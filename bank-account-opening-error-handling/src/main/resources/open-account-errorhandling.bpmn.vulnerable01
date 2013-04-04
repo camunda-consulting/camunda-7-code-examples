@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:fox="http://www.camunda.com/fox" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
+  <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
+    <bpmn2:participant id="process_engine" name="Process Engine" processRef="open-account-errorhandling"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="open-account-errorhandling" name="Open Account with Error Handling" isExecutable="true">
+    <bpmn2:startEvent id="order_received" activiti:formKey="apply-for-new-bank-account" name="Order received">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:manualTask id="wait_for_postident" name="Wait for Postident">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:manualTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="order_received" targetRef="wait_for_postident"/>
+    <bpmn2:userTask id="check_documents" activiti:assignee="kermit" activiti:formKey="check-documents" name="Check documents">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="wait_for_postident" targetRef="check_documents"/>
+    <bpmn2:exclusiveGateway id="documents_approved_gateway" name="Documents approved?" gatewayDirection="Diverging">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="check_documents" targetRef="documents_approved_gateway"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="documents_approved_gateway" targetRef="inform_customer">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">#{!approved}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:serviceTask id="inform_customer" activiti:delegateExpression="#{customerNotificationDelegate}" name="Inform customer" implementation="##unspecified">
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" name="yes" sourceRef="documents_approved_gateway" targetRef="set_up_account">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1">#{approved}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="merging_gateway_1" gatewayDirection="Converging">
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="inform_customer" targetRef="merging_gateway_1"/>
+    <bpmn2:endEvent id="order_processed" name="Order processed">
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" sourceRef="merging_gateway_1" targetRef="order_processed"/>
+    <bpmn2:serviceTask id="set_up_account" activiti:delegateExpression="#{accountSetupDelegate}" name="Set up account" implementation="##unspecified">
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="set_up_account" targetRef="merging_gateway_1"/>
+  </bpmn2:process>
+  <bpmn2:error id="duplicateApplicationError" errorCode="duplicateApplication" name="Duplicate Application Error"/>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="process_engine" isHorizontal="true">
+        <dc:Bounds height="271.0" width="1000.0" x="30.0" y="20.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="order_received">
+        <dc:Bounds height="36.0" width="36.0" x="82.0" y="102.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_1">
+          <dc:Bounds height="22.0" width="101.0" x="60.0" y="140.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ReceiveTask_1" bpmnElement="wait_for_postident">
+        <dc:Bounds height="50.0" width="110.0" x="168.0" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_ReceiveTask_1">
+        <di:waypoint xsi:type="dc:Point" x="118.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="168.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="check_documents">
+        <dc:Bounds height="50.0" width="110.0" x="328.0" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ReceiveTask_1" targetElement="BPMNShape_UserTask_1">
+        <di:waypoint xsi:type="dc:Point" x="278.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="328.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="documents_approved_gateway" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="488.0" y="95.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_2">
+          <dc:Bounds height="22.0" width="150.0" x="530.0" y="130.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_UserTask_1" targetElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="438.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="488.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_1" bpmnElement="inform_customer">
+        <dc:Bounds height="50.0" width="110.0" x="590.0" y="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="513.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="512.0" y="55.0"/>
+        <di:waypoint xsi:type="dc:Point" x="590.0" y="55.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_2" bpmnElement="set_up_account">
+        <dc:Bounds height="50.0" width="110.0" x="590.0" y="158.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_2">
+        <di:waypoint xsi:type="dc:Point" x="513.0" y="146.0"/>
+        <di:waypoint xsi:type="dc:Point" x="512.0" y="183.0"/>
+        <di:waypoint xsi:type="dc:Point" x="590.0" y="183.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_2" bpmnElement="merging_gateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="750.0" y="95.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_ServiceTask_2" targetElement="BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="700.0" y="183.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="183.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="146.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="700.0" y="55.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="55.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="95.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="order_processed">
+        <dc:Bounds height="36.0" width="36.0" x="850.0" y="102.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_ExclusiveGateway_2" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="801.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="850.0" y="120.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

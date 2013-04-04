@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  template="/WEB-INF/templates/template.xhtml">
+
+  <ui:define name="metadata">
+    <f:metadata>
+      <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView"
+        listener="#{fox.taskForm.startProcessInstanceByKeyForm(processDefinitionKey, callbackUrl)}" />
+    </f:metadata>
+  </ui:define>
+
+  <ui:define name="content">
+    <div class="row">
+      <h1 class="span4">Apply for Bank Account</h1>
+    </div>
+    <div class="row">
+      <h:form id="applyForNewBankAccountTaskForm" styleClass="well span4">
+      	<legend>Please provide the following details:</legend>
+        <label>First name<h:inputText id="firstname" value="#{processVariables['firstname']}" /></label>
+        <label>Last name<h:inputText id="lastName" value="#{processVariables['lastname']}" /></label>
+        <label>Account type<h:selectOneMenu id="accountType" value="#{processVariables['accounttype']}"><f:selectItem itemValue="debit" itemLabel="Debit"/><f:selectItem itemValue="credit" itemLabel="Credit"/></h:selectOneMenu></label>
+        <h:commandButton id="submit_button" styleClass="btn btn-primary"
+          value="Submit" action="#{fox.taskForm.completeProcessInstanceForm()}" />
+      </h:form>
+    </div>
+  </ui:define>
+
+</ui:composition>
