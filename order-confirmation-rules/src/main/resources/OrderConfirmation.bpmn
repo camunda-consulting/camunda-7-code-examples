@@ -14,7 +14,7 @@
       <outgoing>flow4</outgoing>
     </serviceTask>
     <sequenceFlow id="flow4" name="" sourceRef="servicetask1" targetRef="Approved_order"/>
-    <userTask id="Approved_order" activiti:assignee="kermit" activiti:formKey="reviewOrder.jsf" name="Approve order">
+    <userTask id="Approved_order" activiti:assignee="demo" activiti:formKey="reviewOrder.jsf" name="Approve order">
       <incoming>flow4</incoming>
       <outgoing>SequenceFlow_1</outgoing>
     </userTask>
