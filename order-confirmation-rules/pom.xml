@@ -15,6 +15,8 @@
         <camunda-bpm.version>7.0.0-SNAPSHOT</camunda-bpm.version>
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
 		<drools.version>5.3.0.Final</drools.version>
+        <fest.assert.version>2.0M10</fest.assert.version>
+
         <!-- Avoid the message "[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!" -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Avoid the message "[WARNING] Using platform encoding (UTF-8 actually) ... also for the surefire and failsafe plugins -->
@@ -117,6 +119,12 @@
 			<artifactId>drools-templates</artifactId>
 			<version>5.1.1</version>
 		</dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-assert-core</artifactId>
+            <version>${fest.assert.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
