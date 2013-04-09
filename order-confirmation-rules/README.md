@@ -27,12 +27,13 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) demonstrati
     * [Git](http://git-scm.com/) 1.7.x
 1. Clone this repository
 1. Build the application with `mvn package`
+1. Optional: to run the Arquillian integration test do `mvn failsafe:integration-test`
 1. Copy the generated WAR artifact to the JBoss AS 7 deployment directory
 1. Point your browser to `http://localhost:8080/order-confirmation-rules/` and enjoy!
 
 # Further Resources
 
-* See [this blog post](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/) including a screencast (in German) from talk at [WJAX](http://jax.de/).
+* See [this blog post](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/) including a screencast (in German) from talk at [WJAX](http://jax.de/) where this sample is presented.
 
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
