@@ -24,23 +24,21 @@
 	</properties>
 
 	<dependencies>
-        <dependency>
-            <groupId>org.camunda.bpm.javaee</groupId>
-            <artifactId>camunda-ejb-client</artifactId>
-            <version>${camunda-bpm.version}</version>
-            <scope>provided</scope>
-        </dependency>
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine</artifactId>
 			<version>${camunda-bpm.version}</version>
-			<scope>provided</scope>
+            <scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.camunda.bpm.javaee</groupId>
+            <artifactId>camunda-ejb-client</artifactId>
+            <version>${camunda-bpm.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-engine-cdi</artifactId>
             <version>${camunda-bpm.version}</version>
-            <scope>provided</scope>
         </dependency>
 
 		<dependency>
@@ -145,6 +143,17 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>		
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.13</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.14</version>
+                <!-- Will default to execute all *IT.java tests -->
+            </plugin>
 		</plugins>
 	</build>
 
