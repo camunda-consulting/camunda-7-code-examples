@@ -1,5 +1,5 @@
-camunda BPM platform - Order Confirmation with Drools
-=====================================================
+Order Confirmation Rules
+========================
 
 # Overview
 
