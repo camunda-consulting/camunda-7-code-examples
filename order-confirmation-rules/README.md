@@ -8,7 +8,7 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) demonstrati
 # What does it demonstrate?
 
 * How to build an simple JSF application including a simple BPMN 2.0 Process
-* Can be used for demonstrating Process Automation with camunda BPM platform on a Java EE 6 environment
+* Can be used for demonstrating process automation with [camunda BPM platform](http://camunda.org/) on a Java EE 6 environment
 * How to use [Drools](http://www.jboss.org/drools/) to implement business rules
 * How to create [Arquillian](http://arquillian.org) integration tests for your process application
 
@@ -18,7 +18,7 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) demonstrati
 
 # Getting Started
 
-1. Download the camunda BPM Platform *for JBoss AS 7* from [here](http://camunda.org/download.html).
+1. Download the [camunda BPM platform](http://camunda.org/) *for JBoss AS 7* from [here](http://camunda.org/download.html).
 1. Install it, start it with `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin$ ./standalone.sh`
 1. Make sure JBoss AS 7 is running by pointing your browser to `http://localhost:8080/`
 1. Make sure you have the following installed *and working*:
@@ -26,12 +26,13 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) demonstrati
     * [Maven](http://maven.apache.org/) 3.0.x
     * [Git](http://git-scm.com/) 1.7.x
 1. Clone this repository
-1. Build the application with `mvn package` and deploy it with `mvn jboss-as:deploy`
+1. Build the application with `mvn package`
+1. Copy the generated WAR artifact to the JBoss AS 7 deployment directory
 1. Point your browser to `http://localhost:8080/order-confirmation-rules/` and enjoy!
 
 # Further Resources
 
-* See blog post including German screencast from talk on conference about it: [http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/)
+* See [this blog post](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/) including a screencast (in German) from talk at [WJAX](http://jax.de/).
 
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
