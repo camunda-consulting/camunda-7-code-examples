@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>camunda fox demo</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<h:outputStylesheet name="css/screen.css" />
+	<h:outputStylesheet name="css/jquery-ui-1.8.16.custom.css" />
+	<script src="/fox-training-manager/javascript/jquery-1.6.2.min.js" type="text/javascript"></script>
+	<script src="/fox-training-manager/javascript/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+</h:head>
+
+<h:body>
+	<h:panelGroup id="page" layout="block">
+		<h:panelGroup id="header">			
+			<h1>camunda fox demo</h1>
+			<p><b>order confirmation rules with JBoss Drools</b></p>								
+		</h:panelGroup>
+		<h:panelGroup>
+			<h:form>
+				<h:outputLink value="taskList.jsf">tasklist</h:outputLink> | 
+				<h:outputLink value="placeNewOrder.jsf">place new order</h:outputLink> |  
+				<h:outputLink value="orderList.jsf">order list</h:outputLink> | 
+				<h:outputLink value="ruleList.jsf">edit rulebase</h:outputLink>
+			</h:form>			
+		</h:panelGroup>
+		<hr />	
+		<h:panelGroup id="container" layout="block">		
+			<h:panelGroup>	
+				<h:panelGroup id="content" layout="block">
+					<h:messages globalOnly="true"/>
+					<ui:insert name="content">Main Content</ui:insert>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup id="footer" layout="block">
+				<hr />
+				powered by <a href="http://www.camunda.com/fox/">camunda fox</a>
+			</h:panelGroup>
+		</h:panelGroup>		
+	</h:panelGroup>
+
+</h:body>
+</html>

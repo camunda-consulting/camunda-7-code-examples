@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">	
+	<ui:define name="content">	
+	
+	<h2>List of orders</h2>	
+	<h:form>
+		<h:dataTable value="#{orderList.list}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="datatable">
+			<h:column><f:facet name="header">Company</f:facet>#{item.customer.company}</h:column>
+			<h:column><f:facet name="header">Email</f:facet>#{item.customer.email}</h:column>
+			<h:column><f:facet name="header">Amount</f:facet>#{item.amount}</h:column>
+			<h:column><f:facet name="header">Discount</f:facet>#{item.discount}</h:column>
+		</h:dataTable>
+	</h:form>
+	
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+<ui:define name="content">
+
+	<h2>task list</h2>
+	
+    <h:form><h:panelGroup><table>
+		<tr>
+			<td>Logged in user:</td>
+			<td><h:inputText id="currentUser" value="#{taskList.currentUser}" /></td>
+			<td><h:commandButton action="#{taskList.update()}" value="update" type="submit" /></td>
+		</tr>
+	</table></h:panelGroup></h:form>
+	
+	<h:form>
+	<h:dataTable value="#{taskList.list}" var="thisTask" id="list" cellspacing="0" rowClasses="odd, even" styleClass="datatable">
+			<h:column>			#{thisTask.id}			</h:column>
+			<h:column><strong>	#{thisTask.name}		</strong></h:column>
+			<h:column>			#{thisTask.createTime}	</h:column>
+			<h:column>			#{thisTask.dueDate}		</h:column>			
+			<h:column>			#{thisTask.assignee}		</h:column>			
+			<h:column>	
+				<h:commandLink action="#{taskList.claim(thisTask)}" value="claim" type="submit" />
+			</h:column>		
+			<h:column>	
+				<h:commandLink action="#{taskList.unclaim(thisTask)}" value="release" type="submit" />
+			</h:column>		
+			<h:column>	
+				<h:outputLink value="#{taskList.getFormKey(thisTask)}?taskId=#{thisTask.id}">complete</h:outputLink>
+			</h:column>		
+	</h:dataTable>	
+	</h:form>	
+</ui:define>
+</ui:composition>

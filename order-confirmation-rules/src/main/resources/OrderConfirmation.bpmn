@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" targetNamespace="http://www.signavio.com/bpmn20">
+  <process id="OrderConfirmation" name="OrderConfirmation">
+    <serviceTask id="servicetask2" activiti:expression="#{orderBean.deleteOrder()}" name="Delete order">
+      <incoming>SequenceFlow_3</incoming>
+      <outgoing>flow7</outgoing>
+    </serviceTask>
+    <endEvent id="endevent1" name="End">
+      <incoming>flow7</incoming>
+    </endEvent>
+    <sequenceFlow id="flow7" name="" sourceRef="servicetask2" targetRef="endevent1"/>
+    <serviceTask id="servicetask1" activiti:expression="#{orderBean.applyRules()}" name="Apply discount rules">
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+    </serviceTask>
+    <sequenceFlow id="flow4" name="" sourceRef="servicetask1" targetRef="Approved_order"/>
+    <userTask id="Approved_order" activiti:assignee="kermit" activiti:formKey="reviewOrder.jsf" name="Approve order">
+      <incoming>flow4</incoming>
+      <outgoing>SequenceFlow_1</outgoing>
+    </userTask>
+    <serviceTask id="Send_order_confirmatin_email" activiti:expression="#{orderBean.sendEmail()}" name="Send order confirmatin email">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_4</outgoing>
+    </serviceTask>
+    <startEvent id="StartEvent_1" name="Start">
+      <outgoing>flow3</outgoing>
+    </startEvent>
+    <sequenceFlow id="flow3" name="" sourceRef="StartEvent_1" targetRef="servicetask1"/>
+    <sequenceFlow id="SequenceFlow_1" name="" sourceRef="Approved_order" targetRef="ExclusiveGateway_1"/>
+    <exclusiveGateway id="ExclusiveGateway_1" name="Approved?">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+      <outgoing>SequenceFlow_3</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="SequenceFlow_2" name="yes" sourceRef="ExclusiveGateway_1" targetRef="Send_order_confirmatin_email">
+      <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_2">#{orderApproved}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="SequenceFlow_3" name="no" sourceRef="ExclusiveGateway_1" targetRef="servicetask2">
+      <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_1">#{!orderApproved}</conditionExpression>
+    </sequenceFlow>
+    <endEvent id="EndEvent_1">
+      <incoming>SequenceFlow_4</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_4" name="" sourceRef="Send_order_confirmatin_email" targetRef="EndEvent_1"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_OrderConfirmation">
+    <bpmndi:BPMNPlane id="BPMNPlane_OrderConfirmation" bpmnElement="OrderConfirmation">
+      <bpmndi:BPMNShape id="BPMNShape_Approved_order" bpmnElement="Approved_order" isHorizontal="true">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="77.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Send_order_confirmatin_email" bpmnElement="Send_order_confirmatin_email" isHorizontal="true">
+        <omgdc:Bounds height="55.0" width="105.0" x="691.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_servicetask1" bpmnElement="servicetask1" isHorizontal="true">
+        <omgdc:Bounds height="55.0" width="105.0" x="110.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_servicetask2" bpmnElement="servicetask2" isHorizontal="true">
+        <omgdc:Bounds height="55.0" width="105.0" x="530.0" y="196.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_endevent1" bpmnElement="endevent1" isHorizontal="true">
+        <omgdc:Bounds height="35.0" width="35.0" x="691.0" y="206.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1" isHorizontal="true">
+        <omgdc:Bounds height="35.0" width="35.0" x="40.0" y="88.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isHorizontal="true">
+        <omgdc:Bounds height="50.0" width="50.0" x="446.0" y="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1" isHorizontal="true">
+        <omgdc:Bounds height="35.0" width="35.0" x="850.0" y="89.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow3" bpmnElement="flow3" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_servicetask1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="75.0" y="105.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="110.0" y="105.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow4" bpmnElement="flow4" sourceElement="BPMNShape_servicetask1" targetElement="BPMNShape_Approved_order">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="215.0" y="105.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="290.0" y="104.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_flow7" bpmnElement="flow7" sourceElement="BPMNShape_servicetask2" targetElement="BPMNShape_endevent1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="635.0" y="223.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="691.0" y="223.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_Approved_order" targetElement="BPMNShape_ExclusiveGateway_1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="395.0" y="104.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="446.0" y="105.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Send_order_confirmatin_email">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="497.0" y="105.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="691.0" y="105.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_servicetask2">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="471.0" y="131.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="470.0" y="223.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="530.0" y="223.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Send_order_confirmatin_email" targetElement="BPMNShape_EndEvent_1">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="796.0" y="105.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="850.0" y="106.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

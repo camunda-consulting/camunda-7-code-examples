@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+		
+<ui:define name="content">	
+	
+	<h2>Edit Rulebase</h2>
+
+    <h:form>
+      <p>					
+		<h:dataTable value="#{ruleList}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="datatable">
+			<h:column><f:facet name="header">name</f:facet>#{item.name}</h:column>
+			<h:column><f:facet name="header">amount from</f:facet>#{item.amountMin}</h:column>
+			<h:column><f:facet name="header">amount till</f:facet>#{item.amountMax}</h:column>
+			<h:column><f:facet name="header">discount</f:facet>#{item.discount}</h:column>			
+			<h:column>				
+				<h:outputLink value="editRule.jsf?entryId=#{item.id}">edit</h:outputLink>
+			</h:column>
+		</h:dataTable>
+
+		<h:outputLink value="editRule.jsf">add entry</h:outputLink>
+      </p>
+      <p>		
+		<h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="update rule base" type="submit" />
+	  </p>
+	  <p>
+		<h:outputText value="#{droolsRulebaseBean.droolsRulebaseDrlHtml}" escape="false" />
+	  </p>	
+	</h:form>
+
+</ui:define>
+</ui:composition>

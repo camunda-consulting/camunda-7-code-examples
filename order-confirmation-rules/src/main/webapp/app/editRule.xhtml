@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+		
+	<ui:define name="content">
+	
+	<f:metadata>
+		<f:viewParam id="entryId" name="entryId" value="#{ruleEntryEdit.entryId}" />
+    </f:metadata>
+			
+	<h2>
+		<h:outputText value="Create a new discount rule entry" rendered="#{ruleEntryEdit.newEntry}" />
+		<h:outputText value="Edit discount rule entry" rendered="#{not ruleEntryEdit.newEntry}" />		
+	</h2>
+
+	<h:form>
+		<table>
+				<tr>
+					<td style="font-weight: bold;">rule name:</td>
+					<td><h:inputText id="name" value="#{ruleEntryEdit.ruleEntry.name}" /></td>
+					<td><h:message id="name_error" for="name" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">amount min (&gt;):</td>
+					<td><h:inputText id="amountMin" value="#{ruleEntryEdit.ruleEntry.amountMin}" /></td>
+					<td><h:message id="amountMin_error" for="amountMin" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">amount max (&lt;=):</td>
+					<td><h:inputText id="amountMax" value="#{ruleEntryEdit.ruleEntry.amountMax}" /></td>
+					<td><h:message id="amountMax_error" for="amountMax" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">discount:</td>
+					<td><h:inputText id="discount" value="#{ruleEntryEdit.ruleEntry.discount}" /></td>
+					<td><h:message id="discount_error" for="discount" errorClass="invalid" /></td>
+				</tr>
+				<tr>
+					<td />
+  					<td>
+						<h:commandButton action="#{ruleEntryEdit.save()}" value="save" type="submit"  rendered="#{ruleEntryEdit.newEntry}"/>
+						<h:commandButton action="#{ruleEntryEdit.update()}" value="update" type="submit" rendered="#{not ruleEntryEdit.newEntry}"/>
+						<h:commandButton action="#{ruleEntryEdit.cancel()}" immediate="true" value="cancel" />
+					</td>				
+				</tr>
+			</table>		
+	</h:form>
+
+	</ui:define>
+</ui:composition>

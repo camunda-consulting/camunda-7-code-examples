@@ -1,0 +1,19 @@
+template header
+name
+amountMin
+amountMax
+discount
+
+package com.camunda.fox.demo.orderconfirmation
+import com.camunda.fox.demo.orderconfirmation.model.*;
+
+template "discount rule"
+rule "@{name}"
+when
+   o: Order( amount > @{amountMin},  amount <= @{amountMax})
+then
+   o.setDiscount( @{discount});
+   o.setDiscountReason( drools.getRule().getName() );
+end
+
+end template
