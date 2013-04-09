@@ -37,8 +37,6 @@ public class OrderBean {
   public Order getNewOrder() {
     if (order == null) {
       order = new Order();
-      Customer customer = new Customer();
-      order.setCustomer(customer);
     }
     return order;
   }
