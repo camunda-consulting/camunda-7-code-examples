@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.orderconfirmation.bean;
+package org.camunda.bpm.demo.orderconfirmation.bean;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.camunda.fox.demo.orderconfirmation.model.DiscountRuleEntry;
+import org.camunda.bpm.demo.orderconfirmation.model.DiscountRuleEntry;
 
 @Named
 @Stateless

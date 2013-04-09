@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.orderconfirmation.bean;
+package org.camunda.bpm.demo.orderconfirmation.bean;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -7,13 +7,13 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.activiti.cdi.BusinessProcess;
-import org.activiti.cdi.annotation.StartProcess;
+import org.camunda.bpm.engine.cdi.BusinessProcess;
+import org.camunda.bpm.engine.cdi.annotation.StartProcess;
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import com.camunda.fox.demo.orderconfirmation.model.Order;
-import com.camunda.fox.demo.orderconfirmation.model.PersistentOrder;
-import com.camunda.fox.demo.orderconfirmation.model.TransientOrder;
+import org.camunda.bpm.demo.orderconfirmation.model.Order;
+import org.camunda.bpm.demo.orderconfirmation.model.PersistentOrder;
+import org.camunda.bpm.demo.orderconfirmation.model.TransientOrder;
 
 @Named
 @Stateless // we need an EJB to get a proper transaction

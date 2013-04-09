@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.orderconfirmation.bean;
+package org.camunda.bpm.demo.orderconfirmation.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,10 +7,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.activiti.engine.FormService;
-import org.activiti.engine.TaskService;
-import org.activiti.engine.form.TaskFormData;
-import org.activiti.engine.task.Task;
+import org.camunda.bpm.engine.FormService;
+import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.form.TaskFormData;
+import org.camunda.bpm.engine.task.Task;
 
 @SessionScoped
 @Named

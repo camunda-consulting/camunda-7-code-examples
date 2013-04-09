@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.orderconfirmation.model;
+package org.camunda.bpm.demo.orderconfirmation.model;
 
 import java.io.Serializable;
 

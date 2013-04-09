@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.orderconfirmation.bean;
+package org.camunda.bpm.demo.orderconfirmation.bean;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.camunda.fox.demo.orderconfirmation.model.DiscountRuleEntry;
+import org.camunda.bpm.demo.orderconfirmation.model.DiscountRuleEntry;
 
 @Named
 @ConversationScoped
