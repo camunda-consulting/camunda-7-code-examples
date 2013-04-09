@@ -34,7 +34,7 @@ public abstract class AbstractEntityList<T> implements Serializable {
   
   // paging 
   protected int pageNumber = 0;
-  protected int pageSize = 5;
+  protected int pageSize = 10;
   // sorting 
   protected String sortColumn;
   protected boolean sortAsc = true;
