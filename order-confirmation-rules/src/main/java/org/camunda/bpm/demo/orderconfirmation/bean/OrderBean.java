@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.camunda.bpm.demo.orderconfirmation.model.Customer;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.annotation.StartProcess;
 import org.drools.runtime.StatefulKnowledgeSession;
@@ -36,6 +37,8 @@ public class OrderBean {
   public Order getNewOrder() {
     if (order == null) {
       order = new Order();
+      Customer customer = new Customer();
+      order.setCustomer(customer);
     }
     return order;
   }
