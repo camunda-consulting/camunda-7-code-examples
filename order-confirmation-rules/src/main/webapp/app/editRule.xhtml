@@ -10,43 +10,47 @@
 	<f:metadata>
 		<f:viewParam id="entryId" name="entryId" value="#{ruleEntryEdit.entryId}" />
     </f:metadata>
-			
-	<h2>
-		<h:outputText value="Create a new discount rule entry" rendered="#{ruleEntryEdit.newEntry}" />
-		<h:outputText value="Edit discount rule entry" rendered="#{not ruleEntryEdit.newEntry}" />		
-	</h2>
 
-	<h:form>
-		<table>
-				<tr>
-					<td style="font-weight: bold;">rule name:</td>
-					<td><h:inputText id="name" value="#{ruleEntryEdit.ruleEntry.name}" /></td>
-					<td><h:message id="name_error" for="name" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">amount min (&gt;):</td>
-					<td><h:inputText id="amountMin" value="#{ruleEntryEdit.ruleEntry.amountMin}" /></td>
-					<td><h:message id="amountMin_error" for="amountMin" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">amount max (&lt;=):</td>
-					<td><h:inputText id="amountMax" value="#{ruleEntryEdit.ruleEntry.amountMax}" /></td>
-					<td><h:message id="amountMax_error" for="amountMax" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">discount:</td>
-					<td><h:inputText id="discount" value="#{ruleEntryEdit.ruleEntry.discount}" /></td>
-					<td><h:message id="discount_error" for="discount" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td />
-  					<td>
-						<h:commandButton action="#{ruleEntryEdit.save()}" value="save" type="submit"  rendered="#{ruleEntryEdit.newEntry}"/>
-						<h:commandButton action="#{ruleEntryEdit.update()}" value="update" type="submit" rendered="#{not ruleEntryEdit.newEntry}"/>
-						<h:commandButton action="#{ruleEntryEdit.cancel()}" immediate="true" value="cancel" />
-					</td>				
-				</tr>
-			</table>		
+	<h:form class="form-horizontal">
+        <legend>
+            <h:outputText value="Create a new discount rule entry" rendered="#{ruleEntryEdit.newEntry}" />
+            <h:outputText value="Edit discount rule entry" rendered="#{not ruleEntryEdit.newEntry}" />
+        </legend>
+        <div class="control-group">
+            <label class="control-label" for="name">Rule name:</label>
+            <div class="controls">
+                <h:inputText id="name" value="#{ruleEntryEdit.ruleEntry.name}" />
+                <h:message id="name_error" for="name" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amountMin">Amount min (&gt;):</label>
+            <div class="controls">
+                <h:inputText id="amountMin" value="#{ruleEntryEdit.ruleEntry.amountMin}" />
+                <h:message id="amountMin_error" for="amountMin" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amountMax">Amount max (&lt;=):</label>
+            <div class="controls">
+                <h:inputText id="amountMax" value="#{ruleEntryEdit.ruleEntry.amountMax}" />
+                <h:message id="amountMax_error" for="amountMax" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="discount">Discount:</label>
+            <div class="controls">
+                <h:inputText id="discount" value="#{ruleEntryEdit.ruleEntry.discount}" />
+                <h:message id="discount_error" for="discount" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{ruleEntryEdit.save()}" value="save" type="submit"  rendered="#{ruleEntryEdit.newEntry}" class="btn btn-primary"/>
+                <h:commandButton action="#{ruleEntryEdit.update()}" value="update" type="submit" rendered="#{not ruleEntryEdit.newEntry}" class="btn btn-success"/>
+                <h:commandButton action="#{ruleEntryEdit.cancel()}" value="cancel" type="submit" immediate="true" class="btn"/>
+            </div>
+        </div>
 	</h:form>
 
 	</ui:define>
