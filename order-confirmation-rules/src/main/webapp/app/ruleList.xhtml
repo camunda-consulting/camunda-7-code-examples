@@ -11,24 +11,35 @@
 
     <h:form>
       <p>					
-		<h:dataTable value="#{ruleList}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="datatable">
-			<h:column><f:facet name="header">name</f:facet>#{item.name}</h:column>
-			<h:column><f:facet name="header">amount from</f:facet>#{item.amountMin}</h:column>
-			<h:column><f:facet name="header">amount till</f:facet>#{item.amountMax}</h:column>
-			<h:column><f:facet name="header">discount</f:facet>#{item.discount}</h:column>			
-			<h:column>				
-				<h:outputLink value="editRule.jsf?entryId=#{item.id}">edit</h:outputLink>
-			</h:column>
-		</h:dataTable>
+		<h:dataTable value="#{ruleList}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
+            <h:column>
+                <f:facet name="header">name</f:facet>
+                #{item.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">amount from</f:facet>
+                #{item.amountMin}
+            </h:column>
+            <h:column>
+                <f:facet name="header">amount till</f:facet>#{item.amountMax}
+            </h:column>
+            <h:column>
+                <f:facet name="header">discount</f:facet>
+                #{item.discount}
+            </h:column>
+            <h:column>
+                <h:outputLink value="editRule.jsf?entryId=#{item.id}" class="btn">edit</h:outputLink>
+            </h:column>
+        </h:dataTable>
 
-		<h:outputLink value="editRule.jsf">add entry</h:outputLink>
+		<h:outputLink value="editRule.jsf" class="btn btn-primary">add entry</h:outputLink>
       </p>
-      <p>		
-		<h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="update rule base" type="submit" />
-	  </p>
-	  <p>
+      <p>
+         <h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="update rule base" type="submit" class="btn btn-success"/>
+      </p>
+      <pre class="prettyprint linenums">
 		<h:outputText value="#{droolsRulebaseBean.droolsRulebaseDrlHtml}" escape="false" />
-	  </p>	
+	  </pre>
 	</h:form>
 
 </ui:define>
