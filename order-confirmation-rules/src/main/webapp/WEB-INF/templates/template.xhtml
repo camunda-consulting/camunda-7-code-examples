@@ -40,15 +40,12 @@
                 <div class="marketing">
                     <h1>Order Confirmation Rules</h1>
                     <p class="marketing-byline">With <a href="http://www.camunda.org">camunda fox BPM platform</a>, <a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE 6</a> and <a href="http://www.jboss.org/drools/">JBoss Drools</a></p>
+                    <h:graphicImage library="img" name="OrderConfirmation.png"/>
                 </div>
             </div>
-            <h:panelGroup id="container" layout="block">
-                <h:panelGroup>
-                    <h:panelGroup styleClass="row">
-                        <h:messages globalOnly="true"/>
-                        <ui:insert name="content">Main Content</ui:insert>
-                    </h:panelGroup>
-                </h:panelGroup>
+            <h:panelGroup styleClass="row">
+                <h:messages globalOnly="true"/>
+                <ui:insert name="content">Main Content</ui:insert>
             </h:panelGroup>
         </div>
         <footer>

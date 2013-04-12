@@ -37,4 +37,4 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) demonstrati
 
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
-[1]: https://raw.github.com/rafacm/camunda-outer-space-demos/migrate-order-confirmation-rules-demo/order-confirmation-rules/src/main/resources/OrderConfirmation.png
+[1]: https://raw.github.com/rafacm/camunda-outer-space-demos/migrate-order-confirmation-rules-demo/order-confirmation-rules/src/main/webapp/resources/img/OrderConfirmation.png

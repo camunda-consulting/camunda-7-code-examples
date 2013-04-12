@@ -1,8 +1,6 @@
 package org.camunda.bpm.demo.orderconfirmation;
 
-import org.camunda.bpm.demo.orderconfirmation.model.Order;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -16,8 +14,6 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.HashMap;
-import java.util.List;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -41,7 +37,7 @@ public class ProcessDeploymentIT {
                 .addAsLibraries(resolver.artifact("org.easytesting:fest-assert-core").resolveAsFiles())
 
                 .addAsResource("OrderConfirmation.bpmn")
-                .addAsResource("OrderConfirmation.png")
+                .addAsResource("resources/img/OrderConfirmation.png")
 
 
                 .addPackage("org.camunda.bpm.demo.orderconfirmation.bean")
