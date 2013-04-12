@@ -8,7 +8,7 @@
 	
 	<h2>List of orders</h2>	
 	<h:form>
-		<h:dataTable value="#{orderList.list}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="datatable">
+		<h:dataTable value="#{orderList.list}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
 			<h:column><f:facet name="header">Company</f:facet>#{item.customer.company}</h:column>
 			<h:column><f:facet name="header">Email</f:facet>#{item.customer.email}</h:column>
 			<h:column><f:facet name="header">Amount</f:facet>#{item.amount}</h:column>
