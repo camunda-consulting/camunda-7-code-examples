@@ -1,7 +1,7 @@
 Order Confirmation Rules
 ========================
 
-This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE](http://www.oracle.com/technetwork/java/javaee/overview/index.html) demonstrating integration with [Drools](http://www.jboss.org/drools/).
+This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE](http://www.oracle.com/technetwork/java/javaee/overview/index.html) demonstrating integration with [JBoss Drools](http://www.jboss.org/drools/).
 
 # What does it demonstrate?
 
