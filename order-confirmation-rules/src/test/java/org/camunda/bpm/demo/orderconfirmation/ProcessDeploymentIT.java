@@ -37,7 +37,6 @@ public class ProcessDeploymentIT {
                 .addAsLibraries(resolver.artifact("org.easytesting:fest-assert-core").resolveAsFiles())
 
                 .addAsResource("OrderConfirmation.bpmn")
-                .addAsResource("resources/img/OrderConfirmation.png")
 
 
                 .addPackage("org.camunda.bpm.demo.orderconfirmation.bean")
