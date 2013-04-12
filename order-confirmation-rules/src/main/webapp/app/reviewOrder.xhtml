@@ -13,36 +13,41 @@
 	
 	<h2>#{task.name}</h2>
 	
-	<h:form>
-		<table>
-				<tr>
-					<td>Company:</td>
-					<td>#{orderEntity.customer.company}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Amount:</td>
-					<td>#{orderEntity.amount}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>Discount:</td>
-					<td>#{orderEntity.discount}</td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td style="font-weight: bold;">Is this order OK?</td>
-					<td><h:selectBooleanCheckbox id="valid" 
-					             value="#{processVariables['orderApproved']}" 
-					             required="true" /></td>
-					<td><h:message for="valid"/></td>
-				</tr>								
-				<tr>
-				    <td />
-					<td><h:commandButton action="#{businessProcess.completeTask(true)}" value="done" type="submit" /></td>
-				</tr>
-		</table>
+	<h:form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="company">Company:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.customer.company}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amount">Amount:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.amount}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="discount">Discount:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.discount}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <h:selectBooleanCheckbox id="valid"
+                                             value="#{processVariables['orderApproved']}"
+                                             required="true" />
+                    <h:message for="valid"/>
+                    Is this order OK?
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{businessProcess.completeTask(true)}" value="Done" type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
 	</h:form>
 </ui:define>
 </ui:composition>
