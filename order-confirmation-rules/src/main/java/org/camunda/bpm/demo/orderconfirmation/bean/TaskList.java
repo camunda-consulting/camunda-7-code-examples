@@ -32,9 +32,9 @@ public class TaskList implements Serializable {
 
   public List<Task> getList() {
     if (currentUser != null && currentUser.length() > 0) {
-      return taskService.createTaskQuery().taskDefinitionKey("OrderConfirmation").taskAssignee(currentUser).list();
+      return taskService.createTaskQuery().processDefinitionKey("OrderConfirmation").taskAssignee(currentUser).list();
     } else {
-      return taskService.createTaskQuery().taskDefinitionKey("OrderConfirmation").list();
+      return taskService.createTaskQuery().processDefinitionKey("OrderConfirmation").list();
     }
   }
 
