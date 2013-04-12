@@ -6,7 +6,7 @@
 	template="/WEB-INF/templates/template.xhtml">
 <ui:define name="content">
 
-	<h2>task list</h2>
+	<h2>Task List</h2>
 	
     <h:form class="form-inline">
         <label class="control-label" for="currentUser">Logged in user: </label><h:inputText id="currentUser" value="#{taskList.currentUser}" class="input-small"/>
@@ -21,9 +21,9 @@
 			<h:column><f:facet name="header">due date</f:facet>#{thisTask.dueDate}</h:column>
 			<h:column><f:facet name="header">assignee</f:facet>#{thisTask.assignee}</h:column>
 			<h:column><f:facet name="header">actions</f:facet>
-				<h:commandLink action="#{taskList.claim(thisTask)}" value="claim" type="submit" class="btn"/>
-				<h:commandLink action="#{taskList.unclaim(thisTask)}" value="release" type="submit" class="btn"/>
-				<h:outputLink value="#{taskList.getFormKey(thisTask)}?taskId=#{thisTask.id}" class="btn">complete</h:outputLink>
+				<h:commandLink action="#{taskList.claim(thisTask)}" value="claim" type="submit" class="btn btn-small"/>
+				<h:commandLink action="#{taskList.unclaim(thisTask)}" value="release" type="submit" class="btn btn-small"/>
+				<h:outputLink value="#{taskList.getFormKey(thisTask)}?taskId=#{thisTask.id}" class="btn btn-small">complete</h:outputLink>
 			</h:column>		
 	</h:dataTable>	
 	</h:form>	
