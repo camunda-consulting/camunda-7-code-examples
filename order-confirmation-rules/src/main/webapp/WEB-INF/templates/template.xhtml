@@ -7,38 +7,59 @@
 <h:head>
 	<title>camunda fox demo</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h:outputStylesheet name="css/screen.css" />
     <link rel='stylesheet' href='${request.contextPath}/webjars/bootstrap/2.1.1/css/bootstrap.min.css'/>
+    <h:outputStylesheet name="css/screen.css" />
 </h:head>
 
 <h:body>
-	<h:panelGroup id="page" layout="block">
-		<h:panelGroup id="header">			
-			<h1>camunda BPM demo</h1>
-			<p><b>order confirmation rules with JBoss Drools</b></p>								
-		</h:panelGroup>
-		<h:panelGroup>
-			<h:form>
-				<h:outputLink value="taskList.jsf">tasklist</h:outputLink> | 
-				<h:outputLink value="placeNewOrder.jsf">place new order</h:outputLink> |  
-				<h:outputLink value="orderList.jsf">order list</h:outputLink> | 
-				<h:outputLink value="ruleList.jsf">edit rulebase</h:outputLink>
-			</h:form>			
-		</h:panelGroup>
-		<hr />	
-		<h:panelGroup id="container" layout="block">		
-			<h:panelGroup>	
-				<h:panelGroup id="content" layout="block">
-					<h:messages globalOnly="true"/>
-					<ui:insert name="content">Main Content</ui:insert>
-				</h:panelGroup>
-			</h:panelGroup>
-			<h:panelGroup id="footer" layout="block">
-				<hr />
-				powered by <a href="http://www.camunda.org">camunda BPM platform</a>
-			</h:panelGroup>
-		</h:panelGroup>		
-	</h:panelGroup>
-
+    <h:form>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <span class="brand">camunda BPM demo</span>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li id="book"><h:outputLink value="taskList.jsf">Task list</h:outputLink></li>
+                            <li id="contents"><h:outputLink value="placeNewOrder.jsf">Place new order</h:outputLink></li>
+                            <li id="start"><h:outputLink value="orderList.jsf">Order list</h:outputLink></li>
+                            <li id="credits"><h:outputLink value="ruleList.jsf">Edit rulebase</h:outputLink></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+	<div id="main">
+        <div class="container clear-top">
+            <div class="row">
+                <div class="marketing">
+                    <h1>Order Confirmation Rules</h1>
+                    <p class="marketing-byline">With <a href="http://www.camunda.org">camunda fox BPM platform</a>, <a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE 6</a> and <a href="http://www.jboss.org/drools/">JBoss Drools</a></p>
+                </div>
+            </div>
+            <h:panelGroup id="container" layout="block">
+                <h:panelGroup>
+                    <h:panelGroup styleClass="row">
+                        <h:messages globalOnly="true"/>
+                        <ui:insert name="content">Main Content</ui:insert>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </div>
+        <footer>
+            <div class="container">
+                <hr/>
+                <div class="row">
+                    <div class="span8">&nbsp;</div>
+                    <div class="span4" style="white-space: nowrap; text-align: right">Powered by <a style="font-weight: bold;" href="http://www.camunda.org">camunda BPM platform</a></div>
+                </div>
+            </div>
+        </footer>
+	</div>
 </h:body>
 </html>
