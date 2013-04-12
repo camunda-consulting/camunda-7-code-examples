@@ -9,27 +9,33 @@
 	
 	<h2>Place a New Order</h2>
 
-	<h:form>
-		<table>
-				<tr>
-					<td style="font-weight: bold;">Company name:</td>
-					<td><h:inputText id="company" value="#{newOrder.customer.company}" /></td>
-					<td><h:message id="company_error" for="company" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">Email:</td>
-					<td><h:inputText id="email" value="#{newOrder.customer.email}" /></td>
-					<td><h:message id="email_error" for="email" errorClass="invalid" /></td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">Amount:</td>
-					<td><h:inputText id="amount" value="#{newOrder.amount}" /></td>
-					<td><h:message id="amount_error" for="amount" errorClass="invalid" /></td>
-				</tr>				
-				<tr>
-					<td><h:commandButton action="#{orderBean.save()}" value="save" type="submit" /></td>
-				</tr>
-			</table>		
+	<h:form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="company">Company name:</label>
+            <div class="controls">
+                <h:inputText id="company" value="#{newOrder.customer.company}" />
+                <h:message id="company_error" for="company" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Email:</label>
+            <div class="controls">
+                <h:inputText id="email" value="#{newOrder.customer.email}" />
+                <h:message id="email_error" for="email" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amount">Amount:</label>
+            <div class="controls">
+                <h:inputText id="amount" value="#{newOrder.amount}" />
+                <h:message id="amount_error" for="amount" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{orderBean.save()}" value="save" type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
 	</h:form>
 
 	</ui:define>
