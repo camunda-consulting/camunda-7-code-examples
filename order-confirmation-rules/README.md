@@ -5,12 +5,11 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE
 
 ![Order Confirmation Rules Screenshot][2]
 
-# What can you Learn?
+# What will you learn?
 
-* How to build an simple JSF application including a simple BPMN 2.0 Process
-* Can be used for demonstrating process automation with [camunda BPM platform](http://camunda.org/) on a Java EE 6 environment
-* How to use [Drools](http://www.jboss.org/drools/) to implement business rules
-* How to create [Arquillian](http://arquillian.org) integration tests for your process application
+1. How to build an simple JSF application including a simple BPMN 2.0 Process on a Java EE 6 environment
+1. How to use [Drools](http://www.jboss.org/drools/) to implement business rules in your processes
+1. How to create [Arquillian](http://arquillian.org) integration tests for your process application
 
 # The Process
 
