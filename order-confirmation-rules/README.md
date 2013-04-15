@@ -3,7 +3,9 @@ Order Confirmation Rules
 
 This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE](http://www.oracle.com/technetwork/java/javaee/overview/index.html) demonstrating integration with [JBoss Drools](http://www.jboss.org/drools/).
 
-# What does it demonstrate?
+![Order Confirmation Rules Screenshot][2]
+
+# What can you Learn?
 
 * How to build an simple JSF application including a simple BPMN 2.0 Process
 * Can be used for demonstrating process automation with [camunda BPM platform](http://camunda.org/) on a Java EE 6 environment
@@ -36,3 +38,4 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
 [1]: https://raw.github.com/rafacm/camunda-outer-space-demos/migrate-order-confirmation-rules-demo/order-confirmation-rules/src/main/webapp/resources/img/OrderConfirmation.png
+[2]: https://raw.github.com/rafacm/camunda-outer-space-demos/migrate-order-confirmation-rules-demo/order-confirmation-rules/src/main/webapp/resources/img/order-confirmation-rules-screenshot.png
