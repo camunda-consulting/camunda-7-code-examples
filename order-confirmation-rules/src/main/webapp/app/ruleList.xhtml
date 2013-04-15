@@ -7,35 +7,33 @@
 		
 <ui:define name="content">	
 	
-	<h2>Edit Rulebase</h2>
+	<h2>Discount Rules</h2>
 
     <h:form>
       <p>					
 		<h:dataTable value="#{ruleList}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
             <h:column>
-                <f:facet name="header">name</f:facet>
+                <f:facet name="header">Name</f:facet>
                 #{item.name}
             </h:column>
             <h:column>
-                <f:facet name="header">amount from</f:facet>
+                <f:facet name="header">Amount from</f:facet>
                 #{item.amountMin}
             </h:column>
             <h:column>
-                <f:facet name="header">amount till</f:facet>#{item.amountMax}
+                <f:facet name="header">Amount till</f:facet>#{item.amountMax}
             </h:column>
             <h:column>
-                <f:facet name="header">discount</f:facet>
+                <f:facet name="header">Discount</f:facet>
                 #{item.discount}
             </h:column>
             <h:column>
-                <h:outputLink value="editRule.jsf?entryId=#{item.id}" class="btn">edit</h:outputLink>
+                <h:outputLink value="editRule.jsf?entryId=#{item.id}" class="btn">Edit</h:outputLink>
             </h:column>
         </h:dataTable>
 
-		<h:outputLink value="editRule.jsf" class="btn btn-primary">add entry</h:outputLink>
-      </p>
-      <p>
-         <h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="update rule base" type="submit" class="btn btn-success"/>
+		<h:outputLink value="editRule.jsf" class="btn btn-primary">Add entry</h:outputLink>
+          <h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="Update rulebase" type="submit" class="btn btn-success"/>
       </p>
       <pre class="prettyprint linenums">
 		<h:outputText value="#{droolsRulebaseBean.droolsRulebaseDrlHtml}" escape="false" />
