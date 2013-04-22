@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="wjax2012-bestellprozess" default="deploy.jboss">
+<project name="bestellprozess-java-ee6" default="deploy.jboss">
 
 	<property file="build.properties" />
 	<property file="${user.home}/.camunda/build.properties" />

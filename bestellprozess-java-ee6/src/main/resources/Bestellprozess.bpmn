@@ -32,7 +32,7 @@
       <outgoing>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</outgoing>
       <errorEventDefinition id="error-goods-not-available" errorRef="goods-not-on-stock"/>
     </boundaryEvent>
-    <userTask id="kunde-umberaten" activiti:assignee="kermit" activiti:formKey="umberaten" name="Kunde umberaten" implementation="webService">
+    <userTask id="kunde-umberaten" activiti:assignee="demo" activiti:formKey="app:umberaten.jsf" name="Kunde umberaten" implementation="webService">
       <incoming>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</incoming>
       <outgoing>SequenceFlow_6</outgoing>
     </userTask>
@@ -53,7 +53,7 @@
         <timeDuration xsi:type="tFormalExpression">PT10S</timeDuration>
       </timerEventDefinition>
     </boundaryEvent>
-    <userTask id="usertask-eskalation" name="Sanften Druck auf Berater ausüben">
+    <userTask id="usertask-eskalation" activiti:formKey="app:eskalation.jsf" activiti:assignee="demo" name="Sanften Druck auf Berater ausüben">
       <incoming>SequenceFlow_3</incoming>
       <outgoing>SequenceFlow_5</outgoing>
     </userTask>
