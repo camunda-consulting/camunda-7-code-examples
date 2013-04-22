@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>OOP DEMO</title>
+	<h:outputStylesheet name="css/bootstrap.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<h:form>
+
+			<fieldset>
+				<legend>Bestellung eingeben</legend>
+				<p>
+					<label>Email</label>
+					<h:inputText value="#{newOrderController.newOrder.email}" />
+
+					<label>PLZ</label>
+					<h:inputText value="#{newOrderController.newOrder.zip}" />
+
+					<label>Betrag</label>
+					<h:inputText value="#{newOrderController.newOrder.amount}" />
+					<label>Was solls sein</label>
+					<h:inputText value="#{newOrderController.newOrder.orderDetails}" />
+
+				</p>
+				<h:commandButton action="#{newOrderController.submit()}"
+					value="Bestellung abschicken" styleClass="btn btn-primary"/>
+			</fieldset>
+		</h:form>
+	</div>
+</h:body>
+</html>

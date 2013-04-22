@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+  <h:head>
+    <f:metadata>
+      <f:viewParam id="taskId" name="taskId" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView"
+        listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+    </f:metadata>
+    <title>#{task.name}</title>
+  </h:head>
+  <h:body>
+    <h1>#{task.name}</h1>
+    <h:form id="someForm">
+      <p>Bestellung ueber
+      	<h:outputText value="#{order.amount}" /> von 
+      	<h:outputText value="#{order.email}" />.
+      </p>
+      Freigeben? <h:selectBooleanCheckbox value="#{processVariables['approved']}" />
+      <h:commandButton id="submit_button" value="Task completed"
+        action="#{fox.taskForm.completeTask()}" />
+    </h:form>
+  </h:body>
+</ui:composition>
