@@ -1,11 +1,4 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-/bestellprozess-java-ee6/.classpath
-/bestellprozess-java-ee6/.project
-/bestellprozess-java-ee6/target
-/bestellprozess-java-ee6/.settings
+target
+.project
+.classpath
+.settings
