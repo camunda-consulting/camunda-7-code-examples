@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+	
+	<ui:define name="content">
+
+		<h1>Aufgaben</h1>
+
+		<h:form>
+			<h:dataTable value="#{tasks}" var="v_task" styleClass="table table-striped">
+				<h:column>
+					<f:facet name="header">Aufgabe</f:facet>
+					#{v_task.name}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Aktion</f:facet>
+					<h:outputLink value="#{formService.getTaskFormData(v_task.id).formKey}.jsf">
+						bearbeiten
+						<f:param name="taskId" value="#{v_task.id}"></f:param>
+						<f:param name="callbackUrl" value="taskList.jsf"></f:param>
+					</h:outputLink>
+				</h:column>
+			</h:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

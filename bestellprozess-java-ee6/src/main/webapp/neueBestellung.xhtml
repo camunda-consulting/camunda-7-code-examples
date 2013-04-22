@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+			<div class="row">
+				<div class="span6">
+					<h1>Artikel</h1>
+					<h:dataTable value="#{articles}" var="article" styleClass="table table-striped">
+						<h:column>
+							<f:facet name="header">Bild</f:facet>
+							<img width="150" src="#{article.imageUrl}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Beschreibung</f:facet>
+							<h:outputLink value="#">#{article.description}</h:outputLink>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Preis</f:facet>
+							<h:outputText value="#{article.priceInCents/100}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Kaufen</f:facet>
+							<h:commandLink action="#{basket.addItem(article)}">
+								<i class="icon-shopping-cart"></i>
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</div>
+				<div class="span2" />
+				<div class="span4">
+					
+					<h1>Warenkorb</h1>
+					<h:dataTable value="#{basket.items}" var="basketItem" styleClass="table table-striped">
+						<h:column>
+							<f:facet name="header">Menge</f:facet>
+							#{basketItem.amount}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Artikel</f:facet>
+							#{basketItem.article.id}
+						</h:column>
+						<h:column>
+							#{basketItem.article.description}
+						</h:column>
+					</h:dataTable>
+
+
+					<h1>Bestellung</h1>
+					<table>						
+						<tr>
+							<td>Kundennummer</td>
+							<td><h:inputText value="#{basket.customer}" /></td>
+						</tr>
+						<tr>
+							<td />
+							<td>
+								<h:commandLink action="#{basket.startOrder()}" styleClass="btn btn-primary">
+									<i class="icon-ok icon-white" /> Bestellung aufgeben
+								</h:commandLink>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

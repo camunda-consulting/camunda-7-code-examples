@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+				<div id="processDiagramWrapper" style="z-index: 1; position: relative !important; overflow: auto; mind-width: 600px; width: 100%; height: 800px">
+					<img id="processDiagram" src="processDiagram" onload="processDiagramWidth=this.width; processDiagramHeight=this.height;"
+						style="max-width: 15000px;" />
+						
+						
+					<ui:repeat value="#{processDiagramController.getFlowNodes()}" var="flowNode" varStatus="status">
+						<span id="all_count_#{status.index}" class="badge badge-info" style="
+				         position: absolute;
+				         left: #{flowNode.bounds.x + flowNode.bounds.width - 35}px;
+				         top: #{flowNode.bounds.y - 5}px;
+				         z-index: 0;
+				         ">#{flowNode.countAll}</span>
+						
+						<h:panelGroup rendered="#{flowNode.countUnfinished>0}">
+						<span id="running_count_#{status.index}" class="badge badge-warning" 
+							  style="
+						         position: absolute;
+						         left: #{flowNode.bounds.x + flowNode.bounds.width - 5}px;
+						         top: #{flowNode.bounds.y - 5}px;
+						         z-index: 0;">
+						  
+				         #{flowNode.countUnfinished}
+				        </span>
+				        </h:panelGroup>
+					</ui:repeat>
+				</div>
+	</ui:define>
+
+</ui:composition>

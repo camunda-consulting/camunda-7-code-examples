@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title>camunda fox WJAX 2012 Demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <h:outputStylesheet name="css/bootstrap.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="../resources/img/fox.ico" />
+  <style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+</style>
+  <h:outputStylesheet name="css/responsive.css" />
+    <ui:insert name="header"></ui:insert>  
+</h:head>
+
+<h:body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid" style="padding: 0;">
+          <a class="brand" href="wjax/">WJAX 2012</a>
+          <ul class="nav">
+            <li class=""><a href="/wjax/neueBestellung.jsf"><i class="icon-file icon-white"></i> Neue Bestellung</a></li>
+            <li class=""><a href="/wjax/taskList.jsf"><i class="icon-user icon-white"/> Aufgabenliste (spezifisch)</a></li>
+            <li class=""><a href="/tasklist/"><i class="icon-user icon-white"/> Aufgabenliste (fox)</a></li>
+            <li class=""><a href="/wjax/bestellungen.jsf"><i class="icon-list icon-white"/> Bestellungen</a></li>
+            <li class=""><a href="/wjax/dashboard.jsf"><i class="icon-info-sign icon-white"/> Dashboard</a></li>                        
+          </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <ui:insert name="content">Main content</ui:insert>
+
+    <hr />
+
+    <footer>
+      <p>
+        powered by <a href="http://www.camunda.com/fox/">camunda fox</a>
+      </p>
+    </footer>
+
+  </div>
+  <!--/.fluid-container-->
+
+
+</h:body>
+</html>

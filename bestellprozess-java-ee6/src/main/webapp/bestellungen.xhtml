@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+	
+	<ui:define name="content">
+
+		<h1>Bestellungen</h1>
+
+		<h:dataTable value="#{orderProcesses}" var="orderDto" styleClass="table table-striped">
+			<h:column>
+				<f:facet name="header">Bestellungs-Nummer</f:facet>
+				#{orderDto.orderId}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Kunde</f:facet>
+				#{orderDto.customer}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Prozess-ID</f:facet>
+				<a href="http://localhost:8080/cockpit/content/instanceDetails.jsf?instanceId=#{orderDto.processInstanceId}">
+					#{orderDto.processInstanceId}
+				</a>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Letzte/Aktuelle Aktivitaet</f:facet>
+				#{orderDto.latestActivityName} (ID: #{orderDto.latestActivityId})
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>

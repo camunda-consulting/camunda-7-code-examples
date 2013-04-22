@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	template="WEB-INF/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam id="taskId" name="taskId" />
+			<f:viewParam id="callbackUrl" name="callbackUrl" />
+			<f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<h1>Kunde hat nicht lagernde Ware bestellt</h1>
+
+			<table>
+				<tr>
+					<td>Kunde</td>
+					<td>#{order.customer}</td>
+				</tr>
+				<tr>
+					<td>Bestellung</td>
+					<td>
+					<h:dataTable value="#{order.items}" var="basketItem" styleClass="table table-striped">
+						<h:column>
+							<f:facet name="header">Menge</f:facet>
+							#{basketItem.amount}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Artikel</f:facet>
+							#{basketItem.article.id}
+						</h:column>
+						<h:column>
+							#{basketItem.article.description}
+						</h:column>
+					</h:dataTable>			
+					</td>
+				</tr>				
+				<tr>
+					<td>Umberatung erfolgreich?</td>
+					<td>
+						<h:selectOneRadio value="#{processVariables['umberatung']}" required="true" layout="pageDirection">
+							<f:selectItem itemLabel="Ja" itemValue="erfolgreich" />
+							<f:selectItem itemLabel="Nein" itemValue="fehlgeschlagen" />
+						</h:selectOneRadio>
+					</td>
+				</tr>
+			</table>
+			<h:commandLink value="OK" action="#{fox.taskForm.completeTask()}" styleClass="btn" />
+		</h:form>
+	</ui:define>
+</ui:composition>

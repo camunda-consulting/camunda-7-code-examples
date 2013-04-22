@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="customQueries">
+  
+  <resultMap id="orderProcessResultMap" type="com.camunda.demo.outerspace.wjax.controller.performance.OrderProcessDTO">
+    <result property="orderId" column="ID"/>
+    <result property="customer" column="CUSTOMER"/>
+    <result property="processInstanceId" column="PROC_INST_ID_" />
+    <result property="latestActivityId" column="ACT_ID_" />
+    <result property="latestActivityName" column="ACT_NAME_" />
+  </resultMap>
+  
+  <select id="selectOrdersWithProcessInformation" resultMap="orderProcessResultMap" parameterType="org.camunda.bpm.engine.impl.db.ListQueryParameterObject">
+	SELECT WJAX_ORDER.ID, WJAX_ORDER.CUSTOMER, pi.PROC_INST_ID_ , act2.ACT_ID_ , act2.ACT_NAME_ 
+	FROM 
+	   WJAX_ORDER, 
+	   ACT_HI_PROCINST pi, 
+       (SELECT PROC_INST_ID_, max(act1.ID_) MAX_ID from ACT_HI_ACTINST act1  group by PROC_INST_ID_ ) as act1,
+       ACT_HI_ACTINST act2 	   
+	WHERE
+	   pi.BUSINESS_KEY_ = WJAX_ORDER.ID 	
+	   and act1.PROC_INST_ID_ = pi.PROC_INST_ID_
+       and act2.ID_ = MAX_ID	   
+  </select>
+  
+</mapper>
