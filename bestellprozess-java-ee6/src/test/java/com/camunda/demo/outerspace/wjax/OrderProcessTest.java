@@ -57,7 +57,8 @@ public class OrderProcessTest {
     return ShrinkWrap
             .create(WebArchive.class, "wjax2012.war")
             // prepare as process application archive for fox platform
-            .addAsLibraries(resolver.artifact("com.camunda.fox.platform:fox-platform-client").resolveAsFiles())
+            .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
+            .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
             .addAsWebResource("META-INF/test-persistence.xml", "WEB-INF/classes/META-INF/persistence.xml")
             .addAsWebResource("META-INF/test-processes.xml", "WEB-INF/classes/META-INF/processes.xml")
             .addAsWebResource("META-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
@@ -125,7 +126,7 @@ public class OrderProcessTest {
             .count());
 
     // check the current state of the process instance
-    ProcessInstance pi = processEngine.getRuntimeService().createProcessInstanceQuery().singleResult();
+    ProcessInstance pi = processEngine.getRuntimeService().createProcessInstanceQuery().variableValueEquals("orderId", orderId).singleResult();
     List<String> activeActivityIds = processEngine.getRuntimeService().getActiveActivityIds(pi.getId());
     assertEquals(1, activeActivityIds.size());
     // it is in task "kunde-umberaten"
@@ -135,7 +136,7 @@ public class OrderProcessTest {
     List<Task> tasks = processEngine.getTaskService().createTaskQuery() //
             .taskAssignee("kermit") //
             // in test cases this may make sense:
-            // .processVariableValueEquals("orderId", orderId) //
+            .processVariableValueEquals("orderId", orderId) //
             .list();
 
     assertEquals(1, tasks.size());

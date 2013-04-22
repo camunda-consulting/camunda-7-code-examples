@@ -12,7 +12,7 @@
       <lane id="sid-71028080-6E57-4994-8CC9-773AE68CE248">
         <flowNodeRef>ServiceTask_2</flowNodeRef>
         <flowNodeRef>BoundaryEvent_1</flowNodeRef>
-        <flowNodeRef>usertask-kunde-umberaten</flowNodeRef>
+        <flowNodeRef>kunde-umberaten</flowNodeRef>
         <flowNodeRef>auftrag-geliefert</flowNodeRef>
         <flowNodeRef>StartEvent_1</flowNodeRef>
         <flowNodeRef>BoundaryEvent_2</flowNodeRef>
@@ -32,22 +32,22 @@
       <outgoing>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</outgoing>
       <errorEventDefinition id="error-goods-not-available" errorRef="goods-not-on-stock"/>
     </boundaryEvent>
-    <userTask id="usertask-kunde-umberaten" activiti:assignee="kermit" activiti:formKey="umberaten" name="Kunde umberaten" implementation="webService">
+    <userTask id="kunde-umberaten" activiti:assignee="kermit" activiti:formKey="umberaten" name="Kunde umberaten" implementation="webService">
       <incoming>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</incoming>
       <outgoing>SequenceFlow_6</outgoing>
     </userTask>
     <endEvent id="auftrag-geliefert" name="Bestellung&#xA;ausgeliefert">
       <incoming>SequenceFlow_2</incoming>
     </endEvent>
-    <sequenceFlow id="SequenceFlow_6" isImmediate="true" sourceRef="usertask-kunde-umberaten" targetRef="ExclusiveGateway_2"/>
-    <sequenceFlow id="sid-0799AB9C-6CAF-45C0-B861-F392783F6E41" sourceRef="BoundaryEvent_1" targetRef="usertask-kunde-umberaten"/>
+    <sequenceFlow id="SequenceFlow_6" isImmediate="true" sourceRef="kunde-umberaten" targetRef="ExclusiveGateway_2"/>
+    <sequenceFlow id="sid-0799AB9C-6CAF-45C0-B861-F392783F6E41" sourceRef="BoundaryEvent_1" targetRef="kunde-umberaten"/>
     <startEvent id="StartEvent_1" name="Bestellung&#xA;eingegangen">
       <outgoing>SequenceFlow_4</outgoing>
       <messageEventDefinition id="sid-1977d430-d717-46d3-8955-d24f132dcd38" messageRef="Message_1"/>
     </startEvent>
     <sequenceFlow id="SequenceFlow_4" isImmediate="true" sourceRef="StartEvent_1" targetRef="ServiceTask_2"/>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="ServiceTask_2" targetRef="ExclusiveGateway_1"/>
-    <boundaryEvent id="BoundaryEvent_2" name="" attachedToRef="usertask-kunde-umberaten" cancelActivity="false">
+    <boundaryEvent id="BoundaryEvent_2" name="" attachedToRef="kunde-umberaten" cancelActivity="false">
       <outgoing>SequenceFlow_3</outgoing>
       <timerEventDefinition id="TimerEventDefinition_1">
         <timeDuration xsi:type="tFormalExpression">PT10S</timeDuration>
@@ -104,7 +104,7 @@
       <bpmndi:BPMNShape id="BoundaryEvent_1_gui" bpmnElement="BoundaryEvent_1">
         <omgdc:Bounds height="30.0" width="30.0" x="283.0" y="108.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1_gui" bpmnElement="usertask-kunde-umberaten">
+      <bpmndi:BPMNShape id="UserTask_1_gui" bpmnElement="kunde-umberaten">
         <omgdc:Bounds height="64.0" width="110.0" x="357.0" y="153.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_2_gui" bpmnElement="ExclusiveGateway_2" isMarkerVisible="true">

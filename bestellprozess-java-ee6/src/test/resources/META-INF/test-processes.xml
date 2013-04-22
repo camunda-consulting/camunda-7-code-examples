@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<process-archives>
-  <process-archive>
-    <configuration>
-        <!-- use delete="false" in production ;-) -->
-      <undeployment delete="true" />
-    </configuration>
-  </process-archive>     
-</process-archives>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<process-application xmlns="http://www.camunda.org/schema/1.0/ProcessApplication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<process-archive name="default">
+		<process-engine>default</process-engine>
+		<properties>
+			<property name="isDeleteUponUndeploy">true</property> <!-- Don't do this in production :-) -->
+			<property name="isScanForProcessDefinitions">true</property>
+		</properties>
+	</process-archive>
+
+</process-application>
