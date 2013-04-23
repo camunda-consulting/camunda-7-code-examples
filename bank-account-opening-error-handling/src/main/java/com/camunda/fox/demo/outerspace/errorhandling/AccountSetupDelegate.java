@@ -17,7 +17,7 @@ public class AccountSetupDelegate implements JavaDelegate {
     // a normal exception is thrown up
 //    throw new Exception(errorMessage);
     // a BpmnError is caught by the engine and triggers a BPMN Error Event 
-    throw new BpmnError("XXduplicateApplication", errorMessage);
+    throw new BpmnError("duplicateApplication", errorMessage);
   }
 
 }
