@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+		
+<ui:define name="content">
+	
+	<h2>Place a New Order</h2>
+
+	<h:form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="company">Company name:</label>
+            <div class="controls">
+                <h:inputText id="company" value="#{newOrder.customer.company}" />
+                <h:message id="company_error" for="company" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="email">Email:</label>
+            <div class="controls">
+                <h:inputText id="email" value="#{newOrder.customer.email}" />
+                <h:message id="email_error" for="email" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amount">Amount:</label>
+            <div class="controls">
+                <h:inputText id="amount" value="#{newOrder.amount}" />
+                <h:message id="amount_error" for="amount" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{orderBean.save()}" value="save" type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
+	</h:form>
+
+	</ui:define>
+</ui:composition>

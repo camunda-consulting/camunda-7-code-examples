@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:z="http://www.qualcomm.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ui:composition>
+	<tr>
+		<td style="font-weight: bold;">${label}:</td>
+		<td>
+			<h:inputText id="${id}d" value="#{property}" styleClass="datePicker" rendered="${type eq 'date'}">
+				<f:ajax event="blur" render="${id}Message"/>
+				<f:convertDateTime pattern="mm/dd/yyyy" />
+			</h:inputText>
+			<h:inputText id="${id}" value="#{property}" rendered="${type eq 'text' || type == null}">
+				<f:ajax event="blur" render="${id}Message"/> 
+			</h:inputText>
+		</td>
+		<td><h:message id="${id}Message" for="${id}" errorClass="invalid" /></td>
+	</tr>	
+	</ui:composition>
+</html>

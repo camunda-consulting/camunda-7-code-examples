@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+		
+	<ui:define name="content">
+	
+	<f:metadata>
+		<f:viewParam id="entryId" name="entryId" value="#{ruleEntryEdit.entryId}" />
+    </f:metadata>
+
+	<h:form class="form-horizontal">
+        <legend>
+            <h:outputText value="Create a new discount rule entry" rendered="#{ruleEntryEdit.newEntry}" />
+            <h:outputText value="Edit discount rule entry" rendered="#{not ruleEntryEdit.newEntry}" />
+        </legend>
+        <div class="control-group">
+            <label class="control-label" for="name">Rule name:</label>
+            <div class="controls">
+                <h:inputText id="name" value="#{ruleEntryEdit.ruleEntry.name}" />
+                <h:message id="name_error" for="name" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amountMin">Amount min (&gt;):</label>
+            <div class="controls">
+                <h:inputText id="amountMin" value="#{ruleEntryEdit.ruleEntry.amountMin}" />
+                <h:message id="amountMin_error" for="amountMin" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amountMax">Amount max (&lt;=):</label>
+            <div class="controls">
+                <h:inputText id="amountMax" value="#{ruleEntryEdit.ruleEntry.amountMax}" />
+                <h:message id="amountMax_error" for="amountMax" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="discount">Discount:</label>
+            <div class="controls">
+                <h:inputText id="discount" value="#{ruleEntryEdit.ruleEntry.discount}" />
+                <h:message id="discount_error" for="discount" errorClass="invalid" />
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{ruleEntryEdit.save()}" value="save" type="submit"  rendered="#{ruleEntryEdit.newEntry}" class="btn btn-primary"/>
+                <h:commandButton action="#{ruleEntryEdit.update()}" value="update" type="submit" rendered="#{not ruleEntryEdit.newEntry}" class="btn btn-success"/>
+                <h:commandButton action="#{ruleEntryEdit.cancel()}" value="cancel" type="submit" immediate="true" class="btn"/>
+            </div>
+        </div>
+	</h:form>
+
+	</ui:define>
+</ui:composition>
