@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is not required if you don't need any extra configuration. -->
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+      http://java.sun.com/xml/ns/javaee
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">  
+      
+    <!-- global navigation rules for redirecting from taskforms back to the tasklist -->
+	<navigation-rule>
+		<navigation-case>
+			<from-action>#{businessProcess.completeTask(true)}</from-action>     
+			<if>#{true}</if>                   
+            <to-view-id>/app/taskList.jsf</to-view-id>
+            <redirect/>            
+		</navigation-case>		
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/app/placeNewOrder.jsf</from-view-id>
+		<navigation-case>
+			<from-action>#{orderBean.save()}</from-action>     
+            <to-view-id>/app/taskList.xhtml</to-view-id>
+            <redirect/>
+		</navigation-case>		
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/app/editRule.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{ruleEntryEdit.save()}</from-action>     
+            <if>#{true}</if>
+            <to-view-id>/app/ruleList.xhtml</to-view-id>
+            <redirect/>
+		</navigation-case>		
+		<navigation-case>
+			<from-action>#{ruleEntryEdit.update()}</from-action>     
+            <if>#{true}</if>
+            <to-view-id>/app/ruleList.xhtml</to-view-id>
+            <redirect/>
+		</navigation-case>		
+		<navigation-case>
+			<from-action>#{ruleEntryEdit.cancel()}</from-action>     
+            <if>#{true}</if>
+            <to-view-id>/app/ruleList.xhtml</to-view-id>
+            <redirect/>
+		</navigation-case>		
+	</navigation-rule>
+</faces-config>

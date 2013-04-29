@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+		
+<ui:define name="content">	
+	
+	<h2>Discount rules</h2>
+
+    <h:form>
+      <p>					
+		<h:dataTable value="#{ruleList}" var="item" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{item.name}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Amount from</f:facet>
+                #{item.amountMin}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Amount till</f:facet>#{item.amountMax}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Discount</f:facet>
+                #{item.discount}
+            </h:column>
+            <h:column>
+                <h:outputLink value="editRule.jsf?entryId=#{item.id}" class="btn">Edit</h:outputLink>
+            </h:column>
+        </h:dataTable>
+
+		<h:outputLink value="editRule.jsf" class="btn btn-primary">Add entry</h:outputLink>
+          <h:commandButton action="#{droolsRulebaseBean.updateRulebase()}" value="Update rulebase" type="submit" class="btn btn-success"/>
+      </p>
+      <pre class="prettyprint linenums">
+		<h:outputText value="#{droolsRulebaseBean.droolsRulebaseDrlHtml}" escape="false" />
+	  </pre>
+	</h:form>
+
+</ui:define>
+</ui:composition>

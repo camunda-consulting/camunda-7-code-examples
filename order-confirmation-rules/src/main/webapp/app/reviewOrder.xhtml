@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">	
+<ui:define name="content">
+
+	<f:metadata>
+		<f:viewParam name="taskId" />
+		<f:event type="preRenderView" listener="#{businessProcess.startTask(taskId, true)}" />            
+   	</f:metadata>
+	
+	<h2>#{task.name}</h2>
+	
+	<h:form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="company">Company:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.customer.company}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="amount">Amount:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.amount}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="discount">Discount:</label>
+            <div class="controls">
+                <span class="uneditable-input">#{orderEntity.discount}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <h:selectBooleanCheckbox id="valid"
+                                             value="#{processVariables['orderApproved']}"
+                                             required="true" />
+                    <h:message for="valid"/>
+                    Is this order OK?
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <h:commandButton action="#{businessProcess.completeTask(true)}" value="Done" type="submit" class="btn btn-primary"/>
+            </div>
+        </div>
+	</h:form>
+</ui:define>
+</ui:composition>
