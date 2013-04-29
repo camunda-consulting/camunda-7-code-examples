@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="oop-demo" default="deploy">
+<project name="oop-demo" default="deploy.jboss">
 
 	<property file="build.properties" />
-	<property file="${user.home}/.fox/build.properties" />
+	<property file="${user.home}/.camunda/build.properties" />
 	<property name="target.dir" value="target" />
 
 	<condition property="mvn.executable" value="mvn.bat" else="mvn">
@@ -16,9 +16,9 @@
 		</exec>
 	</target>
 
-	<target name="deploy" depends="package.mvn">
-		<fail unless="deploy.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.fox/build.properties' and change it according to your environment." />
-		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.dir}" />
+	<target name="deploy.jboss" depends="package.mvn">
+		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.fox/build.properties' and change it according to your environment." />
+		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.jboss.dir}" />
 	</target>
 
 </project>
