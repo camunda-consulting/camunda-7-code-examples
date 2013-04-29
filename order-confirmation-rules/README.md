@@ -36,5 +36,5 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE
 
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
-[1]: https://raw.github.com/camunda/camunda-outer-space-demos/master/order-confirmation-rules/src/main/resources/OrderConfirmation.png
+[1]: https://raw.github.com/camunda/camunda-outer-space-demos/master/order-confirmation-rules/src/main/webapp/resources/img/OrderConfirmation.png
 [2]: https://raw.github.com/camunda/camunda-outer-space-demos/master/order-confirmation-rules/src/main/webapp/resources/img/order-confirmation-rules-screenshot.png
