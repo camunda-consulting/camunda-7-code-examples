@@ -1,0 +1,2 @@
+# Defines the home directory of the deployment folder in the fox installation.
+deploy.jboss.dir=C:/fox/demopoint/fox-platform-jboss7/standalone/deployments
