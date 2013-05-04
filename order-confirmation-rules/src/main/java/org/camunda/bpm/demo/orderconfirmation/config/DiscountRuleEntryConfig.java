@@ -30,7 +30,7 @@ public class DiscountRuleEntryConfig {
     List<DiscountRuleEntry> rules = rulesDAO.findAllDiscountRuleEntries();
     if ((rules == null) || (rules.size() == 0)) {
       log.info("Creating initial sample discount rules: ...");
-      rulesDAO.save(new DiscountRuleEntry("Small orders", 100, 500, 5));
+      rulesDAO.save(new DiscountRuleEntry("Small orders", 0, 500, 5));
       rulesDAO.save(new DiscountRuleEntry("Mediun orders", 501, 1000, 7));
       rulesDAO.save(new DiscountRuleEntry("Big orders", 1001, 5000, 10));
     }
