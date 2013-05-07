@@ -74,13 +74,13 @@ public class StorePDFDelegate implements JavaDelegate {
   }
 
   private void storeInFile (byte[] file, String fileName) throws IOException {
-	  String home = System.getProperty("user.home");
-	  File path = new File(home + "/fox-invoice/");
+	  String directory = System.getProperty("user.home") + "/camunda-bpm-demo-invoice/";
+    File path = new File(directory);
 	  if (!path.exists()){
 	      path.mkdir();
 	  }	  
 	  
-	  FileOutputStream fos = new FileOutputStream(home + "/fox-invoice/" + fileName);
+	  FileOutputStream fos = new FileOutputStream(directory + fileName);
 	  fos.write(file);
 	  fos.close();
   }

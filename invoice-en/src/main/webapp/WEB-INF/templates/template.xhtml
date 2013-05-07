@@ -158,8 +158,7 @@
 									value="#{processDiagramController.getTaskComments(taskId)}"
 									var="comment" varStatus="status">
 									<tr>
-										<td><img style="margin-right: 15px;" width="25"
-											src="./userPicture?user=#{comment.userId}" />#{comment.userId}</td>
+										<td>#{comment.userId}</td>
 										<td><h:outputText value="#{comment.time}">
 												<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
 													timeZone="Europe/Berlin" />
@@ -182,8 +181,7 @@
 									value="#{processDiagramController.commentsOfLastHistoricTask}"
 									var="comment" varStatus="status">
 									<tr>
-										<td><img style="margin-right: 15px;" width="25"
-											src="./userPicture?user=#{comment.userId}" />#{comment.userId}</td>
+										<td>#{comment.userId}</td>
 										<td><h:outputText value="#{comment.time}">
 												<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
 													timeZone="Europe/Berlin" />
@@ -319,7 +317,7 @@
 											</h:panelGroup>
 
 							                +'<table>'+
-										       '<tr><td rowspan="5" style="vertical-align:top"><img style="margin-right:15px;" width="50" src="./userPicture?user=#{htask.assignee}"/></td>'+
+										       '<tr><td rowspan="5" style="vertical-align:top">#{htask.assignee}"/></td>'+
 										       '<td>Assignee: </td><td>#{htask.assignee}</td></tr>'+
 										       '<tr><td>Assigned At: </td><td>'+
 										       		'<h:outputText value="#{htask.startTime}" ><f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Berlin" /></h:outputText>'+
@@ -365,8 +363,7 @@
 					">
 									<td>#{status.index+1}</td>
 									<td>#{phtask.htask.name}</td>
-									<td><img style="margin-right: 15px;" width="25"
-										src="./userPicture?user=#{phtask.htask.assignee}" />#{phtask.htask.assignee}</td>
+									<td>#{phtask.htask.assignee}</td>
 									<td><h:outputText value="#{phtask.htask.startTime}">
 											<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
 												timeZone="Europe/Berlin" />

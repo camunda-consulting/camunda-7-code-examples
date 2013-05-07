@@ -4,18 +4,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="WEB-INF/templates/template.xhtml">
-	
-    
-<ui:define name="metadata">
-    <f:metadata>
-      <f:viewParam id="taskId" name="taskId" />
-      <f:viewParam id="callbackUrl" name="callbackUrl" />
-      <f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
-    </f:metadata>
-</ui:define>
 
-	
+
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam id="taskId" name="taskId" />
+			<f:viewParam id="callbackUrl" name="callbackUrl" />
+			<f:event type="preRenderView"
+				listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+		</f:metadata>
+	</ui:define>
+
+
 	<ui:define name="form">
+		<div class="control-group">
+			<label class="control-label" for="approver">PDF Archiv</label>
+			<div class="controls">
+				<h:selectOneMenu id="repo" value="#{processVariables['repo']}">
+					<f:selectItem itemValue="local" itemLabel="Local file system" />
+					<f:selectItem itemValue="alfresco" itemLabel="Alfresco ECM 4" />
+					<f:selectItem itemValue="svn" itemLabel="Subversion" />
+				</h:selectOneMenu>
+				<br />
+			</div>
+		</div>
 	</ui:define>
 
 </ui:composition>
