@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.camunda.bpm.engine.HistoryService;
-import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
@@ -33,7 +32,7 @@ public class CustomerNotificationDelegate implements JavaDelegate {
       .finished()
       .list();
     Date endTimeOfPreviousActivity = previousActivities.get(previousActivities.size() - 1).getEndTime();
-    if (DateUtils.addSeconds(endTimeOfPreviousActivity, 30).after(new Date())) {
+    if (DateUtils.addSeconds(endTimeOfPreviousActivity, 10).after(new Date())) {
       throw new IOException("Customer Notification Service unreachable");
     }
   }

@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Invoice Inbound</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet name="css/bootstrap.css" />
+	<h:outputStylesheet name="css/responsive.css" />
+	<h:outputStylesheet name="css/start/datepicker.css" />
+	<!-- 3rd party component -->
+
+	<h:outputScript name="js/jquery.js" />
+	<h:outputScript name="js/bootstrap.js" />
+	<h:outputScript name="js/bootstrap-datepicker.js" />
+	<!-- 3rd party component -->
+	<h:outputScript name="js/bootstrap-datepicker.de.js" />
+	<!-- 3rd party component localization-->
+
+	<!--  JQuery UI only needed for Zoom Slider -->
+	<h:outputScript name="js/jquery-ui-1.8.21.slider.min.js" />
+	<h:outputStylesheet name="css/start/jquery-ui-1.8.16.bootstrap.css" />
+
+	<h:outputScript>
+/* <![CDATA[ */
+	var currentStateIndicator = new Array();
+	var historyIndicator = new Array();
+	
+	var taskHoverArea = new Array();
+	var processDiagramWidth;
+	var processDiagramHeight;
+	
+  $(document).ready(function() {
+    $("#slider").slider({
+    	animate: true,
+    	min:1,
+    	max:100,
+    	value:100,
+    	slide: function(event, ui) { 
+    		var diagramMin=400;
+    		var diagramMax=processDiagramWidth;
+    		var diagramRange=diagramMax-diagramMin;
+    		var diagramStep=diagramRange/100;
+    		document.getElementById("processDiagram").width=diagramMin+ui.value*diagramStep;
+    		positionIndicators();
+    		//document.getElementById("sliderValue").innerText=ui.value + " DiagramMin: " + diagramMin + " DiagramMax: " + diagramMax + "DiagramRange: " + diagramRange + " DiagramStep: " + diagramStep + " ergibt " + diagramMin+ui.value*diagramStep;
+    	 }
+    });
+  });
+
+	$(window).load( function() {positionIndicators();});
+	
+	function positionIndicators () {
+		var currentDiagramWidth = document.getElementById("processDiagram").width;
+		var currentDiagramHeight = document.getElementById("processDiagram").height;
+		var factorWidth = currentDiagramWidth/processDiagramWidth;
+		var factorHeight = 	currentDiagramHeight/processDiagramHeight;
+	
+		for (var i = 0; i < currentStateIndicator.length; i++) {
+			var newLeft = currentStateIndicator[i]["left"]*factorWidth;
+			var newTop = currentStateIndicator[i]["top"]*factorHeight;
+
+			document.getElementById(currentStateIndicator[i]["id"]).style.left=newLeft + 'px';
+			document.getElementById(currentStateIndicator[i]["id"]).style.top=newTop + 'px';
+		}
+
+		for (var i = 0; i < historyIndicator.length; i++) {
+			var newLeft = historyIndicator[i]["left"]*factorWidth;
+			var newTop = historyIndicator[i]["top"]*factorHeight;
+
+			document.getElementById(historyIndicator[i]["id"]).style.left=newLeft + 'px';
+			document.getElementById(historyIndicator[i]["id"]).style.top=newTop + 'px';
+		}
+
+		for (var i = 0; i < taskHoverArea.length; i++) {
+			var newLeft = taskHoverArea[i]["left"]*factorWidth;
+			var newTop = taskHoverArea[i]["top"]*factorHeight;
+			var newWidth = taskHoverArea[i]["width"]*factorWidth;
+			var newHeight = taskHoverArea[i]["height"]*factorHeight;
+
+			document.getElementById(taskHoverArea[i]["id"]).style.left=newLeft + 'px';
+			document.getElementById(taskHoverArea[i]["id"]).style.top=newTop + 'px';
+			document.getElementById(taskHoverArea[i]["id"]).style.width=newWidth + 'px';
+			document.getElementById(taskHoverArea[i]["id"]).style.height=newHeight + 'px';
+
+		    //$("#" + taskHoverArea[i]['id']).popover('hide');
+
+		}
+
+
+	}
+	/* ]]> */
+	
+</h:outputScript>
+
+
+</h:head>
+<h:body>
+	<ui:insert name="metadata" />
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid" style="padding: 0;">
+					<a class="brand" href="#{callbackUrl}"
+						style="margin: 0 0 0 17px; padding: 0;">camunda BPM demo</a>
+				</div>
+			</div>
+		</div>
+
+	<div class="container-fluid" style="padding-top: 40px;">
+		<div class="row-fluid">
+			<div class="span1">
+				<!--Sidebar content-->
+				
+			</div>
+			<div class="span11">
+				<!--Body content-->
+				<div class="page-header">
+					<h1>#{businessProcess.task.name}</h1>
+				</div>
+
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#formular" data-toggle="tab">Form</a></li>
+					<li><a href="#beleg" data-toggle="tab">Invoice</a></li>
+					<li><a href="#adhoc" data-toggle="tab">Delegate To</a></li>
+					<li><a href="#wo" data-toggle="tab">Process</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade in active" id="formular">
+						<h:form class="form-horizontal">
+							<fieldset>
+								<ui:insert name="form">Here we will see the form</ui:insert>
+								<div class="control-group">
+									<label class="control-label" for="comment">Comment</label>
+									<div class="controls">
+										<h:inputTextarea id="comment"
+											value="#{putCommentController.comment}" cols="30" rows="5" />
+									</div>
+								</div>
+							</fieldset>
+							<h:commandButton style="margin-left:10px" class="btn btn-primary" id="submit_button"
+								value="OK" action="#{putCommentController.submit()}" />
+							<a class="btn" href="#{callbackUrl}">Cancel</a>
+						</h:form>
+						<h:panelGroup layout="block"
+							rendered="#{processDiagramController.getTaskComments(taskId).size()>0}">
+							<h3>Comments for this task:</h3>
+							<table id="commentsTable" class="table">
+								<tr>
+									<th>Assignee</th>
+									<th>Time</th>
+									<th>Comment</th>
+								</tr>
+								<ui:repeat
+									value="#{processDiagramController.getTaskComments(taskId)}"
+									var="comment" varStatus="status">
+									<tr>
+										<td><img style="margin-right: 15px;" width="25"
+											src="./userPicture?user=#{comment.userId}" />#{comment.userId}</td>
+										<td><h:outputText value="#{comment.time}">
+												<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+													timeZone="Europe/Berlin" />
+											</h:outputText></td>
+										<td>#{comment.fullMessage}</td>
+									</tr>
+								</ui:repeat>
+							</table>
+						</h:panelGroup>
+						<h:panelGroup layout="block"
+							rendered="#{processDiagramController.commentsOfLastHistoricTask.size()>0}">
+							<h3>Comments for the previous task:</h3>
+							<table id="commentsTable" class="table">
+								<tr>
+									<th>Assignee</th>
+									<th>Timestamp</th>
+									<th>Comment</th>
+								</tr>
+								<ui:repeat
+									value="#{processDiagramController.commentsOfLastHistoricTask}"
+									var="comment" varStatus="status">
+									<tr>
+										<td><img style="margin-right: 15px;" width="25"
+											src="./userPicture?user=#{comment.userId}" />#{comment.userId}</td>
+										<td><h:outputText value="#{comment.time}">
+												<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+													timeZone="Europe/Berlin" />
+											</h:outputText></td>
+										<td>#{comment.fullMessage}</td>
+									</tr>
+								</ui:repeat>
+							</table>
+						</h:panelGroup>
+					</div>
+					<div class="tab-pane fade" id="beleg">
+						<div style="height: 600px;">
+							<object data="./downloadInvoice?taskId=#{taskId}"
+								type="application/pdf" width="1000px" height="90%">
+								<p>
+									It appears you don't have a PDF plugin for this browser. No
+									biggie... you can <a href="./downloadInvoice?taskId=#{taskId}">click
+										here to download the PDF file.</a>
+								</p>
+							</object>
+						</div>
+
+					</div>
+					<div class="tab-pane fade" id="adhoc">
+						<h:form class="form-horizontal">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label" for="comment">New
+										Comment</label>
+									<div class="controls">
+										<h:inputTextarea id="comment"
+											value="#{putCommentController.comment}" cols="30" rows="5" />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="assignee">Delegate
+										To</label>
+									<div class="controls">
+										<h:selectOneMenu id="approver"
+											value="#{putCommentController.newAssignee}">
+											<f:selectItems value="#{taskListController.usersList}"
+												var="v_user" itemLabel="#{v_user.id}" itemValue="#{v_user.id}"></f:selectItems>
+										</h:selectOneMenu>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="assignee">Send
+										email (not active in this demo)</label>
+									<div class="controls">
+										<h:selectBooleanCheckbox value="#{putCommentController.email}" disabled="true"/>
+									</div>
+								</div>
+							</fieldset>
+							<h:commandButton style="margin-right:5px;"
+								class="btn btn-primary" id="submit_button"
+								value="Delegate And Comment"
+								action="#{putCommentController.delegate(callbackUrl)}" />
+							<h:commandButton class="btn" id="submit_button2"
+								value="Comment Only"
+								action="#{putCommentController.addComment()}" />
+						</h:form>
+
+					</div>
+					<div class="tab-pane fade" id="wo" >
+						<div>
+							<p id="sliderValue"></p>
+							<div id="slider"
+								style="margin-top: 10px; margin-left: 5px; width: 400px;"></div>
+							<div id="processDiagramWrapper" 
+								style="z-index: 1; position: relative !important; overflow: auto; mind-width: 600px; width: 100%; height: 400px; margin-bottom:10px">
+								<img id="processDiagram"
+									src="processDiagram?processDefinitionId=#{task.processDefinitionId}"
+									onload="processDiagramWidth=this.width; processDiagramHeight=this.height;"
+									style="max-width: 15000px;" />
+								<ui:repeat
+									value="#{processDiagramController.getActiveActivityBoundsOfLatestProcessInstance()}"
+									var="bounds" varStatus="status">
+									<script>
+								     	currentStateIndicator[#{status.index}] = new Object();
+								     	currentStateIndicator[#{status.index}]["id"] = 'currentToken_#{status.index}';
+								     	currentStateIndicator[#{status.index}]["top"] = #{bounds.y - 5};
+								     	currentStateIndicator[#{status.index}]["left"] = #{bounds.x + bounds.width - 25};
+								     </script>
+									<span id="currentToken_#{status.index}"
+										class="badge badge-warning"
+										style="position: absolute; left: #{bounds.x+bounds.width-25}">waiting</span>
+
+								</ui:repeat>
+								<ui:repeat
+									value="#{processDiagramController.traversedTaskDefinitions}"
+									var="htaskdef" varStatus="status">
+									<script>
+								     	taskHoverArea[#{status.index}] = new Object();
+								     	taskHoverArea[#{status.index}]["id"] = 'task_#{htaskdef.taskDefinitionKey}';
+								     	taskHoverArea[#{status.index}]["top"] = #{htaskdef.bounds.y};
+								     	taskHoverArea[#{status.index}]["left"] = #{htaskdef.bounds.x};
+								     	taskHoverArea[#{status.index}]["width"] = #{htaskdef.bounds.width};
+								     	taskHoverArea[#{status.index}]["height"] = #{htaskdef.bounds.height};
+			
+								     	historyIndicator[#{status.index}] = new Object();
+								     	historyIndicator[#{status.index}]["id"] = 'history_#{htaskdef.taskDefinitionKey}';
+								     	historyIndicator[#{status.index}]["top"] = #{htaskdef.bounds.y + htaskdef.bounds.height - 10};
+								     	historyIndicator[#{status.index}]["left"] = #{htaskdef.bounds.x + htaskdef.bounds.width - 20};
+			
+								     </script>
+
+									<span id="history_#{htaskdef.taskDefinitionKey}"
+										class="badge badge-success"
+										style="position: absolute; left: #{htaskdef.bounds.x+htaskdef.bounds.width-20}">#{htaskdef.taskInstances.size()}x</span>
+
+									<div id="task_#{htaskdef.taskDefinitionKey}" rel="popover"
+										data-original-title="#{htaskdef.taskName}"
+										style="cursor: pointer; position: absolute; left: #{htaskdef.bounds.x}"
+										onclick="$('#task_#{htaskdef.taskDefinitionKey}').popover('toggle');document.getElementById('processDiagramWrapper').focus()">
+									</div>
+									<script>
+						   $(function ()  
+								   { $("#task_#{htaskdef.taskDefinitionKey}").popover({
+							            html:true,
+							            title:function () {
+							                return $(this).html();
+							            },
+							            placement: 'inside right',
+							            selector: 'task_#{htaskdef.taskDefinitionKey}',
+							            trigger: 'manual',
+							            template:'<div class="popover"><div class="arrow"></div><div class="popover-inner" style="width:450px;"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+							            content:function () {
+							                var which = $(this).html();               
+							                return '<p>' + which + '</p>'
+							                <ui:repeat value="#{htaskdef.taskInstances}" var="htask" varStatus="status">
+											<h:panelGroup layout="block" rendered="#{status.index>0}">
+												+'<hr/>'
+											</h:panelGroup>
+
+							                +'<table>'+
+										       '<tr><td rowspan="5" style="vertical-align:top"><img style="margin-right:15px;" width="50" src="./userPicture?user=#{htask.assignee}"/></td>'+
+										       '<td>Assignee: </td><td>#{htask.assignee}</td></tr>'+
+										       '<tr><td>Assigned At: </td><td>'+
+										       		'<h:outputText value="#{htask.startTime}" ><f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Berlin" /></h:outputText>'+
+												'</td></tr>'+
+										       '<tr><td>Finished At: </td><td>'+
+										       		'<h:outputText value="#{htask.endTime}" ><f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Berlin" /></h:outputText>'+
+												'</td></tr>'+
+										       '<tr><td>Throughput Time: </td><td>'+
+										       		'<h:outputText value="#{htask.durationInMillis}" ><f:convertDateTime pattern="HH:mm:ss" type="time" /></h:outputText>'+
+												'</td></tr>'+
+												'</table>'
+											</ui:repeat>
+												;
+							            }
+			
+								   });  
+								   });
+						   </script>
+								</ui:repeat>
+
+
+							</div>
+							
+						</div>
+						<table id="tasksTable" class="table">
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Assignee</th>
+								<th>Assigned At</th>
+								<th>Finished</th>
+								<th>Throughput Time</th>
+								<th>Last Comment</th>
+							</tr>
+							<ui:repeat value="#{processDiagramController.traversedTasks}"
+								var="phtask" varStatus="status">
+								<tr class="row_#{phtask.htask.taskDefinitionKey}"
+									onmouseover="
+						document.getElementById('task_#{phtask.htask.taskDefinitionKey}').style.border='1px solid red';	
+					"
+									onmouseout="
+						document.getElementById('task_#{phtask.htask.taskDefinitionKey}').style.border='none';
+					">
+									<td>#{status.index+1}</td>
+									<td>#{phtask.htask.name}</td>
+									<td><img style="margin-right: 15px;" width="25"
+										src="./userPicture?user=#{phtask.htask.assignee}" />#{phtask.htask.assignee}</td>
+									<td><h:outputText value="#{phtask.htask.startTime}">
+											<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+												timeZone="Europe/Berlin" />
+										</h:outputText></td>
+									<td><h:outputText value="#{phtask.htask.endTime}">
+											<f:convertDateTime pattern="dd.MM.yyyy HH:mm"
+												timeZone="Europe/Berlin" />
+										</h:outputText></td>
+									<td><h:outputText value="#{phtask.htask.durationInMillis}">
+											<f:convertDateTime pattern="HH:mm:ss" type="time" />
+										</h:outputText></td>
+									<td>
+										#{processDiagramController.getTaskComment(phtask.htask.id)}</td>
+								</tr>
+							</ui:repeat>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

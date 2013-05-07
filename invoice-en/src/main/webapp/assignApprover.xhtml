@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="WEB-INF/templates/template.xhtml">
+
+	<ui:define name="metadata">
+
+		<f:metadata>
+			<f:viewParam id="taskId" name="taskId" />
+			<f:viewParam id="callbackUrl" name="callbackUrl" />
+			<f:event type="preRenderView"
+				listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="form">
+		<div class="control-group">
+			<label class="control-label" for="creditor">Creditor</label>
+			<div class="controls">
+				<h:inputText id="creditor" value="#{processVariables['creditor']}"
+					size="40" maxlength="100" required="true"
+					requiredMessage=" Mandatory Field!!!" />
+				<h:message for="creditor" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="date">Billing Date</label>
+			<div class="controls">
+				<div class="input-append date" id="dp3" data-date="28.04.1979"
+					data-date-format="dd.mm.yyyy">
+					<h:inputText class="date-picker" id="date"
+						value="#{processVariables['invoice_date']}" required="true"
+						requiredMessage=" Mandatory Field!!!">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+				</div>
+				<h:message for="date" />
+				<script type="text/javascript">
+					//Dates panel
+					$('.date-picker').datepicker({
+						'format' : 'dd.mm.yyyy',
+						'language' : 'de',
+						'weekStart' : 1,
+						'autoclose' : true
+					});
+				</script>
+
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="approver">Approver</label>
+			<div class="controls">
+				<h:selectOneMenu id="approver"
+					value="#{processVariables['approver']}">
+					<f:selectItems value="#{taskListController.usersList}"
+						var="v_user" itemLabel="#{v_user.id}" itemValue="#{v_user.id}"></f:selectItems>
+				</h:selectOneMenu>
+				<br />
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+

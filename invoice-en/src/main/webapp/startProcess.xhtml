@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+		<f:metadata>
+		    <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
+			<f:viewParam id="callbackUrl" name="callbackUrl" />
+		</f:metadata>
+		<title>New invoice</title>
+		<h:outputStylesheet name="css/bootstrap.css" />
+	</h:head>
+	<h:body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid" style="padding: 0;">
+					<a class="brand" href="#{callbackUrl}"
+						style="margin: 0 0 0 17px; padding: 0;"><img
+						src="../../tasklist/resources/img/FoxTasklist_white.png"
+						alt="camunda fox - task list" /></a>
+				</div>
+			</div>
+		</div>
+		<div class="container" style="padding-top: 80px;">
+			<h1>Upload Invoice</h1>
+			<p>Process: #{processDefinitionKey}</p>
+			<FORM class="form-horizontal" ENCTYPE="multipart/form-data" ACTION="startByUpload" METHOD="POST">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label" for="invoice">Invoice (PDF)</label>
+						<div class="controls">
+							<INPUT NAME="invoice" TYPE="file" /> 
+							<input type="hidden" name="processDefinitionKey" value="#{processDefinitionKey}" />
+							<input type="hidden" name="callbackUrl" value="#{callbackUrl}" />
+						</div>
+					</div>
+				</fieldset>
+				<INPUT class="btn btn-primary" TYPE="submit" VALUE="Start Process" />
+			</FORM>
+		</div>
+	</h:body>
+
+</ui:composition>

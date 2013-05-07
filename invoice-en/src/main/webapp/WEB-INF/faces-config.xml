@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{batchStarter.startInstancesByKey('invoice')}</from-action>
+			<if>#{true}</if>
+			<to-view-id>/taskList.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{emailStarter.startProcessInstancesForNewEmails()}</from-action>
+			<if>#{true}</if>
+			<to-view-id>/tasklist/app/taskList.jsf</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+<!-- 
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{businessProcess.completeTask(true)}</from-action>
+			<if>#{true}</if>
+			<to-view-id>/taskList.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+ -->
+</faces-config>

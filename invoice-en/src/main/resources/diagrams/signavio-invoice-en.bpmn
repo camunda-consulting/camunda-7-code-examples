@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-db4cdc7b-db5b-4779-9015-543353ae85e7" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="6.1.0" targetNamespace="http://www.signavio.com/bpmn20">
+  <message id="sid-77d59452-4fa5-456b-922e-9f3ef79a12d5" name="startMessageSignavio_en"/>
+  <collaboration id="sid-48c2972b-06bb-418c-aff7-a4abba948ae4">
+    <participant id="Process_Engine_1" name="invoice receipt (Signavio)" processRef="signavio-invoice-en"/>
+  </collaboration>
+  <process id="signavio-invoice-en" name="invoice receipt (Signavio)" isClosed="true" isExecutable="true">
+    <extensionElements>
+      <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+    </extensionElements>
+    <laneSet id="sid-da834be4-e971-431c-a269-9c50643d9a61">
+      <lane id="Freigebender_105" name="approver">
+        <extensionElements>
+          <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue=""/>
+        </extensionElements>
+        <flowNodeRef>approveInvoice</flowNodeRef>
+        <flowNodeRef>Freigabe_erfolgt__131</flowNodeRef>
+      </lane>
+      <lane id="Team-Assistenz_110" name="team assistant">
+        <extensionElements>
+          <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue=""/>
+        </extensionElements>
+        <flowNodeRef>Rechnung_eingegangen_138</flowNodeRef>
+        <flowNodeRef>assignApprover</flowNodeRef>
+        <flowNodeRef>reviewInvoice</flowNodeRef>
+        <flowNodeRef>Kl_rung_erfolgreich__153</flowNodeRef>
+        <flowNodeRef>endEvent_165</flowNodeRef>
+      </lane>
+      <lane id="Buchhaltung_119" name="accountant">
+        <extensionElements>
+          <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue=""/>
+        </extensionElements>
+        <flowNodeRef>PDF_in_SVN_ablegen_160</flowNodeRef>
+        <flowNodeRef>prepareBankTransfer</flowNodeRef>
+        <flowNodeRef>Rechnungseingang_abgearbeitet_174</flowNodeRef>
+      </lane>
+    </laneSet>
+    <userTask id="approveInvoice" activiti:assignee="#{approver}" activiti:formKey="app:approveInvoice.jsf" name="approve&#xA; invoice" implementation="webService">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="risklevel" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="userstory" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="externaldocuments" metaValue=""/>
+      </extensionElements>
+      <incoming>sequenceFlow_178</incoming>
+      <incoming>ja_186</incoming>
+      <outgoing>sequenceFlow_180</outgoing>
+    </userTask>
+    <exclusiveGateway id="Freigabe_erfolgt__131" name="invoice&#xA;approved?" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioLabel xsi:type="xsd:anyType" align="center" bottom="true" left="false" ref="text_name" right="false" top="false" x="21.0" y="45.0"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+      </extensionElements>
+      <incoming>sequenceFlow_180</incoming>
+      <outgoing>Nein_182</outgoing>
+      <outgoing>Ja_181</outgoing>
+    </exclusiveGateway>
+    <startEvent id="Rechnung_eingegangen_138" activiti:formKey="app:startProcess.jsf" name="invoice&#xA;received">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="viaitsystem" metaValue=""/>
+      </extensionElements>
+      <outgoing>sequenceFlow_187</outgoing>
+      <messageEventDefinition id="sid-d370e9bd-69cb-41a1-a751-5cbebcd5b1f6" messageRef="sid-77d59452-4fa5-456b-922e-9f3ef79a12d5"/>
+    </startEvent>
+    <userTask id="assignApprover" activiti:assignee="demo" activiti:formKey="app:assignApprover.jsf" name="assign approver" implementation="webService">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="risklevel" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="userstory" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="externaldocuments" metaValue=""/>
+      </extensionElements>
+      <incoming>sequenceFlow_187</incoming>
+      <outgoing>sequenceFlow_178</outgoing>
+    </userTask>
+    <userTask id="reviewInvoice" activiti:assignee="demo" activiti:formKey="app:clarifyInvoice.jsf" name="review invoice" implementation="webService">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="risklevel" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="userstory" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="externaldocuments" metaValue=""/>
+      </extensionElements>
+      <incoming>Nein_182</incoming>
+      <outgoing>sequenceFlow_183</outgoing>
+    </userTask>
+    <exclusiveGateway id="Kl_rung_erfolgreich__153" name="review&#xA;successful?" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+      </extensionElements>
+      <incoming>sequenceFlow_183</incoming>
+      <outgoing>ja_186</outgoing>
+      <outgoing>nein_185</outgoing>
+    </exclusiveGateway>
+    <endEvent id="endEvent_165" name="invoice not processed">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+      </extensionElements>
+      <incoming>nein_185</incoming>
+    </endEvent>
+    <serviceTask id="PDF_in_SVN_ablegen_160" activiti:delegateExpression="#{svnService}" name="save invoice to SVN" implementation="webService">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="risklevel" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="userstory" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="externaldocuments" metaValue=""/>
+      </extensionElements>
+      <incoming>sequenceFlow_179</incoming>
+      <outgoing>SequenceFlow_1</outgoing>
+    </serviceTask>
+    <userTask id="prepareBankTransfer" activiti:candidateGroups="accounting" activiti:formKey="app:preparePayment.jsf" name="prepare bank transfer" implementation="webService">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="risklevel" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="userstory" metaValue=""/>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="externaldocuments" metaValue=""/>
+      </extensionElements>
+      <incoming>Ja_181</incoming>
+      <outgoing>sequenceFlow_179</outgoing>
+    </userTask>
+    <endEvent id="Rechnungseingang_abgearbeitet_174" name="invoice &#xA;processed">
+      <extensionElements>
+        <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
+      </extensionElements>
+      <incoming>SequenceFlow_1</incoming>
+    </endEvent>
+    <sequenceFlow id="sequenceFlow_180" name="" isImmediate="true" sourceRef="approveInvoice" targetRef="Freigabe_erfolgt__131"/>
+    <sequenceFlow id="sequenceFlow_183" name="" isImmediate="true" sourceRef="reviewInvoice" targetRef="Kl_rung_erfolgreich__153"/>
+    <sequenceFlow id="sequenceFlow_179" name="" isImmediate="true" sourceRef="prepareBankTransfer" targetRef="PDF_in_SVN_ablegen_160"/>
+    <sequenceFlow id="sequenceFlow_178" name="" isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice"/>
+    <sequenceFlow id="SequenceFlow_1" name="" isImmediate="true" sourceRef="PDF_in_SVN_ablegen_160" targetRef="Rechnungseingang_abgearbeitet_174"/>
+    <sequenceFlow id="sequenceFlow_187" name="" isImmediate="true" sourceRef="Rechnung_eingegangen_138" targetRef="assignApprover"/>
+    <sequenceFlow id="Nein_182" name="no" isImmediate="true" sourceRef="Freigabe_erfolgt__131" targetRef="reviewInvoice">
+      <conditionExpression xsi:type="tFormalExpression" id="sid-b5174263-5d8e-46fd-a65e-583381a47771">${!approved}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Ja_181" name="yes" isImmediate="true" sourceRef="Freigabe_erfolgt__131" targetRef="prepareBankTransfer">
+      <conditionExpression xsi:type="tFormalExpression" id="sid-41245854-7d27-45fd-b066-faf509c504d3">${approved}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="ja_186" name="yes" isImmediate="true" sourceRef="Kl_rung_erfolgreich__153" targetRef="approveInvoice">
+      <conditionExpression xsi:type="tFormalExpression" id="sid-94452c45-b314-46b1-8313-983cfc7237d4">${clarified.equals('yes')}</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="nein_185" name="no" isImmediate="true" sourceRef="Kl_rung_erfolgreich__153" targetRef="endEvent_165">
+      <conditionExpression xsi:type="tFormalExpression" id="sid-01d14fa1-529e-4a77-bfd1-a3f894840dbf">${!clarified.equals('yes')}</conditionExpression>
+    </sequenceFlow>
+    <association id="sid-404932F6-25F8-48E0-8A1D-89C91598110B" sourceRef="prepareBankTransfer" targetRef="sid-30F15285-FB33-4DCB-B3A5-D05FF0FE2009"/>
+    <textAnnotation id="sid-30F15285-FB33-4DCB-B3A5-D05FF0FE2009">
+      <text>mit StarMoney</text>
+    </textAnnotation>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-a9d7b192-1d3d-4aec-8a4b-de9d9b45684b">
+    <bpmndi:BPMNPlane id="sid-87362870-db23-4840-ad7f-95eb8f4578f1" bpmnElement="sid-48c2972b-06bb-418c-aff7-a4abba948ae4">
+      <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="Process_Engine_1" isHorizontal="true">
+        <omgdc:Bounds height="488.0" width="1126.0" x="0.0" y="0.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Freigebender_105_gui" bpmnElement="Freigebender_105" isHorizontal="true">
+        <omgdc:Bounds height="161.0" width="1096.0" x="30.0" y="183.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Team-Assistenz_110_gui" bpmnElement="Team-Assistenz_110" isHorizontal="true">
+        <omgdc:Bounds height="183.0" width="1096.0" x="30.0" y="0.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Buchhaltung_119_gui" bpmnElement="Buchhaltung_119" isHorizontal="true">
+        <omgdc:Bounds height="144.0" width="1096.0" x="30.0" y="344.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="approveInvoice_gui" bpmnElement="approveInvoice">
+        <omgdc:Bounds height="80.0" width="100.0" x="353.0" y="225.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Freigabe_erfolgt__131_gui" bpmnElement="Freigabe_erfolgt__131" isMarkerVisible="true">
+        <omgdc:Bounds height="40.0" width="40.0" x="488.0" y="245.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Rechnung_eingegangen_138_gui" bpmnElement="Rechnung_eingegangen_138">
+        <omgdc:Bounds height="30.0" width="30.0" x="113.0" y="77.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="assignApprover_gui" bpmnElement="assignApprover">
+        <omgdc:Bounds height="80.0" width="100.0" x="185.0" y="52.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="reviewInvoice_gui" bpmnElement="reviewInvoice">
+        <omgdc:Bounds height="80.0" width="100.0" x="548.0" y="52.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Kl_rung_erfolgreich__153_gui" bpmnElement="Kl_rung_erfolgreich__153" isMarkerVisible="true">
+        <omgdc:Bounds height="40.0" width="40.0" x="693.0" y="72.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="endEvent_165_gui" bpmnElement="endEvent_165">
+        <omgdc:Bounds height="28.0" width="28.0" x="923.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PDF_in_SVN_ablegen_160_gui" bpmnElement="PDF_in_SVN_ablegen_160">
+        <omgdc:Bounds height="80.0" width="100.0" x="780.0" y="385.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="prepareBankTransfer_gui" bpmnElement="prepareBankTransfer">
+        <omgdc:Bounds height="80.0" width="100.0" x="638.0" y="385.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Rechnungseingang_abgearbeitet_174_gui" bpmnElement="Rechnungseingang_abgearbeitet_174">
+        <omgdc:Bounds height="28.0" width="28.0" x="923.0" y="411.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-30F15285-FB33-4DCB-B3A5-D05FF0FE2009_gui" bpmnElement="sid-30F15285-FB33-4DCB-B3A5-D05FF0FE2009">
+        <omgdc:Bounds height="50.0" width="100.0" x="800.0" y="270.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Nein_182_gui" bpmnElement="Nein_182" sourceElement="Freigabe_erfolgt__131_gui" targetElement="reviewInvoice_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="245.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="548.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_180_gui" bpmnElement="sequenceFlow_180" sourceElement="approveInvoice_gui" targetElement="Freigabe_erfolgt__131_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="453.0" y="265.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="488.0" y="265.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_183_gui" bpmnElement="sequenceFlow_183" sourceElement="reviewInvoice_gui" targetElement="Kl_rung_erfolgreich__153_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="648.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="693.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_179_gui" bpmnElement="sequenceFlow_179" sourceElement="prepareBankTransfer_gui" targetElement="PDF_in_SVN_ablegen_160_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="738.0" y="425.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="780.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_178_gui" bpmnElement="sequenceFlow_178" sourceElement="assignApprover_gui" targetElement="approveInvoice_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="285.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="310.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="310.0" y="265.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="353.0" y="265.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1_gui" bpmnElement="SequenceFlow_1" sourceElement="PDF_in_SVN_ablegen_160_gui" targetElement="Rechnungseingang_abgearbeitet_174_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="880.0" y="425.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="923.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Ja_181_gui" bpmnElement="Ja_181" sourceElement="Freigabe_erfolgt__131_gui" targetElement="prepareBankTransfer_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="528.0" y="265.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="265.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="425.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="638.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-404932F6-25F8-48E0-8A1D-89C91598110B_gui" bpmnElement="sid-404932F6-25F8-48E0-8A1D-89C91598110B" sourceElement="prepareBankTransfer_gui" targetElement="sid-30F15285-FB33-4DCB-B3A5-D05FF0FE2009_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="688.0" y="385.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="800.0" y="295.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="nein_185_gui" bpmnElement="nein_185" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="endEvent_165_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="733.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="923.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_187_gui" bpmnElement="sequenceFlow_187" sourceElement="Rechnung_eingegangen_138_gui" targetElement="assignApprover_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="143.0" y="92.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="185.0" y="92.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ja_186_gui" bpmnElement="ja_186" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="approveInvoice_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="72.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="35.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="35.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="225.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

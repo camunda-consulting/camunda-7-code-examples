@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Showcase: Invoice Receipt</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<link rel="shortcut icon" type="image/x-icon" href="../../tasklist/resources/img/fox.ico" />
+
+	<link type="text/css" rel="stylesheet" href="/invoice-en/javax.faces.resource/css/bootstrap.css.jsf" />
+	<script type="text/javascript" src="/invoice-en/javax.faces.resource/js/jquery.js.jsf"></script>	
+	<script type="text/javascript" src="/invoice-en/javax.faces.resource/js/bootstrap.js.jsf"></script>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid" style="padding: 0;">
+				<a href="/tasklist/" class="brand" style="margin: 0 0 0 17px; padding: 0;"><img
+					src="../../tasklist/resources/img/FoxTasklist_white.png"
+					alt="camunda fox - task list" /></a>
+			</div>
+		</div>
+	</div>
+	<div class="container" style="padding-top: 80px;">
+		<div class="hero-unit">
+			<h1>Invoice Receipt</h1>
+			<p>Example Application for <a href="http://www.camunda.org/">camunda BPM</a></p>
+			<p>
+				<a href="/tasklist/" class="btn btn-primary btn-large"> Start Via Tasklist </a>
+			</p>
+		</div>
+
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#go" data-toggle="tab">Have fun</a></li>
+			<li><a href="#about" data-toggle="tab">Technology</a></li>
+			<li><a href="#process" data-toggle="tab">Process Models</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" id="go">
+				<ul>
+					<li>Log in to <a href="/tasklist/signin.jsf">fox tasklist</a> (username: kermit; passwort: any desired)</li>
+					<li>Click button 'start process' and choose process (depending on modeling tool, in case of doubt choose 'invoice receipt (fox)')</li>
+					<li>Select local PDF file</li>
+					<li>Click on 'start process'</li>
+					<li>In Kermit's tasklist you will see the task 'assign approver'</li>
+					<li>Click on 'work on task' to work on task</li>
+					<li>Possibilities in form:
+						<ul>
+							<li>Form: enter data and finish task</li>
+							<li>Invoice: show PDF file</li>
+							<li>Delegate to: comment the task and delegate it to another user</li>
+							<li>Process: to view BPMN diagramm including information about the current state and the already completed tasks</li>
+						</ul>
+					<li>Click through the whole process this way</li>
+				</ul>
+				<div class="alert alert-info">
+	  			  	<h4 class="alert-heading">SVN is required</h4>
+	  				<p>
+	  				In the last task a subversion system (SVN) is called in order to archive the PDF file. This only works if in the class "PDFTOSVNDelegate" an existing SVN has been provided and the credetials have been entered correctly.
+	  				</p>
+	  				<p>
+	  				Even if there is no SVN, the process can be run through without a problem until the last user task before the SVN call.
+	  				</p> 
+				</div>
+				
+			</div>
+			<div class="tab-pane fade" id="about">
+				<table width="100%" class="table table-bordered ">
+					<tr>
+						<th>Subject</th>
+						<th>Hints</th>
+						<th style="min-width:200px !important;">More information</th>
+					</tr>
+					<tr>
+						<td rowspan="4"><strong>Human Workflow Management with JSF</strong></td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+							The process application requires the tasklist and does not bring a tasklist on its own.
+							</p>
+						</td>
+						<td >
+						<!-- 
+							<a href="https://app.camunda.com/confluence/display/foxUserGuide/fox+tasklist">fox userguide</a>
+							 -->
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+							Almost all the assignements in the user tasks (attribute "assignee" in user task) point at the user name "kermit". The only exception is "approve invoice". Here, a variable "approver" is set in the attribute "assignee", which is set in the JSF form "assignApprover" via a select box.
+							</p>
+						</td>
+						<td >
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+							There is one JSF form per user task, which itself is is embedded into an template (WEB-INF/templates/template.xhtml). Thereby we can define a central basis layout for the process application in which all forms are integrated consistently.
+							</p>
+							<p>
+							In the template, a variant of twitter bootstrap is referenced, adapted to the fox tasklist, in order to align the design of the forms to the desing of the fox tasklist. This approach can also be used to implement your own corporate design.
+							</p>
+						</td>
+						<td >
+							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Add+forms+to+your+Process+Application">fox userguide</a><br/><br/>
+							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Add+forms+to+your+Process+Application">Twitter Bootstrap</a>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2"><strong>Service Calls with Java Delegates</strong></td>
+					</tr>
+					<tr>
+						<td>
+							<p>At the end of the process the PDF file is filed in a subversion (SVN). In BPMN this is a service task which itself points to the Java class "PDFToSVNDelegate". Here all the process variables are read and the SVN system is called.</p>
+							<p>As you can see, via this very simple approach the whole range of Java can be used. One could also easily implement a link to other systems within this delegate.</p>
+						</td>
+						<td >
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2"><strong>CDI integration</strong></td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+							The CDI integration of the fox engine is used quite often in this application, e.g. in order to start aprocess instance out of the servlet, which can be called up from the start form ("StartByUpload").
+							</p>
+							<p>
+							The example shows how quick and easy even very individual requirements for your process applications can be realized through CDI integration.
+							</p>
+						</td>
+						<td >
+							<a href="https://app.camunda.com/confluence/display/foxUserGuide/CDI+Integration">fox userguide</a><br/><br/>
+						
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2"><strong>Visualize the running process</strong></td>
+					</tr>
+					<tr>
+						<td>
+							<p>
+							At every given point in the process one can see at which point in the process one stands and which steps have been alreday taken and who has completed the tasks.
+							</p>
+							<p>
+							This function demonstrates the process diagramm API, with which one can view an image file of the deployed process and also gets a 'coordinate system" which is based on the layout information of the exported BPMN 2.0-XML. By this means the function can be combined with any BPMN 2.0-conform tool.
+							</p>
+							<p>
+							Built in this, with the help of CCS and Javascript ( (JQuery, Twitter Bootstrap and other functions) the named features are implementet in this example.
+							</p>
+							<p>
+							The example shall show how easy and flexible your own and solution-specific runtime information on the process can be inserted into an on business-side understandable process diagramm.
+							</p>
+						</td>
+						<td >
+							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Process+Diagram+API">fox userguide</a>
+						</td>
+					</tr>
+
+				</table>
+
+			</div>
+			<div class="tab-pane fade" id="process">
+			 <h2>Different Process Models</h2>
+			 <p>This showcase shows, how the BPMN 2-export from different tools can be used in order to be run in camunda fox. For each export one process will be deployed, including the image file of the diagram from the correspondng tool.</p>
+	         <div class="accordion" id="accordion2">
+	            <div class="accordion-group">
+	              <div class="accordion-heading">
+	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#fox-invoice">
+	                  fox designer (manufacturer: camunda)
+	                </a>
+	              </div>
+	              <div id="fox-invoice" class="accordion-body collapse">
+	                <div class="accordion-inner">
+						<img id="processDiagram" src="processDiagram?processDefinitionKey=fox-invoice-en" />
+	                </div>
+	              </div>
+	            </div>
+	            <div class="accordion-group">
+	              <div class="accordion-heading">
+	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#signavio-invoice">
+	                  Signavio Process Editor (manufacturer: Signavio)
+	                </a>
+	              </div>
+	              <div id="signavio-invoice" class="accordion-body collapse">
+	                <div class="accordion-inner">
+						<img id="processDiagram" src="processDiagram?processDefinitionKey=signavio-invoice-en" />
+	                </div>
+	              </div>
+	            </div>
+	          </div>				
+			</div>
+		</div>
+	 <hr />
+    <footer>
+      <p>
+        powered by <a href="http://www.camunda.org/">camunda BPM</a>
+      </p>
+    </footer>
+
+	</div>
+</body>
+</html>
