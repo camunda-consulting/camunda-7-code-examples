@@ -24,7 +24,16 @@ public class DiscountRuleEntry implements Serializable {
   private int amountMin;
   private int amountMax;
   private int discount;
-  
+
+  public DiscountRuleEntry() { }
+
+  public DiscountRuleEntry(String name, int amountMin, int amountMax, int discount) {
+    this.name = name;
+    this.amountMin = amountMin;
+    this.amountMax = amountMax;
+    this.discount = discount;
+  }
+
   public String getName() {
     return name;
   }
