@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spring="http://www.springframework.org/schema/beans"
+  xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+  xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+  xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+  xmlns:file="http://www.mulesoft.org/schema/mule/file"
+  xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+      http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+      http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+      http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+      http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+      http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+      ">
+
+  <spring:beans>
+    <spring:import resource="classpath:application-context.xml"/>
+  </spring:beans>
+  
+  <spring:bean id="routeProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <spring:property name="location" value="classpath:route.properties"/>
+  </spring:bean>
+
+  <spring:bean id="jmsConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <spring:property name="jndiName" value="java:/ConnectionFactory"/>
+  </spring:bean>
+  
+  <spring:bean id="foxService" class="com.camunda.fox.mule.FoxService" /> 
+
+  <!-- TODO: we could do the jndi look-up in a separate spring configuration instead of doing it in the constructor of FoxService -->  
+  <!-- <jee:jndi-lookup id="processEngineService" jndi-name="java:global/camunda-fox-platform/process-engine/PlatformService!com.camunda.fox.platform.api.ProcessEngineService"/> -->
+  
+  <!-- Connector Configurations -->
+  <file:connector name="fileInput" 
+    fileAge="2000" 
+    pollingFrequency="1000"
+    workDirectory="${folder.work}"
+    moveToDirectory="${folder.backup}" 
+    moveToPattern="#[header:originalFilename].backup"/>
+    
+  <jms:connector name="jmsConnector" 
+    specification="1.1" 
+    connectionFactory-ref="jmsConnectionFactory"/>   
+
+  <!-- JAXB -->
+  <mulexml:jaxb-context name="jaxbContext" packageNames="com.camunda.fox.model.dto" />
+
+  <!-- Flows -->
+  
+  <!-- hot-folder order flow -->
+  <flow name="hot-folder order flow">
+    <file:inbound-endpoint connector-ref="fileInput" 
+      path="${folder.orders}">
+      <file:filename-wildcard-filter pattern="*.xml" />
+    </file:inbound-endpoint>
+    <object-to-string-transformer />
+    <logger message="Received order from hot folder, payload: #[payload]" 
+      level="INFO"/>
+    <jms:outbound-endpoint queue="xmlQueue" />
+  </flow>
+
+  <flow name="order to xml flow">
+    <jms:inbound-endpoint queue="orderQueue"  />
+    <logger message="Received payload: #[payload]" level="INFO"/>
+    <mulexml:jaxb-object-to-xml-transformer name="OrderToXml" 
+      jaxbContext-ref="jaxbContext" />
+    <logger message="Transformed order to XML: #[payload]" level="INFO"/>
+    <!-- TODO: there is probably a better way than this: -->
+    <component class="com.camunda.fox.processor.ByteArrayOutputStreamToStringProcessor" />
+    <jms:outbound-endpoint queue="xmlQueue" />
+  </flow>
+
+  <!-- start order process flow -->
+  <flow name="start order process flow">
+    <jms:inbound-endpoint queue="xmlQueue"  />
+    <logger message="Received order from xmlQueue, payload: #[payload]" level="INFO"/>
+    <mulexml:jaxb-xml-to-object-transformer name="XmlToOrder" 
+      jaxbContext-ref="jaxbContext" 
+      returnClass="com.camunda.fox.model.dto.Order" />
+    <component class="com.camunda.fox.processor.OrderToMapProcessor" />
+    <component>
+      <spring-object bean="foxService" />
+    </component>
+  </flow>
+
+  <!-- inform customer flow -->
+  <flow name="inform customer">
+    <vm:inbound-endpoint path="informCustomer" />
+    <logger message="Mule triggered by fox, received payload: #[payload]" level="INFO"/>
+    <component>
+      <spring-object bean="emailService"/>
+    </component>
+  </flow>
+  
+  <!-- set up account flow --> 
+  <flow name="set up account flow">
+    <vm:inbound-endpoint path="setUpAccount" />
+    <logger message="Mule triggered by fox, received payload: #[payload]" level="INFO"/>
+    <component class="com.camunda.fox.processor.MapToOrderProcessor" />
+    <component>
+      <spring-object bean="accountService"/>
+    </component>
+  </flow>
+
+  <!-- incoming postident flow -->
+  <flow name="incoming postident flow">
+    <file:inbound-endpoint connector-ref="fileInput" 
+      path="${folder.postident}">
+      <file:filename-wildcard-filter pattern="*.pdf" />
+    </file:inbound-endpoint>
+    <logger message="received payload: #[payload]" level="INFO"/>
+    <set-payload value="#[message.outboundProperties['originalFilename']]"/>
+    <logger message="payload (should be file name): #[payload]" level="INFO"/>
+    <component>
+      <spring-object bean="foxService"/>
+    </component>
+  </flow>
+
+</mule>
