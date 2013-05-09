@@ -1,5 +1,5 @@
 # Introduction
-This showcase shows an invoice inbound process in German ("Rechnungseingang") including a JSF + JQuery web-gui.
+This showcase shows an invoice inbound process including a JSF + JQuery web-gui.
 It not only deploys a process model from the camunda modeler but as well process models from other BPMN 2.0 modeling tools (currently Signavio).
 
 
