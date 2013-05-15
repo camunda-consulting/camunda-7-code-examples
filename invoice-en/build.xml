@@ -21,4 +21,7 @@
 		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.jboss.dir}" />
 	</target>
 
+	<target name="undeploy.jboss" description="Deletes the process application from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.fox/build.properties'">
+		<delete file="${deploy.jboss.dir}/${ant.project.name}.war" />
+	</target>
 </project>

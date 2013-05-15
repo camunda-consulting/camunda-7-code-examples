@@ -34,10 +34,6 @@ import org.tmatesoft.svn.core.io.ISVNEditor;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.diff.SVNDeltaGenerator;
 
-
-/**
- * TODO: Allow two invoices per creditor on the same day
- */
 @Named("svnService")
 public class StorePDFDelegate implements JavaDelegate {
 
@@ -45,12 +41,10 @@ public class StorePDFDelegate implements JavaDelegate {
   private String svnUser = "demo";
   private String svnPwd = "demo";
 
-
-  
   public void execute(DelegateExecution execution) throws Exception {
     // retrieve process variables
-	String repo =  (String) execution.getVariable("repo");
-	  
+    String repo = (String) execution.getVariable("repo");
+
     byte[] file = (byte[]) execution.getVariable(ProcessConstants.VARIABLE_INVOICE);
     String creditor = (String) execution.getVariable("creditor");
     Date invoiceDate = (Date) execution.getVariable("invoice_date");
@@ -60,74 +54,75 @@ public class StorePDFDelegate implements JavaDelegate {
     String fileName = creditor.replace(" ", "_") + "_" + formattedDate + ".pdf";
     String commitComment = "Freigabeprotokoll...";
 
-    // and do SVN handling
+    // and call Service:
     if (repo.equals("svn")) {
-    	// store in SVN
-    	storeInSubversion(file, fileName, commitComment);
+      // store in SVN
+      storeInSubversion(file, fileName, commitComment);
     } else if (repo.equals("alfresco")) {
-    	// store in Alfresco ECM 4
-    	storeInAlfresco(file, fileName);
+      // store in Alfresco ECM 4
+      storeInAlfresco(file, fileName);
     } else {
-    	// Store locally
-    	storeInFile(file, fileName);    	
+      // Store locally
+      storeInFile(file, fileName);
     }
   }
 
-  private void storeInFile (byte[] file, String fileName) throws IOException {
-	  String directory = System.getProperty("user.home") + "/camunda-bpm-demo-invoice/";
+  private void storeInFile(byte[] file, String fileName) throws IOException {
+    String directory = System.getProperty("user.home") + "/camunda-bpm-demo-invoice/";
     File path = new File(directory);
-	  if (!path.exists()){
-	      path.mkdir();
-	  }	  
-	  
-	  FileOutputStream fos = new FileOutputStream(directory + fileName);
-	  fos.write(file);
-	  fos.close();
+    if (!path.exists()) {
+      path.mkdir();
+    }
+
+    FileOutputStream fos = new FileOutputStream(directory + fileName);
+    fos.write(file);
+    fos.close();
   }
-  
-  private void storeInAlfresco (byte[] file, String fileName) {
-	  
-	  	Map<String, String> parameter = new HashMap<String, String>();
 
-		// Set the user credentials
-		parameter.put(SessionParameter.USER, "admin");
-		parameter.put(SessionParameter.PASSWORD, "admin");
+  private void storeInAlfresco(byte[] file, String fileName) {
 
-		// Specify the connection settings
-		
-		// Public Alfresco CMIS Repo for demo purposes
-		parameter.put(SessionParameter.ATOMPUB_URL, "http://cmis.alfresco.com/cmisatom");
-		
-		// Alternatively: My Local Alfresco Installation
-		//parameter.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1:8090/alfresco/service/cmis");
-		
-		parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+    Map<String, String> parameter = new HashMap<String, String>();
 
-		// Set the alfresco object factory
-		parameter.put(SessionParameter.OBJECT_FACTORY_CLASS, "org.alfresco.cmis.client.impl.AlfrescoObjectFactoryImpl");
+    // Set the user credentials
+    parameter.put(SessionParameter.USER, "admin");
+    parameter.put(SessionParameter.PASSWORD, "admin");
 
-		// Create a session
-		SessionFactory factory = SessionFactoryImpl.newInstance();
-		Session session = factory.getRepositories(parameter).get(0).createSession();
-		
-        Folder parent = (Folder) session.getObjectByPath("/camunda fox/fox-invoice");
-        
-		// properties 
-		// (minimal set: name and object type id)
-		Map<String, Object> properties = new HashMap<String, Object>();
-		properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
-		properties.put(PropertyIds.NAME, fileName);
+    // Specify the connection settings
 
-		// content
-		//byte[] content = "Hello World!".getBytes();
-		ByteArrayInputStream stream = new ByteArrayInputStream(file);
-		ContentStream contentStream = new ContentStreamImpl(fileName, BigInteger.valueOf(file.length), "application/pdf", stream);
+    // Public Alfresco CMIS Repo for demo purposes
+    parameter.put(SessionParameter.ATOMPUB_URL, "http://cmis.alfresco.com/cmisatom");
 
-		// create a major version
-		Document newDoc = parent.createDocument(properties, contentStream, VersioningState.MAJOR);		
-		
+    // Alternatively: My Local Alfresco Installation
+    // parameter.put(SessionParameter.ATOMPUB_URL,
+    // "http://127.0.0.1:8090/alfresco/service/cmis");
+
+    parameter.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+    // Set the alfresco object factory
+    parameter.put(SessionParameter.OBJECT_FACTORY_CLASS, "org.alfresco.cmis.client.impl.AlfrescoObjectFactoryImpl");
+
+    // Create a session
+    SessionFactory factory = SessionFactoryImpl.newInstance();
+    Session session = factory.getRepositories(parameter).get(0).createSession();
+
+    Folder parent = (Folder) session.getObjectByPath("/camunda fox/fox-invoice");
+
+    // properties
+    // (minimal set: name and object type id)
+    Map<String, Object> properties = new HashMap<String, Object>();
+    properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
+    properties.put(PropertyIds.NAME, fileName);
+
+    // content
+    // byte[] content = "Hello World!".getBytes();
+    ByteArrayInputStream stream = new ByteArrayInputStream(file);
+    ContentStream contentStream = new ContentStreamImpl(fileName, BigInteger.valueOf(file.length), "application/pdf", stream);
+
+    // create a major version
+    Document newDoc = parent.createDocument(properties, contentStream, VersioningState.MAJOR);
+
   }
-  
+
   private void storeInSubversion(byte[] file, String fileName, String commitComment) throws SVNException {
     try {
       ISVNAuthenticationManager authManager = new BasicAuthenticationManager(svnUser, svnPwd);

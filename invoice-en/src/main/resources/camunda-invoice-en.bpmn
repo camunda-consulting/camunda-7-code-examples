@@ -5,9 +5,9 @@
   </dataStore>
   <message id="foxMessage_en" name="foxMessage_en"/>
   <collaboration id="collaboration_3">
-    <participant id="Process_Engine_1" name="invoice receipt" processRef="fox-invoice-en"/>
+    <participant id="Process_Engine_1" name="invoice receipt" processRef="camunda-invoice-en"/>
   </collaboration>
-  <process id="fox-invoice-en" name="invoice receipt (camunda BPM)" isExecutable="true">
+  <process id="camunda-invoice-en" name="invoice receipt (camunda BPM)" isExecutable="true">
     <laneSet id="laneSet_5">
       <lane id="Approver" name="approver">
         <flowNodeRef>approveInvoice</flowNodeRef>

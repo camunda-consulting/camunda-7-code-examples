@@ -25,7 +25,7 @@ import com.camunda.fox.showcase.invoice.en.ProcessConstants;
 
 @WebServlet(value = "/startByUpload", loadOnStartup = 1)
 public class StartByUpload extends HttpServlet {
-  
+
   private static Logger log = Logger.getLogger(StartByUpload.class.getName());
 
   private static final long serialVersionUID = 1L;
@@ -34,21 +34,25 @@ public class StartByUpload extends HttpServlet {
   private RuntimeService runtimeService;
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    response.setContentType("text/plain");
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  
+    Map<String, Object> processVariables = new HashMap<String, Object>();
+    RequestMetaData metaData = extractProcessVariablesFromRequest(request, processVariables);
+    
+    runtimeService.startProcessInstanceByKey(metaData.processDefinitionKey, processVariables);
 
-    String redirectUrl = request.getRequestURL().toString().replace("startByUpload", "taskList.jsf");
-    log.log(Level.INFO, "redirect to " + redirectUrl);
-    response.sendRedirect(redirectUrl);    
+    log.log(Level.INFO, "redirect to " + metaData.callbackUrl);
+    response.sendRedirect(metaData.callbackUrl);
+  }
+
+  private static class RequestMetaData {
+    String processDefinitionKey = null;
+    String callbackUrl = null;
   }
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Map<String, Object> processVariables = new HashMap<String, Object>();
-    String processDefinitionKey = null;
-    String callbackUrl = null;
-
+  private RequestMetaData extractProcessVariablesFromRequest(HttpServletRequest request, Map<String, Object> processVariables) {
+    RequestMetaData metaData = new RequestMetaData();
     try {
       // Create a factory for disk-based file items
       FileItemFactory factory = new DiskFileItemFactory();
@@ -69,12 +73,10 @@ public class StartByUpload extends HttpServlet {
           String name = item.getFieldName();
 
           if (item.getFieldName().equals("processDefinitionKey")) {
-        	  processDefinitionKey = item.getString();
-          }
-          else if (item.getFieldName().equals("callbackUrl")) {
-                  callbackUrl = item.getString();
-          }
-          else {
+            metaData.processDefinitionKey = item.getString();
+          } else if (item.getFieldName().equals("callbackUrl")) {
+            metaData.callbackUrl = item.getString();
+          } else {
             processVariables.put(item.getFieldName(), item.getString());
           }
 
@@ -83,14 +85,18 @@ public class StartByUpload extends HttpServlet {
         }
       }
 
-       runtimeService.startProcessInstanceByKey(processDefinitionKey, processVariables);
     } catch (Exception ex) {
       log.log(Level.SEVERE, "Exception while extracting content from HTTP parameters", ex);
     }
+    return metaData;
+  }
 
-    String redirectUrl = callbackUrl;
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.setContentType("text/plain");
+
+    String redirectUrl = request.getRequestURL().toString().replace("startByUpload", "taskList.jsf");
     log.log(Level.INFO, "redirect to " + redirectUrl);
     response.sendRedirect(redirectUrl);
   }
-
 }
