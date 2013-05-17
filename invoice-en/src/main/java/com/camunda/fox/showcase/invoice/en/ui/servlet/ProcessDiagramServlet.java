@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en.servlet;
+package com.camunda.fox.showcase.invoice.en.ui.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;

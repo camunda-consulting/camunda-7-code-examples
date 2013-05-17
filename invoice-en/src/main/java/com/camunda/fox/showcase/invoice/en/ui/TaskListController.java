@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en.tasklist;
+package com.camunda.fox.showcase.invoice.en.ui;
 
 import java.io.Serializable;
 import java.util.List;

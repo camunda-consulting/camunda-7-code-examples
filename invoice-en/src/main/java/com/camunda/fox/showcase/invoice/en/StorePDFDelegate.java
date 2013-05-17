@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.inject.Named;
 
-import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Folder;
 import org.apache.chemistry.opencmis.client.api.Session;
 import org.apache.chemistry.opencmis.client.api.SessionFactory;
@@ -34,6 +33,7 @@ import org.tmatesoft.svn.core.io.ISVNEditor;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.diff.SVNDeltaGenerator;
 
+@SuppressWarnings("cdi-ambiguous-name") // we have a mock providing the same name
 @Named("svnService")
 public class StorePDFDelegate implements JavaDelegate {
 
@@ -119,8 +119,7 @@ public class StorePDFDelegate implements JavaDelegate {
     ContentStream contentStream = new ContentStreamImpl(fileName, BigInteger.valueOf(file.length), "application/pdf", stream);
 
     // create a major version
-    Document newDoc = parent.createDocument(properties, contentStream, VersioningState.MAJOR);
-
+    parent.createDocument(properties, contentStream, VersioningState.MAJOR);
   }
 
   private void storeInSubversion(byte[] file, String fileName, String commitComment) throws SVNException {

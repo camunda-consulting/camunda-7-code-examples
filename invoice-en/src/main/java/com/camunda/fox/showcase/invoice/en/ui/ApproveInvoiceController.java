@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en;
+package com.camunda.fox.showcase.invoice.en.ui;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;

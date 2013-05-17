@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en.tasklist;
+package com.camunda.fox.showcase.invoice.en.ui.diagram;
 
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.repository.DiagramNode;

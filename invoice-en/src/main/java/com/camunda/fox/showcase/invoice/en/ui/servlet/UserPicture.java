@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en.servlet;
+package com.camunda.fox.showcase.invoice.en.ui.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +45,7 @@ public class UserPicture extends HttpServlet {
 
   }
 
+  @SuppressWarnings("rawtypes")
   public static void listEntries(SVNRepository repository, String path) throws SVNException {
     Collection entries = repository.getDir(path, -1, null, (Collection) null);
     Iterator iterator = entries.iterator();

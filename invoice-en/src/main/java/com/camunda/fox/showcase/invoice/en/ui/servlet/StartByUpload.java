@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.en.servlet;
+package com.camunda.fox.showcase.invoice.en.ui.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -70,8 +70,6 @@ public class StartByUpload extends HttpServlet {
         FileItem item = iter.next();
 
         if (item.isFormField()) {
-          String name = item.getFieldName();
-
           if (item.getFieldName().equals("processDefinitionKey")) {
             metaData.processDefinitionKey = item.getString();
           } else if (item.getFieldName().equals("callbackUrl")) {

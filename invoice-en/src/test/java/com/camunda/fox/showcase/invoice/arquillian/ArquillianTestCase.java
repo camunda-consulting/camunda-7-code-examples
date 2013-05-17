@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.invoice.de;
+package com.camunda.fox.showcase.invoice.arquillian;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -42,7 +42,7 @@ public class ArquillianTestCase {
             //.addPackages(true, "com.camunda.fox.showcase.invoice")
             .addPackages(true, "com.camunda.fox.showcase.invoice.test.mock")
             // add process definition
-            .addAsResource("diagrams/"+process+".bpmn")
+            .addAsResource(process+".bpmn")
             .addAsResource("META-INF/beans.xml")
             // now you can add additional stuff required for your test case
             ;

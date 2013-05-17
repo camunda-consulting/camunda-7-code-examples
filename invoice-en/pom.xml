@@ -24,12 +24,14 @@
 			<artifactId>camunda-engine-cdi</artifactId>
 			<version>${camunda.version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.camunda.bpm.javaee</groupId>
 			<artifactId>camunda-ejb-client</artifactId>
 			<version>${camunda.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>com.camunda.fox.tasklist</groupId>
 			<artifactId>tasklist-layout</artifactId>
@@ -97,6 +99,12 @@
 			<version>1.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.171</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 

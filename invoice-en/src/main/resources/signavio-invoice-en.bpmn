@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-db4cdc7b-db5b-4779-9015-543353ae85e7" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="6.1.0" targetNamespace="http://www.signavio.com/bpmn20">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-db4cdc7b-db5b-4779-9015-543353ae85e7" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="6.1.0" targetNamespace="http://www.signavio.com/bpmn20">
   <message id="sid-77d59452-4fa5-456b-922e-9f3ef79a12d5" name="startMessageSignavio_en"/>
   <collaboration id="sid-48c2972b-06bb-418c-aff7-a4abba948ae4">
     <participant id="Process_Engine_1" name="invoice receipt (Signavio)" processRef="signavio-invoice-en"/>
@@ -35,7 +35,7 @@
         <flowNodeRef>Rechnungseingang_abgearbeitet_174</flowNodeRef>
       </lane>
     </laneSet>
-    <userTask id="approveInvoice" activiti:assignee="#{approver}" activiti:formKey="app:approveInvoice.jsf" name="approve&#xA; invoice" implementation="webService">
+    <userTask id="approveInvoice" camunda:assignee="#{approver}" camunda:formKey="app:approveInvoice.jsf" name="approve&#xA; invoice" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
@@ -56,7 +56,7 @@
       <outgoing>Nein_182</outgoing>
       <outgoing>Ja_181</outgoing>
     </exclusiveGateway>
-    <startEvent id="Rechnung_eingegangen_138" activiti:formKey="app:startProcess.jsf" name="invoice&#xA;received">
+    <startEvent id="Rechnung_eingegangen_138" camunda:formKey="app:startProcess.jsf" name="invoice&#xA;received">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffff"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="viaitsystem" metaValue=""/>
@@ -64,7 +64,7 @@
       <outgoing>sequenceFlow_187</outgoing>
       <messageEventDefinition id="sid-d370e9bd-69cb-41a1-a751-5cbebcd5b1f6" messageRef="sid-77d59452-4fa5-456b-922e-9f3ef79a12d5"/>
     </startEvent>
-    <userTask id="assignApprover" activiti:assignee="demo" activiti:formKey="app:assignApprover.jsf" name="assign approver" implementation="webService">
+    <userTask id="assignApprover" camunda:assignee="demo" camunda:formKey="app:assignApprover.jsf" name="assign approver" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
@@ -75,7 +75,7 @@
       <incoming>sequenceFlow_187</incoming>
       <outgoing>sequenceFlow_178</outgoing>
     </userTask>
-    <userTask id="reviewInvoice" activiti:assignee="demo" activiti:formKey="app:clarifyInvoice.jsf" name="review invoice" implementation="webService">
+    <userTask id="reviewInvoice" camunda:assignee="demo" camunda:formKey="app:clarifyInvoice.jsf" name="review invoice" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
@@ -100,7 +100,7 @@
       </extensionElements>
       <incoming>nein_185</incoming>
     </endEvent>
-    <serviceTask id="PDF_in_SVN_ablegen_160" activiti:delegateExpression="#{svnService}" name="save invoice to SVN" implementation="webService">
+    <serviceTask id="PDF_in_SVN_ablegen_160" camunda:delegateExpression="#{svnService}" name="save invoice to SVN" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
@@ -111,7 +111,7 @@
       <incoming>sequenceFlow_179</incoming>
       <outgoing>SequenceFlow_1</outgoing>
     </serviceTask>
-    <userTask id="prepareBankTransfer" activiti:candidateGroups="accounting" activiti:formKey="app:preparePayment.jsf" name="prepare bank transfer" implementation="webService">
+    <userTask id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:preparePayment.jsf" name="prepare bank transfer" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
