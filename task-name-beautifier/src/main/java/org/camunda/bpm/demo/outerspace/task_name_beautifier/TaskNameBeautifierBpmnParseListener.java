@@ -11,18 +11,18 @@
  * limitations under the License.
  */
 
-package com.camunda.fox.demo.outerspace.task_name_beautifier;
+package org.camunda.bpm.demo.outerspace.task_name_beautifier;
 
-import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
-import org.activiti.engine.impl.bpmn.helper.ClassDelegate;
-import org.activiti.engine.impl.bpmn.parser.AbstractBpmnParseListener;
-import org.activiti.engine.impl.bpmn.parser.BpmnParseListener;
-import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.pvm.process.ScopeImpl;
-import org.activiti.engine.impl.util.xml.Element;
-import org.activiti.engine.task.Task;
+import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
+import org.camunda.bpm.engine.impl.bpmn.helper.ClassDelegate;
+import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
+import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParseListener;
+import org.camunda.bpm.engine.impl.pvm.delegate.ActivityBehavior;
+import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
+import org.camunda.bpm.engine.impl.pvm.process.ScopeImpl;
+import org.camunda.bpm.engine.impl.util.xml.Element;
+import org.camunda.bpm.engine.task.Task;
 
 
 /**

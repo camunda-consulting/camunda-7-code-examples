@@ -1,11 +1,11 @@
-package com.camunda.fox.demo.outerspace.task_name_beautifier.nonarquillian;
+package org.camunda.bpm.demo.outerspace.task_name_beautifier.nonarquillian;
 
 import static org.junit.Assert.*;
 
+import org.camunda.bpm.demo.outerspace.task_name_beautifier.TaskNameBeautifier;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.camunda.fox.demo.outerspace.task_name_beautifier.TaskNameBeautifier;
 
 
 public class TaskNameBeautifierTest {

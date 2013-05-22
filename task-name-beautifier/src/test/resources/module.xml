@@ -1,10 +1,9 @@
-<module xmlns="urn:jboss:module:1.0" name="com.camunda.fox.platform.task-name-beautifier">
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
   <resources>
     <resource-root path="task-name-beautifier.jar" />
   </resources>
 
   <dependencies>
-    <module name="com.camunda.fox.engine.fox-engine" />
-    <module name="com.camunda.fox.platform.fox-platform-service" />
+    <module name="org.camunda.bpm.camunda-engine" />
   </dependencies>
 </module>

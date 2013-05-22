@@ -11,11 +11,11 @@
  * limitations under the License.
  */
 
-package com.camunda.fox.demo.outerspace.task_name_beautifier;
+package org.camunda.bpm.demo.outerspace.task_name_beautifier;
 
-import org.activiti.engine.delegate.DelegateTask;
-import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.task.Task;
+import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.engine.task.Task;
 
 
 /**

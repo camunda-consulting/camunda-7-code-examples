@@ -1,4 +1,4 @@
-package com.camunda.fox.demo.outerspace.task_name_beautifier;
+package org.camunda.bpm.demo.outerspace.task_name_beautifier;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -29,22 +29,20 @@ public class ArquillianTest {
       .goOffline()
       .loadMetadataFromPom("pom.xml");
     
-    // if you experience problems with the authentication to the camunda fox
-    // repository the wrong maven configuration might be used.
-    // use this code to use your maven settings.xml in this case:
-    // .configureFrom(".../settings.xml")
-
     return ShrinkWrap
             .create(WebArchive.class, "task-name-beautifier-test.war")
-            // prepare as process application archive for fox platform
-            .addAsLibraries(resolver.artifact("com.camunda.fox.platform:fox-platform-client").resolveAsFiles())
+            // prepare as process application archive for camunda BPM Platform
+            .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
+            .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
             .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
-            .addAsWebResource("META-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
+            .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/beans.xml")
             // add your own classes (could be done one by one as well)
             .addClass(ArquillianTest.class)
             // add process definition
             .addAsResource("process.bpmn")
-    // now you can add additional stuff required for your test case
+            // add process image for visualizations
+            .addAsResource("process.png")
+            // now you can add additional stuff required for your test case
     ;
   }
 

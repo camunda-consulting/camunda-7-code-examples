@@ -1,13 +1,13 @@
-package com.camunda.fox.demo.outerspace.task_name_beautifier.nonarquillian;
+package org.camunda.bpm.demo.outerspace.task_name_beautifier.nonarquillian;
 
-import org.activiti.engine.task.Task;
-import org.activiti.engine.test.ActivitiTestCase;
-import org.activiti.engine.test.Deployment;
+import org.camunda.bpm.engine.task.Task;
+import org.camunda.bpm.engine.test.Deployment;
+import org.camunda.bpm.engine.test.ProcessEngineTestCase;
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
  */
-public class InMemoryH2Test extends ActivitiTestCase {
+public class InMemoryH2Test extends ProcessEngineTestCase {
 
   private static final String PROCESS_DEFINITION_KEY = "task-name-beautifier";
 
