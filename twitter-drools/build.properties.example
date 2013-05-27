@@ -1,0 +1,2 @@
+# Defines the deployment folder in the fox installation.
+deploy.jboss.dir=/path/to/your/jboss/standalone/deployments

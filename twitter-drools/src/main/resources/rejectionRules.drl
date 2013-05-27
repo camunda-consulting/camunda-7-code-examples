@@ -1,0 +1,10 @@
+package org.camunda.bpm.examples.twitter
+
+import org.camunda.bpm.example.twitter.Tweet;
+
+rule "John Doe must not be named in Twitter"
+when
+	t : Tweet( content matches '.*(John Doe).*' )
+then
+	t.reject("Please don't twitter about Jon Doe, he complained about that");
+end
