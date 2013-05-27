@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  template="/WEB-INF/templates/template.xhtml">
+
+  <ui:define name="metadata">
+    <f:metadata>
+      <f:viewParam id="taskId" name="taskId" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView"
+        listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+    </f:metadata>
+  </ui:define>
+
+  <ui:define name="content">
+    <div class="row">
+      <h1 class="span4">Review Tweet</h1>
+    </div>
+    <div class="row">
+      <h:form id="reviewTweetForm" styleClass="well span4">
+        <p><label><strong>Author:</strong> <h:outputText
+            id="author"
+            value="#{processVariables['initiator']}" /> </label></p>
+        <p><label><strong>E-Mail:</strong> <h:outputText
+            id="email"
+            value="#{processVariables['email']}" /> </label></p>
+        <p><label><strong>Content:</strong> <h:outputText
+            id="content"
+            value="#{processVariables['content']}" /> </label></p>
+        <p><label><strong>Approve?</strong> <h:selectBooleanCheckbox
+            id="approved"
+            value="#{processVariables['approved']}" /> </label></p>
+        <p><label><strong>Comments:</strong> <h:inputTextarea
+            id="comments"
+            value="#{processVariables['comments']}" /> </label></p>
+        <h:commandButton id="submit_button" styleClass="btn btn-primary"
+          value="Submit" action="#{fox.taskForm.completeTask()}" />
+      </h:form>
+    </div>
+  </ui:define>
+
+</ui:composition>
+      
