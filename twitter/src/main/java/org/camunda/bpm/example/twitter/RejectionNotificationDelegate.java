@@ -1,11 +1,11 @@
-package com.camunda.fox.showcase.twitter;
+package org.camunda.bpm.example.twitter;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 /**
- * Rejection is just done via a sysout since the fox platform does not support the Mail Task of Activiti!
- * See https://app.camunda.com/confluence/display/foxUserGuide/Activiti+5+Support for details.
+ * Rejection is just done via a sysout since the camunda BPM platform does not support the Mail Task of Activiti
+ * at this moment.
  * 
  * Use your own Mail mechanisms for this or use your application server features. 
  */

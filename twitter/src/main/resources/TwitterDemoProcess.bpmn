@@ -21,12 +21,12 @@
     <sequenceFlow id="yes" name="" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_2">#{approved}</conditionExpression>
     </sequenceFlow>
-    <serviceTask id="service_task_publish_on_twitter" activiti:class="com.camunda.fox.showcase.twitter.TweetContentDelegate" name="Publish on Twitter">
+    <serviceTask id="service_task_publish_on_twitter" activiti:class="org.camunda.bpm.example.twitter.TweetContentDelegate" name="Publish on Twitter">
       <incoming>yes</incoming>
       <outgoing>SequenceFlow_3</outgoing>
     </serviceTask>
     <sequenceFlow id="SequenceFlow_3" name="" sourceRef="service_task_publish_on_twitter" targetRef="gateway_join"/>
-    <serviceTask id="service_task_send_rejection_notification" activiti:class="com.camunda.fox.showcase.twitter.RejectionNotificationDelegate" name="Send rejection notification">
+    <serviceTask id="service_task_send_rejection_notification" activiti:class="org.camunda.bpm.example.twitter.RejectionNotificationDelegate" name="Send rejection notification">
       <incoming>no</incoming>
       <outgoing>SequenceFlow_4</outgoing>
     </serviceTask>

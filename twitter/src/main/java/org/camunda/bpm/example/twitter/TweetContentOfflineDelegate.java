@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.twitter;
+package org.camunda.bpm.example.twitter;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;

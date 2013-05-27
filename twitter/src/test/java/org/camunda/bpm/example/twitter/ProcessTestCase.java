@@ -1,4 +1,4 @@
-package com.camunda.fox.showcase.twitter;
+package org.camunda.bpm.example.twitter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -52,8 +52,7 @@ public class ProcessTestCase {
 
     Task task = processEngineRule.getTaskService().createTaskQuery().taskAssignee("demo").singleResult();
     variables.put("approved", Boolean.FALSE);
-    variables.put("comments", "No, we will not publish this on Twitter");
-    variables.put("binary", new HashMap<String, Serializable>());
+    variables.put("comments", "No, we will not publish this on Twitter");    
     processEngineRule.getTaskService().complete(task.getId(), variables);
 
     TestHelper.assertProcessEnded(processEngineRule.getProcessEngine(), id);

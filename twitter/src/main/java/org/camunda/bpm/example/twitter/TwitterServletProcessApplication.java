@@ -1,9 +1,9 @@
-package com.camunda.fox.showcase.twitter;
+package org.camunda.bpm.example.twitter;
 
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 
-@ProcessApplication("twitter")
+@ProcessApplication
 public class TwitterServletProcessApplication extends ServletProcessApplication {
 
 }
