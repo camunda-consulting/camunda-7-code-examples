@@ -4,7 +4,7 @@
     <bpmn2:participant id="process_engine" name="Process Engine" processRef="open-account-errorhandling"/>
   </bpmn2:collaboration>
   <bpmn2:process id="open-account-errorhandling" name="Open Account with Error Handling" isExecutable="true">
-    <bpmn2:startEvent id="order_received" activiti:formKey="app:start.jsf" name="Order received">
+    <bpmn2:startEvent id="order_received" activiti:formKey="embedded:app:apply-for-new-bank-account.html" name="Order received">
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:userTask id="check_documents" activiti:assignee="demo" activiti:formKey="app:check-documents.jsf" name="Check documents">
@@ -67,59 +67,59 @@
         <dc:Bounds height="341.0" width="943.0" x="30.0" y="20.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="order_received">
-        <dc:Bounds height="36.0" width="36.0" x="82.0" y="102.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="144.0" y="115.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_1">
-          <dc:Bounds height="22.0" width="89.0" x="66.0" y="140.0"/>
+          <dc:Bounds height="26.0" width="115.0" x="105.0" y="157.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="check_documents">
-        <dc:Bounds height="80.0" width="110.0" x="336.0" y="80.0"/>
+        <dc:Bounds height="80.0" width="110.0" x="276.0" y="93.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="documents_approved_gateway" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="488.0" y="95.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="468.0" y="108.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_2">
-          <dc:Bounds height="22.0" width="134.0" x="537.0" y="117.0"/>
+          <dc:Bounds height="26.0" width="169.0" x="517.0" y="133.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_UserTask_1" targetElement="BPMNShape_ExclusiveGateway_1">
-        <di:waypoint xsi:type="dc:Point" x="446.0" y="120.0"/>
-        <di:waypoint xsi:type="dc:Point" x="488.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="386.0" y="133.0"/>
+        <di:waypoint xsi:type="dc:Point" x="468.0" y="133.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="471.0" y="120.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="411.0" y="133.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_ServiceTask_1" bpmnElement="inform_customer">
         <dc:Bounds height="80.0" width="110.0" x="590.0" y="30.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_1">
-        <di:waypoint xsi:type="dc:Point" x="513.0" y="95.0"/>
-        <di:waypoint xsi:type="dc:Point" x="512.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="493.0" y="108.0"/>
+        <di:waypoint xsi:type="dc:Point" x="493.0" y="70.0"/>
         <di:waypoint xsi:type="dc:Point" x="590.0" y="70.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="20.0" x="536.0" y="70.0"/>
+          <dc:Bounds height="26.0" width="24.0" x="502.0" y="70.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_ServiceTask_2" bpmnElement="set_up_account">
         <dc:Bounds height="80.0" width="110.0" x="590.0" y="158.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_2">
-        <di:waypoint xsi:type="dc:Point" x="513.0" y="145.0"/>
-        <di:waypoint xsi:type="dc:Point" x="512.0" y="198.0"/>
+        <di:waypoint xsi:type="dc:Point" x="493.0" y="158.0"/>
+        <di:waypoint xsi:type="dc:Point" x="493.0" y="198.0"/>
         <di:waypoint xsi:type="dc:Point" x="590.0" y="198.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="27.0" x="504.0" y="198.0"/>
+          <dc:Bounds height="26.0" width="32.0" x="495.0" y="198.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_2" bpmnElement="merging_gateway_1" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="750.0" y="95.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="750.0" y="108.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="775.0" y="150.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="775.0" y="163.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_ServiceTask_2" targetElement="BPMNShape_ExclusiveGateway_2">
         <di:waypoint xsi:type="dc:Point" x="700.0" y="198.0"/>
         <di:waypoint xsi:type="dc:Point" x="775.0" y="198.0"/>
-        <di:waypoint xsi:type="dc:Point" x="775.0" y="145.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="158.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="757.0" y="198.0"/>
         </bpmndi:BPMNLabel>
@@ -127,30 +127,36 @@
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_ExclusiveGateway_2">
         <di:waypoint xsi:type="dc:Point" x="700.0" y="70.0"/>
         <di:waypoint xsi:type="dc:Point" x="775.0" y="70.0"/>
-        <di:waypoint xsi:type="dc:Point" x="775.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="775.0" y="108.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="755.0" y="70.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="order_processed">
-        <dc:Bounds height="36.0" width="36.0" x="900.0" y="102.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="888.0" y="115.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="102.0" x="867.0" y="143.0"/>
+          <dc:Bounds height="26.0" width="129.0" x="842.0" y="156.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_ExclusiveGateway_2" targetElement="BPMNShape_EndEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="800.0" y="120.0"/>
-        <di:waypoint xsi:type="dc:Point" x="900.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="800.0" y="133.0"/>
+        <di:waypoint xsi:type="dc:Point" x="888.0" y="133.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="825.0" y="120.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="825.0" y="133.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_UserTask_1">
-        <di:waypoint xsi:type="dc:Point" x="118.0" y="120.0"/>
-        <di:waypoint xsi:type="dc:Point" x="336.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="180.0" y="133.0"/>
+        <di:waypoint xsi:type="dc:Point" x="276.0" y="133.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="225.0" y="133.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_15" bpmnElement="BoundaryEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="629.0" y="220.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="26.0" width="71.0" x="660.0" y="262.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_26" bpmnElement="UserTask_1">
         <dc:Bounds height="80.0" width="110.0" x="756.0" y="264.0"/>
