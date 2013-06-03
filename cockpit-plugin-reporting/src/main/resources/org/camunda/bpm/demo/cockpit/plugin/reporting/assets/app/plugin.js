@@ -126,7 +126,7 @@ function printChart(data) {
             shadow: true
         },
         credits: {
-            enabled: false
+            enabled: true
         },
         series: seriesData
     });
@@ -163,7 +163,10 @@ function printChart(data) {
             type: 'pie',
             name: 'instances per process definition',
             data: pieData
-        }]
+        }],
+        credits: {
+            enabled: true
+        }
     });
 
 }
