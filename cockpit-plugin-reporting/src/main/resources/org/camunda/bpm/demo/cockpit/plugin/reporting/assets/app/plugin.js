@@ -1,5 +1,5 @@
 ngDefine('cockpit.plugin.reporting-process-count', 
-		 ['/cockpit/api/cockpit/plugin/reporting-process-count/static/app/highcharts.js'],
+		 ['http://code.highcharts.com/highcharts.js'], // refer to version in web to avoid thinking about licensing issues with Highcharts
 		 function(module) {
 
   var DashboardController = function($scope, $http, Uri) {
@@ -71,18 +71,14 @@ function printChart(data) {
 	for( var i=0; i<data.length; i++ ) {
          processDefinitionKey[i] = data[i].processDefinitionKey;
          seriesData[1].data[i] = parseInt(data[i].failedInstanceCount);
-         seriesData[1].data[i] = parseInt(data[i].runningInstanceCount);
+         seriesData[1].data[i] = parseInt(data[i].runningInstanceCount - data[i].failedInstanceCount); // failed are running in the query, but should not in the graph
          seriesData[2].data[i] = parseInt(data[i].endedInstanceCount);
          
          sum = seriesData[2].data[i] + seriesData[1].data[i] + seriesData[1].data[i];
          overallSum = overallSum + sum;
          
          pieData[i] = [data[i].processDefinitionKey, sum];
-	}
-	//for( var i=0; i<pieData.length; i++ ) {
-	//	pieData[i][1] = Highcharts.numberFormat(pieData[i][1] / overallSum, 2); 
-	//}	
-	
+	}	
 	
 	$('#instance-count-bar').highcharts({
         chart: {

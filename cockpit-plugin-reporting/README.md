@@ -5,9 +5,9 @@ This is a simple plugin that showcases how easy you can build some dashboard as 
 
 Built and tested against camunda BPM version `7.0.0-alpha5`.
 
-
 ![Screenshot][1]
 
+Please note that I used [Highcharts](http://www.highcharts.com/) for that example which is NOT free commercial usage!
 
 How to use
 ----------------------
