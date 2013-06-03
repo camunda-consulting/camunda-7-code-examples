@@ -20,10 +20,8 @@
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="documents_approved_gateway" targetRef="inform_customer">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="inform_customer" activiti:delegateExpression="#{customerNotificationDelegate}" activiti:async="true" name="Inform customer" implementation="##unspecified">
-      <bpmn2:extensionElements>
-        <fox:failedJobRetryTimeCycle xsi:type="xsd:anyType">R5/PT10S</fox:failedJobRetryTimeCycle>
-      </bpmn2:extensionElements>
+    <bpmn2:serviceTask id="inform_customer" activiti:delegateExpression="#{customerNotificationDelegate}" name="Inform customer" implementation="##unspecified">
+      <bpmn2:extensionElements/>
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -46,19 +44,6 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="set_up_account" targetRef="merging_gateway_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="order_received" targetRef="check_documents"/>
-    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="duplicate" attachedToRef="set_up_account">
-      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
-      <bpmn2:errorEventDefinition id="ErrorEventDefinition_1" errorRef="duplicateApplicationError"/>
-    </bpmn2:boundaryEvent>
-    <bpmn2:userTask id="UserTask_1" activiti:assignee="demo" name="manual processing">
-      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
-    </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="BoundaryEvent_1" targetRef="UserTask_1"/>
-    <bpmn2:endEvent id="EndEvent_1" name="End Event">
-      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
-    </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_11" sourceRef="UserTask_1" targetRef="EndEvent_1"/>
   </bpmn2:process>
   <bpmn2:error id="duplicateApplicationError" errorCode="duplicateApplication" name="Duplicate Application Error"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
@@ -151,27 +136,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="225.0" y="133.0"/>
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_15" bpmnElement="BoundaryEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="629.0" y="220.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="26.0" width="71.0" x="660.0" y="262.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_26" bpmnElement="UserTask_1">
-        <dc:Bounds height="80.0" width="110.0" x="756.0" y="264.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_BoundaryEvent_15" targetElement="_BPMNShape_UserTask_26">
-        <di:waypoint xsi:type="dc:Point" x="647.0" y="256.0"/>
-        <di:waypoint xsi:type="dc:Point" x="647.0" y="304.0"/>
-        <di:waypoint xsi:type="dc:Point" x="756.0" y="304.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_14" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="916.0" y="286.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_UserTask_26" targetElement="_BPMNShape_EndEvent_14">
-        <di:waypoint xsi:type="dc:Point" x="866.0" y="304.0"/>
-        <di:waypoint xsi:type="dc:Point" x="916.0" y="304.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
