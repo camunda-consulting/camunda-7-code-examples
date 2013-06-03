@@ -7,7 +7,13 @@ Built and tested against camunda BPM version `7.0.0-alpha5`.
 
 ![Screenshot][1]
 
-Please note that I used [Highcharts](http://www.highcharts.com/) for that example which is NOT free commercial usage!
+Highcharts is not free or open source!
+----------------------
+
+Please note that I used [Highcharts](http://www.highcharts.com/) for that example which is NOT free.
+You have to buy a license in order to use the plugin shown here, see [Highcharts FAQ](http://shop.highsoft.com/faq). 
+Or you have to replace it with some other JavaScript libraries drawing charts.
+
 
 How to use
 ----------------------
