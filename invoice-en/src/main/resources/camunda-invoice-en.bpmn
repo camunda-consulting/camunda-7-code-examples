@@ -5,7 +5,7 @@
   <collaboration id="sid-99ed0465-b244-4e1f-a6b6-95a0cd0594aa">
     <participant id="Process_Engine_1" name="Process Engine - Invoice Receipt" processRef="camunda-invoice-en"/>
   </collaboration>
-  <process id="camunda-invoice-en" name="Invoice Receipt (camunda BPM)" isClosed="true" isExecutable="true">
+  <process id="camunda-invoice-en" name="Invoice Receipt (camunda Modeler)" isClosed="true" isExecutable="true">
     <laneSet id="sid-cd34acaf-1d5a-4f43-bbac-f307cdefba79">
       <lane id="Approver" name="Approver">
         <flowNodeRef>approveInvoice</flowNodeRef>
@@ -138,21 +138,33 @@
         <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="264.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="425.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="638.0" y="425.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="26.0" width="32.0" x="564.0" y="238.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="invoiceNotApproved_gui" bpmnElement="invoiceNotApproved">
         <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="245.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="92.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="548.0" y="92.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="26.0" width="24.0" x="518.0" y="201.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="reviewSuccessful_gui" bpmnElement="reviewSuccessful">
         <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="72.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="35.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="35.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="225.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="26.0" width="32.0" x="720.0" y="36.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="reviewNotSuccessful_gui" bpmnElement="reviewNotSuccessful">
         <omgdi:waypoint xsi:type="omgdc:Point" x="733.0" y="92.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="928.0" y="92.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="26.0" width="24.0" x="744.0" y="91.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="sequenceFlow_180_gui" bpmnElement="sequenceFlow_180">
         <omgdi:waypoint xsi:type="omgdc:Point" x="453.0" y="265.0"/>
