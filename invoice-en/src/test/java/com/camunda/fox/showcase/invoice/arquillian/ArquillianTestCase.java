@@ -26,7 +26,7 @@ import com.camunda.fox.showcase.invoice.test.mock.SvnDelegateMock;
 
 @RunWith(Arquillian.class)
 public class ArquillianTestCase {
-  static String process ="fox-invoice-en";
+  static String process ="camunda-invoice-en";
 //    static String process ="signavio-invoice-en";
 
   @Deployment  

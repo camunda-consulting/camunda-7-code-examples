@@ -33,7 +33,7 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
 		assertEquals("approveInvoice", tasks.get(0).getTaskDefinitionKey());
 		assertEquals("somebody", tasks.get(0).getAssignee());
 		
-		Mocks.register("svnService", new SvnDelegateMock());
+		Mocks.register("archiveService", new SvnDelegateMock());
 		
 		variables = new HashMap<String, Object>();
 		variables.put("approved", Boolean.TRUE);

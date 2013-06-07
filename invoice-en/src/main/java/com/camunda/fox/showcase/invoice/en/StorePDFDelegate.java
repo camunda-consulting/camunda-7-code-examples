@@ -34,7 +34,7 @@ import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.diff.SVNDeltaGenerator;
 
 @SuppressWarnings("cdi-ambiguous-name") // we have a mock providing the same name
-@Named("svnService")
+@Named("archiveService")
 public class StorePDFDelegate implements JavaDelegate {
 
   private String svnUrl = "https://camunda-jakob/svn/archive/invoices/";

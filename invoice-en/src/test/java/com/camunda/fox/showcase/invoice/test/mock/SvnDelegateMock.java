@@ -8,7 +8,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 
 @SuppressWarnings("cdi-ambiguous-name")
-@Named("svnService")
+@Named("archiveService")
 @ApplicationScoped
 public class SvnDelegateMock implements JavaDelegate{
 
