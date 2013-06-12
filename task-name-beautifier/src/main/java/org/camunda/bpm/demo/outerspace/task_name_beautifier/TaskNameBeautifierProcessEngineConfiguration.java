@@ -25,12 +25,7 @@ ManagedJtaProcessEngineConfiguration {
 	}
 
 	protected void initCustomPostParseListener() {
-		// Change whatever you want to change in the configuration, see
-		// https://app.camunda.com/confluence/display/foxUserGuide/Extending+the+configuration+of+the+fox+platform#Extendingtheconfigurationofthefoxplatform-UseCases
-		// for some typical use cases
-
-		// normally no parse listeners should be set, so create an own list for
-		// it
+		// normally no parse listeners should be set, so create an own list for it
 		if (getCustomPostBPMNParseListeners() == null) {
 			setCustomPostBPMNParseListeners(new ArrayList<BpmnParseListener>());
 		}
