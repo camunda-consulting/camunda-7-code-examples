@@ -33,30 +33,32 @@ The example process shown below contains a user task with a very long name. For 
 In order to make this a little more beautiful, you can implement a
 [TaskListener](http://docs.camunda.org/api-references/bpmn20/#!/concepts/listeners)
 that changes the name of the task as it is created in the task list:
+```java
+public class TaskNameBeautifier implements TaskListener {
 
-    public class TaskNameBeautifier implements TaskListener {
+  @Override
+  public void notify(DelegateTask task) {
+    String name = task.getName();
+    String beautifiedName = beautifyTaskName(name);
+    task.setName(beautifiedName);
+  }
+
+  public String beautifyTaskName(String name) {
+    String beautifiedName = name.replaceAll("(\\w)-\\s*([a-z])", "$1$2");
+    return beautifiedName;
+  }
  
-      @Override
-      public void notify(DelegateTask task) {
-        String name = task.getName();
-        String beautifiedName = beautifyTaskName(name);
-        task.setName(beautifiedName);
-      }
- 
-      public String beautifyTaskName(String name) {
-        String beautifiedName = name.replaceAll("(\\w)-\\s*([a-z])", "$1$2");
-        return beautifiedName;
-      }
-     
-    }
+}
+```
 
 ...and add it to that user task:
-
-    <bpmn2:userTask id="UserTask_1" name="Task with terri- bly long name">
-      <bpmn2:extensionElements>
-        <camunda:taskListener class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifier" event="create"/>
-      </bpmn2:extensionElements>
-    </bpmn2:userTask>
+```xml
+<bpmn2:userTask id="UserTask_1" name="Task with terri- bly long name">
+  <bpmn2:extensionElements>
+    <camunda:taskListener class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifier" event="create"/>
+  </bpmn2:extensionElements>
+</bpmn2:userTask>
+```
 
 ## Adding the Task Listener to all User Tasks of all Processes
 Doing this additional configuration for all user tasks that have a long name
@@ -65,56 +67,61 @@ In addition to that, any process application that wants to use it,
 needs to include the TaskListener class in its WAR or EAR.
 
 Hence, it would be nice to add this Task Listener to all user tasks in a more central location. The camunda engine allows that through a so called [BpmnParseListener](https://app.camunda.com/confluence/display/foxUserGuide/Add+your+own+BpmnParseListener):
-
-    public class TaskNameBeautifierBpmnParseListener extends AbstractBpmnParseListener {
-       
-      @Override
-      public void parseUserTask(Element userTaskElement, ScopeImpl scope, ActivityImpl activity) {
-        ActivityBehavior behavior = activity.getActivityBehavior();
-        if (behavior instanceof UserTaskActivityBehavior) {
-          ((UserTaskActivityBehavior) behavior).getTaskDefinition().addTaskListener(TaskListener.EVENTNAME_CREATE,  new ClassDelegate(TaskNameBeautifier.class, null));
-        }
-      }
-    
+```java
+public class TaskNameBeautifierBpmnParseListener extends AbstractBpmnParseListener {
+   
+  @Override
+  public void parseUserTask(Element userTaskElement, ScopeImpl scope, ActivityImpl activity) {
+    ActivityBehavior behavior = activity.getActivityBehavior();
+    if (behavior instanceof UserTaskActivityBehavior) {
+      ((UserTaskActivityBehavior) behavior).getTaskDefinition()
+          .addTaskListener(TaskListener.EVENTNAME_CREATE,  new ClassDelegate(TaskNameBeautifier.class, null));
     }
+  }
+
+}
+```
 
 ...which can be added to a standalone process engine configuration
 ([activiti.cfg.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/activiti.cfg.xml))
 like that:
-
-      <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
-        <property name="customPostBPMNParseListeners">
-          <list>
-            <bean class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierBpmnParseListener" />
-          </list>
-        </property>
-      </bean>
+```xml
+  <bean id="processEngineConfiguration"
+    class="org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+    <property name="customPostBPMNParseListeners">
+      <list>
+        <bean class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierBpmnParseListener" />
+      </list>
+    </property>
+  </bean>
+```
 
 ## Usage with camunda BPM platform
 
 In the camunda BPM platform the process engine configuration can be extended programmatically:
+```java
+public class TaskNameBeautifierProcessEngineConfiguration
+        extends ManagedJtaProcessEngineConfiguration {
 
-    public class TaskNameBeautifierProcessEngineConfiguration
-            extends ManagedJtaProcessEngineConfiguration {
-    
-    	@Override
-    	protected void init() {
-    		initCustomPostParseListener();
-    		super.init();
-    	}
-    
-    	protected void initCustomPostParseListener() {    
-    		// normally no parse listeners should be set, so create an own list for it
-    		if (getCustomPostBPMNParseListeners() == null) {
-    			setCustomPostBPMNParseListeners(new ArrayList<BpmnParseListener>());
-    		}
-    
-    		// add parse listener
-    		getCustomPostBPMNParseListeners().add(new TaskNameBeautifierBpmnParseListener());
-    
-    	}
-    
-    }
+	@Override
+	protected void init() {
+		initCustomPostParseListener();
+		super.init();
+	}
+
+	protected void initCustomPostParseListener() {    
+		// normally no parse listeners should be set, so create an own list for it
+		if (getCustomPostBPMNParseListeners() == null) {
+			setCustomPostBPMNParseListeners(new ArrayList<BpmnParseListener>());
+		}
+
+		// add parse listener
+		getCustomPostBPMNParseListeners().add(new TaskNameBeautifierBpmnParseListener());
+
+	}
+
+}
+```
 
 ## Installation on JBoss AS 7
 
@@ -122,56 +129,57 @@ In JBoss AS7 you can provide all three classes as a single module.
 For that you create a file
 [$JBOSS_HOME/modules/org/camunda/bpm/task-name-beautifier/main/module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
 with the following contents:
+```xml
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
+  <resources>
+    <resource-root path="task-name-beautifier.jar" />
+  </resources>
 
-    <module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
-      <resources>
-        <resource-root path="task-name-beautifier.jar" />
-      </resources>
-    
-      <dependencies>
-        <module name="org.camunda.bpm.camunda-engine" />
-      </dependencies>
-    </module>
-
+  <dependencies>
+    <module name="org.camunda.bpm.camunda-engine" />
+  </dependencies>
+</module>
+```
 and place the [JAR file with the classes]() next to it.
 
 Add a dependency to the newly created module in
 $JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main/module.xml
 so that the [camunda BPM platform](http://camunda.org)
 can find the alternative ProcessEngineConfiguration provided by the module:
-
-      <dependencies>
-        ...
-        <module name="org.camunda.bpm.task-name-beautifier"/>
-      </dependencies>
+```xml
+  <dependencies>
+    ...
+    <module name="org.camunda.bpm.task-name-beautifier"/>
+  </dependencies>
+```
 
 To enable the configuration class,
 add it to the process engine parameters in your standalone.xml or domain.xml:
-
-        <subsystem xmlns="urn:org.camunda.bpm.jboss:1.1">
-            <process-engines>
-                <process-engine name="default" default="true">
-                    <configuration>
-                        org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierProcessEngineConfiguration
-                    </configuration>
-                    ...
-                </process-engine>
+```xml
+    <subsystem xmlns="urn:org.camunda.bpm.jboss:1.1">
+        <process-engines>
+            <process-engine name="default" default="true">
+                <configuration>
+                    org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierProcessEngineConfiguration
+                </configuration>
                 ...
-            </process-engines>
+            </process-engine>
             ...
-        </subsystem>
-
+        </process-engines>
+        ...
+    </subsystem>
+```
 Finally, you can add the TaskListener to the classpath of all applications
 by adding a global dependeny in your standalone.xml or domain.xml:
-
-        <subsystem xmlns="urn:jboss:domain:ee:1.1">
-            <global-modules>
-                <module name="org.camunda.bpm.task-name-beautifier" slot="main"/>
-                ...
-            </global-modules>
+```xml
+    <subsystem xmlns="urn:jboss:domain:ee:1.1">
+        <global-modules>
+            <module name="org.camunda.bpm.task-name-beautifier" slot="main"/>
             ...
-        </subsystem>
-
+        </global-modules>
+        ...
+    </subsystem>
+```
 ## Source Code Location
 - [GitHub](https://github.com/camunda/camunda-bpm-examples/tree/master/task-name-beautifier)
 - [Download Source Code as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
