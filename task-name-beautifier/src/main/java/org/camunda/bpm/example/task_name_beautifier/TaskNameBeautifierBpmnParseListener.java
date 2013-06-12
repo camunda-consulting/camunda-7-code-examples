@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package org.camunda.bpm.demo.outerspace.task_name_beautifier;
+package org.camunda.bpm.example.task_name_beautifier;
 
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.impl.bpmn.behavior.UserTaskActivityBehavior;

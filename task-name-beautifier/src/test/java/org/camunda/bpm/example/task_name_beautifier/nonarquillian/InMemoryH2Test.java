@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.outerspace.task_name_beautifier.nonarquillian;
+package org.camunda.bpm.example.task_name_beautifier.nonarquillian;
 
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;

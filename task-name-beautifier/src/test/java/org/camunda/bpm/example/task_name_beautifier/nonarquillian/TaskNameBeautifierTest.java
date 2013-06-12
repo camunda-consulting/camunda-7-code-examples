@@ -1,8 +1,8 @@
-package org.camunda.bpm.demo.outerspace.task_name_beautifier.nonarquillian;
+package org.camunda.bpm.example.task_name_beautifier.nonarquillian;
 
 import static org.junit.Assert.*;
 
-import org.camunda.bpm.demo.outerspace.task_name_beautifier.TaskNameBeautifier;
+import org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifier;
 import org.junit.Before;
 import org.junit.Test;
 

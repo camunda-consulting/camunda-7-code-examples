@@ -15,7 +15,7 @@ See below for instructions on how to do it with JBoss AS7.
 
 Alternatively, you can run the unit tests in the following package in Eclipse: 
 
-    org.camunda.bpm.demo.outerspace.task_name_beautifier.nonarquillian
+    org.camunda.bpm.example.task_name_beautifier.nonarquillian
 
 ## Introduction
 This demo shows how to dynamically modify the names of human tasks, during their creation in a task list.
@@ -27,7 +27,7 @@ which is added to the process engine configuration of the [camunda BPM platform]
 ## Example Process
 The example process shown below contains a user task with a very long name. For better readability, the modeler of this process decided to add a hyphen to the task name. However, this hyphen is then also shown later in the task list of the users of this process, e.g., an entry like 'Task with terri-  bly long name'.
 
-![BPMN Process containing a User Task with a very long name](https://bitbucket.org/camunda/outer-space-demos/raw/master/task-name-beautifier/src/test/resources/process.png)
+![BPMN Process containing a User Task with a very long name](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/process.png)
 
 ## Task Listener
 In order to make this a little more beautiful, you can implement a
@@ -54,7 +54,7 @@ that changes the name of the task as it is created in the task list:
 
     <bpmn2:userTask id="UserTask_1" name="Task with terri- bly long name">
       <bpmn2:extensionElements>
-        <camunda:taskListener class="com.camunda.fox.demo.outerspace.task_name_beautifier.TaskNameBeautifier" event="create"/>
+        <camunda:taskListener class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifier" event="create"/>
       </bpmn2:extensionElements>
     </bpmn2:userTask>
 
@@ -64,7 +64,7 @@ is a rather cumbersome solution.
 In addition to that, any process application that wants to use it,
 needs to include the TaskListener class in its WAR or EAR.
 
-Hence, it would be nice to add this Task Listener to all user tasks in a more central location. The fox engine allows that through a so called [BpmnParseListener](https://app.camunda.com/confluence/display/foxUserGuide/Add+your+own+BpmnParseListener):
+Hence, it would be nice to add this Task Listener to all user tasks in a more central location. The camunda engine allows that through a so called [BpmnParseListener](https://app.camunda.com/confluence/display/foxUserGuide/Add+your+own+BpmnParseListener):
 
     public class TaskNameBeautifierBpmnParseListener extends AbstractBpmnParseListener {
        
@@ -85,7 +85,7 @@ like that:
       <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
         <property name="customPostBPMNParseListeners">
           <list>
-            <bean class="org.camunda.bpm.demo.outerspace.task_name_beautifier.TaskNameBeautifierBpmnParseListener" />
+            <bean class="org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierBpmnParseListener" />
           </list>
         </property>
       </bean>
@@ -152,7 +152,7 @@ add it to the process engine parameters in your standalone.xml or domain.xml:
             <process-engines>
                 <process-engine name="default" default="true">
                     <configuration>
-                        org.camunda.bpm.demo.outerspace.task_name_beautifier.TaskNameBeautifierProcessEngineConfiguration
+                        org.camunda.bpm.example.task_name_beautifier.TaskNameBeautifierProcessEngineConfiguration
                     </configuration>
                     ...
                 </process-engine>
@@ -183,7 +183,7 @@ by adding a global dependeny in your standalone.xml or domain.xml:
    **OR** [Download the sources as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
 1. For an easy start, you can import the Maven project in Eclipse and run the JUnit tests in the package:
 
-        com.camunda.fox.demo.outerspace.task_name_beautifier.nonarquillian
+        org.camunda.bpm.example.task_name_beautifier.nonarquillian
 
 2. For the whole show, follow these steps:
     1. [Download camunda BPM for JBoss AS7](http://www.camunda.org/download/) and [install it](http://docs.camunda.org/guides/installation-guide/jboss/)
@@ -193,7 +193,7 @@ by adding a global dependeny in your standalone.xml or domain.xml:
                 
     3. Follow the instructions for installing the module in JBoss AS7 described above
     4. Start the server
-    5. Run the Arquillian test case, which by default connects to a fox platform running locally on JBoss AS 7
+    5. Run the Arquillian test case, which by default connects to a camunda BPM platform running locally on JBoss AS 7
         1. Run the class `ArquillianTest` as a JUnit test in Eclipse
         **OR** Run test with Maven on the command line using:
 

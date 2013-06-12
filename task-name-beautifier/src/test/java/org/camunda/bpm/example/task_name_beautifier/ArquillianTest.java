@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.outerspace.task_name_beautifier;
+package org.camunda.bpm.example.task_name_beautifier;
 
 import static org.junit.Assert.assertEquals;
 
