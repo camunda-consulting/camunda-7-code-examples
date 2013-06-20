@@ -1,0 +1,9 @@
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
+  <resources>
+    <resource-root path="task-name-beautifier.jar" />
+  </resources>
+
+  <dependencies>
+    <module name="org.camunda.bpm.camunda-engine" />
+  </dependencies>
+</module>
