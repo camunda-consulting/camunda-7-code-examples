@@ -1,5 +1,24 @@
 # camunda BPM example: Task Name Beautifier
 
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [camunda BPM example: Task Name Beautifier](#camunda-bpm-example-task-name-beautifier)
+	- [What does it demonstrate?](#what-does-it-demonstrate)
+	- [Technical environment](#technical-environment)
+	- [Remarks to run this application](#remarks-to-run-this-application)
+	- [Introduction](#introduction)
+	- [Example Process](#example-process)
+	- [Task Listener](#task-listener)
+	- [Adding the Task Listener to all User Tasks of all Processes](#adding-the-task-listener-to-all-user-tasks-of-all-processes)
+	- [Usage with camunda BPM platform](#usage-with-camunda-bpm-platform)
+	- [Installation on JBoss AS 7](#installation-on-jboss-as-7)
+		- [1. Switch Process Engine Configuration in JBoss AS 7](#1-switch-process-engine-configuration-in-jboss-as-7)
+		- [2. Task Name Beautifier as a JBoss Module](#2-task-name-beautifier-as-a-jboss-module)
+	- [Source Code Location](#source-code-location)
+	- [Steps to run the showcase](#steps-to-run-the-showcase)
+	- [Known Issues](#known-issues)
+	- [Improvements Backlog](#improvements-backlog)
+
 ## What does it demonstrate?
 - How to dynamically modify a task during its creation in a task list
 - How to add an [execution listener or task listener](http://docs.camunda.org/api-references/bpmn20/#!/concepts/listeners) globally to all processes
@@ -125,32 +144,18 @@ public class TaskNameBeautifierProcessEngineConfiguration
 
 ## Installation on JBoss AS 7
 
-In JBoss AS7 you can provide all three classes as a single module.
-For that you create a file
-[$JBOSS_HOME/modules/org/camunda/bpm/task-name-beautifier/main/module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
-with the following contents:
-```xml
-<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
-  <resources>
-    <resource-root path="task-name-beautifier.jar" />
-  </resources>
-
-  <dependencies>
-    <module name="org.camunda.bpm.camunda-engine" />
-  </dependencies>
-</module>
-```
-and place the [JAR file with the classes]() next to it.
-
-Add a dependency to the newly created module in
-$JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main/module.xml
+### 1. Switch Process Engine Configuration in JBoss AS 7
+Place the [JAR file with the configuration and parse listener class](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar)
+in the directory `$JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main`.
+Add a dependency to the JAR file in
+`$JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main/module.xml`
 so that the [camunda BPM platform](http://camunda.org)
-can find the alternative ProcessEngineConfiguration provided by the module:
+can find the alternative `ProcessEngineConfiguration` provided by the module:
 ```xml
-  <dependencies>
+  <resources>
     ...
-    <module name="org.camunda.bpm.task-name-beautifier"/>
-  </dependencies>
+  <resource-root path="task-name-beautifier.jar" />
+  </resources>
 ```
 
 To enable the configuration class,
@@ -169,6 +174,27 @@ add it to the process engine parameters in your standalone.xml or domain.xml:
         ...
     </subsystem>
 ```
+
+### 2. Task Name Beautifier as a JBoss Module
+Since the Task Listener is added to all processes,
+it needs to be in the classpath of all applications.
+This can be achieved by creating a global JBoss module.
+For that you create a file
+[$JBOSS_HOME/modules/org/camunda/bpm/task-name-beautifier/main/module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
+with the following contents:
+```xml
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
+  <resources>
+    <resource-root path="task-name-beautifier.jar" />
+  </resources>
+
+  <dependencies>
+    <module name="org.camunda.bpm.camunda-engine" />
+  </dependencies>
+</module>
+```
+and place the [JAR file with the task listener class](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar) next to it.
+
 Finally, you can add the TaskListener to the classpath of all applications
 by adding a global dependeny in your standalone.xml or domain.xml:
 ```xml
@@ -180,10 +206,11 @@ by adding a global dependeny in your standalone.xml or domain.xml:
         ...
     </subsystem>
 ```
+
 ## Source Code Location
 - [GitHub](https://github.com/camunda/camunda-bpm-examples/tree/master/task-name-beautifier)
 - [Download Source Code as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
-- Pre-built JAR: [task-name-beautifier.jar]()
+- Pre-built JAR: [task-name-beautifier.jar](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar)
 - JBoss	AS7 module descriptor: [module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
 
 ## Steps to run the showcase

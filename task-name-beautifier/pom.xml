@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha5</camunda.version>
+    <camunda.version>7.0.0-alpha6</camunda.version>
     <jboss.version>7.1.3.Final</jboss.version>
   </properties>
 
