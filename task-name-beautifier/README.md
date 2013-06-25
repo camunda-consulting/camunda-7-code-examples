@@ -1,5 +1,24 @@
 # camunda BPM example: Task Name Beautifier
 
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [camunda BPM example: Task Name Beautifier](#camunda-bpm-example-task-name-beautifier)
+	- [What does it demonstrate?](#what-does-it-demonstrate)
+	- [Technical environment](#technical-environment)
+	- [Remarks to run this application](#remarks-to-run-this-application)
+	- [Introduction](#introduction)
+	- [Example Process](#example-process)
+	- [Task Listener](#task-listener)
+	- [Adding the Task Listener to all User Tasks of all Processes](#adding-the-task-listener-to-all-user-tasks-of-all-processes)
+	- [Usage with camunda BPM platform](#usage-with-camunda-bpm-platform)
+	- [Installation on JBoss AS 7](#installation-on-jboss-as-7)
+		- [1. Switch Process Engine Configuration in JBoss AS 7](#1-switch-process-engine-configuration-in-jboss-as-7)
+		- [2. Task Name Beautifier as a JBoss Module](#2-task-name-beautifier-as-a-jboss-module)
+	- [Source Code Location](#source-code-location)
+	- [Steps to run the showcase](#steps-to-run-the-showcase)
+	- [Known Issues](#known-issues)
+	- [Improvements Backlog](#improvements-backlog)
+
 ## What does it demonstrate?
 - How to dynamically modify a task during its creation in a task list
 - How to add an [execution listener or task listener](http://docs.camunda.org/api-references/bpmn20/#!/concepts/listeners) globally to all processes
