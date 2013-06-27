@@ -22,28 +22,27 @@ import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.camunda.fox.showcase.invoice.en.InvoiceServletProcessApplication;
 import com.camunda.fox.showcase.invoice.test.mock.SvnDelegateMock;
 
 @RunWith(Arquillian.class)
 public class ArquillianTestCase {
   static String process ="camunda-invoice-en";
-//    static String process ="signavio-invoice-en";
 
   @Deployment  
   public static WebArchive createDeployment() {
     MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).goOffline().loadMetadataFromPom("pom.xml");
     
     return ShrinkWrap.create(WebArchive.class, "test.war")
-            // prepare as process application archive for fox platform
-//            .addAsManifestResource("ARQUILLIAN-MANIFEST-JBOSS7.MF", "MANIFEST.MF")
-            .addAsLibraries(resolver.artifact("com.camunda.fox.platform:fox-platform-client").resolveAsFiles())
-            .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
+            .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
             // add your own classes (could be done one by one as well)
             //.addPackages(true, "com.camunda.fox.showcase.invoice")
             .addPackages(true, "com.camunda.fox.showcase.invoice.test.mock")
+            .addClass(InvoiceServletProcessApplication.class)
             // add process definition
-            .addAsResource(process+".bpmn")
+            .addAsResource(process + ".bpmn")
             .addAsResource("META-INF/beans.xml")
+            .addAsResource("META-INF/processes.xml")
             // now you can add additional stuff required for your test case
             ;
   }
