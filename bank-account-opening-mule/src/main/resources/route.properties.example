@@ -1,8 +1,11 @@
-#folder.orders=d:/temp/fox-mule-showcase/orders
-#folder.postident=d:/temp/fox-showcase/postident
-#folder.work=d:/temp/fox-showcase/work
-#folder.backup=d:/temp/fox-showcase/done
+# folder for order XML files
 folder.orders=D:/camundaBPM/src/camunda-outer-space-demos/bank-account-opening-mule/fs/orders
+
+# folder for postident PDF files
 folder.postident=D:/camundaBPM/src/camunda-outer-space-demos/bank-account-opening-mule/fs/postident
+
+# working folder
 folder.work=D:/camundaBPM/src/camunda-outer-space-demos/bank-account-opening-mule/fs/work
+
+# folder for processed files
 folder.backup=D:/camundaBPM/src/camunda-outer-space-demos/bank-account-opening-mule/fs/done

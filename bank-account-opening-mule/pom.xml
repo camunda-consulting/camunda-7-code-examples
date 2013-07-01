@@ -11,7 +11,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha4</camunda.version>
+    <camunda.version>7.0.0-alpha6</camunda.version>
     <mule.version>3.3.0</mule.version>
   </properties>
 
