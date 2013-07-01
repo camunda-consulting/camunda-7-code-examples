@@ -1,4 +1,4 @@
-# camunda BPM example: Bank Account Opening using Camel
+# camunda BPM example: Bank Account Opening using Apache Camel
 
 ## What does it demonstrate?
 - How to use [Apache Camel](http://camel.apache.org/) together with the [camunda BPM platform](http://camunda.org)
@@ -82,10 +82,11 @@ Last but not least, it is crucial that all incoming orders are accepted and proc
 
 Use your favorite REST/HTTP client (curl, chrome rest client, cocoa rest client to name a few) to place a HTTP PUT request:
 
-- METHOD: PUT
-- URL: http://localhost:8080/bank-account-opening-camel/rest/orders/
-- HEADER: Content-Type: application/json
+- method: `PUT`
+- URL: [http://localhost:8080/bank-account-opening-camel/rest/orders/](http://localhost:8080/bank-account-opening-camel/rest/orders/)
+- Header: `Content-Type: application/json`
 - Request Body (example): 
+
 ```  
 {
 	"accounttype": "saving",
