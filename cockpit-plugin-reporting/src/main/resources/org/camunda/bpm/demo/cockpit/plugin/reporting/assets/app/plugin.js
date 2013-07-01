@@ -1,5 +1,7 @@
 ngDefine('cockpit.plugin.reporting-process-count', 
-		 ['http://code.highcharts.com/highcharts.js'], // refer to version in web to avoid thinking about licensing issues with Highcharts
+		 // ['http://code.highcharts.com/highcharts.js'], / refer to version in web to avoid thinking about licensing issues with Highcharts
+		 // ['./static/app/highcharts.js'], // you can use this as well if it is included in the plugin
+		 ['http://localhost:8080/cockpit/api/cockpit/plugin/reporting-process-count/static/app/highcharts.js'],		 
 		 function(module) {
 
   var DashboardController = function($scope, $http, Uri) {

@@ -16,4 +16,11 @@ public class ReportingPluginRootResource extends AbstractPluginRootResource {
   public ProcessInstanceCountResource getProcessInstanceResource(@PathParam("engineName") String engineName) {
     return subResource(new ProcessInstanceCountResource(engineName), engineName);
   }
+  
+
+  @Path("{engineName}/demo-data")
+  public DemoDataGeneratorResource generateDemotData(@PathParam("engineName") String engineName) {
+    return subResource(new DemoDataGeneratorResource(engineName), engineName);
+  }
+
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<order ordernumber="0001">
+	<person>
+		<firstname>John</firstname>
+		<lastname>Doe</lastname>
+		<title>Mr.</title>
+		<dateofbirth>1900-01-01T12:30:23.998+02:00</dateofbirth>
+		<placeofbirth>Berlin</placeofbirth>
+		<gender>male</gender>
+		<phonenumber>123456</phonenumber>
+		<email>somebody@somewhere.com</email>
+	</person>
+	<address>
+		<street>The Street</street>
+		<number>1</number>
+		<zipcode>1234</zipcode>
+		<city>The City</city>
+		<state>The State</state>
+		<country>The Country</country>
+	</address>
+	<accounttype>debit</accounttype>
+</order>

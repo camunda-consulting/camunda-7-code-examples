@@ -3,7 +3,6 @@ package org.camunda.bpm.example.twitter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,9 @@ public class ProcessTestCase {
     variables.put("content", "We will never see this content on Twitter");
     variables.put("email", "bernd.ruecker@camunda.com");
 
-    ProcessInstance processInstance = processEngineRule.getRuntimeService().startProcessInstanceByKey("TwitterDemoProcess", variables);
+    ProcessInstance processInstance = processEngineRule.getRuntimeService()
+              .startProcessInstanceByKey("TwitterDemoProcess", variables);
+    
     String id = processInstance.getId();
     System.out.println("Started process instance id " + id);
 
