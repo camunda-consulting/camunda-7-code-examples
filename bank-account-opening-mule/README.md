@@ -1,5 +1,18 @@
 # camunda BPM example: Bank Account Opening using Mule ESB
 
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [camunda BPM example: Bank Account Opening using Mule ESB](#camunda-bpm-example-bank-account-opening-using-mule-esb)
+	- [What does it demonstrate?](#what-does-it-demonstrate)
+	- [Technical environment](#technical-environment)
+	- [The Process](#the-process)
+	- [Getting Started](#getting-started)
+	- [Starting a process instance via REST](#starting-a-process-instance-via-rest)
+	- [Starting a process instance via XMl in drop folder](#starting-a-process-instance-via-xml-in-drop-folder)
+	- [Correlate Postident PDF to process instance via drop folder](#correlate-postident-pdf-to-process-instance-via-drop-folder)
+	- [Check Tasklist](#check-tasklist)
+	- [The big picture as BPMN collaboration](#the-big-picture-as-bpmn-collaboration)
+	
 ## What does it demonstrate?
 - How to use [Mule ESB](http://www.mulesoft.org/) together with the [camunda BPM platform](http://camunda.org)
 - How to correlate to a running process instance from Mule
