@@ -67,7 +67,7 @@
     </dependency>
 
     <dependency>
-      <!-- Needed for ArquillianProcessExecutionTest -->
+      <!-- Needed for ArquillianTest -->
       <groupId>org.jboss.arquillian.junit</groupId>
       <artifactId>arquillian-junit-container</artifactId>
       <version>1.0.3.Final</version>
@@ -75,7 +75,7 @@
     </dependency>
 
     <dependency>
-      <!-- Needed for ProcessParsingTest -->
+      <!-- Needed for InMemoryH2Test -->
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <version>1.2.132</version>
@@ -121,7 +121,7 @@
       </activation>
       <dependencies>
         <dependency>
-          <!-- Needed for ArquillianProcessExecutionTest -->
+          <!-- Needed for ArquillianTest -->
           <!-- Requires a running JBoss AS7 with camunda BPM
                change to other artifact for embedded start or different server -->
           <!-- Included here for convenience when running the test in Eclipse -->
@@ -153,7 +153,7 @@
       <id>arq-jbossas-remote</id>
       <dependencies>
         <dependency>
-          <!-- Needed for ArquillianProcessExecutionTest -->
+          <!-- Needed for ArquillianTest -->
           <!-- Requires a running JBoss AS7 with camunda BPM
                change to other artifact for embedded start or different server -->
           <groupId>org.jboss.as</groupId>
