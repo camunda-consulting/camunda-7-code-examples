@@ -15,6 +15,14 @@ If each Web application ships with its own forms for BPMN User Tasks,
 a central task list needs to load or link to these forms
 and therefore needs to know the corresponding Servlet Context.
 
+The provided Java class
+[ProcessApplicationHelper](https://github.com/camunda/camunda-bpm-examples/blob/master/get-servlet-context-by-process-definition/src/main/java/org/example/get_servlet_context_by_process_definition/ProcessApplicationHelper.java)
+contains two different ways to retrieve the Servlet Context.
+The first one requires the process engine,
+into which the process definition has been deployed,
+to be known upfront.
+The second one searches through all process engines on a server.
+
 ## Source Code Location
 - [GitHub](https://github.com/camunda/camunda-bpm-examples/tree/master/task-name-beautifier)
 - [Download Source Code as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)

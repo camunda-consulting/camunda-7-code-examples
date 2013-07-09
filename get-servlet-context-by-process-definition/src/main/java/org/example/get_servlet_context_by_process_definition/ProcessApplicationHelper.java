@@ -46,6 +46,9 @@ public class ProcessApplicationHelper {
 		return processApplicationInfo.getProperties().get(ProcessApplicationInfo.PROP_SERVLET_CONTEXT_PATH);
 	}
 
+	/**
+	 * Retrieve the application info of a process definition from a known process engine.
+	 */
 	public static ProcessApplicationInfo getProcessApplicationInfo(
 			ProcessEngine processEngine, String processDefinitionId) {
 		ProcessDefinition processDefinition = processEngine.getRepositoryService().getProcessDefinition(processDefinitionId);
@@ -63,6 +66,9 @@ public class ProcessApplicationHelper {
 		}
 	}
 
+	/**
+	 * Retrieve the application info path of a process definition from any process engine.
+	 */
 	public static ProcessApplicationInfo getProcessApplicationInfo(String processDefinitionId) {
 		ProcessEngineService processEngineService = BpmPlatform.getProcessEngineService();
 		ProcessApplicationService processAppService = BpmPlatform.getProcessApplicationService();
