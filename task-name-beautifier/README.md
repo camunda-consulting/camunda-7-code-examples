@@ -158,6 +158,8 @@ can find the alternative `ProcessEngineConfiguration` provided by the module:
   </resources>
 ```
 
+Please, remember that you have to repeat this step when you upgrade your server to a newer version of camunda BPM.
+
 To enable the configuration class,
 add it to the process engine parameters in your standalone.xml or domain.xml:
 ```xml
