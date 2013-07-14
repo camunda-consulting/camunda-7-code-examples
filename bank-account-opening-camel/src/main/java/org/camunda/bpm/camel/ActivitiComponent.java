@@ -50,7 +50,7 @@ public class ActivitiComponent extends DefaultComponent {
 
   @Override
   protected Endpoint createEndpoint(String s, String s1, Map<String, Object> stringObjectMap) throws Exception {
-    ActivitiEndpoint ae = new ActivitiEndpoint(s, getCamelContext(), runtimeService);
+    ActivitiEndpoint ae = new ActivitiEndpoint(s, this, runtimeService);
     //setProperties(ae, stringObjectMap);
     return ae;
   }

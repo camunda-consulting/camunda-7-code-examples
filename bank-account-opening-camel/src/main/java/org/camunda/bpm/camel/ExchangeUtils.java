@@ -27,6 +27,7 @@ import org.apache.camel.Exchange;
  */
 public class ExchangeUtils {
 
+  @SuppressWarnings("rawtypes")
   static Map<String, Object> prepareVariables(Exchange exchange, ActivitiEndpoint activitiEndpoint) {
     Map<String, Object> ret = new HashMap<String, Object>();
     boolean shouldReadFromProperties = activitiEndpoint.isCopyVariablesFromProperties();

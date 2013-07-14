@@ -13,7 +13,7 @@
 
 package org.camunda.bpm.camel;
 
-import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.Consumer;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -25,7 +25,7 @@ import org.camunda.bpm.engine.RuntimeService;
  * copied from camunda fox ee 6.2.3 / activiti-camel module. It is not yet decided 
  * if we have a comparable module in camunda BPM or do integration differently.
  * 
- * Let us know your oppinion in the <a href="http://www.camunda.org/community/forum.html">forum</a>
+ * Let us know your opinion in the <a href="http://www.camunda.org/community/forum.html">forum</a>
  * 
  * @author ruecker
  */
@@ -41,8 +41,8 @@ public class ActivitiEndpoint extends DefaultEndpoint {
 
   private boolean copyVariablesFromProperties = false;
 
-  public ActivitiEndpoint(String uri, CamelContext camelContext, RuntimeService runtimeService) {
-    super(uri, camelContext);
+  public ActivitiEndpoint(String uri, Component camelComponent, RuntimeService runtimeService) {
+    super(uri, camelComponent);
     this.runtimeService = runtimeService;
   }
 
