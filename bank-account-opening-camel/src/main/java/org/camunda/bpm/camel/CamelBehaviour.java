@@ -52,7 +52,7 @@ public class CamelBehaviour extends BpmnActivityBehavior implements ActivityBeha
 
 
   private ActivitiEndpoint createEndpoint(ActivityExecution execution) {
-    String uri = "activiti://" + getProcessName(execution) + ":" + execution.getActivity().getId();
+    String uri = "camunda://" + getProcessName(execution) + ":" + execution.getActivity().getId();
     return getEndpoint(getContext(execution), uri);
   }
 

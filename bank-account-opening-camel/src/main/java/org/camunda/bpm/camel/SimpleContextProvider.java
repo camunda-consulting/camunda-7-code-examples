@@ -12,11 +12,11 @@
  */
 package org.camunda.bpm.camel;
 
-import org.apache.camel.CamelContext;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.camel.CamelContext;
 
 /**
  * copied from camunda fox ee 6.2.3 / activiti-camel module. It is not yet decided 

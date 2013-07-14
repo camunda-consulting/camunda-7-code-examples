@@ -12,10 +12,10 @@
  */
 package org.camunda.bpm.camel;
 
-import org.apache.camel.Exchange;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.camel.Exchange;
 
 /**
  * copied from camunda fox ee 6.2.3 / activiti-camel module. It is not yet decided 

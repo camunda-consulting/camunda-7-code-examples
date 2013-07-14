@@ -79,9 +79,9 @@ Last but not least, it is crucial that all incoming orders are accepted and proc
 - Ready! You should see the following logs in the server
 
 ```
- INFO [com.camunda.fox.camel.BootStrap] (MSC service thread 1-4) =======================
- INFO [com.camunda.fox.camel.BootStrap] (MSC service thread 1-4) successfully created camel context and started open account route!
- INFO [com.camunda.fox.camel.BootStrap] (MSC service thread 1-4) =======================
+ INFO [org.camunda.demo.camel.camel.BootStrap] (MSC service thread 1-4) =======================
+ INFO [org.camunda.demo.camel.camel.BootStrap] (MSC service thread 1-4) successfully created camel context and started open account route!
+ INFO [org.camunda.demo.camel.camel.BootStrap] (MSC service thread 1-4) =======================
  INFO [javax.enterprise.resource.webcontainer.jsf.config] (MSC service thread 1-1) Initializing Mojarra 2.1.5 (SNAPSHOT 20111202) for context '/bank-account-opening'
  INFO [org.jboss.web] (MSC service thread 1-1) JBAS018210: Registering web context: /bank-account-opening
  INFO [org.jboss.as.server] (DeploymentScanner-threads - 1) JBAS018559: Deployed "bank-account-opening.war"
