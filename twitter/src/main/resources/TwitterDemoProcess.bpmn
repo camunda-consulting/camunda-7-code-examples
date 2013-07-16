@@ -7,7 +7,7 @@
     </serviceTask>
     <sequenceFlow id="SequenceFlow_4" name="" sourceRef="service_task_send_rejection_notification" targetRef="gateway_join"/>
     <exclusiveGateway id="gateway_approved" name="Approved?">
-      <incoming>SequenceFlow_1</incoming>
+      <incoming>SequenceFlow_2</incoming>
       <outgoing>no</outgoing>
       <outgoing>yes</outgoing>
     </exclusiveGateway>
@@ -37,14 +37,9 @@
     <sequenceFlow id="SequenceFlow_9" name="" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet_XXXX"/>
     <userTask id="user_task_review_tweet_XXXX" activiti:assignee="demo" activiti:formKey="app:reviewTweet.jsf" name="Review Tweet">
       <incoming>SequenceFlow_9</incoming>
-      <outgoing>SequenceFlow</outgoing>
+      <outgoing>SequenceFlow_2</outgoing>
     </userTask>
-    <sequenceFlow id="SequenceFlow" name="" sourceRef="user_task_review_tweet_XXXX" targetRef="UserTask_1"/>
-    <userTask id="UserTask_1" activiti:assignee="demo" activiti:formKey="app:reviewTweet.jsf" name="Review the review">
-      <incoming>SequenceFlow</incoming>
-      <outgoing>SequenceFlow_1</outgoing>
-    </userTask>
-    <sequenceFlow id="SequenceFlow_1" name="" sourceRef="UserTask_1" targetRef="gateway_approved"/>
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="user_task_review_tweet_XXXX" targetRef="gateway_approved"/>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="TwitterDemoProcess">
@@ -55,7 +50,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet_XXXX">
-        <omgdc:Bounds height="80.0" width="100.0" x="120.0" y="94.0"/>
+        <omgdc:Bounds height="80.0" width="100.0" x="156.0" y="94.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Approved__3" bpmnElement="gateway_approved" isMarkerVisible="true">
         <omgdc:Bounds height="40.0" width="40.0" x="387.0" y="114.0"/>
@@ -81,13 +76,6 @@
           <omgdc:Bounds height="22.0" width="89.0" x="752.0" y="150.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow" bpmnElement="SequenceFlow" sourceElement="BPMNShape_Review_Tweet_3" targetElement="_BPMNShape_UserTask_2">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="220.0" y="134.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="252.0" y="134.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="233.0" y="134.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_Publish_on_Twitter_3" targetElement="BPMNShape_Exclusive_Databased_Gateway_3">
         <omgdi:waypoint xsi:type="omgdc:Point" x="592.0" y="214.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="647.0" y="214.0"/>
@@ -129,20 +117,16 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_new_tweet_3" targetElement="BPMNShape_Review_Tweet_3">
         <omgdi:waypoint xsi:type="omgdc:Point" x="78.0" y="134.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="120.0" y="134.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="156.0" y="134.0"/>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="6.0" width="6.0" x="103.0" y="119.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTask_1">
-        <omgdc:Bounds height="80.0" width="100.0" x="252.0" y="94.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_UserTask_2" targetElement="BPMNShape_Approved__3">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="352.0" y="135.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="368.0" y="135.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="387.0" y="135.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_Review_Tweet_3" targetElement="BPMNShape_Approved__3">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="256.0" y="134.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="387.0" y="134.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="367.0" y="135.0"/>
+          <omgdc:Bounds height="6.0" width="6.0" x="337.0" y="134.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

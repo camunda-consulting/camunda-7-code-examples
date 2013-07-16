@@ -12,10 +12,8 @@ import twitter4j.auth.AccessToken;
 /**
  * Publish content on Twitter. It really goes live! Watch out http://twitter.com/#!/camunda_demo for your postings.
  */
+@Named("tweetAdapter")
 public class TweetContentDelegate implements JavaDelegate {
-  
-//  @Inject
-//  private Object somthing;
 
   public void execute(DelegateExecution execution) throws Exception {      
     String content = (String) execution.getVariable("content");
