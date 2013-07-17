@@ -25,4 +25,23 @@
 		<delete file="${deploy.jboss.dir}/${ant.project.name}.war" />
 	</target>
 
+	<target name="demo.prepare" description="Makes the process vulnerable">
+		<replace token="//throw new Exception" value="throw new Exception" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
+		<replace token="throw new BpmnError" value="//throw new BpmnError" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
+		<delete>
+			<fileset dir="src/main/resources">
+				<include name="open-account-errorhandling.bpmn" />
+				<include name="open-account-errorhandling.png" />
+			</fileset>
+		</delete>
+		<copy tofile="src/main/resources/open-account-errorhandling.bpmn" file="src/main/resources/open-account-errorhandling.bpmn.vulnerable" />
+		<copy tofile="src/main/resources/open-account-errorhandling.png" file="src/main/resources/open-account-errorhandling.png.vulnerable" />
+	</target>
+
+	<target name="demo.clean" description="Restore from Git">
+		<exec executable="git" dir="." failonerror="true">
+			<arg line="checkout -- src/main/resources/open-account-errorhandling.* src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
+		</exec>
+	</target>
+
 </project>
