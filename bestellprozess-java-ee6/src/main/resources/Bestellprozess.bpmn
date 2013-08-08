@@ -19,9 +19,9 @@
         <flowNodeRef>usertask-eskalation</flowNodeRef>
         <flowNodeRef>EndEvent_1</flowNodeRef>
         <flowNodeRef>ExclusiveGateway_2</flowNodeRef>
-        <flowNodeRef>auftrag-storniert</flowNodeRef>
         <flowNodeRef>ExclusiveGateway_1</flowNodeRef>
         <flowNodeRef>CallActivity_1</flowNodeRef>
+        <flowNodeRef>auftrag-storniert</flowNodeRef>
       </lane>
     </laneSet>
     <serviceTask id="ServiceTask_2" activiti:expression="#{orderService.reserveGoods()}" name="Ware reservieren" implementation="webService">
@@ -47,7 +47,7 @@
     </startEvent>
     <sequenceFlow id="SequenceFlow_4" isImmediate="true" sourceRef="StartEvent_1" targetRef="ServiceTask_2"/>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="ServiceTask_2" targetRef="ExclusiveGateway_1"/>
-    <boundaryEvent id="BoundaryEvent_2" name="" attachedToRef="kunde-umberaten" cancelActivity="false">
+    <boundaryEvent id="BoundaryEvent_2" name="alle 24h" attachedToRef="kunde-umberaten" cancelActivity="false">
       <outgoing>SequenceFlow_3</outgoing>
       <timerEventDefinition id="TimerEventDefinition_1">
         <timeDuration xsi:type="tFormalExpression">PT10S</timeDuration>
@@ -62,18 +62,17 @@
       <incoming>SequenceFlow_5</incoming>
     </endEvent>
     <sequenceFlow id="SequenceFlow_5" sourceRef="usertask-eskalation" targetRef="EndEvent_1"/>
-    <exclusiveGateway id="ExclusiveGateway_2" name="Umberatung erfolgreich?" gatewayDirection="Diverging" default="SequenceFlow_12">
+    <exclusiveGateway id="ExclusiveGateway_2" name="Umberatung erfolgreich?" gatewayDirection="Diverging">
       <incoming>SequenceFlow_6</incoming>
       <outgoing>SequenceFlow_12</outgoing>
       <outgoing>SequenceFlow_14</outgoing>
     </exclusiveGateway>
-    <sequenceFlow id="SequenceFlow_12" name="nein" isImmediate="true" sourceRef="ExclusiveGateway_2" targetRef="auftrag-storniert"/>
+    <sequenceFlow id="SequenceFlow_12" name="nein" isImmediate="true" sourceRef="ExclusiveGateway_2" targetRef="auftrag-storniert">
+      <conditionExpression xsi:type="tFormalExpression">#{umberatung!='erfolgreich'}</conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="SequenceFlow_14" name="ja" isImmediate="true" sourceRef="ExclusiveGateway_2" targetRef="ExclusiveGateway_1">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_1">#{umberatung=='erfolgreich'}</conditionExpression>
     </sequenceFlow>
-    <endEvent id="auftrag-storniert" name="Bestellung&#xA;storniert">
-      <incoming>SequenceFlow_12</incoming>
-    </endEvent>
     <exclusiveGateway id="ExclusiveGateway_1">
       <incoming>SequenceFlow_1</incoming>
       <incoming>SequenceFlow_14</incoming>
@@ -85,6 +84,9 @@
       <outgoing>SequenceFlow_2</outgoing>
     </callActivity>
     <sequenceFlow id="SequenceFlow_2" name="" sourceRef="CallActivity_1" targetRef="auftrag-geliefert"/>
+    <endEvent id="auftrag-storniert" name="Bestellung&#xA;storniert">
+      <incoming>SequenceFlow_12</incoming>
+    </endEvent>
   </process>
   <message id="Message_1" name="OrderReceiveMessage"/>
   <bpmndi:BPMNDiagram id="sid-a1432eb3-df50-41e5-aef7-65f828b800be">
@@ -114,9 +116,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_2_gui" bpmnElement="auftrag-storniert">
-        <omgdc:Bounds height="28.0" width="28.0" x="804.0" y="171.0"/>
+        <omgdc:Bounds height="28.0" width="28.0" x="912.0" y="171.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="38.0" width="67.0" x="785.0" y="204.0"/>
+          <omgdc:Bounds height="38.0" width="67.0" x="893.0" y="204.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_3_gui" bpmnElement="auftrag-geliefert">
@@ -132,7 +134,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_12_gui" bpmnElement="SequenceFlow_12" sourceElement="ExclusiveGateway_2_gui" targetElement="EndEvent_2_gui">
         <omgdi:waypoint xsi:type="omgdc:Point" x="688.0" y="185.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="804.0" y="185.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="912.0" y="185.0"/>
         <bpmndi:BPMNLabel>
           <omgdc:Bounds height="22.0" width="30.0" x="696.0" y="165.0"/>
         </bpmndi:BPMNLabel>
@@ -171,6 +173,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_10" bpmnElement="BoundaryEvent_2">
         <omgdc:Bounds height="30.0" width="30.0" x="420.0" y="202.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="22.0" width="51.0" x="443.0" y="225.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_11" bpmnElement="usertask-eskalation">
         <omgdc:Bounds height="64.0" width="110.0" x="470.0" y="264.0"/>
