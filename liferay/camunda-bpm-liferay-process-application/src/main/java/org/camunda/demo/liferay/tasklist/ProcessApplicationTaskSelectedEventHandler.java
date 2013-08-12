@@ -54,67 +54,11 @@ public class ProcessApplicationTaskSelectedEventHandler extends CdiEnabledBridge
       }
       
       // set to backing bean
-      new SelectedTaskBean().setTask(task);
-      
-      // now show the Portlet
-      
-      String formKey = processEngine.getFormService().getTaskFormData(task.getId()).getFormKey();
-
-      // now context path
-      ProcessDefinition processDefinition = processEngine.getRepositoryService().getProcessDefinition(task.getProcessDefinitionId());
-      String processApplicationName = processEngine.getManagementService().getProcessApplicationForDeployment(processDefinition.getDeploymentId());
-      String contextPath = BpmPlatform.getProcessApplicationService().getProcessApplicationInfo(processApplicationName).getProperties().get(ProcessApplicationInfo.PROP_SERVLET_CONTEXT_PATH);
-   
-
-      try {
-        ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(WebKeys.THEME_DISPLAY);
-
-        String portletId = getPortletId(formKey, contextPath);
-        System.out.println("###: " + portletId);
-        
-//        String dragPortletid = "tasklist_WAR_jsf2cdiportlet";         
-        String columnId = "column-2";
-                
-        Layout layout = (Layout) facesContext.getExternalContext().getRequestMap().get(WebKeys.LAYOUT);
-        LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
-        for (Portlet p : layoutTypePortlet.getAllPortlets()) {
-          // an instance ID is added at the end
-          if (p.getPortletId().startsWith(portletId)) {
-            layoutTypePortlet.removePortletId(themeDisplay.getUserId(), p.getPortletId());
-          }
-        }
-        // add the new one
-        String instance = layoutTypePortlet.addPortletId(themeDisplay.getUserId(), portletId, columnId, -1);
-        // http://www.liferay.com/de/community/forums/-/message_boards/message/3575947
-
-        LayoutLocalServiceUtil.updateLayout(layout);
-      } catch (Exception ex) {
-        throw new RuntimeException("Could not add portlet for task. Root error: " + ex.getMessage(), ex);
-      }
+      new SelectedTaskBean().setTask(task);      
 
     }
     return eventNavigationResult;
 
-  }
-  
-
-  /** copied from https://github.com/liferay/liferay-portal/blob/master/portal-impl/src/com/liferay/portal/service/impl/PortletLocalServiceImpl.java
-   * 
-   * see http://stackoverflow.com/questions/11151001/how-to-get-portlet-id-using-the-portlet-name-in-liferay
-   */
-  public String getPortletId(String portletName, String servletContextName) {
-    String portletId = portletName;
-
-    if (Validator.isNotNull(servletContextName)) {
-      // TODO: Remove leading "/"?
-      if (servletContextName.startsWith("/")) {
-        servletContextName = servletContextName.substring(1);
-      }
-      portletId = portletId.concat(PortletConstants.WAR_SEPARATOR).concat(servletContextName);
-    }
-
-    portletId = PortalUtil.getJsSafePortletId(portletId);
-    return portletId;
   }
   
 

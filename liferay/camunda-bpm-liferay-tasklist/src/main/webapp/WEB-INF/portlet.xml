@@ -14,10 +14,12 @@
 		<!-- <init-param> <name>javax.portlet.faces.defaultViewId.edit</name> <value>/views/portletEditMode.xhtml</value> 
 			</init-param> <init-param> <name>javax.portlet.faces.defaultViewId.help</name> 
 			<value>/views/portletHelpMode.xhtml</value> </init-param> -->
+			<!-- 
 		<init-param>
 			<name>javax.portlet.faces.bridgeEventHandler</name>
 			<value>org.camunda.demo.liferay.tasklist.TaskSelectedEventHandler</value>
 		</init-param>
+		 -->
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
@@ -43,9 +45,11 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
+		<!-- 
 		<supported-processing-event>
 			<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
 		</supported-processing-event>
+		 -->
 		<supported-publishing-event>
 			<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
 		</supported-publishing-event>
