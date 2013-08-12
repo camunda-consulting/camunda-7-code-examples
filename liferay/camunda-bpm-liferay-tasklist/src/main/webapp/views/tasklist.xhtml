@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:bridge="http://liferay.com/faces/bridge">
+
+	<h1>My Tasks</h1>
+	
+	<h:form id="f1">
+		<h:dataTable value="#{tasklist.personalTasks}" var="task">
+			<h:column>
+				<h:outputText value="#{task.id}" />
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{tasklist.selectTask(task)}">
+					<h:outputText value="#{task.name}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</ui:composition>

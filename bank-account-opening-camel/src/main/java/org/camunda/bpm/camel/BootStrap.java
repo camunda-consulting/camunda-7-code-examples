@@ -15,7 +15,7 @@ import javax.jms.QueueConnectionFactory;
 
 import org.apache.camel.component.cdi.CdiCamelContext;
 import org.apache.camel.component.jms.JmsComponent;
-import org.camunda.demo.camel.route.OpenAccountRoute;
+import org.camunda.demo.camel.OpenAccountRoute;
 
 
 /**

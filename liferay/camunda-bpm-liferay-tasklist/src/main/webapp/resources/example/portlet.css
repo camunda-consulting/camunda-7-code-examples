@@ -1,0 +1,8 @@
+.jsf2-portlet .uploaded-files table {
+    width: 100%;
+}
+
+.jsf2-portlet .uploaded-files th, .uploaded-files td {
+    padding-left: 4px;
+    padding-right: 4px;
+}

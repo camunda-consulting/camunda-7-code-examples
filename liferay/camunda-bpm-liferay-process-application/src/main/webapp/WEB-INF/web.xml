@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+	<!-- The WEB-INF/web.xml descriptor is required by the maven-war-plugin, but the actual web.xml that -->
+	<!-- appears in the deployment will be determined by the app.server.type property. For more info, see -->
+	<!-- the configuration section for the maven-war-plugin in the pom.xml project descriptor. -->
+</web-app>

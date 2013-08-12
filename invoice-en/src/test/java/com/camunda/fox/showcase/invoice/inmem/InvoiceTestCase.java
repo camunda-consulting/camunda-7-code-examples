@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.Conversation;
+import javax.inject.Inject;
+
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
@@ -13,15 +16,20 @@ import org.camunda.bpm.engine.test.mock.Mocks;
 import com.camunda.fox.showcase.invoice.test.mock.SvnDelegateMock;
 
 public class InvoiceTestCase extends ProcessEngineTestCase {
+  
+//  @Inject
+//  private Conversation conversation;
 	
-	@Deployment(resources="camunda-invoice-en.bpmn")
+	@Deployment(resources="camunda-invoice-de.bpmn")
 	public void testHappyPath() {
-		ProcessInstance pi = runtimeService.startProcessInstanceByKey("camunda-invoice-en");
+		ProcessInstance pi = runtimeService.startProcessInstanceByKey("camunda-invoice-de");
 		
-		List<Task> tasks = taskService.createTaskQuery().processInstanceId(pi.getId()).list();
+		List<Task> tasks = taskService.createTaskQuery()
+		        .processInstanceId(pi.getId())
+		        .list();
 		
 		assertEquals(1, tasks.size());
-		assertEquals("assignApprover", tasks.get(0).getTaskDefinitionKey());
+		assertEquals("user-task-select-approver", tasks.get(0).getTaskDefinitionKey());
 		
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("approver", "somebody");

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+	<!-- Set the JSF 2 PROJECT_STAGE to Development so that the JSF implementation will do the following at runtime: -->
+	<!-- 1. Log more verbose messages. -->
+	<!-- 2. Render tips and/or warnings in the view markup. -->
+	<!-- 3. Cause the default ExceptionHandler to display a developer-friendly error page. -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<!-- Instruct Mojarra to utilize JBoss-EL instead of the EL implementation provided by the servlet container. -->
+	<context-param>
+		<param-name>com.sun.faces.expressionFactory</param-name>
+		<param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
+	</context-param>
+	<filter>
+		<filter-name>CDICrossContextFilter</filter-name>
+		<filter-class>com.liferay.cdi.portlet.bridge.CDICrossContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CDICrossContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	<filter>
+		<filter-name>WeldCrossContextFilter</filter-name>
+		<filter-class>org.jboss.weld.servlet.WeldCrossContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>WeldCrossContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	<!-- Guarantee order of startup listeners (JSF implementation must be specified before the bridge). -->
+	<listener>
+		<listener-class>${faces.impl.startup.listener}</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.liferay.faces.bridge.servlet.BridgeSessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.liferay.cdi.portlet.bridge.CDIContextListener</listener-class>
+	</listener>
+	<!-- Although the FacesServlet will not be invoked by any portlet requests, it is required to initialize JSF. -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- MyFaces will not initialize unless a servlet-mapping to the Faces Servlet is present. -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<!-- Prevent direct access to Facelet view XHTML by the userAgent (browser). -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Facelet View XHTML</web-resource-name>
+			<url-pattern>*.xhtml</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>nobody</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-role>
+		<role-name>nobody</role-name>
+	</security-role>
+</web-app>

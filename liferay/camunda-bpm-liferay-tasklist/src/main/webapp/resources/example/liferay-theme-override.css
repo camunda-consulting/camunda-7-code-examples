@@ -1,0 +1,12 @@
+.portlet-msg-error {
+    font-style: italic;
+    font-weight: bold;
+    margin: 1px 0px 0px 0px;
+    padding: 1px 5px 1px 24px;
+}
+
+.portlet-msg-info {
+    font-style: italic;
+    margin: 1px 0px 0px 0px;
+    padding: 1px 5px 1px 24px;
+}

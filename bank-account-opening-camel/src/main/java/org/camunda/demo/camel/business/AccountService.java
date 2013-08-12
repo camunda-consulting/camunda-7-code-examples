@@ -18,6 +18,12 @@ public class AccountService {
 	private EntityManager entityManager;
 
 	public void setUpAccout(Order order) {
+	  // allows to simulate errors
+	  if (true) {
+//	  if (order.getAddress().getCity().equals("fail")) {
+	    throw new RuntimeException("city 'fail' not accepted");
+	  }
+	  
 		Account account = new Account(createAccountNumber(),
 				order.getAccounttype(), null);
 		entityManager.persist(account);
