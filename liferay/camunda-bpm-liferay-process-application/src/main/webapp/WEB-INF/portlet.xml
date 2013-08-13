@@ -46,6 +46,9 @@
 		<filter-name>CDIPortletFilter</filter-name>
 		<filter-class>com.liferay.cdi.portlet.bridge.CDIPortletFilter</filter-class>
 		<lifecycle>ACTION_PHASE</lifecycle>
+		<!-- 
+		<lifecycle>EVENT_PHASE</lifecycle>
+		 -->
 		<lifecycle>RENDER_PHASE</lifecycle>
 		<lifecycle>RESOURCE_PHASE</lifecycle>
 	</filter>

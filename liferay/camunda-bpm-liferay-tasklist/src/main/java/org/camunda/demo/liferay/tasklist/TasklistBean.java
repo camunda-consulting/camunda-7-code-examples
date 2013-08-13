@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.portlet.ActionResponse;
 import javax.xml.namespace.QName;
 
@@ -31,8 +32,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 //@Named("tasklist")
-@ManagedBean(name = "tasklist")
-@ViewScoped
+@ManagedBean(name="tasklist")
+@RequestScoped
 public class TasklistBean implements Serializable {
 
   private static final long serialVersionUID = 1L;

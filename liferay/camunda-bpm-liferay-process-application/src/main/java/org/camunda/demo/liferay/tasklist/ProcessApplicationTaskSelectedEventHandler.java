@@ -19,6 +19,12 @@ public class ProcessApplicationTaskSelectedEventHandler extends CdiEnabledBridge
   @Inject
   private ProcessEngine processEngine;
   
+  @Inject
+  private BusinessProcess businessProcess;
+  
+  @Inject
+  private Conversation conversation;
+  
   protected EventNavigationResult handleEventWithCdi(FacesContext facesContext, Event event) {
     EventNavigationResult eventNavigationResult = null;
     String eventQName = event.getQName().toString();
@@ -34,6 +40,10 @@ public class ProcessApplicationTaskSelectedEventHandler extends CdiEnabledBridge
       
       // set to backing bean (via PortletContext - we do not have any other scope available here at this moment)
       new SelectedTaskBean().setTask(task);
+      
+//      conversation.begin();
+//      businessProcess.startTask(taskId);
+      
     }
     return eventNavigationResult;
 

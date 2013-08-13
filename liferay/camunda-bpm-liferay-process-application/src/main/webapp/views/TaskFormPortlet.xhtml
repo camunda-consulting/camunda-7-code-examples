@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns:f="http://java.sun.com/jsf/core"
+<f:view xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:bridge="http://liferay.com/faces/bridge">
+ 
+	<h:head>
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{selectedTask.startTask()}" />
+		</f:metadata>
+	</h:head>
+ 	
+	<h:body styleClass="jsf2-portlet ltr">
 
-	<h1>#{selectedTask.task}</h1>
+	<h1><h:outputText value="#{selectedTask.task}" /></h1>	
 	
-	Hallo Welt.
+	<h1><h:outputText value="#{task}" /></h1>	
 	
-</ui:composition>
+	</h:body>
+</f:view>

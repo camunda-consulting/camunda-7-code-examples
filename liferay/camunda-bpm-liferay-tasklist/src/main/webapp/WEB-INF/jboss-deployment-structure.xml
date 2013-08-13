@@ -5,8 +5,12 @@
 		<exclusions>
 			<module name="javaee.api" />
 			<module name="org.apache.log4j" />
+			
+			<!-- 
+			TODD: remove changes here
 			<module name="org.jboss.weld.core"/>
-			<module name="org.jboss.as.weld"/>			
+			<module name="org.jboss.as.weld"/>
+			 -->			
 		</exclusions>
 		<dependencies>
 			<module name="com.liferay.portal" />
@@ -17,9 +21,11 @@
 			<module name="javax.validation.api" />
 			<module name="javax.mail.api" />
 			<module name="org.jboss.modules" />
-			<!--  -->
+			
 			<module name="org.jboss.weld.core" slot="2.1.21"/>
-			<module name="org.jboss.as.weld" slot="2.1.21"/>			
+			<module name="org.jboss.as.weld" slot="2.1.21"/>
+			<!--
+			  -->			
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>

@@ -16,11 +16,4 @@
 		<phase-listener>com.liferay.faces.util.lifecycle.DebugPhaseListener</phase-listener>
 		<phase-listener>com.liferay.faces.util.lifecycle.ViewScopePhaseListener</phase-listener>
 	</lifecycle>
-	<navigation-rule>
-		<from-view-id>/views/portletViewMode.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/views/confirmation.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 </faces-config>
