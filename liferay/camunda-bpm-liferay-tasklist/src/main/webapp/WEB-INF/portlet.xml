@@ -95,6 +95,10 @@
 		<filter-name>CDIPortletFilter</filter-name>
 		<portlet-name>tasklist</portlet-name>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CDIPortletFilter</filter-name>
+		<portlet-name>process-starter</portlet-name>
+	</filter-mapping>
 	<event-definition>
 		<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
 		<value-type>java.lang.String</value-type>

@@ -7,7 +7,7 @@
 
 	<h:head>
 
-		<script>
+		<h:outputScript>
 	AUI().ready('aui-tabs', function(A) {
  3    var tabs1=new A.TabView({
  4        boundingBox: '#tabs',
@@ -17,7 +17,7 @@
  8
  9    tabs1.render();
 10});
-	</script>
+	</h:outputScript>
 
 	</h:head>
 	<h:body styleClass="jsf2-portlet ltr">
@@ -83,6 +83,16 @@
 
 		</h:form>
 
+	<aui:layout>
+<aui:column>
+<ul>
+<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['JSF']}" /></em></li>
+<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Alloy']}" /></em></li>
+<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['Liferay Faces Bridge']}" /></em></li>
+<li><em><h:outputText value="#{bridgeContext.bridgeConfig.attributes['CDI']}" /></em></li>
+</ul>
+</aui:column>
+</aui:layout>
 
 	</h:body>
 </f:view>

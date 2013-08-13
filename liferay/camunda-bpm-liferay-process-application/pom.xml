@@ -2,18 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.liferay.faces.demos</groupId>
-		<artifactId>liferay-faces-bridge-demos</artifactId>
-		<version>3.1.2-ga3</version>
-	</parent>
 	<groupId>org.camunda.demo.liferay</groupId>
 	<artifactId>camunda-bpm-liferay-process-application</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>JSF2 CDI Portlet</name>
 
 	<properties>
-		<webapp.descriptor>web-jboss.xml</webapp.descriptor>
 		<liferay.version>6.1.1</liferay.version>
 		<liferay.faces.version>3.1.2-ga3</liferay.faces.version>
 		<camunda.version>7.0.0-alpha9</camunda.version>
@@ -34,10 +29,10 @@
 		</dependency>
 		
 		<!-- Liferay -->
-				
-		<dependency>
+	<dependency>
 			<groupId>com.liferay.cdi</groupId>
 			<artifactId>cdi-portlet-bridge-shared</artifactId>
+			<version>6.2.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.liferay.faces</groupId>
@@ -61,16 +56,7 @@
 			<version>${liferay.faces.version}</version>
 		</dependency>
 		
-		<!-- stuff -->
-
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
+		<!-- stuff
 		<dependency>
 			<groupId>javax.el</groupId>
 			<artifactId>el-api</artifactId>
@@ -79,15 +65,18 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
+			<version>2.0</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.jboss.seam</groupId>
 			<artifactId>jboss-el</artifactId>
 		</dependency>
-		
+		 -->
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-web-6.0</artifactId>

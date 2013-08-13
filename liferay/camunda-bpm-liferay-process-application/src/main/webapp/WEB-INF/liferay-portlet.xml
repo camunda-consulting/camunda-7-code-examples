@@ -6,7 +6,9 @@
 		<portlet-name>TaskFormPortlet</portlet-name>
 		<instanceable>true</instanceable>
 		<remoteable>true</remoteable>
+		<!-- 
 		<private-session-attributes>false</private-session-attributes>
+		 -->
 		<ajaxable>false</ajaxable>		
 	</portlet>	
 	<role-mapper>
