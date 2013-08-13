@@ -44,6 +44,11 @@ public class TasklistBean implements Serializable {
   private ProcessEngine processEngine;
 
   private String lastTaskPortletId;
+  
+  public ProcessDefinition getProcessDefinitionForTask(Task task) {
+    // TODO: Add cache
+    return processEngine.getRepositoryService().getProcessDefinition(task.getProcessDefinitionId());
+  }
 
   public List<Task> getPersonalTasks() {
 

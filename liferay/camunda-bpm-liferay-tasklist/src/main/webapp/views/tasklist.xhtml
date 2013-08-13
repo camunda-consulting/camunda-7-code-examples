@@ -5,18 +5,82 @@
 	xmlns:aui="http://liferay.com/faces/aui"
 	xmlns:bridge="http://liferay.com/faces/bridge">
 
-	<h1>My Tasks</h1>
+
+	
 	
 	<h:form id="f1">
+	
+<div id="tabs">
+    <ul class="aui-tabview-list aui-widget-hd" id="docs">
+        <li class="aui-tab">
+            <a class="aui-tab-label" href="javascript:;">My Tasks</a></li>
+        <li class="aui-tab">
+            <a class="aui-tab-label" href="javascript:;">Management</a></li>
+        <li class="aui-tab">
+            <a class="aui-tab-label" href="javascript:;">Accounting</a></li>
+        <li class="aui-tab">
+            <a class="aui-tab-label" href="javascript:;">Colleagues</a></li>
+    </ul>
+    <div class="aui-tabview-content aui-widget-bd" id="docsContent">
+        <div class="aui-tabview-content-item">
 		<h:dataTable value="#{tasklist.personalTasks}" var="task">
 			<h:column>
-				<h:outputText value="#{task.id}" />
+				<f:facet name="header">
+            		<h:outputText value="task name" />
+        		</f:facet>
+				<h:outputText value="#{task.name}" />
 			</h:column>
 			<h:column>
+				<f:facet name="header">
+            		<h:outputText value="process" />
+        		</f:facet>
+				<h:outputText value="#{tasklist.getProcessDefinitionForTask(task).name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+            		<h:outputText value="created" />
+        		</f:facet>
+				<h:outputText value="#{task.createTime}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+            		<h:outputText value="due" />
+        		</f:facet>
+				<h:outputText value="#{task.dueDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+            		<h:outputText value="actions" />
+        		</f:facet>
 				<h:commandLink action="#{tasklist.selectTask(task)}">
-					<h:outputText value="#{task.name}" />
+					<h:outputText value="work on task" />
 				</h:commandLink>
 			</h:column>
-		</h:dataTable>
+		</h:dataTable>        
+        </div>
+        <div class="aui-tabview-content-item">
+        </div>
+        <div class="aui-tabview-content-item">
+        </div>
+        <div class="aui-tabview-content-item">
+        </div>
+    </div>
+</div>
+	
+
 	</h:form>
+	
+		<script>
+YUI().use(
+  'aui-tabview',
+  function(Y) {
+    new Y.TabView(
+      {
+        srcNode: '#tabs'
+      }
+    ).render();
+  }
+);
+10});
+</script>
 </ui:composition>
