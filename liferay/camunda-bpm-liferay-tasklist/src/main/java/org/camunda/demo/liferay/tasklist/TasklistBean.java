@@ -51,13 +51,20 @@ public class TasklistBean implements Serializable {
   }
 
   public List<Task> getPersonalTasks() {
-
+    // TODO: add logic to query only user tasks
     User user = LiferayFacesContext.getInstance().getUser();
-
-    // UserLocalServiceUtil.
-    System.out.println("#### get personal tasks for user " + user);
-
+    // at the moment return all tasks
     return taskService.createTaskQuery().list();
+  }
+  
+  public List<ProcessDefinition> getStartableProcessDefinitions() {
+    List<ProcessDefinition> processDefinitionList = processEngine.getRepositoryService().createProcessDefinitionQuery().latestVersion().active().list();
+    return processDefinitionList;
+  }
+  
+  public void startProcessInstance(ProcessDefinition pd) {
+    // TODO: Show start form if configured
+    processEngine.getRuntimeService().startProcessInstanceById(pd.getId());
   }
 
   public void selectTask(Task task) {
@@ -90,6 +97,7 @@ public class TasklistBean implements Serializable {
       }
       
       // add the new one
+      // TODO: add message if task form portlet cannot be found
       lastTaskPortletId = layoutTypePortlet.addPortletId(themeDisplay.getUserId(), portletId, columnId, -1);
       // http://www.liferay.com/de/community/forums/-/message_boards/message/3575947
 

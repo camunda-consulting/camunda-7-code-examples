@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE context>
-<Context antiJARLocking="false" antiResourceLocking="false">
-    <!-- Disable session persistence for Tomcat due to problems with weld-servlet.jar -->
-    <Manager pathname="" />
-</Context>

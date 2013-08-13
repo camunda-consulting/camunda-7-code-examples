@@ -4,5 +4,6 @@
 <display>
 	<category name="category.sample">
 		<portlet id="tasklist" />
+		<portlet id="process-starter" />
 	</category>
 </display>

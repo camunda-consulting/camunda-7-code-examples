@@ -9,7 +9,7 @@
 		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/views/portletViewMode.xhtml</value>
+			<value>/views/tasklist.xhtml</value>
 		</init-param>
 		<!-- <init-param> <name>javax.portlet.faces.defaultViewId.edit</name> <value>/views/portletEditMode.xhtml</value> 
 			</init-param> <init-param> <name>javax.portlet.faces.defaultViewId.help</name> 
@@ -23,8 +23,6 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>help</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Tasklist</title>
@@ -53,6 +51,38 @@
 		<supported-publishing-event>
 			<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
 		</supported-publishing-event>
+	</portlet>
+	<portlet>
+		<portlet-name>process-starter</portlet-name>
+		<display-name>Start Process</display-name>
+		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/starter.xhtml</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Start Process</title>
+			<short-title>Start Process</short-title>
+			<keywords>process</keywords>
+		</portlet-info>
+		<portlet-preferences>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>		
 	</portlet>
 	<filter>
 		<filter-name>CDIPortletFilter</filter-name>
