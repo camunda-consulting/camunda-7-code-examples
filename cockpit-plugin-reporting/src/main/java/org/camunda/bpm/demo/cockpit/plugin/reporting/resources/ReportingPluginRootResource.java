@@ -18,9 +18,9 @@ public class ReportingPluginRootResource extends AbstractPluginRootResource {
   }
   
 
-  @Path("{engineName}/demo-data")
-  public DemoDataGeneratorResource generateDemotData(@PathParam("engineName") String engineName) {
-    return subResource(new DemoDataGeneratorResource(engineName), engineName);
-  }
+//  @Path("{engineName}/demo-data")
+//  public DemoDataGeneratorResource generateDemotData(@PathParam("engineName") String engineName) {
+//    return subResource(new DemoDataGeneratorResource(engineName), engineName);
+//  }
 
 }
