@@ -3,13 +3,12 @@ package org.camunda.demo.liferay.tasklist;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletSession;
 import javax.xml.namespace.QName;
 
 import org.camunda.bpm.BpmPlatform;
@@ -31,9 +30,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
-//@Named("tasklist")
-@ManagedBean(name="tasklist")
-@RequestScoped
+@Named("tasklist")
 public class TasklistBean implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -107,7 +104,24 @@ public class TasklistBean implements Serializable {
       throw new RuntimeException("Could not add portlet for task. Root error: " + ex.getMessage(), ex);
     }
     
-    // now send the event (to everybody interessted - inclduing the new portlet)    
+    // now send the event (to everybody interested - including the new portlet) 
+//    sendIpcEvent(task);
+    setSharedAttribute(task);
+  }
+
+  /**
+   * Do this as a workaround till IPC works correctly
+   * see http://www.liferay.com/de/community/forums/-/message_boards/message/27295776
+   */
+  private void setSharedAttribute(Task task) {
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    ExternalContext externalContext = facesContext.getExternalContext();
+    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+    // make sure you have <private-session-attributes>false</private-session-attributes> in liferay-portal.xml
+    portletSession.setAttribute("camunda.selected.task.id", task.getId(), PortletSession.APPLICATION_SCOPE);
+  }
+
+  private void sendIpcEvent(Task task) {
     QName qName = new QName("http://camunda.org/events", "ipc.taskSelected");
     ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
     ActionResponse actionResponse = (ActionResponse) externalContext.getResponse();

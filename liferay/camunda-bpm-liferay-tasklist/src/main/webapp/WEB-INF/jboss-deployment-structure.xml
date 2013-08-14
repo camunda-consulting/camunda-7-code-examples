@@ -21,10 +21,9 @@
 			<module name="javax.validation.api" />
 			<module name="javax.mail.api" />
 			<module name="org.jboss.modules" />
-			
+			<!-- 
 			<module name="org.jboss.weld.core" slot="2.1.21"/>
-			<module name="org.jboss.as.weld" slot="2.1.21"/>
-			<!--
+			<module name="org.jboss.as.weld" slot="2.1.21"/>			
 			  -->			
 		</dependencies>
 	</deployment>

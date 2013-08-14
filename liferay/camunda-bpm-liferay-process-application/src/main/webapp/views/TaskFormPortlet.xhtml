@@ -6,16 +6,15 @@
 	xmlns:bridge="http://liferay.com/faces/bridge">
  
 	<h:head>
-		<f:metadata>
-			<f:event type="preRenderView" listener="#{selectedTask.startTask()}" />
-		</f:metadata>
 	</h:head>
  	
 	<h:body styleClass="jsf2-portlet ltr">
 
-	<h1><h:outputText value="#{selectedTask.task}" /></h1>	
 	
-	<h1><h:outputText value="#{task}" /></h1>	
+	<h:form>
+		<h:commandButton action="#{conversationTest.start()}" value="Start" />
+		<h:commandButton action="#{conversationTest.end()}" value="End" />
+	</h:form>	
 	
 	</h:body>
 </f:view>

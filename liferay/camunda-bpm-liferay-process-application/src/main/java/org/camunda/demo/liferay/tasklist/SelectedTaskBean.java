@@ -1,7 +1,7 @@
 package org.camunda.demo.liferay.tasklist;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -10,6 +10,7 @@ import javax.portlet.PortletSession;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.task.Task;
+import java.io.Serializable;
 
 
 /**
@@ -18,20 +19,27 @@ import org.camunda.bpm.engine.task.Task;
  * over PortletSession.APPLICATION_SCOPE
  */
 @Named("selectedTask")
-//@ApplicationScoped
-public class SelectedTaskBean {
+@ConversationScoped
+public class SelectedTaskBean implements Serializable {
+ 
+  private static final long serialVersionUID = 1L;
 
   public static final String SELECTED_TASK_KEY = "camunda.selected.task";
-  
+//  
   @Inject
   private Conversation conversation;
-  
+//  
   @Inject
   private BusinessProcess businessProcess;
 
-  
+
   public void startTask() {
-//    conversation.begin();
+    String taskId = getSelectedTaskId();
+    
+    conversation.begin();
+    
+    businessProcess.startTask(taskId, true);
+    
 //    if (getTask()==null || getTask().getId()==null) {
 //      return;
 //    }
@@ -44,6 +52,10 @@ public class SelectedTaskBean {
 ////    conversation.begin();
 //      businessProcess.startTask(getTask().getId());
 //    }
+  }
+
+  public String getSelectedTaskId() {
+    return (String) getSharedSessionAttribute("camunda.selected.task.id");
   }
 
   public Task getTask() {
