@@ -1,7 +1,8 @@
 package org.camunda.demo.liferay.tasklist;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -10,7 +11,6 @@ import javax.portlet.PortletSession;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.task.Task;
-import java.io.Serializable;
 
 
 /**
@@ -19,26 +19,28 @@ import java.io.Serializable;
  * over PortletSession.APPLICATION_SCOPE
  */
 @Named("selectedTask")
-@ConversationScoped
+@RequestScoped
 public class SelectedTaskBean implements Serializable {
  
+//  private static final String SELECTED_TASK_ID = "camunda.selected.task.id";
+
   private static final long serialVersionUID = 1L;
 
-  public static final String SELECTED_TASK_KEY = "camunda.selected.task";
+//  public static final String SELECTED_TASK = "camunda.selected.task";
+//  
+//  @Inject
+//  private Conversation conversation;
 //  
   @Inject
-  private Conversation conversation;
-//  
-  @Inject
-  private BusinessProcess businessProcess;
+  private transient BusinessProcess businessProcess;
 
 
   public void startTask() {
-    String taskId = getSelectedTaskId();
+//    String taskId = getSelectedTaskId();
     
-    conversation.begin();
+//    conversation.begin();
     
-    businessProcess.startTask(taskId, true);
+//    businessProcess.startTask(taskId); //, true);
     
 //    if (getTask()==null || getTask().getId()==null) {
 //      return;
@@ -53,31 +55,37 @@ public class SelectedTaskBean implements Serializable {
 //      businessProcess.startTask(getTask().getId());
 //    }
   }
-
-  public String getSelectedTaskId() {
-    return (String) getSharedSessionAttribute("camunda.selected.task.id");
-  }
-
-  public Task getTask() {
-    return (Task) getSharedSessionAttribute(SELECTED_TASK_KEY);
-  }
-
-  public void setTask(Task task) {
-    setSharedSessionAttribute(SELECTED_TASK_KEY, task);
-  }
   
-  public static Object getSharedSessionAttribute(String key) {
-    FacesContext facesContext = FacesContext.getCurrentInstance();
-    ExternalContext externalContext = facesContext.getExternalContext();
-    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
-    return portletSession.getAttribute(key, PortletSession.APPLICATION_SCOPE);
+  public  void endTask() {
+    businessProcess.completeTask();
+//    setSharedSessionAttribute(SELECTED_TASK_ID, null);
   }
 
-  public static void setSharedSessionAttribute(String key, Object value) {
-    FacesContext facesContext = FacesContext.getCurrentInstance();
-    ExternalContext externalContext = facesContext.getExternalContext();
-    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
-    portletSession.setAttribute(key, value, PortletSession.APPLICATION_SCOPE);
-  }
+//  public String getSelectedTaskId() {
+////    return (String) getSharedSessionAttribute(SELECTED_TASK_ID);
+//    businessProcess.getTaskId();
+//  }
+
+//  public Task getTask() {
+//    return (Task) getSharedSessionAttribute(SELECTED_TASK);
+//  }
+//
+//  public void setTask(Task task) {
+//    setSharedSessionAttribute(SELECTED_TASK, task);
+//  }
+//  
+//  public static Object getSharedSessionAttribute(String key) {
+//    FacesContext facesContext = FacesContext.getCurrentInstance();
+//    ExternalContext externalContext = facesContext.getExternalContext();
+//    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+//    return portletSession.getAttribute(key, PortletSession.APPLICATION_SCOPE);
+//  }
+//
+//  public static void setSharedSessionAttribute(String key, Object value) {
+//    FacesContext facesContext = FacesContext.getCurrentInstance();
+//    ExternalContext externalContext = facesContext.getExternalContext();
+//    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+//    portletSession.setAttribute(key, value, PortletSession.APPLICATION_SCOPE);
+//  }
 }
 

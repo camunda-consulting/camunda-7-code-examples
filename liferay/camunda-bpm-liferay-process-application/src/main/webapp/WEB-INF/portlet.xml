@@ -13,7 +13,7 @@
 		</init-param>
 		<init-param>
 			<name>javax.portlet.faces.bridgeEventHandler</name>
-			<value>org.camunda.demo.liferay.tasklist.ProcessApplicationTaskSelectedEventHandler</value>
+			<value>org.camunda.demo.liferay.tasklist.outtake.ProcessApplicationTaskSelectedEventHandler</value>
 		</init-param>
 		<supports>
 			<mime-type>text/html</mime-type>

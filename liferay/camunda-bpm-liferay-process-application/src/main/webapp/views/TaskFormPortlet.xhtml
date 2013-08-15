@@ -9,12 +9,14 @@
 	</h:head>
  	
 	<h:body styleClass="jsf2-portlet ltr">
-
-	
-	<h:form>
-		<h:commandButton action="#{conversationTest.start()}" value="Start" />
-		<h:commandButton action="#{conversationTest.end()}" value="End" />
-	</h:form>	
-	
+	    <h1>Testing...</h1>	
+		<h:form>
+			<h:outputText value="CDI Task: #{task}" /><br />		
+			<h:outputText value="Startdatum: #{processVariables['datum']}" /><br />		
+			<h:inputText value="#{processVariables['someText']}" />
+			
+			<h:commandButton action="#{selectedTask.startTask()}" value="Start" />
+			<h:commandButton action="#{businessProcess.completeTask()}" value="Complete" />
+		</h:form>	
 	</h:body>
 </f:view>

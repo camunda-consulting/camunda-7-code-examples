@@ -1,7 +1,10 @@
 package org.camunda.demo.liferay.tasklist;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -61,8 +64,10 @@ public class TasklistBean implements Serializable {
   }
   
   public void startProcessInstance(ProcessDefinition pd) {
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("datum", new Date());
     // TODO: Show start form if configured
-    processEngine.getRuntimeService().startProcessInstanceById(pd.getId());
+    processEngine.getRuntimeService().startProcessInstanceById(pd.getId(), variables);
   }
 
   public void selectTask(Task task) {
@@ -118,7 +123,7 @@ public class TasklistBean implements Serializable {
     ExternalContext externalContext = facesContext.getExternalContext();
     PortletSession portletSession = (PortletSession) externalContext.getSession(false);
     // make sure you have <private-session-attributes>false</private-session-attributes> in liferay-portal.xml
-    portletSession.setAttribute("camunda.selected.task.id", task.getId(), PortletSession.APPLICATION_SCOPE);
+    portletSession.setAttribute("camunda.bridge.selected.task.id", task.getId(), PortletSession.APPLICATION_SCOPE);
   }
 
   private void sendIpcEvent(Task task) {

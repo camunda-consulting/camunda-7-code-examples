@@ -1,4 +1,4 @@
-package org.camunda.demo.liferay.tasklist;
+package org.camunda.demo.liferay.tasklist.outtake;
 
 import javax.enterprise.context.Conversation;
 import javax.faces.context.FacesContext;
@@ -39,7 +39,7 @@ public class ProcessApplicationTaskSelectedEventHandler extends CdiEnabledBridge
       }
       
       // set to backing bean (via PortletContext - we do not have any other scope available here at this moment)
-      new SelectedTaskBean().setTask(task);
+//      new SelectedTaskBean().setTask(task);
       
 //      conversation.begin();
 //      businessProcess.startTask(taskId);

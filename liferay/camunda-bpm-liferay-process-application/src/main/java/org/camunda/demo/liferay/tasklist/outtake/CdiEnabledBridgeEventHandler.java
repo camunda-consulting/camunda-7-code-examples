@@ -1,4 +1,4 @@
-package org.camunda.demo.liferay.tasklist;
+package org.camunda.demo.liferay.tasklist.outtake;
 
 import javax.faces.context.FacesContext;
 import javax.portlet.Event;
