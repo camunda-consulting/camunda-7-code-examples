@@ -1,6 +1,7 @@
 package org.camunda.demo.liferay.tasklist;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,8 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.task.Task;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -43,8 +46,8 @@ public class TasklistBean implements Serializable {
   
   @Inject
   private ProcessEngine processEngine;
-
-  private String lastTaskPortletId;
+  
+  private List<String> addedPortlets = new ArrayList<String>();
   
   public ProcessDefinition getProcessDefinitionForTask(Task task) {
     // TODO: Add cache
@@ -55,7 +58,7 @@ public class TasklistBean implements Serializable {
     // TODO: add logic to query only user tasks
     User user = LiferayFacesContext.getInstance().getUser();
     // at the moment return all tasks
-    return taskService.createTaskQuery().list();
+    return taskService.createTaskQuery().orderByTaskCreateTime().desc().list();
   }
   
   public List<ProcessDefinition> getStartableProcessDefinitions() {
@@ -64,54 +67,74 @@ public class TasklistBean implements Serializable {
   }
   
   public void startProcessInstance(ProcessDefinition pd) {
-    Map<String, Object> variables = new HashMap<String, Object>();
-    variables.put("datum", new Date());
-    // TODO: Show start form if configured
-    processEngine.getRuntimeService().startProcessInstanceById(pd.getId(), variables);
+    if (pd.hasStartFormKey()) {
+      String formKey = processEngine.getFormService().getStartFormKey(pd.getId());;
+      String portletId = constructPortletId(pd.getId(), formKey);
+      setSharedAttribute(pd);
+      showPortlet(portletId);
+    }
+    else {      
+      processEngine.getRuntimeService().startProcessInstanceById(pd.getId());
+    }
   }
 
   public void selectTask(Task task) {
-    String formKey = processEngine.getFormService().getTaskFormData(task.getId()).getFormKey();
+    String formKey = processEngine.getFormService().getTaskFormKey(task.getProcessDefinitionId(), task.getTaskDefinitionKey());
+    String portletId = constructPortletId(task.getProcessDefinitionId(), formKey);
+    
+    setSharedAttribute(task);    
+    showPortlet(portletId);
+    // now send the event (to everybody interested - including the new portlet) 
+    //    sendIpcEvent(task);
+  }
 
-    // now context path
-    ProcessDefinition processDefinition = processEngine.getRepositoryService().getProcessDefinition(task.getProcessDefinitionId());
-    String processApplicationName = processEngine.getManagementService().getProcessApplicationForDeployment(processDefinition.getDeploymentId());
-    String contextPath = BpmPlatform.getProcessApplicationService().getProcessApplicationInfo(processApplicationName).getProperties().get(ProcessApplicationInfo.PROP_SERVLET_CONTEXT_PATH);
-
+  private void showPortlet(String portletId) {
+    // this is hard coded at the moment - put it in the bigger column (make configurable?)
+    String columnId = "column-2";
+    
     try {
       FacesContext facesContext = FacesContext.getCurrentInstance();
-      ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(WebKeys.THEME_DISPLAY);
-
-      String portletId = getPortletId(formKey, contextPath);
-      String columnId = "column-2";
-              
+      ThemeDisplay themeDisplay = (ThemeDisplay) facesContext.getExternalContext().getRequestMap().get(WebKeys.THEME_DISPLAY);              
       Layout layout = (Layout) facesContext.getExternalContext().getRequestMap().get(WebKeys.LAYOUT);
       LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
+      long userId = themeDisplay.getUserId();
       
-      // TODO: Think about which portlets to remove
-      for (Portlet p : layoutTypePortlet.getAllPortlets()) {
-        // an instance ID is added at the end - so only check startsWith
-        if (p.getPortletId().startsWith(portletId)) {
-          layoutTypePortlet.removePortletId(themeDisplay.getUserId(), p.getPortletId());
-        }
-      }
-      if (lastTaskPortletId!=null) {
-        layoutTypePortlet.removePortletId(themeDisplay.getUserId(), lastTaskPortletId);
+      removeAllOfSameTaskFormPortlets(portletId, userId, layoutTypePortlet);
+      for (String portletIdToRemove : addedPortlets) {        
+        layoutTypePortlet.removePortletId(userId, portletIdToRemove);
       }
       
       // add the new one
       // TODO: add message if task form portlet cannot be found
-      lastTaskPortletId = layoutTypePortlet.addPortletId(themeDisplay.getUserId(), portletId, columnId, -1);
+      String lastTaskPortletId = layoutTypePortlet.addPortletId(themeDisplay.getUserId(), portletId, columnId, -1);
       // http://www.liferay.com/de/community/forums/-/message_boards/message/3575947
+      addedPortlets.add(lastTaskPortletId);
 
       LayoutLocalServiceUtil.updateLayout(layout);
     } catch (Exception ex) {
-      throw new RuntimeException("Could not add portlet for task. Root error: " + ex.getMessage(), ex);
+      throw new RuntimeException("Could not add portlet from tasklist. Root error: " + ex.getMessage(), ex);
     }
-    
-    // now send the event (to everybody interested - including the new portlet) 
-//    sendIpcEvent(task);
-    setSharedAttribute(task);
+  }
+
+  private String constructPortletId(String processDefinitionId, String formKey) {
+    // now context path
+    ProcessDefinition processDefinition = processEngine.getRepositoryService().getProcessDefinition(processDefinitionId);
+    String processApplicationName = processEngine.getManagementService().getProcessApplicationForDeployment(processDefinition.getDeploymentId());
+    String contextPath = BpmPlatform.getProcessApplicationService().getProcessApplicationInfo(processApplicationName).getProperties().get(ProcessApplicationInfo.PROP_SERVLET_CONTEXT_PATH);
+
+    // this gives us the PortletId
+    String portletId = getPortletId(formKey, contextPath);
+    return portletId;
+  }
+
+  private void removeAllOfSameTaskFormPortlets(String portletId, long userId, LayoutTypePortlet layoutTypePortlet) throws PortalException,
+      SystemException {
+    for (Portlet p : layoutTypePortlet.getAllPortlets()) {
+      // an instance ID is added at the end - so only check startsWith
+      if (p.getPortletId().startsWith(portletId)) {
+        layoutTypePortlet.removePortletId(userId, p.getPortletId());
+      }
+    }
   }
 
   /**
@@ -133,7 +156,14 @@ public class TasklistBean implements Serializable {
     actionResponse.setEvent(qName, task.getId());
   }
 
-
+  private void setSharedAttribute(ProcessDefinition pd) {
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    ExternalContext externalContext = facesContext.getExternalContext();
+    PortletSession portletSession = (PortletSession) externalContext.getSession(false);
+    // make sure you have <private-session-attributes>false</private-session-attributes> in liferay-portal.xml
+    portletSession.setAttribute("camunda.bridge.selected.processdefinition.id", pd.getId(), PortletSession.APPLICATION_SCOPE);
+  }
+  
   /** copied from https://github.com/liferay/liferay-portal/blob/master/portal-impl/src/com/liferay/portal/service/impl/PortletLocalServiceImpl.java
    * 
    * see http://stackoverflow.com/questions/11151001/how-to-get-portlet-id-using-the-portlet-name-in-liferay

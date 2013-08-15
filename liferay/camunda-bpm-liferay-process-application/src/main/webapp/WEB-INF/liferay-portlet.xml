@@ -9,6 +9,13 @@
 		<private-session-attributes>false</private-session-attributes>
 		<ajaxable>false</ajaxable>		
 	</portlet>	
+	<portlet>
+		<portlet-name>StartFormPortlet</portlet-name>
+		<instanceable>true</instanceable>
+		<remoteable>true</remoteable>
+		<private-session-attributes>false</private-session-attributes>
+		<ajaxable>false</ajaxable>		
+	</portlet>	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

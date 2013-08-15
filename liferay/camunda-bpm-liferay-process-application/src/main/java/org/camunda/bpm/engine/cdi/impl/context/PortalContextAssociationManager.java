@@ -34,7 +34,8 @@ public class PortalContextAssociationManager extends DefaultContextAssociationMa
 
   private static final long serialVersionUID = 1L;
 
-  private static final String BRIDGE_TASK_ID = "camunda.bridge.selected.task.id";
+  public static final String BRIDGE_TASK_ID = "camunda.bridge.selected.task.id";
+  public static final String BRIDGE_PROCESS_DEFINITION_ID = "camunda.bridge.selected.processdefinition.id";
 
   // public static final String ASSOCIATED_TASK_ID =
   // "camunda.business.process.associated.task.id";

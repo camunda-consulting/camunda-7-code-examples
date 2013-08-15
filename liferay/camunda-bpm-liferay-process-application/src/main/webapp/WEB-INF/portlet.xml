@@ -42,6 +42,37 @@
 			<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
 		</supported-processing-event>
 	</portlet>
+	<portlet>
+		<portlet-name>StartFormPortlet</portlet-name>
+		<display-name>Start Process Instance</display-name>
+		<portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
+		<init-param>
+			<name>javax.portlet.faces.defaultViewId.view</name>
+			<value>/views/StartFormPortlet.xhtml</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Start Process Instance</title>
+			<short-title>Start Process</short-title>
+		</portlet-info>
+		<portlet-preferences>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>	
 	<filter>
 		<filter-name>CDIPortletFilter</filter-name>
 		<filter-class>com.liferay.cdi.portlet.bridge.CDIPortletFilter</filter-class>
@@ -53,6 +84,10 @@
 	<filter-mapping>
 		<filter-name>CDIPortletFilter</filter-name>
 		<portlet-name>TaskFormPortlet</portlet-name>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CDIPortletFilter</filter-name>
+		<portlet-name>StartFormPortlet</portlet-name>
 	</filter-mapping>
 	<event-definition>
 		<qname xmlns:x="http://camunda.org/events">x:ipc.taskSelected</qname>
