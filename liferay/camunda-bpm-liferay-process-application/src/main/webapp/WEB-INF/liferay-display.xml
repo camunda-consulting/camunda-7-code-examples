@@ -4,5 +4,6 @@
 <display>
 	<category name="category.hidden">
 		<portlet id="TaskFormPortlet" />
+		<portlet id="StartFormPortlet" />
 	</category>
 </display>

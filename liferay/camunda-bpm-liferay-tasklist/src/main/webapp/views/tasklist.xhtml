@@ -3,7 +3,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aui="http://liferay.com/faces/aui"
-	xmlns:bridge="http://liferay.com/faces/bridge">
+	xmlns:bridge="http://liferay.com/faces/bridge"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
 
 	<h:head>
 
@@ -39,9 +41,9 @@
 				<div class="aui-tabview-content aui-widget-bd" id="docsContent">
 					<div class="aui-tabview-content-item">
 						<!-- TODO add styling, sorting and filtering to the table -->
-						<h:dataTable value="#{tasklist.personalTasks}" var="task">
+						<h:dataTable value="#{tasklist.personalTasks}" var="task"> 
 							<h:column>
-								<f:facet name="header">
+								<f:facet name="header" >
 									<h:outputText value="task name" />
 								</f:facet>
 								<h:outputText value="#{task.name}" />
@@ -57,14 +59,22 @@
 								<f:facet name="header">
 									<h:outputText value="created" />
 								</f:facet>
-								<h:outputText value="#{task.createTime}" />
+								<h:outputText value="#{task.createTime}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm" /></h:outputText>
 							</h:column>
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="due" />
 								</f:facet>
-								<h:outputText value="#{task.dueDate}" />
+								<h:outputText value="#{task.dueDate}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm" /></h:outputText>
 							</h:column>
+							<c:forEach items="#{tasklist.businessVariables}" var="variable" varStatus="status">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="#{variable}" />										
+									</f:facet>
+									<h:outputText value="#{tasklist.getVariable(task, variable)}" />
+								</h:column>
+							</c:forEach>
 							<h:column>
 								<f:facet name="header">
 									<h:outputText value="actions" />

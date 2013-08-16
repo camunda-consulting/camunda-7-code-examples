@@ -20,9 +20,7 @@ public class TaskForm {
   private BusinessProcess businessProcess;
 
   public void completeTask() {
-
     businessProcess.completeTask();
-
     removePortlet();
   }
 
@@ -44,6 +42,6 @@ public class TaskForm {
 
     String portletId = (String) facesContext.getExternalContext().getRequestMap().get(WebKeys.PORTLET_ID);
 
-    layoutTypePortlet.removePortletId(themeDisplay.getUserId(), portletId);
+    layoutTypePortlet.removePortletId(themeDisplay.getUserId(), portletId, true);
   }
 }

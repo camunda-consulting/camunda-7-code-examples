@@ -120,21 +120,6 @@ public class PortalContextAssociationManager extends DefaultContextAssociationMa
     }
   }
 
-  private void setTaskId(String taskId) {
-    Task task = processEngine.getTaskService().createTaskQuery().taskId(taskId).singleResult();
-    if (task == null) {
-      throw new ProcessEngineCdiException("Task with id '" + taskId + "' does not exist.");
-    }
-    setSharedSessionAttribute(ASSOCIATED_TASK, task);
-
-    Execution execution = processEngine.getRuntimeService().createExecutionQuery().executionId(task.getExecutionId()).singleResult();
-    if (execution == null) {
-      // we owe you a beer if this will ever happen!
-      throw new ProcessEngineCdiException("Execution with id '" + task.getExecutionId() + "' does not exist.");
-    }
-    setSharedSessionAttribute(ASSOCIATED_EXECUTION, execution);
-  }
-
   @Override
   public Task getTask() {
     checkTaskSelectedViaBridge();
@@ -155,12 +140,33 @@ public class PortalContextAssociationManager extends DefaultContextAssociationMa
     Task selectedTask = (Task) getSharedSessionAttribute(ASSOCIATED_TASK);
 
     if (selectedTask == null && bridgeTaskId != null) {
-      setTaskId(bridgeTaskId);
+      switchTaskId(bridgeTaskId);
     }
     if (selectedTask != null && bridgeTaskId != null && !selectedTask.getId().equals(bridgeTaskId)) {
       // task switched, TODO: think about if correct like this
-      setTaskId(bridgeTaskId);
+      switchTaskId(bridgeTaskId);
     }
+  }
+  
+  private void switchTaskId(String taskId) {
+    Task task = processEngine.getTaskService().createTaskQuery().taskId(taskId).singleResult();
+    if (task == null) {
+      throw new ProcessEngineCdiException("Task with id '" + taskId + "' does not exist.");
+    }
+    setSharedSessionAttribute(ASSOCIATED_TASK, task);
+
+    Execution execution = processEngine.getRuntimeService().createExecutionQuery().executionId(task.getExecutionId()).singleResult();
+    if (execution == null) {
+      // we owe you a beer if this will ever happen!
+      throw new ProcessEngineCdiException("Execution with id '" + task.getExecutionId() + "' does not exist.");
+    }
+    setSharedSessionAttribute(ASSOCIATED_EXECUTION, execution);
+    
+    // evict cached variables
+    setSharedSessionAttribute(VARIABLE_CACHE, null);
+    
+    // reset switch
+    setSharedSessionAttribute(BRIDGE_TASK_ID, null);
   }
 
   @Override
