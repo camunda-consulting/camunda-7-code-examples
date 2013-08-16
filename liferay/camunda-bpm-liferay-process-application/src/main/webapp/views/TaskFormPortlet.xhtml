@@ -9,11 +9,9 @@
 	</h:head>
  	
 	<h:body styleClass="jsf2-portlet ltr">
-	    <h1>Testing...</h1>	
+	    <h1>#{task.name}</h1>	
 		<h:form>
-			<h:outputText value="CDI Task: #{task}" /><br />		
-			<h:outputText value="Startdatum: #{processVariables['datum']}" /><br />		
-			<h:inputText value="#{processVariables['someText']}" /><br />
+			Input Text: <h:inputText value="#{processVariables['someText']}" /><br />
 						
 			<h:commandButton action="#{portal.taskForm.completeTask()}" value="Complete" />
 		</h:form>	
