@@ -1,7 +1,8 @@
-package org.camunda.demo.liferay.tasklist;
+package org.camunda.demo.liferay.tasklist.outtake;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -20,6 +21,7 @@ import org.camunda.bpm.engine.task.Task;
  */
 @Named("selectedTask")
 @RequestScoped
+//@ConversationScoped
 public class SelectedTaskBean implements Serializable {
  
 //  private static final String SELECTED_TASK_ID = "camunda.selected.task.id";
