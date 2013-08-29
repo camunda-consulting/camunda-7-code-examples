@@ -6,7 +6,7 @@
 		<f:metadata>
 			<f:viewParam id="taskId" name="taskId" />
 			<f:viewParam id="callbackUrl" name="callbackUrl" />
-			<f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+			<f:event type="preRenderView" listener="#{camunda.taskForm.startTask(taskId, callbackUrl)}" />
 		</f:metadata>
 	</ui:define>
 
@@ -47,7 +47,7 @@
 					</td>
 				</tr>
 			</table>
-			<h:commandLink value="OK" action="#{fox.taskForm.completeTask()}" styleClass="btn" />
+			<h:commandLink value="OK" action="#{camunda.taskForm.completeTask()}" styleClass="btn" />
 		</h:form>
 	</ui:define>
 </ui:composition>
