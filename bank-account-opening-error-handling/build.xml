@@ -16,12 +16,12 @@
 		</exec>
 	</target>
 
-	<target name="deploy.jboss" depends="package.mvn" description="Copies the process application to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.fox/build.properties'">
-		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.fox/build.properties' and change it according to your environment." />
+	<target name="deploy.jboss" depends="package.mvn" description="Copies the process application to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
 		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.jboss.dir}" />
 	</target>
 
-	<target name="undeploy.jboss" description="Deletes the process application from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.fox/build.properties'">
+	<target name="undeploy.jboss" description="Deletes the process application from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
 		<delete file="${deploy.jboss.dir}/${ant.project.name}.war" />
 	</target>
 

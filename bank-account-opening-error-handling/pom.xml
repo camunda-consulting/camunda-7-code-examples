@@ -10,7 +10,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha1</camunda.version>
+    <camunda.version>7.0.0-Final</camunda.version>
+    <jboss.version>7.1.3.Final</jboss.version>
   </properties>
 
   <dependencies>
@@ -77,8 +78,9 @@
 
   <repositories>
     <repository>
-      <id>camunda-ce</id>
-      <url>https://app.camunda.com/nexus/content/repositories/fox-ce/</url>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda BPM Maven Repository</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
     </repository>
     <repository>
       <id>jboss-public-repository</id>
@@ -123,7 +125,7 @@
           <!-- Included here for convenience when running the test in Eclipse -->
           <groupId>org.jboss.as</groupId>
           <artifactId>jboss-as-arquillian-container-remote</artifactId>
-          <version>7.1.0.Final</version>
+          <version>${jboss.version}</version>
           <scope>test</scope>
         </dependency>
       </dependencies>
@@ -154,7 +156,7 @@
                change to other artifact for embedded start or different server -->
           <groupId>org.jboss.as</groupId>
           <artifactId>jboss-as-arquillian-container-remote</artifactId>
-          <version>7.1.0.Final</version>
+          <version>${jboss.version}</version>
           <scope>test</scope>
         </dependency>
       </dependencies>
