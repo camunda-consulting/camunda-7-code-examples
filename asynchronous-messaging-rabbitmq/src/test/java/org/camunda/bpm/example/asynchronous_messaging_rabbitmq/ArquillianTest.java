@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ArquillianTest {
-  
+
   private static final String PROCESS_DEFINITION_KEY = "asynchronous-messaging-rabbitmq";
 
   @Deployment
@@ -28,7 +28,7 @@ public class ArquillianTest {
     MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class)
       .goOffline()
       .loadMetadataFromPom("pom.xml");
-    
+
     return ShrinkWrap
             .create(WebArchive.class, "asynchronous-messaging-rabbitmq.war")
             // prepare as process application archive for camunda BPM Platform
@@ -37,7 +37,7 @@ public class ArquillianTest {
             .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
             .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/beans.xml")
             // boot persistence unit
-            .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+            //.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
             // add your own classes (could be done one by one as well)
             .addPackages(false, "org.camunda.bpm.example.asynchronous_messaging_rabbitmq") // not recursive to skip package 'nonarquillian'
             // add process definition
@@ -58,15 +58,15 @@ public class ArquillianTest {
   @Test
   public void testProcessExecution() throws Exception {
     cleanUpRunningProcessInstances();
-    
+
     ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
-    
+
     String processInstanceId = processInstance.getId();
     Execution execution = processEngine.getRuntimeService()
       .createExecutionQuery().processInstanceId(processInstanceId).singleResult();
-    
+
     processEngine.getRuntimeService().signal(execution.getId());
-    
+
 
     assertEquals(1, processEngine.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(processInstance.getId()).finished().count());
   }
@@ -80,5 +80,5 @@ public class ArquillianTest {
     for (ProcessInstance processInstance : runningInstances) {
       processEngine.getRuntimeService().deleteProcessInstance(processInstance.getId(), "deleted to have a clean environment for Arquillian");
     }
-  }  
+  }
 }
