@@ -153,7 +153,7 @@ so that the [camunda BPM platform](http://camunda.org)
 can find the alternative `ProcessEngineConfiguration` provided by the module:
 ```xml
   <resources>
-    <resource-root path="camunda-jboss-subsystem-7.0.0-alpha7.jar" />
+    <resource-root path="camunda-jboss-subsystem-7.0.0-Final.jar" />
     <resource-root path="task-name-beautifier.jar" />
   </resources>
 ```
