@@ -27,7 +27,7 @@
       <artifactId>camunda-engine-cdi</artifactId>
       <version>${camunda.version}</version>
       <scope>compile</scope>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>org.camunda.bpm.javaee</groupId>
       <artifactId>camunda-ejb-client</artifactId>
@@ -92,6 +92,11 @@
 <!--     	<version>6.1.11</version> -->
 <!--     	<type>war</type> -->
 <!--     </dependency> -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>2.3.0</version>
+    </dependency>
   </dependencies>
 
   <repositories>
