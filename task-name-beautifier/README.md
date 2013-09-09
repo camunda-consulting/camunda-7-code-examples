@@ -102,7 +102,7 @@ public class TaskNameBeautifierBpmnParseListener extends AbstractBpmnParseListen
 ```
 
 ...which can be added to a standalone process engine configuration
-([activiti.cfg.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/activiti.cfg.xml))
+([camunda.cfg.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/camunda.cfg.xml))
 like that:
 ```xml
   <bean id="processEngineConfiguration"
@@ -153,7 +153,7 @@ so that the [camunda BPM platform](http://camunda.org)
 can find the alternative `ProcessEngineConfiguration` provided by the module:
 ```xml
   <resources>
-    <resource-root path="camunda-jboss-subsystem-7.0.0-alpha7.jar" />
+    <resource-root path="camunda-jboss-subsystem-7.0.0-Final.jar" />
     <resource-root path="task-name-beautifier.jar" />
   </resources>
 ```

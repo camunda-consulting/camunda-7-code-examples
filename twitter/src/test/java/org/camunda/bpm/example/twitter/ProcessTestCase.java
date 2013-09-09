@@ -36,7 +36,7 @@ public class ProcessTestCase {
 
     ProcessInstance processInstance = processEngineRule.getRuntimeService()
               .startProcessInstanceByKey("TwitterDemoProcess", variables);
-    
+
     String id = processInstance.getId();
     System.out.println("Started process instance id " + id);
 
@@ -53,7 +53,7 @@ public class ProcessTestCase {
 
     Task task = processEngineRule.getTaskService().createTaskQuery().taskAssignee("demo").singleResult();
     variables.put("approved", Boolean.FALSE);
-    variables.put("comments", "No, we will not publish this on Twitter");    
+    variables.put("comments", "No, we will not publish this on Twitter");
     processEngineRule.getTaskService().complete(task.getId(), variables);
 
     TestHelper.assertProcessEnded(processEngineRule.getProcessEngine(), id);

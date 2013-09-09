@@ -17,7 +17,7 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE
 
 # Getting Started
 
-1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-alpha6)** from [here](http://camunda.org/download.html).
+1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html).
 1. Install it, start it with `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin$ ./standalone.sh`
 1. Make sure JBoss AS 7 is running by pointing your browser to `http://localhost:8080/`
 1. Make sure you have the following installed *and working*:

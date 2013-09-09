@@ -1,2 +1,2 @@
-# Defines the deployment folder in the fox installation.
+# Defines the deployment folder in the camunda BPM installation.
 deploy.jboss.dir=/path/to/your/jboss/standalone/deployments

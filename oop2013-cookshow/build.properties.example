@@ -1,2 +1,2 @@
 # Defines the deployment folder in the fox installation.
-deploy.dir=C:/fox/demopoint/fox-platform-jboss7/standalone/deployments
+deploy.jboss.dir=C:/fox/demopoint/fox-platform-jboss7/standalone/deployments

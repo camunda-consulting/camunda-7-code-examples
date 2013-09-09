@@ -17,7 +17,7 @@
 	</target>
 
 	<target name="deploy.jboss" depends="package.mvn">
-		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.fox/build.properties' and change it according to your environment." />
+		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
 		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.jboss.dir}" />
 	</target>
 

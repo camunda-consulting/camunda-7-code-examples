@@ -18,12 +18,12 @@
         <flowNodeRef>IntermediateThrowEvent_2</flowNodeRef>
       </lane>
       <lane id="sid-350FDA87-B083-4C67-91CF-20E0A291920A" name="Freigebender">
-        <flowNodeRef>sid-75ABF6BF-1CA5-4CC2-9787-600855885947</flowNodeRef>
+        <flowNodeRef>approveInvoice</flowNodeRef>
         <flowNodeRef>Freigabe_erfolgt__131</flowNodeRef>
       </lane>
       <lane id="sid-6819245D-1995-4FA2-B0DB-A6CECBB2CFE9" name="Buchhaltung">
         <flowNodeRef>archive-pdf</flowNodeRef>
-        <flowNodeRef>sid-39BC837C-A028-4F8D-A998-CDB68643E87D</flowNodeRef>
+        <flowNodeRef>prepareBankTransfer</flowNodeRef>
         <flowNodeRef>sid-A1773E2F-398F-4D9E-8B3D-A221E110A432</flowNodeRef>
         <flowNodeRef>IntermediateThrowEvent_3</flowNodeRef>
       </lane>
@@ -40,7 +40,7 @@
     <endEvent id="endEvent_165" name="Rechnung NICHT &#xD;&#xA;erfolgreich bearbeitet">
       <incoming>nein_185</incoming>
     </endEvent>
-    <userTask id="sid-75ABF6BF-1CA5-4CC2-9787-600855885947" camunda:assignee="#{approver}" camunda:formKey="app:approveInvoice.jsf" name="Rechnung freigeben" implementation="webService">
+    <userTask id="approveInvoice" camunda:assignee="#{approver}" camunda:formKey="app:approveInvoice.jsf" name="Rechnung freigeben" implementation="webService">
       <incoming>SequenceFlow_9</incoming>
       <incoming>sid-D4EA8617-0104-40EB-A520-7876DF2AAF81</incoming>
       <outgoing>sid-B6A18F1D-7A5D-4236-ACD1-2E7D06561B47</outgoing>
@@ -49,8 +49,8 @@
     <sequenceFlow id="nein_185" name="nein" isImmediate="true" sourceRef="Kl_rung_erfolgreich__153" targetRef="endEvent_165">
       <conditionExpression xsi:type="tFormalExpression" id="sid-8c104f0c-bc7c-4aed-be5b-6643d6965fe1">${!clarified.equals('yes')}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="sid-B6A18F1D-7A5D-4236-ACD1-2E7D06561B47" name="" isImmediate="true" sourceRef="sid-75ABF6BF-1CA5-4CC2-9787-600855885947" targetRef="Freigabe_erfolgt__131"/>
-    <sequenceFlow id="sid-D4EA8617-0104-40EB-A520-7876DF2AAF81" name="ja" isImmediate="true" sourceRef="Kl_rung_erfolgreich__153" targetRef="sid-75ABF6BF-1CA5-4CC2-9787-600855885947">
+    <sequenceFlow id="sid-B6A18F1D-7A5D-4236-ACD1-2E7D06561B47" name="" isImmediate="true" sourceRef="approveInvoice" targetRef="Freigabe_erfolgt__131"/>
+    <sequenceFlow id="sid-D4EA8617-0104-40EB-A520-7876DF2AAF81" name="ja" isImmediate="true" sourceRef="Kl_rung_erfolgreich__153" targetRef="approveInvoice">
       <conditionExpression xsi:type="tFormalExpression" id="sid-47cf8644-690c-41da-a574-39dac3ea4a40">${clarified.equals('yes')}</conditionExpression>
     </sequenceFlow>
     <startEvent id="sid-F97B4602-EE39-4C6F-B5CE-93543E5B815F" camunda:formKey="app:startProcess.jsf" name="Rechnungs-&#xA;freigabe &#xA;angefordert">
@@ -63,7 +63,7 @@
       <incoming>SequenceFlow_5</incoming>
       <outgoing>SequenceFlow_9</outgoing>
     </userTask>
-    <sequenceFlow id="SequenceFlow_9" name="" sourceRef="user-task-select-approver" targetRef="sid-75ABF6BF-1CA5-4CC2-9787-600855885947"/>
+    <sequenceFlow id="SequenceFlow_9" name="" sourceRef="user-task-select-approver" targetRef="approveInvoice"/>
     <intermediateThrowEvent id="IntermediateThrowEvent_2" name="MP: RG eingegangen">
       <incoming>SequenceFlow_4</incoming>
       <outgoing>SequenceFlow_5</outgoing>
@@ -84,11 +84,11 @@
       <incoming>sid-A377F224-BACC-45CB-A249-D4029CA531AF</incoming>
       <outgoing>SequenceFlow_10</outgoing>
     </serviceTask>
-    <userTask id="sid-39BC837C-A028-4F8D-A998-CDB68643E87D" camunda:candidateGroups="accounting" camunda:formKey="app:prepareBankTransfer.jsf" name="Bezahlung vorbereiten" implementation="webService">
+    <userTask id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:prepareBankTransfer.jsf" name="Bezahlung vorbereiten" implementation="webService">
       <incoming>SequenceFlow_6</incoming>
       <outgoing>sid-A377F224-BACC-45CB-A249-D4029CA531AF</outgoing>
     </userTask>
-    <sequenceFlow id="sid-A377F224-BACC-45CB-A249-D4029CA531AF" name="" isImmediate="true" sourceRef="sid-39BC837C-A028-4F8D-A998-CDB68643E87D" targetRef="archive-pdf"/>
+    <sequenceFlow id="sid-A377F224-BACC-45CB-A249-D4029CA531AF" name="" isImmediate="true" sourceRef="prepareBankTransfer" targetRef="archive-pdf"/>
     <sequenceFlow id="SequenceFlow_10" name="" sourceRef="archive-pdf" targetRef="sid-A1773E2F-398F-4D9E-8B3D-A221E110A432"/>
     <endEvent id="sid-A1773E2F-398F-4D9E-8B3D-A221E110A432" name="Rechnung&#xA;verarbeitet">
       <incoming>SequenceFlow_10</incoming>
@@ -97,7 +97,7 @@
       <incoming>flow-approved</incoming>
       <outgoing>SequenceFlow_6</outgoing>
     </intermediateThrowEvent>
-    <sequenceFlow id="SequenceFlow_6" name="" sourceRef="IntermediateThrowEvent_3" targetRef="sid-39BC837C-A028-4F8D-A998-CDB68643E87D"/>
+    <sequenceFlow id="SequenceFlow_6" name="" sourceRef="IntermediateThrowEvent_3" targetRef="prepareBankTransfer"/>
   </process>
   <bpmndi:BPMNDiagram id="sid-52e30333-ade0-4151-8889-68911a162a55">
     <bpmndi:BPMNPlane id="sid-cde7edeb-b640-463e-a685-7d69d5aceeed" bpmnElement="sid-e6431fde-b49b-4143-9ae7-4cae0e062c2a">
@@ -137,7 +137,7 @@
           <omgdc:Bounds height="38.0" width="126.0" x="842.0" y="120.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-75ABF6BF-1CA5-4CC2-9787-600855885947_gui" bpmnElement="sid-75ABF6BF-1CA5-4CC2-9787-600855885947">
+      <bpmndi:BPMNShape id="sid-75ABF6BF-1CA5-4CC2-9787-600855885947_gui" bpmnElement="approveInvoice">
         <omgdc:Bounds height="80.0" width="100.0" x="373.0" y="223.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Freigabe_erfolgt__131_gui" bpmnElement="Freigabe_erfolgt__131" isMarkerVisible="true">
@@ -146,7 +146,7 @@
           <omgdc:Bounds height="38.0" width="66.0" x="543.0" y="244.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-39BC837C-A028-4F8D-A998-CDB68643E87D_gui" bpmnElement="sid-39BC837C-A028-4F8D-A998-CDB68643E87D">
+      <bpmndi:BPMNShape id="sid-39BC837C-A028-4F8D-A998-CDB68643E87D_gui" bpmnElement="prepareBankTransfer">
         <omgdc:Bounds height="80.0" width="100.0" x="624.0" y="390.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="archive-pdf_gui" bpmnElement="archive-pdf">

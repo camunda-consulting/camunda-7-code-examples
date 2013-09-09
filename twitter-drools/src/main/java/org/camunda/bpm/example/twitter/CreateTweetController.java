@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.cdi.compat.TaskForm;
+import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 @Named
@@ -23,13 +23,14 @@ public class CreateTweetController implements Serializable {
   private Tweet newTweet = new Tweet();
 
   @Inject
+  @Named("camunda.taskForm")
   private TaskForm taskForm;
 
   @Inject
   private RuntimeService runtimeService;
-  
+
   @Inject
-  private Instance<Conversation> conversationInstance;  
+  private Instance<Conversation> conversationInstance;
 
   public void startProcess() throws IOException {
     // set the process variable
@@ -41,8 +42,8 @@ public class CreateTweetController implements Serializable {
     ProcessInstance instance = runtimeService.startProcessInstanceById(
             taskForm.getProcessDefinition().getId(), //
             variables);
-        
-    // End the conversation   
+
+    // End the conversation
     conversationInstance.get().end();
 
     resetForm();

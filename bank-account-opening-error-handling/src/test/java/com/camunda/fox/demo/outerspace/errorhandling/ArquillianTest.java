@@ -1,13 +1,17 @@
 package com.camunda.fox.demo.outerspace.errorhandling;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -19,7 +23,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ArquillianTest {
-  
+
   private static final String PROCESS_DEFINITION_KEY = "open-account-errorhandling";
 
   @Deployment
@@ -27,18 +31,19 @@ public class ArquillianTest {
     MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class)
       .goOffline()
       .loadMetadataFromPom("pom.xml");
-    
-    // if you experience problems with the authentication to the camunda fox
+
+    // if you experience problems with the authentication to the camunda bpm
     // repository the wrong maven configuration might be used.
     // use this code to use your maven settings.xml in this case:
     // .configureFrom(".../settings.xml")
 
     return ShrinkWrap
             .create(WebArchive.class, "bank-account-opening-error-handling.war")
-            // prepare as process application archive for fox platform
-            .addAsLibraries(resolver.artifact("com.camunda.fox.platform:fox-platform-client").resolveAsFiles())
+            // prepare as process application archive for camunda BPM platform
+            .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
+            .addAsLibraries(resolver.artifact("commons-lang:commons-lang").resolveAsFiles())
             .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
-            .addAsWebResource("META-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
+            .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
             // add your own classes (could be done one by one as well)
             .addPackages(false, "com.camunda.fox.demo.outerspace.errorhandling") // not recursive to skip package 'nonarquillian'
             // add process definition
@@ -56,8 +61,19 @@ public class ArquillianTest {
   @Test
   public void testProcessExecution() throws Exception {
     cleanUpRunningProcessInstances();
-    
+
     ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+
+    Task task = processEngine.getTaskService().createTaskQuery().processInstanceId(processInstance.getId()).taskAssignee("demo").singleResult();
+    assertNotNull(task);
+
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("approved", true);
+    processEngine.getTaskService().complete(task.getId(), variables);
+
+    task = processEngine.getTaskService().createTaskQuery().processInstanceId(processInstance.getId()).taskAssignee("demo").singleResult();
+    assertNotNull(task);
+    processEngine.getTaskService().complete(task.getId());
 
     assertEquals(1, processEngine.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(processInstance.getId()).finished().count());
   }
@@ -71,5 +87,5 @@ public class ArquillianTest {
     for (ProcessInstance processInstance : runningInstances) {
       processEngine.getRuntimeService().deleteProcessInstance(processInstance.getId(), "deleted to have a clean environment for Arquillian");
     }
-  }  
+  }
 }
