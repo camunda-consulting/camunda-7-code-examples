@@ -8,20 +8,20 @@
   <title>camunda fox WJAX 2012 Demo</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <h:outputStylesheet name="css/bootstrap.css" />
-  <link rel="shortcut icon" type="image/x-icon" href="../resources/img/fox.ico" />
+  <link rel="stylesheet" href="webjars/bootstrap/2.3.0/css/bootstrap.css" />
+  <link rel="stylesheet" href="webjars/bootstrap/2.3.0/css/bootstrap-responsive.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
   <style type="text/css">
-body {
-	padding-top: 60px;
-	padding-bottom: 40px;
-}
+	body {
+		padding-top: 60px;
+		padding-bottom: 40px;
+	}
 
-.sidebar-nav {
-	padding: 9px 0;
-}
-</style>
-  <h:outputStylesheet name="css/responsive.css" />
-    <ui:insert name="header"></ui:insert>  
+	.sidebar-nav {
+		padding: 9px 0;
+	}
+	</style>
+  <ui:insert name="header"></ui:insert>
 </h:head>
 
 <h:body>
@@ -29,7 +29,7 @@ body {
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid" style="padding: 0;">
-          <a class="brand" href="wjax/">WJAX 2012</a>
+          <a class="brand" href="../wjax">WJAX 2012</a>
           <ul class="nav">
             <li class=""><a href="/wjax/neueBestellung.jsf"><i class="icon-file icon-white"></i> Neue Bestellung</a></li>
             <li class=""><a href="/wjax/taskList.jsf"><i class="icon-user icon-white"/> Aufgabenliste (spezifisch)</a></li>
@@ -48,7 +48,7 @@ body {
 
     <footer>
       <p>
-        powered by <a href="http://www.camunda.org">camunda BPM</a>
+        powered by <a href="http://www.camunda.org" target="_blank">camunda BPM</a>
       </p>
     </footer>
 
