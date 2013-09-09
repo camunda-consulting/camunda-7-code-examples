@@ -16,4 +16,4 @@ https://github.com/camunda/camunda-bpm-platform/tree/master/examples.
 
 Remarks to run this example
 =============================
-After deploying the invoice-en.war file to your camunda BPM platform you can start the process via the tasklist: http://localhost:8080/tasklist/.
+After deploying the invoice-en.war file to your camunda BPM platform you can start the process via the tasklist: http://localhost:8080/camunda/app/tasklist/.
