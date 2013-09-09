@@ -40,7 +40,7 @@ public class ProcessTestCase {
     String id = processInstance.getId();
     System.out.println("Started process instance id " + id);
 
-    Assert.assertThat(processEngineRule.getRuntimeService().getActiveActivityIds(id), JUnitMatchers.hasItem("user_task_review_tweet_XXXX"));
+    Assert.assertThat(processEngineRule.getRuntimeService().getActiveActivityIds(id), JUnitMatchers.hasItem("user_task_review_tweet"));
 
     List<HistoricActivityInstance> historyActivities = processEngineRule.getProcessEngine().getHistoryService().createHistoricActivityInstanceQuery() //
             .processInstanceId(processInstance.getId()) //
@@ -76,7 +76,7 @@ public class ProcessTestCase {
     assertEquals("gateway_join", historyActivities.get(2).getActivityId());
     assertEquals("service_task_send_rejection_notification", historyActivities.get(3).getActivityId());
     assertEquals("start_event_new_tweet", historyActivities.get(4).getActivityId());
-    assertEquals("user_task_review_tweet_XXXX", historyActivities.get(5).getActivityId());
+    assertEquals("user_task_review_tweet", historyActivities.get(5).getActivityId());
 
   }
 
