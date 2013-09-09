@@ -3,7 +3,7 @@ Sample Reporting plugin for camunda Cockpit
 
 This is a simple plugin that showcases how easy you can build some dashboard as cockpit plugin for [camunda BPM](http://docs.camunda.org).
 
-Built and tested against camunda BPM version `7.0.0-Final`. Note that it does not run with alpha8 or alpha9 due to a bug there. It will be available in the final release of camunda BPM again!
+Built and tested against camunda BPM version `7.0.0-Final`.
 
 ![Screenshot][1]
 
