@@ -20,6 +20,7 @@
 			<module name="javax.interceptor.api" />
 			<module name="javax.validation.api" />
 			<module name="javax.mail.api" />
+			<module name="javax.jws.api" />
 			<module name="org.jboss.modules" />
 			<!-- 
 			<module name="org.jboss.weld.core" slot="2.1.21"/>
