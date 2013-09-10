@@ -34,12 +34,12 @@
     <startEvent id="start_event_new_tweet" activiti:initiator="initiator" activiti:formKey="app:createTweet.jsf" name="Tweet written">
       <outgoing>SequenceFlow_9</outgoing>
     </startEvent>
-    <sequenceFlow id="SequenceFlow_9" name="" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet_XXXX"/>
-    <userTask id="user_task_review_tweet_XXXX" activiti:assignee="demo" activiti:formKey="app:reviewTweet.jsf" name="Review Tweet">
+    <sequenceFlow id="SequenceFlow_9" name="" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet"/>
+    <userTask id="user_task_review_tweet" activiti:assignee="demo" activiti:formKey="app:reviewTweet.jsf" name="Review Tweet">
       <incoming>SequenceFlow_9</incoming>
       <outgoing>SequenceFlow_2</outgoing>
     </userTask>
-    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="user_task_review_tweet_XXXX" targetRef="gateway_approved"/>
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="user_task_review_tweet" targetRef="gateway_approved"/>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="TwitterDemoProcess">
@@ -49,7 +49,7 @@
           <omgdc:Bounds height="22.0" width="82.0" x="22.0" y="151.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet_XXXX">
+      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet">
         <omgdc:Bounds height="80.0" width="100.0" x="156.0" y="94.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Approved__3" bpmnElement="gateway_approved" isMarkerVisible="true">

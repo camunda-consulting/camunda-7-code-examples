@@ -14,30 +14,30 @@ import org.camunda.bpm.engine.cdi.BusinessProcess;
 
 @Stateless
 public class OrderProcessService {
-  
+
   @Inject
   private RuntimeService runtimeService;
-  
+
   @PersistenceContext
   private EntityManager entityManager;
-  
+
   public long startNewOrderProcess(Order order) {
     entityManager.persist(order);
-    
+
     HashMap<String, Object> variables = new HashMap<String, Object>();
     variables.put("orderId", order.getId());
-    
+
     runtimeService.startProcessInstanceByKey("oop", variables);
     return order.getId();
   }
-  
+
   @Inject
   private BusinessProcess businessProcess;
-  
+
   @Produces
   @Named("order")
   public Order produceOrderForProcessInstance() {
-    long orderId = businessProcess.getVariable("orderId");
+    long orderId = (Long) businessProcess.getVariable("orderId");
     return findOrder(orderId);
   }
 

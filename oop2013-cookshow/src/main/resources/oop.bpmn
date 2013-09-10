@@ -18,7 +18,7 @@
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="ServiceTask_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:userTask id="UserTask_1" activiti:assignee="kermit" activiti:formKey="confirmOrder" name="Auftrag&#xD;&#xA;freigeben">
+    <bpmn2:userTask id="UserTask_1" activiti:assignee="demo" activiti:formKey="app:confirmOrder.jsf" name="Auftrag&#xD;&#xA;freigeben">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -82,7 +82,7 @@
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
       <bpmn2:errorEventDefinition id="ErrorEventDefinition_1" errorRef="Error_1"/>
     </bpmn2:boundaryEvent>
-    <bpmn2:userTask id="UserTask_2" activiti:assignee="kermit" activiti:formKey="escalation" name="Eskalation">
+    <bpmn2:userTask id="UserTask_2" activiti:assignee="demo" activiti:formKey="app:escalation.jsf" name="Eskalation">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
     </bpmn2:userTask>

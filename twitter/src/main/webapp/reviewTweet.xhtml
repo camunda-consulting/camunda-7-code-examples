@@ -8,7 +8,7 @@
       <f:viewParam id="taskId" name="taskId" />
       <f:viewParam id="callbackUrl" name="callbackUrl" />
       <f:event type="preRenderView"
-        listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+        listener="#{camunda.taskForm.startTask(taskId, callbackUrl)}" />
     </f:metadata>
 	<h:outputStylesheet name="css/bootstrap.css" />    
     <title>Aufgabe: #{task.name}</title>
@@ -34,7 +34,7 @@
             id="comments"
             value="#{processVariables['comments']}" /> </label></p>
         <h:commandButton id="submit_button" styleClass="btn btn-primary"
-          value="Submit" action="#{fox.taskForm.completeTask()}" />
+          value="Submit" action="#{camunda.taskForm.completeTask()}" />
 	      </fieldset>        
 	    </h:form>
     </div>

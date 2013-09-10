@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<camunda.version>7.0.0-alpha6</camunda.version>
+		<camunda.version>7.0.0-Final</camunda.version>
 	</properties>
 
 	<dependencies>

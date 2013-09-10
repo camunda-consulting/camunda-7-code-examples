@@ -10,7 +10,7 @@
       <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
       <f:viewParam id="callbackUrl" name="callbackUrl" />
       <f:event type="preRenderView"
-        listener="#{fox.taskForm.startProcessInstanceByKeyForm(processDefinitionKey, callbackUrl)}" />
+        listener="#{camunda.taskForm.startProcessInstanceByKeyForm(processDefinitionKey, callbackUrl)}" />
     </f:metadata>
   </ui:define>
 
