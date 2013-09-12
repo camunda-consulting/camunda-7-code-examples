@@ -15,6 +15,7 @@ import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
@@ -43,7 +44,7 @@ public class ArquillianTest {
             .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
             .addAsLibraries(resolver.artifact("commons-lang:commons-lang").resolveAsFiles())
             .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
-            .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             // add your own classes (could be done one by one as well)
             .addPackages(false, "com.camunda.fox.demo.outerspace.errorhandling") // not recursive to skip package 'nonarquillian'
             // add process definition

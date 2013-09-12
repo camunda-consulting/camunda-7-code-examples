@@ -9,6 +9,7 @@ import org.camunda.bpm.engine.RepositoryService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
@@ -32,7 +33,7 @@ public class ArquillianTest {
             .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
             .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
             .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
-            .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/beans.xml")
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             // boot persistence unit
             // add your own classes (could be done one by one as well)
             .addPackages(false, "org.example.get_servlet_context_by_process_definition") // not recursive to skip package 'nonarquillian'

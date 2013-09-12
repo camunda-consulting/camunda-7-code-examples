@@ -16,6 +16,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
@@ -41,7 +42,7 @@ public class ArquillianTestCase {
             .addClass(InvoiceServletProcessApplication.class)
             // add process definition
             .addAsResource(process + ".bpmn")
-            .addAsResource("META-INF/beans.xml")
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             .addAsResource("META-INF/processes.xml")
             // now you can add additional stuff required for your test case
             ;

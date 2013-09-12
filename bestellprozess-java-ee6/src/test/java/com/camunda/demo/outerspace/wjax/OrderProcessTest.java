@@ -18,6 +18,7 @@ import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
 import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
@@ -61,7 +62,7 @@ public class OrderProcessTest {
             .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
             .addAsWebResource("META-INF/test-persistence.xml", "WEB-INF/classes/META-INF/persistence.xml")
             .addAsWebResource("META-INF/test-processes.xml", "WEB-INF/classes/META-INF/processes.xml")
-            .addAsWebResource("META-INF/beans.xml", "WEB-INF/classes/META-INF/beans.xml")
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             .addAsResource("customMappings.xml", "customMappings.xml")
             .addAsResource("customQueries.xml", "customQueries.xml")
             // add your own classes (could be done one by one as well)
