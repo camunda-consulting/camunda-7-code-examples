@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en;
+package org.camunda.bpm.demo.invoice;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

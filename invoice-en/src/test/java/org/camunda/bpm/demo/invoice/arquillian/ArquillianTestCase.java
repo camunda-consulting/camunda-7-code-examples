@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.camunda.bpm.demo.invoice.en.InvoiceServletProcessApplication;
+import org.camunda.bpm.demo.invoice.InvoiceServletProcessApplication;
 import org.camunda.bpm.demo.invoice.test.mock.SvnDelegateMock;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;

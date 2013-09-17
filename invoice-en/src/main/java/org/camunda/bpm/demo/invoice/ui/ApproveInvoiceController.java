@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui;
+package org.camunda.bpm.demo.invoice.ui;
 
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;

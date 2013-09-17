@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui.servlet;
+package org.camunda.bpm.demo.invoice.ui.servlet;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.camunda.bpm.demo.invoice.en.ProcessConstants;
+import org.camunda.bpm.demo.invoice.ProcessConstants;
 import org.camunda.bpm.engine.TaskService;
 
 

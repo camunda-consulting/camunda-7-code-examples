@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui.servlet;
+package org.camunda.bpm.demo.invoice.ui.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;

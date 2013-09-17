@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui.servlet;
+package org.camunda.bpm.demo.invoice.ui.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.camunda.bpm.demo.invoice.en.ProcessConstants;
+import org.camunda.bpm.demo.invoice.ProcessConstants;
 import org.camunda.bpm.engine.RuntimeService;
 
 

@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui.diagram;
+package org.camunda.bpm.demo.invoice.ui.diagram;
 
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
 import org.camunda.bpm.engine.repository.DiagramNode;

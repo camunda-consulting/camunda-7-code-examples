@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en;
+package org.camunda.bpm.demo.invoice;
 
 
 public class ProcessConstants {

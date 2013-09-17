@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.invoice.en.ui.diagram;
+package org.camunda.bpm.demo.invoice.ui.diagram;
 
 import java.util.ArrayList;
 import java.util.List;
