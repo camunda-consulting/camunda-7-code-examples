@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+  
+<h:head>
+	<f:metadata>
+      <f:viewParam id="taskId" name="taskId" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+    </f:metadata>
+	<title>Task of inter-process communication example</title>
+</h:head>
+<h:body>
+    <p>Task '#{task.name}' in child process engine</p>
+    <h:form id="someForm">
+        <h:commandButton id="submit_button" value="task completed" action="#{fox.taskForm.completeTask()}" />
+    </h:form>
+</h:body>
+</ui:composition>
