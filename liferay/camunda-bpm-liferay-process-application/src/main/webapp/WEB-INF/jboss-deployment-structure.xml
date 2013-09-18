@@ -15,6 +15,7 @@
 			<module name="javax.validation.api" />
 			<module name="javax.mail.api" />
 			<module name="org.jboss.modules" />
+			<module name="javax.ejb.api" />
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>

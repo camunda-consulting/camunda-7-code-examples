@@ -11,10 +11,10 @@
       <outgoing>no</outgoing>
       <outgoing>yes</outgoing>
     </exclusiveGateway>
-    <sequenceFlow id="no" name="" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification">
+    <sequenceFlow id="no" name="no&#x9;" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_1">#{!approved}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="yes" name="" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
+    <sequenceFlow id="yes" name="yes" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_2">#{approved}</conditionExpression>
     </sequenceFlow>
     <exclusiveGateway id="gateway_join" name="Join">
@@ -104,7 +104,7 @@
         <omgdi:waypoint xsi:type="omgdc:Point" x="407.0" y="64.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="492.0" y="64.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="652.0" y="102.0"/>
+          <omgdc:Bounds height="22.0" width="30.0" x="407.0" y="72.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_yes" bpmnElement="yes" sourceElement="BPMNShape_Approved__3" targetElement="BPMNShape_Publish_on_Twitter_3">
@@ -112,7 +112,7 @@
         <omgdi:waypoint xsi:type="omgdc:Point" x="407.0" y="214.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="492.0" y="214.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="417.0" y="214.0"/>
+          <omgdc:Bounds height="22.0" width="27.0" x="409.0" y="192.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_new_tweet_3" targetElement="BPMNShape_Review_Tweet_3">
