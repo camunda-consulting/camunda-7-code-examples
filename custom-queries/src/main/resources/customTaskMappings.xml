@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+<mapper namespace="customTask">
+  
+  <resultMap id="customTaskResultMap" type="org.camunda.demo.custom.query.TaskDTO">
+    <id property="id" column="tID_" jdbcType="VARCHAR"/>
+    <result property="nameWithoutCascade" column="tNAME_" jdbcType="VARCHAR"/>
+    <result property="parentTaskIdWithoutCascade" column="tPARENT_TASK_ID_" jdbcType="VARCHAR"/>
+    <result property="descriptionWithoutCascade" column="tDESCRIPTION_" jdbcType="VARCHAR"/>
+    <result property="priorityWithoutCascade" column="tPRIORITY_" jdbcType="INTEGER"/>
+    <result property="createTime" column="tCREATE_TIME_" jdbcType="TIMESTAMP" />
+    <result property="ownerWithoutCascade" column="tOWNER_" jdbcType="VARCHAR"/>
+    <result property="assigneeWithoutCascade" column="tASSIGNEE_" jdbcType="VARCHAR"/>
+    <result property="delegationStateString" column="tDELEGATION_" jdbcType="VARCHAR"/>
+    <result property="executionId" column="tEXECUTION_ID_" jdbcType="VARCHAR" />
+    <result property="processInstanceId" column="tPROC_INST_ID_" jdbcType="VARCHAR" />
+    <result property="processDefinitionId" column="tPROC_DEF_ID_" jdbcType="VARCHAR"/>
+    <result property="taskDefinitionKeyWithoutCascade" column="tTASK_DEF_KEY_" jdbcType="VARCHAR"/>
+    <result property="dueDateWithoutCascade" column="tDUE_DATE_" jdbcType="TIMESTAMP"/>
+    <association property="customer" javaType="org.camunda.demo.custom.query.Customer">
+	    <id property="id" column="CUSTOMER_ID_"/>
+	    <result property="name" column="CUSTOMER_NAME_"/>
+	    <result property="region" column="CUSTOMER_REGION_" />
+    </association>
+    <collection ofType="org.camunda.demo.custom.query.ProcessVariableDTO" property="variables" column="tPROC_INST_ID_" resultMap="customVariableResultMap"/>
+  </resultMap>   
+    
+  <resultMap id="customVariableResultMap" type="org.camunda.demo.custom.query.ProcessVariableDTO">
+    <id property="id" column="VID_" jdbcType="VARCHAR"/>
+    <result property="name" column="VNAME_" javaType="String" jdbcType="VARCHAR" />
+    <result property="value" column="VTEXT_" jdbcType="VARCHAR"/>
+  </resultMap>
+  
+  <!-- SELECT -->  
+  <!-- TODO: Cannot use own parameter type parameterType="com.camunda.fox.quickstart.tasklist.performance.TasklistQueryObject">
+       because classloader in engine doesn't know it -->  
+  <select id="selectTasksForRegion" resultMap="customTaskResultMap" parameterType="org.camunda.bpm.engine.impl.db.ListQueryParameterObject">
+    ${limitBefore}
+    select distinct
+      T.ID_ as tID_,   
+      T.REV_ as tREV_, 
+      T.NAME_ as tNAME_, 
+      T.DESCRIPTION_ as tDESCRIPTION_,
+      T.CREATE_TIME_ as tCREATE_TIME_,
+      T.PROC_INST_ID_ as tPROC_INST_ID_,
+      T.TASK_DEF_KEY_ as tTASK_DEF_KEY_,
+      T.DUE_DATE_ as tDUE_DATE_,  
+          
+      CUST.ID_ as CUSTOMER_ID_,
+      CUST.NAME_ as CUSTOMER_NAME_,
+      CUST.REGION_ as CUSTOMER_REGION_,
+      
+      VAR.ID_ as VID_,
+      VAR.REV_ as VREV_,
+      VAR.TYPE_ as VTYPE_,
+      VAR.NAME_ as VNAME_,
+      VAR.PROC_INST_ID_ as VPROC_INST_ID_,
+      VAR.EXECUTION_ID_ as VEXECUTION_ID_,
+      VAR.TASK_ID_ as VTASK_ID_,
+      VAR.BYTEARRAY_ID_ as VBYTEARRAY_ID_,
+      VAR.DOUBLE_ as VDOUBLE_,
+      VAR.LONG_ as VLONG_,
+      VAR.TEXT_ as VTEXT_,
+      VAR.TEXT2_ as VTEXT2_      
+      
+    from ${prefix}ACT_RU_TASK T
+    left outer join (select * from ${prefix}ACT_RU_VARIABLE where NAME_= 'customerId' ) VAR_CUSTOMER on VAR_CUSTOMER.EXECUTION_ID_ = T.EXECUTION_ID_
+    left outer join CUSTOMER CUST on CUST.ID_ = VAR_CUSTOMER.LONG_
+
+    right outer join ${prefix}ACT_RU_VARIABLE VAR on VAR.EXECUTION_ID_ = T.EXECUTION_ID_    
+    <where>
+      <if test="parameter != null">
+        CUST.REGION_ = #{parameter}
+      </if> 
+    </where>     
+	${limitAfter}    
+  </select>
+  <!--
+    LEFT OUTER JOIN führt evtl. zu MyBatis Problem mit Collection (oder im activiti Datenmodell bei CustomVariableTypes)
+    WEGEN JOIN gibt es dann mehrfache Results -> Paging nicht auf Taskebene (1 task mit 500 Variablen führt zu einem Objekt-Result) 
+  -->
+
+</mapper>
