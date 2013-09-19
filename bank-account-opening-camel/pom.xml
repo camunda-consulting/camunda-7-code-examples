@@ -42,6 +42,13 @@
 
     <!-- Apache Camel -->
     <dependency>
+      <groupId>org.camunda.bpm.incubation</groupId>
+      <artifactId>camunda-bpm-camel-cdi</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+
+    <!-- Apache Camel -->
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-core</artifactId>
       <version>${camel.version}</version>
