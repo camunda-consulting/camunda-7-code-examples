@@ -13,9 +13,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.jms.QueueConnectionFactory;
 
-import org.apache.camel.component.cdi.CdiCamelContext;
+import org.apache.camel.cdi.CdiCamelContext;
 import org.apache.camel.component.jms.JmsComponent;
-import org.camunda.demo.camel.OpenAccountRoute;
+import org.camunda.demo.camel.route.OpenAccountRoute;
 
 
 /**

@@ -24,7 +24,6 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.camunda.bpm.camel.ActivitiComponent;
 import org.camunda.bpm.camel.ActivitiEndpoint;
 import org.camunda.bpm.camel.ActivitiProducer;
-import org.camunda.demo.camel.OpenAccountRoute;
 import org.camunda.demo.camel.business.AccountService;
 import org.camunda.demo.camel.business.EmailService;
 import org.junit.BeforeClass;
