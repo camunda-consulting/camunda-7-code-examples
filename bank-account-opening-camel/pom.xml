@@ -132,12 +132,15 @@
   </dependencies>
 
 	<repositories>
-		<repository>
-			<id>camunda-bpm-nexus</id>
-			<name>camunda-bpm-nexus</name>
-			<url>https://app.camunda.com/nexus/content/groups/public</url>
-		</repository>
-		<repository>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
 			<id>repository.jboss.org</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
 		</repository>
