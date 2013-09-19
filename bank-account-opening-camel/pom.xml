@@ -11,7 +11,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha6</camunda.version>
+    <camunda.version>7.0.0-Final</camunda.version>
     <camel.version>2.10.0</camel.version>
   </properties>
 
