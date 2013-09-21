@@ -21,9 +21,9 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.seda.SedaComponent;
 import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.camunda.bpm.camel.ActivitiComponent;
-import org.camunda.bpm.camel.ActivitiEndpoint;
-import org.camunda.bpm.camel.ActivitiProducer;
+import org.camunda.bpm.camel.component.CamundaBpmComponent;
+import org.camunda.bpm.camel.component.CamundaBpmEndpoint;
+import org.camunda.bpm.camel.component.producer.CamundaBpmProducer;
 import org.camunda.demo.camel.business.AccountService;
 import org.camunda.demo.camel.business.EmailService;
 import org.junit.BeforeClass;
@@ -35,18 +35,19 @@ import org.mockito.stubbing.Answer;
 /**
  * 
  * @author Nils Preusker - nils.preusker@camunda.com
+ * @author Rafael Cordones - rafael@cordones.me
  *
  */
 public class OpenAccountRouteTest extends CamelTestSupport {
 
-	// This is a flag to know whether the activiti producer 
+	// This is a flag to know whether the camunda BPM producer
 	// was called. See comments below for details.
 	static boolean invoked = false;
 	
 	private static String ordersFolder;
 	private static String postidentFolder;
 
-	private ActivitiProducer activitiProducer;
+	private CamundaBpmProducer producer;
 
 	@BeforeClass
 	public static void setUpFromPropertiesFile() throws IOException {
@@ -83,18 +84,18 @@ public class OpenAccountRouteTest extends CamelTestSupport {
 		// Stub the jms component by replacing it with seda
 		context.addComponent("jms", context.getComponent("seda", SedaComponent.class));
 		
-		// Add a mock that will act as the activiti component. We'll actually use this 
+		// Add a mock that will act as the camunda BPM component. We'll actually use this
 		// to verify the behavior of our route later.
-		ActivitiComponent activitiComponent = mock(ActivitiComponent.class);
-		ActivitiEndpoint activitiEndpoint = mock(ActivitiEndpoint.class);
-		when(activitiEndpoint.getEndpointKey()).thenReturn("camunda:open-account");
-		when(activitiEndpoint.getEndpointUri()).thenReturn("camunda:open-account");
-		when(activitiComponent.createEndpoint(anyString())).thenReturn(activitiEndpoint);
-		when(activitiComponent.getCamelContext()).thenReturn(context);
-		when(activitiEndpoint.getCamelContext()).thenReturn(context);
-		activitiProducer = mock(ActivitiProducer.class);
+		CamundaBpmComponent component = mock(CamundaBpmComponent.class);
+		CamundaBpmEndpoint endpoint = mock(CamundaBpmEndpoint.class);
+		when(endpoint.getEndpointKey()).thenReturn("camunda:open-account");
+		when(endpoint.getEndpointUri()).thenReturn("camunda:open-account");
+		when(component.createEndpoint(anyString())).thenReturn(endpoint);
+		when(component.getCamelContext()).thenReturn(context);
+		when(endpoint.getCamelContext()).thenReturn(context);
+		producer = mock(CamundaBpmProducer.class);
 		// This is the slightly tricky part, we need some kind of feedback when the 
-		// activiti-camel component's producer is invoked. This will let us know that
+		// camunda BPM Camel component's producer is invoked. This will let us know that
 		// the routes were successfully executed up to the process start. And yes,
 		// we're misusing the doAnswer method of mockito here...
 		doAnswer(new Answer<String>() {
@@ -103,10 +104,10 @@ public class OpenAccountRouteTest extends CamelTestSupport {
 				invoked = true;
 				return null;
 			}
-		}).when(activitiProducer).process((Exchange)anyObject());
-		when(activitiEndpoint.createProducer()).thenReturn(activitiProducer);
-		// and finally we add the mocked activiti component to the camel context
-		context.addComponent("camunda", activitiComponent);
+		}).when(producer).process((Exchange)anyObject());
+		when(endpoint.createProducer()).thenReturn(producer);
+		// and finally we add the mocked camunda BPM component to the camel context
+		context.addComponent("camunda-bpm", component);
 		
 		return context;
 	}
@@ -148,12 +149,12 @@ public class OpenAccountRouteTest extends CamelTestSupport {
 				);
 		// Verify the expression of the notify builder matches within a wait interval of 10 seconds
 		assertTrue(jmsXmlQueueNotify.matches(10, TimeUnit.SECONDS));
-		// This is it, now wait for the activiti producer to be invoked
+		// This is it, now wait for the camunda BPM producer to be invoked
 		while(!invoked) {
 			Thread.sleep(500);
 		}
 		// And even though we already know, we'll use mockito to verify the producer was really really called ;)
-		verify(activitiProducer, times(1)).process((Exchange)anyObject());
+		verify(producer, times(1)).process((Exchange)anyObject());
 	}
 
 }

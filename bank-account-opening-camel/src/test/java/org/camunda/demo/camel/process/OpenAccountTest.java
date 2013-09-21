@@ -1,11 +1,13 @@
 package org.camunda.demo.camel.process;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.camunda.bpm.camel.common.CamelService;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
@@ -15,7 +17,6 @@ import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.demo.camel.process.stub.CamelBehaviourStub;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -23,6 +24,7 @@ import org.junit.Test;
 /**
  * 
  * @author Nils Preusker - nils.preusker@camunda.com
+ * @author Rafael Cordones - rafael@cordones.me
  *
  */
 public class OpenAccountTest {
@@ -37,10 +39,9 @@ public class OpenAccountTest {
 		RuntimeService runtimeService = activitiRule.getRuntimeService();
 		TaskService taskService = activitiRule.getTaskService();
 		HistoryService historyService = activitiRule.getHistoryService();
-		
-		// Prepare fake camel behavior
-		CamelBehaviourStub camelBehaviour = new CamelBehaviourStub(); 
-		Mocks.register("camel", camelBehaviour);
+
+		CamelService camelService = mock(CamelService.class);
+		Mocks.register("camel", camelService);
 		
 		// Start process instance
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("open-account");
@@ -73,10 +74,9 @@ public class OpenAccountTest {
 		RuntimeService runtimeService = activitiRule.getRuntimeService();
 		TaskService taskService = activitiRule.getTaskService();
 		HistoryService historyService = activitiRule.getHistoryService();
-		
-		// Prepare fake camel behavior
-		CamelBehaviourStub camelBehaviour = new CamelBehaviourStub(); 
-		Mocks.register("camel", camelBehaviour);
+
+    CamelService camelService = mock(CamelService.class);
+    Mocks.register("camel", camelService);
 		
 		// Start process instance
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("open-account");
