@@ -1,25 +1,24 @@
 # camunda BPM example: Bank Account Opening using Apache Camel
 
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+Table of Contents
 
-- [camunda BPM example: Bank Account Opening using Apache Camel](#camunda-bpm-example-bank-account-opening-using-apache-camel)
-	- [What does it demonstrate?](#what-does-it-demonstrate)
-	- [Technical environment](#technical-environment)
-	- [The Process](#the-process)
-	- [Getting Started](#getting-started)
-	- [Starting a process instance via REST](#starting-a-process-instance-via-rest)
-	- [Starting a process instance via XMl in drop folder](#starting-a-process-instance-via-xml-in-drop-folder)
-	- [Correlate Postident PDF to process instance via drop folder](#correlate-postident-pdf-to-process-instance-via-drop-folder)
-	- [Check Tasklist](#check-tasklist)
-	- [The big picture as BPMN collaboration](#the-big-picture-as-bpmn-collaboration)
+- [What does it demonstrate?](#what-does-it-demonstrate)
+- [Technical environment](#technical-environment)
+- [The Process](#the-process)
+- [Getting Started](#getting-started)
+- [Starting a process instance via REST](#starting-a-process-instance-via-rest)
+- [Starting a process instance via XMl in drop folder](#starting-a-process-instance-via-xml-in-drop-folder)
+- [Correlate Postident PDF to process instance via drop folder](#correlate-postident-pdf-to-process-instance-via-drop-folder)
+- [Check Tasklist](#check-tasklist)
+- [The big picture as BPMN collaboration](#the-big-picture-as-bpmn-collaboration)
 	
 ## What does it demonstrate?
-- How to use [Apache Camel](http://camel.apache.org/) together with the [camunda BPM platform](http://camunda.org)
-- How to correlate to a running process instance from camel
-- How to call (Camel) services from a process instance
+- How to use [Apache Camel](http://camel.apache.org/) together with the [camunda BPM platform](http://camunda.org) with the [camunda-bpm-camel](https://github.com/camunda/camunda-bpm-camel) incubation project
+- How to correlate to a running process instance from Apache Camel
+- How to call Camel services from a process instance
 
 ## Technical environment
-- [camunda BPM platform](http://camunda.org) (tested on JBoss AS 7)
+- [camunda BPM platform 7.0.0-Final](http://camunda.org) (tested on JBoss AS 7)
 
 ## The Process
 
@@ -35,8 +34,8 @@ Last but not least, it is crucial that all incoming orders are accepted and proc
 
 ## Getting Started
 
-- Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-alpha6)** from [here](http://camunda.org/download.html) and install it.
-- Add JMS Queues to your server, therefor edit the standalone-full.xml
+1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html) and install it.
+1. Add JMS Queues to your server, therefor edit the standalone-full.xml
 
 ```xml
 <jms-queue name="orderQueue">
@@ -49,7 +48,7 @@ Last but not least, it is crucial that all incoming orders are accepted and proc
 </jms-queue>
 ```
 
-  You might not yet have any queues in your JBoss - in this case add a `<jms-destinations>` as last element within the `<hornetq-server>` element:
+You might not yet have any queues in your JBoss - in this case add a `<jms-destinations>` as last element within the `<hornetq-server>` element:
 
 ```xml
 <hornetq-server>
@@ -67,7 +66,7 @@ Last but not least, it is crucial that all incoming orders are accepted and proc
 </hornetq-server>	
 ```
 
-- Configure your JBoss to use the **full profile (we use JMS in this demo)**, therefor start the server by by typing `./standalone.sh -c standalone-full.xml` (Linux/Unix/Mac) or `standalone.bat -c standalone-full.xml` (Windows) in `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin`
+3. Configure your JBoss to use the **full profile (we use JMS in this demo)**, therefor start the server by by typing `./standalone.sh -c standalone-full.xml` (Linux/Unix/Mac) or `standalone.bat -c standalone-full.xml` (Windows) in `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin`
 - Make sure you have the following installed *and working*:
     * [Java Platform (*JDK*) 1.6.x](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
     * [Maven](http://maven.apache.org/) 3.0.x
