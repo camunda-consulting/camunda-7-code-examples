@@ -1,6 +1,5 @@
 package org.camunda.bpm.camel;
 
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +9,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.jms.QueueConnectionFactory;
 
 import org.apache.camel.cdi.CdiCamelContext;
@@ -39,14 +37,7 @@ public class BootStrap {
 	private OpenAccountRoute openAccountRoute;
 
 	private CdiCamelContextProvider cdiCamelContextProvider;
-	
-	@Produces
-	@Named("camel")
-	public CamelBehaviour produceCamelBehaviour() {
-	   return new CamelBehaviour(
-	           Arrays.asList(new ContextProvider[] { getCdiCamelContextProvider() }));
-	}
-	
+
 	@Produces
 	public CdiCamelContextProvider getCdiCamelContextProvider() {
 		if(cdiCamelContextProvider == null) {
