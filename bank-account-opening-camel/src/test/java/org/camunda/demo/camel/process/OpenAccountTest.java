@@ -1,7 +1,7 @@
 package org.camunda.demo.camel.process;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,15 +30,15 @@ import org.junit.Test;
 public class OpenAccountTest {
 
 	@Rule
-	public ProcessEngineRule activitiRule = new ProcessEngineRule();
+	public ProcessEngineRule processEngineRule = new ProcessEngineRule();
 
 	@Test
 	@Deployment(resources="open-account.bpmn")
 	public void testApprovedPath() throws Exception {
 		// Get services
-		RuntimeService runtimeService = activitiRule.getRuntimeService();
-		TaskService taskService = activitiRule.getTaskService();
-		HistoryService historyService = activitiRule.getHistoryService();
+		RuntimeService runtimeService = processEngineRule.getRuntimeService();
+		TaskService taskService = processEngineRule.getTaskService();
+		HistoryService historyService = processEngineRule.getHistoryService();
 
 		CamelService camelService = mock(CamelService.class);
 		Mocks.register("camel", camelService);
@@ -65,15 +65,17 @@ public class OpenAccountTest {
 		assertEquals("documents_approved_gateway", activityInstances.get(3).getActivityId());
 		assertEquals("set_up_account", activityInstances.get(4).getActivityId());
 		assertEquals("order_processed", activityInstances.get(5).getActivityId());
+
+    verify(camelService).sendTo("direct:setup-account");
 	}
 
 	@Test
 	@Deployment(resources="open-account.bpmn")
 	public void testNonApprovedPath() throws Exception {
 		// Get services
-		RuntimeService runtimeService = activitiRule.getRuntimeService();
-		TaskService taskService = activitiRule.getTaskService();
-		HistoryService historyService = activitiRule.getHistoryService();
+		RuntimeService runtimeService = processEngineRule.getRuntimeService();
+		TaskService taskService = processEngineRule.getTaskService();
+		HistoryService historyService = processEngineRule.getHistoryService();
 
     CamelService camelService = mock(CamelService.class);
     Mocks.register("camel", camelService);
@@ -100,6 +102,8 @@ public class OpenAccountTest {
 		assertEquals("documents_approved_gateway", activityInstances.get(3).getActivityId());
 		assertEquals("inform_customer", activityInstances.get(4).getActivityId());		
 		assertEquals("order_rejected", activityInstances.get(5).getActivityId());
-	}
+
+    verify(camelService).sendTo("direct:inform-customer");
+  }
 	
 }
