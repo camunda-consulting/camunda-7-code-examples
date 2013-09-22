@@ -48,8 +48,10 @@ public class OpenAccountRoute extends RouteBuilder {
     from("file://" + ordersFolder).
       routeId("hot-folder order route").
       log("=======================").
-      log("Recieved order from hot-folder").
+      log("Received order from hot-folder").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
+      log("Delivering order to JMS XML queue").
       to("jms:xmlQueue");
 
     // Order objects that are sent to the REST web service are placed in a JMS queue called
@@ -61,12 +63,15 @@ public class OpenAccountRoute extends RouteBuilder {
       routeId("order to xml route").
       log("=======================").
       log("received order from orderQueue").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("transforming order object to xml").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       marshal(new JaxbDataFormat(Order.class.getPackage().getName())).
       log("=======================").
       log("delivering order xml to xmlQueue").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       to("jms:xmlQueue");
 
@@ -81,22 +86,26 @@ public class OpenAccountRoute extends RouteBuilder {
       routeId("start order process route").
       log("=======================").
       log("received order xml from xmlQueue").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("setting order # to '" + CAMUNDA_BPM_PROCESS_DEFINITION_KEY + "' property").
-      log("=======================").
       setProperty(CAMUNDA_BPM_PROCESS_DEFINITION_KEY).xpath("//@ordernumber").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("transforming order xml to order object").
-      log("=======================").
       unmarshal(new JaxbDataFormat(Order.class.getPackage().getName())).
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("transforming order object to variable map (java.util.Map) as input for the camunda BPM process").
-      log("=======================").
       process(new OrderToMapProcessor()).
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("starting open-account process").
+      to("camunda-bpm:start?processDefinitionKey=open-account").
       log("=======================").
-      to("camunda-bpm:start?processDefinitionKey=open-account");
+      log("open-account process started").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true")
+    ;
 
     /*
      * If the order was rejected, we'll send a mail to the customer to inform him that his
@@ -104,6 +113,7 @@ public class OpenAccountRoute extends RouteBuilder {
      */
     from("direct:inform-customer").
       routeId("inform customer route").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       beanRef("emailService");
 
     /*
@@ -115,10 +125,12 @@ public class OpenAccountRoute extends RouteBuilder {
       routeId("set up account route").
       log("=======================").
       log("transforming process variable map to order object: ${body}").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       process(new MapToOrderProcessor()).
       log("=======================").
       log("calling accountService to create account from incoming order").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       beanRef("accountService");
 
@@ -132,9 +144,9 @@ public class OpenAccountRoute extends RouteBuilder {
       routeId("incoming postident route").
       log("=======================").
       log("received postident document").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("extracting order number from file name").
-      log("=======================").
       process(new Processor() {
         @Override
         public void process(Exchange exchange) throws Exception {
@@ -142,10 +154,13 @@ public class OpenAccountRoute extends RouteBuilder {
           exchange.setProperty("PROCESS_KEY_PROPERTY", businessKey);
         }
       }).
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
       log("correlating document with process instance").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
-      to("camunda-bpm://signal?processDefinitionKey=open-account:&activityId=wait_for_postident");
+      to("camunda-bpm://signal?processDefinitionKey=open-account:&activityId=wait_for_postident").
+      to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true");
   }
 
 }
