@@ -40,7 +40,7 @@
 			<scope>compile</scope>
 		</dependency>
 
-    <!-- Apache Camel -->
+    <!-- camunda BPM Apache Camel Integration -->
     <dependency>
       <groupId>org.camunda.bpm.incubation</groupId>
       <artifactId>camunda-bpm-camel-cdi</artifactId>
@@ -48,16 +48,6 @@
     </dependency>
 
     <!-- Apache Camel -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cdi</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jms</artifactId>
