@@ -11,8 +11,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha6</camunda.version>
-    <camel.version>2.10.0</camel.version>
+    <camunda.version>7.0.0-Final</camunda.version>
+    <camel.version>2.12.0</camel.version>
   </properties>
 
   <dependencies>
@@ -40,17 +40,14 @@
 			<scope>compile</scope>
 		</dependency>
 
+    <!-- camunda BPM Apache Camel Integration -->
+    <dependency>
+      <groupId>org.camunda.bpm.incubation</groupId>
+      <artifactId>camunda-bpm-camel-cdi</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+
     <!-- Apache Camel -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cdi</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jms</artifactId>
@@ -132,12 +129,15 @@
   </dependencies>
 
 	<repositories>
-		<repository>
-			<id>camunda-bpm-nexus</id>
-			<name>camunda-bpm-nexus</name>
-			<url>https://app.camunda.com/nexus/content/groups/public</url>
-		</repository>
-		<repository>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
 			<id>repository.jboss.org</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
 		</repository>
