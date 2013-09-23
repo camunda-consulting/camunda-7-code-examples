@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:fox="http://www.camunda.com/fox" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:fox="http://www.camunda.com/fox" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
     <bpmn2:participant id="process_engine" name="Process Engine" processRef="open-account-errorhandling"/>
   </bpmn2:collaboration>
   <bpmn2:process id="open-account-errorhandling" name="Open Account with Error Handling" isExecutable="true">
-    <bpmn2:startEvent id="order_received" activiti:formKey="embedded:app:apply-for-new-bank-account.html" name="Order received">
+    <bpmn2:startEvent id="order_received" camunda:formKey="embedded:app:apply-for-new-bank-account.html" name="Order received">
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:userTask id="check_documents" activiti:assignee="demo" activiti:formKey="app:check-documents.jsf" name="Check documents">
+    <bpmn2:userTask id="check_documents" camunda:assignee="demo" camunda:formKey="app:check-documents.jsf" name="Check documents">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -20,7 +20,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="documents_approved_gateway" targetRef="inform_customer">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="inform_customer" activiti:delegateExpression="#{customerNotificationDelegate}" activiti:async="true" name="Inform customer" implementation="##unspecified">
+    <bpmn2:serviceTask id="inform_customer" camunda:delegateExpression="#{customerNotificationDelegate}" camunda:async="true" name="Inform customer" implementation="##unspecified">
       <bpmn2:extensionElements>
         <fox:failedJobRetryTimeCycle xsi:type="xsd:anyType">R5/PT10S</fox:failedJobRetryTimeCycle>
       </bpmn2:extensionElements>
@@ -40,7 +40,7 @@
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_9" sourceRef="merging_gateway_1" targetRef="order_processed"/>
-    <bpmn2:serviceTask id="set_up_account" activiti:delegateExpression="#{accountSetupDelegate}" name="Set up account" implementation="##unspecified">
+    <bpmn2:serviceTask id="set_up_account" camunda:delegateExpression="#{accountSetupDelegate}" name="Set up account" implementation="##unspecified">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -50,7 +50,7 @@
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
       <bpmn2:errorEventDefinition id="ErrorEventDefinition_1" errorRef="duplicateApplicationError"/>
     </bpmn2:boundaryEvent>
-    <bpmn2:userTask id="UserTask_1" activiti:assignee="demo" name="manual processing">
+    <bpmn2:userTask id="UserTask_1" camunda:assignee="demo" name="manual processing">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:userTask>
