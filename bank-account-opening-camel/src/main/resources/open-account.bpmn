@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
     <bpmn2:participant id="process_engine" name="Account Opening (Process Engine)" processRef="open-account"/>
   </bpmn2:collaboration>
@@ -12,7 +12,7 @@
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:receiveTask>
     <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="order_received" targetRef="wait_for_postident"/>
-    <bpmn2:userTask id="check_documents" activiti:assignee="demo" activiti:formKey="app:check-documents.jsf" name="Check documents">
+    <bpmn2:userTask id="check_documents" camunda:assignee="demo" camunda:formKey="app:check-documents.jsf" name="Check documents">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -26,7 +26,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="documents_approved_gateway" targetRef="inform_customer">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="inform_customer" activiti:expression="#{camel.sendTo('direct:inform-customer')}" name="Inform customer" implementation="##unspecified">
+    <bpmn2:serviceTask id="inform_customer" camunda:expression="#{camel.sendTo('direct:inform-customer')}" name="Inform customer" implementation="##unspecified">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -36,7 +36,7 @@
     <bpmn2:endEvent id="order_processed" name="account&#xD;&#xA;created">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="set_up_account" activiti:expression="#{camel.sendTo('direct:setup-account')}" name="Set up account" implementation="##unspecified">
+    <bpmn2:serviceTask id="set_up_account" camunda:expression="#{camel.sendTo('direct:setup-account')}" name="Set up account" implementation="##unspecified">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:serviceTask>

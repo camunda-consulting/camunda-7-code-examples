@@ -1,18 +1,17 @@
-package org.camunda.bpm.camel;
+package org.camunda.demo.camel;
 
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import javax.jms.QueueConnectionFactory;
 
 import org.apache.camel.cdi.CdiCamelContext;
-import org.apache.camel.component.jms.JmsComponent;
+import org.apache.camel.component.seda.SedaComponent;
+import org.camunda.bpm.camel.component.CamundaBpmComponent;
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.demo.camel.route.OpenAccountRoute;
 
 
@@ -22,7 +21,6 @@ import org.camunda.demo.camel.route.OpenAccountRoute;
  * project page at http://camel.apache.org/cdi.html and the Camel CDI BootStrap
  * project at https://github.com/cmoulliard/cdi-camel-example/
  * 
- * @author Nils Preusker - nils.preusker@camunda.com
  */
 @Singleton
 @Startup
@@ -32,29 +30,34 @@ public class BootStrap {
 
 	@Inject
 	private CdiCamelContext cdiCamelContext;
+	
+  @Inject
+  private ProcessEngine processEngine;	
 
 	@Inject
 	private OpenAccountRoute openAccountRoute;
 
-	private CdiCamelContextProvider cdiCamelContextProvider;
-
-	@Produces
-	public CdiCamelContextProvider getCdiCamelContextProvider() {
-		if(cdiCamelContextProvider == null) {
-			cdiCamelContextProvider = new CdiCamelContextProvider(cdiCamelContext); 
-		}
-		return cdiCamelContextProvider;
-	}
-
-	@Resource(mappedName = "java:/JmsXA")
-	private QueueConnectionFactory queueConnectionFactory;
+	// For simplicity JMS was removed from the example - but you can easily re-add it
+//	@Resource(mappedName = "java:/JmsXA")
+//	private QueueConnectionFactory queueConnectionFactory;
 
 	@PostConstruct
 	public void init() throws Exception {
+    log.info("=======================");
+    log.info("Adding camunda BPM Component to Camel");
+    log.info("=======================");
+	  
+	  CamundaBpmComponent component = new CamundaBpmComponent(processEngine);
+    component.setCamelContext(cdiCamelContext);
+    cdiCamelContext.addComponent("camunda-bpm", component);
 
+    // For simplicity JMS was removed from the example - but you can easily re-add it:
 		// inject the JMS connection factory into camel's JMS component
-		JmsComponent jmsComponent = cdiCamelContext.getComponent("jms", JmsComponent.class);
-		jmsComponent.setConnectionFactory(queueConnectionFactory);
+//		JmsComponent jmsComponent = cdiCamelContext.getComponent("jms", JmsComponent.class);
+//		jmsComponent.setConnectionFactory(queueConnectionFactory);
+
+    // Instead we exchanged the JMS component by replacing it with Camel seda component for in memory queues
+    cdiCamelContext.addComponent("jms", cdiCamelContext.getComponent("seda", SedaComponent.class));
 
 		// add routes to camel context
 		log.info("=======================");

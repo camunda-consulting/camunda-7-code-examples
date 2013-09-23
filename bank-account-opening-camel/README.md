@@ -30,52 +30,16 @@ The BPMN diagram shows the resulting process with all it's technical ins and out
 
 Since the management is interested in the time it typically takes from the initial creation of a bank account until the identity documents arrive, we decided to implement those steps as an executable business process. This will automatically store the time stamps of each step in a database and thus make it easy to write some monitoring and reporting later on. However, there are also some data transformation steps before a process can be started and we need to poll folders for incoming files. These are tasks that Apache Camel is really good at, so we decided to combine the process engine with Camel.
 
-Last but not least, it is crucial that all incoming orders are accepted and processed. While the incoming XML orders are already stored in the file system, we'll write the orders that come in from the website to a JMS queue (actually to showcase JMS ;-)).
+There is a possible extension: You can add JMS queues to the game if you want to - this is explained further down this readme.
 
 ## Getting Started
 
-1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html) and install it.
-1. Add JMS Queues to your server, therefor edit the standalone-full.xml
-
-```xml
-<jms-queue name="orderQueue">
-	<entry name="queue/order"/>
-    <entry name="java:jboss/exported/jms/queue/order"/>
-</jms-queue>
-<jms-queue name="xmlQueue">
-	<entry name="queue/xml"/>
-    <entry name="java:jboss/exported/jms/queue/xml"/>
-</jms-queue>
-```
-
-You might not yet have any queues in your JBoss - in this case add a `<jms-destinations>` as last element within the `<hornetq-server>` element:
-
-```xml
-<hornetq-server>
-    ....
-    <jms-destinations>
-		<jms-queue name="orderQueue">
-			<entry name="queue/order"/>
-		    <entry name="java:jboss/exported/jms/queue/order"/>
-		</jms-queue>
-		<jms-queue name="xmlQueue">
-			<entry name="queue/xml"/>
-		    <entry name="java:jboss/exported/jms/queue/xml"/>
-		</jms-queue>
-	</jms-destinations>
-</hornetq-server>	
-```
-
-3. Configure your JBoss to use the **full profile (we use JMS in this demo)**, therefor start the server by by typing `./standalone.sh -c standalone-full.xml` (Linux/Unix/Mac) or `standalone.bat -c standalone-full.xml` (Windows) in `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin`
-- Make sure you have the following installed *and working*:
-    * [Java Platform (*JDK*) 1.6.x](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
-    * [Maven](http://maven.apache.org/) 3.0.x
-    * [Git](http://git-scm.com/) 1.7.x
-- Clone this repository
-- Open  `src/main/resources/route.properties` with a text editor and replace the  `folder.orders` and  `folder.postident` properties with the directories you would like to use as hot-folders for the showcase
-- Build the application with `mvn package`
-- Copy the generated WAR artifact to the JBoss AS 7 deployment directory `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/standalone/deployments/`
-- Ready! You should see the following logs in the server
+* Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html) and install it.
+* Clone this repository
+* Open  `src/main/resources/route.properties` with a text editor and replace the  `folder.orders` and  `folder.postident` properties with the directories you would like to use as hot-folders for the showcase
+* Build the application with `mvn package`
+* Copy the generated WAR artifact to the JBoss AS 7 deployment directory `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/standalone/deployments/`
+* Ready! You should see the following logs in the server
 
 ```
  INFO [org.camunda.demo.camel.camel.BootStrap] (MSC service thread 1-4) =======================
@@ -85,9 +49,6 @@ You might not yet have any queues in your JBoss - in this case add a `<jms-desti
  INFO [org.jboss.web] (MSC service thread 1-1) JBAS018210: Registering web context: /bank-account-opening
  INFO [org.jboss.as.server] (DeploymentScanner-threads - 1) JBAS018559: Deployed "bank-account-opening.war"
 ```
-
-- Now you can wither start the open account process by placing an XML file in the orders hot-folder or sending a JSON order to the REST web-service.
-
 
 
 ## Starting a process instance via REST
@@ -182,7 +143,7 @@ Remember: You configured the according folder in the `route.properties` file. Yo
 
 
 
-**Order Number as Correlation ID:** Note that we are using the "oredernumber" attribute to correlate the "postident" document with the initial order. That means that the order number has to be unique for each submitted bank account order. Orders with existing order numbers will be accepted by the web-service but end up in a dead letter queue.
+**Order Number as Correlation ID:** Note that we are using the "ordernumber" attribute to correlate the "postident" document with the initial order. That means that the order number has to be unique for each submitted bank account order. Orders with existing order numbers will be accepted by the web-service but end up in a dead letter queue.
 
 
 
@@ -191,12 +152,12 @@ Remember: You configured the according folder in the `route.properties` file. Yo
 
 In order to move on the process instance waiting for postident
 
-- Copy a file named `something-0001.pdf` to the drop folder you configred for postident. The `0001` must match the order number you set when creating the process instance.
+* Copy a file named `something-0001.pdf` to the drop folder you configred for postident. The `0001` must match the order number you set when creating the process instance.
 
 
 ## Check Tasklist
 
-Now you can check the task created in the [camunda Tasklist](http://localhost:8080/tasklist/). 
+Now you can check the task created in the [camunda Tasklist](localhost:8080/camunda/app/tasklist/). 
 
 You can approve or not approve the account - check the server logs for the according actions. 
 
@@ -208,3 +169,67 @@ You can approve or not approve the account - check the server logs for the accor
 
 [1]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-overview-bank-acount-opening.png
 [2]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-collaboration-bank-acount-opening.png
+
+
+## Add JMS (optional)
+
+In the example you can easily add JMS. Currently we used the Camel [SEDA Component](http://camel.apache.org/seda.html) instead of JMS to allow running this example
+on containers without JMS configured. 
+
+If you want to replace SEDA with JMS you have to do several steps:
+
+* Configure JMS in your server, we explain it for JBoss AS 7.
+* Configure Camel to use JMS from JBoss AS 7.
+* Send JMS message (instead of SEDA) when retrieving an order via REST API.
+
+### Add JMS Queues to your server
+
+Configure your JBoss to use the **full profile**, therefor start the server by by typing `./standalone.sh -c standalone-full.xml` (Linux/Unix/Mac) or `standalone.bat -c standalone-full.xml` (Windows) in `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin`
+
+Edit the standalone-full.xml and add:
+
+```xml
+<jms-queue name="orderQueue">
+	<entry name="queue/order"/>
+    <entry name="java:jboss/exported/jms/queue/order"/>
+</jms-queue>
+<jms-queue name="xmlQueue">
+	<entry name="queue/xml"/>
+    <entry name="java:jboss/exported/jms/queue/xml"/>
+</jms-queue>
+```
+
+You might not yet have any queues in your JBoss - in this case add a `<jms-destinations>` as last element within the `<hornetq-server>` element:
+
+```xml
+<hornetq-server>
+    ....
+    <jms-destinations>
+		<jms-queue name="orderQueue">
+			<entry name="queue/order"/>
+		    <entry name="java:jboss/exported/jms/queue/order"/>
+		</jms-queue>
+		<jms-queue name="xmlQueue">
+			<entry name="queue/xml"/>
+		    <entry name="java:jboss/exported/jms/queue/xml"/>
+		</jms-queue>
+	</jms-destinations>
+</hornetq-server>	
+```
+
+### Configure Camel to use JMS from JBoss AS 7
+
+Edit [BootStrap.java](https://github.com/camunda/camunda-bpm-examples/blob/master/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/BootStrap.java) and 
+remove the SEDA code and uncomment the code for JMS:
+
+```java
+JmsComponent jmsComponent = cdiCamelContext.getComponent("jms", JmsComponent.class);
+jmsComponent.setConnectionFactory(queueConnectionFactory)
+```
+
+### Send JMS message
+
+Edit [OrderJmsService.java](https://github.com/camunda/camunda-bpm-examples/blob/master/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/jms/OrderJmsService.java) and 
+remove the SEDA code and uncomment the code for JMS.
+
+Redeploy everthing. If that works without errors: Congratulations - you know use JMS!
