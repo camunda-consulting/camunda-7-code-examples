@@ -12,7 +12,6 @@ import org.apache.camel.cdi.CdiCamelContext;
 import org.apache.camel.component.seda.SedaComponent;
 import org.camunda.bpm.camel.component.CamundaBpmComponent;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.demo.camel.route.OpenAccountRoute;
 
 
 /**
@@ -24,9 +23,9 @@ import org.camunda.demo.camel.route.OpenAccountRoute;
  */
 @Singleton
 @Startup
-public class BootStrap {
+public class CamelBootStrap {
 
-	private final static Logger log = Logger.getLogger(BootStrap.class.getCanonicalName());
+	private final static Logger log = Logger.getLogger(CamelBootStrap.class.getCanonicalName());
 
 	@Inject
 	private CdiCamelContext cdiCamelContext;
@@ -35,7 +34,7 @@ public class BootStrap {
   private ProcessEngine processEngine;	
 
 	@Inject
-	private OpenAccountRoute openAccountRoute;
+	private OpenAccountRouteBuilder openAccountRoute;
 
 	// For simplicity JMS was removed from the example - but you can easily re-add it
 //	@Resource(mappedName = "java:/JmsXA")
@@ -49,7 +48,7 @@ public class BootStrap {
 	  
 	  CamundaBpmComponent component = new CamundaBpmComponent(processEngine);
     component.setCamelContext(cdiCamelContext);
-    cdiCamelContext.addComponent("camunda-bpm", component);
+    cdiCamelContext.addComponent("camunda-bpm", component); // TODO: could be done by META-INF/service as well- maybe switch?
 
     // For simplicity JMS was removed from the example - but you can easily re-add it:
 		// inject the JMS connection factory into camel's JMS component

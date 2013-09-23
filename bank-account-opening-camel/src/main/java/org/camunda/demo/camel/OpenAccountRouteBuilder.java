@@ -1,4 +1,4 @@
-package org.camunda.demo.camel.route;
+package org.camunda.demo.camel;
 
 import java.util.Properties;
 
@@ -15,9 +15,10 @@ import org.camunda.demo.camel.processor.OrderToMapProcessor;
  *
  * @author Nils Preusker - nils.preusker@camunda.com
  * @author Rafael Cordones - rafael@cordones.me
- *
+ * @author Bernd Ruecker
+ * 
  */
-public class OpenAccountRoute extends RouteBuilder {
+public class OpenAccountRouteBuilder extends RouteBuilder {
 
   @Override
   public void configure() throws Exception {

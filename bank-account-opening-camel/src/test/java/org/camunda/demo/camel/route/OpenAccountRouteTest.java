@@ -24,6 +24,7 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.camunda.bpm.camel.component.CamundaBpmComponent;
 import org.camunda.bpm.camel.component.CamundaBpmEndpoint;
 import org.camunda.bpm.camel.component.producer.CamundaBpmProducer;
+import org.camunda.demo.camel.OpenAccountRouteBuilder;
 import org.camunda.demo.camel.business.AccountService;
 import org.camunda.demo.camel.business.EmailService;
 import org.junit.BeforeClass;
@@ -115,7 +116,7 @@ public class OpenAccountRouteTest extends CamelTestSupport {
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
 		// add open account routes to the test context
-		return new OpenAccountRoute();
+		return new OpenAccountRouteBuilder();
 	}
 
 	@Test
