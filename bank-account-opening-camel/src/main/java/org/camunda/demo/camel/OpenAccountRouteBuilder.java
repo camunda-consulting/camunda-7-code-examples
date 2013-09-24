@@ -122,7 +122,7 @@ public class OpenAccountRouteBuilder extends RouteBuilder {
      * object and persist it to the database. Since the order was split up into values in a
      * java.util.Map, we'll first pass the map to the MapToOrderProcessor.
      */
-    from("direct:setup-account'").
+    from("direct:setup-account").
       routeId("set up account route").
       log("=======================").
       log("transforming process variable map to order object: ${body}").
@@ -160,7 +160,7 @@ public class OpenAccountRouteBuilder extends RouteBuilder {
       log("correlating document with process instance").
       to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true").
       log("=======================").
-      to("camunda-bpm://signal?processDefinitionKey=open-account&activityId=wait_for_postident").
+      to("camunda-bpm://message?processDefinitionKey=open-account&activityId=wait_for_postident").
       to("log:org.camunda.demo.camel.route?level=INFO&showAll=true&multiline=true");
   }
 
