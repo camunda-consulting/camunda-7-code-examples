@@ -9,6 +9,8 @@ This process does not serve any real-life use case but shows the various use cas
 
 ![Process Model][1]
 
+[Discuss this process model on camunda share](http://camunda.org/share/#/process/f54a4ff9-4cc1-428c-829b-a4002dcdd81f) if you have questions or feedback.
+
 For details on [camunda-bpm-camel](https://github.com/camunda/camunda-bpm-camel) see the according GitHub page.
 
 
@@ -19,7 +21,7 @@ We used `camunda-bpm-camel-cdi` for this example - hence you need a CDI containe
 * camunda BPM 7.1.0-Final
 
 
-# Step by step
+# Getting Started
 
 1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html).
 1. Install it, start it with `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin$ ./standalone.sh`
@@ -35,6 +37,12 @@ We used `camunda-bpm-camel-cdi` for this example - hence you need a CDI containe
     * tweet about `camunda` and wait for Camel to pick it up (sometimes that is a bit slow)
     * drop a text file into `<USER_HOME>/camunda-bpm-demo-camel/` (this should get picked up immediately)
 1. Point your browser to `http://localhost:8080/camunda/app/tasklist/` or `http://localhost:8080/camunda/app/cockpit/` and enjoy! Note: You might see multiple process instances already started - then there were a lot of tweets with `camunda` recently so they got picked up during startup.
+
+# Further Resources
+
+* See [this blog post](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/) including a screencast (in German) from talk at [WJAX](http://jax.de/) where this sample is presented.
+
+For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 
 
 [1]: https://raw.github.com/camunda/camunda-bpm-camel/master/use-cases.png

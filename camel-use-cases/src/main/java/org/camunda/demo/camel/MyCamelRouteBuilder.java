@@ -51,7 +51,6 @@ public class MyCamelRouteBuilder extends RouteBuilder {
         .throwException(new BpmnError("camel.error")) //
         .handled(true) // TODO: Check how we can avoid logging on console
       .end()
-      .to("...")
       .process(new Processor() {        
         @Override
         public void process(Exchange exchange) throws Exception {
