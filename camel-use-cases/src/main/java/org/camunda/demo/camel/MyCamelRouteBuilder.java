@@ -8,7 +8,7 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 /**
  * Adding the Routes via Java DSL here
  * 
- * @author ruecker
+ * @author Bernd Ruecker
  */
 public class MyCamelRouteBuilder extends RouteBuilder { 
 
@@ -24,6 +24,7 @@ public class MyCamelRouteBuilder extends RouteBuilder {
     // ################################
     // Drop folder starts via none start event
     from("file://" + dropFolder) // use drop folder
+      .routeId("file") //
       .convertBodyTo(String.class) //
       .to("log:org.camunda.demo.camel?level=INFO&showAll=true&multiline=true") // logging
       .to("camunda-bpm:start?processDefinitionKey=camel-use-cases"); // and start process instance
@@ -33,6 +34,7 @@ public class MyCamelRouteBuilder extends RouteBuilder {
     // ################################
     // Twitter starts via message event
     from("twitter://search?sinceId="+lastTweetId+"&type=polling&delay=5&keywords=camunda&consumerKey="+consumerKey+"&consumerSecret="+consumerSecret+"&accessToken="+token+"&accessTokenSecret="+tokenSecret) //
+      .routeId("twitter") //
       .to("log:org.camunda.demo.camel?level=INFO&showAll=true&multiline=true") // logging
       .transform().groovy("def map=[:] \n" +
           "map['tweet.what'] = request.body.text       \n" +
@@ -43,10 +45,13 @@ public class MyCamelRouteBuilder extends RouteBuilder {
     // ################################
     // Synchronous Service calles from process
     from("direct://syncService") // service name in memory
+      .routeId("syncService") //
       .to("log:org.camunda.demo.camel?level=INFO&showAll=true&multiline=true") // logging
       .onException(SampleException.class) // map exception to BPMN error
-        .throwException(new BpmnError("camel.error"))//
-        .logStackTrace(false) // avoid logging on console (as it is handled)      
+        .throwException(new BpmnError("camel.error")) //
+        .handled(true) // TODO: Check how we can avoid logging on console
+      .end()
+      .to("...")
       .process(new Processor() {        
         @Override
         public void process(Exchange exchange) throws Exception {
@@ -58,12 +63,14 @@ public class MyCamelRouteBuilder extends RouteBuilder {
     
     // ################################
     // Asynchronous Service (triggering message callback)
-    from("direct://asyncService") // service name in memory
+    from("direct://asyncService") // service name
+      .routeId("asyncService") //
       .to("seda:someQueue?waitForTaskToComplete=Never");
     
     // now some external service would do some magic
-    // then send reply
+    // then send response
     from("seda:someQueue")
+      .routeId("asyncResponse") //
       .process(new Processor() {
         @Override
         public void process(Exchange arg0) throws Exception {
@@ -74,7 +81,7 @@ public class MyCamelRouteBuilder extends RouteBuilder {
           }
         }
       })
-      .to("camunda-bpm:message?messageName=camel.answer");
+      .to("camunda-bpm:message?messageName=camel.answer");    
   }
 
 }
