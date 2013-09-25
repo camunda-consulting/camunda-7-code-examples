@@ -19,8 +19,7 @@ public class AccountService {
 
 	public void setUpAccout(Order order) {
 	  // allows to simulate errors
-	  if (true) {
-//	  if (order.getAddress().getCity().equals("fail")) {
+	  if (order.getAddress().getCity().equals("fail")) {
 	    throw new RuntimeException("city 'fail' not accepted");
 	  }
 	  

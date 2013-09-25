@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5RDmIGWCEeKJQpp2beO2KA" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5RDmIGWCEeKJQpp2beO2KA" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="_Collaboration_2">
     <bpmn2:participant id="_Participant_2" name="OOP Demo" processRef="oop"/>
   </bpmn2:collaboration>
@@ -7,7 +7,7 @@
     <bpmn2:startEvent id="StartEvent_1" name="Bestellung&#xD;&#xA;eingegangen">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:serviceTask id="ServiceTask_1" activiti:expression="#{geoAdapter.retrieveCity()}" name="Ort ermitteln">
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:expression="#{geoAdapter.retrieveCity()}" name="Ort ermitteln">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -18,7 +18,7 @@
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="ServiceTask_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:userTask id="UserTask_1" activiti:assignee="demo" activiti:formKey="app:confirmOrder.jsf" name="Auftrag&#xD;&#xA;freigeben">
+    <bpmn2:userTask id="UserTask_1" camunda:assignee="demo" camunda:formKey="app:confirmOrder.jsf" name="Auftrag&#xD;&#xA;freigeben">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -31,7 +31,7 @@
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_4" sourceRef="UserTask_1" targetRef="ExclusiveGateway_2"/>
-    <bpmn2:serviceTask id="ServiceTask_2" activiti:expression="#{emailAdapter.sendRejection()}" name="Ablehnungs-&#xD;&#xA;mail schicken">
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:expression="#{emailAdapter.sendRejection()}" name="Ablehnungs-&#xD;&#xA;mail schicken">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -53,7 +53,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="ja" sourceRef="ExclusiveGateway_2" targetRef="ExclusiveGateway_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_4">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="ServiceTask_3" activiti:expression="#{supplierAdapter.sendOrder()}" name="Auftrag an lokalen DL schicken">
+    <bpmn2:serviceTask id="ServiceTask_3" camunda:expression="#{supplierAdapter.sendOrder()}" name="Auftrag an lokalen DL schicken">
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -64,12 +64,12 @@
       <bpmn2:messageEventDefinition id="MessageEventDefinition_1" messageRef="Message_1"/>
     </bpmn2:intermediateCatchEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_10" sourceRef="ServiceTask_3" targetRef="IntermediateCatchEvent_1"/>
-    <bpmn2:serviceTask id="ServiceTask_4" activiti:expression="#{weatherAdapter.getWeather()}" name="Wetter am Zielort abrufen">
+    <bpmn2:serviceTask id="ServiceTask_4" camunda:expression="#{weatherAdapter.getWeather()}" name="Wetter am Zielort abrufen">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_11" sourceRef="IntermediateCatchEvent_1" targetRef="ServiceTask_4"/>
-    <bpmn2:serviceTask id="ServiceTask_5" activiti:expression="#{emailAdapter.sendConfirmation()}" name="Bestätigungs-&#xD;&#xA;mail schicken">
+    <bpmn2:serviceTask id="ServiceTask_5" camunda:expression="#{emailAdapter.sendConfirmation()}" name="Bestätigungs-&#xD;&#xA;mail schicken">
       <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -82,7 +82,7 @@
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
       <bpmn2:errorEventDefinition id="ErrorEventDefinition_1" errorRef="Error_1"/>
     </bpmn2:boundaryEvent>
-    <bpmn2:userTask id="UserTask_2" activiti:assignee="demo" activiti:formKey="app:escalation.jsf" name="Eskalation">
+    <bpmn2:userTask id="UserTask_2" camunda:assignee="demo" camunda:formKey="app:escalation.jsf" name="Eskalation">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
     </bpmn2:userTask>

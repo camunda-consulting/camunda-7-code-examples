@@ -14,7 +14,7 @@ public class EmailService {
 
     // TODO
 
-    System.out.println("emailService notifyUser was called");
+    System.out.println("emailService was called to notify user");
 
   }
 

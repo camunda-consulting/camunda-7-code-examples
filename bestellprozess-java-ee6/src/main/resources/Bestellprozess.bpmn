@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-6b9b0c6d-7e42-4e13-9156-4fe541cbebc2" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="6.3.1" name="Default Collaboration Diagram" targetNamespace="http://activiti.org/bpmn">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-6b9b0c6d-7e42-4e13-9156-4fe541cbebc2" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="6.3.1" name="Default Collaboration Diagram" targetNamespace="http://activiti.org/bpmn">
   <error id="goods-not-on-stock" errorCode="goods-not-on-stock"/>
   <message id="sid-e6c930c8-e0c5-4095-8a38-8a0e24c45bb1" name=""/>
   <collaboration id="sid-ed69b566-35d8-4f37-a8d5-236d41e9f8d1">
@@ -24,7 +24,7 @@
         <flowNodeRef>auftrag-storniert</flowNodeRef>
       </lane>
     </laneSet>
-    <serviceTask id="ServiceTask_2" activiti:expression="#{orderService.reserveGoods()}" name="Ware reservieren" implementation="webService">
+    <serviceTask id="ServiceTask_2" camunda:expression="#{orderService.reserveGoods()}" name="Ware reservieren" implementation="webService">
       <incoming>SequenceFlow_4</incoming>
       <outgoing>SequenceFlow_1</outgoing>
     </serviceTask>
@@ -32,7 +32,7 @@
       <outgoing>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</outgoing>
       <errorEventDefinition id="error-goods-not-available" errorRef="goods-not-on-stock"/>
     </boundaryEvent>
-    <userTask id="kunde-umberaten" activiti:assignee="demo" activiti:formKey="app:umberaten.jsf" name="Kunde umberaten" implementation="webService">
+    <userTask id="kunde-umberaten" camunda:assignee="demo" camunda:formKey="app:umberaten.jsf" name="Kunde umberaten" implementation="webService">
       <incoming>sid-0799AB9C-6CAF-45C0-B861-F392783F6E41</incoming>
       <outgoing>SequenceFlow_6</outgoing>
     </userTask>
@@ -53,7 +53,7 @@
         <timeDuration xsi:type="tFormalExpression">PT10S</timeDuration>
       </timerEventDefinition>
     </boundaryEvent>
-    <userTask id="usertask-eskalation" activiti:formKey="app:eskalation.jsf" activiti:assignee="demo" name="Sanften Druck auf Berater ausüben">
+    <userTask id="usertask-eskalation" camunda:formKey="app:eskalation.jsf" camunda:assignee="demo" name="Sanften Druck auf Berater ausüben">
       <incoming>SequenceFlow_3</incoming>
       <outgoing>SequenceFlow_5</outgoing>
     </userTask>

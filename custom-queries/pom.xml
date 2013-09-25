@@ -9,9 +9,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <server.location>../server/jboss-as-${jboss.version}</server.location>
-    <server.port>21009</server.port>
-    <server.configuration>standalone-h2.xml</server.configuration>
     <arquillian.version>1.0.1.Final</arquillian.version>
     <jboss.version>7.1.3.Final</jboss.version>
 		<camunda.version>7.0.0-Final</camunda.version>

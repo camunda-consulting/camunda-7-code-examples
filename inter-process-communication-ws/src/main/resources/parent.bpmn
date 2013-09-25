@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://activiti.org/bpmn">
+  <bpmn2:process id="inter-process-communication-ws-parent" name="inter-process-communication-ws-parent">
+    <bpmn2:startEvent id="StartEvent_1" camunda:formKey="start-parent">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_1"/>
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:expression="#{processInvocationClient.invokeProcess('inter-process-communication-ws-child', execution)}" name="Invoke child process" implementation="##unspecified">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="ServiceTask_1" targetRef="ReceiveTask_1"/>
+    <bpmn2:receiveTask id="ReceiveTask_1" name="Wait for child process" implementation="##unspecified">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:receiveTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="ReceiveTask_1" targetRef="UserTask_1"/>
+    <bpmn2:userTask id="UserTask_1" camunda:formKey="callback-received" camunda:assignee="kermit" name="Callback reveived">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:endEvent id="EndEvent_1">
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" sourceRef="UserTask_1" targetRef="EndEvent_1"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="interprocess-communication-parent" name="interprocess-communication-parent">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="inter-process-communication-ws-parent">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="StartEvent_1" isHorizontal="true">
+        <dc:Bounds height="36.0" width="36.0" x="100.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ReceiveTask_1" bpmnElement="ReceiveTask_1" isHorizontal="true">
+        <dc:Bounds height="50.0" width="110.0" x="350.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_1" bpmnElement="ServiceTask_1" isHorizontal="true">
+        <dc:Bounds height="50.0" width="110.0" x="190.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="UserTask_1" isHorizontal="true">
+        <dc:Bounds height="50.0" width="110.0" x="510.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_2" bpmnElement="EndEvent_1" isHorizontal="true">
+        <dc:Bounds height="36.0" width="36.0" x="670.0" y="101.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_ReceiveTask_1">
+        <di:waypoint xsi:type="dc:Point" x="300.0" y="118.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_1" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="136.0" y="118.0"/>
+        <di:waypoint xsi:type="dc:Point" x="190.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ReceiveTask_1" targetElement="BPMNShape_UserTask_1">
+        <di:waypoint xsi:type="dc:Point" x="460.0" y="118.0"/>
+        <di:waypoint xsi:type="dc:Point" x="510.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_UserTask_1" targetElement="BPMNShape_EndEvent_2">
+        <di:waypoint xsi:type="dc:Point" x="620.0" y="118.0"/>
+        <di:waypoint xsi:type="dc:Point" x="670.0" y="119.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

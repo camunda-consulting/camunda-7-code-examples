@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ProcessCallbackService" targetNamespace="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://ws.interpocesscommunication.demo.camunda.org/" version="1.0" xmlns:tns="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="invokeProcessCallback" type="tns:invokeProcessCallback"/>
+<xs:element name="invokeProcessCallbackResponse" type="tns:invokeProcessCallbackResponse"/>
+<xs:complexType name="invokeProcessCallback">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="invokeProcessCallbackResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="invokeProcessCallbackResponse">
+    <wsdl:part element="tns:invokeProcessCallbackResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="invokeProcessCallback">
+    <wsdl:part element="tns:invokeProcessCallback" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ProcessCallbackService">
+    <wsdl:operation name="invokeProcessCallback">
+      <wsdl:input message="tns:invokeProcessCallback" name="invokeProcessCallback">
+    </wsdl:input>
+      <wsdl:output message="tns:invokeProcessCallbackResponse" name="invokeProcessCallbackResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProcessCallbackServiceSoapBinding" type="tns:ProcessCallbackService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="invokeProcessCallback">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="invokeProcessCallback">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="invokeProcessCallbackResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProcessCallbackService">
+    <wsdl:port binding="tns:ProcessCallbackServiceSoapBinding" name="ProcessCallbackServicePort">
+      <soap:address location="http://localhost:8080/inter-process-communication-ws/ProcessCallback"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

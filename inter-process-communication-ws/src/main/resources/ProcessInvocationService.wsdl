@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="ProcessInvocationService" targetNamespace="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://ws.interpocesscommunication.demo.camunda.org/" version="1.0" xmlns:tns="http://ws.interpocesscommunication.demo.camunda.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="getTaskList" type="tns:getTaskList"/>
+<xs:element name="getTaskListResponse" type="tns:getTaskListResponse"/>
+<xs:element name="invokeProcess" type="tns:invokeProcess"/>
+<xs:element name="invokeProcessResponse" type="tns:invokeProcessResponse"/>
+<xs:complexType name="invokeProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="invokeProcessResponse">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="getTaskList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="getTaskListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="invokeProcessResponse">
+    <wsdl:part element="tns:invokeProcessResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTaskList">
+    <wsdl:part element="tns:getTaskList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTaskListResponse">
+    <wsdl:part element="tns:getTaskListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="invokeProcess">
+    <wsdl:part element="tns:invokeProcess" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ProcessInvocationService">
+    <wsdl:operation name="invokeProcess">
+      <wsdl:input message="tns:invokeProcess" name="invokeProcess">
+    </wsdl:input>
+      <wsdl:output message="tns:invokeProcessResponse" name="invokeProcessResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTaskList">
+      <wsdl:input message="tns:getTaskList" name="getTaskList">
+    </wsdl:input>
+      <wsdl:output message="tns:getTaskListResponse" name="getTaskListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProcessInvocationServiceSoapBinding" type="tns:ProcessInvocationService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="invokeProcess">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="invokeProcess">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="invokeProcessResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTaskList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTaskList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTaskListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProcessInvocationService">
+    <wsdl:port binding="tns:ProcessInvocationServiceSoapBinding" name="ProcessInvocationServicePort">
+      <soap:address location="http://localhost:8080/inter-process-communication-ws/ProcessInvocation"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html">
+  
+<h:head>
+  <f:metadata>
+      <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView" listener="#{fox.taskForm.startProcessInstanceByKeyForm(processDefinitionKey, callbackUrl)}" />
+    </f:metadata>
+  <title>Start new process instance for inter-process communication example</title>
+</h:head>
+<h:body>
+    <p>Start a new process instance of definition '#{fox.taskForm.processDefinition.name}' in version #{fox.taskForm.processDefinition.version}</p>
+    <h:form id="someForm">
+    <p><h:commandButton id="submit_button" value="start process instance" action="#{fox.taskForm.completeProcessInstanceForm()}" /></p>
+    </h:form>
+</h:body>
+</ui:composition>

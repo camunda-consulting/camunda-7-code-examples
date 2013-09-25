@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" targetNamespace="http://www.signavio.com/bpmn20">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" targetNamespace="http://www.signavio.com/bpmn20">
   <process id="OrderConfirmation" name="OrderConfirmation" isExecutable="true">
     <exclusiveGateway id="ExclusiveGateway_1" name="Approved?">
       <incoming>SequenceFlow_6</incoming>
@@ -12,17 +12,17 @@
     <sequenceFlow id="SequenceFlow_3" name="no" sourceRef="ExclusiveGateway_1" targetRef="servicetask2">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_1">#{!orderApproved}</conditionExpression>
     </sequenceFlow>
-    <userTask id="approve_order" activiti:assignee="demo" activiti:formKey="reviewOrder.jsf" name="approve order">
+    <userTask id="approve_order" camunda:assignee="demo" camunda:formKey="reviewOrder.jsf" name="approve order">
       <incoming>flow4</incoming>
       <outgoing>SequenceFlow_6</outgoing>
     </userTask>
     <sequenceFlow id="SequenceFlow_6" name="" sourceRef="approve_order" targetRef="ExclusiveGateway_1"/>
-    <businessRuleTask id="BusinessRuleTask_1" activiti:expression="#{orderBean.applyRules()}" name="apply discount rules">
+    <businessRuleTask id="BusinessRuleTask_1" camunda:expression="#{orderBean.applyRules()}" name="apply discount rules">
       <incoming>SequenceFlow_5</incoming>
       <outgoing>flow4</outgoing>
     </businessRuleTask>
     <sequenceFlow id="flow4" name="" sourceRef="BusinessRuleTask_1" targetRef="approve_order"/>
-    <serviceTask id="Send_order_confirmatin_email" activiti:expression="#{orderBean.sendEmail()}" name="send order confirmatin email">
+    <serviceTask id="Send_order_confirmatin_email" camunda:expression="#{orderBean.sendEmail()}" name="send order confirmatin email">
       <incoming>SequenceFlow_2</incoming>
       <outgoing>SequenceFlow_4</outgoing>
     </serviceTask>
@@ -34,7 +34,7 @@
       <outgoing>SequenceFlow_5</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_5" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
-    <serviceTask id="servicetask2" activiti:expression="#{orderBean.deleteOrder()}" name="delete order">
+    <serviceTask id="servicetask2" camunda:expression="#{orderBean.deleteOrder()}" name="delete order">
       <incoming>SequenceFlow_3</incoming>
       <outgoing>flow7</outgoing>
     </serviceTask>

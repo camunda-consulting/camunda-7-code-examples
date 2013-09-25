@@ -11,8 +11,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.0.0-alpha6</camunda.version>
-    <camel.version>2.10.0</camel.version>
+    <camunda.version>7.0.0-Final</camunda.version>
+    <camel.version>2.12.0</camel.version>
   </properties>
 
   <dependencies>
@@ -40,30 +40,26 @@
 			<scope>compile</scope>
 		</dependency>
 
-    <!-- Apache Camel -->
+    <!-- camunda BPM Apache Camel Integration -->
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core</artifactId>
-      <version>${camel.version}</version>
+      <groupId>org.camunda.bpm.incubation</groupId>
+      <artifactId>camunda-bpm-camel-cdi</artifactId>
+      <version>0.1-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-cdi</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
+
+    <!-- Apache Camel 
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jms</artifactId>
       <version>${camel.version}</version>
       <exclusions>
-        <!-- excluding spring dependency to avoid dependency version conflict 
-          with fox-engine that causes problems with activiti test cases -->
         <exclusion>
           <artifactId>spring-core</artifactId>
           <groupId>org.springframework</groupId>
         </exclusion>
       </exclusions>
     </dependency>
+    -->
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jaxb</artifactId>
@@ -84,12 +80,14 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- 
     <dependency>
       <groupId>javax.jms</groupId>
       <artifactId>jms</artifactId>
       <version>1.1</version>
     </dependency>
-
+ -->
+ 
     <!-- test dependencies -->
     <dependency>
       <groupId>junit</groupId>
@@ -132,12 +130,15 @@
   </dependencies>
 
 	<repositories>
-		<repository>
-			<id>camunda-bpm-nexus</id>
-			<name>camunda-bpm-nexus</name>
-			<url>https://app.camunda.com/nexus/content/groups/public</url>
-		</repository>
-		<repository>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
 			<id>repository.jboss.org</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
 		</repository>
