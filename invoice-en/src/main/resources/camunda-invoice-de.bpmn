@@ -80,7 +80,7 @@
     <sequenceFlow id="sid-314DFE46-2D8A-43A2-9CBE-AF8E6E872560" name="Nein" isImmediate="true" sourceRef="Freigabe_erfolgt__131" targetRef="sid-2E49E032-A81C-4DBE-A30A-6222DACA160C">
       <conditionExpression xsi:type="tFormalExpression" id="sid-7505a88f-136a-48d5-839d-b4052b711c25">${!approved}</conditionExpression>
     </sequenceFlow>
-    <serviceTask id="archive-pdf" camunda:assignee="kermit" camunda:delegateExpression="#{archiveService}" camunda:formKey="preparePayment" name="PDF &#xA;archivieren" implementation="webService">
+    <serviceTask id="archive-pdf" camunda:assignee="kermit" camunda:delegateExpression="#{archiveService}" name="PDF &#xA;archivieren" implementation="webService">
       <incoming>sid-A377F224-BACC-45CB-A249-D4029CA531AF</incoming>
       <outgoing>SequenceFlow_10</outgoing>
     </serviceTask>

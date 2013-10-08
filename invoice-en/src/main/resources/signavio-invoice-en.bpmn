@@ -111,7 +111,7 @@
       <incoming>sequenceFlow_179</incoming>
       <outgoing>SequenceFlow_1</outgoing>
     </serviceTask>
-    <userTask id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:preparePayment.jsf" name="prepare bank transfer" implementation="webService">
+    <userTask id="prepareBankTransfer" camunda:candidateGroups="accounting" camunda:formKey="app:prepareBankTransfer.jsf" name="prepare bank transfer" implementation="webService">
       <extensionElements>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="bgcolor" metaValue="#ffffcc"/>
         <signavio:signavioMetaData xsi:type="xsd:anyType" metaKey="t" metaValue=""/>
