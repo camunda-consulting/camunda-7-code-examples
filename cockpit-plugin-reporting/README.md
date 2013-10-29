@@ -28,7 +28,7 @@ Now it will be shown on the start screen. Note that in the current preview versi
 More information
 -----
 
-Read the [plugin development how to](http://docs.camunda.org/how-tos/cockpit/develop-a-plugin/).
+Read the [plugin development how to](http://docs.camunda.org/latest/real-life/how-to/#cockpit-how-to-develop-a-cockpit-plugin).
 
 
 [1]: https://raw.github.com/camunda/camunda-bpm-examples/master/cockpit-plugin-reporting/screenshot.png
