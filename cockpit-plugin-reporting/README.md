@@ -20,7 +20,7 @@ How to use
 
 1. Build the plugin using maven with mvn clean install
 
-2. Integrate the JAR in your cockpit...war file under WEB-INF/lib
+2. Integrate the JAR in your camunda-*.war file and there under WEB-INF/lib
 
 Now it will be shown on the start screen. Note that in the current preview version the plugin mechanism has a limititation to only be able to show one plugin at a time.
 
