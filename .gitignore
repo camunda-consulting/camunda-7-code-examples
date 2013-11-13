@@ -2,4 +2,7 @@ target
 .project
 .classpath
 .settings
+.idea
+.iml
+camunda-h2-dbs
 build.properties

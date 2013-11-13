@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.camunda.bpm.example</groupId>
+  <artifactId>four-eyes-advanced</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <version.camunda>7.0.0-Final</version.camunda>
+    <version.jboss>7.1.3.Final</version.jboss>
+    <version.shrinkwrap>2.0.0</version.shrinkwrap>
+    <version.arquillian>1.0.4.Final</version.arquillian>
+  </properties>
+
+  <modules>
+    <module>four-eyes-advanced-commons</module>
+    <module>four-eyes-advanced-process-engine-plugin</module>
+    <module>four-eyes-advanced-process-application</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.bpm.example</groupId>
+        <artifactId>four-eyes-advanced-commons</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.example</groupId>
+        <artifactId>four-eyes-advanced-process-engine-plugin</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-engine</artifactId>
+        <version>${version.camunda}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.javaee</groupId>
+        <artifactId>camunda-ejb-client</artifactId>
+        <version>${version.camunda}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-engine-cdi</artifactId>
+        <version>${version.camunda}</version>
+      </dependency>
+      <!-- Java EE 6 Specification -->
+      <dependency>
+        <groupId>org.jboss.spec</groupId>
+        <artifactId>jboss-javaee-6.0</artifactId>
+        <version>3.0.2.Final</version>
+        <type>pom</type>
+        <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>xalan</artifactId>
+            <groupId>org.apache.xalan</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
+
+</project>
