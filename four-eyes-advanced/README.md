@@ -49,6 +49,8 @@ How to use
               </class>
             </plugin>
            </plugins>
+        <process-engine>
+      <process-engines>
     </subsystem>
 
 
@@ -58,6 +60,6 @@ How to use
 6. Now you are good to go to execute the arquillian test located at
    '$FOUR_EYES_HOME/four-eyes-advanced-process-application/src/test/java/org/camunda/bpm/examples/FourEyesAdvancedTest.java'.
    To do so, just enter '$FOUR_EYES_HOME/four-eyes-advanced-process-application' and execute
-   'mvn clean install -Pjboss -D$CAMUNDA_HOME/server/jboss-as-${version.jboss}'.
+   'mvn clean install -Pjboss -Djboss.location=$CAMUNDA_HOME/server/jboss-as-${version.jboss}'.
    You should now see the JBoss starting and executing the test successfully when you installed the libs in the JBoss modules directory
    and adjusted the standalone.xml by adding the four eyes process engine plugin to the engine configuration.

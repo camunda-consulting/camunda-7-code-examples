@@ -20,6 +20,7 @@ public class Helper {
 
   public static final String PROCESS_VARIABLE_NAME = "4_EYES_LAST_USER";
   public static final String FOUR_EYES_GROUP_NAME = "fourEyeGroup";
+  public static final String FOUR_EYES_ROLE_NAME = "role";
 
   /**
    * Namespace must be added to your process definiton:

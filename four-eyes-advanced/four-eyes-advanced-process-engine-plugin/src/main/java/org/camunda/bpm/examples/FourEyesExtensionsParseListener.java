@@ -32,6 +32,8 @@ public class FourEyesExtensionsParseListener extends AbstractBpmnParseListener {
       if (fourEyesGroupName != null) {
         String fourEyesGroupNameString = fourEyesGroupName.attribute("name");
         activity.setProperty(Helper.FOUR_EYES_GROUP_NAME, fourEyesGroupNameString);
+        String fourEyesGroupRoleString = fourEyesGroupName.attribute("role");
+        activity.setProperty(Helper.FOUR_EYES_ROLE_NAME, fourEyesGroupRoleString);
 
         addFourEyesTaskListener(activity);
       }

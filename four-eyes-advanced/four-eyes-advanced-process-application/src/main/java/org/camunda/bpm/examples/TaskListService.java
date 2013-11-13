@@ -3,13 +3,14 @@ package org.camunda.bpm.examples;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.impl.RepositoryServiceImpl;
+import org.camunda.bpm.engine.impl.pvm.PvmActivity;
+import org.camunda.bpm.engine.impl.pvm.ReadOnlyProcessDefinition;
 import org.camunda.bpm.engine.task.Task;
-import org.w3c.dom.Element;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,16 +59,22 @@ public class TaskListService {
     }
     String activityId = activityIds.get(0);
 
-    // First of all we have
-    InputStream inputStream = processEngine.getRepositoryService().getProcessModel(task.getProcessDefinitionId());
+    ReadOnlyProcessDefinition deployedProcessDefinition = ((RepositoryServiceImpl) processEngine.getRepositoryService()).getDeployedProcessDefinition(task.getProcessDefinitionId());
+    PvmActivity activity = deployedProcessDefinition.findActivity(activityId);
+    String fourEyesGroupName = (String) activity.getProperty(Helper.FOUR_EYES_GROUP_NAME);
+    String fourEyesRoleName = (String) activity.getProperty(Helper.FOUR_EYES_ROLE_NAME);
+    boolean firstReview = "first-review".equals(fourEyesRoleName);
 
-    Element userTaskExtensionFoxGroup = Helper.getUserTaskExtensions(inputStream, activityId, Helper.FOUR_EYES_GROUP_NAME);
-    if (userTaskExtensionFoxGroup == null) {
-      throw new RuntimeException("Task '" + task.getId() + "' has no fourEyesGroup configured, which is invalid. Fix usage.");
-    }
+    // First of all we have
+    //InputStream inputStream = processEngine.getRepositoryService().getProcessModel(task.getProcessDefinitionId());
+
+    //Element userTaskExtensionFoxGroup = Helper.getUserTaskExtensions(inputStream, activityId, Helper.FOUR_EYES_GROUP_NAME);
+    //if (userTaskExtensionFoxGroup == null) {
+    //  throw new RuntimeException("Task '" + task.getId() + "' has no fourEyesGroup configured, which is invalid. Fix usage.");
+    //}
     
-    String fourEyesGroupName = userTaskExtensionFoxGroup.getAttribute("name");
-    boolean firstReview = "first-review".equals(userTaskExtensionFoxGroup.getAttribute("role"));
+    //String fourEyesGroupName = userTaskExtensionFoxGroup.getAttribute("name");
+    //boolean firstReview = "first-review".equals(userTaskExtensionFoxGroup.getAttribute("role"));
     
     if (!firstReview) {     
       String lastUser = (String) runtimeService.getVariable(task.getProcessInstanceId(), Helper.getVariableName(fourEyesGroupName));
