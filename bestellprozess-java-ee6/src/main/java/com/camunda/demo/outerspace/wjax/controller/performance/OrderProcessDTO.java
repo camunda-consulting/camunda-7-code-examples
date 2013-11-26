@@ -7,6 +7,7 @@ public class OrderProcessDTO implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private String processInstanceId;
+  private boolean processEnded;
   private long orderId;
   private String customer;
   private String latestActivityId;
@@ -50,6 +51,14 @@ public class OrderProcessDTO implements Serializable {
 
   public void setCustomer(String customer) {
     this.customer = customer;
+  }
+
+  public boolean isProcessEnded() {
+    return processEnded;
+  }
+
+  public void setProcessEnded(boolean processEnded) {
+    this.processEnded = processEnded;
   }
 
 }

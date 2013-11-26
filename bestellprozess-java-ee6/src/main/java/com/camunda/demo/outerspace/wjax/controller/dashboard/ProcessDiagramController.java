@@ -43,8 +43,8 @@ public class ProcessDiagramController implements Serializable {
 
     for (DiagramNode node : processDiagramLayout.getNodes()) {
       if (!filterNode(node)) {
-        long allCount = historyService.createHistoricActivityInstanceQuery().activityId(node.getId()).count();
-        long unfinishedCount = historyService.createHistoricActivityInstanceQuery().activityId(node.getId()).unfinished().count();
+        long allCount = historyService.createHistoricActivityInstanceQuery().processDefinitionId(getProcessDefinitionId()).activityId(node.getId()).count();
+        long unfinishedCount = historyService.createHistoricActivityInstanceQuery().processDefinitionId(getProcessDefinitionId()).activityId(node.getId()).unfinished().count();
         result.add(new FlowNodeDTO(node, allCount, unfinishedCount));
       }
     }
