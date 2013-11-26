@@ -40,7 +40,7 @@ We used `camunda-bpm-camel-cdi` for this example - hence you need a CDI containe
 
 # Further Resources
 
-* See [this blog post](http://www.bpm-guide.de/2011/11/14/activiti-drools-wjax-2011/) including a screencast (in German) from talk at [WJAX](http://jax.de/) where this sample is presented.
+* See [this blog post](http://blog.camunda.org/2013/09/camunda-bpm-apache-camel-integrating.html) for more information.
 
 For help please ask at the camunda BPM ["Users & Process Application Development"](http://camunda.org/community/forum.html) forum.
 

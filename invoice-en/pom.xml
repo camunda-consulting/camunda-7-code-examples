@@ -33,6 +33,12 @@
 			<artifactId>chemistry-opencmis-client-impl</artifactId>
 			<version>0.7.0</version>
 		</dependency>
+    <dependency>
+      <groupId>org.alfresco.cmis.client</groupId>
+      <artifactId>alfresco-opencmis-extension</artifactId>
+      <version>0.3</version>
+      <type>jar</type>
+    </dependency>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-web-6.0</artifactId>
