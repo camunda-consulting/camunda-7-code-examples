@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
-import org.camunda.bpm.engine.impl.test.TestHelper;
+import org.camunda.bpm.engine.impl.test.ProcessEngineAssert;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
@@ -56,7 +56,7 @@ public class ProcessTestCase {
     variables.put("comments", "No, we will not publish this on Twitter");
     processEngineRule.getTaskService().complete(task.getId(), variables);
 
-    TestHelper.assertProcessEnded(processEngineRule.getProcessEngine(), id);
+    ProcessEngineAssert.assertProcessEnded(processEngineRule.getProcessEngine(), id);
 
     HistoricProcessInstance historicProcessInstance = processEngineRule.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(id)
             .singleResult();

@@ -10,10 +10,12 @@
     <result property="processInstanceId" column="PROC_INST_ID_" />
     <result property="latestActivityId" column="ACT_ID_" />
     <result property="latestActivityName" column="ACT_NAME_" />
+    <result property="processEnded" column="ENDED" />
   </resultMap>
   
   <select id="selectOrdersWithProcessInformation" resultMap="orderProcessResultMap" parameterType="org.camunda.bpm.engine.impl.db.ListQueryParameterObject">
-	SELECT WJAX_ORDER.ID, WJAX_ORDER.CUSTOMER, pi.PROC_INST_ID_ , act2.ACT_ID_ , act2.ACT_NAME_ 
+	SELECT WJAX_ORDER.ID, WJAX_ORDER.CUSTOMER, pi.PROC_INST_ID_ , act2.ACT_ID_ , act2.ACT_NAME_, 
+	       (pi.END_TIME_ is not null) as ENDED   
 	FROM 
 	   WJAX_ORDER, 
 	   ACT_HI_PROCINST pi, 
@@ -21,8 +23,9 @@
        ACT_HI_ACTINST act2 	   
 	WHERE
 	   pi.BUSINESS_KEY_ = WJAX_ORDER.ID 	
-	   and act1.PROC_INST_ID_ = pi.PROC_INST_ID_
-       and act2.ID_ = MAX_ID	   
+	   and act2.PROC_INST_ID_ = pi.PROC_INST_ID_
+       and act2.ID_ = MAX_ID
+    ORDER BY WJAX_ORDER.ID 
   </select>
   
 </mapper>

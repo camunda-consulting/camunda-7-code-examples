@@ -20,9 +20,14 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Prozess-ID</f:facet>
-				<a href="http://localhost:8080/camunda/app/cockpit/default/#/process-instance/{orderDto.processInstanceId}">
-					#{orderDto.processInstanceId}
-				</a>
+				<h:panelGroup rendered="#{!orderDto.processEnded}">
+					<a href="http://localhost:8080/camunda/app/cockpit/default/#/process-instance/#{orderDto.processInstanceId}">
+						#{orderDto.processInstanceId}
+					</a>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{orderDto.processEnded}">
+					<strong>ended</strong> (was #{orderDto.processInstanceId})
+				</h:panelGroup>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Letzte/Aktuelle Aktivitaet</f:facet>

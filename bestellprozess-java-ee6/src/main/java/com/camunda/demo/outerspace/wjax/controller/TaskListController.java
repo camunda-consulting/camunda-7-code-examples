@@ -27,7 +27,7 @@ public class TaskListController {
   @Named("tasks")
   public List<Task> getTaskList() {
     return taskService.createTaskQuery()
-//      .taskAssignee("kermit")
+      .processDefinitionKey("wjax2012-bestellprozess")
       .list();
   }
   
