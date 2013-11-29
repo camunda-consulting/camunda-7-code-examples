@@ -173,7 +173,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_5" bpmnElement="_Participant_4" isHorizontal="true">
-        <dc:Bounds height="220.0" width="1151.0" x="12.0" y="12.0"/>
+        <dc:Bounds height="220.0" width="1163.0" x="12.0" y="12.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_6" bpmnElement="Participant_1" isHorizontal="true">
         <dc:Bounds height="241.0" width="1162.0" x="13.0" y="325.0"/>
