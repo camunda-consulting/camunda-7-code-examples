@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import org.camunda.bpm.cockpit.plugin.resource.AbstractPluginResource;
-import org.camunda.bpm.engine.rest.dto.runtime.ProcessInstanceDto;
+import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 public class BpmnCollaborationEngineSpecificResource extends AbstractPluginResource {
@@ -22,29 +22,34 @@ public class BpmnCollaborationEngineSpecificResource extends AbstractPluginResou
 
   @GET
   @Path("process-instance/{id}/linked-process-instance")
-  public List<ProcessInstanceDto> getLinkedProcessInstances(@PathParam("id") String processInstanceId) {
-    ArrayList<ProcessInstanceDto> linkedProcesses = new ArrayList<ProcessInstanceDto>();
+  public List<LinkedProcessInstanceDto> getLinkedProcessInstances(@PathParam("id") String processInstanceId) {
+    ArrayList<LinkedProcessInstanceDto> linkedProcesses = new ArrayList<LinkedProcessInstanceDto>();
     
-    // processes being started by us:
-    
-    // TODO: discuss if we use the process instance id here
-    String variableValue = processInstanceId;
-    
+    // processes being started by us:    
     List<ProcessInstance> processInstances = getProcessEngine().getRuntimeService().createProcessInstanceQuery() //
-      .variableValueEquals(VARIABLE_NAME, variableValue)
+      .variableValueEquals(VARIABLE_NAME, processInstanceId)
       .list();
     for (ProcessInstance pi : processInstances) {
-      linkedProcesses.add( ProcessInstanceDto.fromProcessInstance(pi) );
-    }
-    
+      linkedProcesses.add( LinkedProcessInstanceDto.fromProcessInstance(pi) );
+    }   
     
     // process which started us 
     String callingProcessInstanceId = (String) getProcessEngine().getRuntimeService().getVariable(processInstanceId, VARIABLE_NAME);
     if (callingProcessInstanceId!=null) {
+      // At the moment we only consider running instances - extend to historic as soon as cockpit it capable of it
       ProcessInstance processInstance = getProcessEngine().getRuntimeService().createProcessInstanceQuery() //
            .processInstanceId(callingProcessInstanceId)
            .singleResult();
-      linkedProcesses.add( ProcessInstanceDto.fromProcessInstance(processInstance) );
+      if (processInstance!=null) {
+        linkedProcesses.add( LinkedProcessInstanceDto.fromProcessInstance(processInstance) );
+      }
+      
+    }
+    
+    // add process definition information
+    for (LinkedProcessInstanceDto dto : linkedProcesses) {
+      ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());
+      dto.setProcessDefinition(pd);
     }
     
     // done
