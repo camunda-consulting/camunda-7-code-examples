@@ -9,8 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.mail.MessagingException;
 
+import org.camunda.bpm.demo.invoice.InvoiceTaskForm;
 import org.camunda.bpm.engine.TaskService;
-import org.camunda.bpm.engine.cdi.compat.TaskForm;
 import org.camunda.bpm.engine.task.Task;
 
 @Model
@@ -25,7 +25,7 @@ public class PutCommentController {
 	private Instance<Conversation> conversationInstance;
 
 	@Inject
-	private TaskForm taskForm;
+	private InvoiceTaskForm taskForm;
 
 	@Inject
 	private Task task;

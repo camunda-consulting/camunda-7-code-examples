@@ -7,9 +7,12 @@
 	
 <ui:define name="metadata">
     <f:metadata>
+     <!-- use own JSF task form see https://groups.google.com/forum/#!msg/camunda-bpm-users/Haqwm-XJk8k/NZ9t5ji1o0QJ 
       <f:viewParam id="taskId" name="taskId" />
       <f:viewParam id="callbackUrl" name="callbackUrl" />
       <f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
+     -->
+      <f:event type="preRenderView" listener="#{camunda.taskForm.startTask()}" />
     </f:metadata>
 </ui:define>
 	
