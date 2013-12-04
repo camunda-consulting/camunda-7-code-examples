@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: CustomTasks
-Bundle-SymbolicName: com.mycompany.modeler.myCustomTask;singleton:=true
+Bundle-Name: Modeler Tasks
+Bundle-SymbolicName: com.mycompany.modeler.tasks;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.mycompany.modeler.customtasks.Activator
-Bundle-Vendor: mycompany
+Bundle-Activator: com.mycompany.modeler.tasks.Activator
+Bundle-Vendor: MY COMPANY
 Require-Bundle: org.eclipse.emf,
  org.eclipse.core.runtime,
  org.eclipse.ui,
@@ -15,6 +15,7 @@ Require-Bundle: org.eclipse.emf,
  org.eclipse.bpmn2,
  org.eclipse.graphiti,
  org.eclipse.graphiti.ui,
- org.eclipse.ui.ide.application;bundle-version="1.0.400"
+ org.eclipse.ui.ide.application,
+ org.eclipse.platform
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

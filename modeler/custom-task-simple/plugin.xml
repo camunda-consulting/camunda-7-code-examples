@@ -4,7 +4,7 @@
    <extension
          point="org.camunda.bpm.modeler.plugin.customtask">
       <provider
-            class="com.mycompany.modeler.customtasks.MyCustomTaskProvider">
+            class="com.mycompany.modeler.tasks.MyCustomTaskProvider">
       </provider>
    </extension>
    <extension

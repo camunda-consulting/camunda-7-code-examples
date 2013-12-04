@@ -1,4 +1,4 @@
-package com.mycompany.modeler.customtasks;
+package com.mycompany.modeler.tasks;
 
 import org.camunda.bpm.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.camunda.bpm.modeler.ui.Images;

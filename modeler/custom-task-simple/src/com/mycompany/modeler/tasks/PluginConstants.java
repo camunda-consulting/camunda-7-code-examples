@@ -1,4 +1,4 @@
-package com.mycompany.modeler.customtasks;
+package com.mycompany.modeler.tasks;
 
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.eclipse.bpmn2.ServiceTask;

@@ -7,9 +7,9 @@
     <version>2.3.0</version>
   </parent>
   
-  <groupId>org.camunda.bpm.modeler.example</groupId>
-  <artifactId>customTask</artifactId>
+  <groupId>com.mycompany.modeler.customtasks</groupId>
+  <artifactId>modeler-tasks</artifactId>
   <packaging>eclipse-plugin</packaging>
-  <name>camunda modeler - example - custom task</name>
-  <description>an example project that show cases the custom task features in the camunda modeler</description>
+  <name>mycompany - custom modeler tasks</name>
+  <description>custom modeler tasks provided by mycompany</description>
 </project>

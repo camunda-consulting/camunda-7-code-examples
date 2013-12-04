@@ -1,4 +1,4 @@
-package com.mycompany.modeler.customtasks;
+package com.mycompany.modeler.tasks;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
