@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%productName" uid="com.mycompany.modeler" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="%productName" uid="org.camunda.bpm.modeler.customModeler" id="org.eclipse.platform.ide" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="eclipse_lg.gif"/>
@@ -35,8 +35,8 @@
    </vm>
 
    <plugins>
-      <plugin id="com.mycompany.modeler.myCustomTask"/>
       <plugin id="org.camunda.bpm.modeler"/>
+      <plugin id="org.camunda.bpm.modeler.plugin.customtask"/>
    </plugins>
 
 
