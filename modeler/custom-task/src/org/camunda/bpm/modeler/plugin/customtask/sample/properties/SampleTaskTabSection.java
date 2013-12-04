@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.ui.platform.GFPropertySection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.views.properties.tabbed.ISection;
 
 /**
  * A tab section that provides the contents for the custom 
@@ -23,6 +24,14 @@ public class SampleTaskTabSection extends AbstractTabSection {
 		return new SampleTaskTabCompositeFactory(this, parent).createCompositeForBusinessObject((BaseElement) businessObject);
 	}
 	
+	/**
+	 * Creating the composite for an {@link ISection}.
+	 * 
+	 * @author nico.rehwaldt
+	 * 
+	 * @see FieldInjectionUtil
+	 * @see PropertyUtil
+	 */
 	private static class SampleTaskTabCompositeFactory extends AbstractTabCompositeFactory<BaseElement> {
 
 		public SampleTaskTabCompositeFactory(GFPropertySection section, Composite parent) {
@@ -33,7 +42,8 @@ public class SampleTaskTabSection extends AbstractTabSection {
 		public Composite createCompositeForBusinessObject(BaseElement baseElement) {
 
 			Text stringText = FieldInjectionUtil.createLongStringText(section, parent, "Variable (long)", "variable_long", baseElement);
-			
+
+			// attach a note to the parent object
 			PropertyUtil.attachNoteWithLink(section, stringText, "For more information search <a href=\"http://google.com\">google</a>");
 			
 			Text inlineStringText = FieldInjectionUtil.createText(section, parent, "Variable", "variable", baseElement);

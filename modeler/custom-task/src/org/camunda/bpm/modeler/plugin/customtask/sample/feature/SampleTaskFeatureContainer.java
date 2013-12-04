@@ -1,5 +1,9 @@
 package org.camunda.bpm.modeler.plugin.customtask.sample.feature;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.camunda.bpm.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.camunda.bpm.modeler.core.features.api.IDecorateFeature;
 import org.camunda.bpm.modeler.core.preferences.ShapeStyle;
@@ -15,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.util.IColorConstant;
 
@@ -29,7 +34,7 @@ public class SampleTaskFeatureContainer extends ServiceTaskFeatureContainer {
 
 	@Override
 	public boolean canApplyTo(Object o) {
-		return PluginConstants.appliesTo((EObject) o);
+		return PluginConstants.isMyService((EObject) o);
 	}
 	
 	@Override
@@ -73,5 +78,15 @@ public class SampleTaskFeatureContainer extends ServiceTaskFeatureContainer {
 				return TASK_ICON;
 			}
 		};
+	}
+	
+	@Override
+	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+
+		List<ICustomFeature> features = new ArrayList<ICustomFeature>(Arrays.asList(super.getCustomFeatures(fp)));
+		
+		features.add(new CustomTaskInfoFeature(fp));
+		
+		return features.toArray(new ICustomFeature[0]);
 	}
 }

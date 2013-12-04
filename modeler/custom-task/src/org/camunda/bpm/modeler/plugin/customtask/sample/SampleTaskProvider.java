@@ -39,6 +39,6 @@ public class SampleTaskProvider extends AbstractCustomTaskProvider {
 
 	@Override
 	public boolean appliesTo(EObject eObject) {
-		return PluginConstants.appliesTo(eObject);
+		return PluginConstants.isMyService(eObject);
 	}
 }

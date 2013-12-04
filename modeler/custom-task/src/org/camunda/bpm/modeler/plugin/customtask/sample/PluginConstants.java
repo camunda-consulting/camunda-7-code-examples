@@ -2,7 +2,6 @@ package org.camunda.bpm.modeler.plugin.customtask.sample;
 
 import org.camunda.bpm.modeler.runtime.engine.model.ModelPackage;
 import org.eclipse.bpmn2.ServiceTask;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
@@ -24,10 +23,7 @@ public class PluginConstants {
 	 * 
 	 * @return
 	 */
-	public static boolean appliesTo(EObject eObject) {
-		EClass eClass = eObject.eClass();
-		eClass.getEAllStructuralFeatures().contains(CLASS_STRUCTURAL_FEATURE);
-		
+	public static boolean isMyService(EObject eObject) {
 		return eObject instanceof ServiceTask && CLASS_VALUE.equals(eObject.eGet(CLASS_STRUCTURAL_FEATURE));
 	}
 }
