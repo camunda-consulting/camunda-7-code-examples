@@ -15,6 +15,7 @@ public class FourEyesAdvancedProcessEnginePlugin implements ProcessEnginePlugin 
     List<BpmnParseListener> customPreBPMNParseListeners = processEngineConfiguration.getCustomPreBPMNParseListeners();
     if (customPreBPMNParseListeners == null) {
       customPreBPMNParseListeners = new ArrayList<BpmnParseListener>();
+      processEngineConfiguration.setCustomPreBPMNParseListeners(customPreBPMNParseListeners);
     }
     customPreBPMNParseListeners.add(new FourEyesExtensionsParseListener());
   }
