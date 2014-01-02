@@ -10,19 +10,19 @@ or contributors.
     <th>Description</th>
   </tr>
   <tr>
-    <td>Show Cases</td>
+    <td>[Show Cases](https://github.com/camunda/camunda-consulting/tree/master/showcases)</td>
     <td>Complete demo applications showing more complex scenarios</td>
   </tr>
   <tr>
-    <td>Snippets</td>
+    <td>[Snippets](https://github.com/camunda/camunda-consulting/tree/master/snippets)</td>
     <td>Code snippets for particular technical issues</td>
   </tr>
   <tr>
-    <td>Patterns</td>
+    <td>[Patterns](https://github.com/camunda/camunda-consulting/tree/master/patterns)</td>
     <td>Best practice solutions for common problems</td>
   </tr>
   <tr>
-    <td>One-time Examples</td>
+    <td>[One-time Examples](https://github.com/camunda/camunda-consulting/tree/master/one-time-examples)</td>
     <td>Examples created once for a specific event (like a conference or a magazine article)</td>
   </tr>
 </table>
