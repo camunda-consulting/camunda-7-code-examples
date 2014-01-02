@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.impl.ProcessEngineImpl;
+import org.camunda.bpm.engine.impl.cmd.SetProcessDefinitionVersionCmd;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -88,5 +91,17 @@ public class ArquillianTest {
     for (ProcessInstance processInstance : runningInstances) {
       processEngine.getRuntimeService().deleteProcessInstance(processInstance.getId(), "deleted to have a clean environment for Arquillian");
     }
+  }
+  
+  @Test
+  public void testSetProcessDefinitionVersionCommand() {
+    String processInstanceId =
+      "2d4e6f46-5db7-11e3-939c-955eff2bd0a1";
+    int newVersion = 7;
+    SetProcessDefinitionVersionCmd command = 
+      new SetProcessDefinitionVersionCmd(processInstanceId, newVersion);
+    ((ProcessEngineImpl) ProcessEngines.getDefaultProcessEngine())
+        .getProcessEngineConfiguration()
+        .getCommandExecutorTxRequired().execute(command);  
   }
 }
