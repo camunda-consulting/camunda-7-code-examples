@@ -167,8 +167,8 @@ You can approve or not approve the account - check the server logs for the accor
 ![Bank Account Opening][2]
 
 
-[1]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-overview-bank-acount-opening.png
-[2]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-collaboration-bank-acount-opening.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/showcases/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-overview-bank-acount-opening.png
+[2]: https://raw.github.com/camunda/camunda-consulting/master/showcases/bank-account-opening-camel/src/main/webapp/resources/img/bpmn-collaboration-bank-acount-opening.png
 
 
 ## Add JMS (optional)
@@ -219,7 +219,7 @@ You might not yet have any queues in your JBoss - in this case add a `<jms-desti
 
 ### Configure Camel to use JMS from JBoss AS 7
 
-Edit [BootStrap.java](https://github.com/camunda/camunda-bpm-examples/blob/master/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/BootStrap.java) and 
+Edit [BootStrap.java](https://github.com/camunda/camunda-consulting/blob/master/showcases/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/BootStrap.java) and 
 remove the SEDA code and uncomment the code for JMS:
 
 ```java
@@ -229,7 +229,7 @@ jmsComponent.setConnectionFactory(queueConnectionFactory)
 
 ### Send JMS message
 
-Edit [OrderJmsService.java](https://github.com/camunda/camunda-bpm-examples/blob/master/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/jms/OrderJmsService.java) and 
+Edit [OrderJmsService.java](https://github.com/camunda/camunda-consulting/blob/master/showcases/bank-account-opening-camel/src/main/java/org/camunda/demo/camel/jms/OrderJmsService.java) and 
 remove the SEDA code and uncomment the code for JMS.
 
 Redeploy everthing. If that works without errors: Congratulations - you know use JMS!

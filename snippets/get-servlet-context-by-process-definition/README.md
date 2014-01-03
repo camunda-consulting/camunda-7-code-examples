@@ -16,7 +16,7 @@ a central task list needs to load or link to these forms
 and therefore needs to know the corresponding Servlet Context.
 
 The provided Java class
-[ProcessApplicationHelper](https://github.com/camunda/camunda-bpm-examples/blob/master/get-servlet-context-by-process-definition/src/main/java/org/example/get_servlet_context_by_process_definition/ProcessApplicationHelper.java)
+[ProcessApplicationHelper](https://github.com/camunda/camunda-consulting/blob/master/snippets/get-servlet-context-by-process-definition/src/main/java/org/example/get_servlet_context_by_process_definition/ProcessApplicationHelper.java)
 contains two different ways to retrieve the Servlet Context.
 The first one requires the process engine,
 into which the process definition has been deployed,
@@ -24,16 +24,16 @@ to be known upfront.
 The second one searches through all process engines on a server.
 
 ## Source Code Location
-- [GitHub](https://github.com/camunda/camunda-bpm-examples/tree/master/task-name-beautifier)
-- [Download Source Code as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
+- [GitHub](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier)
+- [Download Source Code as ZIP](https://github.com/camunda/camunda-consulting/archive/master.zip)
 
 ## Steps to run the application
 There is no web interface to access the application. To get started refer to the
 Arquillian test case, which by default connects to a camunda BPM Platform running
 locally on JBoss AS 7.
 
-0. [Clone the project via Git](https://github.com/camunda/camunda-bpm-examples)
-   **OR** [Download the sources as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
+0. [Clone the project via Git](https://github.com/camunda/camunda-consulting)
+   **OR** [Download the sources as ZIP](https://github.com/camunda/camunda-consulting/archive/master.zip)
 1. [Download camunda BPM for JBoss AS7](http://www.camunda.org/download/) and [install it](http://docs.camunda.org/guides/installation-guide/jboss/)
 2. Import the Maven project in Eclipse and run a Maven build **OR** Build with command line:
 

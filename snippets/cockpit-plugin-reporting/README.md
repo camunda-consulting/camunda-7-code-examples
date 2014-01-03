@@ -31,4 +31,4 @@ More information
 Read the [plugin development how to](http://docs.camunda.org/latest/real-life/how-to/#cockpit-how-to-develop-a-cockpit-plugin).
 
 
-[1]: https://raw.github.com/camunda/camunda-bpm-examples/master/cockpit-plugin-reporting/screenshot.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/cockpit-plugin-reporting/screenshot.png

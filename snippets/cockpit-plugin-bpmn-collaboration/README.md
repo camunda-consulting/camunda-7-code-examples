@@ -37,6 +37,6 @@ The second screenshot shows the "change" process which was initiated by the "pef
 
 For help please ask at the [camunda BPM User Forum](http://camunda.org/community/forum.html).
 
-[1]: https://raw.github.com/camunda/camunda-bpm-examples/master/cockpit-plugin-bpmn-collaboration/screenshot1.png
-[2]: https://raw.github.com/camunda/camunda-bpm-examples/master/cockpit-plugin-bpmn-collaboration/screenshot2.png
-[3]: https://raw.github.com/camunda/camunda-bpm-examples/master/cockpit-plugin-bpmn-collaboration/cockpit-plugin-bpmn-collaboration-process-example\src\main\resources\collaboration.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/cockpit-plugin-bpmn-collaboration/screenshot1.png
+[2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/cockpit-plugin-bpmn-collaboration/screenshot2.png
+[3]: https://raw.github.com/camunda/camunda-consulting/master/snippets/cockpit-plugin-bpmn-collaboration/cockpit-plugin-bpmn-collaboration-process-example\src\main\resources\collaboration.png

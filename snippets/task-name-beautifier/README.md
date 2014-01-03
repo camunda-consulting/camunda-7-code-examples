@@ -46,7 +46,7 @@ which is added to the process engine configuration of the [camunda BPM platform]
 ## Example Process
 The example process shown below contains a user task with a very long name. For better readability, the modeler of this process decided to add a hyphen to the task name. However, this hyphen is then also shown later in the task list of the users of this process, e.g., an entry like 'Task with terri-  bly long name'.
 
-![BPMN Process containing a User Task with a very long name](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/process.png)
+![BPMN Process containing a User Task with a very long name](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/src/test/resources/process.png)
 
 ## Task Listener
 In order to make this a little more beautiful, you can implement a
@@ -102,7 +102,7 @@ public class TaskNameBeautifierBpmnParseListener extends AbstractBpmnParseListen
 ```
 
 ...which can be added to a standalone process engine configuration
-([camunda.cfg.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/camunda.cfg.xml))
+([camunda.cfg.xml](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/src/test/resources/camunda.cfg.xml))
 like that:
 ```xml
   <bean id="processEngineConfiguration"
@@ -145,7 +145,7 @@ public class TaskNameBeautifierProcessEngineConfiguration
 ## Installation on JBoss AS 7
 
 ### 1. Switch Process Engine Configuration in JBoss AS 7
-Place the [JAR file with the configuration and parse listener class](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar)
+Place the [JAR file with the configuration and parse listener class](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/task-name-beautifier.jar)
 in the directory `$JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main`.
 Add a dependency to the JAR file in
 `$JBOSS_HOME/modules/org/camunda/bpm/jboss/camunda-jboss-subsystem/main/module.xml`
@@ -183,7 +183,7 @@ it needs to be in the classpath of all applications.
 This can be achieved by creating a global JBoss module.
 For that you create a folder `$JBOSS_HOME/modules/org/camunda/bpm/task-name-beautifier/main/`
 and in there a file called
-[module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
+[module.xml](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/src/test/resources/module.xml)
 with the following contents:
 ```xml
 <module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.task-name-beautifier">
@@ -196,7 +196,7 @@ with the following contents:
   </dependencies>
 </module>
 ```
-Place the [JAR file with the task listener class](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar) next to it.
+Place the [JAR file with the task listener class](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/task-name-beautifier.jar) next to it.
 
 Finally, you can add the TaskListener to the classpath of all applications
 by adding a global dependeny in your standalone.xml or domain.xml:
@@ -211,14 +211,14 @@ by adding a global dependeny in your standalone.xml or domain.xml:
 ```
 
 ## Source Code Location
-- [GitHub](https://github.com/camunda/camunda-bpm-examples/tree/master/task-name-beautifier)
-- [Download Source Code as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
-- Pre-built JAR: [task-name-beautifier.jar](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/task-name-beautifier.jar)
-- JBoss	AS7 module descriptor: [module.xml](https://raw.github.com/camunda/camunda-bpm-examples/master/task-name-beautifier/src/test/resources/module.xml)
+- [GitHub](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier)
+- [Download Source Code as ZIP](https://github.com/camunda/camunda-consulting/archive/master.zip)
+- Pre-built JAR: [task-name-beautifier.jar](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/task-name-beautifier.jar)
+- JBoss	AS7 module descriptor: [module.xml](https://raw.github.com/camunda/camunda-consulting/master/snippets/task-name-beautifier/src/test/resources/module.xml)
 
 ## Steps to run the showcase
-0. [Clone the project via Git](https://github.com/camunda/camunda-bpm-examples)
-   **OR** [Download the sources as ZIP](https://github.com/camunda/camunda-bpm-examples/archive/master.zip)
+0. [Clone the project via Git](https://github.com/camunda/camunda-consulting)
+   **OR** [Download the sources as ZIP](https://github.com/camunda/camunda-consulting/archive/master.zip)
 1. For an easy start, you can import the Maven project in Eclipse and run the JUnit tests in the package:
 
         org.camunda.bpm.example.task_name_beautifier.nonarquillian

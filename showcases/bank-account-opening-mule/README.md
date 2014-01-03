@@ -197,5 +197,5 @@ You can approve or not approve the account - check the server logs for the accor
 ![Bank Account Opening][2]
 
 
-[1]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-mule/src/main/webapp/resources/img/bpmn-overview-bank-acount-opening.png
-[2]: https://raw.github.com/camunda/camunda-bpm-examples/master/bank-account-opening-mule/src/main/webapp/resources/img/bpmn-collaboration-bank-acount-opening.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/showcases/bank-account-opening-mule/src/main/webapp/resources/img/bpmn-overview-bank-acount-opening.png
+[2]: https://raw.github.com/camunda/camunda-consulting/master/showcases/bank-account-opening-mule/src/main/webapp/resources/img/bpmn-collaboration-bank-acount-opening.png
