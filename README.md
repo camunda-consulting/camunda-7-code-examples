@@ -10,19 +10,19 @@ or contributors.
     <th>Description</th>
   </tr>
   <tr>
-    <td>[Show Cases](https://github.com/camunda/camunda-consulting/tree/master/showcases)</td>
+    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Show Cases</a></td>
     <td>Complete demo applications showing more complex scenarios</td>
   </tr>
   <tr>
-    <td>[Snippets](https://github.com/camunda/camunda-consulting/tree/master/snippets)</td>
+    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/snippets">Snippets</a></td>
     <td>Code snippets for particular technical issues</td>
   </tr>
   <tr>
-    <td>[Patterns](https://github.com/camunda/camunda-consulting/tree/master/patterns)</td>
+    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/patterns">Patterns</a></td>
     <td>Best practice solutions for common problems</td>
   </tr>
   <tr>
-    <td>[One-time Examples](https://github.com/camunda/camunda-consulting/tree/master/one-time-examples)</td>
+    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples">One-time Examples</a></td>
     <td>Examples created once for a specific event (like a conference or a magazine article)</td>
   </tr>
 </table>
