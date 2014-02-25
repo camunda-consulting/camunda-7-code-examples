@@ -21,7 +21,9 @@ The second screenshot shows the "change" process which was initiated by the "pef
 
 # Getting Started
 
-1. Download the [camunda BPM platform](http://camunda.org/) **(tested on 7.0.0-Final using JBoss AS 7)** from [here](http://camunda.org/download.html).
+**Important:** The Plug-In-API evolved in version 7.1 - so the current code only works from 7.1.0-alpha2 on.
+
+1. Download the [camunda BPM platform](http://camunda.org/) **(tested on 7.1.0-alpha3 using JBoss AS 7)** from [here](http://camunda.org/download.html).
 1. Install it, start it
 1. Clone this repository
 1. Build  and deploy process application

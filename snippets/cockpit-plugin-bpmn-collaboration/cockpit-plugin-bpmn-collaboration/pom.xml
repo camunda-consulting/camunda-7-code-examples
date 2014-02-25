@@ -9,7 +9,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.0.0-Final</camunda.version>
+		<camunda.version>7.1.0-alpha3</camunda.version>
 	</properties>
 	
   <dependencies>
