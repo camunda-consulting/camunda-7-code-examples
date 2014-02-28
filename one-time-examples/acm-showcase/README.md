@@ -16,8 +16,7 @@ Table of Contents
 
 ![Screenshot "Kredit-Cockpit"][1]
 
-[1]: https://raw.github.com/camunda/camunda-consulting/tree/master/one-time-examples/acm-showcase/screenshot.png
-
+[1]: https://raw.github.com/camunda/camunda-consulting/master/one-time-examples/acm-showcase/screenshot.png
 
 
 ## Technical environment
