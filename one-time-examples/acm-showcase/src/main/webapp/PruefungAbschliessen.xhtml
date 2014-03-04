@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="case-form.xhtml">
+
+	<ui:define name="task">
+			<div class="alert alert-danger">
+				Die Prüfungsphase wird verlassen - sind Sie sicher dass der Geschäftsvorfall 
+				bereit ist?
+			</div>
+			
+			<h:panelGroup rendered="#{caseController.caseInstanceInfo.getMessages(task.taskDefinitionKey).size() > 0}">
+				<div class="alert alert-warning">
+					<bold>Achtung - es gibt Warnungen zu dieser Aktivität:</bold>
+					<ul>
+						<ui:repeat
+							value="#{caseController.caseInstanceInfo.getMessages(act.id)}"
+							var="msg">
+							<li>#{msg.content}</li>
+						</ui:repeat>
+					</ul>
+				</div>
+			</h:panelGroup>
+			
+			
+			Verschaffen Sie sich einen Überblick:			
+			<ul>
+				<li>xxx</li>
+			</ul>
+			
+			<div class="formGroup">
+				<label>Wer soll das Votum abgeben?</label>
+				<h:selectOneMenu  value="#{caseController.taskFormVariables['votumUser']}">
+				 	<f:selectItem itemLabel="Demo Demo" itemValue="demo" />
+				 	<f:selectItem itemLabel="John Doe" itemValue="john" />
+				 	<f:selectItem itemLabel="Mary Anne" itemValue="mary" />
+				 	<f:selectItem itemLabel="Peter Meter" itemValue="peter" />
+				</h:selectOneMenu>
+			</div>
+	</ui:define>	
+</ui:composition>

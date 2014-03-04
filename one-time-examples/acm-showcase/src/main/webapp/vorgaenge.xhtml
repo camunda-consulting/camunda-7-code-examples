@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:head>
+			<title>Geschäftsvorfälle</title>
+		</h:head>
+		<h:body>
+			<div class="page-header">
+				<h1>Geschäftsvorfälle</h1>
+			</div>
+			<div class="container">
+				<h:panelGroup rendered="#{caseListController.needle != null}">
+					<h3>Suche: '<h:outputText value="#{caseListController.needle}"/>'</h3>
+					<h:form>
+						<h:dataTable
+							value="#{caseListController.searchResult}"
+							var="currentSearchRow" styleClass="table">
+							<h:column>
+								<a href="case-form.jsf?caseInstanceId=#{currentSearchRow.caseInstance.id}">#{currentSearchRow.caseDefinition.name}</a>							
+							</h:column>
+							<h:column>
+								#{currentSearchRow.creditApplication.customerId}
+							</h:column>
+							<h:column>
+								#{currentSearchRow.creditApplication.customerName}
+							</h:column>
+						</h:dataTable>
+					</h:form>
+					<div style="margin-top:75px;"></div>
+				</h:panelGroup>
+
+
+			
+				<div>
+					<h3>Laufende Geschäftsvorfälle</h3>
+					<h:form>
+					<h:dataTable
+						value="#{caseListController.runningCases}"
+						var="currentCaseRow" styleClass="table">
+						<h:column>
+							<a href="case-form.jsf?caseInstanceId=#{currentCaseRow.caseInstance.id}">#{currentCaseRow.caseDefinition.name}</a>							
+						</h:column>
+						<h:column>
+							#{currentCaseRow.creditApplication.customerId}
+						</h:column>
+						<h:column>
+							#{currentCaseRow.creditApplication.customerName}
+						</h:column>
+					</h:dataTable>
+					</h:form>
+				</div>
+				
+				
+				
+				
+				<div>
+					<h3>Pausierte Geschäftsvorfälle</h3>
+					<table class="table">
+						<tr>
+							<td>Vorgang 01</td>
+							<td>Beschreibung</td>
+						</tr>
+						<tr>
+							<td>Vorgang 02</td>
+							<td>Beschreibung</td>
+						</tr>
+					</table>
+				</div>
+				
+				
+				
+				
+				<div>
+					<h3>Geschlossene Geschäftsvorfälle</h3>
+					<table class="table">
+						<tr>
+							<td>Vorgang 01</td>
+							<td>Beschreibung</td>
+						</tr>
+						<tr>
+							<td>Vorgang 02</td>
+							<td>Beschreibung</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</h:body>
+	</ui:define>
+</ui:composition>

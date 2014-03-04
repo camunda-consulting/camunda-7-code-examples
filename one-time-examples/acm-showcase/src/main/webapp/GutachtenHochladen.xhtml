@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="case-form.xhtml">
+
+	<ui:define name="task-pre-form">
+						<h:panelGroup rendered="#{caseController.documents.size()==0}">
+							Noch keine Dokumente vorhanden.
+						</h:panelGroup>
+						<h:panelGroup rendered="#{caseController.documents.size()>0}">
+							Vorhandene Dokumente:
+						</h:panelGroup>
+						<ul>
+							<ui:repeat value="#{caseController.documents}" var="doc">
+								<li><a href="#{doc.url}">#{doc.name}</a></li>
+							</ui:repeat>
+						</ul>
+						<hr style="padding-bottom: 0px; padding-top: 20px;" />
+						<form ENCTYPE="multipart/form-data"
+							ACTION="uploadDocument" METHOD="POST" role="form"
+							style="padding-bottom: 20px;">
+							<input type="hidden" name="caseInstanceId"
+								value="#{caseController.caseInstance.id}" />
+							<input
+								id="myupload-form" class="form-control" name="file" type="file"
+								style="display: none;" />
+							<div class="container">
+								<div class="row">
+									<div class="col-md-2">
+										<a class="btn btn-default"
+											onclick="$('input[id=myupload-form]').click();">
+											<span class="glyphicon glyphicon-folder-open"></span>
+										</a>
+									</div>									
+							    	<div class="col-md-5">
+							    		<div id="myupload_filename-form">Noch keine Datei ausgewählt</div>
+							    	</div>
+							    	<div class="col-md-1">
+										<input class="btn btn-primary" TYPE="submit" VALUE="Hinzufügen" />
+									</div>
+								</div>
+							</div>
+						</form>
+						<script>
+$('input[id=myupload-form]').change(function() {
+	$('#myupload_filename-form').text($(this).val());
+});						
+						</script>
+	</ui:define>	
+</ui:composition>

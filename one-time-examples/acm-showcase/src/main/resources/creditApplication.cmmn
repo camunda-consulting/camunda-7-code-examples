@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions id="C15A1438-7FEB-41AE-90E5-7452DA449318" name="My First Case"
+             xmlns:camunda="http://activiti.org/bpmn"
+             xmlns:cmmn="http://www.omg.org/spec/CMMN/20121031/MODEL"
+             targetNamespace="http://camunda.org/example">
+  <cmmn:case id="creditApplication" name="Kreditantrag">
+  	<cmmn:casePlanModel autoComplete="false" name="" description="" id="what">
+        <cmmn:stage id="pruefung" name="Prüfung">
+            <cmmn:humanTask id="neueAntragPruefen" name="Neuen Kreditantrag prüfen"
+                       camunda:assignee="#{assign.get('demo')}" camunda:formKey="app:case-form.jsf" />
+            <cmmn:processTask id="gutachtenBestellen" name="Gutachten bestellen"
+                       camunda:calledElement="gutachtenBestellen">
+            </cmmn:processTask>
+          
+       
+            <cmmn:humanTask id="ratingsErstellen" name="Ratings erstellen"
+                       camunda:assignee="#{assign.get('peter')}" camunda:formKey="app:RatingEingeben.jsf" />
+            <cmmn:humanTask id="ratingsFreigeben" name="Ratings freigeben"
+                       camunda:assignee="#{assign.get('kevin')}" camunda:formKey="app:RatingFreigeben.jsf" />
+          
+            <cmmn:humanTask id="bewertungAbschliessen" name="Prüfung abschliessen"
+                       camunda:assignee="#{assign.get('peter')}" camunda:formKey="app:PruefungAbschliessen.jsf" />                  
+        </cmmn:stage>
+        <cmmn:stage id="votierung" name="Votieren">
+                <cmmn:humanTask id="votumErstellen" name="Votum erstellen"
+                                camunda:assignee="#{votumUser}" camunda:formKey="app:missing.jsf" />     
+        </cmmn:stage>
+        <cmmn:stage id="genehmigung" name="Genehmigen">
+            <cmmn:humanTask id="freigeben" name="Freigeben"
+                                camunda:assignee="#{assign.get('demo')}" camunda:formKey="app:missing.jsf" />                         
+            <cmmn:humanTask id="ablehnen" name="Ablehnen"
+                                camunda:assignee="#{assign.get('demo')}" camunda:formKey="app:missing.jsf" />                         
+        </cmmn:stage>
+        <cmmn:stage id="abschluss" name="Abschliessen">
+                <cmmn:humanTask id="abschliessen" name="Kreditantrag abschliessen"
+                       camunda:assignee="#{assign.get('demo')}" camunda:formKey="app:missing.jsf" />                  
+        </cmmn:stage>
+	    <cmmn:milestone id="geprueft" name="Geprüft"/>
+	    <cmmn:milestone id="votiert" name="Votiert" />
+	    <cmmn:milestone id="genehmigt" name="Genehmigt" />
+	    <cmmn:milestone id="abgeschlossen" name="Abgeschlossen" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+</cmmn:definitions>  

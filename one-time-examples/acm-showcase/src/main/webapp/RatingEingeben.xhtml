@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="case-form.xhtml">
+
+	<ui:define name="task">
+		<div class="row">
+			<div class="col-md-8">
+				<h:commandButton  class="btn btn-default" value="Demo-Rating laden"
+                     action="#{caseController.loadDefaultRating()}" />
+			</div>
+		</div>
+		<div class="row">
+  			<div class="col-md-4"></div>
+  			<div class="col-md-2"><div class="form-group"><strong>Neu</strong></div></div>
+		</div>		
+				
+		
+		<div class="row">
+  			<div class="col-md-4">Schufa:</div>  			
+  			<div class="col-md-2"> 
+				<div class="form-group">
+					<h:selectOneMenu value="#{creditApplication.ratingSchufa}">
+						<f:selectItem itemValue="A" itemLabel="A"></f:selectItem>
+						<f:selectItem itemValue="B" itemLabel="B"></f:selectItem>
+						<f:selectItem itemValue="C" itemLabel="C"></f:selectItem>									
+					</h:selectOneMenu>					
+				</div>
+  			</div>  			  			
+		</div>		
+		
+		<div class="row">
+  			<div class="col-md-4">Creditreform:</div>  			
+  			<div class="col-md-2"> 
+				<div class="form-group">
+					<h:selectOneMenu value="#{creditApplication.ratingCreditreform}">
+						<f:selectItem itemValue="A" itemLabel="A"></f:selectItem>
+						<f:selectItem itemValue="B" itemLabel="B"></f:selectItem>
+						<f:selectItem itemValue="C" itemLabel="C"></f:selectItem>									
+					</h:selectOneMenu>					
+				</div>
+  			</div>  			  			
+		</div>		
+
+	</ui:define>	
+</ui:composition>
