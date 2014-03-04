@@ -25,7 +25,9 @@
 		<delete file="${deploy.jboss.dir}/${ant.project.name}.war" />
 	</target>
 
-	<target name="demo.prepare" description="Makes the process vulnerable">
+	<target name="demo.deploy" depends="demo.prepare, deploy.jboss" description="Makes the process vulnerable" />
+
+	<target name="demo.prepare">
 		<replace token="//throw new Exception" value="throw new Exception" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
 		<replace token="throw new BpmnError" value="//throw new BpmnError" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
 		<delete>
