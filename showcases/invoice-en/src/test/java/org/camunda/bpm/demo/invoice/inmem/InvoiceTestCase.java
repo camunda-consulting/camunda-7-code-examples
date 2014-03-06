@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.context.Conversation;
-import javax.inject.Inject;
-
 import org.camunda.bpm.demo.invoice.test.mock.SvnDelegateMock;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -22,6 +19,9 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
 	
 	@Deployment(resources="camunda-invoice-de.bpmn")
 	public void testHappyPath() {
+		SvnDelegateMock mock = new SvnDelegateMock();
+		Mocks.register("archiveService", mock);
+		
 		ProcessInstance pi = runtimeService.startProcessInstanceByKey("camunda-invoice-de");
 		
 		List<Task> tasks = taskService.createTaskQuery()
@@ -41,8 +41,6 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
 		assertEquals("approveInvoice", tasks.get(0).getTaskDefinitionKey());
 		assertEquals("somebody", tasks.get(0).getAssignee());
 		
-		Mocks.register("archiveService", new SvnDelegateMock());
-		
 		variables = new HashMap<String, Object>();
 		variables.put("approved", Boolean.TRUE);
 		taskService.complete(tasks.get(0).getId(), variables);
@@ -54,6 +52,9 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
 		taskService.complete(tasks.get(0).getId());
 		
 		assertProcessEnded(pi.getId());
+		assertTrue(mock.isCalled());
+		
+//		ProcessTestCoverage.calculate(pi.getId(), processEngine);
 	}
 
 }

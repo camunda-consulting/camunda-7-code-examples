@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="bank-account-opening-error-handling" default="deploy.jboss">
+<project name="process-test-coverage" default="deploy.jboss">
 
 	<property file="build.properties" />
 	<property file="${user.home}/.camunda/build.properties" />
@@ -25,25 +25,13 @@
 		<delete file="${deploy.jboss.dir}/${ant.project.name}.war" />
 	</target>
 
-	<target name="demo.deploy" depends="demo.prepare, deploy.jboss" description="Makes the process vulnerable" />
-
-	<target name="demo.prepare">
-		<replace token="//throw new Exception" value="throw new Exception" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
-		<replace token="throw new BpmnError" value="//throw new BpmnError" file="src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
-		<delete>
-			<fileset dir="src/main/resources">
-				<include name="open-account-errorhandling.bpmn" />
-				<include name="open-account-errorhandling.png" />
-			</fileset>
-		</delete>
-		<copy tofile="src/main/resources/open-account-errorhandling.bpmn" file="src/main/resources/open-account-errorhandling.bpmn.vulnerable" />
-		<copy tofile="src/main/resources/open-account-errorhandling.png" file="src/main/resources/open-account-errorhandling.png.vulnerable" />
+	<target name="deploy.tomcat" depends="package.mvn" description="Copies the process application to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<fail unless="deploy.tomcat.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
+		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.tomcat.dir}" />
 	</target>
 
-	<target name="demo.clean" description="Restore from Git">
-		<exec executable="git" dir="." failonerror="true">
-			<arg line="checkout -- src/main/resources/open-account-errorhandling.* src/main/java/com/camunda/fox/demo/outerspace/errorhandling/AccountSetupDelegate.java"/>
-		</exec>
+	<target name="undeploy.tomcat" description="Deletes the process application from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<delete file="${deploy.tomcat.dir}/${ant.project.name}.war" />
 	</target>
-
+	
 </project>
