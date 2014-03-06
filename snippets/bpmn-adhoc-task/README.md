@@ -20,7 +20,7 @@ This can be easily hooked in camunda BPM with simple workaround. This snippet sh
 
 ![Screenshot "Example process"][1]
 
-[1]: https://raw.github.com/camunda/camunda-consulting/master/snippet/bpmn-adhoc-task/src/main/resources/process.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/bpmn-adhoc-task/src/main/resources/process.png
 
 The implementation is pretty straightforward and uses [http://docs.camunda.org/latest/guides/user-guide/#process-engine-delegation-code-task-listener](Task Listener) which check at the completion of every task the rules if the other tasks should be cancelled. You could easily extend this check and for example check only tasks in the current sub process (to be pretty close to the AdHoc SubProcess).
 
