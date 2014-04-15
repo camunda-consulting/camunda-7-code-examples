@@ -3,6 +3,7 @@ package org.camunda.bpm.demo.cockpit.plugin.bpmncollaboration;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginRootResource;
 import org.camunda.bpm.cockpit.plugin.resource.AbstractPluginRootResource;
 
 /**
@@ -12,7 +13,7 @@ import org.camunda.bpm.cockpit.plugin.resource.AbstractPluginRootResource;
  *
  */
 @Path("plugin/" + BpmnCollaborationPlugin.ID)
-public class BpmnCollaborationRootResource extends AbstractPluginRootResource {
+public class BpmnCollaborationRootResource extends AbstractCockpitPluginRootResource {
 
   public BpmnCollaborationRootResource() {
     super(BpmnCollaborationPlugin.ID);

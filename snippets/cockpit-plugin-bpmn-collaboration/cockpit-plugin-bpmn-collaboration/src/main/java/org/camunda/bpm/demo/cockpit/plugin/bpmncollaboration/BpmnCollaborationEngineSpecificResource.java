@@ -7,11 +7,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import org.camunda.bpm.cockpit.plugin.resource.AbstractPluginResource;
+import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
-public class BpmnCollaborationEngineSpecificResource extends AbstractPluginResource {
+public class BpmnCollaborationEngineSpecificResource extends AbstractCockpitPluginResource {
 
   // TODO: Make configurable (how?)
   private static final String VARIABLE_NAME = "callingProcess";
