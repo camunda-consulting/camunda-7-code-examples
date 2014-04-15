@@ -3,7 +3,7 @@ Sample Reporting plugin for camunda Cockpit
 
 This is a simple plugin that showcases how easy you can build some dashboard as cockpit plugin for [camunda BPM](http://docs.camunda.org).
 
-Built and tested against camunda BPM version `7.0.0-Final`.
+Built and tested against camunda BPM version `7.1.0-Final`.
 
 ![Screenshot][1]
 
@@ -22,7 +22,7 @@ How to use
 
 2. Integrate the JAR in your camunda-*.war file and there under WEB-INF/lib
 
-Now it will be shown on the start screen. Note that in the current preview version the plugin mechanism has a limititation to only be able to show one plugin at a time.
+Now it will be shown on the start screen.
 
 
 More information
