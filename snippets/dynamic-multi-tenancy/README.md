@@ -27,6 +27,7 @@ The tenant manager exposes a WebService via http://localhost:8080/tenantdemo-ten
 - Tenants are stored in a static field in the TenantManager, hence new tenants will vanish after restarting the server
 - The demo is designed for Tomcat and due to JAX-WS packaging limited to it.
 - Adding new process definitions on-the-fly was a requirement as well - this is not yet shown
+- The process application are not yet de-registered during shutdown of the engines or process applications - this should be added
 
 
 ## Technical environment
