@@ -6,6 +6,9 @@ camunda BPM provides the shared engine running with multiple processes in differ
  
 and prints the registry in the browser in order to do diagnossis in case of any problems.
 
+It shows
+ deploymentId -> Process Application Name
+
 ![Screenshot][1]
 
 [1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/camunda-shared-engine-registration-check/screenshot.png
