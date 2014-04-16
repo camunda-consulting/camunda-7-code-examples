@@ -24,4 +24,4 @@ Please note that you can retrieve the information via JMX as well - so e.g. on T
 
 ![JConsole][2]
 
-[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/camunda-shared-engine-registration-check/jconsole.png
+[2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/camunda-shared-engine-registration-check/jconsole.png
