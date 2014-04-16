@@ -17,3 +17,11 @@ It shows
 
 * Clone this repo and build the projects using Maven
 * Deploy the  WARs on the container (*tested with JBoss AS 7*)
+
+# The Alternative: JMX / JConsole
+
+Please note that you can retrieve the information via JMX as well - so e.g. on Tomcat this can be done by using jconsole which displays the same information - here I have multiple engines running:
+
+![JConsole][2]
+
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/camunda-shared-engine-registration-check/jconsole.png
