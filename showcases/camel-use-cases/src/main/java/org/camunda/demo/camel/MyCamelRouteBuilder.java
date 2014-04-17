@@ -14,10 +14,11 @@ public class MyCamelRouteBuilder extends RouteBuilder {
 
   public static String dropFolder = System.getProperty("user.home") + System.getProperty("file.separator") + "camunda-bpm-demo-camel";
   
-  public static String consumerKey = "HW62M0Rxtt39CbgdgP1og";
-  public static String consumerSecret = "TJHNqolmPD6aHPtX8ec5Xp5zgIJcsMBTkwMpGCqdGuk";
-  public static String token = "220324559-8hWDVUXMSOaAnmtNNwBuNuhGJ6hOGwNdWHqhdOsU";
-  public static String tokenSecret = "sGBZafB7saWYMwnPQGjjwU9Ggr0IJYkmPdyAFU5PI";
+  public static String consumerKey = "lRhS80iIXXQtm6LM03awjvrvk";
+  public static String consumerSecret = "gabtxwW8lnSL9yQUNdzAfgBOgIMSRqh7MegQs79GlKVWF36qLS";
+  public static String token = "220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo";
+  public static String tokenSecret = "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say"; 
+
 
   @Override
   public void configure() throws Exception {    
