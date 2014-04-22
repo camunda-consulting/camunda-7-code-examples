@@ -15,7 +15,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<camunda.version>7.1.0-Final</camunda.version>
-		<camunda.camel.version>0.1-SNAPSHOT</camunda.camel.version>
+		<camunda.camel.version>0.1</camunda.camel.version>
 		<camel.version>2.12.3</camel.version>
 		<jboss.version>7.2.0.Final</jboss.version>
 	</properties>
@@ -38,7 +38,7 @@
 
 		<!-- camunda BPM Apache Camel Integration -->
 		<dependency>
-			<groupId>org.camunda.bpm.incubation</groupId>
+			<groupId>org.camunda.bpm.extension.camel</groupId>
 			<artifactId>camunda-bpm-camel-cdi</artifactId>
 			<version>${camunda.camel.version}</version>
 			<exclusions>
