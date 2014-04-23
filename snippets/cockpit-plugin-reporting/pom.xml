@@ -21,10 +21,16 @@
     </dependency>
     <dependency>
       <groupId>org.jboss.spec</groupId>
-      <artifactId>jboss-javaee-6.0</artifactId>
+      <artifactId>jboss-javaee-web-6.0</artifactId>
+      <version>3.0.2.Final</version>
       <type>pom</type>
       <scope>provided</scope>
-      <version>3.0.2.Final</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>xalan</artifactId>
+          <groupId>xalan</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- test dependencies -->
     <dependency>
