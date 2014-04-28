@@ -1,5 +1,8 @@
 package org.camunda.bpm.example.asynchronous_messaging_jms;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -38,15 +41,19 @@ public class CallbackService {
 //    System.out.println("do callback on execution " + executionId);
     
     
-    Execution execution = runtimeService.createExecutionQuery()
-            .processVariableValueEquals("correllationId", correlationKey)
-            .singleResult();
+//    Execution execution = runtimeService.createExecutionQuery()
+//            .processVariableValueEquals("correllationId", correlationKey)
+//            .singleResult();
 
 //    Execution execution = runtimeService.createExecutionQuery()
 //            .processInstanceBusinessKey(correlationKey)
 //            .singleResult();
     
-    runtimeService.signal(execution.getId(), variables);  
+//    runtimeService.signal(execution.getId(), variables);
+	  
+	  Map<String,Object> correlationKeys = new HashMap<String, Object>();
+	  correlationKeys.put("correllationId", correlationKey);
+	  runtimeService.correlateMessage("serviceExecutionCompleted", correlationKeys);
   }
   
   public void triggerAsynchronousCallback(String asynchronousCorrelationKey) {
