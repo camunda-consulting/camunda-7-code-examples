@@ -7,7 +7,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
-import org.camunda.bpm.demo.cockpit.plugin.bpmncollaboration.LinkedProcessInstanceDto;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
