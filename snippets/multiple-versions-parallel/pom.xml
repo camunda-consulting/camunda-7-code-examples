@@ -94,7 +94,7 @@
   </repositories>
   
   <build>
-    <finalName>${project.artifactId}</finalName>
+    <finalName>${project.artifactId}-v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
