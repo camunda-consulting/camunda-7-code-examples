@@ -23,7 +23,7 @@ ngDefine('cockpit.plugin.bpmn-collaboration', function(module) {
   // register Plugin
   var Configuration = function PluginConfiguration(ViewsProvider) {
 
-    ViewsProvider.registerDefaultView('cockpit.processInstance.instanceDetails', {
+    ViewsProvider.registerDefaultView('cockpit.processInstance.runtime.tab', {
       id: 'linked-process-instances-tab',
       label: 'Process Instances related via Collaboration',
       url: 'plugin://bpmn-collaboration/static/app/linked-process-instance-table.html',
