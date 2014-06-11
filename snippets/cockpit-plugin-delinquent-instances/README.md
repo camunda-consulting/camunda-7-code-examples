@@ -1,8 +1,7 @@
 Sample plugin for camunda Cockpit showing delinquent process instances
 =================================
 
-This is a simple plugin that showcases how you can add a list of delinquent process instances to the 
-cockpit homepage - as this is pretty handy for any kind of demo situation.
+This is a simple plugin that showcases how you can add a list of delinquent process instances to the cockpit homepage.
 
 Built and tested against camunda BPM version `7.1.0-Final`.
 
