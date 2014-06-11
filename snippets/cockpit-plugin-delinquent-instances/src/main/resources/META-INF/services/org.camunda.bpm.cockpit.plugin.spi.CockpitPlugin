@@ -1,1 +1,1 @@
-org.camunda.bpm.demo.cockpit.plugin.recentinstances.RecentInstancesPlugin
+org.camunda.bpm.demo.cockpit.plugin.delinquentinstances.DelinquentInstancesPlugin

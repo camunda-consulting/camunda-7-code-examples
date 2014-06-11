@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.camunda.bpm.example.cockpit.plugin</groupId>
-  <artifactId>cockpit-plugin-recent-instances</artifactId>
+  <artifactId>cockpit-plugin-delinquent-instances</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 

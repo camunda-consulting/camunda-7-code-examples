@@ -1,13 +1,13 @@
-package org.camunda.bpm.demo.cockpit.plugin.recentinstances;
+package org.camunda.bpm.demo.cockpit.plugin.delinquentinstances;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.camunda.bpm.cockpit.plugin.spi.impl.AbstractCockpitPlugin;
 
-public class RecentInstancesPlugin extends AbstractCockpitPlugin {
+public class DelinquentInstancesPlugin extends AbstractCockpitPlugin {
 
-  public static final String ID = "recent-instances";
+  public static final String ID = "delinquent-instances";
 
   public String getId() {
     return ID;
@@ -17,7 +17,7 @@ public class RecentInstancesPlugin extends AbstractCockpitPlugin {
   public Set<Class<?>> getResourceClasses() {
     Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    classes.add(RecentInstancesRootResource.class);
+    classes.add(DelinquentInstancesRootResource.class);
 
     return classes;
   }

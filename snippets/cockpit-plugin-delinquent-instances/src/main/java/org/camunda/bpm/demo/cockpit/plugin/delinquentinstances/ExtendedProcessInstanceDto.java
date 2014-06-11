@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.cockpit.plugin.recentinstances;
+package org.camunda.bpm.demo.cockpit.plugin.delinquentinstances;
 
 import java.util.Date;
 

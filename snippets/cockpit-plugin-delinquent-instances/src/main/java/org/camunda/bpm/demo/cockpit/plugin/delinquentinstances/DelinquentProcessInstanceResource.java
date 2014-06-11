@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.cockpit.plugin.recentinstances;
+package org.camunda.bpm.demo.cockpit.plugin.delinquentinstances;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,16 @@ import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
-public class RecentProcessInstanceResource extends AbstractCockpitPluginResource {
+public class DelinquentProcessInstanceResource extends AbstractCockpitPluginResource {
 
-  public RecentProcessInstanceResource(String engineName) {
+  public DelinquentProcessInstanceResource(String engineName) {
     super(engineName);
   }
 
   @GET
   @Path("process-instance")
-  public List<ExtendedProcessInstanceDto> getRecentProcessInstances() {
-    ArrayList<ExtendedProcessInstanceDto> recentProcessInstances = new ArrayList<ExtendedProcessInstanceDto>();
+  public List<ExtendedProcessInstanceDto> getDelinquentProcessInstances() {
+    ArrayList<ExtendedProcessInstanceDto> delinquentProcessInstances = new ArrayList<ExtendedProcessInstanceDto>();
     
     // processes being started by us:    
     List<ProcessInstance> processInstances = getProcessEngine().getRuntimeService() //
@@ -38,10 +38,10 @@ public class RecentProcessInstanceResource extends AbstractCockpitPluginResource
         dto.setStartTime(historicProcessInstance.getStartTime());
       }
       
-      recentProcessInstances.add( dto );
+      delinquentProcessInstances.add( dto );
     }   
     
-    return recentProcessInstances;
+    return delinquentProcessInstances;
   }
 
 }
