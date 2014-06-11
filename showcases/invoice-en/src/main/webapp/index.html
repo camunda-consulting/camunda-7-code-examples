@@ -3,7 +3,7 @@
 <head>
 	<title>Showcase: Invoice Receipt</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  	<link rel="shortcut icon" type="image/x-icon" href="../../tasklist/resources/img/fox.ico" />
+  	<link rel="shortcut icon" type="image/x-icon" href="/camunda/assets/img/favicon.ico" />
 
 	<link type="text/css" rel="stylesheet" href="/invoice-en/javax.faces.resource/css/bootstrap.css.jsf" />
 	<script type="text/javascript" src="/invoice-en/javax.faces.resource/js/jquery.js.jsf"></script>	
@@ -13,9 +13,9 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container-fluid" style="padding: 0;">
-				<a href="/tasklist/" class="brand" style="margin: 0 0 0 17px; padding: 0;"><img
-					src="../../tasklist/resources/img/FoxTasklist_white.png"
-					alt="camunda fox - task list" /></a>
+				<a href="/camunda/app/tasklist/default/" class="brand" style="margin: 0 0 0 17px; padding: 0;"><img
+					src="/camunda/assets/img/tasklist/app-logo.png"
+					alt="camunda Tasklist" /></a>
 			</div>
 		</div>
 	</div>
@@ -24,7 +24,7 @@
 			<h1>Invoice Receipt</h1>
 			<p>Example Application for <a href="http://www.camunda.org/">camunda BPM</a></p>
 			<p>
-				<a href="/tasklist/" class="btn btn-primary btn-large"> Start Via Tasklist </a>
+				<a href="/camunda/app/tasklist/default/" class="btn btn-primary btn-large"> Start Via Tasklist </a>
 			</p>
 		</div>
 
@@ -36,11 +36,11 @@
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade in active" id="go">
 				<ul>
-					<li>Log in to <a href="/tasklist/signin.jsf">fox tasklist</a> (username: kermit; passwort: any desired)</li>
-					<li>Click button 'start process' and choose process (depending on modeling tool, in case of doubt choose 'invoice receipt (fox)')</li>
+					<li>Log in to <a href="/camunda/app/tasklist/default/">camunda Tasklist</a> (username: demo; passwort: demo)</li>
+					<li>Click button 'start process' and choose process (depending on modeling tool, in case of doubt choose 'invoice receipt')</li>
 					<li>Select local PDF file</li>
 					<li>Click on 'start process'</li>
-					<li>In Kermit's tasklist you will see the task 'assign approver'</li>
+					<li>In the tasklist of the demo user you will see the task 'assign approver'</li>
 					<li>Click on 'work on task' to work on task</li>
 					<li>Possibilities in form:
 						<ul>
@@ -79,9 +79,7 @@
 							</p>
 						</td>
 						<td >
-						<!-- 
-							<a href="https://app.camunda.com/confluence/display/foxUserGuide/fox+tasklist">fox userguide</a>
-							 -->
+							<a href="http://docs.camunda.org">camunda userguide</a>
 						</td>
 					</tr>
 					<tr>
@@ -99,12 +97,11 @@
 							There is one JSF form per user task, which itself is is embedded into an template (WEB-INF/templates/template.xhtml). Thereby we can define a central basis layout for the process application in which all forms are integrated consistently.
 							</p>
 							<p>
-							In the template, a variant of twitter bootstrap is referenced, adapted to the fox tasklist, in order to align the design of the forms to the desing of the fox tasklist. This approach can also be used to implement your own corporate design.
+							In the template, a variant of twitter bootstrap is referenced, adapted to camunda Tasklist, in order to align the design of the forms to the desing of the camunda tasklist. This approach can also be used to implement your own corporate design.
 							</p>
 						</td>
 						<td >
-							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Add+forms+to+your+Process+Application">fox userguide</a><br/><br/>
-							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Add+forms+to+your+Process+Application">Twitter Bootstrap</a>
+							<a href="http://docs.camunda.org">camunda userguide</a>
 						</td>
 					</tr>
 					<tr>
@@ -124,15 +121,14 @@
 					<tr>
 						<td>
 							<p>
-							The CDI integration of the fox engine is used quite often in this application, e.g. in order to start aprocess instance out of the servlet, which can be called up from the start form ("StartByUpload").
+							The CDI integration of the camunda engine is used quite often in this application, e.g. in order to start aprocess instance out of the servlet, which can be called up from the start form ("StartByUpload").
 							</p>
 							<p>
 							The example shows how quick and easy even very individual requirements for your process applications can be realized through CDI integration.
 							</p>
 						</td>
 						<td >
-							<a href="https://app.camunda.com/confluence/display/foxUserGuide/CDI+Integration">fox userguide</a><br/><br/>
-						
+							<a href="http://docs.camunda.org">camunda userguide</a>
 						</td>
 					</tr>
 					<tr>
@@ -154,7 +150,7 @@
 							</p>
 						</td>
 						<td >
-							<a href="https://app.camunda.com/confluence/display/foxUserGuide/Process+Diagram+API">fox userguide</a>
+							<a href="http://docs.camunda.org">camunda userguide</a>
 						</td>
 					</tr>
 
@@ -167,13 +163,13 @@
 	         <div class="accordion" id="accordion2">
 	            <div class="accordion-group">
 	              <div class="accordion-heading">
-	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#fox-invoice">
+	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#camunda-invoice">
 	                  camunda Modeler (manufacturer: camunda)
 	                </a>
 	              </div>
-	              <div id="fox-invoice" class="accordion-body collapse">
+	              <div id="camunda-invoice" class="accordion-body collapse">
 	                <div class="accordion-inner">
-						<img id="processDiagram" src="processDiagram?processDefinitionKey=fox-invoice-en" />
+						<img id="processDiagram" src="processDiagram?processDefinitionKey=camunda-invoice-en" />
 	                </div>
 	              </div>
 	            </div>
