@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:fox="http://www.camunda.com/fox" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-130e1e52-1b9b-49a2-b82d-3893f4f76fba" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="7.0.0" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
   <dataStore id="sid-ee0256f8-1740-40c9-afaa-65ad412080e6" isUnlimited="false" name="Offene &#xA;Rechnungen"/>
-  <message id="sid-b591892c-7132-485d-8255-2a97e738668f" name=""/>
+  <message id="sid-b591892c-7132-485d-8255-2a97e738668f" name="invoiceApprovalRequested"/>
   <collaboration id="sid-e6431fde-b49b-4143-9ae7-4cae0e062c2a">
     <participant id="sid-C17FF365-4509-43E7-A1C9-C075163EA182" name="Poststelle"/>
     <participant id="sid-D21978C6-EC73-4EDA-8E3E-D23AABECF3D3" name="Rechnungssteller"/>
