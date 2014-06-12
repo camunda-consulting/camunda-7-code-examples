@@ -1,15 +1,19 @@
 package org.camunda.bpm.demo.cockpit.plugin.delinquentinstances;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.camunda.bpm.cockpit.plugin.resource.AbstractCockpitPluginResource;
-import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 
 public class DelinquentProcessInstanceResource extends AbstractCockpitPluginResource {
 
@@ -20,28 +24,43 @@ public class DelinquentProcessInstanceResource extends AbstractCockpitPluginReso
   @GET
   @Path("process-instance")
   public List<ExtendedProcessInstanceDto> getDelinquentProcessInstances() {
-    ArrayList<ExtendedProcessInstanceDto> delinquentProcessInstances = new ArrayList<ExtendedProcessInstanceDto>();
+    Map<String, ExtendedProcessInstanceDto> delinquentProcessInstances = new HashMap<String, ExtendedProcessInstanceDto>();
     
-    // processes being started by us:    
-    List<ProcessInstance> processInstances = getProcessEngine().getRuntimeService() //
-        .createProcessInstanceQuery() //
-        .orderByProcessInstanceId().desc() //
-        .listPage(0, 20);
-    for (ProcessInstance pi : processInstances) {
-      ExtendedProcessInstanceDto dto = ExtendedProcessInstanceDto.fromProcessInstance(pi);
-      
-      ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());
-      dto.setProcessDefinition(pd);
-      
-      HistoricProcessInstance historicProcessInstance = getProcessEngine().getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(pi.getId()).singleResult();
-      if (historicProcessInstance!=null) {
-        dto.setStartTime(historicProcessInstance.getStartTime());
+    Calendar calendar = Calendar.getInstance();
+    calendar.add(Calendar.DATE, -3);
+    
+    List<Task> delinquentTasks = getProcessEngine().getTaskService()
+    		.createTaskQuery()
+    		.taskCreatedBefore(calendar.getTime())
+    		.orderByTaskCreateTime()
+    		.desc()
+    		.list();
+
+    for (Task task : delinquentTasks) {
+      if (!delinquentProcessInstances.containsKey(task.getProcessInstanceId())) {	
+    	  ExtendedProcessInstanceDto dto = ExtendedProcessInstanceDto.fromTask(task);
+    	  dto.setStartTime(task.getCreateTime());
+          
+    	  ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());
+          dto.setProcessDefinition(pd);
+
+          delinquentProcessInstances.put(task.getProcessInstanceId(), dto);
+      } else {
+    	  ExtendedProcessInstanceDto dto = delinquentProcessInstances.get(task.getProcessInstanceId());
+    	  if (dto.getStartTime().after(task.getCreateTime())) {
+        	  dto.setStartTime(task.getCreateTime());
+    	  }
       }
-      
-      delinquentProcessInstances.add( dto );
     }   
     
-    return delinquentProcessInstances;
+    ArrayList<ExtendedProcessInstanceDto> list = new ArrayList<ExtendedProcessInstanceDto>(delinquentProcessInstances.values());
+    Collections.sort(list, new Comparator<ExtendedProcessInstanceDto>() {
+		@Override
+		public int compare(ExtendedProcessInstanceDto o1, ExtendedProcessInstanceDto o2) {
+			return o1.getStartTime().compareTo(o2.getStartTime());
+		}
+	});
+	return list;
   }
 
 }

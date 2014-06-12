@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.rest.dto.LinkableDto;
 import org.camunda.bpm.engine.rest.dto.runtime.ProcessInstanceDto;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 
 public class ExtendedProcessInstanceDto extends LinkableDto {
   
@@ -35,12 +36,19 @@ public class ExtendedProcessInstanceDto extends LinkableDto {
     return result;
   }
   
+  public static ExtendedProcessInstanceDto fromTask(Task task) {
+    ExtendedProcessInstanceDto result = new ExtendedProcessInstanceDto();
+    result.id = task.getProcessInstanceId();
+    result.processDefinitionId = task.getProcessDefinitionId();
+    return result;
+  }
+  
   public void setProcessDefinition(ProcessDefinition processDefinition) {
     this.processDefinitionId = processDefinition.getId();
     this.processDefinitionKey = processDefinition.getKey();
     this.processDefinitionName = processDefinition.getName();    
   }
-
+  
   public String getId() {
     return id;
   }
@@ -104,7 +112,4 @@ public class ExtendedProcessInstanceDto extends LinkableDto {
   public void setStartTime(Date startTime) {
     this.startTime = startTime;
   }
-
-
-  
 }

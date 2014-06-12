@@ -28,7 +28,7 @@ ngDefine('cockpit.plugin.delinquent-instances', function(module) {
       label: 'Delinquent Process Instances',
       url: 'plugin://delinquent-instances/static/app/delinquent-process-instance-table.html',
       controller: 'DelinquentProcessInstanceController',
-      priority: 15
+      priority: -1
     });
   };
 
