@@ -1,14 +1,14 @@
 package org.camunda.bpm.demo.multi_tenancy;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.ProcessEngineException;
+import org.camunda.bpm.engine.RuntimeService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -20,8 +20,6 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ArquillianTest {
   
-  private static final String PROCESS_DEFINITION_KEY = "multi-tenancy";
-
   @Deployment
   public static WebArchive createDeployment() {
     // resolve given dependencies from Maven POM
@@ -52,27 +50,40 @@ public class ArquillianTest {
 
   @Inject
   private ProcessEngine processEngine;
+  
+  @Inject
+  private RuntimeService runtimeService;
 
-  /**
-   * Tests that the process is executable and reaches its end.
-   */
+  @Inject
+  private Tenant tenant;
+  
   @Test
-  public void testProcessExecution() throws Exception {
-    cleanUpRunningProcessInstances();
-    
-    ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+  public void testTenantAwareProcessEngineInjectionWithoutTenant() throws Exception {
+	  try {
+		  processEngine.getRuntimeService();
+	  } catch (ProcessEngineException e) {
+		  assertEquals("No tenant id specified. A process engine can only be retrieved based on a tenant.", e.getMessage());
+	  }
+  }  
 
-    assertEquals(1, processEngine.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(processInstance.getId()).finished().count());
-  }
+  @Test
+  public void testTenantAwareRuntimeServiceInjectionWithoutTenant() throws Exception {
+	  try {
+		  runtimeService.createExecutionQuery();
+	  } catch (ProcessEngineException e) {
+		  assertEquals("No tenant id specified. A process engine can only be retrieved based on a tenant.", e.getMessage());
+	  }
+  }  
+  
+  @Test
+  public void testTenantAwareProcessEngineInjection() throws Exception {
+	  tenant.setId("default");
+	  assertNotNull(processEngine.getRuntimeService());
+  }  
 
-  /**
-   * Helper to delete all running process instances, which might disturb our Arquillian Test case
-   * Better run test cases in a clean environment, but this is pretty handy for demo purposes
-   */
-  private void cleanUpRunningProcessInstances() {
-    List<ProcessInstance> runningInstances = processEngine.getRuntimeService().createProcessInstanceQuery().processDefinitionKey(PROCESS_DEFINITION_KEY).list();
-    for (ProcessInstance processInstance : runningInstances) {
-      processEngine.getRuntimeService().deleteProcessInstance(processInstance.getId(), "deleted to have a clean environment for Arquillian");
-    }
+  @Test
+  public void testTenantAwareRuntimeServiceInjection() throws Exception {
+	  tenant.setId("default");
+	  assertNotNull(runtimeService.createExecutionQuery());
   }  
 }
