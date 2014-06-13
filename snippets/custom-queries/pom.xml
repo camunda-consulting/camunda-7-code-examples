@@ -11,7 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <arquillian.version>1.0.1.Final</arquillian.version>
     <jboss.version>7.1.3.Final</jboss.version>
-		<camunda.version>7.0.0-Final</camunda.version>
+		<camunda.version>7.1.0-Final</camunda.version>
   </properties>
 
   <dependencies>

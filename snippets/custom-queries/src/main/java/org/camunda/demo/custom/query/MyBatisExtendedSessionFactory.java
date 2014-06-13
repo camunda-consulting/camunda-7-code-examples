@@ -1,11 +1,17 @@
 package org.camunda.demo.custom.query;
 
-import java.io.InputStream;
-
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
+import org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor;
+import org.camunda.bpm.engine.impl.interceptor.CommandInterceptor;
+import org.camunda.bpm.engine.impl.interceptor.LogInterceptor;
 import org.camunda.bpm.engine.impl.util.ReflectUtil;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MyBatisExtendedSessionFactory extends StandaloneProcessEngineConfiguration {
 
@@ -38,6 +44,21 @@ public class MyBatisExtendedSessionFactory extends StandaloneProcessEngineConfig
     initIncidentHandlers();
     initIdentityProviderSessionFactory();
     initSessionFactories();
+  }
+
+  /**
+   * In order to always open a new command context set the property
+   * "alwaysOpenNew" to true inside the CommandContextInterceptor.
+   *
+   * If you execute the custom queries inside the process engine
+   * (for example in a service task), you have to do this.
+   */
+  @Override
+  protected Collection<? extends CommandInterceptor> getDefaultCommandInterceptorsTxRequired() {
+    List<CommandInterceptor> defaultCommandInterceptorsTxRequired = new ArrayList<CommandInterceptor>();
+    defaultCommandInterceptorsTxRequired.add(new LogInterceptor());
+    defaultCommandInterceptorsTxRequired.add(new CommandContextInterceptor(commandContextFactory, this, true));
+    return defaultCommandInterceptorsTxRequired;
   }
 
   @Override
