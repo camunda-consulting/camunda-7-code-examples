@@ -1,4 +1,4 @@
-ngDefine('cockpit.plugin.ige-plugin', function(module) {
+ngDefine('cockpit.plugin.xml-plugin', function(module) {
 
   var ProcessXMLController = function($scope, $http, Uri) {
 
