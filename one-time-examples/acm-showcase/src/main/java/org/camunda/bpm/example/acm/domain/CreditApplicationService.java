@@ -31,7 +31,10 @@ public class CreditApplicationService {
   }
 
   public CreditApplication findCreditApplicationByCaseId(final String caseId) {
-    final long creditApplicationId = (Long) processEngine.getCaseService().getVariable(caseId, CREDIT_APPLICATION_ID);
+    final Long creditApplicationId = (Long) processEngine.getCaseService().getVariable(caseId, CREDIT_APPLICATION_ID);
+    if (creditApplicationId==null) {
+      return null;
+    }
     return entityManager.find(CreditApplication.class, creditApplicationId);
   }
 

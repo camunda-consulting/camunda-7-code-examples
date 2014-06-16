@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.acm.CaseDefinition;
 import org.camunda.bpm.engine.acm.CaseInstance;
+import org.camunda.bpm.engine.impl.persistence.deploy.DeploymentCache;
 import org.camunda.bpm.example.acm.domain.CreditApplication;
 import org.camunda.bpm.example.acm.domain.CreditApplicationService;
 
@@ -44,7 +45,7 @@ public class CaseListController implements Serializable {
             final List<CaseInstance> caseInstances = processEngine.getCaseService().createCaseInstanceQuery().active().list();
             for (final CaseInstance caseInstance : caseInstances) {
                 final CreditApplication creditApplication = service.findCreditApplicationByCaseId(caseInstance.getId());
-                final CaseDefinition caseDefinition = CaseDefinition.mockCaseDefinitions.get(caseInstance.getCaseDefinitionId());
+                final CaseDefinition caseDefinition = DeploymentCache.findCaseDefinitionById(caseInstance.getCaseDefinitionId());
                 rows.add(new CaseRow(caseInstance, caseDefinition, creditApplication));
             }
         }
