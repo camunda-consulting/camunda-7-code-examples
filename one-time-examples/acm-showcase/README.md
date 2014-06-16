@@ -20,15 +20,16 @@ Table of Contents
 
 
 ## Technical environment
-[camunda BPM platform 7.1.0-alpha1-cm (7.1.0-alpha1 with ACM extensions)](https://github.com/berndruecker/camunda-bpm-platform/tree/case-management).
+[camunda BPM platform 7.1.0-Final-acm (7.1.0-Final with ACM prototyp)](https://github.com/berndruecker/camunda-bpm-platform/tree/7.1.0-acm).
 
-**This is an instable hacked version on a private branch**. It was built for a pilot project. There is no guruantee that this will be productized or that it will look like this in the product in a later stage.
+**This is an instable hacked version on a private branch**. It was built for a pilot project. There is no guruantee that this will look like this in the product in a later stage.
+See [JIRA](https://app.camunda.com/jira/secure/RapidBoard.jspa?rapidView=39&quickFilter=158) for details on CMMN implementation in the current platform.
 
 
 
 ## Getting Started
 
-* Build the camunda BPM Platform yourself from this branch: https://github.com/berndruecker/camunda-bpm-platform/tree/case-management. This will result in version *7.1.0-alpha1-cm*.
+* Build the camunda BPM Platform yourself from this branch: https://github.com/berndruecker/camunda-bpm-platform/tree/case-management. This will result in version *7.1.0-Final-acm*.
 * Clone this repo and build the project using Maven
 * Deploy the resulting WAR on the container (*tested only with JBoss AS 7*)
 
@@ -36,7 +37,7 @@ Table of Contents
 
 This example contains a CMMN model: [creditApplication.cmmn](https://github.com/camunda/camunda-consulting/blob/master/one-time-examples/acm-showcase/src/main/resources/creditApplication.cmmn).
 
-CMMN is a specification (close to the first release) of the OMG: [CMMN](http://www.omg.org/spec/CMMN/).
+CMMN is a specification of the OMG: [CMMN](http://www.omg.org/spec/CMMN/).
 
 Currently there is limited modeling support, but the [CMMN Web Modeler](http://www.cmmnwebmodeler.com/) might help. The CMMN looks like this:
 
@@ -49,7 +50,6 @@ Currently there is limited modeling support, but the [CMMN Web Modeler](http://w
 The list of known issues or missing features is quite long. Here the most important ones:
 
 - No CaseDefinition entity / database. No versioning. 
-- Pretty hacky Deployment-Cache, problems when restarting the server are quite common. Best delete your database in this cases.
 - No History of case instances
 - Some CMMN Task Attributes are not yet supported (but would make sense):
   - Repeatable
