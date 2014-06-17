@@ -20,6 +20,7 @@ import org.camunda.bpm.engine.acm.StageDefinition;
 import org.camunda.bpm.engine.acm.activity.CaseActivity;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
+import org.camunda.bpm.engine.impl.persistence.deploy.DeploymentCache;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.example.acm.cmis.CmisClient;
@@ -122,7 +123,7 @@ public class CaseController implements Serializable {
       creditApplication = service.findCreditApplicationByCaseId(caseId);
         caseInstanceInfo = engine.getCaseService().getCaseInstanceInfo(caseId);
         caseInstance = engine.getCaseService().createCaseInstanceQuery().caseInstanceId(caseId).singleResult();
-        caseDefinition = CaseDefinition.mockCaseDefinitions.get(caseInstance.getCaseDefinitionId());
+        caseDefinition = DeploymentCache.findCaseDefinitionById(caseInstance.getCaseDefinitionId());
     }
 
     public void executeCaseActivity(final String activityID) {

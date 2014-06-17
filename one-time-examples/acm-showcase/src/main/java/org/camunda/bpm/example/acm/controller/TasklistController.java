@@ -10,6 +10,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.acm.CaseDefinition;
 import org.camunda.bpm.engine.acm.CaseInstance;
 import org.camunda.bpm.engine.identity.Group;
+import org.camunda.bpm.engine.impl.persistence.deploy.DeploymentCache;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.example.acm.domain.CreditApplication;
 import org.camunda.bpm.example.acm.domain.CreditApplicationService;
@@ -81,7 +82,7 @@ public class TasklistController {
 
             if (task.getCaseInstanceId() != null) {
                 caseInstance = processEngine.getCaseService().createCaseInstanceQuery().caseInstanceId(task.getCaseInstanceId()).singleResult();
-                caseDefinition = CaseDefinition.mockCaseDefinitions.get(caseInstance.getCaseDefinitionId());
+                caseDefinition = DeploymentCache.findCaseDefinitionById(caseInstance.getCaseDefinitionId());
             }
             final Long creditApplicationId = (Long) processEngine.getTaskService().getVariable(task.getId(), CreditApplicationService.CREDIT_APPLICATION_ID);
             if (creditApplicationId != null) {
