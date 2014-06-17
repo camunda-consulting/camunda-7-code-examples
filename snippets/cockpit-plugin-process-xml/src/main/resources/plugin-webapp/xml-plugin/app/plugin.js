@@ -13,7 +13,7 @@ ngDefine('cockpit.plugin.xml-plugin', function(module) {
   var Configuration = function Configuration(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
-	      id: 'process-model-xml',
+	      id: 'process-model-xml-panel',
 	      label: 'XML',
 	      url: 'plugin://xml-plugin/static/app/processmodel.html',
 	      controller: ProcessXMLController,
