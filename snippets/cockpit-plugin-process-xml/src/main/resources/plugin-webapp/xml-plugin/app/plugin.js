@@ -13,9 +13,9 @@ ngDefine('cockpit.plugin.xml-plugin', function(module) {
   var Configuration = function Configuration(ViewsProvider) {
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
-	      id: 'process-model-tab',
+	      id: 'process-model-xml',
 	      label: 'XML',
-	      url: 'plugin://xml-plugin/static/app/Prozessmodell.html',
+	      url: 'plugin://xml-plugin/static/app/processmodel.html',
 	      controller: ProcessXMLController,
 
 	      priority: 9
