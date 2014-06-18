@@ -18,4 +18,4 @@ How to use
 
 3. After starting the cockpit application it will be shown on the process definition screen.
 
-[1]: https://github.com/camunda/camunda-consulting/tree/master/ige-example/ige-business-cockpit-plugin/screenshot.png "Screenshot"
+[1]: https://raw.github.com/camunda/camunda-consulting/tree/master/ige-example/ige-business-cockpit-plugin/screenshot.png "Screenshot"
