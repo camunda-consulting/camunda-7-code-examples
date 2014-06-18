@@ -7,7 +7,7 @@ criteria will be shown in the result table.
 
 Built and tested against camunda BPM version `7.1.0-Final`.
 
-![Screenshot](https://raw.github.com/camunda/camunda-consulting/master/ige-example/ige-business-plugin-process-xml/screenshot.png "Screenshot")
+![Screenshot](https://github.com/camunda/camunda-consulting/tree/master/ige-example/ige-business-cockpit-plugin/screenshot.png "Screenshot")
 
 How to use
 ----------------------
