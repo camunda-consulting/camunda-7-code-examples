@@ -7,7 +7,7 @@ criteria will be shown in the result table.
 
 Built and tested against camunda BPM version `7.1.0-Final`.
 
-![Screenshot](https://github.com/camunda/camunda-consulting/tree/master/ige-example/ige-business-cockpit-plugin/screenshot.png "Screenshot")
+![Screenshot][1]
 
 How to use
 ----------------------
@@ -18,3 +18,4 @@ How to use
 
 3. After starting the cockpit application it will be shown on the process definition screen.
 
+[1]: https://github.com/camunda/camunda-consulting/tree/master/ige-example/ige-business-cockpit-plugin/screenshot.png "Screenshot"
