@@ -1,0 +1,8 @@
+<ch.ipi.esv.fabasoft.bo.Adresse>
+<begruessung>Antrag1</begruessung>
+<strasse>test</strasse>
+<plz>3000</plz>
+<ort>Bern</ort>
+<email>test@test.ch</email>
+<land>Schweiz</land>
+</ch.ipi.esv.fabasoft.bo.Adresse>

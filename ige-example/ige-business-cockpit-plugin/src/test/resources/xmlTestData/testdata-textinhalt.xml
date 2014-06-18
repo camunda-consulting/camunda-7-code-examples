@@ -1,0 +1,7 @@
+<ch.ipi.esv.rmarke.geschaeftsprozesse.business.regeln.bo.Textinhalt>
+<osctCreateID>st_mr_dec_octroi_1ter1</osctCreateID>
+<osctEditID>st_mr_dec_octroi_1ter_1edit</osctEditID>
+<schlagwort class="ch.ipi.esv.fabasoft.bo.enums.r.marke.RMarkeSchalgwort">ABWEISUNGSVERFUEGUNG_R_ANTRAG_PROLONGATION</schlagwort>
+<dokumentenTyp class="ch.ipi.esv.fabasoft.bo.enums.r.marke.RMarkeDokumentenTyp">VERFUEGUNG</dokumentenTyp>
+<optionaleSmartContent/>
+</ch.ipi.esv.rmarke.geschaeftsprozesse.business.regeln.bo.Textinhalt>

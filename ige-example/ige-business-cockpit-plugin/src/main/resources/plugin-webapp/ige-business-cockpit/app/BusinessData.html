@@ -1,0 +1,63 @@
+<div>
+<div class="page-header">
+<h1>IGE Business Data</h1>
+</div>
+<form class="form-inline" role="form">
+<div class="form-group">
+<label class="sr-only" for="schutztitelnummer">Schutztitelnummer</label>
+<input type="string" class="form-control" id="schutztitelnummer"
+	               ng-model="search.titleNumber" 
+	               ng-change="changeModel()">
+<!-- schreibt das Label in das Eingabefeld bei letzter bootstrap version
+placeholder="Schutztitelnummer -->	               
+or	               
+<label class="sr-only" for="gesuchsnummer">Gesuchsnummer</label>
+<input type="string" class="form-control" id="gesuchsnummer"
+	               ng-model="search.requestNumber" 
+	               ng-change="changeModel()">
+<button class="btn btn-default" ng-click="search()">Suchen</button>
+</div>
+</form>
+<div>
+<table class="table table-bordered table-hover table-condensed">
+  <thead>
+    <th>Process Instance</th>
+    <th>Process Name</th>
+    <th>Start Time</th>
+    <th>Incident State</th>
+    <th>Komponente</th>
+    <th>Run State</th>
+    <th>Aktueller Knoten</th>
+    <th>Assignee</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="businessdata in businessdatas">
+      <td>
+        <a href="#/process-instance/{{ businessdata.processInstanceId }}">
+          {{businessdata.processInstanceId | shorten:8}}
+        </a>
+      </td>
+  	  <td>
+  	    <a href="#/process-definition/{{ businessdata.processDefinitionId }}">
+  	      {{businessdata.processName}}
+  	    </a>
+  	  </td>
+  	  <td>{{businessdata.startTime}}</td>
+  	  <td>{{businessdata.incState}}</td>
+      <td>{{businessdata.component}}</td>
+      <td>{{businessdata.runState}}</td>
+  	  <td>{{businessdata.activity}}</td>
+  	  <td>{{businessdata.assignee}}</td>
+    </tr>
+    <tr ng-if="!businessdatas">
+      <td colspan="8"><i class="icon-loading"></i> loading process instances...</td>
+    </tr>
+    <tr ng-if="businessdatas && !businessdatas.length">
+      <td colspan="8">
+        No process instances
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>

@@ -1,0 +1,16 @@
+<list>
+<ch.ipi.esv.frist.api.bo.Frist>
+<createTime>2014-05-19</createTime>
+<createUserID>1557</createUserID>
+<changeTime>2014-05-19 20:33:02.863</changeTime>
+<changeUserID>1557</changeUserID>
+<version>3</version>
+<id>10</id>
+<fristAblaufDat>2014-08-14</fristAblaufDat>
+<status>LAUFEND</status>
+<fristTyp>MANUELL</fristTyp>
+<anzahlVerlaengerungen>3</anzahlVerlaengerungen>
+<geschaeftID>38</geschaeftID>
+<geschaeftstyp>R_MARKE</geschaeftstyp>
+</ch.ipi.esv.frist.api.bo.Frist>
+</list>
