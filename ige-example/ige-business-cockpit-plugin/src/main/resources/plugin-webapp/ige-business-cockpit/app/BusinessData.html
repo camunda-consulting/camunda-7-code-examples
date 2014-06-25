@@ -1,20 +1,13 @@
 <div>
-<div class="page-header">
-<h1>IGE Business Data</h1>
-</div>
 <form class="form-inline" role="form">
 <div class="form-group">
-<label class="sr-only" for="schutztitelnummer">Schutztitelnummer</label>
+<label class="sr-only" for="schutztitelnummer"><b>Schutztitel-/Gesuchsnummer</b></label>
 <input type="string" class="form-control" id="schutztitelnummer"
 	               ng-model="search.titleNumber" 
 	               ng-change="changeModel()">
 <!-- schreibt das Label in das Eingabefeld bei letzter bootstrap version
-placeholder="Schutztitelnummer -->	               
-or	               
-<label class="sr-only" for="gesuchsnummer">Gesuchsnummer</label>
-<input type="string" class="form-control" id="gesuchsnummer"
-	               ng-model="search.requestNumber" 
-	               ng-change="changeModel()">
+Kombination aus class="sr-only" im label-tag und 
+placeholder="Schutztitel-/Gesuchsnummer" im input-Tag -->	               
 <button class="btn btn-default" ng-click="search()">Suchen</button>
 </div>
 </form>
@@ -25,10 +18,10 @@ or
     <th>Process Name</th>
     <th>Start Time</th>
     <th>Incident State</th>
-    <th>Komponente</th>
     <th>Run State</th>
-    <th>Aktueller Knoten</th>
+    <th>Activity</th>
     <th>Assignee</th>
+    <th>Application</th>
   </thead>
   <tbody>
     <tr ng-repeat="businessdata in businessdatas">
@@ -43,11 +36,13 @@ or
   	    </a>
   	  </td>
   	  <td>{{businessdata.startTime}}</td>
-  	  <td>{{businessdata.incState}}</td>
-      <td>{{businessdata.component}}</td>
+  	  <td>
+  	    <div class="circle circle-green" incidents="{{businessdata.incState}}" state-circle=""></div>
+      </td>
       <td>{{businessdata.runState}}</td>
   	  <td>{{businessdata.activity}}</td>
   	  <td>{{businessdata.assignee}}</td>
+      <td>{{businessdata.component}}</td>
     </tr>
     <tr ng-if="!businessdatas">
       <td colspan="8"><i class="icon-loading"></i> loading process instances...</td>

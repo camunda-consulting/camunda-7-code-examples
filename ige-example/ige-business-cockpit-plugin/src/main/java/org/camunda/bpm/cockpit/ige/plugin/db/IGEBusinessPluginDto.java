@@ -20,32 +20,20 @@ public class IGEBusinessPluginDto extends LinkableDto {
   private String runState;
   private String activity;
   private String assignee;
-  private Integer titleNumber;
-  private Integer requestNumber;
+  private String titleNumber;
+  private String requestNumber;
   
   public IGEBusinessPluginDto() {
   }
   
   public IGEBusinessPluginDto(MultivaluedMap<String, String> queryParameters) {
     if (queryParameters.containsKey("requestnumber")) {
-      Integer requestNum;
-      try {
-        requestNum = new Integer(queryParameters.getFirst("requestnumber"));
-      } catch (NumberFormatException e) {
-        log.warning("let requestnumber be empty: NumberFormatException " + e.getMessage());
-        requestNum = null;
-      }
-      this.requestNumber = requestNum;
+      this.requestNumber = queryParameters.getFirst("requestnumber");
+      log.fine("requestNumber = " + this.requestNumber);
     }
     if (queryParameters.containsKey("titlenumber")) {
-      Integer titleNum;
-      try {
-        titleNum = new Integer(queryParameters.getFirst("titlenumber"));
-      } catch (NumberFormatException e) {
-        log.warning("let titlenumber be empty: NumberFormatException " + e.getMessage());
-        titleNum = null;
-      }
-      this.titleNumber = titleNum;
+      this.titleNumber = queryParameters.getFirst("titlenumber");
+      log.fine("titleNumber = " + this.titleNumber);
     }
   }
   
@@ -88,7 +76,11 @@ public class IGEBusinessPluginDto extends LinkableDto {
     this.component = component;
   }
   public String getRunState() {
-    return runState;
+    if (this.runState == null) {
+      return "active";
+    } else {
+      return "completed";
+    }
   }
   public void setRunState(String runState) {
     this.runState = runState;
@@ -105,16 +97,16 @@ public class IGEBusinessPluginDto extends LinkableDto {
   public void setAssignee(String assignee) {
     this.assignee = assignee;
   }
-  public Integer getTitleNumber() {
+  public String getTitleNumber() {
     return titleNumber;
   }
-  public void setTitleNumber(Integer titleNumber) {
+  public void setTitleNumber(String titleNumber) {
     this.titleNumber = titleNumber;
   }
-  public Integer getRequestNumber() {
+  public String getRequestNumber() {
     return requestNumber;
   }
-  public void setRequestNumber(Integer requestNumber) {
+  public void setRequestNumber(String requestNumber) {
     this.requestNumber = requestNumber;
   }
   @Override

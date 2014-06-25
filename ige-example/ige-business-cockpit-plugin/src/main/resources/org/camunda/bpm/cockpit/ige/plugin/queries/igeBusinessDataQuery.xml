@@ -27,17 +27,17 @@
   INC.INCIDENT_STATE_ as incState,
   DP.name_ as component,
   pi.end_time_ as runState,
-  TA.name_ as activity,
-  TA.assignee_ as assignee 
+  (select TA.ACT_NAME_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as activity,
+  (select TA.ASSIGNEE_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as assignee 
   from 
   act_hi_procinst PI
   inner join act_re_procdef PD on PI.proc_def_id_ = pd.id_
   inner join act_re_deployment DP on DP.id_ = pd.deployment_id_
   left outer join act_hi_incident INC on INC.proc_inst_id_ = pi.id_
-  inner join act_hi_taskinst TA on TA.proc_inst_id_ = pi.id_ and ta.end_time_ is null
-  inner join act_hi_varinst VAR on PI.id_ = VAR.proc_inst_id_ 
-  where (var.name_ = 'SCHUTZTITELNUMMER' and var.double_ = #{parameter.titleNumber})
-  or (var.name_ = 'GESUCHSNUMMER' and var.double_ = #{parameter.requestNumber})
+  inner join act_hi_varinst VAR on PI.id_ = VAR.proc_inst_id_
+  left outer join ACT_RU_EXECUTION EXE ON (PI.ID_ = EXE.PROC_INST_ID_ and EXE.ACT_ID_ is not null) 
+  where (var.name_ = 'SCHUTZTITELNUMMER' and var.text_ = #{parameter.titleNumber})
+  or (var.name_ = 'GESUCHSNUMMER' and var.text_ = #{parameter.requestNumber})
   </select>
 
 </mapper>
