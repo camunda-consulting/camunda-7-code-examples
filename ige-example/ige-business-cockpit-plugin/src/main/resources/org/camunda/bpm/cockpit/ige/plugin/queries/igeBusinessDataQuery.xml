@@ -38,7 +38,7 @@
   left outer join ACT_RU_EXECUTION EXE ON (PI.ID_ = EXE.PROC_INST_ID_ and EXE.ACT_ID_ is not null) 
   where (var.name_ = 'SCHUTZTITELNUMMER' and var.text_ = #{parameter.titleNumber})
   or (var.name_ = 'GESUCHSNUMMER' and var.text_ = #{parameter.titleNumber})
-  order by pi.start_time_ desc
+  order by runState, pi.start_time_ desc
   </select>
 
 </mapper>
