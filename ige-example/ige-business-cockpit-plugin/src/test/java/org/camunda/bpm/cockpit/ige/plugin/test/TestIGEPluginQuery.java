@@ -72,8 +72,7 @@ public class TestIGEPluginQuery extends AbstractCockpitPluginTest {
         log.info("Zeile: " + businessLine);
       }
       
-      igeBusinessDataQueryDto.setTitleNumber(null);
-      igeBusinessDataQueryDto.setRequestNumber("15");
+      igeBusinessDataQueryDto.setTitleNumber("15");
       businessData = getQueryService().executeQuery(
           "cockpit.ige.plugin.igeBusinessCockpitQuery", 
           parameters);
