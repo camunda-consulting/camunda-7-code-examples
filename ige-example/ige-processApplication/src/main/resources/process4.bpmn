@@ -9,7 +9,7 @@
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
-    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="org.camunda.bpm.cockpit.ige.adapter.AlwaysFailingDelegate" camunda:async="true" name="Always Failing Service Task">
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="org.camunda.bpm.cockpit.ige.adapter.RepairableFailingDelegate" camunda:async="true" name="Failing Service Task">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:serviceTask>
