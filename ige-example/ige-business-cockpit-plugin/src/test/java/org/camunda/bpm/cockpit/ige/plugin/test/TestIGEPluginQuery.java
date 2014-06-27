@@ -1,8 +1,6 @@
 package org.camunda.bpm.cockpit.ige.plugin.test;
 
 import static org.junit.Assert.*;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
-import static org.camunda.bpm.engine.test.assertions.ProcessInstanceAssert.*;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*; 
 
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class TestIGEPluginQuery extends AbstractCockpitPluginTest {
       
       QueryParameters<IGEBusinessPluginDto> parameters = new QueryParameters<IGEBusinessPluginDto>();
       IGEBusinessPluginDto igeBusinessDataQueryDto = new IGEBusinessPluginDto();
-      igeBusinessDataQueryDto.setTitleNumber(1193300);
+      igeBusinessDataQueryDto.setTitleNumber("1193300");
       
       parameters.setParameter(igeBusinessDataQueryDto);
       List<IGEBusinessPluginDto> businessData = getQueryService().executeQuery(
@@ -62,7 +60,7 @@ public class TestIGEPluginQuery extends AbstractCockpitPluginTest {
       }
       assertEquals("Liste zu kurz/lang", 1, businessData.size());
       
-      igeBusinessDataQueryDto.setTitleNumber(1193302);
+      igeBusinessDataQueryDto.setTitleNumber("1193302");
       businessData = getQueryService().executeQuery(
           "cockpit.ige.plugin.igeBusinessCockpitQuery", 
           parameters);
@@ -75,7 +73,7 @@ public class TestIGEPluginQuery extends AbstractCockpitPluginTest {
       }
       
       igeBusinessDataQueryDto.setTitleNumber(null);
-      igeBusinessDataQueryDto.setRequestNumber(15);
+      igeBusinessDataQueryDto.setRequestNumber("15");
       businessData = getQueryService().executeQuery(
           "cockpit.ige.plugin.igeBusinessCockpitQuery", 
           parameters);
