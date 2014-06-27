@@ -63,6 +63,13 @@ public class IGEBusinessPluginDto extends LinkableDto {
   public void setStartTime(Timestamp startTime) {
     this.startTime = startTime;
   }
+  public String[] getIncidents() {
+    if (incState == null) {
+      return null;
+    } else {
+      return new String[]{"indicate that an Inc has occured"};
+    }
+  }
   public String getIncState() {
     return incState;
   }
