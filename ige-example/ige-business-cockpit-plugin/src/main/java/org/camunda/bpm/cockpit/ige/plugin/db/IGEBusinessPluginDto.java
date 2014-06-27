@@ -37,6 +37,24 @@ public class IGEBusinessPluginDto extends LinkableDto {
     }
   }
   
+  /**
+   * Gets an array to deal with javascript function to indicate incidents with a red circle
+   * instead of a green one. <p>
+   * The javascript-part is from file app/cockpit/directives/stateCircle.js 
+   * in camunda-webapp.<p>
+   * The html-part is 
+   * <code>&lt;div state-circle incidents="businessdata.incidents"&gt;&lt/div&gt;</code>
+   * 
+   * @return array with one String which is queried in stateCircle.js as part of the response.
+   */
+  public String[] getIncidents() {
+    if (incState == null) {
+      return null;
+    } else {
+      return new String[]{"indicate that an Inc has occured"};
+    }
+  }
+
   public String getProcessInstanceId() {
     return processInstanceId;
   }
@@ -62,13 +80,6 @@ public class IGEBusinessPluginDto extends LinkableDto {
   }
   public void setStartTime(Timestamp startTime) {
     this.startTime = startTime;
-  }
-  public String[] getIncidents() {
-    if (incState == null) {
-      return null;
-    } else {
-      return new String[]{"indicate that an Inc has occured"};
-    }
   }
   public String getIncState() {
     return incState;
