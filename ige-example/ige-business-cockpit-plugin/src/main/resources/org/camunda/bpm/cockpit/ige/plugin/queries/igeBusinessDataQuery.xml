@@ -33,11 +33,12 @@
   act_hi_procinst PI
   inner join act_re_procdef PD on PI.proc_def_id_ = pd.id_
   inner join act_re_deployment DP on DP.id_ = pd.deployment_id_
-  left outer join act_hi_incident INC on INC.proc_inst_id_ = pi.id_
+  left outer join act_hi_incident INC on INC.proc_inst_id_ = pi.id_ and INC.end_time_ is null
   inner join act_hi_varinst VAR on PI.id_ = VAR.proc_inst_id_
   left outer join ACT_RU_EXECUTION EXE ON (PI.ID_ = EXE.PROC_INST_ID_ and EXE.ACT_ID_ is not null) 
   where (var.name_ = 'SCHUTZTITELNUMMER' and var.text_ = #{parameter.titleNumber})
-  or (var.name_ = 'GESUCHSNUMMER' and var.text_ = #{parameter.requestNumber})
+  or (var.name_ = 'GESUCHSNUMMER' and var.text_ = #{parameter.titleNumber})
+  order by pi.start_time_ desc
   </select>
 
 </mapper>
