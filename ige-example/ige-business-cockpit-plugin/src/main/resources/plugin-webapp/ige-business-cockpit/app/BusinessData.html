@@ -26,7 +26,7 @@ placeholder="Schutztitel-/Gesuchsnummer" im input-Tag -->
   <tbody>
     <tr ng-repeat="businessdata in businessdatas">
       <td>
-        <a href="#/process-instance/{{ businessdata.processInstanceId }}">
+        <a href="#/process-instance/{{ businessdata.processInstanceId }}/history">
           {{businessdata.processInstanceId | shorten:8}}
         </a>
       </td>

@@ -7,8 +7,8 @@
   <dependencies>
   	<dependency>
   		<groupId>org.camunda.bpm.webapp</groupId>
-  		<artifactId>camunda-webapp-tomcat</artifactId>
-  		<version>7.1.0-Final</version>
+  		<artifactId>camunda-webapp-ee-tomcat</artifactId>
+  		<version>7.1.2-ee</version>
   		<type>war</type>
   	</dependency>
   	<dependency>

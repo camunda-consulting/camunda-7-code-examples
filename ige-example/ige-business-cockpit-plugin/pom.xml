@@ -8,7 +8,7 @@
   	<dependency>
   		<groupId>org.camunda.bpm.webapp</groupId>
   		<artifactId>camunda-webapp-core</artifactId>
-  		<version>7.1.0-Final</version>
+  		<version>7.1.2-ee</version>
   	</dependency>
   	<dependency>
   		<groupId>junit</groupId>
@@ -19,7 +19,7 @@
   	<dependency>
   		<groupId>org.camunda.bpm</groupId>
   		<artifactId>camunda-engine</artifactId>
-  		<version>7.1.0-Final</version>
+  		<version>7.1.2-ee</version>
   		<scope>test</scope>
   	</dependency>
   	<dependency>
