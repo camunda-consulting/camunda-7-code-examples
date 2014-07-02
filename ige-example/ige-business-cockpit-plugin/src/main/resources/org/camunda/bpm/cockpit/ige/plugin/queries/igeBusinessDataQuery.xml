@@ -26,7 +26,7 @@
   PI.START_TIME_ as startTime,
   INC.INCIDENT_STATE_ as incState,
   DP.name_ as component,
-  pi.end_time_ as runState,
+  coalesce(pi.end_time_, '1900-01-01') as runState,
   (select TA.ACT_NAME_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as activity,
   (select TA.ASSIGNEE_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as assignee 
   from 

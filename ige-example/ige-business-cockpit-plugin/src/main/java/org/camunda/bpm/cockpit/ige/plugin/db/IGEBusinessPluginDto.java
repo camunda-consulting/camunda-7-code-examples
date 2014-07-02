@@ -93,8 +93,15 @@ public class IGEBusinessPluginDto extends LinkableDto {
   public void setComponent(String component) {
     this.component = component;
   }
+  /**
+   * Translates the end_time_ into a runState.
+   * If end_time_ is null, then is the process instance still active.
+   * To show the active lines at the top of the result, the sql statement
+   * coalesce the null value to a low date.
+   * @return 'active' or 'completed'
+   */
   public String getRunState() {
-    if (this.runState == null) {
+    if ("1900-01-01".equals(this.runState)) {
       return "active";
     } else {
       return "completed";
