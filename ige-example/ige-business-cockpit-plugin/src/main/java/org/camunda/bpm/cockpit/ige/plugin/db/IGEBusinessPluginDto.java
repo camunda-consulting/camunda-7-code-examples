@@ -101,7 +101,8 @@ public class IGEBusinessPluginDto extends LinkableDto {
    * @return 'active' or 'completed'
    */
   public String getRunState() {
-    if ("1900-01-01".equals(this.runState)) {
+    if (this.runState != null 
+          && this.runState.startsWith("1900-01-01")) {
       return "active";
     } else {
       return "completed";
