@@ -122,9 +122,11 @@ public class ProcessDiagramController {
     ProcessInstance processInstance = getCurrentProcessInstance();
     if (processInstance != null) {
       DiagramLayout processDiagramLayout = repositoryService.getProcessDiagramLayout(processInstance.getProcessDefinitionId());
-      List<String> activeActivityIds = runtimeService.getActiveActivityIds(processInstance.getId());
-      for (String activeActivityId : activeActivityIds) {
-        list.add(processDiagramLayout.getNode(activeActivityId));
+      if (processDiagramLayout != null) { // happens if no image is deployed
+	      List<String> activeActivityIds = runtimeService.getActiveActivityIds(processInstance.getId());
+	      for (String activeActivityId : activeActivityIds) {
+	        list.add(processDiagramLayout.getNode(activeActivityId));
+	      }
       }
     }
     return list;
