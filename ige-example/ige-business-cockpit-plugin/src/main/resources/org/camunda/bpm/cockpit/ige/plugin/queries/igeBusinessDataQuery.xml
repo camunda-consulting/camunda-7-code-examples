@@ -11,7 +11,7 @@
     <result property="startTime" column="startTime" jdbcType="TIMESTAMP" />
     <result property="incState" column="incState" jdbcType="VARCHAR" />
     <result property="component" column="component" jdbcType="VARCHAR" />
-    <result property="runState" column="runState" jdbcType="VARCHAR" />
+    <result property="endTime" column="endTime" jdbcType="VARCHAR" />
     <result property="activity" column="activity" jdbcType="VARCHAR" />
     <result property="assignee" column="assignee" jdbcType="VARCHAR" />
   </resultMap>
@@ -26,7 +26,7 @@
   PI.START_TIME_ as startTime,
   INC.INCIDENT_STATE_ as incState,
   DP.name_ as component,
-  coalesce(pi.end_time_, date '1900-01-01') as runState,
+  coalesce(pi.end_time_, date '9999-12-31') as endTime,
   (select TA.ACT_NAME_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as activity,
   (select TA.ASSIGNEE_ from act_hi_actinst TA where EXE.ACT_ID_ = TA.ACT_ID_ and EXE.ID_ = TA.EXECUTION_ID_) as assignee 
   from 
@@ -38,7 +38,7 @@
   left outer join ACT_RU_EXECUTION EXE ON (PI.ID_ = EXE.PROC_INST_ID_ and EXE.ACT_ID_ is not null) 
   where (var.name_ = 'SCHUTZTITELNUMMER' and var.text_ = #{parameter.titleNumber})
   or (var.name_ = 'GESUCHSNUMMER' and var.text_ = #{parameter.titleNumber})
-  order by runState, pi.start_time_ desc
+  order by endTime desc, pi.start_time_ desc
   </select>
 
 </mapper>

@@ -17,7 +17,7 @@ public class IGEBusinessPluginDto extends LinkableDto {
   private Timestamp startTime;
   private String incState;
   private String component;
-  private String runState;
+  private String endTime;
   private String activity;
   private String assignee;
   private String titleNumber;
@@ -94,22 +94,21 @@ public class IGEBusinessPluginDto extends LinkableDto {
     this.component = component;
   }
   /**
-   * Translates the end_time_ into a runState.
-   * If end_time_ is null, then is the process instance still active.
+   * If end_time_ is null, then the process instance is still active.
    * To show the active lines at the top of the result, the sql statement
-   * coalesce the null value to a low date.
-   * @return 'active' or 'completed'
+   * coalesce the null value to a high date.
+   * @return 'active' or endTime
    */
-  public String getRunState() {
-    if (this.runState != null 
-          && this.runState.startsWith("1900-01-01")) {
+  public String getEndTime() {
+    if (this.endTime != null 
+          && this.endTime.startsWith("9999-12-31")) {
       return "active";
     } else {
-      return "completed";
+      return endTime;
     }
   }
-  public void setRunState(String runState) {
-    this.runState = runState;
+  public void setEndTime(String endTime) {
+    this.endTime = endTime;
   }
   public String getActivity() {
     return activity;
@@ -143,7 +142,7 @@ public class IGEBusinessPluginDto extends LinkableDto {
         startTime + " " + 
         incState + " " +
         component + " " + 
-        runState + " " +
+        endTime + " " +
         activity + " " +
         assignee;
   }

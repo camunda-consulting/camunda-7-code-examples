@@ -14,17 +14,20 @@ placeholder="Schutztitel-/Gesuchsnummer" im input-Tag -->
 <div>
 <table class="table table-bordered table-hover table-condensed">
   <thead>
+    <th>State</th>
     <th>Process Instance</th>
     <th>Process Name</th>
     <th>Start Time</th>
-    <th>Incident State</th>
-    <th>Run State</th>
+    <th>End Time</th>
     <th>Activity</th>
     <th>Assignee</th>
     <th>Application</th>
   </thead>
   <tbody>
     <tr ng-repeat="businessdata in businessdatas">
+  	  <td>
+  	    <div state-circle incidents="businessdata.incidents"></div>
+      </td>
       <td>
         <a ng-href="{{ businessdata.runState === 'active' 
         		? '#/process-instance/' + businessdata.processInstanceId 
@@ -38,10 +41,7 @@ placeholder="Schutztitel-/Gesuchsnummer" im input-Tag -->
   	    </a>
   	  </td>
   	  <td>{{businessdata.startTime}}</td>
-  	  <td>
-  	    <div state-circle incidents="businessdata.incidents"></div>
-      </td>
-      <td>{{businessdata.runState}}</td>
+      <td>{{businessdata.endTime}}</td>
   	  <td>{{businessdata.activity}}</td>
   	  <td>{{businessdata.assignee}}</td>
       <td>{{businessdata.component}}</td>
