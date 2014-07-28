@@ -9,6 +9,7 @@ In every company you will sooner or later migrate to camunda BPM as your favorit
 When you now want to release the process as real BPMN process model on camunda BPM you normaly have to migrate process definitions as well as running process instances. 
 
 Camunda needs process definitions as valid BPMN 2.0 files (XML). In order to get them you have these options:
+
 1. Your old engine was BPMN 2.0 as well - so there is no migration.
    * Well, theoretically yes. In real-life you always have to migrate some nuts and bolts, e.g. extensions used by the vendors.
 2. Automated conversion from the old format to the new format.
@@ -20,6 +21,7 @@ Camunda needs process definitions as valid BPMN 2.0 files (XML). In order to get
 
 
 For the process instances (the actually more thrilling part) you have two basic options:
+
 1. Run in parallel: You still run the old solution untill no process instances are left. In the meanwhile you start new process instances on camunda BPM. 
    * You need some kind of switch to route incoming requests to the old or new system.
    * You need to take care of operating both systems, e.g. checking failures, calculating KPI's or doing instance counts.
