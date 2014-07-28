@@ -8,7 +8,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 import org.camunda.bpm.engine.acm.CaseDefinition;
-import org.camunda.bpm.engine.acm.CaseHandlingRuleManager;
+import org.camunda.bpm.engine.acm.CaseHandlingEventListener;
 import org.camunda.bpm.engine.acm.CaseInstanceInfo;
 import org.camunda.bpm.engine.acm.event.CaseEvent;
 import org.camunda.bpm.engine.acm.impl.CaseInstanceEntity;
@@ -25,7 +25,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 @Startup
 @Singleton
-public class DroolsCaseHandlingRuleManagerImpl implements CaseHandlingRuleManager {
+public class DroolsCaseHandlingRuleManagerImpl implements CaseHandlingEventListener {
 
     protected static String RULE_BASE_EVENT = "rules-event";
 
@@ -38,7 +38,7 @@ public class DroolsCaseHandlingRuleManagerImpl implements CaseHandlingRuleManage
     @PostConstruct
     protected void setUp() {
         System.out.println("############## set rule handler");
-        CaseDefinition.ruleManager = new DroolsCaseHandlingRuleManagerImpl();
+        CaseDefinition.eventListener = new DroolsCaseHandlingRuleManagerImpl();
     }
 
     protected KnowledgeBase buildKnowledgeBase(final String ruleFile) {
@@ -65,7 +65,7 @@ public class DroolsCaseHandlingRuleManagerImpl implements CaseHandlingRuleManage
     }
 
     @Override
-    public void handleEvent(final CaseInstanceEntity caseInstance, final CaseInstanceInfo status, final CaseDefinition caseDefinition, final CaseEvent event) {
+    public void eventOccured(final CaseInstanceEntity caseInstance, final CaseInstanceInfo status, final CaseDefinition caseDefinition, final CaseEvent event) {
         final StatefulKnowledgeSession wm = createWorkingMemory(RULE_BASE_EVENT);
         prepareWorkingMemory(wm, caseInstance);
 

@@ -35,7 +35,7 @@ public class NewCreditApplication implements Serializable {
     private CaseListController caseListController;
 
     public String saveAction() {
-        CaseDefinition.ruleManager = new DroolsCaseHandlingRuleManagerImpl();
+        CaseDefinition.eventListener = new DroolsCaseHandlingRuleManagerImpl();
         final String caseId = service.saveCreditApplication(creditApplication);
         creditApplication = new CreditApplication();
         caseController.initByCaseId(caseId);

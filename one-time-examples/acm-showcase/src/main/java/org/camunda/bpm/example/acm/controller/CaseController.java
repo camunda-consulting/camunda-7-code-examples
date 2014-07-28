@@ -88,7 +88,7 @@ public class CaseController implements Serializable {
     private void initCaseInstanceAndStartActivityIfPossible(final String caseInstanceId, final String activityId) {
       selectedTask = null;
       initByCaseId(caseInstanceId);
-      if (caseInstanceInfo.getAvailableActivityIds().contains(activityId)) {
+      if (caseInstanceInfo.getAvailablePlanItemIds().contains(activityId)) {
         executeCaseActivityAndSelectTask(activityId);            
       } else {
         CaseActivity activity = null;
@@ -144,12 +144,12 @@ public class CaseController implements Serializable {
             variables.put("assign-user", userName);
         }
 
-        engine.getCaseService().executeCaseActivity(caseInstance.getId(), activityID, variables);
+        engine.getCaseService().executePlanItem(caseInstance.getId(), activityID, variables);
         refreshCaseInfo();
     }
 
     public String executeCaseActivityAndSelectTask(final String activityID) {
-        engine.getCaseService().executeCaseActivity(caseInstance.getId(), activityID, null);
+        engine.getCaseService().executePlanItem(caseInstance.getId(), activityID, null);
 
         // Heuristik: Den letzten Task zum aktuellen Case selektieren - eine
         // Aktivität könnte ja auch
