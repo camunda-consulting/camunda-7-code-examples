@@ -11,6 +11,7 @@ import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
+import org.camunda.bpm.engine.impl.bpmn.behavior.IntermediateThrowNoneEventActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.parser.DataAssociation;
 import org.camunda.bpm.engine.impl.context.Context;
 import org.camunda.bpm.engine.impl.javax.el.PropertyNotFoundException;
@@ -119,22 +120,42 @@ public class MigrationEnabledCallActivityBehavior extends CallActivityBehavior {
       // normal behavior
       PvmProcessInstance subProcessInstance = execution.createSubProcessInstance(processDefinition, businessKey);
       subProcessInstance.start(callActivityVariables);
+      
+      System.out.println(subProcessInstance);      
     }
     else {
       // now there are two possibilities: 
       // 1. The process contains a matching Message Start Event
       // 2. The process contains a matching intermediate event
       ActivityImpl startActivity = processDefinition.findActivity("MIGRATION_SCENARIO_" + migrationScenario);
-      
+            
       // handing over the initial activity is missing in PVM API 
-      ExecutionEntity subProcessInstance = (ExecutionEntity) execution.createSubProcessInstance(processDefinition, businessKey);
+//      ExecutionEntity subProcessInstance = (ExecutionEntity) execution.createSubProcessInstance(processDefinition, businessKey);
       // so we do it the hard way afterwards
-      Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
-      processInstanceStartContextField.setAccessible(true);
-      processInstanceStartContextField.set(subProcessInstance, new ProcessInstanceStartContext(startActivity));
+//      Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
+//      processInstanceStartContextField.setAccessible(true);
+//      processInstanceStartContextField.set(subProcessInstance, new ProcessInstanceStartContext(startActivity));
+//      
+
+      ExecutionEntity subProcessInstance = (ExecutionEntity) processDefinition.createProcessInstanceForInitial(startActivity);
+      subProcessInstance.setBusinessKey(businessKey);
+      
+      subProcessInstance.setSuperExecution((ExecutionEntity)execution);      
+      ((ExecutionEntity)execution).setSubProcessInstance(subProcessInstance);
+      
+      // add start context as the used element is not a StartEvent
+      if (subProcessInstance.getExecutions().size()==1) {        
+        Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
+        processInstanceStartContextField.setAccessible(true);
+        processInstanceStartContextField.set(subProcessInstance.getExecutions().get(0), new ProcessInstanceStartContext(startActivity));
+        
+        subProcessInstance.setActive(false);
+      }
       
       // and start normally
       subProcessInstance.start(callActivityVariables);
+      
+      System.out.println(subProcessInstance);
     }
   }
 

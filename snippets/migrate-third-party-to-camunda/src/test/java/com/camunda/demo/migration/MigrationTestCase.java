@@ -108,6 +108,33 @@ public class MigrationTestCase extends ProcessEngineTestCase {
     assertThat(piSuper).isEnded();
   }  
     
+  @Deployment(resources = {"super-process.bpmn", "called-process-2.bpmn"})
+  public void testMigrationIntoErrorSubProcess() {
+    // Scenario 01: Jump into second hierarchy and there into the Human Task within a Sub Process started by an error    
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIO_03", withVariables("migrationScenario", "03"));
+
+    // check that the process instance exists
+    assertThat(piSuper).isStarted().isNotEnded().isWaitingAtExactly("CallActivityProcessB");
+    
+    // search for existing called process instance and assert it as well
+    ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    // TODO: Why is the subprocess active here?
+    assertThat(piB).isStarted().isNotEnded().isWaitingAtExactly("UserTaskHandleManually");
+
+    // now continue in the process execution
+    assertThat(piB).task("UserTaskHandleManually");
+    complete(task());
+    
+    assertThat(piB).isNotEnded().isWaitingAtExactly("UserTaskDoTheWork").task("UserTaskDoTheWork");
+    complete(task());
+    
+    // TODO: HistoricProcessInstance is missing for piB!
+    
+    assertThat(piB).isEnded();
+    assertThat(piSuper).isEnded();
+  }
+  
   @Deployment(resources = {"super-process.bpmn", "called-process-1.bpmn", "called-process-2.bpmn"})
   public void testMigrationScenario01() {
     // Scenario 01: Jump into second hierarchy and there into the Human Task within a Sub Process started by an error    
