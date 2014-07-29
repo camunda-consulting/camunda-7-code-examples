@@ -10,8 +10,8 @@
     <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
-    <bpmn2:userTask id="UserTask_1" name="do something">
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="UserTaskDoSomething"/>
+    <bpmn2:userTask id="UserTaskDoSomething" name="do something">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -26,7 +26,7 @@
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTask_1" targetRef="CallActivityProcessB"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTaskDoSomething" targetRef="CallActivityProcessB"/>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="CallActivityProcessB" targetRef="EndEvent_1"/>
     <bpmn2:startEvent id="MIGRATION_SCENARIO_01" name="Migration Scenario&#xD;&#xA;01: &quot;Handle Manually&quot;">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
@@ -59,7 +59,7 @@
           <dc:Bounds height="0.0" width="0.0" x="150.0" y="114.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTaskDoSomething">
         <dc:Bounds height="80.0" width="100.0" x="206.0" y="74.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_4" bpmnElement="CallActivityProcessB">

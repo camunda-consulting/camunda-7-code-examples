@@ -13,6 +13,7 @@ import org.camunda.bpm.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.parser.DataAssociation;
 import org.camunda.bpm.engine.impl.context.Context;
+import org.camunda.bpm.engine.impl.javax.el.PropertyNotFoundException;
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity;
 import org.camunda.bpm.engine.impl.pvm.PvmProcessInstance;
 import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
@@ -106,22 +107,35 @@ public class MigrationEnabledCallActivityBehavior extends CallActivityBehavior {
     // UNCHANGED TILL HERE!
     
     // now we create the process instance on a different activity steered by the expression:
-    String migrationScenario = (String) migrationScenarioExpression.getValue(execution);
+    String migrationScenario = null;
+    try {
+      migrationScenario = (String) migrationScenarioExpression.getValue(execution);
+    }
+    catch (ProcessEngineException ex) {
+      // might be the case if the process run in "normal" mode and some variables have not be passed id
+    }
     
-    // now there are two possibilities: 
-    // 1. The process contains a matching Message Start Event
-    // 2. The process contains a matching intermediate event
-    ActivityImpl startActivity = processDefinition.findActivity("MIGRATION_SCENARIO_" + migrationScenario);
-    
-    // handing over the initial activity is missing in PVM API 
-    ExecutionEntity subProcessInstance = (ExecutionEntity) execution.createSubProcessInstance(processDefinition, businessKey);
-    // so we do it the hard way afterwards
-    Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
-    processInstanceStartContextField.setAccessible(true);
-    processInstanceStartContextField.set(subProcessInstance, new ProcessInstanceStartContext(startActivity));
-    
-    // and start normally
-    subProcessInstance.start(callActivityVariables);
+    if (migrationScenario==null) {
+      // normal behavior
+      PvmProcessInstance subProcessInstance = execution.createSubProcessInstance(processDefinition, businessKey);
+      subProcessInstance.start(callActivityVariables);
+    }
+    else {
+      // now there are two possibilities: 
+      // 1. The process contains a matching Message Start Event
+      // 2. The process contains a matching intermediate event
+      ActivityImpl startActivity = processDefinition.findActivity("MIGRATION_SCENARIO_" + migrationScenario);
+      
+      // handing over the initial activity is missing in PVM API 
+      ExecutionEntity subProcessInstance = (ExecutionEntity) execution.createSubProcessInstance(processDefinition, businessKey);
+      // so we do it the hard way afterwards
+      Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
+      processInstanceStartContextField.setAccessible(true);
+      processInstanceStartContextField.set(subProcessInstance, new ProcessInstanceStartContext(startActivity));
+      
+      // and start normally
+      subProcessInstance.start(callActivityVariables);
+    }
   }
 
   public static void copyProperty(String name, Class clazz, CallActivityBehavior from, MigrationEnabledCallActivityBehavior to, boolean addCopy) {

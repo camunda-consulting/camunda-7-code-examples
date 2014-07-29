@@ -1,9 +1,7 @@
 package com.camunda.demo.migration;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.runtimeService;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.withVariables;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration;
@@ -56,9 +54,63 @@ public class MigrationTestCase extends ProcessEngineTestCase {
   }
 
   @Deployment(resources = {"super-process.bpmn", "called-process-1.bpmn", "called-process-2.bpmn"})
-  public void testMigrationScenario01() {
-    // Scenario 01: Jump into second hierarchy and there into the Human Task within a Sub Process started by an error
+  public void testNormalRun() {
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByKey(
+        PROCESS_DEFINITION_KEY_SUPER, withVariables("decision", "A"));
     
+    assertThat(piSuper).isStarted().isNotEnded() // 
+      .isWaitingAtExactly("CallActivityProcessA") //
+      .hasPassed("ServiceTaskCallSomeService");
+    
+    // search for existing called process instance and assert it as well
+    ProcessInstance piA = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piA).isStarted().isNotEnded() //
+      .isWaitingAtExactly("UserTaskDoSomething") //
+      .task();
+    complete(task());
+    
+    // and the next pi down the hierarchy
+    ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piA.getId()).singleResult();
+    assertThat(piB).isStarted().isNotEnded() //
+      .isWaitingAtExactly("UserTaskDoTheWork") //
+      .hasPassed("ServiceTaskWithError") //
+      .task();
+    complete(task());
+    
+    assertThat(piB).isEnded();
+    assertThat(piA).isEnded();
+    assertThat(piSuper).isEnded();
+  }
+  
+  @Deployment(resources = {"super-process.bpmn", "called-process-2.bpmn"})
+  public void testErrorHandlingSubProcess() {
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByKey(
+        PROCESS_DEFINITION_KEY_SUPER, withVariables("decision", "B", "throwError", Boolean.TRUE));
+    
+    assertThat(piSuper).isStarted().isNotEnded() // 
+      .isWaitingAtExactly("CallActivityProcessB") //
+      .hasPassed("ServiceTaskCallSomeService");
+        
+    // sub process
+    ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piB).isStarted().isNotEnded() //
+      .isWaitingAtExactly("UserTaskHandleManually") //
+      .hasPassed("ServiceTaskWithError", "ServiceTaskDoCompensationLogic") //
+      .task();
+    complete(task());
+
+    assertThat(piB) //
+      .isWaitingAtExactly("UserTaskDoTheWork") //
+      .task();
+    complete(task());
+
+    assertThat(piB).isEnded();
+    assertThat(piSuper).isEnded();
+  }  
+    
+  @Deployment(resources = {"super-process.bpmn", "called-process-1.bpmn", "called-process-2.bpmn"})
+  public void testMigrationScenario01() {
+    // Scenario 01: Jump into second hierarchy and there into the Human Task within a Sub Process started by an error    
     ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
         PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIO_01", withVariables("migrationScenario", "01"));
 
@@ -77,7 +129,16 @@ public class MigrationTestCase extends ProcessEngineTestCase {
     ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piA.getId()).singleResult();
     assertThat(piB).isStarted().isNotEnded().isWaitingAtExactly("UserTaskHandleManually");
 
+    // now continue in the process execution
+    assertThat(piB).task("UserTaskHandleManually");
+    complete(task());
     
+    assertThat(piB).isNotEnded().isWaitingAtExactly("UserTaskDoTheWork").task("UserTaskDoTheWork");
+    complete(task());
+
+    assertThat(piB).isEnded();
+    assertThat(piA).isEnded();
+    assertThat(piSuper).isEnded();
   }
 
   @Deployment(resources = {"super-process.bpmn", "called-process-1.bpmn", "called-process-2.bpmn"})
@@ -97,6 +158,13 @@ public class MigrationTestCase extends ProcessEngineTestCase {
     // and the next pi down the hierarchy
     ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
     assertThat(piB).isStarted().isNotEnded().isWaitingAtExactly("UserTaskDoTheWork");
+    
+    // now continue in the process execution
+    assertThat(piB).task("UserTaskDoTheWork");
+    complete(task());
+
+    assertThat(piB).isEnded();
+    assertThat(piSuper).isEnded();
   }
  
 }

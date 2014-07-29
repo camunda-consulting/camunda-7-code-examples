@@ -10,15 +10,15 @@
     <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="ServiceTask_1"/>
-    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="SHOULD_NOT_BE_EXECTUED!" name="call some service">
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="ServiceTaskWithError"/>
+    <bpmn2:serviceTask id="ServiceTaskWithError" camunda:class="com.camunda.demo.migration.MigrationValidationDelegate" name="call some service">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTask_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="business&#xD;&#xA;error&#xD;&#xA;occured" attachedToRef="ServiceTask_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTaskWithError" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="business&#xD;&#xA;error&#xD;&#xA;occured" attachedToRef="ServiceTaskWithError">
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-      <bpmn2:errorEventDefinition id="_ErrorEventDefinition_2"/>
+      <bpmn2:errorEventDefinition id="_ErrorEventDefinition_2" errorRef="Error_1"/>
     </bpmn2:boundaryEvent>
     <bpmn2:subProcess id="SubProcess_1" name="error handling">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
@@ -26,12 +26,12 @@
       <bpmn2:startEvent id="StartEvent_2">
         <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
       </bpmn2:startEvent>
-      <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="StartEvent_2" targetRef="ServiceTask_2"/>
-      <bpmn2:serviceTask id="ServiceTask_2" camunda:class="SHOULD_NOT_BE_EXECTUED!" name="do some compensation logic">
+      <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="StartEvent_2" targetRef="ServiceTaskDoCompensationLogic"/>
+      <bpmn2:serviceTask id="ServiceTaskDoCompensationLogic" camunda:class="com.camunda.demo.migration.MigrationValidationDelegate" name="do some compensation logic">
         <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
       </bpmn2:serviceTask>
-      <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="ServiceTask_2" targetRef="UserTaskHandleManually"/>
+      <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="ServiceTaskDoCompensationLogic" targetRef="UserTaskHandleManually"/>
       <bpmn2:userTask id="UserTaskHandleManually" name="handle&#xD;&#xA;manually">
         <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
         <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
@@ -67,6 +67,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="MIGRATION_SCENARIO_02" targetRef="UserTaskDoTheWork"/>
   </bpmn2:process>
   <bpmn2:message id="Message_1" name="migration-example-process-b#MIGRATION_SCENARIO_02"/>
+  <bpmn2:error id="Error_1" errorCode="ERROR" name="some error"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
@@ -91,7 +92,7 @@
           <dc:Bounds height="0.0" width="0.0" x="121.0" y="111.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTaskWithError">
         <dc:Bounds height="80.0" width="100.0" x="182.0" y="71.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_ExclusiveGateway_5">
@@ -134,7 +135,7 @@
           <dc:Bounds height="6.0" width="6.0" x="383.0" y="252.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_4" bpmnElement="ServiceTask_2">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_4" bpmnElement="ServiceTaskDoCompensationLogic">
         <dc:Bounds height="80.0" width="100.0" x="420.0" y="212.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_ServiceTask_4" targetElement="_BPMNShape_UserTask_3">
