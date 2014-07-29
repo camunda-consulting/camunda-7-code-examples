@@ -16,6 +16,7 @@ import org.camunda.bpm.engine.impl.bpmn.parser.DataAssociation;
 import org.camunda.bpm.engine.impl.context.Context;
 import org.camunda.bpm.engine.impl.javax.el.PropertyNotFoundException;
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity;
+import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.camunda.bpm.engine.impl.pvm.PvmProcessInstance;
 import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
@@ -63,7 +64,7 @@ public class MigrationEnabledCallActivityBehavior extends CallActivityBehavior {
       processDefinitionKey = (String) copy_processDefinitionExpression.getValue(execution);
     }
 
-    ProcessDefinitionImpl processDefinition = null;
+    ProcessDefinitionEntity processDefinition = null;
     if (binding == null || CalledElementBinding.LATEST.getValue().equals(binding)) {
       processDefinition = Context.getProcessEngineConfiguration().getDeploymentCache().findDeployedLatestProcessDefinitionByKey(processDefinitionKey);
     } else if (binding != null && CalledElementBinding.DEPLOYMENT.getValue().equals(binding)) {
@@ -137,25 +138,25 @@ public class MigrationEnabledCallActivityBehavior extends CallActivityBehavior {
 //      processInstanceStartContextField.set(subProcessInstance, new ProcessInstanceStartContext(startActivity));
 //      
 
-      ExecutionEntity subProcessInstance = (ExecutionEntity) processDefinition.createProcessInstanceForInitial(startActivity);
-      subProcessInstance.setBusinessKey(businessKey);
+//      ExecutionEntity subProcessInstance = (ExecutionEntity) processDefinition.createProcessInstanceForInitial(startActivity);
+//      subProcessInstance.setBusinessKey(businessKey);
+      ExecutionEntity subProcessInstance = (ExecutionEntity) processDefinition.createProcessInstance(businessKey, startActivity);
       
       subProcessInstance.setSuperExecution((ExecutionEntity)execution);      
       ((ExecutionEntity)execution).setSubProcessInstance(subProcessInstance);
       
+      // TODO: When to do this? When Element is intermediateNoneEvent
       // add start context as the used element is not a StartEvent
       if (subProcessInstance.getExecutions().size()==1) {        
         Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
         processInstanceStartContextField.setAccessible(true);
         processInstanceStartContextField.set(subProcessInstance.getExecutions().get(0), new ProcessInstanceStartContext(startActivity));
-        
+               
         subProcessInstance.setActive(false);
       }
       
       // and start normally
       subProcessInstance.start(callActivityVariables);
-      
-      System.out.println(subProcessInstance);
     }
   }
 
