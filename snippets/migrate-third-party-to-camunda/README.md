@@ -93,7 +93,9 @@ You can easily edit this via the camunda Modeler:
 ![camunda Modeler][3]
 
 
+So Scenario 1 will look like this when you execute the code below:
 
+![Scenario 1][4]
 
 # Limitations and advantages of approach
 
@@ -125,3 +127,4 @@ Advantages:
 [1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/example-process.png
 [2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/migration-scenarios.png
 [3]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/migration-extension-in-modeler.png
+[4]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/scenario1.png
