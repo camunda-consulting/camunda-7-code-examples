@@ -24,7 +24,7 @@ After adding the migration scenarios we can start a process instance which direc
 
 And this is how it looks like in the BPMN:
 
-![Scenario 1][4]
+![Scenario 1][2]
 
 
 # Show me the important parts 
@@ -37,7 +37,7 @@ And this is how it looks like in the BPMN:
 
 Message start events are used in processes to take a shortcut directly to the state you want to be. They can be started by handing in the message via the public API.
 
-![camunda Modeler][4]
+![Message Start Events][4]
 
 For every message start event we have two conventions
 * The *message name* must be #{process name}#MIGRATION_SCENARIO_#{number}, e.g. *process-b#MIGRATION_SCENARIO_01*. The process name is contained since message names must be unique on the engine and the same migration scenario may be modeled in different processes (e.g. for sub processes). The message is used if you want to start this process instance from the outside world.
@@ -58,7 +58,7 @@ Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)):
 
 Intermediate none events are used as a workaround if you directly want to jump into a sub process. This is actually not valid BPMN 2.0 - but as our core engine can run this pretty well we see this as the smallest trade-off.
 
-![camunda Modeler][5]
+![Intermediate None Events][5]
 
 The convention is
 * The *id* of the intermediate event must be MIGRATION_SCENARIO_#{number}, e.g. *MIGRATION_SCENARIO_01*. 
