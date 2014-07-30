@@ -133,18 +133,35 @@ public class MigrationEnabledCallActivityBehavior extends CallActivityBehavior {
       subProcessInstance.setSuperExecution((ExecutionEntity)execution);      
       ((ExecutionEntity)execution).setSubProcessInstance(subProcessInstance);
       
-      // TODO: When to do this? When Element is intermediateNoneEvent
-      // add start context as the used element is not a StartEvent
-      if (subProcessInstance.getExecutions().size()==1) {        
-        Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
-        processInstanceStartContextField.setAccessible(true);
-        processInstanceStartContextField.set(subProcessInstance.getExecutions().get(0), new ProcessInstanceStartContext(startActivity));
-               
-        subProcessInstance.setActive(false);
+      if (subProcessInstance.getExecutions().size()==1) {
+        healExecution(subProcessInstance, subProcessInstance.getExecutions().get(0), startActivity);
+      }
+      else if (subProcessInstance.getExecutions().size()>1) {
+        throw new ProcessEngineException("starting a process instance in parallel pathes of execution is not possible at the moment");
       }
       
       // and start normally
       subProcessInstance.start(callActivityVariables);
+    }
+  }
+  
+  protected void healExecution(ExecutionEntity parentExecution, ExecutionEntity execution, ActivityImpl startActivity) throws Exception {
+    // parent execution is not active if kids exist
+    parentExecution.setActive(false);    
+
+    // add start context as the used element is not a StartEvent    
+    if (execution.getExecutions().size()==0) {
+      // if root element
+      Field processInstanceStartContextField = ExecutionEntity.class.getDeclaredField("processInstanceStartContext");
+      processInstanceStartContextField.setAccessible(true);
+      processInstanceStartContextField.set(execution, new ProcessInstanceStartContext(startActivity));      
+    }
+    else {
+      for (ExecutionEntity child : execution.getExecutions()) {
+        // actually at the moment it is not possible to have multiple executions here! 
+        // we only jump into one specific hierarchy. But it would be able to extend this behavior.
+        healExecution(execution, child, startActivity);
+      }
     }
   }
 

@@ -161,7 +161,7 @@ The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migrat
     }
 ```
 
-# TestCase
+## TestCase
 
 We implemented a couple of test cases checking that normal process instances are not broken. But of course we test the migration scenarios as the following example shows (leveraging [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-assert)):
 
@@ -195,6 +195,16 @@ We implemented a couple of test cases checking that normal process instances are
     assertThat(piSuper).isEnded();
   }
 ```
+
+# Important Limitation on camunda BPM version.
+
+The current implementation requires some bug fixes to the core engine which are contained in the [org.camunda folder](src/main/java/org/camunda) of this project. These bugs occured as we did some stuff not valid in BPMN 2.0 and hence was not properly tested on the core engine. 
+
+However these bug fixes will be added to
+* 7.2 development head
+* 7.1.5 (next enterprise patch release).
+
+If you do not have these versions please patch the engine yourself with the code applied.
 
 # Further Reading
 

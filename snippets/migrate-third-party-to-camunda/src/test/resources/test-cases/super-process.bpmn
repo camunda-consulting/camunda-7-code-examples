@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_DpnXABe1EeSreu5td4ZyqA" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:process id="migration-test-cases-super-process" name="migration-test-cases-super-process" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:startEvent id="MIGRATION_SCENARIO" name="Various Migration Scenario">
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+      <bpmn2:messageEventDefinition id="_MessageEventDefinition_11" messageRef="Message_2"/>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="MIGRATION_SCENARIO" targetRef="ExclusiveGateway_1"/>
     <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
     </bpmn2:endEvent>
@@ -14,19 +23,6 @@
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="CallActivityC" targetRef="EndEvent_1"/>
-    <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="decision?">
-      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-    </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" name="C" sourceRef="ExclusiveGateway_1" targetRef="CallActivityC">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{decision=='C'}</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="D" sourceRef="ExclusiveGateway_1" targetRef="CallActivityD">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{decision=='D'}</bpmn2:conditionExpression>
-    </bpmn2:sequenceFlow>
     <bpmn2:callActivity id="CallActivityD" name="Process D" calledElement="process-d">
       <bpmn2:extensionElements>
         <camunda:properties>
@@ -37,31 +33,61 @@
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="CallActivityD" targetRef="EndEvent_2"/>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="decision?">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="C" sourceRef="ExclusiveGateway_1" targetRef="CallActivityC">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{decision=='C'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="D" sourceRef="ExclusiveGateway_1" targetRef="CallActivityD">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{decision=='D'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="EndEvent_2">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:startEvent id="StartEvent_1">
-      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
-    </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:startEvent id="MIGRATION_SCENARIO_04" name="Migration Scenario&#xD;&#xA;04: Process C">
-      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_11" messageRef="Message_1"/>
-    </bpmn2:startEvent>
-    <bpmn2:startEvent id="StartEvent_3" name="Migration Scenrio&#xD;&#xA;05: Process D">
-      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_12" messageRef="Message_2"/>
-    </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="MIGRATION_SCENARIO_04" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="StartEvent_3" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:callActivity id="CallActivityE" name="Process E" calledElement="process-e">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:properties>
+          <camunda:property value="MIGRATION_SCENARIO_#{migrationScenario}" name="MIGRATION_SCENARIO"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+    </bpmn2:callActivity>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="E" sourceRef="ExclusiveGateway_1" targetRef="CallActivityE">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{decision=='E'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="EndEvent_3">
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="CallActivityE" targetRef="EndEvent_3"/>
+    <bpmn2:callActivity id="CallActivityF" name="Process F" calledElement="process-f">
+      <bpmn2:extensionElements>
+        <camunda:in variables="all"/>
+        <camunda:properties>
+          <camunda:property value="MIGRATION_SCENARIO_#{migrationScenario}" name="MIGRATION_SCENARIO"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
+    </bpmn2:callActivity>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="ExclusiveGateway_1" targetRef="CallActivityF"/>
+    <bpmn2:endEvent id="EndEvent_4">
+      <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="CallActivityF" targetRef="EndEvent_4"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text>hand in 'decision' as variable</bpmn2:text>
     </bpmn2:textAnnotation>
-    <bpmn2:association id="Association_1" sourceRef="TextAnnotation_1" targetRef="MIGRATION_SCENARIO_04"/>
-    <bpmn2:association id="Association_2" sourceRef="TextAnnotation_1" targetRef="StartEvent_3"/>
+    <bpmn2:association id="Association_1" sourceRef="TextAnnotation_1" targetRef="MIGRATION_SCENARIO"/>
   </bpmn2:process>
-  <bpmn2:message id="Message_1" name="migration-test-cases-super-process#MIGRATION_SCENARIO_04"/>
-  <bpmn2:message id="Message_2" name="migration-test-cases-super-process#MIGRATION_SCENARIO_05"/>
+  <bpmn2:message id="Message_2" name="migration-test-cases-super-process#MIGRATION_SCENARIOS"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="migration-test-cases-super-process">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_33" bpmnElement="StartEvent_1">
@@ -71,92 +97,80 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_115" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="236.0" y="119.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="428.0" y="119.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="61.0" x="286.0" y="136.0"/>
+          <dc:Bounds height="22.0" width="61.0" x="478.0" y="136.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_33" targetElement="_BPMNShape_ExclusiveGateway_115">
         <di:waypoint xsi:type="dc:Point" x="186.0" y="144.0"/>
-        <di:waypoint xsi:type="dc:Point" x="236.0" y="144.0"/>
+        <di:waypoint xsi:type="dc:Point" x="428.0" y="144.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="208.0" y="144.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_26" bpmnElement="CallActivityC">
-        <dc:Bounds height="80.0" width="100.0" x="334.0" y="35.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="526.0" y="35.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_ExclusiveGateway_115" targetElement="_BPMNShape_CallActivity_26">
-        <di:waypoint xsi:type="dc:Point" x="261.0" y="119.0"/>
-        <di:waypoint xsi:type="dc:Point" x="261.0" y="75.0"/>
-        <di:waypoint xsi:type="dc:Point" x="310.0" y="75.0"/>
-        <di:waypoint xsi:type="dc:Point" x="334.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="119.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="502.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="526.0" y="75.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="15.0" x="267.0" y="94.0"/>
+          <dc:Bounds height="22.0" width="15.0" x="465.0" y="88.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_27" bpmnElement="CallActivityD">
-        <dc:Bounds height="80.0" width="100.0" x="336.0" y="204.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="528.0" y="204.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ExclusiveGateway_115" targetElement="_BPMNShape_CallActivity_27">
-        <di:waypoint xsi:type="dc:Point" x="261.0" y="169.0"/>
-        <di:waypoint xsi:type="dc:Point" x="261.0" y="244.0"/>
-        <di:waypoint xsi:type="dc:Point" x="336.0" y="244.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="169.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="244.0"/>
+        <di:waypoint xsi:type="dc:Point" x="528.0" y="244.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="15.0" x="267.0" y="184.0"/>
+          <dc:Bounds height="22.0" width="15.0" x="465.0" y="184.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_68" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="484.0" y="57.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="676.0" y="57.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="502.0" y="98.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="694.0" y="98.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_CallActivity_26" targetElement="_BPMNShape_EndEvent_68">
-        <di:waypoint xsi:type="dc:Point" x="434.0" y="75.0"/>
-        <di:waypoint xsi:type="dc:Point" x="484.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="626.0" y="75.0"/>
+        <di:waypoint xsi:type="dc:Point" x="676.0" y="75.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="456.0" y="75.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="840.0" y="75.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_69" bpmnElement="EndEvent_2">
-        <dc:Bounds height="36.0" width="36.0" x="486.0" y="226.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="678.0" y="226.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="504.0" y="267.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="696.0" y="267.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_CallActivity_27" targetElement="_BPMNShape_EndEvent_69">
-        <di:waypoint xsi:type="dc:Point" x="436.0" y="244.0"/>
-        <di:waypoint xsi:type="dc:Point" x="486.0" y="244.0"/>
+        <di:waypoint xsi:type="dc:Point" x="628.0" y="244.0"/>
+        <di:waypoint xsi:type="dc:Point" x="678.0" y="244.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="540.0" y="255.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="650.0" y="244.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_34" bpmnElement="MIGRATION_SCENARIO_04">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_34" bpmnElement="MIGRATION_SCENARIO">
         <dc:Bounds height="36.0" width="36.0" x="150.0" y="267.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="168.0" y="308.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_35" bpmnElement="StartEvent_3">
-        <dc:Bounds height="36.0" width="36.0" x="150.0" y="347.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="168.0" y="388.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_StartEvent_34" targetElement="_BPMNShape_ExclusiveGateway_115">
         <di:waypoint xsi:type="dc:Point" x="186.0" y="285.0"/>
         <di:waypoint xsi:type="dc:Point" x="211.0" y="285.0"/>
         <di:waypoint xsi:type="dc:Point" x="211.0" y="144.0"/>
-        <di:waypoint xsi:type="dc:Point" x="236.0" y="144.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="_BPMNShape_StartEvent_35" targetElement="_BPMNShape_ExclusiveGateway_115">
-        <di:waypoint xsi:type="dc:Point" x="186.0" y="365.0"/>
-        <di:waypoint xsi:type="dc:Point" x="211.0" y="365.0"/>
-        <di:waypoint xsi:type="dc:Point" x="211.0" y="145.0"/>
-        <di:waypoint xsi:type="dc:Point" x="236.0" y="145.0"/>
+        <di:waypoint xsi:type="dc:Point" x="428.0" y="144.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="208.0" y="254.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="208.0" y="215.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_41" bpmnElement="TextAnnotation_1">
@@ -166,9 +180,38 @@
         <di:waypoint xsi:type="dc:Point" x="267.0" y="316.0"/>
         <di:waypoint xsi:type="dc:Point" x="186.0" y="291.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_Association_2" bpmnElement="Association_2" sourceElement="_BPMNShape_TextAnnotation_41" targetElement="_BPMNShape_StartEvent_35">
-        <di:waypoint xsi:type="dc:Point" x="267.0" y="348.0"/>
-        <di:waypoint xsi:type="dc:Point" x="186.0" y="362.0"/>
+      <bpmndi:BPMNShape id="_BPMNShape_CallActivity_28" bpmnElement="CallActivityE">
+        <dc:Bounds height="80.0" width="100.0" x="528.0" y="304.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="_BPMNShape_ExclusiveGateway_115" targetElement="_BPMNShape_CallActivity_28">
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="169.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="344.0"/>
+        <di:waypoint xsi:type="dc:Point" x="528.0" y="344.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="15.0" x="465.0" y="292.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_76" bpmnElement="EndEvent_3">
+        <dc:Bounds height="36.0" width="36.0" x="678.0" y="326.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_CallActivity_28" targetElement="_BPMNShape_EndEvent_76">
+        <di:waypoint xsi:type="dc:Point" x="628.0" y="344.0"/>
+        <di:waypoint xsi:type="dc:Point" x="678.0" y="344.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_CallActivity_29" bpmnElement="CallActivityF">
+        <dc:Bounds height="80.0" width="100.0" x="528.0" y="404.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_ExclusiveGateway_115" targetElement="_BPMNShape_CallActivity_29">
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="169.0"/>
+        <di:waypoint xsi:type="dc:Point" x="453.0" y="444.0"/>
+        <di:waypoint xsi:type="dc:Point" x="528.0" y="444.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_80" bpmnElement="EndEvent_4">
+        <dc:Bounds height="36.0" width="36.0" x="678.0" y="426.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="_BPMNShape_CallActivity_29" targetElement="_BPMNShape_EndEvent_80">
+        <di:waypoint xsi:type="dc:Point" x="628.0" y="444.0"/>
+        <di:waypoint xsi:type="dc:Point" x="678.0" y="444.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

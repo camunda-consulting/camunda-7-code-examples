@@ -53,14 +53,15 @@ public class AtomicOperationProcessStartInitial extends AtomicOperationActivityI
 
     } else {
       List<ActivityImpl> initialActivityStack = processDefinition.getInitialActivityStack(processInstanceStartContext.getInitial());
-      int index = initialActivityStack.indexOf(activity);
-      activity = initialActivityStack.get(index+1);
+//      int index = initialActivityStack.indexOf(activity);
+      // use the activity "at the end" of the hierarchy:
+      activity = initialActivityStack.get(initialActivityStack.size()-1);
 
-      InterpretableExecution executionToUse = null;
-      if (execution.getActivity().isScope()) { //if (activity.isScope()) {
-        executionToUse = (InterpretableExecution) execution.getExecutions().get(0);
-      } else {
-        executionToUse = execution;
+      // and search for the correct execution to set the Activity to  
+      InterpretableExecution executionToUse = execution; 
+      while (executionToUse.getActivity().isScope()) { //if (activity.isScope()) {        
+        executionToUse.setActive(false); // Deactivate since we jump to a node further down the hierarchy
+        executionToUse = (InterpretableExecution) executionToUse.getExecutions().get(0);
       }
       executionToUse.setActivity(activity);
       executionToUse.performOperation(PROCESS_START_INITIAL);

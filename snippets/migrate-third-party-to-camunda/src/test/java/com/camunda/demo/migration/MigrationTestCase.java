@@ -52,7 +52,7 @@ public class MigrationTestCase extends ProcessEngineTestCase {
     // Scenario 04: Jump into sub process and there into a parallel Gateway
     
     ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
-        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIO_" + migrationScenario,  //
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIOS",  //
         withVariables( //
             "migrationScenario", migrationScenario, //
             "decision", "C"));
@@ -72,5 +72,74 @@ public class MigrationTestCase extends ProcessEngineTestCase {
   }
   
 
+
+  @Deployment(resources = {"test-cases/super-process.bpmn", "test-cases/process-e.bpmn"})
+  public void testScenario06() {
+    String migrationScenario = "06";
+    // Scenario 04: Jump into sub process and there into a parallel Gateway
+    
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIOS",  //
+        withVariables( //
+            "migrationScenario", migrationScenario, //
+            "decision", "E"));
+
+    // check that the process instance exists
+    assertThat(piSuper).isStarted().isNotEnded().isWaitingAtExactly("CallActivityE");
+    
+    // search for existing called process instance and assert it as well
+    ProcessInstance piC = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piC).isStarted().isNotEnded().isWaitingAtExactly("UserTaskDoTheWork");
+
+    // now continue in the process execution
+    assertThat(piC).task("UserTaskDoTheWork");
+    complete(task());
+    
+    assertThat(piC).isEnded();
+  }
+  
+  @Deployment(resources = {"test-cases/super-process.bpmn", "test-cases/process-f.bpmn"})
+  public void testScenario07() {
+    String migrationScenario = "07";
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIOS",  //
+        withVariables( //
+            "migrationScenario", migrationScenario, //
+            "decision", "F"));
+
+    // check that the process instance exists
+    assertThat(piSuper).isStarted().isNotEnded().isWaitingAtExactly("CallActivityF");
+    
+    // search for existing called process instance and assert it as well
+    ProcessInstance piC = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piC).isStarted().isNotEnded().isWaitingAtExactly("UserTaskDoTheWork");
+
+    // now continue in the process execution
+    assertThat(piC).task("UserTaskDoTheWork");
+    complete(task());
+    
+    assertThat(piC).isEnded();
+  }
  
+  @Deployment(resources = {"test-cases/super-process.bpmn", "test-cases/process-f.bpmn"})
+  public void testScenario07Timer() {
+    String migrationScenario = "07";
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIOS",  //
+        withVariables( //
+            "migrationScenario", migrationScenario, //
+            "decision", "F"));
+
+    // search for existing called process instance and assert it as well
+    ProcessInstance piC = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piC).isStarted().isNotEnded().isWaitingAtExactly("UserTaskDoTheWork");
+    assertThat(piC).job("UserTaskDoTheWork");
+    execute(job());   
+
+    // now continue in the process execution
+    assertThat(piC).task("UserTaskEscalation");
+    complete(task());
+    
+    assertThat(piC).isEnded();
+  }
 }
