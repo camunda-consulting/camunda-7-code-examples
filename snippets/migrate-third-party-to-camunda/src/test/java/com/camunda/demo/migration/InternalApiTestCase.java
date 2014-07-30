@@ -27,9 +27,7 @@ import org.camunda.bpm.engine.test.mock.MockExpressionManager;
 /**
  * Test case starting an in-memory database-backed Process Engine.
  */
-public class InternalMigrationTestCase extends ProcessEngineTestCase {
-
-  private static final String PROCESS_DEFINITION_KEY_SUPER = "migration-example-super-process";
+public class InternalApiTestCase extends ProcessEngineTestCase {
 
   private static ProcessEngine currentProcessEngine;
 
@@ -56,7 +54,7 @@ public class InternalMigrationTestCase extends ProcessEngineTestCase {
     }
   }
 
-  @Deployment(resources = { "called-process-2.bpmn" })
+  @Deployment(resources = { "example/process-b.bpmn" })
   public void testStartSubProcessInDifferentState() {
     ((RuntimeServiceImpl) processEngine.getRuntimeService()).getCommandExecutor().execute(new Command<Void>() {
 
@@ -71,9 +69,6 @@ public class InternalMigrationTestCase extends ProcessEngineTestCase {
           ActivityImpl startActivity = processDefinition.findActivity("MIGRATION_SCENARIO_03");
 
           ExecutionEntity subProcessInstance = (ExecutionEntity) processDefinition.createProcessInstance("businessKey", startActivity);
-
-          // subProcessInstance.setSuperExecution((ExecutionEntity)execution);
-          // ((ExecutionEntity)execution).setSubProcessInstance(subProcessInstance);
 
           // add start context as the used element is not a StartEvent
           if (subProcessInstance.getExecutions().size() == 1) {
@@ -100,8 +95,6 @@ public class InternalMigrationTestCase extends ProcessEngineTestCase {
     
     assertThat(pi).isNotEnded().isWaitingAtExactly("UserTaskDoTheWork").task("UserTaskDoTheWork");
     complete(task());
-    
-    // TODO: HistoricProcessInstance is missing for piB!
     
     assertThat(pi).isEnded();
   }
