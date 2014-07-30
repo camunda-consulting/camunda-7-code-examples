@@ -30,16 +30,52 @@ And this is how it looks like in the BPMN:
 # Show me the important parts 
 
 
+## Migration Scenarios in your process model
 
-## Extensions in BPMN 2.0 
 
-In order to get this running smoothly we implemented a [Process Engine Plugin](http://docs.camunda.org/latest/guides/user-guide/#process-engine-process-engine-plugins) which basically pimps the behavior of the CallActivity. Then it is able to read a migration scenario expression and starting the called process in the according activity - which might even be nested in a subprocess:
+### Message Start Events
+
+Message start events are used in processes to take a shortcut directly to the state you want to be. They can be started by handing in the message via the public API.
+
+![camunda Modeler][4]
+
+For every message start event we have two conventions
+* The *message name* must be #{process name}#MIGRATION_SCENARIO_#{number}, e.g. *process-b#MIGRATION_SCENARIO_01*. The process name is contained since message names must be unique on the engine and the same migration scenario may be modeled in different processes (e.g. for sub processes). The message is used if you want to start this process instance from the outside world.
+* The *id* of the start event must be MIGRATION_SCENARIO_#{number}, e.g. *MIGRATION_SCENARIO_01*. The id is used if this process is started via a Call Activity. 
+
+If a process is only started by Call Activity and never as top level process instance, you might name the message as you want. But we recommend to stick to the convention.
+
+Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)): 
+
+```xml
+    <bpmn2:startEvent id="MIGRATION_SCENARIO_02" name="Migration Scenario 02: Do the work">
+      <bpmn2:messageEventDefinition id="_MessageEventDefinition_5" messageRef="Message_Scenario_2"/>
+    </bpmn2:startEvent>
+    ...
+  <bpmn2:message id="Message_Scenario_2" name="migration-example-process-b#MIGRATION_SCENARIO_02"/>
+
+### Intermediate None Events
+
+Intermediate none events are used as a workaround if you directly want to jump into a sub process. This is actually not valid BPMN 2.0 - but as our core engine can run this pretty well we see this as the smallest trade-off.
+
+![camunda Modeler][5]
+
+The convention is
+* The *id* of the intermediate event must be MIGRATION_SCENARIO_#{number}, e.g. *MIGRATION_SCENARIO_01*. 
+
+Note that this construct can only be started via a call activity. If it is a top level process, use a message start event and route the flow to the according sub process where you might have to add xome XOR-Gateway. 
+
+### Call Activities
+
+In the Call Activity an extension is added to control which activity of the called process is started. This might be either a Message Start Event or an Intermediate None Event.
+
+Please note that a process variable containing the scenario number is required to be passed into the process in order to be evaluated correctly. This is also used to determine if we are in a migration - so if this variable does not exist the Call Activity behaves normal - which means that "normal" process instances are not influenced.
 
 ```xml
     <bpmn2:callActivity id="CallActivityProcessA" name="Process A" calledElement="migration-example-process-a">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property name="MIGRATION_SCENARIO" value="#{migrationScenario}"/>
+          <camunda:property name="MIGRATION_SCENARIO" value="MIGRATION_SCENARIO_#{migrationScenario}"/>
         </camunda:properties>
         <camunda:in variables="all"/>
       </bpmn2:extensionElements>
@@ -50,12 +86,108 @@ You can easily edit this via the camunda Modeler:
 
 ![camunda Modeler][3]
 
-## Process Engine Plugin to exchange CallActivityBehavior
 
-## Extended CallActivityBehavior
 
-## TestCase
+# Process Engine Plugin
 
+In order to get this running we implemented a [Process Engine Plugin](http://docs.camunda.org/latest/guides/user-guide/#process-engine-process-engine-plugins) which basically pimps the behavior of the CallActivity. 
+
+In order to do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.1/api-references/javadoc/org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html). 
+
+This [MigrationParseListener](src/main/java/com/camunda/demo/migration/MigrationParseListener.java)
+
+```java
+  public void parseCallActivity(Element callActivityElement, ScopeImpl scope, ActivityImpl activity) {
+    CallActivityBehavior behavior = (CallActivityBehavior) activity.getActivityBehavior();
+        
+    // parse additional extension elements defined in the BPMN 2.0:
+    Element extensionElement = callActivityElement.element("extensionElements");
+    if (extensionElement != null) {
+      // get the <camunda:properties ...> element 
+      Element propertiesElement = extensionElement.element("properties");
+      if (propertiesElement != null) {
+        //  get list of <camunda:property ...> elements
+        List<Element> propertyList = propertiesElement.elements("property");
+        for (Element property : propertyList) {
+
+          if("MIGRATION_SCENARIO".equals(property.attribute("name"))) {
+            
+            // exchange behavior
+            MigrationEnabledCallActivityBehavior newBehavior = new MigrationEnabledCallActivityBehavior(behavior);
+            activity.setActivityBehavior(newBehavior);
+            
+            // read expression to control which Migration Scenario is active
+            String migrationScenarioExpression = property.attribute("value");            
+            Expression expression = Context.getProcessEngineConfiguration().getExpressionManager().createExpression(migrationScenarioExpression);
+            newBehavior.addMigrationScenarioExpression(expression);                        
+          }
+        }
+      }
+    }
+  }
+```java
+
+So we exchanged the behavior of the CallActivity for every occurance where the MIGRATION_SCENARIO extension property is set. The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which not only can start process instances in the none start event, but also in the migration scenarios.
+
+The basic code parts are:
+
+```java
+   // existing behavior omitted
+   String migrationScenarioStartActivityId = null;
+    try {
+      migrationScenarioStartActivityId = (String) migrationScenarioExpression.getValue(execution);
+    }
+    catch (ProcessEngineException ex) {
+      // might be the case if the process run in "normal" mode and some variables have not be passed id
+    }
+    
+    if (migrationScenario==null) {
+      // normal behavior omitted...
+    }
+    else {
+      ActivityImpl startActivity = processDefinition.findActivity(migrationScenarioStartActivityId);            
+      ExecutionEntity subProcessInstance = processDefinition.createProcessInstance(businessKey, startActivity);
+      
+      // some details omitted....
+      
+      // and start
+      subProcessInstance.start(callActivityVariables);
+    }
+```
+
+# TestCase
+
+We implemented a couple of test cases checking that normal process instances are not broken. But of course we test the migration scenarios as the following example shows (leveraging [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-assert)):
+
+```java
+ @Deployment(resources = {"example/super-process.bpmn", "example/process-a.bpmn", "example/process-b.bpmn"})
+  public void testMigrationScenario01() {
+    // Scenario 01: Jump into second hierarchy and there into the Human Task within a Sub Process started by an error    
+    ProcessInstance piSuper = runtimeService().startProcessInstanceByMessage(
+        PROCESS_DEFINITION_KEY_SUPER + "#MIGRATION_SCENARIO_01", withVariables("migrationScenario", "01"));
+
+    assertThat(piSuper).isStarted().isNotEnded() 
+      .isWaitingAtExactly("CallActivityProcessA");
+    
+    // search for existing called process instance and assert it as well
+    ProcessInstance piA = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piSuper.getId()).singleResult();
+    assertThat(piA).isStarted().isNotEnded().isWaitingAtExactly("CallActivityProcessB");
+    
+    // and the next pi down the hierarchy
+    ProcessInstance piB = runtimeService().createProcessInstanceQuery().superProcessInstanceId(piA.getId()).singleResult();
+    assertThat(piB).isStarted().isNotEnded().isWaitingAtExactly("UserTaskHandleManually");
+
+    // now continue in the process execution
+    assertThat(piB).isWaitingAtExactly("UserTaskDoTheWork").task("UserTaskHandleManually");
+    complete(task());
+    
+    assertThat(piB).isWaitingAtExactly("UserTaskDoTheWork").task("UserTaskDoTheWork");
+    complete(task());
+
+    assertThat(piB).isEnded();
+    assertThat(piA).isEnded();
+    assertThat(piSuper).isEnded();
+  }
 
 # Further Reading
 
@@ -65,3 +197,5 @@ See whitepaper: TODO-add-link
 [1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/example-process.png
 [2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/scenario1.png
 [3]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/migration-extension-in-modeler.png
+[4]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/message-start-event.png
+[5]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/intermediate-none-event.png

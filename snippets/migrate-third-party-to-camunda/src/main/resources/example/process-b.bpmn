@@ -67,11 +67,11 @@
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="ExclusiveGateway_1" targetRef="UserTaskDoTheWork"/>
     <bpmn2:startEvent id="MIGRATION_SCENARIO_02" name="Migration Scenario&#xD;&#xA;02: &quot;Do the work&quot;">
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_5" messageRef="Message_1"/>
+      <bpmn2:messageEventDefinition id="_MessageEventDefinition_5" messageRef="Message_Scenario_2"/>
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="MIGRATION_SCENARIO_02" targetRef="UserTaskDoTheWork"/>
   </bpmn2:process>
-  <bpmn2:message id="Message_1" name="migration-example-process-b#MIGRATION_SCENARIO_02"/>
+  <bpmn2:message id="Message_Scenario_2" name="migration-example-process-b#MIGRATION_SCENARIO_02"/>
   <bpmn2:error id="Error_1" errorCode="ERROR" name="some error"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">

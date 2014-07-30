@@ -7,7 +7,7 @@
     <bpmn2:callActivity id="CallActivityC" name="Process C" calledElement="process-c">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="#{migrationScenario}" name="MIGRATION_SCENARIO"/>
+          <camunda:property value="MIGRATION_SCENARIO_#{migrationScenario}" name="MIGRATION_SCENARIO"/>
         </camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
@@ -30,7 +30,7 @@
     <bpmn2:callActivity id="CallActivityD" name="Process D" calledElement="process-d">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="#{migrationScenario}" name="MIGRATION_SCENARIO"/>
+          <camunda:property value="MIGRATION_SCENARIO_#{migrationScenario}" name="MIGRATION_SCENARIO"/>
         </camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
