@@ -66,6 +66,13 @@ The convention is
 
 Note that this construct can only be started via a call activity. If it is a top level process, use a message start event and route the flow to the according sub process where you might have to add xome XOR-Gateway. 
 
+Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)): 
+
+```xml
+      <bpmn2:intermediateThrowEvent id="MIGRATION_SCENARIO_01" name="Migration Scenario 01: Handle Manually">
+      </bpmn2:intermediateThrowEvent>
+```
+
 ### Call Activities
 
 In the Call Activity an extension is added to control which activity of the called process is started. This might be either a Message Start Event or an Intermediate None Event.
@@ -93,9 +100,7 @@ You can easily edit this via the camunda Modeler:
 
 In order to get this running we implemented a [Process Engine Plugin](http://docs.camunda.org/latest/guides/user-guide/#process-engine-process-engine-plugins) which basically pimps the behavior of the CallActivity. 
 
-In order to do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.1/api-references/javadoc/org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html). 
-
-This [MigrationParseListener](src/main/java/com/camunda/demo/migration/MigrationParseListener.java)
+In order to do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.1/api-references/javadoc/org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html). This [MigrationParseListener](src/main/java/com/camunda/demo/migration/MigrationParseListener.java) exchanges the behavior of the call activity on the fly:
 
 ```java
   public void parseCallActivity(Element callActivityElement, ScopeImpl scope, ActivityImpl activity) {
@@ -128,9 +133,9 @@ This [MigrationParseListener](src/main/java/com/camunda/demo/migration/Migration
   }
 ```
 
-So we exchanged the behavior of the CallActivity for every occurance where the MIGRATION_SCENARIO extension property is set. The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which not only can start process instances in the none start event, but also in the migration scenarios.
+We exchanged the behavior always when the MIGRATION_SCENARIO extension property is set. 
 
-The basic code parts are:
+The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which not only can start process instances in the none start event, but also in the migration scenarios. The basic code parts are:
 
 ```java
    // existing behavior omitted
