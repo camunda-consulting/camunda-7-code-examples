@@ -53,6 +53,7 @@ Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)):
     </bpmn2:startEvent>
     ...
   <bpmn2:message id="Message_Scenario_2" name="migration-example-process-b#MIGRATION_SCENARIO_02"/>
+```
 
 ### Intermediate None Events
 
@@ -125,7 +126,7 @@ This [MigrationParseListener](src/main/java/com/camunda/demo/migration/Migration
       }
     }
   }
-```java
+```
 
 So we exchanged the behavior of the CallActivity for every occurance where the MIGRATION_SCENARIO extension property is set. The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which not only can start process instances in the none start event, but also in the migration scenarios.
 
@@ -188,6 +189,7 @@ We implemented a couple of test cases checking that normal process instances are
     assertThat(piA).isEnded();
     assertThat(piSuper).isEnded();
   }
+```
 
 # Further Reading
 
