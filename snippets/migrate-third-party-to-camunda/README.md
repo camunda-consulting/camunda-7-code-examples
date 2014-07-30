@@ -24,7 +24,7 @@ After adding the migration scenarios we can start a process instance which direc
 
 And this is how it looks like in the BPMN:
 
-![Scenario 1][4]
+![Scenario 1][2]
 
 
 # Show me the important parts 
