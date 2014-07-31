@@ -9,9 +9,9 @@
 		- [Intermediate None Events](#user-content-intermediate-none-events)
 		- [Call Activities](#user-content-call-activities)
 		- [Necessary adjustments on your process models](#necessary-adjustments-on-your-process-models)
-  - [Process Engine Plugin](#user-content-process-engine-plugin)
+	- [Process Engine Plugin](#user-content-process-engine-plugin)
 	- [TestCase](#user-content-testcase)
-- [Important Limitation on camunda BPM version.](#user-content-important-limitation-on-camunda-bpm-version)
+- [Camunda BPM version requirements](#camunda-bpm-version-requirements)
 - [Further Reading](#user-content-further-reading)
 
 # Introduction
@@ -220,7 +220,7 @@ We implemented a couple of test cases checking that normal process instances are
   }
 ```
 
-# Important Limitation on camunda BPM version.
+# Camunda BPM version requirements
 
 The current implementation requires some bug fixes to the core engine which are contained in the [org.camunda folder](src/main/java/org/camunda) of this project. These bugs occured as we did some stuff not valid in BPMN 2.0 and hence was not properly tested on the core engine. 
 
