@@ -1,5 +1,21 @@
 # How to migrate processes from existing solutions to camunda BPM
 
+**Table of Contents**
+
+- [Introduction](#introduction)
+- [Show me the important parts](#user-content-show-me-the-important-parts)
+	- [Migration Scenarios in your process model](#user-content-migration-scenarios-in-your-process-model)
+		- [Message Start Events](#user-content-message-start-events)
+		- [Intermediate None Events](#user-content-intermediate-none-events)
+		- [Call Activities](#user-content-call-activities)
+		- [Necessary adjustments on your process models](#necessary-adjustments-on-your-process-models)
+  - [Process Engine Plugin](#user-content-process-engine-plugin)
+	- [TestCase](#user-content-testcase)
+- [Important Limitation on camunda BPM version.](#user-content-important-limitation-on-camunda-bpm-version)
+- [Further Reading](#user-content-further-reading)
+
+# Introduction
+
 In every company you will sooner or later migrate to camunda BPM as your favorite BPM platform :-) When doing this you often do not start on a green field - but have ruinning process instances. How to handle this?
 
 There are different approaches to migrate process definitions and process instances, this whitepaper gives an overview and introduction into the topic: TODO-add-link.
@@ -95,8 +111,16 @@ You can easily edit this via the camunda Modeler:
 ![camunda Modeler][3]
 
 
+### Necessary adjustments on your process models
 
-# Process Engine Plugin
+This approach tries to limit hacks to a minimum. But as BPMN cannot "jump" into scopes or parallel paths there are situations which cannot be handled out-of-the-box by the migration scenarios. Then you have to adjust the process model as sketched in the following example:
+
+![Adjusted Process Model][6]
+
+The migration scenario defines that we want to end up in Task A - and only Task A (so Task B was already completed). In order to jump into the parallel paths we need to have an additional parallel gateway for the migration and a decision within the subprocess to bypass "Task 0" - as we cannot directly go into the subprocess on Task A. The changes are marked in red.
+
+
+## Process Engine Plugin
 
 In order to get this running we implemented a [Process Engine Plugin](http://docs.camunda.org/latest/guides/user-guide/#process-engine-process-engine-plugins) which basically pimps the behavior of the CallActivity. 
 
@@ -216,3 +240,4 @@ See whitepaper: TODO-add-link
 [3]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/migration-extension-in-modeler.png
 [4]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/message-start-event.png
 [5]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/intermediate-none-event.png
+[6]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/scenario4.png
