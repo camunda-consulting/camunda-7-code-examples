@@ -16,19 +16,19 @@
 
 # Introduction
 
-In every company you will sooner or later migrate to camunda BPM as your favorite BPM platform :-) When doing this you often do not start on a green field - but have ruinning process instances. How to handle this?
+In every company you will sooner or later migrate to camunda BPM as your favorite BPM platform :-) When doing this you often do not start on a green field - but have running process instances. How to handle this?
 
-There are different approaches to migrate process definitions and process instances, this whitepaper gives an overview and introduction into the topic: TODO-add-link.
+There are different approaches to migrate process definitions and process instances, this whitepaper gives an overview and introduction to the topic: TODO-add-link.
 
-This project is an example implementation of migration scenarios, where we add elements to the BPMN in order to do the migration and afterwards are able to steer the migration via the public API. Please read the whitepaper for a details.
+This project is an example implementation of migration scenarios, where we add elements to the BPMN to do the migration and afterwards are able to steer the migration via the public API. Please read the whitepaper for more details.
 
-Lets make a simple example - which is available as test case in this project:
+Lets make a simple example - which is available as a test case in this project:
 
 ![Process Model][1]
 
-The two red dots mark the places where we do want to migrate to. 
+The two red dots mark the places to which we want to migrate. 
 
-After adding the migration scenarios we can start a process instance which directly moves to these states:
+After adding the migration scenarios, we can start a process instance which directly moves to these states:
 
 ```java
  Map<String, Object> variables = new HashMap<String, Object>();
@@ -38,7 +38,7 @@ After adding the migration scenarios we can start a process instance which direc
         "migration-example-super-process#MIGRATION_SCENARIO_01", variables);
 ```
 
-And this is how it looks like in the BPMN:
+This is what it looks like in the BPMN:
 
 ![Scenario 1][2]
 
@@ -51,15 +51,15 @@ And this is how it looks like in the BPMN:
 
 ### Message Start Events
 
-Message start events are used in processes to take a shortcut directly to the state you want to be. They can be started by handing in the message via the public API.
+Message start events are used in processes to directly take a shortcut to the state you want to be at. They can be started by handing in the message via the public API.
 
 ![Message Start Events][4]
 
 For every message start event we have two conventions
-* The *message name* must be #{process name}#MIGRATION_SCENARIO_#{number}, e.g. *process-b#MIGRATION_SCENARIO_01*. The process name is contained since message names must be unique on the engine and the same migration scenario may be modeled in different processes (e.g. for sub processes). The message is used if you want to start this process instance from the outside world.
+* The *message name* must be #{process name}#MIGRATION_SCENARIO_#{number}, e.g., *process-b#MIGRATION_SCENARIO_01*. The process name is contained as message names must be unique in the engine and the same migration scenario may be modeled in different processes (e.g., for sub processes). The message is used if you want to start this process instance from the outside world.
 * The *id* of the start event must be MIGRATION_SCENARIO_#{number}, e.g. *MIGRATION_SCENARIO_01*. The id is used if this process is started via a Call Activity. 
 
-If a process is only started by Call Activity and never as top level process instance, you might name the message as you want. But we recommend to stick to the convention.
+If a process is only started by a Call Activity and never as top level process instance, you can name the message as you please. However, we recommend to stick to the convention.
 
 Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)): 
 
@@ -73,14 +73,14 @@ Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)):
 
 ### Intermediate None Events
 
-Intermediate none events are used as a workaround if you directly want to jump into a sub process. This is actually not valid BPMN 2.0 - but as our core engine can run this pretty well we see this as the smallest trade-off.
+Intermediate none events are used as a workaround if you want to directly jump into a sub-process. This is actually not valid BPMN 2.0 - but as our core engine can run this pretty well we see this as the smallest trade-off.
 
 ![Intermediate None Events][5]
 
 The convention is
 * The *id* of the intermediate event must be MIGRATION_SCENARIO_#{number}, e.g. *MIGRATION_SCENARIO_01*. 
 
-Note that this construct can only be started via a call activity. If it is a top level process, use a message start event and route the flow to the according sub process where you might have to add xome XOR-Gateway. 
+Note that this construct can only be started via a call activity. If it is a top level process, use a message start event and route the flow to the according sub-process where you might have to add an XOR-Gateway. 
 
 Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)): 
 
@@ -91,9 +91,9 @@ Example (see [process-b.bpmn](src/main/resources/example/process-b.bpmn)):
 
 ### Call Activities
 
-In the Call Activity an extension is added to control which activity of the called process is started. This might be either a Message Start Event or an Intermediate None Event.
+In the Call Activity an extension is added to control which activity of the called process is started. This can either be a Message Start Event or an Intermediate None Event.
 
-Please note that a process variable containing the scenario number is required to be passed into the process in order to be evaluated correctly. This is also used to determine if we are in a migration - so if this variable does not exist the Call Activity behaves normal - which means that "normal" process instances are not influenced.
+Please note that a process variable containing the scenario number must be passed into the process in order to be evaluated correctly. This is also used to determine if we are in a migration - so, if this variable does not exist, the Call Activity behaves normally - which means that "normal" process instances are not influenced.
 
 ```xml
     <bpmn2:callActivity id="CallActivityProcessA" name="Process A" calledElement="migration-example-process-a">
@@ -106,25 +106,25 @@ Please note that a process variable containing the scenario number is required t
     </bpmn2:callActivity>
 ```
 
-You can easily edit this via the camunda Modeler: 
+You can easily edit this with the camunda Modeler: 
 
 ![camunda Modeler][3]
 
 
-### Necessary adjustments on your process models
+### Necessary adjustments to your process models
 
-This approach tries to limit hacks to a minimum. But as BPMN cannot "jump" into scopes or parallel paths there are situations which cannot be handled out-of-the-box by the migration scenarios. Then you have to adjust the process model as sketched in the following example:
+This approach tries to limit hacks to a minimum. However, as BPMN cannot "jump" into scopes or parallel paths, there are situations which cannot be handled out-of-the-box by the migration scenarios. In that case, you have to adjust the process model as sketched in the following example:
 
 ![Adjusted Process Model][6]
 
-The migration scenario defines that we want to end up in Task A - and only Task A (so Task B was already completed). In order to jump into the parallel paths we need to have an additional parallel gateway for the migration and a decision within the subprocess to bypass "Task 0" - as we cannot directly go into the subprocess on Task A. The changes are marked in red.
+This migration scenario defines that we want to end up in Task A - and only Task A (so Task B has already been completed). To jump into the parallel paths we need to have an additional parallel gateway for the migration and a decision within the subprocess to bypass "Task 0" - as we cannot directly go into the sub-process on Task A. The changes are marked in red.
 
 
 ## Process Engine Plugin
 
 In order to get this running we implemented a [Process Engine Plugin](http://docs.camunda.org/latest/guides/user-guide/#process-engine-process-engine-plugins) which basically pimps the behavior of the CallActivity. 
 
-In order to do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.1/api-references/javadoc/org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html). This [MigrationParseListener](src/main/java/com/camunda/demo/migration/MigrationParseListener.java) exchanges the behavior of the call activity on the fly:
+To do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.1/api-references/javadoc/org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html). This [MigrationParseListener](src/main/java/com/camunda/demo/migration/MigrationParseListener.java) exchanges the behavior of the call activity on the fly:
 
 ```java
   public void parseCallActivity(Element callActivityElement, ScopeImpl scope, ActivityImpl activity) {
@@ -157,9 +157,9 @@ In order to do this the Plugin adds a [ParseListener](http://docs.camunda.org/7.
   }
 ```
 
-We exchanged the behavior always when the MIGRATION_SCENARIO extension property is set. 
+We always exchange the behavior when the MIGRATION_SCENARIO extension property is set. 
 
-The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which not only can start process instances in the none start event, but also in the migration scenarios. The basic code parts are:
+The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migration/MigrationEnabledCallActivityBehavior.java) is a bit more complex but basically extends the current behavior by a switch which can not only start process instances in the none start event, but also in the migration scenarios. The basic code parts are:
 
 ```java
    // existing behavior omitted
@@ -187,7 +187,7 @@ The [MigrationEnabledCallActivityBehavior](src/main/java/com/camunda/demo/migrat
 
 ## TestCase
 
-We implemented a couple of test cases checking that normal process instances are not broken. But of course we test the migration scenarios as the following example shows (leveraging [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-assert)):
+We implemented a couple of test cases to check that normal process instances are not broken. Of course we also test the migration scenarios as the following example shows (leveraging [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-assert)):
 
 ```java
  @Deployment(resources = {"example/super-process.bpmn", "example/process-a.bpmn", "example/process-b.bpmn"})
@@ -222,13 +222,13 @@ We implemented a couple of test cases checking that normal process instances are
 
 # Camunda BPM version requirements
 
-The current implementation requires some bug fixes to the core engine which are contained in the [org.camunda folder](src/main/java/org/camunda) of this project. These bugs occured as we did some stuff not valid in BPMN 2.0 and hence was not properly tested on the core engine. 
+The current implementation requires some bug fixes to the core engine which are contained in the [org.camunda folder](src/main/java/org/camunda) of this project. These bugs occured as we did some stuff that is not valid in BPMN 2.0 and therefore was not properly tested on the core engine. 
 
-However these bug fixes will be added to
+However, these bug fixes will be added to
 * 7.2 development head
 * 7.1.5 (next enterprise patch release).
 
-If you do not have these versions please patch the engine yourself with the code applied.
+If you do not have these versions, please patch the engine yourself with the code applied.
 
 # Further Reading
 
