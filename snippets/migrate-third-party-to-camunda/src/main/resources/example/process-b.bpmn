@@ -35,7 +35,6 @@
       <bpmn2:userTask id="UserTaskHandleManually" name="handle&#xD;&#xA;manually">
         <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
         <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
-        <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
       </bpmn2:userTask>
       <bpmn2:endEvent id="EndEvent_2">
@@ -46,10 +45,6 @@
         <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
       </bpmn2:intermediateThrowEvent>
       <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="MIGRATION_SCENARIO_01" targetRef="UserTaskHandleManually"/>
-      <bpmn2:intermediateThrowEvent id="MIGRATION_SCENARIO_03" name="Migration Scenario&#xD;&#xA;03: &quot;Error Subprocess&quot;">
-        <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
-      </bpmn2:intermediateThrowEvent>
-      <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="MIGRATION_SCENARIO_03" targetRef="UserTaskHandleManually"/>
     </bpmn2:subProcess>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="BoundaryEvent_1" targetRef="SubProcessErrorHandling"/>
     <bpmn2:userTask id="UserTaskDoTheWork" name="do the work">
@@ -114,12 +109,12 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_SubProcess_2" bpmnElement="SubProcessErrorHandling" isExpanded="true">
-        <dc:Bounds height="257.0" width="459.0" x="322.0" y="176.0"/>
+        <dc:Bounds height="245.0" width="459.0" x="322.0" y="176.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_SubProcess_2">
         <di:waypoint xsi:type="dc:Point" x="254.0" y="169.0"/>
-        <di:waypoint xsi:type="dc:Point" x="254.0" y="304.0"/>
-        <di:waypoint xsi:type="dc:Point" x="322.0" y="304.0"/>
+        <di:waypoint xsi:type="dc:Point" x="254.0" y="298.0"/>
+        <di:waypoint xsi:type="dc:Point" x="322.0" y="298.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="251.0" y="244.0"/>
         </bpmndi:BPMNLabel>
@@ -174,11 +169,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="_BPMNShape_SubProcess_2" targetElement="_BPMNShape_ExclusiveGateway_5">
-        <di:waypoint xsi:type="dc:Point" x="780.0" y="304.0"/>
-        <di:waypoint xsi:type="dc:Point" x="828.0" y="304.0"/>
+        <di:waypoint xsi:type="dc:Point" x="780.0" y="298.0"/>
+        <di:waypoint xsi:type="dc:Point" x="828.0" y="298.0"/>
         <di:waypoint xsi:type="dc:Point" x="828.0" y="136.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="825.0" y="270.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="825.0" y="264.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_5" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
@@ -195,49 +190,33 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_6" bpmnElement="MIGRATION_SCENARIO_02">
-        <dc:Bounds height="36.0" width="36.0" x="876.0" y="233.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="864.0" y="324.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="124.0" x="832.0" y="274.0"/>
+          <dc:Bounds height="38.0" width="124.0" x="820.0" y="365.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_StartEvent_6" targetElement="_BPMNShape_UserTask_4">
-        <di:waypoint xsi:type="dc:Point" x="894.0" y="233.0"/>
-        <di:waypoint xsi:type="dc:Point" x="894.0" y="192.0"/>
-        <di:waypoint xsi:type="dc:Point" x="938.0" y="192.0"/>
-        <di:waypoint xsi:type="dc:Point" x="938.0" y="151.0"/>
+        <di:waypoint xsi:type="dc:Point" x="882.0" y="324.0"/>
+        <di:waypoint xsi:type="dc:Point" x="882.0" y="192.0"/>
+        <di:waypoint xsi:type="dc:Point" x="910.0" y="151.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="900.0" y="192.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="879.0" y="274.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_IntermediateThrowEvent_2" targetElement="_BPMNShape_UserTask_3">
-        <di:waypoint xsi:type="dc:Point" x="384.0" y="306.0"/>
-        <di:waypoint xsi:type="dc:Point" x="545.0" y="306.0"/>
-        <di:waypoint xsi:type="dc:Point" x="564.0" y="291.0"/>
+        <di:waypoint xsi:type="dc:Point" x="444.0" y="342.0"/>
+        <di:waypoint xsi:type="dc:Point" x="550.0" y="341.0"/>
+        <di:waypoint xsi:type="dc:Point" x="585.0" y="292.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="436.0" y="306.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="495.0" y="341.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_IntermediateThrowEvent_2" bpmnElement="MIGRATION_SCENARIO_01">
-        <dc:Bounds height="36.0" width="36.0" x="348.0" y="288.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="408.0" y="324.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="134.0" x="299.0" y="329.0"/>
+          <dc:Bounds height="38.0" width="134.0" x="359.0" y="365.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_IntermediateThrowEvent_3" bpmnElement="MIGRATION_SCENARIO_03">
-        <dc:Bounds height="36.0" width="36.0" x="348.0" y="372.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="139.0" x="297.0" y="407.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="_BPMNShape_IntermediateThrowEvent_3" targetElement="_BPMNShape_UserTask_3">
-        <di:waypoint xsi:type="dc:Point" x="384.0" y="390.0"/>
-        <di:waypoint xsi:type="dc:Point" x="480.0" y="390.0"/>
-        <di:waypoint xsi:type="dc:Point" x="563.0" y="350.0"/>
-        <di:waypoint xsi:type="dc:Point" x="593.0" y="292.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="528.0" y="365.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>

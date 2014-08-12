@@ -43,7 +43,16 @@ public class AtomicOperationProcessStartInitial extends AtomicOperationActivityI
     
     ActivityImpl activity = (ActivityImpl) execution.getActivity();
     ProcessDefinitionImpl processDefinition = execution.getProcessDefinition();
+    
     ProcessInstanceStartContext processInstanceStartContext = execution.getProcessInstanceStartContext();
+    if (processInstanceStartContext==null) {
+      InterpretableExecution executionToUse = execution;
+      while (processInstanceStartContext==null) {
+        executionToUse = execution.getParent();
+        processInstanceStartContext = executionToUse.getProcessInstanceStartContext();
+      }
+    }
+    
     if (activity==processInstanceStartContext.getInitial()) {
       
       processInstanceStartContext.initialStarted(execution);
@@ -53,13 +62,13 @@ public class AtomicOperationProcessStartInitial extends AtomicOperationActivityI
 
     } else {
       List<ActivityImpl> initialActivityStack = processDefinition.getInitialActivityStack(processInstanceStartContext.getInitial());
-//      int index = initialActivityStack.indexOf(activity);
-      // use the activity "at the end" of the hierarchy:
-      activity = initialActivityStack.get(initialActivityStack.size()-1);
+
+      int index = initialActivityStack.indexOf(activity);
+      activity = initialActivityStack.get(index+1);
 
       // and search for the correct execution to set the Activity to  
       InterpretableExecution executionToUse = execution; 
-      while (executionToUse.getActivity().isScope()) { //if (activity.isScope()) {        
+      if (executionToUse.getActivity().isScope()) { //if (activity.isScope()) {        
         executionToUse.setActive(false); // Deactivate since we jump to a node further down the hierarchy
         executionToUse = (InterpretableExecution) executionToUse.getExecutions().get(0);
       }

@@ -41,7 +41,6 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="B" sourceRef="ExclusiveGateway_2" targetRef="CallActivityProcessB">
@@ -68,11 +67,6 @@
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_2" targetRef="CallActivityProcessA"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="StartEvent_3" targetRef="CallActivityProcessB"/>
-    <bpmn2:startEvent id="StartEvent_4" name="Migration Scenario&#xD;&#xA;03: &quot;Error Subprocess&quot;">
-      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_6" messageRef="Message_3"/>
-    </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="StartEvent_4" targetRef="CallActivityProcessB"/>
   </bpmn2:process>
   <bpmn2:message id="Message_1" name="migration-example-super-process#MIGRATION_SCENARIO_01"/>
   <bpmn2:message id="Message_2" name="migration-example-super-process#MIGRATION_SCENARIO_02"/>
@@ -195,21 +189,6 @@
         <di:waypoint xsi:type="dc:Point" x="394.0" y="231.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="305.0" y="294.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_7" bpmnElement="StartEvent_4">
-        <dc:Bounds height="36.0" width="36.0" x="324.0" y="336.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="139.0" x="273.0" y="377.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_StartEvent_7" targetElement="_BPMNShape_CallActivity_3">
-        <di:waypoint xsi:type="dc:Point" x="360.0" y="354.0"/>
-        <di:waypoint xsi:type="dc:Point" x="378.0" y="354.0"/>
-        <di:waypoint xsi:type="dc:Point" x="378.0" y="254.0"/>
-        <di:waypoint xsi:type="dc:Point" x="394.0" y="244.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="375.0" y="278.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
