@@ -97,6 +97,9 @@ public class CmmnCallActivityBehavior extends AbstractBpmnActivityBehavior imple
         callActivityVariables.put(dataInputAssociation.getTarget(), value);
       }
     }
+    
+    // set id for callback
+    callActivityVariables.put("callActivityId", execution.getId());
 
     if (processDefinition != null) {
       log.info("start process instance here");
@@ -116,7 +119,7 @@ public class CmmnCallActivityBehavior extends AbstractBpmnActivityBehavior imple
 
   @Override
   public void completing(DelegateExecution execution, DelegateExecution subProcessInstance) throws Exception {
-    log.info("shuold copy variables from subProcess or case to current process instance");
+    log.info("should copy variables from subProcess or case to current process instance");
   }
 
   @Override

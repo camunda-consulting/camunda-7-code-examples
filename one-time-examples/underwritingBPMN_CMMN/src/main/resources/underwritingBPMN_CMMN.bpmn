@@ -67,7 +67,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="insurance_system" isHorizontal="true">
-        <dc:Bounds height="399.0" width="1107.0" x="10.0" y="10.0"/>
+        <dc:Bounds height="399.0" width="1323.0" x="10.0" y="10.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartElectronically">
         <dc:Bounds height="36.0" width="36.0" x="108.0" y="93.0"/>

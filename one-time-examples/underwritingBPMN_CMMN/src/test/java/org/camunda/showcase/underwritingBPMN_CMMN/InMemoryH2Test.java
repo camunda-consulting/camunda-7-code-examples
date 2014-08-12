@@ -2,9 +2,11 @@ package org.camunda.showcase.underwritingBPMN_CMMN;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 
+import java.util.List;
 import java.util.Map;
-
+import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.impl.util.LogUtil;
+import org.camunda.bpm.engine.runtime.CaseExecution;
 import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -26,6 +28,7 @@ public class InMemoryH2Test {
   // enable more detailed logging
   static {
     LogUtil.readJavaUtilLoggingConfigFromClasspath();
+    LogFactory.useJdkLogging();
   }
 
   /**
@@ -66,15 +69,78 @@ public class InMemoryH2Test {
   @Test
   @Deployment(resources = "manual_underwriting.cmmn")
   public void startCaseFromScratch() {
-    CaseInstance ci = rule.getProcessEngine().getCaseService().withCaseDefinitionByKey("Case_manual_underwriting").create();
-    
+    CaseInstance ci = rule
+        .getProcessEngine()
+        .getCaseService()
+        .withCaseDefinitionByKey("Case_manual_underwriting")
+        .create();
     assertThat(ci).isNotNull();
+  }
+  
+  @Test
+  @Deployment(resources = "manual_underwriting.cmmn")
+  public void runCaseWhenStartedFromScratch() {
+    CaseInstance ci = rule
+        .getProcessEngine()
+        .getCaseService()
+        .withCaseDefinitionByKey("Case_manual_underwriting")
+        .create();
+    CaseExecution stage = rule
+        .getProcessEngine()
+        .getCaseService()
+        .createCaseExecutionQuery()
+        .activityId("PI_evaluation_stage")
+        .singleResult();
+    assertThat(stage).isNotNull();
+    List<Task> tasks = rule
+        .getProcessEngine()
+        .getTaskService()
+        .createTaskQuery()
+        .caseInstanceId(ci.getId())
+        .list();
+    assertThat(tasks).isNotEmpty();
+    assertThat(tasks).hasSize(1);
+    Task task = tasks.get(0);
+    assertThat(task).hasDefinitionKey("PI_decide_task");
+  }
+  
+  @Test
+  @Deployment(resources = "manual_underwriting.cmmn")
+  public void completeCase() {
+    CaseInstance ci = rule
+        .getProcessEngine()
+        .getCaseService()
+        .withCaseDefinitionByKey("Case_manual_underwriting")
+        .create();
+    // complete Task
+    Task task = rule.getTaskService()
+        .createTaskQuery()
+        .caseInstanceId(ci.getId())
+        .singleResult();
+    rule.getTaskService().complete(task.getId());
+    // complete Case
+    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
+    List<CaseExecution> cases = rule
+        .getProcessEngine()
+        .getCaseService()
+        .createCaseExecutionQuery()
+        .caseExecutionId(ci.getId())
+        .list();
+    assertThat(cases).isNotEmpty();
+    // close Case
+    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).close();
+    cases = rule.getProcessEngine()
+        .getCaseService()
+        .createCaseExecutionQuery()
+        .caseExecutionId(ci.getId())
+        .list();
+    assertThat(cases).isEmpty();
   }
   
   @Test
   @Deployment(resources = { "underwritingBPMN_CMMN.bpmn", 
                             "manual_underwriting.cmmn" })
-  public void startCase() {
+  public void startCaseFromProcess() {
     ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByMessage("electronicApplication");
     Task reviewData = rule
         .getTaskService()
@@ -91,6 +157,39 @@ public class InMemoryH2Test {
         .caseDefinitionKey("Case_manual_underwriting")
         .singleResult();
     assertThat(ci).isNotNull();
+  }
+
+  @Test
+  @Deployment(resources = { "underwritingBPMN_CMMN.bpmn", 
+                            "manual_underwriting.cmmn" })
+  public void completeCaseFromProcessManually() {
+    ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByMessage("electronicApplication");
+    Task reviewData = rule
+        .getTaskService()
+        .createTaskQuery()
+        .processInstanceId(pi.getProcessInstanceId())
+        .singleResult();
+    complete(reviewData);
+    assertThat(pi).isNotEnded();
+    assertThat(pi).isWaitingAt("underwriteApplication");
+    CaseInstance ci = rule
+        .getProcessEngine()
+        .getCaseService()
+        .createCaseInstanceQuery()
+        .caseDefinitionKey("Case_manual_underwriting")
+        .singleResult();
+    assertThat(ci).isNotNull();
+    Map<String, Object> caseVars = rule.getProcessEngine().getCaseService().getVariables(ci.getId());
+    assertThat(caseVars).containsKey("callActivityId");
+    Task task = rule
+        .getTaskService()
+        .createTaskQuery()
+        .caseInstanceId(ci.getId())
+        .singleResult();
+    rule.getTaskService().complete(task.getId());
+    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
+    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).close();    
+    assertThat(pi).isEnded();
   }
 
 }
