@@ -23,8 +23,11 @@
   	<property name="mailServerPassword" value="activiti" />
   	<property name="mailServerDefaultFrom" value="activiti@localhost" />
   	<property name="mailServerPort" value="25" />
-  	-->  	
+  	-->
 
+    <property name="expressionManager">
+        <bean class="org.camunda.bpm.engine.test.mock.MockExpressionManager"/>
+    </property>
   </bean>
 
 </beans>
