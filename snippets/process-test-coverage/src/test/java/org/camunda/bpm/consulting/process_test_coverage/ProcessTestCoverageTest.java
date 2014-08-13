@@ -15,6 +15,12 @@ public class ProcessTestCoverageTest extends ProcessEngineTestCase {
   private static final String PROCESS_DEFINITION_KEY = "process-test-coverage";
 
   @Override
+  protected void setUp() throws Exception {
+	  ProcessTestCoverage.bpmnDir = "../test-classes/"; // process resides in src/test/resources
+	  super.setUp();
+  }
+  
+  @Override
   protected void tearDown() throws Exception {
 	// calculate coverage for all tests
 	ProcessTestCoverage.calculate(processEngine);

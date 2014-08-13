@@ -11,13 +11,14 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 
 public class ProcessTestCoverage {
 
+	public static String bpmnDir = "../classes/";
 	private static String targetDir = "target/process-test-coverage";
 
 	public static void calculate(String processInstanceId, ProcessEngine processEngine) {
 		try {
 			String bpmnFileName = getBpmnFileName(processInstanceId, processEngine);
 			List<HistoricActivityInstance> activities = getAuditTrail(processInstanceId, processEngine);
-			String html = CamundaBpmnJs.highlightActivities("../test-classes/" + bpmnFileName, activities);
+			String html = CamundaBpmnJs.highlightActivities(bpmnDir + bpmnFileName, activities);
 
 			// write report for caller 
 			StackTraceElement caller = getCaller();
@@ -28,7 +29,7 @@ public class ProcessTestCoverage {
 			reportName = bpmnFileName + ".html";
 			File reportFile = new File(targetDir + "/" + reportName);
 			if (reportFile.exists()) {
-				html = CamundaBpmnJs.highlightActivities("../test-classes/" + bpmnFileName, activities, reportFile);
+				html = CamundaBpmnJs.highlightActivities(bpmnDir + bpmnFileName, activities, reportFile);
 			}
 			CamundaBpmnJs.writeToFile(targetDir, reportName, html);
 		} catch (IOException e) {
@@ -43,11 +44,11 @@ public class ProcessTestCoverage {
 			for (ProcessDefinition processDefinition : processDefinitions) {
 				String bpmnFileName = processDefinition.getResourceName(); 
 				List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processDefinitionId(processDefinition.getId()).list();
-				String html = CamundaBpmnJs.highlightActivities("../test-classes/" + bpmnFileName, activities);
+				String html = CamundaBpmnJs.highlightActivities(bpmnDir + bpmnFileName, activities);
 				String reportName = bpmnFileName + "_.html";
 				File reportFile = new File(targetDir + "/" + reportName);
 				if (reportFile.exists()) {
-					html = CamundaBpmnJs.highlightActivities("../test-classes/" + bpmnFileName, activities, reportFile);
+					html = CamundaBpmnJs.highlightActivities(bpmnDir + bpmnFileName, activities, reportFile);
 				}
 				CamundaBpmnJs.writeToFile(targetDir, reportName, html);
 			}
