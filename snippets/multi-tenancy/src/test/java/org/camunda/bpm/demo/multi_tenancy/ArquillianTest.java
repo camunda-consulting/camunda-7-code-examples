@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ArquillianTest {
   
+  private static final String PROCESS_DEFINITION_KEY = "multi-tenancy";
+
   @Deployment
   public static WebArchive createDeployment() {
     // resolve given dependencies from Maven POM
@@ -85,5 +87,11 @@ public class ArquillianTest {
   public void testTenantAwareRuntimeServiceInjection() throws Exception {
 	  tenant.setId("default");
 	  assertNotNull(runtimeService.createExecutionQuery());
+  }  
+
+  @Test
+  public void testProcessExecution() throws Exception {
+	  tenant.setId("default");
+	  runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
   }  
 }
