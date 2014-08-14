@@ -15,7 +15,7 @@
     <camunda.version>7.1.0-Final</camunda.version>
     
     <!-- This property must be present for the pom.xml to be recognized as a plugin -->
-    <camunda.plugin.category>Process Engine</camunda.plugin.category>
+    <camunda.plugin.category>Exploration</camunda.plugin.category>
 
     <camunda.plugin.screenshot>../screenshot1.png</camunda.plugin.screenshot>
     <camunda.plugin.screenshot.1>../screenshot2.png</camunda.plugin.screenshot.1>
