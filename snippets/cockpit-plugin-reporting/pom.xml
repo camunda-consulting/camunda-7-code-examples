@@ -7,9 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>camunda Cockpit Plugin: Reporting Sample</name>
-  <description>This is a simple plugin that showcases how easy you can build some dashboard as Cockpit plugin for camunda BPM.</description>
-  
+  <name>Camunda Cockpit Plugin: Reporting Sample</name>
+  <description>This is a simple plugin that showcases how easy you can build some dashboard as Cockpit plugin for Camunda BPM.</description>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <camunda.version>7.1.0-Final</camunda.version>

@@ -7,7 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>camunda Cockpit Plugin: BPMN Collaboration</name>
+  <name>Camunda Cockpit Plugin: BPMN Collaboration</name>
   <description>This plugin adds an extra tab to process instances that shows related process instances from the same BPMN Collaboration.</description>
   <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/cockpit-plugin-bpmn-collaboration</url>
   <properties>
