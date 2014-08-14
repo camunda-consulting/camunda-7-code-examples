@@ -7,11 +7,20 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>cockpit-sample-plugin</name>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.1.0-Final</camunda.version>
-	</properties>
+  <name>Reporting Sample</name>
+  <description>This is a simple plugin that showcases how easy you can build some dashboard as Cockpit plugin for camunda BPM.</description>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <camunda.version>7.1.0-Final</camunda.version>
+    
+    <!-- This property must be present for the pom.xml to be recognized as a plugin -->
+    <camunda.plugin.category>Process Engine</camunda.plugin.category>
+
+    <camunda.plugin.screenshot>screenshot.png</camunda.plugin.screenshot>
+    <camunda.plugin.testedOnVersion>7.1.0-Final</camunda.plugin.testedOnVersion>
+    <camunda.plugin.language>EN</camunda.plugin.language>
+  </properties>
 	
   <dependencies>
     <dependency>

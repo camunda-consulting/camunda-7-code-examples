@@ -9,12 +9,12 @@
 
   <name>camunda Cockpit Plugin: BPMN Collaboration</name>
   <description>This plugin adds an extra tab to process instances that shows related process instances from the same BPMN Collaboration.</description>
-  <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/cockpit-plugin-bpmn-collaboration</url>  
+  <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/cockpit-plugin-bpmn-collaboration</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <camunda.version>7.1.0-Final</camunda.version>
     
-    <!-- This property must be present to make the pom.xml recognized as a plugin -->
+    <!-- This property must be present for the pom.xml to be recognized as a plugin -->
     <camunda.plugin.category>Process Engine</camunda.plugin.category>
 
     <camunda.plugin.screenshot>../screenshot1.png</camunda.plugin.screenshot>
