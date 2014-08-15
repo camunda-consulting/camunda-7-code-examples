@@ -14,7 +14,7 @@
     <camunda.version>7.1.2-ee</camunda.version>
 
     <!-- This property must be present for the pom.xml to be recognized as a plugin -->
-    <camunda.plugin.category>Business</camunda.plugin.category>
+    <Xcamunda.plugin.category>Business</Xcamunda.plugin.category>
 
     <camunda.plugin.screenshot>screenshot.png</camunda.plugin.screenshot>
     <camunda.plugin.testedOnVersion>7.1.2-ee</camunda.plugin.testedOnVersion>
