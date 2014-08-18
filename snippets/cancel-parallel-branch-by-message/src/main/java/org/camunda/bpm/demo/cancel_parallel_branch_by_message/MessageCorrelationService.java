@@ -9,14 +9,9 @@ public class MessageCorrelationService {
 
 	private static final Logger log = Logger.getLogger(MessageCorrelationService.class);
 
-	/* (non-Javadoc)
-	 * @see de.eplus.norman.op.service.impl.MessageCorrelationService#correlate(org.camunda.bpm.engine.delegate.DelegateExecution, java.lang.String)
-	 */
 	public void correlate(DelegateExecution ctx, String correlationKey) {
 
-
 		RuntimeService runtimeService = ctx.getProcessEngineServices().getRuntimeService();
-//		RuntimeService runtimeService = InMemoryH2Test.runtimeService;
 
 		long waitingProcessInstances = runtimeService
 				.createExecutionQuery().messageEventSubscriptionName(correlationKey)

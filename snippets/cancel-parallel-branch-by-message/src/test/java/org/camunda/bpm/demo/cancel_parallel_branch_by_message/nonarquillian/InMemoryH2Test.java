@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.ManagementService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.impl.util.LogUtil;
-import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
@@ -25,10 +24,6 @@ public class InMemoryH2Test {
   public ProcessEngineRule processEngineRule = new ProcessEngineRule();
 
   private static final String PROCESS_DEFINITION_KEY = "cancel-parallel-branch-by-message";
-
-  public static RuntimeService runtimeService;
-  
-  
 
   // enable more detailed logging
   static {
@@ -48,8 +43,8 @@ public class InMemoryH2Test {
   @Test
   @Deployment(resources = "process.bpmn")
   public void testExecution() {
-    runtimeService = processEngineRule.getRuntimeService();
-    String pid = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY).getId();
+    RuntimeService runtimeService = processEngineRule.getRuntimeService();
+    runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY).getId();
     
     // execute failing job until it becomes an incident
     executeAvailableJobsRecursive();
@@ -58,21 +53,15 @@ public class InMemoryH2Test {
     // execute second branch
     runtimeService.correlateMessage("continue");
     
+    // execute job that cancels parallel branch
     ManagementService managementService = processEngineRule.getManagementService();
     Job job = managementService.createJobQuery().withRetriesLeft().singleResult();
     managementService.executeJob(job.getId());
     
-//    runtimeService.correlateMessage("cancel");
-
     // assert that parallel branch has been canceled by the message
     HistoricActivityInstance historicActivityInstance = processEngineRule.getHistoryService().createHistoricActivityInstanceQuery().activityId("canceled").singleResult();
     assertNotNull(historicActivityInstance);
-    
-    List<Execution> list = runtimeService.createExecutionQuery().list();
-    for (Execution execution : list) {
-		System.out.println(execution);
-	}
-    
+        
     job = managementService.createJobQuery().withRetriesLeft().singleResult();
     assertNotNull(job);
     managementService.executeJob(job.getId());
