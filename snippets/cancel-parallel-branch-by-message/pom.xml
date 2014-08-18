@@ -13,7 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.1.0-Final</camunda.version>
+    <camunda.version>7.1.4-ee</camunda.version>
     <arquillian.version>1.1.2.Final</arquillian.version>
     <jboss.version>7.2.0.Final</jboss.version>
   </properties>
@@ -134,6 +134,13 @@
       <name>camunda BPM Maven Repository</name>
       <url>https://app.camunda.com/nexus/content/groups/public</url>
     </repository>
+<!--
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda BPM Enterprise Maven Repository</name>
+      <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+    </repository>
+-->
     <repository>
       <id>jboss-public-repository</id>
       <name>JBoss Repository</name>
