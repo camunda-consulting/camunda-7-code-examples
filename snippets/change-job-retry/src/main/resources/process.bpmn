@@ -10,7 +10,7 @@
     <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="repairableServiceTask" camunda:async="true" camunda:class="com.camunda.consulting.job_retry_config.RepairableDelegate" name="Repairable Task">
+    <bpmn2:serviceTask id="repairableServiceTask" camunda:async="true" camunda:class="com.camunda.consulting.changeJobRetry.RepairableDelegate" name="Repairable Task">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:serviceTask>
