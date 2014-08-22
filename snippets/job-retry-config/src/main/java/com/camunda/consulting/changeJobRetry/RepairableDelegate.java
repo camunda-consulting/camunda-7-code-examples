@@ -1,4 +1,4 @@
-package com.camunda.consulting.job_retry_config;
+package com.camunda.consulting.changeJobRetry;
 
 import java.util.logging.Logger;
 
