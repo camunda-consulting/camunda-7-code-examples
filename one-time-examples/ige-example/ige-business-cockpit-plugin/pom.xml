@@ -7,14 +7,15 @@
   <name>Camunda Cockpit Plugin: Patent Office Business Data</name>
   <description>This Plugin shows two input search fields for business data, here special process variables.
     After hitting the search button, the process instances which contains one of the search
-    criteria will be shown in the result table.</description>
+    criteria will be shown in the result table. 
+    Important Note: This plugin links to history pages which are only available in the enterprise edition of camunda BPM.</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <camunda.version>7.1.2-ee</camunda.version>
+    <camunda.version>7.1.0-Final</camunda.version>
 
     <!-- This property must be present for the pom.xml to be recognized as a plugin -->
-    <Xcamunda.plugin.category>Business</Xcamunda.plugin.category>
+    <camunda.plugin.category>Business</camunda.plugin.category>
 
     <camunda.plugin.screenshot>screenshot.png</camunda.plugin.screenshot>
     <camunda.plugin.testedOnVersion>7.1.2-ee</camunda.plugin.testedOnVersion>
