@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-package com.camunda.consulting.job_retry_config.nonarquillian;
+package com.camunda.consulting.changeJobRetry.nonarquillian;
 
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;

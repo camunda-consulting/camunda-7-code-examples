@@ -1,4 +1,4 @@
-package com.camunda.consulting.job_retry_config;
+package com.camunda.consulting.changeJobRetry;
 
 import org.camunda.bpm.engine.impl.cfg.AbstractProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;

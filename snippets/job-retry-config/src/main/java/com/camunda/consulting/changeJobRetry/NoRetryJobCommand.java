@@ -1,4 +1,4 @@
-package com.camunda.consulting.job_retry_config;
+package com.camunda.consulting.changeJobRetry;
 
 import java.util.logging.Logger;
 
@@ -31,10 +31,9 @@ public class NoRetryJobCommand extends FoxJobRetryCmd {
 	public Object execute(CommandContext commandContext) {
 		JobEntity job = Context.getCommandContext().getJobManager().findJobById(jobId);
 		if (exception instanceof OptimisticLockingException) {
-      log.info("create Job entity with retries = 3");
-		  job.setRetries(3);
+      log.info("don't change the number of retries");
 		} else {
-		  log.info("create Job entity with retries = 1");
+		  log.info("set retries = 1 in the job entity");
 		  job.setRetries(1);
 		}
 
