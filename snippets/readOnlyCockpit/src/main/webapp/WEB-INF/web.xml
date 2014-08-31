@@ -12,6 +12,21 @@
     <listener-class>org.camunda.bpm.admin.impl.web.bootstrap.AdminContainerBootstrap</listener-class>
   </listener>
 
+  <!-- Reject Changes Filter -->
+  <filter>
+    <filter-name>Reject Changes Filter</filter-name>
+    <filter-class>com.camunda.consulting.webapp.security.filter.RejectProcessDataChangeFilter</filter-class>
+    <init-param>
+      <param-name>configFile</param-name>
+      <param-value>/WEB-INF/forbiddenPostRequestURIs.txt</param-value>  
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>Reject Changes Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
   <!-- Authentication filter -->
   <filter>
     <filter-name>Authentication Filter</filter-name>
