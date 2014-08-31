@@ -10,3 +10,5 @@ An additional Filter answers all POST-, PUT-, and DELETE-Requests with 403 Forbi
 
 This REST-Webapp doesn't work with readOnlyCockpit.
 
+If you want to try it, you must undeploy the original camunda-engine-rest.war
+
