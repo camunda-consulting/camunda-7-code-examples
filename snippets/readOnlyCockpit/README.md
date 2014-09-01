@@ -6,10 +6,10 @@ In the deployment-descriptors for jboss and webLogicServer the context-root is /
 
 This application shades camunda-webapp and includes only the files that has to be changed to hide all actions that might change data.   
 
-Some html-tables are copied from the camunda-webapp into this project and the buttons for changing variables or restarting incidents has been cut out.
+Some html-tables are copied from the camunda-webapp into this project and the buttons for changing variables or restarting incidents have been cut out.
 
-The dashboard has only a business key search.
+The dashboard has only a business key search which is a plugin that needs to be built separately from: https://github.com/camunda/camunda-cockpit-plugins/blob/master/cockpit-plugin-business-key-search/
 
 It is rebranded with a new logo.
 
-![Screenshot](screenshot.png) 
+![Screenshot](screenshot.png)
