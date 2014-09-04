@@ -12,12 +12,17 @@
 	               ng-model="newSubTask.name">
 	<input type="string" class="input-small"
 	               placeholder="Wer?" 
-	               ng-model="newSubTask.assignee">
+	               ng-model="newSubTask.assignee"
+	               data-provide="typeahead" 
+	               data-items="10"
+	               data-source="["Ahmedabad","Akola","Asansol","Aurangabad","Bangaluru","Baroda","Belgaon","Berhumpur","Calicut","Chennai","Chapra","Cherapunji"]"
+	               >
 	<!--
-	<input type="string" class="input-small"
+	<input id="datepicker" type="string" class="input-small"
 	               placeholder="Bis wann?" 
 	               ng-model="newSubTask.dueDate">
-	-->               
+	-->
+	               
 	<input type="button" ng-click="createSubtask()" class="btn" value="anlegen"></input>
 	</div>
 	<h3>Aufgabenhierarchie</h3>
@@ -34,12 +39,18 @@
 	  </thead>
 	  <tr ng-repeat="dto in taskDtos" ng-class="{'info': dto.id==task.id}">
 	    <td><span class="label">{{dto.hierarchyLevel}}</span></td>
-	    <td><i class="icon-ok" ng-if="dto.ended"></i></td>
+	    <td>
+	    	<i class="icon-ok" ng-if="dto.ended"></i>
+	    	<i class="icon-pencil" ng-if="dto.assignee!=null"></i>
+	    </td>
 	    <td>
 	    	<s ng-if="dto.ended">{{dto.name}}</s>
 	    	<span ng-if="!dto.ended"><a href="/camunda/app/tasklist/default/#/task/{{dto.id}}">{{dto.name}}</a></span>
 	    </td>
-	    <td>{{dto.assignee}}</td>
+	    <td>
+	    	<span ng-if="dto.assignee!=null">{{dto.assignee}}</span>
+	    	<span ng-if="dto.assignee==null">{{dto.candidates}}</span>
+	    </td>
 	    <td>{{dto.dueDate}}</td>
 	  </tr>
 	 
@@ -65,6 +76,8 @@
        });
        $scope.newSubTask = null;
   }
+  
+  // $( "#datepicker" ).datepicker();
 
   window.setTimeout(function(){
        // use jquery instead of angular as $http is not injected       	

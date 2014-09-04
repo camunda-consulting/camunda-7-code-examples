@@ -11,7 +11,7 @@
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_1"/>
-    <bpmn2:userTask id="Task_1" camunda:assignee="#{taskAssignee}" camunda:formKey="embedded:app:task.html" name="Aufgabe '#{taskName}' durchführen">
+    <bpmn2:userTask id="Task_1" camunda:formKey="embedded:app:task.html" camunda:candidateUsers="#{taskAssignee}" name="Aufgabe '#{taskName}' durchführen">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>

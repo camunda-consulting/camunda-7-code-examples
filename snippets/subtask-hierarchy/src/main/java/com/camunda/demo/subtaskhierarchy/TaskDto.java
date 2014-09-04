@@ -8,6 +8,7 @@ public class TaskDto {
   private String dueDate;
   private long hierarchyLevel;
   private boolean ended;
+  private String candidates;
 
   public String getName() {
     return name;
@@ -56,6 +57,14 @@ public class TaskDto {
 
   public boolean isEnded() {
     return ended;
+  }
+
+  public void setCandidates(String candidates) {
+    this.candidates = candidates;    
+  }
+
+  public String getCandidates() {
+    return candidates;
   }
 
 }

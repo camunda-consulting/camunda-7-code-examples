@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +17,9 @@ import javax.ws.rs.core.Application;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
+import org.camunda.bpm.engine.identity.User;
+import org.camunda.bpm.engine.task.IdentityLink;
+import org.camunda.bpm.engine.task.IdentityLinkType;
 
 @Path("/info")
 @ApplicationPath("/api")
@@ -28,7 +30,6 @@ public class InfoRestService extends Application {
   
   @POST
   @Path("/task/{id}/subtask")
-//  @Consumes("application/json")
   @Produces("application/json")
   public List<TaskDto> createNewSubtask(@PathParam("id") String parentTaskId, TaskDto newTaskData) {
     HistoricTaskInstance currentTask = findTask(parentTaskId);
@@ -98,6 +99,42 @@ public class InfoRestService extends Application {
       dto.setDueDate("");
     }
     dto.setHierarchyLevel(hierarchyLevel);
+    
+    if (processEngine.getTaskService().createTaskQuery().taskId(task.getId()).count()>0) {
+      List<IdentityLink> identityLinksForTask = processEngine.getTaskService().getIdentityLinksForTask(task.getId());
+      String candidates = "";
+      for (IdentityLink identityLink : identityLinksForTask) {
+        if (identityLink.getUserId()!=null) {
+          candidates += identityLink.getUserId() + ", ";
+        } else {
+          candidates += identityLink.getGroupId() + ", ";        
+        }
+      }
+      if (candidates.length()>2) { // remove last comma
+        candidates.substring(0, candidates.length()-2);
+      }
+      dto.setCandidates(candidates);
+    }    
+    return dto;
+  }
+  
+  @GET
+  @Path("/user")
+  @Produces("application/json")
+  public List<UserDto> getUsers() {
+    ArrayList<UserDto> result = new ArrayList<UserDto>();
+    List<User> users = processEngine.getIdentityService().createUserQuery().list();
+    for (User user : users) {
+      result.add(createUserDto(user));
+    }
+    return result;
+  }
+
+  private UserDto createUserDto(User user) {
+    UserDto dto = new UserDto();
+    dto.setFirstName(user.getFirstName());
+    dto.setLastName(user.getLastName());
+    dto.setId(user.getId());
     return dto;
   }
 }
