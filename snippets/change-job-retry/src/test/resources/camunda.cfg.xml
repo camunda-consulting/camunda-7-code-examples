@@ -8,7 +8,7 @@
     <property name="jobExecutorActivate" value="false"/>
     <property name="processEnginePlugins">
       <list>
-        <bean class="com.camunda.consulting.job_retry_config.NoRetryEnginePlugin"/>
+        <bean class="com.camunda.consulting.changeJobRetry.NoRetryEnginePlugin"/>
       </list>
     </property>
     <!--
