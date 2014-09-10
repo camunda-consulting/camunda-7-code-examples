@@ -1,0 +1,91 @@
+<div class="span7">
+	
+	<h3>Formulardaten...</h3>
+	
+</div>
+<div class="span5">
+	<h3>Neue Unteraufgabe</h3>
+	
+	<div class="form-inline">
+	<input type="string" class="input-small" 
+	               placeholder="Was?" 
+	               ng-model="newSubTask.name">
+	<input type="string" class="input-small"
+	               placeholder="Wer?" 
+	               ng-model="newSubTask.assignee"
+	               data-provide="typeahead" 
+	               data-items="10"
+	               data-source="["Ahmedabad","Akola","Asansol","Aurangabad","Bangaluru","Baroda","Belgaon","Berhumpur","Calicut","Chennai","Chapra","Cherapunji"]"
+	               >
+	<!--
+	<input id="datepicker" type="string" class="input-small"
+	               placeholder="Bis wann?" 
+	               ng-model="newSubTask.dueDate">
+	-->
+	               
+	<input type="button" ng-click="createSubtask()" class="btn" value="anlegen"></input>
+	</div>
+	<h3>Aufgabenhierarchie</h3>
+
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Ebene</th>
+	      <th></th>
+	      <th>Aufgabe</th>
+	      <th>Bearbeiter</th>
+	      <th>Fälligkeit</th>
+	    </tr>
+	  </thead>
+	  <tr ng-repeat="dto in taskDtos" ng-class="{'info': dto.id==task.id}">
+	    <td><span class="label">{{dto.hierarchyLevel}}</span></td>
+	    <td>
+	    	<i class="icon-ok" ng-if="dto.ended"></i>
+	    	<i class="icon-pencil" ng-if="dto.assignee!=null"></i>
+	    </td>
+	    <td>
+	    	<s ng-if="dto.ended">{{dto.name}}</s>
+	    	<span ng-if="!dto.ended"><a href="/camunda/app/tasklist/default/#/task/{{dto.id}}">{{dto.name}}</a></span>
+	    </td>
+	    <td>
+	    	<span ng-if="dto.assignee!=null">{{dto.assignee}}</span>
+	    	<span ng-if="dto.assignee==null">{{dto.candidates}}</span>
+	    </td>
+	    <td>{{dto.dueDate}}</td>
+	  </tr>
+	 
+	</table>
+	
+</div>
+
+
+<!-- This is a necessary workaround in 7.1 to change data within the JSON String 
+     Should get easier with 7.2 -->
+<script form-script type="text/form-script">
+
+  $scope.createSubtask = function() {
+      $.ajax('/subtask-hierarchy/api/info/task/' + $scope.task.id + '/subtask', {
+         data : JSON.stringify($scope.newSubTask),
+         contentType : 'application/json',
+         type : 'POST',
+         success: function (result) {
+            $scope.$apply(function () {
+                $scope.taskDtos = result;
+            });
+         }
+       });
+       $scope.newSubTask = null;
+  }
+  
+  // $( "#datepicker" ).datepicker();
+
+  window.setTimeout(function(){
+       // use jquery instead of angular as $http is not injected       	
+       $.get( '/subtask-hierarchy/api/info/task/' + $scope.task.id, function( result ) {
+         $scope.$apply(function () {
+            $scope.taskDtos = result;
+         });
+	   });
+       	
+  }, 100);  
+</script>
