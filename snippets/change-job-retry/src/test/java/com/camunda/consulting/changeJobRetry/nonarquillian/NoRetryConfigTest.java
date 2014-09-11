@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.ibatis.logging.LogFactory;
@@ -19,6 +18,7 @@ import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,24 +41,30 @@ public class NoRetryConfigTest {
   }
 
 	static ControllableThread activeThread;
+	
+	@Before
+	public void setUp() {
+	  init(rule.getProcessEngine());
+	}
 
 	@Test
 	@Deployment(resources = "process.bpmn")
 	public void runProcessWithoutRetry() {
 
-	  Map<String, Object> variables = withVariables("fail", "true");		
-	  ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByKey("job-retry-config", variables);
+	  ProcessInstance pi = runtimeService().startProcessInstanceByKey(
+	      "job-retry-config", 
+	      withVariables("fail", "true"));
 
 	  // continue the async execution manually
-	  Job job = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).singleResult();
+	  Job job = jobQuery().executionId(pi.getProcessInstanceId()).singleResult();
 	  try {
-	    rule.getManagementService().executeJob(job.getId());
+	    managementService().executeJob(job.getId());
 	  } catch (Exception e) {
 	    assertEquals("Wrong error massage", "Repairable Service Task should fail", e.getMessage());
 	  }
 
 	  // check for the incident after the first fail
-	  Incident incident = rule.getRuntimeService().createIncidentQuery().executionId(pi.getProcessInstanceId()).singleResult();
+	  Incident incident = runtimeService().createIncidentQuery().executionId(pi.getProcessInstanceId()).singleResult();
 	  assertNotNull("No incident found", incident);
 	  assertThat(incident.getIncidentMessage()).isEqualTo("Repairable Service Task should fail");
 	}
@@ -66,18 +72,19 @@ public class NoRetryConfigTest {
   @Test
   @Deployment(resources = "process.bpmn")
   public void runServiceThrowingOptimisticLocking() {
-    Map<String, Object> variables = withVariables("fail", "optimisticLockingException");    
-    ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByKey("job-retry-config", variables);
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(
+        "job-retry-config", 
+        withVariables("fail", "optimisticLockingException"));
     
     // continue the async execution manually
-    Job job = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).singleResult();
+    Job job = jobQuery().executionId(pi.getProcessInstanceId()).singleResult();
     try {
-      rule.getManagementService().executeJob(job.getId());
+      managementService().executeJob(job.getId());
     } catch (Exception e) {
       assertEquals("Wrong error massage", "Service Task throws OptimisticLockingException", e.getMessage());
     }
     
-    List<Job> jobs = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).list();
+    List<Job> jobs = jobQuery().executionId(pi.getProcessInstanceId()).list();
     assertTrue("not one job", jobs.size() == 1);
     assertTrue("not three retries", jobs.get(0).getRetries() == (3-1)); // Still decremented by 1
   }
@@ -85,27 +92,28 @@ public class NoRetryConfigTest {
   @Test
   @Deployment(resources = "process.bpmn")
   public void continueServiceThrowingOptimisticLocking() {
-    Map<String, Object> variables = withVariables("fail", "optimisticLockingException");    
-    ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByKey("job-retry-config", variables);
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(
+        "job-retry-config", 
+        withVariables("fail", "optimisticLockingException"));
     
     // continue the async execution manually
-    Job job = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).singleResult();
+    Job job = jobQuery().executionId(pi.getProcessInstanceId()).singleResult();
     try {
-      rule.getManagementService().executeJob(job.getId());
+      managementService().executeJob(job.getId());
     } catch (Exception e) {
       assertEquals("Wrong error massage", "Service Task throws OptimisticLockingException", e.getMessage());
     }
 
     // first retry
-    job = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).singleResult();
+    job = jobQuery().executionId(pi.getProcessInstanceId()).singleResult();
     try {
-      rule.getManagementService().executeJob(job.getId());
+      managementService().executeJob(job.getId());
     } catch (Exception e) {
       assertEquals("Wrong error massage", "Service Task throws OptimisticLockingException", e.getMessage());
     }
     
     // retry counter decremented?
-    List<Job> jobs = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).list();
+    List<Job> jobs = jobQuery().executionId(pi.getProcessInstanceId()).list();
     assertTrue("not one job", jobs.size() == 1);
     assertTrue("not two retries left", jobs.get(0).getRetries() == (2-1)); // Still decremented by 1
     
@@ -114,23 +122,30 @@ public class NoRetryConfigTest {
   @Test
   @Deployment(resources = "process.bpmn")
   public void forceOptimiticLockingfrom2Threads() {
-    Map<String, Object> variables = withVariables("fail", "false");
-    ProcessInstance pi = rule.getRuntimeService().startProcessInstanceByKey("job-retry-config", variables);
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(
+        "job-retry-config", 
+        withVariables("fail", "false"));
 
     // continue the async execution manually
-    Job job = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).singleResult();
+    Job job = jobQuery().executionId(pi.getProcessInstanceId()).singleResult();
     rule.getManagementService().executeJob(job.getId());
 
-    String taskId = rule.getTaskService().createTaskQuery().singleResult().getId();
+    String taskId = taskQuery().singleResult().getId();
     String variableName = "varName";
 
-    rule.getTaskService().setVariable(taskId, variableName, "someValue");
+    taskService().setVariable(taskId, variableName, "someValue");
 
-    SetTaskVariablesThread thread1 = new SetTaskVariablesThread(taskId, variableName, "someString");
+    SetTaskVariablesThread thread1 = new SetTaskVariablesThread(
+        taskId, 
+        variableName, 
+        "someString");
     thread1.startAndWaitUntilControlIsReturned();
 
     // this fails with an optimistic locking exception
-    SetTaskVariablesThread thread2 = new SetTaskVariablesThread(taskId, variableName, "someOtherString");
+    SetTaskVariablesThread thread2 = new SetTaskVariablesThread(
+        taskId, 
+        variableName, 
+        "someOtherString");
     thread2.startAndWaitUntilControlIsReturned();
 
     thread1.proceedAndWaitTillDone();
@@ -139,7 +154,7 @@ public class NoRetryConfigTest {
     assertNull(thread1.optimisticLockingException);
     assertNotNull(thread2.optimisticLockingException);
         
-    List<Job> jobs = rule.getManagementService().createJobQuery().executionId(pi.getProcessInstanceId()).list();
+    List<Job> jobs = jobQuery().executionId(pi.getProcessInstanceId()).list();
     assertTrue("No jobs found", jobs.size() > 0);
   }
 
