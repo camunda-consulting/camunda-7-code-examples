@@ -27,6 +27,10 @@ import org.junit.runner.RunWith;
 
 import com.camunda.consulting.tasklist.fulltext.entity.UserTask;
 
+/**
+ * @author Ingo Richtsmeier
+ *
+ */
 @RunWith(Arquillian.class)
 public class FullTextArquillianTest {
   

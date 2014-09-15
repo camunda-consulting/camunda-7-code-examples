@@ -27,7 +27,7 @@ To use this taskHandler in your processes, add the FulltextTaskListener as deleg
 
 ## Query for CLOB column
 
-The query to the CLOB column is built in the FulltextTaskListener, too. If you get the named bean, you can call 
+The query to the CLOB column is built in the FulltextTaskListener, too. If you inject the named bean, you can call 
   
 	List<UserTask> userTasks = fulltext.findUserTasksWithExceptionLike("Service Call should");
   

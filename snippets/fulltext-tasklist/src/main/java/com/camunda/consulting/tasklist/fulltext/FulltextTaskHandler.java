@@ -16,6 +16,13 @@ import org.camunda.bpm.engine.impl.context.Context;
 
 import com.camunda.consulting.tasklist.fulltext.entity.UserTask;
 
+/**
+ * A TaskListener that put some values of a task into an extra database table
+ * to allow fast or fulltext queries for these userTasks.
+ *  
+ * @author Ingo Richtsmeier
+ *
+ */
 @Named
 public class FulltextTaskHandler implements TaskListener, Serializable {
   

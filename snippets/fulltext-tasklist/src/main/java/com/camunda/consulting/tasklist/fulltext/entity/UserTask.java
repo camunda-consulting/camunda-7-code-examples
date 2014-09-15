@@ -5,6 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entity to collect some business values of a task and allow a fast query
+ * without join to these values or a full text query to the CLOB column.
+ * 
+ * @author Ingo Richtsmeier
+ *
+ */
 @Entity
 @Table(name = "USER_TASK")
 public class UserTask {
