@@ -1,7 +1,7 @@
 # Fulltext Task List
 
 If you want to search for long variable content, longer than the 4000 characters that you can save
-in a process variable, this snippet shows you, how to save your tasks with a CLOB containing the large text. 
+in a process variable, this snippet shows you how to save your tasks with a CLOB containing the large text. 
 
 ## The detailed parts
 
@@ -24,6 +24,14 @@ To use this taskHandler in your processes, add the FulltextTaskListener as deleg
         <camunda:taskListener delegateExpression="${fulltextTaskHandler}" event="complete"/>
       </bpmn2:extensionElements>
     </bpmn2:userTask>
+
+## Query for CLOB column
+
+The query to the CLOB column is built in the FulltextTaskListener, too. If you get the named bean, you can call 
+  
+	List<UserTask> userTasks = fulltext.findUserTasksWithExceptionLike("Service Call should");
+  
+to get all user tasks including a text like the method parameter.
 
 ## Remarks to run this application
 There is no web interface to access the application. To get started refer to the

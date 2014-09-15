@@ -25,6 +25,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.camunda.consulting.tasklist.fulltext.entity.UserTask;
+
 @RunWith(Arquillian.class)
 public class FullTextArquillianTest {
   
@@ -64,6 +66,9 @@ public class FullTextArquillianTest {
 
   @Inject
   private ProcessEngine processEngine;
+  
+  @Inject
+  private FulltextTaskHandler fulltext;
 
   /**
    * Tests that the process is executable and reaches its end.
@@ -204,6 +209,20 @@ public class FullTextArquillianTest {
       } 
     }
     assertTrue("Stack trace not found", stackTraceFound);
+  }
+  
+  @Test
+  public void queryTasksWithExceptionSnippets() throws Exception {
+    cleanUpRunningProcessInstances();
+    String businessKey = "" + new Random(System.currentTimeMillis()).nextInt(1000);
+    Incident incident = startProcessWithIncident(businessKey);
+    Job job = processEngine.getManagementService().createJobQuery().processInstanceId(incident.getProcessInstanceId()).singleResult();
+    Map<String, Object> procVars = collectIncidentVariables(incident, job);
+    
+    processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, businessKey, procVars);
+    
+    List<UserTask> userTasks = fulltext.findUserTasksWithExceptionLike("Service Call should");
+    assertTrue("no user tasks found", userTasks.size() > 0);
   }
   
   private Incident startProcessWithIncident(String businessKey) throws Exception {

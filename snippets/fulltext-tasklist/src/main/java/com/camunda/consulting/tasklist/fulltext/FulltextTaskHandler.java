@@ -1,12 +1,14 @@
 package com.camunda.consulting.tasklist.fulltext;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
@@ -86,6 +88,14 @@ public class FulltextTaskHandler implements TaskListener, Serializable {
     log.info("Delete User Task " + userTask.getName());
     UserTask businessUserTask = em.find(UserTask.class, userTask.getVariableLocal(BUSINESS_USER_TASK_ID));
     em.remove(businessUserTask);
+  }
+  
+  public List<UserTask> findUserTasksWithExceptionLike(String exceptionSnippet) {
+    TypedQuery<UserTask> query = em.createQuery(
+        "select ut from UserTask ut where inc_exception_ like :exceptionSnippet", 
+        UserTask.class);
+    query.setParameter("exceptionSnippet", "%" + exceptionSnippet + "%");
+    return query.getResultList();
   }
 
 }
