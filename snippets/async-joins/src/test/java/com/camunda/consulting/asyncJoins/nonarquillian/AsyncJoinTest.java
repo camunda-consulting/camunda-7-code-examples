@@ -36,7 +36,7 @@ public class AsyncJoinTest {
   
   @Before
   public void setup() {
-	init(rule.getProcessEngine());
+    init(rule.getProcessEngine());
   }
 
   /**
@@ -63,9 +63,10 @@ public class AsyncJoinTest {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, withVariables("allTransitions", true));
     List<Job> jobs = jobQuery().list();
     for (Job job : jobs) {
-      managementService().executeJob(job.getId());
+      execute(job);
     }
     assertThat(pi).hasPassed("InclusiveGateway_2");
+    assertThat(pi).isEnded();
   }
   
   @Test
@@ -82,9 +83,10 @@ public class AsyncJoinTest {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(MULTI_INSTANCE);
     List<Job> jobs = jobQuery().list();
     for (Job job : jobs) {
-      managementService().executeJob(job.getId());
+      execute(job);
     }
     assertThat(pi).hasPassed("EndEvent_2", "ServiceTask_2");
+    assertThat(pi).isEnded();
   }
   
   @Test
@@ -101,9 +103,10 @@ public class AsyncJoinTest {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PARALLEL);
     List<Job> jobs = jobQuery().list();
     for (Job job : jobs) {
-      managementService().executeJob(job.getId());
+      execute(job);
     }
     assertThat(pi).hasPassed("ParallelGateway_2", "ServiceTask_3");
+    assertThat(pi).isEnded();
   }
   
   @Test
