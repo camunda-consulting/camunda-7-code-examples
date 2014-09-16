@@ -69,6 +69,7 @@ public class FulltextTaskHandler implements TaskListener, Serializable {
     businessUserTask.setProcessDefinitionId(userTask.getProcessDefinitionId());
     businessUserTask.setAssignee(userTask.getAssignee());
     businessUserTask.setBusinessKey(userTask.getExecution().getProcessBusinessKey());
+    businessUserTask.setCreateTime(userTask.getCreateTime());
     
     Map<String, Object> variables = userTask.getVariables();
     String jobId = (String) variables.get(INCIDENT_JOB_ID);

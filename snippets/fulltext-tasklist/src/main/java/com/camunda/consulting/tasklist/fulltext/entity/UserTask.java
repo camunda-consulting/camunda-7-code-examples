@@ -1,5 +1,7 @@
 package com.camunda.consulting.tasklist.fulltext.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,6 +27,7 @@ public class UserTask {
   String candidates;
   String assignee;
   String businessKey;
+  Date createTime;
   
   // business attributes
   String incidentActivityId;
@@ -98,6 +101,13 @@ public class UserTask {
   }
   public void setBusinessKey(String businessKey) {
     this.businessKey = businessKey;
+  }
+  @Column(name = "CREATE_TIME_")
+  public Date getCreateTime() {
+    return createTime;
+  }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
   }
   @Column(name = "INC_ACTIVITY_ID_")
   public String getIncidentActivityId() {
