@@ -38,11 +38,6 @@ public class AsyncJoinParseListener extends AbstractBpmnParseListener {
         log.info(activity.getActivityId() + " is join inclusive gateway");
         makeAsynchronous(activity);
       }
-//    } else if (activity.getProperty("type").equals("endEvent")) {
-//      log.fine("Handle end event " + activity.getActivityId());
-//      if (activity.getParentActivity() != null) {
-//        log.fine(activity.getParentActivity().getActivityId());
-//      }
     } else if (activity.getProperty("type").equals("subProcess")) {
       log.fine("Handle outer subProcess " + activity.getActivityId());
       handleSubProcessforAsyncJoin(activity);
@@ -64,6 +59,7 @@ public class AsyncJoinParseListener extends AbstractBpmnParseListener {
           }
         }
       } else {
+        // run into recursion
         List<ActivityImpl> innerActivities = activity.getActivities();
         for (ActivityImpl innerActivity : innerActivities) {
           handleAsyncJoinActivity(innerActivity);
