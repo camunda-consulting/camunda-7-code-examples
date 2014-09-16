@@ -46,7 +46,8 @@ public class AsyncJoinParseListener extends AbstractBpmnParseListener {
   
   private void handleSubProcessforAsyncJoin(ActivityImpl activity) {
     if (activity.getProperty("type").equals("subProcess")) {
-      if (activity.getProperty("multiInstance") != null) {
+      if (activity.getProperty("multiInstance") != null 
+          && activity.getProperty("multiInstance").equals("parallel")) {
         // search for endEvent and makeAsynchronous
         List<ActivityImpl> innerActivities = activity.getActivities();
         for (ActivityImpl innerActivity : innerActivities) {
@@ -56,6 +57,9 @@ public class AsyncJoinParseListener extends AbstractBpmnParseListener {
               log.info(innerActivity.getActivityId() + " is multi instance join end event");
               makeAsynchronous(innerActivity);
             }
+          } else {
+            // run into recursion
+            handleAsyncJoinActivity(innerActivity);
           }
         }
       } else {

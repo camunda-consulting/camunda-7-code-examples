@@ -26,6 +26,7 @@ public class AsyncJoinTest {
   private static final String MULTI_INSTANCE = "multi-instance";
   private static final String MULTI_INSTANCE_RECURSIVE = "multi-instance-recursive";
   private static final String PARALLEL = "parallel-process";
+  private static final String PARALLEL_SUBPROCESS = "parallel-subprocess";
 
 
   // enable more detailed logging
@@ -44,7 +45,7 @@ public class AsyncJoinTest {
    */
   @Test
   @Deployment(resources = {"process.bpmn", "multiInstanceProcess.bpmn", 
-      "multiInstanceRecursive.bpmn", "parallelProcess.bpmn"})
+      "multiInstanceRecursive.bpmn", "parallelProcess.bpmn", "parallelSubprocess.bpmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
@@ -115,5 +116,44 @@ public class AsyncJoinTest {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(MULTI_INSTANCE_RECURSIVE);
     assertThat(pi).hasPassed("ServiceTask_1");
     assertThat(pi).isWaitingAt("EndEvent_2");
+  }
+  
+  @Test
+  @Deployment(resources = "parallelSubprocess.bpmn")
+  public void startParallelSubprocessAsyncJoin() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PARALLEL_SUBPROCESS);
+    assertThat(pi).hasPassed("ServiceTask_1", "ServiceTask_2");
+    assertThat(pi).isWaitingAt("ParallelGateway_2");
+  }
+  
+  @Test
+  @Deployment(resources = "parallelSubprocess.bpmn")
+  public void continueToMultiInstanceEnd() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PARALLEL_SUBPROCESS);
+    List<Job> jobs = jobQuery().list();
+    for (Job job : jobs) {
+      execute(job);
+    }
+    assertThat(pi).hasPassed("ParallelGateway_2");
+    assertThat(pi).isWaitingAt("EndEvent_1");
+  }
+  
+  @Test
+  @Deployment(resources = "parallelSubprocess.bpmn")
+  public void continueParallelMultiInstanceEnd() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PARALLEL_SUBPROCESS);
+    List<Job> jobs = jobQuery().list();
+    for (Job job : jobs) {
+      execute(job);
+    }
+    // contine EndEvent_1
+    jobs = jobQuery().list();
+    assertThat(jobs).hasSize(2); // loopCardinality is 2
+    for (Job job : jobs) {      
+      execute(job);
+    }
+    assertThat(pi).hasPassed("ServiceTask_3");
+    assertThat(pi).isEnded();
+    
   }
 }
