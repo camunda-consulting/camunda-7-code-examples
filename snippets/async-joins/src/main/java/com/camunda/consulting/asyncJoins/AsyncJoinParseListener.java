@@ -1,45 +1,74 @@
 package com.camunda.consulting.asyncJoins;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParse;
 import org.camunda.bpm.engine.impl.jobexecutor.MessageJobDeclaration;
+import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
-import org.camunda.bpm.engine.impl.pvm.process.ScopeImpl;
 import org.camunda.bpm.engine.impl.util.xml.Element;
 
 public class AsyncJoinParseListener extends AbstractBpmnParseListener {
   
   private static final Logger log = Logger.getLogger(AsyncJoinParseListener.class.getName());
-
+  
   @Override
-  public void parseInclusiveGateway(Element inclusiveGwElement, ScopeImpl scope, ActivityImpl activity) {
-    log.info("parsing Inclusive Gateway for async join");
-    String nameAttribute = inclusiveGwElement.attribute("name");
-    if (nameAttribute != null && nameAttribute.startsWith("async-")) {
-      log.info("async inclusive gateway");
-      makeAsynchronous(activity);
+  public void parseProcess(Element processElement, ProcessDefinitionEntity processDefinition) {
+    log.info("Parse Process for async join: " + processElement.attribute("id"));
+    List<ActivityImpl> activities = processDefinition.getActivities();
+    for (ActivityImpl activity : activities) {
+      handleAsyncJoinActivity(activity);
     }
   }
 
-  @Override
-  public void parseEndEvent(Element endEventElement, ScopeImpl scope, ActivityImpl activity) {
-    log.info("parsing End Event for async join");
-    String nameAttribute = endEventElement.attribute("name");
-    if (nameAttribute != null && nameAttribute.startsWith("async-")) {
-      log.info("async multi instance subprocess end event");
-      makeAsynchronous(activity);
+  private void handleAsyncJoinActivity(ActivityImpl activity) {
+    if (activity.getProperty("type").equals("parallelGateway")) {
+      log.fine("Handle parallel gateway:");
+      if (activity.getIncomingTransitions() != null
+          && activity.getIncomingTransitions().size() > 1) {
+        log.info(activity.getActivityId() + " is join parallel gateway");
+        makeAsynchronous(activity);
+      }
+    } else if (activity.getProperty("type").equals("inclusiveGateway")) {
+      log.fine("Handle inclusive gateway:");
+      if (activity.getIncomingTransitions() != null 
+          && activity.getIncomingTransitions().size() > 1) {
+        log.info(activity.getActivityId() + " is join inclusive gateway");
+        makeAsynchronous(activity);
+      }
+//    } else if (activity.getProperty("type").equals("endEvent")) {
+//      log.fine("Handle end event " + activity.getActivityId());
+//      if (activity.getParentActivity() != null) {
+//        log.fine(activity.getParentActivity().getActivityId());
+//      }
+    } else if (activity.getProperty("type").equals("subProcess")) {
+      log.fine("Handle outer subProcess " + activity.getActivityId());
+      handleSubProcessforAsyncJoin(activity);
     }
   }
-
-  @Override
-  public void parseParallelGateway(Element parallelGwElement, ScopeImpl scope, ActivityImpl activity) {
-    log.info("parsing Parallel Gateway for async join");
-    String nameAttribute = parallelGwElement.attribute("name");
-    if (nameAttribute != null && nameAttribute.startsWith("async-")) {
-      log.info("async parallel gateway");
-      makeAsynchronous(activity);
+  
+  private void handleSubProcessforAsyncJoin(ActivityImpl activity) {
+    if (activity.getProperty("type").equals("subProcess")) {
+      if (activity.getProperty("multiInstance") != null) {
+        // search for endEvent and makeAsynchronous
+        List<ActivityImpl> innerActivities = activity.getActivities();
+        for (ActivityImpl innerActivity : innerActivities) {
+          if (innerActivity.getProperty("type").equals("endEvent")) {
+            log.fine("Handle end event " + innerActivity.getActivityId());
+            if (innerActivity.getParentActivity() != null) {
+              log.info(innerActivity.getActivityId() + " is multi instance join end event");
+              makeAsynchronous(innerActivity);
+            }
+          }
+        }
+      } else {
+        List<ActivityImpl> innerActivities = activity.getActivities();
+        for (ActivityImpl innerActivity : innerActivities) {
+          handleAsyncJoinActivity(innerActivity);
+        }
+      }
     }
   }
 

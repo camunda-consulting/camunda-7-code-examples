@@ -23,10 +23,10 @@ public class AsyncJoinTest {
   public ProcessEngineRule rule = new ProcessEngineRule();
 
   private static final String PROCESS_DEFINITION_KEY = "async-joins";
-
   private static final String MULTI_INSTANCE = "multi-instance";
-
+  private static final String MULTI_INSTANCE_RECURSIVE = "multi-instance-recursive";
   private static final String PARALLEL = "parallel-process";
+
 
   // enable more detailed logging
   static {
@@ -43,7 +43,8 @@ public class AsyncJoinTest {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {"process.bpmn", "multiInstanceProcess.bpmn", "parallelProcess.bpmn"})
+  @Deployment(resources = {"process.bpmn", "multiInstanceProcess.bpmn", 
+      "multiInstanceRecursive.bpmn", "parallelProcess.bpmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
@@ -103,5 +104,13 @@ public class AsyncJoinTest {
       managementService().executeJob(job.getId());
     }
     assertThat(pi).hasPassed("ParallelGateway_2", "ServiceTask_3");
+  }
+  
+  @Test
+  @Deployment(resources = "multiInstanceRecursive.bpmn")
+  public void startInnermostMultiInstanceAsyncJoin() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(MULTI_INSTANCE_RECURSIVE);
+    assertThat(pi).hasPassed("ServiceTask_1");
+    assertThat(pi).isWaitingAt("EndEvent_2");
   }
 }
