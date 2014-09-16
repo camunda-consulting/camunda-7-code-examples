@@ -32,7 +32,7 @@ import com.camunda.consulting.tasklist.fulltext.entity.UserTask;
  *
  */
 @RunWith(Arquillian.class)
-public class FullTextArquillianTest {
+public class FulltextArquillianTest {
   
   private static final String PROCESS_DEFINITION_KEY = "fulltext-tasklist";
   private static final String INCIDENT_PROCESS_DEFINITION = "incident-process";
@@ -58,6 +58,7 @@ public class FullTextArquillianTest {
             // add your own classes (could be done one by one as well)
             .addPackages(false, "com.camunda.consulting.tasklist.fulltext") // not recursive to skip package 'nonarquillian'
             .addPackages(false, "com.camunda.consulting.tasklist.fulltext.entity")
+            .addPackages(false, "com.camunda.consulting.tasklist.fulltext.resource")
             // add process definition
             .addAsResource("process.bpmn")
             .addAsResource("incidentProcess.bpmn")
