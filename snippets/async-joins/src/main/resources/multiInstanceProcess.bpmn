@@ -30,7 +30,7 @@
     <bpmn2:endEvent id="EndEvent_1">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.consulting.asyncJoins.LoggerDelegate" name="Service Task 2">
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.consulting.asyncJoins.RepairableDelegate" name="Service Task 2">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:serviceTask>

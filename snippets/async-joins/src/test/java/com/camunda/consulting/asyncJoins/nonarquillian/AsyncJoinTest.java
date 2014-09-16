@@ -3,7 +3,9 @@ package com.camunda.consulting.asyncJoins.nonarquillian;
 import java.util.List;
 
 import org.apache.ibatis.logging.LogFactory;
+import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.impl.util.LogUtil;
+import org.camunda.bpm.engine.runtime.Incident;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
@@ -81,7 +83,9 @@ public class AsyncJoinTest {
   @Test
   @Deployment(resources = "multiInstanceProcess.bpmn")
   public void continueMultiInstanceAsyncEnd() {
-    ProcessInstance pi = runtimeService().startProcessInstanceByKey(MULTI_INSTANCE);
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(
+        MULTI_INSTANCE,
+        withVariables("continue", "continue"));
     List<Job> jobs = jobQuery().list();
     for (Job job : jobs) {
       execute(job);
@@ -154,6 +158,29 @@ public class AsyncJoinTest {
     }
     assertThat(pi).hasPassed("ServiceTask_3");
     assertThat(pi).isEnded();
-    
+  }
+  
+  @Test
+  @Deployment(resources = "multiInstanceProcess.bpmn")
+  public void runIntoIncident() {
+    runtimeService().startProcessInstanceByKey(MULTI_INSTANCE);
+    List<Job> jobs = jobQuery().list();
+    for (Job job : jobs) {
+      try {
+        execute(job);
+      } catch (ProcessEngineException e) {
+        // Do nothing
+      }
+    }
+    for (int i = 0; i < 3; i++) {      
+      Job job = jobQuery().singleResult();
+      try {
+        execute(job);
+      } catch (ProcessEngineException e) {
+        // Do nothing
+      }
+    }
+    List<Incident> incidents = runtimeService().createIncidentQuery().list();
+    assertThat(incidents).isNotEmpty();
   }
 }
