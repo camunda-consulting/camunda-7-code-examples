@@ -1,0 +1,329 @@
+/*!
+ * Bootstrap Docs (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter,  Inc.
+ * Licensed under the Creative Commons Attribution 3.0 Unported License. For
+ * details,  see http://creativecommons.org/licenses/by/3.0/.
+ */
+
+@font-face { font-family: Volkswagen; src: url(VolkswagenTS-Regular.otf); }
+
+ body {
+    position: relative;
+}
+
+h1, h2, h3, h4, p.lead {
+        font-family: Volkswagen;
+}
+
+main {
+    background-color:#610000;
+}
+
+.btn-outline {
+    color: #610000;
+    background-color: transparent;
+    border-color: #610000;
+}
+.btn-outline:hover, .btn-outline:focus, .btn-outline:active {
+    color: #fff;
+    background-color: #610000;
+    border-color: #610000;
+}
+.btn-outline-inverse {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+}
+.btn-outline-inverse:hover, .btn-outline-inverse:focus, .btn-outline-inverse:active {
+    color: #610000;
+    text-shadow: none;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.bs-docs-nav {
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 0;
+}
+.bs-home-nav .bs-nav-b {
+    display: none;
+}
+.bs-docs-nav .navbar-brand, .bs-docs-nav .navbar-nav>li>a {
+    font-weight: 500;
+    color: #610000;
+}
+.bs-docs-nav .navbar-nav>li>a:hover, .bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
+    color: #463265;
+    background-color: #f9f9f9;
+}
+.bs-docs-nav .navbar-toggle .icon-bar {
+    background-color: #610000;
+}
+.bs-docs-nav .navbar-header .navbar-toggle {
+    border-color: #fff;
+}
+.bs-docs-nav .navbar-header .navbar-toggle:hover, .bs-docs-nav .navbar-header .navbar-toggle:focus {
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+
+
+.bs-docs-footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 100px;
+    color: #777;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+.bs-docs-footer-links {
+    padding-left: 0;
+    margin-top: 20px;
+    color: #999;
+}
+.bs-docs-footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+.bs-docs-footer-links li:first-child {
+    padding-left: 0;
+}
+@media (min-width:768px) {
+    .bs-docs-footer p {
+    margin-bottom: 0;
+}
+
+
+}.bs-docs-social {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.bs-docs-social-buttons {
+    display: inline-block;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.bs-docs-social-buttons li {
+    display: inline-block;
+    padding: 5px 8px;
+    line-height: 1;
+}
+.bs-docs-social-buttons .twitter-follow-button {
+    width: 225px!important;
+}
+.bs-docs-social-buttons .twitter-share-button {
+    width: 98px!important;
+}
+.github-btn {
+    overflow: hidden;
+    border: 0;
+}
+
+
+.bs-docs-featurette {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.bs-docs-featurette+.bs-docs-footer {
+    margin-top: 0;
+    border-top: 0;
+}
+.bs-docs-featurette-title {
+    margin-bottom: 5px;
+    font-size: 30px;
+    font-weight: 400;
+    color: #333;
+}
+
+.half-rule {
+    width: 100px;
+    margin: 40px auto;
+}
+.bs-docs-featurette h3 {
+    margin-bottom: 5px;
+    font-weight: 400;
+    color: #333;
+}
+.bs-docs-featurette-img {
+    display: block;
+    margin-bottom: 20px;
+    color: #333;
+}
+.bs-docs-featurette-img:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+.bs-docs-featurette-img img {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.bs-docs-featurette-title {
+    font-size: 40px;
+}
+
+.bs-docs-featurette .lead {
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.bs-docs-masthead, .bs-docs-header {
+    position: relative;
+    padding: 30px 15px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    background-color: #610000;
+}
+
+ .bs-docs-header {
+    padding-top: 40px;
+    padding-bottom: 50px;
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+.bs-docs-header h1 {
+    font-size: 60px;
+    line-height: 1;
+}
+.bs-docs-section {
+    margin-bottom: 60px;
+}
+.bs-docs-section:last-child {
+    margin-bottom: 0;
+}
+
+      .team img {
+          filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+          filter: gray; /* IE6-9 */
+          -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+      }
+
+.team .col-md-2 {
+    padding: 20px;
+}
+
+div.reference {
+  float: left;
+  width: 285px;
+  height: 112px;
+  line-height: 112px;
+  text-align: center;
+  border: 1px solid #dce0e3;
+  border-left: none;
+}
+
+div.first-reference 
+{
+    border-left: 1px solid #dce0e3;
+}
+
+div.reference img,
+div.reference .img-responsive {
+  display: inline-block;
+  vertical-align: middle;
+  max-width:80%;
+  max-height:80%;
+}
+
+/*
+.nav-pills li.active, .nav-pills li.active a {
+    background-color: grey !important;
+}
+*/
+
+.affix {
+    top:30px;
+}
+
+#download-windows .download-info {
+background-image: url('/assets/img/modeler-standalone/win.png');
+}
+
+#download-linux .download-info {
+background-image: url('/assets/img/modeler-standalone/linux.png');
+}
+
+#download-macos .download-info {
+background-image: url('/assets/img/modeler-standalone/mac.png');
+}
+
+
+.download-info {
+    margin-top: 10px;
+padding-left: 45px;
+background: left 50% no-repeat;
+line-height: 50px;
+}
+
+.download-info dt, .download-info dd {
+display: inline-block;
+}
+
+.jumbo {
+min-height: 500px;
+margin-bottom: 100px;
+position: relative;
+}
+.center {
+text-align: center;
+}
+
+.home-news {
+    height:600px; 
+    overflow:hidden; 
+    text-align: left;    
+}
+
+.home-news .panel-body {
+    font-size: 14px;
+}
+
+.bpmn-container-container {
+    overflow: auto;
+    display:block;
+    border: 1px solid lightgrey;
+
+}
+
+.bpmn-container {
+
+        position: relative;
+        overflow: visible;
+
+    width:2000px;
+
+}
+
+.bjs-container {
+}
+
+.bpmn-container .djs-visual > :nth-child(1)  {
+    /* stroke: grey;  */
+}
+
+
+.bpmn-hover .djs-visual > :nth-child(1)  {
+    stroke: orange;
+}
+
+.bpmn-help {
+    width: 400px;
+}
+
+
+
+
