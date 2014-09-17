@@ -9,6 +9,12 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
 
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
@@ -24,6 +30,7 @@ import com.camunda.consulting.tasklist.fulltext.entity.UserTask;
  *
  */
 @Named
+@Path("/")
 public class FulltextTaskHandler implements TaskListener, Serializable {
   
   public static final String BUSINESS_USER_TASK_ID = "businessUserTaskId";
@@ -35,6 +42,7 @@ public class FulltextTaskHandler implements TaskListener, Serializable {
   public static final String INCIDENT_PROCESS_INSTANCE_ID = "incidentProcessInstanceId";
   public static final String INCIDENT_MESSAGE = "incidentMessage";
 
+  public static final String EXCEPTION_SNIPPET = "exceptionSnippet";
 
   private static final long serialVersionUID = 1L;
 
@@ -96,6 +104,25 @@ public class FulltextTaskHandler implements TaskListener, Serializable {
     log.info("Delete User Task " + userTask.getName());
     UserTask businessUserTask = em.find(UserTask.class, userTask.getVariableLocal(BUSINESS_USER_TASK_ID));
     em.remove(businessUserTask);
+  }
+  
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/exceptiontext")
+  public List<UserTask> getExceptionTasks(@javax.ws.rs.core.Context UriInfo uriInfo) {
+    log.info("getExceptionTasks " + uriInfo);
+    MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters();
+    log.info("queryParameter: " + queryParameters);
+    
+    String exceptionSnippet = null;
+    if (queryParameters.containsKey(EXCEPTION_SNIPPET)) {
+      exceptionSnippet = queryParameters.getFirst(EXCEPTION_SNIPPET);
+      log.info("snippet: " + exceptionSnippet);
+    } else {
+      log.info("No exceptionSnippet");
+    }
+
+    return findUserTasksWithExceptionLike(exceptionSnippet);
   }
   
   public List<UserTask> findUserTasksWithExceptionLike(String exceptionSnippet) {
