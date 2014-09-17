@@ -10,33 +10,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.camunda.consulting.tasklist.fulltext.resource;
+package com.camunda.consulting.tasklist.fulltext.rest;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
  * @author Ingo Richtsmeier
  *
  */
+@ApplicationPath("tasksearch")
 public class FulltextTaskSearchApplication extends Application {
   
-  private Set<Object> singletons = new HashSet<Object>();
-  private Set<Class<?>> empty = new HashSet<Class<?>>();
-  
-  public FulltextTaskSearchApplication() {
-    this.singletons.add(new FulltextTaskResource());
-  }
-
-  @Override
-  public Set<Class<?>> getClasses() {
-    return this.empty;
-  }
-
-  @Override
-  public Set<Object> getSingletons() {
-    return this.singletons;
-  }
 }

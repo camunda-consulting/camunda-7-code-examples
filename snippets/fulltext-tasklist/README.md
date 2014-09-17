@@ -31,10 +31,44 @@ The query to the CLOB column is built in the FulltextTaskListener, too. If you i
   
 	List<UserTask> userTasks = fulltext.findUserTasksWithExceptionLike("Service Call should");
   
-to get all user tasks including a text like the method parameter.
+to get all user tasks including a text like the method parameter. It sends a query with <code>where inc\_exception\_ like '%Servcie Call should%'</code>
+to the database. 
+
+## Query with REST-Service
+
+The projects includes a REST-Application with a GET-Resource to execute the query.
+
+The url is: <code>http://localhost:8080/fulltext/tasksearch/exceptiontext?exceptionSnippet=Service%20Call</code>
+
+The query text must be URL-encoded.
+
+A response looks like this:
+
+	0:  {
+		id: "94a6b3a7-3d6d-11e4-a81d-760220524153"
+		name: "User Task 1"
+		taskId: "94a66586-3d6d-11e4-a81d-760220524153"
+		taskDefinitionKey: "UserTask_1"
+		processInstanceId: "94a63e67-3d6d-11e4-a81d-760220524153"
+		processDefinitionId: "fulltext-tasklist:2:8c71e716-3d6a-11e4-a81d-760220524153"
+		candidates: null
+		assignee: "demo"
+		businessKey: "415"
+		createTime: 1410850158262
+		incidentActivityId: "ServiceTask_1"
+		incidentProcessDefinitionId: "incident-process:1:8c71c004-3d6a-11e4-a81d-760220524153"
+		incidentJobId: "940d59c1-3d6d-11e4-a81d-760220524153"
+		incidentExecutionId: "940d59bf-3d6d-11e4-a81d-760220524153"
+		incidentProcessInstanceId: "940d59bf-3d6d-11e4-a81d-760220524153"
+		incidentMessage: "this Service Call should provoke an incident"
+		incidentException: "org.camunda.bpm.engine.ProcessEngineException: this Service Call should provoke an incident 			at com.camunda.consulting.tasklist.fulltext.RepairableDelegate.execute(RepairableDelegate.java:22) 
+			at org.camunda.bpm.engine.impl.delegate.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:34) 
+			..."
+	}  
+
 
 ## Remarks to run this application
-There is no web interface to access the application. To get started refer to the
+To get started refer to the
 Arquillian test case, which by default connects to a camunda BPM Platform running
 locally on JBoss AS 7.
 
