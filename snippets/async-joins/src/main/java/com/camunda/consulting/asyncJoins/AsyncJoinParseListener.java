@@ -74,7 +74,6 @@ public class AsyncJoinParseListener extends AbstractBpmnParseListener {
 
   private void makeAsynchronous(ActivityImpl activity) {
     activity.setAsync(true);
-    activity.setExclusive(true);
     // create message event declaration:
     MessageJobDeclaration messageJobDecl = new MessageJobDeclaration();
     messageJobDecl.setExclusive(true);
