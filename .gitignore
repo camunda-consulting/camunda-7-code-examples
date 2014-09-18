@@ -1,8 +1,17 @@
+# Maven
 target
+
+# Eclipse
 .project
 .classpath
 .settings
+
+# IntelliJ
 .idea
 .iml
-camunda-h2-dbs
+
+# Ant
 build.properties
+
+# H2
+camunda-h2-dbs
