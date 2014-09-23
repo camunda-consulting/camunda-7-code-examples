@@ -1,7 +1,8 @@
 Absence Manager
 ===============
-
 If the assignee for a Usertask is currently absent, you may want to assign that Usertask to a specified replacement. 
+
+![Order Confirmation Process][1]
 
 The BPMN process in this application consists of one Usertask. When it is created, there is a Tasklistener that does the following:
 
@@ -13,4 +14,7 @@ The BPMN process in this application consists of one Usertask. When it is create
 
 In order to edit the JSON file, you will also find a very simple "Absence Manager" application when you point your browser to http://localhost:8080/absence/ 
 
-Please note that this sniplet is supposed to run on JBoss AS.
+*Only tested on JBoss AS 7*, for other container (e.g. Tomcat) you have to take care to include a JAX-RS implementation.
+
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/task-assignment-absence/screenshot.png
+[2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/task-assignment-absence/src/main/webapp/resources/absence.png
