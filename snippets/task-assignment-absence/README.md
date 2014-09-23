@@ -21,4 +21,4 @@ In order to edit the JSON file, you will also find a very simple "Absence Manage
 *Only tested on JBoss AS 7*, for other container (e.g. Tomcat) you have to take care to include a JAX-RS implementation.
 
 [1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/task-assignment-absence/screenshot.png
-[2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/task-assignment-absence/src/main/webapp/resources/absence.png
+[2]: https://raw.githubusercontent.com/camunda/camunda-consulting/master/snippets/task-assignment-absence/src/main/resources/absence.png
