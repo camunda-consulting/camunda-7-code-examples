@@ -2,9 +2,13 @@ Absence Manager
 ===============
 If the assignee for a Usertask is currently absent, you may want to assign that Usertask to a specified replacement. 
 
-![Order Confirmation Process][1]
+![Absence Manager UI][1]
 
-The BPMN process in this application consists of one Usertask. When it is created, there is a Tasklistener that does the following:
+The BPMN process in this application consists of one Usertask. 
+
+![The One Task Process][2]
+
+When it is created, there is a Tasklistener that does the following:
 
 * Load a very simple "database" (in this case just a JSON file)
 * Check if the assignee is currently present
