@@ -51,9 +51,15 @@ public class CallbackService {
     
 //    runtimeService.signal(execution.getId(), variables);
 	  
-	  Map<String,Object> correlationKeys = new HashMap<String, Object>();
-	  correlationKeys.put("correllationId", correlationKey);
-	  runtimeService.correlateMessage("serviceExecutionCompleted", correlationKeys);
+//	  Map<String,Object> correlationKeys = new HashMap<String, Object>();
+//	  correlationKeys.put("correllationId", correlationKey);
+//	  runtimeService.correlateMessage("serviceExecutionCompleted", correlationKeys);
+	  
+	  runtimeService.createMessageCorrelation("serviceExecutionCompleted")
+	  	.processInstanceVariableEquals("correllationId", correlationKey)
+	  	.setVariable("payload", "somePayload")
+	  	.correlate();
+	  
   }
   
   public void triggerAsynchronousCallback(String asynchronousCorrelationKey) {

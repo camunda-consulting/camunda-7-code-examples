@@ -101,6 +101,14 @@
 			<version>1.3.171</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<!-- AssertJ Testing Library -->
+			<groupId>org.camunda.bpm.extension</groupId>
+			<artifactId>camunda-bpm-assert</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 
