@@ -17,12 +17,14 @@
 	</target>
 
 	<target name="deploy" depends="package.mvn" description="Copies the process application to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<property file="${target.dir}/classes/version.properties" />
 		<fail unless="deploy.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
-		<copy file="${target.dir}/${ant.project.name}.war" todir="${deploy.dir}" />
+		<copy file="${target.dir}/${ant.project.name}-v${maven.version.major}.${maven.version.minor}.war" todir="${deploy.dir}" />
 	</target>
 
 	<target name="undeploy" description="Deletes the process application from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
-		<delete file="${deploy.dir}/${ant.project.name}.war" />
+		<property file="${target.dir}/classes/version.properties" />
+		<delete file="${deploy.dir}/${ant.project.name}-v${maven.version.major}.${maven.version.minor}.war" />
 	</target>
 
 </project>
