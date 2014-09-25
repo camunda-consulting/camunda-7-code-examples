@@ -23,7 +23,6 @@ public class CreateTweetController implements Serializable {
   private Tweet newTweet = new Tweet();
 
   @Inject
-  @Named("camunda.taskForm")
   private TaskForm taskForm;
 
   @Inject

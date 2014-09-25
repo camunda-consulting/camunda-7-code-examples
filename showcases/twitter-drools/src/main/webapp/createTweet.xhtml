@@ -7,10 +7,8 @@
 
   <ui:define name="metadata">
     <f:metadata>
-      <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
-      <f:viewParam id="callbackUrl" name="callbackUrl" />
       <f:event type="preRenderView"
-        listener="#{camunda.taskForm.startProcessInstanceByKeyForm(processDefinitionKey, callbackUrl)}" />
+        listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
     </f:metadata>
   </ui:define>
 
