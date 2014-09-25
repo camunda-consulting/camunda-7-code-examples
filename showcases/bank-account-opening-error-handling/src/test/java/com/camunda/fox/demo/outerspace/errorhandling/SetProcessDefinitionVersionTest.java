@@ -28,7 +28,7 @@ public class SetProcessDefinitionVersionTest {
     // .configureFrom(".../settings.xml")
 
     return ShrinkWrap
-            .create(WebArchive.class, "bank-account-opening-error-handling.war")
+            .create(WebArchive.class, "set-process-definition-version.war")
             // prepare as process application archive for camunda BPM platform
             .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
             .addAsLibraries(resolver.artifact("commons-lang:commons-lang").resolveAsFiles())
@@ -45,8 +45,8 @@ public class SetProcessDefinitionVersionTest {
   @Test
   public void testSetProcessDefinitionVersionCommand() {
     String processInstanceId =
-      "10bea61f-8a60-11e3-8827-f0def18a13c6";
-    int newVersion = 13;
+      "1672626b-44b2-11e4-ab0c-f0def18a13c6";
+    int newVersion = 1;
     SetProcessDefinitionVersionCmd command = 
       new SetProcessDefinitionVersionCmd(processInstanceId, newVersion);
     ((ProcessEngineImpl) ProcessEngines.getDefaultProcessEngine())
