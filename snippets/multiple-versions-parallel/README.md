@@ -51,4 +51,8 @@ Remarks to run this application
 ===============================
 Just increase the Maven version number from 1.0.x to 1.1.x or 2.0.x  and compare the resulting war files.
 
-You can also use 
+You can also use `ant` to build and deploy the example.
+For that to work you need to copy the file `build.properties.example` to `build.properties`
+and configure the path to your application server inside it.
+Alternatively, you can also copy it to `${user.home}/.camunda/build.properties`
+to have a central configuration that works with all camunda BPM projects.
