@@ -8,6 +8,8 @@ This example shows how use Maven to build different versions of a process applic
 
 In order to achieve this, the final name of the resulting war file and the process definition key contain the major and minor version number. Thus, application server and process engine will isolate the classes and processes.
 
+Please note that this is one possibility to handle multiple versions in parallel. A possible alternative could be to add a version number to the BPMN XML as extension attribute and tweak the camunda process application registration mechanism to register different deployments for the correct version).
+
 pom.xml
 -------
 ```xml
