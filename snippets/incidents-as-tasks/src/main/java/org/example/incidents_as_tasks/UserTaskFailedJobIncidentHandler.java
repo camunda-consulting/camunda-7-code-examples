@@ -4,6 +4,7 @@ import org.camunda.bpm.engine.impl.TaskServiceImpl;
 import org.camunda.bpm.engine.impl.incident.FailedJobIncidentHandler;
 import org.camunda.bpm.engine.impl.incident.IncidentHandler;
 import org.camunda.bpm.engine.impl.interceptor.CommandExecutorImpl;
+import org.camunda.bpm.engine.runtime.Incident;
 import org.camunda.bpm.engine.task.Task;
 
 public class UserTaskFailedJobIncidentHandler extends FailedJobIncidentHandler
@@ -12,14 +13,14 @@ public class UserTaskFailedJobIncidentHandler extends FailedJobIncidentHandler
 	@Override
 	public void handleIncident(String processDefinitionId, String activityId,
 			String executionId, String jobId, String message) {
-		super.handleIncident(processDefinitionId, activityId, executionId, jobId,
+		Incident incident = createIncident(processDefinitionId, activityId, executionId, jobId,
 				message);
 		TaskServiceImpl taskServiceImpl = getTaskService();
 		Task task = taskServiceImpl.newTask();
 		task.setName("Handle Incident");
 		task.setAssignee("demo");
 		taskServiceImpl.saveTask(task);
-		taskServiceImpl.setVariable(task.getId(), "executionId", executionId);
+		taskServiceImpl.setVariable(task.getId(), "incidentId", incident.getId());
 	}
 
 	private TaskServiceImpl getTaskService() {
