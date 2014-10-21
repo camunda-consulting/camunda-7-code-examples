@@ -3,7 +3,7 @@ function loadStaff () {
 
 	$("#staffTableContainer").empty();
 
-	var staffTable = "<table class='table'><th>Mitarbeiter/in</th><th>Benutzername</th><th colspan='2'>Derzeit anwesend</th><th colspan='2'>Vertreter</th></tr>";
+	var staffTable = "<table class='table'><th>Employee/in</th><th>Username</th><th colspan='2'>Currently present</th><th colspan='2'>Replacement</th></tr>";
 
 	$.getJSON('http://localhost:8080/absence/rest/staff', function(data) {
 		$(data).each (function () {
@@ -21,7 +21,7 @@ function loadStaff () {
 		$(".switchReplacement").click (function() {
 			user = getUser($(this).attr("username"), data);
 
-			$('#myModal #myModalLabel').text ('Vertreter für ' + user.name);
+			$('#myModal #myModalLabel').text ('Replacement for ' + user.name);
 			
 			var myModalBody = "";
 
@@ -36,13 +36,13 @@ function loadStaff () {
 
 			myModalBody += '<div class="row"><form class="form-horizontal col-md-8" role="form">' + 
 								'<div class="form-group">'  + 
-									'<label class="col-sm-2 control-label">Aktuell</label>' +
+									'<label class="col-sm-2 control-label">Currently</label>' +
 									'<div class="col-sm-10">' +
 								      '<input class="form-control" type="text" readonly value="' + getUser(user.vertreter, data).name  + '" />' + 
 								    '</div>' + 									
 								'</div>' + 
 								'<div class="form-group">'  + 
-									'<label class="col-sm-2 control-label">Neu</label>' +
+									'<label class="col-sm-2 control-label">New</label>' +
 									'<div class="col-sm-10">' +
 								      '<select id="selectReplacement" class="form-control" size="1">' + selectReplacement + ' </select>' +
 								    '</div>' + 									
