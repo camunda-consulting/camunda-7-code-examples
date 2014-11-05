@@ -21,7 +21,7 @@ public class EscalationStartTaskListener implements TaskListener {
 			.singleResult()
 			.getCamundaProperties();
 		for (CamundaProperty property : properties) {
-			if ("escalation1".equals(property.getAttributeValue("name"))) {
+			if ("escalation1".equals(property.getAttributeValue("name"))) { // in 7.2 one can use: property.getCamundaName()
 				delegateTask.setDueDate(new Date());
 			}
 		}
