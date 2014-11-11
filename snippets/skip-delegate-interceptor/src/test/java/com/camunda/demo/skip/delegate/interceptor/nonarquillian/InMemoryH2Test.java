@@ -9,14 +9,23 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.mock.Mocks;
+import org.camunda.bpm.model.bpmn.instance.FlowElement;
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
   
+
+
+
+
+
 import com.camunda.demo.skip.delegate.interceptor.LoggerDelegate;
+import com.camunda.demo.skip.delegate.interceptor.SkipDelegateInterceptor;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
+import static org.junit.Assert.*;
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
@@ -70,6 +79,19 @@ public class InMemoryH2Test {
     assertThat(processInstance)
       .hasVariables("skip_ServiceTask_1", "skip_ServiceTask_2", "skip_SendTask_1", "skip_UserTask_1" ,"loggerInvoked");
     
+  }
+
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testRetrievalOfExtensionAttribute() {
+    String processDefinitionId = processDefinitionQuery().processDefinitionKey(PROCESS_DEFINITION_KEY).latestVersion().singleResult().getId();
+    ModelElementInstance serviceTask = repositoryService().getBpmnModelInstance(processDefinitionId).getModelElementById("ServiceTask_1");
+    String skippable = SkipDelegateInterceptor.getSkippableProperty((FlowElement) serviceTask);
+    assertEquals("This Service Task does not require any manual correction in order to be skipped.", skippable);
+
+    ModelElementInstance receiveTask = repositoryService().getBpmnModelInstance(processDefinitionId).getModelElementById("ReceiveTask_1");
+    skippable = SkipDelegateInterceptor.getSkippableProperty((FlowElement) receiveTask);
+    assertNull(skippable);
   }
 
 }

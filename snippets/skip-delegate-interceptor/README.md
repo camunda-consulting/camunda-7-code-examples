@@ -17,12 +17,19 @@ Show me the important parts!
 ----------------------------
 
 A Service Task (or any other element that can have user code attached to it)
-can be marked as skippable by setting the extenstion attribute `skippable` on it.
-The value of the attribute can be used for instructions on manual operations
+can be marked as skippable by setting the extenstion property `skippable` on it.
+
+![BPMN Process Model](screenshot.png)
+
+The value of the property can be used for instructions on manual operations
 that need to be carried out before skipping the task. These instructions can be
 retrieved using the BPMN Model API and displayed in a user interface.
 
-![BPMN Process Model](screenshot.png)
+```java
+String processDefinitionId = processDefinitionQuery().processDefinitionKey(PROCESS_DEFINITION_KEY).latestVersion().singleResult().getId();
+ModelElementInstance serviceTask = repositoryService().getBpmnModelInstance(processDefinitionId).getModelElementById("ServiceTask_1");
+String skippable = SkipDelegateInterceptor.getSkippableProperty((FlowElement) serviceTask);
+```
 
 If the variable `skip` is set in the execution, all user code of the upcoming
 task will not be executed, but only if the task is marked as skippable.
@@ -33,22 +40,23 @@ This will skip user code of the according task regardless of whether it is the
 next task in the execution or a later one.
 
 ```java
-    Map<String, Object> variables = new HashMap<String, Object>();
-    variables.put("skip", true); // skips the next task 
-    variables.put("skip_ServiceTask_2", true); // skips task with id 'ServiceTask_2'
-    
-    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+Map<String, Object> variables = new HashMap<String, Object>();
+variables.put("skip", true); // skips the next task 
+variables.put("skip_ServiceTask_2", true); // skips task with id 'ServiceTask_2'
+
+ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
 ```
 
 
 How does it work?
 -----------------
 
-A DelegateInterceptor checks the variables and the extension attribute.
+A DelegateInterceptor checks the variables and the extension property.
 
 ```java
 public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
 
+  private static final String SKIP_PROPERTY_NAME = "skippable";
   private static final String SKIP_VARIABLE_NAME = "skip";
   private static final Logger LOG = Logger.getLogger(SkipDelegateInterceptor.class.getName());
 
@@ -87,7 +95,7 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
   }
 
   private boolean isSkippable(InterpretableExecution execution) {
-    return elementHasCamundaProperty(execution.getBpmnModelElementInstance(), "skippable");
+    return getCamundaProperty(execution.getBpmnModelElementInstance(), SKIP_PROPERTY_NAME) != null;
   }
 
   private InterpretableExecution getExecution(DelegateInvocation invocation) {
@@ -101,7 +109,7 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
     return execution;
   }
 
-  private boolean elementHasCamundaProperty(FlowElement flowElement, String propertyName) {
+  public static String getCamundaProperty(FlowElement flowElement, String propertyName) {
     ExtensionElements extensionElements = flowElement.getExtensionElements();
     List<CamundaProperties> propertyContainers = extensionElements.getElementsQuery()
       .filterByType(CamundaProperties.class)
@@ -109,11 +117,15 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
     for (CamundaProperties propertyContainer : propertyContainers) {
       for (CamundaProperty property : propertyContainer.getCamundaProperties()) {
         if (propertyName.equals(property.getAttributeValue("name"))) { // in 7.2 one can use: property.getCamundaName()
-          return true;
+          return property.getCamundaValue();
         }
       }
     }
-    return false;
+    return null;
+  }
+
+  public static String getSkippableProperty(FlowElement flowElement) {
+    return getCamundaProperty(flowElement, SKIP_PROPERTY_NAME);
   }
 
 }

@@ -18,6 +18,7 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty;
  */
 public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
 
+  private static final String SKIP_PROPERTY_NAME = "skippable";
   private static final String SKIP_VARIABLE_NAME = "skip";
   private static final Logger LOG = Logger.getLogger(SkipDelegateInterceptor.class.getName());
 
@@ -56,7 +57,7 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
   }
 
   private boolean isSkippable(InterpretableExecution execution) {
-    return elementHasCamundaProperty(execution.getBpmnModelElementInstance(), "skippable");
+    return getCamundaProperty(execution.getBpmnModelElementInstance(), SKIP_PROPERTY_NAME) != null;
   }
 
   private InterpretableExecution getExecution(DelegateInvocation invocation) {
@@ -70,7 +71,7 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
     return execution;
   }
 
-  private boolean elementHasCamundaProperty(FlowElement flowElement, String propertyName) {
+  public static String getCamundaProperty(FlowElement flowElement, String propertyName) {
     ExtensionElements extensionElements = flowElement.getExtensionElements();
     List<CamundaProperties> propertyContainers = extensionElements.getElementsQuery()
       .filterByType(CamundaProperties.class)
@@ -78,11 +79,15 @@ public class SkipDelegateInterceptor extends DefaultDelegateInterceptor {
     for (CamundaProperties propertyContainer : propertyContainers) {
       for (CamundaProperty property : propertyContainer.getCamundaProperties()) {
         if (propertyName.equals(property.getAttributeValue("name"))) { // in 7.2 one can use: property.getCamundaName()
-          return true;
+          return property.getCamundaValue();
         }
       }
     }
-    return false;
+    return null;
+  }
+
+  public static String getSkippableProperty(FlowElement flowElement) {
+    return getCamundaProperty(flowElement, SKIP_PROPERTY_NAME);
   }
 
 }
