@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://www.example.org/bpmn">
+  <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
+    <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="skip-delegate-interceptor"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="skip-delegate-interceptor" name="skip-delegate-interceptor" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="com.camunda.demo.skip.delegate.interceptor.LoggerDelegate" name="Execute Delegate&#xA;unless skipped">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="This Service Task does not require any manual correction in order to be skipped." name="skippable"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_1"/>
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:expression="${logger.execute(execution)}" name="Execute Expression unless skipped">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="This Service Task does not require any manual correction in order to be skipped." name="skippable"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="ServiceTask_1" targetRef="ServiceTask_2"/>
+    <bpmn2:sendTask id="SendTask_1" camunda:expression="${logger.execute(execution)}" name="Execute&#xA;Exec. Listener&#xA;unless skipped">
+      <bpmn2:extensionElements>
+        <camunda:executionListener event="start" expression="${logger.execute(execution)}"/>
+        <camunda:executionListener event="end" expression="${logger.execute(execution)}"/>
+        <camunda:properties>
+          <camunda:property value="This Send Task does not require any manual correction in order to be skipped." name="skippable"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="ServiceTask_2" targetRef="SendTask_1"/>
+    <bpmn2:userTask id="UserTask_1" name="Execute&#xA;Task Listener unless skipped">
+      <bpmn2:extensionElements>
+        <camunda:taskListener event="create" expression="${logger.execute(execution)}"/>
+        <camunda:taskListener event="assignment" expression="${logger.execute(execution)}"/>
+        <camunda:taskListener event="complete" expression="${logger.execute(execution)}"/>
+        <camunda:properties>
+          <camunda:property value="This User Task does not require any manual correction in order to be skipped." name="skippable"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="SendTask_1" targetRef="UserTask_1"/>
+    <bpmn2:receiveTask id="ReceiveTask_1" name="Execute unskippable Exec. Listener">
+      <bpmn2:extensionElements>
+        <camunda:executionListener event="start" expression="${logger.execute(execution)}"/>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+    </bpmn2:receiveTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="UserTask_1" targetRef="ReceiveTask_1"/>
+    <bpmn2:endEvent id="EndEvent_3">
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ReceiveTask_1" targetRef="EndEvent_3"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
+        <dc:Bounds height="200.0" width="1000.0" x="10.0" y="10.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="60.0" y="93.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="78.0" y="131.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_13" bpmnElement="ServiceTask_1">
+        <dc:Bounds height="80.0" width="100.0" x="146.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_StartEvent_1" targetElement="_BPMNShape_ServiceTask_13">
+        <di:waypoint xsi:type="dc:Point" x="96.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="146.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_SendTask_2" bpmnElement="ServiceTask_2">
+        <dc:Bounds height="80.0" width="100.0" x="296.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_ServiceTask_13" targetElement="_BPMNShape_SendTask_2">
+        <di:waypoint xsi:type="dc:Point" x="246.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="296.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_SendTask_3" bpmnElement="SendTask_1">
+        <dc:Bounds height="80.0" width="100.0" x="446.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="_BPMNShape_SendTask_2" targetElement="_BPMNShape_SendTask_3">
+        <di:waypoint xsi:type="dc:Point" x="396.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="446.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_3" bpmnElement="UserTask_1">
+        <dc:Bounds height="80.0" width="100.0" x="596.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="_BPMNShape_SendTask_3" targetElement="_BPMNShape_UserTask_3">
+        <di:waypoint xsi:type="dc:Point" x="546.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="596.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_3" bpmnElement="ReceiveTask_1">
+        <dc:Bounds height="80.0" width="100.0" x="746.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_UserTask_3" targetElement="_BPMNShape_ReceiveTask_3">
+        <di:waypoint xsi:type="dc:Point" x="696.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="746.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_40" bpmnElement="EndEvent_3">
+        <dc:Bounds height="36.0" width="36.0" x="896.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ReceiveTask_3" targetElement="_BPMNShape_EndEvent_40">
+        <di:waypoint xsi:type="dc:Point" x="846.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="896.0" y="111.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

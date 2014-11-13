@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ArquillianTest {
   
+  private static final String TENANT_ID = "default";
+
   private static final String PROCESS_DEFINITION_KEY = "multi-tenancy";
 
   @Deployment
@@ -79,19 +81,19 @@ public class ArquillianTest {
   
   @Test
   public void testTenantAwareProcessEngineInjection() throws Exception {
-	  tenant.setId("default");
+	  tenant.setId(TENANT_ID);
 	  assertNotNull(processEngine.getRuntimeService());
   }  
 
   @Test
   public void testTenantAwareRuntimeServiceInjection() throws Exception {
-	  tenant.setId("default");
+	  tenant.setId(TENANT_ID);
 	  assertNotNull(runtimeService.createExecutionQuery());
   }  
 
   @Test
   public void testProcessExecution() throws Exception {
-	  tenant.setId("default");
+	  tenant.setId(TENANT_ID);
 	  runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
   }  
 }

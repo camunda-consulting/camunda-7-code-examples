@@ -1,19 +1,19 @@
 package org.camunda.bpm.demo.multi_tenancy;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.camunda.bpm.ProcessEngineService;
+import org.camunda.bpm.BpmPlatform;
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.ManagementService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineException;
+import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
@@ -25,8 +25,8 @@ public class TenantAwareProcessEngineServicesProducer extends ProcessEngineServi
   @Inject
   private Tenant tenant;
 
-  @EJB(lookup="java:global/camunda-bpm-platform/process-engine/ProcessEngineService!org.camunda.bpm.ProcessEngineService")
-  private ProcessEngineService processEngineService; 
+//  @EJB(lookup="java:global/camunda-bpm-platform/process-engine/ProcessEngineService!org.camunda.bpm.ProcessEngineService")
+//  private ProcessEngineService processEngineService; 
 
   @Override
   @Named
@@ -35,11 +35,11 @@ public class TenantAwareProcessEngineServicesProducer extends ProcessEngineServi
   public ProcessEngine processEngine() {
     String processEngineName = tenant.getId();
     if (processEngineName != null) {
-    	ProcessEngine processEngine = processEngineService.getProcessEngine(processEngineName);
-//		ProcessEngine processEngine = BpmPlatform.getProcessEngineService().getProcessEngine(processEngineName);
-//	    if (processEngine == null) {
-//	    	processEngine = ProcessEngines.getProcessEngine(processEngineName, false);
-//	    }
+//    	ProcessEngine processEngine = processEngineService.getProcessEngine(processEngineName);
+      ProcessEngine processEngine = BpmPlatform.getProcessEngineService().getProcessEngine(processEngineName);
+	    if (processEngine == null) {
+	    	processEngine = ProcessEngines.getProcessEngine(processEngineName, false);
+	    }
 	    if (processEngine != null) {
 	    	return processEngine;
 	    } else {

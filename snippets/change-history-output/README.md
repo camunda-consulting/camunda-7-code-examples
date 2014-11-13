@@ -27,3 +27,7 @@ With the example configuration only variables with the names orderId or camundaT
 
 No Details will be saved. The database table <code>ACT\_HI\_DETAIL</code> will be left empty.
 
+## Supress History of exclusive Gateways
+
+Overwrite the method insertOrUpdate(HistoryEvent) from the DbHistoryEventHandler to supress the history of exclusive gateways. See the implementation how to handle the details.
+

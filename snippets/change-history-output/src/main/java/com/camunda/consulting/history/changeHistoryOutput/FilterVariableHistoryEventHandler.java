@@ -3,13 +3,15 @@ package com.camunda.consulting.history.changeHistoryOutput;
 import java.util.logging.Logger;
 
 import org.camunda.bpm.engine.impl.db.DbSqlSession;
+import org.camunda.bpm.engine.impl.history.event.HistoricActivityInstanceEventEntity;
 import org.camunda.bpm.engine.impl.history.event.HistoricVariableUpdateEventEntity;
 import org.camunda.bpm.engine.impl.history.event.HistoryEvent;
 import org.camunda.bpm.engine.impl.history.handler.DbHistoryEventHandler;
 import org.camunda.bpm.engine.impl.persistence.entity.HistoricVariableInstanceEntity;
 
 /**
- * Process engine plugin to avoid saving variables in the history if the history level is set to full.
+ * Process engine plugin to avoid saving variables in the history if the history level is set to full.<br>
+ * And it does't save exclusive gateways in the history.
  * 
  * @author Ingo Richtsmeier
  *
@@ -57,6 +59,16 @@ public class FilterVariableHistoryEventHandler extends DbHistoryEventHandler {
       }
     }
     
+  }
+
+  @Override
+  protected void insertOrUpdate(HistoryEvent historyEvent) {
+    if (historyEvent instanceof HistoricActivityInstanceEventEntity
+        && ((HistoricActivityInstanceEventEntity) historyEvent).getActivityType().equals("exclusiveGateway")) {
+      log.fine("Don't persist gateway " + ((HistoricActivityInstanceEventEntity) historyEvent).getActivityId());
+    } else {
+      super.insertOrUpdate(historyEvent);
+    }
   }
   
   
