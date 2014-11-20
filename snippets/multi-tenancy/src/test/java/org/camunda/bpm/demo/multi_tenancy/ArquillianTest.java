@@ -8,7 +8,6 @@ import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineException;
-import org.camunda.bpm.engine.RuntimeService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -19,8 +18,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ArquillianTest {
-  
-  private static final String TENANT_ID = "default";
 
   private static final String PROCESS_DEFINITION_KEY = "multi-tenancy";
 
@@ -30,14 +27,14 @@ public class ArquillianTest {
     File[] libs = Maven.resolver()
       .offline(false)
       .loadPomFromFile("pom.xml")
-      .importRuntimeAndTestDependencies().resolve().withTransitivity().asFile();
+      .importRuntimeDependencies().resolve().withTransitivity().asFile();
 
     return ShrinkWrap
             .create(WebArchive.class, "multi-tenancy.war")
             // add needed dependencies
             .addAsLibraries(libs)
             // prepare as process application archive for camunda BPM Platform
-            .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml")
+            .addAsResource("META-INF/processes.xml", "META-INF/processes.xml")
             // enable CDI
             .addAsWebResource("WEB-INF/beans.xml", "WEB-INF/beans.xml")
             // boot JPA persistence unit
@@ -54,46 +51,72 @@ public class ArquillianTest {
 
   @Inject
   private ProcessEngine processEngine;
-  
-  @Inject
-  private RuntimeService runtimeService;
 
   @Inject
   private Tenant tenant;
-  
+
   @Test
   public void testTenantAwareProcessEngineInjectionWithoutTenant() throws Exception {
+    // given
+    // tenant id is null
+    assertNull(tenant.getId());
+
+    // then
+    // the process engine cannot be injected
 	  try {
-		  processEngine.getRuntimeService();
+		  processEngine.getName();
+		  fail("Exception expected");
 	  } catch (ProcessEngineException e) {
 		  assertEquals("No tenant id specified. A process engine can only be retrieved based on a tenant.", e.getMessage());
 	  }
-  }  
+  }
 
   @Test
-  public void testTenantAwareRuntimeServiceInjectionWithoutTenant() throws Exception {
-	  try {
-		  runtimeService.createExecutionQuery();
-	  } catch (ProcessEngineException e) {
-		  assertEquals("No tenant id specified. A process engine can only be retrieved based on a tenant.", e.getMessage());
-	  }
-  }  
-  
-  @Test
-  public void testTenantAwareProcessEngineInjection() throws Exception {
-	  tenant.setId(TENANT_ID);
-	  assertNotNull(processEngine.getRuntimeService());
-  }  
+  public void testTenantAwareProcessEngineInjectionTenant1() throws Exception {
+
+    // given
+    // that tenant id is set to 'tenant1'
+    tenant.setId("tenant1");
+
+    // then
+    // the 'tenant1' engine is injected
+    assertEquals("tenant1", processEngine.getName());
+  }
 
   @Test
-  public void testTenantAwareRuntimeServiceInjection() throws Exception {
-	  tenant.setId(TENANT_ID);
-	  assertNotNull(runtimeService.createExecutionQuery());
-  }  
+  public void testTenantAwareProcessEngineInjectionTenant2() throws Exception {
+
+    // given
+    // that tenant id is set to 'tenant2'
+    tenant.setId("tenant2");
+
+    // then
+    // the 'tenant2' engine is injected
+    assertEquals("tenant2", processEngine.getName());
+  }
+
 
   @Test
-  public void testProcessExecution() throws Exception {
-	  tenant.setId(TENANT_ID);
-	  runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
-  }  
+  public void testProcessExecutionTenant1() throws Exception {
+
+    // given
+    // that tenant 1 is selected
+    tenant.setId("tenant1");
+
+    // then
+    // the process can be executed
+    processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+  }
+
+  @Test
+  public void testProcessExecutionTenant2() throws Exception {
+
+    // given
+    // that tenant 2 is selected
+    tenant.setId("tenant2");
+
+    // then
+    // the process can be executed
+    processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+  }
 }
