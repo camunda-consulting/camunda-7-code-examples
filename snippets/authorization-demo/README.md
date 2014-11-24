@@ -14,15 +14,15 @@ The task listener is created as a process engine plugin.
 How does it work?
 -----------------
 
-For our simple process with two user tasks in different lanes two additional resourced are defined to check against later on. 
+For our simple process with two user tasks in different lanes one new resource 'processDefinitionResource' is used to grant access with two different resource ids to check against later on. 
 
 ![process diagram](src/main/resources/process.png)
 
-The resource id is the same as the resource name and it is build from the parts ``processDefinitionKey-candidateGroup``, in this example 'authorization-demo-management' with type 10 and 'authorization-demo-sales' with type 11. The resources are defined in a static member ``AuthorizationResources.resources`` as a HashMap.
+The resource id is build from the parts ``processDefinitionKey-candidateGroup``, in this example 'authorization-demo-management' and 'authorization-demo-sales'. The new resource is defined as a static member ``AuthorizationResources.resource``.
 
-While setting up the unit test authorizations for the resources are created. The group 'management' is granted the authorization to access and create one of the resources, the group 'sales' is granted to access the other one.
+While setting up the unit test authorizations for the resource are created. The group 'management' is granted the authorization to access and create the resource with the according Id, the group 'sales' is granted to access the same resource with another Id.
 
-A super-user gets all permissions to the resources to delete during deployment cleanup. To do this, the a new subclass of ProcessEngineRule is used to run the test. The super-user is authenticated before finishing the tests. 
+A super-user gets all permissions to the process definition resource with all ids to delete during deployment cleanup. To do the cleanup, a new subclass of ProcessEngineRule is used to run the test. The super-user is authenticated before finishing the tests. 
   
 
 How to use it?
@@ -57,4 +57,4 @@ Known Issues
 Improvements Backlog
 --------------------
 
-Find a place to create and store resources dynamically, maybe a database table. In this example its a static HashMap.
+Add the process definition resource to the enumeration of resources in the engine. 

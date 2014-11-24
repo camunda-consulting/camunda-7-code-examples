@@ -36,7 +36,7 @@ public class AuthorizationListener implements TaskListener {
     UserTask userTask = (UserTask) delegateTask.getBpmnModelElementInstance();
     String candidateGroup = userTask.getCamundaCandidateGroups();
     
-    Resource resource = AuthorizationResources.resources.get(processDefinitionKey + "-" + candidateGroup);
+    Resource resource = AuthorizationResources.resource;
     
     if (currentAuthentication != null 
         && delegateTask.getProcessEngineServices().getAuthorizationService().isUserAuthorized(

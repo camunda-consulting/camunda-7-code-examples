@@ -30,6 +30,9 @@ public class InMemoryH2Test {
 
   public static final String PROCESS_DEFINITION_KEY = "authorization-demo";
 
+  public static final String AUTH_DEMO_MANAGEMENT_RESOURCE_ID = PROCESS_DEFINITION_KEY + "-management";
+  public static final String AUTH_DEMO_SALES_RESOURCE_ID = PROCESS_DEFINITION_KEY + "-sales";
+
   // enable more detailed logging
   static {
     LogUtil.readJavaUtilLoggingConfigFromClasspath(); // process engine
@@ -43,40 +46,33 @@ public class InMemoryH2Test {
     List<Authorization> authorizationsForProcessDefinition = 
         authorizationService()
           .createAuthorizationQuery()
-          .resourceId(AuthorizationResources.AUTH_DEMO_MANAGEMENT_RESOURCE)
+          .resourceId(AUTH_DEMO_MANAGEMENT_RESOURCE_ID)
           .list();
     if (authorizationsForProcessDefinition.size() == 0) {
       // Grant management access to the process definition resource
-      Resource authorizationDemoManagementResource = AuthorizationResources.resources.get(
-          AuthorizationResources.AUTH_DEMO_MANAGEMENT_RESOURCE);
+      Resource processDefinitionResource = AuthorizationResources.resource;
       Authorization auth1 = authorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
       auth1.setGroupId("management");
       auth1.setPermissions(new Permissions[] { Permissions.ACCESS, Permissions.CREATE });
-      auth1.setResource(authorizationDemoManagementResource);
-      auth1.setResourceId(authorizationDemoManagementResource.resourceName());
+      auth1.setResource(processDefinitionResource);
+      auth1.setResourceId(AUTH_DEMO_MANAGEMENT_RESOURCE_ID);
       authorizationService().saveAuthorization(auth1);
       
       // Grant sales access to the process definition sales resource
-      Resource authorizationDemoSalesResource = AuthorizationResources.resources.get(
-          AuthorizationResources.AUTH_DEMO_SALES_RESOURCE);
       Authorization auth2 = authorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
       auth2.setGroupId("sales");
       auth2.setPermissions(new Permissions[] { Permissions.ACCESS, Permissions.CREATE });
-      auth2.setResource(authorizationDemoSalesResource);
-      auth2.setResourceId(authorizationDemoSalesResource.resourceName());
+      auth2.setResource(processDefinitionResource);
+      auth2.setResourceId(AUTH_DEMO_SALES_RESOURCE_ID);
       authorizationService().saveAuthorization(auth2);
       
       // Grant admin all permissions
-      Authorization authAdmin;
-      for (String resourceId : AuthorizationResources.resources.keySet()) {
-        System.out.println(resourceId);
-        authAdmin = authorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
-        authAdmin.setUserId("admin");
-        authAdmin.setPermissions(new Permissions[] { Permissions.ALL });
-        authAdmin.setResourceType(AuthorizationResources.resources.get(resourceId).resourceType());
-        authAdmin.setResourceId("*");
-        authorizationService().saveAuthorization(authAdmin);
-      }
+      Authorization authAdmin = authorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+      authAdmin.setUserId("admin");
+      authAdmin.setPermissions(new Permissions[] { Permissions.ALL });
+      authAdmin.setResource(processDefinitionResource);
+      authAdmin.setResourceId("*");
+      authorizationService().saveAuthorization(authAdmin);
     }
   }
   
@@ -101,14 +97,14 @@ public class InMemoryH2Test {
   @Deployment(resources = "process.bpmn") 
   public void testAuthorization() {
     identityService().setAuthenticatedUserId("john");
-    Resource authorizationDemoManagementResource = AuthorizationResources.resources.get(AuthorizationResources.AUTH_DEMO_MANAGEMENT_RESOURCE);
+    Resource processDefinitionResource = AuthorizationResources.resource;
     assertThat(
         authorizationService().isUserAuthorized(
             "john", 
             null, 
             Permissions.ACCESS, 
-            authorizationDemoManagementResource,
-            authorizationDemoManagementResource.resourceName())
+            processDefinitionResource,
+            AUTH_DEMO_MANAGEMENT_RESOURCE_ID)
         ).isFalse();
     
     assertThat(
@@ -116,8 +112,8 @@ public class InMemoryH2Test {
             "peter",                                             // comes from LDAP
             Arrays.asList(new String[] {"management"}),          // come from LDAP
             Permissions.ACCESS,                                  // what to do in this case
-            authorizationDemoManagementResource,                 // the resource working on (needed to get the type)
-            authorizationDemoManagementResource.resourceName()   // usually we only get the key of the process definition
+            processDefinitionResource,                 // the resource working on (needed to get the type)
+            AUTH_DEMO_MANAGEMENT_RESOURCE_ID           // the resource id build from process definition + lane 
             )
         ).isTrue();
   }
