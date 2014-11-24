@@ -14,7 +14,11 @@ The task listener is created as a process engine plugin.
 How does it work?
 -----------------
 
-For our simple process with two user tasks in different lanes two additional resourced are defined to check against later on. The resource id is the same as the resource name and it is build from the parts ``processDefinitionKey-candidateGroup``, in this example 'authorization-demo-management' with type 10 and 'authorization-demo-sales' with type 11. The resources are defined in a static member ``AuthorizationResources.resources`` as a HashMap.
+For our simple process with two user tasks in different lanes two additional resourced are defined to check against later on. 
+
+![process diagram](src/main/resources/process.png)
+
+The resource id is the same as the resource name and it is build from the parts ``processDefinitionKey-candidateGroup``, in this example 'authorization-demo-management' with type 10 and 'authorization-demo-sales' with type 11. The resources are defined in a static member ``AuthorizationResources.resources`` as a HashMap.
 
 While setting up the unit test authorizations for the resources are created. The group 'management' is granted the authorization to access and create one of the resources, the group 'sales' is granted to access the other one.
 

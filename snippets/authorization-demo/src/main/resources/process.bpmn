@@ -35,7 +35,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
-        <dc:Bounds height="399.0" width="1000.0" x="10.0" y="0.0"/>
+        <dc:Bounds height="397.0" width="663.0" x="10.0" y="0.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="96.0" y="83.0"/>
@@ -60,12 +60,12 @@
         <dc:Bounds height="80.0" width="100.0" x="168.0" y="61.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_Task_2" targetElement="_BPMNShape_Task_3">
-        <di:waypoint xsi:type="dc:Point" x="268.0" y="100.0"/>
-        <di:waypoint xsi:type="dc:Point" x="316.0" y="99.0"/>
+        <di:waypoint xsi:type="dc:Point" x="268.0" y="101.0"/>
+        <di:waypoint xsi:type="dc:Point" x="316.0" y="101.0"/>
         <di:waypoint xsi:type="dc:Point" x="316.0" y="290.0"/>
         <di:waypoint xsi:type="dc:Point" x="357.0" y="290.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="273.0" y="100.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="273.0" y="101.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Task_3" bpmnElement="Task_2">
@@ -79,10 +79,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Lane_2" bpmnElement="Lane_1" isHorizontal="true">
-        <dc:Bounds height="200.0" width="970.0" x="40.0" y="0.0"/>
+        <dc:Bounds height="200.0" width="633.0" x="40.0" y="0.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_Lane_3" bpmnElement="Lane_2" isHorizontal="true">
-        <dc:Bounds height="200.0" width="970.0" x="40.0" y="199.0"/>
+        <dc:Bounds height="198.0" width="633.0" x="40.0" y="199.0"/>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
