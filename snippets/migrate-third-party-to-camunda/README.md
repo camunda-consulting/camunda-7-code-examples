@@ -232,7 +232,7 @@ If you do not have these versions, please patch the engine yourself with the cod
 
 # Further Reading
 
-See whitepaper: TODO-add-link
+* [Download Whitepaper "How to migrate to Camunda"](http://camunda.com/landing/whitepaper-migrate-to-camunda/)
 
 
 [1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/migrate-third-party-to-camunda/docs/example-process.png

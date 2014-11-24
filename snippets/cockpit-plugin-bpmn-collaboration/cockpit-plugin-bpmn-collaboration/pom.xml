@@ -29,6 +29,7 @@
       <groupId>org.camunda.bpm.webapp</groupId>
       <artifactId>camunda-webapp-core</artifactId>
       <version>${camunda.version}</version>
+      <scope>provided</scope>      
     </dependency>
     <dependency>
       <groupId>org.jboss.spec</groupId>
