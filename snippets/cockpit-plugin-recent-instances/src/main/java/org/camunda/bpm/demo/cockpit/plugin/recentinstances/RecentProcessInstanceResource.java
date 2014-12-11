@@ -23,11 +23,11 @@ public class RecentProcessInstanceResource extends AbstractCockpitPluginResource
     ArrayList<ExtendedProcessInstanceDto> recentProcessInstances = new ArrayList<ExtendedProcessInstanceDto>();
     
     // processes being started by us:    
-    List<ProcessInstance> processInstances = getProcessEngine().getRuntimeService() //
-        .createProcessInstanceQuery() //
-        .orderByProcessInstanceId().desc() //
+    List<HistoricProcessInstance> processInstances = getProcessEngine().getHistoryService() //
+        .createHistoricProcessInstanceQuery() //
+        .orderByProcessInstanceStartTime().desc() //
         .listPage(0, 20);
-    for (ProcessInstance pi : processInstances) {
+    for (HistoricProcessInstance pi : processInstances) {
       ExtendedProcessInstanceDto dto = ExtendedProcessInstanceDto.fromProcessInstance(pi);
       
       ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());

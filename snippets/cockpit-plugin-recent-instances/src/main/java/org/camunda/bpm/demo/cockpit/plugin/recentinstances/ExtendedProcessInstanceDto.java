@@ -2,10 +2,10 @@ package org.camunda.bpm.demo.cockpit.plugin.recentinstances;
 
 import java.util.Date;
 
+import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.rest.dto.LinkableDto;
 import org.camunda.bpm.engine.rest.dto.runtime.ProcessInstanceDto;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 public class ExtendedProcessInstanceDto extends LinkableDto {
   
@@ -16,7 +16,7 @@ public class ExtendedProcessInstanceDto extends LinkableDto {
   private String processDefinitionId;
   private String businessKey;
   private boolean ended;
-  private boolean suspended;
+//  private boolean suspended;
 
   /**
    * own stuff
@@ -25,13 +25,13 @@ public class ExtendedProcessInstanceDto extends LinkableDto {
   private String processDefinitionName;
   private Date startTime;
   
-  public static ExtendedProcessInstanceDto fromProcessInstance(ProcessInstance instance) {    
+  public static ExtendedProcessInstanceDto fromProcessInstance(HistoricProcessInstance instance) {    
     ExtendedProcessInstanceDto result = new ExtendedProcessInstanceDto();
     result.id = instance.getId();
     result.processDefinitionId = instance.getProcessDefinitionId();
     result.businessKey = instance.getBusinessKey();
-    result.ended = instance.isEnded();
-    result.suspended = instance.isSuspended();
+    result.ended = instance.getEndTime()!=null;
+//    result.suspended = instance.isSuspended();
     return result;
   }
   
@@ -73,13 +73,13 @@ public class ExtendedProcessInstanceDto extends LinkableDto {
     this.ended = ended;
   }
 
-  public boolean isSuspended() {
-    return suspended;
-  }
-
-  public void setSuspended(boolean suspended) {
-    this.suspended = suspended;
-  }
+//  public boolean isSuspended() {
+//    return suspended;
+//  }
+//
+//  public void setSuspended(boolean suspended) {
+//    this.suspended = suspended;
+//  }
 
   public String getProcessDefinitionKey() {
     return processDefinitionKey;
