@@ -37,19 +37,16 @@ public class CallbackService {
   private QueueConnectionFactory connectionFactory;  
   
   public void receiveCallback(String correlationKey) {
-//    String executionId = correlationKey;
-//    System.out.println("do callback on execution " + executionId);
-    
-    
 //    Execution execution = runtimeService.createExecutionQuery()
 //            .processVariableValueEquals("correllationId", correlationKey)
 //            .singleResult();
-
+//
 //    Execution execution = runtimeService.createExecutionQuery()
 //            .processInstanceBusinessKey(correlationKey)
 //            .singleResult();
-    
+//    
 //    runtimeService.signal(execution.getId(), variables);
+//    runtimeService.messageEventReceived("serviceExecutionCompleted", execution.getId());
 	  
 //	  Map<String,Object> correlationKeys = new HashMap<String, Object>();
 //	  correlationKeys.put("correllationId", correlationKey);

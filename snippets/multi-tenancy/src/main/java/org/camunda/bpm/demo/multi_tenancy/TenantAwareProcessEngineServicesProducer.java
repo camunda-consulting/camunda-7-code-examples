@@ -25,9 +25,6 @@ public class TenantAwareProcessEngineServicesProducer extends ProcessEngineServi
   @Inject
   private Tenant tenant;
 
-//  @EJB(lookup="java:global/camunda-bpm-platform/process-engine/ProcessEngineService!org.camunda.bpm.ProcessEngineService")
-//  private ProcessEngineService processEngineService; 
-
   @Override
   @Named
   @Produces
@@ -35,11 +32,7 @@ public class TenantAwareProcessEngineServicesProducer extends ProcessEngineServi
   public ProcessEngine processEngine() {
     String processEngineName = tenant.getId();
     if (processEngineName != null) {
-//    	ProcessEngine processEngine = processEngineService.getProcessEngine(processEngineName);
       ProcessEngine processEngine = BpmPlatform.getProcessEngineService().getProcessEngine(processEngineName);
-	    if (processEngine == null) {
-	    	processEngine = ProcessEngines.getProcessEngine(processEngineName, false);
-	    }
 	    if (processEngine != null) {
 	    	return processEngine;
 	    } else {

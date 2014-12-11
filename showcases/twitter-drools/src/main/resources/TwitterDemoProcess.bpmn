@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" targetNamespace="http://www.signavio.com/bpmn20">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://www.signavio.com/bpmn20">
   <process id="TwitterDemoProcessDrools" name="TwitterDemoProcess Drools" isExecutable="true">
     <startEvent id="start_event_new_tweet" camunda:initiator="initiator" camunda:formKey="app:createTweet.jsf" name="Tweet written">
       <outgoing>SequenceFlow_2</outgoing>
@@ -37,8 +37,12 @@
     </endEvent>
     <businessRuleTask id="BusinessRuleTask_1" camunda:class="org.camunda.bpm.example.twitter.DroolsDelegate" name="apply approval rules">
       <extensionElements>
-        <camunda:field name="drlFile" stringValue="rejectionRules.drl"/>
-        <camunda:field name="facts" stringValue="tweet"/>
+        <camunda:field name="drlFile">
+          <camunda:string>rejectionRules.drl</camunda:string>
+        </camunda:field>
+        <camunda:field name="facts">
+          <camunda:string>tweet</camunda:string>
+        </camunda:field>
       </extensionElements>
       <incoming>SequenceFlow_2</incoming>
       <outgoing>SequenceFlow</outgoing>
