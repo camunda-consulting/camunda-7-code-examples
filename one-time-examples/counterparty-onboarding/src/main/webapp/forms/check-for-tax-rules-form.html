@@ -1,0 +1,37 @@
+<form class="form-horizontal">
+  <div>{{description}}</div>
+  <div class="control-group">
+    <label class="control-label">CPTY Name</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="CPTYName" readonly="true" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">CPTY Number</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="Long" cam-variable-name="CPTYNumber" readonly="true" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">COB-Team reason for direct tax approval:</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="reasonForTaxApproval" readonly/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Comment for amend request by COB Team:</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="taxComments" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Approved by tax?:</label>
+    <div class="controls">
+      <select cam-variable-type="String" cam-variable-name="taxApproved">
+        <option value="no">No</option>
+        <option value="maybe">Amend by COB Team</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+  </div>
+</form>
