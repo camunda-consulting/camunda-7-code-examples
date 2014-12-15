@@ -119,7 +119,7 @@ public class InMemoryH2Test {
         .singleResult();
     rule.getTaskService().complete(task.getId());
     // complete Case
-    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
+//    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
     List<CaseExecution> cases = rule
         .getProcessEngine()
         .getCaseService()
@@ -187,7 +187,7 @@ public class InMemoryH2Test {
         .caseInstanceId(ci.getId())
         .singleResult();
     rule.getTaskService().complete(task.getId());
-    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
+//    rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).complete();
     rule.getProcessEngine().getCaseService().withCaseExecution(ci.getId()).close();    
     assertThat(pi).isEnded();
   }

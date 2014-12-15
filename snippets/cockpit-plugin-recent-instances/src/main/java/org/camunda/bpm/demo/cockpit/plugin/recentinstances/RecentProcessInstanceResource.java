@@ -23,20 +23,21 @@ public class RecentProcessInstanceResource extends AbstractCockpitPluginResource
     ArrayList<ExtendedProcessInstanceDto> recentProcessInstances = new ArrayList<ExtendedProcessInstanceDto>();
     
     // processes being started by us:    
-    List<ProcessInstance> processInstances = getProcessEngine().getRuntimeService() //
-        .createProcessInstanceQuery() //
-        .orderByProcessInstanceId().desc() //
+    List<HistoricProcessInstance> processInstances = getProcessEngine().getHistoryService() //
+        .createHistoricProcessInstanceQuery() //
+        .orderByProcessInstanceStartTime().desc() //
         .listPage(0, 20);
-    for (ProcessInstance pi : processInstances) {
+    for (HistoricProcessInstance pi : processInstances) {
       ExtendedProcessInstanceDto dto = ExtendedProcessInstanceDto.fromProcessInstance(pi);
       
-      ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());
-      dto.setProcessDefinition(pd);
-      
-      HistoricProcessInstance historicProcessInstance = getProcessEngine().getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(pi.getId()).singleResult();
-      if (historicProcessInstance!=null) {
-        dto.setStartTime(historicProcessInstance.getStartTime());
+      try {
+        ProcessDefinition pd = getProcessEngine().getRepositoryService().getProcessDefinition(dto.getProcessDefinitionId());
+        dto.setProcessDefinition(pd);
       }
+      catch (Exception ex) {
+        dto.setProcessDefinitionId(pi.getProcessDefinitionId());
+      }
+      dto.setStartTime(pi.getStartTime());
       
       recentProcessInstances.add( dto );
     }   

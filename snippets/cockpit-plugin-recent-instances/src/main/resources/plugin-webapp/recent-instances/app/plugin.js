@@ -13,8 +13,8 @@ ngDefine('cockpit.plugin.recent-instances', function(module) {
     // input: processInstance
 
     $scope.recentProcessInstances = null;
-    RecentProcessInstanceResource.query().$then(function(response) {
-          $scope.recentProcessInstances = response.data;
+    RecentProcessInstanceResource.query().$promise.then(function(response) {
+             $scope.recentProcessInstances = response;
     });      
   };
   module.controller('RecentProcessInstanceController', [ '$scope', 'RecentProcessInstanceResource', RecentProcessInstanceController ]);
