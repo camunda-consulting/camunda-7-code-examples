@@ -15,3 +15,4 @@ build.properties
 
 # H2
 camunda-h2-dbs
+/one-time-examples/2015-01-webinars/webinar-tasklist/node-js/node_modules
