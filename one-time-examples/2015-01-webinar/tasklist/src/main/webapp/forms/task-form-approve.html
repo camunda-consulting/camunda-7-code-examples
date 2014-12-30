@@ -1,0 +1,43 @@
+<form class="form-horizontal">
+
+  <!-- load object and bind it to Angular scope, see https://github.com/camunda/camunda-bpm-examples/tree/master/usertask/task-form-embedded-serialized-java-object#accessing-an-existing-java-object-variable-in-a-task-form -->
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      camForm.variableManager.fetchVariable('vacationRequest');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of vacationRequest to a angular
+      // scope value such that the form can work on it
+      $scope.vacationRequest = camForm.variableManager.variable('vacationRequest').value;
+    });
+  </script>
+
+  <div class="control-group">
+    <label class="control-label">Name</label>
+    <div class="controls">
+      <input type="string" ng-model="vacationRequest.name" readonly="true" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Beginn</label>
+    <div class="controls">
+      <input type="string" ng-model="vacationRequest.startDate" readonly="true" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Dauer</label>
+    <div class="controls">
+      <input type="string" ng-model="vacationRequest.duration" readonly="true" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Approve?</label>
+    <div class="controls">
+      <input type="checkbox"
+         cam-variable-name="approved"
+         cam-variable-type="Boolean" />
+    </div>
+  </div>
+</form>
