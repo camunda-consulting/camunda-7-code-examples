@@ -1,0 +1,50 @@
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">CPTY Name</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="CPTYName" readonly />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">CPTY Number</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="Long" cam-variable-name="CPTYNumber" readonly />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">country</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="country" readonly />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Direct tax approval:</label>
+    <div class="controls">
+      <select cam-variable-type="String" cam-variable-name="gotoTax">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Reason for direct tax approval:</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="reasonForTaxApproval" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Direct compliance approval:</label>
+    <div class="controls">
+      <select cam-variable-type="String" cam-variable-name="gotoCompliance">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Reason for direct compliance approval:</label>
+    <div class="controls">
+      <input class="form-control" type="text" cam-variable-type="String" cam-variable-name="reasonForComplianceApproval" />
+    </div>
+  </div>
+</form>

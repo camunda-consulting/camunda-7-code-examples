@@ -1,0 +1,41 @@
+POST /user/create {"profile": {"id": "michelle", "firstName":"Michelle", "lastName":"Wahlgren", "email":"aNewEmailAddress"},"credentials": {"password":"michelle"}}
+POST /user/create {"profile": {"id": "joyce", "firstName":"Joyce", "lastName":"Li", "email":"aNewEmailAddress"},"credentials": {"password":"joyce"}}
+POST /user/create {"profile": {"id": "eddy", "firstName":"Eddy", "lastName":"Beltif", "email":"aNewEmailAddress"},"credentials": {"password":"eddy"}}
+POST /user/create {"profile": {"id": "reggie", "firstName":"Reggie", "lastName":"Wong", "email":"aNewEmailAddress"},"credentials": {"password":"reggie"}}
+POST /user/create {"profile": {"id": "robert", "firstName":"Robert", "lastName":"Luo", "email":"aNewEmailAddress"},"credentials": {"password":"robert"}}
+POST /user/create {"profile": {"id": "raymond", "firstName":"Raymond", "lastName":"Tong", "email":"aNewEmailAddress"},"credentials": {"password":"raymond"}}
+#POST /user/create {"profile": {"id": "", "firstName":"", "lastName":"", "email":"aNewEmailAddress"},"credentials": {"password":""}}
+#POST /user/create {"profile": {"id": "", "firstName":"", "lastName":"", "email":"aNewEmailAddress"},"credentials": {"password":""}}
+#POST /user/create {"profile": {"id": "", "firstName":"", "lastName":"", "email":"aNewEmailAddress"},"credentials": {"password":""}}
+
+POST /group/create {"id":"APP_COB", "name":"Counterparty Onboarding", "type":"Organizational Unit"}
+POST /group/create {"id":"APP_TAX", "name":"Tax", "type":"Organizational Unit"}
+POST /group/create {"id":"APP_COMPLIANCE", "name":"Compliance", "type":"Organizational Unit"}
+POST /group/create {"id":"APP_MANAGEMENT", "name":"Platform Head", "type":"Organizational Unit"}
+POST /group/create {"id":"APP_TREASURY", "name":"Treasury", "type":"Organizational Unit"}
+#POST /group/create {"id":"", "name":"", "type":""}
+#POST /group/create {"id":"", "name":"", "type":""}
+#POST /group/create {"id":"", "name":"", "type":""}
+
+PUT /group/APP_COB/members/joyce
+PUT /group/APP_COB/members/eddy
+PUT /group/APP_TAX/members/reggie
+PUT /group/APP_COMPLIANCE/members/robert
+PUT /group/APP_MANAGEMENT/members/michelle
+PUT /group/APP_TREASURY/members/raymond
+
+#give the users the ability to create filters (resource type 5)
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "michelle", "groupId": null, "resourceType": 5, "resourceId": "*"}
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "joyce", "groupId": null, "resourceType": 5, "resourceId": "*"}
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "eddy", "groupId": null, "resourceType": 5, "resourceId": "*"}
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "reggie", "groupId": null, "resourceType": 5, "resourceId": "*"}
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "robert", "groupId": null, "resourceType": 5, "resourceId": "*"}
+POST /authorization/create {"type": 1, "permissions": ["CREATE"], "userId": "raymond", "groupId": null, "resourceType": 5, "resourceId": "*"}
+
+# new filter to see all group task
+# makes testing much easier
+# POST /filter/create {"resourceType": "Task", "name": "COB Tasks", "owner": null, "query": {"candidateGroups": ["APP_COB","APP_TAX","APP_COMPLIANCE","APP_MANAGEMENT","APP_TREASURY"]},"properties": {"color": "#EEEEEE","description": "All tasks from COB processes","priority": -4,"variables": [{"name": "CPTYName", "label": "Name"}, {"name": "CPTYNumber", "label": "CTPY Number"}]}}
+# grant the read permission on this filter to every
+# need the id of the create before.
+#POST /authorization/create {"type": 0, "permissions": ["READ"], "userId": "*", "groupId": null, "resourceType": 5, "resourceId": "COB_Filter"}
+
