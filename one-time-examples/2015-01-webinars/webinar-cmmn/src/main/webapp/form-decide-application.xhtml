@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="case-form.xhtml">
+
+	<ui:define name="task">
+		<!-- Todo Show Application -->
+		
+		<!-- Decide -->
+		<div class="formGroup">
+				<label>Approve?</label>
+				<h:selectOneMenu id="approved" value="#{caseController.taskFormVariables['approved']}">
+					<f:selectItem itemValue="#{true}" itemLabel="Yes" />
+					<f:selectItem itemValue="#{false}" itemLabel="No" />					
+				</h:selectOneMenu>
+				<h:inputText value="#{caseController.taskFormVariables['comment']}" />
+		</div>
+	</ui:define>	
+</ui:composition>
