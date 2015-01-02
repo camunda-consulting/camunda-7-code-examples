@@ -12,17 +12,14 @@ import org.camunda.bpm.engine.repository.CaseDefinition;
 import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.task.Task;
 
+import com.camunda.demo.webinar.cmmn.Constants;
 import com.camunda.demo.webinar.cmmn.domain.Application;
-import com.camunda.demo.webinar.cmmn.domain.ApplicationDomainService;
 
 @Named
 public class TasklistController {
 
   @Inject
   private ProcessEngine processEngine;
-
-  @Inject
-  private ApplicationDomainService service;
 
   @Inject
   @Named
@@ -62,18 +59,16 @@ public class TasklistController {
     List<TaskRow> taskRows = new ArrayList<TaskRow>();
     for (Task task : tasks) {
       CaseInstance caseInstance = null;
-      Application creditApplication = null;
+      Application application = null;
       CaseDefinition caseDefinition = null;
 
       if (task.getCaseInstanceId() != null) {
         caseInstance = processEngine.getCaseService().createCaseInstanceQuery().caseInstanceId(task.getCaseInstanceId()).singleResult();
         caseDefinition = processEngine.getRepositoryService().getCaseDefinition(caseInstance.getCaseDefinitionId());
       }
-      final Long creditApplicationId = (Long) processEngine.getTaskService().getVariable(task.getId(), ApplicationDomainService.CREDIT_APPLICATION_ID);
-      if (creditApplicationId != null) {
-        creditApplication = service.findApplicationById(creditApplicationId);
-      }
-      taskRows.add(new TaskRow(task, creditApplication, caseInstance, caseDefinition));
+
+      application = (Application) processEngine.getTaskService().getVariable(task.getId(), Constants.VAR_NAME_APPLICATION);
+      taskRows.add(new TaskRow(task, application, caseInstance, caseDefinition));
     }
     return taskRows;
   }

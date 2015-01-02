@@ -1,29 +1,13 @@
 package com.camunda.demo.webinar.cmmn.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.UUID;
 
-@Entity
 public class Application {
 
-  @GeneratedValue
-  @Id
-  private long id;
-  
+  private String id = UUID.randomUUID().toString();
+
   private String customerId;
   private String customerName;
-  
-  private String ratingCreditreform;
-  private String ratingSchufa;
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
 
   public String getCustomerId() {
     return customerId;
@@ -41,20 +25,8 @@ public class Application {
     this.customerName = customerName;
   }
 
-  public String getRatingCreditreform() {
-    return ratingCreditreform;
-  }
-
-  public void setRatingCreditreform(String ratingCreditreform) {
-    this.ratingCreditreform = ratingCreditreform;
-  }
-
-  public String getRatingSchufa() {
-    return ratingSchufa;
-  }
-
-  public void setRatingSchufa(String ratingSchufa) {
-    this.ratingSchufa = ratingSchufa;
+  public String getId() {
+    return id;
   }
 
 }

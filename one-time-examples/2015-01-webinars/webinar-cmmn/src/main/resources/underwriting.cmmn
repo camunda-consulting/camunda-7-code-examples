@@ -39,7 +39,7 @@
             </cmmn:sentry>
 
 			<!-- Plan Item Definitions -->
-            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:formKey="app:form-decide-application.jsf">
+            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-decide-application.jsf">
 				<cmmn:extensionElements>
 					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.webinar.cmmn.listener.DisableRemainingActivitiesListener" />
 				</cmmn:extensionElements>             
@@ -51,12 +51,20 @@
 					</cmmn:manualActivationRule>
                 </cmmn:defaultControl>
             </cmmn:humanTask>
-            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" />
-            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true"/>
-            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true"/>
+            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
+            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf"/>
+            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf">
+                <cmmn:defaultControl>
+					<cmmn:manualActivationRule>
+						<cmmn:condition>
+							<cmmn:body>${false}</cmmn:body>
+						</cmmn:condition>
+					</cmmn:manualActivationRule>
+                </cmmn:defaultControl>            
+            </cmmn:humanTask>
             <cmmn:humanTask id="humanTaskThereIsMore" name="..." isBlocking="false"/>
 
-            <cmmn:processTask id="processTaskDoctorRequest" name="doctor information request" isBlocking="true" />
+            <cmmn:processTask id="processTaskDoctorRequest" name="doctor information request"  processRef="DoctorInformationRequest" isBlocking="true" />
             
             <cmmn:milestone id="milestoneApproved" name="approved">
 				<cmmn:extensionElements>

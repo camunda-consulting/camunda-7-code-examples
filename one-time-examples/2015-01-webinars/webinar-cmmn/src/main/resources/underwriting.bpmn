@@ -4,7 +4,7 @@
     <bpmn2:participant id="pool-underwriting" name="Insurance Underwriting" processRef="underwriting"/>
   </bpmn2:collaboration>
   <bpmn2:process id="underwriting" name="Insurance Underwriting" isExecutable="true">
-    <bpmn2:startEvent id="startEventElectronicApplication" name="Application recieved&#xD;&#xA;electronically">
+    <bpmn2:startEvent id="startEventElectronicApplication" name="Application received&#xD;&#xA;electronically">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_2" messageRef="Message_1"/>
     </bpmn2:startEvent>
@@ -14,6 +14,7 @@
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="startEventElectronicApplication" targetRef="ExclusiveGateway_1"/>
@@ -21,9 +22,12 @@
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_3" messageRef="Message_2"/>
     </bpmn2:startEvent>
-    <bpmn2:serviceTask id="checkDuplicates" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="validate application">
+    <bpmn2:serviceTask id="checkDuplicates" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="persist application in DB">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+        <bpmn2:targetRef>_DataStoreReference_2</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_5" sourceRef="ExclusiveGateway_1" targetRef="checkDuplicates"/>
     <bpmn2:boundaryEvent id="BoundaryEvent_1" name="duplicate" attachedToRef="checkDuplicates">
@@ -39,7 +43,7 @@
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="checkDuplicates" targetRef="userTaskReviewData"/>
-    <bpmn2:businessRuleTask id="assignUnderwriter" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="assign underwriter">
+    <bpmn2:businessRuleTask id="assignUnderwriter" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="assign underwriter">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
     </bpmn2:businessRuleTask>
@@ -58,7 +62,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="no" sourceRef="ExclusiveGateway_2" targetRef="endEventApplicationRejectedUnderwriter">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="process application and create policy">
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="process application and create policy">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -80,12 +84,18 @@
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="ServiceTask_2" targetRef="ReceiveTask_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_14" name="" sourceRef="assignUnderwriter" targetRef="ServiceTask_2"/>
     <bpmn2:sequenceFlow id="SequenceFlow_15" name="" sourceRef="ReceiveTask_1" targetRef="ExclusiveGateway_2"/>
+    <bpmn2:startEvent id="StartEvent_1" name="Application entered&#xD;&#xA;manually">
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:dataStoreReference id="_DataStoreReference_2" name="Application&#xD;&#xA;DB" dataStoreRef="DataStore_1"/>
     <bpmn2:group id="Group_1"/>
   </bpmn2:process>
   <bpmn2:message id="Message_1" name="msgElectronicApplication"/>
   <bpmn2:message id="Message_2" name="msgPaperApplication"/>
   <bpmn2:error id="Error_1" errorCode="duplicateError" name="duplicate application error"/>
   <bpmn2:message id="Message_3" name="msgUnderwritingFinished"/>
+  <bpmn2:dataStore id="DataStore_1" name="Data Store 1"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="pool-underwriting" isHorizontal="true">
@@ -248,8 +258,32 @@
         <di:waypoint xsi:type="dc:Point" x="1076.0" y="110.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Group_2" bpmnElement="Group_1">
-        <dc:Bounds height="108.0" width="253.0" x="792.0" y="149.0"/>
+        <dc:Bounds height="108.0" width="253.0" x="792.0" y="57.0"/>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_6" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="108.0" y="24.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="126.0" y="65.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_StartEvent_6" targetElement="_BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="144.0" y="42.0"/>
+        <di:waypoint xsi:type="dc:Point" x="265.0" y="42.0"/>
+        <di:waypoint xsi:type="dc:Point" x="265.0" y="85.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="223.0" y="42.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_DataStoreReference_2" bpmnElement="_DataStoreReference_2">
+        <dc:Bounds height="50.0" width="50.0" x="372.0" y="300.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="38.0" width="80.0" x="357.0" y="355.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_1" sourceElement="_BPMNShape_ServiceTask_2" targetElement="_BPMNShape_DataStoreReference_2">
+        <di:waypoint xsi:type="dc:Point" x="411.0" y="150.0"/>
+        <di:waypoint xsi:type="dc:Point" x="399.0" y="300.0"/>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>

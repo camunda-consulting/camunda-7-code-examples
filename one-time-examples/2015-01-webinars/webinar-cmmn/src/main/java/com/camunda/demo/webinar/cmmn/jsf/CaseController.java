@@ -14,22 +14,17 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.history.HistoricCaseActivityInstance;
-import org.camunda.bpm.engine.history.HistoricProcessInstance;
-import org.camunda.bpm.engine.history.HistoricTaskInstance;
 import org.camunda.bpm.engine.impl.cmmn.entity.runtime.CaseExecutionEntity;
 import org.camunda.bpm.engine.impl.cmmn.execution.CaseExecutionState;
-import org.camunda.bpm.engine.impl.persistence.deploy.DeploymentCache;
 import org.camunda.bpm.engine.repository.CaseDefinition;
 import org.camunda.bpm.engine.runtime.CaseExecution;
 import org.camunda.bpm.engine.runtime.CaseInstance;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.model.cmmn.impl.CmmnModelConstants;
 
+import com.camunda.demo.webinar.cmmn.Constants;
 import com.camunda.demo.webinar.cmmn.domain.Application;
-import com.camunda.demo.webinar.cmmn.domain.ApplicationDomainService;
 
 @Named
 @SessionScoped
@@ -38,9 +33,6 @@ public class CaseController implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Application application;
-
-  @Inject
-  private ApplicationDomainService service;
 
   @Inject
   private ProcessEngine engine;
@@ -68,27 +60,28 @@ public class CaseController implements Serializable {
     Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     String taskId = requestParameterMap.get("taskId");
     String caseInstanceId = requestParameterMap.get("caseInstanceId");
-    String activityId = requestParameterMap.get("activityId");
+//    String activityId = requestParameterMap.get("activityId");
 
-    if (activityId != null && caseInstanceId != null) {
-      if (caseInstance != null && caseInstance.getId().equals(caseInstanceId) && selectedTask != null && selectedTask.getTaskDefinitionKey().equals(activityId)) {
-        // already selected!
-        return;
-      }
-      // this activity shall be started if possible
-      initCaseInstanceAndStartActivityIfPossible(caseInstanceId, activityId);
-    } else if (taskId != null) {
+//    if (activityId != null && caseInstanceId != null) {
+//      if (caseInstance != null && caseInstance.getId().equals(caseInstanceId) && selectedTask != null && selectedTask.getTaskDefinitionKey().equals(activityId)) {
+//        // already selected!
+//        return;
+//      }
+//      // this activity shall be started if possible
+//      initCaseInstanceAndStartActivityIfPossible(caseInstanceId, activityId);
+//    } else
+      if (taskId != null) {
       selectTask(taskId);
       Task loadedTask = selectedTask;
-      initByCaseId(selectedTask.getCaseInstanceId()); // does a reset!
+      initByCaseInstanceId(selectedTask.getCaseInstanceId()); // does a reset!
       selectedTask = loadedTask;
     } else if (caseInstanceId != null) {
-      initByCaseId(caseInstanceId);
+      initByCaseInstanceId(caseInstanceId);
     }
 
   }
 
-  private void initCaseInstanceAndStartActivityIfPossible(String caseInstanceId, String activityId) {
+//  private void initCaseInstanceAndStartActivityIfPossible(String caseInstanceId, String activityId) {
 //    selectedTask = null;
 //    initByCaseId(caseInstanceId);
 //    if (caseInstanceInfo.getAvailablePlanItemIds().contains(activityId)) {
@@ -109,7 +102,7 @@ public class CaseController implements Serializable {
 //      }
 //
 //    }
-  }
+//  }
 
   private void reset() {
     selectedTask = null;
@@ -119,10 +112,10 @@ public class CaseController implements Serializable {
     taskFormVariables = new HashMap<String, Object>();
   }
 
-  public void initByCaseId(final String caseId) {
+  public void initByCaseInstanceId(final String caseInstanceId) {
     reset();
-    application = service.findApplicationByCaseId(caseId);
-    caseInstance = engine.getCaseService().createCaseInstanceQuery().caseInstanceId(caseId).singleResult();
+    application = (Application) engine.getCaseService().getVariable(caseInstanceId, Constants.VAR_NAME_APPLICATION);
+    caseInstance = engine.getCaseService().createCaseInstanceQuery().caseInstanceId(caseInstanceId).singleResult();
     caseDefinition = engine.getRepositoryService().getCaseDefinition(caseInstance.getCaseDefinitionId());
     
     activeCaseExecutions = new ArrayList<CaseExecution>();
@@ -145,7 +138,7 @@ public class CaseController implements Serializable {
 
   }
 
-//  public void executeCaseActivity(final String activityID) {
+//  public void executeCaseActivity(CaseExecution execution) {
 //    final HashMap<String, Object> variables = new HashMap<String, Object>();
 //    variables.put("assign-group", null);
 //    variables.put("assign-user", null);
@@ -167,20 +160,29 @@ public class CaseController implements Serializable {
 //    refreshCaseInfo();
 //  }
 
-//  public String executeCaseActivityAndSelectTask(final String activityID) {
-//    engine.getCaseService().executePlanItem(caseInstance.getId(), activityID, null);
-//
-//    // Heuristik: Den letzten Task zum aktuellen Case selektieren - eine
-//    // Aktivität könnte ja auch
-//    // ein Prozess sein der keine oder mehrere Aufgaben erzeugt!
+  public String executeCaseActivityAndSelectTask(CaseExecution execution) {
+    engine.getCaseService().manuallyStartCaseExecution(execution.getId());
+    
+    List<Task> tasks = engine.getTaskService().createTaskQuery().caseExecutionId(execution.getId()).list();
+    if (tasks.size() > 0) {
+      selectedTask = tasks.get(0);
+    }
+    
+    // now enabled/active activities have changed
+    refreshCaseInfo();
+    
+    // Heuristik: Den letzten Task zum aktuellen Case selektieren - eine
+    // Aktivität könnte ja auch
+    // ein Prozess sein der keine oder mehrere Aufgaben erzeugt!
 //    final List<Task> tasks = engine.getTaskService().createTaskQuery().caseInstanceId(caseInstance.getId()).orderByTaskCreateTime().desc().list();
 //    if (tasks.size() > 0) {
 //      selectedTask = tasks.get(0);
-//      claimSelectedAskForCurrentUser();
+////      claimSelectedAskForCurrentUser();
 //    }
 //    refreshCaseInfo();
-//    return getFormForTask(selectedTask.getId());
-//  }
+    return "";
+    //return getTaskFormLink(selectedTask.getId());
+  }
 
   public boolean isRunning(String activityId) {
 //    for (Task task : caseInstanceInfo.getActiveTasks()) {
@@ -214,18 +216,16 @@ public class CaseController implements Serializable {
     if (caseExecution.getActivityType()==CmmnModelConstants.CMMN_ELEMENT_HUMAN_TASK) {
       Task task = engine.getTaskService().createTaskQuery().caseExecutionId(caseExecution.getId()).initializeFormKeys().singleResult();
       String formKey = task.getFormKey();
+      if (formKey == null) {
+        return null;
+      }
       return formKey.replaceAll("app:", "") + "?taskId=" + task.getId();
     }
     else return null;
   }
 
   public void refreshCaseInfo() {
-    initByCaseId(caseInstance.getId());
-  }
-
-  public void loadDefaultRating() {
-    application.setRatingSchufa("B");
-    application.setRatingCreditreform("A");
+    initByCaseInstanceId(caseInstance.getId());
   }
 
   public void deselectTask() {
@@ -256,8 +256,6 @@ public class CaseController implements Serializable {
   }
 
   public String completeSelectedTask() {
-    service.update(application);
-    
     HashMap<String, Object> variables = new HashMap<String, Object>();
     // workaround to use boolean variables
     for (Entry<String, Object> entry : taskFormVariables.entrySet()) {
@@ -268,6 +266,8 @@ public class CaseController implements Serializable {
         variables.put(entry.getKey(), entry.getValue());
       }
     }
+    // save changed to variables object bound to JSF UI
+    variables.put(Constants.VAR_NAME_APPLICATION, application);
     
     // Workaround for bug: https://app.camunda.com/jira/browse/CAM-3261
     engine.getCaseService().setVariables(selectedTask.getCaseExecutionId(), variables);
@@ -283,7 +283,7 @@ public class CaseController implements Serializable {
   }
 
   public void saveSelectedTask() {
-    service.update(application);
+    engine.getCaseService().setVariable(selectedTask.getCaseExecutionId(), Constants.VAR_NAME_APPLICATION, application);
   }
 
   public String getProcessDefinitionName(final String processDefinitionId) {

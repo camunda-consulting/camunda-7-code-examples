@@ -12,8 +12,8 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.CaseDefinition;
 import org.camunda.bpm.engine.runtime.CaseInstance;
 
+import com.camunda.demo.webinar.cmmn.Constants;
 import com.camunda.demo.webinar.cmmn.domain.Application;
-import com.camunda.demo.webinar.cmmn.domain.ApplicationDomainService;
 
 @Named
 @SessionScoped
@@ -23,9 +23,6 @@ public class CaseListController implements Serializable {
 
   @Inject
   private ProcessEngine processEngine;
-
-  @Inject
-  private ApplicationDomainService service;
 
   @Inject
   @Named
@@ -41,7 +38,7 @@ public class CaseListController implements Serializable {
       rows = new ArrayList<CaseRow>();
       List<CaseInstance> caseInstances = processEngine.getCaseService().createCaseInstanceQuery().active().list();
       for (CaseInstance caseInstance : caseInstances) {
-        Application application = service.findApplicationByCaseId(caseInstance.getId());
+        Application application = (Application) processEngine.getCaseService().getVariable(caseInstance.getId(), Constants.VAR_NAME_APPLICATION);
         CaseDefinition caseDefinition = processEngine.getRepositoryService().getCaseDefinition(caseInstance.getCaseDefinitionId());
         rows.add(new CaseRow(caseInstance, caseDefinition, application));
       }
@@ -82,7 +79,7 @@ public class CaseListController implements Serializable {
   }
 
   public String selectCase(final String caseId) {
-    caseController.initByCaseId(caseId);
+    caseController.initByCaseInstanceId(caseId);
     return "case-form";
   }
 

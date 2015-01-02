@@ -6,8 +6,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.runtime.CaseInstance;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
+
+import com.camunda.demo.webinar.cmmn.Constants;
 import com.camunda.demo.webinar.cmmn.domain.Application;
-import com.camunda.demo.webinar.cmmn.domain.ApplicationDomainService;
 
 
 @Named
@@ -17,9 +22,9 @@ public class NewApplication implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Application application = new Application();
-
+    
     @Inject
-    private ApplicationDomainService service;
+    private ProcessEngine processEngine;
 
     @Inject
     @Named
@@ -30,8 +35,13 @@ public class NewApplication implements Serializable {
     private CaseListController caseListController;
 
     public String saveAction() {
-        String caseId = service.saveCreditApplication(application);
-        caseController.initByCaseId(caseId);
+        CaseInstance caseInstance = processEngine.getCaseService().createCaseInstanceByKey( //
+            "underwriting", 
+            Variables.createVariables().putValueTyped( //
+                Constants.VAR_NAME_APPLICATION, //
+                Variables.objectValue(application).serializationDataFormat(SerializationDataFormats.JSON).create()));
+        
+        caseController.initByCaseInstanceId(caseInstance.getId());
         caseListController.clearBuffer();
         
         // reset

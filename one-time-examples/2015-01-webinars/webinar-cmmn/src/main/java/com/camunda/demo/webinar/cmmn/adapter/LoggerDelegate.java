@@ -1,4 +1,4 @@
-package com.camunda.demo.webinar.cmmn;
+package com.camunda.demo.webinar.cmmn.adapter;
 
 import java.util.logging.Logger;
 
