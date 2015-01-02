@@ -13,6 +13,7 @@ import org.camunda.bpm.engine.impl.persistence.entity.HistoricCaseActivityInstan
 import org.camunda.bpm.engine.impl.util.LogUtil;
 import org.camunda.bpm.engine.runtime.CaseExecution;
 import org.camunda.bpm.engine.runtime.CaseInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
@@ -84,24 +85,54 @@ public class InMemoryH2Test {
     System.out.println("####################");
     caseExecutions = processEngine().getCaseService().createCaseExecutionQuery().caseInstanceId(caseInstance.getId()).list();
     for (CaseExecution otherCaseExecution : caseExecutions) {
-      System.out.println(otherCaseExecution.getActivityName() + " -> " + ((CaseExecutionEntity)otherCaseExecution).getCurrentState().toString());
+      System.out.println(otherCaseExecution.getActivityName() + " -> " + ((CaseExecutionEntity) otherCaseExecution).getCurrentState().toString());
     }
     System.out.println("####################");
-    List<HistoricCaseActivityInstance> caseActivityInstances = processEngine().getHistoryService().createHistoricCaseActivityInstanceQuery().caseInstanceId(caseInstance.getId()).list();
+    List<HistoricCaseActivityInstance> caseActivityInstances = processEngine().getHistoryService().createHistoricCaseActivityInstanceQuery()
+        .caseInstanceId(caseInstance.getId()).list();
     for (HistoricCaseActivityInstance historicCaseActivityInstance : caseActivityInstances) {
-      System.out.println(historicCaseActivityInstance.getCaseActivityName() + " -> " + ((HistoricCaseActivityInstanceEntity)historicCaseActivityInstance).getCaseActivityInstanceState());
+      System.out.println(historicCaseActivityInstance.getCaseActivityName() + " -> "
+          + ((HistoricCaseActivityInstanceEntity) historicCaseActivityInstance).getCaseActivityInstanceState());
     }
     System.out.println("####################");
-
 
     caseInstance = processEngine().getCaseService().createCaseInstanceQuery().caseInstanceId(caseInstance.getId()).singleResult();
-    assertTrue( caseInstance.isCompleted());
+    assertTrue(caseInstance.isCompleted());
 
-    HistoricCaseInstance historicCaseInstance = processEngine().getHistoryService().createHistoricCaseInstanceQuery().caseInstanceId(caseInstance.getId()).singleResult();
-    assertTrue( historicCaseInstance.isCompleted());    
+    HistoricCaseInstance historicCaseInstance = processEngine().getHistoryService().createHistoricCaseInstanceQuery().caseInstanceId(caseInstance.getId())
+        .singleResult();
+    assertTrue(historicCaseInstance.isCompleted());
 
-   assertEquals(0, processEngine().getCaseService().createCaseInstanceQuery().caseInstanceId(caseInstance.getId()).count());
+    processEngine().getCaseService().closeCaseInstance(caseInstance.getId());
+
+    assertEquals(0, processEngine().getCaseService().createCaseInstanceQuery().caseInstanceId(caseInstance.getId()).count());
 
   }
 
+  @Test
+  @Deployment(resources = {"underwriting.cmmn", "underwriting.bpmn"})
+  public void testUnderwritingProcessIncludingCase() {
+    
+    ProcessInstance pi = processEngine().getRuntimeService().startProcessInstanceByMessage(Constants.MSG_START_ELECTRONIC_APPLICATION);
+    
+    assertThat(pi).task("userTaskReviewData");
+    complete(task());
+    
+    assertThat(pi).isWaitingFor(Constants.MSG_UNDERWRITING_FINISHED);
+    CaseInstance caseInstance = processEngine().getCaseService().createCaseInstanceQuery() //
+          .variableValueEquals(Constants.VAR_NAME_PROCESS_INSTANCE_ID, pi.getProcessInstanceId()) //
+          .singleResult();
+    
+    assertNotNull(caseInstance);
+
+    Task task = processEngine().getTaskService().createTaskQuery().caseInstanceId(caseInstance.getId()).singleResult();
+    assertNotNull(task);
+    assertEquals("PI_humanTaskDecide", task.getTaskDefinitionKey());
+
+    // set variable in case instead of just completing task because of bug: https://app.camunda.com/jira/browse/CAM-3261
+    processEngine().getCaseService().setVariable(caseInstance.getId(), "approved", Boolean.TRUE);
+    processEngine().getTaskService().complete(task.getId());
+
+    assertThat(pi).isEnded().hasPassed("endEventApplicationProcessed");
+  }
 }

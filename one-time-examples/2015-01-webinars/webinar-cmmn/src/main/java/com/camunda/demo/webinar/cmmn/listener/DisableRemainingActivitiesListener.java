@@ -1,4 +1,4 @@
-package com.camunda.demo.webinar.cmmn;
+package com.camunda.demo.webinar.cmmn.listener;
 
 import java.util.List;
 
@@ -20,14 +20,10 @@ public class DisableRemainingActivitiesListener implements CaseExecutionListener
       if (otherCaseExecution.isEnabled()) {
         caseExecution.getProcessEngineServices().getCaseService().disableCaseExecution(otherCaseExecution.getId());
       }
-      if (otherCaseExecution.isAvailable()) {
+//      if (otherCaseExecution.isAvailable()) {
 //        caseExecution.getProcessEngineServices().getCaseService().disableCaseExecution(otherCaseExecution.getId());
-      }
+//      }
       System.out.println(otherCaseExecution.getActivityName() + " -> " + ((CaseExecutionEntity)otherCaseExecution).getCurrentState().toString());
     }
-    
-    // Maybe to early because task completion is not yet done?
-//    caseExecution.getProcessEngineServices().getCaseService().completeCaseExecution(    caseExecution.getCaseInstanceId() );
-    
   }
 }

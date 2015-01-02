@@ -4,11 +4,11 @@
     <bpmn2:participant id="pool-underwriting" name="Insurance Underwriting" processRef="underwriting"/>
   </bpmn2:collaboration>
   <bpmn2:process id="underwriting" name="Insurance Underwriting" isExecutable="true">
-    <bpmn2:startEvent id="StartElectronically" name="Application recieved&#xD;&#xA;electronically">
+    <bpmn2:startEvent id="startEventElectronicApplication" name="Application recieved&#xD;&#xA;electronically">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_2" messageRef="Message_1"/>
     </bpmn2:startEvent>
-    <bpmn2:endEvent id="EndEvent_1" name="application &#xD;&#xA;rejected by&#xD;&#xA;underwriter">
+    <bpmn2:endEvent id="endEventApplicationRejectedUnderwriter" name="application &#xD;&#xA;rejected by&#xD;&#xA;underwriter">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1">
@@ -16,8 +16,8 @@
       <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartElectronically" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:startEvent id="StartPaper" name="Application recieved&#xD;&#xA;on paper">
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="startEventElectronicApplication" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:startEvent id="startEventPaperApplication" name="Application recieved&#xD;&#xA;on paper">
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_3" messageRef="Message_2"/>
     </bpmn2:startEvent>
@@ -30,32 +30,32 @@
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
       <bpmn2:errorEventDefinition id="_ErrorEventDefinition_2" errorRef="Error_1"/>
     </bpmn2:boundaryEvent>
-    <bpmn2:endEvent id="EndDuplicate" name="application&#xD;&#xA;rejected as&#xD;&#xA;duplicate">
+    <bpmn2:endEvent id="endEventApplicationRejectedDuplicate" name="application&#xD;&#xA;rejected as&#xD;&#xA;duplicate">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="BoundaryEvent_1" targetRef="EndDuplicate"/>
-    <bpmn2:userTask id="reviewData" name="review data">
+    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="BoundaryEvent_1" targetRef="endEventApplicationRejectedDuplicate"/>
+    <bpmn2:userTask id="userTaskReviewData" camunda:assignee="demo" name="review data">
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="checkDuplicates" targetRef="reviewData"/>
-    <bpmn2:businessRuleTask id="assignUnderwriter" camunda:class="org.camunda.showcase.underwritingBPMN_CMMN.LoggerDelegate" name="assign underwriter">
+    <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="checkDuplicates" targetRef="userTaskReviewData"/>
+    <bpmn2:businessRuleTask id="assignUnderwriter" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="assign underwriter">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
     </bpmn2:businessRuleTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="reviewData" targetRef="assignUnderwriter"/>
-    <bpmn2:userTask id="enterApplicationData" name="enter data from application scan">
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="userTaskReviewData" targetRef="assignUnderwriter"/>
+    <bpmn2:userTask id="enterApplicationData" camunda:assignee="demo" name="enter data from application scan">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="StartPaper" targetRef="enterApplicationData"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="startEventPaperApplication" targetRef="enterApplicationData"/>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="enterApplicationData" targetRef="ExclusiveGateway_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_2" name="approved?">
       <bpmn2:incoming>SequenceFlow_15</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" name="no" sourceRef="ExclusiveGateway_2" targetRef="EndEvent_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="no" sourceRef="ExclusiveGateway_2" targetRef="endEventApplicationRejectedUnderwriter">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask id="ServiceTask_1" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="process application and create policy">
@@ -65,15 +65,15 @@
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="yes" sourceRef="ExclusiveGateway_2" targetRef="ServiceTask_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:endEvent id="EndEvent_2" name="application&#xD;&#xA;processed">
+    <bpmn2:endEvent id="endEventApplicationProcessed" name="application&#xD;&#xA;processed">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="ServiceTask_1" targetRef="EndEvent_2"/>
-    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.demo.webinar.cmmn.LoggerDelegate" name="create underwriting case instance">
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="ServiceTask_1" targetRef="endEventApplicationProcessed"/>
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.demo.webinar.cmmn.listener.CreateCaseInstanceDelegate" name="create underwriting case instance">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:receiveTask id="ReceiveTask_1" name="wait for case instance completion" messageRef="Message_3">
+    <bpmn2:receiveTask id="ReceiveTask_1" name="wait for case instance " messageRef="Message_3">
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
     </bpmn2:receiveTask>
@@ -91,13 +91,13 @@
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="pool-underwriting" isHorizontal="true">
         <dc:Bounds height="399.0" width="1443.0" x="10.0" y="10.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartElectronically">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="startEventElectronicApplication">
         <dc:Bounds height="36.0" width="36.0" x="108.0" y="93.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="38.0" width="131.0" x="64.0" y="131.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="endEventApplicationRejectedUnderwriter">
         <dc:Bounds height="36.0" width="36.0" x="1172.0" y="209.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="54.0" width="82.0" x="1152.0" y="247.0"/>
@@ -116,7 +116,7 @@
           <dc:Bounds height="6.0" width="6.0" x="166.0" y="111.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartPaper">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="startEventPaperApplication">
         <dc:Bounds height="36.0" width="36.0" x="108.0" y="208.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="38.0" width="131.0" x="61.0" y="249.0"/>
@@ -138,7 +138,7 @@
           <dc:Bounds height="22.0" width="58.0" x="444.0" y="167.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndDuplicate">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="endEventApplicationRejectedDuplicate">
         <dc:Bounds height="36.0" width="36.0" x="492.0" y="208.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="54.0" width="80.0" x="470.0" y="249.0"/>
@@ -152,7 +152,7 @@
           <dc:Bounds height="6.0" width="6.0" x="451.0" y="226.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="reviewData">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="userTaskReviewData">
         <dc:Bounds height="80.0" width="100.0" x="514.0" y="70.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="_BPMNShape_ServiceTask_2" targetElement="_BPMNShape_UserTask_2">
@@ -216,7 +216,7 @@
           <dc:Bounds height="22.0" width="27.0" x="1126.0" y="85.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_4" bpmnElement="EndEvent_2">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_4" bpmnElement="endEventApplicationProcessed">
         <dc:Bounds height="36.0" width="36.0" x="1326.0" y="92.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="38.0" width="78.0" x="1305.0" y="133.0"/>

@@ -1,4 +1,4 @@
-package org.camunda.bpm.example.acm.controller;
+package com.camunda.demo.webinar.cmmn.jsf;
 
 import java.io.Serializable;
 

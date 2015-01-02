@@ -40,6 +40,9 @@
 
 			<!-- Plan Item Definitions -->
             <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:formKey="app:form-decide-application.jsf">
+				<cmmn:extensionElements>
+					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.webinar.cmmn.listener.DisableRemainingActivitiesListener" />
+				</cmmn:extensionElements>             
                 <cmmn:defaultControl>
 					<cmmn:manualActivationRule>
 						<cmmn:condition>
@@ -57,12 +60,12 @@
             
             <cmmn:milestone id="milestoneApproved" name="approved">
 				<cmmn:extensionElements>
-					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.webinar.cmmn.DisableRemainingActivitiesListener" />
+					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.webinar.cmmn.listener.CompleteCaseAndResumeProcessListener" />
 				</cmmn:extensionElements>             
             </cmmn:milestone>
             <cmmn:milestone id="milestoneRejected" name="rejected">
 				<cmmn:extensionElements>
-					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.webinar.cmmn.DisableRemainingActivitiesListener" />
+					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.webinar.cmmn.listener.CompleteCaseAndResumeProcessListener" />
 				</cmmn:extensionElements>             
             </cmmn:milestone>
         </cmmn:casePlanModel>
