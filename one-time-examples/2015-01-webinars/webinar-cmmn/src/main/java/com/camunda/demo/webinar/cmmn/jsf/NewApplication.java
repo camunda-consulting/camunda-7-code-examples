@@ -35,18 +35,21 @@ public class NewApplication implements Serializable {
     private CaseListController caseListController;
 
     public String saveAction() {
-        CaseInstance caseInstance = processEngine.getCaseService().createCaseInstanceByKey( //
+        processEngine.getRuntimeService().startProcessInstanceByKey(
+//        CaseInstance caseInstance = processEngine.getCaseService().createCaseInstanceByKey( //
             "underwriting", 
             Variables.createVariables().putValueTyped( //
                 Constants.VAR_NAME_APPLICATION, //
                 Variables.objectValue(application).serializationDataFormat(SerializationDataFormats.JSON).create()));
         
-        caseController.initByCaseInstanceId(caseInstance.getId());
+        // cannot yet jump into case as it was not created yet!
+        //caseController.initByCaseInstanceId(caseInstance.getId());
         caseListController.clearBuffer();
         
         // reset
         application = new Application();
-        return "case-form";
+        return "tasklist";
+//        return "case-form";
     }
 
     public Application getApplication() {

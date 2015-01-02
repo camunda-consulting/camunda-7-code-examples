@@ -14,7 +14,7 @@
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="startEventElectronicApplication" targetRef="ExclusiveGateway_1"/>
@@ -22,12 +22,9 @@
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_3" messageRef="Message_2"/>
     </bpmn2:startEvent>
-    <bpmn2:serviceTask id="checkDuplicates" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="persist application in DB">
+    <bpmn2:serviceTask id="checkDuplicates" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="validate application">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
-        <bpmn2:targetRef>_DataStoreReference_2</bpmn2:targetRef>
-      </bpmn2:dataOutputAssociation>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_5" sourceRef="ExclusiveGateway_1" targetRef="checkDuplicates"/>
     <bpmn2:boundaryEvent id="BoundaryEvent_1" name="duplicate" attachedToRef="checkDuplicates">
@@ -84,12 +81,15 @@
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="ServiceTask_2" targetRef="ReceiveTask_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_14" name="" sourceRef="assignUnderwriter" targetRef="ServiceTask_2"/>
     <bpmn2:sequenceFlow id="SequenceFlow_15" name="" sourceRef="ReceiveTask_1" targetRef="ExclusiveGateway_2"/>
-    <bpmn2:startEvent id="StartEvent_1" name="Application entered&#xD;&#xA;manually">
-      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+    <bpmn2:startEvent id="StartEvent_1" camunda:formKey="app:new-application.jsf" name="Application entered&#xD;&#xA;manually">
+      <bpmn2:outgoing>SequenceFlow_16</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:dataStoreReference id="_DataStoreReference_2" name="Application&#xD;&#xA;DB" dataStoreRef="DataStore_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_16" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1"/>
     <bpmn2:group id="Group_1"/>
+    <bpmn2:textAnnotation id="TextAnnotation_1">
+      <bpmn2:text>Workaround for missing CallActivity to CMMN</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="Association_1" sourceRef="TextAnnotation_1" targetRef="Group_1"/>
   </bpmn2:process>
   <bpmn2:message id="Message_1" name="msgElectronicApplication"/>
   <bpmn2:message id="Message_2" name="msgPaperApplication"/>
@@ -102,9 +102,9 @@
         <dc:Bounds height="399.0" width="1443.0" x="10.0" y="10.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="startEventElectronicApplication">
-        <dc:Bounds height="36.0" width="36.0" x="108.0" y="93.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="96.0" y="192.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="131.0" x="64.0" y="131.0"/>
+          <dc:Bounds height="38.0" width="131.0" x="52.0" y="230.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="endEventApplicationRejectedUnderwriter">
@@ -114,32 +114,34 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="240.0" y="85.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="291.0" y="85.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="265.0" y="140.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="316.0" y="140.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_StartEvent_1" targetElement="_BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="144.0" y="111.0"/>
-        <di:waypoint xsi:type="dc:Point" x="240.0" y="110.0"/>
+        <di:waypoint xsi:type="dc:Point" x="132.0" y="210.0"/>
+        <di:waypoint xsi:type="dc:Point" x="198.0" y="210.0"/>
+        <di:waypoint xsi:type="dc:Point" x="198.0" y="110.0"/>
+        <di:waypoint xsi:type="dc:Point" x="291.0" y="110.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="166.0" y="111.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="154.0" y="210.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="startEventPaperApplication">
-        <dc:Bounds height="36.0" width="36.0" x="108.0" y="208.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="96.0" y="274.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="131.0" x="61.0" y="249.0"/>
+          <dc:Bounds height="38.0" width="131.0" x="49.0" y="315.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="checkDuplicates">
         <dc:Bounds height="80.0" width="100.0" x="364.0" y="70.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_ExclusiveGateway_2" targetElement="_BPMNShape_ServiceTask_2">
-        <di:waypoint xsi:type="dc:Point" x="290.0" y="110.0"/>
+        <di:waypoint xsi:type="dc:Point" x="341.0" y="110.0"/>
         <di:waypoint xsi:type="dc:Point" x="364.0" y="110.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="315.0" y="110.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="353.0" y="110.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_2" bpmnElement="BoundaryEvent_1">
@@ -183,22 +185,22 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_3" bpmnElement="enterApplicationData">
-        <dc:Bounds height="80.0" width="100.0" x="216.0" y="186.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="192.0" y="252.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_StartEvent_2" targetElement="_BPMNShape_UserTask_3">
-        <di:waypoint xsi:type="dc:Point" x="144.0" y="226.0"/>
-        <di:waypoint xsi:type="dc:Point" x="216.0" y="226.0"/>
+        <di:waypoint xsi:type="dc:Point" x="132.0" y="292.0"/>
+        <di:waypoint xsi:type="dc:Point" x="192.0" y="292.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="166.0" y="226.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="154.0" y="292.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="_BPMNShape_UserTask_3" targetElement="_BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="266.0" y="186.0"/>
-        <di:waypoint xsi:type="dc:Point" x="266.0" y="161.0"/>
-        <di:waypoint xsi:type="dc:Point" x="265.0" y="161.0"/>
-        <di:waypoint xsi:type="dc:Point" x="265.0" y="135.0"/>
+        <di:waypoint xsi:type="dc:Point" x="292.0" y="293.0"/>
+        <di:waypoint xsi:type="dc:Point" x="316.0" y="293.0"/>
+        <di:waypoint xsi:type="dc:Point" x="316.0" y="194.0"/>
+        <di:waypoint xsi:type="dc:Point" x="316.0" y="135.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="262.0" y="151.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="313.0" y="281.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_3" bpmnElement="ExclusiveGateway_2" isMarkerVisible="true">
@@ -261,28 +263,21 @@
         <dc:Bounds height="108.0" width="253.0" x="792.0" y="57.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_6" bpmnElement="StartEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="108.0" y="24.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="96.0" y="92.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="126.0" y="65.0"/>
+          <dc:Bounds height="38.0" width="127.0" x="51.0" y="133.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_StartEvent_6" targetElement="_BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="144.0" y="42.0"/>
-        <di:waypoint xsi:type="dc:Point" x="265.0" y="42.0"/>
-        <di:waypoint xsi:type="dc:Point" x="265.0" y="85.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="223.0" y="42.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_16" bpmnElement="SequenceFlow_16" sourceElement="_BPMNShape_StartEvent_6" targetElement="_BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="132.0" y="110.0"/>
+        <di:waypoint xsi:type="dc:Point" x="291.0" y="110.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_DataStoreReference_2" bpmnElement="_DataStoreReference_2">
-        <dc:Bounds height="50.0" width="50.0" x="372.0" y="300.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="80.0" x="357.0" y="355.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_1">
+        <dc:Bounds height="44.0" width="157.0" x="864.0" y="184.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_1" sourceElement="_BPMNShape_ServiceTask_2" targetElement="_BPMNShape_DataStoreReference_2">
-        <di:waypoint xsi:type="dc:Point" x="411.0" y="150.0"/>
-        <di:waypoint xsi:type="dc:Point" x="399.0" y="300.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_1" bpmnElement="Association_1" sourceElement="_BPMNShape_TextAnnotation_2" targetElement="_BPMNShape_Group_2">
+        <di:waypoint xsi:type="dc:Point" x="936.0" y="184.0"/>
+        <di:waypoint xsi:type="dc:Point" x="932.0" y="165.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

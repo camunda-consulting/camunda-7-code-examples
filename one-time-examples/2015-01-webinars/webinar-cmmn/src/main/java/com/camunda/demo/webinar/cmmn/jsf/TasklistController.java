@@ -37,8 +37,12 @@ public class TasklistController {
       taskRows = new ArrayList<TaskRow>();
       // Todo: check that somebody is logged in
       
-      List<Task> tasksForUser = processEngine.getTaskService().createTaskQuery().taskAssignee(userController.getUserId()).active()
-          .orderByTaskCreateTime().desc().list();
+      List<Task> tasksForUser = processEngine.getTaskService().createTaskQuery() //
+          .taskAssignee(userController.getUserId()) //
+          .active() //
+          .orderByTaskCreateTime().desc() //
+          .initializeFormKeys() //
+          .list();
       taskRows.addAll(createTaskRows(tasksForUser));
 
       List<Group> groups = processEngine.getIdentityService().createGroupQuery().groupMember(userController.getUserId()).list();
@@ -47,8 +51,12 @@ public class TasklistController {
         groupIds.add(group.getId());
       }
       if (groupIds.size() > 0) {
-        List<Task> tasksForGroups = processEngine.getTaskService().createTaskQuery().taskCandidateGroupIn(groupIds).active().orderByTaskCreateTime()
-            .desc().list();
+        List<Task> tasksForGroups = processEngine.getTaskService().createTaskQuery() //
+            .taskCandidateGroupIn(groupIds) //
+            .active() //
+            .orderByTaskCreateTime().desc() //
+            .initializeFormKeys() //
+            .list();
         taskRows.addAll(createTaskRows(tasksForGroups));
       }
     }

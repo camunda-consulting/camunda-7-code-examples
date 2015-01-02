@@ -10,14 +10,14 @@ public class TaskRow {
 
   private Task task;
   
-  private Application creditApplication;
+  private Application application;
   private CaseInstance caseInstance;
   private CaseDefinition caseDefinition;
 
-  public TaskRow(Task task, Application creditApplication, CaseInstance caseInstance, CaseDefinition caseDefinition) {
+  public TaskRow(Task task, Application application, CaseInstance caseInstance, CaseDefinition caseDefinition) {
     super();
     this.task = task;
-    this.creditApplication = creditApplication;
+    this.application = application;
     this.caseInstance = caseInstance;
     this.caseDefinition = caseDefinition;
   }
@@ -26,8 +26,8 @@ public class TaskRow {
     return task;
   }
 
-  public Application getCreditApplication() {
-    return creditApplication;
+  public Application getApplication() {
+    return application;
   }
 
   public CaseInstance getCaseInstance() {

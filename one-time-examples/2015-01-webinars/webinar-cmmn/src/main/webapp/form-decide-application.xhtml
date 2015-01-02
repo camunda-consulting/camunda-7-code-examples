@@ -7,15 +7,24 @@
 
 	<ui:define name="task">
 		<!-- Todo Show Application -->
+		<ul>
+			<li>
+				Customer ID: 
+				<h:outputText value="#{caseController.application.customerId}" />
+			</li>
+			<li>
+				Customer Name: 
+				<h:outputText value="#{caseController.application.customerName}" />
+			</li>
+		</ul>
 		
 		<!-- Decide -->
 		<div class="formGroup">
-				<label>Approve?</label>
-				<h:selectOneMenu id="approved" value="#{caseController.taskFormVariables['approved']}">
-					<f:selectItem itemValue="#{true}" itemLabel="Yes" />
-					<f:selectItem itemValue="#{false}" itemLabel="No" />					
-				</h:selectOneMenu>
-				<h:inputText value="#{caseController.taskFormVariables['comment']}" />
+			<label>Approve? </label>
+			<h:selectOneMenu id="approved" value="#{caseController.taskFormVariables['approved']}">
+				<f:selectItem itemValue="#{true}" itemLabel="Yes" />
+				<f:selectItem itemValue="#{false}" itemLabel="No" />					
+			</h:selectOneMenu>
 		</div>
 	</ui:define>	
 </ui:composition>

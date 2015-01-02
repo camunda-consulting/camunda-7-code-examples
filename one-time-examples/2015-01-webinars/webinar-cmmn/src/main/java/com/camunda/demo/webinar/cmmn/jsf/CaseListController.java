@@ -93,7 +93,7 @@ public class CaseListController implements Serializable {
 
   public String clearSearch() {
     cachedSearchResult = null;
-    return "vorgaenge";
+    return "case-instances";
   }
 
   public void clearBuffer() {

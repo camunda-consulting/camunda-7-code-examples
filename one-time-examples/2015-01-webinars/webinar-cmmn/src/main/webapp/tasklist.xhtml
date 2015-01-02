@@ -7,14 +7,19 @@
 
 	<ui:define name="content">
 		<h:head>
-			<title>Aufgaben</title>
+			<title>Tasks</title>
 		</h:head>
 		<h:body>
         <!-- see http://datatables.net/examples/advanced_init/language_file.html -->
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#taskTableForm\\:taskTable').dataTable( {
-            		"oLanguage": {
+            		
+            		}
+        		});
+			});
+		</script>
+		<!-- "oLanguage": {
 						"sProcessing": "Bitte warten...",
 						"sLengthMenu": "_MENU_ Einträge anzeigen",
 						"sZeroRecords": "Keine Einträge vorhanden.",
@@ -29,13 +34,9 @@
 							"sPrevious": "Zurück",
 							"sNext":     "Nächster",
 							"sLast":     "Letzter"
-						}
-            		}
-        		});
-			});
-		</script>			
+						} -->			
 			<div class="page-header">
-				<h1>Aufgaben</h1>
+				<h1>All Tasks</h1>
 			</div>
 
 			<div class="container">
@@ -44,25 +45,25 @@
 							<h:dataTable value="#{tasklistController.allTasks}" var="row"
 								styleClass="table" id="taskTable">
 								<h:column>
-									<f:facet name="header">Geschäftsvorfall</f:facet>
+									<f:facet name="header">Case</f:facet>
 									<h:panelGroup rendered="#{row.caseInstance!=null}">
-										<a href="#{caseController.getFormForTask(row.task.id)}?taskId=#{row.task.id}">#{row.caseDefinition.name}</a>							
+										<a href="/case-form.jsf?caseInstanceId={row.caseInstance.id}">#{row.caseDefinition.name}</a>							
 									</h:panelGroup>
 								</h:column>
 								<h:column>
-									<f:facet name="header">Aufgabe</f:facet>
-									#{row.task.name}
+									<f:facet name="header">Task</f:facet>
+									<a href="#{caseController.getFormLink(row.task)}">#{row.task.name}</a>									
 								</h:column>
 								<h:column>
-									<f:facet name="header">Kundennummer</f:facet>
-									<h:panelGroup rendered="#{row.creditApplication!=null}">		
-											#{row.creditApplication.customerId}
+									<f:facet name="header">Customer ID</f:facet>
+									<h:panelGroup rendered="#{row.application!=null}">		
+											#{row.application.customerId}
 										</h:panelGroup>
 								</h:column>
 								<h:column>
-									<f:facet name="header">Kreditnehmer</f:facet>
-									<h:panelGroup rendered="#{row.creditApplication!=null}">		
-											#{row.creditApplication.customerName}
+									<f:facet name="header">Custoner Name</f:facet>
+									<h:panelGroup rendered="#{row.application!=null}">		
+											#{row.application.customerName}
 										</h:panelGroup>
 								</h:column>
 							</h:dataTable>

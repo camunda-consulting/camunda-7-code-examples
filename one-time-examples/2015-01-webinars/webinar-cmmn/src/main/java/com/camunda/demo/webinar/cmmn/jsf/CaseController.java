@@ -215,13 +215,22 @@ public class CaseController implements Serializable {
   public String getTaskFormLink(CaseExecution caseExecution) {
     if (caseExecution.getActivityType()==CmmnModelConstants.CMMN_ELEMENT_HUMAN_TASK) {
       Task task = engine.getTaskService().createTaskQuery().caseExecutionId(caseExecution.getId()).initializeFormKeys().singleResult();
-      String formKey = task.getFormKey();
-      if (formKey == null) {
-        return null;
-      }
-      return formKey.replaceAll("app:", "") + "?taskId=" + task.getId();
+      return getFormLink(task);
     }
     else return null;
+  }
+  
+  public String getFormLink(Task task) {
+    if (task.getCaseInstanceId()==null ){
+      // no task from case
+      return "/../camunda/app/tasklist/default/#/?task="+task.getId()+"&detailsTab=task-detail-form";
+    }
+    
+    String formKey = task.getFormKey();
+    if (formKey == null) {
+      return null;
+    }    
+    return formKey.replaceAll("app:", "") + "?taskId=" + task.getId();    
   }
 
   public void refreshCaseInfo() {
