@@ -1,3 +1,10 @@
+# DEPRECTAED!
+
+Please not that this example is deprecated. It used a prototype of CMMN - a real implementation is relesed as part of camunda BPM in the meanwhile.
+
+Please refer to the [Underwriting Example] (https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/2015-01-webinars/webinar-cmmn) instead!
+
+
 # camunda BPM: ACM Showcase / Pilot
 
 Table of Contents
