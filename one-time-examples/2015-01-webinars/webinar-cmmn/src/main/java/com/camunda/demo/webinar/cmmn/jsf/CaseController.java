@@ -265,6 +265,22 @@ public class CaseController implements Serializable {
   }
 
   public String completeSelectedTask() {
+    
+    HashMap<String, Object> variables = saveVariables();
+    
+    // complete task (variables are ignored due to bug https://app.camunda.com/jira/browse/CAM-3261)
+    // hence variables are saved beforehand (workaround)
+    engine.getTaskService().complete(selectedTask.getId(), variables);
+
+    // reset task form
+    taskFormVariables = new HashMap<String, Object>();
+    refreshCaseInfo();
+    selectedTask = null;
+
+    return "case-form.jsf?caseInstanceId=" + caseInstance.getId();
+  }
+
+  private HashMap<String, Object> saveVariables() {
     HashMap<String, Object> variables = new HashMap<String, Object>();
     // workaround to use boolean variables
     for (Entry<String, Object> entry : taskFormVariables.entrySet()) {
@@ -278,21 +294,14 @@ public class CaseController implements Serializable {
     // save changed to variables object bound to JSF UI
     variables.put(Constants.VAR_NAME_APPLICATION, application);
     
-    // Workaround for bug: https://app.camunda.com/jira/browse/CAM-3261
     engine.getCaseService().setVariables(selectedTask.getCaseExecutionId(), variables);
-    // and complete task (variables are ignored due to bug mentioned above)
-    engine.getTaskService().complete(selectedTask.getId(), variables);
-
-    // reset task form
-    taskFormVariables = new HashMap<String, Object>();
-    refreshCaseInfo();
-    selectedTask = null;
-
-    return "case-form.jsf?caseInstanceId=" + caseInstance.getId();
+    return variables;
   }
 
   public void saveSelectedTask() {
-    engine.getCaseService().setVariable(selectedTask.getCaseExecutionId(), Constants.VAR_NAME_APPLICATION, application);
+    saveVariables();
+//    engine.getCaseService().setVariable(selectedTask.getCaseExecutionId(), Constants.VAR_NAME_APPLICATION, application);
+//    engine.getCaseService().setVariable(selectedTask.getCaseExecutionId(), Constants.VAR_NAME_EVALUATION_COMMENTS, application);
   }
 
   public String getProcessDefinitionName(final String processDefinitionId) {

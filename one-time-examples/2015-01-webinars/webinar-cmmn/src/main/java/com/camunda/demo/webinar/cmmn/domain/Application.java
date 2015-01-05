@@ -4,10 +4,15 @@ import java.util.UUID;
 
 public class Application {
 
-  private String id = UUID.randomUUID().toString();
+  private String id;
 
   private String customerId;
   private String customerName;
+  
+  public Application() {
+    id = UUID.randomUUID().toString();
+    id = id.substring(0, 8);
+  }
 
   public String getCustomerId() {
     return customerId;
@@ -27,6 +32,10 @@ public class Application {
 
   public String getId() {
     return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
 }
