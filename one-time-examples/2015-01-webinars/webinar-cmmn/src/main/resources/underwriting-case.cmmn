@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cmmn:definitions id="underwriting-definition" name="Underwriting" targetNamespace="http://cmmn.org" xmlns:cmmn="http://www.omg.org/spec/CMMN/20131201/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <cmmn:case id="underwriting" name="Underwriting">
-        <cmmn:casePlanModel autoComplete="false" name="Underwriting"  id="_manual_underwriting">
+        <cmmn:casePlanModel autoComplete="true" name="Underwriting"  id="_manual_underwriting">
             <cmmn:planItem id="PI_humanTaskDecide" definitionRef="humanTaskDecide" />
             <cmmn:planItem id="PI_milestoneApproved" definitionRef="milestoneApproved" entryCriteriaRefs="sentryApproved" />
             <cmmn:planItem id="PI_milestoneRejected" definitionRef="milestoneRejected" entryCriteriaRefs="sentryRejected" />

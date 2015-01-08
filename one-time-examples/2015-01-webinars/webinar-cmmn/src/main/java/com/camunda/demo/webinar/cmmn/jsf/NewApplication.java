@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 
@@ -44,7 +43,6 @@ public class NewApplication implements Serializable {
         
         // cannot yet jump into case as it was not created yet!
         //caseController.initByCaseInstanceId(caseInstance.getId());
-        caseListController.clearBuffer();
         
         // reset
         application = new Application();

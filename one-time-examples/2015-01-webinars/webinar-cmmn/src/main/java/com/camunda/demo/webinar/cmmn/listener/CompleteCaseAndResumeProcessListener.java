@@ -10,7 +10,7 @@ public class CompleteCaseAndResumeProcessListener implements CaseExecutionListen
   @Override
   public void notify(DelegateCaseExecution caseExecution) throws Exception {
     System.out.println(" --- Completing Case ...");
-    caseExecution.getProcessEngineServices().getCaseService().completeCaseExecution( caseExecution.getCaseInstanceId() );
+//    caseExecution.getProcessEngineServices().getCaseService().completeCaseExecution( caseExecution.getCaseInstanceId() );
 //    caseExecution.getProcessEngineServices().getCaseService().closeCaseInstance( caseExecution.getCaseInstanceId() );
 
     // correlate message if there is a waiting process instance

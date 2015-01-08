@@ -20,9 +20,6 @@ public class DisableRemainingActivitiesListener implements CaseExecutionListener
       if (otherCaseExecution.isEnabled()) {
         caseExecution.getProcessEngineServices().getCaseService().disableCaseExecution(otherCaseExecution.getId());
       }
-//      if (otherCaseExecution.isAvailable()) {
-//        caseExecution.getProcessEngineServices().getCaseService().disableCaseExecution(otherCaseExecution.getId());
-//      }
       System.out.println(otherCaseExecution.getActivityName() + " -> " + ((CaseExecutionEntity)otherCaseExecution).getCurrentState().toString());
     }
   }

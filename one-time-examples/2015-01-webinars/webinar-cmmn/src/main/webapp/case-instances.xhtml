@@ -14,28 +14,6 @@
 				<h1>Cases</h1>
 			</div>
 			<div class="container">
-				<h:panelGroup rendered="#{caseListController.needle != null}">
-					<h3>Search: '<h:outputText value="#{caseListController.needle}"/>'</h3>
-					<h:form>
-						<h:dataTable
-							value="#{caseListController.searchResult}"
-							var="currentSearchRow" styleClass="table">
-							<h:column>
-								<a href="case-form.jsf?caseInstanceId=#{currentSearchRow.caseInstance.id}">#{currentSearchRow.caseDefinition.name}</a>							
-							</h:column>
-							<h:column>
-								#{currentSearchRow.creditApplication.customerId}
-							</h:column>
-							<h:column>
-								#{currentSearchRow.creditApplication.customerName}
-							</h:column>
-						</h:dataTable>
-					</h:form>
-					<div style="margin-top:75px;"></div>
-				</h:panelGroup>
-
-
-			
 				<div>
 					<h3>Active Cases</h3>
 					<h:form>

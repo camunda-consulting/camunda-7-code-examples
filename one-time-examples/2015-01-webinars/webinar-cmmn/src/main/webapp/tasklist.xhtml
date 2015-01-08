@@ -47,7 +47,7 @@
 								<h:column>
 									<f:facet name="header">Case</f:facet>
 									<h:panelGroup rendered="#{row.caseInstance!=null}">
-										<a href="/case-form.jsf?caseInstanceId={row.caseInstance.id}">#{row.caseDefinition.name}</a>							
+										<a href="case-form.jsf?caseInstanceId=#{row.caseInstance.id}">#{row.caseDefinition.name}</a>							
 									</h:panelGroup>
 								</h:column>
 								<h:column>
@@ -61,7 +61,7 @@
 										</h:panelGroup>
 								</h:column>
 								<h:column>
-									<f:facet name="header">Custoner Name</f:facet>
+									<f:facet name="header">Customer Name</f:facet>
 									<h:panelGroup rendered="#{row.application!=null}">		
 											#{row.application.customerName}
 										</h:panelGroup>

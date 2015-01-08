@@ -35,10 +35,10 @@
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="BoundaryEvent_1" targetRef="endEventApplicationRejectedDuplicate"/>
-    <bpmn2:userTask id="userTaskReviewData" camunda:assignee="demo" name="review data">
+    <bpmn2:serviceTask id="userTaskReviewData" camunda:assignee="demo" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="add information from services">
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
-    </bpmn2:userTask>
+    </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_7" sourceRef="checkDuplicates" targetRef="userTaskReviewData"/>
     <bpmn2:businessRuleTask id="assignUnderwriter" camunda:class="com.camunda.demo.webinar.cmmn.adapter.LoggerDelegate" name="assign underwriter">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
@@ -99,7 +99,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="pool-underwriting" isHorizontal="true">
-        <dc:Bounds height="399.0" width="1443.0" x="10.0" y="10.0"/>
+        <dc:Bounds height="375.0" width="1443.0" x="10.0" y="10.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="startEventElectronicApplication">
         <dc:Bounds height="36.0" width="36.0" x="96.0" y="192.0"/>
@@ -250,14 +250,23 @@
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_13" sourceElement="_BPMNShape_ServiceTask_5" targetElement="_BPMNShape_ReceiveTask_2">
         <di:waypoint xsi:type="dc:Point" x="916.0" y="110.0"/>
         <di:waypoint xsi:type="dc:Point" x="936.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="923.0" y="110.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_14" sourceElement="_BPMNShape_BusinessRuleTask_2" targetElement="_BPMNShape_ServiceTask_5">
         <di:waypoint xsi:type="dc:Point" x="764.0" y="110.0"/>
         <di:waypoint xsi:type="dc:Point" x="816.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="787.0" y="110.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_15" bpmnElement="SequenceFlow_15" sourceElement="_BPMNShape_ReceiveTask_2" targetElement="_BPMNShape_ExclusiveGateway_3">
         <di:waypoint xsi:type="dc:Point" x="1036.0" y="110.0"/>
         <di:waypoint xsi:type="dc:Point" x="1076.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="1053.0" y="110.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Group_2" bpmnElement="Group_1">
         <dc:Bounds height="108.0" width="253.0" x="792.0" y="57.0"/>
@@ -271,6 +280,9 @@
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_16" bpmnElement="SequenceFlow_16" sourceElement="_BPMNShape_StartEvent_6" targetElement="_BPMNShape_ExclusiveGateway_2">
         <di:waypoint xsi:type="dc:Point" x="132.0" y="110.0"/>
         <di:waypoint xsi:type="dc:Point" x="291.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="209.0" y="110.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_1">
         <dc:Bounds height="44.0" width="157.0" x="864.0" y="184.0"/>
