@@ -21,7 +21,7 @@
 						value="#{caseListController.runningCases}"
 						var="currentCaseRow" styleClass="table">
 						<h:column>
-							<a href="case-form.jsf?caseInstanceId=#{currentCaseRow.caseInstance.id}">#{currentCaseRow.caseDefinition.name} XX</a>							
+							<a href="case-form.jsf?caseInstanceId=#{currentCaseRow.caseInstance.id}">#{currentCaseRow.caseDefinition.name}</a>							
 						</h:column>
 						<h:column>
 							#{currentCaseRow.creditApplication.customerId}

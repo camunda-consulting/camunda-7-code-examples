@@ -2,7 +2,7 @@ package com.camunda.demo.webinar.cmmn;
 
 public class Constants {
 
-  public static final String VAR_NAME_APPLICATION = "APPLICATION";
+  public static final String VAR_NAME_APPLICATION = "application";
   public static final String VAR_NAME_CASE_INSTANCE_ID = "CALLED_CASE_INSTANCE_ID";
   public static final String VAR_NAME_PROCESS_INSTANCE_ID = "CALLING_PROCESS_INSTANCE_ID";
 
