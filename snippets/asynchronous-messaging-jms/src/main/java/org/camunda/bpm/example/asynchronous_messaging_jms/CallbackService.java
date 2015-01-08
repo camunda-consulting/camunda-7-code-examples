@@ -36,7 +36,9 @@ public class CallbackService {
   @Resource(mappedName = "java:/JmsXA")
   private QueueConnectionFactory connectionFactory;  
   
-  public void receiveCallback(String correlationKey) {
+  public void receiveCallback(String correlationKey, Object payload) {
+    String messageName = "serviceExecutionCompleted";
+
 //    Execution execution = runtimeService.createExecutionQuery()
 //            .processVariableValueEquals("correllationId", correlationKey)
 //            .singleResult();
@@ -46,15 +48,18 @@ public class CallbackService {
 //            .singleResult();
 //    
 //    runtimeService.signal(execution.getId(), variables);
-//    runtimeService.messageEventReceived("serviceExecutionCompleted", execution.getId());
+//    runtimeService.messageEventReceived(messageName, execution.getId());
 	  
-//	  Map<String,Object> correlationKeys = new HashMap<String, Object>();
+
+//    Map<String,Object> correlationKeys = new HashMap<String, Object>();
 //	  correlationKeys.put("correllationId", correlationKey);
-//	  runtimeService.correlateMessage("serviceExecutionCompleted", correlationKeys);
+//	  Map<String, Object> variables = new HashMap<String, Object>();
+//    variables.put("payload", payload);
+//    runtimeService.correlateMessage(messageName, correlationKeys);
 	  
-	  runtimeService.createMessageCorrelation("serviceExecutionCompleted")
+	  runtimeService.createMessageCorrelation(messageName)
 	  	.processInstanceVariableEquals("correllationId", correlationKey)
-	  	.setVariable("payload", "somePayload")
+	  	.setVariable("payload", payload)
 	  	.correlate();
 	  
   }

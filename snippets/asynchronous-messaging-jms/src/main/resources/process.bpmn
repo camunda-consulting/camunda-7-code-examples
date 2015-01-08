@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://camunda.org/example/asynchronous-messaging-jms">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://camunda.org/example/asynchronous-messaging-jms">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
     <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="asynchronous-messaging-jms"/>
     <bpmn2:participant id="Participant_1" name="Service MDB"/>
@@ -17,7 +17,7 @@
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="StartEvent_1" targetRef="ServiceTask_1"/>
-    <bpmn2:receiveTask id="ReceiveTask_1" name="Wait for&#xA;Response">
+    <bpmn2:receiveTask id="ReceiveTask_1" name="Wait for&#xA;Response" messageRef="Message_1">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:receiveTask>
@@ -26,13 +26,14 @@
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_10" sourceRef="ReceiveTask_1" targetRef="EndEvent_4"/>
-    <bpmn2:group id="Group_1"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Process
 Application]]></bpmn2:text>
     </bpmn2:textAnnotation>
-    <bpmn2:association id="Association_1" sourceRef="TextAnnotation_1" targetRef="Group_1"/>
+    <bpmn2:association id="Association_2" sourceRef="TextAnnotation_1" targetRef="Participant_2"/>
+    <bpmn2:association id="Association_3" sourceRef="TextAnnotation_1" targetRef="Process_Engine"/>
   </bpmn2:process>
+  <bpmn2:message id="Message_1" name="serviceExecutionCompleted"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
@@ -108,15 +109,16 @@ Application]]></bpmn2:text>
           <dc:Bounds height="0.0" width="0.0" x="421.0" y="111.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_Group_2" bpmnElement="Group_1">
-        <dc:Bounds height="433.0" width="685.0" x="0.0" y="0.0"/>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_1">
-        <dc:Bounds height="50.0" width="84.0" x="615.0" y="455.0"/>
+        <dc:Bounds height="50.0" width="84.0" x="744.0" y="239.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_Association_1" bpmnElement="Association_1" sourceElement="_BPMNShape_TextAnnotation_2" targetElement="_BPMNShape_Group_2">
-        <di:waypoint xsi:type="dc:Point" x="627.0" y="455.0"/>
-        <di:waypoint xsi:type="dc:Point" x="600.0" y="432.0"/>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_2" bpmnElement="Association_2" sourceElement="_BPMNShape_TextAnnotation_2" targetElement="_BPMNShape_Participant_3">
+        <di:waypoint xsi:type="dc:Point" x="744.0" y="274.0"/>
+        <di:waypoint xsi:type="dc:Point" x="576.0" y="312.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_3" bpmnElement="Association_3" sourceElement="_BPMNShape_TextAnnotation_2" targetElement="BPMNShape_1">
+        <di:waypoint xsi:type="dc:Point" x="744.0" y="250.0"/>
+        <di:waypoint xsi:type="dc:Point" x="614.0" y="208.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
