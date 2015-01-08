@@ -19,7 +19,8 @@ public class CallbackServiceMDB implements MessageListener {
   public void onMessage(Message message) {
     try {
       String correlationKey = ((TextMessage) message).getText();
-      callbackService.receiveCallback(correlationKey);
+      String payload = "somePayload"; // TODO retrieve payload from message
+      callbackService.receiveCallback(correlationKey, payload);
     } catch (Exception ex) {
       throw new RuntimeException("Could not process JMS message", ex);
     }
