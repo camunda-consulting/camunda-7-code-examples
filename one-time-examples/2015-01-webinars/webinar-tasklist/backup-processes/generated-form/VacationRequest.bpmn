@@ -12,7 +12,7 @@
         <bpmn2:flowNodeRef>StartEvent_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ExclusiveGateway_1</bpmn2:flowNodeRef>
       </bpmn2:lane>
-      <bpmn2:lane id="Lane_2" name="Human Ressources">
+      <bpmn2:lane id="Lane_2" name="Human Resources">
         <bpmn2:flowNodeRef>UserTask_2</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ServiceTask_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>EndEvent_1</bpmn2:flowNodeRef>
@@ -39,7 +39,7 @@
     <bpmn2:endEvent id="EndEvent_2" name="vacation&#xD;&#xA;recjected">
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Management" name="approve&#xD;&#xA;vacation">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" name="approve&#xD;&#xA;vacation">
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="name" label="Name" type="string"/>

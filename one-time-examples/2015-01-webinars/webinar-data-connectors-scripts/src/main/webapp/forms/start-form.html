@@ -1,0 +1,58 @@
+<form role="form">
+  <script cam-script type="text/form-script">
+
+    <!-- create Java Object, see https://github.com/camunda/camunda-bpm-examples/tree/master/usertask/task-form-embedded-serialized-java-object#creating-a-java-object-variable-in-a-start-form -->
+    // angular form works on scope object
+    var application = $scope.application = {};
+
+    // hook into camunda SDK JS Form Lifecycle
+    camForm.on('form-loaded', function() {
+
+      // declare variable 'application' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'application',
+        type: 'Object',
+        value: application,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'com.camunda.demo.webinar.dataconnect.CreditorApplication'
+        }
+      });
+
+    });
+  </script>  
+
+  <!-- THE HTML FORM STARTS NOW -->
+
+  <div class="control-group">
+    <label class="control-label">Company Name</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             required 
+             ng-model="application.company">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Bank Account Number</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             required 
+             ng-model="application.bankAccountNumber">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Bank Identifier Code</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             required 
+             ng-model="application.bankIdentifierCode">
+    </div>
+  </div>
+</form>

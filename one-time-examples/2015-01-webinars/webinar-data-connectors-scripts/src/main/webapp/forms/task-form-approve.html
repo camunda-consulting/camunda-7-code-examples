@@ -1,0 +1,64 @@
+<form class="form-horizontal">
+
+  <!-- load object and bind it to Angular scope, see https://github.com/camunda/camunda-bpm-examples/tree/master/usertask/task-form-embedded-serialized-java-object#accessing-an-existing-java-object-variable-in-a-task-form -->
+  <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      camForm.variableManager.fetchVariable('application');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of vacationRequest to a angular
+      // scope value such that the form can work on it
+      $scope.application = camForm.variableManager.variable('application').value;
+    });
+  </script>
+
+ 
+  <div class="control-group">
+    <label class="control-label">Company Name</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             readonly="true" 
+             ng-model="application.company">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Bank Account Number</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             readonly="true" 
+             ng-model="application.bankAccountNumber">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Bank Identifier Code</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             readonly="true" 
+             ng-model="application.bankIdentifierCode">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Bank Name</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             readonly="true" 
+             ng-model="application.bankName">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Approve?</label>
+    <div class="controls">
+      <input type="checkbox"
+          ng-model="application.approved">
+    </div>
+  </div>
+</form>

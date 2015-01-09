@@ -94,10 +94,10 @@ public class CaseController implements Serializable {
   private void loadCaseInstanceStatus() {
     List<CaseExecution> caseExecutions = engine.getCaseService().createCaseExecutionQuery().caseInstanceId(caseInstance.getId()).list();
     for (CaseExecution caseExecution : caseExecutions) {
-      if (((CaseExecutionEntity)caseExecution).getCurrentState() == CaseExecutionState.ACTIVE) {
+      if (caseExecution.isActive()) {
         activeCaseExecutions.add(caseExecution);
       }
-      else if (((CaseExecutionEntity)caseExecution).getCurrentState() == CaseExecutionState.ENABLED) {
+      else if (caseExecution.isEnabled()) {
         enabledCaseExecutions.add(caseExecution);
       }
     }
