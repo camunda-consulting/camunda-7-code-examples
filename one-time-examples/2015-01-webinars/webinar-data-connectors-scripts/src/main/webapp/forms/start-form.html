@@ -35,6 +35,17 @@
              ng-model="application.company">
     </div>
   </div>
+  
+  <div class="control-group">
+    <label class="control-label">Email</label>
+    <div class="controls">
+      <input class="form-control"
+             type="text"
+             required 
+             ng-pattern="/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i"
+             ng-model="application.email">
+    </div>
+  </div>  
 
   <div class="control-group">
     <label class="control-label">Bank Account Number</label>

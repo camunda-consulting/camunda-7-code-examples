@@ -18,10 +18,11 @@ public class CalculateRatingDelegate implements JavaDelegate {
     // You can get the "typed" variable:
     ObjectValue typedValue = execution.getVariableTyped("application");
     // and get more information from it if you like:
-    log.info("Type: + " + typedValue.getType());
-    log.info("Value: + " + typedValue.getValue());
-    log.info("SerializationDataFormat: + " + typedValue.getSerializationDataFormat());
-    log.info("ValueSerialized: + " + typedValue.getValueSerialized());
+    log.info("Typed Variable application values: " 
+       + "\n    Type: " + typedValue.getType()
+       + "\n    Value: " + typedValue.getValue()
+       + "\n    SerializationDataFormat: " + typedValue.getSerializationDataFormat()
+       + "\n    ValueSerialized: " + typedValue.getValueSerialized());
     
     // BTW: When doing queries you can decide if values gets deserialized
     // important e.g. for Tasklist/REST queries using the JSON anyway

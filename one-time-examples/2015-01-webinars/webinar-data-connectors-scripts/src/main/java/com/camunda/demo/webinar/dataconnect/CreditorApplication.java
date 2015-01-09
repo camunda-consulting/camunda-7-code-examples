@@ -10,6 +10,7 @@ public class CreditorApplication implements Serializable {
   private String id = UUID.randomUUID().toString();
   
   private String company;
+  private String email;
   
   private String bankAccountNumber;
   private String bankIdentifierCode;
@@ -59,6 +60,12 @@ public class CreditorApplication implements Serializable {
   }
   public void setApproved(boolean approved) {
     this.approved = approved;
+  }
+  public String getEmail() {
+    return email;
+  }
+  public void setEmail(String email) {
+    this.email = email;
   }
 
 }

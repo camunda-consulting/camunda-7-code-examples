@@ -1,13 +1,13 @@
 package com.camunda.demo.webinar.dataconnect;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import static org.junit.Assert.*;
 
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.engine.test.assertions.TaskAssert;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
@@ -49,10 +49,12 @@ public class SerializedObjectTest {
 
   @Test
   @Deployment(resources = "process.bpmn")
-  public void testApprove() throws Exception {
+  public void testNotApprove() throws Exception {
     CreditorApplication application = new CreditorApplication();
     application.setBankAccountNumber("123456");
     application.setBankIdentifierCode("10070024"); // Deutsche Bank Berlin
+    application.setCompany("Acme Inc");
+    application.setEmail("br@camunda.com");
     
     VariableMap variables = Variables.createVariables()
         //.putValue("application", application);
@@ -66,15 +68,18 @@ public class SerializedObjectTest {
     // --> now we can inspect it - just set a breakpoint in the next line:
     // - JDBC URL:  jdbc:h2:tcp://localhost:9092/mem:camunda
     
-    assertThat(pi).task().hasDefinitionKey("userTaskApproveCreditor");
+    TaskAssert task = assertThat(pi).task().hasDefinitionKey("userTaskApproveCreditor");
     
     assertEquals("Deutsche Bank Privat und Geschäftskunden F 700", 
         (String)processEngine().getRuntimeService().getVariable(pi.getId(), "bankName"));
 
-    assertEquals("Deutsche Bank Privat und Geschäftskunden F 700", 
-        ((CreditorApplication)processEngine().getRuntimeService().getVariable(pi.getId(), "application")).getBankName());
+    application = (CreditorApplication)processEngine().getRuntimeService().getVariable(pi.getId(), "application");
+    assertEquals("Deutsche Bank Privat und Geschäftskunden F 700", application.getBankName());
 
     assertThat(pi).variables().containsEntry("bankName", "Deutsche Bank Privat und Geschäftskunden F 700");
+    
+    application.setApproved(false);
+    complete(task(), Variables.createVariables().putValue("application", application));
     
   }
 }

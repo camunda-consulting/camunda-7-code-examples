@@ -109,6 +109,11 @@
 		<!-- Add your own dependencies here, if in compile scope, they are added 
 			to the war -->
 
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>

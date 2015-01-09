@@ -2,6 +2,8 @@ package com.camunda.demo.webinar.dataconnect;
 
 import java.util.logging.Logger;
 
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -24,7 +26,7 @@ public class LoggerDelegate implements JavaDelegate {
             + ", executionId=" + execution.getId()
             + " \n\n");
     
-    LOGGER.info("INPUT: " + execution.getVariable("in"));
+    LOGGER.info("INPUT: " + execution.getVariable("in"));   
     
   }
 
