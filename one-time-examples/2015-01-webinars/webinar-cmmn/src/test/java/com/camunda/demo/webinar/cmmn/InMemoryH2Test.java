@@ -47,21 +47,21 @@ public class InMemoryH2Test {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = "underwriting.bpmn")
+  @Deployment(resources = "underwriting-process.bpmn")
   public void testParseBpmn() {
     // nothing is done here, as we just want to check for exceptions during
     // deployment
   }
 
   @Test
-  @Deployment(resources = "underwriting.cmmn")
+  @Deployment(resources = "underwriting-case.cmmn")
   public void testParseCmmn() {
     // nothing is done here, as we just want to check for exceptions during
     // deployment
   }
 
   @Test
-  @Deployment(resources = "underwriting.cmmn")
+  @Deployment(resources = "underwriting-case.cmmn")
   public void testUnderwritingCase() {
     CaseInstance caseInstance = processEngine().getCaseService().createCaseInstanceByKey("underwriting");
 
@@ -110,13 +110,10 @@ public class InMemoryH2Test {
   }
 
   @Test
-  @Deployment(resources = {"underwriting.cmmn", "underwriting.bpmn"})
+  @Deployment(resources = {"underwriting-case.cmmn", "underwriting-process.bpmn"})
   public void testUnderwritingProcessIncludingCase() {
     
     ProcessInstance pi = processEngine().getRuntimeService().startProcessInstanceByMessage(Constants.MSG_START_ELECTRONIC_APPLICATION);
-    
-    assertThat(pi).task("userTaskReviewData");
-    complete(task());
     
     assertThat(pi).isWaitingFor(Constants.MSG_UNDERWRITING_FINISHED);
     CaseInstance caseInstance = processEngine().getCaseService().createCaseInstanceQuery() //
