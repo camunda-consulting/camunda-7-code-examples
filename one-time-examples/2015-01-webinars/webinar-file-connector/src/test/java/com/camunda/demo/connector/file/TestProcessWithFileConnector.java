@@ -1,4 +1,7 @@
-import static org.junit.Assert.*;
+package com.camunda.demo.connector.file; 
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -7,9 +10,6 @@ import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.variable.Variables;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
-
-
 
 public class TestProcessWithFileConnector {
   
