@@ -60,17 +60,7 @@ public class CaseController implements Serializable {
     Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     String taskId = requestParameterMap.get("taskId");
     String caseInstanceId = requestParameterMap.get("caseInstanceId");
-//    String activityId = requestParameterMap.get("activityId");
-
-//    if (activityId != null && caseInstanceId != null) {
-//      if (caseInstance != null && caseInstance.getId().equals(caseInstanceId) && selectedTask != null && selectedTask.getTaskDefinitionKey().equals(activityId)) {
-//        // already selected!
-//        return;
-//      }
-//      // this activity shall be started if possible
-//      initCaseInstanceAndStartActivityIfPossible(caseInstanceId, activityId);
-//    } else
-      if (taskId != null) {
+    if (taskId != null) {
       selectTask(taskId);
       Task loadedTask = selectedTask;
       initByCaseInstanceId(selectedTask.getCaseInstanceId()); // does a reset!
@@ -80,29 +70,6 @@ public class CaseController implements Serializable {
     }
 
   }
-
-//  private void initCaseInstanceAndStartActivityIfPossible(String caseInstanceId, String activityId) {
-//    selectedTask = null;
-//    initByCaseId(caseInstanceId);
-//    if (caseInstanceInfo.getAvailablePlanItemIds().contains(activityId)) {
-//      executeCaseActivityAndSelectTask(activityId);
-//    } else {
-//      CaseActivity activity = null;
-//      List<StageDefinition> stageDefinitions = caseDefinition.getStageDefinitions();
-//      for (StageDefinition stageDefinition : stageDefinitions) {
-//        Map<String, CaseActivity> activities = caseDefinition.getCaseActivityDefinitionMapForStage(stageDefinition.getId());
-//        if (activities.containsKey(activityId)) {
-//          activity = activities.get(activityId);
-//        }
-//      }
-//      if (activity != null) {
-//        activityForbiddenText = "Die Daten für Aktivität '" + activity.getName() + "' können im aktuellen Zustand leider nicht geändert werden!";
-//      } else {
-//        activityForbiddenText = "Die ausgewählten Daten können im aktuellen Zustand leider nicht geändert werden!";
-//      }
-//
-//    }
-//  }
 
   private void reset() {
     selectedTask = null;
@@ -121,6 +88,10 @@ public class CaseController implements Serializable {
     activeCaseExecutions = new ArrayList<CaseExecution>();
     enabledCaseExecutions = new ArrayList<CaseExecution>();
     
+    loadCaseInstanceStatus();
+  }
+
+  private void loadCaseInstanceStatus() {
     List<CaseExecution> caseExecutions = engine.getCaseService().createCaseExecutionQuery().caseInstanceId(caseInstance.getId()).list();
     for (CaseExecution caseExecution : caseExecutions) {
       if (((CaseExecutionEntity)caseExecution).getCurrentState() == CaseExecutionState.ACTIVE) {
@@ -135,30 +106,7 @@ public class CaseController implements Serializable {
           .caseInstanceId(caseInstance.getId()) //
           .completed() //
           .list();
-
   }
-
-//  public void executeCaseActivity(CaseExecution execution) {
-//    final HashMap<String, Object> variables = new HashMap<String, Object>();
-//    variables.put("assign-group", null);
-//    variables.put("assign-user", null);
-//
-//    // parameter for planning are passed via "normal" HTML form - no JSF
-//    // binding applied
-//    final Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-//    // so read them manually here:
-//    final String assignmentType = requestParameterMap.get("radio-" + activityID);
-//    if ("group".equals(assignmentType)) {
-//      final String groupName = requestParameterMap.get("group-" + activityID);
-//      variables.put("assign-group", groupName);
-//    } else if ("user".equals(assignmentType)) {
-//      final String userName = requestParameterMap.get("user-" + activityID);
-//      variables.put("assign-user", userName);
-//    }
-//
-//    engine.getCaseService().executePlanItem(caseInstance.getId(), activityID, variables);
-//    refreshCaseInfo();
-//  }
 
   public String executeCaseActivityAndSelectTask(CaseExecution execution) {
     engine.getCaseService().manuallyStartCaseExecution(execution.getId());
