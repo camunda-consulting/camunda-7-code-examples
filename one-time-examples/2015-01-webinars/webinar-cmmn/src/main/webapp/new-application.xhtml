@@ -33,7 +33,15 @@
 										value="#{newApplication.application.customerName}" />
 								</div>
 							</div>
-							
+							<div class="form-group">
+								<label for="smoker" class="col-md-3 control-label">Smoker?
+								</label>
+								<div class="col-md-9">
+									<h:selectBooleanCheckbox class="form-control"
+										id="smoker" 
+										value="#{newApplication.application.smoker}" />
+								</div>
+							</div>							
 							<div class="form-group">
 								<div class="col-md-offset-2 col-md-10 text-right">
 									<h:commandButton type="submit" class="btn btn-primary" action="#{newApplication.saveAction}" value="Create"></h:commandButton>

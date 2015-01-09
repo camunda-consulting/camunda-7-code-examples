@@ -10,8 +10,16 @@
             <cmmn:planItem id="PI_processTaskDoctorRequest" definitionRef="processTaskDoctorRequest" />
             <cmmn:planItem id="PI_humanTaskTeleInterview" definitionRef="humanTaskTeleInterview" />
             <cmmn:planItem id="PI_humanTaskReviewInterview" definitionRef="humanTaskReviewInterview" entryCriteriaRefs="sentryInterviewFourEyesPrinciple" />
+            <cmmn:planItem id="PI_humanTaskSmoker" definitionRef="humanTaskSmoker" entryCriteriaRefs="sentrySmoker" />
             
             <!--  Sentries -->
+            <cmmn:sentry id="sentrySmoker">
+				<cmmn:ifPart>
+					<cmmn:condition>
+						<cmmn:body>${application.smoker}</cmmn:body>
+					</cmmn:condition>
+				</cmmn:ifPart>                
+            </cmmn:sentry>
             <cmmn:sentry id="sentryRejected">
                 <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide">
                     <cmmn:standardEvent>complete</cmmn:standardEvent>
@@ -39,6 +47,7 @@
             </cmmn:sentry>
 
 			<!-- Plan Item Definitions -->
+            <cmmn:humanTask id="humanTaskSmoker" name="adjust risk profile for smoker" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
             <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-decide-application.jsf">
 				<cmmn:extensionElements>
 					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.webinar.cmmn.listener.DisableRemainingActivitiesListener" />

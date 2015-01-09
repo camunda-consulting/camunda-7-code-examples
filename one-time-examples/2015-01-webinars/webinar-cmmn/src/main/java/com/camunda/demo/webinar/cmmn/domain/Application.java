@@ -9,6 +9,8 @@ public class Application {
   private String customerId;
   private String customerName;
   
+  private boolean smoker;
+  
   public Application() {
     id = UUID.randomUUID().toString();
     id = id.substring(0, 8);
@@ -36,6 +38,14 @@ public class Application {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public boolean isSmoker() {
+    return smoker;
+  }
+
+  public void setSmoker(boolean smoker) {
+    this.smoker = smoker;
   }
 
 }
