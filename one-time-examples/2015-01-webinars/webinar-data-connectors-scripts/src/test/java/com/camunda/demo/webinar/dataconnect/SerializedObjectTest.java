@@ -1,8 +1,11 @@
 package com.camunda.demo.webinar.dataconnect;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.complete;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
+import static org.junit.Assert.assertEquals;
 
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
@@ -11,7 +14,6 @@ import org.camunda.bpm.engine.test.assertions.TaskAssert;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
-import org.h2.tools.Server;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -82,4 +84,27 @@ public class SerializedObjectTest {
     complete(task(), Variables.createVariables().putValue("application", application));
     
   }
+  
+
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testApprove() throws Exception {
+    CreditorApplication application = new CreditorApplication();
+    application.setBankAccountNumber("123456");
+    application.setBankIdentifierCode("10070024"); // Deutsche Bank Berlin
+    application.setCompany("Acme Inc");
+    application.setEmail("br@camunda.com");
+    application.setApproved(true);
+    
+    VariableMap variables = Variables.createVariables()
+        //.putValue("application", application);
+        .putValueTyped("application", Variables.objectValue(application).serializationDataFormat(SerializationDataFormats.JSON).create());
+    
+    ProcessInstance pi = processEngine().getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+    
+    assertThat(pi).task().hasDefinitionKey("userTaskApproveCreditor");    
+    complete(task());
+
+    assertThat(pi).isEnded().hasPassed("EndEventCreditorCreated");
+  }  
 }

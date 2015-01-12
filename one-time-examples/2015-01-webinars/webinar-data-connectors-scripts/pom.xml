@@ -77,6 +77,13 @@
 			<artifactId>camunda-connect-soap-http-client</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.camunda.demo.webinar</groupId>
+			<artifactId>webinar-file-connector</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Groovy as JSR-223 scripting engine -->
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>

@@ -40,8 +40,9 @@
         </camunda:connector>
         <camunda:inputOutput>
           <camunda:inputParameter name="camunda_source">${XML(application).toString()}</camunda:inputParameter>
-          <camunda:outputParameter name="set bank name in application">
-            <camunda:script scriptFormat="groovy">application.setBankName( bankName );</camunda:script>
+          <camunda:outputParameter name="bankName">
+            <camunda:script scriptFormat="groovy"><![CDATA[application.setBankName( bankName );
+bankName;]]></camunda:script>
           </camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn2:extensionElements>
@@ -81,15 +82,24 @@ email.send();
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="com.camunda.demo.webinar.dataconnect.LoggerDelegate" name="store creditor transfer file&#xD;&#xA;(custom connector)">
+    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="" name="store creditor transfer file&#xD;&#xA;(custom connector)">
+      <bpmn2:extensionElements>
+        <camunda:connector>
+          <camunda:connectorId>file-connector</camunda:connectorId>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="filePath">D:/webinar.xml</camunda:inputParameter>
+            <camunda:inputParameter name="fileContent">#{XML(application).toString()}</camunda:inputParameter>
+          </camunda:inputOutput>
+        </camunda:connector>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="userTaskApproveCreditor" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:endEvent id="EndEvent_2" name="creditor&#xD;&#xA;created">
+    <bpmn2:endEvent id="EndEventCreditorCreated" name="creditor&#xD;&#xA;created">
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="ServiceTask_3" targetRef="EndEvent_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="ServiceTask_3" targetRef="EndEventCreditorCreated"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="approved?">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
@@ -98,13 +108,13 @@ email.send();
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{application.approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:endEvent id="EndEvent_3" name="creditor&#xD;&#xA;rejected">
+    <bpmn2:endEvent id="EndEventCreditorRejected" name="creditor&#xD;&#xA;rejected">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="no" sourceRef="ExclusiveGateway_1" targetRef="ScriptTask_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!application.approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ScriptTask_1" targetRef="EndEvent_3"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ScriptTask_1" targetRef="EndEventCreditorRejected"/>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="ServiceTask_2" targetRef="userTaskApproveCreditor"/>
     <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Creditor&#xD;&#xA;Application" dataObjectRef="DataObject_1"/>
@@ -156,7 +166,7 @@ email.send();
           <dc:Bounds height="6.0" width="6.0" x="529.0" y="3.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEvent_2">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEventCreditorCreated">
         <dc:Bounds height="36.0" width="36.0" x="911.0" y="57.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="38.0" width="59.0" x="900.0" y="98.0"/>
@@ -182,7 +192,7 @@ email.send();
           <dc:Bounds height="22.0" width="27.0" x="696.0" y="81.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_3" bpmnElement="EndEvent_3">
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_3" bpmnElement="EndEventCreditorRejected">
         <dc:Bounds height="36.0" width="36.0" x="911.0" y="155.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="38.0" width="59.0" x="900.0" y="196.0"/>
