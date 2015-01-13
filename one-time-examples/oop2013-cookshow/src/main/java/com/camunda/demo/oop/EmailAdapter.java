@@ -18,7 +18,7 @@ public class EmailAdapter {
     
     Email email = new SimpleEmail();
     email.setHostName("mail.camunda.com");    
-    email.setAuthentication("activitishowcase@mx.camunda.com", "28484234386345");
+    email.setAuthentication("demo@mx.camunda.com", "28484234386345");
     email.setFrom("br@camunda.com");
     email.setSubject("Auftragsbestätigung");
     email.setMsg("Deine Bestellung wird geliefert. Und die Temperatur in " + order.getCity() + " ist " + order.getWeatherInfo());
@@ -31,7 +31,7 @@ public class EmailAdapter {
     
     Email email = new SimpleEmail();
     email.setHostName("mail.camunda.com");    
-    email.setAuthentication("activitishowcase@mx.camunda.com", "28484234386345");
+    email.setAuthentication("demo@mx.camunda.com", "28484234386345");
     email.setFrom("br@camunda.com");
     email.setSubject("Ablehnung");
     email.setMsg("Sorry - geht nicht");
