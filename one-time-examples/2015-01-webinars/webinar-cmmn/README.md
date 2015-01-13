@@ -54,6 +54,13 @@ and the [ACM Plugin](https://github.com/camunda/camunda-acm-plugin/tree/master/)
 available via the [Plugin Store](http://camunda.org/plugins/).
 
 
+Webinar Recording
+------------------
+
+This example was presented in a Webinar, the recording is available:
+- English: http://vimeo.com/116525703
+- German: https://vimeo.com/116330092
+
 Environment Restrictions
 ------------------------
 
