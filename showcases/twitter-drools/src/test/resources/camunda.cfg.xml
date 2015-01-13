@@ -12,19 +12,6 @@
     
     <!-- job executor configurations -->
     <property name="jobExecutorActivate" value="false" />
-    
-  	<property name="mailServerHost" value="mail.camunda.com" />
-  	<property name="mailServerUsername" value="activitishowcase@mx.camunda.com" />
-  	<property name="mailServerPassword" value="28484234386345" />
-  	<property name="mailServerDefaultFrom" value="activiti@camunda.com" />
-  	<!--
-  	<property name="mailServerHost" value="localhost" />
-  	<property name="mailServerUsername" value="activiti" />
-  	<property name="mailServerPassword" value="activiti" />
-  	<property name="mailServerDefaultFrom" value="activiti@localhost" />
-  	<property name="mailServerPort" value="25" />
-  	-->  	
-
   </bean>
 
 </beans>
