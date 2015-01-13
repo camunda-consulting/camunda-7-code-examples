@@ -6,7 +6,7 @@
       <outgoing>SequenceFlow_2</outgoing>
       <outgoing>SequenceFlow_3</outgoing>
     </exclusiveGateway>
-    <sequenceFlow id="SequenceFlow_2" name="yes" sourceRef="ExclusiveGateway_1" targetRef="Send_order_confirmatin_email">
+    <sequenceFlow id="SequenceFlow_2" name="yes" sourceRef="ExclusiveGateway_1" targetRef="Send_order_confirmation_email">
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_2">#{orderApproved}</conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="SequenceFlow_3" name="no" sourceRef="ExclusiveGateway_1" targetRef="servicetask2">
@@ -22,11 +22,11 @@
       <outgoing>flow4</outgoing>
     </businessRuleTask>
     <sequenceFlow id="flow4" name="" sourceRef="BusinessRuleTask_1" targetRef="approve_order"/>
-    <serviceTask id="Send_order_confirmatin_email" camunda:expression="#{orderBean.sendEmail()}" name="send order confirmatin email">
+    <serviceTask id="Send_order_confirmation_email" camunda:expression="#{orderBean.sendEmail()}" name="send order confirmation email">
       <incoming>SequenceFlow_2</incoming>
       <outgoing>SequenceFlow_4</outgoing>
     </serviceTask>
-    <sequenceFlow id="SequenceFlow_4" name="" sourceRef="Send_order_confirmatin_email" targetRef="EndEvent_1"/>
+    <sequenceFlow id="SequenceFlow_4" name="" sourceRef="Send_order_confirmation_email" targetRef="EndEvent_1"/>
     <endEvent id="EndEvent_1" name="order&#xD;&#xA;confirmed">
       <incoming>SequenceFlow_4</incoming>
     </endEvent>
@@ -48,7 +48,7 @@
       <bpmndi:BPMNShape id="BPMNShape_Approved_order" bpmnElement="approve_order" isHorizontal="true">
         <omgdc:Bounds height="68.0" width="105.0" x="288.0" y="82.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Send_order_confirmatin_email" bpmnElement="Send_order_confirmatin_email" isHorizontal="true">
+      <bpmndi:BPMNShape id="BPMNShape_Send_order_confirmation_email" bpmnElement="Send_order_confirmation_email" isHorizontal="true">
         <omgdc:Bounds height="67.0" width="105.0" x="612.0" y="83.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_servicetask2" bpmnElement="servicetask2" isHorizontal="true">
@@ -92,7 +92,7 @@
           <omgdc:Bounds height="6.0" width="6.0" x="742.0" y="250.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Send_order_confirmatin_email">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Send_order_confirmation_email">
         <omgdi:waypoint xsi:type="omgdc:Point" x="496.0" y="116.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="612.0" y="116.0"/>
         <bpmndi:BPMNLabel>
@@ -107,7 +107,7 @@
           <omgdc:Bounds height="22.0" width="20.0" x="477.0" y="156.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Send_order_confirmatin_email" targetElement="BPMNShape_EndEvent_1">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_Send_order_confirmation_email" targetElement="BPMNShape_EndEvent_1">
         <omgdi:waypoint xsi:type="omgdc:Point" x="716.0" y="116.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="850.0" y="116.0"/>
         <bpmndi:BPMNLabel>
