@@ -11,6 +11,30 @@ Show me the important parts!
 ----------------------------
 Have a look at the commits of the repository to find the snippet to build the single feature.
 
+Table of contents
+-----------------
+1. [Fast Track user task](#fast-track-user-task)
+2. [Ad Hoc Approval Task](#ad-hoc-approval-task)
+    1. [Approval in the following task](#approval-in-the-following-task)
+    2. [Approval by another assignee](#approval-by-another-assignee)
+    3. [Approval by delegating to another user](#approval-by-delegating-to another-user)
+    4. [Approval by another team](#approval-by-another-team)
+    5. [Approval in a predefined task](#approval-in-a-predefined-task)
+    6. [Approval in a new subtask](#approval-in-a-new-substask)
+    7. [Approval with case management](#approval-with-case-management)
+3. [Service Level Agreement](#service-level-agreement)
+    1. [Escalate on overdue](#escalate-on-overdue)
+    2. [Escalate all task with due date](#escalate-all-tasks-on-duedate)
+4. [Add users, groups and memberships](#add-users-groups-and-membertship)
+5. [Add independent subprocess](#add-independent-subprocess)
+6. [Cancel independent subprocess](#cancel-independent-subprocess)
+7. [Business Rules with Drools](#business-rules-with-drools)
+8. [Refine the candidate group](#refine-the-candidate-group)
+9. [Save History in Elastic Search](#save-the-history-in-elastic-search)
+10. [Mail Notification to all users of a group](#mail-notification-to-all-users-of-a-group)
+11. [Complete task by email](#complete-task-by-email)
+
+
 Fast Track user task
 ------------------------
 In the process definition, the user tasks have an attached non-canceling message receive event called override. If the process instance receives an override message, it will create an additional task 'Review Override Request' for Management. In this task, the user can approve the Override and the original request and decide to publish the counterparty immediately or reject the override.
