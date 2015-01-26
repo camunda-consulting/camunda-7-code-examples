@@ -25,7 +25,7 @@ Table of contents
 3. [Service Level Agreement](#service-level-agreement)
     1. [Escalate on overdue](#escalate-on-overdue)
     2. [Escalate all tasks with due date](#escalate-all-tasks-with-due-date)
-4. [Add users, groups and memberships](#add-users-groups-and-membership)
+4. [Add users, groups and memberships](#add-users-groups-and-memberships)
 5. [Start independent subprocess](#start-independent-subprocess)
 6. [Cancel independent subprocess](#cancel-independent-subprocess)
 7. [Business Rules with Drools](#business-rules-with-drools)
@@ -311,7 +311,7 @@ To change the groupId of the identity link (The link from the task to the task l
 
 If the task listener is notified for the first task of the process, the startUserId is still in the thread and not in the database. For every other task, which is assigned later, the userId has to be read from the history service. 
 
-Save History in the Elasticsearch
+Save History in Elasticsearch
 ---------------------------------
 
 The Camunda BPM elastic search extension is a community extension which allows you to use Elasticsearch as data store for Camunda history and audit data.
