@@ -41,11 +41,11 @@
 		</dependency>
 
     <!-- camunda BPM Apache Camel Integration -->
-    <dependency>
-      <groupId>org.camunda.bpm.incubation</groupId>
-      <artifactId>camunda-bpm-camel-cdi</artifactId>
-      <version>0.1-SNAPSHOT</version>
-    </dependency>
+		<dependency>
+		  <groupId>org.camunda.bpm.extension.camel</groupId>
+		  <artifactId>camunda-bpm-camel-cdi</artifactId>
+		  <version>0.1</version>
+		</dependency>
 
     <!-- Apache Camel 
     <dependency>
