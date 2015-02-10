@@ -15,7 +15,9 @@ Important note: Requires JSF - does not run on Tomcat!
 Show me the important parts!
 ----------------------------
 
-The BPMN process starts the underwriting. It implements all structured activities and calls the CMMN case when the
+![CMMN Case](docs/case.png)
+
+The BPMN process starts the underwriting. It implements all structured activities and calls the more CMMN case when the
 unstructured phase of the real underwriting from a clerk starts: 
 
 ![BPMN Process and CMMN Case](docs/process-and-case.png)
@@ -34,6 +36,10 @@ the [CMMN Lifecycle in our docs](http://docs.camunda.org/latest/api-references/c
 And as a last remark I want to point out that it is already built-in the CMMN to call processes from a case - no workaround necessary:
 
 ![BPMN Process](docs/case-and-process.png)
+
+This allows you to use the right tool for the right job - BPMN for structured process parts and CMMN for unstructured ones:
+
+![BPMN Process](docs/structured-vs-unstructured.png)
 
 How to use it?
 --------------
