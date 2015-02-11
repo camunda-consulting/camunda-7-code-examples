@@ -22,10 +22,6 @@ unstructured phase of the real underwriting from a clerk starts:
 
 ![BPMN Process and CMMN Case](docs/process-and-case.png)
 
-Currently calling a Case from BPMN is not yet supported (but planned for Camunda BPM 7.3) - so you need a small workaround
-to start a case instance and wait for its completion:
-
-![BPMN Process](docs/call-cmmn-from-bpmn.png)
 
 The UI now visualizes all Tasks from Task Management for the case (basically "ACTIVE" activities from CMMN), 
 "ENABLED" Activities from CMMN and Historic Tasks from the engine history. Maybe this would be a good time to check out
@@ -33,13 +29,26 @@ the [CMMN Lifecycle in our docs](http://docs.camunda.org/latest/api-references/c
 
 ![BPMN Process](docs/case-ui.png)
 
-And as a last remark I want to point out that it is already built-in the CMMN to call processes from a case - no workaround necessary:
+And as a last remark I want to point out that it is already built-in the CMMN to call processes from a case:
 
 ![BPMN Process](docs/case-and-process.png)
 
 This allows you to use the right tool for the right job - BPMN for structured process parts and CMMN for unstructured ones:
 
 ![BPMN Process](docs/structured-vs-unstructured.png)
+
+
+Current Workarounds
+-------------------
+
+Currently calling a Case from BPMN is not yet supported (but already implemented in Camunda BPM 7.3 alpha1!) - so you need a small workaround
+to start a case instance and wait for its completion:
+
+![BPMN Process](docs/call-cmmn-from-bpmn.png)
+
+The "Auto-Complete" attribute of a case is not implemented in camunda BPM 7.2 (but already implemented in Camunda BPM 7.3 alpha1!) - hence you
+need a listener to auto complete the case instance (see listeners in CMMN.xml).
+
 
 How to use it?
 --------------
