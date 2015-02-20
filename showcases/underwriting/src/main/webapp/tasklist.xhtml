@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:head>
+			<title>Tasks</title>
+		</h:head>
+		<h:body>
+        <!-- see http://datatables.net/examples/advanced_init/language_file.html -->
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$('#taskTableForm\\:taskTable').dataTable( {
+            		
+            		}
+        		});
+			});
+		</script>
+		<!-- "oLanguage": {
+						"sProcessing": "Bitte warten...",
+						"sLengthMenu": "_MENU_ Einträge anzeigen",
+						"sZeroRecords": "Keine Einträge vorhanden.",
+						"sInfo": "_START_ bis _END_ von _TOTAL_ Einträgen",
+						"sInfoEmpty": "0 bis 0 von 0 Einträgen",
+						"sInfoFiltered": "(gefiltert von _MAX_  Einträgen)",
+						"sInfoPostFix": "",
+						"sSearch": "Filter",
+						"sUrl": "",
+						"oPaginate": {
+							"sFirst":    "Erster",
+							"sPrevious": "Zurück",
+							"sNext":     "Nächster",
+							"sLast":     "Letzter"
+						} -->			
+			<div class="page-header">
+				<h1>All Tasks</h1>
+			</div>
+
+			<div class="container">
+			
+						<h:form id="taskTableForm">
+							<h:dataTable value="#{tasklistController.allTasks}" var="row"
+								styleClass="table" id="taskTable">
+								<h:column>
+									<f:facet name="header">Case</f:facet>
+									<h:panelGroup rendered="#{row.caseInstance!=null}">
+										<a href="case-form.jsf?caseInstanceId=#{row.caseInstance.id}">#{row.caseDefinition.name}</a>							
+									</h:panelGroup>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Task</f:facet>
+									<a href="#{caseController.getFormLink(row.task)}">#{row.task.name}</a>									
+								</h:column>
+								<h:column>
+									<f:facet name="header">Customer ID</f:facet>
+									<h:panelGroup rendered="#{row.application!=null}">		
+											#{row.application.customerId}
+										</h:panelGroup>
+								</h:column>
+								<h:column>
+									<f:facet name="header">Customer Name</f:facet>
+									<h:panelGroup rendered="#{row.application!=null}">		
+											#{row.application.customerName}
+										</h:panelGroup>
+								</h:column>
+							</h:dataTable>
+						</h:form>
+						
+			</div>
+
+		</h:body>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="case-form.xhtml">
+
+	<ui:define name="task">
+		<!-- Todo Show Application -->
+		<div>
+				Customer ID: 
+				<h:outputText value="#{caseController.application.customerId}" />
+		</div>				
+		<div>				
+				Customer Name: 
+				<h:outputText value="#{caseController.application.customerName}" />
+		</div>				
+
+		<div>				
+				<label>Evaluation Comments</label>
+		</div>
+		<div>
+				<h:inputTextarea rows="6" cols="50" value="#{caseController.taskFormVariables['evaluationComments']}" />
+		</div>				
+		
+		<!-- Decide -->
+		<div>
+		     <label>Approve? </label>
+		</div>
+		<div>
+			<h:selectOneMenu id="approved" value="#{caseController.taskFormVariables['approved']}">
+				<f:selectItem itemValue="#{false}" itemLabel="No" />					
+				<f:selectItem itemValue="#{true}" itemLabel="Yes" />
+			</h:selectOneMenu>
+		</div>
+	</ui:define>	
+</ui:composition>

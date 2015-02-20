@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title>camunda BPM</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/favicon.ico" />
+	<h:outputStylesheet name="css/bootstrap.css" />
+	<h:outputStylesheet name="css/bootstrap-theme.css" />
+	<h:outputStylesheet name="css/app.css" />
+
+	<h:outputScript type="text/javascript" library="js" name="jquery.js" />
+	<h:outputScript type="text/javascript" library="js"
+		name="jquery.dataTables.js" />
+	<h:outputScript type="text/javascript" library="js" name="bootstrap.js" />
+</h:head>
+
+<h:body style="padding-bottom: 40px;">
+
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.jsf">Underwriting Cockpit</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">New <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="new-application.jsf"><span
+								class="glyphicon glyphicon-file" /> Application</a></li>
+					</ul>
+				</li>
+
+				<li><a href="case-instances.jsf"><span
+						class="glyphicon glyphicon-folder-open" /> Cases</a></li>
+				<li><a href="tasklist.jsf"><span
+						class="glyphicon glyphicon-list" /> Tasks</a></li>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+			
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i>
+						#{userController.user.firstName} #{userController.user.lastName}
+					</a>
+					<ul class="dropdown-menu">
+						<h:form>
+							<li><h:commandLink class="btn btn-primary btn-sm"
+							        action="#{userController.logout()}"
+									value="Abmelden" /></li>
+						</h:form>
+					</ul>
+				</li>
+				
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+
+	<h:panelGroup id="page" layout="block" styleClass="container">
+		<h:panelGroup id="container" layout="block">
+			<h:panelGroup>
+				<h:panelGroup id="content" layout="block">
+					<h:messages globalOnly="true" />
+					<ui:insert name="content">Main Content</ui:insert>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup id="footer" layout="block">
+
+			</h:panelGroup>
+		</h:panelGroup>
+		<nav class="navbar navbar-default navbar-fixed-bottom"
+			role="navigation" id="footer">
+			<div class="text-right">
+				powered by <a href="http://www.camunda.org">Camunda BPM</a>
+			</div>
+		</nav>
+	</h:panelGroup>
+
+</h:body>
+</html>
