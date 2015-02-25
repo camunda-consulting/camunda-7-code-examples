@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions id="underwriting-definition" name="Underwriting" targetNamespace="http://cmmn.org" xmlns:cmmn="http://www.omg.org/spec/CMMN/20131201/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cmmn:case id="underwriting" name="Underwriting">
+        <cmmn:casePlanModel autoComplete="true" name="Underwriting"  id="_manual_underwriting">
+            <cmmn:planItem id="PI_humanTaskDecide" definitionRef="humanTaskDecide" />
+            <cmmn:planItem id="PI_milestoneApproved" definitionRef="milestoneApproved" entryCriteriaRefs="sentryApproved" />
+            <cmmn:planItem id="PI_milestoneRejected" definitionRef="milestoneRejected" entryCriteriaRefs="sentryRejected" />
+            <cmmn:planItem id="PI_humanTaskThereIsMore" definitionRef="humanTaskThereIsMore" />
+            <cmmn:planItem id="PI_humanTaskCoUnderwriter" definitionRef="humanTaskCoUnderwriter" />
+            <cmmn:planItem id="PI_processTaskDoctorRequest" definitionRef="processTaskDoctorRequest" />
+            <cmmn:planItem id="PI_humanTaskTeleInterview" definitionRef="humanTaskTeleInterview" />
+            <cmmn:planItem id="PI_humanTaskReviewInterview" definitionRef="humanTaskReviewInterview" entryCriteriaRefs="sentryInterviewFourEyesPrinciple" />
+            <cmmn:planItem id="PI_humanTaskSmoker" definitionRef="humanTaskSmoker" entryCriteriaRefs="sentrySmoker" />
+            
+            <!--  Sentries -->
+            <cmmn:sentry id="sentrySmoker">
+				<cmmn:ifPart>
+					<cmmn:condition>
+						<cmmn:body>${application.smoker}</cmmn:body>
+					</cmmn:condition>
+				</cmmn:ifPart>                
+            </cmmn:sentry>
+            <cmmn:sentry id="sentryRejected">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide">
+                    <cmmn:standardEvent>complete</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+				<cmmn:ifPart>
+					<cmmn:condition>
+						<cmmn:body>${!approved}</cmmn:body>
+					</cmmn:condition>
+				</cmmn:ifPart>                
+            </cmmn:sentry>
+            <cmmn:sentry id="sentryApproved">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide">
+                    <cmmn:standardEvent>complete</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+				<cmmn:ifPart>
+					<cmmn:condition>
+						<cmmn:body>${approved}</cmmn:body>
+					</cmmn:condition>
+				</cmmn:ifPart>                
+            </cmmn:sentry>
+            <cmmn:sentry id="sentryInterviewFourEyesPrinciple">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskTeleInterview">
+                    <cmmn:standardEvent>complete</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+            </cmmn:sentry>
+
+			<!-- Plan Item Definitions -->
+            <cmmn:humanTask id="humanTaskSmoker" name="adjust risk profile for smoker" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
+            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-decide-application.jsf">
+<!-- 				<cmmn:extensionElements>
+					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
+				</cmmn:extensionElements>
+				             -->
+                <cmmn:defaultControl>
+					<cmmn:manualActivationRule>
+						<cmmn:condition>
+							<cmmn:body>${false}</cmmn:body>
+						</cmmn:condition>
+					</cmmn:manualActivationRule>
+                </cmmn:defaultControl>
+            </cmmn:humanTask>
+            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
+            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf"/>
+            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf">
+                <cmmn:defaultControl>
+					<cmmn:manualActivationRule>
+						<cmmn:condition>
+							<cmmn:body>${false}</cmmn:body>
+						</cmmn:condition>
+					</cmmn:manualActivationRule>
+                </cmmn:defaultControl>            
+            </cmmn:humanTask>
+            <cmmn:humanTask id="humanTaskThereIsMore" name="..." isBlocking="false"/>
+
+            <cmmn:processTask id="processTaskDoctorRequest" name="doctor information request"  processRef="DoctorInformationRequest" isBlocking="true" />
+            
+            <cmmn:milestone id="milestoneApproved" name="approved">
+				<cmmn:extensionElements>
+					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
+				</cmmn:extensionElements>             
+            </cmmn:milestone>
+            <cmmn:milestone id="milestoneRejected" name="rejected">
+				<cmmn:extensionElements>
+					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
+				</cmmn:extensionElements>             
+            </cmmn:milestone>
+        </cmmn:casePlanModel>
+    </cmmn:case>
+</cmmn:definitions>
+

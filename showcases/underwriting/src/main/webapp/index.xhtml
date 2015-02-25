@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title>camunda BPM</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" type="image/x-icon"
+		href="#{request.contextPath}/resources/favicon.ico" />
+	<h:outputStylesheet name="css/bootstrap.css" />
+	<h:outputStylesheet name="css/bootstrap-theme.css" />
+	<h:outputStylesheet name="css/app.css" />
+
+	<h:outputScript type="text/javascript" library="webjars/jquery/1.9.0"
+		name="jquery.js" />
+	<h:outputScript type="text/javascript"
+		library="webjars/bootstrap/3.0.0/js" name="bootstrap.js" />
+
+
+</h:head>
+
+<h:body style="padding-top: 60px; padding-bottom: 40px;">
+	<div class="container">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Underwriting Cockpit</a>
+			</div>
+		</nav>
+		<div class="row">
+					<h:form class="col-md-4 col-md-offset-4" id="someForm" role="form">
+						<h2>Login</h2>
+						<div class="form-group">
+							<label>Username</label>
+							<h:inputText class="form-control" p:placeholder="username"
+									value="#{userController.userId}" />
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<h:inputSecret class="form-control" p:placeholder="password"
+									value="#{userController.password}" />
+						</div>
+						<h:commandButton value="Login" class="btn btn-primary"
+									action="#{userController.login}" />						
+					</h:form>
+
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-bottom"
+			role="navigation" id="footer">
+			<div class="text-right">
+				powered by <a href="http://www.camunda.org">Camunda BPM</a>
+			</div>
+		</nav>
+	</div>
+
+</h:body>
+</html>

@@ -61,12 +61,14 @@
 			<artifactId>camunda-template-engines-freemarker</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- I do not want to use ee only feature for this demo 
 		<dependency>
 			<groupId>org.camunda.bpm.extension.xslt</groupId>
 			<artifactId>camunda-bpm-xslt</artifactId>
 			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
@@ -89,6 +91,7 @@
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>2.1.3</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>

@@ -7,10 +7,11 @@ import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.complete
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.camunda.bpm.engine.test.assertions.TaskAssert;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
@@ -51,16 +52,17 @@ public class SerializedObjectTest {
 
   @Test
   @Deployment(resources = "process.bpmn")
-  public void testNotApprove() throws Exception {
+  public void testRejected() throws Exception {
     CreditorApplication application = new CreditorApplication();
     application.setBankAccountNumber("123456");
     application.setBankIdentifierCode("10070024"); // Deutsche Bank Berlin
     application.setCompany("Acme Inc");
     application.setEmail("br@camunda.com");
+   
     
-    VariableMap variables = Variables.createVariables()
-        //.putValue("application", application);
-        .putValueTyped("application", Variables.objectValue(application).serializationDataFormat(SerializationDataFormats.JSON).create());
+    Map<String, Object> variables = Variables.createVariables()
+        .putValue("application", application);
+//        .putValueTyped("application", Variables.objectValue(application).serializationDataFormat(SerializationDataFormats.XML).create());
     
     ProcessInstance pi = processEngine().getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
     
@@ -70,7 +72,7 @@ public class SerializedObjectTest {
     // --> now we can inspect it - just set a breakpoint in the next line:
     // - JDBC URL:  jdbc:h2:tcp://localhost:9092/mem:camunda
     
-    TaskAssert task = assertThat(pi).task().hasDefinitionKey("userTaskApproveCreditor");
+    assertThat(pi).task().hasDefinitionKey("userTaskApproveCreditor");
     
     assertEquals("Deutsche Bank Privat und Geschäftskunden F 700", 
         (String)processEngine().getRuntimeService().getVariable(pi.getId(), "bankName"));
@@ -82,7 +84,8 @@ public class SerializedObjectTest {
     
     application.setApproved(false);
     complete(task(), Variables.createVariables().putValue("application", application));
-    
+
+    assertThat(pi).isEnded().hasPassed("EndEventCreditorRejected");   
   }
   
 

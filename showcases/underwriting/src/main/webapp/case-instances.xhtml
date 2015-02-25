@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:head>
+			<title>Cases</title>
+		</h:head>
+		<h:body>
+			<div class="page-header">
+				<h1>Cases</h1>
+			</div>
+			<div class="container">
+				<div>
+					<h3>Active Cases</h3>
+					<h:form>
+					<h:dataTable
+						value="#{caseListController.runningCases}"
+						var="currentCaseRow" styleClass="table">
+						<h:column>
+							<a href="case-form.jsf?caseInstanceId=#{currentCaseRow.caseInstance.id}">#{currentCaseRow.caseDefinition.name}</a>							
+						</h:column>
+						<h:column>
+							#{currentCaseRow.creditApplication.customerId}
+						</h:column>
+						<h:column>
+							#{currentCaseRow.creditApplication.customerName}
+						</h:column>
+					</h:dataTable>
+					</h:form>
+				</div>
+				
+			</div>
+				
+
+		</h:body>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,280 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+		<h:head>
+			<f:metadata>
+				<f:event type="preRenderView" listener="#{caseController.initCaseByParameters()}" />
+			</f:metadata>
+			<title>Underwriting</title>
+		</h:head>
+		<h:body>
+			<div class="page-header">
+				<h1>#{caseController.caseDefinition.name}</h1>
+				<p>
+						Application ID: #{caseController.application.id}
+						| Customer ID:
+						#{caseController.application.customerId} 
+						| Customer Name:
+						#{caseController.application.customerName} 			
+				</p>
+				<!-- 
+				<div>
+
+						<ui:repeat
+							value="#{caseController.accomplishedStages}"
+							var="stage">
+							<div class="arrow-box-accomplished">
+								<h:outputText value="#{stage}" />
+							</div>
+						</ui:repeat>
+	
+						<div class="arrow-box-current">
+							<h:outputText
+								value="#{caseController.currentStage}" />
+						</div>
+	
+						<ui:repeat value="#{caseController.futureStages}"
+							var="stage">
+							<div class="arrow-box-future">
+								<h:outputText value="#{stage}" />
+							</div>
+						</ui:repeat>
+					
+				</div>
+				 -->
+
+			</div>
+			
+			
+			<div class="col-md-8" style="height: 100%">
+				<h:panelGroup rendered="#{caseController.activityForbiddenText!=null}">
+					<div class="alert alert-danger">
+						<bold>#{caseController.activityForbiddenText}</bold>
+					</div>
+				</h:panelGroup>			
+
+<!-- TASK FORM -->
+
+				<!-- Tasks have to use this page (case-form.xhtml) as template! -->
+				<h:panelGroup rendered="#{caseController.selectedTask != null}">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h:form>
+							<h:commandLink class="close" aria-hidden="true"
+														action="#{caseController.deselectTask()}"
+														 value="x">
+							</h:commandLink>
+							</h:form>
+							Task: #{caseController.selectedTask.name}
+						</div>
+						<div class="panel-body">
+
+							<ui:insert name="task-pre-form" />
+
+							<h:form class="form-horizontal" role="form">
+							
+								<ui:insert name="task" />
+							
+								<div style="margin-top: 25px;">
+									<div class="row">
+										<div class="col-md-4">
+											<h:commandLink class="btn btn-primary"
+														action="#{caseController.completeSelectedTask()}"
+														 value="Complete Task">
+										    </h:commandLink>
+							    		</div>
+										<div class="col-md-4">							    
+											<h:commandLink class="btn btn-default"
+														action="#{caseController.saveSelectedTask()}"
+														 value="Save">
+										    </h:commandLink>
+										</div>
+									</div>
+								</div>									
+							</h:form>
+						</div>
+					</div>
+				</h:panelGroup>
+				
+				
+<!-- Overview -->
+	<h:panelGroup rendered="#{caseController.selectedTask == null}">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Some data on case</h3>
+			</div>
+			<div class="panel-body">... lalala ...</div>
+		</div>
+
+	</h:panelGroup>
+
+<!-- END OVERVIEW -->
+				
+			</div>
+
+			<div class="col-md-4">
+
+				<div class="panel panel-default" id="accordion-1">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion-1"
+								href="#collapse-1-One"> Active Activities (Running) </a>
+						</h4>
+					</div>
+					<div id="collapse-1-One" class="panel-collapse collapse in">
+						<h:dataTable
+							value="#{caseController.activeCaseExecutions}"
+							var="currentExecution" styleClass="table table-condensed">
+							<h:column>
+								<h:panelGroup rendered="#{currentExecution.activityType!='casePlanModel'}">
+									<h:panelGroup rendered="#{currentExecution.activityType=='processTask'}">
+										<span class="glyphicon glyphicon-cog" title="process" ></span>
+ 										#{currentExecution.activityName}											
+									</h:panelGroup>									
+									<h:panelGroup rendered="#{currentExecution.activityType=='humanTask'}">
+								        <span class="glyphicon glyphicon-user" title="task"></span>
+										<a href="#{caseController.getTaskFormLink(currentExecution)}">
+												#{currentExecution.activityName}											
+										</a>
+									</h:panelGroup>							        
+								</h:panelGroup>
+							</h:column>
+						</h:dataTable>
+					</div>
+				</div>
+
+
+
+				<div class="panel panel-default" id="accordion-2">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion-2"
+								href="#collapse-2"> Enabled Activities (Available) </a>
+						</h4>
+					</div>
+					<div id="collapse-2" class="panel-collapse collapse in">
+<script>					
+function radioChanged(activityId) {
+  var radioValue = document.querySelector('input[name="radio-'+activityId+'"]:checked').value;
+  if(radioValue == 'user') {
+      $('#user-' + activityId).prop('disabled', false);
+      $('#group-' + activityId).prop('disabled', true);
+  }
+  else if(radioValue == 'group') {
+      $('#user-' + activityId).prop('disabled', true);
+      $('#group-' + activityId).prop('disabled', false);
+  }
+  else {
+      $('#user-' + activityId).prop('disabled', true);
+      $('#group-' + activityId).prop('disabled', true);
+  }
+}
+</script>
+					<h:form>
+						<h:dataTable
+							value="#{caseController.enabledCaseExecutions}"
+							var="act" styleClass="table table-condensed">
+
+							<h:column>
+								<h:panelGroup rendered="#{act.activityType=='processTask'}">
+									<span class="glyphicon glyphicon-cog" title="process" ></span>
+								</h:panelGroup>									
+								<h:panelGroup rendered="#{act.activityType=='humanTask'}">
+							        <span class="glyphicon glyphicon-user" title="task"></span>
+								</h:panelGroup>	
+								<a id = "toggle-#{act.id}" href="#">
+									#{act.activityName}										
+								</a>
+								<script>
+var toggleButton = document.getElementById('toggle-#{act.id}');
+var elementToShow = document.getElementById('div-#{act.id}');
+
+toggleButton.onclick = function() {
+  var isHidden = $("#div-#{act.id}").css("display") == "none";
+  if (isHidden) {
+    $("#div-#{act.id}").css("display", "block");		
+  } else {
+    $("#div-#{act.id}").css("display", "none");		
+  }
+};
+								</script>
+								<div id = "div-#{act.id}" style="display: none;">
+									<div class="form-group">
+										<h:commandLink 
+											action="#{caseController.executeCaseActivityAndSelectTask(act)}"
+											class="btn btn-primary"
+											rendered="#{act.activityType=='humanTask'}">
+											Start Human Task
+										</h:commandLink>										
+										<h:commandLink 
+											action="#{caseController.executeCaseActivityAndSelectTask(act)}"
+											class="btn btn-primary"
+											rendered="#{act.activityType=='processTask'}">
+											Start Process
+										</h:commandLink>										
+									</div>
+								</div>
+							</h:column>
+							<!-- 
+							<h:column>
+								<h:panelGroup rendered="#{caseController.isRunning(act.id)}" >
+									<span class="glyphicon glyphicon-play"></span>
+								</h:panelGroup>
+							</h:column>
+							<h:column>
+								<h:panelGroup rendered="#{caseController.isFinished(act.id)}" >
+									<span class="glyphicon glyphicon-ok"></span>
+								</h:panelGroup>
+							</h:column>
+							 -->
+						</h:dataTable>
+					</h:form>
+					</div>
+				</div>
+
+
+				<div class="panel panel-default" id="accordion">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion"
+								href="#collapseOne"> Completed Activities </a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<h:form>
+								<h:dataTable
+									value="#{caseController.historicCaseActivityInstances}"
+									var="activity" styleClass="table table-condensed">
+
+								<h:column>
+									<h:panelGroup rendered="#{activity.calledProcessInstanceId!=null}">
+										<span class="glyphicon glyphicon-cog" title="process" ></span>
+										<a href="/../camunda/app/cockpit/default/#/process-instance/#{activity.calledProcessInstanceId}/history" target="_blank">
+												#{activity.caseActivityName}											
+										</a>
+									</h:panelGroup>									
+									<h:panelGroup rendered="#{activity.taskId!=null}">
+								        <span class="glyphicon glyphicon-user" title="task"></span>
+										#{activity.caseActivityName}											
+									</h:panelGroup>							        
+								</h:column>
+								</h:dataTable>
+
+							</h:form>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</h:body>
+	</ui:define>
+</ui:composition>
