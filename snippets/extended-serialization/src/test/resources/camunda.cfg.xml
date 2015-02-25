@@ -11,6 +11,7 @@
 		<property name="processEnginePlugins">
 			<list>
 				<bean class="org.camunda.spin.plugin.impl.SpinProcessEnginePlugin" />
+				<bean class="com.camunda.consulting.extendedSerialization.plugins.SerializerProcessEnginePlugin"/>
 			</list>
 		</property>
   </bean>
