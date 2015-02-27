@@ -1,0 +1,11 @@
+<modules xmlns="http://smartics.de/ns/jboss-modules-descriptor/1">
+  <module name="$g1">
+    <match>
+      <includes>
+        <include>
+          <groupId>(com.camunda.consulting.extendedSerialization)</groupId>
+        </include>
+      </includes>
+    </match>
+  </module>
+</modules>
