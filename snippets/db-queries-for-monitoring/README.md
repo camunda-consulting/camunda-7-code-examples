@@ -2,7 +2,7 @@
 
 Put the following queries in your favorite monitoring tool, e.g. Nagios,
 and [track them over time](http://docs.pnp4nagios.org/pnp-0.6/gallery/start)
-to monitor Camunda BPM engine performance.
+to monitor [Camunda BPM](http://camunda.org) engine performance.
 
 ```sql
 --  running process instances
@@ -41,7 +41,7 @@ select count(*) from act_hi_incident where lower(incident_msg_) like '%deadlock%
 
 # Additional metrics to monitor
 
-- CPU usage
+- CPU utilization
 - Memory usage
 - Database response time
 - Utilization/size of Job Executor thread pool (Application Server)
