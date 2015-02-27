@@ -1,5 +1,9 @@
 # SQL Queries for Monitoring Camunda BPM
 
+Put the following queries in your favorite monitoring tool, e.g. Nagios,
+and [track them over time](http://docs.pnp4nagios.org/pnp-0.6/gallery/start)
+to monitor Camunda BPM engine performance.
+
 ```sql
 --  running process instances
 select count(*) from act_ru_execution
@@ -34,3 +38,10 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%deadlock%
 -- number incidents with particular error type in history
 select count(*) from act_hi_incident where lower(incident_msg_) like '%deadlock%';
 ```
+
+# Additional metrics to monitor
+
+- CPU usage
+- Memory usage
+- Database response time
+- Utilization/size of Job Executor thread pool (Application Server)
