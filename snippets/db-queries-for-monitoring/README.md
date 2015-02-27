@@ -1,6 +1,6 @@
 # SQL Queries for Monitoring Camunda BPM
 
-Put the following queries in your favorite monitoring tool, e.g. Nagios,
+Put the following queries in your favorite monitoring tool, e.g. [Nagios](http://omdistro.org/),
 and [track them over time](http://docs.pnp4nagios.org/pnp-0.6/gallery/start)
 to monitor [Camunda BPM](http://camunda.org) engine performance.
 
