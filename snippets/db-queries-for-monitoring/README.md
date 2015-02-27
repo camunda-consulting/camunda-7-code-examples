@@ -44,4 +44,5 @@ select count(*) from act_hi_incident where lower(incident_msg_) like '%deadlock%
 - CPU utilization
 - Memory usage
 - Database response time
+- Database size
 - Utilization/size of Job Executor thread pool (Application Server)
