@@ -12,6 +12,7 @@ import org.camunda.spin.DataFormats;
 import org.camunda.spin.impl.json.jackson.format.JacksonJsonDataFormat;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
+import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -61,6 +62,7 @@ public class InMemoryH2Test {
     Product product = new Product();
     product.setName("Praxishandbuch BPMN");
     product.setPrice(Money.of(CurrencyUnit.EUR, new BigDecimal("34.99")));
+    product.setDateCreated(LocalDate.parse("2015-03-01"));
     
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, withVariables("product", product));
     assertThat(pi).isWaitingAt("UserTask_1");

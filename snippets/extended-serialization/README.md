@@ -20,12 +20,15 @@ Built and tested against Camunda BPM version 7.2.0.
 Show me the important parts!
 ----------------------------
 
-![BPMN Process](src/main/resources/process.png)
+
 
 
 How does it work?
 -----------------
 
+To test the dataFormatConfigurator, it uses this process:
+
+![BPMN Process](src/test/resources/process.png)
 
 How to use it?
 --------------
