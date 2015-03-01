@@ -8,8 +8,6 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
-import org.camunda.spin.DataFormats;
-import org.camunda.spin.impl.json.jackson.format.JacksonJsonDataFormat;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.joda.time.LocalDate;
@@ -17,13 +15,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.camunda.consulting.extendedSerialization.serializer.MoneyDeserializer;
-import com.camunda.consulting.extendedSerialization.serializer.MoneySerializer;
-
-import spinjar.com.fasterxml.jackson.databind.ObjectMapper;
-import spinjar.com.fasterxml.jackson.databind.module.SimpleModule;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
@@ -68,7 +60,7 @@ public class InMemoryH2Test {
     assertThat(pi).isWaitingAt("UserTask_1");
     
     ObjectValue jsonProduct = runtimeService().getVariableTyped(pi.getProcessInstanceId(), "product", false);
-    assertThat(jsonProduct.getValueSerialized()).contains("EUR 34.99");
+    assertThat(jsonProduct.getValueSerialized()).contains("EUR 34.99").contains("2015-03-01");
     
     Object deserializedProduct = runtimeService().getVariable(pi.getProcessInstanceId(), "product");
     assertThat(deserializedProduct).isEqualToComparingFieldByField(product);
