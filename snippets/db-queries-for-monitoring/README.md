@@ -32,11 +32,15 @@ and (RES.SUSPENSION_STATE_ = 1 or RES.SUSPENSION_STATE_ is null);
 -- i.e. have no more automatic retries
 select count(*) from act_ru_job where retries_ = 0;
 
--- number incidents with particular error type in running processes
-select count(*) from act_ru_incident where lower(incident_msg_) like '%deadlock%';
+-- number of open incidents in running processes
+select count(*) from act_ru_incident;
 
--- number incidents with particular error type in history
-select count(*) from act_hi_incident where lower(incident_msg_) like '%deadlock%';
+-- number of all incidents in history
+select count(*) from act_hi_incident;
+
+-- number of open incidents with particular error type in running processes
+select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
+
 ```
 
 # Additional metrics to monitor
