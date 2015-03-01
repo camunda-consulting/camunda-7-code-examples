@@ -119,20 +119,47 @@
           <target>1.6</target>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>de.smartics.maven.plugin</groupId>
-        <artifactId>smartics-jboss-modules-maven-plugin</artifactId>
-        <version>2.0.0</version>
-        <executions>
-          <execution>
-            <id>create-modules-archive</id>
-            <goals>
-              <goal>create-modules-archive</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+  
+<profiles>
+  <profile>
+    <id>attach</id>
+
+    <properties>
+      <attach.archive>true</attach.archive>
+    </properties>
+
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>de.smartics.maven.plugin</groupId>
+          <artifactId>smartics-jboss-modules-maven-plugin</artifactId>
+          <version>2.0.0</version>
+          <executions>
+            <execution>
+              <id>create-modules-archive</id>
+              <goals>
+                <goal>create-modules-archive</goal>
+              </goals>
+              <phase>package</phase>
+            </execution>
+          </executions>
+          <configuration>
+            <slotStrategy>main</slotStrategy>
+            <defaultSlot>extended-serialization</defaultSlot>
+            <attach>${attach.archive}</attach>
+
+            <dependencyExcludes>
+              <exclude>
+                <groupId>org\.camunda\.bpm</groupId>
+                <artifactId>camunda-engine</artifactId>
+              </exclude>
+            </dependencyExcludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+  </profile>
+</profiles>  
 </project>
