@@ -1,0 +1,27 @@
+<strong>Here you would put the actual form to work on the task</strong>
+
+<p>You can invoke this form through the camunda tasklist
+  by setting the formKey of a User Task to 'embedded:app:forms/embedded/task-form.html'.</p>
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Name</label>
+    <div class="controls">
+      <input form-field type="string" name="name" readonly="true" />
+      <input type="text" 
+             cam-variable-name="name"
+             readonly="true" 
+             class="form-control"/>      
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Approve?</label>
+    <div class="controls">
+      <input type="checkbox"
+             cam-variable-name="approved"
+		         cam-variable-type="Boolean"
+             name="approved"
+		         class="form-control" />
+    </div>
+  </div>
+</form>
