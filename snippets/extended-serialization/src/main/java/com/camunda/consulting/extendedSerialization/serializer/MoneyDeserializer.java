@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.joda.money.Money;
 
-import spinjar.com.fasterxml.jackson.core.JsonParser;
-import spinjar.com.fasterxml.jackson.core.JsonProcessingException;
-import spinjar.com.fasterxml.jackson.databind.DeserializationContext;
-import spinjar.com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 public class MoneyDeserializer extends StdDeserializer<Money> {
   

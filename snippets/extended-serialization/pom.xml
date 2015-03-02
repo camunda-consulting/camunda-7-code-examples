@@ -45,7 +45,7 @@
     <!-- Required to use Spin dataformat in unit tests -->
     <dependency>
       <groupId>org.camunda.spin</groupId>
-      <artifactId>camunda-spin-dataformat-all</artifactId>
+      <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -147,14 +147,15 @@
           </executions>
           <configuration>
             <slotStrategy>main</slotStrategy>
-            <defaultSlot>extended-serialization</defaultSlot>
             <attach>${attach.archive}</attach>
 
             <dependencyExcludes>
+            <!-- 
               <exclude>
                 <groupId>org\.camunda\.bpm</groupId>
                 <artifactId>camunda-engine</artifactId>
               </exclude>
+              -->
             </dependencyExcludes>
           </configuration>
         </plugin>

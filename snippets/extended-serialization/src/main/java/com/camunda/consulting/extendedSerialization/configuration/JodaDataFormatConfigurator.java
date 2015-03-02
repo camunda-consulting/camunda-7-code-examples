@@ -7,8 +7,8 @@ import org.camunda.spin.spi.DataFormatConfigurator;
 import org.joda.money.Money;
 import org.joda.time.LocalDate;
 
-import spinjar.com.fasterxml.jackson.databind.ObjectMapper;
-import spinjar.com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import com.camunda.consulting.extendedSerialization.serializer.LocalDateDeserializer;
 import com.camunda.consulting.extendedSerialization.serializer.LocalDateSerializer;

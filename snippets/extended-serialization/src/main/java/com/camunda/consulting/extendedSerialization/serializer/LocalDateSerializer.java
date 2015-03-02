@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.joda.time.LocalDate;
 
-import spinjar.com.fasterxml.jackson.core.JsonGenerationException;
-import spinjar.com.fasterxml.jackson.core.JsonGenerator;
-import spinjar.com.fasterxml.jackson.databind.SerializerProvider;
-import spinjar.com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 public class LocalDateSerializer extends StdSerializer<LocalDate> {
   
