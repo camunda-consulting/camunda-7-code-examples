@@ -65,7 +65,7 @@ The JBoss server starts without errors and you can find these lines in your log 
 Packaging of process applications
 ---------------------------------
 
-A process application that uses this dataformat configurator can be found in the snippet [extended-serialization-plugin](https://github.com/camunda/camunda-consulting/tree/master/snippets/extended-serialization-process)
+A process application that uses this dataformat configurator can be found in the snippet [extended-serialization-process](https://github.com/camunda/camunda-consulting/tree/master/snippets/extended-serialization-process)
 
 For the class loading you have to set the artifacts that are used by the DataFormatConfigurator to the scope provided. They must not be packaged into the war, otherwise the serialization will not use your custom serializer and deserializer. 
 
@@ -77,7 +77,7 @@ And to make JBoss to search in the modules for the serializer, you have to add t
 How to use it?
 --------------
 
-Install the modules on your JBoss camunda bpm distribution. Install the process application extended-serialization-process. Start the tasklist and start a process. complete the user task and check the server log for the output of the second service task.  
+Install the modules on your JBoss camunda bpm distribution. Install the process application extended-serialization-process. Log into the tasklist and start a process. Complete the user task and check the server log for the output of the second service task.  
 
 Environment Restrictions
 ------------------------
