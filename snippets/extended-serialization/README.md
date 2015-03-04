@@ -77,7 +77,33 @@ And to make JBoss to search in the modules for the serializer, you have to add t
 How to use it?
 --------------
 
-Install the modules on your JBoss camunda bpm distribution. Install the process application extended-serialization-process. Log into the tasklist and start a process. Complete the user task and check the server log for the output of the second service task.  
+Install the modules on your JBoss camunda bpm distribution. Install the process application extended-serialization-process. Log into the tasklist and start a process. Complete the user task and check the server log for the output of the second service task. 
+
+If you want to access the complex objects via REST-API, always attach `?deserializeValue=false` to the GET request:
+
+    http://localhost:8080/engine-rest/variable-instance/a8b8f2f0-c1d7-11e4-acbc-1abf20524153?deserializeValue=false
+    
+returns:
+
+    {
+      type: "Object"
+      value: "{"name":"exampleName","price":"EUR 34.99","purchaseDate":null}"
+      valueInfo: {
+        serializationDataFormat: "application/json"
+        objectTypeName: "com.camunda.consulting.extendedSerializationProcess.ComplexDataObject"
+      }
+      id: "a8b8f2f0-c1d7-11e4-acbc-1abf20524153"
+      name: "complexValue"
+      processInstanceId: "a89bf50c-c1d7-11e4-acbc-1abf20524153"
+      executionId: "a89bf50c-c1d7-11e4-acbc-1abf20524153"
+      caseInstanceId: null
+      caseExecutionId: null
+      taskId: null
+      activityInstanceId: "a89bf50c-c1d7-11e4-acbc-1abf20524153"
+      errorMessage: null
+    }
+    
+Otherwiese the REST client will try to serialize the Json-Object again without access to the dataFormatConfigurator. Result will be an error like the one from the start of this readme...    
 
 Environment Restrictions
 ------------------------
