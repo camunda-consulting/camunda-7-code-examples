@@ -8,4 +8,13 @@
       </includes>
     </match>
   </module>
+  <module name="org.joda.time" slot="2.1">
+    <match>
+      <includes>
+        <include>
+          <artifactId>joda-time</artifactId>
+        </include>
+      </includes>
+    </match>
+  </module>
 </modules>

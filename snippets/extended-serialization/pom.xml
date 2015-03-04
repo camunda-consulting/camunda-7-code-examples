@@ -76,6 +76,32 @@
   	  <artifactId>joda-money</artifactId>
       <version>0.10.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.4.1</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.4.1</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.camunda.spin</groupId>
+      <artifactId>camunda-spin-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 
@@ -122,45 +148,38 @@
     </plugins>
   </build>
   
-<profiles>
-  <profile>
-    <id>attach</id>
+  <profiles>
+    <profile>
+      <id>attach</id>
 
-    <properties>
-      <attach.archive>true</attach.archive>
-    </properties>
+      <properties>
+        <attach.archive>true</attach.archive>
+      </properties>
 
-    <build>
-      <plugins>
-        <plugin>
-          <groupId>de.smartics.maven.plugin</groupId>
-          <artifactId>smartics-jboss-modules-maven-plugin</artifactId>
-          <version>2.0.0</version>
-          <executions>
-            <execution>
-              <id>create-modules-archive</id>
-              <goals>
-                <goal>create-modules-archive</goal>
-              </goals>
-              <phase>package</phase>
-            </execution>
-          </executions>
-          <configuration>
-            <slotStrategy>main</slotStrategy>
-            <attach>${attach.archive}</attach>
-
-            <dependencyExcludes>
-            <!-- 
-              <exclude>
-                <groupId>org\.camunda\.bpm</groupId>
-                <artifactId>camunda-engine</artifactId>
-              </exclude>
-              -->
-            </dependencyExcludes>
-          </configuration>
-        </plugin>
-      </plugins>
-    </build>
-  </profile>
-</profiles>  
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>de.smartics.maven.plugin</groupId>
+            <artifactId>smartics-jboss-modules-maven-plugin</artifactId>
+            <version>2.0.0</version>
+            <executions>
+              <execution>
+                <id>create-modules-archive</id>
+                <goals>
+                  <goal>create-modules-archive</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <slotStrategy>main</slotStrategy>
+              <attach>${attach.archive}</attach>
+              <dependencyExcludes>
+              </dependencyExcludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>  
 </project>
