@@ -73,7 +73,9 @@ public class InMemoryH2Test {
     ProcessEngine processEngine = processEngine();
 
     // HashMap containing variables to be added to case instance
-    VariableMap variables = Variables.createVariables().putValue("application", new Application());
+    VariableMap variables = Variables.createVariables() //
+        .putValue("application", new Application()) //
+        .putValue("capableUnderwriters", "demo");
 
     // create the case instance
     CaseInstance caseInstance = processEngine.getCaseService().createCaseInstanceByKey("underwriting", variables);
