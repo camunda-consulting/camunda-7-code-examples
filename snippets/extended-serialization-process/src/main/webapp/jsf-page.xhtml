@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:head>
+	  <title>JSF Page</title>
+    <h:outputStylesheet library="webjars/bootstrap/2.3.2/css" name="bootstrap.css"/>
+    <!-- if you need it - it is right there: 
+    <h:outputScript type="text/javascript" library="webjars/bootstrap/2.3.2/js" name="bootstrap.js" />    
+    -->
+  </h:head>
+  <h:body>
+	  <div class="container">
+	  	<h:form>          
+	  		<fieldset>
+	  			<legend>Some Form</legend>
+	  			<p>
+	  			  This is a sample for a simple JSF page which can be used e.g. to trigger some
+	  			  method on a service or bean.
+	  			</p>
+	  			<p>
+	  				<label>Field1</label>
+	  				<h:inputText value="#binding1" />
+	  			</p>
+	  			<h:commandButton action="#submit" value="Submit" styleClass="btn btn-primary"/>
+	  		</fieldset>
+	  	</h:form>
+	  </div>
+  </h:body>
+</html>

@@ -1,0 +1,20 @@
+<modules xmlns="http://smartics.de/ns/jboss-modules-descriptor/1">
+  <module name="$g1">
+    <match>
+      <includes>
+        <include>
+          <groupId>(com.camunda.consulting.extendedSerialization)</groupId>
+        </include>
+      </includes>
+    </match>
+  </module>
+  <module name="org.joda.time" slot="2.1">
+    <match>
+      <includes>
+        <include>
+          <artifactId>joda-time</artifactId>
+        </include>
+      </includes>
+    </match>
+  </module>
+</modules>
