@@ -1,10 +1,13 @@
 package com.camunda.consulting.extendedSerializationProcess;
 
+import java.io.Serializable;
+
 import org.joda.money.Money;
 import org.joda.time.LocalDate;
 
-public class ComplexDataObject {
+public class ComplexDataObject implements Serializable {
   
+  private static final long serialVersionUID = 1L;
   private String name; 
   private Money price;
   private LocalDate purchaseDate;
