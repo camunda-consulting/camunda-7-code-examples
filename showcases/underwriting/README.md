@@ -2,8 +2,8 @@
 =========================
 
 This project is a sample application using BPMN + CMMN to implement a typical underwriting process of an insurance company
-(but is actually pretty generic to serve other industries as well). It was build for the 
-[Camunda Hands-On Webinar on CMMN](http://camunda.com/landing/webinars-72-handson/).
+(but is actually pretty generic to serve other industries as well). It was initially build for the 
+[Camunda Hands-On Webinar on CMMN](https://network.camunda.org/webinars/7).
 
 It includes a user interface for the knowledge worker implemented in JSF.
 

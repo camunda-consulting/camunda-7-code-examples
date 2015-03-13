@@ -62,9 +62,11 @@ public class CaseController implements Serializable {
     String caseInstanceId = requestParameterMap.get("caseInstanceId");
     if (taskId != null) {
       selectTask(taskId);
-      Task loadedTask = selectedTask;
-      initByCaseInstanceId(selectedTask.getCaseInstanceId()); // does a reset!
-      selectedTask = loadedTask;
+      if (selectedTask!=null) {
+        Task loadedTask = selectedTask;
+        initByCaseInstanceId(selectedTask.getCaseInstanceId()); // does a reset!
+        selectedTask = loadedTask;
+       }
     } else if (caseInstanceId != null) {
       initByCaseInstanceId(caseInstanceId);
     }
@@ -81,6 +83,9 @@ public class CaseController implements Serializable {
 
   public void initByCaseInstanceId(final String caseInstanceId) {
     reset();
+    if (engine.getCaseService().createCaseExecutionQuery().caseInstanceId(caseInstanceId).count()==0) {
+      return;
+    }
     application = (Application) engine.getCaseService().getVariable(caseInstanceId, Constants.VAR_NAME_APPLICATION);
     caseInstance = engine.getCaseService().createCaseInstanceQuery().caseInstanceId(caseInstanceId).singleResult();
     caseDefinition = engine.getRepositoryService().getCaseDefinition(caseInstance.getCaseDefinitionId());
@@ -106,6 +111,13 @@ public class CaseController implements Serializable {
           .caseInstanceId(caseInstance.getId()) //
           .completed() //
           .list();
+  }
+  
+  public Object getTaskVariable(String name) {
+    if (selectedTask!=null) {
+      return engine.getTaskService().getVariable(selectedTask.getId(), "capableUnderwriters");
+    }
+    return null;
   }
 
   public String executeCaseActivityAndSelectTask(CaseExecution execution) {
@@ -191,6 +203,9 @@ public class CaseController implements Serializable {
 
   public void selectTask(final String taskId) {
     selectedTask = engine.getTaskService().createTaskQuery().taskId(taskId).singleResult();
+    if(selectedTask==null) {
+      return;
+    }
     claimSelectedTaskForCurrentUser();
   }
 
@@ -224,8 +239,11 @@ public class CaseController implements Serializable {
     taskFormVariables = new HashMap<String, Object>();
     refreshCaseInfo();
     selectedTask = null;
-
-    return "case-form.jsf?caseInstanceId=" + caseInstance.getId();
+    if (caseInstance==null) {
+      return "case-instances.jsf";      
+    } else {
+      return "case-form.jsf?caseInstanceId=" + caseInstance.getId();
+    }
   }
 
   private HashMap<String, Object> saveVariables() {

@@ -14,7 +14,13 @@
 		<div>				
 				Customer Name: 
 				<h:outputText value="#{caseController.application.customerName}" />
-		</div>				
+		</div>	
+		 			
+		<div>				
+				Capable Underwriters: 
+				<h:outputText value="#{caseController.getTaskVariable('capableUnderwriters')}" />
+		</div>
+		 		
 
 		<div>				
 				<label>Evaluation Comments</label>

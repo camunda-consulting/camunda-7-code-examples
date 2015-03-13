@@ -16,23 +16,32 @@
 			<div class="container">
 						<h:form class="form-horizontal" role="form">
 							<div class="form-group">
-								<label for="inputKundennummer" class="col-md-3 control-label">Customer ID
+								<label for="inputCustomerId" class="col-md-3 control-label">Customer ID
 								</label>
 								<div class="col-md-9">
 									<h:inputText type="input" class="form-control"
-										id="inputKundennummer" pt:placeholder="Kundennummer"
+										id="inputCustomerId" pt:placeholder="Customer ID"
 										value="#{newApplication.application.customerId}" />
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputKreditnehmer" class="col-md-3 control-label">Customer Name
+								<label for="inputCustomerName" class="col-md-3 control-label">Customer Name
 								</label>
 								<div class="col-md-9">
 									<h:inputText type="input" class="form-control"
-										id="inputKreditnehmer" pt:placeholder="Kreditnehmer"
+										id="inputCustomerName" pt:placeholder="Customer Name"
 										value="#{newApplication.application.customerName}" />
 								</div>
 							</div>
+							<div class="form-group">
+								<label for="age" class="col-md-3 control-label">Age?
+								</label>
+								<div class="col-md-9">
+									<h:inputText class="form-control"
+										id="age" 
+										value="#{newApplication.application.age}" />
+								</div>
+							</div>							
 							<div class="form-group">
 								<label for="smoker" class="col-md-3 control-label">Smoker?
 								</label>
@@ -41,7 +50,31 @@
 										id="smoker" 
 										value="#{newApplication.application.smoker}" />
 								</div>
-							</div>							
+							</div>		
+							<div class="form-group">
+								<label for="type" class="col-md-3 control-label">Insurance Type?
+								</label>
+								<div class="col-md-9">
+									<h:selectOneMenu  class="form-control"
+										id="type" 
+										value="#{newApplication.application.type}">
+   										<f:selectItem itemValue="basic" itemLabel="basic" />
+   										<f:selectItem itemValue="chief physician" itemLabel="chief physician guaranteed" />
+   									</h:selectOneMenu>										
+								</div>
+							</div>														
+							<div class="form-group">
+								<label for="risk" class="col-md-3 control-label">Risk (entered here manually for simulation!)
+								</label>
+								<div class="col-md-9">
+									<h:selectOneMenu  class="form-control"
+										id="risk" 
+										value="#{newApplication.application.risk}">
+   										<f:selectItem itemValue="low" itemLabel="low" />
+   										<f:selectItem itemValue="high" itemLabel="high" />
+   									</h:selectOneMenu>										
+								</div>
+							</div>														
 							<div class="form-group">
 								<div class="col-md-offset-2 col-md-10 text-right">
 									<h:commandButton type="submit" class="btn btn-primary" action="#{newApplication.saveAction}" value="Create"></h:commandButton>
