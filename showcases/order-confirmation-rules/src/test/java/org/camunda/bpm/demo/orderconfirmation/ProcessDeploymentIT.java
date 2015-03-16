@@ -1,13 +1,14 @@
 package org.camunda.bpm.demo.orderconfirmation;
 
+import java.io.File;
+
 import org.camunda.bpm.engine.RuntimeService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,21 +24,15 @@ public class ProcessDeploymentIT {
     @Deployment
     public static WebArchive createDeployment() {
 
-        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class)
-                .goOffline()
-                .loadMetadataFromPom("pom.xml");
+      File[] libs = Maven.resolver()
+          .offline(false)
+          .loadPomFromFile("pom.xml")
+          .importRuntimeAndTestDependencies().resolve().withTransitivity().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "process-deployment-and-start-test.war")
-                .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
-                .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
-                .addAsLibraries(resolver.artifact("org.drools:drools-core").resolveAsFiles())
-                .addAsLibraries(resolver.artifact("org.drools:drools-compiler").resolveAsFiles())
-                .addAsLibraries(resolver.artifact("org.drools:drools-templates").resolveAsFiles())
-
-                .addAsLibraries(resolver.artifact("org.easytesting:fest-assert-core").resolveAsFiles())
+                .addAsLibraries(libs)
 
                 .addAsResource("OrderConfirmation.bpmn")
-
 
                 .addPackage("org.camunda.bpm.demo.orderconfirmation.bean")
                 .addPackage("org.camunda.bpm.demo.orderconfirmation.model")
@@ -46,7 +41,7 @@ public class ProcessDeploymentIT {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
 
                 // prepare as process application archive for the camunda BPM platform
-                .addAsWebResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml");
+                .addAsResource("META-INF/processes.xml", "WEB-INF/classes/META-INF/processes.xml");
     }
 
     @Inject

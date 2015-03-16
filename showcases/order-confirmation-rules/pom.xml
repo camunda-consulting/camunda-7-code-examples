@@ -12,7 +12,7 @@
 	<description>This is an application demonstrating camunda BPM and Drools.</description>
 
 	<properties>
-    <camunda-bpm.version>7.0.0-Final</camunda-bpm.version>
+        <camunda.version>7.2.0</camunda.version>
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
 		<drools.version>5.3.0.Final</drools.version>
         <fest.assert.version>2.0M10</fest.assert.version>
@@ -21,24 +21,43 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Avoid the message "[WARNING] Using platform encoding (UTF-8 actually) ... also for the surefire and failsafe plugins -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <arquillian.version>1.1.2.Final</arquillian.version>
+        <jboss.version>7.2.0.Final</jboss.version>
 	</properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${camunda.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <!-- Needed for ArquillianTest -->
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine</artifactId>
-			<version>${camunda-bpm.version}</version>
             <scope>provided</scope>
 		</dependency>
         <dependency>
             <groupId>org.camunda.bpm.javaee</groupId>
             <artifactId>camunda-ejb-client</artifactId>
-            <version>${camunda-bpm.version}</version>
         </dependency>
         <dependency>
             <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-engine-cdi</artifactId>
-            <version>${camunda-bpm.version}</version>
         </dependency>
 
 		<dependency>
@@ -70,14 +89,25 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.0.3.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- Needed for ArquillianTest -->
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <!-- Needed for ArquillianTest -->
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -94,13 +124,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-        <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-arquillian-container-remote</artifactId>
-            <version>7.1.3.Final</version>
-            <scope>test</scope>
-        </dependency>
 
 		<dependency>
 			<groupId>org.drools</groupId>
@@ -129,7 +152,7 @@
             <artifactId>bootstrap</artifactId>
             <version>2.1.1</version>
         </dependency>
-</dependencies>
+    </dependencies>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -144,7 +167,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
+				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>		
 				</configuration>
@@ -152,7 +175,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.13</version>
+                <version>2.17</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -160,8 +183,65 @@
                 <version>2.14</version>
                 <!-- Will default to execute all *IT.java tests -->
             </plugin>
+            <plugin>
+                <!-- Usage: mvn jboss-as:deploy See also: https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html -->
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>7.6.Final</version>
+            </plugin>
 		</plugins>
 	</build>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <!-- Needed for ArquillianTest -->
+                    <!-- Requires a running JBoss AS7 with camunda BPM
+                         change to other artifact for embedded start or different server -->
+                    <!-- Included here for convenience when running the test in Eclipse -->
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>${jboss.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.17</version>
+                        <configuration>
+                            <excludes>
+                                <!-- Exclusion for Arquillian test cases to avoid dependency on infrastructure 
+                                     for Maven build. Feel free to adjust to your testing requirements. -->
+                                <exclude>**/Arquillian*.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>     
+                </plugins>
+            </build>
+        </profile>    
+        <profile>
+            <id>arq-jbossas-remote</id>
+            <dependencies>
+                <dependency>
+                    <!-- Needed for ArquillianTest -->
+                    <!-- Requires a running JBoss AS7 with camunda BPM
+                         change to other artifact for embedded start or different server -->
+                    <groupId>org.jboss.as</groupId>
+                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
+                    <version>${jboss.version}</version>
+                    <scope>test</scope>
+               </dependency>
+           </dependencies>
+        </profile>
+    </profiles>
 
 	<repositories>
         <repository>
