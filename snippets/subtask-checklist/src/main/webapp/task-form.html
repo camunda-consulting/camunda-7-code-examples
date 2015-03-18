@@ -1,0 +1,34 @@
+
+
+<form role="form">
+
+<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Status</th>
+	      <th>Aufgabe</th>
+	    </tr>
+	  </thead>
+	  <tr ng-repeat="dto in subtasks" >
+	    <td>
+	    	<i class="glyphicon glyphicon-pencil" ng-if="!dto.endTime"></i>
+	    	<i class="glyphicon glyphicon-ok" ng-if="dto.endTime"></i>
+	    </td>
+	    <td>
+	    	<s ng-if="dto.endTime">{{dto.name}}</s>
+	    	<span ng-if="!dto.endTime"><a href="/camunda/app/tasklist/default/#/?task={{dto.id}}">{{dto.name}}</a></span>
+	    </td>	  
+	  </tr>
+</table>
+
+  <script cam-script type="text/form-script">
+  	
+  	 $.get( '/camunda/api/engine/engine/default/history/task?taskParentTaskId=' + camForm.taskId, function( result ) {
+         $scope.$apply(function () {
+            $scope.subtasks = result;
+         });
+	   });
+  	
+  </script>
+
+</form>
