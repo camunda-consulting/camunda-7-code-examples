@@ -17,9 +17,6 @@
         <camunda:properties>
           <camunda:property value="[       {           &quot;taskName&quot;: &quot;checkmilage&quot;,           &quot;taskFormKey&quot;: &quot;myForm.jsf&quot;       },       {           &quot;taskName&quot;: &quot;checkdamages&quot;,           &quot;taskFormKey&quot;: &quot;myForm.jsf&quot;       }   ]" name="subtaskConfiguration"/>
         </camunda:properties>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="test">Hallo #{name}</camunda:inputParameter>
-        </camunda:inputOutput>
         <camunda:taskListener class="com.camunda.bpm.demo.subtask_checklist.VerifySubtasksEndedListener" event="complete"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
