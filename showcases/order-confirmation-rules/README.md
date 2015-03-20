@@ -17,17 +17,17 @@ This is a sample for the [camunda BPM platform](http://camunda.org/) on [Java EE
 
 # Getting Started
 
-1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.0.0-Final)** from [here](http://camunda.org/download.html).
-1. Install it, start it with `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/bin$ ./standalone.sh`
+1. Download the [camunda BPM platform](http://camunda.org/) for JBoss AS 7 **(tested on 7.2.0)** from [here](http://camunda.org/download.html).
+1. Install it, start it with `start-camunda.bat`
 1. Make sure JBoss AS 7 is running by pointing your browser to `http://localhost:8080/`
 1. Make sure you have the following installed *and working*:
-    * [Java Platform (*JDK*) 1.6.x](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+    * at least [Java Platform (*JDK*) 1.6.x](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
     * [Maven](http://maven.apache.org/) 3.0.x
     * [Git](http://git-scm.com/) 1.7.x
 1. Clone this repository
 1. Build the application with `mvn package`
 1. Optional: to run the Arquillian integration test do `mvn failsafe:integration-test`
-1. Copy the generated WAR artifact to the JBoss AS 7 deployment directory `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.1.3.Final/standalone/deployments/`
+1. Copy the generated WAR artifact to the JBoss AS 7 deployment directory `<CAMUNDA_BPM_PLATFORM_HOME>/server/jboss-as-7.2.0.Final/standalone/deployments/`
 1. Point your browser to `http://localhost:8080/order-confirmation-rules/` and enjoy!
 
 # Further Resources
