@@ -3,7 +3,7 @@ subtask-checklist
 
 This project shows how to use subtasks within a BPMN UserTask by defining them in the process model (XML). An Extension Element is used and this JSON string configures the subtasks:
 
-<code>
+<pre><code>
 [
     {
         "taskName": "checkmilage",
@@ -14,11 +14,11 @@ This project shows how to use subtasks within a BPMN UserTask by defining them i
         "taskFormKey": "myForm.jsf"
     }
 ]
-</code>
+</code></pre>
 
 This can be directly used within the BPMN process:
 
-<code>
+<pre><code>
     <bpmn2:userTask id="Task_1" camunda:formKey="embedded:app:task-form.html" name="do various checks">
       <bpmn2:extensionElements>
         <camunda:taskListener class="com.camunda.bpm.demo.subtask_checklist.CreateSubTasksListener" event="create"/>
@@ -30,7 +30,7 @@ This can be directly used within the BPMN process:
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>
-</code>
+</code></pre>
 
 A TaskListener creates the subtask when the UserTask is entered.
 
