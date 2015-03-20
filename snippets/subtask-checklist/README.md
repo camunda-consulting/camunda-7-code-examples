@@ -32,11 +32,11 @@ This can be directly used within the BPMN process:
     </bpmn2:userTask>
 ```
 
-A TaskListener creates the subtask when the UserTask is entered.
+A TaskListener creates the subtask when the UserTask is entered. In the form used to display the task I simply visualized the subtasks as list indicating the status:
 
-A second TaskListener verifies that the UserTask can only be completed if all subtasks are completed.
+![Screenshot](screenshot.png)
 
-Built and tested against Camunda BPM version 7.2.0.
+A second TaskListener verifies that the UserTask can only be completed if all subtasks are completed - otherwise you get an exception.
 
 
 Environment Restrictions
