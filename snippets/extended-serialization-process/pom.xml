@@ -193,6 +193,7 @@
         <configuration>
           <!-- A web.xml is no longer required. -->
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <!-- include the MANIFEST.MF with JBoss dependencies -->
           <archive>
             <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
           </archive>
