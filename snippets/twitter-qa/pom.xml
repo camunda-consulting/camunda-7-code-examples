@@ -126,7 +126,12 @@
     </dependency>
 
     <!-- Add your own dependencies here, if in compile scope, they are added to the war -->
-
+    <dependency>
+      <groupId>org.twitter4j</groupId>
+      <artifactId>twitter4j-core</artifactId>
+      <version>3.0.5</version>
+    </dependency>
+    
   </dependencies>
 
   <repositories>

@@ -36,11 +36,10 @@
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTask_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:scriptTask id="ServiceTask_1" name="Publish on Twitter" scriptFormat="JavaScript">
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="com.camunda.training.twitterQa.CreateTweetDelegate" name="Publish on Twitter">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-      <bpmn2:script>println('Publish on Twitter!');</bpmn2:script>
-    </bpmn2:scriptTask>
+    </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
