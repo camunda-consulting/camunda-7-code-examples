@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:head>
+	  <title>Statistics</title>
+  		<h:outputStylesheet library="css" name="jquery.jqplot.css"/>
+  </h:head>
+  <h:body>
+	  <div class="container">
+	  	<h:form>          
+	 		<div id="milestoneChart"></div>
+	  		<h:commandButton action="#{statisticsMilestoneBean.updateStats()}" value="Update" styleClass="btn btn-primary"/>
+	 		<div id="phasesChart"></div>
+	  		<h:commandButton action="#{statisticsPhasesBean.updateStats()}" value="Update" styleClass="btn btn-primary"/>
+	  	</h:form>
+	  </div>
+	  
+  	  <h:outputScript library="js" name="jquery.js"  />	  
+  	  <h:outputScript library="js" name="jquery.jqplot.js"  />
+  	  <h:outputScript library="js" name="jqplot.barRenderer.js"  />
+  	  <h:outputScript library="js" name="jqplot.categoryAxisRenderer.js"  />
+	  <h:outputScript target="body">
+	  
+$(document).ready(function(){
+		$.jqplot.config.enablePlugins = true;
+
+		var axisDatesMilestone = #{statisticsMilestoneBean.axisDates};
+		var chartDataMilestone = #{statisticsMilestoneBean.chartData};
+         var milestoneChart = $.jqplot('milestoneChart', [chartDataMilestone], {
+            title: 'Reached Milestones (Sum)',
+             seriesDefaults:{
+                 renderer: $.jqplot.BarRenderer,
+                 rendererOptions: {
+                    barDirection: 'horizontal'
+                }, 
+                color: '#610000',
+                pointLabels: { show: true }
+            },   
+            axes: {
+                yaxis: {                            
+                        renderer:  $.jqplot.CategoryAxisRenderer,
+                        ticks: axisDatesMilestone
+                },
+                xaxis: {
+                    tickInterval: 1
+                }
+            }
+        });
+            
+            
+		var axisDatesPhases = #{statisticsPhasesBean.axisDates};
+		var chartDataPhases = #{statisticsPhasesBean.chartData};
+        var phasesChart = $.jqplot('phasesChart', [chartDataPhases], {
+            title: 'Currently Active Phases (Count)',
+             seriesDefaults:{
+                 renderer: $.jqplot.BarRenderer,
+                 rendererOptions: {
+                    barDirection: 'horizontal'
+                }, 
+                color: '#610000',
+                pointLabels: { show: true }
+            },
+            axes: {
+                yaxis: {                            
+                        renderer:  $.jqplot.CategoryAxisRenderer,
+                        ticks: axisDatesPhases
+                },
+                xaxis: {
+                    tickInterval: 1
+                }
+            }
+        });            
+});	 	          
+	  </h:outputScript>
+  </h:body>
+</html>
