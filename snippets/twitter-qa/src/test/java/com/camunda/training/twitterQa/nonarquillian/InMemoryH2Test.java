@@ -45,8 +45,17 @@ public class InMemoryH2Test {
   @Test
   @Deployment(resources = "process.bpmn")
   public void testStartSimpleProcessForLab3() {
-    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "I did it with variable! Cheers The Trainer", "approved", true));
     assertThat(pi).isEnded().hasPassed("ServiceTask_1");
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testRejectTweetForLab4() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "I did it with variable! Cheers The Trainer", "approved", false));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_2");    
   }
 
 }
