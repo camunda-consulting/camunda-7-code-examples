@@ -15,7 +15,7 @@
     <bpmn2:endEvent id="EndEvent_1" name="Tweet handled">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:manualTask id="UserTask_1" camunda:candidateGroups="management" name="Review Tweet">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" name="Review Tweet">
       <bpmn2:extensionElements>
         <camunda:formData>
           <camunda:formField id="content" label="Tweet" type="string">
@@ -28,7 +28,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-    </bpmn2:manualTask>
+    </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="Approved?">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>

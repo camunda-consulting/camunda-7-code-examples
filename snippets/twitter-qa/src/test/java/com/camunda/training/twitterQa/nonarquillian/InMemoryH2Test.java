@@ -3,6 +3,7 @@ package com.camunda.training.twitterQa.nonarquillian;
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.impl.util.LogUtil;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Before;
@@ -46,7 +47,10 @@ public class InMemoryH2Test {
   @Deployment(resources = "process.bpmn")
   public void testStartSimpleProcessForLab3() {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
-        withVariables("content", "I did it with variable! Cheers The Trainer", "approved", true));
+        withVariables("content", "I did it with variable and user task! Cheers The Trainer"));
+    Task reviewTask = taskQuery().taskCandidateGroup("management").singleResult();
+    assertThat(reviewTask).hasName("Review Tweet");
+    taskService().complete(reviewTask.getId(), withVariables("approved", true));
     assertThat(pi).isEnded().hasPassed("ServiceTask_1");
   }
   
@@ -54,7 +58,10 @@ public class InMemoryH2Test {
   @Deployment(resources = "process.bpmn")
   public void testRejectTweetForLab4() {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
-        withVariables("content", "I did it with variable! Cheers The Trainer", "approved", false));
+        withVariables("content", "I did it with variable! Cheers The Trainer"));
+    Task reviewTask = taskQuery().taskCandidateGroup("management").singleResult();
+    assertThat(reviewTask).hasName("Review Tweet");
+    taskService().complete(reviewTask.getId(), withVariables("approved", false));
     assertThat(pi).isEnded().hasPassed("ServiceTask_2");    
   }
 
