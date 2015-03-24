@@ -4,13 +4,13 @@
     <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="twitter-qa"/>
   </bpmn2:collaboration>
   <bpmn2:process id="twitter-qa" name="twitter-qa" isExecutable="true">
-    <bpmn2:startEvent id="StartEvent_1" camunda:formKey="embedded:app:start-form.html" name="Tweet written">
+    <bpmn2:startEvent id="StartEvent_1" camunda:formKey="app:forms/jsf/start-form.jsf" name="Tweet written">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:endEvent id="EndEvent_1" name="Tweet handled">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" camunda:formKey="embedded:app:task-form.html" name="Review Tweet">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" camunda:formKey="app:forms/jsf/task-form.jsf" name="Review Tweet">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>

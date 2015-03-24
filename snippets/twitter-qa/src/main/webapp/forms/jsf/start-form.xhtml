@@ -33,8 +33,8 @@
 		        by setting the formKey of a Start Task to 'app:forms/jsf/start-form.jsf'.
 		      </p>
 					<p>		       
-			      <label>Name</label>
-			      <h:inputText disabled="false" id="name" value="#{processVariables['name']}" />
+			      <label>Tweet Content</label>
+			      <h:inputText disabled="false" id="content" value="#{processVariables['content']}" />
 			    </p>
 		      <h:commandButton id="submit_button" value="Start Process"
 		        action="#{camundaTaskForm.completeProcessInstanceForm()}" styleClass="btn btn-primary" />
