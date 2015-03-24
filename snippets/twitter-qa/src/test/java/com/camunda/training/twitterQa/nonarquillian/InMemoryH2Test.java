@@ -43,7 +43,7 @@ public class InMemoryH2Test {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
   
-//  @Test
+  @Test
   @Deployment(resources = "process.bpmn")
   public void testStartSimpleProcessForLab3() {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 

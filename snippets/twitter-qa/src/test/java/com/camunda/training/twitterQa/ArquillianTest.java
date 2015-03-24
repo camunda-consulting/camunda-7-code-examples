@@ -1,5 +1,6 @@
 package com.camunda.training.twitterQa;
 
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import static org.junit.Assert.*;
 
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -61,17 +63,17 @@ public class ArquillianTest {
 	init(processEngine);
   }
 
-  /**
-   * Tests that the process is executable and reaches its end.
-   */
   @Test
-  public void testProcessExecution() throws Exception {
+  public void testRunProcessWithPublish() {
     cleanUpRunningProcessInstances();
-    
-    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
-
-    assertThat(processInstance).isEnded();
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "I did it with variable and user task from Arquillian! Cheers The Trainer"));
+    Task reviewTask = taskQuery().taskCandidateGroup("management").singleResult();
+    assertThat(reviewTask).hasName("Review Tweet");
+    taskService().complete(reviewTask.getId(), withVariables("approved", true));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_1");
   }
+  
 
   /**
    * Helper to delete all running process instances, which might disturb our Arquillian Test case

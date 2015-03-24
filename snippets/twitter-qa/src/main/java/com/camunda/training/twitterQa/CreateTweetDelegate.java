@@ -2,6 +2,8 @@ package com.camunda.training.twitterQa;
 
 import java.util.logging.Logger;
 
+import javax.inject.Named;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -9,6 +11,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
+@Named
 public class CreateTweetDelegate implements JavaDelegate {
 
   private static final Logger LOGGER = Logger.getLogger(CreateTweetDelegate.class.getName());
