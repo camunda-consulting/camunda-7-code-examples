@@ -5,12 +5,27 @@
   </bpmn2:collaboration>
   <bpmn2:process id="twitter-qa" name="twitter-qa" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" name="Tweet written">
+      <bpmn2:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="content" label="Tweet" type="string"/>
+        </camunda:formData>
+      </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:endEvent id="EndEvent_1" name="Tweet handled">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" name="Review Tweet">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" name="Review Tweet">
+      <bpmn2:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="content" label="Tweet" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly"/>
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="approved" label="Approved" type="boolean"/>
+        </camunda:formData>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -21,16 +36,22 @@
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTask_1" targetRef="ExclusiveGateway_1"/>
-    <bpmn2:serviceTask id="ServiceTask_1" name="Publish on Twitter">
+    <bpmn2:scriptTask id="ServiceTask_1" name="Publish on Twitter" scriptFormat="JavaScript">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-    </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_1"/>
-    <bpmn2:serviceTask id="ServiceTask_2" name="Send rejection notfication">
+      <bpmn2:script>println('Publish on Twitter!');</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_1">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${approved}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="ServiceTask_2" name="Send rejection notfication" scriptFormat="JavaScript">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-    </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_2"/>
+      <bpmn2:script>println('Send rejection notification');</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_2">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!approved}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_2">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
