@@ -2,6 +2,7 @@ package com.camunda.training.twitterQa.nonarquillian;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.impl.util.LogUtil;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Before;
@@ -39,6 +40,13 @@ public class InMemoryH2Test {
   @Deployment(resources = "process.bpmn")
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testStartSimpleProcessForLab3() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+    assertThat(pi).isEnded().hasPassed("ServiceTask_1");
   }
 
 }
