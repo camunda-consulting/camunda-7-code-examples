@@ -16,7 +16,7 @@
             <cmmn:sentry id="sentrySmoker">
 				<cmmn:ifPart>
 					<cmmn:condition>
-						<cmmn:body>${application.smoker}</cmmn:body>
+						<cmmn:body>${customerSmoker}</cmmn:body>
 					</cmmn:condition>
 				</cmmn:ifPart>                
             </cmmn:sentry>
@@ -48,7 +48,7 @@
 
 			<!-- Plan Item Definitions -->
             <cmmn:humanTask id="humanTaskSmoker" name="adjust risk profile for smoker" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
-            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-decide-application.jsf">
+            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-decide-application.jsf" >
 <!-- 				<cmmn:extensionElements>
 					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
 				</cmmn:extensionElements>
@@ -61,9 +61,9 @@
 					</cmmn:manualActivationRule>
                 </cmmn:defaultControl>
             </cmmn:humanTask>
-            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf" />
-            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf"/>
-            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true" camunda:assignee="demo" camunda:formKey="app:form-missing.jsf">
+            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" camunda:assignee="demo" camunda:formKey="embedded:app:forms/comment.html" />
+            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true" camunda:assignee="demo" camunda:formKey="embedded:app:forms/teleInterview.html"/>
+            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true" camunda:assignee="demo" camunda:formKey="embedded:app:forms/teleInterviewResult.html">
                 <cmmn:defaultControl>
 					<cmmn:manualActivationRule>
 						<cmmn:condition>

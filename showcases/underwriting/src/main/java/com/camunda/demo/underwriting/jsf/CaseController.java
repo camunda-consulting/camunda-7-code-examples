@@ -2,6 +2,7 @@ package com.camunda.demo.underwriting.jsf;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,6 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.history.HistoricCaseActivityInstance;
-import org.camunda.bpm.engine.impl.cmmn.entity.runtime.CaseExecutionEntity;
-import org.camunda.bpm.engine.impl.cmmn.execution.CaseExecutionState;
 import org.camunda.bpm.engine.repository.CaseDefinition;
 import org.camunda.bpm.engine.runtime.CaseExecution;
 import org.camunda.bpm.engine.runtime.CaseInstance;
@@ -33,8 +32,15 @@ public class CaseController implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private Application application;
+  
 
-  @Inject
+  public Map<String, Object> getCaseVariables() {
+	return engine.getCaseService().getVariables(caseInstance.getId());
+}
+
+
+
+@Inject
   private ProcessEngine engine;
   
   private CaseInstance caseInstance;
@@ -42,6 +48,8 @@ public class CaseController implements Serializable {
   private Task selectedTask;
 
   private CaseDefinition caseDefinition;
+  
+  private String assignee;
 
   @Inject
   private UserController currentUser;
@@ -126,7 +134,16 @@ public class CaseController implements Serializable {
     List<Task> tasks = engine.getTaskService().createTaskQuery().caseExecutionId(execution.getId()).list();
     if (tasks.size() > 0) {
       selectedTask = tasks.get(0);
+
+      selectedTask.setAssignee(getAssignee());
+      
+
+      engine.getTaskService().saveTask(selectedTask);
+      
     }
+    
+
+    
     
     // now enabled/active activities have changed
     refreshCaseInfo();
@@ -229,12 +246,18 @@ public class CaseController implements Serializable {
 
   public String completeSelectedTask() {
     
+  
     HashMap<String, Object> variables = saveVariables();
+    
+    System.out.println (selectedTask.getId());
+    System.out.println (selectedTask.getName());
     
     // complete task (variables are ignored due to bug https://app.camunda.com/jira/browse/CAM-3261)
     // hence variables are saved beforehand (workaround)
     engine.getTaskService().complete(selectedTask.getId(), variables);
 
+    
+    
     // reset task form
     taskFormVariables = new HashMap<String, Object>();
     refreshCaseInfo();
@@ -318,6 +341,14 @@ public class CaseController implements Serializable {
   
   public List<HistoricCaseActivityInstance> getHistoricCaseActivityInstances() {
     return historicActivityInstances;
-  } 
+  }
+
+public String getAssignee() {
+	return assignee;
+}
+
+public void setAssignee(String assignee) {
+	this.assignee = assignee;
+} 
   
 }
