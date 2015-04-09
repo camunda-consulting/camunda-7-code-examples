@@ -16,6 +16,8 @@ Cross-origin resource sharing may generally enabled (and security disabled!) by:
 1. mvn clean test
 2. Open html files which are created in the directory target/process-test-coverage/
 
+![Screenshot](screenshot.png)
+
 # Known Issues
 
 # Improvements Backlog
