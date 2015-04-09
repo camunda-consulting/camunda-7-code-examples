@@ -1,23 +1,18 @@
 package com.camunda.demo.webinar.testing.scope1;
 
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.complete;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.execute;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.job;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
-import static org.junit.Assert.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
-import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.history.HistoricVariableInstance;
-import org.camunda.bpm.engine.impl.test.ProcessEngineAssert;
 import org.camunda.bpm.engine.impl.util.LogUtil;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
@@ -27,8 +22,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
@@ -40,7 +33,7 @@ import com.camunda.demo.webinar.testing.CustomerServiceImpl;
  * Test case starting an in-memory database-backed Process Engine.
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest( fullyQualifiedNames = {"com.camunda.demo.webinar.testing.*"} )
+//@PrepareForTest( fullyQualifiedNames = {"com.camunda.demo.webinar.testing.*"} )
 public class MockitoTestCase {
 
 	@Rule
