@@ -7,13 +7,11 @@ import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.execute;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.job;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.SQLException;
 
 import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
@@ -22,8 +20,6 @@ import org.camunda.bpm.engine.variable.Variables;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
-
-import com.camunda.demo.webinar.testing.CustomerServiceAdapter;
 
 public class ProcessTestCase {
 
@@ -40,7 +36,7 @@ public class ProcessTestCase {
 
   @Test
   @Deployment(resources = "process.bpmn")
-  public void testPathB() {
+  public void testPathB() {    
     ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey("webinar-testing");
 
     // assert that the User Task was created and complete it directly to advance the process flow
@@ -93,7 +89,29 @@ public class ProcessTestCase {
     
     // visualize path in process instance
     ProcessTestCoverage.calculate(processInstance.getId(), processEngineRule.getProcessEngine());    
-  }  
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testShowcaseDatabase() throws SQLException {
+    org.h2.tools.Server.createWebServer("-web").start();
+    // now you have the webtool ready at http://localhost:8082/
+    
+    //org.h2.tools.Server.createTcpServer( "-tcp", "-tcpAllowOthers").start();
+    // now we can inspect the database via JDBC, URL:  jdbc:h2:tcp://localhost:9092/mem:camunda
+    
+    ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey("webinar-testing");
+    assertThat(processInstance).isActive();
+    System.out.println("This is a great place for a breakpoint!");
+    
+    complete(task(), Variables.createVariables().putValue("path", "B"));
+    System.out.println("This is a great place for a breakpoint!");
+    
+    execute(job());
+    System.out.println("This is a great place for a breakpoint!");
+    
+    assertThat(processInstance).isEnded();
+  }
 
   @After
   public void tearDown() throws Exception {

@@ -47,6 +47,7 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitt
 
 - CPU utilization
 - Memory usage
+- Swap file size
 - Database response time
 - Database size
 - Utilization/size of Job Executor thread pool (Application Server)
