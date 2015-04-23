@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>camunda BPM Tasklist</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>JSF Page</title>
+    <h:outputStylesheet library="webjars/bootstrap/2.3.2/css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="starter-template.css" />
+    <h:outputScript type="text/javascript" library="webjars/bootstrap/2.3.2/js" name="bootstrap.js" />    
+</h:head>
+
+<h:body>
+    <h:form>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <span class="brand">camunda BPM Demo</span>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li id="book"><h:outputLink value="taskList.jsf">Task list</h:outputLink></li>
+                            <li id="book"><h:outputLink value="startList.jsf">Start Process Instances</h:outputLink></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:form>
+	<div id="main">
+        <div class="container clear-top">
+            <div class="row">
+                <div class="marketing">
+                    <h1>A simple Tasklist</h1>
+                    <p class="marketing-byline">With the <a href="http://www.camunda.org">camunda BPM platform</a>, <a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE 6</a><br/>
+                    </p>
+                </div>
+            </div>
+            <h:panelGroup styleClass="row">
+                <h:messages globalOnly="true"/>
+                <ui:insert name="content">Main Content</ui:insert>
+            </h:panelGroup>
+        </div>
+        <footer>
+            <div class="container">
+                <hr/>
+                <div class="row">
+                    <div class="span8">&nbsp;</div>
+                    <div class="span4" style="white-space: nowrap; text-align: right">Powered by <a style="font-weight: bold;" href="http://www.camunda.org">camunda BPM platform</a></div>
+                </div>
+            </div>
+        </footer>
+	</div>
+</h:body>
+</html>

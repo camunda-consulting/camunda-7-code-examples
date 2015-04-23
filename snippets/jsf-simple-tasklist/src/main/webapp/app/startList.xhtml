@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+<ui:define name="content">
+
+	<h2>Start Process Instance</h2>
+	
+	<h:form>
+	<h:dataTable value="#{startList.list}" var="thisProcessDefinition" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
+			<h:column><f:facet name="header">name</f:facet><strong>#{thisProcessDefinition.name}</strong></h:column>
+			<h:column><f:facet name="header">ID</f:facet>#{thisProcessDefinition.id}</h:column>
+			<h:column><f:facet name="header">key</f:facet>#{thisProcessDefinition.key}</h:column>
+			<h:column><f:facet name="header">version</f:facet>#{thisProcessDefinition.version}</h:column>
+			<h:column><f:facet name="header">actions</f:facet>
+				<!-- ?processDefinitionKey=#{thisProcessDefinition.key}&amp;callbackUrl=http://localhost:8080/jsf-simple-tasklist/app/taskList.jsf -->
+				<h:outputLink rendered="#{thisProcessDefinition.hasStartFormKey()}" value="#{startList.getAbsoluteStartFormKey(thisProcessDefinition)}" class="btn btn-small">
+					<f:param name="processDefinitionKey" value="#{thisProcessDefinition.key}"></f:param>
+					<f:param name="callbackUrl" value="#{request.contextPath}/app/taskList.jsf"></f:param>
+					start
+				</h:outputLink>
+				<h:commandButton rendered="#{!thisProcessDefinition.hasStartFormKey()}" action="taskList.jsf" actionListener="#{businessProcess.startProcessByKey(thisProcessDefinition.key)}" class="btn btn-small" value="start"/>
+			</h:column>		
+	</h:dataTable>	
+	</h:form>	
+</ui:define>
+</ui:composition>
