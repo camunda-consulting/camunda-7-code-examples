@@ -6,7 +6,7 @@ ngDefine('cockpit.plugin.ige-business-cockpit',
 	  $scope.businessdatas = [];
 	  
 	  $scope.search = function() {
-		  $http.get(Uri.appUri("plugin://ige-business-cockpit/default/business-data?titlenumber=" 
+		  $http.get(Uri.appUri("plugin://ige-business-cockpit/:engine/business-data?titlenumber=" 
     		+ $scope.search.titleNumber))
 				  .success(function(data) {
 					  // Data Binding
