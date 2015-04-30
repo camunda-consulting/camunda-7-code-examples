@@ -6,7 +6,7 @@ ngDefine('cockpit.plugin.reporting-process-count',
 
   var DashboardController = function($scope, $http, Uri) {
 
-    $http.get(Uri.appUri("plugin://reporting-process-count/default/process-instance-count"))
+    $http.get(Uri.appUri("plugin://reporting-process-count/:engine/process-instance-count"))
       .success(function(data) {
         printChart(data)
       });
