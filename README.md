@@ -23,7 +23,7 @@ or contributors.
   </tr>
   <tr>
     <td><a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples">One-time Examples</a></td>
-    <td>Examples created once for a specific event (like a conference or a magazine article)</td>
+    <td>Examples created once for a specific event (like a conference or a magazine article). <b>The code is not maintained.</b></td>
   </tr>
 </table>
 
