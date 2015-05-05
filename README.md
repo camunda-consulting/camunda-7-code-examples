@@ -123,3 +123,6 @@ Snippets
   
 </table>
 
+### Cockpit Plugins
+
+See [Plugin Store](http://camunda.org/plugins/).
