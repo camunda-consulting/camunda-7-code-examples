@@ -106,3 +106,20 @@ Snippets
   </tr>
 </table>
 
+### BPMN
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/bpmn-adhoc-task/src/main/resources/process.png" width="50" /></td>
+    <td><a href="snippets/bpmn-adhoc-task/">Workaround to realize BPMN AdHoc Subpocess</a></td>
+    <td>The BPMN AdHoc Subprocess is not specified to be executable, hence camunda BPM cannot execute it out-of-the-box. This snippet shows a possile workaround.</td>
+  </tr>
+  
+</table>
+
