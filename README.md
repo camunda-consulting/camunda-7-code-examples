@@ -31,21 +31,21 @@ Showcases
 <table>
   <tr>
     <td>
-      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Twitter</a>
-      <img href="showcases/twitter/src/main/resources/TwitterDemoProcess.png" />
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Review Process for new Tweets</a> <br />
+<img src="showcases/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
     </td>
     <td>
        Key Features showcased:
        
-       * Complete Process Application
-       * HTML or JSF task forms
-       * Testing with camunda-bpm-assert and PowerMock + Mockito
-       * [todo] Cycle with Collaboration
-       * [todo] Retries and Incident Handling
+* Complete Process Application
+* HTML or JSF task forms
+* Testing with camunda-bpm-assert and PowerMock + Mockito
+* [todo] Cycle with Collaboration
+* [todo] Retries and Incident Handling
        
     </td>
   </tr>
-
+</table>
 
 
 
