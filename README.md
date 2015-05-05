@@ -1,8 +1,8 @@
-camunda Consulting Examples
+Camunda Consulting Examples
 ===========================
 
 This repository contains examples, patterns, code snippets and demo applications build by the camunda consulting team
-or contributors.
+or contributors. Note: All examples are only tested manually and there is no guarantee that they are actively maintained. If you search for officially maintained examples go to <a href="https://github.com/camunda/camunda-bpm-examples">https://github.com/camunda/camunda-bpm-examples</a>.
 
 <table>
   <tr>
@@ -18,13 +18,35 @@ or contributors.
     <td>Code snippets for particular technical issues</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/patterns">Patterns</a></td>
-    <td>Best practice solutions for common problems</td>
-  </tr>
-  <tr>
     <td><a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples">One-time Examples</a></td>
     <td>Examples created once for a specific event (like a conference or a magazine article). <b>The code is not maintained and might be out-of-date.</b></td>
   </tr>
 </table>
 
-Note: The examples are only tested manually and there is no guarantee that they are actively maintained.
+
+
+Showcases
+-----------------------
+
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Twitter</a>
+      <img href="showcases/twitter/src/main/resources/TwitterDemoProcess.png" />
+    </td>
+    <td>
+       Key Features showcased:
+       * Complete Process Application
+       * HTML or JSF task forms
+       * Testing with camunda-bpm-assert and PowerMock + Mockito
+       * [todo] Cycle with Collaboration
+       * [todo] Retries and Incident Handling
+    </td>
+  </tr>
+
+
+
+
+Snippets
+-----------------------
+
