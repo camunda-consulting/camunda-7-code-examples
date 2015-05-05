@@ -36,13 +36,13 @@ Showcases
     </td>
     <td>
        Key Features showcased:
-       
+
 * Complete Process Application
 * HTML or JSF task forms
 * Testing with camunda-bpm-assert and PowerMock + Mockito
 * [todo] Cycle with Collaboration
 * [todo] Retries and Incident Handling
-       
+
     </td>
   </tr>
 </table>
