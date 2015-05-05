@@ -56,10 +56,12 @@ Snippets
 
 <table>
   <tr>
+    <th>Preview</th>
     <th>Name</th>
     <th>Description</th>
   </tr>
   <tr>
+    <td><img src="snippets/subtask-checklist/screenshot.png" width="50" /></td>
     <td><a href="https://github.com/camunda/camunda-consulting/tree/master/snippets/subtask-checklist">Subtask Checklist</a></td>
     <td>BPMN process with sub tasks configured on a User Task using BPMN Extension Elements. The Subtasks are shown in the HTML task form using the Camunda Forms SDK (JavaScript). A User Task can only be completed if all subtasks are completed beforehand.</td>
   </tr>
