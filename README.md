@@ -45,6 +45,45 @@ Showcases
       </ul>
     </td>
   </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Camel Use Cases</a> <br />
+<img src="showcases/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
+    </td>
+    <td>
+       Key Features showcased:
+       <ul>
+        <li>Features of Camel Component, especially including messaging</li>
+      </ul>
+    </td>
+  </tr>
+ <tr>
+    <td>
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Insurance Underwriting</a> <br />
+<img src="showcases/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
+    </td>
+    <td>
+       Key Features showcased:
+       <ul>
+          <li>CMMN</li>
+          <li>Case UI in JSF</li>
+          <li>Combination of BPMN, CMMN and Rules</li>
+      </ul>
+    </td>
+  </tr>  
+ <tr>
+    <td>
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases">Incident Handling</a> <br />
+<img src="showcases/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
+    </td>
+    <td>
+       Key Features showcased:
+       <ul>
+          <li>Working process from official OMG by example paper</li>
+          <li>BPMN Collaboration</li>
+      </ul>
+    </td>
+  </tr>    
 </table>
 
 
