@@ -52,3 +52,16 @@ Showcases
 Snippets
 -----------------------
 
+### Human Task Management
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/camunda/camunda-consulting/tree/master/snippets/subtask-checklist">Subtask Checklist</a></td>
+    <td>BPMN process with sub tasks configured on a User Task using BPMN Extension Elements. The Subtasks are shown in the HTML task form using the Camunda Forms SDK (JavaScript). A User Task can only be completed if all subtasks are completed beforehand.</td>
+  </tr>
+</table>
+
