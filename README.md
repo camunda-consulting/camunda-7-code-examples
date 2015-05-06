@@ -125,4 +125,17 @@ Snippets
 
 ### Cockpit Plugins
 
-See [Plugin Store](http://camunda.org/plugins/).
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><img src="https://i.vimeocdn.com/video/485755185_640.jpg" width="50"></td>
+    <td><a href="http://camunda.org/plugins/">Plugin Store</a></td>
+    <td>The Plugin Store lists various available cockpit plugins, including the consulting snippets.</td>
+  </tr>
+  
+</table>
