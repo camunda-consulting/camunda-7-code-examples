@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:head>
+    <f:metadata>
+      <f:viewParam id="processDefinitionKey" name="processDefinitionKey" />
+      <f:viewParam id="callbackUrl" name="callbackUrl" />
+      <f:event type="preRenderView"
+        listener="#{camundaTaskForm.startProcessInstanceByKeyForm()}" />
+    </f:metadata>
+    
+    <h:outputStylesheet library="webjars/bootstrap/2.3.2/css" name="bootstrap.css"/>
+    <!-- if you need it - it is right there: 
+    <h:outputScript type="text/javascript" library="webjars/bootstrap/2.3.2/js" name="bootstrap.js" />    
+    -->
+    
+    <title>Start Process: #{processDefinitionKey}</title>
+  </h:head>
+  <h:body>
+    <div class="container">
+	    <h:form id="someForm">
+	      <fieldset>
+	        <legend>Start Process: #{processDefinitionKey}</legend>
+		      <p>
+		      	Here you would put the actual form to start the process in some
+        		design normally either matching your task list or your business
+        		application (or both in the best case).
+        	</p>
+		      <p>
+		        You can invoke this form through the camunda tasklist
+		        by setting the formKey of a Start Task to 'app:forms/jsf/start-form.jsf'.
+		      </p>
+					<p>		       
+			      <label>Name</label>
+			      <h:inputText disabled="false" id="name" value="#{processVariables['name']}" />
+			    </p>
+		      <h:commandButton id="submit_button" value="Start Process"
+		        action="#{camundaTaskForm.completeProcessInstanceForm()}" styleClass="btn btn-primary" />
+	      </fieldset>        
+	    </h:form>
+    </div> 
+  </h:body>
+</html>

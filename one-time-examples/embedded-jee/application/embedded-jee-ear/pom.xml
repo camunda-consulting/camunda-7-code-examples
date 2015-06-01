@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>application</artifactId>
+    <groupId>com.camunda.consulting</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>embedded-jee-ear</artifactId>
+  <packaging>ear</packaging>
+
+  <name>embedded-jee-ear</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <glassfish.directory>C:/Arbeit/glassfish3</glassfish.directory>
+  </properties>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- libraries -->
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine</artifactId>
+    </dependency>
+    
+    <!-- services enterfernen, kein SPI nutzen -->
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-spring</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>embedded-engine-spring</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.uuid</groupId>
+      <artifactId>java-uuid-generator</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.camunda.spin</groupId>
+      <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-spin</artifactId>
+    </dependency>
+    
+    <!-- modules -->
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>embedded-oracle-weblogic-rar</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>rar</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>jndi-printer-ejb</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>ejb</type>
+    </dependency>
+
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>embedded-oracle-weblogic-service</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>ejb</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>process-application-war</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-rest</artifactId>
+      <version>${camunda.version}</version>
+      <classifier>wls</classifier>
+      <type>war</type>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.camunda.bpm.webapp </groupId>
+      <artifactId>camunda-webapp-ee-wls</artifactId>
+      <version>${camunda.version}</version>
+      <type>war</type>
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <version>6</version>
+          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <initializeInOrder>true</initializeInOrder>
+          <modules>
+            <rarModule>
+              <groupId>com.camunda.consulting</groupId>
+              <artifactId>embedded-oracle-weblogic-rar</artifactId>
+            </rarModule>
+            <ejbModule>
+              <groupId>com.camunda.consulting</groupId>
+              <artifactId>jndi-printer-ejb</artifactId>
+            </ejbModule>
+            <ejbModule>
+              <groupId>com.camunda.consulting</groupId>
+              <artifactId>embedded-oracle-weblogic-service</artifactId>
+            </ejbModule>
+            <webModule>
+              <groupId>com.camunda.consulting</groupId>
+              <artifactId>process-application-war</artifactId>
+            </webModule>
+            <webModule>
+              <groupId>org.camunda.bpm</groupId>
+              <artifactId>camunda-engine-rest</artifactId>
+              <contextRoot>/engine-rest</contextRoot>
+            </webModule>
+            <webModule>
+              <groupId>org.camunda.bpm.webapp</groupId>
+              <artifactId>camunda-webapp-ee-wls</artifactId>
+              <contextRoot>/camunda</contextRoot>
+            </webModule>
+          </modules>
+          <packagingExcludes>lib/camunda-engine-spring*.jar</packagingExcludes>
+        </configuration>
+      </plugin>      
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda BPM Maven Repository</name>
+      <url>https://app.camunda.com/nexus/content/groups/private</url>
+    </repository>
+  </repositories>
+
+</project>
