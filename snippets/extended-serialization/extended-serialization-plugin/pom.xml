@@ -98,11 +98,6 @@
 
   <repositories>
     <repository>
-      <id>camunda-bpm-nexus</id>
-      <name>camunda BPM Maven Repository</name>
-      <url>https://app.camunda.com/nexus/content/groups/public</url>
-    </repository>
-    <repository>
       <id>smartics</id>
       <url>http://www.smartics.eu/nexus/content/groups/public-group</url>
       <releases>
@@ -131,6 +126,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
