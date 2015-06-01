@@ -1,4 +1,3 @@
-
 Extended serialization
 =========================
 
@@ -15,26 +14,27 @@ and
 Implementation
 --------------
 
-One step is to provide implementations of a serializer and deserializer for the Joda Money type. You can find examples [here](src/main/java/com/camunda/consulting/extendedSerialization/serializer). These serializer and deserializer write an onject of Money as 
+One step is to provide implementations of a serializer and deserializer for the Joda Money type. You can find examples [here](extended-serialization-plugin/src/main/java/com/camunda/consulting/extendedSerialization/serializer). These serializer and deserializer write an onject of Money as 
 
     {"price":"EUR 34.99"}
      
 and create a Java object from the json represetation.
   
-You must register these serializers in a new implementation of a DataFormatConfigurator from the type JacksonJsonDataFormat like the [JodaDataFormatConfigurator](src/main/java/com/camunda/consulting/extendedSerialization/configuration/JodaDataFormatConfigurator.java)   
+You must register these serializers in a new implementation of a DataFormatConfigurator from the type JacksonJsonDataFormat like the [JodaDataFormatConfigurator](extended-serialization-plugin/src/main/java/com/camunda/consulting/extendedSerialization/configuration/JodaDataFormatConfigurator.java)   
 
-The JodaDataFormatConfugurator is published as a service provider (SPI) in the file [org.camunda.spin.spi.DataFormatConfigurator](src/main/resources/META-INF/services/org.camunda.spin.spi.DataFormatConfigurator). The file is saved in the META-INF/services directory and contains the fully qualified class path.
+The JodaDataFormatConfugurator is published as a service provider (SPI) in the file [org.camunda.spin.spi.DataFormatConfigurator](extended-serialization-plugin/src/main/resources/META-INF/services/org.camunda.spin.spi.DataFormatConfigurator). The file is saved in the META-INF/services directory and contains the fully qualified class path.
 
 This project includes serializers and deserializers for joda time, too.
 
 Packaging
 ---------
 
-This project extends the process engine so it has be installed on the same level as the process engine. For a JBoss installation with a shared engine (like our distribution) the project has to be packaged as a JBoss module and must be installed in the JBoss modules folder.
+This project has two submodules. extended-serialization-plugin 
+extends the process engine so it has be installed on the same level as the process engine. For a JBoss installation with a shared engine (like our distribution) the project has to be packaged as a JBoss module and must be installed in the JBoss modules folder.
 
 The module can be packaged with a maven plugin from [http://www.smartics.eu/smartics-jboss-modules-maven-plugin/](http://www.smartics.eu/smartics-jboss-modules-maven-plugin/). The plugin is used as a profile and `mvn package attach` builds the module with jars and module.xml-files in target/jboss-modules. Check the profile-part of the pom.xml for further configuration details.
 
-The module itself is configured in the [extended-serializer-module.xml](src/main/resources/META-INF/jboss-modules/extended-serialization-module.xml) in the folder META-INF/jboss-modules. The configuration includes a mapping of maven coordinates of joda-time:joda-time to the module org.joda.time:2.1.
+The module itself is configured in the [extended-serializer-module.xml](extended-serialization-plugin/src/main/resources/META-INF/jboss-modules/extended-serialization-module.xml) in the folder META-INF/jboss-modules. The configuration includes a mapping of maven coordinates of joda-time:joda-time to the module org.joda.time:2.1.
 
 Installation of the module
 --------------------------
@@ -65,7 +65,7 @@ The JBoss server starts without errors and you can find these lines in your log 
 Packaging of process applications
 ---------------------------------
 
-A process application that uses this dataformat configurator can be found in the snippet [extended-serialization-process](https://github.com/camunda/camunda-consulting/tree/master/snippets/extended-serialization-process)
+A process application that uses this dataformat configurator can be found in the sub module [extended-serialization-process](extended-serialization-process)
 
 For the class loading you have to set the artifacts that are used by the DataFormatConfigurator to the scope provided. They must not be packaged into the war, otherwise the serialization will not use your custom serializer and deserializer. 
 
