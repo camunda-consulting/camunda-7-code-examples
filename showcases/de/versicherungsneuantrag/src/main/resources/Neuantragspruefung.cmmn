@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions targetNamespace="http://cmmn.org"  xmlns:cmmn="http://www.omg.org/spec/CMMN/20131201/MODEL"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:camunda="http://camunda.org/schema/1.0/cmmn">
+    <cmmn:case id="neuantrangspruefung" name="Neuantragsprüfung">
+        <cmmn:casePlanModel autoComplete="true" name="Neuantragsprüfung" id="neuantrangspruefungPlanModel">
+        
+            <cmmn:planItem definitionRef="humanTaskAntragEntscheiden" id="PU_humanTaskAntragEntscheiden"/>
+            <cmmn:planItem definitionRef="humanTaskAntragsBeurteilung" id="PI_humanTaskAntragsBeurteilung"/>
+            <cmmn:planItem definitionRef="humanTaskAntragsBeurteilungGL" id="PI_humanTaskAntragsBeurteilungGL"/>
+            <cmmn:planItem definitionRef="processTaskDokumenteAnfordern" id="PI_processTaskDokumenteAnfordern"/>
+            
+            <cmmn:humanTask isBlocking="true" id="humanTaskAntragEntscheiden" name="Antrag entscheiden" camunda:candidateGroupds="management"
+            		camunda:formKey="embedded:app:forms/decide.html"  >
+                <cmmn:defaultControl>
+					<cmmn:manualActivationRule>
+						<cmmn:condition>
+							<cmmn:body>${false}</cmmn:body>
+						</cmmn:condition>
+					</cmmn:manualActivationRule>
+                </cmmn:defaultControl>
+            </cmmn:humanTask>            
+            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Underwriter)" id="humanTaskAntragsBeurteilung">
+            </cmmn:humanTask>
+            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Gruppenleiter)" id="humanTaskAntragsBeurteilungGL">
+            </cmmn:humanTask>
+            <cmmn:processTask isBlocking="true" name="Dokumente anfordern" id="processTaskDokumenteAnfordern">
+            </cmmn:processTask>
+            
+        </cmmn:casePlanModel>
+        
+    </cmmn:case>
+</cmmn:definitions>
+
