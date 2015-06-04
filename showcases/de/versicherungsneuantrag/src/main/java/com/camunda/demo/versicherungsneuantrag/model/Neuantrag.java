@@ -24,11 +24,19 @@ public class Neuantrag {
     }
   }
   
+  public void setFahrerUeber25String(String s) {
+    // ignore - currently needed because JsonIgnore configuration not yet done
+  }
+  
   public String getBeitrag() {
     NumberFormat n = NumberFormat.getCurrencyInstance(Locale.GERMANY); 
     return n.format(beitragInCent / 100.0);
   }
-
+  
+  public void setBeitrag(String s) {
+    // ignore - currently needed because JsonIgnore configuration not yet done
+  }
+  
   public Person getAntragssteller() {
     return antragssteller;
   }

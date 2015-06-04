@@ -5,7 +5,7 @@
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTaskAntragAutomatischPruefen"/>
-    <bpmn2:sendTask id="SendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" name="Police zusenden">
+    <bpmn2:sendTask id="SendTaskPoliceZusenden" name="Police zusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" >
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="mailBody">
@@ -103,7 +103,20 @@ Ihre Camundanzia.]]></camunda:script>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Nein" sourceRef="ExclusiveGateway_2" targetRef="ExclusiveGatewayJoin">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" name="Ablehnung zusenden">
+    <bpmn2:sendTask id="SendTaskAblehnungZusenden" name="Ablehnung zusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" >
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Leider müssen wir Ihnen mitteilen, dass wir Ihnen die gewünschte KFZ Versicherungspolice nicht ausstellen können. 
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Antrag abgelehnt</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_17</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:sendTask>

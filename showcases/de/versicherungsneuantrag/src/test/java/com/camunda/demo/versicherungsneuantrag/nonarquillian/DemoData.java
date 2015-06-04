@@ -2,8 +2,8 @@ package com.camunda.demo.versicherungsneuantrag.nonarquillian;
 
 import java.util.Calendar;
 
-import spinjar.com.fasterxml.jackson.core.JsonProcessingException;
-import spinjar.com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.camunda.demo.versicherungsneuantrag.model.Neuantrag;
 import com.camunda.demo.versicherungsneuantrag.model.Person;

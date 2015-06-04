@@ -28,6 +28,7 @@
                 processRef="dokumentAnfordern">
 				 <cmmn:extensionElements>
 				    <camunda:in source="neuantrag" target="neuantrag" />
+				    <camunda:in source="hinweise" target="hinweise" />
 				    <camunda:out source="risks" target="risks" />
 				 </cmmn:extensionElements>                
             </cmmn:processTask>

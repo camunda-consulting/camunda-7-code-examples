@@ -9,10 +9,7 @@ public class Person {
   private String email;
   private Date geburtsdatum;
   private String geschlecht = "Frau";
-
-  public int getAlter() {
-    return calculateAlter(new Date());
-  }
+  private int alter;
   
   public int calculateAlter(Date atDate) {
     Calendar dob = Calendar.getInstance();  
@@ -36,6 +33,7 @@ public class Person {
   }
   public void setGeburtsdatum(Date geburtsdatum) {
     this.geburtsdatum = geburtsdatum;
+     setAlter(calculateAlter(new Date()));
   }
 
   public String getGeschlecht() {
@@ -60,5 +58,13 @@ public class Person {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public int getAlter() {
+    return alter;
+  }
+
+  public void setAlter(int alter) {
+    this.alter = alter;
   }
 }

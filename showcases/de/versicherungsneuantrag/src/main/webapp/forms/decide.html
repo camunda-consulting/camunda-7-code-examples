@@ -53,6 +53,11 @@
          </div>
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			  <h2>Weitere Aktivitäten starten</h2>
+			  <div class="form-group"> 			  
+			  	<label>Mitzugebene Hinweise:</label>
+			  	<textarea id="textareaHinweise"></textarea>
+			  </div>
+			  
 			  <table class="table">
 			  <tr ng-repeat="caseExecution in enabledCaseExecutions">
 			    <td>
@@ -89,13 +94,11 @@
 	 function loadCaseStatus() {
   	   $.get( '/camunda/api/engine/engine/default/task/' + camForm.taskId, function( task ) {
 		   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&enabled=true', function( result1 ) {
-	  	     console.log(result1);
 	         $scope.$apply(function () {
 	            $scope.enabledCaseExecutions = result1;
 	         });
 		   });
 	  	   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&active=true', function( result2 ) {
-	  	     console.log(result2);
 	         $scope.$apply(function () {
 	            $scope.activeCaseExecutions = result2;
 	         });
@@ -105,9 +108,20 @@
 	 
 	 loadCaseStatus();  	     
 	 
-	 $scope.manualStartCaseExecution = function(caseExecution) {	   
+	 $scope.manualStartCaseExecution = function(caseExecution) {
+	       var data = {
+	            "variables": { 
+	       			"hinweise": {
+	       				"value":  $('#textareaHinweise').val(), 
+	       				"type": "String"
+	       			}
+	       	    }, 
+	       	    "deletions" : []
+	       };
+	       console.log( data );
+	       	   
 		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/manual-start', {
-		         data: "{\"variables\":{}, \"deletions\": []}",
+		         data: JSON.stringify(data),
 		         contentType : 'application/json',
 		         type : 'POST',
 		         success: function (result) {
