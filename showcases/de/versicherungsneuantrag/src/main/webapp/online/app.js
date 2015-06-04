@@ -18,11 +18,10 @@ $( document ).ready(function() {
 				  },
 			"fahrzeugHersteller": $('#kfzHersteller').val(),
 		  "fahrzeugTyp":       $('#kfzTyp').val(),
-			"versicherungsprodukt": "Camundanzia Vollkasko Plus"
+			"versicherungsprodukt": "Camundanzia Vollkasko Plus",
+			"preisindikationInCent": 12000
 			};
 			
-			console.log(neuantrag);
-
 		var resource = camClient.resource("process-definition");
 		
 		// {"antragssteller":{"vorname":null,"nachname":null,"geburtsdatum":170926761061},"fahrzeug":{"hersteller":"VW","typ":"Golf IV"},"fahrerUeber25":false,"versicherungsprodukt":"Camundanzia Vollkasko Plus"}
@@ -45,5 +44,24 @@ $( document ).ready(function() {
 		});
 
 	});
+	
+	
+	// correlate message for Antrag	
+	$('#triggerUploadDocuments').click(function() {
+		
+		var data = {
+			"messageName": "MSG_DOCUMENT_RECEIVED", 
+			"processVariables" : {}
+		};
+    $.ajax('/camunda/api/engine/engine/default/message/', {
+		         data: JSON.stringify(data),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+								$('#documentsReceived').toggle();
+								$('#fieldsetForm').toggle();
+		         }
+	  });			
 
+	});
 });

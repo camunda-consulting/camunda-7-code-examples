@@ -24,7 +24,7 @@
             <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Gruppenleiter)" id="humanTaskAntragsBeurteilungGL"
                     camunda:candidateGroupds="management">
             </cmmn:humanTask>
-            <cmmn:processTask isBlocking="true" name="Dokumente anfordern" id="processTaskDokumenteAnfordern"
+            <cmmn:processTask isBlocking="true" name="Dokumentenanforderung" id="processTaskDokumenteAnfordern"
                 processRef="dokumentAnfordern">
 				 <cmmn:extensionElements>
 				    <camunda:in source="neuantrag" target="neuantrag" />

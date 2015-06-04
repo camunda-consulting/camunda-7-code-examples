@@ -14,6 +14,7 @@ public class Neuantrag {
   private String versicherungsprodukt;
   
   private String vertragsnummer;
+  private long preisindikationInCent;
   private long beitragInCent;
   
   public String getFahrerUeber25String() {
@@ -92,5 +93,13 @@ public class Neuantrag {
 
   public void setBeitragInCent(long beitragInCent) {
     this.beitragInCent = beitragInCent;
+  }
+
+  public long getPreisindikationInCent() {
+    return preisindikationInCent;
+  }
+
+  public void setPreisindikationInCent(long preisindikationInCent) {
+    this.preisindikationInCent = preisindikationInCent;
   }
 }
