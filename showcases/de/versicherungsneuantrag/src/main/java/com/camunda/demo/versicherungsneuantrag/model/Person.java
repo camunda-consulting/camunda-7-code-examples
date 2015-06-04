@@ -8,7 +8,7 @@ public class Person {
   private String name;
   private String email;
   private Date geburtsdatum;
-  private String geschlecht;
+  private String geschlecht = "Frau";
 
   public int getAlter() {
     return calculateAlter(new Date());

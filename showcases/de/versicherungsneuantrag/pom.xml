@@ -14,13 +14,12 @@
 
 	<properties>
 		<camunda.version>7.3.0</camunda.version>
-		<arquillian.version>1.1.2.Final</arquillian.version>
-		<jboss.version>7.2.0.Final</jboss.version>
+		<drools.version>5.6.0.Final</drools.version>
+
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
-		<drools.version>5.6.0.Final</drools.version>
 	</properties>
 
 	<dependencyManagement>
@@ -29,14 +28,6 @@
 				<groupId>org.camunda.bpm</groupId>
 				<artifactId>camunda-bom</artifactId>
 				<version>${camunda.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-			<dependency>
-				<!-- Needed for ArquillianTest -->
-				<groupId>org.jboss.arquillian</groupId>
-				<artifactId>arquillian-bom</artifactId>
-				<version>${arquillian.version}</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
@@ -95,6 +86,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- required to use freemarker as ioMapping in test -->
+		<dependency>
+			<groupId>org.camunda.template-engines</groupId>
+			<artifactId>camunda-template-engines-freemarker</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<!-- Bootstrap for styling via Webjars project -->
 			<groupId>org.webjars</groupId>
@@ -124,25 +122,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<!-- Needed for ArquillianTest -->
-			<groupId>org.jboss.arquillian.junit</groupId>
-			<artifactId>arquillian-junit-container</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- Needed for ArquillianTest -->
-			<groupId>org.jboss.arquillian.protocol</groupId>
-			<artifactId>arquillian-protocol-servlet</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- Needed for ArquillianTest -->
-			<groupId>org.jboss.shrinkwrap.resolver</groupId>
-			<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -213,76 +192,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>default</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<dependencies>
-				<dependency>
-					<!-- Needed for ArquillianTest -->
-					<!-- Requires a running JBoss AS7 with Camunda BPM change to other artifact 
-						for embedded start or different server -->
-					<!-- Included here for convenience when running the test in Eclipse -->
-					<groupId>org.jboss.as</groupId>
-					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>${jboss.version}</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.17</version>
-						<configuration>
-							<excludes>
-								<!-- Exclusion for Arquillian test cases to avoid dependency on infrastructure 
-									for Maven build. Feel free to adjust to your testing requirements. -->
-								<exclude>**/Arquillian*.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>arq-jbossas-remote</id>
-			<dependencies>
-				<dependency>
-					<!-- Needed for ArquillianTest -->
-					<!-- Requires a running JBoss AS7 with Camunda BPM change to other artifact 
-						for embedded start or different server -->
-					<groupId>org.jboss.as</groupId>
-					<artifactId>jboss-as-arquillian-container-remote</artifactId>
-					<version>${jboss.version}</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-
-		<profile>
-			<id>arq-wildfly-remote</id>
-			<dependencies>
-				<dependency>
-					<!-- Needed for ArquillianTest -->
-					<!-- Requires a running Wildfly with Camunda BPM -->
-					<groupId>org.wildfly.arquillian</groupId>
-					<artifactId>wildfly-arquillian-container-remote</artifactId>
-					<version>1.0.0.Alpha5</version>
-					<scope>test</scope>
-					<exclusions>
-						<exclusion>
-							<groupId>sun.jdk</groupId>
-							<artifactId>jconsole</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 </project>

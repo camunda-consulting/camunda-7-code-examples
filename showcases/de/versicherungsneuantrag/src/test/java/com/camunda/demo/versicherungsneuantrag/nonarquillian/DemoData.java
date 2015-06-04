@@ -22,6 +22,9 @@ public class DemoData {
     cal.add(Calendar.YEAR, -1 * alter);
 
     neuantrag.getAntragssteller().setGeburtsdatum(cal.getTime());
+    neuantrag.getAntragssteller().setName("Bernd Rücker");
+    neuantrag.getAntragssteller().setEmail("br@camunda.com");
+    neuantrag.getAntragssteller().setGeschlecht("Mann");
     neuantrag.setFahrzeugHersteller(hersteller);
     neuantrag.setFahrzeugTyp(typ);
     neuantrag.setVersicherungsprodukt("Camundanzia Vollkasko Plus");

@@ -41,6 +41,7 @@ $( document ).ready(function() {
 			}
 		}, function (error, response) {
 			$('#applicationReceived').toggle();
+			$('#fieldsetForm').toggle();
 		});
 
 	});

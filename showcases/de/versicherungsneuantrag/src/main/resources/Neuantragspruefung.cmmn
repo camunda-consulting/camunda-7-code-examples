@@ -18,11 +18,18 @@
 					</cmmn:manualActivationRule>
                 </cmmn:defaultControl>
             </cmmn:humanTask>            
-            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Underwriter)" id="humanTaskAntragsBeurteilung">
+            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Underwriter)" id="humanTaskAntragsBeurteilung"
+            		camunda:candidateGroupds="management">
             </cmmn:humanTask>
-            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Gruppenleiter)" id="humanTaskAntragsBeurteilungGL">
+            <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Gruppenleiter)" id="humanTaskAntragsBeurteilungGL"
+                    camunda:candidateGroupds="management">
             </cmmn:humanTask>
-            <cmmn:processTask isBlocking="true" name="Dokumente anfordern" id="processTaskDokumenteAnfordern">
+            <cmmn:processTask isBlocking="true" name="Dokumente anfordern" id="processTaskDokumenteAnfordern"
+                processRef="dokumentAnfordern">
+				 <cmmn:extensionElements>
+				    <camunda:in source="neuantrag" target="neuantrag" />
+				    <camunda:out source="risks" target="risks" />
+				 </cmmn:extensionElements>                
             </cmmn:processTask>
             
         </cmmn:casePlanModel>

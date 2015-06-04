@@ -42,6 +42,8 @@ public class CheckApplicationWithRulesetAdapater implements JavaDelegate {
     // write output data
     execution.setVariable(ProcessVariables.VAR_NAME_risks,  Variables.objectValue(risks).serializationDataFormat(SerializationDataFormats.JSON));
     execution.setVariable(ProcessVariables.VAR_NAME_statusRedRisks, Variables.objectValue(statusRedRisks).serializationDataFormat(SerializationDataFormats.JSON));
+    
+    execution.setVariable("test", "hallo");
   }
 
   public void callRuleEngine(Object parameter, List<String> risks, List<String> statusRedRisks) throws Exception {

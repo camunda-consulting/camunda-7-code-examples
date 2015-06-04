@@ -49,7 +49,7 @@ public class NeuantragProcessTest {
 
   @Test
   @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
-  public void testDunkelverarbeitungPiliciert() {
+  public void testDunkelverarbeitungPoliciert() {
     Neuantrag neuantrag = DemoData.createNeuantrag(40, true, "VW", "Golf V");
     
     VariableMap variables = Variables.createVariables();

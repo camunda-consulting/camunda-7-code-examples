@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://bpmn.io/schema/bpmn">
   <bpmn:collaboration id="Collaboration_0liisio">
     <bpmn:participant id="Participant_1yeu9cv" name="Kunde" processRef="Process_1riavz7"/>
-    <bpmn:participant id="Participant_012xlj2" name="Versicherer" processRef="Process_1"/>
+    <bpmn:participant id="Participant_012xlj2" name="Versicherer" processRef="dokumentAnfordern"/>
     <bpmn:messageFlow id="MessageFlow_1thpz82" sourceRef="SendTask_1hvdsj6" targetRef="StartEvent_2"/>
     <bpmn:messageFlow id="MessageFlow_1l59g58" sourceRef="SendTask_0lhtv2o" targetRef="ReceiveTask_1707zk0"/>
-    <bpmn:messageFlow id="MessageFlow_02nql3b" sourceRef="UserTask_1pu6sug" targetRef="Participant_1yeu9cv"/>
+    <bpmn:messageFlow id="MessageFlow_02nql3b" sourceRef="UserTaskKundenAnrufen" targetRef="Participant_1yeu9cv"/>
     <bpmn:messageFlow id="MessageFlow_1lokmtl" sourceRef="SendTask_0rs6zt3" targetRef="Participant_1yeu9cv"/>
   </bpmn:collaboration>
   <bpmn:process id="Process_1riavz7" isExecutable="false">
@@ -28,9 +28,9 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_2" targetRef="ReceiveTask_1uvhbsa"/>
   </bpmn:process>
-  <bpmn:process id="Process_1" isExecutable="false">
+  <bpmn:process id="dokumentAnfordern" name="Dokument anfordern" isExecutable="true">
     <bpmn:sequenceFlow id="SequenceFlow_0d7dzn0" sourceRef="StartEvent_1" targetRef="SendTask_1hvdsj6"/>
-    <bpmn:sendTask id="SendTask_1hvdsj6" name="Anfrage starten">
+    <bpmn:sendTask id="SendTask_1hvdsj6" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" name="Anfrage starten">
       <bpmn:incoming>SequenceFlow_0d7dzn0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_18a0pzl</bpmn:outgoing>
     </bpmn:sendTask>
@@ -46,36 +46,41 @@
       <bpmn:incoming>SequenceFlow_0dgysae</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1rywql7" sourceRef="ReceiveTask_1707zk0" targetRef="ExclusiveGateway_1iiz8o0"/>
-    <bpmn:sequenceFlow id="SequenceFlow_0i97ejj" sourceRef="BoundaryEvent_2" targetRef="UserTask_1pu6sug"/>
-    <bpmn:sequenceFlow id="SequenceFlow_0kz48n2" sourceRef="UserTask_1pu6sug" targetRef="ExclusiveGateway_1iiz8o0"/>
+    <bpmn:sequenceFlow id="SequenceFlow_0i97ejj" sourceRef="BoundaryEvent_2" targetRef="UserTaskKundenAnrufen"/>
+    <bpmn:sequenceFlow id="SequenceFlow_0kz48n2" sourceRef="UserTaskKundenAnrufen" targetRef="ExclusiveGateway_1iiz8o0"/>
     <bpmn:sequenceFlow id="SequenceFlow_0dgysae" sourceRef="ExclusiveGateway_1iiz8o0" targetRef="EndEvent_1u6qjao"/>
     <bpmn:sequenceFlow id="SequenceFlow_18a0pzl" sourceRef="SendTask_1hvdsj6" targetRef="ReceiveTask_1707zk0"/>
-    <bpmn:receiveTask id="ReceiveTask_1707zk0" name="Warte auf Antwort">
+    <bpmn:receiveTask id="ReceiveTask_1707zk0" name="Warte auf Antwort" messageRef="Message_1">
       <bpmn:incoming>SequenceFlow_18a0pzl</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rywql7</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:userTask id="UserTask_1pu6sug" name="CallCenter beauftragen">
+    <bpmn:userTask id="UserTaskKundenAnrufen" name="Kunden anrufen">
       <bpmn:incoming>SequenceFlow_0i97ejj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0kz48n2</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_1bqpxlf" sourceRef="BoundaryEvent_1" targetRef="SendTask_0rs6zt3"/>
-    <bpmn:sendTask id="SendTask_0rs6zt3" name="Erinnerungsmail schicken">
+    <bpmn:sendTask id="SendTask_0rs6zt3" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter" name="Erinnerungsmail schicken">
       <bpmn:incoming>SequenceFlow_1bqpxlf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:boundaryEvent id="BoundaryEvent_1" name="" attachedToRef="ReceiveTask_1707zk0" cancelActivity="false">
+    <bpmn:boundaryEvent id="BoundaryEvent_1" name="täglich" attachedToRef="ReceiveTask_1707zk0" cancelActivity="false">
       <bpmn:outgoing>SequenceFlow_1bqpxlf</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="_TimerEventDefinition_2"/>
+      <bpmn:timerEventDefinition id="_TimerEventDefinition_2">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">PT1D</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:boundaryEvent id="BoundaryEvent_2" name="" attachedToRef="ReceiveTask_1707zk0">
+    <bpmn:boundaryEvent id="BoundaryEvent_2" name="1 Woche" attachedToRef="ReceiveTask_1707zk0">
       <bpmn:outgoing>SequenceFlow_0i97ejj</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="_TimerEventDefinition_3"/>
+      <bpmn:timerEventDefinition id="_TimerEventDefinition_3">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="EndEvent_1" name="Mail verschickt">
       <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_2" name="" sourceRef="SendTask_0rs6zt3" targetRef="EndEvent_1"/>
   </bpmn:process>
+  <bpmn:message id="Message_1" name="MSG_DOCUMENT_RECEIVED"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0liisio">
       <bpmndi:BPMNShape id="Participant_1yeu9cv_di" bpmnElement="Participant_1yeu9cv" isHorizontal="false">
@@ -194,7 +199,7 @@
           <dc:Bounds height="20.0" width="90.0" x="398.5" y="134.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1pu6sug_di" bpmnElement="UserTask_1pu6sug">
+      <bpmndi:BPMNShape id="UserTask_1pu6sug_di" bpmnElement="UserTaskKundenAnrufen">
         <dc:Bounds height="80.0" width="100.0" x="630.0" y="189.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_02nql3b_di" bpmnElement="MessageFlow_02nql3b">

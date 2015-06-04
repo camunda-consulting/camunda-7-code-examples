@@ -1,5 +1,8 @@
 package com.camunda.demo.versicherungsneuantrag.model;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class Neuantrag {
 
   private Person antragssteller;
@@ -10,12 +13,20 @@ public class Neuantrag {
   
   private String versicherungsprodukt;
   
+  private String vertragsnummer;
+  private long beitragInCent;
+  
   public String getFahrerUeber25String() {
     if (fahrerUeber25) {
       return "ja";          
     } else {
       return "nein";
     }
+  }
+  
+  public String getBeitrag() {
+    NumberFormat n = NumberFormat.getCurrencyInstance(Locale.GERMANY); 
+    return n.format(beitragInCent / 100.0);
   }
 
   public Person getAntragssteller() {
@@ -57,5 +68,21 @@ public class Neuantrag {
 
   public void setFahrzeugTyp(String fahrzeugTyp) {
     this.fahrzeugTyp = fahrzeugTyp;
+  }
+
+  public String getVertragsnummer() {
+    return vertragsnummer;
+  }
+
+  public void setVertragsnummer(String vertragsnummer) {
+    this.vertragsnummer = vertragsnummer;
+  }
+
+  public long getBeitragInCent() {
+    return beitragInCent;
+  }
+
+  public void setBeitragInCent(long beitragInCent) {
+    this.beitragInCent = beitragInCent;
   }
 }
