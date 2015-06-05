@@ -52,13 +52,13 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitt
 
 # Process instances over time
 
-One count per day for the last 30 days, can be drawn as line chart, e.g.
+One count per hour for the last 30 days, can be drawn as line chart to see development, e.g.
 
 ![Line Chart][1]
 
 H2:
 ```sql
-select hour_date, ACT_RE_PROCDEF.KEY_ , count(*) as processDefinitionCount
+select hour_date, ACT_RE_PROCDEF.KEY_ , count(*) as processInstanceCount
 FROM (select  DATEADD('HOUR', -1*rownum, sysdate) as hour_date  from SYSTEM_RANGE(1, 168))
      join act_hi_procinst on (start_time_ <= hour_date and (end_time_ is null OR end_time_ > hour_date))
      join ACT_RE_PROCDEF on act_hi_procinst.PROC_DEF_ID_  = ACT_RE_PROCDEF.ID_
@@ -68,7 +68,7 @@ order by ACT_RE_PROCDEF.KEY_, hour_date;
 
 Oracle: 
 ```sql
-select hour_date, to_char(hour_date, 'yyyy-mm-dd') as dateString, to_char(hour_date, 'hh24') as hourString, ACT_RE_PROCDEF.KEY_ , count(*) as processDefinitionCount
+select hour_date, to_char(hour_date, 'yyyy-mm-dd') as dateString, to_char(hour_date, 'hh24') as hourString, ACT_RE_PROCDEF.KEY_ , count(*) as processInstanceCount
 FROM (select  sysdate - rownum/24 as hour_date  from all_objects WHERE rownum < 169)
      join act_hi_procinst on (start_time_ <= hour_date and (end_time_ is null OR end_time_ > hour_date))
      join ACT_RE_PROCDEF on act_hi_procinst.PROC_DEF_ID_  = ACT_RE_PROCDEF.ID_
