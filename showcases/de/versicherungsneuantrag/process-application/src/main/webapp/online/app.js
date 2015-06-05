@@ -7,6 +7,9 @@ $( document ).ready(function() {
 		apiUri: 'http://localhost:8080/engine-rest/'
 	});
 
+  //$('#birthdate').on('change', function() {
+  //	console.log($('#birthdate').val());
+  //});
 
 	// Start single Process Instance
 	$('#triggerStartApplication').click(function() {
@@ -15,7 +18,7 @@ $( document ).ready(function() {
 			"antragssteller" : {
 				   "name":         $('#antragstellerName').val(),
 				   "geschlecht":   $('#selectSex').val(),
-				   "geburtsdatum": "1979-04-28T00:00:00",
+				   "geburtsdatum": $('#birthdate').val() + "T00:00:00",
 				   "email":        $('#email').val()
 				  },
 			"fahrzeugHersteller": $('#kfzHersteller').val(),
