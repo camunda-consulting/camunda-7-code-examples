@@ -1,4 +1,4 @@
-package com.camunda.demo.versicherungsneuantrag.nonarquillian;
+package com.camunda.demo.versicherungsneuantrag;
 
 import static org.junit.Assert.assertEquals;
 

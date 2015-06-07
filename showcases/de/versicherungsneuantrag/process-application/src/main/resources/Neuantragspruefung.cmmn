@@ -3,7 +3,7 @@
     <cmmn:case id="neuantrangspruefung" name="Neuantragsprüfung">
         <cmmn:casePlanModel autoComplete="true" name="Neuantragsprüfung" id="neuantrangspruefungPlanModel">
         
-            <cmmn:planItem definitionRef="humanTaskAntragEntscheiden" id="PU_humanTaskAntragEntscheiden"/>
+            <cmmn:planItem definitionRef="humanTaskAntragEntscheiden" id="PI_humanTaskAntragEntscheiden"/>
             <cmmn:planItem definitionRef="humanTaskAntragsBeurteilung" id="PI_humanTaskAntragsBeurteilung"/>
             <cmmn:planItem definitionRef="humanTaskAntragsBeurteilungGL" id="PI_humanTaskAntragsBeurteilungGL"/>
             <cmmn:planItem definitionRef="processTaskDokumenteAnfordern" id="PI_processTaskDokumenteAnfordern"/>
@@ -19,10 +19,18 @@
                 </cmmn:defaultControl>
             </cmmn:humanTask>            
             <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Underwriter)" id="humanTaskAntragsBeurteilung"
-            		camunda:candidateGroupds="management">
+            		camunda:candidateGroupds="management" camunda:formKey="embedded:app:forms/beurteilen.html" >
+                <cmmn:extensionElements>
+					<camunda:caseExecutionListener event="manualStart" class="com.camunda.demo.versicherungsneuantrag.adapter.ActivateFollowUpDateAdapter" />
+					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.versicherungsneuantrag.adapter.DeactivateFollowUpDateAdapter" />
+				</cmmn:extensionElements>   				   		
             </cmmn:humanTask>
             <cmmn:humanTask isBlocking="true" name="Antrags-beurteilung (Gruppenleiter)" id="humanTaskAntragsBeurteilungGL"
-                    camunda:candidateGroupds="management">
+                    camunda:candidateGroupds="management"  camunda:formKey="embedded:app:forms/beurteilen.html" >
+                <cmmn:extensionElements>
+					<camunda:caseExecutionListener event="manualStart" class="com.camunda.demo.versicherungsneuantrag.adapter.ActivateFollowUpDateAdapter" />
+					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.versicherungsneuantrag.adapter.DeactivateFollowUpDateAdapter" />
+				</cmmn:extensionElements>                       
             </cmmn:humanTask>
             <cmmn:processTask isBlocking="true" name="Dokumentenanforderung" id="processTaskDokumenteAnfordern"
                 processRef="dokumentAnfordern">
@@ -30,6 +38,8 @@
 				    <camunda:in source="neuantrag" target="neuantrag" />
 				    <camunda:in source="hinweise" target="hinweise" />
 				    <camunda:out source="risks" target="risks" />
+					<camunda:caseExecutionListener event="manualStart" class="com.camunda.demo.versicherungsneuantrag.adapter.ActivateFollowUpDateAdapter" />
+					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.versicherungsneuantrag.adapter.DeactivateFollowUpDateAdapter" />
 				 </cmmn:extensionElements>                
             </cmmn:processTask>
             

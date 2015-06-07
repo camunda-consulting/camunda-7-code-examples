@@ -38,6 +38,15 @@ public class Neuantrag {
     // ignore - currently needed because JsonIgnore configuration not yet done
   }
   
+  public String getPreisindikation() {
+    NumberFormat n = NumberFormat.getCurrencyInstance(Locale.GERMANY); 
+    return n.format(preisindikationInCent / 100.0);
+  }
+  
+  public void setPreisindikation(String s) {
+    // ignore - currently needed because JsonIgnore configuration not yet done
+  }
+  
   public Person getAntragssteller() {
     return antragssteller;
   }
