@@ -8,7 +8,8 @@
             <cmmn:planItem definitionRef="humanTaskAntragsBeurteilungGL" id="PI_humanTaskAntragsBeurteilungGL"/>
             <cmmn:planItem definitionRef="processTaskDokumenteAnfordern" id="PI_processTaskDokumenteAnfordern"/>
             
-            <cmmn:humanTask isBlocking="true" id="humanTaskAntragEntscheiden" name="Antrag entscheiden" camunda:candidateGroupds="management"
+            <cmmn:humanTask isBlocking="true" id="humanTaskAntragEntscheiden" name="Antrag entscheiden"
+                    camunda:candidateGroupds="management"
             		camunda:formKey="embedded:app:forms/decide.html"  >
                 <cmmn:defaultControl>
 					<cmmn:manualActivationRule>

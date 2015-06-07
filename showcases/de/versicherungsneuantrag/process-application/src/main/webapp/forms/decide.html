@@ -1,5 +1,4 @@
-<form role="form">
-
+<form role="form"> 
  <script cam-script type="text/form-script">
     camForm.on('form-loaded', function() {
       camForm.variableManager.fetchVariable('neuantrag');
@@ -61,8 +60,6 @@
             <input type="checkbox"
        				cam-variable-name="approved"
        			    cam-variable-type="Boolean" />
-            
-            
          </div>
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			  <h2>Weitere Aktivitäten starten</h2>
@@ -131,7 +128,7 @@
 	       	    }, 
 	       	    "deletions" : []
 	       };
-	       console.log( data );
+	       $('#textareaHinweise').val("");
 	       	   
 		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/manual-start', {
 		         data: JSON.stringify(data),
@@ -146,4 +143,10 @@
 
   </script>
 
+<!--
+Todo: add toggle for nice UI (http://www.bootstraptoggle.com/#usage)
+Need to load from PA here - how to do that?
+ <script src="bootstrap-toggle.min.js"></script>
+ <link href="bootstrap-toggle.min.css" rel="stylesheet">
+ -->
 </form>
