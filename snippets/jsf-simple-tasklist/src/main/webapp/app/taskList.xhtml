@@ -6,21 +6,38 @@
 	template="/WEB-INF/templates/template.xhtml">
 <ui:define name="content">
 
-	<h2>Task List</h2>
-	
     <h:form class="form-inline">
-        <label class="control-label" for="currentUser">Logged in user: </label><h:inputText id="currentUser" value="#{taskList.currentUser}" class="input-small"/>
-		<h:commandButton action="#{taskList.update()}" value="update" type="submit" class="btn btn-primary"/>
+    <div class="row">
+        <div class="span2 text-right">
+        <label for="currentUser" class="input">Logged in user: </label>
+        </div>
+        <div class="span3">
+        <h:inputText id="currentUser" value="#{taskList.currentUser}" class="input"/>
+        </div>
+        <div class="span2">
+        <h:commandButton action="#{taskList.update()}" value="update" type="submit" class="btn btn-primary"/>
+        </div>
+    </div>
     </h:form>
-    
-	<h:form>
-	<label class="control-label" for="assignee">show tasks for: </label>
+    <p></p>
+    <hr></hr>
+	<h:form class="form-inline">
+	<div class="row">
+	<div class="span2 text-right">
+	<label class="input" for="assignee">Show tasks for: </label>
+	</div>
+	<div class="span3">
 	<h:selectOneMenu value="#{taskList.assignee}" id="assignee" styleClass="selectpicker">
 		<f:selectItem itemValue="" itemLabel="all"/>
 		<f:selectItem itemValue="#{taskList.currentUser}" itemLabel="#{taskList.currentUser}"/>
 	</h:selectOneMenu>
+	</div>
+	<div class="span2">
    	<h:commandButton action="#{taskList.update()}" value="select tasks" type="submit" class="btn btn-primary"/>
-   	
+   	</div>
+   	</div>
+	</h:form>	
+	<h:form>
 	<h:dataTable value="#{taskList.list}" var="thisTask" id="list" cellspacing="0" rowClasses="odd, even" styleClass="table table-striped table-bordered">
 			<h:column><f:facet name="header">ID</f:facet>#{thisTask.id}</h:column>
 			<h:column><f:facet name="header">name</f:facet><strong>#{thisTask.name}</strong></h:column>
@@ -36,7 +53,7 @@
 					complete
 				</h:outputLink>
 			</h:column>		
-	</h:dataTable>	
+	</h:dataTable>
 	</h:form>	
 </ui:define>
 </ui:composition>

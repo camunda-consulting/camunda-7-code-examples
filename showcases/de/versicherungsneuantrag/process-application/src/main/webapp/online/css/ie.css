@@ -1,0 +1,26 @@
+.ie8 .logo img {
+	max-width:none;
+}
+
+.ie8 header #search-form {
+	margin-top:-4px;
+}
+
+.ie8 .blog-showcase-extra-info span {
+	border: 1px solid #ddd;
+}
+
+.ie8 .fullscreen i, .ie8 .portfolio-item-link span.portfolio-item-hover, .ie8 .post-item-link span.post-item-hover, .ie8 .img-hover {
+	background: #666;
+}
+
+.ie8 .breadcrumbs ul li:first-child + li:before, .ie8 .breadcrumbs ul li:first-child:before {
+	content: " ";
+	margin: 0;
+}
+
+.ie8 .divider {
+	margin: 40px 0;
+	border-top: 1px solid #ddd;
+}
+

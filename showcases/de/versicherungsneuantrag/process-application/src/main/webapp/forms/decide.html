@@ -1,0 +1,152 @@
+<form role="form"> 
+ <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      camForm.variableManager.fetchVariable('neuantrag');
+      camForm.variableManager.fetchVariable('risks');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of vacationRequest to a angular
+      // scope value such that the form can work on it
+      $scope.neuantrag = camForm.variableManager.variable('neuantrag').value;
+      $scope.risks = camForm.variableManager.variable('risks').value;
+    });
+  </script>
+ 
+
+	 <div class="row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h2>Antragsdaten</h2>
+            <table class="table table-striped">
+               <tr>
+                  <td>Antragssteller</td>
+                  <td>{{neuantrag.antragssteller.name}}</td>
+               </tr>
+               <tr>
+                  <td>Geburtsdatum</td>
+                  <td>{{neuantrag.antragssteller.geburtsdatum}}</td>
+               </tr>
+               <tr>
+                  <td>Aktuelles Alter</td>
+                  <td>{{neuantrag.antragssteller.alter}}</td>
+               </tr>               
+               <tr>
+                  <td>Fahrzeug</td>
+                  <td>{{neuantrag.fahrzeugHersteller}} {{neuantrag.fahrzeugTyp}}</td>
+               </tr>
+               <tr>
+                  <td>Versicherungsprodukt</td>
+                  <td>{{neuantrag.versicherungsprodukt}}</td>
+               </tr>               
+               <tr>
+                  <td>Preisindikation</td>
+                  <td>{{neuantrag.preisindikation}}</td>
+               </tr>               
+            </table>
+            
+            <h2>Risiken</h2>
+            Folgende Risiken haben zur Aussteuerung geführt:
+            <ul>
+              <li ng-repeat="risk in risks">{{risk}}</li>
+			</ul>  
+			
+            <h2>Beurteilung(en)</h2>
+            <textarea class="form-control" 
+       				cam-variable-name="beurteilung"
+       			    cam-variable-type="String" />	
+			
+            <h2>Entscheidung</h2>
+            Antrag annehmen: 
+            <input type="checkbox"
+       				cam-variable-name="approved"
+       			    cam-variable-type="Boolean" />
+         </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			  <h2>Weitere Aktivitäten starten</h2>
+			  <div class="form-group"> 			  
+			  	<label>Mitzugebene Hinweise:</label>
+			  	<textarea id="textareaHinweise" class="form-control"></textarea>
+			  </div>
+			  
+			  <table class="table table-striped table-hover">
+			  <tr ng-repeat="caseExecution in enabledCaseExecutions">
+			    <td>
+			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
+			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
+			    </td>
+			    <td>
+			    	{{caseExecution.activityName}}
+			    </td>	  
+			    <td>
+			        <a ng-click="manualStartCaseExecution(caseExecution)"><i class="glyphicon glyphicon-play"></i></a>
+			    </td>
+			  </tr>
+			  </table>
+
+			  <h2>Bereits laufende Aktivitäten</h2>
+			  <table class="table table-striped table-hover">
+			  <tr ng-repeat="caseExecution in activeCaseExecutions" >
+			    <td>
+			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
+			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
+			    	<i class="glyphicon glyphicon glyphicon-folder-open" ng-if="caseExecution.activityType=='casePlanModel'"></i>
+			    </td>
+			    <td>
+			    	{{caseExecution.activityName}}
+			    </td>	  
+			  </tr>
+			  </table>			  
+         </div>
+     </div>
+ 
+ <script cam-script type="text/form-script">
+     
+	 function loadCaseStatus() {
+  	   $.get( '/camunda/api/engine/engine/default/task/' + camForm.taskId, function( task ) {
+		   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&enabled=true', function( result1 ) {
+	         $scope.$apply(function () {
+	            $scope.enabledCaseExecutions = result1;
+	         });
+		   });
+	  	   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&active=true', function( result2 ) {
+	         $scope.$apply(function () {
+	            $scope.activeCaseExecutions = result2;
+	         });
+		   });	 
+	   }); 	
+	 };
+	 
+	 loadCaseStatus();  	     
+	 
+	 $scope.manualStartCaseExecution = function(caseExecution) {
+	       var data = {
+	            "variables": { 
+	       			"hinweise": {
+	       				"value":  $('#textareaHinweise').val(), 
+	       				"type": "String"
+	       			}
+	       	    }, 
+	       	    "deletions" : []
+	       };
+	       $('#textareaHinweise').val("");
+	       	   
+		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/manual-start', {
+		         data: JSON.stringify(data),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+		            loadCaseStatus();
+		         }
+		    });
+	 };
+	 
+
+  </script>
+
+<!--
+Todo: add toggle for nice UI (http://www.bootstraptoggle.com/#usage)
+Need to load from PA here - how to do that?
+ <script src="bootstrap-toggle.min.js"></script>
+ <link href="bootstrap-toggle.min.css" rel="stylesheet">
+ -->
+</form>

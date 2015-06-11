@@ -1,0 +1,475 @@
+/*********************
+ * Graph Holder styles *
+ *********************/
+
+/** Graph Holder container **/
+.graph-container {
+    position: relative; /* required Y axis stuff, Graph Holder's left and bottom sides to be positions properly */
+    display: inline-block; /* display: table may also work.. */
+    padding: 0; /* let the bars position themselves */
+    list-style: none; /* we don't want to see any default <ul> markers */
+	margin: 10px 0 20px 40px;
+	font-size: 0.7em;
+    /* Graph Holder's Background */
+    background-image: -webkit-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -moz-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -o-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: -ms-linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-image: linear-gradient(left , rgba(255, 255, 255, .3) 100%, transparent 100%);
+    background-repeat: no-repeat;
+    background-position: 0 -2.5em;
+}
+
+/* Graph Holder bottom side */
+.graph-container:before {
+    position: absolute;
+    content: "";
+
+    bottom: 0;
+    left: -1.25em; /* skew pushes it left, so we move it a bit in opposite direction */
+
+    width: 100%; /* make sure it is as wide as the whole graph */
+
+    height: 2.5em;
+    background-color: rgba(183, 183, 183, 1);
+
+    /* Make it look perspective */
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+
+/* Graph Holder left side */
+.graph-container:after {
+    position: absolute;
+    content: "";
+
+    top: 1.25em; /* skew pushes it up so we move it down a bit */
+    left: -2.5em;
+
+    width: 2.5em;
+    background-color: rgba(129, 129, 129, 0.4);
+
+    /* Make it look perspective */
+    -webkit-transform: skew(0deg, -45deg);
+    -moz-transform: skew(0deg, -45deg);
+    -o-transform: skew(0deg, -45deg);
+    -ms-transform: skew(0deg, -45deg);
+    transform: skew(0deg, -45deg);
+}
+
+/* Bars and X-axis labels holder */
+.graph-container > li {
+    float: left; /* Make sure bars are aligned one next to another */
+    position: relative; /* Make sure X-axis labels are positioned relative to this element */
+}
+/* A small hack to make Graph Holder's background side be wide enough
+   ..because our bottom side is skewed and pushed to the right, we have to compensate it in Graph Holder's background */
+.graph-container > li:nth-last-child(2) {
+    margin-right: 2.5em;
+}
+/* X-axis labels */
+.graph-container > li > span {
+    position: absolute;
+    left: 0;
+    bottom: -2em;
+    width: 80%; /* play with this one if you change perspective depth */
+    text-align: center;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+	color: #777;
+}
+
+/*******************************
+ * Graph Y-axis Markers styles *
+ *******************************/
+
+/* Markers container */
+.graph-container > li:last-child {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+/* Y-axis Markers list */
+.graph-marker-container > li {
+    position: absolute;
+    left: -2.5em;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 2.5em;
+    list-style: none;
+}
+
+/* Y-axis lines general styles */
+.graph-marker-container > li:before,
+.graph-marker-container > li:after {
+    content: "";
+    position: absolute;
+    border-style: none none dotted;
+    border-color: rgba(100, 100, 100, .15);
+    border-width: 0 0 .15em;
+    background: rgba(133, 133, 133, .15);
+}
+
+/* Y-axis Side line */
+.graph-marker-container > li:before {
+    width: 3.55em;
+    height: 0;
+    bottom: -1.22em;
+    left: -.55em;
+    z-index: 2; /* be above .graph-container:after */
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+/* Y-axis Background line */
+.graph-marker-container li:after {
+    width: 100%;
+    bottom: 0;
+    left: 2.5em;
+}
+
+/* Y-axis text Label */
+.graph-marker-container span {
+    position: absolute;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
+    top: 1em;
+    left: -3.5em; /* just to push it away from the graph.. */
+    width: 3.5em; /* give it absolute value of left offset */
+}
+
+/*********************
+ * Graph Bars styles *
+ *********************/
+
+/* Bar wrapper - hides the inner bar when it goes below the bar, required */
+.bar-wrapper {
+  overflow: hidden;
+}
+/* Bar container - this guy is a real parent of a bar's parts - they all are positioned relative to him */
+.bar-container {
+  position: relative;
+  margin-top: 2.5em; /* should be at least equal to the top offset of background casing */
+                     /* because back casing is positioned higher than actual bar */
+  width: 12.5em; /* required, we have to define the width of a bar */
+}
+/* right bottom patch - make sure inner bar's right bottom corner is "cut" when it slides down */
+.bar-container:before {
+  content: "";
+  position: absolute;
+  z-index: 3; /* to be above .bar-inner */
+ 
+  bottom: 0;
+  right: 0;
+ 
+  /* Use bottom border to shape triangle */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 2.5em 2.5em;
+  border-color: transparent transparent rgba(183,183,183,1);
+}
+
+/** BACK CASING **/
+/* Back panel */
+.bar-background {
+  width: 10em;
+  height: 100%;
+  position: absolute;
+  top: -2.5em;
+  left: 2.5em;
+  z-index: 1; /* just for reference */
+}
+ 
+.bar-background:before,
+.bar-background:after {
+  content: "";
+  position: absolute;
+}
+ 
+/* Bottom panel */
+.bar-background:before {
+  bottom: -2.5em;
+  right: 1.25em;
+  width: 10em;
+  height: 2.5em;
+  transform: skew(-45deg);
+}
+ 
+/* Left back panel */
+.bar-background:after {
+  top: 1.25em;
+  right: 10em;
+  width: 2.5em;
+  height: 100%;
+ 
+  /* skew only the Y-axis */
+  transform: skew(0deg, -45deg);
+}
+
+/** FRONT CASING **/
+/* Front panel */
+.bar-foreground {
+    z-index: 3; /* be above .bar-background and .bar-inner */
+}
+.bar-foreground,
+.bar-inner {
+    position: absolute;
+    width: 10em;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.bar-foreground:before,
+.bar-foreground:after,
+.bar-inner:before,
+.bar-inner:after {
+    content: "";
+    position: absolute;
+}
+
+/* Right front panel */
+.bar-foreground:before,
+.bar-inner:before {
+    top: -1.25em;
+    right: -2.5em;
+    width: 2.5em;
+    height: 100%;
+    background-color: rgba(160, 160, 160, .27);
+
+    -webkit-transform: skew(0deg, -45deg);
+    -moz-transform: skew(0deg, -45deg);
+    -o-transform: skew(0deg, -45deg);
+    -ms-transform: skew(0deg, -45deg);
+    transform: skew(0deg, -45deg);
+}
+
+/* Top front panel */
+.bar-foreground:after,
+.bar-inner:after {
+    top: -2.5em;
+    right: -1.25em;
+    width: 100%;
+    height: 2.5em;
+    background-color: rgba(160, 160, 160, .2);
+
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    -o-transform: skew(-45deg);
+    -ms-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+
+/** BAR's inner block **/
+.bar-inner {
+    z-index: 2; /* to be above .bar-background */
+    top: auto; /* reset position top */
+    background-color: rgba(5, 62, 123, .6);
+    height: 0;
+    bottom: -2.5em;
+    color: transparent; /* hide text values */
+
+    -webkit-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -moz-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -o-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    -ms-transition: height 0.8s ease-out, bottom 0.8s ease-out;
+    transition: height 0.8s ease-out, bottom 0.8s ease-out;
+}
+
+/* Right panel */
+.bar-inner:before {
+    background-color: rgba(5, 62, 123, .6);
+}
+
+/* Top panel */
+.bar-inner:after {
+    background-color: rgba(47, 83, 122, .7);
+}
+
+.graph-container li:nth-child(1) .bar-inner,
+.graph-container li:nth-child(1) .bar-inner:before { background-color: rgba(196, 109, 59, .6); }
+.graph-container li:nth-child(1) .bar-inner:after { background-color: rgba(216, 143, 102, .7); }
+.graph-container li:nth-child(2) .bar-inner,
+.graph-container li:nth-child(2) .bar-inner:before { background-color: rgba(5, 123, 5, .3); }
+.graph-container li:nth-child(2) .bar-inner:after { background-color: rgba(63, 122, 47, .4); }
+.graph-container li:nth-child(3) .bar-inner,
+.graph-container li:nth-child(3) .bar-inner:before { background-color: rgba(255, 0, 0, .3); }
+.graph-container li:nth-child(3) .bar-inner:after { background-color: rgba(255, 71, 71, .3); }
+.graph-container li:nth-child(4) .bar-inner,
+.graph-container li:nth-child(4) .bar-inner:before { background-color: rgba(255, 248, 136, .8); }
+.graph-container li:nth-child(4) .bar-inner:after { background-color: rgba(220, 204, 53, .4); }
+.graph-container li:nth-child(5) .bar-inner,
+.graph-container li:nth-child(5) .bar-inner:before { background-color: rgba(5, 62, 123, .6); }
+.graph-container li:nth-child(5) .bar-inner:after { background-color: rgba(47, 83, 122, .7); }
+
+
+/******************************************************************************
+ **                                                                          **
+ ** VARIABLES                                                                **
+ **                                                                          **
+ ******************************************************************************/
+
+/****************
+ * SIZES        *
+ ****************/
+ /* Size of the Graph */
+.graph-container,
+.bar-container {
+  font-size: 8px;
+}
+/* Height of Bars */
+.bar-container,
+.graph-container:after,
+.graph-container > li:last-child {
+  height: 40em;
+}
+
+.graph-marker-container span, .graph-container > li > span {
+	font-size: 2em;
+}
+
+
+/****************
+ * SPACING      *
+ ****************/
+
+/* spacing between bars */
+.graph-container > li .bar-container {
+    margin-right: 2.5em;
+}
+/* spacing before first bar */
+.graph-container > li:first-child {
+    margin-left: 2.5em;
+}
+/* spacing after last bar */
+.graph-container > li:nth-last-child(2) .bar-container {
+    margin-right: 2em;
+}
+
+/****************
+ *    Colors    *
+ ****************/
+ 
+/* Bar's Back side */
+.bar-background {
+    background-color: rgba(160, 160, 160, .1);
+}
+/* Bar's Bottom side */
+.bar-background:before {
+    background-color: rgba(160, 160, 160, .2);
+}
+/* Bar's Left Back side */
+.bar-background:after {
+    background-color: rgba(160, 160, 160, .05);
+}
+/* Bar's Front side */
+.bar-foreground {
+    background-color: rgba(160, 160, 160, .1);
+}
+
+.button-label{
+	font-weight: bold;
+	color: #aaa;
+	line-height: 40px;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+	display: inline;
+	margin: 0 10px 0 20px;
+}
+.button-label:before { 
+	content: " "; 
+	white-space: wrap; 
+}
+
+.main span:first-of-type{
+	margin-left: 0px;
+}
+/******************************************************************************
+ **                                                                          **
+ ** RESPONSIVENESS                                                           **
+ **                                                                          **
+ ** Just as an example to show you the way how to resize the graph 			 **
+ **                                                                          **
+ ******************************************************************************/
+ 
+@media screen and (max-width: 1125px) {
+		.graph-container > li > span {
+    bottom: -3em;
+	}
+	
+		.graph-container,
+.bar-container {
+  font-size: 6px;
+}
+}
+@media screen and (max-width: 1050px) {
+	.graph-container > li > span {
+    bottom: -3em;
+	}
+	
+		.graph-container,
+.bar-container {
+  font-size: 6px;
+}
+}
+
+@media screen and (max-width: 768px) {
+	.graph-container > li > span {
+    bottom: -3em;
+	}
+	.graph-container {
+		margin-top: 25px;
+	}
+		.graph-container,
+.bar-container {
+  font-size: 7px;
+}
+}
+
+@media screen and (max-width: 640px) {
+	.graph-container > li > span {
+    bottom: -3em;
+	}
+	.graph-container {
+		margin-top: 25px;
+	}
+		.graph-container,
+.bar-container {
+  font-size: 6px;
+}
+}
+@media screen and (max-width: 480px) {
+	.graph-container > li > span {
+    bottom: -3em;
+	}
+	.graph-container {
+		margin-top: 25px;
+	}
+		.graph-container,
+.bar-container {
+  font-size: 5px;
+}
+}
+@media screen and (max-width: 360px) {
+	.graph-container {
+		margin-top: 20px;
+	}
+	
+	.graph-container > li > span {
+    bottom: -4em;
+	}
+	
+	.graph-container,
+.bar-container {
+  font-size: 3px;
+}
+}
