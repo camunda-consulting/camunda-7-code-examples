@@ -67,7 +67,7 @@ This example was presented in a Webinar, the recording is available:
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.3.1-alpha1 and JBoss AS 7.2. 
+Built and tested against Camunda BPM version 7.3.0 and JBoss AS 7.2. 
 
 License
 -------
