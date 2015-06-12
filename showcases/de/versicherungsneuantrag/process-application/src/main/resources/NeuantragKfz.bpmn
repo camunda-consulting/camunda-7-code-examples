@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://activiti.org/bpmn" exporter="camunda modeler" exporterVersion="2.7.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:collaboration id="Collaboration_1u35ano">
+    <bpmn2:participant id="Participant_0477s11" name="Versicherungsneuantrag" processRef="versicherungsneuantrag" />
+  </bpmn2:collaboration>
   <bpmn2:process id="versicherungsneuantrag" name="Versicherungsneuantrag" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" name="Antrag&#10;erhalten">
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
@@ -126,7 +129,10 @@ Ihre Camundanzia.]]></camunda:script>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt" />
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="versicherungsneuantrag">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1u35ano">
+      <bpmndi:BPMNShape id="Participant_0477s11_di" bpmnElement="Participant_0477s11">
+        <dc:Bounds x="103" y="69" width="1166" height="459" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_4" bpmnElement="StartEvent_1">
         <dc:Bounds x="153" y="111" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -206,6 +212,13 @@ Ihre Camundanzia.]]></camunda:script>
           <dc:Bounds x="147" y="129" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_SendTask_2">
+        <di:waypoint xsi:type="dc:Point" x="1017" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="1058" y="129" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="988" y="131" width="90" height="6" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_SendTask_2" targetElement="_BPMNShape_EndEvent_2">
         <di:waypoint xsi:type="dc:Point" x="1158" y="129" />
         <di:waypoint xsi:type="dc:Point" x="1213" y="129" />
@@ -213,11 +226,18 @@ Ihre Camundanzia.]]></camunda:script>
           <dc:Bounds x="1138" y="141" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_SendTask_2">
-        <di:waypoint xsi:type="dc:Point" x="1017" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="1058" y="129" />
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_ExclusiveGateway_4" targetElement="_BPMNShape_ServiceTask_3">
+        <di:waypoint xsi:type="dc:Point" x="862" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="917" y="129" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="988" y="131" width="90" height="6" />
+          <dc:Bounds x="840" y="131" width="90" height="6" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_BusinessRuleTask_2" targetElement="_BPMNShape_ExclusiveGateway_2">
+        <di:waypoint xsi:type="dc:Point" x="333" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="367" y="129" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="323" y="129" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ExclusiveGateway_2" targetElement="_BPMNShape_CallActivity_2">
@@ -235,19 +255,19 @@ Ihre Camundanzia.]]></camunda:script>
           <dc:Bounds x="419" y="135" width="94" height="38" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_BusinessRuleTask_2" targetElement="_BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="333" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="367" y="129" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="323" y="129" width="90" height="6" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_16" bpmnElement="SequenceFlow_16" sourceElement="_BPMNShape_ExclusiveGateway_2" targetElement="_BPMNShape_ExclusiveGateway_5">
         <di:waypoint xsi:type="dc:Point" x="392" y="154" />
         <di:waypoint xsi:type="dc:Point" x="392" y="468" />
         <di:waypoint xsi:type="dc:Point" x="812" y="468" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="386" y="473" width="90" height="22" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_CallActivity_2" targetElement="_BPMNShape_ExclusiveGateway_3">
+        <di:waypoint xsi:type="dc:Point" x="601" y="242" />
+        <di:waypoint xsi:type="dc:Point" x="812" y="242" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="573" y="242" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_BoundaryEvent_3" targetElement="_BPMNShape_UserTask_6">
@@ -258,32 +278,11 @@ Ihre Camundanzia.]]></camunda:script>
           <dc:Bounds x="593" y="366" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_CallActivity_2" targetElement="_BPMNShape_ExclusiveGateway_3">
-        <di:waypoint xsi:type="dc:Point" x="601" y="242" />
-        <di:waypoint xsi:type="dc:Point" x="812" y="242" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="573" y="242" width="90" height="6" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_UserTask_6" targetElement="_BPMNShape_EndEvent_28">
         <di:waypoint xsi:type="dc:Point" x="707" y="366" />
         <di:waypoint xsi:type="dc:Point" x="750" y="366" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="671" y="366" width="90" height="6" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_ExclusiveGateway_4" targetElement="_BPMNShape_ServiceTask_3">
-        <di:waypoint xsi:type="dc:Point" x="862" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="917" y="129" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="840" y="131" width="90" height="6" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_17" bpmnElement="SequenceFlow_17" sourceElement="_BPMNShape_ExclusiveGateway_5" targetElement="_BPMNShape_SendTask_3">
-        <di:waypoint xsi:type="dc:Point" x="862" y="468" />
-        <di:waypoint xsi:type="dc:Point" x="917" y="468" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="814" y="468" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="_BPMNShape_ExclusiveGateway_3" targetElement="_BPMNShape_ExclusiveGateway_4">
@@ -298,6 +297,13 @@ Ihre Camundanzia.]]></camunda:script>
         <di:waypoint xsi:type="dc:Point" x="837" y="443" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="813" y="271" width="90" height="22" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_17" bpmnElement="SequenceFlow_17" sourceElement="_BPMNShape_ExclusiveGateway_5" targetElement="_BPMNShape_SendTask_3">
+        <di:waypoint xsi:type="dc:Point" x="862" y="468" />
+        <di:waypoint xsi:type="dc:Point" x="917" y="468" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="814" y="468" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_13" sourceElement="_BPMNShape_SendTask_3" targetElement="_BPMNShape_EndEvent_3">
