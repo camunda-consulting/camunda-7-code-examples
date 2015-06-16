@@ -70,13 +70,15 @@ public class ProcessDiagramController {
 
 	    if (processInstance != null) {
 	      DiagramLayout processDiagramLayout = repositoryService.getProcessDiagramLayout(processInstance.getProcessDefinitionId());
-	      List<HistoricTaskInstance> hlist = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstance.getId()).orderByHistoricActivityInstanceStartTime().asc().list();
-	      for (HistoricTaskInstance htask : hlist) {
-	    	  if (htask.getEndTime() != null) {
-	        	PositionedHistoricTaskInstance ptask = new PositionedHistoricTaskInstance(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
-	        	alist.add(ptask);
-	        }
-	      }
+        if (processDiagramLayout != null) {
+  	      List<HistoricTaskInstance> hlist = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstance.getId()).orderByHistoricActivityInstanceStartTime().asc().list();
+  	      for (HistoricTaskInstance htask : hlist) {
+  	    	  if (htask.getEndTime() != null) {
+  	        	PositionedHistoricTaskInstance ptask = new PositionedHistoricTaskInstance(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
+  	        	alist.add(ptask);
+  	        }
+  	      }
+        }
 	    }
 	    return alist;
 	  }
@@ -88,27 +90,28 @@ public class ProcessDiagramController {
 
 	    if (processInstance != null) {
 	      DiagramLayout processDiagramLayout = repositoryService.getProcessDiagramLayout(processInstance.getProcessDefinitionId());
-	      
-	      //order by taskName as workaround because orderByTaskDefinitionKey is not working. This is not really safe!
-	      List<HistoricTaskInstance> hlist = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstance.getId()).orderByTaskName().asc().list();
-
-	      int i=0;
-	      for (HistoricTaskInstance htask : hlist) {
-	    	  if (htask.getEndTime() != null) {
-	    		  if (i>0) {
-		    		  if (alist.get(i-1).getTaskDefinitionKey().equals(htask.getTaskDefinitionKey())) {
-		        		alist.get(i-1).taskInstances.add(htask);
-		        	} else {
-		        		PositionedHistoricTaskDefinition ptask = new PositionedHistoricTaskDefinition(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
-		  	          	alist.add(ptask);
-		  	          	i++;
-		        	}
-	    		  } else {
-		        		PositionedHistoricTaskDefinition ptask = new PositionedHistoricTaskDefinition(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
-		  	          	alist.add(ptask);
-		  	          	i++;
-	    		  }
-	        }
+	      if (processDiagramLayout != null) {
+  	      //order by taskName as workaround because orderByTaskDefinitionKey is not working. This is not really safe!
+  	      List<HistoricTaskInstance> hlist = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstance.getId()).orderByTaskName().asc().list();
+  
+  	      int i=0;
+  	      for (HistoricTaskInstance htask : hlist) {
+  	    	  if (htask.getEndTime() != null) {
+  	    		  if (i>0) {
+  		    		  if (alist.get(i-1).getTaskDefinitionKey().equals(htask.getTaskDefinitionKey())) {
+  		        		alist.get(i-1).taskInstances.add(htask);
+  		        	} else {
+  		        		PositionedHistoricTaskDefinition ptask = new PositionedHistoricTaskDefinition(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
+  		  	          	alist.add(ptask);
+  		  	          	i++;
+  		        	}
+  	    		  } else {
+  		        		PositionedHistoricTaskDefinition ptask = new PositionedHistoricTaskDefinition(htask, processDiagramLayout.getNode(htask.getTaskDefinitionKey()));
+  		  	          	alist.add(ptask);
+  		  	          	i++;
+  	    		  }
+  	        }
+  	      }
 	      }
 	    }
 	    return alist;
