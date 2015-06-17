@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://activiti.org/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://activiti.org/bpmn" exporter="camunda modeler" exporterVersion="2.7.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:collaboration id="Collaboration_1u35ano">
-    <bpmn2:participant id="Participant_0477s11" name="Versicherungsneuantrag" processRef="versicherungsneuantrag" />
+    <bpmn2:participant id="Participant_0477s11" name="Versicherungsneuantrag (Camunda BPM)" processRef="versicherungsneuantrag" />
+    <bpmn2:participant id="Participant_02vw71n" name="Dokumentenerstellung und Output Management (M/TEXT+M/OMS)" processRef="Process_0taiiw1" />
+    <bpmn2:messageFlow id="MessageFlow_18z463g" sourceRef="SendTaskAblehnungZusenden" targetRef="StartEvent_1v2k3i9" />
+    <bpmn2:messageFlow id="MessageFlow_1g8clqa" sourceRef="SendTaskPoliceZusenden" targetRef="StartEvent_1v2k3i9" />
   </bpmn2:collaboration>
   <bpmn2:process id="versicherungsneuantrag" name="Versicherungsneuantrag" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" name="Antrag&#10;erhalten">
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:sendTask id="SendTaskPoliceZusenden" name="Police zusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter">
-      <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="mailBody">
-            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
-
-Wir freuen uns Ihnen mitteilen zu können, dass wir Ihre KFZ Versicherungspolice ausgestellt haben. 
-
-Wir haben Ihnen hier die wichtigsten Informationen zusammengestellt: 
-- Vertragsnummer: ${neuantrag.vertragsnummer}
-- Jahresbeitrag: ${neuantrag.beitrag}
-- Produkt: ${neuantrag.versicherungsprodukt}
-
-Schöne Grüße
-Ihre Camundanzia.]]></camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="mailSubject">Ihre Police wurde ausgestellt</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
-    </bpmn2:sendTask>
     <bpmn2:serviceTask id="ServiceTaskPoliceAusstellen" name="Police ausstellen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.IssuePolicyAdapter">
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:endEvent id="EndEventAntragPoliciert" name="Antrag &#10;policiert">
-      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
-    </bpmn2:endEvent>
     <bpmn2:exclusiveGateway id="ExclusiveGatewayPruefung" name="Prüfungsergebnis?">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
@@ -93,9 +71,6 @@ Ihre Camundanzia.]]></camunda:script>
       <bpmn2:incoming>SequenceFlow_17</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:sendTask>
-    <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Antrag &#10;abgelehnt">
-      <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
-    </bpmn2:endEvent>
     <bpmn2:boundaryEvent id="BoundaryEvent_2" name="2 Tage" cancelActivity="false" attachedToRef="CallActivityAntragManuellPruefen">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="TimerEventDefinition_1">
@@ -104,7 +79,6 @@ Ihre Camundanzia.]]></camunda:script>
     </bpmn2:boundaryEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTaskAntragAutomatischPruefen" />
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ServiceTaskPoliceAusstellen" targetRef="SendTaskPoliceZusenden" />
-    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="SendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert" />
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="ExclusiveGatewayJoi" targetRef="ServiceTaskPoliceAusstellen" />
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="BusinessRuleTaskAntragAutomatischPruefen" targetRef="ExclusiveGatewayPruefung" />
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="Risiken erkannt&#10;(gelb)" sourceRef="ExclusiveGatewayPruefung" targetRef="CallActivityAntragManuellPruefen">
@@ -127,11 +101,80 @@ Ihre Camundanzia.]]></camunda:script>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="ExclusiveGatewayJoin" targetRef="SendTaskAblehnungZusenden" />
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt" />
+    <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Antrag &#10;abgelehnt">
+      <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sendTask id="SendTaskPoliceZusenden" name="Police zusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter">
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Wir freuen uns Ihnen mitteilen zu können, dass wir Ihre KFZ Versicherungspolice ausgestellt haben. 
+
+Wir haben Ihnen hier die wichtigsten Informationen zusammengestellt: 
+- Vertragsnummer: ${neuantrag.vertragsnummer}
+- Jahresbeitrag: ${neuantrag.beitrag}
+- Produkt: ${neuantrag.versicherungsprodukt}
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Ihre Police wurde ausgestellt</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:endEvent id="EndEventAntragPoliciert" name="Antrag &#10;policiert">
+      <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="SendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert" />
+  </bpmn2:process>
+  <bpmn2:process id="Process_0taiiw1">
+    <bpmn2:serviceTask id="ServiceTask_008kj4i" name="Dokument&#10;aus Vorlage erstellen">
+      <bpmn2:incoming>SequenceFlow_04sz00a</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_0ufpr0x</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:startEvent id="StartEvent_1v2k3i9" name="Dokumenten-versand&#10;angefordert">
+      <bpmn2:outgoing>SequenceFlow_04sz00a</bpmn2:outgoing>
+      <bpmn2:messageEventDefinition />
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_04sz00a" sourceRef="StartEvent_1v2k3i9" targetRef="ServiceTask_008kj4i" />
+    <bpmn2:sequenceFlow id="SequenceFlow_0ufpr0x" sourceRef="ServiceTask_008kj4i" targetRef="ServiceTask_1g7oivw" />
+    <bpmn2:sequenceFlow id="SequenceFlow_1jotym6" sourceRef="ServiceTask_1g7oivw" targetRef="InclusiveGateway_0nstsr1" />
+    <bpmn2:serviceTask id="ServiceTask_1g7oivw" name="Dokument archivieren">
+      <bpmn2:incoming>SequenceFlow_0ufpr0x</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1jotym6</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:inclusiveGateway id="InclusiveGateway_0nstsr1">
+      <bpmn2:incoming>SequenceFlow_1jotym6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1aircst</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_04qt5rk</bpmn2:outgoing>
+    </bpmn2:inclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_1aircst" sourceRef="InclusiveGateway_0nstsr1" targetRef="SendTask_1w716ar" />
+    <bpmn2:sendTask id="SendTask_1w716ar" name="Dokument per E-Mail versenden">
+      <bpmn2:incoming>SequenceFlow_1aircst</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1dbadhi</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:endEvent id="EndEvent_1kbyu6v" name="Dokument per&#10;E-Mail versendet">
+      <bpmn2:incoming>SequenceFlow_1dbadhi</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1dbadhi" sourceRef="SendTask_1w716ar" targetRef="EndEvent_1kbyu6v" />
+    <bpmn2:sequenceFlow id="SequenceFlow_04qt5rk" sourceRef="InclusiveGateway_0nstsr1" targetRef="SendTask_10wx48x" />
+    <bpmn2:endEvent id="EndEvent_06smdjh" name="Dokument per&#10;Post versendet">
+      <bpmn2:incoming>SequenceFlow_1772cvq</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1772cvq" sourceRef="SendTask_10wx48x" targetRef="EndEvent_06smdjh" />
+    <bpmn2:sendTask id="SendTask_10wx48x" name="Dokument drucken und per Post versenden">
+      <bpmn2:incoming>SequenceFlow_04qt5rk</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1772cvq</bpmn2:outgoing>
+    </bpmn2:sendTask>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1u35ano">
       <bpmndi:BPMNShape id="Participant_0477s11_di" bpmnElement="Participant_0477s11">
-        <dc:Bounds x="103" y="69" width="1166" height="459" />
+        <dc:Bounds x="103" y="69" width="1191" height="459" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_4" bpmnElement="StartEvent_1">
         <dc:Bounds x="153" y="111" width="36" height="36" />
@@ -140,15 +183,15 @@ Ihre Camundanzia.]]></camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_SendTask_2" bpmnElement="SendTaskPoliceZusenden">
-        <dc:Bounds x="1058" y="89" width="100" height="80" />
+        <dc:Bounds x="1068" y="89" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTaskPoliceAusstellen">
         <dc:Bounds x="917" y="89" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEventAntragPoliciert">
-        <dc:Bounds x="1213" y="111" width="36" height="36" />
+        <dc:Bounds x="1223" y="111" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1173" y="152" width="116" height="25" />
+          <dc:Bounds x="1183" y="152" width="116" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_2" bpmnElement="ExclusiveGatewayPruefung" isMarkerVisible="true">
@@ -194,9 +237,9 @@ Ihre Camundanzia.]]></camunda:script>
         <dc:Bounds x="917" y="428" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_3" bpmnElement="EndEventAntragAbgelehnt">
-        <dc:Bounds x="1066" y="450" width="36" height="36" />
+        <dc:Bounds x="1057" y="450" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1032" y="491" width="104" height="22" />
+          <dc:Bounds x="1023" y="491" width="104" height="22" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_3" bpmnElement="BoundaryEvent_2">
@@ -214,16 +257,16 @@ Ihre Camundanzia.]]></camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_SendTask_2">
         <di:waypoint xsi:type="dc:Point" x="1017" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="1058" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="1068" y="129" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="988" y="131" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_SendTask_2" targetElement="_BPMNShape_EndEvent_2">
-        <di:waypoint xsi:type="dc:Point" x="1158" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="1213" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="1168" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="1223" y="129" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1138" y="141" width="90" height="6" />
+          <dc:Bounds x="1148" y="141" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_ExclusiveGateway_4" targetElement="_BPMNShape_ServiceTask_3">
@@ -308,11 +351,116 @@ Ihre Camundanzia.]]></camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_13" sourceElement="_BPMNShape_SendTask_3" targetElement="_BPMNShape_EndEvent_3">
         <di:waypoint xsi:type="dc:Point" x="1017" y="468" />
-        <di:waypoint xsi:type="dc:Point" x="1066" y="468" />
+        <di:waypoint xsi:type="dc:Point" x="1057" y="468" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1043" y="469" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_02vw71n_di" bpmnElement="Participant_02vw71n">
+        <dc:Bounds x="1038" y="599" width="738" height="256" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_04sz00a_di" bpmnElement="SequenceFlow_04sz00a">
+        <di:waypoint xsi:type="dc:Point" x="1136" y="667" />
+        <di:waypoint xsi:type="dc:Point" x="1172" y="667" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1109" y="657" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_008kj4i_di" bpmnElement="ServiceTask_008kj4i">
+        <dc:Bounds x="1172" y="627" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1v2k3i9_di" bpmnElement="StartEvent_1v2k3i9">
+        <dc:Bounds x="1100" y="649" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1073" y="685" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_18z463g_di" bpmnElement="MessageFlow_18z463g">
+        <di:waypoint xsi:type="dc:Point" x="967" y="508" />
+        <di:waypoint xsi:type="dc:Point" x="967" y="565" />
+        <di:waypoint xsi:type="dc:Point" x="1083" y="565" />
+        <di:waypoint xsi:type="dc:Point" x="1112" y="651" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859" y="600.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_1g8clqa_di" bpmnElement="MessageFlow_1g8clqa">
+        <di:waypoint xsi:type="dc:Point" x="1118" y="169" />
+        <di:waypoint xsi:type="dc:Point" x="1118" y="649" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="986.5" y="440" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_1w716ar_di" bpmnElement="SendTask_1w716ar">
+        <dc:Bounds x="1543.4675324675325" y="627" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ufpr0x_di" bpmnElement="SequenceFlow_0ufpr0x">
+        <di:waypoint xsi:type="dc:Point" x="1272" y="667" />
+        <di:waypoint xsi:type="dc:Point" x="1310" y="667" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="657" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jotym6_di" bpmnElement="SequenceFlow_1jotym6">
+        <di:waypoint xsi:type="dc:Point" x="1410" y="667" />
+        <di:waypoint xsi:type="dc:Point" x="1454" y="667" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1378.5" y="657" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="InclusiveGateway_0nstsr1_di" bpmnElement="InclusiveGateway_0nstsr1">
+        <dc:Bounds x="1454.4655344655346" y="642" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1434.4655344655346" y="692" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1g7oivw_di" bpmnElement="ServiceTask_1g7oivw">
+        <dc:Bounds x="1309.5684315684316" y="627" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1aircst_di" bpmnElement="SequenceFlow_1aircst">
+        <di:waypoint xsi:type="dc:Point" x="1504" y="667" />
+        <di:waypoint xsi:type="dc:Point" x="1543" y="667" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1484.5" y="657" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1kbyu6v_di" bpmnElement="EndEvent_1kbyu6v">
+        <dc:Bounds x="1692" y="649" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1665" y="685" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1dbadhi_di" bpmnElement="SequenceFlow_1dbadhi">
+        <di:waypoint xsi:type="dc:Point" x="1643" y="667" />
+        <di:waypoint xsi:type="dc:Point" x="1692" y="667" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1622.5" y="657" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_04qt5rk_di" bpmnElement="SequenceFlow_04qt5rk">
+        <di:waypoint xsi:type="dc:Point" x="1479" y="692" />
+        <di:waypoint xsi:type="dc:Point" x="1479" y="785" />
+        <di:waypoint xsi:type="dc:Point" x="1543" y="785" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1479" y="716" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_06smdjh_di" bpmnElement="EndEvent_06smdjh">
+        <dc:Bounds x="1692" y="767" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1665" y="803" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1772cvq_di" bpmnElement="SequenceFlow_1772cvq">
+        <di:waypoint xsi:type="dc:Point" x="1643" y="785" />
+        <di:waypoint xsi:type="dc:Point" x="1692" y="785" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1622.5" y="775" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_10wx48x_di" bpmnElement="SendTask_10wx48x">
+        <dc:Bounds x="1543" y="745" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
