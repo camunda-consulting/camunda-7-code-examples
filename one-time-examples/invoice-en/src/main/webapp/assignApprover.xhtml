@@ -12,7 +12,7 @@
 	      <f:viewParam id="callbackUrl" name="callbackUrl" />
 	      <f:event type="preRenderView" listener="#{fox.taskForm.startTask(taskId, callbackUrl)}" />
 	     -->
-	      <f:event type="preRenderView" listener="#{camunda.taskForm.startTask()}" />
+	      <f:event type="preRenderView" listener="#{camundaTaskForm.startTask()}" />
 	    </f:metadata>
 	</ui:define>
 
