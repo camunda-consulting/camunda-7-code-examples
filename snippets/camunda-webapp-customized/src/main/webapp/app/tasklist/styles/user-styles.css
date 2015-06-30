@@ -1,0 +1,36 @@
+.navbar .navbar-brand {
+  background-image: url(../images/custom-logo.png);
+}
+
+.navbar-collapse,
+.navbar-default,
+.navbar-right > .divider-vertical,
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+  background-color: #52b415;
+  border-color: #52b415;
+}
+
+.columns>.task-details .cell.top {
+  background-color: #f0faed;
+}	
+.columns>.tasks-list .cell.top {
+  background-color: #C7D8C2;
+}
+.columns>.task-filters .cell.top {
+  background-color: #B9CAB4;
+}
+
+a, a:link, a:hover, a:focus, a:active {
+	color: #204F03;
+}
+
+.btn-link {
+	color: #204F03;
+}
+
+button.region-toggle .icon-bar {
+  background-color: #204F03;
+}
