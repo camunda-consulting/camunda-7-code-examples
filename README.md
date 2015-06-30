@@ -133,7 +133,7 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/camunda-webapp-customize/screenshot.png" width="50"></td>
+    <td><img src="snippets/camunda-webapp-customized/screenshot.png" width="50"></td>
     <td><a href="snippets/camunda-webapp-customized">Webapp Customizing</a></td>
     <td>Shows how to build a customized webapp (own logo, colors, language, plugins, ...) by using Maven Overlay.</td>
   </tr>
@@ -150,7 +150,7 @@ Snippets
     <td>Plugin that provides a "Google-like" search bar for tasks.</td>
   </tr>
   <tr>
-    <td><img src="snippetstasklist-plugin-nice-external-forms/screenshot.png" width="50"></td>
+    <td><img src="snippets/tasklist-plugin-nice-external-forms/screenshot.png" width="50"></td>
     <td><a href="snippets/tasklist-plugin-nice-external-forms">Tasklist Plugin: Extended External Forms</a></td>
     <td>Plugin that provides a customized and better looking external forms hook.</td>
   </tr>
