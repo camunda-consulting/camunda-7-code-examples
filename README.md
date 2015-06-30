@@ -123,7 +123,7 @@ Snippets
   
 </table>
 
-### Cockpit Plugins
+### Camunda Webapp (Tasklist & Cockpit)
 
 <table>
   <tr>
@@ -133,9 +133,26 @@ Snippets
   </tr>
 
   <tr>
+    <td><img src="snippets/camunda-webapp-customize/screenshot.png" width="50"></td>
+    <td><a href="snippets/camunda-webapp-customized">Webapp Customizing</a></td>
+    <td>Shows how to build a customized webapp (own logo, colors, language, plugins, ...) by using Maven Overlay.</td>
+  </tr>
+
+  <tr>
     <td><img src="https://i.vimeocdn.com/video/485755185_640.jpg" width="50"></td>
-    <td><a href="http://camunda.org/plugins/">Plugin Store</a></td>
+    <td><a href="http://camunda.org/plugins/">Various Cockpit Plugins</a></td>
     <td>The Plugin Store lists various available cockpit plugins, including the consulting snippets.</td>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/tasklist-plugin-easy-search/screenshot.png" width="50"></td>
+    <td><a href="snippets/tasklist-plugin-easy-search">Tasklist Plugin: Easy Search</a></td>
+    <td>Plugin that provides a "Google-like" search bar for tasks.</td>
+  </tr>
+  <tr>
+    <td><img src="snippetstasklist-plugin-nice-external-forms/screenshot.png" width="50"></td>
+    <td><a href="snippets/tasklist-plugin-nice-external-forms">Tasklist Plugin: Extended External Forms</a></td>
+    <td>Plugin that provides a customized and better looking external forms hook.</td>
   </tr>
   
 </table>

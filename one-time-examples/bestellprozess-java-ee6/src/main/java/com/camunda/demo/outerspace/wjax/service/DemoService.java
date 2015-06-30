@@ -21,7 +21,7 @@ public class DemoService {
       Article article1 = new Article();
       article1.setId("bag1");
       article1.setDescription("Awesome crazy bag");
-      article1.setImageUrl("http://image.ticcity.de/images/imagepool/www.nunon.deprodukt_knorr_handtasche_40202.jpg");
+      article1.setImageUrl("http://www.klonblog.com/images/2013/06/cleaver-clutch.jpg");
       article1.setPriceInCents(999);
       entityManager.persist(article1);
       stockService.setAmountOnStock(article1.getId(), 5);

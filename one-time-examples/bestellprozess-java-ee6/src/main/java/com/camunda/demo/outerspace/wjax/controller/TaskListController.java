@@ -49,7 +49,7 @@ public class TaskListController {
 
       @SuppressWarnings("unchecked")
       public List<OrderProcessDTO> execute(CommandContext commandContext) {
-        return (List<OrderProcessDTO>) commandContext.getDbSqlSession().selectList("selectOrdersWithProcessInformation");
+        return (List<OrderProcessDTO>) commandContext.getDbSqlSession().selectList("selectOrdersWithProcessInformation", null);
       }
     });
   }  

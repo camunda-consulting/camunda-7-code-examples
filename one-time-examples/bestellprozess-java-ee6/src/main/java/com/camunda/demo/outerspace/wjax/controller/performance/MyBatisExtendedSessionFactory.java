@@ -29,7 +29,6 @@ public class MyBatisExtendedSessionFactory extends StandaloneProcessEngineConfig
     setDataSource(processEngineConfiguration.getDataSource());
 
     initDataSource();
-    initVariableTypes();
     initCommandContextFactory();
     initTransactionFactory();
     initTransactionContextFactory();

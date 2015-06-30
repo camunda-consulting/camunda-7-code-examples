@@ -9,7 +9,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.0.0-Final</camunda.version>
+		<camunda.version>7.3.0</camunda.version>
 	</properties>
 
 	<dependencies>
@@ -32,17 +32,11 @@
 			<scope>compile</scope>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.camunda.fox.tasklist</groupId> -->
-<!-- 			<artifactId>tasklist-layout</artifactId> -->
-<!-- 			<version>6.2.1</version> -->
-<!-- 			<type>war</type> -->
-<!-- 		</dependency> -->
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>bootstrap</artifactId>
-      <version>2.3.0</version>
-    </dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
