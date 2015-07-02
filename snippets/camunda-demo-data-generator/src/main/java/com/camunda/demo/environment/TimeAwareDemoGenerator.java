@@ -73,7 +73,7 @@ public class TimeAwareDemoGenerator {
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
     originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument()); // do not do a validation here as it caused quite strange trouble
-    Logger.getLogger("TEST").severe("-----\n"+originalBpmn + "\n------");
+//    Logger.getLogger("TEST").severe("-----\n"+originalBpmn + "\n------");
     
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
     Collection<ModelElementInstance> scriptTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ScriptTask.class));
