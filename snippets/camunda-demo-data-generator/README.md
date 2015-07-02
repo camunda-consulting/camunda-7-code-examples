@@ -10,13 +10,13 @@ In order to use this you have to
 Instrument your BPMN process
 ----------------
 
-# Add Proabilities to outgoing Sequence Flows on XOR-Gateways:
+### Add Proabilities to all outgoing Sequence Flows on XOR-Gateways:
 
 ![Proability on Squence Flow](decisionProbability.png)
 
-# Add Distribution for Duration of User Tasks:
+### Add Distribution for Duration of User Tasks:
 
-![Distribution for Task Duration](taskDuration)
+![Distribution for Task Duration](taskDuration.png)
 
 
 Start the Generation
