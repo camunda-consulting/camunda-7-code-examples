@@ -191,7 +191,7 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/change-job-retry/src/main/resources/process.png" width="50"></td>
+    <td><img src="snippets/change-job-retry/thumbnail.png" width="50"></td>
     <td><a href="snippets/change-job-retry">Change Number of Job Retries</a></td>
     <td>This snippet shows how to change the number of retries for all jobs without touching the process diagrams.</td>
   </tr>
