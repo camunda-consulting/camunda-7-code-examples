@@ -30,7 +30,9 @@ Now you can start the genartion, you have to specify:
 
 ![Start the Generator](screenshot.png)
 
-Now you have instances:
+This will deploy a new version of the process definition which is tweaked for simulation (e.g. delegation code is removed, listeners steer the decisions, ...). After the simulation the original version is deployed again as newest version.
+
+So you will have instances in the version before the latest version if you look into cockpit:
 
 ![Statistics](statistics.png)
 
