@@ -156,3 +156,44 @@ Snippets
   </tr>
   
 </table>
+
+### Process Engine Plugins
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/async-joins/src/main/resources/parallelSubprocess.png" width="50"></td>
+    <td><a href="snippets/async-joins">Making parallel joins asynchronous</a></td>
+    <td>To avoid optimistic lock exceptions on heavy load processes, this plugin makes each joining gateway asynchronous without further configuration in the process diagram.</td>
+  </tr>
+  
+  <tr>
+    <td><img src="http://docs.camunda.org/7.3/guides/user-guide/assets/img/transactions-2.png" width="50"></td>
+    <td><a href="snippets/authenticated-async-continuation">authenticatedUserId after Asynchronous Continuation</a></td>
+    <td>To use the userId after asynchronous continuation, this plugin puts it from the history on the current thread.</td>
+  </tr>
+  
+  <tr>
+    <td><img src="snippets/authorization-demo/src/main/resources/process.png" width="50"></td>
+    <td><a href="snippets/authorization-demo">Authorized User Tasks</a></td>
+    <td>Only authorized users are able to complete a task. Obsolete since 7.3. Use <a href="http://docs.camunda.org/7.3/guides/user-guide/#process-engine-authorization-service">Authorization-Service</a> instead.</td>
+  </tr>
+  
+  <tr>
+    <td><img src="http://docs.camunda.org/7.3/assets/img/user-guide/process-engine-history.png" width="50"></td>
+    <td><a href="snippets/change-history-output">History Variable Filter</a></td>
+    <td>How to store only one of many variables in the history.</td>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/change-job-retry/src/main/resources/process.png" width="50"></td>
+    <td><a href="snippets/change-job-retry">Change Number of Job Retries</a></td>
+    <td>This snippet shows how to change the number of retries for all jobs without touching the process diagrams.</td>
+  </tr>
+  
+</table>
