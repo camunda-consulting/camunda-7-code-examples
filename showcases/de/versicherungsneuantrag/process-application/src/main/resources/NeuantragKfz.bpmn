@@ -42,10 +42,6 @@ Ihre Camundanzia.]]></camunda:script>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_16</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" name="Antrag automatisch prüfen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.CheckApplicationWithRulesetAdapater">
-      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-    </bpmn2:businessRuleTask>
     <bpmn2:callActivity id="CallActivityAntragManuellPruefen" name="Antrag manuell prüfen" camunda:caseRef="neuantrangspruefung">
       <bpmn2:extensionElements>
         <camunda:out source="approved" target="approved" />
@@ -127,6 +123,10 @@ Ihre Camundanzia.]]></camunda:script>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="ExclusiveGatewayJoin" targetRef="SendTaskAblehnungZusenden" />
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt" />
+    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" name="Antrag automatisch prüfen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.CheckApplicationWithRulesetAdapater">
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1u35ano">
@@ -158,7 +158,7 @@ Ihre Camundanzia.]]></camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_BusinessRuleTask_2" bpmnElement="BusinessRuleTaskAntragAutomatischPruefen">
-        <dc:Bounds x="233" y="89" width="100" height="80" />
+        <dc:Bounds x="233" y="135" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_CallActivity_2" bpmnElement="CallActivityAntragManuellPruefen">
         <dc:Bounds x="501" y="202" width="100" height="80" />
@@ -207,7 +207,9 @@ Ihre Camundanzia.]]></camunda:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_StartEvent_4" targetElement="_BPMNShape_BusinessRuleTask_2">
         <di:waypoint xsi:type="dc:Point" x="189" y="129" />
-        <di:waypoint xsi:type="dc:Point" x="233" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="211" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="211" y="175" />
+        <di:waypoint xsi:type="dc:Point" x="233" y="175" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="147" y="129" width="90" height="6" />
         </bpmndi:BPMNLabel>
@@ -234,7 +236,9 @@ Ihre Camundanzia.]]></camunda:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_BusinessRuleTask_2" targetElement="_BPMNShape_ExclusiveGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="333" y="129" />
+        <di:waypoint xsi:type="dc:Point" x="333" y="175" />
+        <di:waypoint xsi:type="dc:Point" x="350" y="175" />
+        <di:waypoint xsi:type="dc:Point" x="350" y="129" />
         <di:waypoint xsi:type="dc:Point" x="367" y="129" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="323" y="129" width="90" height="6" />

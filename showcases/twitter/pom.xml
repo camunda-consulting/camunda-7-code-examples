@@ -11,7 +11,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.1.0-Final</camunda.version>
+		<camunda.version>7.3.0</camunda.version>
 		<powermock.version>1.5.4</powermock.version>
 	</properties>
 
@@ -51,8 +51,14 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.11</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.camunda.bpm.consulting</groupId>
+		  <artifactId>process-test-coverage</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>		
+		  <scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -64,7 +70,7 @@
 		<dependency>
 			<groupId>org.camunda.bpm.extension</groupId>
 			<artifactId>camunda-bpm-assert</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 			<scope>test</scope>
 		</dependency>
 

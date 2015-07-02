@@ -2,6 +2,8 @@ package org.camunda.bpm.example.twitter;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.complete;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.engine.variable.Variables;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -17,9 +20,6 @@ public class ProcessTestCase {
 
   @Rule
   public ProcessEngineRule processEngineRule = new ProcessEngineRule();
-
-  public void testDeployment() {
-  }
 
   @Test
   @Deployment(resources = "TwitterDemoProcess.bpmn")
@@ -36,13 +36,15 @@ public class ProcessTestCase {
     assertThat(processInstance).isStarted() //
     	.isWaitingAt("user_task_review_tweet") //
     	.task() //
-    	.isAssignedTo("demo");
+    	.hasCandidateGroup("management");
+    
+    complete(task(), Variables.createVariables().putValue("approved", Boolean.FALSE));
     
     // or using the Java API
-    Task task = processEngineRule.getTaskService().createTaskQuery().taskAssignee("demo").singleResult();
-    variables.put("approved", Boolean.FALSE);
-    variables.put("comments", "No, we will not publish this on Twitter");
-    processEngine().getTaskService().complete(task.getId(), variables);
+//    Task task = processEngineRule.getTaskService().createTaskQuery().taskCandidateGroup("management").singleResult();
+//    variables.put("approved", Boolean.FALSE);
+//    variables.put("comments", "No, we will not publish this on Twitter");
+//    processEngine().getTaskService().complete(task.getId(), variables);
 
     // assert that all activities where passed
     assertThat(processInstance) //
