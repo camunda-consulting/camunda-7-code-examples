@@ -37,6 +37,8 @@ import org.camunda.bpm.model.xml.instance.ModelElementInstance;
  * Groovy?
  */
 public class TimeAwareDemoGenerator {
+  
+  private static final Logger log = Logger.getLogger(TimeAwareDemoGenerator.class.getName());
 
   private String processDefinitionKey;
   private int numberOfDaysInPast;
@@ -61,11 +63,14 @@ public class TimeAwareDemoGenerator {
   }
 
   protected void restoreOriginalProcessDefinition() {
+    log.info("restore original process definition");
     engine.getRepositoryService().createDeployment().addString(processDefinitionKey + ".bpmn", originalBpmn).deploy();
 
   }
   
   protected void tweakProcessDefinition() {
+    log.info("tweak process definition " + processDefinitionKey);
+    
     processDefinition = engine.getRepositoryService().createProcessDefinitionQuery() //
         .processDefinitionKey(processDefinitionKey) // 
         .latestVersion() // 
@@ -73,7 +78,7 @@ public class TimeAwareDemoGenerator {
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
     originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument()); // do not do a validation here as it caused quite strange trouble
-//    Logger.getLogger("TEST").severe("-----\n"+originalBpmn + "\n------");
+    log.finer("-----\n"+originalBpmn + "\n------");
     
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
     Collection<ModelElementInstance> scriptTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ScriptTask.class));
@@ -149,6 +154,8 @@ public class TimeAwareDemoGenerator {
 
 
   protected void startMultipleProcessInstances() {
+    log.info("start multiple process instances for " + numberOfDaysInPast + " workingdays in the past");
+    
     // for all desired days in past
     for (int i = numberOfDaysInPast; i >= 0; i--) {
       Calendar cal = Calendar.getInstance();

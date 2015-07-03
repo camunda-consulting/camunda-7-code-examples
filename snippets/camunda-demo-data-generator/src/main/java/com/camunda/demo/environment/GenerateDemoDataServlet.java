@@ -1,6 +1,7 @@
 package com.camunda.demo.environment;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,8 @@ import org.camunda.bpm.BpmPlatform;
  */
 @WebServlet(value = "/generate", loadOnStartup = 1)
 public class GenerateDemoDataServlet extends HttpServlet {
+  
+  private static final Logger log = Logger.getLogger(GenerateDemoDataServlet.class.getName());
 
   private static final long serialVersionUID = 1L;
 
@@ -42,11 +45,14 @@ public class GenerateDemoDataServlet extends HttpServlet {
     double timeBetweenStartsBusinessDaysMean = Double.parseDouble(req.getParameter("timeBetweenStartsBusinessDaysMean"));
     double timeBetweenStartsBusinessDaysSd = Double.parseDouble(req.getParameter("timeBetweenStartsBusinessDaysSd"));
     
+    log.info("start generate data");
     TimeAwareDemoGenerator generator = new TimeAwareDemoGenerator(BpmPlatform.getDefaultProcessEngine()) //
       .processDefinitionKey(processDefinitionKey) //
       .numberOfDaysInPast(numberOfDaysInPast) //
       .timeBetweenStartsBusinessDays(timeBetweenStartsBusinessDaysMean, timeBetweenStartsBusinessDaysSd);
     generator.generateData();
+    
+    log.info("data generation finished");
     
     resp.sendRedirect("index.html");
   }
