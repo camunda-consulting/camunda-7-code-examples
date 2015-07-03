@@ -1,0 +1,47 @@
+<form class="form-horizontal"
+      role="form">
+
+  <div class="alert alert-warning" role="alert">
+    <strong>Bitte klären:</strong>
+    Die Rechnung bedarf weiterer Klärung(en) bevor sie freigegeben und bezahlt werden kann.
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Kreditor</label>
+    <div class="controls">
+      <input cam-variable-name="creditor"
+             type="text"
+             name="creditor"
+             class="form-control" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Betrag</label>
+    <div class="controls">
+      <input cam-variable-name="amount"
+             type="text"
+             name="amount"
+             class="form-control" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Rechnungsnummer</label>
+    <div class="controls">
+      <input cam-variable-name="invoiceNumber"
+             type="text"
+             name="invoiceNumber"
+             class="form-control" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Konnte die Rechnung geklärt werden? </label>
+    <div class="controls">
+      <input cam-variable-name="clarified"
+             cam-variable-type="Boolean"
+             type="checkbox"
+             name="clarified"
+             class="form-control" />
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,54 @@
+<form role="form"
+      class="form-horizontal">
+
+  <div>Bitte geben Sie die Rechnungsdaten ein.</div>
+
+  <div class="control-group">
+    <label class="control-label"
+           for="creditor">Kreditor</label>
+    <div class="controls">
+      <input cam-variable-name="creditor"
+             cam-variable-type="String"
+             id="creditor"
+             class="form-control"
+             type="text"
+             required />
+      <div class="help">
+        (z.B. &quot;Die freundliche Butterstulle Gbr.&quot;)
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label"
+           for="amount">Bertrag</label>
+    <div class="controls">
+      <input cam-variable-name="amount"
+             cam-variable-type="String"
+             id="amount"
+             class="form-control"
+             type="text"
+             required />
+      <div class="help">
+        (z.B. &quot;30,45 €&quot;)
+      </div>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label"
+           for="invoiceNumber">Rechnungsnummer</label>
+    <div class="controls">
+      <input cam-variable-name="invoiceNumber"
+             cam-variable-type="String"
+             id="invoiceNumber"
+             class="form-control"
+             type="text"
+             required />
+      <div class="help">
+        (z.B. &quot;RE-12345&quot;)
+      </div>
+    </div>
+  </div>
+</form>
+
