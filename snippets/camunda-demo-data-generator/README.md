@@ -3,14 +3,14 @@ Demo Data Generator
 
 **UNDER CONSTRUCTION!***
 
-This project can start process instances and walk them thorugh (skipping service tasks and other delegation code) in order to get some menaigful load in the history table - normally used to showcase reporting features.
+This project can start process instances and walk them thorugh (skipping service tasks and other delegation code) in order to get some meaningful load in the history table - normally used to showcase reporting features.
 
 In order to use this you have to 
 
 Instrument your BPMN process
 ----------------
 
-### Add Proabilities to all outgoing Sequence Flows on XOR-Gateways:
+### Add Propabilities to all outgoing Sequence Flows on XOR-Gateways:
 
 ![Proability on Squence Flow](decisionProbability.png)
 
