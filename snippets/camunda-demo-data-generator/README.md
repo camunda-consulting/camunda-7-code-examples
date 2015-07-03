@@ -3,16 +3,18 @@ Demo Data Generator
 
 **UNDER CONSTRUCTION!***
 
-This project can start process instances and walk them thorugh (skipping service tasks and other delegation code) in order to get some meaningful load in the history table - normally used to showcase reporting features.
+This project can start process instances and walk them through (skipping service tasks and other delegation code) in order to get some meaningful load in the history table - normally used to showcase reporting features.
+
+Check the version n-1 for your generated process instances!
 
 In order to use this you have to 
 
 Instrument your BPMN process
 ----------------
 
-### Add Propabilities to all outgoing Sequence Flows on XOR-Gateways:
+### Add Probabilities to all outgoing Sequence Flows on XOR-Gateways:
 
-![Proability on Squence Flow](decisionProbability.png)
+![Probability on Sequence Flow](decisionProbability.png)
 
 ### Add Distribution for Duration of User Tasks:
 
@@ -22,11 +24,11 @@ Instrument your BPMN process
 Start the Generation
 --------------------
 
-Now you can start the genartion, you have to specify:
+Now you can start the generation, you have to specify:
 
 * process definition key to start
 * How many days in the past you want to have instances
-* A Distribution configiuring the time between two process instance starts (mean and standard deviation)
+* A Distribution configuring the time between two process instance starts (mean and standard deviation)
 
 ![Start the Generator](screenshot.png)
 
