@@ -1,0 +1,57 @@
+/* 
+Camunda Version: 7.3.2-ee; Oracle 12c tested
+State as of: 23.02.2015 
+S. Hellmann, M. Krassmann: Silpion; T. Hirsch for Haspa; Ingo Richtsmeier for Camunda;
+
+DOC.:
+--------------------------------------------------------------------------------------
+Drop a archive tables
+*/
+
+WHENEVER SQLERROR EXIT SQL.SQLCODE;
+SET SERVEROUTPUT ON;
+
+/*-- Sequence */
+DROP sequence STAT_EXECUTION_SEQ;
+
+/*-- TMP_ARCHIVING_PROCINST */
+DROP TABLE TMP_ARCHIVING_PROCINST;
+
+/* drop own extentions columns:
+alter table  ARCHIVE_ACT_HI_PROCINST DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_ACTINST DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_TASKINST DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_VARINST DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_DETAIL DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_COMMENT DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_ATTACHMENT DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_OP_LOG DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+alter table  ARCHIVE_ACT_HI_INCIDENT DROP (STAT_EXECUTION_ID, STAT_EXECUTION_TS);
+*/
+
+/*--#1 */
+drop TABLE ARCHIVE_ACT_HI_PROCINST;
+/*--#2 */
+drop  TABLE ARCHIVE_ACT_HI_ACTINST;
+/*--#3 */
+drop TABLE ARCHIVE_ACT_HI_TASKINST;
+/*--#4 */
+drop TABLE ARCHIVE_ACT_HI_VARINST;
+/*--#5 */
+drop TABLE ARCHIVE_ACT_HI_DETAIL;
+/*--#6 */
+drop TABLE ARCHIVE_ACT_HI_COMMENT;
+/*--#7 */
+drop TABLE ARCHIVE_ACT_HI_ATTACHMENT;
+/*--#8 */
+drop TABLE ARCHIVE_ACT_HI_OP_LOG;
+/*--#9 */
+drop TABLE ARCHIVE_ACT_HI_INCIDENT;
+
+/* drop PL SQL functions: */
+drop function ARCHIVE_CAMUNDA_HISTORY;
+drop function ROLLB_ARCHIVE_CAMUNDA_HISTORY;
+
+quit;
+/
+
