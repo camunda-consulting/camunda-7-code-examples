@@ -25,8 +25,9 @@ AS
  PRAGMA AUTONOMOUS_TRANSACTION;
  P_archiveTablesArray TextArrayType;
  P_piProcessed number;          /* Number of PI's worked out */
+ P_baProcessed number;        /* Number of Bytearray's workout */
  P_tableName NVARCHAR2(80);     /* temp tableName */
- P_tableFields NVARCHAR2(500);  /* temp fÃ¼r alle tableFields einer Tabelle */
+ P_tableFields NVARCHAR2(500);  /* temp für alle tableFields einer Tabelle */
  P_query VARCHAR2(600);         /* temp query */
  P_startDate DATE;              /* start Timestamp */
  P_executionDuration number;
@@ -125,8 +126,24 @@ OLLBACK (RESTORE) of archived Camunda history tables:
 	
 	dbms_output.put_line('QUERY (before execute): /fill temp table with PI candidates/ ' || P_query);
     EXECUTE IMMEDIATE P_query;
-	dbms_output.put_line('.... rows inserted into TMP_ARCHIVING_PROCINST: ' || TO_CHAR(SQL%ROWCOUNT));		
-  			   
+	dbms_output.put_line('.... rows inserted into TMP_ARCHIVING_PROCINST: ' || TO_CHAR(SQL%ROWCOUNT));
+  
+  /* 3. Fill TMP_ARCHIVING_BYTEARRAYS with candidates:  */
+	dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: INSERT INTO TMP_ARCHIVING_BYTEARRAY ...');
+    INSERT INTO TMP_ARCHIVING_BYTEARRAY
+      SELECT BYTEARRAY_ID_, PROC_INST_ID_ FROM ARCHIVE_ACT_HI_VARINST archvar
+      where archvar.PROC_INST_ID_ in (SELECT PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST)
+      AND archvar.BYTEARRAY_ID_ is not null;
+      
+    INSERT INTO TMP_ARCHIVING_BYTEARRAY
+      SELECT BYTEARRAY_ID_, PROC_INST_ID_ FROM ARCHIVE_ACT_HI_DETAIL archvar
+      where archvar.PROC_INST_ID_ in (SELECT PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST)
+      AND archvar.BYTEARRAY_ID_ is not null;  
+        
+    /* 5. Check Bytearrays im TEMP if any found, ready for ACHIVING */
+    select count(*) INTO P_baProcessed FROM TMP_ARCHIVING_BYTEARRAY;
+    dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: '|| P_baProcessed ||' ByteArray candidates for rollback found!' || chr(13)||chr(10));
+  
   			   
 	/* 3. Check PI's im TEMP ready for ROLLBACK */
 	select count(*) INTO P_piProcessed FROM TMP_ARCHIVING_PROCINST;
@@ -179,6 +196,28 @@ OLLBACK (RESTORE) of archived Camunda history tables:
 			dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10));
 		END LOOP;
 		
+    /* INSERT */
+    dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: Copy from ARCHIVE_ACT_GE_BYTEARRAY to history ...');
+			P_tableFields := ''; /* reset, becouse had some problems with double columns  */
+			/* fetch table column names into P_tableFields : */
+			select LISTAGG(COLUMN_NAME, ', ') 
+				WITHIN GROUP (ORDER BY TABLE_NAME, COLUMN_ID) INTO P_tableFields 
+				from ALL_TAB_COLUMNS 
+				where TABLE_NAME = 'ACT_GE_BYTEARRAY';
+			
+			/* INSERT */
+			P_query := 'INSERT INTO ACT_GE_BYTEARRAY hi ' ||chr(13)||chr(10)||
+ 					   ' SELECT ' || P_tableFields ||chr(13)||chr(10)||
+ 					   '  FROM ARCHIVE_ACT_GE_BYTEARRAY' ||chr(13)||chr(10)|| 
+ 					   '  WHERE ID_ in ( SELECT tmp.BYTEARRAY_ID_ FROM TMP_ARCHIVING_BYTEARRAY tmp)';
+ 		    dbms_output.put_line('QUERY (before execute): /copy back to history table/ ' || P_query);
+			EXECUTE IMMEDIATE P_query;
+            dbms_output.put_line('.... rows inserted: ' || TO_CHAR(SQL%ROWCOUNT));
+    
+    /* DELETE */
+    dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]:         Delete in ARCHIVE_ACT_GE_BYTEARRAY ...');
+    DELETE ARCHIVE_ACT_GE_BYTEARRAY WHERE ID_ in (select BYTEARRAY_ID_ FROM TMP_ARCHIVING_BYTEARRAY);
+    dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10)); 
 
     	/* COMMIT TRANSACTION */
     	dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: PIs processed: ' || P_piProcessed );
