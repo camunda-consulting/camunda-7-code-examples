@@ -24,6 +24,7 @@ AS
  P_archiveTablesArray TextArrayType;
  P_executionId number(20);    /* generate from STAT_EXECUTION_SEQ a STAT_EXECUTION_ID for this RUN */
  P_piProcessed number;        /* Number of PI's workout */
+ P_baProcessed number;        /* Number of Bytearray's workout */
  P_tableName NVARCHAR2(80);   /* temp tableName */
  P_query VARCHAR2(400);       /* temp query */ 
  P_startDate DATE;            /* start Timestamp */
@@ -60,7 +61,7 @@ Manual archiving of Camunda History tables:
 	    SET SERVEROUTPUT OFF;
 	   
 	-- CHECK BEFORE: Number of candidates to archive 
-	   --SELECT PROC_INST_ID_, END_TIME_ FROM ( 
+  --SELECT PROC_INST_ID_, END_TIME_ FROM ( 
 	   SELECT count(*), min(END_TIME_), max(END_TIME_) FROM (
 		  SELECT hi.PROC_INST_ID_, hi.END_TIME_ 
 		  	FROM ACT_HI_PROCINST hi 
@@ -70,10 +71,7 @@ Manual archiving of Camunda History tables:
 		
 	-- CHECK AFTER: Number completed PI's in archive 
 	   select count(*), min(END_TIME_), max(END_TIME_), STAT_EXECUTION_ID  
-	     from ARCHIVE_ACT_HI_PROCINST where 
-	     STAT_EXECUTION_ID = 4711
-	     --STAT_EXECUTION_ID between 4711 AND 4712;
-	     -- 1=1;
+	     from ARCHIVE_ACT_HI_PROCINST
 	     GROUP BY STAT_EXECUTION_ID ORDER BY STAT_EXECUTION_ID;
 
 -----------------------------------------------------------------------*/
@@ -89,9 +87,10 @@ Manual archiving of Camunda History tables:
                            '; STAT_EXECUTION_ID: '|| P_executionId || chr(13)||chr(10) ||
 	                       ' PARAMS: IN_maxProcessInstances: ' || IN_maxProcessInstances || '; IN_periodInDays: ' || IN_periodInDays );
 															
-	/* 1. truncate TMP_ARCHIVING_PROCINST */
-	dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]:  Delete TMP_ARCHIVING_PROCINST ...' );
+	/* 1. truncate TMP_ARCHIVING_PROCINST and TMP_ARCHIVING_BYTEARRAY */
+	dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]:  Delete TMP_ARCHIVING_PROCINST and TMP_ARCHIVING_BYTEARRAY...' );
 	DELETE TMP_ARCHIVING_PROCINST;
+	DELETE TMP_ARCHIVING_BYTEARRAY;  
 	
 	/* 2. Fill TMP_ARCHIVING_PROCINST with candidates: */
 	dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]:  INSERT INTO TMP_ARCHIVING_PROCINST ...' );
@@ -158,23 +157,50 @@ Manual archiving of Camunda History tables:
 			dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10));
 		END LOOP;
 		
-	
-    	/* COMMIT TRANSACTION */
-    	dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]: PIs processed: ' || P_piProcessed || '; STAT_EXECUTION_ID: '|| P_executionId);
-    	dbms_output.put_line('TRY TA-COMMIT ...');
-   		COMMIT;
-    	dbms_output.put_line('TA-COMMIT DONE!' ||chr(13)||chr(10));
-    	
-    	P_executionDuration := sysdate - P_startDate;
-    	
-    	P_result := '[ARCHIVE_CAMUNDA_HISTORY]:  EXECUTED (commited) successfully! ' || chr(13)||chr(10)||
-    			to_char(systimestamp, 'DD.MM.YYYY HH24:MI:SS ..FF3') || '; Duration: ' || to_char(round(P_executionDuration*24*60*60, 1)) || ' sec.' ||  chr(13)||chr(10) ||
-    			' PIs processed: ' || P_piProcessed || '; STAT_EXECUTION_ID: '|| P_executionId  || chr(13)||chr(10)||
-    			' PARAMS: IN_maxProcessInstances: ' || IN_maxProcessInstances || '; IN_periodInDays: ' || IN_periodInDays;
-    	
-    	dbms_output.put_line(P_result);
+    /* select bytearray_ids */
+    dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]: INSERT INTO TMP_ARCHIVING_BYTEARRAY ...');
+    INSERT INTO TMP_ARCHIVING_BYTEARRAY
+      SELECT BYTEARRAY_ID_, PROC_INST_ID_ FROM ARCHIVE_ACT_HI_VARINST archvar
+      where archvar.PROC_INST_ID_ in (SELECT PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST)
+      AND archvar.BYTEARRAY_ID_ is not null;
+      
+    INSERT INTO TMP_ARCHIVING_BYTEARRAY
+      SELECT BYTEARRAY_ID_, PROC_INST_ID_ FROM ARCHIVE_ACT_HI_DETAIL archvar
+      where archvar.PROC_INST_ID_ in (SELECT PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST)
+      AND archvar.BYTEARRAY_ID_ is not null;  
+        
+    /* 5. Check Bytearrays im TEMP if any found, ready for ACHIVING */
+    select count(*) INTO P_baProcessed FROM TMP_ARCHIVING_BYTEARRAY;
+    dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]: '|| P_baProcessed ||' ByteArray candidates for archiving found!' || chr(13)||chr(10));
+
+    /* INSERT */
+    dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]: Copy from history to ARCHIVE_ACT_GE_BYTEARRAY ...');
+    INSERT INTO ARCHIVE_ACT_GE_BYTEARRAY ar  
+       SELECT hi.*, P_executionId, CURRENT_TIMESTAMP FROM ACT_GE_BYTEARRAY hi 
+       WHERE hi.ID_ in ( SELECT BYTEARRAY_ID_ FROM TMP_ARCHIVING_BYTEARRAY);
+    dbms_output.put_line('.... rows inserted: ' || TO_CHAR(SQL%ROWCOUNT));
     
-    	RETURN 'RESULT: ' || P_result;
+    /* DELETE */
+    dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]:         Delete in History ACT_GE_BYTEARRAY ...');
+    DELETE ACT_GE_BYTEARRAY WHERE ID_ in (select BYTEARRAY_ID_ FROM TMP_ARCHIVING_BYTEARRAY);
+    dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10)); 
+
+    /* COMMIT TRANSACTION */
+    dbms_output.put_line('[ARCHIVE_CAMUNDA_HISTORY]: PIs processed: ' || P_piProcessed || '; STAT_EXECUTION_ID: '|| P_executionId);
+    dbms_output.put_line('TRY TA-COMMIT ...');
+   	COMMIT;
+    dbms_output.put_line('TA-COMMIT DONE!' ||chr(13)||chr(10));
+    
+    P_executionDuration := sysdate - P_startDate;
+    
+    P_result := '[ARCHIVE_CAMUNDA_HISTORY]:  EXECUTED (commited) successfully! ' || chr(13)||chr(10)||
+    		to_char(systimestamp, 'DD.MM.YYYY HH24:MI:SS ..FF3') || '; Duration: ' || to_char(round(P_executionDuration*24*60*60, 1)) || ' sec.' ||  chr(13)||chr(10) ||
+    		' PIs processed: ' || P_piProcessed || '; STAT_EXECUTION_ID: '|| P_executionId  || chr(13)||chr(10)||
+    		' PARAMS: IN_maxProcessInstances: ' || IN_maxProcessInstances || '; IN_periodInDays: ' || IN_periodInDays;
+    	
+    dbms_output.put_line(P_result);
+    
+    RETURN 'RESULT: ' || P_result;
 	END IF;
 	
   
