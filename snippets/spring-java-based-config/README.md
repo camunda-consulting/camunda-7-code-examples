@@ -2,7 +2,9 @@ Process Application with java-based configured Spring container
 ===============================================================
 
 This example shows how to configure the Spring container for the process application in Java using `@Configure` and `@Bean`.
-It uses the sample application from the [spring getting started guide](http://docs.camunda.org/7.3/guides/getting-started-guides/spring-framework/).
+It uses the sample application from the [spring getting started guide](http://docs.camunda.org/7.3/guides/getting-started-guides/spring-framework/). 
+
+You have to run this example in the prepackaged distro or install the process engine as a shared engine before.
 
 The process instance is started after deployment. See implementation of the `org.springframework.beans.factory.InitializingBean` in [Starter](src/main/java/com/camunda/consulting/springexample/Starter.java)
 
