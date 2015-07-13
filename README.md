@@ -197,3 +197,20 @@ Snippets
   </tr>
   
 </table>
+
+### Runtime Environments
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <tr>
+    <td><img src="http://docs.camunda.org/7.3/assets/img/getting-started/spring-framework/Spring_Logo.png" width="50"></td>
+    <td><a href="snippets/spring-java-based-config">Java-based Spring container configuration</a></td>
+    <td>Run the process application in a Spring container with java-based configuration on a shared process engine.</td>
+  </tr>
+
+</table>
