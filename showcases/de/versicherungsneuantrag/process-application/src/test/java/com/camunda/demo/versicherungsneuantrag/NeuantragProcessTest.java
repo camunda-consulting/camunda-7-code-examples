@@ -26,10 +26,12 @@ import com.camunda.demo.versicherungsneuantrag.model.Neuantrag;
  */
 public class NeuantragProcessTest {
 
+
   @Rule
   public ProcessEngineRule rule = new ProcessEngineRule();
 
-  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantrag";
+  private static final String PROCESS_BPMN_FILE = "NeuantragKfzMitDokumentenerstellung.bpmn";
+  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantragMitDokumentenerstellung";
 
   // enable more detailed logging
   static {
@@ -46,13 +48,13 @@ public class NeuantragProcessTest {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
   public void testDunkelverarbeitungPoliciert() {
     Neuantrag neuantrag = DemoData.createNeuantrag(40, true, "VW", "Golf V");
     
@@ -68,7 +70,7 @@ public class NeuantragProcessTest {
   }
 
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
   public void testDunkelverarbeitungAbgelehnt() {
     Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "911");
     
@@ -85,7 +87,7 @@ public class NeuantragProcessTest {
 
   
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
   public void testHell() {
     Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
     
@@ -102,7 +104,7 @@ public class NeuantragProcessTest {
   }  
   
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
   public void testCase() {
     Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
     

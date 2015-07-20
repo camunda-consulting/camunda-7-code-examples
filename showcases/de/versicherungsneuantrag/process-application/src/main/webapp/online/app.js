@@ -33,7 +33,7 @@ $( document ).ready(function() {
 		// {"antragssteller":{"vorname":null,"nachname":null,"geburtsdatum":170926761061},"fahrzeug":{"hersteller":"VW","typ":"Golf IV"},"fahrerUeber25":false,"versicherungsprodukt":"Camundanzia Vollkasko Plus"}
 
 		resource.submitForm ({
-			key: "versicherungsneuantrag",
+			key: "versicherungsneuantragMitDokumentenerstellung",
 			variables: {
 				neuantrag: {
 					value: JSON.stringify(neuantrag),

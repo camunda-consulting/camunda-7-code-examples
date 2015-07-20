@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<antragsteller>
+		<name>Max Mustermann</name>
+		<email>toBeChanged@camunda.com</email>
+		<geburtsdatum>05.06.1992</geburtsdatum>
+		<geschlecht>Mann</geschlecht>
+		<alter>23</alter>
+	</antragsteller>	
+	<fahrzeug>
+		<hersteller>Porsche</hersteller>
+		<typ>911</typ>
+	</fahrzeug>
+	<vertragsdaten>
+		<produkt>Camundanzia Vollkasko Plus</produkt>
+		<nummer>1434107423931</nummer>
+	    <preisindikation>310,00</preisindikation>
+	    <beitrag>213,00</beitrag>
+	    <fahrerUeber25>false</fahrerUeber25>
+	    <fahrerUeber25String>nein</fahrerUeber25String>
+   	</vertragsdaten>
+</document>

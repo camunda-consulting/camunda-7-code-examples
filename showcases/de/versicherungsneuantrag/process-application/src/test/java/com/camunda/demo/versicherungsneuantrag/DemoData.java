@@ -23,7 +23,7 @@ public class DemoData {
 
     neuantrag.getAntragssteller().setGeburtsdatum(cal.getTime());
     neuantrag.getAntragssteller().setName("Bernd Rücker");
-    neuantrag.getAntragssteller().setEmail("br@camunda.com");
+    neuantrag.getAntragssteller().setEmail("fm@camunda.com");
     neuantrag.getAntragssteller().setGeschlecht("Mann");
     neuantrag.setFahrzeugHersteller(hersteller);
     neuantrag.setFahrzeugTyp(typ);
