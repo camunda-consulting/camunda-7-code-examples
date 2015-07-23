@@ -214,3 +214,20 @@ Snippets
   </tr>
 
 </table>
+
+### Administration Stuff
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <tr>
+    <td><img src="snippets/clean-up-history/cleanup.jpg" width="50"></td>
+    <td><a href="snippets/clean-up-history">How to clean up the history tables</a></td>
+    <td>Solutions to clean up the history from old completed process instances.</td>
+  </tr>
+
+</table>
