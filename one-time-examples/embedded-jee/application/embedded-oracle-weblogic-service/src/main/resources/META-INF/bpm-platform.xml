@@ -18,7 +18,7 @@
       <property name="authorizationEnabled">true</property>
       <property name="jobExecutorDeploymentAware">true</property>
       
-      <property name="defaultSerializationFormat">application/json</property>
+      <property name="defaultSerializationFormat">application/xml</property>
     </properties>
 
     <plugins>
