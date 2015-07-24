@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<f:metadata>
+    	<f:viewParam name="taskId" value="#{taskBean.id}" />
+	</f:metadata>
+	
+	<f:view locale="de">
+		<h:head>
+ 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+			<!-- load diagram-js styles and bpmn styles including the cool bpmn font -->
+			<h:outputStylesheet library="webjars" name="bpmn-js/0.10.3/assets/diagram-js.css" />
+			<h:outputStylesheet library="webjars" name="bpmn-js/0.10.3/assets/bpmn-font/css/bpmn-embedded.css" />
+
+			<!-- load jquery -->
+			<h:outputScript library="webjars" name="jquery/1.9.0/jquery.js"/>
+
+			<!-- load bpmn-js dependencies -->
+			<h:outputScript library="webjars" name="lodash/2.4.1-6/lodash.min.js"/>
+			<h:outputScript library="webjars" name="sax/0.6.0/lib/sax.js"/>
+			<h:outputScript library="webjars" name="Snap.svg/0.3.0/snap.svg-min.js"/>
+			<h:outputScript library="webjars" name="jquery-mousewheel/3.1.11/jquery.mousewheel.js"/>
+
+			<!-- bpmn-js viewer -->
+			<h:outputScript library="webjars" name="bpmn-js/0.10.3/bpmn-navigated-viewer.js" /><!-- min. -->
+		</h:head>
+		<h:body>
+ 			<!-- to draw on -->
+ 			<div class="content" id="js-drop-zone">
+				<div id="diagramCanvas"></div>
+			</div>
+
+			<script>
+				$(document).ready(function() {
+					var restAccess = '/engine-rest';
+					var BpmnViewer = window.BpmnJS;
+					var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
+
+					var container = $('#js-drop-zone');
+					// get the diagram
+					$.get(restAccess + '/task/#{taskBean.id}', function(marker) {
+						console.log(marker);
+						$.get(restAccess + '/process-definition/' + marker.processDefinitionId + '/xml', function(data) {
+
+							// show it in bpmn.io
+							viewer.importXML(data.bpmn20Xml, function(err) {
+								if (err) {
+									console.log('error rendering', err);
+								} else {
+									var canvas = viewer.get('canvas');
+									// zoom to fit full viewport
+									canvas.zoom('fit-viewport');
+									container.removeClass('with-error')
+											 .addClass('with-diagram');
+									// add marker
+									canvas.addMarker(marker.taskDefinitionKey, 'highlight');	
+									console.log('AddMarker');
+								}
+							});
+						});
+					});
+				});
+			</script>
+			
+			<!-- load the stylesheet for the modeler -->
+			<h:outputStylesheet library="css" name="modeler.css" />
+		</h:body>
+	</f:view>
+</html>

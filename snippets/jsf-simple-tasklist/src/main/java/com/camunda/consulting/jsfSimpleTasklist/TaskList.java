@@ -61,11 +61,15 @@ public class TaskList extends ProcessApplicationBean implements Serializable {
   
   public String getAbsoluteFormKey(Task task) {
     String formkey = getFormKey(task);
-    if (formkey.startsWith("app:")) {
-      String applicationPath = getApplicationPath(task.getProcessDefinitionId());
-      return applicationPath + "/" + formkey.substring(4);
+    if (formkey != null) {
+      if (formkey.startsWith("app:")) {
+        String applicationPath = getApplicationPath(task.getProcessDefinitionId());
+        return applicationPath + "/" + formkey.substring(4);
+      } else {
+        return formkey;
+      }
     } else {
-      return formkey;
+      return "";
     }
   }
   
