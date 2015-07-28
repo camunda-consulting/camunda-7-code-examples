@@ -1,11 +1,15 @@
 package com.camunda.demo.environment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.zip.DataFormatException;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -31,18 +35,22 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
 import org.camunda.bpm.model.xml.ModelInstance;
 import org.camunda.bpm.model.xml.impl.util.IoUtil;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+import org.joda.time.Hours;
 
 /**
  * TODO: - Classloading klären für Eigene Klassen - oder geht alles per Script?
  * Groovy?
  */
 public class TimeAwareDemoGenerator {
-  
+
   private static final Logger log = Logger.getLogger(TimeAwareDemoGenerator.class.getName());
 
   private String processDefinitionKey;
   private int numberOfDaysInPast;
   private StatisticalDistribution timeBetweenStartsBusinessDays;
+  private String startTimeBusinessDay = "08:30";
+  private String endTimeBusinessDay = "18:00";
+
   private StatisticalDistribution timeBetweenStartsWeekend;
 
   // private ;
@@ -57,9 +65,9 @@ public class TimeAwareDemoGenerator {
   }
 
   public void generateData() {
-   tweakProcessDefinition();
-   startMultipleProcessInstances();
-   restoreOriginalProcessDefinition();
+    tweakProcessDefinition();
+    startMultipleProcessInstances();
+    restoreOriginalProcessDefinition();
   }
 
   protected void restoreOriginalProcessDefinition() {
@@ -67,19 +75,30 @@ public class TimeAwareDemoGenerator {
     engine.getRepositoryService().createDeployment().addString(processDefinitionKey + ".bpmn", originalBpmn).deploy();
 
   }
-  
+
   protected void tweakProcessDefinition() {
     log.info("tweak process definition " + processDefinitionKey);
-    
+
     processDefinition = engine.getRepositoryService().createProcessDefinitionQuery() //
-        .processDefinitionKey(processDefinitionKey) // 
-        .latestVersion() // 
+        .processDefinitionKey(processDefinitionKey) //
+        .latestVersion() //
         .singleResult();
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
-    originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument()); // do not do a validation here as it caused quite strange trouble
-    log.finer("-----\n"+originalBpmn + "\n------");
-    
+    originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument()); // do
+                                                                          // not
+                                                                          // do
+                                                                          // a
+                                                                          // validation
+                                                                          // here
+                                                                          // as
+                                                                          // it
+                                                                          // caused
+                                                                          // quite
+                                                                          // strange
+                                                                          // trouble
+    log.finer("-----\n" + originalBpmn + "\n------");
+
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
     Collection<ModelElementInstance> scriptTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ScriptTask.class));
     Collection<ModelElementInstance> userTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(UserTask.class));
@@ -102,16 +121,16 @@ public class TimeAwareDemoGenerator {
       userTask.setCamundaAssignee(null);
       userTask.setCamundaCandidateGroups(null);
     }
-    
+
     for (ModelElementInstance modelElementInstance : xorGateways) {
       ExclusiveGateway xorGateway = ((ExclusiveGateway) modelElementInstance);
       tweakGateway(xorGateway);
     }
 
-//    Bpmn.validateModel(bpmn);
+    // Bpmn.validateModel(bpmn);
     engine.getRepositoryService().createDeployment() //
-          .addModelInstance(processDefinitionKey + ".bpmn", bpmn) // 
-          .deploy();
+        .addModelInstance(processDefinitionKey + ".bpmn", bpmn) //
+        .deploy();
   }
 
   protected void tweakGateway(ExclusiveGateway xorGateway) {
@@ -144,22 +163,48 @@ public class TimeAwareDemoGenerator {
     script.setCamundaScriptFormat("Javascript");
     executionListener.setCamundaScript(script);
 
-    if (xorGateway.getExtensionElements()==null) {
+    if (xorGateway.getExtensionElements() == null) {
       ExtensionElements extensionElements = bpmn.newInstance(ExtensionElements.class);
       xorGateway.addChildElement(extensionElements);
     }
     xorGateway.getExtensionElements().addChildElement(executionListener);
   }
 
+  protected void copyTimeField(Calendar calFrom, Calendar calTo, int... calendarFieldConstant) {
+    for (int i = 0; i < calendarFieldConstant.length; i++) {
+      calTo.set(calendarFieldConstant[i], calFrom.get(calendarFieldConstant[i]));
+    }
+  }
+  
+  private boolean isInTimeFrame(Calendar cal, String startTime, String endTime) {
+    try {
+      // TODO: maybe cache?
+      Date startDate = new SimpleDateFormat("HH:mm").parse(startTime);
+      Date endDate = new SimpleDateFormat("HH:mm").parse(endTime);
+      Calendar startCal = Calendar.getInstance();
+      startCal.setTime(startDate);
+      copyTimeField(cal, startCal, Calendar.YEAR, Calendar.DAY_OF_YEAR);
+      
+      Calendar endCal = Calendar.getInstance();
+      endCal.setTime(endDate);
+      copyTimeField(cal, endCal, Calendar.YEAR, Calendar.DAY_OF_YEAR);
 
+      return (startCal.before(cal) && cal.before(endCal));
+    } catch (ParseException ex) {
+      throw new RuntimeException("Could not parse time format: '" + startTime + "' or '" + endTime + "'", ex);
+    }
+  }
 
   protected void startMultipleProcessInstances() {
     log.info("start multiple process instances for " + numberOfDaysInPast + " workingdays in the past");
-    
+
     // for all desired days in past
     for (int i = numberOfDaysInPast; i >= 0; i--) {
       Calendar cal = Calendar.getInstance();
       cal.add(Calendar.DAY_OF_YEAR, -1 * i);
+      cal.set(Calendar.HOUR_OF_DAY, 0);
+      cal.set(Calendar.MINUTE, 0);
+      
       int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
 
       // now lets start process instances on that day
@@ -170,18 +215,22 @@ public class TimeAwareDemoGenerator {
           // business day (OK - simplified - do not take holidays into account)
           double time = timeBetweenStartsBusinessDays.nextSample();
           cal.add(Calendar.SECOND, (int) Math.round(time));
-          ClockUtil.setCurrentTime(cal.getTime());
+          if (isInTimeFrame(cal, startTimeBusinessDay, endTimeBusinessDay)) {
+            ClockUtil.setCurrentTime(cal.getTime());
 
-          runSingleProcessInstance();
+            runSingleProcessInstance();
 
-          // Housekeeping for safety (as the run might have changed the clock)
-          ClockUtil.setCurrentTime(cal.getTime());
+            // Housekeeping for safety (as the run might have changed the clock)
+            ClockUtil.setCurrentTime(cal.getTime());
+          }
         }
       }
     }
 
     ClockUtil.reset();
   }
+
+
 
   protected void runSingleProcessInstance() {
     ProcessInstance pi = engine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
@@ -203,8 +252,9 @@ public class TimeAwareDemoGenerator {
       // yet).
       // This will at least not lead to endless loops
       piRunning = (tasks.size() > 0 || messages.size() > 0);
-      
-      // TODO: Stop when we reach the NOW time (might leave open tasks - but that is OK!)
+
+      // TODO: Stop when we reach the NOW time (might leave open tasks - but
+      // that is OK!)
     }
 
   }
@@ -254,7 +304,6 @@ public class TimeAwareDemoGenerator {
     NormalDistribution distribution = new NormalDistribution(durationMean, durationStandardDeviation);
     return distribution;
   }
-
 
   private String readCamundaProperty(BaseElement modelElementInstance, String propertyName) {
     Collection<CamundaProperty> properties = modelElementInstance.getExtensionElements().getElementsQuery() //
