@@ -11,6 +11,6 @@
   </modules>
   
   <properties>
-    <camunda.version>7.2.2-ee</camunda.version>
+    <camunda.version>7.3.0-ee</camunda.version>
   </properties>
 </project>

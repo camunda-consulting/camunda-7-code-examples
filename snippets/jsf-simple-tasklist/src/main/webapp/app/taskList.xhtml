@@ -52,6 +52,10 @@
 					<f:param name="callbackUrl" value="#{request.contextPath}/app/taskList.jsf"></f:param>
 					complete
 				</h:outputLink>
+				<h:outputLink value="taskDetail.jsf" class="btn btn-small">
+					<f:param name="taskId" value="#{thisTask.id}"></f:param>
+					details
+				</h:outputLink>
 			</h:column>		
 	</h:dataTable>
 	</h:form>	

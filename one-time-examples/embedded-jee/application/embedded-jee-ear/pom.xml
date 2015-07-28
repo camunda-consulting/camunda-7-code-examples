@@ -55,7 +55,7 @@
     
     <dependency>
       <groupId>org.camunda.spin</groupId>
-      <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
+      <artifactId>camunda-spin-dataformat-xml-dom</artifactId>
     </dependency>
     
     <dependency>
@@ -70,6 +70,14 @@
       <version>1.0-SNAPSHOT</version>
       <type>rar</type>
     </dependency>
+    
+    <!-- 
+    <dependency>
+      <groupId>org.camunda.bpm.weblogic</groupId>
+      <artifactId>camunda-oracle-weblogic-rar</artifactId>
+      <version>${camunda.version}</version>
+      <type>rar</type>
+    </dependency> -->
 
     <dependency>
       <groupId>com.camunda.consulting</groupId>
@@ -90,7 +98,15 @@
       <artifactId>process-application-war</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>war</type>
-    </dependency>
+    </dependency> 
+
+<!--     
+    <dependency>
+      <groupId>com.camunda.consulting</groupId>
+      <artifactId>extended-serialization-process</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <type>war</type>
+    </dependency>  -->
     
     <dependency>
       <groupId>org.camunda.bpm</groupId>
@@ -127,12 +143,15 @@
         <version>2.9.1</version>
         <configuration>
           <version>6</version>
-          <defaultLibBundleDir>lib</defaultLibBundleDir>
+          <defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
           <initializeInOrder>true</initializeInOrder>
           <modules>
             <rarModule>
               <groupId>com.camunda.consulting</groupId>
-              <artifactId>embedded-oracle-weblogic-rar</artifactId>
+              <artifactId>embedded-oracle-weblogic-rar</artifactId> 
+            <!-- 
+              <groupId>org.camunda.bpm.weblogic</groupId>
+              <artifactId>camunda-oracle-weblogic-rar</artifactId> -->
             </rarModule>
             <ejbModule>
               <groupId>com.camunda.consulting</groupId>
@@ -144,7 +163,9 @@
             </ejbModule>
             <webModule>
               <groupId>com.camunda.consulting</groupId>
-              <artifactId>process-application-war</artifactId>
+              <artifactId>process-application-war</artifactId>  
+              <!-- 
+              <artifactId>extended-serialization-process</artifactId> -->
             </webModule>
             <webModule>
               <groupId>org.camunda.bpm</groupId>
