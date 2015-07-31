@@ -24,7 +24,7 @@ select count(*) from act_hi_actinst where end_time_ is not null;
 
 -- number of Jobs that are currently being processed,
 -- i.e. are acquired by a Job Executor
-select coun(*) from act_ru_job res
+select count(*) from act_ru_job res
 where (RES.LOCK_OWNER_ is not null);
 
 -- number of Jobs that are due to be processed,
