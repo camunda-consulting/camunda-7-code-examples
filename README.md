@@ -105,7 +105,7 @@ Snippets
     <td>BPMN process with sub tasks configured on a User Task using BPMN Extension Elements. The Subtasks are shown in the HTML task form using the Camunda Forms SDK (JavaScript). A User Task can only be completed if all subtasks are completed beforehand.</td>
   </tr>
   <tr>
-    <td><img src="snippet/jsf-simple-tasklist/screenshot.png" width="50"></td>
+    <td><img src="snippets/jsf-simple-tasklist/screenshot.png" width="50"></td>
     <td><a href="snippets/jsf-simple-tasklist">Simple tasklist build with JSF</a></td>
     <td>A tasklist to show how to use the engine api inside a JSF application. It calls forms, completes tasks and shows the detail process diagram with bpmn.io</td>
   </tr>
