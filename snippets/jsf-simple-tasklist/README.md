@@ -52,7 +52,7 @@ If you want to include it into your process application, these steps have to be 
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.2.0.
+Built and tested against Camunda BPM version 7.3.0.
 
 Known Limitations
 -----------------
