@@ -46,6 +46,8 @@ If you want to include it into your process application, these steps have to be 
   6. otherwise get the canvas from the viewer, zoom it to the full view, exchange the css class to display the diagram istaed of display the error [lines 66-71](src/main/webapp/app/taskDetail.xhtml#L66-L71)
   7. set a marker to the current task with the task definition key. [line 73](src/main/webapp/app/taskDetail.xhtml#L73). The markup for the highlight is defined in a css part in [line 16-26](src/main/webapp/app/taskDetail.xhtml#L16-L26)
   8. include the cascading style sheet `modeller.css` to display the diagram [lines 81-82](src/main/webapp/app/taskDetail.xhtml#L81-L82)
+  
+![diagram](diagram.png)
 
 Environment Restrictions
 ------------------------
