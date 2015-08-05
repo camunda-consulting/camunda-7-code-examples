@@ -27,9 +27,47 @@ Load [localhost:8080/jsf-simple-tasklist](http://localhost:8080/jsf-simple-taskl
 Display the process diagram
 ---------------------------
 
-The taskDetail.xhtml is a jsf-Page that simply (and only) renders the process diagram and highlight the current task. 
+![diagram](diagram.png)
 
-If you want to include it into your process application, these steps have to be taken:
+The [taskDetail.xhtml](https://github.com/camunda/camunda-consulting/blob/master/snippets/jsf-simple-tasklist/src/main/webapp/app/taskDetail.xhtml) is a JSF-Page that simply (and only) renders the process diagram and highlight the current task. Note that we just used JSF because we work in a JSF application - it could be a simple HTML page as well.
+
+The magic happens because of [bpmn.io](http://bpmn.io), simply add this JavaScript to your page to
+
+- Load the BPMN 2.0 XML from the Process Engine via REST
+- Render the BPMN via bpmn.io
+- Add a CSS highlight class to mark the current activity:
+
+```javascript
+<script>
+  $(document).ready(function() {
+    var restAccess = '/engine-rest';
+    var BpmnViewer = window.BpmnJS;
+    var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
+    var container = $('#js-drop-zone');
+    // get the diagram
+    $.get(restAccess + '/task/#{taskBean.id}', function(marker) {
+      $.get(restAccess + '/process-definition/' + marker.processDefinitionId + '/xml', function(data) {
+        // show it in bpmn.io
+        viewer.importXML(data.bpmn20Xml, function(err) {
+          if (err) {
+            console.log('error rendering', err);
+          } else {
+            var canvas = viewer.get('canvas');
+            // zoom to fit full viewport
+            canvas.zoom('fit-viewport');
+            container.removeClass('with-error')
+                 .addClass('with-diagram');
+            // add marker
+            canvas.addMarker(marker.taskDefinitionKey, 'highlight');                  
+          }
+        });
+      });
+    });
+  });
+</script>
+```
+
+Here are the detailed steps to be taken when you want to add this in your project:
 
 1. include bpmn-js webjar into your [pom.xml](pom.xml#L129-L133) (see lines 129-133)
 2. create a jsf-page which gets the taskid from the tasklist (or wherever). [See line 7-9 taskDetail.xhtml](src/main/webapp/app/taskDetail.xhtml#L7-L9) how to get the taskId.
@@ -47,7 +85,6 @@ If you want to include it into your process application, these steps have to be 
   7. set a marker to the current task with the task definition key. [line 73](src/main/webapp/app/taskDetail.xhtml#L73). The markup for the highlight is defined in a css part in [line 16-26](src/main/webapp/app/taskDetail.xhtml#L16-L26)
   8. include the cascading style sheet `modeller.css` to display the diagram [lines 81-82](src/main/webapp/app/taskDetail.xhtml#L81-L82)
   
-![diagram](diagram.png)
 
 Environment Restrictions
 ------------------------
