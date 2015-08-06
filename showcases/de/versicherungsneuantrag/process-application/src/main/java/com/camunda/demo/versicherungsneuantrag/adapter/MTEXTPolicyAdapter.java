@@ -15,7 +15,7 @@ public class MTEXTPolicyAdapter implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
 //    Neuantrag antrag = (Neuantrag) execution.getVariable(ProcessVariables.VAR_NAME_neuantrag);
 //    String xml = XML(antrag).toString();
-    String xml = (String) execution.getVariable(ProcessVariables.VAR_NAME_neuantragXML);
+    String xml = (String) execution.getVariable(ProcessVariables.VAR_NAME_documentXml);
     byte[] pdf = MTEXT.generateAndDistributeDocument(xml, "\\\\Police\\Vorlagen\\KFZ-Versicherung.dataBinding");
     execution.setVariable("pdf", pdf);
   }

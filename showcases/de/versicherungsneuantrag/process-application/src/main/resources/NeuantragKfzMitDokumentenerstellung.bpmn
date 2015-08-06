@@ -78,8 +78,8 @@
     <bpmn2:sendTask id="SendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTPolicyAdapter" camunda:async="true" name="Police ausstellen und zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="neuantragXML">
-            <camunda:script scriptFormat="freemarker" resource="Antrag.xml.ftl"/>
+          <camunda:inputParameter name="documentXml">
+            <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl"/>
           </camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn2:extensionElements>
@@ -94,8 +94,8 @@
     <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTRejectionAdapter" camunda:async="true" name="Ablehnung zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="neuantragXML">
-            <camunda:script scriptFormat="freemarker" resource="Antrag-abgelehnt.xml.ftl"/>
+          <camunda:inputParameter name="documentXml">
+            <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl"/>
           </camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn2:extensionElements>

@@ -13,9 +13,9 @@
 	</fahrzeug>
 	<vertragsdaten>
 		<produkt>${neuantrag.versicherungsprodukt}</produkt>
-		<nummer>${neuantrag.vertragsnummer}</nummer>
+		<#if neuantrag.vertragsnummer?has_content><nummer>${neuantrag.vertragsnummer}</nummer></#if>
 	    <preisindikation>${neuantrag.preisindikation?string[0..5]}</preisindikation>
-	    <beitrag>${neuantrag.beitrag?string[0..5]}</beitrag>
+	    <#if neuantrag.beitrag?has_content><beitrag>${neuantrag.beitrag?string[0..5]}</beitrag></#if>
 	    <fahrerUeber25>${neuantrag.fahrerUeber25?c}</fahrerUeber25>
 	    <fahrerUeber25String>${neuantrag.fahrerUeber25String}</fahrerUeber25String>
    	</vertragsdaten>
