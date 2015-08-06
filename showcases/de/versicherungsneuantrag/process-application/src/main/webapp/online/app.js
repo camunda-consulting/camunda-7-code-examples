@@ -34,6 +34,7 @@ $( document ).ready(function() {
 
 		resource.submitForm ({
 			key: "versicherungsneuantrag",
+//			key: "versicherungsneuantragMitDokumentenerstellung",
 			variables: {
 				neuantrag: {
 					value: JSON.stringify(neuantrag),

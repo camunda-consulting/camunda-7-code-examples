@@ -4,3 +4,4 @@
 
 # Defines the deployment folder in a Camunda BPM installation (backslashes need to be escaped or replaced by forward slashes).
 deploy.jboss.dir=C:/camunda/camunda-bpm-jboss-7.2.0/server/jboss-as-7.2.0.Final/standalone/deployments
+wsdl.url=
