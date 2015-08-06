@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:fox="http://www.camunda.com/fox" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="Collaboration_1u35ano">
     <bpmn2:participant id="Participant_0477s11" name="Versicherungsneuantrag&#xA;(Camunda BPM)" processRef="versicherungsneuantragMitDokumentenerstellung"/>
     <bpmn2:participant id="Participant_02vw71n" name="Dokumentenerstellung und Output Management&#xA;(M/TEXT CS + M/OMS)" processRef="dokumentenerstellung"/>
@@ -75,7 +75,7 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt"/>
-    <bpmn2:sendTask id="SendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTPolicyAdapter" name="Police ausstellen und zusenden">
+    <bpmn2:sendTask id="SendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTPolicyAdapter" camunda:async="true" name="Police ausstellen und zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="neuantragXML">
@@ -91,7 +91,7 @@
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="SendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert"/>
     <bpmn2:sequenceFlow id="SequenceFlow_183b0ll" sourceRef="ExclusiveGatewayJoin" targetRef="ServiceTask_0o3o39j"/>
-    <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTRejectionAdapter" name="Ablehnung zusenden">
+    <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTRejectionAdapter" camunda:async="true" name="Ablehnung zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="neuantragXML">
