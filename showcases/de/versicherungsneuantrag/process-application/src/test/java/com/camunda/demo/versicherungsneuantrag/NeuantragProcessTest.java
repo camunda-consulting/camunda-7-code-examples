@@ -30,8 +30,10 @@ public class NeuantragProcessTest {
   @Rule
   public ProcessEngineRule rule = new ProcessEngineRule();
 
-  private static final String PROCESS_BPMN_FILE = "NeuantragKfzMitDokumentenerstellung.bpmn";
-  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantragMitDokumentenerstellung";
+  private static final String PROCESS_BPMN_FILE = "NeuantragKfz.bpmn";
+  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantrag";
+//  private static final String PROCESS_BPMN_FILE = "NeuantragKfzMitDokumentenerstellung.bpmn";
+//  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantragMitDokumentenerstellung";
 
   // enable more detailed logging
   static {
