@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.7.0.201501051438" targetNamespace="http://www.example.org/bpmn">
+  <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
+    <bpmn2:participant id="Process_Engine" name="Invoice Creation" processRef="invoice-creation"/>
+  </bpmn2:collaboration>
+  <bpmn2:process id="invoice-creation" name="Invoice Creation" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/start-form.html" name="Invoice&#xD;&#xA;requested">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="business-rule-task-determine-order-discount"/>
+    <bpmn2:businessRuleTask id="business-rule-task-determine-order-discount" camunda:decisionRef="orderDiscount" camunda:resultVariable="discount" name="Determine order discount">
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="order">
+            <camunda:script scriptFormat="javascript"><![CDATA[order.setDiscount(discount);
+order;]]></camunda:script>
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+    <bpmn2:serviceTask id="service-task-create-invoice" camunda:expression="#{true}" name="Create invoice">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="business-rule-task-determine-order-discount" targetRef="service-task-create-invoice"/>
+    <bpmn2:serviceTask id="service-task-send-invoice" camunda:expression="#{true}" name="Send invoice">
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="service-task-create-invoice" targetRef="service-task-send-invoice"/>
+    <bpmn2:endEvent id="EndEvent_2" name="Invoice&#xD;&#xA;sent">
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="service-task-send-invoice" targetRef="EndEvent_2"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
+        <dc:Bounds height="219.0" width="639.0" x="10.0" y="10.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="60.0" y="93.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="38.0" width="63.0" x="50.0" y="131.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="_BPMNShape_Task_2">
+        <di:waypoint xsi:type="dc:Point" x="96.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="133.0" y="111.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="121.0" y="111.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_Task_2" bpmnElement="business-rule-task-determine-order-discount">
+        <dc:Bounds height="80.0" width="100.0" x="133.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_4" bpmnElement="service-task-create-invoice">
+        <dc:Bounds height="80.0" width="100.0" x="283.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_Task_2" targetElement="_BPMNShape_ServiceTask_4">
+        <di:waypoint xsi:type="dc:Point" x="233.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="283.0" y="111.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="255.0" y="111.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_5" bpmnElement="service-task-send-invoice">
+        <dc:Bounds height="80.0" width="100.0" x="433.0" y="71.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_ServiceTask_4" targetElement="_BPMNShape_ServiceTask_5">
+        <di:waypoint xsi:type="dc:Point" x="383.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="433.0" y="111.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="405.0" y="111.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_29" bpmnElement="EndEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="583.0" y="93.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="74.0" x="564.0" y="134.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_ServiceTask_5" targetElement="_BPMNShape_EndEvent_29">
+        <di:waypoint xsi:type="dc:Point" x="533.0" y="111.0"/>
+        <di:waypoint xsi:type="dc:Point" x="583.0" y="111.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="555.0" y="111.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

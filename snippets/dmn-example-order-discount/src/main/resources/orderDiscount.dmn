@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions xmlns="http://www.omg.org/spec/DMN/20130901" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="camunda" namespace="http://camunda.org/dmn">
+  <ItemDefinition id="itemDefinition1">  <typeDefinition>long</typeDefinition>
+</ItemDefinition>
+  <ItemDefinition id="itemDefinition2">  <typeDefinition>integer</typeDefinition>
+</ItemDefinition>
+  <ItemDefinition id="ItemDefinition_0eavd35">  <typeDefinition>long</typeDefinition>
+</ItemDefinition>
+  <Decision id="orderDiscount" name="Order Dicount">
+    <DecisionTable id="decisionTable" isComplete="true" isConsistent="true">
+      <clause id="clause1" name="Order Amount">
+        <inputExpression id="inputExpression1">
+          <itemDefinition href="#itemDefinition1" />
+          <text>order.amount</text>
+        </inputExpression>
+        <inputEntry id="LiteralExpression_0u7japd">        <text><![CDATA[>= 500]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_0mo8urn">        <text><![CDATA[>= 1000]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_1uvinlo">        <text><![CDATA[>= 2000]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_0wgq6xs">        <text><![CDATA[>= 5000]]></text>
+</inputEntry>
+      </clause>
+      <clause id="Clause_0z3mzbe" name="Order Amount">
+        <inputExpression id="LiteralExpression_1gk2mjy">
+          <itemDefinition href="#ItemDefinition_0eavd35" />
+          <text>order.amount</text>
+        </inputExpression>
+        <inputEntry id="LiteralExpression_0n9wx23">        <text><![CDATA[< 500]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_13xplwv">        <text><![CDATA[< 999]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_07mobzk">        <text><![CDATA[< 1999]]></text>
+</inputEntry>
+        <inputEntry id="LiteralExpression_0te7m0q">        <text><![CDATA[< 4999]]></text>
+</inputEntry>
+      </clause>
+      <clause id="clause2" name="Discount" camunda:output="discount">
+        <outputDefinition href="#itemDefinition2" />
+        <outputEntry id="LiteralExpression_1bz8lky">        <text>8</text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1vtjebt">        <text>0</text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_11r9gmz">        <text>2</text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1nynrfz">        <text>3</text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_08ggrf6">        <text>5</text>
+</outputEntry>
+      </clause>
+      <rule id="DecisionRule_11botgu">
+        <description></description>
+        <condition>LiteralExpression_0n9wx23</condition>
+        <conclusion>LiteralExpression_1vtjebt</conclusion>
+      </rule>
+      <rule id="DecisionRule_1gtzek4">
+        <description></description>
+        <condition>LiteralExpression_0u7japd</condition>
+        <condition>LiteralExpression_13xplwv</condition>
+        <conclusion>LiteralExpression_11r9gmz</conclusion>
+      </rule>
+      <rule id="DecisionRule_15hkt38">
+        <description></description>
+        <condition>LiteralExpression_0mo8urn</condition>
+        <condition>LiteralExpression_07mobzk</condition>
+        <conclusion>LiteralExpression_1nynrfz</conclusion>
+      </rule>
+      <rule id="DecisionRule_16blfv8">
+        <condition>LiteralExpression_1uvinlo</condition>
+        <condition>LiteralExpression_0te7m0q</condition>
+        <conclusion>LiteralExpression_08ggrf6</conclusion>
+      </rule>
+      <rule id="DecisionRule_0tnysoq">
+        <condition>LiteralExpression_0wgq6xs</condition>
+        <conclusion>LiteralExpression_1bz8lky</conclusion>
+      </rule>
+    </DecisionTable>
+  </Decision>
+</Definitions>

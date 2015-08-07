@@ -1,0 +1,42 @@
+<form name="customerForm" role="form">
+
+  <script cam-script type="text/form-script">
+
+    // angular form works on scope object
+    var order = $scope.order = {
+    };
+
+    // hook into camunda SDK JS Form Lifecycle
+    camForm.on('form-loaded', function() {
+
+      // declare variable 'customerData' incuding metadata for serialization
+      camForm.variableManager.createVariable({
+        name: 'order',
+        type: 'Object',
+        value: order,
+        valueInfo: {
+          // indicate that object is serialized as json
+          serializationDataFormat: 'application/json',
+          // provide classname of java object
+          objectTypeName: 'com.camunda.demo.dmn.order.discount.Order'
+        }
+      });
+
+    });
+
+  </script>
+
+  <h3>Order Details</h3>
+
+  <div class="control-group">
+    <label class="control-label" for="amount">Amount</label>
+    <div class="controls">
+      <input id="amount"
+             class="form-control"
+             type="number"
+             required 
+             ng-model="order.amount">
+    </div>
+
+  </div>
+</form>
