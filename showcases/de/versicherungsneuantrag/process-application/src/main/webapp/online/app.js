@@ -26,15 +26,55 @@ $( document ).ready(function() {
 			"versicherungsprodukt": "Camundanzia Vollkasko Plus",
 			"preisindikationInCent": getPrice() * 100
 			};
-			
+		
+		// {"antragssteller":{"vorname":null,"nachname":null,"geburtsdatum":170926761061},"fahrzeug":{"hersteller":"VW","typ":"Golf IV"},"fahrerUeber25":false,"versicherungsprodukt":"Camundanzia Vollkasko Plus"}	
+
 	  console.log(neuantrag);
+
+        var data = JSON.stringify({
+          "variables": {
+				neuantrag: {
+					value: JSON.stringify(neuantrag),
+					type: 'Object',
+         			 valueInfo: {
+             			serializationDataFormat: 'application/json',
+             			objectTypeName: 'com.camunda.demo.versicherungsneuantrag.model.Neuantrag'
+          			}
+				}
+			}              
+        });   
+
+        var url = "http://ec2-52-16-100-183.eu-west-1.compute.amazonaws.com/engine-rest/process-definition/key/versicherungsneuantragMitDokumentenerstellung/start";
+
+        console.log (url);
+
+        $.ajax
+          ({
+              type: 'POST',
+              //url: 'http://localhost:8080/engine-rest/message',
+              url: url,
+              data:data,
+              success: function (info) {                
+               		$('#applicationReceived').toggle();
+					$('#fieldsetForm').toggle();
+              },
+              dataType: 'json',
+              contentType: 'application/json; charset=utf-8',
+			  crossDomain: true,
+			  beforeSend: function(xhr) {
+			    xhr.setRequestHeader('Authorization', 'Basic ' + window.btoa(unescape(encodeURIComponent('insuranceShowcase' + ':' + 'insuranceShowcase'))))
+			  }
+
+          }); 
+
+      });
+		
+/*
 		var resource = camClient.resource("process-definition");
 		
-		// {"antragssteller":{"vorname":null,"nachname":null,"geburtsdatum":170926761061},"fahrzeug":{"hersteller":"VW","typ":"Golf IV"},"fahrerUeber25":false,"versicherungsprodukt":"Camundanzia Vollkasko Plus"}
-
 		resource.submitForm ({
-			key: "versicherungsneuantrag",
-//			key: "versicherungsneuantragMitDokumentenerstellung",
+//			key: "versicherungsneuantrag",
+			key: "versicherungsneuantragMitDokumentenerstellung",
 			variables: {
 				neuantrag: {
 					value: JSON.stringify(neuantrag),
@@ -52,6 +92,7 @@ $( document ).ready(function() {
 
 	});
 	
+*/
 	
 	// correlate message for Antrag	
 	$('#triggerUploadDocuments').click(function() {
