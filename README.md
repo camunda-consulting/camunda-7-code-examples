@@ -220,6 +220,23 @@ Snippets
 
 </table>
 
+### Testing
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  
+  <tr>
+    <td><img src="snippets/bpmn-validation/screenshot.png" width="50"></td>
+    <td><a href="snippets/bpmn-validation">BPMN Validation with the Parser of the Process Engine</a></td>
+    <td>A minimal environment for validating BPMN processes using an in-memory process engine in a JUnit test.</td>
+  </tr>
+
+</table>
+
 ### Administration Stuff
 
 <table>
