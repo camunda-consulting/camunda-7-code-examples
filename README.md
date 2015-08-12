@@ -100,12 +100,12 @@ Snippets
     <th>Description</th>
   </tr>
   <tr>
-    <td><img src="snippets/subtask-checklist/screenshot.png" width="50" /></td>
+    <td><img src="snippets/subtask-checklist/screenshot.png" width="100" /></td>
     <td><a href="https://github.com/camunda/camunda-consulting/tree/master/snippets/subtask-checklist">Subtask Checklist</a></td>
     <td>BPMN process with sub tasks configured on a User Task using BPMN Extension Elements. The Subtasks are shown in the HTML task form using the Camunda Forms SDK (JavaScript). A User Task can only be completed if all subtasks are completed beforehand.</td>
   </tr>
   <tr>
-    <td><img src="snippets/jsf-simple-tasklist/screenshot.png" width="50"></td>
+    <td><img src="snippets/jsf-simple-tasklist/screenshot.png" width="100"></td>
     <td><a href="snippets/jsf-simple-tasklist">Simple tasklist build with JSF</a></td>
     <td>A tasklist to show how to use the engine api inside a JSF application. It calls forms, completes tasks and shows the detail process diagram with bpmn.io</td>
   </tr>
@@ -121,7 +121,7 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/bpmn-adhoc-task/src/main/resources/process.png" width="50" /></td>
+    <td><img src="snippets/bpmn-adhoc-task/src/main/resources/process.png" width="100" /></td>
     <td><a href="snippets/bpmn-adhoc-task/">Workaround to realize BPMN AdHoc Subpocess</a></td>
     <td>The BPMN AdHoc Subprocess is not specified to be executable, hence camunda BPM cannot execute it out-of-the-box. This snippet shows a possile workaround.</td>
   </tr>
@@ -138,24 +138,24 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/camunda-webapp-customized/screenshot.png" width="50"></td>
+    <td><img src="snippets/camunda-webapp-customized/screenshot.png" width="100"></td>
     <td><a href="snippets/camunda-webapp-customized">Webapp Customizing</a></td>
     <td>Shows how to build a customized webapp (own logo, colors, language, plugins, ...) by using Maven Overlay.</td>
   </tr>
 
   <tr>
-    <td><img src="https://i.vimeocdn.com/video/485755185_640.jpg" width="50"></td>
+    <td><img src="https://i.vimeocdn.com/video/485755185_640.jpg" width="100"></td>
     <td><a href="http://camunda.org/plugins/">Various Cockpit Plugins</a></td>
     <td>The Plugin Store lists various available cockpit plugins, including the consulting snippets.</td>
   </tr>
 
   <tr>
-    <td><img src="snippets/tasklist-plugin-easy-search/screenshot.png" width="50"></td>
+    <td><img src="snippets/tasklist-plugin-easy-search/screenshot.png" width="100"></td>
     <td><a href="snippets/tasklist-plugin-easy-search">Tasklist Plugin: Easy Search</a></td>
     <td>Plugin that provides a "Google-like" search bar for tasks.</td>
   </tr>
   <tr>
-    <td><img src="snippets/tasklist-plugin-nice-external-forms/screenshot.png" width="50"></td>
+    <td><img src="snippets/tasklist-plugin-nice-external-forms/screenshot.png" width="100"></td>
     <td><a href="snippets/tasklist-plugin-nice-external-forms">Tasklist Plugin: Extended External Forms</a></td>
     <td>Plugin that provides a customized and better looking external forms hook.</td>
   </tr>
@@ -172,31 +172,31 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/async-joins/src/main/resources/parallelSubprocess.png" width="50"></td>
+    <td><img src="snippets/async-joins/src/main/resources/parallelSubprocess.png" width="100"></td>
     <td><a href="snippets/async-joins">Making parallel joins asynchronous</a></td>
     <td>To avoid optimistic lock exceptions on heavy load processes, this plugin makes each joining gateway asynchronous without further configuration in the process diagram.</td>
   </tr>
   
   <tr>
-    <td><img src="http://docs.camunda.org/7.3/guides/user-guide/assets/img/transactions-2.png" width="50"></td>
+    <td><img src="http://docs.camunda.org/7.3/guides/user-guide/assets/img/transactions-2.png" width="100"></td>
     <td><a href="snippets/authenticated-async-continuation">authenticatedUserId after Asynchronous Continuation</a></td>
     <td>To use the userId after asynchronous continuation, this plugin puts it from the history on the current thread.</td>
   </tr>
   
   <tr>
-    <td><img src="snippets/authorization-demo/src/main/resources/process.png" width="50"></td>
+    <td><img src="snippets/authorization-demo/src/main/resources/process.png" width="100"></td>
     <td><a href="snippets/authorization-demo">Authorized User Tasks</a></td>
     <td>Only authorized users are able to complete a task. Obsolete since 7.3. Use <a href="http://docs.camunda.org/7.3/guides/user-guide/#process-engine-authorization-service">Authorization-Service</a> instead.</td>
   </tr>
   
   <tr>
-    <td><img src="http://docs.camunda.org/7.3/assets/img/user-guide/process-engine-history.png" width="50"></td>
+    <td><img src="http://docs.camunda.org/7.3/assets/img/user-guide/process-engine-history.png" width="100"></td>
     <td><a href="snippets/change-history-output">History Variable Filter</a></td>
     <td>How to store only one of many variables in the history.</td>
   </tr>
 
   <tr>
-    <td><img src="snippets/change-job-retry/thumbnail.png" width="50"></td>
+    <td><img src="snippets/change-job-retry/thumbnail.png" width="100"></td>
     <td><a href="snippets/change-job-retry">Change Number of Job Retries</a></td>
     <td>This snippet shows how to change the number of retries for all jobs without touching the process diagrams.</td>
   </tr>
@@ -213,7 +213,7 @@ Snippets
   </tr>
   
   <tr>
-    <td><img src="http://docs.camunda.org/7.3/assets/img/getting-started/spring-framework/Spring_Logo.png" width="50"></td>
+    <td><img src="http://docs.camunda.org/7.3/assets/img/getting-started/spring-framework/Spring_Logo.png" width="100"></td>
     <td><a href="snippets/spring-java-based-config">Java-based Spring container configuration</a></td>
     <td>Run the process application in a Spring container with java-based configuration on a shared process engine.</td>
   </tr>
@@ -230,7 +230,7 @@ Snippets
   </tr>
   
   <tr>
-    <td><img src="snippets/bpmn-validation/screenshot.png" width="50"></td>
+    <td><img src="snippets/bpmn-validation/screenshot.png" width="100"></td>
     <td><a href="snippets/bpmn-validation">BPMN Validation with the Parser of the Process Engine</a></td>
     <td>A minimal environment for validating BPMN processes using an in-memory process engine in a JUnit test.</td>
   </tr>
@@ -247,7 +247,7 @@ Snippets
   </tr>
   
   <tr>
-    <td><img src="snippets/clean-up-history/cleanup.jpg" width="50"></td>
+    <td><img src="snippets/clean-up-history/cleanup.jpg" width="100"></td>
     <td><a href="snippets/clean-up-history">How to clean up the history tables</a></td>
     <td>Solutions to clean up the history from old completed process instances.</td>
   </tr>
