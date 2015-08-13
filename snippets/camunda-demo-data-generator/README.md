@@ -24,6 +24,8 @@ Instrument your BPMN process
 Start the Generation
 --------------------
 
+Deploy the camunda-demo-data-generator-webapp.war. 
+
 Now you can start the generation, you have to specify:
 
 * process definition key to start
@@ -43,11 +45,56 @@ So you will have instances in the version before the latest version if you look 
 How to use it?
 --------------
 
-Build and Deploy the app. Should work on any container (Tomcat, JBoss, ...).
+Build everything using mvn package. Deploy the camunda-demo-data-gento erator-webapp.war (in subproject camunda-demo-data-generator-webapp). Should work on any container (Tomcat, JBoss, ...).
 
 Once you deployed the application you can run it using
-[localhost:8080/camunda-demo-data-generator/generate](localhost:8080/camunda-demo-data-generator/). You might have to adjust the port.
+[localhost:8080/camunda-demo-data-generator/generate](localhost:8080/camunda-demo-data-generator-webapp/). You might have to adjust the port.
 
+
+
+Use Auto Generation
+--------------
+
+If you set up demo systems you might want to automatically generate data during startup. E.g. you could build a system were data is cleared every night and regenerated on startup. Therefor you have to add one dependency to your process application:
+
+```
+		<dependency>
+			<groupId>com.camunda.demo.environment</groupId>
+			<artifactId>camunda-demo-data-generator</artifactId>
+			<version>1.0.0</version>
+			<type>jar</type>
+		</dependency>
+```
+
+Instrument your process definition XML for all processes where auto generation should be applied
+
+```
+  <process id="rechnungseingang" name="Rechnungseingang" isExecutable="true">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="14" name="simulateNumberOfDaysInPast"/>
+          <camunda:property value="1000" name="simulateTimeBetweenStartsBusinessDaysMean"/>
+          <camunda:property value="2000" name="simulateTimeBetweenStartsBusinessDaysSd"/>
+        </camunda:properties>
+      </extensionElements>
+```
+
+And add a @PostDeploy hook into your ProcessApplication class:
+```
+@ProcessApplication
+public class InvoiceProcessApplication extends ServletProcessApplication {
+
+  /**
+   * In a @PostDeploy Hook you can interact with the process engine and access
+   * the processes the application has deployed.
+   */
+  @PostDeploy
+  public void startFirstProcess(ProcessEngine processEngine) {
+    DemoDataGenerator.autoGenerateFor(processEngine, "rechnungseingang");
+  }
+```
+
+That's it. You get automatically instances generated - if not more than 50 instances exist in history yet (to avoid new instances on every startup).
 
 Environment Restrictions
 ------------------------

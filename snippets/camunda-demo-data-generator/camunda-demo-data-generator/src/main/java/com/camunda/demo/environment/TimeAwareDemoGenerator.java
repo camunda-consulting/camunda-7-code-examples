@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-import java.util.zip.DataFormatException;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -35,11 +34,9 @@ import org.camunda.bpm.model.bpmn.instance.camunda.CamundaTaskListener;
 import org.camunda.bpm.model.xml.ModelInstance;
 import org.camunda.bpm.model.xml.impl.util.IoUtil;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
-import org.joda.time.Hours;
 
 /**
- * TODO: - Classloading klären für Eigene Klassen - oder geht alles per Script?
- * Groovy?
+ * Classloading: Currently everything is done as JavaScript - so no classes are necessary
  */
 public class TimeAwareDemoGenerator {
 
