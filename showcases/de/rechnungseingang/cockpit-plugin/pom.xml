@@ -4,7 +4,7 @@
 
 	<groupId>com.camunda.demo</groupId>
 	<artifactId>cockpit-plugin-rechnungseingang</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<packaging>jar</packaging>
 

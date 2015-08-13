@@ -3,7 +3,7 @@ package com.camunda.demo.environment;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
 public class StatisticalDistribution {
-  private String type = "erlang";
+//  private String type = "erlang";
 //  private double mean=94.3247;
 //  private double standardDeviation=52.8106;
   private NormalDistribution distribution;
