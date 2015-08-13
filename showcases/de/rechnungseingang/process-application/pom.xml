@@ -37,6 +37,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.camunda.demo.environment</groupId>
+			<artifactId>camunda-demo-data-generator</artifactId>
+			<version>1.0.0</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
