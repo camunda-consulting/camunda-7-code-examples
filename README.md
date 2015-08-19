@@ -218,6 +218,12 @@ Snippets
     <td>Run the process application in a Spring container with java-based configuration on a shared process engine.</td>
   </tr>
 
+  <tr>
+    <td><img src="snippets/embedded-engine-without-spring/Spring_Logo-striked-through.png" width="100"></td>
+    <td><a href="snippets/embedded-engine-without-spring">Embedded Process Engine without Spring</a></td>
+    <td>A Process Application containing an embedded process engine that is configured in the processes.xml file and therefore does not require the Spring Framework as a dependency.</td>
+  </tr>
+  
 </table>
 
 ### Testing
