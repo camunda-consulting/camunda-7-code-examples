@@ -125,7 +125,11 @@ Snippets
     <td><a href="snippets/bpmn-adhoc-task/">Workaround to realize BPMN AdHoc Subpocess</a></td>
     <td>The BPMN AdHoc Subprocess is not specified to be executable, hence camunda BPM cannot execute it out-of-the-box. This snippet shows a possile workaround.</td>
   </tr>
-  
+  <tr>
+    <td><img src="snippets/call-activity-set-local-variable/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/call-activity-set-local-variable">Call Activity sets local variable</a></td>
+    <td>Shows how to set a local variable in a parent process based on the variable of a child process invoked by a Call Activity</td>
+  </tr>  
 </table>
 
 ### Camunda Webapp (Tasklist & Cockpit)
