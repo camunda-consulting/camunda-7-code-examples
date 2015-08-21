@@ -31,6 +31,8 @@ Since the target variable is already defined in the local scope of the Sub-Proce
 the scan stops and the variable is updated.
 Otherwise, the variable would be created in the global scope.
 
+The same approach can be applied to result variables of Service and Script Tasks as well as variables returned from Connector invocations.
+
 ## How to use it?
 There is no web interface to access the application.
 To get started run the `InMemoryH2Test` and watch the log output.
