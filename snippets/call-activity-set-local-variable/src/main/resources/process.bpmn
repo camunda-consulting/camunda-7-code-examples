@@ -8,6 +8,11 @@
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:subProcess id="SubProcess_1">
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="localVariable"/>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
       <bpmn2:multiInstanceLoopCharacteristics>
@@ -20,15 +25,14 @@
       <bpmn2:endEvent id="EndEvent_4">
         <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       </bpmn2:endEvent>
-      <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.demo.call_activity_set_local_variable.LoggerDelegate" name="Log variable">
+      <bpmn2:serviceTask id="ServiceTask_2" camunda:class="com.camunda.demo.call_activity_set_local_variable.LoggerDelegate" name="Log local variable">
         <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
       </bpmn2:serviceTask>
       <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="ServiceTask_2" targetRef="EndEvent_4"/>
-      <bpmn2:callActivity id="CallActivity_1" name="Invoke child process" calledElement="call-activity-set-local-variable-child-process">
+      <bpmn2:callActivity id="CallActivity_1" name="Invoke process" calledElement="call-activity-set-local-variable-child-process">
         <bpmn2:extensionElements>
-          <camunda:executionListener class="com.camunda.demo.call_activity_set_local_variable.SetLocalVariableExecutionListener" event="end"/>
-          <camunda:out source="childProcessVariable" target="childProcessVariable"/>
+          <camunda:out source="childProcessVariable" target="localVariable"/>
           <camunda:in source="loopCounter" target="loopCounter"/>
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
@@ -37,7 +41,7 @@
       <bpmn2:sequenceFlow id="SequenceFlow_8" name="" sourceRef="CallActivity_1" targetRef="ServiceTask_2"/>
     </bpmn2:subProcess>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_1" targetRef="SubProcess_1"/>
-    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="com.camunda.demo.call_activity_set_local_variable.LoggerDelegate" name="Log variable">
+    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="com.camunda.demo.call_activity_set_local_variable.LoggerDelegate" name="Try to log variable">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -46,11 +50,15 @@
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="ServiceTask_3" targetRef="EndEvent_5"/>
+    <bpmn2:textAnnotation id="TextAnnotation_1">
+      <bpmn2:text>Output will be null as local variable does not exist outside it's scope</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:association id="Association_1" sourceRef="TextAnnotation_1" targetRef="ServiceTask_3"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
-        <dc:Bounds height="200.0" width="819.0" x="10.0" y="10.0"/>
+        <dc:Bounds height="200.0" width="915.0" x="10.0" y="10.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="60.0" y="93.0"/>
@@ -129,6 +137,13 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="749.0" y="111.0"/>
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_1">
+        <dc:Bounds height="63.0" width="157.0" x="756.0" y="24.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_Association_1" bpmnElement="Association_1" sourceElement="_BPMNShape_TextAnnotation_2" targetElement="_BPMNShape_ServiceTask_5">
+        <di:waypoint xsi:type="dc:Point" x="756.0" y="83.0"/>
+        <di:waypoint xsi:type="dc:Point" x="727.0" y="93.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

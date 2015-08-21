@@ -23,7 +23,7 @@ public class LoggerDelegate implements JavaDelegate {
             + ", businessKey=" + execution.getProcessBusinessKey()
             + ", executionId=" + execution.getId()
             + " \n\n"
-    + "  childProcessVariable=" + execution.getVariable("childProcessVariable")
+    + "  localVariable=" + execution.getVariable("localVariable")
     + " \n\n");
     
   }
