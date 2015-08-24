@@ -104,6 +104,14 @@ See also:
  * [Configuring process engines in the processes.xml file](http://docs.camunda.org/latest/guides/user-guide/#process-applications-the-processesxml-deployment-descriptor-configuring-process-engines-in-the-processesxml-file)
  * [Deployment Descriptor Reference: Process Engine Configuration](http://docs.camunda.org/latest/api-references/deployment-descriptors/#tags-process-engine-configuration)
 
+## Camunda Worbench Integration
+
+The example also embedds the [Camunda BPM Workbench](https://github.com/camunda/camunda-bpm-workbench).
+
+![Camunda Workbench](screenshot-camunda-bpm-workbench.png)
+
+If you don't want the uses this, remove the Maven dependency from the `pom.xml` and the plugin from the process engine configuration in the `pocesses.xml`.
+
 ## How to use it?
 There is no web interface to access the application.
 To get started refer to the `InMemoryH2Test`.
