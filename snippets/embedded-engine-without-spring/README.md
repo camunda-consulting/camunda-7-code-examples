@@ -134,7 +134,7 @@ After deploying the application, visit [http://localhost:8080/camunda/](http://l
 
 ## Camunda Worbench Integration
 
-The example also embedds the [Camunda BPM Workbench](https://github.com/camunda/camunda-bpm-workbench).
+The example also embedds the [Camunda BPM Workbench](https://github.com/camunda/camunda-bpm-workbench). After deploying the web application visit [http://localhost:8090/#/debug](http://localhost:8090/#/debug).
 
 ![Camunda Workbench](screenshot-camunda-bpm-workbench.png)
 
