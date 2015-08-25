@@ -1,11 +1,8 @@
 Sample Reporting plugin for camunda Cockpit
 =================================
 
-This is a simple plugin that showcases how easy you can build some dashboard as cockpit plugin for [camunda BPM](http://docs.camunda.org).
+This is a sample plugin for the "rechnungseingang" demo application.
 
-Built and tested against camunda BPM version `7.1.0-Final`.
-
-![Screenshot][1]
 
 Highcharts is not free or open source!
 ----------------------
@@ -29,6 +26,3 @@ More information
 -----
 
 Read the [plugin development how to](http://docs.camunda.org/latest/real-life/how-to/#cockpit-how-to-develop-a-cockpit-plugin).
-
-
-[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/cockpit-plugin-reporting/screenshot.png

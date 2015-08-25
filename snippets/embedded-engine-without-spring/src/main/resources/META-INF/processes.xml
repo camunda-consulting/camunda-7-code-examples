@@ -74,6 +74,11 @@
         </properties>
       </plugin>
       -->
+      
+      <!-- Optional Plugin for Camunda BPM Workbench -->
+      <plugin>
+        <class>org.camunda.bpm.debugger.server.EmbeddableDebugWebsocketBootstrap</class>
+      </plugin>      
    </plugins>
   </process-engine>
 

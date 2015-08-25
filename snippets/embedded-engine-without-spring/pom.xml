@@ -157,6 +157,13 @@
         <artifactId>java-uuid-generator</artifactId>
       </dependency>
 
+      <dependency>
+        <!-- Optional Plugin for Camunda BPM Workbench -->
+        <groupId>org.camunda.bpm.workbench</groupId>
+        <artifactId>camunda-workbench-dist-embeddable</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+      </dependency>
+
     <!-- Add your own dependencies here, if in compile scope, they are added to the war -->
 
   </dependencies>

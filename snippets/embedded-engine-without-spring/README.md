@@ -104,6 +104,42 @@ See also:
  * [Configuring process engines in the processes.xml file](http://docs.camunda.org/latest/guides/user-guide/#process-applications-the-processesxml-deployment-descriptor-configuring-process-engines-in-the-processesxml-file)
  * [Deployment Descriptor Reference: Process Engine Configuration](http://docs.camunda.org/latest/api-references/deployment-descriptors/#tags-process-engine-configuration)
 
+## Camunda Cockpit Integration
+
+To use a Cockpit with the embedded engine, download the
+[Standalone Web Application Distribution](http://docs.camunda.org/7.3/guides/user-guide/#introduction-download-standalone-web-application-distribution)
+and change the file `WEB_INF/applicationContext.xml` file inside the WAR file to point to the same datasource than the process engine:
+
+```xml
+  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName" value="java:jboss/datasources/ProcessEngine"/>
+  </bean>
+```
+
+You should also disable the `databaseSchemaUpdate` and you may have to set the history level to match that of your embedded engine:
+
+```xml
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration">
+    ...
+    <property name="databaseSchemaUpdate" value="false" />
+    <property name="history" value="full" />
+    ...
+```
+
+Here is an example file: [applicationContext.xml](applicationContext.xml)
+
+After deploying the application, visit [http://localhost:8080/camunda/](http://localhost:8080/camunda/).
+
+![Screenshot Camunda Cockpit](screenshot-camunda-cockpit.png)
+
+## Camunda Worbench Integration
+
+The example also embedds the [Camunda BPM Workbench](https://github.com/camunda/camunda-bpm-workbench). After deploying the web application visit [http://localhost:8090/#/debug](http://localhost:8090/#/debug).
+
+![Camunda Workbench](screenshot-camunda-bpm-workbench.png)
+
+If you don't want the uses this, remove the Maven dependency from the `pom.xml` and the plugin from the process engine configuration in the `pocesses.xml`.
+
 ## How to use it?
 There is no web interface to access the application.
 To get started refer to the `InMemoryH2Test`.
