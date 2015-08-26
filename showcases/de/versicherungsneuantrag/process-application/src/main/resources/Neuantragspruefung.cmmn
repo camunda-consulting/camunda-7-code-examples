@@ -38,7 +38,6 @@
 				 <cmmn:extensionElements>
 				    <camunda:in source="neuantrag" target="neuantrag" />
 				    <camunda:in source="hinweise" target="hinweise" />
-				    <camunda:out source="risks" target="risks" />
 					<camunda:caseExecutionListener event="manualStart" class="com.camunda.demo.versicherungsneuantrag.adapter.ActivateFollowUpDateAdapter" />
 					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.versicherungsneuantrag.adapter.DeactivateFollowUpDateAdapter" />
 				 </cmmn:extensionElements>                
