@@ -6,12 +6,12 @@
 	  <groupId>org.camunda</groupId>
 	  <artifactId>camunda-release-parent</artifactId>
 	  <version>2.5</version>
-	  <relativePath></relativePath>  
+	  <relativePath />  
   </parent>
 
   <groupId>org.camunda.consulting.snippets</groupId>
   <artifactId>process-test-coverage</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
 
   <packaging>jar</packaging>
 
@@ -82,6 +82,7 @@
     <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage</url>
     <connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
     <developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
 </project>
