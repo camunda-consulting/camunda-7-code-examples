@@ -14,10 +14,11 @@ The tool creates test coverage reports for:
 
 Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consulting/process_test_coverage/ProcessTestCoverageTest.java). 
 
-# Remarks to run this application
+## Remarks to run this application
 1. mvn clean test
 2. Open html files which are created in the directory target/process-test-coverage/
 
-# Known Issues
+## Known Limitations
+Test cases that deploy different version of the same process (same process definition key) are currently not supported and will result in miss-leading reports. Just make sure all your processes have unique process definition keys (in BPMN XML //process@id).
 
-# Improvements Backlog
+## Improvements Backlog

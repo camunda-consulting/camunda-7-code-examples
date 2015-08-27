@@ -1,6 +1,5 @@
 package org.camunda.bpm.consulting.process_test_coverage;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -37,7 +36,7 @@ public class ProcessTestCoverage {
     calculate(processInstanceId, processEngine, getCaller());    
   }
 
-	public static void calculate(String processInstanceId, ProcessEngine processEngine, String caller) {
+	protected static void calculate(String processInstanceId, ProcessEngine processEngine, String caller) {
 		try {
 	    HistoricProcessInstance processInstance = getProcessInstance(processInstanceId, processEngine);
 			String bpmnXml = getBpmnXml(processInstance, processEngine);
@@ -46,24 +45,35 @@ public class ProcessTestCoverage {
 			// write report for caller 
       String reportName = caller + ".html";
       BpmnJsReport.highlightActivities(bpmnXml, activities, reportName, targetDir);
-//			BpmnJsReport.writeToFile(targetDir, reportName, html);
 			
 			// write report for overall process
 			reportName = getProcessDefinitionKey(processEngine, processInstance) + ".html";
 			Set<String> coveredAcivityIds = callculateProcessCoverage(getProcessDefinitionKey(processEngine, processInstance), activities);
-//			File reportFile = new File(targetDir + "/" + reportName);
-//			if (reportFile.exists()) {
-//				html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
-//			}
-			
 			BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
-  private static Set<String> callculateProcessCoverage(String processDefinitionKey, List<HistoricActivityInstance> activities) {
+	/**
+   * calculate overall test coverage for all processes deployed in the engine
+	 */
+  public static void calculate(ProcessEngine processEngine) {
+		try {
+			List<ProcessDefinition> processDefinitions = processEngine.getRepositoryService().createProcessDefinitionQuery().list();
+			for (ProcessDefinition processDefinition : processDefinitions) {
+			  String bpmnXml = getBpmnXml(processDefinition);
+				List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processDefinitionId(processDefinition.getId()).list();
+	      Set<String> coveredAcivityIds = callculateProcessCoverage(processDefinition.getKey(), activities);
+				String reportName = processDefinition.getKey() + "_sum.html";
+	      BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
+			}
+		} catch (IOException e) {
+      throw new RuntimeException(e);
+		}
+	}
+
+	protected static Set<String> callculateProcessCoverage(String processDefinitionKey, List<HistoricActivityInstance> activities) {
     Set<String> coveredActivites;
     if (!processCoverage.containsKey(processDefinitionKey)) {
       coveredActivites = new HashSet<String>();
@@ -79,72 +89,32 @@ public class ProcessTestCoverage {
     return coveredActivites;
   }
 
-	/**
-   * calculate overall test coverage for all processes deployed in the engine
-	 */
-  public static void calculate(ProcessEngine processEngine) {
-		try {
-			List<ProcessDefinition> processDefinitions = processEngine.getRepositoryService().createProcessDefinitionQuery().list();
-			for (ProcessDefinition processDefinition : processDefinitions) {
-//				String bpmnXml = FileUtils.readFileToString(new File(bpmnDir + "/" + processDefinition.getResourceName()));//getBpmnXml(processDefinition.getId(), processEngine);
-			  String bpmnXml = getBpmnXml(processDefinition);
-				List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processDefinitionId(processDefinition.getId()).list();
-	      Set<String> coveredAcivityIds = callculateProcessCoverage(processDefinition.getKey(), activities);
-//				String html = BpmnJsReport.highlightActivities(bpmnXml, activities);
-				String reportName = processDefinition.getKey() + "_sum.html";
-//				File reportFile = new File(targetDir + "/" + reportName);
-//				if (reportFile.exists()) {
-//					html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
-//				}
-//				BpmnJsReport.writeToFile(targetDir, reportName, html);
-	      BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-  private static String getProcessDefinitionKey(ProcessEngine processEngine, HistoricProcessInstance processInstance) {
+	protected static String getProcessDefinitionKey(ProcessEngine processEngine, HistoricProcessInstance processInstance) {
     return processEngine.getRepositoryService().getProcessDefinition(processInstance.getProcessDefinitionId()).getKey();
   }
   
-  private static String getBpmnXml(HistoricProcessInstance processInstance, ProcessEngine processEngine) throws IOException {
+  protected static String getBpmnXml(HistoricProcessInstance processInstance, ProcessEngine processEngine) throws IOException {
     String processDefinitionId = processInstance.getProcessDefinitionId();
-//  return getBpmnXml(processDefinitionId, processEngine);
     ProcessDefinition processDefinition = processEngine.getRepositoryService().createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
-//    return IOUtils.toString(processEngine.getRepositoryService().getResourceAsStream(processDefinition.getDeploymentId(), processDefinition.getResourceName()));
-//    return FileUtils.readFileToString(new File(bpmnDir + "/" + processDefinition.getResourceName()));
     return getBpmnXml(processDefinition);
   }
 
-  private static String getBpmnXml(ProcessDefinition processDefinition) throws IOException {
+  protected static String getBpmnXml(ProcessDefinition processDefinition) throws IOException {
     InputStream inputStream = ProcessTestCoverage.class.getClassLoader().getResourceAsStream(processDefinition.getResourceName());
     return IOUtils.toString(inputStream);
   }
 
-  private static String getBpmnXml(String processDefinitionId, ProcessEngine processEngine) throws IOException {
-    return IOUtils.toString(processEngine.getRepositoryService().getProcessDiagram(processDefinitionId));
-  }
-  
-  private static String getBpmnFileName(String processInstanceId,	ProcessEngine processEngine) {
-		HistoricProcessInstance processInstance = getProcessInstance(processInstanceId, processEngine);
-		String processDefinitionId = processInstance.getProcessDefinitionId();
-    ProcessDefinition processDefinition = processEngine.getRepositoryService().createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
-    return processDefinition.getResourceName();
-	}
-
-  private static HistoricProcessInstance getProcessInstance(String processInstanceId, ProcessEngine processEngine) {
+  protected static HistoricProcessInstance getProcessInstance(String processInstanceId, ProcessEngine processEngine) {
     return processEngine.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
   }
 
-	private static List<HistoricActivityInstance> getAuditTrail(
+  protected static List<HistoricActivityInstance> getAuditTrail(
 			String processInstanceId, ProcessEngine processEngine) {
 		List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processInstanceId(processInstanceId).list();
 		return activities;
 	}
 
-	private static String getCaller() {
+	protected static String getCaller() {
 		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 		StackTraceElement caller = stackTraceElements[3];
     String callerMethod = caller.getClassName() + "." + caller.getMethodName();
