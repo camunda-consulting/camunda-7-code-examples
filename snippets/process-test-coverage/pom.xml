@@ -11,7 +11,7 @@
 
   <groupId>org.camunda.consulting.snippets</groupId>
   <artifactId>process-test-coverage</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3-SNAPSHOT</version>
 
   <packaging>jar</packaging>
 
@@ -82,7 +82,7 @@
     <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage</url>
     <connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
     <developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
-    <tag>0.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
 </project>
