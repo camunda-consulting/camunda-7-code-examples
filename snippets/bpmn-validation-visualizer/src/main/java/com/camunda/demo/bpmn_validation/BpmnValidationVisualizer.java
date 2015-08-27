@@ -16,14 +16,14 @@ public class BpmnValidationVisualizer {
 //    = Pattern.compile("Exclusive Gateway 'ExclusiveGateway_1' has outgoing sequence flow '([^']+)' without condition which is not the default flow. | process.bpmn | line 0 | column 0");
 
   private static Pattern REGEXP_GENERIC_EXCEPTION
-    = Pattern.compile("\\| elements? (.+)\n");
+    = Pattern.compile("([^\\|]+).*\\| elements? (.+)" + System.getProperty("line.separator"));
 
   public static Map<String, List<String>> getErrors(ProcessEngineException e) {
     Map<String, List<String>> errors = new HashMap<String, List<String>>();
     String message = e.getMessage();
     Matcher matcher = REGEXP_GENERIC_EXCEPTION.matcher(message);
     while (matcher.find()) {
-      String[] bpmnElementIds = matcher.group(1).split(",");
+      String[] bpmnElementIds = matcher.group(2).split(",");
       for (String bpmnElement : bpmnElementIds) {
         List<String> errorsForBpmnElement;
         if (errors.containsKey(bpmnElement)) {
@@ -32,7 +32,7 @@ public class BpmnValidationVisualizer {
           errorsForBpmnElement = new ArrayList<String>();
           errors.put(bpmnElement, errorsForBpmnElement);
         }
-        errorsForBpmnElement.add(matcher.group());
+        errorsForBpmnElement.add(matcher.group(1));
       }
     }
     return errors;

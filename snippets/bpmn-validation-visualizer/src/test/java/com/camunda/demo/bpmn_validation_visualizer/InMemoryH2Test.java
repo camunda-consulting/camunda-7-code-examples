@@ -52,6 +52,7 @@ public class InMemoryH2Test {
        assertTrue(errors.containsKey("SequenceFlow_5"));
        assertTrue(errors.containsKey("ServiceTask_1"));
        assertTrue(errors.containsKey("ExclusiveGateway_1"));
+       System.out.println(errors);
     }
   }
 
