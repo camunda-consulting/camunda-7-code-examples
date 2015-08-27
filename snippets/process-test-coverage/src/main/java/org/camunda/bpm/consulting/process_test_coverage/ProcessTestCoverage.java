@@ -65,7 +65,7 @@ public class ProcessTestCoverage {
 			  String bpmnXml = getBpmnXml(processDefinition);
 				List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processDefinitionId(processDefinition.getId()).list();
 	      Set<String> coveredAcivityIds = callculateProcessCoverage(processDefinition.getKey(), activities);
-				String reportName = processDefinition.getKey() + "_sum.html";
+				String reportName = processDefinition.getKey() + ".html";
 	      BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
 			}
 		} catch (IOException e) {
