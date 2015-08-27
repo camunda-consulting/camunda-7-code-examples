@@ -3,7 +3,11 @@ package org.camunda.bpm.consulting.process_test_coverage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -17,7 +21,7 @@ public class ProcessTestCoverage {
   @Deprecated public static String bpmnDir = "../classes"; // no longer needed as BPMN files are loaded from class path
 	public static String targetDir = "target/process-test-coverage";
 	
-//	private static Map<String, Set<String>> processCoverage = new HashMap<String, Set<String>>();
+	private static Map<String, Set<String>> processCoverage = new HashMap<String, Set<String>>();
 
 	/**
 	 * calculate coverage for this, but also add to the overall coverage of the process
@@ -38,33 +42,42 @@ public class ProcessTestCoverage {
 	    HistoricProcessInstance processInstance = getProcessInstance(processInstanceId, processEngine);
 			String bpmnXml = getBpmnXml(processInstance, processEngine);
 			List<HistoricActivityInstance> activities = getAuditTrail(processInstanceId, processEngine);
-			String html = BpmnJsReport.highlightActivities(bpmnXml, activities);
 
 			// write report for caller 
       String reportName = caller + ".html";
-			BpmnJsReport.writeToFile(targetDir, reportName, html);
+      BpmnJsReport.highlightActivities(bpmnXml, activities, reportName, targetDir);
+//			BpmnJsReport.writeToFile(targetDir, reportName, html);
 			
-			// write report for process
+			// write report for overall process
 			reportName = getProcessDefinitionKey(processEngine, processInstance) + ".html";
-//			callculateProcessCoverage(getProcessDefinitionKey(processEngine, processInstance), activities);
-			File reportFile = new File(targetDir + "/" + reportName);
-			if (reportFile.exists()) {
-				html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
-			}
-			BpmnJsReport.writeToFile(targetDir, reportName, html);
+			Set<String> coveredAcivityIds = callculateProcessCoverage(getProcessDefinitionKey(processEngine, processInstance), activities);
+//			File reportFile = new File(targetDir + "/" + reportName);
+//			if (reportFile.exists()) {
+//				html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
+//			}
+			
+			BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-//  private static void callculateProcessCoverage(String processDefinitionKey, List<HistoricActivityInstance> activities) {
-//    
-//    if (!processCoverage.containsKey(processDefinitionKey)) {
-//      processCoverage.put(processDefinitionKey, new HashSet<String>());
-//    }
-//    
-//  }
+  private static Set<String> callculateProcessCoverage(String processDefinitionKey, List<HistoricActivityInstance> activities) {
+    Set<String> coveredActivites;
+    if (!processCoverage.containsKey(processDefinitionKey)) {
+      coveredActivites = new HashSet<String>();
+      processCoverage.put(processDefinitionKey, coveredActivites);
+    } else {
+      coveredActivites = processCoverage.get(processDefinitionKey);
+    }
+    
+    for (HistoricActivityInstance activity : activities) {
+      coveredActivites.add(activity.getActivityId());
+    }
+    
+    return coveredActivites;
+  }
 
 	/**
    * calculate overall test coverage for all processes deployed in the engine
@@ -76,13 +89,15 @@ public class ProcessTestCoverage {
 //				String bpmnXml = FileUtils.readFileToString(new File(bpmnDir + "/" + processDefinition.getResourceName()));//getBpmnXml(processDefinition.getId(), processEngine);
 			  String bpmnXml = getBpmnXml(processDefinition);
 				List<HistoricActivityInstance> activities = processEngine.getHistoryService().createHistoricActivityInstanceQuery().processDefinitionId(processDefinition.getId()).list();
-				String html = BpmnJsReport.highlightActivities(bpmnXml, activities);
+	      Set<String> coveredAcivityIds = callculateProcessCoverage(processDefinition.getKey(), activities);
+//				String html = BpmnJsReport.highlightActivities(bpmnXml, activities);
 				String reportName = processDefinition.getKey() + "_sum.html";
-				File reportFile = new File(targetDir + "/" + reportName);
-				if (reportFile.exists()) {
-					html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
-				}
-				BpmnJsReport.writeToFile(targetDir, reportName, html);
+//				File reportFile = new File(targetDir + "/" + reportName);
+//				if (reportFile.exists()) {
+//					html = BpmnJsReport.highlightActivities(bpmnXml, activities, reportFile);
+//				}
+//				BpmnJsReport.writeToFile(targetDir, reportName, html);
+	      BpmnJsReport.highlightActivities(bpmnXml, coveredAcivityIds, reportName, targetDir);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -19,7 +20,19 @@ public class BpmnJsReport {
 	private static final String PLACEHOLDER_ANNOTATIONS = "          //YOUR ANNOTATIONS GO HERE";
 	private static final String PLACEHOLDER_BPMN_XML = "YOUR BPMN XML CONTENT";
 
-	public static String highlightActivities(String bpmnXml, List<HistoricActivityInstance> activities) throws IOException {
+  public static void highlightActivities(String bpmnXml, List<HistoricActivityInstance> activities, String reportName, String targetDir) throws IOException {
+    String javaScript = generateJavaScriptAnnotations(activities);
+    String html = generateHtml(javaScript, bpmnXml);
+    writeToFile(targetDir, reportName, html);
+  }
+
+  public static void highlightActivities(String bpmnXml, Set<String> coveredAcivityIds, String reportName, String targetDir) throws IOException {
+    String javaScript = generateJavaScriptAnnotations(coveredAcivityIds);
+    String html = generateHtml(javaScript, bpmnXml);
+    writeToFile(targetDir, reportName, html);
+  }
+
+  public static String highlightActivities(String bpmnXml, List<HistoricActivityInstance> activities) throws IOException {
 		String javaScript = generateJavaScriptAnnotations(activities);
 		String html = generateHtml(javaScript, bpmnXml);
 		return html;
@@ -43,8 +56,15 @@ public class BpmnJsReport {
 		return html;
 	}
 
-	public static String generateJavaScriptAnnotations(
-			List<HistoricActivityInstance> activities) {
+  private static String generateJavaScriptAnnotations(Set<String> acivityIds) {
+    StringBuilder javaScript = new StringBuilder();
+    for (String activityId : acivityIds) {
+      javaScript.append("          canvas.addMarker('" + activityId + "', 'highlight');\n");
+    }
+    return javaScript.toString();
+  }
+
+	public static String generateJavaScriptAnnotations(List<HistoricActivityInstance> activities) {
 		StringBuilder javaScript = new StringBuilder();
 		for (HistoricActivityInstance activity : activities) {
 			javaScript.append("          canvas.addMarker('" + activity.getActivityId() + "', 'highlight');\n");
