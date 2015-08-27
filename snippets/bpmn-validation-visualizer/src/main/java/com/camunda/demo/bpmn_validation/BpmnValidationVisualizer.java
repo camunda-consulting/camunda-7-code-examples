@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.camunda.bpm.engine.ProcessEngineException;
-import org.h2.table.RegularTable;
 
 public class BpmnValidationVisualizer {
 
