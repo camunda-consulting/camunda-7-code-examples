@@ -13,47 +13,33 @@ import org.camunda.bpm.engine.test.ProcessEngineTestCase;
 public class ProcessTestCoverageTest extends ProcessEngineTestCase {
 
   private static final String PROCESS_DEFINITION_KEY = "process-test-coverage";
-
-  @Override
-  protected void setUp() throws Exception {
-	  ProcessTestCoverage.bpmnDir = "../test-classes/"; // process resides in src/test/resources
-	  super.setUp();
-  }
   
   @Override
   protected void tearDown() throws Exception {
-	// calculate coverage for all tests
-	ProcessTestCoverage.calculate(processEngine);
-//	String testCaseName = this.getClass().getName() + "." + getName();
+    // calculate coverage for all tests
+    ProcessTestCoverage.calculate(processEngine);
+    // TODO identify for which method the tearDown is called, e.g. using: String testCaseName = this.getClass().getName() + "." + getName();
     super.tearDown();
   }
 
   @Deployment(resources = "process.bpmn")
   public void testPathA() {
-	ProcessInstance processInstance = executePathA();
-    ProcessTestCoverage.calculate(processInstance.getId(), processEngine);
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("path", "A");
+    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+
+    // calculate coverage for this method, but also add to the overall coverage of the process
+    ProcessTestCoverage.calculate(processInstance, processEngine);
   }
 
   @Deployment(resources = "process.bpmn")
   public void testPathB() {
-	Map<String, Object> variables = new HashMap<String, Object>();
-	variables.put("path", "B");
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("path", "B");
     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+    
+    // calculate coverage for this method, but also add to the overall coverage of the process
     ProcessTestCoverage.calculate(processInstance.getId(), processEngine);
-  }
-  
-  @Deployment(resources = "process.bpmn")
-  public void testGetBpmnFileName() {
-	ProcessInstance processInstance = executePathA();
-	String bpmnFileName = ProcessTestCoverage.getBpmnFileName(processInstance.getId(), processEngine);
-	assertEquals("process.bpmn", bpmnFileName);
-  }
-
-  private ProcessInstance executePathA() {
-	Map<String, Object> variables = new HashMap<String, Object>();
-	variables.put("path", "A");
-    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
-	return processInstance;
   }
   
 }
