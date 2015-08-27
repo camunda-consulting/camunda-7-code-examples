@@ -11,7 +11,7 @@
 
   <groupId>org.camunda.consulting.snippets</groupId>
   <artifactId>process-test-coverage</artifactId>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.2.1</version>
 
   <name>BPMN Process Test Coverage</name>
   <description>Helper library to visualize which parts of a BPMN process have been covered by a unit test</description>
@@ -73,7 +73,7 @@
     <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage</url>
     <connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
     <developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>0.2.1</tag>
   </scm>
 
 </project>
