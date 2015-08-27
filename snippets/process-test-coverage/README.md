@@ -12,6 +12,17 @@ The tool creates test coverage reports for:
 
 ## How to use it?
 
+Add this Maven Dependency to your project:
+
+´´´
+<dependency>
+  <groupId>org.camunda.consulting.snippets</groupId>
+  <artifactId>process-test-coverage</artifactId>
+  <version>0.0.2</version>
+  <scope>test</scope>
+</dependency>
+´´´
+
 Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consulting/process_test_coverage/ProcessTestCoverageTest.java). 
 
 ## Remarks to run this application
