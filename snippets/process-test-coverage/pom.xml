@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+	  <groupId>org.camunda</groupId>
+	  <artifactId>camunda-release-parent</artifactId>
+	  <version>2.5</version>
+	  <relativePath></relativePath>  
+  </parent>
 
-  <groupId>org.camunda.bpm.consulting</groupId>
+  <groupId>com.camunda.bpm.consulting</groupId>
   <artifactId>process-test-coverage</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
@@ -70,5 +77,11 @@
       </plugin>
     </plugins>
   </build>
+
+  <scm>
+    <url>https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage</url>
+    <connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
+    <developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
+  </scm>
 
 </project>
