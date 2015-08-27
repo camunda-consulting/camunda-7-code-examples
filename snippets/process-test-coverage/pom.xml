@@ -9,7 +9,7 @@
 	  <relativePath></relativePath>  
   </parent>
 
-  <groupId>com.camunda.bpm.consulting</groupId>
+  <groupId>org.camunda.consulting.snippets</groupId>
   <artifactId>process-test-coverage</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
