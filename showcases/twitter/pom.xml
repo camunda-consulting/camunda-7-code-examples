@@ -55,12 +55,18 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		  <groupId>org.camunda.bpm.consulting</groupId>
-		  <artifactId>process-test-coverage</artifactId>
-		  <version>0.0.1-SNAPSHOT</version>		
-		  <scope>test</scope>
-		</dependency>
-
+			<groupId>org.camunda.consulting.snippets</groupId>
+			<artifactId>process-test-coverage</artifactId>
+			<version>0.2.1</version>
+			<scope>test</scope>
+		  </dependency>
+	<dependency>
+	  <groupId>commons-lang</groupId>
+	  <artifactId>commons-lang</artifactId>
+	  <version>2.6</version>
+	  <scope>test</scope>
+	</dependency>
+	
 		<dependency>
 			<groupId>org.twitter4j</groupId>
 			<artifactId>twitter4j-core</artifactId>

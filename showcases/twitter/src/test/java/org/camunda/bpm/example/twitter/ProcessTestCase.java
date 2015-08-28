@@ -8,11 +8,13 @@ import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.task;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.variable.Variables;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -51,6 +53,14 @@ public class ProcessTestCase {
     	.isEnded() //
     	.hasPassed("end_event_tweet_handled", "gateway_approved", "gateway_join", "service_task_send_rejection_notification", "start_event_new_tweet", "user_task_review_tweet");
 
+    ProcessTestCoverage.calculate(processInstance, processEngineRule.getProcessEngine());
   }
+  
+  
+  @After
+  public void calculateCoverage() throws Exception {
+    // calculate coverage for all tests
+    ProcessTestCoverage.calculate(processEngineRule.getProcessEngine());
+  }  
 
 }
