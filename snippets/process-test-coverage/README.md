@@ -18,12 +18,15 @@ Add this Maven Dependency to your project:
 <dependency>
   <groupId>org.camunda.consulting.snippets</groupId>
   <artifactId>process-test-coverage</artifactId>
-  <version>0.0.2</version>
+  <version>0.2.3</version>
   <scope>test</scope>
 </dependency>
 ```
 
-Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consulting/process_test_coverage/ProcessTestCoverageTest.java). 
+Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consulting/process_test_coverage/ProcessTestCoverageTest.java):
+
+- In a tearDown() or @AfterClass method for the Test Class coverage
+- In the actual test methods to get coverage for test cases
 
 ## Remarks to run this application
 1. mvn clean test
