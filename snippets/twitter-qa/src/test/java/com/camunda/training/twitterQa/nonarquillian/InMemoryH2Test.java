@@ -54,7 +54,7 @@ public class InMemoryH2Test {
     assertThat(pi).isEnded().hasPassed("ServiceTask_1");
   }
   
-  @Test
+//  @Test
   @Deployment(resources = "process.bpmn")
   public void testRejectTweetForLab4() {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
@@ -63,6 +63,14 @@ public class InMemoryH2Test {
     assertThat(reviewTask).hasName("Review Tweet");
     taskService().complete(reviewTask.getId(), withVariables("approved", false));
     assertThat(pi).isEnded().hasPassed("ServiceTask_2");    
+  }
+  
+  @Test
+  @Deployment(resources = {"process.bpmn", "table.dmn"})
+  public void testReviewWithDecision() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "from my DMN-test", "email", "john.doe@camunda.com"));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_2");
   }
 
 }

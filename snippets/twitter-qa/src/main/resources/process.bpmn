@@ -10,10 +10,17 @@
     <bpmn2:endEvent id="EndEvent_1" name="Tweet handled">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" camunda:formKey="embedded:app:task-form.html" name="Review Tweet">
+    <bpmn2:businessRuleTask id="UserTask_1" camunda:decisionRef="tweet_approval" camunda:resultVariable="approved_str" name="Review Tweet">
+      <bpmn2:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="approved">
+            <camunda:script scriptFormat="JavaScript">approved_str === 'true' ? true : false;</camunda:script>
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-    </bpmn2:userTask>
+    </bpmn2:businessRuleTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="Approved?">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
