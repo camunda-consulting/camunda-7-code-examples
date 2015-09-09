@@ -32,7 +32,7 @@ Packaging
 This project has two submodules. extended-serialization-plugin 
 extends the process engine so it has be installed on the same level as the process engine. For a JBoss installation with a shared engine (like our distribution) the project has to be packaged as a JBoss module and must be installed in the JBoss modules folder.
 
-The module can be packaged with a maven plugin from [http://www.smartics.eu/smartics-jboss-modules-maven-plugin/](http://www.smartics.eu/smartics-jboss-modules-maven-plugin/). The plugin is used as a profile and `mvn package attach` builds the module with jars and module.xml-files in target/jboss-modules. Check the profile-part of the pom.xml for further configuration details.
+The module can be packaged with a maven plugin from [http://www.smartics.eu/smartics-jboss-modules-maven-plugin/](http://www.smartics.eu/smartics-jboss-modules-maven-plugin/). The plugin is used as a profile and `mvn package -P attach` builds the module with jars and module.xml-files in target/jboss-modules. Check the profile-part of the pom.xml for further configuration details.
 
 The module itself is configured in the [extended-serializer-module.xml](extended-serialization-plugin/src/main/resources/META-INF/jboss-modules/extended-serialization-module.xml) in the folder META-INF/jboss-modules. The configuration includes a mapping of maven coordinates of joda-time:joda-time to the module org.joda.time:2.1.
 
