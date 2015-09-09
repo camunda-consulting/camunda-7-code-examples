@@ -1,19 +1,16 @@
 package org.camunda.bpm.consulting.process_test_coverage;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.commons.io.IOUtils;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 public class ProcessTestCoverage {
 
@@ -101,6 +98,9 @@ public class ProcessTestCoverage {
 
   protected static String getBpmnXml(ProcessDefinition processDefinition) throws IOException {
     InputStream inputStream = ProcessTestCoverage.class.getClassLoader().getResourceAsStream(processDefinition.getResourceName());
+    if (inputStream == null) {
+      inputStream = new FileInputStream(processDefinition.getResourceName());
+    }
     return IOUtils.toString(inputStream);
   }
 
