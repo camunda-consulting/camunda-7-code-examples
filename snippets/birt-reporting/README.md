@@ -9,7 +9,7 @@ BIRT queries data via SQL from the Camunda history tables and visualizes them in
 
 ![Screenshot Exampe Report][1]
 
-[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/example1.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/example.png
 
 ## BIRT Components and Installation
 
@@ -19,10 +19,15 @@ In order to *create* a BIRT report you will have to install
 
 When you want to *view* your reports via some web browser you can leverage the
 
- * [BIRT Runtime](http://www.eclipse.org/birt/phoenix/build/#j2ee), e.g. for Java EE environments. You will have to extract a "birt.war" from the download and include your report file into the war:
+ * [BIRT Viewer](http://www.eclipse.org/birt/phoenix/build/#j2ee), e.g. for Java EE environments. You will have to extract a "birt.war" from the download and include your report file into the war:
 
-![Screenshot Exampe Report][https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/download-birt-viewer.png]
-![xxx][https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/xxx.png]
+![Download BIRT Viewer][2]
+![Get birt.war from download][3]
+![Add report file][4]
+
+[2]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/download-birt-viewer.png
+[3]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/birt-runtime-zip.png
+[4]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/insert-report.png
 
 Now you can access the report here: http://localhost:8080/birt/frameset?__report=camunda.rptdesign
 
