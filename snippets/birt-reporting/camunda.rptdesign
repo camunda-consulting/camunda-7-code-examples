@@ -744,7 +744,7 @@ GROUP BY
       <Visible>true</Visible>
       <Label>
         <Caption>
-          <Value>started process instances per Month 2012</Value>
+          <Value>Started Process Instances per Month</Value>
           <Font>
             <Size>16.0</Size>
             <Bold>true</Bold>
@@ -1038,7 +1038,7 @@ GROUP BY
     <Type>Text</Type>
     <Title>
       <Caption>
-        <Value>month</Value>
+        <Value>Month/Year</Value>
         <Font>
           <Size>14.0</Size>
           <Bold>true</Bold>
@@ -1078,7 +1078,7 @@ GROUP BY
       <Type>Linear</Type>
       <Title>
         <Caption>
-          <Value>count</Value>
+          <Value>Count</Value>
           <Font>
             <Size>14.0</Size>
             <Bold>true</Bold>
