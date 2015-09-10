@@ -204,6 +204,12 @@ Snippets
     <td><a href="snippets/change-job-retry">Change Number of Job Retries</a></td>
     <td>This snippet shows how to change the number of retries for all jobs without touching the process diagrams.</td>
   </tr>
+
+  <tr>
+    <td><img src="snippets/extended-serialization/extended-serialization-process/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/extended-serialization">Extend serialization of process variables</a></td>
+    <td>This snippets exends the serialization of process variables for special classes, builds a jboss module with a maven plugin and shows how to use complex objects in a process application.</td>
+  </tr>
   
 </table>
 
