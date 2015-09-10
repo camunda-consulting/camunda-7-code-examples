@@ -9,7 +9,7 @@ BIRT queries data via SQL from the Camunda history tables and visualizes them in
 
 ![Screenshot Exampe Report][1]
 
-[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/example1.png
+[1]: https://raw.github.com/camunda/camunda-consulting/master/snippets/birt-reporting/screenshots/example1.PNG
 
 ## BIRT Components and Installation
 
