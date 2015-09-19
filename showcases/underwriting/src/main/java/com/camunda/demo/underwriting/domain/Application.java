@@ -17,8 +17,6 @@ public class Application {
   
   private boolean smoker;
   
-  private List<String> clerkRequirements = new ArrayList<String>();  
-  
   public Application() {
     id = UUID.randomUUID().toString();
     id = id.substring(0, 8);
@@ -78,14 +76,6 @@ public class Application {
 
   public void setType(String type) {
     this.type = type;
-  }
-
-  public List<String> getClerkRequirements() {
-    return clerkRequirements;
-  }
-
-  public void addClerkRequirement(String clerkRequirement) {
-    this.clerkRequirements.add(clerkRequirement);
   }
 
 }

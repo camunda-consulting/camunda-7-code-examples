@@ -2,28 +2,21 @@ package com.camunda.demo.underwriting.adapter;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 
+import org.camunda.bpm.dmn.engine.DmnDecision;
+import org.camunda.bpm.dmn.engine.DmnDecisionOutput;
+import org.camunda.bpm.dmn.engine.DmnDecisionResult;
+import org.camunda.bpm.dmn.engine.DmnEngine;
+import org.camunda.bpm.dmn.engine.impl.DmnEngineConfigurationImpl;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.drools.KnowledgeBase;
-import org.drools.KnowledgeBaseFactory;
-import org.drools.builder.DecisionTableConfiguration;
-import org.drools.builder.DecisionTableInputType;
-import org.drools.builder.KnowledgeBuilder;
-import org.drools.builder.KnowledgeBuilderError;
-import org.drools.builder.KnowledgeBuilderErrors;
-import org.drools.builder.KnowledgeBuilderFactory;
-import org.drools.builder.ResourceType;
-import org.drools.decisiontable.InputType;
-import org.drools.decisiontable.SpreadsheetCompiler;
-import org.drools.io.ResourceFactory;
-import org.drools.runtime.StatelessKnowledgeSession;
+import org.camunda.bpm.engine.variable.Variables;
 
 import com.camunda.demo.underwriting.domain.Application;
 
@@ -37,15 +30,33 @@ public class AssignUnderwriterAdapter implements JavaDelegate {
     Application application = (Application) execution.getVariable("application");
 
     // call service
-    callRuleEngine(application);
-    List<String> employeesWithRequirement = findEmployeesWithRequirement(application);
+    List<String> requiredSkills = takeDecision(application);    
+    List<String> employeesWithRequirement = findEmployeesWithRequirement(requiredSkills);
 
     // write output data
     execution.setVariable("capableUnderwriters", //
         employeesWithRequirement.toString().substring(1, employeesWithRequirement.toString().length() - 1));
   }
 
-  private List<String> findEmployeesWithRequirement(Application application) {
+  private List<String> takeDecision(Application application) {
+    InputStream dmnResourceAsStream = AssignUnderwriterAdapter.class.getResourceAsStream("/required-skills.dmn");
+    
+    DmnEngine dmnEngine = new DmnEngineConfigurationImpl().buildEngine();
+    DmnDecision decision = dmnEngine.parseDecision(dmnResourceAsStream);
+    DmnDecisionResult decisionResult = dmnEngine.evaluate(
+        decision, 
+        Variables.createVariables().putValue("application", application));
+    
+    ArrayList<String> requiredSkills = new ArrayList<String>();
+    for (Iterator iterator = decisionResult.iterator(); iterator.hasNext();) {
+      DmnDecisionOutput result = (DmnDecisionOutput) iterator.next();
+      requiredSkills.add((String)result.getValue());
+    }
+    return requiredSkills;
+    
+  }
+
+  private List<String> findEmployeesWithRequirement(List<String> requiredSkills) {
     try {
       List<String> employeesWithRequirements = new ArrayList<String>();
 
@@ -57,7 +68,7 @@ public class AssignUnderwriterAdapter implements JavaDelegate {
         String capabilities = sheet.getCell(1, row).getContents();
         boolean suitable = true;
 
-        for (String requirement : application.getClerkRequirements()) {
+        for (String requirement : requiredSkills) {
           if (capabilities == null || !capabilities.contains(requirement)) {
             suitable = false;
           }
@@ -72,6 +83,7 @@ public class AssignUnderwriterAdapter implements JavaDelegate {
     }
   }
 
+  private static Workbook workbook;
   private Workbook getWorkbook() throws Exception {
     if (workbook!=null) {
       return workbook;
@@ -83,54 +95,5 @@ public class AssignUnderwriterAdapter implements JavaDelegate {
     workbook = Workbook.getWorkbook(inputWorkbook, ws);
     return workbook;
   }
-
-  public void callRuleEngine(Object parameter) throws Exception {
-    StatelessKnowledgeSession ksession = getKnowledgeBase().newStatelessKnowledgeSession();
-    ksession.execute(Arrays.asList(new Object[] { parameter }));
-  }
-
-  public static KnowledgeBase getKnowledgeBase() throws Exception {
-    if (kbase != null) {
-      return kbase;
-    }
-
-    DecisionTableConfiguration dtableconfiguration = KnowledgeBuilderFactory.newDecisionTableConfiguration();
-    dtableconfiguration.setInputType(DecisionTableInputType.XLS);
-    KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-
-    kbuilder.add(ResourceFactory.newClassPathResource(DECISION_TABLE_FILE_NAME, AssignUnderwriterAdapter.class), ResourceType.DTABLE, dtableconfiguration);
-
-    if (sysoutDrl) {
-      sysoutDrl(DECISION_TABLE_FILE_NAME);
-    }
-
-    if (kbuilder.hasErrors()) {
-      StringBuffer message = new StringBuffer();
-      KnowledgeBuilderErrors errors = kbuilder.getErrors();
-      for (KnowledgeBuilderError error : errors) {
-        message.append("\n").append(error.getMessage());
-      }
-      throw new Exception("Errors parsing decision table: " + message.toString());
-    }
-
-    KnowledgeBase newKBase = KnowledgeBaseFactory.newKnowledgeBase();
-    newKBase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-    kbase = newKBase;
-    return kbase;
-  }
-
-  private static void sysoutDrl(String table) {
-    System.out.println( //
-        new SpreadsheetCompiler().compile(AssignUnderwriterAdapter.class.getResourceAsStream(table), InputType.XLS));
-  }
-
-  /**
-   * some static stuff which should be actually created differently. Well hidden down at the bottom :-)
-   * 
-   * Just for demo purposes.
-   */
-  public static boolean sysoutDrl = true;
-  public static KnowledgeBase kbase;
-  public static Workbook workbook;
 
 }
