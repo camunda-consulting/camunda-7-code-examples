@@ -26,7 +26,18 @@ Add this Maven Dependency to your project:
 Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consulting/process_test_coverage/ProcessTestCoverageTest.java):
 
 - In a tearDown() or @AfterClass method for the Test Class coverage
+```java
+  @After
+  public void calculateCoverage() throws Exception {
+    // calculate coverage for all tests
+    ProcessTestCoverage.calculate(processEngineRule.getProcessEngine());
+  }  
+```
+
 - In the actual test methods to get coverage for test cases
+```java
+ProcessTestCoverage.calculate(processInstance, processEngineRule.getProcessEngine());
+```
 
 ## Remarks to run this application
 1. mvn clean test
