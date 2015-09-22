@@ -31,10 +31,13 @@ public class SendJmsMessageDelegate implements JavaDelegate {
   private QueueConnectionFactory connectionFactory;
 
   public void execute(DelegateExecution execution) throws Exception {
+    // Not Recommended
 //    String asynchronousCorrelationKey = execution.getId();
+
 //    String asynchronousCorrelationKey = UUID.randomUUID().toString();
+//    execution.setVariable("correlationId", asynchronousCorrelationKey);
+    
     String asynchronousCorrelationKey = execution.getProcessBusinessKey();
-    execution.setVariable("correlationId", asynchronousCorrelationKey);
     
     Connection connection = connectionFactory.createConnection();
     Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);

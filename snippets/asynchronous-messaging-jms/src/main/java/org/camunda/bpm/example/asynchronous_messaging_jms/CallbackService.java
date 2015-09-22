@@ -57,11 +57,17 @@ public class CallbackService {
 //    variables.put("payload", payload);
 //    runtimeService.correlateMessage(messageName, correlationKeys);
 	  
-	  runtimeService.createMessageCorrelation(messageName)
-	  	.processInstanceVariableEquals("correllationId", correlationKey)
-	  	.setVariable("payload", payload)
-	  	.correlate();
+    // UUID
+//	  runtimeService.createMessageCorrelation(messageName)
+//	  	.processInstanceVariableEquals("correllationId", correlationKey)
+//	  	.setVariable("payload", payload)
+//	  	.correlate();
 	  
+    runtimeService.createMessageCorrelation(messageName)
+      .processInstanceBusinessKey(correlationKey)
+      .setVariable("payload", payload)
+      .correlate();
+  
   }
   
   public void triggerAsynchronousCallback(String asynchronousCorrelationKey) {

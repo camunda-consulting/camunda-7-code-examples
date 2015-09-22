@@ -57,7 +57,8 @@ public class ArquillianTest {
   public void testProcessExecution() throws Exception {
     cleanUpRunningProcessInstances();
     
-    ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+    String businessKey = "23";
+    ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, businessKey);
 
     assertEquals(1, processEngine.getHistoryService().createHistoricProcessInstanceQuery().processInstanceId(processInstance.getId()).finished().count());
   }
