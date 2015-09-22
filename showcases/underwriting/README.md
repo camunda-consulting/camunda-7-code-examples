@@ -1,15 +1,17 @@
 "Underwriting" with BPMN and CMMN
 =========================
 
-This project is a sample application using BPMN + CMMN to implement a typical underwriting process of an insurance company
+This project is a sample application using BPMN + CMMN + DMN to implement a typical underwriting process of an insurance company
 (but is actually pretty generic to serve other industries as well). It was initially build for the 
 [Camunda Hands-On Webinar on CMMN](https://network.camunda.org/webinars/7).
 
 It includes a user interface for the knowledge worker implemented in JSF.
 
-Built and tested against *Camunda BPM 7.3.0* on JBoss AS 7.2.
+Built and tested against *Camunda BPM 7.4.0 - alpha1* on JBoss WildFly 8.2.0.
 
 Important note: *Requires JSF - does not run on Tomcat!*
+
+*Required 7.4.x - as DMN is used!*
 
 
 Show me the important parts!
@@ -67,7 +69,7 @@ This example was presented in a Webinar, the recording is available:
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.3.0 and JBoss AS 7.2. 
+Built and tested against Camunda BPM version 7.4.0 and WildFly 8.2.0. 
 
 License
 -------

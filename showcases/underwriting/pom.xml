@@ -13,8 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.3.0</camunda.version>
-		<drools.version>5.0.1</drools.version>
+		<camunda.version>7.4.0-alpha1</camunda.version>
 	</properties>
 
 	<dependencyManagement>
@@ -89,30 +88,6 @@
 			<version>1.4.181</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Add your own dependencies here, if in compile scope, they are added 
-			to the war -->
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-api</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-core</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-compiler</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-decisiontables</artifactId>
-			<version>${drools.version}</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
