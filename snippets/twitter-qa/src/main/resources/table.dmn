@@ -11,11 +11,11 @@
       <clause id="clause1" name="Tweet content">
         <inputExpression id="inputExpression1">
           <itemDefinition href="#itemDefinition1" />
-          <text>content</text>
+          <text></text>
         </inputExpression>
-        <inputEntry id="LiteralExpression_0tui2pk">        <text>camunda</text>
+        <inputEntry id="LiteralExpression_0tui2pk">        <text><![CDATA[${content.contains("camunda")}]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_09ve878">        <text>hack days</text>
+        <inputEntry id="LiteralExpression_09ve878">        <text><![CDATA[${content.contains("hack days")}]]></text>
 </inputEntry>
       </clause>
       <clause id="Clause_1jwxqmb" name="Email">
@@ -40,7 +40,6 @@
 </outputEntry>
       </clause>
       <rule id="DecisionRule_1u089wv">
-        <description></description>
         <condition>LiteralExpression_0tui2pk</condition>
         <conclusion>LiteralExpression_0kcut0q</conclusion>
       </rule>
@@ -55,7 +54,7 @@
         <conclusion>LiteralExpression_07pwdqk</conclusion>
       </rule>
       <rule id="DecisionRule_0j6sdbx">
-        <description>Ingo is not allowed for twittering</description>
+        <description>John is not allowed for twittering</description>
         <condition>LiteralExpression_037epka</condition>
         <conclusion>LiteralExpression_060hlru</conclusion>
       </rule>
