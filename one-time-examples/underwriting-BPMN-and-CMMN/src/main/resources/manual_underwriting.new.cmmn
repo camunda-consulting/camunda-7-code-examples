@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cmmn:definitions author="" exporter="CMMN Web Modeler" id="_d193f65f-809a-43b9-8c43-053e10eecd1c" name="manual_underwriting" targetNamespace="http://cmmn.org" xmlns:cmmn="http://www.omg.org/spec/CMMN/20131201/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cmmn:case id="Case_3ba8092a-ad63-4bec-96eb-8aadfa5d0f2d">
+        <cmmn:casePlanModel autoComplete="false" name="Manual Underwriting" description="" id="_3ba8092a-ad63-4bec-96eb-8aadfa5d0f2d">
+            <cmmn:planItem definitionRef="_2c5b79d5-20cb-42a8-afd5-ffb26f2c366b" exitCriteriaRefs="_cb2ff69a-b1bc-464e-bf26-5157e6271210" id="PI_2c5b79d5-20cb-42a8-afd5-ffb26f2c366b"/>
+            <cmmn:planItem definitionRef="_40c7a38d-ee56-4bec-8574-537cc82ad1d6" entryCriteriaRefs="_878f8e0f-de85-41d7-b1b6-226a4c2e776a" id="PI_40c7a38d-ee56-4bec-8574-537cc82ad1d6"/>
+            <cmmn:sentry id="_cb2ff69a-b1bc-464e-bf26-5157e6271210">
+                <cmmn:planItemOnPart sourceRef="PI_a3ac4670-7c67-451f-b9bb-1424a4387b3a">
+                    <cmmn:standardEvent>complete</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+            </cmmn:sentry>
+            <cmmn:sentry id="_878f8e0f-de85-41d7-b1b6-226a4c2e776a">
+                <cmmn:planItemOnPart sentryRef="_cb2ff69a-b1bc-464e-bf26-5157e6271210" sourceRef="PI_2c5b79d5-20cb-42a8-afd5-ffb26f2c366b">
+                    <cmmn:standardEvent>exit</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+            </cmmn:sentry>
+            <cmmn:stage autoComplete="false" name="Evaluation &amp; Decision" description="" id="_2c5b79d5-20cb-42a8-afd5-ffb26f2c366b">
+                <cmmn:planItem definitionRef="_a3ac4670-7c67-451f-b9bb-1424a4387b3a" id="PI_a3ac4670-7c67-451f-b9bb-1424a4387b3a"/>
+                <cmmn:humanTask isBlocking="false" name="Decide on application" description="" id="_a3ac4670-7c67-451f-b9bb-1424a4387b3a">
+                    <cmmn:defaultControl>
+                        <cmmn:requiredRule id="_1416412195261"/>
+                    </cmmn:defaultControl>
+                </cmmn:humanTask>
+            </cmmn:stage>
+            <cmmn:milestone name="Approval" description="" id="_40c7a38d-ee56-4bec-8574-537cc82ad1d6"/>
+        </cmmn:casePlanModel>
+    </cmmn:case>
+</cmmn:definitions>
+
