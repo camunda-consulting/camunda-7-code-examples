@@ -1,5 +1,7 @@
 package org.camunda.bpm.example.twitter;
 
+import javax.inject.Named;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -9,6 +11,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
  * 
  * Use your own Mail mechanisms for this or use your application server features. 
  */
+@Named("emailAdapter")
 public class RejectionNotificationDelegate implements JavaDelegate {
   
   public void execute(DelegateExecution execution) throws Exception {
