@@ -14,7 +14,11 @@
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="approved">
-            <camunda:script scriptFormat="JavaScript">approved_str === 'true' ? true : false;</camunda:script>
+            <camunda:script scriptFormat="JavaScript"><![CDATA[if (typeof approved_str !== 'undefined') {
+  approved_str === 'true' ? true : false;
+} else {
+  false;
+}]]></camunda:script>
           </camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn2:extensionElements>
@@ -38,7 +42,7 @@
     <bpmn2:scriptTask id="ServiceTask_2" name="Send rejection notfication" scriptFormat="JavaScript">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-      <bpmn2:script>println('Send rejection notification');</bpmn2:script>
+      <bpmn2:script>print('Send rejection notification\n');</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_2">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!approved}</bpmn2:conditionExpression>

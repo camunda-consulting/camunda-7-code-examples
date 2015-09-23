@@ -81,4 +81,12 @@ public class InMemoryH2Test {
     assertThat(pi).isEnded().hasPassed("ServiceTask_2");
   }
 
+  @Test
+  @Deployment(resources = {"process.bpmn", "table.dmn"})
+  public void testReviewWithDecisionNoMatch() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "foo", "email", "falko.menge@camunda.com"));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_2");
+  }
+
 }
