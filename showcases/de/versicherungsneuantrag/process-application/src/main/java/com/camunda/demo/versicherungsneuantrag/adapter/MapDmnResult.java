@@ -8,7 +8,7 @@ import org.camunda.bpm.dmn.engine.DmnDecisionResult;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 
-public class LogDmnResult implements ExecutionListener {
+public class MapDmnResult implements ExecutionListener {
 
   @Override
   public void notify(DelegateExecution execution) throws Exception {

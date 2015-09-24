@@ -74,7 +74,7 @@ public class NeuantragProcessTest {
   @Test
   @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testDunkelverarbeitungAbgelehnt() {
-    Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "x911");
+    Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "911");
     
     VariableMap variables = Variables.createVariables();
     variables.putValue(
