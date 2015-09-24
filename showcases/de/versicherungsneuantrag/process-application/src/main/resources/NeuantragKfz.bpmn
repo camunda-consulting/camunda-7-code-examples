@@ -123,7 +123,10 @@ Ihre Camundanzia.]]></camunda:script>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="ExclusiveGatewayJoin" targetRef="SendTaskAblehnungZusenden"/>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt"/>
-    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.CheckApplicationWithRulesetAdapater" name="Antrag automatisch prüfen">
+    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" camunda:decisionRef="risikopruefung" camunda:resultVariable="risikopruefung" name="Antrag automatisch prüfen">
+      <bpmn2:extensionElements>
+        <camunda:executionListener class="com.camunda.demo.versicherungsneuantrag.adapter.LogDmnResult" event="end"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:businessRuleTask>

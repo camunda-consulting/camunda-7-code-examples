@@ -50,13 +50,13 @@ public class NeuantragProcessTest {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testDunkelverarbeitungPoliciert() {
     Neuantrag neuantrag = DemoData.createNeuantrag(40, true, "VW", "Golf V");
     
@@ -72,9 +72,9 @@ public class NeuantragProcessTest {
   }
 
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testDunkelverarbeitungAbgelehnt() {
-    Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "911");
+    Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "x911");
     
     VariableMap variables = Variables.createVariables();
     variables.putValue(
@@ -83,15 +83,16 @@ public class NeuantragProcessTest {
         
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
     
-    assertThat(processInstance).isEnded()
-      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt");    
+    assertThat(processInstance)
+      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt")
+      .isEnded();    
   }
 
   
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testHell() {
-    Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
+    Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525"); //I
     
     VariableMap variables = Variables.createVariables();
     variables.putValue(
@@ -106,7 +107,7 @@ public class NeuantragProcessTest {
   }  
   
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testCase() {
     Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
     
