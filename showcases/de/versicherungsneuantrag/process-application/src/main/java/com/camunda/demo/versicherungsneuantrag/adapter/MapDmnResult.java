@@ -7,6 +7,8 @@ import org.camunda.bpm.dmn.engine.DmnDecisionOutput;
 import org.camunda.bpm.dmn.engine.DmnDecisionResult;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 
 public class MapDmnResult implements ExecutionListener {
 
@@ -33,8 +35,8 @@ public class MapDmnResult implements ExecutionListener {
       throw new RuntimeException("Unknwon result type " + result.getClass().getName() + " (" + result + ")");
     }
 
-    execution.setVariable("risks", risks);
-    execution.setVariable("statusRedRisks", statusRedRisks);
+    execution.setVariable("risks", Variables.objectValue(risks).serializationDataFormat(SerializationDataFormats.JSON).create());
+    execution.setVariable("statusRedRisks", Variables.objectValue(statusRedRisks).serializationDataFormat(SerializationDataFormats.JSON).create());
   }
 
   protected void parseOutput(List<String> risks, List<String> statusRedRisks, DmnDecisionOutput dmnDecisionOutput) {

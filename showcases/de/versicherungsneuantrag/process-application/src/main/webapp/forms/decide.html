@@ -10,7 +10,6 @@
       // scope value such that the form can work on it
       $scope.neuantrag = camForm.variableManager.variable('neuantrag').value;
       $scope.risks = camForm.variableManager.variable('risks').value;
-      console.log($scope.risks);
     });
   </script>
  
@@ -107,15 +106,15 @@
 
 			  <h2>Bereits laufende Aktivitäten</h2>
 			  <table class="table table-striped table-hover">
-			  <tr ng-repeat="execution in activeExecutions" >
-			    <td>			    
-			    	<i class="glyphicon glyphicon-user" ng-if="execution.activityType=='userTask'"></i>
-			    	<i class="glyphicon glyphicon-cog" ng-if="execution.activityType=='callActivity'"></i>
-			    </td>
-			    <td>
-			    	{{execution.activityName}}
-			    </td>	  
-			  </tr>
+					  <tr ng-if="execution.activityType!='subProcess'" ng-repeat="execution in activeExecutions" >
+					    <td>			    
+					    	<i class="glyphicon glyphicon-user" ng-if="execution.activityType=='userTask'"></i>
+					    	<i class="glyphicon glyphicon-cog" ng-if="execution.activityType=='callActivity'"></i>
+					    </td>
+					    <td>
+					    	{{execution.activityName}}
+					    </td>	  
+					  </tr>
 			  </table>			  
          </div>
      </div>
