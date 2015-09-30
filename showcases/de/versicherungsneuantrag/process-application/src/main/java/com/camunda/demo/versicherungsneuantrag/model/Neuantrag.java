@@ -4,6 +4,9 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class Neuantrag {
+  
+  // Achtung: Nur für Demo-Zwecke für eine lesbare Nummer - in real: UUID!
+  private String antragsNummer = "A-" + System.currentTimeMillis();
 
   private Person antragssteller;
   private String fahrzeugHersteller;
@@ -110,5 +113,9 @@ public class Neuantrag {
 
   public void setPreisindikationInCent(long preisindikationInCent) {
     this.preisindikationInCent = preisindikationInCent;
+  }
+
+  public String getAntragsNummer() {
+    return antragsNummer;
   }
 }

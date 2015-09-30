@@ -10,6 +10,7 @@
       // scope value such that the form can work on it
       $scope.neuantrag = camForm.variableManager.variable('neuantrag').value;
       $scope.risks = camForm.variableManager.variable('risks').value;
+      console.log($scope.risks);
     });
   </script>
  
@@ -69,30 +70,50 @@
 			  </div>
 			  
 			  <table class="table table-striped table-hover">
-			  <tr ng-repeat="caseExecution in enabledCaseExecutions">
-			    <td>
-			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
-			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
-			    </td>
-			    <td>
-			    	{{caseExecution.activityName}}
-			    </td>	  
-			    <td>
-			        <a ng-click="manualStartCaseExecution(caseExecution)"><i class="glyphicon glyphicon-play"></i></a>
-			    </td>
-			  </tr>
+			    <tr>
+				    <td>
+				    	<i class="glyphicon glyphicon-user"></i>
+				    </td>
+				    <td>
+				    	Beurteilung durch Underwriter notwendig
+				    </td>	  
+				    <td>
+				        <a ng-click="sendMessage('MSG_UnderwriterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+				    </td>
+				  </tr>
+			    <tr>
+				    <td>
+				    	<i class="glyphicon glyphicon-user"></i>
+				    </td>
+				    <td>
+				    	Beurteilung durch Gruppenleiter notwendig
+				    </td>	  
+				    <td>
+				        <a ng-click="sendMessage('MSG_GruppenleiterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+				    </td>
+				  </tr>
+			    <tr>
+				    <td>
+				    	<i class="glyphicon glyphicon-cog"></i>
+				    </td>
+				    <td>
+				    	Dokumente anfordern
+				    </td>	  
+				    <td>
+				        <a ng-click="sendMessage('MSG_DokumenteNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+				    </td>
+				  </tr>
 			  </table>
 
 			  <h2>Bereits laufende Aktivitäten</h2>
 			  <table class="table table-striped table-hover">
-			  <tr ng-repeat="caseExecution in activeCaseExecutions" >
-			    <td>
-			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
-			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
-			    	<i class="glyphicon glyphicon glyphicon-folder-open" ng-if="caseExecution.activityType=='casePlanModel'"></i>
+			  <tr ng-repeat="execution in activeExecutions" >
+			    <td>			    
+			    	<i class="glyphicon glyphicon-user" ng-if="execution.activityType=='userTask'"></i>
+			    	<i class="glyphicon glyphicon-cog" ng-if="execution.activityType=='callActivity'"></i>
 			    </td>
 			    <td>
-			    	{{caseExecution.activityName}}
+			    	{{execution.activityName}}
 			    </td>	  
 			  </tr>
 			  </table>			  
@@ -100,17 +121,12 @@
      </div>
  
  <script cam-script type="text/form-script">
-     
 	 function loadCaseStatus() {
   	   $.get( '/camunda/api/engine/engine/default/task/' + camForm.taskId, function( task ) {
-		   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&enabled=true', function( result1 ) {
+	  	   $.get( '/camunda/api/engine/engine/default/history/activity-instance?processInstanceId=' + task.processInstanceId + '&unfinished=true', function( result2 ) {
 	         $scope.$apply(function () {
-	            $scope.enabledCaseExecutions = result1;
-	         });
-		   });
-	  	   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&active=true', function( result2 ) {
-	         $scope.$apply(function () {
-	            $scope.activeCaseExecutions = result2;
+	            $scope.activeExecutions = result2;
+	            console.log(result2);
 	         });
 		   });	 
 	   }); 	
@@ -118,9 +134,11 @@
 	 
 	 loadCaseStatus();  	     
 	 
-	 $scope.manualStartCaseExecution = function(caseExecution) {
+	 $scope.sendMessage = function(messageName) {
 	       var data = {
-	            "variables": { 
+	            "messageName" : messageName,
+	       		"businessKey" : $scope.neuantrag.antragsNummer,
+	            "processVariables": { 
 	       			"hinweise": {
 	       				"value":  $('#textareaHinweise').val(), 
 	       				"type": "String"
@@ -130,7 +148,7 @@
 	       };
 	       $('#textareaHinweise').val("");
 	       	   
-		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/manual-start', {
+		   $.ajax('/camunda/api/engine/engine/default/message/', {
 		         data: JSON.stringify(data),
 		         contentType : 'application/json',
 		         type : 'POST',

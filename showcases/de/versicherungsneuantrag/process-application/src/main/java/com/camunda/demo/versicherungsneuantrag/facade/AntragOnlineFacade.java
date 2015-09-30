@@ -25,6 +25,7 @@ public class AntragOnlineFacade {
   public void submitNewAntrag(@PathParam("processDefinitionKey") String processDefinitionKey, Neuantrag neuantrag) {    
     BpmPlatform.getDefaultProcessEngine().getRuntimeService().startProcessInstanceByKey( //
         processDefinitionKey, 
+        neuantrag.getAntragsNummer(),
         Variables.createVariables().putValueTyped("neuantrag", //
             Variables.objectValue(neuantrag).serializationDataFormat(SerializationDataFormats.JSON).create()));    
   }
