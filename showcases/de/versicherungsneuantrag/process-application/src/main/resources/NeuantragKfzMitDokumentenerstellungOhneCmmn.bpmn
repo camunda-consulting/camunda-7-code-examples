@@ -58,7 +58,7 @@
           <bpmn2:outgoing>SequenceFlow_158ca3d</bpmn2:outgoing>
           <bpmn2:messageEventDefinition messageRef="Message_1"/>
         </bpmn2:startEvent>
-        <bpmn2:userTask id="UserTask_1v0y2h4" camunda:formKey="embedded:app:forms/beurteilen.html" camunda:candidateGroups="underwriter" name="Antrags-beurteilung (Underwriter)">
+        <bpmn2:userTask id="UserTask_1v0y2h4" camunda:formKey="embedded:app:forms/beurteilen.html" camunda:candidateGroups="underwriter" camunda:dueDate="${dateTime().plusHours(2).toDate()}" name="Antrags-beurteilung (Underwriter)">
           <bpmn2:incoming>SequenceFlow_158ca3d</bpmn2:incoming>
           <bpmn2:outgoing>SequenceFlow_1wlwa7o</bpmn2:outgoing>
         </bpmn2:userTask>
@@ -77,7 +77,7 @@
           <bpmn2:outgoing>SequenceFlow_0t2ecvh</bpmn2:outgoing>
           <bpmn2:messageEventDefinition messageRef="Message_2"/>
         </bpmn2:startEvent>
-        <bpmn2:userTask id="UserTask_1a2hrm6" camunda:candidateGroups="gruppenleiter" camunda:formKey="embedded:app:forms/beurteilen.html" name="Antrags-beurteilung (Gruppenleiter)">
+        <bpmn2:userTask id="UserTask_1a2hrm6" camunda:candidateGroups="gruppenleiter" camunda:formKey="embedded:app:forms/beurteilen.html" camunda:dueDate="${dateTime().plusHours(2).toDate()}" name="Antrags-beurteilung (Gruppenleiter)">
           <bpmn2:incoming>SequenceFlow_0t2ecvh</bpmn2:incoming>
           <bpmn2:outgoing>SequenceFlow_1mr1km6</bpmn2:outgoing>
         </bpmn2:userTask>
@@ -108,7 +108,7 @@
       <bpmn2:endEvent id="EndEvent_0i78ril">
         <bpmn2:incoming>SequenceFlow_14ztxpy</bpmn2:incoming>
       </bpmn2:endEvent>
-      <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="sachbearbeiter" name="Antrag entscheiden">
+      <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="sachbearbeiter" camunda:dueDate="${dateTime().plusDays(1).toDate()}" name="Antrag entscheiden">
         <bpmn2:incoming>SequenceFlow_0izdu96</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_14ztxpy</bpmn2:outgoing>
       </bpmn2:userTask>
