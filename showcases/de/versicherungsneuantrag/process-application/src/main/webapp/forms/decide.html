@@ -46,10 +46,12 @@
             
             <h2>Risiken</h2>
             Folgende Risiken haben zur Aussteuerung geführt:
-            <ul>
-              <li ng-repeat="risk in risks">{{risk}}</li>
-			</ul>  
-			
+   		    <table class="table table-striped table-hover">
+			  <tr ng-repeat="risk in risks">
+			  	<td>{{risk}}</td>
+			  </tr>
+			</table>
+						
             <h2>Beurteilung(en)</h2>
             <textarea class="form-control" 
        				cam-variable-name="beurteilung"
@@ -62,49 +64,8 @@
        			    cam-variable-type="Boolean" />
          </div>
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			  <h2>Weitere Aktivitäten starten</h2>
-			  <div class="form-group"> 			  
-			  	<label>Mitzugebene Hinweise:</label>
-			  	<textarea id="textareaHinweise" class="form-control"></textarea>
-			  </div>
-			  
-			  <table class="table table-striped table-hover">
-			    <tr>
-				    <td>
-				    	<i class="glyphicon glyphicon-user"></i>
-				    </td>
-				    <td>
-				    	Beurteilung durch Underwriter notwendig
-				    </td>	  
-				    <td>
-				        <a ng-click="sendMessage('MSG_UnderwriterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
-				    </td>
-				  </tr>
-			    <tr>
-				    <td>
-				    	<i class="glyphicon glyphicon-user"></i>
-				    </td>
-				    <td>
-				    	Beurteilung durch Gruppenleiter notwendig
-				    </td>	  
-				    <td>
-				        <a ng-click="sendMessage('MSG_GruppenleiterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
-				    </td>
-				  </tr>
-			    <tr>
-				    <td>
-				    	<i class="glyphicon glyphicon-cog"></i>
-				    </td>
-				    <td>
-				    	Dokumente anfordern
-				    </td>	  
-				    <td>
-				        <a ng-click="sendMessage('MSG_DokumenteNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
-				    </td>
-				  </tr>
-			  </table>
 
-			  <h2>Bereits laufende Aktivitäten</h2>
+		      <h2>Laufende Aktivitäten</h2>
 			  <table class="table table-striped table-hover">
 					  <tr ng-if="execution.activityType!='subProcess'" ng-repeat="execution in activeExecutions" >
 					    <td>			    
@@ -115,11 +76,64 @@
 					    	{{execution.activityName}}
 					    </td>	  
 					  </tr>
-			  </table>			  
+			  </table>
+
+
+			  <h2>Aktivität starten</h2>
+			  <div class="row">
+			      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">			 
+					  <div class="form-group"> 			  
+					  	<label>Mitzugebene Hinweise:</label>
+					  	<textarea id="textareaHinweise" rows="5" class="form-control"></textarea>
+					  </div>
+				  </div>
+				  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						  			  
+					  <table class="table table-striped table-hover">
+					    <tr>
+						    <td>
+						    	<i class="glyphicon glyphicon-user"></i>
+						    </td>
+						    <td>
+						    	Beurteilung durch Underwriter notwendig
+						    </td>	  
+						    <td>
+						        <a ng-click="sendMessage('MSG_UnderwriterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+						    </td>
+						  </tr>
+					    <tr>
+						    <td>
+						    	<i class="glyphicon glyphicon-user"></i>
+						    </td>
+						    <td>
+						    	Beurteilung durch Gruppenleiter notwendig
+						    </td>	  
+						    <td>
+						        <a ng-click="sendMessage('MSG_GruppenleiterNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+						    </td>
+						  </tr>
+					    <tr>
+						    <td>
+						    	<i class="glyphicon glyphicon-cog"></i>
+						    </td>
+						    <td>
+						    	Dokumente anfordern
+						    </td>	  
+						    <td>
+						        <a ng-click="sendMessage('MSG_DokumenteNotwendig')"><i class="glyphicon glyphicon-play"></i></a>
+						    </td>
+						  </tr>
+					  </table>
+					</div>
+				<div>
+			  			  
          </div>
      </div>
  
  <script cam-script type="text/form-script">
+   inject([ '$location', function($location) {
+
+ 
 	 function loadCaseStatus() {
   	   $.get( '/camunda/api/engine/engine/default/task/' + camForm.taskId, function( task ) {
 	  	   $.get( '/camunda/api/engine/engine/default/history/activity-instance?processInstanceId=' + task.processInstanceId + '&unfinished=true', function( result2 ) {
@@ -153,11 +167,19 @@
 		         type : 'POST',
 		         success: function (result) {
 		            loadCaseStatus();
+		            
+		            // reload task
+					$location.search('task', camForm.taskId);
+
+					// hardocore reload :-)
+		            window.location.reload();
 		         }
 		    });
 	 };
 	 
+	 
 
+	   }]);
   </script>
 
 <!--
