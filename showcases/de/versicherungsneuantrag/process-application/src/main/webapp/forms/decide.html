@@ -131,7 +131,14 @@
      </div>
  
  <script cam-script type="text/form-script">
-   inject([ '$location', function($location) {
+  // get the angular-data-depend service 'taskData'
+  var getTaskData = function(scope) {
+    if (scope.taskData) {
+      return scope.taskData;
+    }  
+    return scope.$parent && getTaskData(scope.$parent);
+  };
+  $scope.taskData = getTaskData($scope);
 
  
 	 function loadCaseStatus() {
@@ -169,17 +176,15 @@
 		            loadCaseStatus();
 		            
 		            // reload task
-					$location.search('task', camForm.taskId);
+					$scope.taskData.changed('task');
 
 					// hardocore reload :-)
-		            window.location.reload();
+		            //window.location.reload();
 		         }
 		    });
 	 };
 	 
-	 
 
-	   }]);
   </script>
 
 <!--
