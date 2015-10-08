@@ -9,5 +9,6 @@ public class ProcessVariables {
   public static final String VAR_NAME_hinweise = "hinweise";
   public static final String VAR_NAME_refernceId = "referenceId";
   public static final String VAR_NAME_documentXml = "documentXml";
+  public static final String VAR_NAME_document = "document";
 
 }

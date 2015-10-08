@@ -45,6 +45,12 @@ public class NeuantragProcessTest {
   public void setup() {
     init(rule.getProcessEngine());
   }
+  
+  @Test
+  @Deployment(resources = {"Neuantragspruefung.cmmn"})
+  public void testParseCmmn() {
+    // nothing is done here, as we just want to check for exceptions during deployment
+  }
 
   /**
    * Just tests if the process definition is deployable.

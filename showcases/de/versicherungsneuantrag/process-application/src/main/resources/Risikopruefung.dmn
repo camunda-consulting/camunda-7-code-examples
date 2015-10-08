@@ -4,16 +4,19 @@
 </ItemDefinition>
   <ItemDefinition id="itemDefinition3">  <typeDefinition>string</typeDefinition>
 </ItemDefinition>
-  <ItemDefinition id="itemDefinition4">  <typeDefinition>boolean</typeDefinition>
-</ItemDefinition>
-  <ItemDefinition id="ItemDefinition_0dpmr97">  <typeDefinition>boolean</typeDefinition>
-</ItemDefinition>
+  <ItemDefinition id="itemDefinition4">
+    <typeDefinition>string</typeDefinition>
+    <allowedValue id="LiteralExpression_1vipw35">    <text>gelb</text>
+</allowedValue>
+    <allowedValue id="LiteralExpression_08yn2b4">    <text>rot</text>
+</allowedValue>
+  </ItemDefinition>
   <ItemDefinition id="ItemDefinition_1y7swej">  <typeDefinition>string</typeDefinition>
 </ItemDefinition>
   <ItemDefinition id="ItemDefinition_1376bi8">  <typeDefinition>string</typeDefinition>
 </ItemDefinition>
   <Decision id="risikopruefung" name="Risikoprüfung">
-    <DecisionTable id="decisionTable" isComplete="false" isConsistent="true" hitPolicy="COLLECT">
+    <DecisionTable id="decisionTable" hitPolicy="COLLECT" isConsistent="true">
       <clause id="clause2" name="Alter">
         <inputExpression id="inputExpression2">
           <itemDefinition href="#itemDefinition2" />
@@ -21,19 +24,9 @@
         </inputExpression>
         <inputEntry id="LiteralExpression_0d2xbyd">        <text><![CDATA[<= 21]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_1siw57j">        <text><![CDATA[<= 30]]></text>
-</inputEntry>
         <inputEntry id="LiteralExpression_1xs6kiu">        <text><![CDATA[<= 30]]></text>
 </inputEntry>
         <inputEntry id="LiteralExpression_17x5qfk">        <text><![CDATA[<= 25]]></text>
-</inputEntry>
-      </clause>
-      <clause id="Clause_0b0yrlo" name="Nur Fahrer älter als 25">
-        <inputExpression id="LiteralExpression_1151dc3">
-          <itemDefinition href="#ItemDefinition_0dpmr97" />
-          <text>neuantrag.fahrerUeber25</text>
-        </inputExpression>
-        <inputEntry id="LiteralExpression_1hvbs7p">        <text>false</text>
 </inputEntry>
       </clause>
       <clause id="Clause_1exbg8j" name="Fahrzeughersteller">
@@ -66,54 +59,40 @@
         <outputDefinition href="#itemDefinition3" />
         <outputEntry id="LiteralExpression_1lr2695">        <text>Anfänger</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_1cawh6u">        <text>Jung mit Freunden</text>
-</outputEntry>
         <outputEntry id="LiteralExpression_08l58oa">        <text>Jung und schnell</text>
 </outputEntry>
         <outputEntry id="LiteralExpression_0n3hid7">        <text>Sinnlose Raserei</text>
 </outputEntry>
         <outputEntry id="LiteralExpression_0thxp5a">        <text>Hochwertfahrzeug</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_1mbq5kj">        <text>Sinnlose Raserei</text>
+        <outputEntry id="LiteralExpression_1mbq5kj">        <text>Jung und zu schnell</text>
 </outputEntry>
       </clause>
-      <clause id="clause4" name="Ablehnung" camunda:output="ablehnung">
+      <clause id="clause4" name="Risikobewertung" camunda:output="risikobewertung">
         <outputDefinition href="#itemDefinition4" />
-        <outputEntry id="LiteralExpression_1nsowgx">        <text>true</text>
+        <outputEntry id="LiteralExpression_1nsowgx">        <text>rot</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0xbfiy8">        <text>false</text>
+        <outputEntry id="LiteralExpression_0xbfiy8">        <text>gelb</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0a3vnas">        <text>false</text>
+        <outputEntry id="LiteralExpression_04a9gk1">        <text>gelb</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_04a9gk1">        <text>false</text>
+        <outputEntry id="LiteralExpression_0zeltq5">        <text>gelb</text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0zeltq5">        <text>false</text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_03gnb3x">        <text>false</text>
+        <outputEntry id="LiteralExpression_03gnb3x">        <text>gelb</text>
 </outputEntry>
       </clause>
       <rule id="rule2">
-        <description></description>
         <condition>LiteralExpression_0d2xbyd</condition>
         <conclusion>LiteralExpression_1lr2695</conclusion>
         <conclusion>LiteralExpression_0xbfiy8</conclusion>
       </rule>
-      <rule id="rule3">
-        <description></description>
-        <condition>LiteralExpression_1siw57j</condition>
-        <condition>LiteralExpression_1hvbs7p</condition>
-        <conclusion>LiteralExpression_1cawh6u</conclusion>
-        <conclusion>LiteralExpression_0a3vnas</conclusion>
-      </rule>
       <rule id="rule4">
-        <description></description>
         <condition>LiteralExpression_1xs6kiu</condition>
         <condition>LiteralExpression_13vhfej</condition>
         <conclusion>LiteralExpression_08l58oa</conclusion>
         <conclusion>LiteralExpression_04a9gk1</conclusion>
       </rule>
       <rule id="DecisionRule_19e2au9">
-        <description></description>
         <condition>LiteralExpression_16powhj</condition>
         <condition>LiteralExpression_1vn2s88</condition>
         <conclusion>LiteralExpression_0n3hid7</conclusion>
@@ -126,7 +105,6 @@
         <conclusion>LiteralExpression_03gnb3x</conclusion>
       </rule>
       <rule id="DecisionRule_0up74ix">
-        <description></description>
         <condition>LiteralExpression_17x5qfk</condition>
         <condition>LiteralExpression_0qfuwb9</condition>
         <condition>LiteralExpression_12246qt</condition>

@@ -20,7 +20,7 @@ ngDefine('cockpit.plugin.versicherungsneuantrag',
 	      url: 'plugin://versicherungsneuantrag/static/app/dashboard.html',
 	      controller: DashboardController,
 
-	      priority: 50
+	      priority: -50
 	    });
   	};
 

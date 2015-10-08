@@ -53,20 +53,55 @@ $( document ).ready(function() {
 
   // correlate message for Antrag
   $('#triggerUploadDocuments').click(function() {
+  	
+	      var fileUpload = $('#documentToUpload').get(0);
 
-    var url = baseUrl + "/dokument/" + $('#vorgangsnummer').val();
-    $.ajax({
-             type : 'POST',
-             url: url,
-             data: '{}',
-             contentType: 'application/json; charset=utf-8',
-             dataType: 'json',
-             success: function (result) {
-                $('#documentsReceived').toggle();
-                $('#fieldsetForm').toggle();
-             },
-             crossDomain: true,
-    });
+     	  var fileVar = {};
+	      if(typeof FileReader === 'function' && fileUpload.files.length > 0) {		        
+	        var reader = new FileReader();
+	        reader.onloadend = (function(fileUpload) {
+	          return function(e) {
+	            var binary = '';
+	            var bytes = new Uint8Array( e.target.result );
+	            var len = bytes.byteLength;
+	            for (var j = 0; j < len; j++) {
+	                binary += String.fromCharCode( bytes[ j ] );
+	            }
+	            fileVar.value = btoa(binary);
+	
+	            // set file metadata as value info 
+	            fileVar.type = 'File';
+	            fileVar.valueInfo = {
+	                filename: fileUpload.files[0].name,
+	                mimeType: fileUpload.files[0].type
+	            };
+	            
+	
+	            callCallback();
+	          };
+	        })(fileUpload);
+	        reader.readAsArrayBuffer(fileUpload.files[0]);
+		};
+	    
+	    var callCallback = function() {
+		   var data = JSON.stringify(fileVar);
+			var url = baseUrl + "/dokument/" + $('#vorgangsnummer').val();
+		    $.ajax({
+		             type : 'POST',
+		             url: url,
+		             data: data,
+		             contentType: 'application/json; charset=utf-8',
+		             dataType: 'json',
+		             success: function (result) {
+		                $('#documentsReceived').toggle();
+		                $('#fieldsetForm').toggle();
+		             },
+		             crossDomain: true,
+		    });
+		}; 
+    	
+      
+    
   });
 
 
