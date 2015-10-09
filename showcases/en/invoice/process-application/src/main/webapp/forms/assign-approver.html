@@ -1,10 +1,10 @@
 <form class="form-horizontal"
       role="form">
 
-  <div >Wer soll die Rechnung freigeben?</div>
+  <div >Select approver for the invoice</div>
 
   <div class="control-group">
-    <label class="control-label">Kreditor</label>
+    <label class="control-label">Creditor</label>
     <div class="controls">
       <input cam-variable-name="creditor"
              type="text"
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="control-group">
-    <label class="control-label">Betrag</label>
+    <label class="control-label">Amount</label>
     <div class="controls">
       <input cam-variable-name="amount"
              type="text"
@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="control-group">
-    <label class="control-label">Rechnungsnummer</label>
+    <label class="control-label">Invoice Number</label>
     <div class="controls">
       <input cam-variable-name="invoiceNumber"
              type="text"
@@ -35,15 +35,15 @@
   </div>
   
   <div class="control-group">
-    <label class="control-label">Rechnung</label>
+    <label class="control-label">Invoice Document</label>
     <div class="controls">
-		<a cam-file-download="document"></a>
+		<a cam-file-download="invoiceDocument"></a>
     </div>
   </div>
   
   
   <div class="control-group">
-    <label class="control-label">Freigebender: </label>
+    <label class="control-label">Approver: </label>
     <div class="controls">
       <select cam-variable-name="approver"
               cam-variable-type="String"
@@ -52,12 +52,12 @@
               class="form-control"
               required>
         <option></option>
-        <option value="desi">Desi (Team-Assistenz)</option>
-        <option value="anne">Anne (Management)</option>
-        <option value="lars">Lars (Buchhaltung)</option>
-        <option value="admin">Admin (für Demo-Zwecke)</option>
+        <option value="john">John (Team Assistence)</option>
+        <option value="peter">Peter (Management)</option>
+        <option value="mary">Mary (Accounting)</option>
+        <option value="admin">Admin (only for Demo)</option>
       </select>
-      <p>Wer soll die Rechnung freigeben?</p>
+      <p>Who shall approve the invoice?</p>
     </div>
   </div>
 </form>
