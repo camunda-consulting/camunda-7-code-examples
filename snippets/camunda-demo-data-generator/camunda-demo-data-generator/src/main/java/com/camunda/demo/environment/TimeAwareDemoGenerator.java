@@ -11,8 +11,10 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.camunda.bpm.application.ProcessApplicationReference;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
+import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
@@ -57,8 +59,15 @@ public class TimeAwareDemoGenerator {
   private Map<String, NormalDistribution> distributions = new HashMap<String, NormalDistribution>();
   private String originalBpmn;
 
-  public TimeAwareDemoGenerator(ProcessEngine engine) {
+  private ProcessApplicationReference processApplicationReference;
+
+  public TimeAwareDemoGenerator(ProcessEngine engine, ProcessApplicationReference processApplicationReference) {
     this.engine = engine;
+    this.processApplicationReference = processApplicationReference; 
+  }
+
+  public TimeAwareDemoGenerator(ProcessEngine processEngine) {
+    this.engine = processEngine;
   }
 
   public void generateData() {
@@ -69,7 +78,12 @@ public class TimeAwareDemoGenerator {
 
   protected void restoreOriginalProcessDefinition() {
     log.info("restore original process definition");
-    engine.getRepositoryService().createDeployment().addString(processDefinitionKey + ".bpmn", originalBpmn).deploy();
+    Deployment deployment = engine.getRepositoryService().createDeployment() //
+        .addString(processDefinitionKey + ".bpmn", originalBpmn) //
+        .deploy();
+    if (processApplicationReference!=null) {
+      engine.getManagementService().registerProcessApplication(deployment.getId(), processApplicationReference);
+    }
 
   }
 

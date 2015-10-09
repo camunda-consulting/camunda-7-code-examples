@@ -1,9 +1,12 @@
 package com.camunda.demo.versicherungsneuantrag.model;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class Neuantrag {
+  
+  private String antragsNummer = nextAntrangsNummer();
 
   private Person antragssteller;
   private String fahrzeugHersteller;
@@ -16,6 +19,20 @@ public class Neuantrag {
   private String vertragsnummer;
   private long preisindikationInCent;
   private long beitragInCent;
+  
+  public static int counter = 0;
+  public static String nextAntrangsNummer() {
+    // Achtung: Nur für Demo-Zwecke für eine lesbare Nummer - in real: UUID!
+    if (counter==0) {
+      counter = Calendar.getInstance().get(Calendar.MINUTE) + Calendar.getInstance().get(Calendar.SECOND);      
+    } else {
+      counter++;
+    }
+    String result = "A-"
+        + Calendar.getInstance().get(Calendar.DAY_OF_YEAR)
+        + counter; 
+    return result;
+  }
   
   public String getFahrerUeber25String() {
     if (fahrerUeber25) {
@@ -110,5 +127,9 @@ public class Neuantrag {
 
   public void setPreisindikationInCent(long preisindikationInCent) {
     this.preisindikationInCent = preisindikationInCent;
+  }
+
+  public String getAntragsNummer() {
+    return antragsNummer;
   }
 }

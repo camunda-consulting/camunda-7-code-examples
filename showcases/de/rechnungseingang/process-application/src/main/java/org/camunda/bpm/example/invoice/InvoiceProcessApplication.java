@@ -31,7 +31,7 @@ public class InvoiceProcessApplication extends ServletProcessApplication {
    */
   @PostDeploy
   public void startFirstProcess(ProcessEngine processEngine) {
-    DemoDataGenerator.autoGenerateFor(processEngine, "rechnungseingang");
+    DemoDataGenerator.autoGenerateFor(processEngine, "rechnungseingang", getReference());
   }
 
 }

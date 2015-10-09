@@ -13,7 +13,10 @@ public class IssuePolicyAdapter implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution execution) throws Exception {
-    Neuantrag antrag = (Neuantrag) execution.getVariable(ProcessVariables.VAR_NAME_neuantrag);
+    Neuantrag antrag = (Neuantrag) execution.getVariable(ProcessVariables.VAR_NAME_neuantrag);    
+    // do data transformation
+    // call real service 
+   
     
     antrag.setBeitragInCent(21300);
     antrag.setVertragsnummer(String.valueOf(System.currentTimeMillis()));

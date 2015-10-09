@@ -22,7 +22,7 @@
 	<target name="package.mvn">
 		<exec executable="${mvn.executable}" dir="." failonerror="true">
 			<env key="MAVEN_OPTS" value="-Xmx1024m -Xms512m -DskipTests=true -Dmaven.test.skip=true " />
-			<arg line="clean package ${mvn.profiles}" />
+			<arg line="clean install ${mvn.profiles}" />
 		</exec>
 	</target>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="cockpit-plugin-versicherungsneuantrag" default="deploy.jboss">
+<project name="versicherungsneuantrag-plugin" default="deploy.jboss">
 
 	<property file="build.properties" />
 	<property file="${user.home}/.camunda/build.properties" />
@@ -14,7 +14,7 @@
 	<target name="package.mvn">
 		<exec executable="${mvn.executable}" dir="." failonerror="true">
 			<env key="MAVEN_OPTS" value="-Xmx1024m -Xms512m -DskipTests=true -Dmaven.test.skip=true" />
-			<arg line="clean package" />
+			<arg line="clean install" />
 		</exec>
 	</target>
 

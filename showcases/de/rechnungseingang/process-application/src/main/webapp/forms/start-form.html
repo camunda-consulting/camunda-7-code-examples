@@ -50,5 +50,32 @@
       </div>
     </div>
   </div>
+  
+  <div class="control-group">
+    <label class="control-label"
+           for="documentUpload">Rechnung</label>
+    <div class="controls">
+	  <input type="file"
+	     id="documentUpload"
+         cam-variable-name="document"
+         cam-variable-type="File"
+         cam-max-filesize="10000000" />
+      <div class="help">
+        (Bitte Scan der Rechnung als PDF hochladen)
+      </div>
+    </div>
+  </div>
+  
+  <script cam-script type="text/form-script">
+    camForm.on('submit', function(evt) {
+
+      var fileUpload = $('#documentUpload').get(0);
+
+      // prevent submit if user has not provided a file
+      evt.submitPrevented = (fileUpload.files.length == 0);
+
+    });
+  </script>  
+  
 </form>
 

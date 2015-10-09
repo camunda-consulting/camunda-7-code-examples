@@ -16,11 +16,11 @@ ngDefine('cockpit.plugin.rechnungseingang',
 
     ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
 	      id: 'rechnungseingang',
-	      label: 'Statistics',
+	      label: 'Statistik (Rechnungseingang)',
 	      url: 'plugin://rechnungseingang/static/app/dashboard.html',
 	      controller: DashboardController,
 
-	      priority: 2
+	      priority: -55
 	    });
   	};
 
@@ -44,7 +44,7 @@ function printData(data) {
             plotShadow: false
         },
         title: {
-            text: 'Ended Processes'
+            text: 'Verteilung Endereignisse'
         },
         tooltip: {
     	    pointFormat: '<b>{point.y}</b>'
@@ -78,7 +78,7 @@ function printData(data) {
 	////////////////////////////////////////////	
 	$('#lineChartRE').highcharts({
 		title : {
-			text : 'Started Process Instances',
+			text : 'Gestartete Prozessinstanzen',
 			x : -20
 		// center
 		},

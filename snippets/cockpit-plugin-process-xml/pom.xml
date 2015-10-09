@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.camunda.bpm.cockpit.plugin</groupId>
 	<artifactId>cockpit-plugin-process-xml</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<name>Camunda Cockpit Plugin: Process Definition as XML</name>
 	<description>This Plugin shows the BPMN 2.0 XML as tab in the process definition view</description>

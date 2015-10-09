@@ -1,4 +1,4 @@
-"Underwriting" with BPMN and CMMN
+"Underwriting" with BPMN, DMN and CMMN
 =========================
 
 This project is a sample application using BPMN + CMMN + DMN to implement a typical underwriting process of an insurance company

@@ -45,34 +45,34 @@ public class NeuantragProcessTest {
   public void setup() {
     init(rule.getProcessEngine());
   }
-
+  
   /**
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Risikopruefung.dmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", })
   public void testDunkelverarbeitungPoliciert() {
     Neuantrag neuantrag = DemoData.createNeuantrag(40, true, "VW", "Golf V");
     
-    VariableMap variables = Variables.createVariables();
-    variables.putValue(
+    VariableMap variables = Variables.createVariables().putValue(
         ProcessVariables.VAR_NAME_neuantrag,
         Variables.objectValue(neuantrag).serializationDataFormat(SerializationDataFormats.JSON).create());
         
-    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("versicherungsneuantrag", variables);
     
+    // Dunkelverarbeitung!
     assertThat(processInstance).isEnded()
       .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "ServiceTaskPoliceAusstellen", "SendTaskPoliceZusenden", "EndEventAntragPoliciert");    
   }
 
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testDunkelverarbeitungAbgelehnt() {
     Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "911");
     
@@ -83,15 +83,16 @@ public class NeuantragProcessTest {
         
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
     
-    assertThat(processInstance).isEnded()
-      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt");    
+    assertThat(processInstance)
+      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt")
+      .isEnded();    
   }
 
   
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
-  public void testHell() {
-    Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Risikopruefung.dmn", "Dokumentenanforderung.bpmn"})
+  public void testHellManuelleVerarbeitung() {
+    Neuantrag neuantrag = DemoData.createNeuantrag(40, false, "Porsche", "911"); //I
     
     VariableMap variables = Variables.createVariables();
     variables.putValue(
@@ -100,13 +101,24 @@ public class NeuantragProcessTest {
         
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
     
-    assertThat(processInstance).isWaitingAtExactly("CallActivityAntragManuellPruefen");
+    assertThat(processInstance).job();
+    execute(job());
     
-    // TODO
+    assertThat(processInstance).task()
+      .hasDefinitionKey("userTaskAntragEntscheiden")
+      .hasCandidateGroup("sachbearbeiter");
+    
+    complete(task(), withVariables("approved", Boolean.TRUE));
+    
+    assertThat(processInstance).job();
+    execute(job());
+    
+    assertThat(processInstance).isEnded()
+      .hasPassed("serviceTaskPoliceAusstellen", "sendTaskPoliceZusenden");    
   }  
   
   @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn"})
+  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
   public void testCase() {
     Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
     
