@@ -14,9 +14,9 @@ ngDefine('cockpit.plugin.versicherungsneuantrag',
   
   var Configuration = function Configuration(ViewsProvider) {
 
-    ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
+    ViewsProvider.registerDefaultView('cockpit.processDefinition.history.tab', {
 	      id: 'versicherungsneuantrag',
-	      label: 'Statistik',
+	      label: 'Statistik (Versicherungsneuantrag)',
 	      url: 'plugin://versicherungsneuantrag/static/app/dashboard.html',
 	      controller: DashboardController,
 
@@ -45,9 +45,6 @@ function printData(data) {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
-        },
-        title: {
-            text: 'Anzahl beendete Prozesse'
         },
         tooltip: {
     	    pointFormat: '<b>{point.y}</b>'
@@ -80,11 +77,6 @@ function printData(data) {
 	// Linien Instanz-Count
 	////////////////////////////////////////////	
 	$('#lineChart').highcharts({
-		title : {
-			text : 'Anzahl gestarteter Prozessinstanzen',
-			x : -20
-		// center
-		},
 		subtitle : {
 			text : '(letzte 14 Tage)',
 			x : -20

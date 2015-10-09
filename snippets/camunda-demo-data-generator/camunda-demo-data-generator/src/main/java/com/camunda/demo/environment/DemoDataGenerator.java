@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.camunda.bpm.BpmPlatform;
+import org.camunda.bpm.application.ProcessApplicationReference;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -16,19 +17,19 @@ public class DemoDataGenerator {
 
   private static final Logger log = Logger.getLogger(DemoDataGenerator.class.getName());
 
-  public static void autoGenerateAll(ProcessEngine engine) {
+  public static void autoGenerateAll(ProcessEngine engine, ProcessApplicationReference processApplicationReference) {
     List<ProcessDefinition> processDefinitions = engine.getRepositoryService().createProcessDefinitionQuery().latestVersion().list();
     for (ProcessDefinition processDefinition : processDefinitions) {
-      autoGenerateFor(engine, processDefinition);
+      autoGenerateFor(engine, processDefinition, processApplicationReference);
     }
   }
 
-  public static void autoGenerateFor(ProcessEngine engine, String processDefinitionKey) {
+  public static void autoGenerateFor(ProcessEngine engine, String processDefinitionKey, ProcessApplicationReference processApplicationReference) {
     ProcessDefinition processDefinition = engine.getRepositoryService().createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey).latestVersion().singleResult();
-    autoGenerateFor(engine, processDefinition);    
+    autoGenerateFor(engine, processDefinition, processApplicationReference);    
   }
 
-  public static void autoGenerateFor(ProcessEngine engine, ProcessDefinition processDefinition) {
+  public static void autoGenerateFor(ProcessEngine engine, ProcessDefinition processDefinition, ProcessApplicationReference processApplicationReference) {
     log.info("check auto generation for " + processDefinition);
     BpmnModelInstance modelInstance = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
@@ -55,7 +56,7 @@ public class DemoDataGenerator {
 
         log.info("simulation properties set - auto generation applied (" + numberOfDaysInPast + " days in past, time between mean: " + timeBetweenStartsBusinessDaysMean + " and Standard Deviation: " + timeBetweenStartsBusinessDaysSd);
   
-        TimeAwareDemoGenerator generator = new TimeAwareDemoGenerator(BpmPlatform.getDefaultProcessEngine()) //
+        TimeAwareDemoGenerator generator = new TimeAwareDemoGenerator(BpmPlatform.getDefaultProcessEngine(), processApplicationReference) //
             .processDefinitionKey(processDefinition.getKey()) //
             .numberOfDaysInPast(Integer.valueOf(numberOfDaysInPast)) //
             .timeBetweenStartsBusinessDays(Integer.valueOf(timeBetweenStartsBusinessDaysMean), Integer.valueOf(timeBetweenStartsBusinessDaysSd));
