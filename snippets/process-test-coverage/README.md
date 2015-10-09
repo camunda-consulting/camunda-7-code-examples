@@ -7,8 +7,8 @@ This tool supports in analyzing and visualizing the process test coverage of a B
 
 The tool creates test coverage reports for:
 
-* Single test cases: The process coverage is visualized by marking those tasks and events with a green color which have be traversed by the test case.
-* Entire test suites: The process coverage is visualized by marking those tasks and events with a green color which have be traversed by any of the test suite's test cases.
+* Single test cases: The process coverage is visualized by marking those tasks and events with a green color which are traversed by the test case.
+* Entire test suites: The process coverage is visualized by marking those tasks and events with a green color which are traversed by any of the test suite's test cases.
 
 ## How to use it?
 
@@ -27,7 +27,7 @@ Have a look at the [ProcessTestCoverageTest](src/test/java/org/camunda/bpm/consu
 
 - In a tearDown() or @AfterClass method for the Test Class coverage
 ```java
-  @After
+  @AfterClass
   public void calculateCoverage() throws Exception {
     // calculate coverage for all tests
     ProcessTestCoverage.calculate(processEngineRule.getProcessEngine());
@@ -44,6 +44,6 @@ ProcessTestCoverage.calculate(processInstance, processEngineRule.getProcessEngin
 2. Open html files which are created in the directory target/process-test-coverage/
 
 ## Known Limitations
-Test cases that deploy different version of the same process (same process definition key) are currently not supported and will result in miss-leading reports. Just make sure all your processes have unique process definition keys (in BPMN XML //process@id).
+Test cases that deploy different version of the same process (same process definition key) are currently not supported and will result in misleading reports. Just make sure all your processes have unique process definition keys (in BPMN XML //process@id).
 
 ## Improvements Backlog
