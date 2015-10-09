@@ -31,7 +31,7 @@ public class AntragOnlineFacade {
   @Consumes(MediaType.APPLICATION_JSON)
   public void submitNewAntrag(@PathParam("processDefinitionKey") String processDefinitionKey, Neuantrag neuantrag) {    
     BpmPlatform.getDefaultProcessEngine().getRuntimeService().startProcessInstanceByKey( //
-        processDefinitionKey, 
+        "versicherungsneuantrag", 
         neuantrag.getAntragsNummer(),
         Variables.createVariables().putValueTyped( //
             "neuantrag", //
