@@ -6,9 +6,15 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
+import org.camunda.bpm.engine.variable.value.SerializationDataFormat;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import com.camunda.training.twitterQa.Tweet;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import static org.junit.Assert.*;
@@ -46,22 +52,34 @@ public class InMemoryH2Test {
 //  @Test
   @Deployment(resources = "process.bpmn")
   public void testStartSimpleProcessForLab3() {
+    Tweet tweet = new Tweet();
+    tweet.setContent("I did it with variable and user task! Cheers The Trainer");
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
-        withVariables("content", "I did it with variable and user task! Cheers The Trainer"));
+        withVariables("tweet", tweet));
     Task reviewTask = taskQuery().taskCandidateGroup("management").singleResult();
     assertThat(reviewTask).hasName("Review Tweet");
-    taskService().complete(reviewTask.getId(), withVariables("approved", true));
+    tweet.setApproved(true);
+    taskService().complete(reviewTask.getId(), withVariables("tweet", tweet));
     assertThat(pi).isEnded().hasPassed("ServiceTask_1");
   }
   
   @Test
   @Deployment(resources = "process.bpmn")
   public void testRejectTweetForLab4() {
+    Tweet tweet = new Tweet();
+    tweet.setContent("I did it with variable and user task! Cheers The Trainer");
+    
+    ObjectValue tweetObjectValue = Variables.objectValue(tweet).serializationDataFormat(SerializationDataFormats.JSON).create();
+    
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
-        withVariables("content", "I did it with variable! Cheers The Trainer"));
+        withVariables("tweet", tweetObjectValue));
+    
     Task reviewTask = taskQuery().taskCandidateGroup("management").singleResult();
     assertThat(reviewTask).hasName("Review Tweet");
-    taskService().complete(reviewTask.getId(), withVariables("approved", false));
+    
+    tweet = (Tweet) taskService().getVariable(reviewTask.getId(), "tweet");
+    tweet.setApproved(false);
+    taskService().complete(reviewTask.getId(), withVariables("tweet", tweet));
     assertThat(pi).isEnded().hasPassed("ServiceTask_2");    
   }
 

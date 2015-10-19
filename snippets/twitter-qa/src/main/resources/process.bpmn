@@ -10,7 +10,7 @@
     <bpmn2:endEvent id="EndEvent_1" name="Tweet handled">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" camunda:formKey="app:forms/jsf/task-form.jsf" name="Review Tweet">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="management" camunda:formKey="embedded:app:forms/embedded/task-form.html" name="Review Tweet">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -26,15 +26,15 @@
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_1">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${approved}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${tweet.approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:scriptTask id="ServiceTask_2" name="Send rejection notfication" scriptFormat="JavaScript">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-      <bpmn2:script>println('Send rejection notification');</bpmn2:script>
+      <bpmn2:script>print('Send rejection notification\n');</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="no" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!approved}</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!tweet.approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_2">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>

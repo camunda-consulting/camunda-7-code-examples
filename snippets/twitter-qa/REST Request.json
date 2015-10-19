@@ -1,0 +1,15 @@
+# http://localhost:8080/engine-rest/process-definition/key/twitter-qa/start
+# Content-Type: application/json
+
+{
+    "variables": {
+              "tweet" : {
+                  "value" : "{\"content\" : \"Hallo vom Camunda BPM Advanced Training aus Luzern!\"}", 
+                  "type": "Object",
+                  "valueInfo" : {
+                       "objectTypeName": "com.camunda.training.twitterQa.Tweet",
+                       "serializationDataFormat": "application/json"
+                  }
+              }
+    }
+}

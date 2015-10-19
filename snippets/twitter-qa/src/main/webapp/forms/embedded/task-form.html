@@ -4,12 +4,28 @@
   by setting the formKey of a User Task to 'embedded:app:forms/embedded/task-form.html'.</p>
 
 <form class="form-horizontal">
+
+  <script cam-script type="text/form-script">
+
+    camForm.on('form-loaded', function() {
+      // fetch the variable named 'tweet'
+      camForm.variableManager.fetchVariable('tweet');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of tweet to a angular
+      // scope value such that the form can work on it
+      $scope.tweet = camForm.variableManager.variable('tweet').value;
+    });
+
+  </script>
+
   <div class="control-group">
-    <label class="control-label">Name</label>
+    <label class="control-label">Tweet</label>
     <div class="controls">
-      <input form-field type="string" name="name" readonly="true" />
-      <input type="text" 
-             cam-variable-name="name"
+
+      <input type="text"
+             ng-model="tweet.content" 
              readonly="true" 
              class="form-control"/>      
     </div>
@@ -18,7 +34,7 @@
     <label class="control-label">Approve?</label>
     <div class="controls">
       <input type="checkbox"
-             cam-variable-name="approved"
+             ng-model="tweet.approved"
 		         cam-variable-type="Boolean"
              name="approved"
 		         class="form-control" />
