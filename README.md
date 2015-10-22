@@ -121,7 +121,7 @@ Snippets
   </tr>
 
   <tr>
-    <td><img src="snippets/i18n-process-model/src/main/resources/process.png" width="100"></td>
+    <td><img src="snippets/i18n-process-model/translated-model.png" width="100"></td>
     <td><a href="snippets/i18n-process-model">Translate your process model on the fly</a></td>
     <td>Translate the BPMN XML on the fly using XPath and render the result (in the correct language) via bpmn.io</td>
   </tr>  
