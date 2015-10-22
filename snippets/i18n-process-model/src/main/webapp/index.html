@@ -1,0 +1,39 @@
+<html>
+<head>
+    <!-- JQuery -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- bpmn-js viewer -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpmn-io/bower-bpmn-js/v0.11.0/dist/bpmn-navigated-viewer.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/bpmn-io/bower-bpmn-js/v0.11.0/dist/assets/diagram-js.css"/> 
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/bpmn-io/bower-bpmn-js/v0.11.0/dist/assets/bpmn-font/css/bpmn-embedded.css"/> 
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/bpmn-io/bower-bpmn-js/v0.11.0/dist/assets/bpmn-font/css/bpmn.css"/> 	
+</head>
+<body>
+    <div class="content" id="bpmn-drop-zone">
+      <div id="bpmnCanvas" style="height:300px;"></div>
+    </div>
+
+     <script>
+      $(document).ready(function() {   
+        var BpmnNavigatedViewer = window.BpmnJS;
+        var viewer = new BpmnNavigatedViewer({container: '#bpmnCanvas', width: '100%', height: '100%'});
+        var container = $('#bpmn-drop-zone');
+        
+        // get the diagram              
+        $.get('model/translated', function(data) {
+            viewer.importXML(data, function(err) {
+              if (err) {
+                console.log('error rendering', err);
+              } else {
+                var canvas = viewer.get('canvas');
+                // zoom to fit full viewport
+                canvas.zoom('fit-viewport');
+                container.removeClass('with-error').addClass('with-diagram');
+              }
+            });
+        });
+      });
+	</script>  	
+</body>
+</html>
