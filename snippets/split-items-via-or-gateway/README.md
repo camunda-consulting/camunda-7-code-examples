@@ -18,7 +18,7 @@ But now you have to keep an eye on data handling:
 
 - Gather all new approved items / credits / ... right before the OR-Gateway and send a token to the handling task containing these items
 - Check if there are undecided items / credits / ... left to see if you have to loop
-- Write a [Local Variable](xxx) containing the list of items, the local variable will be different for every token you send out this path of the OR-Gateway
+- Write a "Local Variable" containing the list of items, the local variable will be different for every token you send out this path of the OR-Gateway
 
 So lets assume you approved exactly one item / credit / ... the situation will be like shown in the following image:
 
@@ -29,8 +29,8 @@ How does it work?
 -----------------
 
 See the following listeners where the magic happens:
-- [Listener before the OR Gateway]()
-- [Listener after the OR Gateway in the Handling Path]()
+- [Listener before the OR Gateway](https://github.com/camunda/camunda-consulting/blob/master/snippets/split-items-via-or-gateway/src/main/java/com/camunda/demo/gateway/or/split/items/EvaluateDecisionListener.java)
+- [Listener after the OR Gateway in the Handling Path](https://github.com/camunda/camunda-consulting/blob/master/snippets/split-items-via-or-gateway/src/main/java/com/camunda/demo/gateway/or/split/items/SetLocalVariablesListener.java)
 
 How to use it?
 --------------

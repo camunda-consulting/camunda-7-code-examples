@@ -121,15 +121,25 @@ Snippets
   </tr>
 
   <tr>
+    <td><img src="snippets/i18n-process-model/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/i18n-process-model">Translate your process model on the fly</a></td>
+    <td>Translate the BPMN XML on the fly using XPath and render the result (in the correct language) via bpmn.io</td>
+  </tr>  
+  <tr>
+    <td><img src="snippets/call-activity-set-local-variable/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/call-activity-set-local-variable">Call Activity sets local variable</a></td>
+    <td>Shows how to set a local variable in a parent process based on the variable of a child process invoked by a Call Activity.</td>
+  </tr>  
+  <tr>
+    <td><img src="snippets/split-items-via-or-gateway/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/split-items-via-or-gateway">Split Order Item Handling via OR Gateway</a></td>
+    <td>Assume only a few items of an order are decided in one go - but the approved ones need to get processed right away. This is modeled using an OR Gateway and local variables.</td>
+  </tr>    
+  <tr>
     <td><img src="snippets/bpmn-adhoc-task/src/main/resources/process.png" width="100" /></td>
     <td><a href="snippets/bpmn-adhoc-task/">Workaround to realize BPMN AdHoc Subpocess</a></td>
     <td>The BPMN AdHoc Subprocess is not specified to be executable, hence camunda BPM cannot execute it out-of-the-box. This snippet shows a possile workaround.</td>
   </tr>
-  <tr>
-    <td><img src="snippets/call-activity-set-local-variable/src/main/resources/process.png" width="100"></td>
-    <td><a href="snippets/call-activity-set-local-variable">Call Activity sets local variable</a></td>
-    <td>Shows how to set a local variable in a parent process based on the variable of a child process invoked by a Call Activity</td>
-  </tr>  
 </table>
 
 ### Camunda Webapp (Tasklist & Cockpit)
@@ -253,7 +263,7 @@ Snippets
 
 </table>
 
-### Administration Stuff
+### Administration
 
 <table>
   <tr>

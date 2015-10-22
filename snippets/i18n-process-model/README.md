@@ -19,19 +19,19 @@ How does it work?
 
 Translations are authored using simple properties files
 
-- [en.properties](xxx)
-- [de.properties](xx)
+- [en.properties](https://github.com/camunda/camunda-consulting/blob/master/snippets/i18n-process-model/src/main/resources/en.properties)
+- [de.properties](https://github.com/camunda/camunda-consulting/blob/master/snippets/i18n-process-model/src/main/resources/de.properties)
 
 The translation is done by using XPath to find and replace names:
 
-- [ProcessModelTranslator.java](xxx)
+- [ProcessModelTranslator.java](https://github.com/camunda/camunda-consulting/blob/master/snippets/i18n-process-model/src/main/java/com/camunda/demo/i18n/processmodel/ProcessModelTranslator.java)
 
-This translated BPMN.xml is handed out via a [Simple Servlet](xxx) to have as less environment requirements as possible for the example.
+This translated BPMN.xml is handed out via a [Simple Servlet](https://github.com/camunda/camunda-consulting/blob/master/snippets/i18n-process-model/src/main/java/com/camunda/demo/i18n/processmodel/GetTranslatedProcessModelServlet.java) to have as less environment requirements as possible for the example.
 In real-life use REST, JSF or whatever you always use for this job.
 
 Last step is to render the model using bpmn.io:
 
-- [index.html](xxx)
+- [index.html](https://github.com/camunda/camunda-consulting/blob/master/snippets/i18n-process-model/src/main/webapp/index.html)
 
 
 How to use it?
