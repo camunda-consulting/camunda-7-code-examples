@@ -48,6 +48,15 @@ Environment Restrictions
 
 Built and tested against Camunda BPM version 7.3.0.
 
+
+Improvement Ideas
+------------------------
+
+- Use [GNU Gettext](https://de.wikipedia.org/wiki/GNU_gettext) to use english wording as keys and keep the original BPMN readable
+  - [Java Library](https://code.google.com/p/gettext-commons/)
+- Use [CAT-Tools] (https://de.wikipedia.org/wiki/Computerunterst%C3%BCtzte_%C3%9Cbersetzung) for translation
+
+
 License
 -------
 
