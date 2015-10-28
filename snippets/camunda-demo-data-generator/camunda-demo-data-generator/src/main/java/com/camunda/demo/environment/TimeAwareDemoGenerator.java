@@ -13,11 +13,14 @@ import java.util.logging.Logger;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.camunda.bpm.application.ProcessApplicationReference;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.el.ExpressionManager;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.test.mock.MockExpressionManager;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
@@ -38,7 +41,8 @@ import org.camunda.bpm.model.xml.impl.util.IoUtil;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 
 /**
- * Classloading: Currently everything is done as JavaScript - so no classes are necessary
+ * Classloading: Currently everything is done as JavaScript - so no classes are
+ * necessary
  */
 public class TimeAwareDemoGenerator {
 
@@ -63,7 +67,7 @@ public class TimeAwareDemoGenerator {
 
   public TimeAwareDemoGenerator(ProcessEngine engine, ProcessApplicationReference processApplicationReference) {
     this.engine = engine;
-    this.processApplicationReference = processApplicationReference; 
+    this.processApplicationReference = processApplicationReference;
   }
 
   public TimeAwareDemoGenerator(ProcessEngine processEngine) {
@@ -81,7 +85,7 @@ public class TimeAwareDemoGenerator {
     Deployment deployment = engine.getRepositoryService().createDeployment() //
         .addString(processDefinitionKey + ".bpmn", originalBpmn) //
         .deploy();
-    if (processApplicationReference!=null) {
+    if (processApplicationReference != null) {
       engine.getManagementService().registerProcessApplication(deployment.getId(), processApplicationReference);
     }
 
@@ -121,7 +125,8 @@ public class TimeAwareDemoGenerator {
     for (ModelElementInstance modelElementInstance : serviceTasks) {
       ServiceTask serviceTask = ((ServiceTask) modelElementInstance);
       serviceTask.setCamundaClass(null);
-      // TODO: Wait for https://app.camunda.com/jira/browse/CAM-4178 and set to
+      // TODO: Wait for https://app.camunda.com/jira/browse/CAM-4178 and set
+      // to
       // null!
       // serviceTask.setCamundaDelegateExpression(null);
       serviceTask.setCamundaExpression("#{true}"); // Noop
@@ -142,6 +147,7 @@ public class TimeAwareDemoGenerator {
     engine.getRepositoryService().createDeployment() //
         .addModelInstance(processDefinitionKey + ".bpmn", bpmn) //
         .deploy();
+
   }
 
   protected void tweakGateway(ExclusiveGateway xorGateway) {
@@ -153,32 +159,34 @@ public class TimeAwareDemoGenerator {
     String var = "SIM_SAMPLE_VALUE_" + xorGateway.getId();
 
     Collection<SequenceFlow> flows = xorGateway.getOutgoing();
-    for (SequenceFlow sequenceFlow : flows) {
-      double probability = Double.valueOf(readCamundaProperty(sequenceFlow, "probability"));
+    if (flows.size() > 1) { // if outgoing flows = 1 it is a joining gateway
+      for (SequenceFlow sequenceFlow : flows) {
+        double probability = Double.valueOf(readCamundaProperty(sequenceFlow, "probability"));
 
-      ConditionExpression conditionExpression = bpmn.newInstance(ConditionExpression.class);
-      conditionExpression.setTextContent("#{" + var + " >= " + probabilitySum + " && " + var + " < " + (probabilitySum + probability) + "}");
-      sequenceFlow.setConditionExpression(conditionExpression);
+        ConditionExpression conditionExpression = bpmn.newInstance(ConditionExpression.class);
+        conditionExpression.setTextContent("#{" + var + " >= " + probabilitySum + " && " + var + " < " + (probabilitySum + probability) + "}");
+        sequenceFlow.setConditionExpression(conditionExpression);
 
-      probabilitySum += probability;
+        probabilitySum += probability;
+      }
+
+      // add execution listener to do decision based on random which corresponds
+      // to configured probabilities
+      // (because of expressions on outgoing sequence flows)
+      CamundaExecutionListener executionListener = bpmn.newInstance(CamundaExecutionListener.class);
+      executionListener.setCamundaEvent("start");
+      CamundaScript script = bpmn.newInstance(CamundaScript.class);
+      script.setTextContent(//
+          "sample = com.camunda.demo.environment.StatisticsHelper.nextSample(" + probabilitySum + ");\n" + "execution.setVariable('" + var + "', sample);");
+      script.setCamundaScriptFormat("Javascript");
+      executionListener.setCamundaScript(script);
+
+      if (xorGateway.getExtensionElements() == null) {
+        ExtensionElements extensionElements = bpmn.newInstance(ExtensionElements.class);
+        xorGateway.addChildElement(extensionElements);
+      }
+      xorGateway.getExtensionElements().addChildElement(executionListener);
     }
-
-    // add execution listener to do decision based on random which corresponds
-    // to configured probabilities
-    // (because of expressions on outgoing sequence flows)
-    CamundaExecutionListener executionListener = bpmn.newInstance(CamundaExecutionListener.class);
-    executionListener.setCamundaEvent("start");
-    CamundaScript script = bpmn.newInstance(CamundaScript.class);
-    script.setTextContent(//
-        "sample = com.camunda.demo.environment.StatisticsHelper.nextSample(" + probabilitySum + ");\n" + "execution.setVariable('" + var + "', sample);");
-    script.setCamundaScriptFormat("Javascript");
-    executionListener.setCamundaScript(script);
-
-    if (xorGateway.getExtensionElements() == null) {
-      ExtensionElements extensionElements = bpmn.newInstance(ExtensionElements.class);
-      xorGateway.addChildElement(extensionElements);
-    }
-    xorGateway.getExtensionElements().addChildElement(executionListener);
   }
 
   protected void copyTimeField(Calendar calFrom, Calendar calTo, int... calendarFieldConstant) {
@@ -186,7 +194,7 @@ public class TimeAwareDemoGenerator {
       calTo.set(calendarFieldConstant[i], calFrom.get(calendarFieldConstant[i]));
     }
   }
-  
+
   private boolean isInTimeFrame(Calendar cal, String startTime, String endTime) {
     try {
       // TODO: maybe cache?
@@ -195,7 +203,7 @@ public class TimeAwareDemoGenerator {
       Calendar startCal = Calendar.getInstance();
       startCal.setTime(startDate);
       copyTimeField(cal, startCal, Calendar.YEAR, Calendar.DAY_OF_YEAR);
-      
+
       Calendar endCal = Calendar.getInstance();
       endCal.setTime(endDate);
       copyTimeField(cal, endCal, Calendar.YEAR, Calendar.DAY_OF_YEAR);
@@ -207,41 +215,44 @@ public class TimeAwareDemoGenerator {
   }
 
   protected void startMultipleProcessInstances() {
-    log.info("start multiple process instances for " + numberOfDaysInPast + " workingdays in the past");
+    try {
+      log.info("start multiple process instances for " + numberOfDaysInPast + " workingdays in the past");
 
-    // for all desired days in past
-    for (int i = numberOfDaysInPast; i >= 0; i--) {
-      Calendar cal = Calendar.getInstance();
-      cal.add(Calendar.DAY_OF_YEAR, -1 * i);
-      cal.set(Calendar.HOUR_OF_DAY, 0);
-      cal.set(Calendar.MINUTE, 0);
-      
-      int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
+      // for all desired days in past
+      for (int i = numberOfDaysInPast; i >= 0; i--) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, -1 * i);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
 
-      // now lets start process instances on that day
-      if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-        // weekend
-      } else {
-        while (cal.get(Calendar.DAY_OF_YEAR) == dayOfYear) {
-          // business day (OK - simplified - do not take holidays into account)
-          double time = timeBetweenStartsBusinessDays.nextSample();
-          cal.add(Calendar.SECOND, (int) Math.round(time));
-          if (isInTimeFrame(cal, startTimeBusinessDay, endTimeBusinessDay)) {
-            ClockUtil.setCurrentTime(cal.getTime());
+        int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
 
-            runSingleProcessInstance();
+        // now lets start process instances on that day
+        if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+          // weekend
+        } else {
+          while (cal.get(Calendar.DAY_OF_YEAR) == dayOfYear) {
+            // business day (OK - simplified - do not take holidays into
+            // account)
+            double time = timeBetweenStartsBusinessDays.nextSample();
+            cal.add(Calendar.SECOND, (int) Math.round(time));
+            if (isInTimeFrame(cal, startTimeBusinessDay, endTimeBusinessDay)) {
+              ClockUtil.setCurrentTime(cal.getTime());
 
-            // Housekeeping for safety (as the run might have changed the clock)
-            ClockUtil.setCurrentTime(cal.getTime());
+              runSingleProcessInstance();
+
+              // Housekeeping for safety (as the run might have changed the
+              // clock)
+              ClockUtil.setCurrentTime(cal.getTime());
+            }
           }
         }
       }
+
+    } finally {
+      ClockUtil.reset();
     }
-
-    ClockUtil.reset();
   }
-
-
 
   protected void runSingleProcessInstance() {
     ProcessInstance pi = engine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
@@ -282,6 +293,9 @@ public class TimeAwareDemoGenerator {
       Calendar cal = Calendar.getInstance();
       cal.setTime(task.getCreateTime());
       double timeToWait = distributions.get(task.getTaskDefinitionKey()).sample();
+      if (timeToWait<=0) {
+        timeToWait=1;
+      }
       cal.add(Calendar.SECOND, (int) Math.round(timeToWait));
       ClockUtil.setCurrentTime(cal.getTime());
 

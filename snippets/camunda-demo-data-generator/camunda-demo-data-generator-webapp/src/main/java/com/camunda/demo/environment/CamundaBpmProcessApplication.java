@@ -17,7 +17,6 @@ public class CamundaBpmProcessApplication extends ServletProcessApplication {
    */
   @PostDeploy
   public void onDeploymentFinished(ProcessEngine processEngine) {
-//    DemoDataGenerator.setupFull(processEngine);
   }
 
 }
