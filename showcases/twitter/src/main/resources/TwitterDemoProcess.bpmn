@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://www.signavio.com/bpmn20">
   <process id="TwitterDemoProcess" name="TwitterDemoProcess" isExecutable="true">
-    <serviceTask id="service_task_send_rejection_notification" camunda:delegateExpression="${emailAdapter}" name="Send rejection notification">
+    <serviceTask id="service_task_send_rejection_notification" camunda:class="org.camunda.bpm.example.twitter.RejectionNotificationDelegate" name="Send rejection notification">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Tweet Rejected" name="KPI-Ratio"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>no</incoming>
       <outgoing>SequenceFlow_4</outgoing>
     </serviceTask>
     <sequenceFlow id="SequenceFlow_4" name="" sourceRef="service_task_send_rejection_notification" targetRef="gateway_join"/>
     <exclusiveGateway id="gateway_approved" name="Approved?">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Tweet Approval Time" name="KPI-Cycle-End"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>SequenceFlow_2</incoming>
       <outgoing>no</outgoing>
       <outgoing>yes</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="no" name="no&#x9;" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="13" name="probability"/>
+        </camunda:properties>
+      </extensionElements>
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_1">#{!approved}</conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="yes" name="yes" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="87" name="probability"/>
+        </camunda:properties>
+      </extensionElements>
       <conditionExpression xsi:type="tFormalExpression" id="FormalExpression_2">#{approved}</conditionExpression>
     </sequenceFlow>
     <exclusiveGateway id="gateway_join" name="Join">
@@ -23,7 +43,12 @@
       <outgoing>SequenceFlow_5</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="SequenceFlow_5" name="" sourceRef="gateway_join" targetRef="end_event_tweet_handled"/>
-    <serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetAdapter}" name="Publish on Twitter">
+    <serviceTask id="service_task_publish_on_twitter" camunda:class="org.camunda.bpm.example.twitter.TweetContentDelegate" name="Publish on Twitter">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Tweet Approved" name="KPI-Ratio"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>yes</incoming>
       <outgoing>SequenceFlow_3</outgoing>
     </serviceTask>
@@ -32,10 +57,21 @@
       <incoming>SequenceFlow_5</incoming>
     </endEvent>
     <startEvent id="start_event_new_tweet" camunda:initiator="initiator" camunda:formKey="app:createTweet.jsf" name="Tweet written">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Tweet Approval Time" name="KPI-Cycle-Start"/>
+        </camunda:properties>
+      </extensionElements>
       <outgoing>SequenceFlow_9</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_9" name="" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet"/>
     <userTask id="user_task_review_tweet" camunda:assignee="demo" camunda:formKey="app:reviewTweet.jsf" name="Review Tweet">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="10000" name="durationMean"/>
+          <camunda:property value="5000" name="durationSd"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>SequenceFlow_9</incoming>
       <outgoing>SequenceFlow_2</outgoing>
     </userTask>
