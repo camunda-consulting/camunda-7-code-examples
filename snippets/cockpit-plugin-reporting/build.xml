@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="cockpit-plugin-reporting" default="deploy.jboss">
+<project name="cockpit-plugin-process-kpi" default="deploy.jboss">
 
 	<property file="build.properties" />
 	<property file="${user.home}/.camunda/build.properties" />
@@ -22,7 +22,7 @@
 		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
 		<path id="cockpit.file.id"> 
 		    <fileset dir="${deploy.jboss.dir}"> 
-		        <include name="camunda-webapp-*jboss-*.war"/> 
+		        <include name="camunda-webapp-*.war"/> 
 		     </fileset> 
 		</path> 
 		<property name="cockpit.file" refid="cockpit.file.id"/> 

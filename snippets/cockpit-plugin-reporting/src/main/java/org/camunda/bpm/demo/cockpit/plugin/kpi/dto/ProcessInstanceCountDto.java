@@ -1,4 +1,4 @@
-package org.camunda.bpm.demo.cockpit.plugin.reporting;
+package org.camunda.bpm.demo.cockpit.plugin.kpi.dto;
 
 public class ProcessInstanceCountDto {
 

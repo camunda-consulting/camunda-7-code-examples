@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cockpit.kpi">
+
+  <resultMap id="processInstanceCountMap" type="org.camunda.bpm.demo.cockpit.plugin.kpi.dto.ProcessInstanceCountDto">
+    <result property="processDefinitionKey" column="KEY_" />
+    <result property="runningInstanceCount" column="RUNNING_COUNT" />
+    <result property="endedInstanceCount" column="ENDED_COUNT"/>
+    <result property="failedInstanceCount" column="EXCEPTIONS_COUNT"/>
+  </resultMap>
+
+  <select id="selectProcessInstanceCountsByProcessDefinition" resultMap="processInstanceCountMap">
+SELECT 
+  KEY_, 
+  SUM( CASE WHEN E.END_TIME_ IS NULL THEN 1 ELSE 0 END  ) AS RUNNING_COUNT, 
+  SUM( CASE WHEN E.END_TIME_ IS NOT NULL THEN 1 ELSE 0 END  ) AS ENDED_COUNT,   
+  SUM( HAS_EXCEPTION) AS EXCEPTIONS_COUNT
+FROM 
+   ACT_HI_PROCINST E
+   LEFT JOIN 
+       (SELECT EXECUTION_ID_, CASE WHEN EXCEPTION_STACK_ID_ IS NOT NULL AND RETRIES_ >= 0 THEN 1 ELSE NULL END AS HAS_EXCEPTION FROM ACT_RU_JOB) J
+       ON J.EXECUTION_ID_ = E.ID_
+   LEFT JOIN 
+       ACT_RE_PROCDEF def 
+       ON def.ID_ = E.PROC_DEF_ID_
+WHERE
+   E.ID_ = E.PROC_INST_ID_
+Group by (KEY_)
+  </select>
+  
+   <resultMap id="coutPerDuration" type="org.camunda.bpm.demo.cockpit.plugin.kpi.dto.CountPerDurationDto">
+    <result property="duration" column="DURATION_" />
+    <result property="count" column="COUNT_" />
+  </resultMap>
+  
+  <select id="selectCycleTimeInHours" parameterType="java.util.Map" resultMap="coutPerDuration">
+SELECT durationInHours as DURATION_, count(*) as COUNT_
+FROM (
+        SELECT actinst_start.PROC_INST_ID_, actinst_start.START_TIME_, actinst_end.END_TIME_, timestampdiff(HOUR, actinst_start.START_TIME_, actinst_end.END_TIME_) as durationInHours
+        FROM 
+                ACT_HI_ACTINST actinst_start,
+                ACT_HI_ACTINST actinst_end 
+        WHERE
+                actinst_start.ACT_ID_ = #{parameter.activityIdStart}
+                and actinst_start.PROC_DEF_KEY_ = #{parameter.processDefinitionKey}
+                and actinst_start.START_TIME_ is not null
+                
+                and actinst_end.ACT_ID_ = #{parameter.activityIdEnd}
+                and actinst_end.END_TIME_ is not null
+                and actinst_end.PROC_INST_ID_ = actinst_start.PROC_INST_ID_
+) 
+GROUP BY durationInHours
+ORDER BY durationInHours ASC
+  </select>
+
+ <resultMap id="instanceCount" type="org.camunda.bpm.demo.cockpit.plugin.kpi.dto.InstanceCountDto">
+    <result property="name" column="KEY_" />
+    <result property="date" column="hour_date" jdbcType="TIMESTAMP" />
+    <result property="count" column="instanceCount" />
+  </resultMap>
+
+  <select id="selectProcessInstanceCountPerHourForLast7Days" parameterType="java.util.Map" resultMap="instanceCount">
+select hour_date, ACT_RE_PROCDEF.KEY_ , count(*) as instanceCount
+FROM (select  sysdate as hour_date union select DATEADD('DAY', -1*rownum, sysdate) as hour_date from SYSTEM_RANGE(1, 13))
+     join act_hi_procinst on (DAY_OF_YEAR(start_time_) = DAY_OF_YEAR(hour_date))
+     join ACT_RE_PROCDEF on act_hi_procinst.PROC_DEF_ID_  = ACT_RE_PROCDEF.ID_
+     <if test="parameter['processDefinitionKey'] != null">
+WHERE ACT_RE_PROCDEF.KEY_ = #{parameter.processDefinitionKey}
+     </if>
+group by (hour_date, ACT_RE_PROCDEF.KEY_  )
+order by ACT_RE_PROCDEF.KEY_, hour_date
+  </select>
+  
+   <resultMap id="countPerOption" type="org.camunda.bpm.demo.cockpit.plugin.kpi.dto.CountPerOptionDto">
+    <result property="optionId" column="OPTION_" />
+    <result property="count" column="COUNT_" />
+  </resultMap>
+    
+  <select id="selectCountPerActivityId" parameterType="java.util.Map" resultMap="countPerOption">
+	<foreach item="item" collection="parameter['activityIds']"
+			 separator=" UNION ">
+SELECT ACT_ID_ AS OPTION_, count(*) AS COUNT_ FROM PUBLIC.ACT_HI_ACTINST WHERE ACT_HI_ACTINST.ACT_ID_ = #{item}
+  	</foreach>  
+  </select>
+</mapper>

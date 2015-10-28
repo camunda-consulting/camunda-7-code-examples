@@ -5,171 +5,193 @@ ngDefine('cockpit.plugin.reporting-process-count',
 		 function(module) {
 
   var DashboardController = function($scope, $http, Uri) {
-
     $http.get(Uri.appUri("plugin://reporting-process-count/:engine/process-instance-count"))
       .success(function(data) {
-        printChart(data)
+					printStartedInstances(data);
+      });
+  };
+
+
+  var ProcessDefinitionKpiController = function($scope, $http, Uri) {
+  	var baseUrl = "plugin://reporting-process-count/:engine/" + $scope.processDefinition.key;
+    $http.get(Uri.appUri(baseUrl + "/process-instance-count"))
+      .success(function(data) {
+					printStartedInstances(data);
+      });
+    $http.get(Uri.appUri(baseUrl + "/cycle-time/hour"))
+      .success(function(data) {
+					printCycleTime(data);
+      });
+    $http.get(Uri.appUri(baseUrl + "/ratio"))
+      .success(function(data) {
+					printRatio(data);
       });
   };
 
   DashboardController.$inject = ["$scope", "$http", "Uri"];
+  ProcessDefinitionKpiController.$inject = ["$scope", "$http", "Uri"];
   
   var Configuration = function Configuration(ViewsProvider) {
 
 	    ViewsProvider.registerDefaultView('cockpit.dashboard', {
 	      id: 'process-definitions',
-	      label: 'Process Instance Count',
+	      label: 'Statistics',
 	      url: 'plugin://reporting-process-count/static/app/dashboard.html',
 	      controller: DashboardController,
 
 	      // make sure we have a higher priority than the default plugin
 	      priority: 12
 	    });
+	    
+			ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
+				id: 'runtime',
+				priority: -50,// put at the end
+				label: 'KPI',
+				url: 'plugin://reporting-process-count/static/app/processDefinition.html',
+				controller: ProcessDefinitionKpiController
+			});	    
 	  };
+	  
 
 	  Configuration.$inject = ['ViewsProvider'];
 
 	  module.config(Configuration);
 
-	  return module;  
-
-//
-//  var PluginConfiguration = function PluginConfiguration(PluginsProvider) {
-//
-//    PluginsProvider.registerDefaultPlugin('cockpit.dashboard', {
-//      id: 'process-definitions',
-//      label: 'Process Instance Count',
-//      url: 'plugin://reporting-process-count/static/app/dashboard.html',
-//      controller: DashboardController
-//    });
-//  };
-//
-//  PluginConfiguration.$inject = ['PluginsProvider'];
-//
-//  module.config(PluginConfiguration);
-//
-//  return module;
+	  return module;
 });
 
 
-function printChart(data) {
-	// create categories array
-	processDefinitionKey = {};
 
-	// and data
+function printCycleTime(data) {
+	$('#cycleTimeInfo').html( data.name + "<br>(Calculated from <em>'" + data.startName + "'</em> to <em>'" + data.endName + "</em>')" );
+
 	seriesData = [{
-        name: 'Failed',
-        data: []
-    }, {
-        name: 'Running',
-        data: []
-    }, {
-        name: 'Ended',
-        data: []
-    }];
-	
-	pieData = [];	
-	overallSum = 0;
-	for( var i=0; i<data.length; i++ ) {
-         processDefinitionKey[i] = data[i].processDefinitionKey;
-         seriesData[1].data[i] = parseInt(data[i].failedInstanceCount);
-         seriesData[1].data[i] = parseInt(data[i].runningInstanceCount - data[i].failedInstanceCount); // failed are running in the query, but should not in the graph
-         seriesData[2].data[i] = parseInt(data[i].endedInstanceCount);
-         
-         sum = seriesData[2].data[i] + seriesData[1].data[i] + seriesData[1].data[i];
-         overallSum = overallSum + sum;
-         
-         pieData[i] = [data[i].processDefinitionKey, sum];
+            name: 'Duration in Hours',
+            data: []
+          }];
+  
+  for( var i=0; i<data.timesPerDuration.length; i++ ) {
+     seriesData[0].data.push([
+     		data.timesPerDuration[i].duration + " h",
+     		data.timesPerDuration[i].count 
+     	]);
 	}	
 	
-	$('#instance-count-bar').highcharts({
+	$('#barChart').highcharts({
+		 		title: {
+		 			text: null
+		 		},
+		 		legend: {
+		 			enabled: false
+		 		},
         chart: {
-            type: 'bar'
-        },
-        colors: ['#910000', '#8bbc21', '#0d233a'],
-        title: {
-            text: 'instance count per state'
+            type: 'column'
         },
         xAxis: {
-            categories: processDefinitionKey,
-            title: {
-                text: null
+						type: 'category',    
+            labels: {
+                overflow: 'justify'
             }
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Number of instances',
+                text: null,
                 align: 'high'
             },
             labels: {
                 overflow: 'justify'
             }
-        },
-        tooltip: {
-            valueSuffix: ' instances'
-        },
-        plotOptions: {
-            bar: {
-                dataLabels: {
-                    enabled: true
-                }
-            }
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -100,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true
-        },
+        },       
         credits: {
             enabled: true
         },
         series: seriesData
-    });
-	
-	// -------------------
-	$('#definition-pie').highcharts({
+    });	
+}
+
+
+
+function printRatio(data) {
+
+	seriesData = [];
+  for( var i=0; i<data.length; i++ ) {
+         seriesData.push([data[i].optionName, data[i].count]);
+	}	
+
+	$('#pieChart').highcharts({
+		 		title: {
+		 			text: null
+		 		},
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
         },
-        title: {
-            text: 'instance sum per process definition'
-        },
         tooltip: {
-    	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-        	percentageDecimals: 1
+    	    pointFormat: '<b>{point.y}</b>'
         },
         plotOptions: {
             pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
                 dataLabels: {
                     enabled: true,
-                    color: '#000000',
-                    connectorColor: '#000000',
                     formatter: function() {
-                        return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+                        return '<b>'+ this.point.name +'</b>: ' + Math.round(this.percentage*100)/100 + ' %';
                     }
                 }
             }
         },
         series: [{
             type: 'pie',
-            name: 'instances per process definition',
-            data: pieData
+            data: seriesData
         }],
         credits: {
             enabled: true
         }
     });
-
 }
+
+function printStartedInstances(data) {
+	
+	var legend = {enabled: false};
+	if (data.series.length > 1) {
+		legend = {
+			layout : 'vertical',
+			align : 'right',
+			verticalAlign : 'middle',
+			borderWidth : 0,
+			enabled: true
+		}
+	}
+	
+	$('#lineChart').highcharts({
+ 		title: {
+ 			text: null
+ 		},
+		subtitle : {
+			text : null,
+			x : -20
+		},
+		xAxis : {
+			categories : data.categories
+		},
+		yAxis : {
+			title : {
+				text : null
+			},
+			plotLines : [ {
+				value : 0,
+				width : 1,
+				color : '#808080'
+			} ],
+			min : 0
+		},
+		tooltip : {
+			valueSuffix : ''
+		},
+		legend : legend,
+		series : data.series
+	});
+}
+
 
