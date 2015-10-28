@@ -81,7 +81,7 @@ order by ACT_RE_PROCDEF.KEY_, hour_date
   <select id="selectCountPerActivityId" parameterType="java.util.Map" resultMap="countPerOption">
 	<foreach item="item" collection="parameter['activityIds']"
 			 separator=" UNION ">
-SELECT ACT_ID_ AS OPTION_, count(*) AS COUNT_ FROM PUBLIC.ACT_HI_ACTINST WHERE ACT_HI_ACTINST.ACT_ID_ = #{item}
+SELECT '${item}' AS OPTION_, count(*) AS COUNT_ FROM PUBLIC.ACT_HI_ACTINST WHERE ACT_HI_ACTINST.ACT_ID_ = #{item}
   	</foreach>  
   </select>
 </mapper>
