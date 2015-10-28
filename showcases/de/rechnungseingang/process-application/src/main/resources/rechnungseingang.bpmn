@@ -19,6 +19,7 @@
       <lane id="Approver" name="Freigebender">
         <flowNodeRef>approveInvoice</flowNodeRef>
         <flowNodeRef>invoice_approved</flowNodeRef>
+        <flowNodeRef>IntermediateCatchEvent_1</flowNodeRef>
       </lane>
       <lane id="teamAssistant" name="Team Assistenz">
         <flowNodeRef>reviewInvoice</flowNodeRef>
@@ -28,9 +29,9 @@
         <flowNodeRef>StartEvent_1</flowNodeRef>
       </lane>
       <lane id="Accountant" name="Buchhaltung">
-        <flowNodeRef>prepareBankTransfer</flowNodeRef>
         <flowNodeRef>invoiceProcessed</flowNodeRef>
         <flowNodeRef>ServiceTask_1</flowNodeRef>
+        <flowNodeRef>prepareBankTransfer</flowNodeRef>
       </lane>
     </laneSet>
     <userTask id="approveInvoice" camunda:formKey="embedded:app:forms/approve-invoice.html" camunda:assignee="${approver}" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}" name="Rechnung freigeben">
@@ -64,16 +65,6 @@
       <outgoing>reviewNotSuccessful</outgoing>
       <outgoing>reviewSuccessful</outgoing>
     </exclusiveGateway>
-    <userTask id="prepareBankTransfer" camunda:formKey="embedded:app:forms/prepare-bank-transfer.html" camunda:candidateGroups="buchhaltung" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}" name="Bezahlung vorbereiten">
-      <extensionElements>
-        <camunda:properties>
-          <camunda:property value="5000" name="durationMean"/>
-          <camunda:property value="600" name="durationSd"/>
-        </camunda:properties>
-      </extensionElements>
-      <incoming>invoiceApproved</incoming>
-      <outgoing>SequenceFlow_2</outgoing>
-    </userTask>
     <sequenceFlow id="invoiceNotApproved" name="nein" isImmediate="true" sourceRef="invoice_approved" targetRef="reviewInvoice">
       <extensionElements>
         <camunda:properties>
@@ -84,7 +75,7 @@
     </sequenceFlow>
     <sequenceFlow id="sequenceFlow_180" isImmediate="true" sourceRef="approveInvoice" targetRef="invoice_approved"/>
     <sequenceFlow id="sequenceFlow_183" isImmediate="true" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw"/>
-    <sequenceFlow id="invoiceApproved" name="ja" isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer">
+    <sequenceFlow id="invoiceApproved" name="ja" isImmediate="true" sourceRef="invoice_approved" targetRef="IntermediateCatchEvent_1">
       <extensionElements>
         <camunda:properties>
           <camunda:property value="75" name="probability"/>
@@ -109,18 +100,22 @@
       <conditionExpression xsi:type="tFormalExpression">${clarified}</conditionExpression>
     </sequenceFlow>
     <dataStoreReference id="DataStoreReference_1" name="Buchhaltungs-&#xD;&#xA;system" dataStoreRef="FinancialAccountingSystem"/>
-    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="prepareBankTransfer" targetRef="ServiceTask_1"/>
     <endEvent id="invoiceNotProcessed" name="Rechnung nicht&#xD;&#xA;erfolgreich verarbeitet">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="RG zurückgewiesen" name="KPI-Ratio"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>reviewNotSuccessful</incoming>
     </endEvent>
     <endEvent id="invoiceProcessed" name="Rechnung&#xD;&#xA;erfolgreich verarbeitet">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="RG verarbeitet" name="KPI-Ratio"/>
+        </camunda:properties>
+      </extensionElements>
       <incoming>SequenceFlow_3</incoming>
     </endEvent>
-    <serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpm.example.invoice.service.ArchiveInvoiceService" camunda:async="true" name="Rechnung archivieren">
-      <incoming>SequenceFlow_2</incoming>
-      <outgoing>SequenceFlow_3</outgoing>
-    </serviceTask>
-    <sequenceFlow id="SequenceFlow_3" name="" sourceRef="ServiceTask_1" targetRef="invoiceProcessed"/>
     <userTask id="assignApprover" camunda:formKey="embedded:app:forms/assign-approver.html" camunda:dueDate="${dateTime().plusDays(3).toDate()}" camunda:candidateGroups="assistenz" name="Freigebenden auswählen">
       <extensionElements>
         <camunda:properties>
@@ -133,9 +128,40 @@
     </userTask>
     <sequenceFlow id="sequenceFlow_178" isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice"/>
     <startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/start-form.html" name="Rechnung&#xD;&#xA;eingegangen">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Dauer Rechnungsfreigabe" name="KPI-Cycle-Start"/>
+        </camunda:properties>
+      </extensionElements>
       <outgoing>SequenceFlow_1</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="assignApprover"/>
+    <serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpm.example.invoice.service.ArchiveInvoiceService" camunda:async="true" name="Rechnung archivieren">
+      <incoming>SequenceFlow_2</incoming>
+      <outgoing>SequenceFlow_3</outgoing>
+    </serviceTask>
+    <sequenceFlow id="SequenceFlow_3" name="" sourceRef="ServiceTask_1" targetRef="invoiceProcessed"/>
+    <userTask id="prepareBankTransfer" camunda:formKey="embedded:app:forms/prepare-bank-transfer.html" camunda:candidateGroups="buchhaltung" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}" name="Bezahlung vorbereiten">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="5000" name="durationMean"/>
+          <camunda:property value="600" name="durationSd"/>
+        </camunda:properties>
+      </extensionElements>
+      <incoming>SequenceFlow_4</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+    </userTask>
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="prepareBankTransfer" targetRef="ServiceTask_1"/>
+    <intermediateThrowEvent id="IntermediateCatchEvent_1" name="Rechnung&#xD;&#xA;freigegeben">
+      <extensionElements>
+        <camunda:properties>
+          <camunda:property value="Dauer Rechnungsfreigabe" name="KPI-Cycle-End"/>
+        </camunda:properties>
+      </extensionElements>
+      <incoming>invoiceApproved</incoming>
+      <outgoing>SequenceFlow_4</outgoing>
+    </intermediateThrowEvent>
+    <sequenceFlow id="SequenceFlow_4" name="" sourceRef="IntermediateCatchEvent_1" targetRef="prepareBankTransfer"/>
     <association id="Association_1" sourceRef="DataStoreReference_1" targetRef="prepareBankTransfer"/>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_73">
@@ -180,7 +206,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="zberweisung_vorbereiten_169_gui" bpmnElement="prepareBankTransfer" isHorizontal="true">
-        <omgdc:Bounds height="80.0" width="100.0" x="638.0" y="383.0"/>
+        <omgdc:Bounds height="80.0" width="100.0" x="660.0" y="383.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Rechnungseingang_abgearbeitet_174_gui" bpmnElement="invoiceProcessed" isHorizontal="true">
         <omgdc:Bounds height="28.0" width="28.0" x="929.0" y="409.0"/>
@@ -226,16 +252,16 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_1_gui" bpmnElement="Association_1" sourceElement="DataStoreReference_1_gui" targetElement="zberweisung_vorbereiten_169_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="625.0" y="516.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="661.0" y="463.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="631.0" y="516.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="676.0" y="463.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Ja_181_gui" bpmnElement="invoiceApproved" sourceElement="Freigabe_erfolgt__131_gui" targetElement="zberweisung_vorbereiten_169_gui">
+      <bpmndi:BPMNEdge id="Ja_181_gui" bpmnElement="invoiceApproved" sourceElement="Freigabe_erfolgt__131_gui" targetElement="_BPMNShape_IntermediateCatchEvent_2">
         <omgdi:waypoint xsi:type="omgdc:Point" x="528.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="423.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="638.0" y="423.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="550.0" y="264.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="550.0" y="263.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="576.0" y="263.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="26.0" width="32.0" x="540.0" y="237.0"/>
+          <omgdc:Bounds height="22.0" width="16.0" x="528.0" y="241.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="nein_185_gui" bpmnElement="reviewNotSuccessful" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="endEvent_165_gui">
@@ -255,10 +281,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_2" sourceElement="zberweisung_vorbereiten_169_gui" targetElement="_BPMNShape_ServiceTask_2">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="738.0" y="423.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="780.0" y="423.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="760.0" y="423.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="792.0" y="423.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="745.0" y="423.0"/>
+          <omgdc:Bounds height="6.0" width="6.0" x="767.0" y="423.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_3" bpmnElement="StartEvent_1">
@@ -275,13 +301,28 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="ServiceTask_1">
-        <omgdc:Bounds height="80.0" width="100.0" x="780.0" y="383.0"/>
+        <omgdc:Bounds height="80.0" width="100.0" x="792.0" y="383.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ServiceTask_2" targetElement="Rechnungseingang_abgearbeitet_174_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="880.0" y="423.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="892.0" y="423.0"/>
         <omgdi:waypoint xsi:type="omgdc:Point" x="929.0" y="423.0"/>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="913.0" y="423.0"/>
+          <omgdc:Bounds height="6.0" width="6.0" x="925.0" y="423.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_IntermediateCatchEvent_2" bpmnElement="IntermediateCatchEvent_1">
+        <omgdc:Bounds height="28.0" width="28.0" x="576.0" y="249.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="38.0" width="74.0" x="553.0" y="276.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_IntermediateCatchEvent_2" targetElement="zberweisung_vorbereiten_169_gui">
+        <omgdi:waypoint xsi:type="omgdc:Point" x="604.0" y="263.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="624.0" y="263.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="624.0" y="423.0"/>
+        <omgdi:waypoint xsi:type="omgdc:Point" x="660.0" y="423.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="6.0" width="6.0" x="621.0" y="340.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

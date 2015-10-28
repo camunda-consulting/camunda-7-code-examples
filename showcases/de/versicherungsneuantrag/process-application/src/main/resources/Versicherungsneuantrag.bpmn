@@ -5,6 +5,11 @@
   </bpmn2:collaboration>
   <bpmn2:process id="versicherungsneuantrag" name="Versicherungsneuantrag" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" camunda:asyncAfter="true" name="Antrag&#xA;erhalten">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="Antragsentscheidung" name="KPI-Cycle-Start"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:exclusiveGateway id="ExclusiveGatewayPruefung" name="Risikobewertung?">
@@ -26,18 +31,43 @@
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTaskAntragAutomatischPruefen"/>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="BusinessRuleTaskAntragAutomatischPruefen" targetRef="ExclusiveGatewayPruefung"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="gelb &#xA;(Risiken erkannt)" sourceRef="ExclusiveGatewayPruefung" targetRef="userTaskAntragEntscheiden">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="30" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung == 'gelb'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="grün &#xA;(keine Risiken)" sourceRef="ExclusiveGatewayPruefung" targetRef="serviceTaskPoliceAusstellen">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="55" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risks.size()==0}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_16" name="rot &#xA;(Hohes Risiko)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTask_0o3o39j">
+    <bpmn2:sequenceFlow id="SequenceFlow_16" name="rot &#xD;&#xA;(Hohes Risiko)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTask_0o3o39j">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="15" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung == 'rot'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="Antrag &#xA;annehmen" sourceRef="ExclusiveGateway_2" targetRef="serviceTaskPoliceAusstellen">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="80" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Antrag &#xA;ablehnen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTask_0o3o39j">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="20" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask id="serviceTaskPoliceAusstellen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.IssuePolicyAdapter" name="Policierung im Bestandssystem">
@@ -57,6 +87,11 @@
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:endEvent id="EndEventAntragPoliciert" name="Antrag &#xA;policiert">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="Policiert" name="KPI-Ratio"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="serviceTaskPoliceAusstellen" targetRef="sendTaskPoliceZusenden"/>
@@ -78,6 +113,11 @@
       <bpmn2:outgoing>SequenceFlow_01vh1zw</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Antrag &#xA;abgelehnt">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="Abgelehnt" name="KPI-Ratio"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_01vh1zw" sourceRef="ServiceTask_0o3o39j" targetRef="SendTaskAblehnungZusenden"/>
@@ -91,6 +131,13 @@
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="sachbearbeiter" camunda:dueDate="${dateTime().plusDays(1).toDate()}" name="Antrag entscheiden">
+      <bpmn2:extensionElements>
+        <camunda:properties>
+          <camunda:property value="Antragsentscheidung" name="KPI-Cycle-End"/>
+          <camunda:property value="250000" name="durationMean"/>
+          <camunda:property value="200000" name="durationSd"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:userTask>
