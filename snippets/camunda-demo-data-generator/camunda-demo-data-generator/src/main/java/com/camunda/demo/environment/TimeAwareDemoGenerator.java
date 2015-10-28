@@ -100,18 +100,8 @@ public class TimeAwareDemoGenerator {
         .singleResult();
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
-    originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument()); // do
-                                                                          // not
-                                                                          // do
-                                                                          // a
-                                                                          // validation
-                                                                          // here
-                                                                          // as
-                                                                          // it
-                                                                          // caused
-                                                                          // quite
-                                                                          // strange
-                                                                          // trouble
+    originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument());
+    // do not do a validation here as it caused quite strange trouble
     log.finer("-----\n" + originalBpmn + "\n------");
 
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
@@ -293,8 +283,8 @@ public class TimeAwareDemoGenerator {
       Calendar cal = Calendar.getInstance();
       cal.setTime(task.getCreateTime());
       double timeToWait = distributions.get(task.getTaskDefinitionKey()).sample();
-      if (timeToWait<=0) {
-        timeToWait=1;
+      if (timeToWait <= 0) {
+        timeToWait = 1;
       }
       cal.add(Calendar.SECOND, (int) Math.round(timeToWait));
       ClockUtil.setCurrentTime(cal.getTime());
