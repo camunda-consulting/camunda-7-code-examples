@@ -12,6 +12,8 @@ In order to use this you have to
 Instrument your BPMN process
 ----------------
 
+*Hint:* All times are expressed in *seconds*.
+
 ### Add Probabilities to all outgoing Sequence Flows on XOR-Gateways:
 
 ![Probability on Sequence Flow](decisionProbability.png)
