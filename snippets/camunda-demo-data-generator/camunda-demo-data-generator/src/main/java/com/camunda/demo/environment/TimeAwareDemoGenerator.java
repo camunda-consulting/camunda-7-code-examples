@@ -22,6 +22,7 @@ import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.mock.MockExpressionManager;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
@@ -116,10 +117,12 @@ public class TimeAwareDemoGenerator {
       ServiceTask serviceTask = ((ServiceTask) modelElementInstance);
       serviceTask.setCamundaClass(null);
       // TODO: Wait for https://app.camunda.com/jira/browse/CAM-4178 and set
-      // to
-      // null!
+      // to null!
       // serviceTask.setCamundaDelegateExpression(null);
-      serviceTask.setCamundaExpression("#{true}"); // Noop
+      // Workaround:
+      serviceTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");
+      
+      serviceTask.setCamundaExpression("#{true}"); // Noop      
     }
 
     for (ModelElementInstance modelElementInstance : userTasks) {
