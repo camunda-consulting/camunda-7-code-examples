@@ -16,7 +16,9 @@ import javax.jms.TextMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.history.HistoricActivityInstance;
 import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
@@ -26,6 +28,9 @@ public class CallbackService {
 
   @Inject
   private RuntimeService runtimeService;
+  
+  @Inject
+  private HistoryService historyService;
   
   @PersistenceContext
   private EntityManager entityManager;
@@ -63,8 +68,20 @@ public class CallbackService {
 //	  	.setVariable("payload", payload)
 //	  	.correlate();
 	  
+    ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+      .processInstanceBusinessKey(correlationKey) // requires unique business key
+      .singleResult();
+    
+    HistoricActivityInstance historicActivityInstance = historyService.createHistoricActivityInstanceQuery()
+      .processInstanceId(processInstance.getId())
+      .activityId("SendTask_1")
+      .singleResult();
+    
+    runtimeService.messageEventReceived(messageName, historicActivityInstance.getExecutionId(), processVariables);
+
+    // Business Key
     runtimeService.createMessageCorrelation(messageName)
-      .processInstanceBusinessKey(correlationKey)
+      .processInstanceBusinessKey(correlationKey) // requires unique business key
       .setVariable("payload", payload)
       .correlate();
   
