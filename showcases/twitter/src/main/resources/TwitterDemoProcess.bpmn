@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://www.signavio.com/bpmn20">
   <process id="TwitterDemoProcess" name="TwitterDemoProcess" isExecutable="true">
-    <serviceTask id="service_task_send_rejection_notification" camunda:class="org.camunda.bpm.example.twitter.RejectionNotificationDelegate" name="Send rejection notification">
+    <serviceTask id="service_task_send_rejection_notification" camunda:delegateExpression="#{emailAdapter}" name="Send rejection notification">
       <extensionElements>
         <camunda:properties>
           <camunda:property value="Tweet Rejected" name="KPI-Ratio"/>
@@ -43,7 +43,7 @@
       <outgoing>SequenceFlow_5</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="SequenceFlow_5" name="" sourceRef="gateway_join" targetRef="end_event_tweet_handled"/>
-    <serviceTask id="service_task_publish_on_twitter" camunda:class="org.camunda.bpm.example.twitter.TweetContentDelegate" name="Publish on Twitter">
+    <serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetAdapter}" name="Publish on Twitter">
       <extensionElements>
         <camunda:properties>
           <camunda:property value="Tweet Approved" name="KPI-Ratio"/>

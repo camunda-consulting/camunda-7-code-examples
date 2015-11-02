@@ -12,6 +12,7 @@ import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.engine.test.mock.Mocks;
 import org.camunda.bpm.engine.variable.Variables;
 import org.junit.After;
 import org.junit.Rule;
@@ -25,6 +26,8 @@ public class ProcessTestCase {
   @Test
   @Deployment(resources = "TwitterDemoProcess.bpmn")
   public void testRejectedPath() {
+    Mocks.register("emailAdapter", new RejectionNotificationDelegate()); // get expression to work without Spring or CDI in JUnit
+    
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("content", "We will never see this content on Twitter");
     variables.put("email", "bernd.ruecker@camunda.com");
@@ -37,7 +40,7 @@ public class ProcessTestCase {
     assertThat(processInstance).isStarted() //
     	.isWaitingAt("user_task_review_tweet") //
     	.task() //
-    	.hasCandidateGroup("management");
+    	.isAssignedTo("demo");
     
     complete(task(), Variables.createVariables().putValue("approved", Boolean.FALSE));
     

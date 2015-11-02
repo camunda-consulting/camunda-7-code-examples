@@ -46,7 +46,8 @@ public class MockitoTestCase {
 	public void testUserTaskRejected() throws Exception{
 		
 		Mocks.register("tweetAdapter", new TweetContentDelegate()); // not actually a mock, but works without CDI
-		
+    Mocks.register("emailAdapter", new RejectionNotificationDelegate()); // not actually a mock, but works without CDI
+				
 		AccessToken mockToken = Mockito.mock(AccessToken.class);
 		PowerMockito.whenNew(AccessToken.class).withAnyArguments().thenReturn(mockToken);
 		
