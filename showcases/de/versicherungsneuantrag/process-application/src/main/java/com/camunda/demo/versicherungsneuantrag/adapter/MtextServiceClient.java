@@ -14,9 +14,9 @@ import de.kwsoft.mtext.adapters.ws.IntegrationAdapterService;
 import de.kwsoft.mtext.adapters.ws.NamedData;
 import de.kwsoft.mtext.adapters.ws.PrintResult;
 
-public class MTEXT {
+public class MtextServiceClient implements MtextService {
 
-  public static byte[] generateAndDistributeDocument(String xml, String dataBinding) throws IntegrationAdapterException_Exception, IOException {
+  public byte[] generateAndDistributeDocument(String xml, String dataBinding) throws IntegrationAdapterException_Exception, IOException {
     final String documentName = "DoesNotMatter";
     final String dataSourceName = "DATA";
 
@@ -24,7 +24,7 @@ public class MTEXT {
     final IntegrationAdapter integrationAdapter = service.getIntegrationAdapterPort();
 
     final Properties props = new Properties();
-    props.load(MTEXTRejectionAdapter.class.getClassLoader().getResourceAsStream("credentials.properties"));
+    props.load(MtextServiceClient.class.getClassLoader().getResourceAsStream("credentials.properties"));
     final ConfigurationProperties config = convert(props);
 
     final NamedData nd = new NamedData();

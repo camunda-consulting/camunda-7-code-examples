@@ -38,7 +38,7 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung == 'gelb'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="grün &#xA;(keine Risiken)" sourceRef="ExclusiveGatewayPruefung" targetRef="serviceTaskPoliceAusstellen">
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="grün &#xA;(keine Risiken)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property value="55" name="probability"/>
@@ -46,7 +46,7 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risks.size()==0}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_16" name="rot &#xD;&#xA;(Hohes Risiko)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTask_0o3o39j">
+    <bpmn2:sequenceFlow id="SequenceFlow_16" name="rot &#xD;&#xA;(Hohes Risiko)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property value="15" name="probability"/>
@@ -54,7 +54,7 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung == 'rot'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Antrag &#xA;annehmen" sourceRef="ExclusiveGateway_2" targetRef="serviceTaskPoliceAusstellen">
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Antrag &#xA;annehmen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property value="80" name="probability"/>
@@ -62,7 +62,7 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_12" name="Antrag &#xA;ablehnen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTask_0o3o39j">
+    <bpmn2:sequenceFlow id="SequenceFlow_12" name="Antrag &#xA;ablehnen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property value="20" name="probability"/>
@@ -70,18 +70,21 @@
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="serviceTaskPoliceAusstellen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.IssuePolicyAdapter" name="Policierung im Bestandssystem">
+    <bpmn2:serviceTask id="ServiceTaskPoliceAusstellen" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.IssuePolicyAdapter" name="Policierung im Bestandssystem">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sendTask id="sendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTPolicyAdapter" camunda:async="true" name="Police ausstellen und zusenden">
+    <bpmn2:sendTask id="SendTaskPoliceZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MtextAdapter" camunda:async="true" name="Police ausstellen und zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="documentXml">
             <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl"/>
           </camunda:inputParameter>
         </camunda:inputOutput>
+        <camunda:field name="mtextTemplate">
+          <camunda:string>\\Police\Vorlagen\KFZ-Versicherung.dataBinding</camunda:string>
+        </camunda:field>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
@@ -94,20 +97,23 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="serviceTaskPoliceAusstellen" targetRef="sendTaskPoliceZusenden"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="sendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert"/>
-    <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MTEXTRejectionAdapter" camunda:async="true" name="Ablehnung zusenden">
+    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ServiceTaskPoliceAusstellen" targetRef="SendTaskPoliceZusenden"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="SendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert"/>
+    <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MtextAdapter" camunda:async="true" name="Ablehnung zusenden">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="documentXml">
             <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl"/>
           </camunda:inputParameter>
         </camunda:inputOutput>
+        <camunda:field name="mtextTemplate">
+          <camunda:string>\\Ablehnung\Vorlagen\Ablehnung.dataBinding</camunda:string>
+        </camunda:field>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_01vh1zw</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:sendTask>
-    <bpmn2:serviceTask id="ServiceTask_0o3o39j" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.LoggerDelegate" name="Ablehnung im Bestandsystem vermerken">
+    <bpmn2:serviceTask id="ServiceTaskAblehnungVermerken" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.LoggerDelegate" name="Ablehnung im Bestandsystem vermerken">
       <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_01vh1zw</bpmn2:outgoing>
@@ -120,7 +126,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_01vh1zw" sourceRef="ServiceTask_0o3o39j" targetRef="SendTaskAblehnungZusenden"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_01vh1zw" sourceRef="ServiceTaskAblehnungVermerken" targetRef="SendTaskAblehnungZusenden"/>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt"/>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="UserTaskAntragspruefungBeschleunigen" targetRef="EndEventAntragBeschleunigt"/>
     <bpmn2:userTask id="UserTaskAntragspruefungBeschleunigen" camunda:candidateGroups="management" name="Antragsprüfung beschleunigen">
@@ -169,10 +175,10 @@
           <dc:Bounds height="38.0" width="52.0" x="51.0" y="93.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_SendTask_2" bpmnElement="sendTaskPoliceZusenden">
+      <bpmndi:BPMNShape id="_BPMNShape_SendTask_2" bpmnElement="SendTaskPoliceZusenden">
         <dc:Bounds height="80.0" width="100.0" x="960.0" y="30.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="serviceTaskPoliceAusstellen">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTaskPoliceAusstellen">
         <dc:Bounds height="80.0" width="100.0" x="816.0" y="31.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_2" bpmnElement="EndEventAntragPoliciert">
@@ -295,7 +301,7 @@
           <dc:Bounds height="6.0" width="6.0" x="977.0" y="353.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0o3o39j_di" bpmnElement="ServiceTask_0o3o39j">
+      <bpmndi:BPMNShape id="ServiceTask_0o3o39j_di" bpmnElement="ServiceTaskAblehnungVermerken">
         <dc:Bounds height="80.0" width="100.0" x="816.0" y="312.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_01vh1zw_di" bpmnElement="SequenceFlow_01vh1zw">

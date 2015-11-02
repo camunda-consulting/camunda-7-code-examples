@@ -30,10 +30,7 @@ public class NeuantragProcessTest {
   @Rule
   public ProcessEngineRule rule = new ProcessEngineRule();
 
-  private static final String PROCESS_BPMN_FILE = "NeuantragKfz.bpmn";
   private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantrag";
-//  private static final String PROCESS_BPMN_FILE = "NeuantragKfzMitDokumentenerstellung.bpmn";
-//  private static final String PROCESS_DEFINITION_KEY = "versicherungsneuantragMitDokumentenerstellung";
 
   // enable more detailed logging
   static {
@@ -50,13 +47,13 @@ public class NeuantragProcessTest {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {"NeuantragKfz.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Dokumentenanforderung.bpmn", "Risikopruefung.dmn"})
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Risikopruefung.dmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", })
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Risikopruefung.dmn", "Dokumentenanforderung.bpmn", })
   public void testDunkelverarbeitungPoliciert() {
     Neuantrag neuantrag = DemoData.createNeuantrag(40, true, "VW", "Golf V");
     
@@ -66,13 +63,17 @@ public class NeuantragProcessTest {
         
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("versicherungsneuantrag", variables);
     
+    assertThat(processInstance).job();
+    execute(job()); // start event
+    execute(job()); // send task
+        
     // Dunkelverarbeitung!
     assertThat(processInstance).isEnded()
-      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "ServiceTaskPoliceAusstellen", "SendTaskPoliceZusenden", "EndEventAntragPoliciert");    
+      .hasPassed("BusinessRuleTaskAntragAutomatischPruefen", "ServiceTaskPoliceAusstellen", "SendTaskPoliceZusenden", "EndEventAntragPoliciert");    
   }
 
   @Test
-  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
+  @Deployment(resources = {"Versicherungsneuantrag.bpmn",  "Dokumentenanforderung.bpmn", "Risikopruefung.dmn"})
   public void testDunkelverarbeitungAbgelehnt() {
     Neuantrag neuantrag = DemoData.createNeuantrag(20, true, "Porsche", "911");
     
@@ -83,8 +84,12 @@ public class NeuantragProcessTest {
         
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
     
+    assertThat(processInstance).job();
+    execute(job()); // start event
+    execute(job()); // send task
+    
     assertThat(processInstance)
-      .hasPassedInOrder("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt")
+      .hasPassed("BusinessRuleTaskAntragAutomatischPruefen", "SendTaskAblehnungZusenden", "EndEventAntragAbgelehnt")
       .isEnded();    
   }
 
@@ -114,60 +119,62 @@ public class NeuantragProcessTest {
     execute(job());
     
     assertThat(processInstance).isEnded()
-      .hasPassed("serviceTaskPoliceAusstellen", "sendTaskPoliceZusenden");    
+      .hasPassed("ServiceTaskPoliceAusstellen", "SendTaskPoliceZusenden");    
   }  
   
-  @Test
-  @Deployment(resources = {PROCESS_BPMN_FILE, "Neuantragspruefung.cmmn", "DokumentAnfordern.bpmn", "Risikopruefung.dmn"})
-  public void testCase() {
-    Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
-    
-    VariableMap variables = Variables.createVariables();
-    variables.putValue(
-        ProcessVariables.VAR_NAME_neuantrag,
-        Variables.objectValue(neuantrag).serializationDataFormat(SerializationDataFormats.JSON).create());
-        
-    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
-    
-    assertThat(processInstance).isWaitingAtExactly("CallActivityAntragManuellPruefen");
-    
-    CaseInstance caseInstance = processEngine().getCaseService().createCaseInstanceQuery()
-      .superProcessInstanceId(processInstance.getId()).singleResult();
-
-    CaseExecution caseExecution = processEngine().getCaseService().createCaseExecutionQuery()
-        .caseInstanceId(caseInstance.getId()) //
-        .activityId("PI_humanTaskAntragsBeurteilung").singleResult();
-
-    // Check lister for follow-up date when activating one task
-    // before no follow-up date
-    Task task = processEngine().getTaskService().createTaskQuery() //
-        .caseInstanceId(caseInstance.getId())
-        .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
-        .singleResult();
-    assertNull(task.getFollowUpDate());
-
-    processEngine().getCaseService().manuallyStartCaseExecution(caseExecution.getId());
-    
-    // after: follow-up date
-    task = processEngine().getTaskService().createTaskQuery() //
-      .caseInstanceId(caseInstance.getId())
-      .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
-      .singleResult();
-    assertNotNull(task.getFollowUpDate());
-
-    // complete activity via human task -> follow up date will be removed
-    task = processEngine().getTaskService().createTaskQuery() //
-        .caseInstanceId(caseInstance.getId())
-        .taskDefinitionKey("PI_humanTaskAntragsBeurteilung")
-        .singleResult();
-    complete(task);  
-    
-    // after: follow-up date
-    task = processEngine().getTaskService().createTaskQuery() //
-      .caseInstanceId(caseInstance.getId())
-      .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
-      .singleResult();
-    assertNull(task.getFollowUpDate());  
-
-  }  
+//  @Test
+//  @Deployment(resources = {"Versicherungsneuantrag.bpmn", "Dokumentenanforderung.bpmn", "Risikopruefung.dmn"})
+//  public void testCase() {
+//    Neuantrag neuantrag = DemoData.createNeuantrag(30, false, "BMW", "525i");
+//    
+//    VariableMap variables = Variables.createVariables();
+//    variables.putValue(
+//        ProcessVariables.VAR_NAME_neuantrag,
+//        Variables.objectValue(neuantrag).serializationDataFormat(SerializationDataFormats.JSON).create());
+//        
+//    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, variables);
+//    
+//    assertThat(processInstance).job();
+//    execute(job());
+//    assertThat(processInstance).isWaitingAtExactly("CallActivityAntragManuellPruefen");
+//    
+//    CaseInstance caseInstance = processEngine().getCaseService().createCaseInstanceQuery()
+//      .superProcessInstanceId(processInstance.getId()).singleResult();
+//
+//    CaseExecution caseExecution = processEngine().getCaseService().createCaseExecutionQuery()
+//        .caseInstanceId(caseInstance.getId()) //
+//        .activityId("PI_humanTaskAntragsBeurteilung").singleResult();
+//
+//    // Check lister for follow-up date when activating one task
+//    // before no follow-up date
+//    Task task = processEngine().getTaskService().createTaskQuery() //
+//        .caseInstanceId(caseInstance.getId())
+//        .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
+//        .singleResult();
+//    assertNull(task.getFollowUpDate());
+//
+//    processEngine().getCaseService().manuallyStartCaseExecution(caseExecution.getId());
+//    
+//    // after: follow-up date
+//    task = processEngine().getTaskService().createTaskQuery() //
+//      .caseInstanceId(caseInstance.getId())
+//      .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
+//      .singleResult();
+//    assertNotNull(task.getFollowUpDate());
+//
+//    // complete activity via human task -> follow up date will be removed
+//    task = processEngine().getTaskService().createTaskQuery() //
+//        .caseInstanceId(caseInstance.getId())
+//        .taskDefinitionKey("PI_humanTaskAntragsBeurteilung")
+//        .singleResult();
+//    complete(task);  
+//    
+//    // after: follow-up date
+//    task = processEngine().getTaskService().createTaskQuery() //
+//      .caseInstanceId(caseInstance.getId())
+//      .taskDefinitionKey("PI_humanTaskAntragEntscheiden")
+//      .singleResult();
+//    assertNull(task.getFollowUpDate());  
+//
+//  }  
 }
