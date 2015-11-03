@@ -55,6 +55,20 @@ GROUP BY durationInHours
 ORDER BY durationInHours ASC
   </select>
 
+  <select id="selectCycleTimeForPDInHours" parameterType="java.util.Map" resultMap="coutPerDuration">
+SELECT durationInHours as DURATION_, count(*) as COUNT_
+FROM (
+        SELECT procinst.PROC_INST_ID_, procinst.START_TIME_, procinst.END_TIME_, timestampdiff(HOUR, procinst.START_TIME_, procinst.END_TIME_) as durationInHours
+        FROM 
+                ACT_HI_PROCINST procinst
+        WHERE
+                procinst.PROC_DEF_KEY_ = #{parameter.processDefinitionKey}
+                and procinst.END_TIME_ is not null
+) 
+GROUP BY durationInHours
+ORDER BY durationInHours ASC
+  </select>
+
  <resultMap id="instanceCount" type="org.camunda.bpm.demo.cockpit.plugin.kpi.dto.InstanceCountDto">
     <result property="name" column="KEY_" />
     <result property="date" column="hour_date" jdbcType="TIMESTAMP" />

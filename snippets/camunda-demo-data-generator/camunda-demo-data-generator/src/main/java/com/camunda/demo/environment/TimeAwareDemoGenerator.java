@@ -24,11 +24,13 @@ import org.camunda.bpm.engine.test.mock.MockExpressionManager;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
+import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.InclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.ScriptTask;
+import org.camunda.bpm.model.bpmn.instance.SendTask;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 import org.camunda.bpm.model.bpmn.instance.UserTask;
@@ -106,6 +108,8 @@ public class TimeAwareDemoGenerator {
     log.finer("-----\n" + originalBpmn + "\n------");
 
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
+    Collection<ModelElementInstance> sendTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(SendTask.class));
+    Collection<ModelElementInstance> businessRuleTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(BusinessRuleTask.class));
     Collection<ModelElementInstance> scriptTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ScriptTask.class));
     Collection<ModelElementInstance> userTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(UserTask.class));
     Collection<ModelElementInstance> executionListeners = bpmn.getModelElementsByType(bpmn.getModel().getType(CamundaExecutionListener.class));
@@ -123,6 +127,19 @@ public class TimeAwareDemoGenerator {
       serviceTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");
       
       serviceTask.setCamundaExpression("#{true}"); // Noop      
+    }
+    for (ModelElementInstance modelElementInstance : sendTasks) {
+      SendTask serviceTask = ((SendTask) modelElementInstance);
+      serviceTask.setCamundaClass(null);
+      serviceTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");      
+      serviceTask.setCamundaExpression("#{true}"); // Noop      
+    }
+    for (ModelElementInstance modelElementInstance : businessRuleTasks) {
+      BusinessRuleTask businessRuleTask = (BusinessRuleTask) modelElementInstance;
+      businessRuleTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "decisionRef"); // DMN ref from 7.4 on
+      businessRuleTask.setCamundaClass(null);
+      businessRuleTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");      
+      businessRuleTask.setCamundaExpression("#{true}"); // Noop      
     }
 
     for (ModelElementInstance modelElementInstance : userTasks) {

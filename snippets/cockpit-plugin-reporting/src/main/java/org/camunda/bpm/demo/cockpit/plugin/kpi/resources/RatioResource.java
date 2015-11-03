@@ -42,6 +42,11 @@ public class RatioResource extends AbstractCockpitPluginResource {
 //    List<String> activityNames = ExtenstionElementReader.findActivityNamesForProperty(bpmn, "KPI-Ratio");
     List<String> propertyNames = ExtenstionElementReader.findPropertyValues(bpmn, "KPI-Ratio");
 
+    if (activityIds.size()==0) {
+      activityIds = ExtenstionElementReader.findEndEventActivities(bpmn, ExtenstionElementReader.ID);
+      propertyNames = ExtenstionElementReader.findEndEventActivities(bpmn, ExtenstionElementReader.NAME);
+    }
+
     parameters.put("activityIds", activityIds);
 
     QueryParameters<CountPerOptionDto> queryParameters = new QueryParameters<CountPerOptionDto>();
