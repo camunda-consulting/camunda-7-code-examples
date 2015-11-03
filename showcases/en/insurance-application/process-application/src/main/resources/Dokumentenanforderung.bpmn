@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0liisio">
+    <bpmn:participant id="Participant_012xlj2" name="Dokumentenanforderung&#xD;&#xA;Versicherer" processRef="dokumentAnfordern"/>
+  </bpmn:collaboration>
+  <bpmn:process id="dokumentAnfordern" name="Dokumentenanforderung" isExecutable="true">
+    <bpmn:extensionElements>
+      <camunda:executionListener class="com.camunda.demo.insuranceapplication.adapter.CreateReferenceIdAdapter" event="start"/>
+    </bpmn:extensionElements>
+    <bpmn:sequenceFlow id="SequenceFlow_0d7dzn0" sourceRef="StartEvent_1" targetRef="SendTaskDokumenteAnfordern"/>
+    <bpmn:sendTask id="SendTaskDokumenteAnfordern" camunda:class="com.camunda.demo.insuranceapplication.adapter.EmailAdapter" camunda:async="true" name="Dokumente anfordern">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Um Ihren KFZ-Neuantrag zu bearbeiten benötigen wir noch Unterlagen von Ihnen:
+${hinweise}   
+
+Bitte geben Sie bei der Kommunikation folgende Vorgangsnummer an: ${referenceId}.
+
+Sobald die Unterlagen bei uns eingegangen sind werden wir Ihren Antrag umgehend weiter bearbeiten.
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Wir benötigen noch Unterlagen</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0d7dzn0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18a0pzl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:startEvent id="StartEvent_1" name="Dokument&#xA;benötigt">
+      <bpmn:outgoing>SequenceFlow_0d7dzn0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1u6qjao" name="Dokument&#xA;erhalten">
+      <bpmn:incoming>SequenceFlow_6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0i97ejj" sourceRef="BoundaryEvent_2" targetRef="UserTaskKundenAnrufen"/>
+    <bpmn:sequenceFlow id="SequenceFlow_18a0pzl" sourceRef="SendTaskDokumenteAnfordern" targetRef="ReceiveTask_1707zk0"/>
+    <bpmn:receiveTask id="ReceiveTask_1707zk0" name="Auf Antwort warten" messageRef="Message_1">
+      <bpmn:incoming>SequenceFlow_18a0pzl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_6</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:userTask id="UserTaskKundenAnrufen" name="Kunden anrufen">
+      <bpmn:incoming>SequenceFlow_0i97ejj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1bqpxlf" sourceRef="BoundaryEvent_1" targetRef="SendTaskErinnerungsmailSchicken"/>
+    <bpmn:sendTask id="SendTaskErinnerungsmailSchicken" camunda:class="com.camunda.demo.insuranceapplication.adapter.EmailAdapter" name="Erinnerungsmail schicken">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Um Ihren KFZ-Neuantrag zu bearbeiten benötigen wir noch folgende Unterlagen von Ihnen: 
+
+Sobald diese bei uns eingegangen sind werden wir Ihren Antrag umgehend weiter bearbeiten.
+${hinweise}  
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Wir benötigen noch Unterlagen</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1bqpxlf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_2</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_1" name="täglich" attachedToRef="ReceiveTask_1707zk0" cancelActivity="false">
+      <bpmn:outgoing>SequenceFlow_1bqpxlf</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="_TimerEventDefinition_2">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R5/P1D</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_2" name="1 Woche" attachedToRef="ReceiveTask_1707zk0">
+      <bpmn:outgoing>SequenceFlow_0i97ejj</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="_TimerEventDefinition_3">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="EndEvent_1" name="Mail verschickt">
+      <bpmn:incoming>SequenceFlow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_2" name="" sourceRef="SendTaskErinnerungsmailSchicken" targetRef="EndEvent_1"/>
+    <bpmn:sequenceFlow id="SequenceFlow_6" name="" sourceRef="ReceiveTask_1707zk0" targetRef="EndEvent_1u6qjao"/>
+    <bpmn:endEvent id="EndEvent_2" name="Rückmeldung&#xD;&#xA;erhalten">
+      <bpmn:incoming>SequenceFlow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTaskKundenAnrufen" targetRef="EndEvent_2"/>
+  </bpmn:process>
+  <bpmn:message id="Message_1" name="MSG_DOCUMENT_RECEIVED"/>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0liisio">
+      <bpmndi:BPMNShape id="Participant_012xlj2_di" bpmnElement="Participant_012xlj2" isHorizontal="false">
+        <dc:Bounds height="301.0" width="829.0" x="12.0" y="27.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ReceiveTask_1707zk0_di" bpmnElement="ReceiveTask_1707zk0">
+        <dc:Bounds height="80.0" width="100.0" x="350.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_1hvdsj6_di" bpmnElement="SendTaskDokumenteAnfordern">
+        <dc:Bounds height="80.0" width="100.0" x="162.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="68.0" y="72.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="38.0" width="65.0" x="54.0" y="108.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d7dzn0_di" bpmnElement="SequenceFlow_0d7dzn0">
+        <di:waypoint xsi:type="dc:Point" x="104.0" y="90.0"/>
+        <di:waypoint xsi:type="dc:Point" x="162.0" y="90.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="115.0" y="72.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0i97ejj_di" bpmnElement="SequenceFlow_0i97ejj" sourceElement="_BPMNShape_BoundaryEvent_5">
+        <di:waypoint xsi:type="dc:Point" x="450.0" y="148.0"/>
+        <di:waypoint xsi:type="dc:Point" x="450.0" y="245.0"/>
+        <di:waypoint xsi:type="dc:Point" x="569.0" y="245.0"/>
+        <di:waypoint xsi:type="dc:Point" x="569.0" y="215.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="450.0" y="176.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1u6qjao_di" bpmnElement="EndEvent_1u6qjao">
+        <dc:Bounds height="36.0" width="36.0" x="756.0" y="72.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="38.0" width="65.0" x="742.0" y="108.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_18a0pzl_di" bpmnElement="SequenceFlow_18a0pzl">
+        <di:waypoint xsi:type="dc:Point" x="262.0" y="90.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="90.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="332.0" y="80.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1pu6sug_di" bpmnElement="UserTaskKundenAnrufen">
+        <dc:Bounds height="80.0" width="100.0" x="519.0" y="135.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1bqpxlf_di" bpmnElement="SequenceFlow_1bqpxlf" sourceElement="_BPMNShape_BoundaryEvent_4">
+        <di:waypoint xsi:type="dc:Point" x="401.0" y="148.0"/>
+        <di:waypoint xsi:type="dc:Point" x="401.0" y="271.0"/>
+        <di:waypoint xsi:type="dc:Point" x="519.0" y="271.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="447.0" y="186.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_0rs6zt3_di" bpmnElement="SendTaskErinnerungsmailSchicken">
+        <dc:Bounds height="80.0" width="100.0" x="519.0" y="231.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_4" bpmnElement="BoundaryEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="383.0" y="112.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="44.0" x="360.0" y="147.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_5" bpmnElement="BoundaryEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="432.0" y="112.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="58.0" x="449.0" y="147.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_29" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="672.0" y="253.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="92.0" x="644.0" y="294.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="SendTask_0rs6zt3_di" targetElement="_BPMNShape_EndEvent_29">
+        <di:waypoint xsi:type="dc:Point" x="619.0" y="271.0"/>
+        <di:waypoint xsi:type="dc:Point" x="672.0" y="271.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="641.0" y="271.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="ReceiveTask_1707zk0_di" targetElement="EndEvent_1u6qjao_di">
+        <di:waypoint xsi:type="dc:Point" x="450.0" y="90.0"/>
+        <di:waypoint xsi:type="dc:Point" x="756.0" y="90.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="551.0" y="90.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_30" bpmnElement="EndEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="756.0" y="157.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="38.0" width="85.0" x="732.0" y="198.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="UserTask_1pu6sug_di" targetElement="_BPMNShape_EndEvent_30">
+        <di:waypoint xsi:type="dc:Point" x="619.0" y="175.0"/>
+        <di:waypoint xsi:type="dc:Point" x="756.0" y="175.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="641.0" y="175.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
