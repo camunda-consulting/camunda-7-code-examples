@@ -139,6 +139,7 @@
           <bpmn2:extensionElements>
             <camunda:in source="neuantrag" target="neuantrag"/>
             <camunda:in source="hinweise" target="hinweise"/>
+            <camunda:out source="document" target="newDocument"/>
           </bpmn2:extensionElements>
           <bpmn2:incoming>SequenceFlow_1u73tjz</bpmn2:incoming>
           <bpmn2:outgoing>SequenceFlow_1hmfuhp</bpmn2:outgoing>
