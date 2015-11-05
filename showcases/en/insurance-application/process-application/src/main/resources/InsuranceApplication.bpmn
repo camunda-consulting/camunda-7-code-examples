@@ -97,7 +97,7 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:endEvent id="EndEventAntragPoliciert" name="Policy&#xD;&#xA;issued">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="Policiert" name="KPI-Ratio"/>
+          <camunda:property value="Accepted" name="KPI-Ratio"/>
         </camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
@@ -129,7 +129,7 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Application&#xD;&#xA;rejected">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="Abgelehnt" name="KPI-Ratio"/>
+          <camunda:property value="Rejected" name="KPI-Ratio"/>
         </camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
