@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://bpmn.io/schema/bpmn">
   <bpmn:collaboration id="Collaboration_0liisio">
-    <bpmn:participant id="Participant_012xlj2" name="Dokumentenanforderung&#xD;&#xA;Versicherer" processRef="dokumentAnfordern"/>
+    <bpmn:participant id="Participant_012xlj2" name="Dokumentenanforderung" processRef="dokumentAnfordern"/>
   </bpmn:collaboration>
   <bpmn:process id="dokumentAnfordern" name="Dokumentenanforderung" isExecutable="true">
     <bpmn:extensionElements>
@@ -14,8 +14,8 @@
           <camunda:inputParameter name="mailBody">
             <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
 
-Um Ihren KFZ-Neuantrag zu bearbeiten benötigen wir noch Unterlagen von Ihnen:
-${hinweise}   
+Um Ihren KFZ-Neuantrag zu bearbeiten benötigen wir noch Unterlagen von Ihnen.
+<#if hinweise??>${hinweise} </#if>
 
 Bitte geben Sie bei der Kommunikation folgende Vorgangsnummer an: ${referenceId}.
 
@@ -116,11 +116,10 @@ Ihre Camundanzia.]]></camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0i97ejj_di" bpmnElement="SequenceFlow_0i97ejj" sourceElement="_BPMNShape_BoundaryEvent_5">
         <di:waypoint xsi:type="dc:Point" x="450.0" y="148.0"/>
-        <di:waypoint xsi:type="dc:Point" x="450.0" y="245.0"/>
-        <di:waypoint xsi:type="dc:Point" x="569.0" y="245.0"/>
-        <di:waypoint xsi:type="dc:Point" x="569.0" y="215.0"/>
+        <di:waypoint xsi:type="dc:Point" x="450.0" y="175.0"/>
+        <di:waypoint xsi:type="dc:Point" x="519.0" y="175.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="450.0" y="176.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="451.0" y="175.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1u6qjao_di" bpmnElement="EndEvent_1u6qjao">

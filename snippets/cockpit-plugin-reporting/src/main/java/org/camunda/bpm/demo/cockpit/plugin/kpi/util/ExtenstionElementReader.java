@@ -15,6 +15,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class ExtenstionElementReader {
+  public static final String NAME = "name";
+  public static final String ID = "id";
+
   //
   // public static String findProperty(BpmnModelInstance modelInstance, String
   // propertyName) {
@@ -134,19 +137,44 @@ public class ExtenstionElementReader {
   }
 
   public static String findActivityIdForProperty(Document bpmn, String propertyName) {
-    return findActivityAttributeForProperty(bpmn, propertyName, "id");
+    return findActivityAttributeForProperty(bpmn, propertyName, ID);
   }
 
   public static String findActivityNameForProperty(Document bpmn, String propertyName) {
-    return findActivityAttributeForProperty(bpmn, propertyName, "name");
+    return findActivityAttributeForProperty(bpmn, propertyName, NAME);
   }
 
   public static List<String> findActivityIdsForProperty(Document bpmn, String propertyName) {
-    return findActivityAttributesForProperty(bpmn, propertyName, "id");
+    return findActivityAttributesForProperty(bpmn, propertyName, ID);
   }
 
   public static List<String> findActivityNamesForProperty(Document bpmn, String propertyName) {
-    return findActivityAttributesForProperty(bpmn, propertyName, "name");
+    return findActivityAttributesForProperty(bpmn, propertyName, NAME);
   }
 
+  private static List<String> findActivities(Document bpmn, String eventName, String attribute) {
+    try {
+      ArrayList<String> result = new ArrayList<String>();
+
+      // apply XPath to find all elements with attribute "name"
+      XPath xPath = XPathFactory.newInstance().newXPath();
+      NodeList nodes = (NodeList) xPath.evaluate("//*[local-name()='"+eventName+"']", bpmn.getDocumentElement(), XPathConstants.NODESET);
+
+      for (int i = 0; i < nodes.getLength(); ++i) {
+        String activityId = ((Element) nodes.item(i)).getAttribute(attribute);
+        result.add(activityId);
+      }
+      return result;
+    } catch (Exception ex) {
+      throw new RuntimeException("Could not read attributes from model", ex);
+    }
+  }
+  
+  public static List<String> findEndEventActivities(Document bpmn, String attribute) {
+    return findActivities(bpmn, "endEvent", attribute);
+  }
+
+  public static List<String> findStartEventActivities(Document bpmn, String attribute) {
+    return findActivities(bpmn, "startEvent", attribute);
+  }
 }

@@ -12,7 +12,7 @@ import org.camunda.bpm.engine.test.ProcessEngineTestCase;
 
 public class InvoiceTestCase extends ProcessEngineTestCase {
 	
-  @Deployment(resources="rechnungseingang.bpmn")
+  @Deployment(resources="invoice.bpmn")
   public void testBPMN() {
     
   }

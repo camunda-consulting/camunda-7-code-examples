@@ -43,8 +43,8 @@ ngDefine('cockpit.plugin.reporting-process-count',
 	      priority: 12
 	    });
 	    
-			ViewsProvider.registerDefaultView('cockpit.processDefinition.runtime.tab', {
-				id: 'runtime',
+			ViewsProvider.registerDefaultView('cockpit.processDefinition.history.tab', {
+				id: 'kpi',
 				priority: -50,// put at the end
 				label: 'KPI',
 				url: 'plugin://reporting-process-count/static/app/processDefinition.html',
