@@ -144,7 +144,7 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:endEvent id="EndEventAntragBeschleunigt" name="Escalation&#xD;&#xA;handled">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="sachbearbeiter" camunda:dueDate="${dateTime().plusDays(1).toDate()}" name="Decide about application">
+    <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="clerk" camunda:dueDate="${dateTime().plusDays(1).toDate()}" name="Decide about application">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property value="Decide about application" name="KPI-Cycle-End"/>
