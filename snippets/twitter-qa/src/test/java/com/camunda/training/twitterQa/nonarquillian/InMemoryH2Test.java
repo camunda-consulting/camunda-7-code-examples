@@ -72,13 +72,21 @@ public class InMemoryH2Test {
         withVariables("content", "from my DMN-test", "email", "john.doe@camunda.com"));
     assertThat(pi).isEnded().hasPassed("ServiceTask_2");
   }
-  
+
   @Test
   @Deployment(resources = {"process.bpmn", "table.dmn"})
-  public void testRejectFromContent() {
+  public void testReviewWithDecisionAndContains() {
     ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
-        withVariables("content", "the hack days were productive", "email", "ingo"));
-    assertThat(pi).hasPassed("ServiceTask_2");
+        withVariables("content", "hack days!", "email", "falko.menge@camunda.com"));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_2");
   }
-  
+
+//  @Test
+  @Deployment(resources = {"process.bpmn", "table.dmn"})
+  public void testReviewWithDecisionNoMatch() {
+    ProcessInstance pi = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("content", "foo", "email", "falko.menge@camunda.com"));
+    assertThat(pi).isEnded().hasPassed("ServiceTask_2");
+  }
+
 }
