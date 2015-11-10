@@ -2,20 +2,20 @@
 <Definitions xmlns="http://www.omg.org/spec/DMN/20130901" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="camunda" namespace="http://camunda.org/dmn">
   <ItemDefinition id="itemDefinition1">  <typeDefinition>string</typeDefinition>
 </ItemDefinition>
-  <ItemDefinition id="itemDefinition2">  <typeDefinition>string</typeDefinition>
+  <ItemDefinition id="itemDefinition2">  <typeDefinition>boolean</typeDefinition>
 </ItemDefinition>
   <ItemDefinition id="ItemDefinition_0keflke">  <typeDefinition>string</typeDefinition>
 </ItemDefinition>
-  <Decision id="tweet_approval" name="Appove tweets">
+  <Decision id="tweet_approval" name="Twitter Approval">
     <DecisionTable id="decisionTable" isComplete="true" isConsistent="true">
-      <clause id="clause1" name="Tweet content">
+      <clause id="clause1" name="Tweet Content">
         <inputExpression id="inputExpression1">
           <itemDefinition href="#itemDefinition1" />
-          <text>content</text>
+          <text></text>
         </inputExpression>
-        <inputEntry id="LiteralExpression_0tui2pk">        <text>camunda</text>
+        <inputEntry id="LiteralExpression_0tui2pk">        <text><![CDATA[${content.contains("camunda")}]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_09ve878">        <text>hack days</text>
+        <inputEntry id="LiteralExpression_09ve878">        <text><![CDATA[${content.contains("hack days")}]]></text>
 </inputEntry>
       </clause>
       <clause id="Clause_1jwxqmb" name="Email">
@@ -28,7 +28,7 @@
         <inputEntry id="LiteralExpression_037epka">        <text>john.doe@camunda.com</text>
 </inputEntry>
       </clause>
-      <clause id="clause2" name="" camunda:output="approved_str">
+      <clause id="clause2" name="" camunda:output="approved">
         <outputDefinition href="#itemDefinition2" />
         <outputEntry id="LiteralExpression_0kcut0q">        <text>true</text>
 </outputEntry>
@@ -40,7 +40,7 @@
 </outputEntry>
       </clause>
       <rule id="DecisionRule_1u089wv">
-        <description></description>
+        <description>camunda can be published</description>
         <condition>LiteralExpression_0tui2pk</condition>
         <conclusion>LiteralExpression_0kcut0q</conclusion>
       </rule>
@@ -55,7 +55,7 @@
         <conclusion>LiteralExpression_07pwdqk</conclusion>
       </rule>
       <rule id="DecisionRule_0j6sdbx">
-        <description>Ingo is not allowed for twittering</description>
+        <description>tweets by john.doe@camunda.com must be rejected</description>
         <condition>LiteralExpression_037epka</condition>
         <conclusion>LiteralExpression_060hlru</conclusion>
       </rule>
