@@ -16,6 +16,7 @@ import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
@@ -56,6 +57,7 @@ public class TimeAwareDemoGenerator {
 
   private Map<String, NormalDistribution> distributions = new HashMap<String, NormalDistribution>();
   private String originalBpmn;
+  final private long now = new Date().getTime(); 
 
   public TimeAwareDemoGenerator(ProcessEngine engine) {
     this.engine = engine;
@@ -252,6 +254,12 @@ public class TimeAwareDemoGenerator {
 
       // TODO: Stop when we reach the NOW time (might leave open tasks - but
       // that is OK!)
+      for (Task task : tasks) {
+        if (task.getCreateTime().getTime() > now) {
+          piRunning = false;
+          break;
+        }
+      }
     }
 
   }
