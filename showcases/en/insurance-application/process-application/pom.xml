@@ -55,7 +55,12 @@
 			<scope>provided</scope>
 			<version>${camunda.version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.camunda.demo.environment</groupId>
+			<artifactId>camunda-demo-support</artifactId>
+			<version>0.1.0</version>		
+		</dependency>
 
 		<dependency>
 			<!-- AssertJ Testing Library -->
@@ -239,7 +244,44 @@
 			</plugin>
 			
 		</plugins>
-		
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											properties-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0-alpha-2,)
+										</versionRange>
+										<goals>
+											<goal>
+												read-project-properties
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<!--camunda.rest.url = http://ec2-52-16-100-183.eu-west-1.compute.amazonaws.com/engine-rest 
