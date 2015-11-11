@@ -78,7 +78,7 @@
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTask_1" targetRef="ServiceTask_2"/>
-    <bpmn2:serviceTask id="ServiceTask_2" camunda:expression="#{someExpressionIDoNotWantToCall}" name="Service Task (Expression)">
+    <bpmn2:serviceTask id="ServiceTask_2" camunda:expression="#{someExpressionIDoNotWantToCall}" camunda:async="true" name="Service Task (Expression)">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
     </bpmn2:serviceTask>

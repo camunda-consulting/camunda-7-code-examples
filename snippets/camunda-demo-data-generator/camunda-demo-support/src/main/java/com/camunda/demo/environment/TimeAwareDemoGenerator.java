@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.EventSubscription;
+import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.mock.MockExpressionManager;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -35,6 +37,7 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 import org.camunda.bpm.model.bpmn.instance.UserTask;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaInputParameter;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperties;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaScript;
@@ -79,8 +82,12 @@ public class TimeAwareDemoGenerator {
 
   public void generateData() {
     tweakProcessDefinition();
-    startMultipleProcessInstances();
-    restoreOriginalProcessDefinition();
+    ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().shutdown();
+    try {
+      startMultipleProcessInstances();
+    } finally {
+      restoreOriginalProcessDefinition();      
+      ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().start();    }
   }
 
   protected void restoreOriginalProcessDefinition() {
@@ -101,6 +108,9 @@ public class TimeAwareDemoGenerator {
         .processDefinitionKey(processDefinitionKey) //
         .latestVersion() //
         .singleResult();
+    if (processDefinition==null) {
+      throw new RuntimeException("Process with key '" + processDefinitionKey + "' not found.");
+    }
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
     originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument());
@@ -117,6 +127,8 @@ public class TimeAwareDemoGenerator {
     Collection<ModelElementInstance> xorGateways = bpmn.getModelElementsByType(bpmn.getModel().getType(ExclusiveGateway.class));
     Collection<ModelElementInstance> orGateways = bpmn.getModelElementsByType(bpmn.getModel().getType(InclusiveGateway.class));
 
+    Collection<ModelElementInstance> scripts = bpmn.getModelElementsByType(bpmn.getModel().getType(CamundaScript.class));
+
     for (ModelElementInstance modelElementInstance : serviceTasks) {
       ServiceTask serviceTask = ((ServiceTask) modelElementInstance);
       serviceTask.setCamundaClass(null);
@@ -124,22 +136,43 @@ public class TimeAwareDemoGenerator {
       // to null!
       // serviceTask.setCamundaDelegateExpression(null);
       // Workaround:
-      serviceTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");
+      serviceTask.removeAttributeNs("http://activiti.org/bpmn", "delegateExpression");
+      serviceTask.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "delegateExpression");
       
       serviceTask.setCamundaExpression("#{true}"); // Noop      
     }
     for (ModelElementInstance modelElementInstance : sendTasks) {
       SendTask serviceTask = ((SendTask) modelElementInstance);
       serviceTask.setCamundaClass(null);
-      serviceTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");      
+      serviceTask.removeAttributeNs("http://activiti.org/bpmn", "delegateExpression");      
+      serviceTask.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "delegateExpression");      
       serviceTask.setCamundaExpression("#{true}"); // Noop      
     }
     for (ModelElementInstance modelElementInstance : businessRuleTasks) {
       BusinessRuleTask businessRuleTask = (BusinessRuleTask) modelElementInstance;
-      businessRuleTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "decisionRef"); // DMN ref from 7.4 on
+      businessRuleTask.removeAttributeNs("http://activiti.org/bpmn", "decisionRef"); // DMN ref from 7.4 on
+      businessRuleTask.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "decisionRef"); // DMN ref from 7.4 on
       businessRuleTask.setCamundaClass(null);
-      businessRuleTask.removeAttributeNs(BpmnModelConstants.CAMUNDA_NS, "delegateExpression");      
+      businessRuleTask.removeAttributeNs("http://activiti.org/bpmn", "delegateExpression");      
+      businessRuleTask.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "delegateExpression");
+      
       businessRuleTask.setCamundaExpression("#{true}"); // Noop      
+    }
+    for (ModelElementInstance modelElementInstance : executionListeners) {
+      CamundaExecutionListener executionListener = (CamundaExecutionListener) modelElementInstance;
+//      executionListener.setCamundaClass(null);
+      executionListener.removeAttributeNs("http://activiti.org/bpmn", "class");      
+      executionListener.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "class");      
+
+      executionListener.removeAttributeNs("http://activiti.org/bpmn", "delegateExpression");      
+      executionListener.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "delegateExpression");      
+      executionListener.setCamundaExpression("#{true}"); // Noop      
+    }
+    for (ModelElementInstance modelElementInstance : scripts) {
+      CamundaScript script = (CamundaScript) modelElementInstance;
+//      executionListener.setCamundaClass(null);
+      script.setTextContent("");
+      script.setCamundaScriptFormat("javascript");
     }
 
     for (ModelElementInstance modelElementInstance : userTasks) {
@@ -249,6 +282,7 @@ public class TimeAwareDemoGenerator {
             if (isInTimeFrame(cal, startTimeBusinessDay, endTimeBusinessDay)) {
               ClockUtil.setCurrentTime(cal.getTime());
 
+              System.out.print(".");
               runSingleProcessInstance();
 
               // Housekeeping for safety (as the run might have changed the
@@ -271,11 +305,13 @@ public class TimeAwareDemoGenerator {
     while (piRunning) {
       List<org.camunda.bpm.engine.task.Task> tasks = engine.getTaskService().createTaskQuery().processInstanceId(pi.getId()).list();
       List<EventSubscription> messages = engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("message").list();
+      List<Job> jobs = engine.getManagementService().createJobQuery().processInstanceId(pi.getId()).list();
       // TODO:
       // engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("signal").list();
 
       handleTasks(pi, tasks);
       handleMessages(pi, messages);
+      handleJobs(jobs);
 
       // do queries again if we have changed anything in the process instance
       // for the moment we do not query processInstance.isEnded as we are not
@@ -283,7 +319,7 @@ public class TimeAwareDemoGenerator {
       // if we have yet tackled all situations (read: we are sure we haven't
       // yet).
       // This will at least not lead to endless loops
-      piRunning = (tasks.size() > 0 || messages.size() > 0);
+      piRunning = (tasks.size() > 0 || messages.size() > 0 || jobs.size() > 0);
 
       // TODO: Stop when we reach the NOW time (might leave open tasks - but
       // that is OK!)
@@ -328,6 +364,16 @@ public class TimeAwareDemoGenerator {
       ClockUtil.setCurrentTime(cal.getTime());
 
       engine.getRuntimeService().createMessageCorrelation(eventSubscription.getEventName()).processInstanceId(pi.getId()).correlate();
+    }
+  }
+
+  protected void handleJobs(List<Job> jobs) {
+    for (Job job : jobs) {
+      try {
+          engine.getManagementService().executeJob(job.getId());
+      } catch (Exception ex) {
+        System.out.println("COULD NOT EXECUTE JOB " + job);
+      }
     }
   }
 

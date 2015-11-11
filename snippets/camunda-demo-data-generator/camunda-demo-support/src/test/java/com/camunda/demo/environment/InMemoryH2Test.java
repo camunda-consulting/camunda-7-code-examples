@@ -50,8 +50,8 @@ public class InMemoryH2Test {
   public void testSimulationDrive() {
     TimeAwareDemoGenerator generator = new TimeAwareDemoGenerator(processEngine()) //
         .processDefinitionKey("simulate") //
-        .numberOfDaysInPast(5) //
-        .timeBetweenStartsBusinessDays(600.0, 100.0); // approx. every 10 minutes
+        .numberOfDaysInPast(1) //
+        .timeBetweenStartsBusinessDays(6000.0, 100.0); // every 6000 seconds
     generator.generateData();
     
 //    ProcessInstance pi = runtimeService().startProcessInstanceByKey("simulate");

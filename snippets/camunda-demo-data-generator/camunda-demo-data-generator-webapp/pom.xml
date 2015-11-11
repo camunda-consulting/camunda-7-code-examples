@@ -17,8 +17,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.camunda.demo.environment</groupId>
-			<artifactId>camunda-demo-data-generator</artifactId>
-			<version>1.0.0</version>		
+			<artifactId>camunda-demo-support</artifactId>
+			<version>0.1.0</version>		
 		</dependency>	
 
 		<dependency>

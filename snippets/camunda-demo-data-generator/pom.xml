@@ -7,7 +7,8 @@
   <packaging>pom</packaging>
 
   <modules>
-        <module>camunda-demo-data-generator</module>
+        <module>camunda-demo-support</module>
         <module>camunda-demo-data-generator-webapp</module>
+        <!-- TODO: cockpit plugin -->
   </modules>
 </project>
