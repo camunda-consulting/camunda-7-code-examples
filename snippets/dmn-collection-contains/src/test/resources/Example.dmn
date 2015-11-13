@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd"
+             id="definitions"
+             name="definitions"
+             namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="orderDecision" name="Check Order">
+    <decisionTable hitPolicy="COLLECT">
+      <input id="input">
+        <inputExpression>
+          <text>customer.hobbies</text>
+        </inputExpression>
+      </input>
+      <output id="output" name="result" />
+      <rule id="rule1">
+        <inputEntry>
+          <text>~ "biking"</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Biking is great"</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule2">
+        <inputEntry>
+          <text>~ "hiking"</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Hiking is great"</text>
+        </outputEntry>
+      </rule>
+      <rule id="rule3">
+        <inputEntry>
+          <text>~ "swimming"</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Swimming is great"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
