@@ -37,7 +37,9 @@ public class SendJmsMessageDelegate implements JavaDelegate {
 //    String asynchronousCorrelationKey = UUID.randomUUID().toString();
 //    execution.setVariable("correlationId", asynchronousCorrelationKey);
     
-    String asynchronousCorrelationKey = execution.getProcessBusinessKey();
+    String asynchronousCorrelationKey = execution.getCurrentActivityId();
+    
+//    String asynchronousCorrelationKey = execution.getProcessBusinessKey();
     
     Connection connection = connectionFactory.createConnection();
     Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
