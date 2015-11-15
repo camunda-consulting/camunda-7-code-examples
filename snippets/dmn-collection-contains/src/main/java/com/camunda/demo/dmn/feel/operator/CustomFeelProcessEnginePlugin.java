@@ -3,6 +3,7 @@ package com.camunda.demo.dmn.feel.operator;
 import java.lang.reflect.Field;
 
 import org.camunda.bpm.dmn.engine.DmnEngine;
+import org.camunda.bpm.dmn.engine.DmnEngineConfiguration;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
@@ -20,16 +21,17 @@ public class CustomFeelProcessEnginePlugin implements ProcessEnginePlugin {
   public void postInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
     // so do it here
     try {
-      ScriptingEngines scriptingEngines = processEngineConfiguration.getScriptingEngines();
-      HistoryDecisionTableListener historyDecisionTableListener = new HistoryDecisionTableListener(processEngineConfiguration.getDmnHistoryEventProducer(),
-          processEngineConfiguration.getHistoryLevel());
-      ExpressionManager expressionManager = processEngineConfiguration.getExpressionManager();
-
-      ProcessEngineDmnEngineConfiguration dmnEngineConfiguration = new ProcessEngineDmnEngineConfiguration(scriptingEngines, historyDecisionTableListener,
-          expressionManager);
-
-      dmnEngineConfiguration.feelEngineFactory(new CustomFeelEngineFactory());
       
+//      ScriptingEngines scriptingEngines = processEngineConfiguration.getScriptingEngines();
+//      HistoryDecisionTableListener historyDecisionTableListener = new HistoryDecisionTableListener(processEngineConfiguration.getDmnHistoryEventProducer(),
+//          processEngineConfiguration.getHistoryLevel());
+//      ExpressionManager expressionManager = processEngineConfiguration.getExpressionManager();
+//
+//      ProcessEngineDmnEngineConfiguration dmnEngineConfiguration = new ProcessEngineDmnEngineConfiguration(scriptingEngines, historyDecisionTableListener,
+//          expressionManager);
+
+      DmnEngineConfiguration dmnEngineConfiguration = processEngineConfiguration.getDmnEngineConfiguration();
+      dmnEngineConfiguration.feelEngineFactory(new CustomFeelEngineFactory());      
       DmnEngine dmnEngine = dmnEngineConfiguration.buildEngine();
 
       Field dmnEngineConfigurationField = getField(processEngineConfiguration.getClass(), "dmnEngineConfiguration");

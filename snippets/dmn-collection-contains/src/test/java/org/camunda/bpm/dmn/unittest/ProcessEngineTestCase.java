@@ -2,6 +2,7 @@ package org.camunda.bpm.dmn.unittest;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
+import org.camunda.bpm.engine.history.HistoricVariableInstance;
 import org.camunda.bpm.engine.impl.util.LogUtil;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
@@ -56,4 +57,21 @@ public class ProcessEngineTestCase {
     assertThat(results.getSingleResult()).containsOnly(entry("result", "Hiking is great"));
   }
 
+  @Test
+  @Deployment(resources = {"DmnExample.bpmn", "Example.dmn"})
+  public void customerWithOneHobbyViaBPMN() {
+    Customer customer = new Customer();
+    customer.getHobbies().add("hiking");
+
+    VariableMap variables = Variables.createVariables().putValue("customer", customer);
+
+    processEngine().getRuntimeService().startProcessInstanceByKey("orderDecision", variables);
+
+    HistoricVariableInstance dmnResult = processEngine().getHistoryService().createHistoricVariableInstanceQuery().variableName("dmnResult").singleResult();
+    assertNotNull(dmnResult);
+    System.out.println(dmnResult);
+//    assertThat(results).hasSize(1);
+//
+//    assertThat(results.getSingleResult()).containsOnly(entry("result", "Hiking is great"));
+  }
 }
