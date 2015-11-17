@@ -13,6 +13,8 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperties;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty;
 
+import com.camunda.demo.environment.simulation.TimeAwareDemoGenerator;
+
 public class DemoDataGenerator {
 
   private static final Logger log = Logger.getLogger(DemoDataGenerator.class.getName());
@@ -23,7 +25,7 @@ public class DemoDataGenerator {
       autoGenerateFor(engine, processDefinition, processApplicationReference);
     }
   }
-
+  
   public static void autoGenerateFor(ProcessEngine engine, String processDefinitionKey, ProcessApplicationReference processApplicationReference) {
     ProcessDefinition processDefinition = engine.getRepositoryService().createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey).latestVersion().singleResult();
     autoGenerateFor(engine, processDefinition, processApplicationReference);    
@@ -34,11 +36,25 @@ public class DemoDataGenerator {
     BpmnModelInstance modelInstance = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
     String numberOfDaysInPast = findProperty(modelInstance, "simulateNumberOfDaysInPast");
-    if (numberOfDaysInPast != null) {      
+    if (numberOfDaysInPast != null) {
+      autoGenerateFor(engine, processDefinition, Integer.parseInt(numberOfDaysInPast), null);
+    }
+  }
+
+  public static void autoGenerateFor(ProcessEngine engine, String processDefinitionKey, int numberOfDaysInThePast, ProcessApplicationReference processApplicationReference) {
+    ProcessDefinition processDefinition = engine.getRepositoryService().createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey).latestVersion().singleResult();
+    if (processDefinition==null) {
+      throw new RuntimeException("Could not find process definition with key '" + processDefinitionKey + "'");
+    }
+    autoGenerateFor(engine, processDefinition, numberOfDaysInThePast, processApplicationReference);    
+  }
+
+  public static void autoGenerateFor(ProcessEngine engine, ProcessDefinition processDefinition, int numberOfDaysInPast, ProcessApplicationReference processApplicationReference) {
+    BpmnModelInstance modelInstance = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
       // check if not yet existant - we could maybe search for the right process definition version in history 
       // but a simple check works for the moment
       Calendar cal = Calendar.getInstance();
-      cal.set(Calendar.DAY_OF_YEAR, (-1 * Integer.parseInt(numberOfDaysInPast)));
+      cal.set(Calendar.DAY_OF_YEAR, (-1 * numberOfDaysInPast));
       long count = engine.getHistoryService().createHistoricProcessInstanceQuery().processDefinitionKey(processDefinition.getKey()).startedAfter(cal.getTime()).count();
       if (count > 50) { // gut feeling
         log.info("generation ignored as more than 10 process instances exist");
@@ -62,7 +78,7 @@ public class DemoDataGenerator {
             .timeBetweenStartsBusinessDays(Integer.valueOf(timeBetweenStartsBusinessDaysMean), Integer.valueOf(timeBetweenStartsBusinessDaysSd));
         generator.generateData();
       }
-    }
+    
   }
 
   public static String findProperty(BpmnModelInstance modelInstance, String propertyName) {

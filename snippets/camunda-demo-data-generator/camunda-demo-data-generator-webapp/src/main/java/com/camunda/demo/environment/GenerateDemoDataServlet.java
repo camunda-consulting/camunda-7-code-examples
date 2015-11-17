@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.BpmPlatform;
 
+import com.camunda.demo.environment.simulation.TimeAwareDemoGenerator;
+
 /**
  * Using a plain servlet to avoid any environment dependency - but to 
  * callable by HTTP.

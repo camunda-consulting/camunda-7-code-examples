@@ -2,6 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.camunda</groupId>
+		<artifactId>camunda-release-parent</artifactId>
+		<version>2.5</version>
+		<relativePath />
+	</parent>
 
 	<groupId>com.camunda.demo.environment</groupId>
 	<artifactId>camunda-demo-support</artifactId>
@@ -11,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.3.0</camunda.version>
+		<camunda.version>7.4.0-alpha2</camunda.version>
 	</properties>
 
 	<dependencies>
@@ -69,11 +76,11 @@
 
 		<!-- Add your own dependencies here, if in compile scope, they are added 
 			to the war -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>desmoj</groupId> -->
-<!-- 			<artifactId>desmoj</artifactId> -->
-<!-- 			<version>2.1.1</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>desmoj</groupId> -->
+		<!-- <artifactId>desmoj</artifactId> -->
+		<!-- <version>2.1.1</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
@@ -89,24 +96,11 @@
 		</repository>
 	</repositories>
 
-	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<!-- A web.xml is no longer required. -->
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<scm>
+		<url>https://github.com/camunda/camunda-consulting/tree/master/snippets/camunda-demo-data-generator/camunda-demo-support</url>
+		<connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
+		<developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
 </project>

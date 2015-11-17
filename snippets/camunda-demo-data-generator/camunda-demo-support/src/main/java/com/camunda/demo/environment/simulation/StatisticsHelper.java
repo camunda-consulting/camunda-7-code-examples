@@ -1,4 +1,4 @@
-package com.camunda.demo.environment;
+package com.camunda.demo.environment.simulation;
 
 import java.util.Random;
 

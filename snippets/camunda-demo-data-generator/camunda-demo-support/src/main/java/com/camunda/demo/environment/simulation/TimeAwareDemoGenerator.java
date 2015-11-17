@@ -1,12 +1,12 @@
-package com.camunda.demo.environment;
+package com.camunda.demo.environment.simulation;
 
+import java.io.ByteArrayInputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -15,16 +15,14 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.camunda.bpm.application.ProcessApplicationReference;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.camunda.bpm.engine.impl.el.ExpressionManager;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.test.mock.MockExpressionManager;
+import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
@@ -37,7 +35,6 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 import org.camunda.bpm.model.bpmn.instance.UserTask;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaExecutionListener;
-import org.camunda.bpm.model.bpmn.instance.camunda.CamundaInputParameter;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperties;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaProperty;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaScript;
@@ -82,23 +79,30 @@ public class TimeAwareDemoGenerator {
 
   public void generateData() {
     tweakProcessDefinition();
-    ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().shutdown();
-    try {
-      startMultipleProcessInstances();
-    } finally {
-      restoreOriginalProcessDefinition();      
-      ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().start();    }
+    synchronized (engine) {        
+      ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().shutdown();
+      try {
+          startMultipleProcessInstances();
+      } finally {
+        restoreOriginalProcessDefinition();      
+        ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getJobExecutor().start();    
+      }
+    }
   }
 
   protected void restoreOriginalProcessDefinition() {
     log.info("restore original process definition");
-    Deployment deployment = engine.getRepositoryService().createDeployment() //
-        .addString(processDefinitionKey + ".bpmn", originalBpmn) //
-        .deploy();
-    if (processApplicationReference != null) {
-      engine.getManagementService().registerProcessApplication(deployment.getId(), processApplicationReference);
+    
+    try {
+      Deployment deployment = engine.getRepositoryService().createDeployment() //
+          .addInputStream(processDefinitionKey + ".bpmn", new ByteArrayInputStream(originalBpmn.getBytes("UTF-8"))) //
+          .deploy();
+      if (processApplicationReference != null) {
+        engine.getManagementService().registerProcessApplication(deployment.getId(), processApplicationReference);
+      }
+    } catch (Exception ex) {
+      throw new RuntimeException("Could not deploy tweaked process definition",  ex);
     }
-
   }
 
   protected void tweakProcessDefinition() {
@@ -111,6 +115,11 @@ public class TimeAwareDemoGenerator {
     if (processDefinition==null) {
       throw new RuntimeException("Process with key '" + processDefinitionKey + "' not found.");
     }
+    // store original process application reference
+    if (processApplicationReference==null) {
+      processApplicationReference = ((ProcessEngineConfigurationImpl)engine.getProcessEngineConfiguration()).getProcessApplicationManager().getProcessApplicationForDeployment(processDefinition.getDeploymentId());
+    }
+    
     BpmnModelInstance bpmn = engine.getRepositoryService().getBpmnModelInstance(processDefinition.getId());
 
     originalBpmn = IoUtil.convertXmlDocumentToString(bpmn.getDocument());
@@ -171,8 +180,10 @@ public class TimeAwareDemoGenerator {
     for (ModelElementInstance modelElementInstance : scripts) {
       CamundaScript script = (CamundaScript) modelElementInstance;
 //      executionListener.setCamundaClass(null);
-      script.setTextContent("");
+      script.setTextContent(""); // java.lang.System.out.println('x');
       script.setCamundaScriptFormat("javascript");
+      script.removeAttributeNs("http://activiti.org/bpmn", "resource");
+      script.removeAttributeNs("http://camunda.org/schema/1.0/bpmn", "resource");
     }
 
     for (ModelElementInstance modelElementInstance : userTasks) {
@@ -187,10 +198,16 @@ public class TimeAwareDemoGenerator {
     }
 
     // Bpmn.validateModel(bpmn);
-    engine.getRepositoryService().createDeployment() //
-        .addModelInstance(processDefinitionKey + ".bpmn", bpmn) //
-        .deploy();
-
+    String xmlString = Bpmn.convertToString(bpmn);
+    try {
+      engine.getRepositoryService().createDeployment() //
+  //        .addString(processDefinitionKey + ".bpmn", xmlString) //
+  //        .addModelInstance(processDefinitionKey + ".bpmn", bpmn) //
+          .addInputStream(processDefinitionKey + ".bpmn", new ByteArrayInputStream(xmlString.getBytes("UTF-8")))
+          .deploy();
+    } catch (Exception ex) {
+      throw new RuntimeException("Could not deploy tweaked process definition",  ex);
+    }
   }
 
   protected void tweakGateway(ExclusiveGateway xorGateway) {
@@ -304,13 +321,13 @@ public class TimeAwareDemoGenerator {
 
     while (piRunning) {
       List<org.camunda.bpm.engine.task.Task> tasks = engine.getTaskService().createTaskQuery().processInstanceId(pi.getId()).list();
-      List<EventSubscription> messages = engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("message").list();
+//      List<EventSubscription> messages = engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("message").list();
       List<Job> jobs = engine.getManagementService().createJobQuery().processInstanceId(pi.getId()).list();
       // TODO:
       // engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("signal").list();
 
       handleTasks(pi, tasks);
-      handleMessages(pi, messages);
+//      handleMessages(pi, messages);
       handleJobs(jobs);
 
       // do queries again if we have changed anything in the process instance
@@ -319,7 +336,9 @@ public class TimeAwareDemoGenerator {
       // if we have yet tackled all situations (read: we are sure we haven't
       // yet).
       // This will at least not lead to endless loops
-      piRunning = (tasks.size() > 0 || messages.size() > 0 || jobs.size() > 0);
+      piRunning = (tasks.size() > 0 
+          //|| messages.size() > 0 
+          || jobs.size() > 0);
 
       // TODO: Stop when we reach the NOW time (might leave open tasks - but
       // that is OK!)
@@ -369,21 +388,27 @@ public class TimeAwareDemoGenerator {
 
   protected void handleJobs(List<Job> jobs) {
     for (Job job : jobs) {
-      try {
-          engine.getManagementService().executeJob(job.getId());
-      } catch (Exception ex) {
+      if (engine.getManagementService().createJobQuery().jobId(job.getId()).count()==1) {          
+        engine.getManagementService().executeJob(job.getId());
+      }
+      else {
         System.out.println("COULD NOT EXECUTE JOB " + job);
       }
     }
   }
 
   protected NormalDistribution createDistributionForElement(ProcessInstance pi, String id) {
-    BaseElement taskElement = engine.getRepositoryService().getBpmnModelInstance(pi.getProcessDefinitionId()).getModelElementById(id);
-    double durationMean = Double.parseDouble(readCamundaProperty(taskElement, "durationMean"));
-    double durationStandardDeviation = Double.parseDouble(readCamundaProperty(taskElement, "durationSd"));
-
-    NormalDistribution distribution = new NormalDistribution(durationMean, durationStandardDeviation);
-    return distribution;
+    try {
+      BaseElement taskElement = engine.getRepositoryService().getBpmnModelInstance(pi.getProcessDefinitionId()).getModelElementById(id);
+      double durationMean = Double.parseDouble(readCamundaProperty(taskElement, "durationMean"));
+      double durationStandardDeviation = Double.parseDouble(readCamundaProperty(taskElement, "durationSd"));
+  
+      NormalDistribution distribution = new NormalDistribution(durationMean, durationStandardDeviation);
+      return distribution;
+    }
+    catch (Exception ex) {
+      throw new RuntimeException("Could not read distribution for element '" + id + "' of process definition '" + pi.getProcessDefinitionId() + "'", ex);
+    }
   }
 
   private String readCamundaProperty(BaseElement modelElementInstance, String propertyName) {
