@@ -237,7 +237,7 @@ public class TimeAwareDemoGenerator {
       executionListener.setCamundaEvent("start");
       CamundaScript script = bpmn.newInstance(CamundaScript.class);
       script.setTextContent(//
-          "sample = com.camunda.demo.environment.StatisticsHelper.nextSample(" + probabilitySum + ");\n" + "execution.setVariable('" + var + "', sample);");
+          "sample = com.camunda.demo.environment.simulation.StatisticsHelper.nextSample(" + probabilitySum + ");\n" + "execution.setVariable('" + var + "', sample);");
       script.setCamundaScriptFormat("Javascript");
       executionListener.setCamundaScript(script);
 
