@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>External Task Demo</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+	
+    <div class="container-fluid">
+    
+	    <h1>External Task Demo</h1>
+	    
+	    <div class="form-group">	    
+			Start a new process instance: 
+			<input type="text" id="videoName"></input>
+		    <button onclick="startProcessInstance()" class="btn btn-default">Start</button>
+	    </div>
+    
+	    <div class="row">
+	    	<div class="col-md-4">
+	    		<div class="panel panel-default">
+		    		<div class="panel-heading"><span class="glyphicon glyphicon-cog"></span> Worker 'transcodeVideo'</div>
+		  			<div class="panel-body">
+					    <button onclick="receiveExternalTasks('transcodeVideo')" class="btn btn-default">Receive Tasks</button>
+					    <div class="table-responsive">		    
+							<table id="tabletranscodeVideo" class="table table-striped">
+							    <thead>
+							        <tr>
+							            <th>Received External Task for processing</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    </tbody>    
+							</table>
+						</div>
+					</div>
+				</div>    	
+	    	</div>
+	    	<div class="col-md-4">
+	   			<div class="panel panel-default">
+		    		<div class="panel-heading"><span class="glyphicon glyphicon-cog"></span> Worker 'uploadVideo'</div>
+		  			<div class="panel-body">
+					    <button onclick="receiveExternalTasks('uploadVideo')" class="btn btn-default">Receive Tasks</button>		    
+					    <div class="table-responsive">		    
+							<table id="tableuploadVideo" class="table table-striped">
+							    <thead>
+							        <tr>
+							            <th>Received External Task for processing</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    </tbody>    
+							</table>
+						</div>
+					</div>
+				</div>    	    	
+	    	</div>
+	    	<div class="col-md-4">
+	   			<div class="panel panel-default">
+		    		<div class="panel-heading"><span class="glyphicon glyphicon-user"></span> Somebody from 'Marketing'</div>
+		  			<div class="panel-body">
+					    <button onclick="receiveUserTasks('marketing')" class="btn btn-default">Receive Tasks</button>		    
+					    <div class="table-responsive">		    
+							<table id="tablemarketing" class="table table-striped">
+							    <thead>
+							        <tr>
+							            <th>Received User Tasks for completion</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    </tbody>    
+							</table>
+						</div>
+					</div>
+				</div>    	    	
+	    	</div>	    	
+		</div>
+	</div>
+	
+    <script>
+    var REST_BASE_URL = "http://localhost:8080/engine-rest/engine/default";
+    
+    // Possible enhancemenet: Perodically load tasks and add start/stop worker button 
+    // var intervalId = setInterval(function(){}, 30000);
+    // clearInterval(refreshIntervalId);
+
+    function receiveExternalTasks(topicName) {
+ 		var fetchRequest = {
+	  			"workerId":"worker01",
+	  			"maxTasks":5,
+	  			"topics": [
+	  				{
+	  					"topicName": topicName,
+						"lockDuration": 10000,
+	      				"variables": ["video"]
+	      			}
+	      	    ]
+			}
+       
+		   $.ajax(REST_BASE_URL + '/external-task/fetchAndLock/', {
+		         data: JSON.stringify(fetchRequest),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+					for (var index = 0; index < result.length; ++index) {
+						var externalTask = result[index];
+					    console.log(externalTask);
+			        	addRowToTable('table' + topicName, JSON.stringify(externalTask));
+						
+						$.ajax(REST_BASE_URL + '/external-task/' + externalTask.id + '/complete', {
+		         			data: JSON.stringify({"workerId":"worker01"}),
+		         			contentType : 'application/json',
+		         			type : 'POST'
+					    });
+					}		            
+		         }
+		    });
+	};
+	
+    function receiveUserTasks(groupName) {
+		   $.ajax(REST_BASE_URL + '/task?candidateGroup=' + groupName, {
+		         contentType : 'application/json',
+		         type : 'GET',
+		         success: function (result) {
+					for (var index = 0; index < result.length; ++index) {
+						var userTask = result[index];
+					    console.log(userTask);
+			        	addRowToTable('table' + groupName, JSON.stringify(userTask));
+						
+						$.ajax(REST_BASE_URL + '/task/' + userTask.id + '/complete', {
+		         			data: JSON.stringify({}),
+		         			contentType : 'application/json',
+		         			type : 'POST'
+					    });
+					}		            
+		         }
+		    });
+	};	
+	
+	function startProcessInstance() {
+ 		var startRequest = {"variables":
+   			 {
+   			 	"video" : {"value" : $("#videoName").val(), "type": "String"},
+     		 }
+     	}       
+		$.ajax(REST_BASE_URL + '/process-definition/key/video-publishing/start', {
+		         data: JSON.stringify(startRequest),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {}		         
+		});	
+	}
+	
+	function addRowToTable(tableName, content) {
+		  var tableRef = document.getElementById(tableName).getElementsByTagName('tbody')[0];
+
+		  // Insert a row in the table at row index 0
+		  var newRow   = tableRef.insertRow(tableRef.rows.length);
+		
+		  // Insert a cell in the row at index 0
+		  var newCell  = newRow.insertCell(0);
+		
+		  // Append a text node to the cell
+		  var newText  = document.createTextNode(content)
+		  newCell.appendChild(newText);
+	}
+    </script>    
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

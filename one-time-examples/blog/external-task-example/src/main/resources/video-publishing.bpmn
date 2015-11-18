@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda_1="http://activiti.org/bpmn" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="camunda modeler" exporterVersion="2.7.0.201501051438" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn:process id="video-publishing" name="Video Publishing" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Video &#10;publishing&#10;requested">
+      <bpmn:extensionElements>
+        <camunda_1:formData>
+          <camunda_1:formField id="video" label="Video Name" type="string" />
+        </camunda_1:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0x6xnog</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0x6xnog" sourceRef="StartEvent_1" targetRef="ParallelGateway_0usro0i" />
+    <bpmn:serviceTask id="ServiceTask_1okl7ao" name="Transcode video file to target format" camunda:type="external" camunda:topic="transcodeVideo">
+      <bpmn:incoming>SequenceFlow_14afoub</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18s6s1s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_18s6s1s" sourceRef="ServiceTask_1okl7ao" targetRef="ServiceTask_00xcnfj" />
+    <bpmn:sequenceFlow id="SequenceFlow_14afoub" sourceRef="ParallelGateway_0usro0i" targetRef="ServiceTask_1okl7ao" />
+    <bpmn:parallelGateway id="ParallelGateway_0usro0i">
+      <bpmn:incoming>SequenceFlow_0x6xnog</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14afoub</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_08rtrlh</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_08rtrlh" sourceRef="ParallelGateway_0usro0i" targetRef="UserTask_1np2fku" />
+    <bpmn:userTask id="UserTask_1np2fku" name="Edit video metadata" camunda_1:candidateGroups="marketing">
+      <bpmn:extensionElements>
+        <camunda_1:formData>
+          <camunda_1:formField id="video" label="Video" type="string" />
+          <camunda_1:formField id="videoName" label="Name" type="string" />
+          <camunda_1:formField id="videoDescription" label="Description" type="string" />
+        </camunda_1:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_08rtrlh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1beiszs</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="ServiceTask_00xcnfj" name="Upload video to portal" camunda:type="external" camunda:topic="uploadVideo">
+      <bpmn:incoming>SequenceFlow_18s6s1s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hd9hxo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0hd9hxo" sourceRef="ServiceTask_00xcnfj" targetRef="ParallelGateway_1z0ni6f" />
+    <bpmn:parallelGateway id="ParallelGateway_1z0ni6f">
+      <bpmn:incoming>SequenceFlow_0hd9hxo</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1beiszs</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1tvdypq</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1beiszs" sourceRef="UserTask_1np2fku" targetRef="ParallelGateway_1z0ni6f" />
+    <bpmn:sequenceFlow id="SequenceFlow_1tvdypq" sourceRef="ParallelGateway_1z0ni6f" targetRef="ServiceTask_1wpkjk1" />
+    <bpmn:serviceTask id="ServiceTask_1wpkjk1" name="Publish link" camunda:class="com.camunda.demo.external.task.PublishLinkAdapter">
+      <bpmn:extensionElements>
+        <camunda_1:connector>
+          <camunda_1:connectorId>http-connector</camunda_1:connectorId>
+          <camunda_1:inputOutput>
+            <camunda_1:inputParameter name="url"><![CDATA[#{"http://localhost:8080/external-task-example/video/".concat( video ).concat("/publish")}]]></camunda_1:inputParameter>
+            <camunda_1:inputParameter name="method">POST</camunda_1:inputParameter>
+            <camunda_1:inputParameter name="headers">
+              <camunda_1:map>
+                <camunda_1:entry key="Accept">application/json</camunda_1:entry>
+              </camunda_1:map>
+            </camunda_1:inputParameter>
+          </camunda_1:inputOutput>
+        </camunda_1:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1tvdypq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0oxarxg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_1gt65b5" name="Video&#10;published">
+      <bpmn:incoming>SequenceFlow_0oxarxg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0oxarxg" sourceRef="ServiceTask_1wpkjk1" targetRef="EndEvent_1gt65b5" />
+    <bpmn:textAnnotation id="TextAnnotation_1xwfebk">    <bpmn:text><![CDATA[Take up to several hours
+
+
+External Task]]></bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0ci2h3r" sourceRef="ServiceTask_1okl7ao" targetRef="TextAnnotation_1xwfebk" />
+    <bpmn:textAnnotation id="TextAnnotation_0rp8c0w">    <bpmn:text><![CDATA[Take a bit as well
+
+External Task]]></bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0ky9ab5" sourceRef="ServiceTask_00xcnfj" targetRef="TextAnnotation_0rp8c0w" />
+    <bpmn:textAnnotation id="TextAnnotation_02ta5x9">    <bpmn:text><![CDATA[Normally fast,
+Simple REST Call]]></bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0dlivmf" sourceRef="ServiceTask_1wpkjk1" targetRef="TextAnnotation_02ta5x9" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="video-publishing">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="99" y="124" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="72" y="165" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0x6xnog_di" bpmnElement="SequenceFlow_0x6xnog" targetElement="ParallelGateway_0usro0i_di">
+        <di:waypoint xsi:type="dc:Point" x="135" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="177" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="142" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1okl7ao_di" bpmnElement="ServiceTask_1okl7ao">
+        <dc:Bounds x="278" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1xwfebk_di" bpmnElement="TextAnnotation_1xwfebk">
+        <dc:Bounds x="345" y="29" width="163" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0ci2h3r_di" bpmnElement="Association_0ci2h3r">
+        <di:waypoint xsi:type="dc:Point" x="330" y="102" />
+        <di:waypoint xsi:type="dc:Point" x="349" y="79" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_18s6s1s_di" bpmnElement="SequenceFlow_18s6s1s">
+        <di:waypoint xsi:type="dc:Point" x="378" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="438" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="362" y="132" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14afoub_di" bpmnElement="SequenceFlow_14afoub">
+        <di:waypoint xsi:type="dc:Point" x="227" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="278" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="215.5" y="132" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_0usro0i_di" bpmnElement="ParallelGateway_0usro0i">
+        <dc:Bounds x="177" y="117" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="167" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08rtrlh_di" bpmnElement="SequenceFlow_08rtrlh">
+        <di:waypoint xsi:type="dc:Point" x="202" y="167" />
+        <di:waypoint xsi:type="dc:Point" x="202" y="257" />
+        <di:waypoint xsi:type="dc:Point" x="367" y="257" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="173" y="202.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1np2fku_di" bpmnElement="UserTask_1np2fku">
+        <dc:Bounds x="367" y="217" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_00xcnfj_di" bpmnElement="ServiceTask_00xcnfj">
+        <dc:Bounds x="438" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hd9hxo_di" bpmnElement="SequenceFlow_0hd9hxo">
+        <di:waypoint xsi:type="dc:Point" x="538" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="593" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="520.5" y="132" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_1z0ni6f_di" bpmnElement="ParallelGateway_1z0ni6f">
+        <dc:Bounds x="593" y="117" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="573" y="167" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1beiszs_di" bpmnElement="SequenceFlow_1beiszs">
+        <di:waypoint xsi:type="dc:Point" x="467" y="257" />
+        <di:waypoint xsi:type="dc:Point" x="618" y="257" />
+        <di:waypoint xsi:type="dc:Point" x="618" y="167" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="497.5" y="247" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1tvdypq_di" bpmnElement="SequenceFlow_1tvdypq">
+        <di:waypoint xsi:type="dc:Point" x="643" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="701" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="668" y="132" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1wpkjk1_di" bpmnElement="ServiceTask_1wpkjk1">
+        <dc:Bounds x="701" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1gt65b5_di" bpmnElement="EndEvent_1gt65b5">
+        <dc:Bounds x="869" y="124" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="842" y="169" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0oxarxg_di" bpmnElement="SequenceFlow_0oxarxg">
+        <di:waypoint xsi:type="dc:Point" x="801" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="845" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="845" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="869" y="142" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="788" y="132" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0rp8c0w_di" bpmnElement="TextAnnotation_0rp8c0w">
+        <dc:Bounds x="530" y="29" width="120" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0ky9ab5_di" bpmnElement="Association_0ky9ab5">
+        <di:waypoint xsi:type="dc:Point" x="509" y="102" />
+        <di:waypoint xsi:type="dc:Point" x="553" y="79" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_02ta5x9_di" bpmnElement="TextAnnotation_02ta5x9">
+        <dc:Bounds x="821" y="29" width="109" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dlivmf_di" bpmnElement="Association_0dlivmf">
+        <di:waypoint xsi:type="dc:Point" x="799" y="110" />
+        <di:waypoint xsi:type="dc:Point" x="839" y="79" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
