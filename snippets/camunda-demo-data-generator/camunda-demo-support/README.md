@@ -21,23 +21,23 @@ public class MyProcessApplication extends ServletProcessApplication {
   public void setupEnvironmentForDemo(ProcessEngine engine) {
 
     LicenseHelper.setLicense(engine);
-    DemoDataGenerator.autoGenerateFor(engine, "versicherungsneuantrag", 14, getReference());
+    DemoDataGenerator.autoGenerateFor(engine, "insurance-application", 14, getReference());
     createDefaultUsers(engine);
     
-    addUser(engine, "marc", "marc", "Marc", "Mustermann");
-    addGroup(engine, "sachbearbeiter", "Sachbearbeiter", "marc");
-    addFilterGroupAuthorization(engine, "sachbearbeiter", FILTER_MeineAufgaben, FILTER_GruppenAufgaben, FILTER_Ueberfaellig, FILTER_Wiedervorlage);
+    addUser(engine, "ben", "ben", "Ben", "Brooks");
+    addGroup(engine, "clerk", "Clerk", "ben");  
+    addFilterGroupAuthorization(engine, "clerk", FILTER_myTasks, FILTER_groupTasksFilter, FILTER_allTasksFilter);   
 
-    addUser(engine, "paul", "paul", "Paul", "Pohl");
-    addGroup(engine, "management", "paul");
-    addFilterUserAuthorization(engine, "paul", FILTER_MeineAufgaben, FILTER_GruppenAufgaben, FILTER_Ueberfaellig, FILTER_Wiedervorlage, FILTER_PostkorbManagement, FILTER_alleAufgaben);
-    
-    createGrantGroupAuthorization(engine, 
-        new String[]{"sachbearbeiter", "underwriter", "gruppenleiter"},
-        new Permission[]{Permissions.READ, Permissions.READ_HISTORY, Permissions.UPDATE_INSTANCE},
-        Resources.PROCESS_DEFINITION,
-        new String[] {"versicherungsneuantragMitDokumentenerstellung", "versicherungsneuantrag"});
-´´´
+    addUser(engine, "lisa", "lisa", "Lisa", "Floyd");
+    addGroup(engine, "management", "Management", "lisa");
+    addFilterUserAuthorization(engine, "lisa", FILTER_myTasks, FILTER_groupTasksFilter, FILTER_allTasksFilter);
+
+    createGrantGroupAuthorization(engine, //
+        new String[] { "clerk" }, //
+        new Permission[] { Permissions.READ, Permissions.READ_HISTORY, Permissions.UPDATE_INSTANCE }, //
+        Resources.PROCESS_DEFINITION, //
+        new String[] { "insurance-application" });
+```
 
 See [InsuranceProcessApplication](https://github.com/camunda/camunda-consulting/blob/master/showcases/en/insurance-application/process-application/src/main/java/com/camunda/demo/insuranceapplication/InsuranceProcessApplication.java) for an example of using it.
 
