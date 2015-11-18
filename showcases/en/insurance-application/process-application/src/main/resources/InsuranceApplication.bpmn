@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:camunda_1="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="Collaboration_1u35ano">
-    <bpmn2:participant id="Participant_0477s11" name="Insurance Application" processRef="insurance-application"/>
+    <bpmn2:participant id="Participant_0477s11" name="Insurance Application" processRef="insurance-application">
+    </bpmn2:participant>
   </bpmn2:collaboration>
   <bpmn2:process id="insurance-application" name="Insurance Application" isExecutable="true">
-    <bpmn2:startEvent id="StartEvent_1" camunda:asyncAfter="true" name="Application&#xD;&#xA;received">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="Decide about application" name="KPI-Cycle-Start"/>
+          <camunda:property value="14" name="simulateNumberOfDaysInPast"/>
+          <camunda:property value="2000" name="simulateTimeBetweenStartsBusinessDaysMean"/>
+          <camunda:property value="6000" name="simulateTimeBetweenStartsBusinessDaysSd"/>
         </camunda:properties>
+      </bpmn2:extensionElements>
+    <bpmn2:startEvent id="StartEvent_1" camunda:asyncAfter="true" name="Application&#xD;&#xA;received">
+      <bpmn2:extensionElements>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="Decide about application" name="KPI-Cycle-Start"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:startEvent>
@@ -29,41 +37,41 @@
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="BusinessRuleTaskAntragAutomatischPruefen" targetRef="ExclusiveGatewayPruefung"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="yellow&#xD;&#xA;(medium risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="userTaskAntragEntscheiden">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="30" name="probability"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="30" name="probability"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{riskAssessment == 'yellow'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="green&#xD;&#xA;(no risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="55" name="probability"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="55" name="probability"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risks.size()==0}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_16" name="red&#xD;&#xA;(At least one severe risk)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="15" name="probability"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="15" name="probability"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{riskAssessment == 'red'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="Accept&#xD;&#xA;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="80" name="probability"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="80" name="probability"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Reject&#xD;&#xA;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="20" name="probability"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="20" name="probability"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
@@ -74,9 +82,9 @@
     </bpmn2:serviceTask>
     <bpmn2:sendTask id="sendTaskPoliceZusenden" camunda:async="true" camunda:class="com.camunda.demo.insuranceapplication.adapter.EmailAdapter" name="Send policy">
       <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="mailBody">
-            <camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
+        <camunda:inputOutput><![CDATA[
+          ]]><camunda:inputParameter name="mailBody"><![CDATA[
+            ]]><camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
 
 We are happy to let you know that we issued your insurance policy! 
 
@@ -86,19 +94,19 @@ Here you find the relevant data summarized:
 - Product: ${application.insuranceProduct}
 
 With kind regards
-Your Camundanzia.]]></camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="mailSubject">Your policy was issued</camunda:inputParameter>
-        </camunda:inputOutput>
+Your Camundanzia.]]></camunda:script><![CDATA[
+          ]]></camunda:inputParameter><![CDATA[
+          ]]><camunda:inputParameter name="mailSubject">Your policy was issued</camunda:inputParameter><![CDATA[
+        ]]></camunda:inputOutput>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:endEvent id="EndEventAntragPoliciert" name="Policy&#xD;&#xA;issued">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="Accepted" name="KPI-Ratio"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="Accepted" name="KPI-Ratio"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
     </bpmn2:endEvent>
@@ -106,17 +114,17 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="sendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert"/>
     <bpmn2:sendTask id="SendTaskAblehnungZusenden" camunda:async="true" camunda:class="com.camunda.demo.insuranceapplication.adapter.EmailAdapter" name="Send rejection">
       <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="mailBody">
-            <camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
+        <camunda:inputOutput><![CDATA[
+          ]]><camunda:inputParameter name="mailBody"><![CDATA[
+            ]]><camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
 
 Unfortunately we cannot issue the policy you applied for. 
 
 With kind regards
-Your Camundanzia.]]></camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="mailSubject">Your application was rejected</camunda:inputParameter>
-        </camunda:inputOutput>
+Your Camundanzia.]]></camunda:script><![CDATA[
+          ]]></camunda:inputParameter><![CDATA[
+          ]]><camunda:inputParameter name="mailSubject">Your application was rejected</camunda:inputParameter><![CDATA[
+        ]]></camunda:inputOutput>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_01vh1zw</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
@@ -128,9 +136,9 @@ Your Camundanzia.]]></camunda:script>
     </bpmn2:serviceTask>
     <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Application&#xD;&#xA;rejected">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="Rejected" name="KPI-Ratio"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="Rejected" name="KPI-Ratio"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
     </bpmn2:endEvent>
@@ -146,11 +154,11 @@ Your Camundanzia.]]></camunda:script>
     </bpmn2:endEvent>
     <bpmn2:userTask id="userTaskAntragEntscheiden" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="clerk" camunda:dueDate="${dateTime().plusDays(1).toDate()}" name="Decide about application">
       <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property value="Decide about application" name="KPI-Cycle-End"/>
-          <camunda:property value="250000" name="durationMean"/>
-          <camunda:property value="200000" name="durationSd"/>
-        </camunda:properties>
+        <camunda:properties><![CDATA[
+          ]]><camunda:property value="Decide about application" name="KPI-Cycle-End"/><![CDATA[
+          ]]><camunda:property value="25000" name="durationMean"/><![CDATA[
+          ]]><camunda:property value="10000" name="durationSd"/><![CDATA[
+        ]]></camunda:properties>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>

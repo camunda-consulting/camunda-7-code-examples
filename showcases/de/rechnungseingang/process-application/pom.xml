@@ -36,12 +36,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.camunda.demo.environment</groupId>
-			<artifactId>camunda-demo-data-generator</artifactId>
-			<version>1.0.0</version>
-			<type>jar</type>
-		</dependency>
+    <dependency>
+        <groupId>org.camunda.consulting.snippets</groupId>
+        <artifactId>camunda-demo-support</artifactId>
+        <version>0.3.1</version>    
+    </dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

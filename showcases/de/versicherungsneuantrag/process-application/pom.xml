@@ -14,7 +14,6 @@
 
 	<properties>
 		<camunda.version>7.4.0-alpha2</camunda.version>
-		<drools.version>5.6.0.Final</drools.version>
 
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -58,7 +57,12 @@
 			<scope>provided</scope>
 			<version>${camunda.version}</version>
 		</dependency>
-
+		
+		<dependency>
+		    <groupId>org.camunda.consulting.snippets</groupId>
+		    <artifactId>camunda-demo-support</artifactId>
+		    <version>0.3.1</version>		
+		</dependency>
 
 		<dependency>
 			<!-- AssertJ Testing Library -->

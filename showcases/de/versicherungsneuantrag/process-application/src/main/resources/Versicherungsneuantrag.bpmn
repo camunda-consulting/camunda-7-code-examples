@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:camunda_1="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_5SVkEIXnEeSmwfgVk-ryvQ" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="Collaboration_1u35ano">
     <bpmn2:participant id="Participant_0477s11" name="Versicherungsneuantrag" processRef="versicherungsneuantrag"/>
   </bpmn2:collaboration>
@@ -30,47 +30,42 @@
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="gelb &#xD;&#xA;(Risiken erkannt)" sourceRef="ExclusiveGatewayPruefung" targetRef="SubProcess_078vm0w">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="30" name="probability"/>
+          <camunda:property value="35" name="probability"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{risikobewertung
-				== 'gelb'}]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung== 'gelb'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="gruen &#xD;&#xA;(keine Risiken)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="55" name="probability"/>
+        	<camunda:property value="55" name="probability"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{risks.size()==0}
-			]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risks.size()==0}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_16" name="rot &#xD;&#xA;(Hohes Risiko)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTask_0o3o39j">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="15" name="probability"/>
+        	<camunda:property value="20" name="probability"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{risikobewertung
-				== 'rot'}]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{risikobewertung == 'rot'}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="Antrag&#xD;&#xA;annehmen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="80" name="probability"/>
-        </camunda:properties>
+			<camunda:property value="80" name="probability"/>
+		</camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{approved}
-			]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Antrag&#xD;&#xA;ablehnen" sourceRef="ExclusiveGateway_2" targetRef="ServiceTask_0o3o39j">
       <bpmn2:extensionElements>
         <camunda:properties>
-          <camunda:property value="20" name="probability"/>
+			<camunda:property value="20" name="probability"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[#{!approved}
-			]]></bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!approved}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:subProcess id="SubProcess_078vm0w" name="Manuelle Prüfung">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
@@ -88,7 +83,7 @@
         <bpmn2:endEvent id="EndEvent_0jnh118">
           <bpmn2:extensionElements>
             <camunda:properties>
-              <camunda:property value="Policiert" name="KPI-Ratio"/>
+            	<camunda:property value="Policiert" name="KPI-Ratio"/> 
             </camunda:properties>
           </bpmn2:extensionElements>
           <bpmn2:incoming>SequenceFlow_1wlwa7o</bpmn2:incoming>
@@ -158,8 +153,8 @@
         <bpmn2:extensionElements>
           <camunda:properties>
             <camunda:property value="Antragsentscheidung" name="KPI-Cycle-End"/>
-            <camunda:property value="250000" name="durationMean"/>
-            <camunda:property value="200000" name="durationSd"/>
+            <camunda:property value="25000" name="durationMean"/>
+            <camunda:property value="50000" name="durationSd"/>
           </camunda:properties>
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_0izdu96</bpmn2:incoming>
@@ -199,8 +194,7 @@
     <bpmn2:boundaryEvent id="BoundaryEvent_2" name="2 Tage" attachedToRef="SubProcess_078vm0w" cancelActivity="false">
       <bpmn2:outgoing>SequenceFlow_06vge3o</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="TimerEventDefinition_1">
-        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression"><![CDATA[P2D
-				]]></bpmn2:timeDuration>
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">P2D</bpmn2:timeDuration>
       </bpmn2:timerEventDefinition>
     </bpmn2:boundaryEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_06vge3o" sourceRef="BoundaryEvent_2" targetRef="UserTaskAntragspruefungBeschleunigen"/>
