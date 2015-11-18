@@ -37,7 +37,7 @@ public class MyProcessApplication extends ServletProcessApplication {
         new Permission[]{Permissions.READ, Permissions.READ_HISTORY, Permissions.UPDATE_INSTANCE},
         Resources.PROCESS_DEFINITION,
         new String[] {"versicherungsneuantragMitDokumentenerstellung", "versicherungsneuantrag"});
-´´´
+```
 
 See [InsuranceProcessApplication](https://github.com/camunda/camunda-consulting/blob/master/showcases/en/insurance-application/process-application/src/main/java/com/camunda/demo/insuranceapplication/InsuranceProcessApplication.java) for an example of using it.
 
