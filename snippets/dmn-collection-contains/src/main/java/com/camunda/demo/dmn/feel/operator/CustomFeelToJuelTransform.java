@@ -13,8 +13,9 @@
 
 package com.camunda.demo.dmn.feel.operator;
 
-import org.camunda.bpm.dmn.feel.impl.transform.FeelToJuelTransform;
-import org.camunda.bpm.dmn.feel.impl.transform.FeelToJuelTransformImpl;
+import org.camunda.bpm.dmn.feel.impl.juel.transform.FeelToJuelTransform;
+import org.camunda.bpm.dmn.feel.impl.juel.transform.FeelToJuelTransformImpl;
+
 
 public class CustomFeelToJuelTransform extends FeelToJuelTransformImpl implements FeelToJuelTransform{
 

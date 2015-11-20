@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import org.camunda.bpm.dmn.engine.DmnEngine;
 import org.camunda.bpm.dmn.engine.DmnEngineConfiguration;
+import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
@@ -30,8 +31,8 @@ public class CustomFeelProcessEnginePlugin implements ProcessEnginePlugin {
 //      ProcessEngineDmnEngineConfiguration dmnEngineConfiguration = new ProcessEngineDmnEngineConfiguration(scriptingEngines, historyDecisionTableListener,
 //          expressionManager);
 
-      DmnEngineConfiguration dmnEngineConfiguration = processEngineConfiguration.getDmnEngineConfiguration();
-      dmnEngineConfiguration.feelEngineFactory(new CustomFeelEngineFactory());      
+      DefaultDmnEngineConfiguration dmnEngineConfiguration = (DefaultDmnEngineConfiguration) processEngineConfiguration.getDmnEngineConfiguration();
+      dmnEngineConfiguration.setFeelEngineFactory(new CustomFeelEngineFactory());      
       DmnEngine dmnEngine = dmnEngineConfiguration.buildEngine();
 
       Field dmnEngineConfigurationField = getField(processEngineConfiguration.getClass(), "dmnEngineConfiguration");

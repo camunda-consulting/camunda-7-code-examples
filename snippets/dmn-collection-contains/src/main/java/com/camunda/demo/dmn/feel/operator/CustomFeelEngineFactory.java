@@ -13,8 +13,9 @@
 
 package com.camunda.demo.dmn.feel.operator;
 
-import org.camunda.bpm.dmn.feel.impl.FeelEngineFactoryImpl;
-import org.camunda.bpm.dmn.feel.impl.transform.FeelToJuelTransform;
+import org.camunda.bpm.dmn.feel.impl.juel.FeelEngineFactoryImpl;
+import org.camunda.bpm.dmn.feel.impl.juel.transform.FeelToJuelTransform;
+
 
 public class CustomFeelEngineFactory extends FeelEngineFactoryImpl {
 

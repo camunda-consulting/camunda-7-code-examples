@@ -8,7 +8,7 @@
 
 	<properties>
 		<!-- set the version for camunda BPM here -->
-		<version.camunda>7.4.0-SNAPSHOT</version.camunda>
+		<version.camunda>7.4.0-alpha3</version.camunda>
 		<version.junit>4.12</version.junit>
 		<version.assertj>1.7.1</version.assertj>
 	</properties>

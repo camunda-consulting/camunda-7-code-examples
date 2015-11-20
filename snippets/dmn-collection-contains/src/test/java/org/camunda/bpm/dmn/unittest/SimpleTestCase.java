@@ -47,7 +47,7 @@ public class SimpleTestCase {
   @Before
   public void initEngineAndDecision() {
     dmnEngine = rule.getDmnEngine();
-    decision = dmnEngine.parseFirstDecision("Example.dmn");
+    decision = dmnEngine.parseDecision("orderDecision", this.getClass().getResourceAsStream("/Example.dmn"));
   }
 
   @Test
