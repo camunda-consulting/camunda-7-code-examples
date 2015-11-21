@@ -3,10 +3,9 @@ package com.camunda.demo.versicherungsneuantrag.adapter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import org.camunda.bpm.dmn.engine.DmnDecisionOutput;
-import org.camunda.bpm.dmn.engine.DmnDecisionResult;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.variable.Variables;
@@ -20,21 +19,12 @@ public class MapDmnResult implements ExecutionListener {
     Set<String> risikobewertungen = new HashSet<String>();
     
     //DmnDecisionOutput vs DmnDecisionResult
-    Object result = execution.getVariable("risikopruefung");
-    if (result instanceof DmnDecisionOutput) {
-      parseOutput(risks, risikobewertungen, (DmnDecisionOutput)result);      
-    } else if (result instanceof DmnDecisionResult) {
-      DmnDecisionResult risikopruefung = (DmnDecisionResult) execution.getVariable("risikopruefung");    
-      
-      for (DmnDecisionOutput dmnDecisionOutput : risikopruefung) { 
-        parseOutput(risks, risikobewertungen, dmnDecisionOutput);
+    List<Map<String, Object>> resultList = (List<Map<String, Object>>) execution.getVariable("risikopruefung");
+    for (Map<String, Object> result : resultList) {
+      risks.add((String)result.get("risiko"));
+      if (result.get("risikobewertung")!=null) {
+        risikobewertungen.add(((String)result.get("risikobewertung")).toLowerCase());      
       }
-    }
-    else if (result==null){
-      // no risks :-)
-    }
-    else {
-      throw new RuntimeException("Unknwon result type " + result.getClass().getName() + " (" + result + ")");
     }
 
     String risikobewertung = "grün";
@@ -45,14 +35,6 @@ public class MapDmnResult implements ExecutionListener {
     }
     execution.setVariable("risks", Variables.objectValue(risks).serializationDataFormat(SerializationDataFormats.JSON).create());
     execution.setVariable("risikobewertung", risikobewertung);
-  }
-
-  protected void parseOutput(List<String> risks, Set<String> risikobewertungen, DmnDecisionOutput dmnDecisionOutput) {
-    risks.add((String)dmnDecisionOutput.getValue("risiko"));
-    if (dmnDecisionOutput.getValue("risikobewertung")!=null) {
-      risikobewertungen.add(
-          ((String)dmnDecisionOutput.getValue("risikobewertung")).toLowerCase());      
-    }
   }
 
 }
