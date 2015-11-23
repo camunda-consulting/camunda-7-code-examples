@@ -74,11 +74,6 @@
         </bpmn2:extensionElements>
         <bpmn2:sequenceFlow id="SequenceFlow_158ca3d" sourceRef="StartEvent_0fp2npt" targetRef="UserTask_1v0y2h4" />
         <bpmn2:endEvent id="EndEvent_0jnh118">
-          <bpmn2:extensionElements>
-            <camunda:properties>
-              <camunda:property name="KPI-Ratio" value="Policiert" />
-            </camunda:properties>
-          </bpmn2:extensionElements>
           <bpmn2:incoming>SequenceFlow_1wlwa7o</bpmn2:incoming>
         </bpmn2:endEvent>
         <bpmn2:sequenceFlow id="SequenceFlow_1wlwa7o" sourceRef="UserTask_1v0y2h4" targetRef="EndEvent_0jnh118" />
@@ -98,11 +93,6 @@
         </bpmn2:extensionElements>
         <bpmn2:sequenceFlow id="SequenceFlow_0t2ecvh" sourceRef="StartEvent_11ba1jo" targetRef="UserTask_1a2hrm6" />
         <bpmn2:endEvent id="EndEvent_0pa9dpx">
-          <bpmn2:extensionElements>
-            <camunda:properties>
-              <camunda:property name="KPI-Ratio" value="Policiert" />
-            </camunda:properties>
-          </bpmn2:extensionElements>
           <bpmn2:incoming>SequenceFlow_1mr1km6</bpmn2:incoming>
         </bpmn2:endEvent>
         <bpmn2:sequenceFlow id="SequenceFlow_1mr1km6" sourceRef="UserTask_1a2hrm6" targetRef="EndEvent_0pa9dpx" />

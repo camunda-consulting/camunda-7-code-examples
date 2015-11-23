@@ -13,15 +13,14 @@ import org.camunda.bpm.engine.authorization.Resources;
 
 import com.camunda.demo.environment.DemoDataGenerator;
 import com.camunda.demo.environment.LicenseHelper;
+import com.camunda.demo.environment.ProcessApplicationDemoSetup;
 
 @ProcessApplication
 public class VersicherungsneuantragProcessApplication extends ServletProcessApplication {
 
   @PostDeploy
   public void setupEnvironmentForDemo(ProcessEngine engine) {
-    LicenseHelper.setLicense(engine);
-    DemoDataGenerator.autoGenerateFor(engine, "versicherungsneuantrag", 14, getReference());
-    createDefaultUsers(engine);
+    ProcessApplicationDemoSetup.executeDefaultSetup(engine, "versicherungsneuantrag", getReference());
     
     addUser(engine, "marc", "marc", "Marc", "Mustermann");
     addGroup(engine, "sachbearbeiter", "Sachbearbeiter", "marc");
@@ -36,7 +35,7 @@ public class VersicherungsneuantragProcessApplication extends ServletProcessAppl
     addFilterGroupAuthorization(engine, "underwriter", FILTER_MeineAufgaben, FILTER_GruppenAufgaben, FILTER_Ueberfaellig, FILTER_Wiedervorlage);
 
     addUser(engine, "paul", "paul", "Paul", "Pohl");
-    addGroup(engine, "management", "paul");
+    addGroup(engine, "management", "Management", "paul");
     addFilterUserAuthorization(engine, "paul", FILTER_MeineAufgaben, FILTER_GruppenAufgaben, FILTER_Ueberfaellig, FILTER_Wiedervorlage, FILTER_PostkorbManagement, FILTER_alleAufgaben);
     
     createGrantGroupAuthorization(engine, 

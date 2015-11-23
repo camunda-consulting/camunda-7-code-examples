@@ -3,7 +3,12 @@ package com.camunda.demo.insuranceapplication;
 import static com.camunda.demo.environment.DefaultFilter.FILTER_allTasksFilter;
 import static com.camunda.demo.environment.DefaultFilter.FILTER_groupTasksFilter;
 import static com.camunda.demo.environment.DefaultFilter.FILTER_myTasks;
-import static com.camunda.demo.environment.UserDataGenerator.*;
+import static com.camunda.demo.environment.UserDataGenerator.addFilterGroupAuthorization;
+import static com.camunda.demo.environment.UserDataGenerator.addFilterUserAuthorization;
+import static com.camunda.demo.environment.UserDataGenerator.addGroup;
+import static com.camunda.demo.environment.UserDataGenerator.addUser;
+import static com.camunda.demo.environment.UserDataGenerator.createGrantGroupAuthorization;
+import static com.camunda.demo.environment.UserDataGenerator.createGrantUserAuthorization;
 
 import org.camunda.bpm.application.PostDeploy;
 import org.camunda.bpm.application.ProcessApplication;
@@ -13,17 +18,14 @@ import org.camunda.bpm.engine.authorization.Permission;
 import org.camunda.bpm.engine.authorization.Permissions;
 import org.camunda.bpm.engine.authorization.Resources;
 
-import com.camunda.demo.environment.DemoDataGenerator;
-import com.camunda.demo.environment.LicenseHelper;
+import com.camunda.demo.environment.ProcessApplicationDemoSetup;
 
 @ProcessApplication
 public class InsuranceProcessApplication extends ServletProcessApplication {
 
   @PostDeploy
   public void setupEnvironmentForDemo(ProcessEngine engine) {
-    LicenseHelper.setLicense(engine);
-    DemoDataGenerator.autoGenerateFor(engine, "insurance-application", 14, getReference());
-    createDefaultUsers(engine);
+    ProcessApplicationDemoSetup.executeDefaultSetup(engine, "insurance-application", getReference());
     
     addUser(engine, "ben", "ben", "Ben", "Brooks");
     addGroup(engine, "clerk", "Clerk", "ben");  

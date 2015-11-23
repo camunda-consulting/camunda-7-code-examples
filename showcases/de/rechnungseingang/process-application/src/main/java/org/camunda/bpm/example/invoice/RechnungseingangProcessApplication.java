@@ -1,12 +1,15 @@
 package org.camunda.bpm.example.invoice;
 
-import static com.camunda.demo.environment.DefaultFilter.*;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_GruppenAufgaben;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_MeineAufgaben;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_Ueberfaellig;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_Wiedervorlage;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_alleAufgaben;
+import static com.camunda.demo.environment.DefaultFilter.FILTER_management;
 import static com.camunda.demo.environment.UserDataGenerator.addFilterGroupAuthorization;
 import static com.camunda.demo.environment.UserDataGenerator.addFilterUserAuthorization;
 import static com.camunda.demo.environment.UserDataGenerator.addGroup;
-import static com.camunda.demo.environment.UserDataGenerator.addMembership;
 import static com.camunda.demo.environment.UserDataGenerator.addUser;
-import static com.camunda.demo.environment.UserDataGenerator.createDefaultUsers;
 import static com.camunda.demo.environment.UserDataGenerator.createGrantGroupAuthorization;
 import static com.camunda.demo.environment.UserDataGenerator.createGrantUserAuthorization;
 
@@ -18,17 +21,14 @@ import org.camunda.bpm.engine.authorization.Permission;
 import org.camunda.bpm.engine.authorization.Permissions;
 import org.camunda.bpm.engine.authorization.Resources;
 
-import com.camunda.demo.environment.DemoDataGenerator;
-import com.camunda.demo.environment.LicenseHelper;
+import com.camunda.demo.environment.ProcessApplicationDemoSetup;
 
 @ProcessApplication
 public class RechnungseingangProcessApplication extends ServletProcessApplication {
 
   @PostDeploy
   public void generateProcessInstances(ProcessEngine engine) {
-    LicenseHelper.setLicense(engine);
-    DemoDataGenerator.autoGenerateFor(engine, "rechnungseingang", 14, getReference());
-    createDefaultUsers(engine);    
+    ProcessApplicationDemoSetup.executeDefaultSetup(engine, "rechnungseingang", getReference()); 
     
     addUser(engine, "desi", "desi", "Desi", "Ree");
     addGroup(engine, "assistenz", "Team Asssistenz", "desi");
@@ -39,7 +39,7 @@ public class RechnungseingangProcessApplication extends ServletProcessApplicatio
     addFilterGroupAuthorization(engine, "buchhaltung", FILTER_MeineAufgaben, FILTER_GruppenAufgaben);
 
     addUser(engine, "anne", "anne", "Anne", "Wichtig");
-    addGroup(engine, "management", "anne");
+    addGroup(engine, "management", "Management", "anne");
     addFilterUserAuthorization(engine, "anne", FILTER_MeineAufgaben, FILTER_GruppenAufgaben, FILTER_management, FILTER_alleAufgaben);
 
     createGrantGroupAuthorization(engine, //

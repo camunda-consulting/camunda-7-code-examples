@@ -8,7 +8,6 @@ import static com.camunda.demo.environment.UserDataGenerator.addFilterGroupAutho
 import static com.camunda.demo.environment.UserDataGenerator.addFilterUserAuthorization;
 import static com.camunda.demo.environment.UserDataGenerator.addGroup;
 import static com.camunda.demo.environment.UserDataGenerator.addUser;
-import static com.camunda.demo.environment.UserDataGenerator.createDefaultUsers;
 import static com.camunda.demo.environment.UserDataGenerator.createGrantGroupAuthorization;
 import static com.camunda.demo.environment.UserDataGenerator.createGrantUserAuthorization;
 
@@ -20,17 +19,14 @@ import org.camunda.bpm.engine.authorization.Permission;
 import org.camunda.bpm.engine.authorization.Permissions;
 import org.camunda.bpm.engine.authorization.Resources;
 
-import com.camunda.demo.environment.DemoDataGenerator;
-import com.camunda.demo.environment.LicenseHelper;
+import com.camunda.demo.environment.ProcessApplicationDemoSetup;
 
 @ProcessApplication
 public class InvoiceProcessApplication extends ServletProcessApplication {
 
   @PostDeploy
   public void setupEnvironmentForDemo(ProcessEngine engine) {
-    LicenseHelper.setLicense(engine);
-    DemoDataGenerator.autoGenerateFor(engine, "incoming-invoice", 14, getReference());
-    createDefaultUsers(engine);
+    ProcessApplicationDemoSetup.executeDefaultSetup(engine, "incoming-invoice", getReference()); 
     
     addUser(engine, "john", "john", "John", "Doe");
     addGroup(engine, "team-assistence", "Team Assistence", "john");
