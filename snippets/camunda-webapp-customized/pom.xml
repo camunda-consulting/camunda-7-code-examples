@@ -10,7 +10,7 @@
 
 
 	<properties>
-		<camunda.version>7.3.0</camunda.version>
+		<camunda.version>7.4.0.-alpha3</camunda.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,7 +58,7 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries><!-- module dependencies for deployment on AS 7 -->
-							<Dependencies>org.camunda.bpm.camunda-engine</Dependencies>
+							<Dependencies>org.camunda.bpm.camunda-engine,org.camunda.bpm.dmn.camunda-engine-dmn</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
