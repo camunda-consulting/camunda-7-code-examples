@@ -1,8 +1,12 @@
 package com.camunda.demo.environment;
 
+import java.util.logging.Logger;
+
 import org.camunda.bpm.engine.ProcessEngine;
 
 public class LicenseHelper {
+
+  private final static Logger LOGGER = Logger.getLogger(LicenseHelper.class.getName());
 
   /**
    * Set license from user home
@@ -15,7 +19,8 @@ public class LicenseHelper {
   }
 
   public static void setLicense(ProcessEngine processEngine, String licenseKey) {
-    processEngine.getManagementService().setProperty("camunda-license-key", licenseKey);
+    LOGGER.info("Set license to provided license key");
 
+    processEngine.getManagementService().setProperty("camunda-license-key", licenseKey);
   }
 }

@@ -19,19 +19,16 @@ import org.camunda.bpm.engine.authorization.Resource;
 import org.camunda.bpm.engine.authorization.Resources;
 import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity;
 
 public class UserDataGenerator {
 
   private final static Logger LOGGER = Logger.getLogger(UserDataGenerator.class.getName());
-
-  public static void createDemoData(ProcessEngine engine) {
-
-  }
-
+  
   public static void createDefaultUsers(ProcessEngine engine) {
     LOGGER.info("Generating default users for showroom");
-
+ 
     // /////////////////////////////////////
     // create user as otherwise the invoice exmaple will re-create users
     // gets no authorizations - cannot do any harm :-)
