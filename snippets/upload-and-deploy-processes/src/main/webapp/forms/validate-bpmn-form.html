@@ -1,0 +1,64 @@
+<form role=form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Check out this BPMN file</legend>
+
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form method="post">
+     <!-- Select Basic -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="selectbasic">Do you want to deploy this file</label>
+			  <div class="col-md-4">
+			   <select cam-variable-name="deployBPMN"
+		        		cam-variable-type="Boolean">
+		 		 	<option value="true" selected="selected">Yes</option>
+		  			<option value="false">No</option>
+			</select>
+			  </div>
+			</div>
+			<script cam-script type="text/form-script">
+    		var variableManager = camForm.variableManager;
+
+    		camForm.on('form-loaded', function() {
+
+      		variableManager.fetchVariable('BPMNFile');
+    		});
+
+    		camForm.on('variables-fetched', function() {
+			// we're using atob because the base is encoded to 64bit and atob decodes it	
+      		scope.bpmnFile = atob( variableManager.variableValue('BPMNFile') );
+
+    		});
+
+  		</script>
+    
+     	
+    	<div class="diagram-pane"
+	         cam-widget-bpmn-viewer
+	         diagram-data="bpmnFile"
+	         control="control">
+    	</div>    
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+
+
+
+</fieldset>
+
+
+
+</form>
