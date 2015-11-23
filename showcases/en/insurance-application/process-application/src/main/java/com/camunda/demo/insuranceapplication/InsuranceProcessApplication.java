@@ -49,6 +49,11 @@ public class InsuranceProcessApplication extends ServletProcessApplication {
         new Permission[] { Permissions.READ, Permissions.READ_HISTORY, Permissions.READ_INSTANCE, Permissions.UPDATE_INSTANCE }, //
         Resources.PROCESS_DEFINITION, //
         new String[] { "insurance-application" });
+    createGrantUserAuthorization(engine, 
+        new String[]{"lisa"},
+        new Permission[]{Permissions.READ, Permissions.READ_HISTORY},
+        Resources.DECISION_DEFINITION,
+        new String[] {"riskAssessment"});
     createGrantUserAuthorization(engine, //
         new String[] { "lisa" }, //
         new Permission[] { Permissions.READ, Permissions.UPDATE }, //

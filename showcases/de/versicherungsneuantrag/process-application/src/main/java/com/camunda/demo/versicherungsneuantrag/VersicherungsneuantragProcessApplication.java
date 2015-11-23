@@ -52,6 +52,11 @@ public class VersicherungsneuantragProcessApplication extends ServletProcessAppl
         new String[] {"versicherungsneuantragMitDokumentenerstellung", "versicherungsneuantrag", "dokumentAnfordern"});
     createGrantUserAuthorization(engine, 
         new String[]{"paul"},
+        new Permission[]{Permissions.READ, Permissions.READ_HISTORY},
+        Resources.DECISION_DEFINITION,
+        new String[] {"risikopruefung"});
+    createGrantUserAuthorization(engine, 
+        new String[]{"paul"},
         new Permission[]{Permissions.READ, Permissions.UPDATE},
         Resources.TASK,
         new String[] {"*"});    
