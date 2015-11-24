@@ -7,7 +7,7 @@ This project is a sample application using BPMN + CMMN + DMN to implement a typi
 
 It includes a user interface for the knowledge worker implemented in JSF.
 
-Built and tested against *Camunda BPM 7.4.0 - alpha1* on JBoss WildFly 8.2.0.
+Built and tested against *Camunda BPM 7.4.0 - alpha3* on JBoss WildFly 8.2.1.
 
 Important note: *Requires JSF - does not run on Tomcat!*
 
@@ -69,7 +69,7 @@ This example was presented in a Webinar, the recording is available:
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.4.0 and WildFly 8.2.0. 
+Built and tested against Camunda BPM version 7.4.0 and WildFly 8.2.1. 
 
 License
 -------
