@@ -3,16 +3,15 @@ package com.camunda.demo.underwriting;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.complete;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.camunda.bpm.dmn.engine.DmnDecisionResult;
+import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
 import org.camunda.bpm.dmn.engine.DmnEngine;
-import org.camunda.bpm.dmn.engine.impl.DmnEngineConfigurationImpl;
+import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.history.HistoricCaseActivityInstance;
 import org.camunda.bpm.engine.history.HistoricCaseInstance;
@@ -30,7 +29,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import com.camunda.demo.underwriting.Constants;
 import com.camunda.demo.underwriting.domain.Application;
 
 /**
@@ -84,9 +82,9 @@ public class InMemoryH2Test {
     application.setRisk("low");
     application.setType("extended");
     
-    DmnEngine dmnEngine = new DmnEngineConfigurationImpl().buildEngine();
-    DmnDecisionResult decisionResult = dmnEngine.evaluate(
-        dmnEngine.parseDecision(this.getClass().getResourceAsStream("/determine-underwriter.dmn")),
+    DmnEngine dmnEngine = new DefaultDmnEngineConfiguration().buildEngine();
+    DmnDecisionTableResult decisionResult = dmnEngine.evaluateDecisionTable(
+        dmnEngine.parseDecision("determineUnderwriter", this.getClass().getResourceAsStream("/determine-underwriter.dmn")),
         Variables.createVariables().putValue("application", application));
     
     System.out.println(decisionResult.get(0));

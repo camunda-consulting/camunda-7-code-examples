@@ -1,100 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Definitions xmlns="http://www.omg.org/spec/DMN/20130901" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="camunda" namespace="http://camunda.org/dmn">
-  <ItemDefinition id="itemDefinition1">  <typeDefinition>integer</typeDefinition>
-</ItemDefinition>
-  <ItemDefinition id="itemDefinition2">  <typeDefinition>string</typeDefinition>
-</ItemDefinition>
-  <ItemDefinition id="ItemDefinition_08zrve1">  <typeDefinition>string</typeDefinition>
-</ItemDefinition>
-  <ItemDefinition id="ItemDefinition_0km96qz">  <typeDefinition>string</typeDefinition>
-</ItemDefinition>
-  <Decision id="determineUnderwriter" name="Determine Underwriter">
-    <DecisionTable id="decisionTable" isComplete="true" isConsistent="true">
-      <clause id="clause1" name="Age">
-        <inputExpression id="inputExpression1">
-          <itemDefinition href="#itemDefinition1" />
-          <text>application.age</text>
-        </inputExpression>
-        <inputEntry id="LiteralExpression_0o8gsz8">        <text><![CDATA[> 40]]></text>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="determineUnderwriter" name="Determine Underwriter">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Age">
+        <inputExpression id="inputExpression1" typeRef="integer">        <text>application.age</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0f5y38x" label="Risk">
+        <inputExpression id="LiteralExpression_1m0s5nk" typeRef="string">        <text>application.risk</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0honcdj" label="Type of Insurance">
+        <inputExpression id="LiteralExpression_1lr6st8" typeRef="string">        <text>application.type</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Underwriter" name="underwriter" typeRef="string" />
+      <rule id="row-981531974-1">
+        <inputEntry id="UnaryTests_16geswz">        <text><![CDATA[<= 40]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_1m5t1lf">        <text><![CDATA[> 40]]></text>
+        <inputEntry id="UnaryTests_18qjtz1">        <text><![CDATA["low"]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_0mymv9m">        <text><![CDATA[<= 40]]></text>
+        <inputEntry id="UnaryTests_16kf9hs">        <text><![CDATA["basic"]]></text>
 </inputEntry>
-        <inputEntry id="LiteralExpression_142jarf">        <text><![CDATA[<= 40]]></text>
-</inputEntry>
-      </clause>
-      <clause id="Clause_1kdbj5u" name="Risk">
-        <inputExpression id="LiteralExpression_0yd6of9">
-          <itemDefinition href="#ItemDefinition_08zrve1" />
-          <text>application.risk</text>
-        </inputExpression>
-        <inputEntry id="LiteralExpression_1ddpxgr">        <text>low</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_0xw0sjb">        <text>low</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_0ucwehw">        <text>high</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_1gl1v15">        <text>high</text>
-</inputEntry>
-      </clause>
-      <clause id="Clause_1fxekxa" name="Type of Insurance">
-        <inputExpression id="LiteralExpression_0kk1ffx">
-          <itemDefinition href="#ItemDefinition_0km96qz" />
-          <text>application.type</text>
-        </inputExpression>
-        <inputEntry id="LiteralExpression_0h7ommi">        <text>extended</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_11cmifm">        <text>basic</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_1pww5eh">        <text>basic</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_1xiflhl">        <text>basic</text>
-</inputEntry>
-        <inputEntry id="LiteralExpression_0to1hns">        <text>basic</text>
-</inputEntry>
-      </clause>
-      <clause id="clause2" name="Underwriter" camunda:output="underwriter">
-        <outputDefinition href="#itemDefinition2" />
-        <outputEntry id="LiteralExpression_0sc9ub5">        <text>john</text>
+        <outputEntry id="LiteralExpression_0s78nbb">        <text><![CDATA["john"]]></text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_119fb65">        <text>mary</text>
+      </rule>
+      <rule id="row-981531974-2">
+        <inputEntry id="UnaryTests_0fe4e1a">        <text><![CDATA[> 40]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1u1dqad">        <text><![CDATA["low"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00638as">        <text><![CDATA["basic"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0rv0rzq">        <text><![CDATA["mary"]]></text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0fm3lvs">        <text>peter</text>
+      </rule>
+      <rule id="row-981531974-3">
+        <inputEntry id="UnaryTests_07ojn7v">        <text><![CDATA[<= 40]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06c1je0">        <text><![CDATA["high"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1n604sv">        <text><![CDATA["basic"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1p64txh">        <text><![CDATA["mary"]]></text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0dkayca">        <text>peter</text>
+      </rule>
+      <rule id="row-981531974-4">
+        <inputEntry id="UnaryTests_02rueyx">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jma2h3">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0up3qm1">        <text><![CDATA["extended"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0e4qcpt">        <text><![CDATA["peter"]]></text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_1pvpvb4">        <text>mary</text>
+      </rule>
+      <rule id="row-981531974-5">
+        <inputEntry id="UnaryTests_1rrteua">        <text><![CDATA[> 40]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1fnqq62">        <text><![CDATA["high"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_136v0ct">        <text><![CDATA["basic"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_14w9yzr">        <text><![CDATA["peter"]]></text>
 </outputEntry>
-      </clause>
-      <rule id="DecisionRule_0opktl3">
-        <condition>LiteralExpression_1ddpxgr</condition>
-        <condition>LiteralExpression_0mymv9m</condition>
-        <condition>LiteralExpression_1pww5eh</condition>
-        <conclusion>LiteralExpression_0sc9ub5</conclusion>
       </rule>
-      <rule id="DecisionRule_0t5xc5u">
-        <condition>LiteralExpression_0o8gsz8</condition>
-        <condition>LiteralExpression_0xw0sjb</condition>
-        <condition>LiteralExpression_1xiflhl</condition>
-        <conclusion>LiteralExpression_119fb65</conclusion>
-      </rule>
-      <rule id="DecisionRule_13xxc4c">
-        <condition>LiteralExpression_142jarf</condition>
-        <condition>LiteralExpression_1gl1v15</condition>
-        <condition>LiteralExpression_0to1hns</condition>
-        <conclusion>LiteralExpression_1pvpvb4</conclusion>
-      </rule>
-      <rule id="DecisionRule_0lfwdb8">
-        <condition>LiteralExpression_0h7ommi</condition>
-        <conclusion>LiteralExpression_0fm3lvs</conclusion>
-      </rule>
-      <rule id="DecisionRule_00ews8v">
-        <condition>LiteralExpression_1m5t1lf</condition>
-        <condition>LiteralExpression_0ucwehw</condition>
-        <condition>LiteralExpression_11cmifm</condition>
-        <conclusion>LiteralExpression_0dkayca</conclusion>
-      </rule>
-    </DecisionTable>
-  </Decision>
-</Definitions>
+    </decisionTable>
+  </decision>
+</definitions>
