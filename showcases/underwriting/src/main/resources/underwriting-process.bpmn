@@ -101,7 +101,7 @@
   <bpmn2:error id="Error_1" name="duplicate application error" errorCode="duplicateError" />
   <bpmn2:message id="Message_3" name="msgUnderwritingFinished" />
   <bpmn2:dataStore id="DataStore_1" name="Data Store 1" />
-  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="pool-underwriting" isHorizontal="true">
         <dc:Bounds x="10" y="10" width="1311" height="363" />
