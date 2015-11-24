@@ -7,6 +7,7 @@ A Process Application for [Camunda BPM](http://docs.camunda.org).
 The process consists of:
 
 * Two External Tasks, served by JavaScript "workers" (simulated by the click on a button)
+  * Example see [index.html](https://github.com/camunda/camunda-consulting/blob/master/one-time-examples/blog/external-task-example/src/main/webapp/index.html#L106)
 * One Human Task, served either via Camunda Tasklist or simulated via another button
 * One "normal" Service Task actively calling a REST service
 
