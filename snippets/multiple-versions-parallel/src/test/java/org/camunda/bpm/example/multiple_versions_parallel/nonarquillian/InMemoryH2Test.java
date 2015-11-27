@@ -29,7 +29,7 @@ public class InMemoryH2Test extends ProcessEngineTestCase {
     runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY + version.getProperty("maven.version.major") + "." + version.getProperty("maven.version.minor"));
   }
 
-  @Deployment(resources = { "process.bpmn", "process-v23.bpmn" })
+  @Deployment(resources = { "process.bpmn", "process-v7.4.bpmn" })
   public void testStartLatestVerison() {
     List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
       .processDefinitionKeyLike(PROCESS_DEFINITION_KEY + "%")
@@ -38,7 +38,9 @@ public class InMemoryH2Test extends ProcessEngineTestCase {
       .latestVersion()
       .listPage(0, 1);
     
-    assertEquals(PROCESS_DEFINITION_KEY + "42.0", processDefinitions.get(0).getKey());
+    assertEquals(PROCESS_DEFINITION_KEY + "7.4", processDefinitions.get(0).getKey());
+    
+    runtimeService.startProcessInstanceById(processDefinitions.get(0).getId());
   }
 
 }
