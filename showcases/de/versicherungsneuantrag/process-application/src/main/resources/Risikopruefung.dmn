@@ -74,7 +74,7 @@
 </inputEntry>
         <outputEntry id="LiteralExpression_1h3sboh">        <text><![CDATA["Hochwertfahrzeug"]]></text>
 </outputEntry>
-        <outputEntry id="LiteralExpression_0asc7l5">        <text>gelb</text>
+        <outputEntry id="LiteralExpression_0asc7l5">        <text><![CDATA["gelb"]]></text>
 </outputEntry>
       </rule>
     </decisionTable>
