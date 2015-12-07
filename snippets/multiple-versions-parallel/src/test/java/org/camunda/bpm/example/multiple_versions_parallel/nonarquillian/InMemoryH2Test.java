@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import org.camunda.bpm.engine.impl.util.LogUtil;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineTestCase;
 import org.camunda.bpm.engine.test.Deployment;
 
@@ -26,7 +27,9 @@ public class InMemoryH2Test extends ProcessEngineTestCase {
   public void testParsingAndDeployment() throws IOException {
     Properties version = new Properties();
     version.load(this.getClass().getResourceAsStream("/version.properties"));
-    runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY + version.getProperty("maven.version.major") + "." + version.getProperty("maven.version.minor"));
+    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY + version.getProperty("maven.version.major") + "." + version.getProperty("maven.version.minor"));
+    
+    System.out.println(runtimeService.getVariable(processInstance.getId(), "processDefinitionVersion"));
   }
 
   @Deployment(resources = { "process.bpmn", "process-v7.4.bpmn" })
