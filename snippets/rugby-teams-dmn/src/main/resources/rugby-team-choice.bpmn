@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="RugbyRules" name="Rugby Team Choice" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0ghp2lc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0ghp2lc" sourceRef="StartEvent_1" targetRef="UserTask_0l4jp70" />
+    <bpmn:userTask id="UserTask_0l4jp70" name="Choose Team Preferences" camunda:assignee="demo" camunda:formKey="embedded:app:forms/choose-team-preferences.html">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="org.camunda.demo.dmnTest.RugbyRules.SetupTeamColours" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0ghp2lc</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0rpbgpt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1fpdpr5" name="Northern Hemishphere?">
+      <bpmn:incoming>SequenceFlow_0rpbgpt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0x41nw1</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_117tlf3</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0rpbgpt" sourceRef="UserTask_0l4jp70" targetRef="ExclusiveGateway_1fpdpr5" />
+    <bpmn:sequenceFlow id="SequenceFlow_0x41nw1" name="Yes" sourceRef="ExclusiveGateway_1fpdpr5" targetRef="BusinessRuleTask_0scr8cb">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{isNorthern}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_117tlf3" name="No" sourceRef="ExclusiveGateway_1fpdpr5" targetRef="BusinessRuleTask_1x0jy8i">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!isNorthern}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1dt7mzo">
+      <bpmn:incoming>SequenceFlow_0zcm61p</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1kiwi5r</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0syx38s</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0zcm61p" sourceRef="BusinessRuleTask_1x0jy8i" targetRef="ExclusiveGateway_1dt7mzo" />
+    <bpmn:endEvent id="EndEvent_11apmrw">
+      <bpmn:incoming>SequenceFlow_0r3y86f</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0syx38s" sourceRef="ExclusiveGateway_1dt7mzo" targetRef="UserTask_0be3syc" />
+    <bpmn:sequenceFlow id="SequenceFlow_1kiwi5r" sourceRef="BusinessRuleTask_0scr8cb" targetRef="ExclusiveGateway_1dt7mzo" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0scr8cb" name="Northern Teams" camunda:resultVariable="chosenTeam" camunda:decisionRef="northernTeams" camunda:mapDecisionResult="singleResult">
+      <bpmn:incoming>SequenceFlow_0x41nw1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kiwi5r</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:businessRuleTask id="BusinessRuleTask_1x0jy8i" name="Southern Teams" camunda:resultVariable="chosenTeam" camunda:decisionRef="southernTeams" camunda:mapDecisionResult="singleResult">
+      <bpmn:incoming>SequenceFlow_117tlf3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zcm61p</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:userTask id="UserTask_0be3syc" name="ApproveChocie" camunda:assignee="demo" camunda:formKey="embedded:app:forms/show-team-details.html">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="org.camunda.demo.dmnTest.RugbyRules.ParseDecisionListener" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0syx38s</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0zrssu3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1rgo2hx</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_04ofdmp" name="Are you Happy with your team?">
+      <bpmn:incoming>SequenceFlow_1rgo2hx</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0r3y86f</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_18gn488</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1rgo2hx" sourceRef="UserTask_0be3syc" targetRef="ExclusiveGateway_04ofdmp" />
+    <bpmn:sequenceFlow id="SequenceFlow_0r3y86f" name="Yes" sourceRef="ExclusiveGateway_04ofdmp" targetRef="EndEvent_11apmrw">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{happy}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_18gn488" name="No" sourceRef="ExclusiveGateway_04ofdmp" targetRef="BusinessRuleTask_0vf188b">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!happy}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0zrssu3" sourceRef="BusinessRuleTask_0vf188b" targetRef="UserTask_0be3syc" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0vf188b" name="Other Teams" camunda:resultVariable="chosenTeam" camunda:decisionRef="remainingTeams" camunda:mapDecisionResult="singleResult">
+      <bpmn:incoming>SequenceFlow_18gn488</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zrssu3</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="RugbyRules">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="126" y="137" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="99" y="173" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ghp2lc_di" bpmnElement="SequenceFlow_0ghp2lc">
+        <di:waypoint xsi:type="dc:Point" x="162" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="249" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160.5" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0l4jp70_di" bpmnElement="UserTask_0l4jp70">
+        <dc:Bounds x="249" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1fpdpr5_di" bpmnElement="ExclusiveGateway_1fpdpr5" isMarkerVisible="true">
+        <dc:Bounds x="434" y="130" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="492" y="135" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0rpbgpt_di" bpmnElement="SequenceFlow_0rpbgpt">
+        <di:waypoint xsi:type="dc:Point" x="349" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="434" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="346.5" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0x41nw1_di" bpmnElement="SequenceFlow_0x41nw1">
+        <di:waypoint xsi:type="dc:Point" x="459" y="130" />
+        <di:waypoint xsi:type="dc:Point" x="459" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="559" y="27" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="395" y="109" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_117tlf3_di" bpmnElement="SequenceFlow_117tlf3">
+        <di:waypoint xsi:type="dc:Point" x="459" y="180" />
+        <di:waypoint xsi:type="dc:Point" x="459" y="253" />
+        <di:waypoint xsi:type="dc:Point" x="571" y="253" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="393" y="185" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1dt7mzo_di" bpmnElement="ExclusiveGateway_1dt7mzo" isMarkerVisible="true">
+        <dc:Bounds x="770" y="130" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="750" y="180" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zcm61p_di" bpmnElement="SequenceFlow_0zcm61p">
+        <di:waypoint xsi:type="dc:Point" x="671" y="253" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="253" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="180" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="674.5" y="249" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_11apmrw_di" bpmnElement="EndEvent_11apmrw">
+        <dc:Bounds x="1496" y="137" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1469" y="173" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0syx38s_di" bpmnElement="SequenceFlow_0syx38s">
+        <di:waypoint xsi:type="dc:Point" x="820" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="871" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="814.5" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kiwi5r_di" bpmnElement="SequenceFlow_1kiwi5r">
+        <di:waypoint xsi:type="dc:Point" x="659" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="130" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="674.5" y="14" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0scr8cb_di" bpmnElement="BusinessRuleTask_0scr8cb">
+        <dc:Bounds x="559" y="-13" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BusinessRuleTask_1x0jy8i_di" bpmnElement="BusinessRuleTask_1x0jy8i">
+        <dc:Bounds x="571" y="213" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0be3syc_di" bpmnElement="UserTask_0be3syc">
+        <dc:Bounds x="871" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_04ofdmp_di" bpmnElement="ExclusiveGateway_04ofdmp" isMarkerVisible="true">
+        <dc:Bounds x="1358" y="130" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1338" y="180" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1rgo2hx_di" bpmnElement="SequenceFlow_1rgo2hx">
+        <di:waypoint xsi:type="dc:Point" x="971" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="1358" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="967.5" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0r3y86f_di" bpmnElement="SequenceFlow_0r3y86f">
+        <di:waypoint xsi:type="dc:Point" x="1408" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="1496" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1386" y="128" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_18gn488_di" bpmnElement="SequenceFlow_18gn488">
+        <di:waypoint xsi:type="dc:Point" x="1383" y="130" />
+        <di:waypoint xsi:type="dc:Point" x="1383" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="1221" y="27" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1310" y="104.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zrssu3_di" bpmnElement="SequenceFlow_0zrssu3">
+        <di:waypoint xsi:type="dc:Point" x="1121" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="921" y="27" />
+        <di:waypoint xsi:type="dc:Point" x="921" y="115" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1004" y="10.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0vf188b_di" bpmnElement="BusinessRuleTask_0vf188b">
+        <dc:Bounds x="1121" y="-13" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

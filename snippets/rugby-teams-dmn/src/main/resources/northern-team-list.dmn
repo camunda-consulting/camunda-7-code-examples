@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="northernTeams" name="Northern Team to Support">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Colour">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>colour</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1esu76g" label="Underdog">
+        <inputExpression id="LiteralExpression_0crbkce" typeRef="boolean">        <text>underdog</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Chosen Team" name="chosenTeam" typeRef="string" />
+      <output id="OutputClause_193jnm5" label="Team Description" name="teamDescription" typeRef="string" />
+      <rule id="row-981533309-6">
+        <inputEntry id="UnaryTests_19erc3a">        <text><![CDATA["Red"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bqzrt1">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_05iv10q">        <text><![CDATA["Wales"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0q2ecgq">        <text><![CDATA["Small place, big team"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-7">
+        <description>No other team in green are woth your time</description>
+        <inputEntry id="UnaryTests_13to787">        <text><![CDATA["Green"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1q4ccc8">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0o463os">        <text><![CDATA["Ireland"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1byfuf0">        <text><![CDATA["Have won the 6 Nations last two years running but generally mess up by the time the world cup come around. they've never Managed to get past the quater finals"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-8">
+        <inputEntry id="UnaryTests_1t495lu">        <text><![CDATA["Dark Blue"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pasbh1">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1naqb9t">        <text><![CDATA["France"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0soee3v">        <text><![CDATA["Who knows.. an unpredictable team"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-9">
+        <inputEntry id="UnaryTests_12fnjh7">        <text><![CDATA["Black"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19g299n">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1scco0k">        <text><![CDATA["Georgia"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1ms4tz9">        <text><![CDATA["Best of the 2nd tier teams"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-10">
+        <inputEntry id="UnaryTests_18djg4s">        <text><![CDATA["White"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ih4b84">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0eidev5">        <text><![CDATA["England"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0arq4ig">        <text><![CDATA["Hampered most often by off-the-field issues"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-11">
+        <inputEntry id="UnaryTests_0sz47qd">        <text><![CDATA["Light Blue"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08dc2zs">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0ss49xu">        <text><![CDATA["Italy"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_04ej220">        <text><![CDATA["Everyone's favourite underdogs"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-12">
+        <inputEntry id="UnaryTests_0cuzm9e">        <text><![CDATA["Red"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_139cvax">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_18mnq35">        <text><![CDATA["Canada"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_11wt4az">        <text><![CDATA["The part of north america we're happy to support"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-15">
+        <inputEntry id="UnaryTests_1utnw6i">        <text><![CDATA["Light Blue"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xyeuls">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_04r0ocw">        <text><![CDATA["USA"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0jf3qaf">        <text><![CDATA["They try.... bless"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-16">
+        <inputEntry id="UnaryTests_1fo52e3">        <text><![CDATA["Black"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pf4hif">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0bwhbuq">        <text><![CDATA["Germany"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0uprbxg">        <text><![CDATA["Yes - Germany has a rugby team"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-17">
+        <inputEntry id="UnaryTests_03koal6">        <text><![CDATA["White"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_029yy5o">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_08607p2">        <text><![CDATA["Japan"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_03e2qx2">        <text><![CDATA["Beat South Africa in the world cup"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-18">
+        <inputEntry id="UnaryTests_0kpzf6z">        <text><![CDATA["Dark Blue"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0giewgz">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_19z3ygk">        <text><![CDATA["Scotland"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1xh23f9">        <text><![CDATA["Always want them to do well, but they don't tend to"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-981533309-19">
+        <inputEntry id="UnaryTests_1ymsqa2">        <text><![CDATA["Yellow"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09d28za">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0vp4xs6">        <text><![CDATA["Romania"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_1uaa0qe">        <text><![CDATA["oddly enough one of the few things in Romania that was better under a dictatorship"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-488973267-6">
+        <inputEntry id="UnaryTests_0y8qff7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1senfcx">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ozvszn">        <text><![CDATA["No Team"]]></text>
+</outputEntry>
+        <outputEntry id="LiteralExpression_0x8awi3">        <text><![CDATA["Turns out you're pretty hard to please... "]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

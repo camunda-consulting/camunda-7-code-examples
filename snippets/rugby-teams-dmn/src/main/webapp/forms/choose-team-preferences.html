@@ -1,0 +1,46 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>What kind of team do you want to support</legend>
+
+     <!-- Select Basic -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="selectbasic">Which Hemisphere Do you Like?</label>
+			  <div class="col-md-4">
+			   <select cam-variable-name="isNorthern"
+		        		cam-variable-type="Boolean">
+		 		 	<option value="true" selected="selected">Northern</option>
+		  			<option value="false">Southern</option>
+			</select>
+			  </div>
+			</div>
+			
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Select A Colour</label>
+  <div class="col-md-4">
+	<select cam-variable-name="colour"
+        	cam-variable-type="String"
+        	cam-choices="teamColours">
+	</select>
+  </div>
+</div>
+
+     <!-- Select Basic -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="selectbasic">Do you like supporting an underdog?</label>
+			  <div class="col-md-4">
+			   <select cam-variable-name="underdog"
+		        		cam-variable-type="Boolean">
+		 		 	<option value="true" selected="selected">Yes</option>
+		  			<option value="false">No</option>
+			</select>
+			  </div>
+			</div>
+
+
+</fieldset>
+</form>

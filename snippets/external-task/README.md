@@ -1,7 +1,14 @@
-From Push to Pull – External Tasks in BPMN processes
+DEPRECATED
 =========================
 
-In some environments it is hard for a process engine to actively call services, e.g. in cloud scenarios, polyglott environments, ... Then we often use a pattern we call "External Task": The process engine "only" controls the process flow and creates work packages for external "workers" executing the real service logic. So the work is pulled instead of pushed. See [From Push to Pull – External Tasks in BPMN processes](http://www.bpm-guide.de/2015/04/10/from-push-to-pull-external-tasks-in-bpmn-processes/) for more background on this.
+External Tasks are a core feature of Camunda BPM from 7.4 on, see [External Tasks allows new Use Cases with Camunda BPM 7.4](http://blog.camunda.org/post/2015/11/external-tasks/)
+
+
+
+From Push to Pull â€“ External Tasks in BPMN processes
+=========================
+
+In some environments it is hard for a process engine to actively call services, e.g. in cloud scenarios, polyglott environments, ... Then we often use a pattern we call "External Task": The process engine "only" controls the process flow and creates work packages for external "workers" executing the real service logic. So the work is pulled instead of pushed. See [From Push to Pull â€“ External Tasks in BPMN processes](http://www.bpm-guide.de/2015/04/10/from-push-to-pull-external-tasks-in-bpmn-processes/) for more background on this.
 
 This can be implemented on a standard Camunda BPM Platform when leveraging User Task behavior - as shown in this working prototype.  
 
