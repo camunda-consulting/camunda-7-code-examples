@@ -34,7 +34,7 @@ public class SetupTeamColours implements ExecutionListener {
 		
 		arg0.setVariable("teamColours", teamColoursSerialized);
 		
-		arg0.getProcessEngineServices().getHistoryService().createHistoricActivityInstanceQuery().p
+//		arg0.getProcessEngineServices().getHistoryService().createHistoricActivityInstanceQuery().p
 		
 		
 	}
