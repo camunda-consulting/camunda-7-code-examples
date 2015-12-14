@@ -1,0 +1,92 @@
+<h2>Claim for assignment</h2>
+
+<form class="form-horizontal">
+
+<script cam-script type="text/form-script">
+  var claim = {
+    type: 'Car Accident',
+    expenditure: 0,
+    region: ''
+  };
+  $scope.claim = claim;
+  camForm.on('form-loaded', function() {
+    camForm.variableManager.createVariable({
+       name: 'claim',
+       type: 'Object',
+       value: claim,
+       valueInfo: {
+         serializationDataFormat: 'application/json',
+         objectTypeName: 'com.camunda.demo.dmntraining.taskrouting.Claim'
+      }
+    });
+  });
+</script>
+
+  <div class="control-group">
+    <label class="control-label">Type of claim</label>
+    <div class="controls">
+		<select name="type" ng-model="claim.type" required class="form-control" >
+      		<option value="Car Accident">Car Accident</option>
+      		<option value="Third Party Liability">Third Party Liability</option>
+		</select>    
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <label class="control-label">Expenditure (estimated)</label>
+    <div class="controls">
+		<input id="firstname"
+             class="form-control"
+             type="text"
+             required 
+             ng-model="claim.expenditure">   
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Region (e.g. 10xxx for zip code Berlin)</label>
+    <div class="controls">
+		<input id="region"
+             class="form-control"
+             type="text"
+             required 
+             ng-model="claim.region">   
+    </div>
+  </div>
+  
+  <h2>Sample employees</h2>
+  
+  The following employees will be taken into account to handle this claim:
+  
+  <table class="table table-striped">
+		<thead>
+  			<tr>
+     			<th>Employee</th>
+     			<th>Experience Level</th>
+     			<th>Region</th>
+     			<th>Number of assigned claims</th>
+  			</tr>
+ 		</thead>
+ 	   <tr>
+    		<td>john</td>
+    		<td>Experienced</td>
+    		<td>10xxx</td>
+	    	<td>5</td>
+  		</tr>
+ 	   <tr>
+    		<td>mary</td>
+    		<td>Senior</td>
+    		<td>22xxx</td>
+	    	<td>2</td>
+  		</tr>
+ 	   <tr>
+    		<td>peter</td>
+    		<td>Junior</td>
+    		<td>10xxx</td>
+	    	<td>7</td>
+  		</tr>
+  </table>
+  
+
+</form>

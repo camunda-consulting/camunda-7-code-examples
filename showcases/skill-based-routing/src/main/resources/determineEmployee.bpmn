@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="camunda modeler" exporterVersion="3.0.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn:process id="determineEmployeeLab4" name="Decision Flow: Determine Employee" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Employee&#10;required" camunda:formKey="embedded:app:forms/start-form.html">
+      <bpmn:outgoing>SequenceFlow_1biy97m</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1biy97m" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_0uk4ef1" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0uk4ef1" name="Determine required skills" camunda:resultVariable="skills" camunda:decisionRef="determineSkillsLab4" camunda:mapDecisionResult="collectEntries">
+      <bpmn:incoming>SequenceFlow_1biy97m</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06rsywk</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="SequenceFlow_06rsywk" sourceRef="BusinessRuleTask_0uk4ef1" targetRef="ServiceTask_0dg3ssk" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fl7ktb" sourceRef="ServiceTask_0dg3ssk" targetRef="BusinessRuleTask_1edm8id" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_1edm8id" name="Score employee suitability " camunda:resultVariable="employeeScore" camunda:decisionRef="scoreEmployee" camunda:mapDecisionResult="singleEntry">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="end">
+          <camunda:script scriptFormat="javascript">employee.setScore( employeeScore );</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0fl7ktb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1euh8mz</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="#{employees}" camunda:elementVariable="employee" />
+    </bpmn:businessRuleTask>
+    <bpmn:endEvent id="EndEvent_1js7ouz" name="Employee&#10;determined">
+      <bpmn:incoming>SequenceFlow_0fm1o35</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1euh8mz" sourceRef="BusinessRuleTask_1edm8id" targetRef="ScriptTask_11ijplt" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fm1o35" sourceRef="ScriptTask_11ijplt" targetRef="EndEvent_1js7ouz" />
+    <bpmn:scriptTask id="ScriptTask_11ijplt" name="Determine Eployee" scriptFormat="javascript" camunda:resultVariable="selectedEmployee">
+      <bpmn:incoming>SequenceFlow_1euh8mz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0fm1o35</bpmn:outgoing>
+      <bpmn:script><![CDATA[java.lang.System.out.println(employees);
+
+var selectedEmployee;
+
+for (var i = 0; i < employees.length; i++) {
+    var employee = employees[i];
+    if (!selectedEmployee || employee.score > selectedEmployee.score) {
+           selectedEmployee = employee;
+    }
+}
+
+java.lang.System.out.println("SELECTED EMPLOYEE: " + selectedEmployee);
+
+execution.setVariable("employees", 
+org.camunda.bpm.engine.variable.Variables.objectValue(employees).serializationDataFormat(org.camunda.bpm.engine.variable.Variables.SerializationDataFormats.JSON).create()
+);
+
+execution.setVariable("employees", 
+org.camunda.bpm.engine.variable.Variables.objectValue(employees).serializationDataFormat(org.camunda.bpm.engine.variable.Variables.SerializationDataFormats.JSON).create()
+);
+
+selectedEmployee.name;]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="ServiceTask_0dg3ssk" name="Load available and qualified employees" camunda:class="com.camunda.demo.dmntraining.taskrouting.LoadQualifiedEmployees">
+      <bpmn:incoming>SequenceFlow_06rsywk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0fl7ktb</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="determineEmployeeLab4">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="135" y="126" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="108" y="162" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1biy97m_di" bpmnElement="SequenceFlow_1biy97m">
+        <di:waypoint xsi:type="dc:Point" x="171" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="191" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="191" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="232" y="144" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="146" y="138.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0uk4ef1_di" bpmnElement="BusinessRuleTask_0uk4ef1">
+        <dc:Bounds x="232" y="104" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_06rsywk_di" bpmnElement="SequenceFlow_06rsywk">
+        <di:waypoint xsi:type="dc:Point" x="332" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="383" y="144" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="312.5" y="134" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0fl7ktb_di" bpmnElement="SequenceFlow_0fl7ktb">
+        <di:waypoint xsi:type="dc:Point" x="483" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="522" y="144" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="457.5" y="134" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_1edm8id_di" bpmnElement="BusinessRuleTask_1edm8id">
+        <dc:Bounds x="522" y="104" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1js7ouz_di" bpmnElement="EndEvent_1js7ouz">
+        <dc:Bounds x="803" y="126" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="776" y="162" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1euh8mz_di" bpmnElement="SequenceFlow_1euh8mz">
+        <di:waypoint xsi:type="dc:Point" x="622" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="661" y="144" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="601.5" y="134" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0fm1o35_di" bpmnElement="SequenceFlow_0fm1o35">
+        <di:waypoint xsi:type="dc:Point" x="761" y="144" />
+        <di:waypoint xsi:type="dc:Point" x="803" y="144" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="722" y="134" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_11ijplt_di" bpmnElement="ScriptTask_11ijplt">
+        <dc:Bounds x="661" y="104" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0dg3ssk_di" bpmnElement="ServiceTask_0dg3ssk">
+        <dc:Bounds x="383" y="104" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="scoreEmployee" name="Score Employee Suitability">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="InputClause_1nx5mqm" label="Name">
+        <inputExpression id="LiteralExpression_0iogbyp" typeRef="string">        <text>employee.name</text>
+</inputExpression>
+      </input>
+      <input id="input1" label="Employee: Claims Assigned">
+        <inputExpression id="inputExpression1" typeRef="integer">        <text>employee.claimsAssigned</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1ya6p75" label="Employee and Claim: Identical Region">
+        <inputExpression id="LiteralExpression_024d2i2" typeRef="boolean">        <text>employee.region == claim.region</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1gp8c52" label="Claim Expenditure (estimated)">
+        <inputExpression id="LiteralExpression_0u4cle7" typeRef="integer">        <text>claim.expenditure</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1vhiue5" label="Employee: Experience">
+        <inputExpression id="LiteralExpression_14tt7m7" typeRef="string">        <text>employee.experience</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Score" name="score" typeRef="integer" />
+      <rule id="row-536960114-5">
+        <inputEntry id="UnaryTests_1gi7opf">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c25icd">        <text><![CDATA[<= 5]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15ifbdl">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_11q89ap">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0auqqvo">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0u9lhu3">        <text>10</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-6">
+        <inputEntry id="UnaryTests_0guxvdy">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v7soz1">        <text><![CDATA[> 10]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yffqry">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_01eimd4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0q9mcc7">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0sxzehp">        <text>-25</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-7">
+        <inputEntry id="UnaryTests_0j1r6e9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_056ffbd">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1nat48v">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1y4gpx9">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_089bfbt">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1l6ow8j">        <text>20</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-8">
+        <inputEntry id="UnaryTests_0v5c4op">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1d2zkct">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1jowcvn">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0097zfd">        <text><![CDATA[< 1000]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12wypq8">        <text><![CDATA["Junior","Experienced"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_07w3ddt">        <text>0</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-9">
+        <inputEntry id="UnaryTests_169jlw4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gtkprt">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1okvqb1">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ezk0yy">        <text><![CDATA[< 1000]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0cjywiv">        <text><![CDATA["Senior"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_035sxxl">        <text>-20</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-10">
+        <inputEntry id="UnaryTests_1xlgpto">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1h8j6ip">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0jjxqo2">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0gyqahq">        <text>[1000..10000]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00qfzvi">        <text><![CDATA["Junior"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_06ylif7">        <text>-15</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-11">
+        <inputEntry id="UnaryTests_13aq89o">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0uwpv55">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gaze09">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wzu7n1">        <text><![CDATA[> 10000]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gs83kn">        <text><![CDATA["Junior"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0v2nzd8">        <text>-50</text>
+</outputEntry>
+      </rule>
+      <rule id="row-536960114-12">
+        <inputEntry id="UnaryTests_06ood5q">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wbrhrj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1xx5fs0">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0zpqmgo">        <text><![CDATA[> 10000]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1c8vizb">        <text><![CDATA["Experienced"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_123cqkw">        <text>-15</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
