@@ -31,11 +31,22 @@
 			
 			    <!-- Select Basic -->
 			<div class="form-group">
- 				 <label class="col-md-4 control-label" for="selectbasic">Select One</label>
+ 				 <label class="col-md-4 control-label" for="selectbasic">Select a BPMN Process</label>
   				<div class="col-md-4">
 				<select cam-variable-name="processName"
 			        	cam-variable-type="String"
 			        	cam-choices="theProDefs">
+				</select>
+  			</div>
+			</div>
+				
+			    <!-- Select Basic -->
+			<div class="form-group">
+ 				 <label class="col-md-4 control-label" for="selectbasic">Select a DMN Table</label>
+  				<div class="col-md-4">
+				<select cam-variable-name="dmnName"
+			        	cam-variable-type="String"
+			        	cam-choices="theDmnDefs">
 				</select>
   			</div>
 			</div>

@@ -1,0 +1,66 @@
+<form role=form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Check out this DMN file</legend>
+
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form method="post">
+     <!-- Select Basic -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="selectbasic">Do you want to deploy this file</label>
+			  <div class="col-md-4">
+			   <select cam-variable-name="deployDMN"
+		        		cam-variable-type="Boolean">
+		 		 	<option value="true" selected="selected">Yes</option>
+		  			<option value="false">No</option>
+			</select>
+			  </div>
+			</div>
+						</div>
+			<script cam-script type="text/form-script">
+    		var variableManager = camForm.variableManager;
+
+    		camForm.on('form-loaded', function() {
+
+      		variableManager.fetchVariable('DMNFile');
+    		});
+
+    		camForm.on('variables-fetched', function() {
+			// we're using atob because the base is encoded to 64bit and atob decodes it	
+      		scope.dmnFile = atob( variableManager.variableValue('DMNFile') );
+
+    		});
+
+  		</script>
+    
+     	
+    	<div class="diagram-pane"
+	         cam-widget-dmn-viewer
+	         table-xml="dmnFile"
+	         control="control">
+    	</div>  
+ 
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+
+
+
+
+
+</fieldset>
+
+
+
+</form>

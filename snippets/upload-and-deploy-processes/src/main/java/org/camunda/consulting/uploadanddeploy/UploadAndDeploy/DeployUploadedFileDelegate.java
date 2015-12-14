@@ -33,19 +33,30 @@ public class DeployUploadedFileDelegate implements JavaDelegate {
 //		    	parent.mkdirs();
 //		
 		//File bpmnFile = (File)execution.getVariable("BPMNFile");
-		byte[] byteArray = (byte[])execution.getVariable("BPMNFile");
 		
+		boolean deployBPMN = (Boolean) execution.getVariable("deployBPMN");
+		boolean deployDMN = (Boolean) execution.getVariable("deployDMN");
+		
+		if(deployBPMN){
+			byte[] bpmnFile  = (byte[])execution.getVariable("BPMNFile");
+			deploy(bpmnFile, execution, "bpmnFile.bpmn");
+		}
+		
+		if(deployDMN){
+			byte[] dmnFile  = (byte[])execution.getVariable("DMNFile");
+			deploy(dmnFile, execution, "dmnFile.dmn");
+		}
+
+		
+	}
+	
+	private void deploy(byte[] byteArray, DelegateExecution execution, String resourceName){
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
 		
-		//writeFile(byteArrayInputStream, tempBpmnFile);
 		
-	    //IOUtils.copy(byteArrayInputStream, new FileOutputStream(tempBpmnFile));
-		
-		//LOGGY.info("File was called: " + tempBpmnFile.getAbsolutePath());
-		
-		String deploymentID = execution.getProcessEngineServices().getRepositoryService().createDeployment().addInputStream("foo.bpmn", byteArrayInputStream).deploy().getId();
-		LOGGY.info("File was deployed: " + deploymentID);
-		
+		String deploymentID = execution.getProcessEngineServices().getRepositoryService().createDeployment().addInputStream(resourceName, byteArrayInputStream).deploy().getId();
+		LOGGY.info("File " + resourceName + " was deployed: " + deploymentID);
+
 	}
 	
 	private void writeFile(ByteArrayInputStream byteArrayInputStream, File outputFile) throws IOException{
