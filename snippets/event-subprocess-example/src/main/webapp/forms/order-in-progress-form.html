@@ -1,0 +1,26 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Order In Progress</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="customerNumber">Customer Number</label>  
+  <div class="col-md-4">
+  <input id="customerNumber" name="customerNumber" placeholder="" class="form-control input-md" type="text" readonly="true" cam-variable-name="cusNum" cam-variable-type="String" >
+  <span class="help-block">This is the unique key for this instance</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="orderedItem">Ordered Item</label>  
+  <div class="col-md-4">
+  <input id="orderedItem" name="orderedItem" placeholder="" class="form-control input-md" type="text" readonly="true"  cam-variable-name="orderedItem" cam-variable-type="String">
+  <span class="help-block">This can be used to correlate a message from another process</span>  
+  </div>
+</div>
+
+</fieldset>
+</form>

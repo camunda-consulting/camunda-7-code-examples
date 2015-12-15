@@ -1,0 +1,51 @@
+<strong>Here you would put the actual form to work on the task</strong>
+
+
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Cancel Order Process</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Business Key">Business Key</label>  
+  <div class="col-md-4">
+  <input id="Business Key" name="Business Key" placeholder="Customer id of the order" class="form-control input-md" required="" cam-variable-name="orderBusKey" cam-variable-type="String" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Ordered Item">Ordered Item</label>  
+  <div class="col-md-4">
+  <input id="Ordered Item" name="Ordered Item" placeholder="Name of the ordered item" class="form-control input-md" cam-variable-name="orderedItem" cam-variable-type="String" type="text">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Reason">Reason</label>  
+  <div class="col-md-4">
+  <input id="Reason" name="Reason" placeholder="Reason for warning/cancelation" class="form-control input-md" required="" cam-variable-name="reason" cam-variable-type="String" type="text">
+    
+  </div>
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectType">Select Message Type</label>
+  <div class="col-md-4">
+    <select id="selectType" name="selectType" class="form-control" cam-variable-name="messageType" cam-variable-type="String">
+      <option value="WARNING_MESSAGE">Warn Process</option>
+      <option value="CANCEL_PROCESS">Stop Process</option>
+    </select>
+  </div>
+
+</fieldset>
+
+</form>
