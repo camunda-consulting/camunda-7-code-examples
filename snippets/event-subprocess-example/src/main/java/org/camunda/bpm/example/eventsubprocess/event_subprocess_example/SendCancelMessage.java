@@ -23,7 +23,7 @@ public class SendCancelMessage implements JavaDelegate {
 		vars.put("reason", reason);
 		vars.put("messageFrom", messageFrom);
 		
-		if(orderedItem == null){
+		if(orderedItem == null || orderedItem == ""){
 			
 			execution.getProcessEngineServices().getRuntimeService().correlateMessage(messageType, orderBusKey, vars);
 			
