@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.camunda.bpm.engine.FilterService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.filter.Filter;
 import org.camunda.bpm.engine.task.TaskQuery;
@@ -84,7 +83,12 @@ public class DefaultFilter {
   }
 
   private static String createFilter(ProcessEngine engine, String name, int priority, String description, TaskQuery query, String... additionalProperties) {
-    Map<String, Object> filterProperties = new HashMap<String, Object>();
+	 Filter existingFilter = engine.getFilterService().createFilterQuery().filterName(name).singleResult();
+	 if (existingFilter!=null) {
+		 return existingFilter.getId();
+	 }
+	  
+	  Map<String, Object> filterProperties = new HashMap<String, Object>();
 
     filterProperties.put("description", description);
     filterProperties.put("priority", priority);
@@ -107,17 +111,8 @@ public class DefaultFilter {
         .setProperties(filterProperties)//
         .setOwner("admin")//
         .setQuery(query);
-    saveFilterIfNotExistant(engine.getFilterService(), myTasksFilter);
+    engine.getFilterService().saveFilter(myTasksFilter);
     return myTasksFilter.getId();
-  }
-
-  private static void saveFilterIfNotExistant(FilterService filterService, Filter filter) {
-    Filter singleResult = filterService.createFilterQuery().filterName(filter.getName()).singleResult();
-    if (singleResult != null) {
-      return;
-    } else {
-      filterService.saveFilter(filter);
-    }
   }
 
 }

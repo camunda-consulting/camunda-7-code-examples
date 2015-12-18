@@ -159,25 +159,31 @@ public class UserDataGenerator {
     for (String filterName : filterNames) {
       String filterId = useFilter(engine, filterName);
 
-      Authorization managementGroupFilterRead = engine.getAuthorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
-      managementGroupFilterRead.setResource(FILTER);
-      managementGroupFilterRead.setResourceId(filterId);
-      managementGroupFilterRead.addPermission(READ);
-      managementGroupFilterRead.setUserId(userId);
-      engine.getAuthorizationService().saveAuthorization(managementGroupFilterRead);
+      long count = engine.getAuthorizationService().createAuthorizationQuery().resourceType(FILTER).resourceId(filterId).userIdIn(userId).count();
+      if (count==0) {
+	      Authorization managementGroupFilterRead = engine.getAuthorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+	      managementGroupFilterRead.setResource(FILTER);
+	      managementGroupFilterRead.setResourceId(filterId);
+	      managementGroupFilterRead.addPermission(READ);
+	      managementGroupFilterRead.setUserId(userId);
+	      engine.getAuthorizationService().saveAuthorization(managementGroupFilterRead);
+      }
     }
   }
 
   public static void addFilterGroupAuthorization(ProcessEngine engine, String groupId, String... filterNames) {
     for (String filterName : filterNames) {
       String filterId = useFilter(engine, filterName);
-
-      Authorization managementGroupFilterRead = engine.getAuthorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
-      managementGroupFilterRead.setResource(FILTER);
-      managementGroupFilterRead.setResourceId(filterId);
-      managementGroupFilterRead.addPermission(READ);
-      managementGroupFilterRead.setGroupId(groupId);
-      engine.getAuthorizationService().saveAuthorization(managementGroupFilterRead);
+      
+      long count = engine.getAuthorizationService().createAuthorizationQuery().resourceType(FILTER).resourceId(filterId).groupIdIn(groupId).count();
+      if (count==0) {
+	      Authorization managementGroupFilterRead = engine.getAuthorizationService().createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+	      managementGroupFilterRead.setResource(FILTER);
+	      managementGroupFilterRead.setResourceId(filterId);
+	      managementGroupFilterRead.addPermission(READ);
+	      managementGroupFilterRead.setGroupId(groupId);
+	      engine.getAuthorizationService().saveAuthorization(managementGroupFilterRead);
+      }
     }
   }
 
