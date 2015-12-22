@@ -58,7 +58,7 @@ public class InMemoryH2Test {
 		
 		PowerMockito.when(mockEmployeeService.getQualifiedAndAvailableEmployees(Mockito.anyList())).thenReturn(employees);
 					
-		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey("determineEmployeeLab4", //
+		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey("determineEmployee", //
 				Variables.createVariables() //
 						.putValue("claim", claimCarAccident) //
 		);
