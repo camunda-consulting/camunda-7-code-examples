@@ -58,11 +58,3 @@ Built and tested against Camunda BPM version 7.4.1.
 
 ## License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-<!-- HTML snippet for index page
-  <tr>
-    <td><img src="snippets/dmn-task-routing/src/main/resources/process.png" width="100"></td>
-    <td><a href="snippets/dmn-task-routing">Camunda BPM Process Application</a></td>
-    <td>A Process Application for [Camunda BPM](http://docs.camunda.org).</td>
-  </tr>
--->
