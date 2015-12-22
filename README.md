@@ -84,6 +84,21 @@ Showcases
       </ul>
     </td>
   </tr>    
+
+  <tr>
+    <td>
+      <a href="showcases/skill-based-routing">Skill-based-Routing</a> <br />
+      <img src="showcases/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
+    </td>
+    <td>
+       Key Features showcased:
+       <ul>
+          <li>DMN Decision Tables</li>
+          <li>Decision Flow implementing a DMN Decision Requirement Diagram (DRD)</li>
+      </ul>
+    </td>
+  </tr>
+
 </table>
 
 
