@@ -10,12 +10,28 @@ The best suited employee is a complex decision which can be modeled by the OMG S
 
 ![BPMN Process](doc/skill-based-routing-decision-flow.png)
 
-## How to run
+## Running a Claim Handling Process
 
 Build the application using Maven. Afterwards deploy the resulting WAR file to your Container running Camunda BPM with the shared engine (e.g. one of the [pre-packaged distributions](https://camunda.org/download/)).
 
 Once you deployed  you can start a new claim handling process using
 [Camunda Tasklist](http://docs.camunda.org/latest/guides/user-guide/#tasklist). After you started a new process instance you should see a task in the tasklist which is assigned to the selected employee.
+
+1. Start a new process:
+
+![Start a new process](doc/screenshot1.png)
+
+2. Task was assigned to a certain employee:
+
+![Task Assigned](doc/screenshot2.png)
+
+3. Check via cockpit the decision flow history (only possible in [Camunda BPM Enterprise Edition](http://camunda.com/bpm/enterprise/)):
+
+![Decision Flow History](doc/screenshotCockpit1.png)
+
+And the Decision Tables being executed:
+
+![Decision Table History](doc/screenshotCockpit2.png)
 
 ## DRD and Decision Flow
 
