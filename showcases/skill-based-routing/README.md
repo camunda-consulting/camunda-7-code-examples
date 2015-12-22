@@ -4,11 +4,11 @@ A sample process application for [Camunda BPM](http://www.camunda.org).
 ## Show me the important parts!
 
 Let's imagine you want to handle an insurance claim. You need to figure out which employee is best suited. In your BPMN process you simply query this employee and assign a task to him:
-![Client Process](docs/skill-based-routing-usage.png)
+![Client Process](doc/skill-based-routing-usage.png)
 
 The best suited employee is a complex decision which can be modeled by the OMG Standard DMN (see [DMN Tutorial](https://camunda.org/dmn/tutorial/)). As this decision involves multiple steps it can be best implemented using a "Decision Flow" orchestrating DMN Decision Tables:
 
-![BPMN Process](docs/skill-based-routing-decision-flow.png)
+![BPMN Process](doc/skill-based-routing-decision-flow.png)
 
 ## How to run
 
@@ -21,11 +21,11 @@ Once you deployed  you can start a new claim handling process using
 
 If you know DMN you know Decision Requirement Diagrams (DRD). The above decision can be modeled logically as the following DRD:
 
-![Decision Requirement Diagram](docs/drd.png)
+![Decision Requirement Diagram](doc/drd.png)
 
 This is very helpful during Decision Discovery, Analysis and Design. You can link the decision logic to that DRD in a early stage:
 
-![DRD and linked Decision Logic](docs/drd-decision-logic-linked.png)
+![DRD and linked Decision Logic](doc/drd-decision-logic-linked.png)
 
 However, when you want to execute the decision non-functional requirements have to taken into account as well as limitations of DRD execution (see [a former blog post](http://www.bpm-guide.de/2015/07/20/dmn-decision-model-and-notation-introduction-by-example/) about the multiplicity limitation of DRDs). Hence we translate the DRD into a BPMN process called Decision Flow which can really execute the decision. 
 
