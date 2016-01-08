@@ -40,14 +40,14 @@ public class InMemoryH2Test {
 
 
 	@Test
-	@Deployment(resources = { "mitarbeiterBestimmen.bpmn", "notwendigeKompetenz.dmn", "mitarbeiterScore.dmn" })
+	@Deployment(resources = { "mitarbeiterBestimmen.bpmn", "notwendigeKompetenz.dmn", "mitarbeiterErfahrung.dmn",  "mitarbeiterScore.dmn" })
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testSkillBasedRouting() throws Exception {
 		
 		ArrayList<Employee> employees = new ArrayList<Employee>();
-		employees.add(new Employee("mary", "Senior", "97xxx", 2));
-		employees.add(new Employee("peter", "Senior", "10xxx", 7));
-		employees.add(new Employee("john", "Senior", "10xxx", 5));
+		employees.add(new Employee("mary", 5000, "97xxx", 2)); // 5000 = "Senior"
+		employees.add(new Employee("peter", 5000, "10xxx", 7));
+		employees.add(new Employee("john", 5000, "10xxx", 5));
 		
 		Claim claimCarAccident = DemoData.createClaimCarAccident(10000, "10xxx");
 		
@@ -70,7 +70,7 @@ public class InMemoryH2Test {
 		Mockito.verify(mockEmployeeService).getQualifiedAndAvailableEmployees(argument.capture());
 		assertEquals(2, argument.getValue().size());
 		assertEquals("KFZ", argument.getValue().get(0));
-		assertEquals("Senior", argument.getValue().get(1));
+		assertEquals("Experte", argument.getValue().get(1));
 	}
 
 }

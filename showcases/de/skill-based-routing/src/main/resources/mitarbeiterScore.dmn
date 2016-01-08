@@ -19,7 +19,7 @@
 </inputExpression>
       </input>
       <input id="InputClause_1vhiue5" label="Erfahrung des Mitarbeiters">
-        <inputExpression id="LiteralExpression_14tt7m7" typeRef="string">        <text>employee.experience</text>
+        <inputExpression id="LiteralExpression_14tt7m7" typeRef="string">        <text>employeeExperience</text>
 </inputExpression>
       </input>
       <output id="output1" label="Score" name="score" typeRef="integer" />

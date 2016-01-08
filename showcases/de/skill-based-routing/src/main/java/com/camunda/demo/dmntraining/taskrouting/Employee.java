@@ -7,7 +7,7 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private String experience;
+	private long approvalAuthority;
 	private String region;
 	private int claimsAssigned;
 	
@@ -16,9 +16,9 @@ public class Employee implements Serializable {
 	public Employee() {		
 	}
 	
-	public Employee(String name, String experience, String region, int claimsAssigned) {
+	public Employee(String name, long approvalAuthority, String region, int claimsAssigned) {
 		this.name = name;
-		this.experience = experience;
+		this.approvalAuthority = approvalAuthority;
 		this.region = region;
 		this.claimsAssigned = claimsAssigned;
 	}
@@ -29,14 +29,6 @@ public class Employee implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getExperience() {
-		return experience;
-	}
-
-	public void setExperience(String experience) {
-		this.experience = experience;
 	}
 
 	public String getRegion() {
@@ -65,8 +57,16 @@ public class Employee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", experience=" + experience
+		return "Employee [name=" + name + ", approvalAuthority =" + approvalAuthority
 				+ ", region=" + region + ", claimsAssigned=" + claimsAssigned
 				+ ", score=" + score + "]";
+	}
+
+	public long getApprovalAuthority() {
+		return approvalAuthority;
+	}
+
+	public void setApprovalAuthority(long approvalAuthority) {
+		this.approvalAuthority = approvalAuthority;
 	}
 }

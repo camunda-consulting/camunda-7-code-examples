@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="mitarbeiterErfahrung" name="Erfahrung des Mitarbeiters">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="Freigabekompetenz">
+        <inputExpression id="inputExpression1" typeRef="long">        <text>employee.approvalAuthority</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Erfahrung" name="employeeExperience" typeRef="string" />
+      <rule id="row-61084667-1">
+        <inputEntry id="UnaryTests_1nopl96">        <text><![CDATA[< 1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0cm7yze">        <text><![CDATA["Junior"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-61084667-2">
+        <inputEntry id="UnaryTests_0f8tnbk">        <text>[1000..10000]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_11k4c7v">        <text><![CDATA["Senior"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-61084667-3">
+        <inputEntry id="UnaryTests_16vtlu7">        <text><![CDATA[> 10000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1k4hwgv">        <text><![CDATA["Experte"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
