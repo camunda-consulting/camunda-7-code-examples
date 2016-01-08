@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="notwendigeKompetenz" name="Notwendige Kompetenz">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT">
+      <input id="input1" label="Schadensart">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>claim.type</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0fw7a1s" label="Schadenshöhe">
+        <inputExpression id="LiteralExpression_1fuzv2r" typeRef="integer">        <text>claim.expenditure</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_118cmn1" label="Betroffenes Objekt">
+        <inputExpression id="LiteralExpression_0zr7583" typeRef="string">        <text>claim.affectedObject</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Notwendige Kompetenz" name="" typeRef="string" />
+      <rule id="table-986986669-7">
+        <inputEntry id="UnaryTests_06mfg9n">        <text><![CDATA["Unfall KFZ"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ujlgal">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1amusbq">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_04oovgk">        <text><![CDATA["KFZ"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-429019747-5">
+        <description></description>
+        <inputEntry id="UnaryTests_05ylcxh">        <text><![CDATA["Unfall KFZ"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_03n72w2">        <text>[1000..10000[</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1khs7cb">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0tr1xse">        <text><![CDATA["Erfahrung"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-986986669-4">
+        <inputEntry id="UnaryTests_06la05m">        <text><![CDATA["Unfall KFZ"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_189who2">        <text><![CDATA[>= 10000]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04ju51c">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0hep3z2">        <text><![CDATA["Senior"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-986986669-8">
+        <inputEntry id="UnaryTests_11u29cq">        <text><![CDATA["Hatfpflicht"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_186v7zo">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02awyyv">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0c3k7nr">        <text><![CDATA["Haftpflicht"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-429019747-7">
+        <inputEntry id="UnaryTests_0docm05">        <text><![CDATA["Hatfpflicht"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1mzw58p">        <text><![CDATA[>= 500]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qdhpgh">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0jq5byo">        <text><![CDATA["Senior"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-429019747-8">
+        <description>Schäden Mobiltelefone betreffend werden auf Grund der Häufigkeit von Betrugsvorfällen nur von speziell ausgebildeten Mitarbeitern übernommen</description>
+        <inputEntry id="UnaryTests_1mt9vf0">        <text><![CDATA["Hatfpflicht"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0uy5mlh">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1m6bzia">        <text><![CDATA["Handy"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1tdf84o">        <text><![CDATA["Handy"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

@@ -1,0 +1,72 @@
+
+<form class="form-horizontal">
+
+<script cam-script type="text/form-script">
+  camForm.on('form-loaded', function() {
+    camForm.variableManager.fetchVariable('claim');
+    camForm.variableManager.fetchVariable('decisionDetails');
+  });
+  camForm.on('variables-fetched', function() {
+    $scope.claim = camForm.variableManager.variableValue('claim');
+    $scope.decisionDetails = camForm.variableManager.variableValue('decisionDetails');
+  });
+</script>
+  
+  <h2>DMN Result</h2>
+  <table class="table table-striped">
+ 	   <tr>
+    		<td><strong>Selected Employee</strong></td>
+    		<td>{{decisionDetails.selectedEmployee}}</td>
+  		</tr>
+ 	   <tr>
+    		<td><strong>Decision Flow</strong></td>
+    		<td><a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/process-instance/{{decisionDetails.decisionFlowId}}/history">{{decisionDetails.decisionFlowId}}</a></td>
+  		</tr>
+ 	   <tr>
+    		<td><strong>Required Skills</strong></td>
+    		<td><a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decisionDetails.determineSkillsId}}/history">{{decisionDetails.determineSkillsId}}</a></td>
+  		</tr>
+ 	   <tr>
+    		<td><strong>Employee Suitability Scores</strong></td>
+    		<td>
+    		<ul>
+    			<li ng-repeat="decision in decisionDetails.scoreEmployee">
+		    		<a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decision.id}}/history">{{decision.id}}</a></td>
+    			</li>
+    		</ul>
+  		</tr>
+  </table>  
+
+  <h2>Claim data</h2>
+  
+  <div class="control-group">
+    <label class="control-label">Type of claim</label>
+    <div class="controls">
+		<input name="type" ng-model="claim.type" type="text" readonly class="form-control" />
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <label class="control-label">Expenditure (estimated)</label>
+    <div class="controls">
+		<input id="firstname"
+             class="form-control"
+             type="text"
+             readonly
+             ng-model="claim.expenditure">   
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Region</label>
+    <div class="controls">
+		<input id="region"
+             class="form-control"
+             type="text"
+             readonly 
+             ng-model="claim.region">   
+    </div>
+  </div>    
+  
+</form>
