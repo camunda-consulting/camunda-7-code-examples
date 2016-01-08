@@ -12,10 +12,10 @@
   });
 </script>
   
-  <h2>DMN Result</h2>
+  <h2>DMN Entscheidungsergebnis</h2>
   <table class="table table-striped">
  	   <tr>
-    		<td><strong>Selected Employee</strong></td>
+    		<td><strong>Ausgewählter Mitarbeiter</strong></td>
     		<td>{{decisionDetails.selectedEmployee}}</td>
   		</tr>
  	   <tr>
@@ -23,11 +23,11 @@
     		<td><a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/process-instance/{{decisionDetails.decisionFlowId}}/history">{{decisionDetails.decisionFlowId}}</a></td>
   		</tr>
  	   <tr>
-    		<td><strong>Required Skills</strong></td>
+    		<td><strong>Notwendige Kompetenzen</strong></td>
     		<td><a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decisionDetails.determineSkillsId}}/history">{{decisionDetails.determineSkillsId}}</a></td>
   		</tr>
  	   <tr>
-    		<td><strong>Employee Suitability Scores</strong></td>
+    		<td><strong>Score Mitarbeiter-Eignung</strong></td>
     		<td>
     		<ul>
     			<li ng-repeat="decision in decisionDetails.scoreEmployee">
@@ -40,7 +40,7 @@
   <h2>Claim data</h2>
   
   <div class="control-group">
-    <label class="control-label">Type of claim</label>
+    <label class="control-label">Schadensart</label>
     <div class="controls">
 		<input name="type" ng-model="claim.type" type="text" readonly class="form-control" />
     </div>
@@ -48,7 +48,7 @@
 
 
   <div class="control-group">
-    <label class="control-label">Expenditure (estimated)</label>
+    <label class="control-label">Schadenshöhe</label>
     <div class="controls">
 		<input id="firstname"
              class="form-control"

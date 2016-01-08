@@ -4,7 +4,7 @@ public class DemoData {
 
 	public static Claim createClaimCarAccident(long expenditure, String region) {
 		Claim claim = new Claim();
-		claim.setType("Car Accident");
+		claim.setType("Unfall KFZ");
 		claim.setExpenditure(expenditure);
 		claim.setRegion(region);
 		return claim;
@@ -12,7 +12,7 @@ public class DemoData {
 
 	public static Claim createClaimThirdPartyLiability(long expenditure, String region, String... affectedObject) {
 		Claim claim = new Claim();
-		claim.setType("Third Party Liability");
+		claim.setType("Haftpflicht");
 		claim.setExpenditure(expenditure);
 		claim.setRegion(region);
 		if (affectedObject.length>0) {

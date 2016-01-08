@@ -26,14 +26,13 @@
 </outputEntry>
       </rule>
       <rule id="row-429019747-5">
-        <description></description>
         <inputEntry id="UnaryTests_05ylcxh">        <text><![CDATA["Unfall KFZ"]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_03n72w2">        <text>[1000..10000[</text>
 </inputEntry>
         <inputEntry id="UnaryTests_1khs7cb">        <text></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_0tr1xse">        <text><![CDATA["Erfahrung"]]></text>
+        <outputEntry id="LiteralExpression_0tr1xse">        <text><![CDATA["Senior"]]></text>
 </outputEntry>
       </rule>
       <rule id="table-986986669-4">
@@ -43,7 +42,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_04ju51c">        <text></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_0hep3z2">        <text><![CDATA["Senior"]]></text>
+        <outputEntry id="LiteralExpression_0hep3z2">        <text><![CDATA["Experte"]]></text>
 </outputEntry>
       </rule>
       <rule id="table-986986669-8">

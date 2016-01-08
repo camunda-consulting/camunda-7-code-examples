@@ -5,7 +5,7 @@
       <bpmn:outgoing>SequenceFlow_1biy97m</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1biy97m" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_0uk4ef1" />
-    <bpmn:businessRuleTask id="BusinessRuleTask_0uk4ef1" name="Determine required skills" camunda:resultVariable="skills" camunda:decisionRef="determineSkillsLab4" camunda:mapDecisionResult="collectEntries">
+    <bpmn:businessRuleTask id="BusinessRuleTask_0uk4ef1" name="Determine required skills" camunda:resultVariable="skills" camunda:decisionRef="notwendigeKompetenz" camunda:mapDecisionResult="collectEntries">
       <bpmn:incoming>SequenceFlow_1biy97m</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06rsywk</bpmn:outgoing>
     </bpmn:businessRuleTask>

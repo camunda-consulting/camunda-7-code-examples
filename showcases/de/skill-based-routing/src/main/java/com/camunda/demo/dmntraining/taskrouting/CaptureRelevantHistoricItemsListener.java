@@ -25,11 +25,11 @@ public class CaptureRelevantHistoricItemsListener implements ExecutionListener {
 		decisionDetails.put("selectedEmployee", execution.getVariable("selectedEmployee"));
 		
 		// find DMN decisions
-		HistoricDecisionInstance determineSkillsDecision = execution.getProcessEngineServices().getHistoryService().createHistoricDecisionInstanceQuery().processInstanceId(decisionFlowPI.getId()).decisionDefinitionKey("determineSkillsLab4").includeOutputs().orderByEvaluationTime().desc().list().get(0);		
+		HistoricDecisionInstance determineSkillsDecision = execution.getProcessEngineServices().getHistoryService().createHistoricDecisionInstanceQuery().processInstanceId(decisionFlowPI.getId()).decisionDefinitionKey(BpmConstants.DECISION_DEFINITION_KEY_notwendigeKompetenz).includeOutputs().orderByEvaluationTime().desc().list().get(0);		
 		decisionDetails.put("determineSkillsId", determineSkillsDecision.getId());
 		decisionDetails.put("determineSkillsResult", determineSkillsDecision.getOutputs().toString());
 		
-		List<HistoricDecisionInstance> list = execution.getProcessEngineServices().getHistoryService().createHistoricDecisionInstanceQuery().processInstanceId(decisionFlowPI.getId()).decisionDefinitionKey("scoreEmployee").includeOutputs().orderByEvaluationTime().desc().list();
+		List<HistoricDecisionInstance> list = execution.getProcessEngineServices().getHistoryService().createHistoricDecisionInstanceQuery().processInstanceId(decisionFlowPI.getId()).decisionDefinitionKey(BpmConstants.DECISION_DEFINITION_KEY_mitarbeiterScore).includeOutputs().orderByEvaluationTime().desc().list();
 		List<Map<String, Object>> scoreEmployees = new ArrayList<Map<String, Object>>();
 		
 		for (HistoricDecisionInstance decision : list) {

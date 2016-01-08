@@ -40,7 +40,7 @@ public class InMemoryH2Test {
 
 
 	@Test
-	@Deployment(resources = { "determineEmployee.bpmn", "determineSkills.dmn", "scoreEmployee.dmn" })
+	@Deployment(resources = { "mitarbeiterBestimmen.bpmn", "notwendigeKompetenz.dmn", "mitarbeiterScore.dmn" })
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void testSkillBasedRouting() throws Exception {
 		
@@ -58,7 +58,7 @@ public class InMemoryH2Test {
 		
 		PowerMockito.when(mockEmployeeService.getQualifiedAndAvailableEmployees(Mockito.anyList())).thenReturn(employees);
 					
-		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey("determineEmployee", //
+		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey(BpmConstants.DECISION_FLOW_KEY_mitarbeiterBestimmen, //
 				Variables.createVariables() //
 						.putValue("claim", claimCarAccident) //
 		);
@@ -69,7 +69,7 @@ public class InMemoryH2Test {
 		ArgumentCaptor<List> argument = ArgumentCaptor.forClass(List.class);
 		Mockito.verify(mockEmployeeService).getQualifiedAndAvailableEmployees(argument.capture());
 		assertEquals(2, argument.getValue().size());
-		assertEquals("Car", argument.getValue().get(0));
+		assertEquals("KFZ", argument.getValue().get(0));
 		assertEquals("Senior", argument.getValue().get(1));
 	}
 

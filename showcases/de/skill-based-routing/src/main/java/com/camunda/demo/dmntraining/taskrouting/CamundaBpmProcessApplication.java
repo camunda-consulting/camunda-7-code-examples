@@ -19,10 +19,10 @@ public class CamundaBpmProcessApplication extends ServletProcessApplication {
   @PostDeploy
   public void onDeploymentFinished(ProcessEngine processEngine) {
 		Claim claim = new Claim();
-		claim.setType("Car Accident");
+		claim.setType("Unfall KFZ");
 		claim.setExpenditure(1000);
 		
-		processEngine.getRuntimeService().startProcessInstanceByKey("determineEmployee", //
+		processEngine.getRuntimeService().startProcessInstanceByKey(BpmConstants.DECISION_FLOW_KEY_mitarbeiterBestimmen, //
 				Variables.createVariables() //
 						.putValue("claim", claim));
   }

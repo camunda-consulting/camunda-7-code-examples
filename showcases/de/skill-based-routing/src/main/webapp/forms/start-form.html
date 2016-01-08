@@ -4,7 +4,7 @@
 
 <script cam-script type="text/form-script">
   var claim = {
-    type: 'Car Accident',
+    type: 'Unfall KFZ',
     expenditure: 0,
     region: ''
   };
@@ -23,18 +23,18 @@
 </script>
 
   <div class="control-group">
-    <label class="control-label">Type of claim</label>
+    <label class="control-label">Schadensart</label>
     <div class="controls">
 		<select name="type" ng-model="claim.type" required class="form-control" >
-      		<option value="Car Accident">Car Accident</option>
-      		<option value="Third Party Liability">Third Party Liability</option>
+      		<option value="Unfall KFZ">Unfall KFZ</option>
+      		<option value="Haftpflicht">Haftpflicht</option>
 		</select>    
     </div>
   </div>
 
 
   <div class="control-group">
-    <label class="control-label">Expenditure (estimated)</label>
+    <label class="control-label">Schadenshöhe (geschätzt)</label>
     <div class="controls">
 		<input id="firstname"
              class="form-control"
@@ -45,7 +45,7 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label">Region (e.g. 10xxx for zip code Berlin)</label>
+    <label class="control-label">Region (z.B. 10xxx = Berlin)</label>
     <div class="controls">
 		<input id="region"
              class="form-control"
@@ -55,28 +55,28 @@
     </div>
   </div>
   
-  <h2>Sample employees</h2>
+  <h2>Mitarbeiter</h2>
   
-  The following employees will be taken into account to handle this claim:
+  Die folgenden beispielhaften Mitarbeiter können den Schadensfall bearbeiten:
   
   <table class="table table-striped">
 		<thead>
   			<tr>
-     			<th>Employee</th>
-     			<th>Experience Level</th>
+     			<th>Mitarbeiter</th>
+     			<th>Erfahrung</th>
      			<th>Region</th>
-     			<th>Number of assigned claims</th>
+     			<th>Anzahl offener Schadensfälle</th>
   			</tr>
  		</thead>
  	   <tr>
     		<td>john</td>
-    		<td>Experienced</td>
+    		<td>Senior</td>
     		<td>10xxx</td>
 	    	<td>5</td>
   		</tr>
  	   <tr>
     		<td>mary</td>
-    		<td>Senior</td>
+    		<td>Experte</td>
     		<td>22xxx</td>
 	    	<td>2</td>
   		</tr>
