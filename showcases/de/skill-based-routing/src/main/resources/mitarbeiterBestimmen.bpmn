@@ -10,14 +10,6 @@
       <bpmn:outgoing>SequenceFlow_06rsywk</bpmn:outgoing>
     </bpmn:businessRuleTask>
     <bpmn:sequenceFlow id="SequenceFlow_06rsywk" sourceRef="BusinessRuleTask_0uk4ef1" targetRef="ServiceTask_0dg3ssk" />
-    <bpmn:businessRuleTask id="BusinessRuleTask_1edm8id" name="Score employee suitability " camunda:resultVariable="employeeScore" camunda:decisionRef="mitarbeiterScore" camunda:mapDecisionResult="singleEntry">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="end">
-          <camunda:script scriptFormat="javascript">employee.setScore( employeeScore );</camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="#{employees}" camunda:elementVariable="employee" />
-    </bpmn:businessRuleTask>
     <bpmn:endEvent id="EndEvent_1js7ouz" name="Mitarbeiter&#10;ausgewählt">
       <bpmn:incoming>SequenceFlow_0fm1o35</bpmn:incoming>
     </bpmn:endEvent>
@@ -56,7 +48,7 @@ selectedEmployee.name;]]></bpmn:script>
     <bpmn:subProcess id="SubProcess_1tnzxl6">
       <bpmn:incoming>SequenceFlow_0k0a4uc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1euh8mz</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:collection="#{employees}" camunda:elementVariable="employee" />
       <bpmn:sequenceFlow id="SequenceFlow_1mzo7tg" sourceRef="BusinessRuleTask_0mh82wb" targetRef="BusinessRuleTask_0odeexb" />
       <bpmn:startEvent id="StartEvent_0eth709">
         <bpmn:outgoing>SequenceFlow_1bn93ng</bpmn:outgoing>
@@ -109,9 +101,6 @@ selectedEmployee.name;]]></bpmn:script>
           <dc:Bounds x="312.5" y="134" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BusinessRuleTask_1edm8id_di" bpmnElement="BusinessRuleTask_1edm8id">
-        <dc:Bounds x="563" y="510" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1js7ouz_di" bpmnElement="EndEvent_1js7ouz">
         <dc:Bounds x="1124" y="126" width="36" height="36" />
         <bpmndi:BPMNLabel>

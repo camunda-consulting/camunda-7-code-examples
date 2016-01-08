@@ -21,18 +21,18 @@
       </bpmn2:dataOutputAssociation>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_05e0ry7" />
-    <bpmn2:userTask id="UserTask_1" name="Schaden regulieren&#10;(#{selectedEmployee})" camunda:async="true" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="#{selectedEmployee}">
+    <bpmn2:userTask id="UserTaskSchadenRegulieren" name="Schaden regulieren&#10;(#{selectedEmployee})" camunda:asyncBefore="true" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="#{selectedEmployee}">
       <bpmn2:extensionElements>
         <camunda:executionListener class="com.camunda.demo.dmntraining.taskrouting.CaptureRelevantHistoricItemsListener" event="start" />
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="CallActivity_1" targetRef="UserTask_1" />
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="CallActivity_1" targetRef="UserTaskSchadenRegulieren" />
     <bpmn2:endEvent id="EndEvent_1" name="Schadens-meldung bearbeitet">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTask_1" targetRef="EndEvent_1" />
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="UserTaskSchadenRegulieren" targetRef="EndEvent_1" />
     <bpmn2:sequenceFlow id="SequenceFlow_1mw25y0" sourceRef="ServiceTask_05e0ry7" targetRef="CallActivity_1" />
     <bpmn2:serviceTask id="ServiceTask_05e0ry7" name="Schaden protokollieren" camunda:expression="#{true}">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
@@ -58,7 +58,7 @@
         <di:waypoint xsi:type="dc:Point" x="164" y="125" />
         <di:waypoint xsi:type="dc:Point" x="217" y="125" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="UserTaskSchadenRegulieren">
         <dc:Bounds x="514" y="85" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_CallActivity_2" targetElement="_BPMNShape_UserTask_2">

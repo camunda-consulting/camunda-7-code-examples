@@ -1,7 +1,8 @@
 package com.camunda.demo.dmntraining.taskrouting;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.*;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.execute;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.job;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -62,7 +63,10 @@ public class InMemoryH2Test {
 				Variables.createVariables() //
 						.putValue("claim", claimCarAccident) //
 		);
-		String employee = (String) rule.getProcessEngine().getHistoryService().createHistoricVariableInstanceQuery().processInstanceId(pi.getId()).variableName("selectedEmployee").singleResult().getValue();
+		String employee = (String) rule.getProcessEngine().getHistoryService().createHistoricVariableInstanceQuery() //
+				.processInstanceId(pi.getId()) //
+				.variableName("selectedEmployee") //
+				.singleResult().getValue();
 
 		assertEquals("john", employee);
 		
@@ -73,4 +77,35 @@ public class InMemoryH2Test {
 		assertEquals("Experte", argument.getValue().get(1));
 	}
 
+	
+
+	@Test
+	@Deployment(resources = { "schadenBearbeiten.bpmn", "mitarbeiterBestimmen.bpmn", "notwendigeKompetenz.dmn", "mitarbeiterErfahrung.dmn",  "mitarbeiterScore.dmn" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void testSimulation() throws Exception {
+		
+		ArrayList<Employee> employees = new ArrayList<Employee>();
+		employees.add(new Employee("mary", 5000, "97xxx", 2)); // 5000 = "Senior"
+		employees.add(new Employee("peter", 5000, "10xxx", 7));
+		employees.add(new Employee("john", 5000, "10xxx", 5));
+		
+		Claim claimCarAccident = DemoData.createClaimCarAccident(10000, "10xxx");
+		
+		// John is best suited
+		
+		EmployeeService mockEmployeeService = PowerMockito.mock(EmployeeService.class);
+		PowerMockito.whenNew(EmployeeService.class).withAnyArguments().thenReturn(mockEmployeeService);		
+		
+		PowerMockito.when(mockEmployeeService.getQualifiedAndAvailableEmployees(Mockito.anyList())).thenReturn(employees);
+					
+		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey( //
+				"schadensbearbeitungSimulation", //
+				Variables.createVariables() //
+						.putValue("claim", claimCarAccident) //
+		);
+		assertThat(pi).job();
+		execute(job());
+		assertThat(pi).task("UserTaskSchadenRegulieren").isAssignedTo("john");
+		
+	}
 }

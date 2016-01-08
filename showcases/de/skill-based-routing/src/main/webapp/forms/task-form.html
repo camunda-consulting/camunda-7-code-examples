@@ -24,14 +24,19 @@
   		</tr>
  	   <tr>
     		<td><strong>Notwendige Kompetenzen</strong></td>
-    		<td><a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decisionDetails.determineSkillsId}}/history">{{decisionDetails.determineSkillsId}}</a></td>
+    		<td>
+	    		<a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decisionDetails.determineSkillsId}}/history">{{decisionDetails.determineSkillsId}}</a>
+	    		<ul>
+	    			<li ng-repeat="skill in decisionDetails.determineSkillsResult">{{skill}}</li>
+	    		</ul>
+	    	</td>
   		</tr>
  	   <tr>
     		<td><strong>Score Mitarbeiter-Eignung</strong></td>
     		<td>
     		<ul>
     			<li ng-repeat="decision in decisionDetails.scoreEmployee">
-		    		<a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decision.id}}/history">{{decision.id}}</a></td>
+		    		{{decision.employee}}: {{decision.result}} (<a ng-href="http://localhost:8080/camunda/app/cockpit/default/#/decision-instance/{{decision.id}}/history">{{decision.id}}</a>)</td>
     			</li>
     		</ul>
   		</tr>
