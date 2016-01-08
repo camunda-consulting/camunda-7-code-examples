@@ -74,7 +74,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0097zfd">        <text><![CDATA[< 1000]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_12wypq8">        <text><![CDATA["Junior","Experienced"]]></text>
+        <inputEntry id="UnaryTests_12wypq8">        <text><![CDATA["Junior","Senior"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_07w3ddt">        <text>0</text>
 </outputEntry>
@@ -88,7 +88,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0ezk0yy">        <text><![CDATA[< 1000]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_0cjywiv">        <text><![CDATA["Senior"]]></text>
+        <inputEntry id="UnaryTests_0cjywiv">        <text><![CDATA["Experte"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_035sxxl">        <text>-20</text>
 </outputEntry>
@@ -130,7 +130,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0zpqmgo">        <text><![CDATA[> 10000]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1c8vizb">        <text><![CDATA["Experienced"]]></text>
+        <inputEntry id="UnaryTests_1c8vizb">        <text><![CDATA["Senior"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_123cqkw">        <text>-15</text>
 </outputEntry>
