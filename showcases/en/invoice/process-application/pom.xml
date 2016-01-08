@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>org.camunda.consulting.snippets</groupId>
 			<artifactId>camunda-demo-support</artifactId>
-			<version>0.3.3</version>
+			<version>0.3.4</version>
 		</dependency>
 
 		<dependency>
