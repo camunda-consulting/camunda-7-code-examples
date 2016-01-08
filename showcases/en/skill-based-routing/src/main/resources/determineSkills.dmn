@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="determineSkillsLab4" name="Determine Required Skills">
+  <decision id="determineSkills" name="Determine Required Skills">
     <decisionTable id="decisionTable" hitPolicy="COLLECT">
       <input id="input1" label="Type of Claim">
         <inputExpression id="inputExpression1" typeRef="string">        <text>claim.type</text>

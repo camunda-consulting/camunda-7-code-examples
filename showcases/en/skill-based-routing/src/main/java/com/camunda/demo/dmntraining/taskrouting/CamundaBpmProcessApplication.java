@@ -22,7 +22,7 @@ public class CamundaBpmProcessApplication extends ServletProcessApplication {
 		claim.setType("Car Accident");
 		claim.setExpenditure(1000);
 		
-		processEngine.getRuntimeService().startProcessInstanceByKey("determineEmployee", //
+		processEngine.getRuntimeService().startProcessInstanceByKey(BpmConstants.DECISION_FLOW_KEY_determineEmployee, //
 				Variables.createVariables() //
 						.putValue("claim", claim));
   }
