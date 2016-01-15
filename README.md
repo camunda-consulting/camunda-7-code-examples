@@ -155,6 +155,11 @@ Snippets
     <td><a href="snippets/bpmn-adhoc-task/">Workaround to realize BPMN AdHoc Subpocess</a></td>
     <td>The BPMN AdHoc Subprocess is not specified to be executable, hence camunda BPM cannot execute it out-of-the-box. This snippet shows a possile workaround.</td>
   </tr>
+  <tr>
+    <td><img src="snippets/non-interrupting-message-event-sub-process-in-sub-process/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/non-interrupting-message-event-sub-process-in-sub-process">Non-interrupting Message Event Sub-Process inside a Sub-Process</a></td>
+    <td>An example showing that a Sub-Process is not finished until a contained Event Sub-Process has reached its end.</td>
+  </tr>
 </table>
 
 ### Camunda Webapp (Tasklist & Cockpit)
