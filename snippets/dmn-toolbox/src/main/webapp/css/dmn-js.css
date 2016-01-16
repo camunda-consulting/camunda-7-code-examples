@@ -1,0 +1,1968 @@
+.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+/* The content of this file is mostly taken from */
+@font-face {
+  font-family: 'dmn-js';
+  src: url('../fonts/dmn-js.eot');
+  src: url('../fonts/dmn-js.eot#iefix') format('embedded-opentype'), url('../fonts/dmn-js.woff') format('woff'), url('../fonts/dmn-js.ttf') format('truetype'), url('../fonts/dmn-js.svg#dmn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="dmn-icon"]:before,
+[class*=" dmn-icon"]:before {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.table-js-add-row {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: auto;
+  margin-right: auto;
+}
+.table-js-add-row span {
+  display: none;
+}
+.table-js-add-row:before {
+  content: '\e803';
+}
+.dmn-icon-up:before {
+  content: '\e800';
+}
+/* 'î €' */
+.dmn-icon-down:before {
+  content: '\e801';
+}
+/* 'î ' */
+.dmn-icon-clear:before {
+  content: '\e802';
+}
+/* 'î ‚' */
+.dmn-icon-plus:before {
+  content: '\e803';
+}
+/* 'î ƒ' */
+.dmn-icon-minus:before {
+  content: '\e804';
+}
+/* 'î „' */
+.dmn-icon-info:before {
+  content: '\e805';
+}
+/* 'î …' */
+.dmn-icon-left:before {
+  content: '\e806';
+}
+/* 'î †' */
+.dmn-icon-dmn-io:before {
+  content: '\e807';
+}
+/* 'î ‡' */
+.dmn-icon-right:before {
+  content: '\e808';
+}
+/* 'î ˆ' */
+.dmn-icon-input:before {
+  content: '\e809';
+}
+/* 'î ‰' */
+.dmn-icon-output:before {
+  content: '\e80a';
+}
+/* 'î Š' */
+.dmn-icon-copy:before {
+  content: '\e80b';
+}
+/* 'î ‹' */
+.dmn-icon-keyboard:before {
+  content: '\e80c';
+}
+/* 'î Œ' */
+.dmn-icon-undo:before {
+  content: '\e80d';
+}
+/* 'î ' */
+.dmn-icon-redo:before {
+  content: '\e80e';
+}
+/* 'î Ž' */
+.dmn-icon-menu:before {
+  content: '\e80f';
+}
+/* 'î ' */
+.dmn-icon-setting:before {
+  content: '\e810';
+}
+/* 'î ' */
+.dmn-icon-wrench:before {
+  content: '\e811';
+}
+/* 'î ‘' */
+.dmn-icon-eraser:before {
+  content: '\e812';
+}
+/* 'î ’' */
+.dmn-icon-attention:before {
+  content: '\e813';
+}
+/* 'î “' */
+.dmn-icon-resize-big:before {
+  content: '\e814';
+}
+/* 'î ”' */
+.dmn-icon-resize-small:before {
+  content: '\e815';
+}
+/* 'î •' */
+.dmn-icon-file-code:before {
+  content: '\e816';
+}
+/* 'î –' */
+.dmn-table {
+  position: relative;
+  max-height: 100%;
+  color: #606060;
+  overflow: auto;
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  color: #808080;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /*
+  &.scrollable {
+    position: relative;
+
+    thead,
+    tfoot,
+    tbody
+    {
+      display: block;
+      width: 100%;
+      tr {
+        width: 100%;
+      }
+    }
+    thead,
+    tfoot {
+      display: table;
+    }
+
+    tbody {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      .number {
+        border-left: 0;
+      }
+      .annotation {
+        border-right: none;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+  */
+}
+.dmn-table a {
+  background-color: transparent;
+}
+.dmn-table a:active,
+.dmn-table a:hover {
+  outline: 0;
+}
+.dmn-table h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.dmn-table small {
+  font-size: 80%;
+}
+.dmn-table sub,
+.dmn-table sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.dmn-table sup {
+  top: -0.5em;
+}
+.dmn-table sub {
+  bottom: -0.25em;
+}
+.dmn-table img {
+  border: 0;
+}
+.dmn-table svg:not(:root) {
+  overflow: hidden;
+}
+.dmn-table button,
+.dmn-table input,
+.dmn-table optgroup,
+.dmn-table select,
+.dmn-table textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.dmn-table button {
+  overflow: visible;
+}
+.dmn-table button,
+.dmn-table select {
+  text-transform: none;
+}
+.dmn-table button,
+.dmn-table input[type="reset"],
+.dmn-table input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.dmn-table button[disabled] {
+  cursor: default;
+}
+.dmn-table button::-moz-focus-inner,
+.dmn-table input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.dmn-table input {
+  line-height: normal;
+}
+.dmn-table input[type="checkbox"],
+.dmn-table input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.dmn-table input[type="number"]::-webkit-inner-spin-button,
+.dmn-table input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.dmn-table input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dmn-table input[type="search"]::-webkit-search-cancel-button,
+.dmn-table input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.dmn-table textarea {
+  overflow: auto;
+}
+.dmn-table optgroup {
+  font-weight: bold;
+}
+.dmn-table table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dmn-table td,
+.dmn-table th {
+  padding: 0;
+}
+.dmn-table input,
+.dmn-table textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.dmn-table * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-table *:before,
+.dmn-table *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-table *:focus {
+  outline: none;
+}
+.dmn-table .input {
+  background-color: #eff9e8;
+}
+.dmn-table .output {
+  background-color: #e1f3d5;
+}
+.dmn-table .number {
+  text-align: right;
+}
+.dmn-table [contenteditable] {
+  cursor: text;
+}
+.dmn-table .dmn-icon-plus {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-table header,
+.dmn-table tbody,
+.dmn-table thead {
+  border: 2px solid #a0a0a0;
+}
+.dmn-table header,
+.dmn-table td,
+.dmn-table th {
+  padding: 3px 6px;
+}
+.dmn-table td,
+.dmn-table th {
+  border: 1px solid #a0a0a0;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  -webkit-transition: background-color 0.436s ease;
+  -o-transition: background-color 0.436s ease;
+  transition: background-color 0.436s ease;
+  -webkit-transition: box-shadow 0.436s ease;
+  -o-transition: box-shadow 0.436s ease;
+  transition: box-shadow 0.436s ease;
+}
+.dmn-table td:empty:before,
+.dmn-table th:empty:before {
+  content: '-';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table td.focused,
+.dmn-table th.focused {
+  box-shadow: 0px 0px 6px 0px rgba(82, 180, 21, 0.6) inset;
+}
+.dmn-table tbody:empty {
+  display: none;
+}
+.dmn-table td,
+.dmn-table th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmn-table td [contenteditable],
+.dmn-table th [contenteditable] {
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  white-space: pre-wrap;
+}
+.dmn-table td [contenteditable]:empty:before,
+.dmn-table th [contenteditable]:empty:before {
+  content: '-';
+  display: inline-block;
+  width: 100%;
+  color: #a0a0a0;
+  text-align: center;
+}
+.dmn-table td.invalid,
+.dmn-table th.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-table header {
+  background-color: #fff;
+  display: inline-block;
+  border-bottom: none;
+  margin-bottom: -1px;
+  position: relative;
+}
+.dmn-table header h3 {
+  font-size: 24px;
+  line-height: 30px;
+  margin: 0.3em auto;
+  font-weight: bold;
+  text-align: center;
+}
+.dmn-table header h3:empty:before {
+  display: inline;
+  content: '<Set a name>';
+  color: #f0ad4e;
+}
+.dmn-table header .tjs-table-id {
+  font-size: 18px;
+  background-color: #c0c0c0;
+  font-family: monospace;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  margin: 0px -6px -3px;
+  padding: 2px;
+}
+.dmn-table table {
+  font-size: 90%;
+  background-color: #fff;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.dmn-table thead {
+  border-bottom: 3px double #a0a0a0;
+}
+.dmn-table thead > tr:first-of-type .hit,
+.dmn-table thead > tr:first-of-type .hit > span {
+  cursor: pointer;
+}
+.dmn-table thead > tr:first-of-type th {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.dmn-table thead .annotation {
+  vertical-align: bottom;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dmn-table thead .annotation .dmn-js-logo {
+  text-decoration: none;
+  display: block;
+  position: absolute;
+  top: 4px;
+  right: -5px;
+}
+.dmn-table thead .annotation .dmn-js-logo:after {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: '\e807';
+  text-align: right;
+  font-size: 3em;
+  color: #52b415;
+  -webkit-transition: color 0.218s ease;
+  -o-transition: color 0.218s ease;
+  transition: color 0.218s ease;
+  text-decoration: none;
+}
+.dmn-table thead th {
+  text-align: center;
+}
+.dmn-table .hit {
+  vertical-align: top;
+  width: 3em;
+}
+.dmn-table .labels,
+.dmn-table .values,
+.dmn-table .mappings {
+  text-align: center;
+}
+.dmn-table .values,
+.dmn-table .mappings {
+  background-color: #cfcfcf;
+  color: #fff;
+}
+.dmn-table .values td,
+.dmn-table .mappings td,
+.dmn-table .values th,
+.dmn-table .mappings th {
+  cursor: pointer;
+}
+.dmn-table .values td.invalid,
+.dmn-table .mappings td.invalid,
+.dmn-table .values th.invalid,
+.dmn-table .mappings th.invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-table .values td {
+  background-color: #CFCFCF;
+}
+.dmn-table .values .col-focused {
+  background-color: #DCDBC4;
+}
+.dmn-table .mappings {
+  font-family: monospace;
+}
+.dmn-table .mappings td {
+  background-color: #C0C0C0;
+}
+.dmn-table .mappings .col-focused {
+  background-color: #D2D1BA;
+}
+.dmn-table.hide-mappings .mappings {
+  display: none;
+}
+.dmn-table.hide-mappings .values {
+  display: none;
+}
+.dmn-table .labels td:empty:before {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: '\e813';
+  color: #d9534f;
+}
+.dmn-table tbody {
+  border: 2px solid #a0a0a0;
+  border-top: none;
+}
+.dmn-table tbody tr:nth-child(1) td,
+.dmn-table tbody tr:nth-child(1) th {
+  border-top: none;
+}
+.dmn-table tbody .input {
+  color: #808080;
+}
+.dmn-table tbody .input.set {
+  color: #606060;
+}
+.dmn-table tfoot {
+  border: 2px solid #eeeeee;
+  border-top: none;
+}
+.dmn-table tfoot tr,
+.dmn-table tfoot td {
+  border-color: #eeeeee;
+}
+.dmn-table tfoot .add-rule {
+  text-align: right;
+}
+.dmn-table tfoot .add-rule a {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-table tfoot .add-rule a:before {
+  padding: 0;
+  margin: 0;
+}
+.dmn-table tfoot:empty {
+  display: none;
+}
+.dmn-table .col-focused,
+.dmn-table .row-focused td {
+  background-color: #FEFDE6;
+}
+.dmn-table tr > .input + .output {
+  border-left: 3px double #a0a0a0;
+}
+.dmn-table .tjs-controls {
+  float: right;
+  text-align: right;
+  max-width: 50%;
+  padding: 3px 6px;
+  font-size: 90%;
+  background-color: #f0f0f0;
+}
+.dmn-table .tjs-controls a {
+  cursor: pointer;
+}
+.dmn-table.dmn-table-compact {
+  font-size: 95%;
+}
+.dmn-table.dmn-table-compact header,
+.dmn-table.dmn-table-compact td,
+.dmn-table.dmn-table-compact th {
+  padding: 1px 2px;
+}
+.dmn-table.dmn-table-bold {
+  font-size: 110%;
+}
+.dmn-table.dmn-table-bold header,
+.dmn-table.dmn-table-bold td,
+.dmn-table.dmn-table-bold th {
+  padding: 6px 12px;
+}
+.dmn-table-clause-controls {
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #f0f0f0;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  margin: 0;
+  padding: 0;
+}
+.dmn-table-clause-controls a {
+  background-color: transparent;
+}
+.dmn-table-clause-controls a:active,
+.dmn-table-clause-controls a:hover {
+  outline: 0;
+}
+.dmn-table-clause-controls h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.dmn-table-clause-controls small {
+  font-size: 80%;
+}
+.dmn-table-clause-controls sub,
+.dmn-table-clause-controls sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.dmn-table-clause-controls sup {
+  top: -0.5em;
+}
+.dmn-table-clause-controls sub {
+  bottom: -0.25em;
+}
+.dmn-table-clause-controls img {
+  border: 0;
+}
+.dmn-table-clause-controls svg:not(:root) {
+  overflow: hidden;
+}
+.dmn-table-clause-controls button,
+.dmn-table-clause-controls input,
+.dmn-table-clause-controls optgroup,
+.dmn-table-clause-controls select,
+.dmn-table-clause-controls textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.dmn-table-clause-controls button {
+  overflow: visible;
+}
+.dmn-table-clause-controls button,
+.dmn-table-clause-controls select {
+  text-transform: none;
+}
+.dmn-table-clause-controls button,
+.dmn-table-clause-controls input[type="reset"],
+.dmn-table-clause-controls input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.dmn-table-clause-controls button[disabled] {
+  cursor: default;
+}
+.dmn-table-clause-controls button::-moz-focus-inner,
+.dmn-table-clause-controls input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.dmn-table-clause-controls input {
+  line-height: normal;
+}
+.dmn-table-clause-controls input[type="checkbox"],
+.dmn-table-clause-controls input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.dmn-table-clause-controls input[type="number"]::-webkit-inner-spin-button,
+.dmn-table-clause-controls input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.dmn-table-clause-controls input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dmn-table-clause-controls input[type="search"]::-webkit-search-cancel-button,
+.dmn-table-clause-controls input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.dmn-table-clause-controls textarea {
+  overflow: auto;
+}
+.dmn-table-clause-controls optgroup {
+  font-weight: bold;
+}
+.dmn-table-clause-controls table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dmn-table-clause-controls td,
+.dmn-table-clause-controls th {
+  padding: 0;
+}
+.dmn-table-clause-controls input,
+.dmn-table-clause-controls textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.dmn-table-clause-controls li {
+  padding: 3px 6px;
+  margin: 3px 0 0 6px;
+  cursor: pointer;
+}
+.tjs-context-menu {
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  -webkit-transition: top 0.218s ease;
+  -o-transition: top 0.218s ease;
+  transition: top 0.218s ease;
+  -webkit-transition: left 0.218s ease;
+  -o-transition: left 0.218s ease;
+  transition: left 0.218s ease;
+  min-width: 180px;
+}
+.tjs-context-menu a {
+  background-color: transparent;
+}
+.tjs-context-menu a:active,
+.tjs-context-menu a:hover {
+  outline: 0;
+}
+.tjs-context-menu h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.tjs-context-menu small {
+  font-size: 80%;
+}
+.tjs-context-menu sub,
+.tjs-context-menu sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.tjs-context-menu sup {
+  top: -0.5em;
+}
+.tjs-context-menu sub {
+  bottom: -0.25em;
+}
+.tjs-context-menu img {
+  border: 0;
+}
+.tjs-context-menu svg:not(:root) {
+  overflow: hidden;
+}
+.tjs-context-menu button,
+.tjs-context-menu input,
+.tjs-context-menu optgroup,
+.tjs-context-menu select,
+.tjs-context-menu textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.tjs-context-menu button {
+  overflow: visible;
+}
+.tjs-context-menu button,
+.tjs-context-menu select {
+  text-transform: none;
+}
+.tjs-context-menu button,
+.tjs-context-menu input[type="reset"],
+.tjs-context-menu input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.tjs-context-menu button[disabled] {
+  cursor: default;
+}
+.tjs-context-menu button::-moz-focus-inner,
+.tjs-context-menu input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.tjs-context-menu input {
+  line-height: normal;
+}
+.tjs-context-menu input[type="checkbox"],
+.tjs-context-menu input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.tjs-context-menu input[type="number"]::-webkit-inner-spin-button,
+.tjs-context-menu input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.tjs-context-menu input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.tjs-context-menu input[type="search"]::-webkit-search-cancel-button,
+.tjs-context-menu input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.tjs-context-menu textarea {
+  overflow: auto;
+}
+.tjs-context-menu optgroup {
+  font-weight: bold;
+}
+.tjs-context-menu table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.tjs-context-menu td,
+.tjs-context-menu th {
+  padding: 0;
+}
+.tjs-context-menu input,
+.tjs-context-menu textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.tjs-context-menu .coordinates {
+  padding: 3px 6px;
+  display: none;
+}
+.tjs-context-menu a {
+  color: #52b415;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+  padding: 3px 6px;
+}
+.tjs-context-menu a:hover {
+  color: #3d8610;
+}
+.tjs-context-menu a:hover {
+  background-color: #c0c0c0;
+}
+.tjs-context-menu ul,
+.tjs-context-menu li {
+  margin: 0;
+  padding: 0;
+}
+.tjs-context-menu ul {
+  list-style: none;
+}
+.tjs-context-menu ul li {
+  position: relative;
+}
+.tjs-context-menu ul li:after,
+.tjs-context-menu ul li > a {
+  display: block;
+}
+.tjs-context-menu ul li:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(200, 200, 200, 0.3);
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 0;
+  -webkit-transition: width 0.218s ease;
+  -o-transition: width 0.218s ease;
+  transition: width 0.218s ease;
+}
+.tjs-context-menu ul li:hover:after {
+  width: 1.6em;
+}
+.tjs-context-menu ul li li:hover:after {
+  width: 100%;
+}
+.tjs-context-menu ul li > a {
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+.tjs-context-menu ul li > a:hover {
+  background-color: transparent;
+}
+.tjs-context-menu span {
+  display: inline-block;
+}
+.tjs-context-menu .tjs-label {
+  color: #606060;
+  font-weight: bold;
+  background-color: transparent;
+  font-size: 100%;
+  font-weight: normal;
+  padding: 0;
+}
+.tjs-context-menu .tjs-icon {
+  width: 1em;
+  margin-left: 0;
+  margin-right: .4em;
+}
+.tjs-context-menu .tjs-icon:before {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+.tjs-context-menu .tjs-icon.undo:before {
+  content: '\e80d';
+}
+.tjs-context-menu .tjs-icon.redo:before {
+  content: '\e80e';
+}
+.tjs-context-menu .tjs-icon.plus:before {
+  content: '\e803';
+}
+.tjs-context-menu .tjs-icon.minus:before {
+  content: '\e804';
+}
+.tjs-context-menu .tjs-icon.input:before {
+  content: '\e809';
+}
+.tjs-context-menu .tjs-icon.output:before {
+  content: '\e80a';
+}
+.tjs-context-menu .tjs-icon.copy:before {
+  content: '\e80b';
+}
+.tjs-context-menu .tjs-icon.above:before {
+  content: '\e800';
+}
+.tjs-context-menu .tjs-icon.below:before {
+  content: '\e801';
+}
+.tjs-context-menu .tjs-icon.left:before {
+  content: '\e806';
+}
+.tjs-context-menu .tjs-icon.right:before {
+  content: '\e808';
+}
+.tjs-context-menu .tjs-icon.clear:before {
+  content: '\e812';
+}
+.tjs-context-menu a.disabled,
+.tjs-context-menu a.disabled:hover {
+  color: #808080;
+  cursor: default;
+}
+.tjs-context-menu ul:empty {
+  display: none;
+}
+.tjs-context-menu > ul > li {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px dotted #c0c0c0;
+}
+.tjs-context-menu > ul > li:last-child {
+  border-bottom: none;
+}
+.tjs-context-menu > ul > li > ul .label {
+  padding-left: 0.4em;
+}
+.tjs-context-menu ul ul {
+  overflow: hidden;
+}
+.tjs-context-menu ul ul li {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  clear: both;
+}
+.tjs-context-menu ul ul li > a {
+  display: inline-block;
+}
+.tjs-context-menu ul ul li > ul {
+  float: right;
+}
+.tjs-context-menu ul ul li.tjs-dropdown {
+  width: 100%;
+}
+.tjs-context-menu ul ul ul {
+  display: inline-block;
+  text-align: right;
+}
+.tjs-context-menu ul ul ul li {
+  float: left;
+  clear: none;
+  width: auto;
+}
+.tjs-context-menu ul ul ul li:after {
+  display: none;
+}
+.tjs-context-menu ul ul ul li .icon {
+  width: 1em;
+  margin: 0 0.2em;
+}
+.tjs-context-menu ul ul ul li .label {
+  display: none;
+}
+.tjs-context-menu li.input {
+  background-color: #eff9e8;
+}
+.tjs-context-menu li.output {
+  background-color: #e1f3d5;
+}
+.dmn-clausevalues-setter,
+.dmn-hitpolicy-setter {
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  min-width: 180px;
+  max-width: 370px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter a,
+.dmn-hitpolicy-setter a {
+  background-color: transparent;
+}
+.dmn-clausevalues-setter a:active,
+.dmn-hitpolicy-setter a:active,
+.dmn-clausevalues-setter a:hover,
+.dmn-hitpolicy-setter a:hover {
+  outline: 0;
+}
+.dmn-clausevalues-setter h1,
+.dmn-hitpolicy-setter h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.dmn-clausevalues-setter small,
+.dmn-hitpolicy-setter small {
+  font-size: 80%;
+}
+.dmn-clausevalues-setter sub,
+.dmn-hitpolicy-setter sub,
+.dmn-clausevalues-setter sup,
+.dmn-hitpolicy-setter sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.dmn-clausevalues-setter sup,
+.dmn-hitpolicy-setter sup {
+  top: -0.5em;
+}
+.dmn-clausevalues-setter sub,
+.dmn-hitpolicy-setter sub {
+  bottom: -0.25em;
+}
+.dmn-clausevalues-setter img,
+.dmn-hitpolicy-setter img {
+  border: 0;
+}
+.dmn-clausevalues-setter svg:not(:root),
+.dmn-hitpolicy-setter svg:not(:root) {
+  overflow: hidden;
+}
+.dmn-clausevalues-setter button,
+.dmn-hitpolicy-setter button,
+.dmn-clausevalues-setter input,
+.dmn-hitpolicy-setter input,
+.dmn-clausevalues-setter optgroup,
+.dmn-hitpolicy-setter optgroup,
+.dmn-clausevalues-setter select,
+.dmn-hitpolicy-setter select,
+.dmn-clausevalues-setter textarea,
+.dmn-hitpolicy-setter textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.dmn-clausevalues-setter button,
+.dmn-hitpolicy-setter button {
+  overflow: visible;
+}
+.dmn-clausevalues-setter button,
+.dmn-hitpolicy-setter button,
+.dmn-clausevalues-setter select,
+.dmn-hitpolicy-setter select {
+  text-transform: none;
+}
+.dmn-clausevalues-setter button,
+.dmn-hitpolicy-setter button,
+.dmn-clausevalues-setter input[type="reset"],
+.dmn-hitpolicy-setter input[type="reset"],
+.dmn-clausevalues-setter input[type="submit"],
+.dmn-hitpolicy-setter input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.dmn-clausevalues-setter button[disabled],
+.dmn-hitpolicy-setter button[disabled] {
+  cursor: default;
+}
+.dmn-clausevalues-setter button::-moz-focus-inner,
+.dmn-hitpolicy-setter button::-moz-focus-inner,
+.dmn-clausevalues-setter input::-moz-focus-inner,
+.dmn-hitpolicy-setter input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.dmn-clausevalues-setter input,
+.dmn-hitpolicy-setter input {
+  line-height: normal;
+}
+.dmn-clausevalues-setter input[type="checkbox"],
+.dmn-hitpolicy-setter input[type="checkbox"],
+.dmn-clausevalues-setter input[type="radio"],
+.dmn-hitpolicy-setter input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.dmn-clausevalues-setter input[type="number"]::-webkit-inner-spin-button,
+.dmn-hitpolicy-setter input[type="number"]::-webkit-inner-spin-button,
+.dmn-clausevalues-setter input[type="number"]::-webkit-outer-spin-button,
+.dmn-hitpolicy-setter input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.dmn-clausevalues-setter input[type="search"],
+.dmn-hitpolicy-setter input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dmn-clausevalues-setter input[type="search"]::-webkit-search-cancel-button,
+.dmn-hitpolicy-setter input[type="search"]::-webkit-search-cancel-button,
+.dmn-clausevalues-setter input[type="search"]::-webkit-search-decoration,
+.dmn-hitpolicy-setter input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.dmn-clausevalues-setter textarea,
+.dmn-hitpolicy-setter textarea {
+  overflow: auto;
+}
+.dmn-clausevalues-setter optgroup,
+.dmn-hitpolicy-setter optgroup {
+  font-weight: bold;
+}
+.dmn-clausevalues-setter table,
+.dmn-hitpolicy-setter table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dmn-clausevalues-setter td,
+.dmn-hitpolicy-setter td,
+.dmn-clausevalues-setter th,
+.dmn-hitpolicy-setter th {
+  padding: 0;
+}
+.dmn-clausevalues-setter input,
+.dmn-hitpolicy-setter input,
+.dmn-clausevalues-setter textarea,
+.dmn-hitpolicy-setter textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.dmn-clausevalues-setter *,
+.dmn-hitpolicy-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter *:before,
+.dmn-hitpolicy-setter *:before,
+.dmn-clausevalues-setter *:after,
+.dmn-hitpolicy-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clausevalues-setter:after,
+.dmn-hitpolicy-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clausevalues-setter:after,
+.dmn-hitpolicy-setter:after {
+  right: 100%;
+  top: 16px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #fff;
+}
+.dmn-clausevalues-setter .datatype,
+.dmn-hitpolicy-setter .datatype,
+.dmn-clausevalues-setter .allowed-values,
+.dmn-hitpolicy-setter .allowed-values {
+  max-width: 100%;
+  padding: 3px 6px;
+}
+.dmn-clausevalues-setter .ranged-values,
+.dmn-hitpolicy-setter .ranged-values,
+.dmn-clausevalues-setter .allowed-values,
+.dmn-hitpolicy-setter .allowed-values {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 6px;
+}
+.dmn-clausevalues-setter .datatype,
+.dmn-hitpolicy-setter .datatype {
+  display: table;
+  width: 100%;
+}
+.dmn-clausevalues-setter .datatype label,
+.dmn-hitpolicy-setter .datatype label,
+.dmn-clausevalues-setter .datatype input,
+.dmn-hitpolicy-setter .datatype input {
+  vertical-align: middle;
+  display: table-cell;
+}
+.dmn-clausevalues-setter.choices .datatype,
+.dmn-hitpolicy-setter.choices .datatype,
+.dmn-clausevalues-setter.range .datatype,
+.dmn-hitpolicy-setter.range .datatype {
+  border-bottom: 1px solid #f0f0f0;
+}
+.dmn-clausevalues-setter.choices .allowed-values,
+.dmn-hitpolicy-setter.choices .allowed-values,
+.dmn-clausevalues-setter.range .ranged-values,
+.dmn-hitpolicy-setter.range .ranged-values {
+  padding: 6px;
+  max-height: 1000px;
+}
+.dmn-clausevalues-setter .allowed-values ul,
+.dmn-hitpolicy-setter .allowed-values ul,
+.dmn-clausevalues-setter .ranged-values ul,
+.dmn-hitpolicy-setter .ranged-values ul {
+  max-height: 180px;
+  overflow: auto;
+}
+.dmn-clausevalues-setter .allowed-values input,
+.dmn-hitpolicy-setter .allowed-values input {
+  width: 100%;
+}
+.dmn-clausevalues-setter .ranged-values li,
+.dmn-hitpolicy-setter .ranged-values li {
+  display: table;
+}
+.dmn-clausevalues-setter .ranged-values li label,
+.dmn-hitpolicy-setter .ranged-values li label,
+.dmn-clausevalues-setter .ranged-values li input,
+.dmn-hitpolicy-setter .ranged-values li input {
+  vertical-align: middle;
+  display: table-cell;
+}
+.dmn-clausevalues-setter .invalid,
+.dmn-hitpolicy-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clausevalues-setter input,
+.dmn-hitpolicy-setter input {
+  border: 1px solid #a0a0a0;
+  padding: 3px 6px;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+}
+.dmn-clausevalues-setter input:focus,
+.dmn-hitpolicy-setter input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clausevalues-setter label,
+.dmn-hitpolicy-setter label {
+  color: #606060;
+  font-weight: bold;
+  background-color: transparent;
+  min-width: 50px;
+  padding: 3px 0;
+  margin-right: 6px;
+}
+.dmn-clausevalues-setter ul,
+.dmn-hitpolicy-setter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dmn-clausevalues-setter li,
+.dmn-hitpolicy-setter li {
+  margin: 3px 0 0 0;
+  padding: 0;
+}
+.dmn-clausevalues-setter.read-only input,
+.dmn-hitpolicy-setter.read-only input {
+  background-color: transparent;
+  border: none;
+}
+.dmn-clausevalues-setter.read-only .dmn-combobox .cb-caret,
+.dmn-hitpolicy-setter.read-only .dmn-combobox .cb-caret {
+  display: none;
+}
+.dmn-clausevalues-setter.read-only .dmn-combobox input,
+.dmn-hitpolicy-setter.read-only .dmn-combobox input {
+  padding-bottom: 0;
+}
+.dmn-hitpolicy-setter {
+  max-width: 420px;
+}
+.dmn-hitpolicy-setter > div > .dmn-combobox {
+  padding: 3px 6px;
+}
+.dmn-hitpolicy-setter > div > .dmn-combobox label {
+  white-space: nowrap;
+}
+.dmn-clauseexpression-setter {
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  transition: all 0.218s linear;
+}
+.dmn-clauseexpression-setter a {
+  background-color: transparent;
+}
+.dmn-clauseexpression-setter a:active,
+.dmn-clauseexpression-setter a:hover {
+  outline: 0;
+}
+.dmn-clauseexpression-setter h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.dmn-clauseexpression-setter small {
+  font-size: 80%;
+}
+.dmn-clauseexpression-setter sub,
+.dmn-clauseexpression-setter sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.dmn-clauseexpression-setter sup {
+  top: -0.5em;
+}
+.dmn-clauseexpression-setter sub {
+  bottom: -0.25em;
+}
+.dmn-clauseexpression-setter img {
+  border: 0;
+}
+.dmn-clauseexpression-setter svg:not(:root) {
+  overflow: hidden;
+}
+.dmn-clauseexpression-setter button,
+.dmn-clauseexpression-setter input,
+.dmn-clauseexpression-setter optgroup,
+.dmn-clauseexpression-setter select,
+.dmn-clauseexpression-setter textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.dmn-clauseexpression-setter button {
+  overflow: visible;
+}
+.dmn-clauseexpression-setter button,
+.dmn-clauseexpression-setter select {
+  text-transform: none;
+}
+.dmn-clauseexpression-setter button,
+.dmn-clauseexpression-setter input[type="reset"],
+.dmn-clauseexpression-setter input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.dmn-clauseexpression-setter button[disabled] {
+  cursor: default;
+}
+.dmn-clauseexpression-setter button::-moz-focus-inner,
+.dmn-clauseexpression-setter input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.dmn-clauseexpression-setter input {
+  line-height: normal;
+}
+.dmn-clauseexpression-setter input[type="checkbox"],
+.dmn-clauseexpression-setter input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.dmn-clauseexpression-setter input[type="number"]::-webkit-inner-spin-button,
+.dmn-clauseexpression-setter input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.dmn-clauseexpression-setter input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dmn-clauseexpression-setter input[type="search"]::-webkit-search-cancel-button,
+.dmn-clauseexpression-setter input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.dmn-clauseexpression-setter textarea {
+  overflow: auto;
+}
+.dmn-clauseexpression-setter optgroup {
+  font-weight: bold;
+}
+.dmn-clauseexpression-setter table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dmn-clauseexpression-setter td,
+.dmn-clauseexpression-setter th {
+  padding: 0;
+}
+.dmn-clauseexpression-setter input,
+.dmn-clauseexpression-setter textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.dmn-clauseexpression-setter * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter *:before,
+.dmn-clauseexpression-setter *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-clauseexpression-setter:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.dmn-clauseexpression-setter:after {
+  left: 0;
+  top: 100%;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid #fff;
+}
+.dmn-clauseexpression-setter label {
+  color: #606060;
+  font-weight: bold;
+  background-color: transparent;
+  margin-right: 6px;
+}
+.dmn-clauseexpression-setter input,
+.dmn-clauseexpression-setter textarea {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  padding: 3px 6px;
+  border: 1px solid;
+}
+.dmn-clauseexpression-setter input:focus,
+.dmn-clauseexpression-setter textarea:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-clauseexpression-setter textarea {
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  position: relative;
+  font-family: monospace;
+  resize: vertical;
+}
+.dmn-clauseexpression-setter .links {
+  display: table;
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dmn-clauseexpression-setter .links a {
+  cursor: pointer;
+  color: #52b415;
+}
+.dmn-clauseexpression-setter .dmn-icon-clear {
+  text-align: right;
+}
+.dmn-clauseexpression-setter .dmn-icon-clear:before {
+  margin: 0;
+}
+.dmn-clauseexpression-setter .toggle-type,
+.dmn-clauseexpression-setter .dmn-icon-clear,
+.dmn-clauseexpression-setter .region {
+  padding: 6px;
+}
+.dmn-clauseexpression-setter .toggle-type,
+.dmn-clauseexpression-setter .dmn-icon-clear {
+  display: table-cell;
+}
+.dmn-clauseexpression-setter .language {
+  width: auto;
+  max-width: 350px;
+  margin-bottom: 3px;
+}
+.dmn-clauseexpression-setter .invalid {
+  background-color: #f4cecd;
+  border-color: #d9534f;
+  color: #c9302c;
+}
+.dmn-clauseexpression-setter .expression input {
+  min-width: 300px;
+}
+.dmn-clauseexpression-setter .links .expression {
+  text-decoration: underline;
+}
+.dmn-clauseexpression-setter .region.script {
+  display: none;
+}
+.dmn-clauseexpression-setter.use-script {
+  max-width: none;
+}
+.dmn-clauseexpression-setter.use-script .links .script {
+  text-decoration: underline;
+}
+.dmn-clauseexpression-setter.use-script .links .expression {
+  text-decoration: none;
+}
+.dmn-clauseexpression-setter.use-script .region.expression {
+  display: none;
+}
+.dmn-clauseexpression-setter.use-script .region.script {
+  display: block;
+}
+.dmn-clauseexpression-setter.use-script:after {
+  display: none;
+}
+.dmn-clauseexpression-setter.read-only input {
+  background-color: transparent;
+  border: none;
+}
+.dmn-clauseexpression-setter.read-only .dmn-combobox .cb-caret {
+  display: none;
+}
+.dmn-clauseexpression-setter.read-only .dmn-combobox input {
+  padding-bottom: 0;
+}
+.dmn-combobox {
+  /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  color: #808080;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  display: table;
+  width: 100%;
+}
+.dmn-combobox a {
+  background-color: transparent;
+}
+.dmn-combobox a:active,
+.dmn-combobox a:hover {
+  outline: 0;
+}
+.dmn-combobox h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.dmn-combobox small {
+  font-size: 80%;
+}
+.dmn-combobox sub,
+.dmn-combobox sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.dmn-combobox sup {
+  top: -0.5em;
+}
+.dmn-combobox sub {
+  bottom: -0.25em;
+}
+.dmn-combobox img {
+  border: 0;
+}
+.dmn-combobox svg:not(:root) {
+  overflow: hidden;
+}
+.dmn-combobox button,
+.dmn-combobox input,
+.dmn-combobox optgroup,
+.dmn-combobox select,
+.dmn-combobox textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.dmn-combobox button {
+  overflow: visible;
+}
+.dmn-combobox button,
+.dmn-combobox select {
+  text-transform: none;
+}
+.dmn-combobox button,
+.dmn-combobox input[type="reset"],
+.dmn-combobox input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+.dmn-combobox button[disabled] {
+  cursor: default;
+}
+.dmn-combobox button::-moz-focus-inner,
+.dmn-combobox input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.dmn-combobox input {
+  line-height: normal;
+}
+.dmn-combobox input[type="checkbox"],
+.dmn-combobox input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.dmn-combobox input[type="number"]::-webkit-inner-spin-button,
+.dmn-combobox input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+.dmn-combobox input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.dmn-combobox input[type="search"]::-webkit-search-cancel-button,
+.dmn-combobox input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.dmn-combobox textarea {
+  overflow: auto;
+}
+.dmn-combobox optgroup {
+  font-weight: bold;
+}
+.dmn-combobox table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dmn-combobox td,
+.dmn-combobox th {
+  padding: 0;
+}
+.dmn-combobox input,
+.dmn-combobox textarea {
+  font-size: 16px;
+  color: #808080;
+}
+.dmn-combobox * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-combobox *:before,
+.dmn-combobox *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.dmn-combobox label,
+.dmn-combobox input {
+  display: table-cell;
+  vertical-align: middle;
+}
+.dmn-combobox label {
+  color: #606060;
+  font-weight: bold;
+  background-color: transparent;
+  padding-right: 6px;
+}
+.dmn-combobox input {
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+  padding: 3px 6px;
+  border: 1px solid;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.dmn-combobox input:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-combobox .cb-caret {
+  position: absolute;
+  right: 6px;
+  top: 3px;
+  bottom: 3px;
+  display: block;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+}
+.dmn-combobox .cb-caret:before {
+  font-family: "dmn-js";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  display: block;
+  right: 0;
+  width: 1.2em;
+  height: 20px;
+  line-height: 20px;
+  height: 1.2em;
+  top: 50%;
+  margin-top: -0.6em;
+  content: '\E801';
+}
+.dmn-combobox .cb-caret:hover:before {
+  color: #52b415;
+}
+.dmn-combobox.expanded .cb-caret:before {
+  content: '\E800';
+}
+.dmn-combobox-suggestions {
+  position: absolute;
+  display: block;
+  z-index: 99;
+  color: #808080;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  box-shadow: 0 0 3px 1px rgba(96, 96, 96, 0.5);
+  z-index: 999;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #a0a0a0;
+  margin-top: 5px;
+}
+.dmn-combobox-suggestions:before {
+  content: '';
+  display: block;
+  height: 4px;
+  top: -4px;
+  width: 100%;
+  z-index: 10;
+  background-color: inherit;
+  position: absolute;
+  border: 1px solid #a0a0a0;
+  left: -1px;
+  z-index: 1;
+}
+.dmn-combobox-suggestions li {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  min-height: 12px;
+  padding: 3px 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #c0c0c0;
+  background-color: #fff;
+  -webkit-transition: background-color 0.218s ease;
+  -o-transition: background-color 0.218s ease;
+  transition: background-color 0.218s ease;
+  -webkit-transition: box-shadow 0.218s ease;
+  -o-transition: box-shadow 0.218s ease;
+  transition: box-shadow 0.218s ease;
+}
+.dmn-combobox-suggestions li:focus {
+  outline: none;
+  box-shadow: 0px 0px 4px 0px rgba(82, 180, 21, 0.6) inset;
+  border-color: #52b415;
+}
+.dmn-combobox-suggestions li:hover {
+  background-color: #eefce5;
+}
+.dmn-combobox-suggestions li:first-child {
+  margin-top: -4px;
+}
+.dmn-combobox-suggestions li:last-child {
+  border-bottom: 0;
+}
+.dmn-table .dragTable {
+  width: 100%;
+  pointer-events: none;
+  box-shadow: 0 0 3px 0px rgba(181, 181, 181, 0.7);
+  transform: scale(0.75) translateY(-50%);
+  transform-origin: left top;
+  opacity: 0.85;
+}
+.dmn-table thead tr > td.drop.left,
+.dmn-table tbody tr > td.drop.left {
+  border-left: 6px double #52b415;
+}
+.dmn-table thead tr > td.drop.right,
+.dmn-table tbody tr > td.drop.right {
+  border-right: 6px double #52b415;
+}
+.dmn-table table > tbody tr.drop.above {
+  border-top: 6px double #52b415;
+}
+.dmn-table table > tbody tr.drop.below {
+  border-bottom: 6px double #52b415;
+}
+.dmn-table table > tbody tr td.draggable {
+  cursor: move;
+  cursor: ns-resize;
+}
+.dmn-table table > tbody tr td.draggable:before {
+  float: left;
+  content: '\283F';
+  cursor: move;
+  cursor: ns-resize;
+}
+.dmn-table table > tbody tr td.draggable span {
+  float: right;
+  width: auto;
+}
+.dmn-table table > thead tr td.draggable .drag-handle,
+.dmn-table table > thead tr td.draggable [contenteditable] {
+  vertical-align: middle;
+  display: inline-block;
+}
+.dmn-table table > thead tr td.draggable [contenteditable] {
+  width: calc(100% - 1em);
+}
+.dmn-table table > thead tr td.draggable .drag-handle {
+  float: left;
+  width: 1em;
+  cursor: move;
+  cursor: ew-resize;
+}
+.dmn-table table > thead tr td.draggable .drag-handle:before {
+  position: relative;
+  top: 2px;
+  content: '\283F';
+  display: inline-block;
+}
