@@ -108,4 +108,21 @@ public class InMemoryH2Test {
 		assertThat(pi).task("UserTaskSchadenRegulieren").isAssignedTo("john");
 		
 	}
+	
+	@Test
+	@Deployment(resources = { "mitarbeiterBestimmen.bpmn", "notwendigeKompetenz.dmn", "mitarbeiterErfahrung.dmn",  "mitarbeiterScore.dmn" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void testOutput() {
+		Claim claimCarAccident = DemoData.createClaimThirdPartyLiability(15000, "10xxx", "Handy");
+		
+		ProcessInstance pi = rule.getProcessEngine().getRuntimeService().startProcessInstanceByKey(BpmConstants.DECISION_FLOW_KEY_mitarbeiterBestimmen, //
+				Variables.createVariables() //
+						.putValue("claim", claimCarAccident) //
+		);
+		String employee = (String) rule.getProcessEngine().getHistoryService().createHistoricVariableInstanceQuery() //
+				.processInstanceId(pi.getId()) //
+				.variableName("selectedEmployee") //
+				.singleResult().getValue();
+		System.out.println(employee);
+	}
 }

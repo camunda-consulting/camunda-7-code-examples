@@ -2,8 +2,8 @@
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="mitarbeiterScore" name="Score Mitarbeiter-Eignung">
     <decisionTable id="decisionTable" hitPolicy="COLLECT" aggregation="SUM">
-      <input id="EmployeeName" label="Name">
-        <inputExpression id="LiteralExpression_0iogbyp" typeRef="string">        <text>employee.name</text>
+      <input id="InputClause_0rexy6v" label="Name">
+        <inputExpression id="LiteralExpression_091p30l" typeRef="string">        <text>employee.name</text>
 </inputExpression>
       </input>
       <input id="input1" label="Anzahl offener Fälle zur Bearbeitung beim Mitarbeiter">
@@ -14,7 +14,7 @@
         <inputExpression id="LiteralExpression_024d2i2" typeRef="boolean">        <text>employee.region == claim.region</text>
 </inputExpression>
       </input>
-      <input id="InputClause_1gp8c52" label="Schadenshöhe&#10;(geschätzt)">
+      <input id="InputClause_1gp8c52" label="Schadens-höhe&#10;(geschätzt)">
         <inputExpression id="LiteralExpression_0u4cle7" typeRef="integer">        <text>claim.expenditure</text>
 </inputExpression>
       </input>
@@ -24,7 +24,7 @@
       </input>
       <output id="output1" label="Score" name="score" typeRef="integer" />
       <rule id="row-536960114-5">
-        <inputEntry id="UnaryTests_1gi7opf">        <text></text>
+        <inputEntry id="UnaryTests_1dbmy3j">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_1c25icd">        <text><![CDATA[<= 5]]></text>
 </inputEntry>
@@ -38,7 +38,7 @@
 </outputEntry>
       </rule>
       <rule id="row-536960114-6">
-        <inputEntry id="UnaryTests_0guxvdy">        <text></text>
+        <inputEntry id="UnaryTests_0sruaig">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0v7soz1">        <text><![CDATA[> 10]]></text>
 </inputEntry>
@@ -48,11 +48,11 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0q9mcc7">        <text></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_0sxzehp">        <text>-25</text>
+        <outputEntry id="LiteralExpression_0sxzehp">        <text>-30</text>
 </outputEntry>
       </rule>
       <rule id="row-536960114-7">
-        <inputEntry id="UnaryTests_0j1r6e9">        <text></text>
+        <inputEntry id="UnaryTests_1rjdwp3">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_056ffbd">        <text></text>
 </inputEntry>
@@ -62,11 +62,11 @@
 </inputEntry>
         <inputEntry id="UnaryTests_089bfbt">        <text></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_1l6ow8j">        <text>20</text>
+        <outputEntry id="LiteralExpression_1l6ow8j">        <text>25</text>
 </outputEntry>
       </rule>
       <rule id="row-536960114-8">
-        <inputEntry id="UnaryTests_0v5c4op">        <text></text>
+        <inputEntry id="UnaryTests_0dq4wk9">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_1d2zkct">        <text></text>
 </inputEntry>
@@ -80,7 +80,7 @@
 </outputEntry>
       </rule>
       <rule id="row-536960114-9">
-        <inputEntry id="UnaryTests_169jlw4">        <text></text>
+        <inputEntry id="UnaryTests_1axkyf9">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0gtkprt">        <text></text>
 </inputEntry>
@@ -94,7 +94,7 @@
 </outputEntry>
       </rule>
       <rule id="row-536960114-10">
-        <inputEntry id="UnaryTests_1xlgpto">        <text></text>
+        <inputEntry id="UnaryTests_1n6hicn">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_1h8j6ip">        <text></text>
 </inputEntry>
@@ -104,11 +104,11 @@
 </inputEntry>
         <inputEntry id="UnaryTests_00qfzvi">        <text><![CDATA["Junior"]]></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_06ylif7">        <text>-15</text>
+        <outputEntry id="LiteralExpression_06ylif7">        <text>-10</text>
 </outputEntry>
       </rule>
       <rule id="row-536960114-11">
-        <inputEntry id="UnaryTests_13aq89o">        <text></text>
+        <inputEntry id="UnaryTests_0yrcmmp">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0uwpv55">        <text></text>
 </inputEntry>
@@ -122,7 +122,7 @@
 </outputEntry>
       </rule>
       <rule id="row-536960114-12">
-        <inputEntry id="UnaryTests_06ood5q">        <text></text>
+        <inputEntry id="UnaryTests_1w3z7eu">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0wbrhrj">        <text></text>
 </inputEntry>
@@ -132,7 +132,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_1c8vizb">        <text><![CDATA["Senior"]]></text>
 </inputEntry>
-        <outputEntry id="LiteralExpression_123cqkw">        <text>-15</text>
+        <outputEntry id="LiteralExpression_123cqkw">        <text>-10</text>
 </outputEntry>
       </rule>
     </decisionTable>

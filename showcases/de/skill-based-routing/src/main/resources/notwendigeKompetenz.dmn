@@ -46,7 +46,7 @@
 </outputEntry>
       </rule>
       <rule id="table-986986669-8">
-        <inputEntry id="UnaryTests_11u29cq">        <text><![CDATA["Hatfpflicht"]]></text>
+        <inputEntry id="UnaryTests_11u29cq">        <text><![CDATA["Haftpflicht"]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_186v7zo">        <text></text>
 </inputEntry>
@@ -56,7 +56,7 @@
 </outputEntry>
       </rule>
       <rule id="row-429019747-7">
-        <inputEntry id="UnaryTests_0docm05">        <text><![CDATA["Hatfpflicht"]]></text>
+        <inputEntry id="UnaryTests_0docm05">        <text><![CDATA["Haftpflicht"]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_1mzw58p">        <text><![CDATA[>= 500]]></text>
 </inputEntry>
@@ -66,8 +66,7 @@
 </outputEntry>
       </rule>
       <rule id="row-429019747-8">
-        <description>Schäden Mobiltelefone betreffend werden auf Grund der Häufigkeit von Betrugsvorfällen nur von speziell ausgebildeten Mitarbeitern übernommen</description>
-        <inputEntry id="UnaryTests_1mt9vf0">        <text><![CDATA["Hatfpflicht"]]></text>
+        <inputEntry id="UnaryTests_1mt9vf0">        <text><![CDATA["Haftpflicht"]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0uy5mlh">        <text></text>
 </inputEntry>

@@ -55,6 +55,16 @@
     </div>
   </div>
   
+  <div class="control-group">
+    <label class="control-label">Betroffenes Objekt</label>
+    <div class="controls">
+		<input id="region"
+             class="form-control"
+             type="text"
+             ng-model="claim.affectedObject">   
+    </div>
+  </div>
+    
   <h2>Mitarbeiter</h2>
   
   Die folgenden beispielhaften Mitarbeiter können den Schadensfall bearbeiten:
@@ -66,6 +76,7 @@
      			<th>Erfahrung</th>
      			<th>Region</th>
      			<th>Anzahl offener Schadensfälle</th>
+     			<th>Handy?</th>
   			</tr>
  		</thead>
  	   <tr>
@@ -73,18 +84,21 @@
     		<td>Senior</td>
     		<td>10xxx</td>
 	    	<td>7</td>
+	    	<td>-</td>
   		</tr>
  	   <tr>
     		<td>mary</td>
     		<td>Experte</td>
     		<td>22xxx</td>
 	    	<td>5</td>
+	    	<td>-</td>
   		</tr>
  	   <tr>
     		<td>peter</td>
     		<td>Junior</td>
     		<td>10xxx</td>
 	    	<td>2</td>
+	    	<td>Ja</td>
   		</tr>
   </table>
   

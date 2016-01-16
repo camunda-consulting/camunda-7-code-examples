@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="camunda modeler" exporterVersion="3.0.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn:process id="mitarbeiterBestimmen" name="Decision Flow: Mitarbeiter bestimmen" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Employee&#10;required" camunda:formKey="embedded:app:forms/start-form.html">
+    <bpmn:startEvent id="StartEvent_1" name="Mitarbeiter für Schadensfall&#10;benötigt" camunda:formKey="embedded:app:forms/start-form.html">
       <bpmn:outgoing>SequenceFlow_1biy97m</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1biy97m" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_0uk4ef1" />
@@ -41,7 +41,7 @@ org.camunda.bpm.engine.variable.Variables.objectValue(employees).serializationDa
 
 selectedEmployee.name;]]></bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:serviceTask id="ServiceTask_0dg3ssk" name="Verfügbare qualifizierte Mitarbeiter laden" camunda:class="com.camunda.demo.dmntraining.taskrouting.LoadQualifiedEmployees">
+    <bpmn:serviceTask id="ServiceTask_0dg3ssk" name="Mitarbeiter (qualifiziert &#38; verfügbar) laden" camunda:class="com.camunda.demo.dmntraining.taskrouting.LoadQualifiedEmployees">
       <bpmn:incoming>SequenceFlow_06rsywk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k0a4uc</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -73,6 +73,15 @@ selectedEmployee.name;]]></bpmn:script>
       </bpmn:businessRuleTask>
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="SequenceFlow_0k0a4uc" sourceRef="ServiceTask_0dg3ssk" targetRef="SubProcess_1tnzxl6" />
+    <bpmn:textAnnotation id="TextAnnotation_0vgznfb">    <bpmn:text>Für jeden Mitarbeiter</bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0oc6ml9" sourceRef="SubProcess_1tnzxl6" targetRef="TextAnnotation_0vgznfb" />
+    <bpmn:textAnnotation id="TextAnnotation_0fx4sgl">    <bpmn:text>Einmalig für Schadensfall</bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0uu947o" sourceRef="BusinessRuleTask_0uk4ef1" targetRef="TextAnnotation_0fx4sgl" />
+    <bpmn:textAnnotation id="TextAnnotation_1ger2z7">    <bpmn:text>Mitarbeiter mit höchsten Score aus Liste auswählen</bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_11syziq" sourceRef="ScriptTask_11ijplt" targetRef="TextAnnotation_1ger2z7" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="mitarbeiterBestimmen">
@@ -175,6 +184,27 @@ selectedEmployee.name;]]></bpmn:script>
         <bpmndi:BPMNLabel>
           <dc:Bounds x="460" y="139.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0vgznfb_di" bpmnElement="TextAnnotation_0vgznfb">
+        <dc:Bounds x="737" y="242" width="121" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0oc6ml9_di" bpmnElement="Association_0oc6ml9">
+        <di:waypoint xsi:type="dc:Point" x="770" y="222" />
+        <di:waypoint xsi:type="dc:Point" x="782" y="242" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0fx4sgl_di" bpmnElement="TextAnnotation_0fx4sgl">
+        <dc:Bounds x="310" y="212" width="143" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0uu947o_di" bpmnElement="Association_0uu947o">
+        <di:waypoint xsi:type="dc:Point" x="323" y="183" />
+        <di:waypoint xsi:type="dc:Point" x="355" y="212" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1ger2z7_di" bpmnElement="TextAnnotation_1ger2z7">
+        <dc:Bounds x="1004" y="215" width="125" height="57" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_11syziq_di" bpmnElement="Association_11syziq">
+        <di:waypoint xsi:type="dc:Point" x="1042" y="184" />
+        <di:waypoint xsi:type="dc:Point" x="1055" y="215" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
