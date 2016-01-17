@@ -9,82 +9,16 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet"></link>
     
-    <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
-    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
-    
-    <!-- Camunda DMN -->
-    <!-- 
-    <script type="text/javascript" src="https://cdn.rawgit.com/bpmn-io/bower-dmn-js/v0.4.0/dist/dmn-viewer.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/bpmn-io/bower-dmn-js/v0.4.0/dist/css/dmn-js.css"/>
-     --> 
-    <script type="text/javascript" src="js/dmn-viewer.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/dmn-js.css"/> 
-    
   </head>
   <body>
 <div class="container-fluid">
 
 	<ul class="nav nav-pills">
-	  <li role="presentation" class="active"><a href="#">Statistik</a></li>
+	  <li role="presentation"><a href="statistics.html">Statistik</a></li>
 	  <li role="presentation"><a href="excel.html">Excel-Import</a></li>
 	  <li role="presentation"><a href="http://localhost:7777/FrontPage.DMN">Testing (Fitnesse)</a></li>
 	  <li role="presentation"><a href="#">Simulation</a></li>
 	</ul>
 	
-	<div class="row"><span>&nbsp;</span></div>
-
-        <div class="content" id="dmn-drop-zone">
-          <div id="dmnCanvas"></div>
-        </div>
-  
-        <script>
-                $(document).ready(function() {   
-                  var restAccess = 'http://localhost:8080/engine-rest';         
-                  var DmnModeler = window.DmnJS;
-                  var viewer = new DmnModeler({ container: '#dmnCanvas' });
-   
-                  $.get('http://localhost:8080/dmn-toolbox/api/statistics/notwendigeKompetenz', function(statistics) {
-                        $.get(restAccess + '/decision-definition/key/notwendigeKompetenz/xml', function(data) {
-                            viewer.importXML(data.dmnXml, function(err) {
-                              if (err) {
-                                   console.log('error rendering', err);
-                              }
-                              
-                              // hook into cell rendering to visualize additional things in DMN Viewer
-						      viewer.get('eventBus').on('cell.render', function(event) {
-						            if (event.data.column.id == 'annotations') {
-						              var ruleId = event.data.row.id;						              
-						              if (statistics[ruleId]) {
-						              	// Remove Annotation Text
-										event.gfx.firstChild.textContent = "";
-									    
-									    // Add "bar chart"
-										var div = document.createElement('div');
-										div.style.height = '25px';
-										div.style.width = statistics[ruleId].percentage + '%';
-										div.style.backgroundColor = '#3C763D';
-										event.gfx.firstChild.appendChild(div);										
-	
-										// Add value text
-										var div2 = document.createElement('div');
-										div2.style.color = '#808080';										
-										div2.textContent = statistics[ruleId].percentage + '% (' + statistics[ruleId].count + ')'; 
-										event.gfx.firstChild.appendChild(div2);
-						              }
-						            }
-						      }); 
-								  
-							  // re-render to apply new renderer
-						      viewer.get('elementRegistry').forEach(function(element, gfx) {
-						          	viewer.get('graphicsFactory').update(element._type, element, gfx);
-						      });						                                        
-                            });
-                        });
-                  });
-                });
-        </script>          
-	</div>
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
