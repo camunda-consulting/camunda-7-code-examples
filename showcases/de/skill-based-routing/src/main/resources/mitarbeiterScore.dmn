@@ -2,7 +2,7 @@
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="mitarbeiterScore" name="Score Mitarbeiter-Eignung">
     <decisionTable id="decisionTable" hitPolicy="COLLECT" aggregation="SUM">
-      <input id="InputClause_0rexy6v" label="Name">
+      <input id="EmployeeName" label="Name">
         <inputExpression id="LiteralExpression_091p30l" typeRef="string">        <text>employee.name</text>
 </inputExpression>
       </input>
