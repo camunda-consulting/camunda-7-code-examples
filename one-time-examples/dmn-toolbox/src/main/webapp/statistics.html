@@ -33,57 +33,83 @@
 	</ul>
 	
 	<div class="row"><span>&nbsp;</span></div>
+	<select id="selectedProcessDefinition" name="selectedProcessDefinition" ></select> 
+	<div class="row"><span>&nbsp;</span></div>
 
         <div class="content" id="dmn-drop-zone">
           <div id="dmnCanvas"></div>
         </div>
   
         <script>
-                $(document).ready(function() {   
-                  var restAccess = 'http://localhost:8080/engine-rest';         
-                  var DmnModeler = window.DmnJS;
-                  var viewer = new DmnModeler({ container: '#dmnCanvas' });
+                var restAccess = 'http://localhost:8080/engine-rest';         
+                var DmnModeler = window.DmnJS;
+                var viewer = new DmnModeler({ container: '#dmnCanvas' });
+                function showDecisionStatistics(decisionDefinitionKey){   
    
-                  $.get('http://localhost:8080/dmn-toolbox/api/statistics/notwendigeKompetenz', function(statistics) {
-                        $.get(restAccess + '/decision-definition/key/notwendigeKompetenz/xml', function(data) {
+                        $.get(restAccess + '/decision-definition/key/' + decisionDefinitionKey + '/xml', function(data) {
                             viewer.importXML(data.dmnXml, function(err) {
                               if (err) {
                                    console.log('error rendering', err);
                               }
                               
-                              // hook into cell rendering to visualize additional things in DMN Viewer
-						      viewer.get('eventBus').on('cell.render', function(event) {
-						            if (event.data.column.id == 'annotations') {
-						              var ruleId = event.data.row.id;						              
-						              if (statistics[ruleId]) {
-						              	// Remove Annotation Text
-										event.gfx.firstChild.textContent = "";
-									    
-									    // Add "bar chart"
-										var div = document.createElement('div');
-										div.style.height = '25px';
-										div.style.width = statistics[ruleId].percentage + '%';
-										div.style.backgroundColor = '#3C763D';
-										event.gfx.firstChild.appendChild(div);										
-	
-										// Add value text
-										var div2 = document.createElement('div');
-										div2.style.color = '#808080';										
-										div2.textContent = statistics[ruleId].percentage + '% (' + statistics[ruleId].count + ')'; 
-										event.gfx.firstChild.appendChild(div2);
-						              }
-						            }
-						      }); 
-								  
-							  // re-render to apply new renderer
-						      viewer.get('elementRegistry').forEach(function(element, gfx) {
-						          	viewer.get('graphicsFactory').update(element._type, element, gfx);
-						      });						                                        
+                              $.get('http://localhost:8080/dmn-toolbox/api/statistics/' + decisionDefinitionKey, function(statistics) {
+	                              // hook into cell rendering to visualize additional things in DMN Viewer
+							      viewer.get('eventBus').on('cell.render', function(event) {
+							            if (event.data.column.id == 'annotations') {
+							              var ruleId = event.data.row.id;						              
+							              if (statistics[ruleId]) {
+							              	// Remove Annotation Text
+											event.gfx.firstChild.textContent = "";
+										    
+										    // Add "bar chart"
+											var div = document.createElement('div');
+											div.style.height = '25px';
+											div.style.width = statistics[ruleId].percentage + '%';
+											div.style.backgroundColor = '#3C763D';
+											event.gfx.firstChild.appendChild(div);										
+		
+											// Add value text
+											var div2 = document.createElement('div');
+											div2.style.color = '#808080';										
+											div2.textContent = statistics[ruleId].percentage + '% (' + statistics[ruleId].count + ')'; 
+											event.gfx.firstChild.appendChild(div2);
+							              }
+							            }
+							      }); 
+								  // re-render to apply new renderer
+							      viewer.get('elementRegistry').forEach(function(element, gfx) {
+							          	viewer.get('graphicsFactory').update(element._type, element, gfx);
+							      });								      
+							  });
                             });
                         });
-                  });
-                });
-        </script>          
+                };
+        </script>  
+        
+        <script>
+        $(document).ready(function() {                          
+           var select = document.getElementById("selectedProcessDefinition"); 				
+
+		   var newOption = document.createElement("option");
+		   newOption.textContent = "-";
+		   newOption.value = "-";
+		   select.appendChild(newOption);
+
+           $.get(restAccess + '/decision-definition/?latestVersion=true', function(data) {
+				for(var i = 0; i < data.length; i++) {				    
+				    var newOption = document.createElement("option");
+				    newOption.textContent = data[i].name + ' (' + data[i].key + ')';
+				    newOption.value = data[i].key;
+				    select.appendChild(newOption);
+				}
+           });
+           select.onchange = function() { 
+           	  if (select.value != '-') {
+           	  	showDecisionStatistics(select.value);
+           	  }
+			};
+        });        
+        </script>        
 	</div>
     <script src="js/bootstrap.min.js"></script>
   </body>
