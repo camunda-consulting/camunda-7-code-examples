@@ -33,7 +33,10 @@
 	</ul>
 	
 	<div class="row"><span>&nbsp;</span></div>
-	<select id="selectedProcessDefinition" name="selectedProcessDefinition" ></select> 
+	<div class="form-inline">
+	   <select id="selectedProcessDefinition" name="selectedProcessDefinition" class="form-control"></select> 
+		<button type="button" id="refreshButton" disabled="true" class="btn">Aktualisieren</button>
+	</div>
 	<div class="row"><span>&nbsp;</span></div>
 
         <div class="content" id="dmn-drop-zone">
@@ -88,7 +91,8 @@
         
         <script>
         $(document).ready(function() {                          
-           var select = document.getElementById("selectedProcessDefinition"); 				
+           var select = document.getElementById("selectedProcessDefinition"); 	
+           var refresh = document.getElementById("refreshButton");			
 
 		   var newOption = document.createElement("option");
 		   newOption.textContent = "-";
@@ -106,7 +110,13 @@
            select.onchange = function() { 
            	  if (select.value != '-') {
            	  	showDecisionStatistics(select.value);
+           	  	refresh.disabled = false;
+           	  }  else {
+           	  	refresh.disabled = true;
            	  }
+			};
+			refresh.onclick = function() { 
+         	  	showDecisionStatistics(select.value);
 			};
         });        
         </script>        
