@@ -63,7 +63,12 @@
 		    <artifactId>camunda-demo-support</artifactId>
 		    <version>0.3.4</version>		
 		</dependency>
-
+<dependency>
+  <groupId>org.camunda.consulting.snippets</groupId>
+  <artifactId>process-test-coverage</artifactId>
+  <version>0.2.3</version>
+  <scope>test</scope>
+</dependency>
 		<dependency>
 			<!-- AssertJ Testing Library -->
 			<groupId>org.camunda.bpm.extension</groupId>
