@@ -41,7 +41,7 @@ org.camunda.bpm.engine.variable.Variables.objectValue(employees).serializationDa
 
 selectedEmployee.name;]]></bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:serviceTask id="ServiceTask_0dg3ssk" name="Mitarbeiter (qualifiziert &#38; verfügbar) laden" camunda:class="com.camunda.demo.dmntraining.taskrouting.LoadQualifiedEmployees">
+    <bpmn:serviceTask id="ServiceTask_0dg3ssk" name="Liste qualifizierter &#38; verfügbarer Mitarbeiter laden" camunda:class="com.camunda.demo.dmntraining.taskrouting.LoadQualifiedEmployees">
       <bpmn:incoming>SequenceFlow_06rsywk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k0a4uc</bpmn:outgoing>
     </bpmn:serviceTask>
