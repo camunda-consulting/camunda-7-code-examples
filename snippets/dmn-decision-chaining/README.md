@@ -2,15 +2,15 @@
 
 When you want to evaluate dependant decisions you have basically three options on the Camunda Platform:
 
-1. Use a *decision flow*: A small BPMN process referencing the decisions as Business Rule Tasks. Make sure that this process is soley a decision flow, meaning it does not contain real business process logic. It is important to keep workflow and decision logic seperated. But you can use BPMN easily to chain decisions on the Camunda BPM Platform.
+Use a **decision flow**: A small BPMN process referencing the decisions as Business Rule Tasks. Make sure that this process is soley a decision flow, meaning it does not contain real business process logic. It is important to keep workflow and decision logic seperated. But you can use BPMN easily to chain decisions on the Camunda BPM Platform.
 
 ![Decision Flow](decision-flow.png)
 
-2. Use a *custom function* in expression language. Then you can call another DMN table in the background and use the output from there as Input. 
+Use a **custom function** in expression language. Then you can call another DMN table in the background and use the output from there as Input. 
 
 ![Custom Function](decision-chaining-function.png)
 
-3. Do the chaining *harcoded in Java* somewhere.
+Do the chaining **harcoded in Java** somewhere.
 
 # Decision Flow
 
