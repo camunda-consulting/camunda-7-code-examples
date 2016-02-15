@@ -196,6 +196,23 @@ Snippets
   
 </table>
 
+### DMN
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/dmn-decision-chaining/decision-chaining-function2.png" width="100"></td>
+    <td><a href="snippets/dmn-decision-chaining">DMN dependant decisions</a></td>
+    <td>How to evaluate dependant DMN decisions on the Camunda BPM platform.</td>
+  </tr>  
+  
+</table>  
+  
 ### Process Engine Plugins
 
 <table>
