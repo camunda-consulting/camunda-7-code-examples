@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="beverages" name="Beverages">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT">
+      <input id="input1" label="Dish">
+        <inputExpression id="inputExpression1" typeRef="string">        <text><![CDATA[dmn('dish', variableContext)]]></text>
+</inputExpression>
+      </input>
+      <input id="InputClause_13jss1r" label="Guests with Children">
+        <inputExpression id="LiteralExpression_1wfpnbc" typeRef="boolean">        <text>children</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Beverages" name="beverages" typeRef="string" />
+      <rule id="row-539426237-1">
+        <inputEntry id="UnaryTests_0r003uh">        <text><![CDATA["Spareribs"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1q9dzx0">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1f0gpw5">        <text><![CDATA["Beer"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-539426237-2">
+        <inputEntry id="UnaryTests_0huyfl9">        <text><![CDATA["Stew"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1rof3by">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_165hha2">        <text><![CDATA["Guiness"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-539426237-3">
+        <inputEntry id="UnaryTests_1swjdh3">        <text><![CDATA["Roastbeef"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_05th8cx">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_14nz2av">        <text><![CDATA["Bordeaux"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-539426237-4">
+        <inputEntry id="UnaryTests_14ik5ux">        <text><![CDATA["Steak","Dry Aged Gourmet Steak", "Light Salad"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ksuo05">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0llpsyz">        <text><![CDATA["Pinot Noir"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-539426237-5">
+        <inputEntry id="UnaryTests_1dgz7z2">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1wnhw7w">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_169pk8h">        <text><![CDATA["Juice"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-539426237-6">
+        <inputEntry id="UnaryTests_1dwuxkj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0d30qbn">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1gg4lp5">        <text><![CDATA["Water"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
