@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+			
+	<!-- own CCS style for highlight of activity - color can be easily changed here -->
+	<style type="text/css">
+	.djs-container .highlight .djs-outline {
+	   stroke-width: 2px important;
+	   stroke: #08c !important;
+	   fill: #bce2f5 !important;
+	}
+	.djs-container .highlight .djs-visual>:nth-child(1) {
+	   fill: #bce2f5 !important;
+	}
+	</style>
+	
+	<!-- load jquery and bpmn-js dependencies -->
+	<script type="text/javascript" src="webjars/jquery/1.9.0/jquery.js"></script>
+    <script type="text/javascript" src="webjars/lodash/2.4.1-6/lodash.min.js"></script>
+    <script type="text/javascript" src="webjars/sax/0.6.0/lib/sax.js"></script>
+    <script type="text/javascript" src="webjars/Snap.svg/0.3.0/snap.svg-min.js"></script>
+    <script type="text/javascript" src="webjars/jquery-mousewheel/3.1.11/jquery.mousewheel.js"></script>
+
+	<!-- bpmn-js viewer -->
+	<script type="text/javascript" src="webjars/bpmn-js/0.10.3/bpmn-navigated-viewer.js"></script>
+	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.10.3/assets/diagram-js.css" />
+	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.10.3/assets/bpmn-font/css/bpmn-embedded.css" />
+	<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
+</head>
+<body>
+ 			<!-- to draw on -->
+ 			<div class="content" id="js-drop-zone">
+				<div id="diagramCanvas"></div>
+			</div>
+
+			<script>
+				$(document).ready(function() {
+				
+				    // get URL query parameter
+					function getParameterByName(name) {
+					    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+					    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+					}				    
+					var taskId = getParameterByName('taskId');				    
+				
+					var restAccess = '/engine-rest';
+					var BpmnViewer = window.BpmnJS;
+					var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
+
+					var container = $('#js-drop-zone');
+					// get the diagram
+					$.get(restAccess + '/task/' + taskId, function(marker) {
+						$.get(restAccess + '/process-definition/' + marker.processDefinitionId + '/xml', function(data) {
+
+							// show it in bpmn.io
+							viewer.importXML(data.bpmn20Xml, function(err) {
+								if (err) {
+									console.log('error rendering', err);
+								} else {
+									var canvas = viewer.get('canvas');
+									// zoom to fit full viewport
+									canvas.zoom('fit-viewport');
+									container.removeClass('with-error')
+											 .addClass('with-diagram');
+									// add marker
+									canvas.addMarker(marker.taskDefinitionKey, 'highlight');									
+								}
+							});
+						});
+					});
+				});
+			</script>
+			
+  </body>
+</html>
