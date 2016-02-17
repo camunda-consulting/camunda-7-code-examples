@@ -33,6 +33,20 @@ public class WatchDuedateTaskListener implements TaskListener {
 	}
 
 	private void createJobForEscalation(DelegateTask delegateTask) {
+		ExecutionEntity execution = (ExecutionEntity) delegateTask.getExecution();
+		ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) execution.getProcessDefinition();
+
+		TimerEntity timer = new TimerEntity();
+		timer.setExecution(execution);
+		timer.setDuedate(delegateTask.getDueDate());
+		timer.setJobHandlerType(UserTaskOverdueJobHandler.USER_TASK_ESCALATION_JOB_HANDLER_TYPE);
+		timer.setProcessDefinitionKey(processDefinition.getKey());
+		timer.setDeploymentId(processDefinition.getDeploymentId());
+		Context.getCommandContext().getJobManager().schedule(timer);
+		
+		
+		/*
+		 * Alternative code from counterparty onboarding. TODO: double check and delete
 		log.info("create job for escalation for task " + delegateTask.getId());
 		ExecutionEntity execution = (ExecutionEntity) delegateTask.getExecution();
 		Long dueDateLong = delegateTask.getDueDate().getTime();
@@ -49,7 +63,7 @@ public class WatchDuedateTaskListener implements TaskListener {
 		ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) execution.getProcessDefinition();
 		timerEntity.setProcessDefinitionKey(processDefinition.getKey());
 		timerEntity.setDeploymentId(processDefinition.getDeploymentId());
-		// handlerCfg can be used to transport data
+		// handlerCfg can be used to transport data*/
 	}
 
 	private void deleteJobForEscalation(DelegateTask delegateTask) {
