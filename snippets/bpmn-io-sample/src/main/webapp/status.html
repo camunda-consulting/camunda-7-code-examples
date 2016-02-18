@@ -122,13 +122,20 @@
 	}
 	
 	function addHistoryInfoOverlay(overlays, actInstList) {
+
+
+	
        for (index = 0; index < actInstList.length; ++index) {
+			var calledPiLink = '';
+			if (actInstList[index].calledProcessInstanceId) {
+				calledPiLink = '<a href="status.html?processInstanceId=" + actInstList[index].calledProcessInstanceId + "><i class="icon-circle-arrow-right icon-white"></i></a>';
+			}		
 			overlays.add(actInstList[index].activityId, {
 			  position: {
 			    top: 0,
 			    right: 0
 			  },
-			  html: '<div class="bpmn-badge"><i class="icon-ok icon-white"></i></div>'
+			  html: '<div class="bpmn-badge"><i class="icon-ok icon-white"></i>'+calledPiLink+'</div>'
 			});					        
        }
 	}
