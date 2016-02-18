@@ -128,7 +128,7 @@
        for (index = 0; index < actInstList.length; ++index) {
 			var calledPiLink = '';
 			if (actInstList[index].calledProcessInstanceId) {
-				calledPiLink = '<a href="status.html?processInstanceId=" + actInstList[index].calledProcessInstanceId + "><i class="icon-circle-arrow-right icon-white"></i></a>';
+				calledPiLink = '<a href="status.html?processInstanceId=' + actInstList[index].calledProcessInstanceId + '"><i class="icon-circle-arrow-right icon-white"></i></a>';
 			}		
 			overlays.add(actInstList[index].activityId, {
 			  position: {
