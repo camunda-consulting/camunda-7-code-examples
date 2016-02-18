@@ -40,15 +40,11 @@
 	
 	<!-- load jquery and bpmn-js dependencies -->
 	<script type="text/javascript" src="webjars/jquery/1.9.0/jquery.js"></script>
-    <script type="text/javascript" src="webjars/lodash/2.4.1-6/lodash.min.js"></script>
-    <script type="text/javascript" src="webjars/sax/0.6.0/lib/sax.js"></script>
-    <script type="text/javascript" src="webjars/Snap.svg/0.3.0/snap.svg-min.js"></script>
-    <script type="text/javascript" src="webjars/jquery-mousewheel/3.1.11/jquery.mousewheel.js"></script>
-
+ 
 	<!-- bpmn-js viewer -->
-	<script type="text/javascript" src="webjars/bpmn-js/0.10.3/bpmn-navigated-viewer.js"></script>
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.10.3/assets/diagram-js.css" />
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.10.3/assets/bpmn-font/css/bpmn-embedded.css" />
+	<script type="text/javascript" src="webjars/bpmn-js/0.13.1/dist/bpmn-navigated-viewer.js"></script>
+	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/diagram-js.css" />
+	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/bpmn-font/css/bpmn-embedded.css" />
 	<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
 </head>
 <body>
@@ -58,118 +54,84 @@
 			</div>
 
 			<script>
-				$(document).ready(function() {
-				
-				    // get URL query parameter
-					function getParameterByName(name) {
-					    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-					    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-					}				    
-					var taskId = getParameterByName('taskId');				    
-					var processInstanceId = getParameterByName('processInstanceId');				    
-				
-					var restAccess = '/engine-rest';
-					var BpmnViewer = window.BpmnJS;
-					var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
-
-					var container = $('#js-drop-zone');
-					
-					
-					if (processInstanceId) {
-						$.get(restAccess + '/history/process-instance/' + processInstanceId, function(pi) {
-							$.get(restAccess + '/process-definition/' + pi.processDefinitionId + '/xml', function(data) {
+	$(document).ready(function() {
 	
-								// show it in bpmn.io
-								viewer.importXML(data.bpmn20Xml, function(err) {
-									if (err) {
-										console.log('error rendering', err);
-									} else {
-										var canvas = viewer.get('canvas');
-										var overlays = viewer.get('overlays');
-
-										container.removeClass('with-error')
-												 .addClass('with-diagram');
-
-										// zoom to fit full viewport
-										canvas.zoom('fit-viewport');
-									    
-									    // load runtime status
-										$.get(restAccess + '/process-instance/' + processInstanceId + '/activity-instances/', function(actInstTree) {
-										   addMarkerForActivities(canvas, actInstTree);									       
-									    });
-									    
-										// completed / not scope -> Overlay with Info										
-										$.get(restAccess + '/history/activity-instance/?processInstanceId=' + processInstanceId + '&finished=true&', function(actInstList) {
-										   addHistoryInfoOverlay(overlays, actInstList)
-									    });
-										
-										// TODO click to show documentation
-										// See e.g. https://github.com/bpmn-io/bpmn-js-examples/tree/master/commenting
-									}
-								});
-							});
-						});
-					}
-					else if (taskId) {
-						$.get(restAccess + '/task/' + taskId, function(marker) {
-							$.get(restAccess + '/process-definition/' + marker.processDefinitionId + '/xml', function(data) {
+	    // get URL query parameter
+		function getParameterByName(name) {
+		    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+		    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+		}				    
+		var taskId = getParameterByName('taskId');				    
+		var processInstanceId = getParameterByName('processInstanceId');				    
 	
-								// show it in bpmn.io
-								viewer.importXML(data.bpmn20Xml, function(err) {
-									if (err) {
-										console.log('error rendering', err);
-									} else {
-										var canvas = viewer.get('canvas');
-										// zoom to fit full viewport
-										canvas.zoom('fit-viewport');
-										container.removeClass('with-error')
-												 .addClass('with-diagram');
-										// add marker
-										canvas.addMarker(marker.taskDefinitionKey, 'highlight');	
-										
-	
-										// attach an overlay to a node
-										var overlays = viewer.get('overlays');
-										overlays.add(marker.taskDefinitionKey, {
-										  position: {
-										    bottom: 0,
-										    right: 0
-										  },
-										  html: '<div>Mixed up the labels?</div>'
-										});								
-									}
-								});
-							});
-						});
-					}
+		var restAccess = '/engine-rest';
+		var BpmnViewer = window.BpmnJS;
+		var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
+
+		var container = $('#js-drop-zone');
+		
+		
+			$.get(restAccess + '/history/process-instance/' + processInstanceId, function(pi) {
+				$.get(restAccess + '/process-definition/' + pi.processDefinitionId + '/xml', function(data) {
+
+					// show it in bpmn.io
+					viewer.importXML(data.bpmn20Xml, function(err) {
+						if (err) {
+							console.log('error rendering', err);
+						} else {
+							var canvas = viewer.get('canvas');
+							var overlays = viewer.get('overlays');
+
+							container.removeClass('with-error')
+									 .addClass('with-diagram');
+
+							// zoom to fit full viewport
+							canvas.zoom('fit-viewport');
+						    
+						    // load runtime status
+							$.get(restAccess + '/process-instance/' + processInstanceId + '/activity-instances/', function(actInstTree) {
+							   addMarkerForActivities(canvas, actInstTree);									       
+						    }).fail(function(){}); // ignore 404 - ProcessInstance might be ended
+						    
+							// completed / not scope -> Overlay with Info										
+							$.get(restAccess + '/history/activity-instance/?processInstanceId=' + processInstanceId + '&finished=true&', function(actInstList) {
+							   addHistoryInfoOverlay(overlays, actInstList)
+						    });
+							
+							// TODO click to show documentation
+							// See e.g. https://github.com/bpmn-io/bpmn-js-examples/tree/master/commenting
+						}
+					});
 				});
-				
-				function addMarkerForActivities(canvas, actInstTree) {
-					if (actInstTree.childTransitionInstances.length==0 && actInstTree.childActivityInstances.length==0) {
-						canvas.addMarker(actInstTree.activityId, 'highlight');	
-					}
-					else {
-						for (index=0; index < actInstTree.childTransitionInstances.length; ++index) {
-							canvas.addMarker(actInstTree.childTransitionInstances[index].activityId, 'highlight');	
-						}
-						for (index=0; index < actInstTree.childActivityInstances.length; ++index) {
-						    // add recursively
-							addMarkerForActivities(canvas, actInstTree.childActivityInstances[index]);	
-						}
-					}
-				}
-				
-				function addHistoryInfoOverlay(overlays, actInstList) {
-			       for (index = 0; index < actInstList.length; ++index) {
-						overlays.add(actInstList[index].activityId, {
-						  position: {
-						    bottom: 0,
-						    right: 0
-						  },
-						  html: '<div class="bpmn-badge"><i class="icon-ok icon-white"></i></div>'
-						});					        
-			       }
-				}
+			});			
+	});
+	
+	function addMarkerForActivities(canvas, actInstTree) {
+		if (actInstTree.childTransitionInstances.length==0 && actInstTree.childActivityInstances.length==0) {
+			canvas.addMarker(actInstTree.activityId, 'highlight');	
+		}
+		else {
+			for (index=0; index < actInstTree.childTransitionInstances.length; ++index) {
+				canvas.addMarker(actInstTree.childTransitionInstances[index].activityId, 'highlight');	
+			}
+			for (index=0; index < actInstTree.childActivityInstances.length; ++index) {
+			    // add recursively
+				addMarkerForActivities(canvas, actInstTree.childActivityInstances[index]);	
+			}
+		}
+	}
+	
+	function addHistoryInfoOverlay(overlays, actInstList) {
+       for (index = 0; index < actInstList.length; ++index) {
+			overlays.add(actInstList[index].activityId, {
+			  position: {
+			    top: 0,
+			    right: 0
+			  },
+			  html: '<div class="bpmn-badge"><i class="icon-ok icon-white"></i></div>'
+			});					        
+       }
+	}
 			</script>
 			
   </body>
