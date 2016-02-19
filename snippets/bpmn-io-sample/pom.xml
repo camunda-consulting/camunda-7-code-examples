@@ -34,8 +34,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-
 		<dependency>
 			<!-- Bootstrap for styling via Webjars project -->
 			<groupId>org.webjars</groupId>
@@ -69,9 +67,9 @@
 		<!-- Add your own dependencies here, if in compile scope, they are added 
 			to the war -->
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bpmn-js</artifactId>
-			<version>0.10.3</version>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>bpmn-js</artifactId>
+		    <version>0.13.1</version>
 		</dependency>
 
 	</dependencies>
