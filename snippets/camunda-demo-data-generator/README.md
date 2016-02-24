@@ -57,7 +57,7 @@ Once you deployed the application you can run it using
 Use Auto Generation
 --------------
 
-If you set up demo systems you might want to automatically generate data during startup. E.g. you could build a system were data is cleared every night and regenerated on startup. Therefor you have to add one dependency to your process application:
+If you set up demo systems you might want to automatically generate data during startup. E.g. you could build a system were data is cleared every night and regenerated on startup. Therefore you have to add one dependency to your process application:
 
 ```
 		<dependency>
