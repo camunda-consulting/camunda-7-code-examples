@@ -50,7 +50,7 @@ How to use it?
 Build everything using mvn package. Deploy the camunda-demo-data-gento erator-webapp.war (in subproject camunda-demo-data-generator-webapp). Should work on any container (Tomcat, JBoss, ...).
 
 Once you deployed the application you can run it using
-[localhost:8080/camunda-demo-data-generator/generate](localhost:8080/camunda-demo-data-generator-webapp/). You might have to adjust the port.
+[localhost:8080/camunda-demo-data-generator/](localhost:8080/camunda-demo-data-generator-webapp/). You might have to adjust the port.
 
 
 
