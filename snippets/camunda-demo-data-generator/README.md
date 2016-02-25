@@ -22,6 +22,9 @@ Instrument your BPMN process
 
 ![Distribution for Task Duration](taskDuration.png)
 
+### Add Distribution for Duration of Receive Tasks / Intermediate Message Events
+
+Do it as for User Tasks - it is the same configuration.
 
 Start the Generation
 --------------------

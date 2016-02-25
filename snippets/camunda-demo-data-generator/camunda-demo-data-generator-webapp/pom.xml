@@ -11,14 +11,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.4.0-alpha3</camunda.version>
+		<camunda.version>7.4.0</camunda.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.camunda.consulting.snippets</groupId>
 			<artifactId>camunda-demo-support</artifactId>
-			<version>0.3.2-SNAPSHOT</version>
+			<version>0.3.5-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
