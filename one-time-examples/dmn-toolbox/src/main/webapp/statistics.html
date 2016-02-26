@@ -77,6 +77,9 @@
 											div2.textContent = statistics[ruleId].percentage + '% (' + statistics[ruleId].count + ')'; 
 											event.gfx.firstChild.appendChild(div2);
 							              }
+							              if (event.gfx.firstChild.textContent=='Annotation') {
+											event.gfx.firstChild.textContent = "Statistics";
+							              }
 							            }
 							      }); 
 								  // re-render to apply new renderer
