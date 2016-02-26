@@ -124,6 +124,11 @@ Snippets
     <td><a href="snippets/jsf-simple-tasklist">Simple tasklist build with JSF</a></td>
     <td>A tasklist to show how to use the engine api inside a JSF application. It calls forms, completes tasks and shows the detail process diagram with bpmn.io</td>
   </tr>
+  <tr>
+    <td><img src="snippets/task-overdue-job-handler/dueDate.png" width="100"></td>
+    <td><a href="snippets/task-overdue-job-handler">Watch Task Due Date and Automatically Take Action</a></td>
+    <td>A Process engine Plugin which registers Jobs for all User Tasks having a due date. It allows to define an own JobHandler to take action whenever a due date is hit, e.g sending an email.</td>
+  </tr>
 </table>
 
 ### BPMN
@@ -195,6 +200,25 @@ Snippets
   </tr>
   
 </table>
+
+### bpmn.io
+
+<table>
+  <tr>
+    <th>Preview</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+  <tr>
+    <td><img src="snippets/bpmn-io-sample/screenshot.png" width="100"></td>
+    <td><a href="snippets/bpmn-io-sample">Plain HTML page showing Process Instance status</a></td>
+    <td>Shows how to build a self-contained HTML page with bpmn.io showing the process model and add overlays and markers to show historical information.</td>
+  </tr>
+
+  
+</table>
+
 
 ### DMN
 

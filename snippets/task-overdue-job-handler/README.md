@@ -1,4 +1,4 @@
-Job Handler to take Action on overdue User Tasks
+Watch Task Due Date and Automatically Take Action
 ======================
 
 This Snippet contains a [Process Engine Plugin](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) that adds functionality to automatically escalate overdue Jobs by a custom Job Handler.
@@ -12,7 +12,7 @@ Show me the important parts!
 ----------------------------
 
 * The [Process Engine Plugin](src/main/java/com/camunda/demo/task/escalation/WatchUserTaskDueDateProcessEnginePlugin.java) to add
-* A [Parse Listener](src/main/java/com/camunda/demo/task/escalation/AddWatchDuedateParseListener.java) which adds Task Listeners to create or remove the job: [CreateWatchDuedateJobTaskListener](src/main/java/com/camunda/demo/task/escalation/CreateWatchDuedateJobTaskListener), [DeleteWatchDuedateJobTaskListener](src/main/java/com/camunda/demo/task/escalation/DeleteWatchDuedateJobTaskListener)
+* A [Parse Listener](src/main/java/com/camunda/demo/task/escalation/AddWatchDuedateParseListener.java) which adds Task Listeners to create or remove the job: [CreateWatchDuedateJobTaskListener](src/main/java/com/camunda/demo/task/escalation/CreateWatchDuedateJobTaskListener.java), [DeleteWatchDuedateJobTaskListener](src/main/java/com/camunda/demo/task/escalation/DeleteWatchDuedateJobTaskListener.java)
 * A [Job Handler](src/main/java/com/camunda/demo/task/escalation/UserTaskOverdueJobHandler.java) taking arbritrary actions when the task is now overdue
 
 How to use it?
