@@ -16,9 +16,14 @@ Instrument your BPMN process
 
 ### Add Probabilities to all outgoing Sequence Flows on XOR-Gateways:
 
+Extension Attribute: `probability`
+
 ![Probability on Sequence Flow](decisionProbability.png)
 
+
 ### Add Distribution for Duration of User Tasks:
+
+Extension Attributes: `durationMean` and `durationSd`
 
 ![Distribution for Task Duration](taskDuration.png)
 
