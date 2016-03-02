@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <title>Camunda DMN Toolbox</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"></link>
+    
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>-->
+    
+    <!-- Camunda DMN -->
+    <!-- 
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpmn-io/bower-dmn-js/v0.4.0/dist/dmn-viewer.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/bpmn-io/bower-dmn-js/v0.4.0/dist/css/dmn-js.css"/>
+     --> 
+    <script type="text/javascript" src="js/dmn-viewer.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/dmn-js.css"/> 
+    
+  </head>
+  <body>
+  <div class="container-fluid">
+
+	<ul class="nav nav-pills">
+	  <li role="presentation"><a href="statistics.html">Statistik</a></li>
+	  <li role="presentation" class="active"><a href="#">Excel-Import</a></li>
+	  <li role="presentation"><a href="http://localhost:7777/FrontPage.DMN">Testing (Fitnesse)</a></li>
+	  <li role="presentation"><a href="#">Simulation</a></li>
+	</ul>
+	
+	<div class="row"><span>&nbsp;</span></div>
+
+    <form id="xslxForm" class="form-inline">
+        <input type="file" name="uploadedFile" id="uploadedFile" class="form-control"/>
+        <input id="submitButton" type="button" value="Konvertieren" class="form-control btn btn-primary">
+     </form>
+     
+	<div class="row"><span>&nbsp;</span></div>
+	     
+     <div class="content" id="dmn-drop-zone">
+       <div id="dmnCanvas"></div>
+     </div>     
+  </div>
+  <script>             
+var viewer;
+$(document).ready(function() {          
+   var DmnModeler = window.DmnJS;
+   viewer = new DmnModeler({ container: '#dmnCanvas' });
+});
+                   
+$('input#submitButton').click( function() {
+	      var fileUpload = $('#uploadedFile').get(0);
+	      if(typeof FileReader === 'function' && fileUpload.files.length > 0) {		        
+	        var reader = new FileReader();
+	        reader.onloadend = (function(fileUpload) {
+	          return function(e) {
+	            var binary = '';
+	            var bytes = new Uint8Array( e.target.result );
+	            var len = bytes.byteLength;
+	            for (var j = 0; j < len; j++) {
+	                binary += String.fromCharCode( bytes[ j ] );
+	            }
+
+	            // send base64 encoded directly to the Servlet
+	            var fileContent = btoa(binary); 	            
+			    $.ajax({
+			        url: 'http://localhost:8080/dmn-toolbox/xslx',
+			        type: 'post',        
+			        data: fileContent,
+			        success: function(data) {
+			            viewer.importXML(data, function(err) {
+			                if (err) {
+			                    console.log('error rendering', err);
+			                }
+			            });
+			        }
+			    });
+	          };
+	        })(fileUpload);
+	        reader.readAsArrayBuffer(fileUpload.files[0]);
+       };
+
+});
+  </script>      
+
+  <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

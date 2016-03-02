@@ -150,17 +150,26 @@
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sendTask id="SendTaskPoliceZusenden" name="Police ausstellen und zusenden" camunda:async="true" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MtextAdapter">
+    <bpmn2:sendTask id="SendTaskPoliceZusenden" name="Police zusenden" camunda:async="true" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="documentXml">
-            <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl" />
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Wir freuen uns Ihnen mitteilen zu können, dass wir Ihre KFZ Versicherungspolice ausgestellt haben. 
+
+Wir haben Ihnen hier die wichtigsten Informationen zusammengestellt: 
+- Vertragsnummer: ${neuantrag.vertragsnummer}
+- Jahresbeitrag: ${neuantrag.beitrag}
+- Produkt: ${neuantrag.versicherungsprodukt}
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
           </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Ihre Police wurde ausgestellt</camunda:inputParameter>
         </camunda:inputOutput>
-        <camunda:field name="mtextTemplate">        <camunda:string>\\Police\Vorlagen\KFZ-Versicherung.dataBinding</camunda:string>
-</camunda:field>
       </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+	  <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:endEvent id="EndEventAntragPoliciert" name="Antrag &#10;policiert">
@@ -186,15 +195,19 @@
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_106c3bg" sourceRef="SubProcess_078vm0w" targetRef="ExclusiveGateway_2" />
-    <bpmn2:sendTask id="SendTaskAblehnungZusenden" name="Ablehnung zusenden" camunda:async="true" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.MtextAdapter">
+    <bpmn2:sendTask id="SendTaskAblehnungZusenden" name="Ablehnung zusenden" camunda:async="true" camunda:class="com.camunda.demo.versicherungsneuantrag.adapter.EmailAdapter">
       <bpmn2:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="documentXml">
-            <camunda:script scriptFormat="freemarker" resource="Document.xml.ftl" />
+          <camunda:inputParameter name="mailBody">
+            <camunda:script scriptFormat="freemarker"><![CDATA[Sehr <#if neuantrag.antragssteller.geschlecht = "Mann">geehrter Herr<#else>geehrte Frau</#if> ${neuantrag.antragssteller.name}.
+
+Leider müssen wir Ihnen mitteilen, dass wir Ihnen die gewünschte KFZ Versicherungspolice nicht ausstellen können. 
+
+Schöne Grüße
+Ihre Camundanzia.]]></camunda:script>
           </camunda:inputParameter>
+          <camunda:inputParameter name="mailSubject">Antrag abgelehnt</camunda:inputParameter>
         </camunda:inputOutput>
-        <camunda:field name="mtextTemplate">        <camunda:string>\\Ablehnung\Vorlagen\Ablehnung.dataBinding</camunda:string>
-</camunda:field>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_01vh1zw</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>

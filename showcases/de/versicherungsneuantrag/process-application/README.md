@@ -37,7 +37,7 @@ but before running it set your email address in `DemoData`.
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.4.0-alpha3.
+Built and tested against Camunda BPM version 7.4.0.
 
 
 Known Limitations

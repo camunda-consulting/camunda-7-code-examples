@@ -13,7 +13,7 @@ import org.camunda.bpm.engine.variable.Variables.SerializationDataFormats;
 @ProcessApplication
 public class CamundaBpmProcessApplication extends ServletProcessApplication {
 
-  private static final String PROCESS_DEFINITION_KEY = "order-processing";
+  public static final String PROCESS_DEFINITION_KEY = "order-processing";
 
   /**
    * In a @PostDeploy Hook you can interact with the process engine and access 

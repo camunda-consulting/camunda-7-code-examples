@@ -27,6 +27,9 @@ Extension Attributes: `durationMean` and `durationSd`
 
 ![Distribution for Task Duration](taskDuration.png)
 
+### Add Distribution for Duration of Receive Tasks / Intermediate Message Events
+
+Do it as for User Tasks - it is the same configuration.
 
 Start the Generation
 --------------------
@@ -52,11 +55,20 @@ So you will have instances in the version before the latest version if you look 
 How to use it?
 --------------
 
-Build everything using mvn package. Deploy the camunda-demo-data-gento erator-webapp.war (in subproject camunda-demo-data-generator-webapp). Should work on any container (Tomcat, JBoss, ...).
+
+Add this dependency to your process application:
+```
+	<dependency>
+	    <groupId>org.camunda.consulting.snippets</groupId>
+	    <artifactId>camunda-demo-support</artifactId>
+	    <version>0.3.5</version>		
+	</dependency>
+```
+
+Build the camunda-demo-data-generator-webapp.war (in subproject camunda-demo-data-generator-webapp) using Maven. Deploy it to your containt, should work on any container (Wildfly, Tomcat, JBoss, ...).
 
 Once you deployed the application you can run it using
 [localhost:8080/camunda-demo-data-generator/](localhost:8080/camunda-demo-data-generator-webapp/). You might have to adjust the port.
-
 
 
 Use Auto Generation
@@ -65,12 +77,11 @@ Use Auto Generation
 If you set up demo systems you might want to automatically generate data during startup. E.g. you could build a system were data is cleared every night and regenerated on startup. Therefore you have to add one dependency to your process application:
 
 ```
-		<dependency>
-			<groupId>com.camunda.demo.environment</groupId>
-			<artifactId>camunda-demo-data-generator</artifactId>
-			<version>1.0.0</version>
-			<type>jar</type>
-		</dependency>
+	<dependency>
+	    <groupId>org.camunda.consulting.snippets</groupId>
+	    <artifactId>camunda-demo-support</artifactId>
+	    <version>0.3.5</version>		
+	</dependency>
 ```
 
 Instrument your process definition XML for all processes where auto generation should be applied

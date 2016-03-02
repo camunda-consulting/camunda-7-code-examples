@@ -14,6 +14,7 @@ import org.camunda.bpm.engine.authorization.Resources;
 import com.camunda.demo.environment.DemoDataGenerator;
 import com.camunda.demo.environment.LicenseHelper;
 import com.camunda.demo.environment.ProcessApplicationDemoSetup;
+import com.camunda.demo.environment.UserDataGenerator;
 
 @ProcessApplication
 public class VersicherungsneuantragProcessApplication extends ServletProcessApplication {
@@ -21,6 +22,7 @@ public class VersicherungsneuantragProcessApplication extends ServletProcessAppl
   @PostDeploy
   public void setupEnvironmentForDemo(ProcessEngine engine) {
     ProcessApplicationDemoSetup.executeDefaultSetup(engine, "versicherungsneuantrag", getReference());
+    UserDataGenerator.createDefaultUsers(engine);
     
     addUser(engine, "marc", "marc", "Marc", "Mustermann");
     addGroup(engine, "sachbearbeiter", "Sachbearbeiter", "marc");
