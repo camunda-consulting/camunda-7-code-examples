@@ -33,17 +33,21 @@ public class MyBatisExtendedSessionFactory extends StandaloneProcessEngineConfig
     setDatabaseType(processEngineConfiguration.getDatabaseType());
     setDataSource(processEngineConfiguration.getDataSource());
     setDatabaseTablePrefix(processEngineConfiguration.getDatabaseTablePrefix());
-
-    initDataSource();
-    initVariableTypes();
+    
+    initDefaultCharset();
+    initHistoryLevel();
     initCommandContextFactory();
-    initTransactionFactory();
     initTransactionContextFactory();
     initCommandExecutors();
+    initServices();
+    initIdGenerator();
+    initDataSource();
+    initTransactionFactory();
     initSqlSessionFactory();
-    initIncidentHandlers();
     initIdentityProviderSessionFactory();
     initSessionFactories();
+    initValueTypeResolver();
+    initSerialization();
   }
 
   /**

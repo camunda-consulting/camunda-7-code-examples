@@ -8,6 +8,7 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.impl.ProcessEngineImpl;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.db.ListQueryParameterObject;
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
 
@@ -26,13 +27,10 @@ public class TasklistService {
       @SuppressWarnings("unchecked")
       public List<TaskDTO> execute(CommandContext commandContext) {
 
-        // TODO: Add more parameters
-        //        ListQueryParameterObject queryParameterObject = new ListQueryParameterObject();
-        //        queryParameterObject.setParameter(region);
-        //        queryParameterObject.setAssignee(assignee);
+        ListQueryParameterObject queryParameterObject = new ListQueryParameterObject();
+        queryParameterObject.setParameter(region);
 
-        // select the first 100 elements for this query
-        return (List<TaskDTO>) commandContext.getDbSqlSession().selectList("selectTasksForRegion", region, 0, 100);
+        return (List<TaskDTO>) commandContext.getDbSqlSession().selectList("selectTasksForRegion", queryParameterObject);
       }
     });
   }

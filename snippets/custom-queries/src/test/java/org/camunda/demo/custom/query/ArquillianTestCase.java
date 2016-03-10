@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,18 +13,12 @@ import javax.inject.Inject;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.demo.custom.query.Customer;
-import org.camunda.demo.custom.query.CustomerService;
-import org.camunda.demo.custom.query.TaskDTO;
-import org.camunda.demo.custom.query.TasklistService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,13 +28,13 @@ public class ArquillianTestCase {
 
   @Deployment  
   public static WebArchive createDeployment() {
-    MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class)
-      .goOffline()
-      .loadMetadataFromPom("pom.xml");
+    File[] libs = Maven.resolver()
+    	      .offline(false)
+    	      .loadPomFromFile("pom.xml")
+    	      .importRuntimeAndTestDependencies().resolve().withTransitivity().asFile();
      
     return ShrinkWrap.create(WebArchive.class, "custom-queries.war")            
-            .addAsLibraries(resolver.artifact("org.camunda.bpm.javaee:camunda-ejb-client").resolveAsFiles())
-            .addAsLibraries(resolver.artifact("org.camunda.bpm:camunda-engine-cdi").resolveAsFiles())
+    		.addAsLibraries(libs)
             .addAsWebResource("test-processes.xml", "WEB-INF/classes/META-INF/processes.xml")
             .addAsWebResource("test-persistence.xml", "WEB-INF/classes/META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
