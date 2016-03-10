@@ -29,8 +29,10 @@ public class TasklistService {
 
         ListQueryParameterObject queryParameterObject = new ListQueryParameterObject();
         queryParameterObject.setParameter(region);
-
-        return (List<TaskDTO>) commandContext.getDbSqlSession().selectList("selectTasksForRegion", queryParameterObject);
+        
+        return (List<TaskDTO>) commandContext.getDbEntityManager().selectList("selectTasksForRegion", queryParameterObject);
+        
+//        return (List<TaskDTO>) commandContext.getDbSqlSession().selectList("selectTasksForRegion", queryParameterObject);
       }
     });
   }
