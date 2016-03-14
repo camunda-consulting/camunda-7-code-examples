@@ -37,13 +37,14 @@ public class ArquillianTestCase {
     		.addAsLibraries(libs)
             .addAsWebResource("test-processes.xml", "WEB-INF/classes/META-INF/processes.xml")
             .addAsWebResource("test-persistence.xml", "WEB-INF/classes/META-INF/persistence.xml")
+            .addAsWebResource("jboss-deployment-structure.xml", "WEB-INF/jboss-deployment-structure.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             
             .addPackages(false, "org.camunda.demo.custom.query")
             
             .addAsResource("oneTaskProcess.bpmn")
             .addAsResource("customTaskMappings.xml")
-            .addAsResource("mappings.xml");    
+            .addAsResource("customMyBatisConfiguration.xml");    
   }
 
   @After
