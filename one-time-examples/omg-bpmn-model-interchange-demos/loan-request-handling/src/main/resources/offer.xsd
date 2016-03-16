@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns="http://www.w4software.com/mibank" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w4software.com/mibank">
+
+  <xs:complexType name="AccountType">
+   <xs:sequence>
+     <xs:element name="Ref" type="xs:string"/>
+     <xs:element name="CreationDate" type="xs:dateTime" minOccurs="0"/>
+     <xs:element name="FirstName" type="xs:string" minOccurs="0"/>
+     <xs:element name="LastName" type="xs:string" minOccurs="0"/>
+     <xs:element name="Address" type="xs:string" minOccurs="0"/>
+     <xs:element name="Phone" type="xs:string" minOccurs="0"/>
+     <xs:element name="EMail" type="xs:string" minOccurs="0"/>
+     <xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+     <xs:element name="Balance" type="xs:double"/>
+   </xs:sequence>
+  </xs:complexType>
+  
+   <xs:complexType name="OfferType">
+    <xs:sequence>
+      <xs:element name="Account" type="AccountType"/>
+      <xs:element name="Ref" type="xs:string"/>
+      <xs:element name="Amount" type="xs:double"/>
+      <xs:element name="StartDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="Rate" type="xs:double" minOccurs="0" />
+      <xs:element name="TermInMonths" type="xs:integer"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="Offer" type="OfferType"/>
+  <xs:element name="Account" type="AccountType"/>
+  <xs:element name="ElementRef" type="xs:string"/>
+  <xs:element name="Status" type="xs:string"/>
+  <xs:element name="Validation" type="xs:boolean"/>
+</xs:schema>

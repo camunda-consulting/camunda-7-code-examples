@@ -1,0 +1,2067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:mb="http://www.w4software.com/mibank" xmlns:mbws="http://mibankws/" xmlns:style="http://www.w4.eu/spec/DataComposer/20120927/Diagram/Style" xmlns:w4="http://www.w4.eu/spec/BPMN/20110701/MODEL" xmlns:w4graph="http://www.w4.eu/spec/BPMN/20110930/GRAPH" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="BranchOfficeOnlyLoan" w4:version="1.0" exporter="W4 BPMN+ Composer" exporterVersion="9.2.0.40" name="BranchOfficeOnlyLoan" targetNamespace="http://www.w4software.com/mibank/loanprocess">
+  <bpmn2:itemDefinition id="LoanOffer" structureRef="mb:Offer"/>
+  <bpmn2:error id="Bpmn2_Error_OnyTgJlrEeONXJy5WRVCwQ" errorCode="Offer Expired" name="Offer Expired"/>
+  <bpmn2:signal id="Bpmn2_Signal_ReD9EJlrEeONXJy5WRVCwQ" name="fn:concat(&quot;SignedOffer&quot;,fn:getDataObject(&quot;LoanOffer&quot;)/Ref)" structureRef="LoanOffer"/>
+  <bpmn2:message id="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ" itemRef="LoanOffer" name="MsgLoanOffer"/>
+  <bpmn2:interface id="Bpmn2_Interface_ijKAUJlsEeONXJy5WRVCwQ" name="LoanHandling">
+    <bpmn2:operation id="Bpmn2_Operation_FA8rYZmHEeONXJy5WRVCwQ" name="LoanOffer">
+      <bpmn2:inMessageRef>Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ</bpmn2:inMessageRef>
+      <bpmn2:outMessageRef>Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ</bpmn2:outMessageRef>
+    </bpmn2:operation>
+  </bpmn2:interface>
+  <bpmn2:process id="BOLoanRequestCustomerSigning" name="BranchOffice loan request (Customer signing)" isClosed="true" isExecutable="true" processType="Private">
+    <bpmn2:extensionElements>
+      <w4graph:graphStyle><![CDATA[
+        ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+      ]]></w4graph:graphStyle>
+    </bpmn2:extensionElements>
+    <bpmn2:laneSet id="Bpmn2_LaneSet_Ahx95Jo2EeODY5gs4RP0gg"/>
+    <bpmn2:intermediateThrowEvent id="Bpmn2_IntermediateThrowEvent_psTBopo6EeO1WrMpxYFn7Q" name="Signed loan offer transmitted">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="0,83,144" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_r6SjMJo6EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_sgEw0Zo6EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:dataInput id="Bpmn2_DataInput_LE0FhJo7EeO1WrMpxYFn7Q" itemSubjectRef="LoanOffer" name="LoanOffer"/>
+      <bpmn2:dataInputAssociation id="Bpmn2_DataInputAssociation_LE0Fg5o7EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataStoreReference_I65ysJo7EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataInput_LE0FhJo7EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:inputSet id="Bpmn2_InputSet_LE0FhZo7EeO1WrMpxYFn7Q" name="default input set">
+        <bpmn2:dataInputRefs>Bpmn2_DataInput_LE0FhJo7EeO1WrMpxYFn7Q</bpmn2:dataInputRefs>
+      </bpmn2:inputSet>
+      <bpmn2:messageEventDefinition id="Bpmn2_MessageEventDefinition_V7ytwJpJEeOaLPEr7parPA" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ">
+        <bpmn2:operationRef>Bpmn2_Operation_FA8rYZmHEeONXJy5WRVCwQ</bpmn2:operationRef>
+      </bpmn2:messageEventDefinition>
+    </bpmn2:intermediateThrowEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_r6SjMJo6EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="Bpmn2_IntermediateCatchEvent_3PWZIppJEeOaLPEr7parPA" targetRef="Bpmn2_IntermediateThrowEvent_psTBopo6EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_sgEw0po6EeO1WrMpxYFn7Q" name="">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_sgEw0Zo6EeO1WrMpxYFn7Q</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_sgEw0Zo6EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="Bpmn2_IntermediateThrowEvent_psTBopo6EeO1WrMpxYFn7Q" targetRef="Bpmn2_EndEvent_sgEw0po6EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn2_DataStoreReference_I65ysJo7EeO1WrMpxYFn7Q" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:dataState id="Bpmn2_DataState_J8Yd0Jo7EeO1WrMpxYFn7Q" name="Approved"/>
+    </bpmn2:dataStoreReference>
+    <bpmn2:intermediateCatchEvent id="Bpmn2_IntermediateCatchEvent_3PWZIppJEeOaLPEr7parPA" name="Received signed loan offer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="41,83,231" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_DjbZ4JpKEeOaLPEr7parPA</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_r6SjMJo6EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:dataOutput id="Bpmn2_DataOutput_34Xg8JpJEeOaLPEr7parPA" itemSubjectRef="LoanOffer" name="LoanOffer"/>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_ICFUUZo7EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_34Xg8JpJEeOaLPEr7parPA</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataStoreReference_I65ysJo7EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet id="Bpmn2_OutputSet_34Xg8ZpJEeOaLPEr7parPA" name="default output set">
+        <bpmn2:dataOutputRefs>Bpmn2_DataOutput_34Xg8JpJEeOaLPEr7parPA</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:signalEventDefinition id="Bpmn2_SignalEventDefinition_LojAIKieEeOHMfwF_q0-ng" signalRef="Bpmn2_Signal_ReD9EJlrEeONXJy5WRVCwQ"/>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:startEvent id="Bpmn2_StartEvent_A4rD0ppKEeOaLPEr7parPA" name="Provided loan offer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="109,183,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_DjbZ4JpKEeOaLPEr7parPA</bpmn2:outgoing>
+      <bpmn2:dataOutput id="Bpmn2_DataOutput_IdGekJpKEeOaLPEr7parPA" itemSubjectRef="LoanOffer" name="LoanOffer"/>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_IdAX85pKEeOaLPEr7parPA">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Oblique" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_IdGekJpKEeOaLPEr7parPA</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataStoreReference_FqOuUJpKEeOaLPEr7parPA</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:outputSet id="Bpmn2_OutputSet_IdGekZpKEeOaLPEr7parPA" name="default output set">
+        <bpmn2:dataOutputRefs>Bpmn2_DataOutput_IdGekJpKEeOaLPEr7parPA</bpmn2:dataOutputRefs>
+      </bpmn2:outputSet>
+      <bpmn2:messageEventDefinition id="Bpmn_MessageEventDefinition_SRVrYM0mEeWcraJSbyQ7_Q" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ">
+        <bpmn2:operationRef>Bpmn2_Operation_FA8rYZmHEeONXJy5WRVCwQ</bpmn2:operationRef>
+      </bpmn2:messageEventDefinition>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_DjbZ4JpKEeOaLPEr7parPA" isImmediate="true" sourceRef="Bpmn2_StartEvent_A4rD0ppKEeOaLPEr7parPA" targetRef="Bpmn2_IntermediateCatchEvent_3PWZIppJEeOaLPEr7parPA">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn2_DataStoreReference_FqOuUJpKEeOaLPEr7parPA" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:dataState id="Bpmn2_DataState_GwoVsJpKEeOaLPEr7parPA" name="Provided"/>
+    </bpmn2:dataStoreReference>
+    <bpmn2:correlationSubscription id="Bpmn_CorrelationSubscription_D-ssMM0mEeWcraJSbyQ7_Q" correlationKeyRef="Bpmn_CorrelationKey_n2XIgM0lEeWcraJSbyQ7_Q">
+      <bpmn2:correlationPropertyBinding id="Bpmn_CorrelationPropertyBinding_D-ssMc0mEeWcraJSbyQ7_Q" correlationPropertyRef="Bpmn_CorrelationProperty_ZQK7MM0lEeWcraJSbyQ7_Q">
+        <bpmn2:dataPath xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_DlwnwM0mEeWcraJSbyQ7_Q" evaluatesToTypeRef="LoanOfferRef" language="http://www.w3.org/1999/XPath"><![CDATA[fn:getDataObject("LoanOffer")/Ref]]></bpmn2:dataPath>
+      </bpmn2:correlationPropertyBinding>
+    </bpmn2:correlationSubscription>
+  </bpmn2:process>
+  <bpmn2:collaboration id="BOLoanApplicationCollaboration" isClosed="true" name="Branch office loan application">
+    <bpmn2:extensionElements>
+      <w4graph:graphStyle><![CDATA[
+        ]]><w4graph:basic background="0,0,0" foreground="0,0,0" autoResize="false" borderColor="255,255,255" collapsed="false"/><![CDATA[
+        ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]><w4graph:root gridVisible="true" snapToGrid="true" rulerVisible="true" snapToGuide="true" rulerUnit="Pixels"><![CDATA[
+          ]]><Grid spacing="15" color="230,230,230"/><![CDATA[
+          ]]><VerticalRuler/><![CDATA[
+          ]]><HorizontalRuler/><![CDATA[
+        ]]></w4graph:root><![CDATA[
+      ]]></w4graph:graphStyle>
+    </bpmn2:extensionElements>
+    <bpmn2:participant id="Bpmn2_Participant_Ahx96po2EeODY5gs4RP0gg" name="Customer" processRef="BOLoanRequestCustomerSigning">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="192,192,192" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:interfaceRef>Bpmn2_Interface_ijKAUJlsEeONXJy5WRVCwQ</bpmn2:interfaceRef>
+    </bpmn2:participant>
+    <bpmn2:participant id="Bpmn2_Participant_sOOvspo2EeO1WrMpxYFn7Q" name="Bank" processRef="BOLoanRequestHandling">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="192,192,192" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:interfaceRef>Bpmn2_Interface_ijKAUJlsEeONXJy5WRVCwQ</bpmn2:interfaceRef>
+    </bpmn2:participant>
+    <bpmn2:messageFlow id="Bpmn2_MessageFlow_cEDqUJo6EeO1WrMpxYFn7Q" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ" name="Approved loan offer" sourceRef="Bpmn2_IntermediateThrowEvent_psTBopo6EeO1WrMpxYFn7Q" targetRef="ReceiveSignedLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:messageFlow>
+    <bpmn2:messageFlow id="Bpmn2_MessageFlow_BqdtIJpKEeOaLPEr7parPA" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ" name="Provided loan offer" sourceRef="LoanOfferProvided" targetRef="Bpmn2_StartEvent_A4rD0ppKEeOaLPEr7parPA">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:messageFlow>
+    <bpmn2:conversation id="Bpmn_Conversation_dG244s0lEeWcraJSbyQ7_Q" name="Bank Offer Conversation">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="182,165,218" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:participantRef>Bpmn2_Participant_sOOvspo2EeO1WrMpxYFn7Q</bpmn2:participantRef>
+      <bpmn2:participantRef>Bpmn2_Participant_Ahx96po2EeODY5gs4RP0gg</bpmn2:participantRef>
+      <bpmn2:messageFlowRef>Bpmn2_MessageFlow_cEDqUJo6EeO1WrMpxYFn7Q</bpmn2:messageFlowRef>
+      <bpmn2:messageFlowRef>Bpmn2_MessageFlow_BqdtIJpKEeOaLPEr7parPA</bpmn2:messageFlowRef>
+      <bpmn2:correlationKey id="Bpmn_CorrelationKey_n2XIgM0lEeWcraJSbyQ7_Q" name="offerRefCorrelationKey">
+        <bpmn2:correlationPropertyRef>Bpmn_CorrelationProperty_ZQK7MM0lEeWcraJSbyQ7_Q</bpmn2:correlationPropertyRef>
+      </bpmn2:correlationKey>
+    </bpmn2:conversation>
+  </bpmn2:collaboration>
+  <bpmn2:process id="BOLoanRequestHandling" name="BranchOffice loan request handling" isClosed="true" isExecutable="true" processType="Private">
+    <bpmn2:extensionElements>
+      <w4graph:graphStyle><![CDATA[
+        ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+      ]]></w4graph:graphStyle>
+    </bpmn2:extensionElements>
+    <bpmn2:laneSet id="Bpmn2_LaneSet_uHFuw5o2EeO1WrMpxYFn7Q">
+      <bpmn2:lane id="Bpmn2_Lane_uFLqQpo2EeO1WrMpxYFn7Q" name="Branch office">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>Bpmn2_StartEvent_u-hGApo2EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_6lo6Ipo2EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>ProvideLoanOffer</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>ReceiveSignedLoanOffer</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_rSpbwpo3EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_uDw4gpo3EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_Sdy6spo6EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_UserTask_4m2bwJpCEeOaLPEr7parPA</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>LoanOfferProvided</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_StartEvent_9E1JYqqdEeOU-ea4bX5igg</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+      <bpmn2:lane id="Bpmn2_Lane_0d2AApo3EeO1WrMpxYFn7Q" name="Branch office manager">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>ValidateLoanOffer</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_reGjQ6qdEeOU-ea4bX5igg</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>NotifyCustomerAndBranchOffice</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+      <bpmn2:lane id="Bpmn2_Lane_TPPbMpo5EeO1WrMpxYFn7Q" name="IT">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:flowNodeRef>Bpmn2_IntermediateCatchEvent_ZHFYUpo5EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>Bpmn2_EndEvent_otNYopo5EeO1WrMpxYFn7Q</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>RetrieveAccountDetails</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>TransferMoneyOnCustomerAccount</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>MonthlyDebitCustomerAccount</bpmn2:flowNodeRef>
+      </bpmn2:lane>
+    </bpmn2:laneSet>
+    <bpmn2:startEvent id="Bpmn2_StartEvent_u-hGApo2EeO1WrMpxYFn7Q" name="Manual start">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="109,183,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_vpiY8Zo2EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:outputSet id="Bpmn_OutputSet_wFhvUDnBEeSGOJQn7hdE9Q" name="default output set"/>
+    </bpmn2:startEvent>
+    <bpmn2:userTask id="ProvideLoanOffer" name="Provide loan offer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="600.0" name="durationMean"/>
+          <camunda:property value="300.0" name="durationSd"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_vpiY8Zo2EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_-R4LUaqdEeOU-ea4bX5igg</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_13bekZo2EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn2_InputOutputSpecification_xmSSIpo5EeO1WrMpxYFn7Q">
+        <bpmn2:dataOutput id="Bpmn2_DataOutput_xmwzQJo5EeO1WrMpxYFn7Q" itemSubjectRef="LoanOffer" name="LoanOffer">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:dataOutput id="Bpmn_DataOutput_c-92UMUQEeWtyJWrpr6YKg" itemSubjectRef="Status" name="Status_0">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn2_InputSet_xmSSJJo5EeO1WrMpxYFn7Q" name="default input set">
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_xmSSI5o5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_xmSSI5o5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_xmSSI5o5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_xmSSI5o5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn2_OutputSet_xmSSI5o5EeO1WrMpxYFn7Q" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn2_DataOutput_xmwzQJo5EeO1WrMpxYFn7Q</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>Bpmn_DataOutput_c-92UMUQEeWtyJWrpr6YKg</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_xmSSJJo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_xmSSJJo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_xmSSJJo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_xmSSJJo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_xmSSIZo5EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_xmwzQJo5EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataStoreReference_yRPToJo5EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn_DataOutputAssociation_c-YAcsUQEeWtyJWrpr6YKg">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataOutput_c-92UMUQEeWtyJWrpr6YKg</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataObjectReference_amQ5kMUQEeWtyJWrpr6YKg</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:potentialOwner id="Bpmn2_ResourceRole_TEyBMJpFEeOaLPEr7parPA" name="Agent">
+        <bpmn2:resourceRef>Bpmn2_Resource_gz5IULQqEeOE1M41eDOGDg</bpmn2:resourceRef>
+      </bpmn2:potentialOwner>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_vpiY8Zo2EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="Bpmn2_StartEvent_u-hGApo2EeO1WrMpxYFn7Q" targetRef="ProvideLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q" name="Provided?">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_13bekZo2EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_6lo6IZo2EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_9gC1wZo2EeO1WrMpxYFn7Q</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_13bekZo2EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="ProvideLoanOffer" targetRef="Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_6lo6Ipo2EeO1WrMpxYFn7Q" name="Shelved loan offer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_6lo6IZo2EeO1WrMpxYFn7Q</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_6lo6IZo2EeO1WrMpxYFn7Q" name="No" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q" targetRef="Bpmn2_EndEvent_6lo6Ipo2EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="25" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="Bpmn2_FormalExpression_7ooYcJpHEeOaLPEr7parPA">${not true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:receiveTask id="ReceiveSignedLoanOffer" name="Receive signed loan offer" implementation="##unspecified" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ" operationRef="Bpmn2_Operation_FA8rYZmHEeONXJy5WRVCwQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="864000" name="durationMean"/>
+          <camunda:property value="5000" name="durationSd"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_2BBk0JpJEeOaLPEr7parPA</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_BhaHgJo5EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn2_InputOutputSpecification_IR85IJo3EeO1WrMpxYFn7Q">
+        <bpmn2:dataOutput id="Bpmn2_DataOutput_ISC_wJo3EeO1WrMpxYFn7Q" itemSubjectRef="LoanOffer" name="LoanOffer">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn2_InputSet_IR85Ipo3EeO1WrMpxYFn7Q" name="default input set">
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_IR85IZo3EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_IR85IZo3EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_IR85IZo3EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_IR85IZo3EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn2_OutputSet_IR85IZo3EeO1WrMpxYFn7Q" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn2_DataOutput_ISC_wJo3EeO1WrMpxYFn7Q</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_IR85Ipo3EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_IR85Ipo3EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_IR85Ipo3EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_IR85Ipo3EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_IR2ygZo3EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_ISC_wJo3EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataStoreReference_LL9zMJo3EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:receiveTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_9gC1wZo2EeO1WrMpxYFn7Q" name="Yes" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q" targetRef="LoanOfferProvided">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="75" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_yUY4gM0jEeWcraJSbyQ7_Q">${true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn2_DataStoreReference_LL9zMJo3EeO1WrMpxYFn7Q" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:dataState id="Bpmn2_DataState_MvdmQJo3EeO1WrMpxYFn7Q" name="Approved"/>
+    </bpmn2:dataStoreReference>
+    <bpmn2:boundaryEvent id="WaitToReviveWhileWaitingLoan" name="Every 10 days" attachedToRef="ReceiveSignedLoanOffer" cancelActivity="false">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="0,0,0" foreground="0,0,0" autoResize="false" borderColor="255,255,255" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_V9s3cZo3EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="Bpmn2_TimerEventDefinition_DO7o4LQaEeOoBvTrFaspCA">
+        <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="Bpmn2_FormalExpression_DCRF4LQaEeOoBvTrFaspCA" language="http://www.w4.eu/spec/EL/20110701">R2/PT10M</bpmn2:timeCycle>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:boundaryEvent>
+    <bpmn2:userTask id="Bpmn2_UserTask_4m2bwJpCEeOaLPEr7parPA" name="Revive customer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="180.0" name="durationMean"/>
+          <camunda:property value="60.0" name="durationSd"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_V9s3cZo3EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_uhdhIJo3EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn2_InputOutputSpecification_EhMc9Jo6EeO1WrMpxYFn7Q">
+        <bpmn2:dataInput id="Bpmn2_DataInput_Eh3LUJo6EeO1WrMpxYFn7Q" itemSubjectRef="LoanOffer" name="LoanOffer">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataInput>
+        <bpmn2:dataOutput id="Bpmn2_DataOutput_ZiYiUJo7EeO1WrMpxYFn7Q" itemSubjectRef="Status" name="Status">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn2_InputSet_EhMc9po6EeO1WrMpxYFn7Q" name="default input set">
+          <bpmn2:dataInputRefs>Bpmn2_DataInput_Eh3LUJo6EeO1WrMpxYFn7Q</bpmn2:dataInputRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_EhMc9Zo6EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_EhMc9Zo6EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_EhMc9Zo6EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_EhMc9Zo6EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn2_OutputSet_EhMc9Zo6EeO1WrMpxYFn7Q" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn2_DataOutput_ZiYiUJo7EeO1WrMpxYFn7Q</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_EhMc9po6EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_EhMc9po6EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_EhMc9po6EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_EhMc9po6EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="Bpmn2_DataInputAssociation_EhMc85o6EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataStoreReference_yRPToJo5EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataInput_Eh3LUJo6EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_Zhz6kZo7EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_ZiYiUJo7EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataObjectReference_a1nr0Jo7EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:potentialOwner id="Bpmn2_ResourceRole_QvQUQJpFEeOaLPEr7parPA" name="Agent">
+        <bpmn2:resourceRef>Bpmn2_Resource_gz5IULQqEeOE1M41eDOGDg</bpmn2:resourceRef>
+      </bpmn2:potentialOwner>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_V9s3cZo3EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="WaitToReviveWhileWaitingLoan" targetRef="Bpmn2_UserTask_4m2bwJpCEeOaLPEr7parPA">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:boundaryEvent id="CancellationWhileWaitingLoanOffer" name="Cancellation" attachedToRef="ReceiveSignedLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="0,0,0" foreground="0,0,0" autoResize="false" borderColor="255,255,255" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_rSpbwZo3EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:signalEventDefinition id="Bpmn2_SignalEventDefinition_DC1yIJpGEeOaLPEr7parPA" signalRef="Bpmn2_Signal_xfPDYJpDEeOaLPEr7parPA"/>
+    </bpmn2:boundaryEvent>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_rSpbwpo3EeO1WrMpxYFn7Q" name="Loan offer cancelled by customer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_rSpbwZo3EeO1WrMpxYFn7Q</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_rSpbwZo3EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="CancellationWhileWaitingLoanOffer" targetRef="Bpmn2_EndEvent_rSpbwpo3EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_uDw4gpo3EeO1WrMpxYFn7Q" name="Loan offer shelved">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_Riz5IJo6EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:signalEventDefinition id="Bpmn2_SignalEventDefinition_EYO3wJpGEeOaLPEr7parPA" signalRef="Bpmn2_Signal_xfPDYJpDEeOaLPEr7parPA"/>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_uhdhIJo3EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="Bpmn2_UserTask_4m2bwJpCEeOaLPEr7parPA" targetRef="Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:userTask id="ValidateLoanOffer" name="Validate loan offer">
+      <bpmn2:extensionElements>
+        <w4:notification id="Notification_fsZCgCPFEeWR2OLIHp06TA"><![CDATA[
+          ]]><w4:onActive/><![CDATA[
+          ]]><w4:serviceDefinition id="W4_ServiceDefinition_tH308GW_EeSInqc4JlfQjw" name="SendMail" version="1.0"><![CDATA[
+            ]]><w4:mail id="Mail_fsa3sCPFEeWR2OLIHp06TA" contentType="Html" encoding="UTF-8" locale="fr"><![CDATA[
+              ]]><w4:from id="From_fsa3sSPFEeWR2OLIHp06TA">admin@w4demo.com</w4:from><![CDATA[
+              ]]><w4:to id="Recipient_fsa3siPFEeWR2OLIHp06TA">${activityInstance.potentialAndNotExcludedOwnerUsers}</w4:to><![CDATA[
+              ]]><w4:to id="Recipient_fsa3syPFEeWR2OLIHp06TA">${activityInstance.potentialAndNotExcludedOwnerGroups{}.users}</w4:to><![CDATA[
+              ]]><w4:subject id="Subject_fsa3tCPFEeWR2OLIHp06TA">Offre d'emprunt ${processInstance.dataEntries.Offre.value.dwbOffreRef} à valider</w4:subject><![CDATA[
+              ]]><w4:body id="Body_fsbewCPFEeWR2OLIHp06TA"><![CDATA[<html>
+<body>
+<pre>
+Bonjour,
+   Vous avez à valider une nouvelle offre d'emprunt.
+
+    Référence : <a href="http://localhost:7718/dwb/invoke.htm?_classInfo=dwbValiderOffreUserTaskInstance&_action=dwbValiderOffreUserTaskInstance_complete&_objectId=${activityInstance.identifier.id}">${processInstance.dataEntries.Offre.value.dwbOffreRef}</a>
+    Nom du client : ${processInstance.dataEntries.Offre.value.dwbOffreClient.dwbClientNom} 
+    Prénom du client : ${processInstance.dataEntries.Offre.value.dwbOffreClient.dwbClientPrenom} 
+    Coût total : ${processInstance.dataEntries.Offre.value.dwbOffreCouttotal} 
+  Cdt,
+
+       W4 
+</pre>
+</body>
+</html>]]></w4:body><![CDATA[
+            ]]></w4:mail><![CDATA[
+          ]]></w4:serviceDefinition><![CDATA[
+        ]]></w4:notification>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="300.0" name="durationMean"/>
+          <camunda:property value="60.0" name="durationSd"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_BhaHgJo5EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_pkPeoaqdEeOU-ea4bX5igg</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn2_InputOutputSpecification_6LMSdJo5EeO1WrMpxYFn7Q">
+        <bpmn2:dataInput id="Bpmn2_DataInput_6L3A0Jo5EeO1WrMpxYFn7Q" itemSubjectRef="LoanOffer" name="LoanOffer">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataInput>
+        <bpmn2:dataOutput id="Bpmn2_DataOutput_Eur2saqeEeOU-ea4bX5igg" itemSubjectRef="Validation" name="Validation">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn2_InputSet_6LMSdpo5EeO1WrMpxYFn7Q" name="default input set">
+          <bpmn2:dataInputRefs>Bpmn2_DataInput_6L3A0Jo5EeO1WrMpxYFn7Q</bpmn2:dataInputRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_6LMSdZo5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_6LMSdZo5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_6LMSdZo5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn2_OutputSet_6LMSdZo5EeO1WrMpxYFn7Q</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn2_OutputSet_6LMSdZo5EeO1WrMpxYFn7Q" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn2_DataOutput_Eur2saqeEeOU-ea4bX5igg</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_6LMSdpo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_6LMSdpo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_6LMSdpo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn2_InputSet_6LMSdpo5EeO1WrMpxYFn7Q</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="Bpmn2_DataInputAssociation_6LMSc5o5EeO1WrMpxYFn7Q">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataStoreReference_LL9zMJo3EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataInput_6L3A0Jo5EeO1WrMpxYFn7Q</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn2_DataOutputAssociation_Eur2sKqeEeOU-ea4bX5igg">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataOutput_Eur2saqeEeOU-ea4bX5igg</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataStoreReference_K2s90KqeEeOU-ea4bX5igg</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:potentialOwner id="Bpmn2_ResourceRole_VneAYJpFEeOaLPEr7parPA" name="Directeur Agence">
+        <bpmn2:resourceRef>Bpmn2_Resource_iLZt0LQqEeOE1M41eDOGDg</bpmn2:resourceRef>
+      </bpmn2:potentialOwner>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_BhaHgJo5EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="ReceiveSignedLoanOffer" targetRef="ValidateLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:scriptTask id="RetrieveAccountDetails" name="Retrieve Account Details" scriptFormat="javascript">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_4KhykaqdEeOU-ea4bX5igg</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn_SequenceFlow_8T94Us0pEeWbm4O3TNVUvw</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn_InputOutputSpecification_6KLMMM0nEeWbm4O3TNVUvw">
+        <bpmn2:dataInput id="Bpmn_DataInput_6KyQMM0nEeWbm4O3TNVUvw" itemSubjectRef="LoanOffer" name="LoanOffer">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataInput>
+        <bpmn2:dataOutput id="Bpmn_DataOutput_POIcQM0qEeWbm4O3TNVUvw" itemSubjectRef="Account" name="Account">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn_InputSet_6KLMMs0nEeWbm4O3TNVUvw" name="default input set">
+          <bpmn2:dataInputRefs>Bpmn_DataInput_6KyQMM0nEeWbm4O3TNVUvw</bpmn2:dataInputRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_6KLMMc0nEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_6KLMMc0nEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_6KLMMc0nEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_6KLMMc0nEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn_OutputSet_6KLMMc0nEeWbm4O3TNVUvw" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn_DataOutput_POIcQM0qEeWbm4O3TNVUvw</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_6KLMMs0nEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_6KLMMs0nEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_6KLMMs0nEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_6KLMMs0nEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="Bpmn_DataInputAssociation_6KKlIs0nEeWbm4O3TNVUvw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataStoreReference_5TCv4s0nEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataInput_6KyQMM0nEeWbm4O3TNVUvw</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn_DataOutputAssociation_PNdt4M0qEeWbm4O3TNVUvw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataOutput_POIcQM0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataStoreReference_LOmros0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:script></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:intermediateCatchEvent id="Bpmn2_IntermediateCatchEvent_ZHFYUpo5EeO1WrMpxYFn7Q" name="Every month">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="41,83,231" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_nvgaQJo5EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_aKOQUZo5EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="Bpmn2_TimerEventDefinition_MAXGwJpGEeOaLPEr7parPA">
+        <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="Bpmn2_FormalExpression_Lt2acJpGEeOaLPEr7parPA" language="http://www.w4.eu/spec/EL/20110701">R5/PT5M</bpmn2:timeCycle>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:serviceTask id="MonthlyDebitCustomerAccount" camunda:class="org.camunda.bpm.demo.loan_request_handling.LoggerDelegate" name="Monthly debit customer account" implementation="##WebService" operationRef="Bpmn_Operation_MWI-oM0uEeWbm4O3TNVUvw">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_aKOQUZo5EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_otNYoZo5EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn_InputOutputSpecification_wwJaYc0qEeWbm4O3TNVUvw">
+        <bpmn2:dataInput id="Bpmn_DataInput_ww5oUM0qEeWbm4O3TNVUvw" itemSubjectRef="TransactionOnAccountDef" name="applyTransactionOnAccount">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataInput>
+        <bpmn2:dataOutput id="Bpmn_DataOutput_EUBF0M0vEeWbm4O3TNVUvw" itemSubjectRef="TransactionOnAccountResponseDef" name="applyTransactionOnAccountResponse">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn_InputSet_wwJaY80qEeWbm4O3TNVUvw" name="default input set">
+          <bpmn2:dataInputRefs>Bpmn_DataInput_ww5oUM0qEeWbm4O3TNVUvw</bpmn2:dataInputRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_wwJaYs0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_wwJaYs0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_wwJaYs0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_wwJaYs0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn_OutputSet_wwJaYs0qEeWbm4O3TNVUvw" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn_DataOutput_EUBF0M0vEeWbm4O3TNVUvw</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_wwJaY80qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_wwJaY80qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_wwJaY80qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_wwJaY80qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="Bpmn_DataInputAssociation_WaKCMM3nEeWdWKucoQSwUw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataStoreReference_WsMwUs0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataInput_ww5oUM0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_H2dSwM3oEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_BJ8M4M3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.Account.Balance}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_BJ8M4c3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.AccountBalance}</bpmn2:to>
+        </bpmn2:assignment>
+        <bpmn2:assignment id="Bpmn_Assignment_H2dSwc3oEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_V0GHwM3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.Account.Ref}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_V0GHwc3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.AccountRef}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="Bpmn_DataInputAssociation_PxdvIM5kEeWHFe6L7wgZBA">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataStoreReference_yyGEAs0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataInput_ww5oUM0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_lKUD0M3nEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_kprb8M3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701"><![CDATA[${sourceDataEntries["LoanOffer"].Amount/sourceDataEntries["LoanOffer"].TermInMonths}]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_kprb8c3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.TransactionAmount}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn_DataOutputAssociation_w1M9oM3nEeWdWKucoQSwUw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataOutput_EUBF0M0vEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataStoreReference_DYHeQs0vEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_w26N0M3nEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_wY7RUM3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.applyTransactionOnAccountResponse.NewAccountBalance}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_wY7RUc3nEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.Account.Balance}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_aKOQUZo5EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="Bpmn2_IntermediateCatchEvent_ZHFYUpo5EeO1WrMpxYFn7Q" targetRef="MonthlyDebitCustomerAccount">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_nvgaQJo5EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="TransferMoneyOnCustomerAccount" targetRef="Bpmn2_IntermediateCatchEvent_ZHFYUpo5EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_otNYopo5EeO1WrMpxYFn7Q" name="Loan completed">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_otNYoZo5EeO1WrMpxYFn7Q</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_otNYoZo5EeO1WrMpxYFn7Q" isImmediate="true" sourceRef="MonthlyDebitCustomerAccount" targetRef="Bpmn2_EndEvent_otNYopo5EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn2_DataStoreReference_yRPToJo5EeO1WrMpxYFn7Q" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:dataObject id="Bpmn2_DataObject_z3EpApo5EeO1WrMpxYFn7Q" name="Status" itemSubjectRef="Status">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:exclusiveGateway id="Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q" name="Cancel?">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_uhdhIJo3EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_Riz5IJo6EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_Sdy6sZo6EeO1WrMpxYFn7Q</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_Riz5IJo6EeO1WrMpxYFn7Q" name="Yes" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q" targetRef="Bpmn2_EndEvent_uDw4gpo3EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="25" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="Bpmn2_FormalExpression_x1pbcJpHEeOaLPEr7parPA">${not true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_Sdy6spo6EeO1WrMpxYFn7Q" name="">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_Sdy6sZo6EeO1WrMpxYFn7Q</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_Sdy6sZo6EeO1WrMpxYFn7Q" name="No" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q" targetRef="Bpmn2_EndEvent_Sdy6spo6EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="75" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_BEnLkM0kEeWcraJSbyQ7_Q">${true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataObjectReference id="Bpmn2_DataObjectReference_a1nr0Jo7EeO1WrMpxYFn7Q" name="Status" dataObjectRef="Bpmn2_DataObject_z3EpApo5EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObjectReference>
+    <bpmn2:intermediateThrowEvent id="LoanOfferProvided" name="Loan offer provided">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="0,83,144" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_9gC1wZo2EeO1WrMpxYFn7Q</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_2BBk0JpJEeOaLPEr7parPA</bpmn2:outgoing>
+      <bpmn2:dataInput id="Bpmn2_DataInput_y6JeBJpKEeOaLPEr7parPA" itemSubjectRef="LoanOffer" name="LoanOffer"/>
+      <bpmn2:dataInputAssociation id="Bpmn2_DataInputAssociation_y6JeA5pKEeOaLPEr7parPA">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Oblique" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn2_DataStoreReference_yRPToJo5EeO1WrMpxYFn7Q</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn2_DataInput_y6JeBJpKEeOaLPEr7parPA</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:inputSet id="Bpmn2_InputSet_y6JeBZpKEeOaLPEr7parPA" name="default input set">
+        <bpmn2:dataInputRefs>Bpmn2_DataInput_y6JeBJpKEeOaLPEr7parPA</bpmn2:dataInputRefs>
+      </bpmn2:inputSet>
+      <bpmn2:messageEventDefinition id="Bpmn2_MessageEventDefinition_USGrwJpMEeOaLPEr7parPA" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ">
+        <bpmn2:operationRef>Bpmn2_Operation_FA8rYZmHEeONXJy5WRVCwQ</bpmn2:operationRef>
+      </bpmn2:messageEventDefinition>
+    </bpmn2:intermediateThrowEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_2BBk0JpJEeOaLPEr7parPA" isImmediate="true" sourceRef="LoanOfferProvided" targetRef="ReceiveSignedLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:exclusiveGateway id="Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg" name="Validated?">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="185,139,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_pkPeoaqdEeOU-ea4bX5igg</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_reGjQaqdEeOU-ea4bX5igg</bpmn2:outgoing>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_4KhykaqdEeOU-ea4bX5igg</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_pkPeoaqdEeOU-ea4bX5igg" isImmediate="true" sourceRef="ValidateLoanOffer" targetRef="Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="Bpmn2_EndEvent_reGjQ6qdEeOU-ea4bX5igg" name="Loan offer not  validated">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="190,0,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_WaTj4aqeEeOU-ea4bX5igg</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_reGjQaqdEeOU-ea4bX5igg" name="No" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg" targetRef="NotifyCustomerAndBranchOffice">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="20" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${not true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_4KhykaqdEeOU-ea4bX5igg" name="Yes" isImmediate="true" sourceRef="Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg" targetRef="RetrieveAccountDetails">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+        <camunda:properties>
+          <camunda:property value="80" name="probability"/>
+        </camunda:properties>
+      </bpmn2:extensionElements>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_mNZAEM5YEeWHFe6L7wgZBA">${true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:startEvent id="Bpmn2_StartEvent_9E1JYqqdEeOU-ea4bX5igg" name="Former loan offer not validated">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="109,183,0" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_-R4LUaqdEeOU-ea4bX5igg</bpmn2:outgoing>
+      <bpmn2:signalEventDefinition id="Bpmn2_SignalEventDefinition_Ezx8oKqfEeOU-ea4bX5igg" signalRef="Bpmn2_Signal_B0MmEKqfEeOU-ea4bX5igg"/>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_-R4LUaqdEeOU-ea4bX5igg" isImmediate="true" sourceRef="Bpmn2_StartEvent_9E1JYqqdEeOU-ea4bX5igg" targetRef="ProvideLoanOffer">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn2_DataStoreReference_K2s90KqeEeOU-ea4bX5igg" name="Validation" dataStoreRef="Bpmn2_DataObject_EqTF8qqeEeOU-ea4bX5igg">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:serviceTask id="NotifyCustomerAndBranchOffice" w4:serviceName="SendMail" camunda:class="org.camunda.bpm.demo.loan_request_handling.LoggerDelegate" name="Notify Customer and Branch Office" implementation="##unspecified">
+      <bpmn2:extensionElements>
+        <w4:mail id="Mail_fseiECPFEeWR2OLIHp06TA" contentType="Text"><![CDATA[
+          ]]><w4:from id="From_fseiESPFEeWR2OLIHp06TA">demo@w4.demo</w4:from><![CDATA[
+          ]]><w4:to id="Recipient_19vV8CPLEeWR2OLIHp06TA">${processInstance.initiator}</w4:to><![CDATA[
+          ]]><w4:subject id="Subject_fseiFCPFEeWR2OLIHp06TA">Refus du prêt ${processInstance.dataEntries.Offre.value.dwbOffreRef}</w4:subject><![CDATA[
+          ]]><w4:body id="Body_fseiFSPFEeWR2OLIHp06TA"><![CDATA[Bonjour,
+   Votre offre de prêt a été refusée.
+
+   Salutations distinguées,
+
+       Votre Agence W4 Bank]]></w4:body><![CDATA[
+        ]]></w4:mail>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn2_SequenceFlow_reGjQaqdEeOU-ea4bX5igg</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_WaTj4aqeEeOU-ea4bX5igg</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn_InputOutputSpecification_5XrxcMlvEeShXsaiRBTFdQ">
+        <bpmn2:inputSet id="Bpmn_InputSet_5XrxcslvEeShXsaiRBTFdQ" name="default input set">
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_5XrxcclvEeShXsaiRBTFdQ</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_5XrxcclvEeShXsaiRBTFdQ</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_5XrxcclvEeShXsaiRBTFdQ</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_5XrxcclvEeShXsaiRBTFdQ</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn_OutputSet_5XrxcclvEeShXsaiRBTFdQ" name="default output set">
+          <bpmn2:inputSetRefs>Bpmn_InputSet_5XrxcslvEeShXsaiRBTFdQ</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_5XrxcslvEeShXsaiRBTFdQ</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_5XrxcslvEeShXsaiRBTFdQ</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_5XrxcslvEeShXsaiRBTFdQ</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="Bpmn2_SequenceFlow_WaTj4aqeEeOU-ea4bX5igg" isImmediate="true" sourceRef="NotifyCustomerAndBranchOffice" targetRef="Bpmn2_EndEvent_reGjQ6qdEeOU-ea4bX5igg">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataObjectReference id="Bpmn_DataObjectReference_amQ5kMUQEeWtyJWrpr6YKg" name="Status" dataObjectRef="Bpmn2_DataObject_z3EpApo5EeO1WrMpxYFn7Q">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObjectReference>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_5TCv4s0nEeWbm4O3TNVUvw" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:serviceTask id="TransferMoneyOnCustomerAccount" camunda:class="org.camunda.bpm.demo.loan_request_handling.LoggerDelegate" name="Tranfer money on customer account" implementation="##WebService" operationRef="Bpmn_Operation_MWI-oM0uEeWbm4O3TNVUvw">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="194,215,235" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>Bpmn_SequenceFlow_8T94Us0pEeWbm4O3TNVUvw</bpmn2:incoming>
+      <bpmn2:outgoing>Bpmn2_SequenceFlow_nvgaQJo5EeO1WrMpxYFn7Q</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="Bpmn_InputOutputSpecification_Twt2oM0qEeWbm4O3TNVUvw">
+        <bpmn2:dataInput id="Bpmn_DataInput_TxZzIM0qEeWbm4O3TNVUvw" itemSubjectRef="TransactionOnAccountDef" name="applyTransactionOnAccount">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataInput>
+        <bpmn2:dataOutput id="Bpmn_DataOutput_YFtg8M0qEeWbm4O3TNVUvw" itemSubjectRef="TransactionOnAccountResponseDef" name="applyTransactionOnAccountResponse">
+          <bpmn2:extensionElements>
+            <w4graph:graphStyle><![CDATA[
+              ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]></w4graph:graphStyle>
+          </bpmn2:extensionElements>
+        </bpmn2:dataOutput>
+        <bpmn2:inputSet id="Bpmn_InputSet_Twt2os0qEeWbm4O3TNVUvw" name="default input set">
+          <bpmn2:dataInputRefs>Bpmn_DataInput_TxZzIM0qEeWbm4O3TNVUvw</bpmn2:dataInputRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_Twt2oc0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_Twt2oc0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_Twt2oc0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+          <bpmn2:outputSetRefs>Bpmn_OutputSet_Twt2oc0qEeWbm4O3TNVUvw</bpmn2:outputSetRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="Bpmn_OutputSet_Twt2oc0qEeWbm4O3TNVUvw" name="default output set">
+          <bpmn2:dataOutputRefs>Bpmn_DataOutput_YFtg8M0qEeWbm4O3TNVUvw</bpmn2:dataOutputRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_Twt2os0qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_Twt2os0qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_Twt2os0qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+          <bpmn2:inputSetRefs>Bpmn_InputSet_Twt2os0qEeWbm4O3TNVUvw</bpmn2:inputSetRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="Bpmn_DataInputAssociation_NIpXYM3jEeWdWKucoQSwUw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataStoreReference_LOmros0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataInput_TxZzIM0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_5yn94M3iEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_4rZ3IM3iEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.Account.Balance}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_4raeMM3iEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.AccountBalance}</bpmn2:to>
+        </bpmn2:assignment>
+        <bpmn2:assignment id="Bpmn_Assignment_H2dSws3oEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_MMTD4M3jEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.Account.Ref}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_MMTD4c3jEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.AccountRef}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="Bpmn_DataInputAssociation_MNKh8M5kEeWHFe6L7wgZBA">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataStoreReference_rk75ws0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataInput_TxZzIM0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_cgMwMM3jEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_cAhKkM3jEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701"><![CDATA[${sourceDataEntries["LoanOffer"].Amount}]]></bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_cAhKkc3jEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.applyTransactionOnAccount.TransactionAmount}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="Bpmn_DataOutputAssociation_uoYBEM3kEeWdWKucoQSwUw">
+        <bpmn2:extensionElements>
+          <w4graph:graphStyle><![CDATA[
+            ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+            ]]><w4graph:line routerType="Rectilinear" automaticRoute="false" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+          ]]></w4graph:graphStyle>
+        </bpmn2:extensionElements>
+        <bpmn2:sourceRef>Bpmn_DataOutput_YFtg8M0qEeWbm4O3TNVUvw</bpmn2:sourceRef>
+        <bpmn2:targetRef>Bpmn_DataStoreReference_WsMwUs0qEeWbm4O3TNVUvw</bpmn2:targetRef>
+        <bpmn2:assignment id="Bpmn_Assignment_upT1MM3kEeWdWKucoQSwUw">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_uJHSMM3kEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${sourceDataEntries.applyTransactionOnAccountResponse.NewAccountBalance}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_uJH5QM3kEeWdWKucoQSwUw" language="http://www.w4.eu/spec/EL/20110701">${targetDataEntry.Account.Balance}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="Bpmn_SequenceFlow_8T94Us0pEeWbm4O3TNVUvw" isImmediate="true" sourceRef="RetrieveAccountDetails" targetRef="TransferMoneyOnCustomerAccount">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="255,255,255" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+          ]]><w4graph:line routerType="Rectilinear" automaticRoute="true" closestRoute="false" avoidObstacleRoute="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_LOmros0qEeWbm4O3TNVUvw" name="Account" dataStoreRef="Bpmn_DataStore_OlPQQM0qEeWbm4O3TNVUvw">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_WsMwUs0qEeWbm4O3TNVUvw" name="Account" dataStoreRef="Bpmn_DataStore_OlPQQM0qEeWbm4O3TNVUvw">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_rk75ws0qEeWbm4O3TNVUvw" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_yyGEAs0qEeWbm4O3TNVUvw" name="LoanOffer" dataStoreRef="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:dataStoreReference id="Bpmn_DataStoreReference_DYHeQs0vEeWbm4O3TNVUvw" name="Account" dataStoreRef="Bpmn_DataStore_OlPQQM0qEeWbm4O3TNVUvw">
+      <bpmn2:extensionElements>
+        <w4graph:graphStyle><![CDATA[
+          ]]><w4graph:basic background="153,153,153" foreground="0,0,0" autoResize="false" borderColor="100,100,100" collapsed="false"/><![CDATA[
+        ]]></w4graph:graphStyle>
+      </bpmn2:extensionElements>
+    </bpmn2:dataStoreReference>
+    <bpmn2:correlationSubscription id="Bpmn_CorrelationSubscription_3r-WUM0lEeWcraJSbyQ7_Q" correlationKeyRef="Bpmn_CorrelationKey_n2XIgM0lEeWcraJSbyQ7_Q">
+      <bpmn2:correlationPropertyBinding id="Bpmn_CorrelationPropertyBinding_3r-9YM0lEeWcraJSbyQ7_Q" correlationPropertyRef="Bpmn_CorrelationProperty_ZQK7MM0lEeWcraJSbyQ7_Q">
+        <bpmn2:dataPath xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_3EEBwM0lEeWcraJSbyQ7_Q" evaluatesToTypeRef="LoanOfferRef" language="http://www.w3.org/1999/XPath"><![CDATA[fn:getDataObject("LoanOffer")/Ref]]></bpmn2:dataPath>
+      </bpmn2:correlationPropertyBinding>
+    </bpmn2:correlationSubscription>
+  </bpmn2:process>
+  <bpmn2:signal id="Bpmn2_Signal_xfPDYJpDEeOaLPEr7parPA" name="fn:concat(&quot;Cancellation&quot;,fn:getDataObject(&quot;LoanOffer&quot;)/Ref)"/>
+  <bpmn2:resource id="Bpmn2_Resource_QvpV0JpFEeOaLPEr7parPA" w4:type="Group" name="everybody"/>
+  <bpmn2:resource id="Bpmn2_Resource_TY690JpIEeOaLPEr7parPA" w4:type="Group" name="BackOffice"/>
+  <bpmn2:itemDefinition id="Status" structureRef="mb:Status"/>
+  <bpmn2:itemDefinition id="LoanOfferRef" structureRef="mb:ElementRef"/>
+  <bpmn2:dataStore id="Bpmn2_DataObject_EqTF8qqeEeOU-ea4bX5igg" itemSubjectRef="Validation" name="Validation"/>
+  <bpmn2:itemDefinition id="Validation" structureRef="mb:Validation"/>
+  <bpmn2:signal id="Bpmn2_Signal_B0MmEKqfEeOU-ea4bX5igg" name="NotApprovedOrder"/>
+  <bpmn2:resource id="Bpmn2_Resource_gz5IULQqEeOE1M41eDOGDg" w4:type="Group" name="Officer"/>
+  <bpmn2:resource id="Bpmn2_Resource_iLZt0LQqEeOE1M41eDOGDg" w4:type="Group" name="BranchOfficeMgr"/>
+  <bpmn2:dataStore id="Bpmn_DataStore_M36G8I4MEeWzZeFCV54HNQ" itemSubjectRef="LoanOffer" name="LoanOffer"/>
+  <bpmn2:itemDefinition id="Account" structureRef="mb:Account"/>
+  <bpmn2:correlationProperty id="Bpmn_CorrelationProperty_ZQK7MM0lEeWcraJSbyQ7_Q" name="offerRefCorrelation" type="LoanOfferRef">
+    <bpmn2:correlationPropertyRetrievalExpression id="Bpmn_CorrelationPropertyRetrievalExpression_ZQK7Mc0lEeWcraJSbyQ7_Q" messageRef="Bpmn2_Message_o-4jEJlrEeONXJy5WRVCwQ">
+      <bpmn2:messagePath xsi:type="bpmn2:tFormalExpression" id="Bpmn_FormalExpression_XjYCMM0lEeWcraJSbyQ7_Q" evaluatesToTypeRef="LoanOfferRef" language="http://www.w3.org/1999/XPath">/context/Ref</bpmn2:messagePath>
+    </bpmn2:correlationPropertyRetrievalExpression>
+  </bpmn2:correlationProperty>
+  <bpmn2:dataStore id="Bpmn_DataStore_WfgqEM0oEeWbm4O3TNVUvw" name="Transactions"/>
+  <bpmn2:dataStore id="Bpmn_DataStore_a4I3MM0oEeWbm4O3TNVUvw" name="Transaction"/>
+  <bpmn2:dataStore id="Bpmn_DataStore_OlPQQM0qEeWbm4O3TNVUvw" itemSubjectRef="Account" name="Account"/>
+  <bpmn2:dataStore id="Bpmn_DataStore_sHi3kM0qEeWbm4O3TNVUvw" name="Loan offert"/>
+  <bpmn2:itemDefinition id="TransactionOnAccountDef" structureRef="mbws:applyTransationOnAccount"/>
+  <bpmn2:itemDefinition id="TransactionOnAccountResponseDef" structureRef="mbws:applyTransationOnAccountResponse"/>
+  <bpmn2:message id="Bpmn_Message__VeksM0tEeWbm4O3TNVUvw" itemRef="TransactionOnAccountDef" name="TransactionOnAccountMsg"/>
+  <bpmn2:message id="Bpmn_Message_B4IusM0uEeWbm4O3TNVUvw" itemRef="TransactionOnAccountResponseDef" name="TransactionOnAccountResponseMsg"/>
+  <bpmn2:interface id="Bpmn_Interface_MWIXkM0uEeWbm4O3TNVUvw" implementationRef="MiBankWS" name="MiBankWS">
+    <bpmn2:operation id="Bpmn_Operation_MWI-oM0uEeWbm4O3TNVUvw" implementationRef="applyTransationOnAccount" name="applyTransactionOnAccount">
+      <bpmn2:inMessageRef>Bpmn_Message__VeksM0tEeWbm4O3TNVUvw</bpmn2:inMessageRef>
+      <bpmn2:outMessageRef>Bpmn_Message_B4IusM0uEeWbm4O3TNVUvw</bpmn2:outMessageRef>
+    </bpmn2:operation>
+  </bpmn2:interface>
+  <bpmndi:BPMNDiagram id="Bpmndi_BPMNDiagram_Ahx94Jo2EeODY5gs4RP0gg" name="Branch office loan application">
+    <bpmndi:BPMNPlane id="Bpmndi_BPMNPlane_Ahx94Zo2EeODY5gs4RP0gg" bpmnElement="BOLoanApplicationCollaboration">
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_Ahx96Zo2EeODY5gs4RP0gg" bpmnElement="Bpmn2_Participant_Ahx96po2EeODY5gs4RP0gg" isHorizontal="true">
+        <dc:Bounds height="176.0" width="1280.0" x="0.0" y="0.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_Ahx965o2EeODY5gs4RP0gg" labelStyle="Bpmndi_BPMNLabelStyle_m6Q7sJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="67.0" width="17.0" x="2.0" y="55.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_sSztsJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_Participant_sOOvspo2EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="708.0" width="1280.0" x="0.0" y="216.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_sSztsZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_sSztspo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="41.0" width="17.0" x="2.0" y="550.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_uHFuwJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_Lane_uFLqQpo2EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="359.0" width="1261.0" x="21.0" y="216.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_uHFuwZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_uHR8AJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="91.0" width="17.0" x="23.0" y="350.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_u_qVgJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_StartEvent_u-hGApo2EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="122.0" y="368.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_u_qVgZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_u_qVgpo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="82.0" x="97.0" y="400.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_vtKUsJo2EeO1WrMpxYFn7Q" bpmnElement="ProvideLoanOffer" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="216.0" y="352.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_vtKUsZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_vtKUspo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="84.0" x="230.0" y="367.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_vt7wwJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_vpiY8Zo2EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="154.0" y="384.0"/>
+        <di:waypoint xsi:type="dc:Point" x="216.0" y="384.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_vt7wwZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_vuULQJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="185.0" y="389.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_2E-LUJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_ExclusiveGateway_13bekpo2EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="48.0" width="48.0" x="368.0" y="360.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_2E-LUZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_2FKYkJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="63.0" x="361.0" y="343.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_2GBUMJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_13bekZo2EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="328.0" y="383.0"/>
+        <di:waypoint xsi:type="dc:Point" x="368.0" y="383.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_2GBUMZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_2GspoJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="363.0" y="388.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_60U2YJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_6lo6Ipo2EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="376.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_60U2YZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_60a9AJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="111.0" x="337.0" y="472.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_61X_QJo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_6lo6IZo2EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="392.0" y="408.0"/>
+        <di:waypoint xsi:type="dc:Point" x="392.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_61X_QZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_618nAJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="25.0" x="397.0" y="416.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_9lfWcJo2EeO1WrMpxYFn7Q" bpmnElement="ReceiveSignedLoanOffer" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="544.0" y="352.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_9lfWcZo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_9lfWcpo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="96.0" x="552.0" y="367.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_9mol8Jo2EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_9gC1wZo2EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="416.0" y="385.0"/>
+        <di:waypoint xsi:type="dc:Point" x="464.0" y="385.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_9mol8Zo2EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_9nTUUJo2EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="27.0" x="427.0" y="390.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_IR2ygJo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataOutputAssociation_IR2ygZo3EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="580.0" y="416.0"/>
+        <di:waypoint xsi:type="dc:Point" x="580.0" y="461.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_LMD50Jo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataStoreReference_LL9zMJo3EeO1WrMpxYFn7Q">
+        <dc:Bounds height="60.0" width="60.0" x="549.0" y="461.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_LMD50Zo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_LM0u0Jo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="69.0" x="545.0" y="521.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_Q5O4AJo3EeO1WrMpxYFn7Q" bpmnElement="WaitToReviveWhileWaitingLoan" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="24.0" width="24.0" x="618.0" y="340.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_Q5O4AZo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_Q6wiAJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="81.0" x="590.0" y="323.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_V9y-EZo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_UserTask_4m2bwJpCEeOaLPEr7parPA" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="50.0" width="80.0" x="728.0" y="255.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_V9y-Epo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_V9y-E5o3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="62.0" x="737.0" y="263.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_V_m78Jo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_V9s3cZo3EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="632.0" y="340.0"/>
+        <di:waypoint xsi:type="dc:Point" x="632.0" y="288.0"/>
+        <di:waypoint xsi:type="dc:Point" x="728.0" y="288.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_V_m78Zo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_WBUzMJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="637.0" y="293.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_kUNC8Jo3EeO1WrMpxYFn7Q" bpmnElement="CancellationWhileWaitingLoanOffer" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="24.0" width="24.0" x="618.0" y="404.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_kUNC8Zo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_kWHHcJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="81.0" x="590.0" y="428.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_reNLgJo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_rSpbwpo3EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="688.0" y="456.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_reNLgZo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_reTSIJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="125.0" x="642.0" y="488.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_rg4FAJo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_rSpbwZo3EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="629.0" y="427.0"/>
+        <di:waypoint xsi:type="dc:Point" x="629.0" y="468.0"/>
+        <di:waypoint xsi:type="dc:Point" x="688.0" y="468.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_rg4FAZo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_rjQqoJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="634.0" y="473.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_uFxDoJo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_uDw4gpo3EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="984.0" y="304.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_uFxDoZo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_uF3KQJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="113.0" x="944.0" y="336.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_uhdhIZo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_uhdhIJo3EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="808.0" y="281.0"/>
+        <di:waypoint xsi:type="dc:Point" x="850.0" y="281.0"/>
+        <di:waypoint xsi:type="dc:Point" x="850.0" y="319.0"/>
+        <di:waypoint xsi:type="dc:Point" x="864.0" y="319.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_uhdhIpo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_uj8NYJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="859.0" y="324.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_0e5I4Jo3EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_Lane_0d2AApo3EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="137.0" width="1261.0" x="21.0" y="575.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_0e5I4Zo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_0gzNYJo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="91.0" width="34.0" x="23.0" y="598.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_6SffMJo3EeO1WrMpxYFn7Q" bpmnElement="ValidateLoanOffer" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="128.0" x="704.0" y="607.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_6SffMZo3EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_6Sll0Jo3EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="123.0" x="707.0" y="631.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_BhaHgZo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_BhaHgJo5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="656.0" y="387.0"/>
+        <di:waypoint xsi:type="dc:Point" x="780.0" y="387.0"/>
+        <di:waypoint xsi:type="dc:Point" x="780.0" y="607.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_BhaHgpo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_Bly4QJo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="785.0" y="392.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_TQxFMJo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_Lane_TPPbMpo5EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="212.0" width="1261.0" x="21.0" y="712.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_TQxFMZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_TToL8Jo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="27.0" width="17.0" x="23.0" y="805.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_WkAXlJo5EeO1WrMpxYFn7Q" bpmnElement="RetrieveAccountDetails" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="512.0" y="760.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_WkAXlZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_WkAXlpo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="111.0" x="513.0" y="775.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_ZJRwsJo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_IntermediateCatchEvent_ZHFYUpo5EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="896.0" y="768.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_ZJRwsZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_ZJX3UJo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="78.0" x="873.0" y="751.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_aN2MEJo5EeO1WrMpxYFn7Q" bpmnElement="MonthlyDebitCustomerAccount" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="976.0" y="752.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_aN2MEZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_aN2MEpo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="108.0" x="978.0" y="767.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_aStd8Jo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_aKOQUZo5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="928.0" y="784.0"/>
+        <di:waypoint xsi:type="dc:Point" x="976.0" y="784.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_aStd8Zo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_aW6BcJo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="971.0" y="781.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_nvgaQZo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_nvgaQJo5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="824.0" y="785.0"/>
+        <di:waypoint xsi:type="dc:Point" x="896.0" y="785.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_nvgaQpo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_n0Le4Jo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="860.0" y="782.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_o8X2AJo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_otNYopo5EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="1144.0" y="768.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_o8X2AZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_o8d8oJo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="95.0" x="1113.0" y="800.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_pB_84Jo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_otNYoZo5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="1088.0" y="784.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1144.0" y="784.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_pB_84Zo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_pGYtoJo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="1116.0" y="781.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_xmSSIJo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataOutputAssociation_xmSSIZo5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="264.0" y="352.0"/>
+        <di:waypoint xsi:type="dc:Point" x="264.0" y="270.0"/>
+        <di:waypoint xsi:type="dc:Point" x="323.0" y="270.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_yRVaQJo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataStoreReference_yRPToJo5EeO1WrMpxYFn7Q">
+        <dc:Bounds height="60.0" width="60.0" x="323.0" y="240.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_yRVaQZo5EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_yWAe4Jo5EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="63.0" x="322.0" y="300.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_6LMScZo5EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataInputAssociation_6LMSc5o5EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="582.0" y="521.0"/>
+        <di:waypoint xsi:type="dc:Point" x="582.0" y="638.0"/>
+        <di:waypoint xsi:type="dc:Point" x="704.0" y="638.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_6LMScpo5EeO1WrMpxYFn7Q"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_EhMc8Zo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataInputAssociation_EhMc85o6EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="383.0" y="269.0"/>
+        <di:waypoint xsi:type="dc:Point" x="728.0" y="269.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_EhMc8po6EeO1WrMpxYFn7Q"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_PnNvIJo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_ExclusiveGateway_Pki1opo6EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="864.0" y="304.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_PnNvIZo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_PnT1wJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="51.0" x="855.0" y="336.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_Riz5IZo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_Riz5IJo6EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="896.0" y="321.0"/>
+        <di:waypoint xsi:type="dc:Point" x="984.0" y="321.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_Riz5Ipo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_RpHVcJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="27.0" x="927.0" y="326.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_SqfS4Jo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_Sdy6spo6EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="864.0" y="240.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_SqfS4Zo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_SqlZgJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="880.0" y="272.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_SxddkJo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_Sdy6sZo6EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="879.0" y="304.0"/>
+        <di:waypoint xsi:type="dc:Point" x="879.0" y="272.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_SxddkZo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_S38gEJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="25.0" x="884.0" y="280.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_cEDqUZo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_MessageFlow_cEDqUJo6EeO1WrMpxYFn7Q" messageVisibleKind="non_initiating">
+        <di:waypoint xsi:type="dc:Point" x="501.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="501.0" y="133.0"/>
+        <di:waypoint xsi:type="dc:Point" x="582.0" y="133.0"/>
+        <di:waypoint xsi:type="dc:Point" x="582.0" y="352.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_cEDqUpo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_cGD1cJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="121.0" x="525.0" y="138.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_pvQPAJo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_IntermediateThrowEvent_psTBopo6EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="485.0" y="38.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_pvQPAZo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_pvWVoJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="105.0" x="449.0" y="4.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_r6SjMZo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_r6SjMJo6EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="57.0"/>
+        <di:waypoint xsi:type="dc:Point" x="485.0" y="57.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_r6SjMpo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_r6ewcJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="417.0" y="62.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_snTaMJo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_EndEvent_sgEw0po6EeO1WrMpxYFn7Q" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="625.0" y="41.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_snTaMZo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_snZg0Jo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="641.0" y="73.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_soQccJo6EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_SequenceFlow_sgEw0Zo6EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="517.0" y="53.0"/>
+        <di:waypoint xsi:type="dc:Point" x="625.0" y="53.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_soQccZo6EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_socpsJo6EeO1WrMpxYFn7Q">
+          <dc:Bounds height="16.0" width="1.0" x="571.0" y="58.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_ICFUUJo7EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataOutputAssociation_ICFUUZo7EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="336.0" y="72.0"/>
+        <di:waypoint xsi:type="dc:Point" x="336.0" y="104.0"/>
+        <di:waypoint xsi:type="dc:Point" x="399.0" y="104.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_I6_5UJo7EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataStoreReference_I65ysJo7EeO1WrMpxYFn7Q">
+        <dc:Bounds height="60.0" width="60.0" x="399.0" y="74.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_I6_5UZo7EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_I6_5Upo7EeO1WrMpxYFn7Q">
+          <dc:Bounds height="34.0" width="69.0" x="395.0" y="134.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_LE0FgZo7EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataInputAssociation_LE0Fg5o7EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="459.0" y="104.0"/>
+        <di:waypoint xsi:type="dc:Point" x="491.0" y="104.0"/>
+        <di:waypoint xsi:type="dc:Point" x="491.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_LE0Fgpo7EeO1WrMpxYFn7Q"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_Zhz6kJo7EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataOutputAssociation_Zhz6kZo7EeO1WrMpxYFn7Q">
+        <di:waypoint xsi:type="dc:Point" x="776.0" y="305.0"/>
+        <di:waypoint xsi:type="dc:Point" x="776.0" y="368.0"/>
+        <di:waypoint xsi:type="dc:Point" x="918.0" y="368.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_a1nr0Zo7EeO1WrMpxYFn7Q" bpmnElement="Bpmn2_DataObjectReference_a1nr0Jo7EeO1WrMpxYFn7Q">
+        <dc:Bounds height="55.0" width="55.0" x="918.0" y="356.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_a1nr0po7EeO1WrMpxYFn7Q" labelStyle="Bpmndi_BPMNLabelStyle_a-NAEJo7EeO1WrMpxYFn7Q">
+          <dc:Bounds height="17.0" width="45.0" x="923.0" y="411.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_yZZ94JpJEeOaLPEr7parPA" bpmnElement="LoanOfferProvided" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="464.0" y="368.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_yZZ94ZpJEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_yZgEgJpJEeOaLPEr7parPA">
+          <dc:Bounds height="17.0" width="119.0" x="421.0" y="400.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_2BBk0ZpJEeOaLPEr7parPA" bpmnElement="Bpmn2_SequenceFlow_2BBk0JpJEeOaLPEr7parPA">
+        <di:waypoint xsi:type="dc:Point" x="496.0" y="384.0"/>
+        <di:waypoint xsi:type="dc:Point" x="544.0" y="384.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_2BBk0ppJEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_2TueYJpJEeOaLPEr7parPA">
+          <dc:Bounds height="16.0" width="1.0" x="539.0" y="389.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_3QfooJpJEeOaLPEr7parPA" bpmnElement="Bpmn2_IntermediateCatchEvent_3PWZIppJEeOaLPEr7parPA" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="318.0" y="40.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_3QfooZpJEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_3QlvQJpJEeOaLPEr7parPA">
+          <dc:Bounds height="34.0" width="123.0" x="273.0" y="6.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_A7JwEJpKEeOaLPEr7parPA" bpmnElement="Bpmn2_StartEvent_A4rD0ppKEeOaLPEr7parPA" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="205.0" y="39.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_A7JwEZpKEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_A7P2sJpKEeOaLPEr7parPA">
+          <dc:Bounds height="17.0" width="117.0" x="163.0" y="22.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_BqdtIZpKEeOaLPEr7parPA" bpmnElement="Bpmn2_MessageFlow_BqdtIJpKEeOaLPEr7parPA">
+        <di:waypoint xsi:type="dc:Point" x="479.0" y="368.0"/>
+        <di:waypoint xsi:type="dc:Point" x="479.0" y="190.0"/>
+        <di:waypoint xsi:type="dc:Point" x="222.0" y="190.0"/>
+        <di:waypoint xsi:type="dc:Point" x="222.0" y="71.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_BqdtIppKEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_BuX8wJpKEeOaLPEr7parPA">
+          <dc:Bounds height="17.0" width="117.0" x="356.0" y="195.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_DjbZ4ZpKEeOaLPEr7parPA" bpmnElement="Bpmn2_SequenceFlow_DjbZ4JpKEeOaLPEr7parPA">
+        <di:waypoint xsi:type="dc:Point" x="237.0" y="55.0"/>
+        <di:waypoint xsi:type="dc:Point" x="318.0" y="55.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_DjbZ4ppKEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_Dj57AJpKEeOaLPEr7parPA">
+          <dc:Bounds height="16.0" width="1.0" x="277.0" y="60.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_FsIy0JpKEeOaLPEr7parPA" bpmnElement="Bpmn2_DataStoreReference_FqOuUJpKEeOaLPEr7parPA" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="34.0" width="31.0" x="257.0" y="102.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_FsIy0ZpKEeOaLPEr7parPA" labelStyle="Bpmndi_BPMNLabelStyle_FsO5cJpKEeOaLPEr7parPA">
+          <dc:Bounds height="34.0" width="69.0" x="238.0" y="136.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_IdAX8ZpKEeOaLPEr7parPA" bpmnElement="Bpmn2_DataOutputAssociation_IdAX85pKEeOaLPEr7parPA">
+        <di:waypoint xsi:type="dc:Point" x="233.0" y="71.0"/>
+        <di:waypoint xsi:type="dc:Point" x="258.0" y="102.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_IdAX8ppKEeOaLPEr7parPA"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_y6JeAZpKEeOaLPEr7parPA" bpmnElement="Bpmn2_DataInputAssociation_y6JeA5pKEeOaLPEr7parPA">
+        <di:waypoint xsi:type="dc:Point" x="383.0" y="296.0"/>
+        <di:waypoint xsi:type="dc:Point" x="464.0" y="369.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_y6JeAppKEeOaLPEr7parPA"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_pyWzIKqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_ExclusiveGateway_pkPeoqqdEeOU-ea4bX5igg" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="48.0" width="48.0" x="888.0" y="615.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_pyWzIaqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_pyjAYKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="17.0" width="69.0" x="878.0" y="598.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_p1-u4KqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_SequenceFlow_pkPeoaqdEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="832.0" y="638.0"/>
+        <di:waypoint xsi:type="dc:Point" x="888.0" y="638.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_p1-u4aqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_p5mqoKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="16.0" width="1.0" x="860.0" y="643.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_tmiPYKqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_EndEvent_reGjQ6qdEeOU-ea4bX5igg" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="1184.0" y="623.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_tmiPYaqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_tmucoKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="34.0" width="92.0" x="1154.0" y="655.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_tqiloKqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_SequenceFlow_reGjQaqdEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="936.0" y="639.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1016.0" y="639.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_tqiloaqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_tt4NgKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="17.0" width="25.0" x="964.0" y="644.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_4KhykqqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_SequenceFlow_4KhykaqdEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="912.0" y="663.0"/>
+        <di:waypoint xsi:type="dc:Point" x="912.0" y="689.0"/>
+        <di:waypoint xsi:type="dc:Point" x="568.0" y="689.0"/>
+        <di:waypoint xsi:type="dc:Point" x="568.0" y="760.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_4Khyk6qdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_4OJuUKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="17.0" width="27.0" x="745.0" y="694.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_9GQswKqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_StartEvent_9E1JYqqdEeOU-ea4bX5igg" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="32.0" width="32.0" x="122.0" y="432.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_9GQswaqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_9GWzYKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="34.0" width="128.0" x="74.0" y="464.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_-R4LUqqdEeOU-ea4bX5igg" bpmnElement="Bpmn2_SequenceFlow_-R4LUaqdEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="154.0" y="448.0"/>
+        <di:waypoint xsi:type="dc:Point" x="206.0" y="448.0"/>
+        <di:waypoint xsi:type="dc:Point" x="206.0" y="384.0"/>
+        <di:waypoint xsi:type="dc:Point" x="216.0" y="384.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_-R-R8KqdEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_-V4hkKqdEeOU-ea4bX5igg">
+          <dc:Bounds height="16.0" width="1.0" x="211.0" y="421.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_EulwEKqeEeOU-ea4bX5igg" bpmnElement="Bpmn2_DataOutputAssociation_Eur2sKqeEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="822.0" y="607.0"/>
+        <di:waypoint xsi:type="dc:Point" x="822.0" y="521.0"/>
+        <di:waypoint xsi:type="dc:Point" x="902.0" y="521.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_K2zEcKqeEeOU-ea4bX5igg" bpmnElement="Bpmn2_DataStoreReference_K2s90KqeEeOU-ea4bX5igg">
+        <dc:Bounds height="64.0" width="64.0" x="902.0" y="487.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_K2zEcaqeEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_K52YcKqeEeOU-ea4bX5igg">
+          <dc:Bounds height="18.0" width="69.0" x="900.0" y="551.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_VRKxkKqeEeOU-ea4bX5igg" bpmnElement="NotifyCustomerAndBranchOffice" isHorizontal="true" isMarkerVisible="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="1016.0" y="607.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_VRKxkaqeEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_VRKxkqqeEeOU-ea4bX5igg">
+          <dc:Bounds height="34.0" width="111.0" x="1017.0" y="622.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_WaTj4qqeEeOU-ea4bX5igg" bpmnElement="Bpmn2_SequenceFlow_WaTj4aqeEeOU-ea4bX5igg">
+        <di:waypoint xsi:type="dc:Point" x="1128.0" y="639.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1184.0" y="639.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_WaTj46qeEeOU-ea4bX5igg" labelStyle="Bpmndi_BPMNLabelStyle_WegHYKqeEeOU-ea4bX5igg">
+          <dc:Bounds height="16.0" width="1.0" x="1156.0" y="644.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_amRgoMUQEeWtyJWrpr6YKg" bpmnElement="Bpmn_DataObjectReference_amQ5kMUQEeWtyJWrpr6YKg">
+        <dc:Bounds height="52.0" width="47.0" x="269.0" y="475.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_amRgocUQEeWtyJWrpr6YKg" labelStyle="Bpmndi_BPMNLabelStyle_aqCmUMUQEeWtyJWrpr6YKg">
+          <dc:Bounds height="17.0" width="45.0" x="270.0" y="527.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_c-YAcMUQEeWtyJWrpr6YKg" bpmnElement="Bpmn_DataOutputAssociation_c-YAcsUQEeWtyJWrpr6YKg">
+        <di:waypoint xsi:type="dc:Point" x="242.0" y="416.0"/>
+        <di:waypoint xsi:type="dc:Point" x="242.0" y="507.0"/>
+        <di:waypoint xsi:type="dc:Point" x="269.0" y="507.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_c-YAccUQEeWtyJWrpr6YKg"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_dHWBEM0lEeWcraJSbyQ7_Q" bpmnElement="Bpmn_Conversation_dG244s0lEeWcraJSbyQ7_Q" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="60.0" width="60.0" x="1340.0" y="138.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_dHWBEc0lEeWcraJSbyQ7_Q" labelStyle="Bpmndi_BPMNLabelStyle_dHYdUM0lEeWcraJSbyQ7_Q">
+          <dc:Bounds height="34.0" width="78.0" x="1331.0" y="198.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_5W4uEM0nEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_5TCv4s0nEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="457.0" y="838.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_5W4uEc0nEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_5XSWsM0nEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="63.0" x="443.0" y="873.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_6KKlIM0nEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataInputAssociation_6KKlIs0nEeWbm4O3TNVUvw">
+        <di:waypoint xsi:type="dc:Point" x="492.0" y="853.0"/>
+        <di:waypoint xsi:type="dc:Point" x="545.0" y="853.0"/>
+        <di:waypoint xsi:type="dc:Point" x="545.0" y="824.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_6KKlIc0nEeWbm4O3TNVUvw"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_8c7nEM0pEeWbm4O3TNVUvw" bpmnElement="TransferMoneyOnCustomerAccount" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="64.0" width="112.0" x="712.0" y="752.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_8c7nEc0pEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_8c81MM0pEeWbm4O3TNVUvw">
+          <dc:Bounds height="34.0" width="114.0" x="711.0" y="767.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_8dwtgM0pEeWbm4O3TNVUvw" bpmnElement="Bpmn_SequenceFlow_8T94Us0pEeWbm4O3TNVUvw">
+        <di:waypoint xsi:type="dc:Point" x="624.0" y="790.0"/>
+        <di:waypoint xsi:type="dc:Point" x="712.0" y="790.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_8dwtgc0pEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_8ed4IM0pEeWbm4O3TNVUvw">
+          <dc:Bounds height="16.0" width="1.0" x="696.0" y="787.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_LTUzkM0qEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_LOmros0qEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="663.0" y="835.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_LTUzkc0qEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_LTw4cM0qEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="54.0" x="653.0" y="870.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_PNdG0s0qEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataOutputAssociation_PNdt4M0qEeWbm4O3TNVUvw">
+        <di:waypoint xsi:type="dc:Point" x="591.0" y="824.0"/>
+        <di:waypoint xsi:type="dc:Point" x="591.0" y="854.0"/>
+        <di:waypoint xsi:type="dc:Point" x="663.0" y="854.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_PNdG080qEeWbm4O3TNVUvw"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_WxMlEM0qEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_WsMwUs0qEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="904.0" y="840.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_WxMlEc0qEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_WxqfIM0qEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="54.0" x="894.0" y="875.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_rqP3kM0qEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_rk75ws0qEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="756.0" y="868.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_rqP3kc0qEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_rquYsM0qEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="63.0" x="742.0" y="903.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_y3aB0M0qEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_yyGEAs0qEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="1015.0" y="865.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_y3aB0c0qEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_y35xEM0qEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="63.0" x="1001.0" y="900.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Bpmndi_BPMNShape_DdvlIM0vEeWbm4O3TNVUvw" bpmnElement="Bpmn_DataStoreReference_DYHeQs0vEeWbm4O3TNVUvw" isHorizontal="true" isMessageVisible="true">
+        <dc:Bounds height="35.0" width="35.0" x="1107.0" y="843.0"/>
+        <bpmndi:BPMNLabel id="Bpmndi_BPMNLabel_DdvlIc0vEeWbm4O3TNVUvw" labelStyle="Bpmndi_BPMNLabelStyle_DeQigM0vEeWbm4O3TNVUvw">
+          <dc:Bounds height="17.0" width="54.0" x="1097.0" y="878.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_NJK70M3jEeWdWKucoQSwUw" bpmnElement="Bpmn_DataInputAssociation_NIpXYM3jEeWdWKucoQSwUw">
+        <di:waypoint xsi:type="dc:Point" x="698.0" y="854.0"/>
+        <di:waypoint xsi:type="dc:Point" x="732.0" y="854.0"/>
+        <di:waypoint xsi:type="dc:Point" x="732.0" y="816.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_uot_UM3kEeWdWKucoQSwUw" bpmnElement="Bpmn_DataOutputAssociation_uoYBEM3kEeWdWKucoQSwUw">
+        <di:waypoint xsi:type="dc:Point" x="808.0" y="816.0"/>
+        <di:waypoint xsi:type="dc:Point" x="808.0" y="859.0"/>
+        <di:waypoint xsi:type="dc:Point" x="904.0" y="859.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_WbcboM3nEeWdWKucoQSwUw" bpmnElement="Bpmn_DataInputAssociation_WaKCMM3nEeWdWKucoQSwUw">
+        <di:waypoint xsi:type="dc:Point" x="939.0" y="858.0"/>
+        <di:waypoint xsi:type="dc:Point" x="999.0" y="858.0"/>
+        <di:waypoint xsi:type="dc:Point" x="999.0" y="816.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_w2TJ0M3nEeWdWKucoQSwUw" bpmnElement="Bpmn_DataOutputAssociation_w1M9oM3nEeWdWKucoQSwUw">
+        <di:waypoint xsi:type="dc:Point" x="1069.0" y="816.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1069.0" y="859.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1107.0" y="859.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_MNocAM5kEeWHFe6L7wgZBA" bpmnElement="Bpmn_DataInputAssociation_MNKh8M5kEeWHFe6L7wgZBA">
+        <di:waypoint xsi:type="dc:Point" x="770.0" y="868.0"/>
+        <di:waypoint xsi:type="dc:Point" x="770.0" y="816.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Bpmndi_BPMNEdge_Px6bEM5kEeWHFe6L7wgZBA" bpmnElement="Bpmn_DataInputAssociation_PxdvIM5kEeWHFe6L7wgZBA">
+        <di:waypoint xsi:type="dc:Point" x="1032.0" y="865.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1032.0" y="816.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_m6Q7sJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_sSztspo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_uHR8AJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_u_qVgpo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_vtKUspo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_vuULQJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_2FKYkJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_2GspoJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_60a9AJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_618nAJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_9lfWcpo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_9nTUUJo2EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_LM0u0Jo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_Q6wiAJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_V9y-E5o3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_WBUzMJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_kWHHcJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_reTSIJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_rjQqoJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_uF3KQJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_uj8NYJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_0gzNYJo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_6Sll0Jo3EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_Bly4QJo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_TToL8Jo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_WkAXlpo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_ZJX3UJo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_aN2MEpo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_aW6BcJo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_n0Le4Jo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_o8d8oJo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_pGYtoJo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_yWAe4Jo5EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_PnT1wJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_RpHVcJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_SqlZgJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_S38gEJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_cGD1cJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_pvWVoJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_r6ewcJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_snZg0Jo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_socpsJo6EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_I6_5Upo7EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_a-NAEJo7EeO1WrMpxYFn7Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_yZgEgJpJEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_2TueYJpJEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_3QlvQJpJEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_A7P2sJpKEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_BuX8wJpKEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_Dj57AJpKEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_FsO5cJpKEeOaLPEr7parPA">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_pyjAYKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_p5mqoKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_tmucoKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_tt4NgKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_4OJuUKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_9GWzYKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_-V4hkKqdEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_K52YcKqeEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_VRKxkqqeEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_WegHYKqeEeOU-ea4bX5igg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_ZjjfYMUQEeWtyJWrpr6YKg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_aqCmUMUQEeWtyJWrpr6YKg">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_dHYdUM0lEeWcraJSbyQ7_Q">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_5XSWsM0nEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_CvPkkM0oEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_8c81MM0pEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_8ed4IM0pEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_LTw4cM0qEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_WxqfIM0qEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_rquYsM0qEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_y35xEM0qEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+    <bpmndi:BPMNLabelStyle id="Bpmndi_BPMNLabelStyle_DeQigM0vEeWbm4O3TNVUvw">
+      <dc:Font name="Segoe UI" size="16.35"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
