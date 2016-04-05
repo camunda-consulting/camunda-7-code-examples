@@ -22,8 +22,8 @@
 
 var selectedEmployee;
 
-for (var i = 0; i < employees.length; i++) {
-    var employee = employees[i];
+for (var i = 0; i < employees.size(); i++) {
+    var employee = employees.get(i);
     if (!selectedEmployee || employee.score > selectedEmployee.score) {
            selectedEmployee = employee;
     }
