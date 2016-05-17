@@ -96,3 +96,23 @@ order by ACT_RE_PROCDEF.KEY_, hour_date;
 - Utilization/size of Job Executor thread pool (Application Server)
 
 [1]: instancesOverTime.png
+
+# Java API Queries
+
+```java
+// Number of finished process instances
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").finished().count();
+
+// Number of running process instances with incidents
+runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").incidentMessageLike("%").active().count();
+
+// Number of running process instances that exceed a given durataion
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").unfinished().startedBefore(new Date()).count();
+
+// Advanced queries
+historyService.createNativeProcessInstanceQuery().sql(
+    "SELECT count(*) FROM "
+    + managementService.getTableName(HistoricProcessInstance.class) + " WHERE END_ACT_ID_ = #{endActivityId}")
+  .parameter("endActivityId", "endEvent_23")
+  .count();
+```
