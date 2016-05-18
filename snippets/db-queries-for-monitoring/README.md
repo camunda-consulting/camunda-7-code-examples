@@ -110,7 +110,7 @@ runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").i
 historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").unfinished().startedBefore(new Date()).count();
 
 // Advanced queries
-historyService.createNativeProcessInstanceQuery().sql(
+historyService.createNativeHistoricProcessInstanceQuery().sql(
     "SELECT count(*) FROM "
     + managementService.getTableName(HistoricProcessInstance.class) + " WHERE END_ACT_ID_ = #{endActivityId}")
   .parameter("endActivityId", "endEvent_23")
