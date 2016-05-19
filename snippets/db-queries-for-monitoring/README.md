@@ -22,6 +22,13 @@ select count(*) from act_hi_procinst where end_time_ is not null;
 -- flow nodes count
 select count(*) from act_hi_actinst where end_time_ is not null;
 
+-- flow nodes count by month
+SELECT year, month, COUNT (*) AS flowNodeCount
+    FROM (SELECT TO_CHAR (START_TIME_, 'yyyy')  as year,  TO_CHAR (START_TIME_, 'mm')AS month
+            FROM ACT_HI_ACTINST )
+GROUP BY (year, month)
+order by 1,2
+
 -- number of Jobs that are currently being processed,
 -- i.e. are acquired by a Job Executor
 select count(*) from act_ru_job res
