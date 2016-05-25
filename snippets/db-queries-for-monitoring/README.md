@@ -22,6 +22,13 @@ select count(*) from act_hi_procinst where end_time_ is not null;
 -- flow nodes count
 select count(*) from act_hi_actinst where end_time_ is not null;
 
+-- flow nodes count by month
+SELECT year, month, COUNT (*) AS flowNodeCount
+    FROM (SELECT TO_CHAR (START_TIME_, 'yyyy')  as year,  TO_CHAR (START_TIME_, 'mm')AS month
+            FROM ACT_HI_ACTINST )
+GROUP BY (year, month)
+order by 1,2
+
 -- number of Jobs that are currently being processed,
 -- i.e. are acquired by a Job Executor
 select count(*) from act_ru_job res
@@ -96,3 +103,23 @@ order by ACT_RE_PROCDEF.KEY_, hour_date;
 - Utilization/size of Job Executor thread pool (Application Server)
 
 [1]: instancesOverTime.png
+
+# Java API Queries
+
+```java
+// Number of finished process instances
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").finished().count();
+
+// Number of running process instances with incidents
+runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").incidentMessageLike("%").active().count();
+
+// Number of running process instances that exceed a given durataion
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").unfinished().startedBefore(new Date()).count();
+
+// Advanced queries
+historyService.createNativeHistoricProcessInstanceQuery().sql(
+    "SELECT count(*) FROM "
+    + managementService.getTableName(HistoricProcessInstance.class) + " WHERE END_ACT_ID_ = #{endActivityId}")
+  .parameter("endActivityId", "endEvent_23")
+  .count();
+```
