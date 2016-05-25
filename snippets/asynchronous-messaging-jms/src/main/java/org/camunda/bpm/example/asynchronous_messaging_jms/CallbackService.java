@@ -56,6 +56,7 @@ public class CallbackService {
 //    runtimeService.messageEventReceived(messageName, execution.getId());
 	  
 
+    // UUID
 //    Map<String,Object> correlationKeys = new HashMap<String, Object>();
 //	  correlationKeys.put("correllationId", correlationKey);
 //	  Map<String, Object> variables = new HashMap<String, Object>();
@@ -63,12 +64,29 @@ public class CallbackService {
 //    runtimeService.correlateMessage(messageName, correlationKeys);
 	  
     // UUID
-//	  runtimeService.createMessageCorrelation(messageName)
-//	  	.processInstanceVariableEquals("correllationId", correlationKey)
-//	  	.setVariable("payload", payload)
-//	  	.correlate();
+	  runtimeService.createMessageCorrelation(messageName)
+	  	.processInstanceVariableEquals("correllationId", correlationKey)
+//	  	.processInstanceActivityId("receiveTaskId") // not implemented
+	  	.setVariable("payload", payload)
+	  	.correlate();
+
+    String receiveTaskId;
+    Execution execution = runtimeService.createExecutionQuery()
+      .messageEventSubscriptionName(messageName)
+      .processInstanceBusinessKey(correlationKey) // proces instance
+      .activityId(receiveTaskId) // token
+      .singleResult();
+    runtimeService.messageEventReceived(messageName, execution.getId());
+    
+    
+    // Business Key
+	  String businessKey = correlationKey; // TODO: Retrieve business key from message
+	  runtimeService.createMessageCorrelation(messageName)
+	    .processInstanceBusinessKey(businessKey)
+      .setVariable("payload", payload)
+      .correlate();
 	  
-    ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+	  ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
       .processInstanceBusinessKey(correlationKey) // requires unique business key
       .singleResult();
     
