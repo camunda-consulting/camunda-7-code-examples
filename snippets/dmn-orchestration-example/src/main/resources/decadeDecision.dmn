@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decade" name="Decade Decision">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Sport">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>sport</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1mi2p3g" label="Hair">
+        <inputExpression id="LiteralExpression_176u0sq" typeRef="string">        <text>hair</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_15256yd" label="Politically Left">
+        <inputExpression id="LiteralExpression_0soa6dc" typeRef="boolean">        <text>politicalView</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Decade" name="decade" typeRef="integer" />
+      <rule id="row-552364181-7">
+        <inputEntry id="UnaryTests_0pzvnya">        <text><![CDATA["Frisbee", "Soccer"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0shbud3">        <text><![CDATA["Long"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1fgebie">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1hosxzb">        <text>1960</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-3">
+        <inputEntry id="UnaryTests_12oecjw">        <text><![CDATA["Frisbee", "Snooker"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0rnkibn">        <text><![CDATA["Long", "Midlength"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16vsirn">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1yzf4ys">        <text>1970</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-4">
+        <inputEntry id="UnaryTests_1dgp2mt">        <text><![CDATA["Snooker","Tennis"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_17z3qyo">        <text><![CDATA["Midlength", "Short"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15upy0o">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0u11dos">        <text>1980</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-5">
+        <inputEntry id="UnaryTests_1s24uds">        <text><![CDATA["Tennis", "Soccer"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1fezcde">        <text><![CDATA["Short"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1enam34">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_03dsm28">        <text>1990</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-6">
+        <inputEntry id="UnaryTests_0u3bjhh">        <text><![CDATA["Soccer"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0hmhj90">        <text><![CDATA["Long", "Midlength"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pv8u5g">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_087nquv">        <text>2000</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-9">
+        <inputEntry id="UnaryTests_0jiu1ub">        <text><![CDATA["Frisbee", "Soccer"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0olgi3t">        <text><![CDATA["Midlength", "Short"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09lwdt9">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0jl9ees">        <text>2010</text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-4">
+        <inputEntry id="UnaryTests_07afvac">        <text><![CDATA["Frisbee", "Snooker","Tennis"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qh1pb0">        <text><![CDATA["Short"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ltmrkr">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0dw02h0">        <text>2000</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-10">
+        <inputEntry id="UnaryTests_1tghdsc">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_18o2gmp">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08cz4qp">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0qu834d">        <text>1990</text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-11">
+        <inputEntry id="UnaryTests_0uim6b4">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1x2d1o8">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12atrfe">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1ckgmt6">        <text>1960</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

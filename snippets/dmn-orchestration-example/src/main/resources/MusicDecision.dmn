@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="music" name="Music Choice">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Decade">
+        <inputExpression id="inputExpression1" typeRef="integer">        <text>decade</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0ilgutd" label="Peace and Quiet">
+        <inputExpression id="LiteralExpression_17eryx2" typeRef="boolean">        <text>peace</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_01tozd3" label="Story">
+        <inputExpression id="LiteralExpression_14afnur" typeRef="boolean">        <text>story</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Band" name="band" typeRef="string" />
+      <rule id="row-552364181-20">
+        <inputEntry id="UnaryTests_04jwz3l">        <text>1960</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_07swn7h">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1foi17x">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1wp4d5j">        <text><![CDATA["The Free Design"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-6">
+        <inputEntry id="UnaryTests_04zfory">        <text>1960</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0chg430">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1lf0mvb">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1eq9jyr">        <text><![CDATA["The Shaggs"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-21">
+        <inputEntry id="UnaryTests_1vvb3xh">        <text>1970</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0jvz5od">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0p3pw02">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0bs7gw3">        <text><![CDATA["Nick Drake"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-22">
+        <inputEntry id="UnaryTests_14ppkwt">        <text>[1960.. 1970]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12ns7xm">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ag7wqz">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0tleg49">        <text><![CDATA["Black Sabbath"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-23">
+        <inputEntry id="UnaryTests_0a09t84">        <text>1980</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_11xlfoe">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1668jgv">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_15vzrch">        <text><![CDATA["The Smiths"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-24">
+        <inputEntry id="UnaryTests_0iyem6n">        <text>1980</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0qe0cja">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1n0zckl">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0zqiaqs">        <text><![CDATA["Metalica"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-25">
+        <inputEntry id="UnaryTests_1gvqjsb">        <text>1990</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yon77e">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0cngqx9">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1tkpf6n">        <text><![CDATA["Belle and Sebastian"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-26">
+        <inputEntry id="UnaryTests_0108wyn">        <text>1990</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0o1e1e9">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02fyp7l">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0fodh1a">        <text><![CDATA["Korn"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-27">
+        <inputEntry id="UnaryTests_063cqpb">        <text>1990</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1uix4eh">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_068cl1h">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nkfdu2">        <text><![CDATA["Immortal"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-28">
+        <inputEntry id="UnaryTests_12mien3">        <text>1990</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1i4asvy">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1f5zdyf">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1svmevs">        <text><![CDATA["My Bloody Valenine"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-29">
+        <inputEntry id="UnaryTests_1evx2a2">        <text>2000</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1p6a93s">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09amjcv">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1e6nh4i">        <text><![CDATA["Sambassadeur"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-30">
+        <inputEntry id="UnaryTests_0e52r3i">        <text>[2000.. 2010]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qc1rne">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_171trh3">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1mad8kp">        <text><![CDATA["Dimmu Borgir"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-31">
+        <inputEntry id="UnaryTests_01t0j3d">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0efk5vf">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0hs516a">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0v1pi7d">        <text><![CDATA["Sepultura"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-32">
+        <inputEntry id="UnaryTests_0qa0f71">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1tf9ff6">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_14ldr7p">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0aer5lv">        <text><![CDATA["William Shatner"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
