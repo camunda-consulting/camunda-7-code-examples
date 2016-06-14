@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.0.0">
+  <bpmn:process id="DrdExample" name="DRD Example" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1ko1lln</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1ko1lln" sourceRef="StartEvent_1" targetRef="UserTask_0e111q1" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0lgz24k" name="Decide on Decade" camunda:resultVariable="decade" camunda:decisionRef="decade" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>SequenceFlow_0o44617</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ehuvcp</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1ehuvcp" sourceRef="BusinessRuleTask_0lgz24k" targetRef="ParallelGateway_0kz6z6e" />
+    <bpmn:sequenceFlow id="SequenceFlow_0putr9y" sourceRef="ParallelGateway_0kz6z6e" targetRef="BusinessRuleTask_0uldi0j" />
+    <bpmn:sequenceFlow id="SequenceFlow_008ld2t" sourceRef="ParallelGateway_0kz6z6e" targetRef="BusinessRuleTask_0vsbvqc" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0uldi0j" name="Decide on Video Game" camunda:resultVariable="videoGame" camunda:decisionRef="videoGame" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>SequenceFlow_0putr9y</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1fa62y4</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:businessRuleTask id="BusinessRuleTask_0vsbvqc" name="Decide on Band" camunda:resultVariable="band" camunda:decisionRef="music" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>SequenceFlow_008ld2t</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_07b45rh</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1fa62y4" sourceRef="BusinessRuleTask_0uldi0j" targetRef="ParallelGateway_1n74tvx" />
+    <bpmn:businessRuleTask id="BusinessRuleTask_0gakqln" name="Decide on Movie" camunda:resultVariable="movie" camunda:decisionRef="movie" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>SequenceFlow_0zta7te</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_13zduef</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:endEvent id="EndEvent_1blh8gx">
+      <bpmn:incoming>SequenceFlow_0x0zgcx</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_13zduef" sourceRef="BusinessRuleTask_0gakqln" targetRef="UserTask_15nnfdc" />
+    <bpmn:parallelGateway id="ParallelGateway_0kz6z6e">
+      <bpmn:incoming>SequenceFlow_1ehuvcp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0putr9y</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_008ld2t</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0zta7te" sourceRef="ParallelGateway_1n74tvx" targetRef="BusinessRuleTask_0gakqln" />
+    <bpmn:parallelGateway id="ParallelGateway_1n74tvx">
+      <bpmn:incoming>SequenceFlow_1fa62y4</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_07b45rh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zta7te</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_07b45rh" sourceRef="BusinessRuleTask_0vsbvqc" targetRef="ParallelGateway_1n74tvx" />
+    <bpmn:sequenceFlow id="SequenceFlow_0o44617" sourceRef="UserTask_0e111q1" targetRef="BusinessRuleTask_0lgz24k" />
+    <bpmn:userTask id="UserTask_0e111q1" name="What things do you like?" camunda:formKey="embedded:app:forms/tellus.html">
+      <bpmn:incoming>SequenceFlow_1ko1lln</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o44617</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0x0zgcx" sourceRef="UserTask_15nnfdc" targetRef="EndEvent_1blh8gx" />
+    <bpmn:userTask id="UserTask_15nnfdc" name="View Results">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="name" label="Name" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="&#34;&#34;" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="movie" label="A Movie you would like is:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="&#34;&#34;" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="videoGame" label="A Video Game you would like is:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="&#34;&#34;" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="band" label="A Band you would like is:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="&#34;&#34;" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_13zduef</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0x0zgcx</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="DrdExample">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="56" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="29" y="138" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ko1lln_di" bpmnElement="SequenceFlow_1ko1lln">
+        <di:waypoint xsi:type="dc:Point" x="92" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="116" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="116" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="137" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="204.5" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0lgz24k_di" bpmnElement="BusinessRuleTask_0lgz24k">
+        <dc:Bounds x="338" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ehuvcp_di" bpmnElement="SequenceFlow_1ehuvcp">
+        <di:waypoint xsi:type="dc:Point" x="438" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="491" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="420" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0putr9y_di" bpmnElement="SequenceFlow_0putr9y">
+        <di:waypoint xsi:type="dc:Point" x="516" y="95" />
+        <di:waypoint xsi:type="dc:Point" x="516" y="16" />
+        <di:waypoint xsi:type="dc:Point" x="621" y="16" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="486" y="46" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_008ld2t_di" bpmnElement="SequenceFlow_008ld2t">
+        <di:waypoint xsi:type="dc:Point" x="516" y="145" />
+        <di:waypoint xsi:type="dc:Point" x="516" y="224" />
+        <di:waypoint xsi:type="dc:Point" x="621" y="224" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="486" y="175" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0uldi0j_di" bpmnElement="BusinessRuleTask_0uldi0j">
+        <dc:Bounds x="621" y="-24" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0vsbvqc_di" bpmnElement="BusinessRuleTask_0vsbvqc">
+        <dc:Bounds x="621" y="184" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fa62y4_di" bpmnElement="SequenceFlow_1fa62y4">
+        <di:waypoint xsi:type="dc:Point" x="721" y="16" />
+        <di:waypoint xsi:type="dc:Point" x="827" y="16" />
+        <di:waypoint xsi:type="dc:Point" x="827" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="725" y="-9" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0gakqln_di" bpmnElement="BusinessRuleTask_0gakqln">
+        <dc:Bounds x="896" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1blh8gx_di" bpmnElement="EndEvent_1blh8gx">
+        <dc:Bounds x="1290" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1263" y="138" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_13zduef_di" bpmnElement="SequenceFlow_13zduef">
+        <di:waypoint xsi:type="dc:Point" x="996" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1040" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1040" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1075" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1009" y="-9" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_0kz6z6e_di" bpmnElement="ParallelGateway_0kz6z6e">
+        <dc:Bounds x="491" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="471" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zta7te_di" bpmnElement="SequenceFlow_0zta7te">
+        <di:waypoint xsi:type="dc:Point" x="852" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="896" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="835" y="-9" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ParallelGateway_1n74tvx_di" bpmnElement="ParallelGateway_1n74tvx">
+        <dc:Bounds x="802" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="782" y="145" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07b45rh_di" bpmnElement="SequenceFlow_07b45rh">
+        <di:waypoint xsi:type="dc:Point" x="721" y="224" />
+        <di:waypoint xsi:type="dc:Point" x="827" y="224" />
+        <di:waypoint xsi:type="dc:Point" x="827" y="145" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="730" y="199" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0o44617_di" bpmnElement="SequenceFlow_0o44617">
+        <di:waypoint xsi:type="dc:Point" x="237" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="338" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="219.5" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0e111q1_di" bpmnElement="UserTask_0e111q1">
+        <dc:Bounds x="137" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0x0zgcx_di" bpmnElement="SequenceFlow_0x0zgcx">
+        <di:waypoint xsi:type="dc:Point" x="1175" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1220" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1220" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1290" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1179" y="-9" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_15nnfdc_di" bpmnElement="UserTask_15nnfdc">
+        <dc:Bounds x="1075" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

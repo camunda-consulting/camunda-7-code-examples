@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="videoGame" name="Video Game Choice">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Decade">
+        <inputExpression id="inputExpression1" typeRef="integer">        <text>decade</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0zh6xp5" label="Challenging">
+        <inputExpression id="LiteralExpression_0kf106d" typeRef="boolean">        <text>challengeLevel</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_13a19du" label="Story">
+        <inputExpression id="LiteralExpression_11q6ojo" typeRef="boolean">        <text>story</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Video Game" name="videoGame" typeRef="string" />
+      <rule id="row-552364181-12">
+        <inputEntry id="UnaryTests_0qnt285">        <text>[1960.. 1980]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1or524d">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0fa9m75">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0migptu">        <text><![CDATA["Pong"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-1">
+        <inputEntry id="UnaryTests_18z4iph">        <text>[1960.. 1970]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1523frm">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1gvekw7">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_11wsm7n">        <text><![CDATA["Asteroids"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-2">
+        <inputEntry id="UnaryTests_0bzrdev">        <text>[1960.. 1970]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mv6vyj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1nra1lt">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0ejjhmi">        <text><![CDATA["The Oregon Trail"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-13">
+        <inputEntry id="UnaryTests_1ylmojy">        <text>[1990.. 2000]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0na4qa3">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1do31h3">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_06re946">        <text><![CDATA["Doom"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-14">
+        <inputEntry id="UnaryTests_1d36rva">        <text>2000</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_06e1l3e">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1yqsxzd">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0kb7qg4">        <text><![CDATA["Call of Duty"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-15">
+        <inputEntry id="UnaryTests_1yssxxs">        <text>[2000.. 2010]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_13dpdhu">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v79v2x">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1s6ilek">        <text><![CDATA["Fallout"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-16">
+        <inputEntry id="UnaryTests_01zwndn">        <text>[1980.. 1990]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1pt3xuz">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_16dmuc1">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nxcgnb">        <text><![CDATA["Super Mario Bros."]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-17">
+        <inputEntry id="UnaryTests_05ufxsd">        <text>[1980.. 1990]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02y9k36">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mqzv14">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_07ve45i">        <text><![CDATA["Quest for Glory"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-18">
+        <inputEntry id="UnaryTests_0woj2nf">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0550bp7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1grlu1h">        <text>true</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0uf3dfk">        <text><![CDATA["Skyrim"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-7">
+        <inputEntry id="UnaryTests_18s456m">        <text>[1980.. 2010]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_086dql5">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0v9ioos">        <text>false</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1v8yqmh">        <text><![CDATA["Civilization"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-19">
+        <inputEntry id="UnaryTests_1mchum0">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_070c5ng">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0j5zqtl">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0flj23u">        <text><![CDATA["You should go play outside"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

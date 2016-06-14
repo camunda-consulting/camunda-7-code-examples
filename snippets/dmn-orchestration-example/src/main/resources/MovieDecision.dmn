@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="movie" name="Movie Choice">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Band">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>band</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_16nm0ub" label="Video Game">
+        <inputExpression id="LiteralExpression_1y5grc7" typeRef="string">        <text>videoGame</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Movie" name="movie" typeRef="string" />
+      <rule id="row-552364181-33">
+        <inputEntry id="UnaryTests_0fgr9mh">        <text><![CDATA["The Free Design", "Nick Drake", "The Smiths"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08dveut">        <text><![CDATA["Pong", "Asteroids"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1sjny54">        <text><![CDATA["A Trip to the Moon"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-34">
+        <inputEntry id="UnaryTests_0czonhd">        <text><![CDATA["The Free Design", "Nick Drake", "The Smiths"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0m7vjvo">        <text><![CDATA["The Oregon Trail", "Doom"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0fhw50t">        <text><![CDATA["Cassablanca"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-35">
+        <inputEntry id="UnaryTests_0jjtxek">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1m0w7vd">        <text><![CDATA["Pong", "Asteroids", "The Oregon Trail", "Doom"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0aswn62">        <text><![CDATA["Eraserhead"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-36">
+        <inputEntry id="UnaryTests_0nw47ti">        <text><![CDATA["Black Sabbath", "Korn", "Immortal"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wxoodt">        <text><![CDATA["Doom", "Call of Duty", "Skyrim"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0gfrl6v">        <text><![CDATA["The Silence of the Lambs"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-37">
+        <inputEntry id="UnaryTests_033usya">        <text><![CDATA["Black Sabbath", "Korn", "Immortal"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0wutq5k">        <text><![CDATA["You Should go play outside"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1147tfy">        <text><![CDATA["Cabin in the woods"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-38">
+        <inputEntry id="UnaryTests_097e85n">        <text><![CDATA["The Smiths", "My Bloody Valenine", "Sambassadeur"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09uytay">        <text><![CDATA["Quest for Glory", "Super Mario Bros."]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_06pvzdr">        <text><![CDATA["Pulp Fiction"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="table-646233848-3">
+        <inputEntry id="UnaryTests_1gk2mq4">        <text><![CDATA["Dimmu Borgir", "Sepultura"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0oli3a7">        <text><![CDATA[not("You should go play outside")]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1a3soa4">        <text><![CDATA["Momento"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-41">
+        <inputEntry id="UnaryTests_11dfkzv">        <text><![CDATA["Music probably isn't your thing"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_15hco2z">        <text><![CDATA["You Should go play outside"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0k27ec8">        <text><![CDATA["You're not going to like movies anyway"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-552364181-40">
+        <inputEntry id="UnaryTests_1dhn8ka">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0dnidek">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0t4zy1q">        <text><![CDATA["The Lives of Others"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
