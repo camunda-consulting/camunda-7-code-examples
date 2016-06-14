@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Signal to Parallel Branch within same Process Instance",
+    "id": "com.camunda.example.SignalToParallelBranch",
+    "appliesTo": [
+      "bpmn:intermediateThrowEvent[bpmn:signalEventDefinition]", // we tried to write it in XPath notation
+      "bpmn:intermediateThrowEvent[?(@.bpmn:signalEventDefinition)]" // or how about JSONPath
+    ],
+    "properties": [
+      {
+        "type": "Hidden",
+        "binding": {
+          "type": "bpmn:signal",
+          "name": "SubscribeToThisSignalAndDie"
+        }
+      },
+      {
+        "type": "Hidden",
+        "value": "com.camunda.bpm.demo.signal_event_interrupts_parallel_branch.SendSignalToParallelBranchExecutionLister",
+        "binding": {
+          "type": "camunda:executionListener",
+          "event": "start",
+          "isClass": true
+        }
+      },
+      {
+        "label": "Signal Name",
+        "type": "String",
+        "binding": {
+          "type": "camunda:property",
+          "name": "signalName"
+        },
+        "constraints": {
+          "notEmpty": true
+        }
+      }
+    ],
+    "entriesVisible": {
+      "_all": true,
+      "signal": false, // how does one find these ids? 
+      "signal-element-name": false // not even looking in the code seems to help: https://github.com/bpmn-io/bpmn-js-properties-panel/blob/5a03df94f59cc8642bd2af404382b4e8115df968/lib/provider/bpmn/parts/implementation/SignalEventDefinition.js
+    }
+  }
+]

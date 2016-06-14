@@ -141,6 +141,11 @@ Snippets
   </tr>
 
   <tr>
+    <td><img src="snippets/signal-event-interrupts-parallel-branch/src/main/resources/process.png" width="100"></td>
+    <td><a href="snippets/signal-event-interrupts-parallel-branch">BPMN Signal Events between Parallel Branches</a></td>
+    <td>This example shows how to interrupt a Task in a parallel flow within the same process instance by using a BPMN Signal Event.</td>
+  </tr>
+  <tr>
     <td><img src="snippets/i18n-process-model/translated-model.png" width="100"></td>
     <td><a href="snippets/i18n-process-model">Translate your process model on the fly</a></td>
     <td>Translate the BPMN XML on the fly using XPath and render the result (in the correct language) via bpmn.io</td>
