@@ -59,7 +59,3 @@ Built and tested against Camunda BPM version 7.5.0.
 
 ## License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-<!-- Tweet
-New @CamundaBPM example: BPMN Signal Events between Parallel Branches - This example shows how to interrupt a Task in a parallel flow within the same process instance by using a BPMN Signal Event. https://github.com/camunda/camunda-consulting/tree/master/snippets/signal-event-interrupts-parallel-branch
--->
