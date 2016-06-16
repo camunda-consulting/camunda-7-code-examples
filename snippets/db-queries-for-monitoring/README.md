@@ -20,7 +20,7 @@ where parent_id_ is null;
 select count(*) from act_hi_procinst where end_time_ is not null;
 
 -- flow nodes count
-select count(*) from act_hi_actinst where end_time_ is not null;
+select count(*) from act_hi_actinst;
 
 -- flow nodes count by month
 SELECT year, month, COUNT (*) AS flowNodeCount
@@ -55,6 +55,19 @@ select count(*) from act_hi_incident;
 -- number of open incidents with particular error type in running processes
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
 
+-- many metrics in one query
+select 'Runtime' as Category, 'Process instances (running)' as Metric, count(*) as Count from act_ru_execution where parent_id_ is null
+union select 'History', 'Process instances (finished)', count(*) from act_hi_procinst where end_time_ is not null
+union select 'History', 'Flow node instances', count(*) from ACT_HI_ACTINST
+union select 'Runtime', 'Jobs (running)', count(*) from act_ru_job where retries_ > 0
+union select 'Runtime', 'Jobs (failed)', count(*) from act_ru_job where retries_ = 0
+union select 'Runtime', 'User Tasks', count(*) from ACT_RU_TASK
+union select 'Runtime', 'Event Subscriptions', count(*) from ACT_RU_EVENT_SUBSCR
+union select 'Repository', 'Process definitions', count(*) from (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF)
+union select 'Repository', 'Process definition versions', count(*) from ACT_RE_PROCDEF
+union select 'Repository', 'Deployments', count(*) from ACT_RE_DEPLOYMENT
+union select 'Runtime', 'Process variables', count(*) from ACT_RU_VARIABLE
+ORDER BY Category, Metric
 ```
 
 ## Process/Case instances over time
