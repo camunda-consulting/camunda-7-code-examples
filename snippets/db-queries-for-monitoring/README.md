@@ -58,50 +58,37 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitt
 -- many metrics in one query
 SELECT *
 FROM
-  (SELECT 'Runtime'               AS Category,
-    'Process instances (running)' AS Metric,
-    COUNT(*)                      AS COUNT
-  FROM act_ru_execution
-  WHERE parent_id_ IS NULL
-  UNION
-  SELECT 'History',
-    'Process instances (finished)',
-    COUNT(*)
-  FROM act_hi_procinst
-  WHERE end_time_ IS NOT NULL
-  UNION
-  SELECT 'History', 'Flow node instances', COUNT(*) FROM ACT_HI_ACTINST
-  UNION
-  SELECT 'Runtime',
-    'Jobs (running)',
-    COUNT(*)
-  FROM act_ru_job
-  WHERE retries_ > 0
-  UNION
-  SELECT 'Runtime', 'Jobs (failed)', COUNT(*) FROM act_ru_job WHERE retries_ = 0
-  UNION
-  SELECT 'Runtime', 'User Tasks', COUNT(*) FROM ACT_RU_TASK
-  UNION
-  SELECT 'Runtime', 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-  UNION
-  SELECT 'Repository',
-    'Process definitions',
-    COUNT(*)
-  FROM
-    (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF
-    )
-  UNION
-  SELECT 'Repository',
-    'Process definition versions',
-    COUNT(*)
-  FROM ACT_RE_PROCDEF
-  UNION
-  SELECT 'Repository', 'Deployments', COUNT(*) FROM ACT_RE_DEPLOYMENT
-  UNION
-  SELECT 'Runtime', 'Process variables', COUNT(*) FROM ACT_RU_VARIABLE
-  )
-ORDER BY Category,
-  Metric
+  (
+  SELECT 10 AS Position, 'Deployments' AS Metric, COUNT(*) AS Count FROM ACT_RE_DEPLOYMENT
+  UNION SELECT 11, 'Process definitions', COUNT(*) FROM (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF)
+  UNION SELECT 12, 'Process definition versions', COUNT(*) FROM ACT_RE_PROCDEF
+  UNION SELECT 20, 'Flow node instances', COUNT(*) FROM ACT_HI_ACTINST
+  UNION SELECT 21, 'Process instances', COUNT(*) FROM ACT_HI_PROCINST
+  UNION SELECT 22, 'Process instances (finished)', COUNT(*) FROM ACT_HI_PROCINST WHERE END_TIME_ IS NOT NULL
+  UNION SELECT 30, 'Process instances (running)', COUNT(*) FROM ACT_RU_EXECUTION WHERE PARENT_ID_ IS NULL
+  UNION SELECT 31, 'User Tasks', COUNT(*) FROM ACT_RU_TASK
+  UNION SELECT 32, 'User Tasks (unassigned)', COUNT(*) FROM ACT_RU_TASK WHERE ASSIGNEE_ IS NULL
+  UNION SELECT 40, 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
+  UNION SELECT 41, 'Event Subscriptions (type: ' || EVENT_TYPE_ || CASEWHEN (PROC_INST_ID_ IS NULL, ' start', 'intermediate') || ')' AS Metric, COUNT(*) FROM ACT_RU_EVENT_SUBSCR GROUP BY Metric
+  UNION SELECT 50, 'Jobs', COUNT(*) FROM ACT_RU_JOB
+  UNION SELECT 51, 'Jobs (running)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE)
+  UNION SELECT 52, 'Jobs (due)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (RETRIES_ > 0)
+    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
+    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
+    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
+  UNION SELECT 53, 'Jobs (waiting)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (RETRIES_ > 0)
+    AND (DUEDATE_ IS NOT NULL AND DUEDATE_ >= SYSDATE)
+    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
+    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
+  UNION SELECT 54, 'Jobs (suspended)', COUNT(*) FROM ACT_RU_JOB WHERE SUSPENSION_STATE_ = 2
+  UNION SELECT 55, 'Jobs (failed)', COUNT(*) FROM ACT_RU_JOB WHERE RETRIES_ = 0
+  UNION SELECT 59, 'Jobs (type: ' || TYPE_ || ')' AS Metric, COUNT(*) FROM ACT_RU_JOB GROUP BY Metric
+  UNION SELECT 60, 'Process variables', COUNT(*) FROM ACT_RU_VARIABLE
+  )
+ORDER BY Position, Metric
 ```
 
 ## Process/Case instances over time
