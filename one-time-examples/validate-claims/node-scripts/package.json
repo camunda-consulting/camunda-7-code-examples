@@ -1,0 +1,11 @@
+{
+  "name": "simple_service",
+  "version": "1.0.0",
+  "description": "Example for a simple REST service endpoint",
+  "author": "Ingo Richtsmeier",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4"
+  }
+}

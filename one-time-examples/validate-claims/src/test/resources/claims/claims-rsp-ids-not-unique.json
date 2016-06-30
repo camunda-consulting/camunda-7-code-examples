@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "claimId": "189",
+      "rows": [
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 12
+        },
+        {
+          "repairServicePartnerId": 12,
+          "localClaimID": 13
+        }
+      ]
+    }
+  ]
+}
