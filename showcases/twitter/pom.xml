@@ -11,7 +11,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.4.0</camunda.version>
+		<camunda.version>7.5.0-alpha4</camunda.version>
 		<powermock.version>1.5.4</powermock.version>
 	</properties>
 
@@ -26,7 +26,7 @@
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine-cdi</artifactId>
 			<version>${camunda.version}</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.camunda.bpm.extension</groupId>
 			<artifactId>camunda-bpm-assert</artifactId>
-			<version>1.1</version>
+			<version>1.2</version>
 			<scope>test</scope>
 		</dependency>
 

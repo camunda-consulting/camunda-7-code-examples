@@ -39,7 +39,7 @@ public class InMemoryH2Test {
   @Deployment(resources = "process.bpmn")
   public void testParsingAndDeployment() {
     
-	 // rule.getHistoryService().
+
 	  
 	  
   }

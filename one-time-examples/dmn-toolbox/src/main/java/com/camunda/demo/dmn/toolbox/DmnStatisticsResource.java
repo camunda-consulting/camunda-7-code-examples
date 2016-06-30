@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import org.camunda.bpm.BpmPlatform;
 import org.camunda.bpm.engine.history.HistoricDecisionInstance;
 import org.camunda.bpm.engine.history.HistoricDecisionOutputInstance;
+import org.camunda.bpm.engine.repository.DecisionDefinition;
+import org.camunda.bpm.engine.repository.DecisionDefinitionQuery;
 
 @Path("/statistics")
 public class DmnStatisticsResource {
@@ -22,17 +24,21 @@ public class DmnStatisticsResource {
 	@Produces(MediaType.APPLICATION_JSON)	
 	public Map<String, StatisticResultDto> getStatistics(@PathParam("decisionDefinitionKey") String decisionDefinitionKey) {
 		HashMap<String, StatisticResultDto> result = new HashMap<String, StatisticResultDto>();
-		
+
+		DecisionDefinition decisionDefinition = BpmPlatform.getDefaultProcessEngine().getRepositoryService().createDecisionDefinitionQuery()
+				.decisionDefinitionKey(decisionDefinitionKey)
+				.latestVersion()
+				.singleResult();
+
 		List<HistoricDecisionInstance> decisions = BpmPlatform.getDefaultProcessEngine().getHistoryService().createHistoricDecisionInstanceQuery()
-			.decisionDefinitionKey(decisionDefinitionKey)
+			.decisionDefinitionId(decisionDefinition.getId())
 			.includeOutputs()			
 			.list();
 		
 		for (HistoricDecisionInstance decision : decisions) {
 			try {
-				List<HistoricDecisionOutputInstance> outputs = decision.getOutputs();
-				for (HistoricDecisionOutputInstance output : outputs) {
-					String ruleId = output.getRuleId();
+				if (decision.getOutputs().size()>0) {
+					String ruleId = decision.getOutputs().get(0).getRuleId();
 					if (result.containsKey(ruleId)) {
 						result.get(ruleId).incCount();					
 					} else {

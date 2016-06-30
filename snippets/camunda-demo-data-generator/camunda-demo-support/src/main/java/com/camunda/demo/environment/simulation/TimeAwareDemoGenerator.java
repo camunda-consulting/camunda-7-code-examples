@@ -29,6 +29,7 @@ import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.InclusiveGateway;
+import org.camunda.bpm.model.bpmn.instance.ReceiveTask;
 import org.camunda.bpm.model.bpmn.instance.ScriptTask;
 import org.camunda.bpm.model.bpmn.instance.SendTask;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
@@ -128,6 +129,7 @@ public class TimeAwareDemoGenerator {
 
     Collection<ModelElementInstance> serviceTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ServiceTask.class));
     Collection<ModelElementInstance> sendTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(SendTask.class));
+    Collection<ModelElementInstance> receiveTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ReceiveTask.class));
     Collection<ModelElementInstance> businessRuleTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(BusinessRuleTask.class));
     Collection<ModelElementInstance> scriptTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(ScriptTask.class));
     Collection<ModelElementInstance> userTasks = bpmn.getModelElementsByType(bpmn.getModel().getType(UserTask.class));
@@ -216,7 +218,7 @@ public class TimeAwareDemoGenerator {
     double probabilitySum = 0;
     // Process Variable used to store sample from distribution to decide for
     // outgoing transition
-    String var = "SIM_SAMPLE_VALUE_" + xorGateway.getId();
+    String var = "SIM_SAMPLE_VALUE_" + xorGateway.getId().replaceAll("-", "_");
 
     Collection<SequenceFlow> flows = xorGateway.getOutgoing();
     if (flows.size() > 1) { // if outgoing flows = 1 it is a joining gateway
@@ -320,14 +322,16 @@ public class TimeAwareDemoGenerator {
     boolean piRunning = true;
 
     while (piRunning) {
-      List<org.camunda.bpm.engine.task.Task> tasks = engine.getTaskService().createTaskQuery().processInstanceId(pi.getId()).list();
-//      List<EventSubscription> messages = engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("message").list();
-      List<Job> jobs = engine.getManagementService().createJobQuery().processInstanceId(pi.getId()).list();
       // TODO:
       // engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("signal").list();
 
-      handleTasks(pi, tasks);
-//      handleMessages(pi, messages);
+      List<org.camunda.bpm.engine.task.Task> tasks = engine.getTaskService().createTaskQuery().processInstanceId(pi.getId()).list();
+      handleTasks(engine, pi, tasks);
+
+      List<EventSubscription> messages = engine.getRuntimeService().createEventSubscriptionQuery().processInstanceId(pi.getId()).eventType("message").list();
+      handleMessages(engine, pi, messages);
+
+      List<Job> jobs = engine.getManagementService().createJobQuery().processInstanceId(pi.getId()).list();
       handleJobs(jobs);
 
       // do queries again if we have changed anything in the process instance
@@ -337,7 +341,7 @@ public class TimeAwareDemoGenerator {
       // yet).
       // This will at least not lead to endless loops
       piRunning = (tasks.size() > 0 
-          //|| messages.size() > 0 
+          || messages.size() > 0 
           || jobs.size() > 0);
 
       // TODO: Stop when we reach the NOW time (might leave open tasks - but
@@ -346,7 +350,7 @@ public class TimeAwareDemoGenerator {
 
   }
 
-  protected void handleTasks(ProcessInstance pi, List<org.camunda.bpm.engine.task.Task> tasks) {
+  protected boolean handleTasks(ProcessEngine engine, ProcessInstance pi, List<org.camunda.bpm.engine.task.Task> tasks) {
     for (org.camunda.bpm.engine.task.Task task : tasks) {
       String id = task.getTaskDefinitionKey();
 
@@ -362,13 +366,40 @@ public class TimeAwareDemoGenerator {
         timeToWait = 1;
       }
       cal.add(Calendar.SECOND, (int) Math.round(timeToWait));
+     
+      if (timerDue(engine, pi, cal.getTime())) {
+    	  if (engine.getTaskService().createTaskQuery().taskId(task.getId()).count()==0) {
+    		  // do nothing - timer was faster and canceled activity
+    		  return true;
+    	  }
+      }
+
       ClockUtil.setCurrentTime(cal.getTime());
 
       engine.getTaskService().complete(task.getId());
+      return true;
     }
+    return false;
   }
 
-  protected void handleMessages(ProcessInstance pi, List<EventSubscription> messages) {
+  private boolean timerDue(ProcessEngine engine2, ProcessInstance pi, Date date) {
+
+      List<Job> jobs = engine.getManagementService().createJobQuery() //
+    		  .processInstanceId(pi.getProcessInstanceId())
+    		  .timers()
+    		  .duedateLowerThan(date)
+    		  .list();
+      
+      if (jobs.size()>0) {
+    	  handleJobs(jobs);
+    	  return true;
+      }
+      else {
+    	  return false;
+      }
+}
+
+protected boolean handleMessages(ProcessEngine engine, ProcessInstance pi, List<EventSubscription> messages) {
     for (EventSubscription eventSubscription : messages) {
       String id = eventSubscription.getActivityId();
       if (!distributions.containsKey(id)) {
@@ -380,19 +411,28 @@ public class TimeAwareDemoGenerator {
       cal.setTime(eventSubscription.getCreated());
       double timeToWait = distributions.get(id).sample();
       cal.add(Calendar.SECOND, (int) Math.round(timeToWait));
-      ClockUtil.setCurrentTime(cal.getTime());
 
+      if (timerDue(engine, pi, cal.getTime())) {
+    	  if (engine.getRuntimeService().createEventSubscriptionQuery().eventSubscriptionId(eventSubscription.getId()).count()==0) {
+    		  // do nothing - timer was faster and canceled activity waiting for message
+    		  return true;
+    	  }
+      }
+
+      ClockUtil.setCurrentTime(cal.getTime());
       engine.getRuntimeService().createMessageCorrelation(eventSubscription.getEventName()).processInstanceId(pi.getId()).correlate();
     }
+    return false;
   }
 
   protected void handleJobs(List<Job> jobs) {
     for (Job job : jobs) {
       if (engine.getManagementService().createJobQuery().jobId(job.getId()).count()==1) {          
         engine.getManagementService().executeJob(job.getId());
+        return;
       }
       else {
-        System.out.println("COULD NOT EXECUTE JOB " + job);
+//        System.out.println("COULD NOT EXECUTE JOB " + job);
       }
     }
   }

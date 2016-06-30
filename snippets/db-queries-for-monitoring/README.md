@@ -20,7 +20,14 @@ where parent_id_ is null;
 select count(*) from act_hi_procinst where end_time_ is not null;
 
 -- flow nodes count
-select count(*) from act_hi_actinst where end_time_ is not null;
+select count(*) from act_hi_actinst;
+
+-- flow nodes count by month
+SELECT year, month, COUNT (*) AS flowNodeCount
+    FROM (SELECT TO_CHAR (START_TIME_, 'yyyy')  as year,  TO_CHAR (START_TIME_, 'mm')AS month
+            FROM ACT_HI_ACTINST )
+GROUP BY (year, month)
+order by 1,2
 
 -- number of Jobs that are currently being processed,
 -- i.e. are acquired by a Job Executor
@@ -48,6 +55,40 @@ select count(*) from act_hi_incident;
 -- number of open incidents with particular error type in running processes
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
 
+-- many metrics in one query
+SELECT *
+FROM
+  (
+  SELECT 10 AS Position, 'Deployments' AS Metric, COUNT(*) AS Count FROM ACT_RE_DEPLOYMENT
+  UNION SELECT 11, 'Process Definitions', COUNT(*) FROM (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF)
+  UNION SELECT 12, 'Process Definition Versions', COUNT(*) FROM ACT_RE_PROCDEF
+  UNION SELECT 20, 'Flow Node Instances (FNI)', COUNT(*) FROM ACT_HI_ACTINST
+  UNION SELECT 21, 'Process Instances', COUNT(*) FROM ACT_HI_PROCINST
+  UNION SELECT 22, 'Process Instances (finished)', COUNT(*) FROM ACT_HI_PROCINST WHERE END_TIME_ IS NOT NULL
+  UNION SELECT 30, 'Process Instances (running)', COUNT(*) FROM ACT_RU_EXECUTION WHERE PARENT_ID_ IS NULL
+  UNION SELECT 31, 'User Tasks', COUNT(*) FROM ACT_RU_TASK
+  UNION SELECT 32, 'User Tasks (unassigned)', COUNT(*) FROM ACT_RU_TASK WHERE ASSIGNEE_ IS NULL
+  UNION SELECT 40, 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
+  UNION SELECT 41, 'Event Subscriptions (type: ' || EVENT_TYPE_ || CASEWHEN (PROC_INST_ID_ IS NULL, ' start', 'intermediate') || ')' AS Metric, COUNT(*) FROM ACT_RU_EVENT_SUBSCR GROUP BY Metric
+  UNION SELECT 50, 'Jobs', COUNT(*) FROM ACT_RU_JOB
+  UNION SELECT 51, 'Jobs (running)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE)
+  UNION SELECT 52, 'Jobs (due)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (RETRIES_ > 0)
+    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
+    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
+    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
+  UNION SELECT 53, 'Jobs (waiting)', COUNT(*) FROM ACT_RU_JOB
+    WHERE (RETRIES_ > 0)
+    AND (DUEDATE_ IS NOT NULL AND DUEDATE_ >= SYSDATE)
+    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
+    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
+  UNION SELECT 54, 'Jobs (suspended)', COUNT(*) FROM ACT_RU_JOB WHERE SUSPENSION_STATE_ = 2
+  UNION SELECT 55, 'Jobs (failed)', COUNT(*) FROM ACT_RU_JOB WHERE RETRIES_ = 0
+  UNION SELECT 59, 'Jobs (type: ' || TYPE_ || ')' AS Metric, COUNT(*) FROM ACT_RU_JOB GROUP BY Metric
+  UNION SELECT 60, 'Process Variables', COUNT(*) FROM ACT_RU_VARIABLE
+  )
+ORDER BY Position, Metric
 ```
 
 ## Process/Case instances over time
@@ -96,3 +137,23 @@ order by ACT_RE_PROCDEF.KEY_, hour_date;
 - Utilization/size of Job Executor thread pool (Application Server)
 
 [1]: instancesOverTime.png
+
+# Java API Queries
+
+```java
+// Number of finished process instances
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").finished().count();
+
+// Number of running process instances with incidents
+runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").incidentMessageLike("%").active().count();
+
+// Number of running process instances that exceed a given durataion
+historyService.createHistoricProcessInstanceQuery().processDefinitionKey("my-process").unfinished().startedBefore(new Date()).count();
+
+// Advanced queries
+historyService.createNativeHistoricProcessInstanceQuery().sql(
+    "SELECT count(*) FROM "
+    + managementService.getTableName(HistoricProcessInstance.class) + " WHERE END_ACT_ID_ = #{endActivityId}")
+  .parameter("endActivityId", "endEvent_23")
+  .count();
+```

@@ -11,14 +11,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.4.0-alpha3</camunda.version>
+		<camunda.version>7.4.0</camunda.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.camunda.consulting.snippets</groupId>
 			<artifactId>camunda-demo-support</artifactId>
-			<version>0.3.2-SNAPSHOT</version>
+			<version>0.3.5-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -113,6 +113,18 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+	      <plugin>
+	        <!-- Usage: mvn jboss-as:deploy See also: https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html -->
+	        <groupId>org.jboss.as.plugins</groupId>
+	        <artifactId>jboss-as-maven-plugin</artifactId>
+	        <version>7.6.Final</version>
+	      </plugin>
+	      <plugin>
+	        <!-- Usage: mvn wildfly:deploy See also: https://docs.jboss.org/wildfly/plugins/maven/latest/examples/deployment-example.html -->
+	        <groupId>org.wildfly.plugins</groupId>
+	        <artifactId>wildfly-maven-plugin</artifactId>
+	        <version>1.0.2.Final</version>
+	      </plugin>
 		</plugins>
 	</build>
 </project>

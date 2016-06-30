@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<camunda.version>7.3.0</camunda.version>
+		<camunda.version>7.4.0</camunda.version>
 
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -68,4 +68,13 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>
+
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
+
 </project>

@@ -108,7 +108,7 @@ public class NeuantragProcessTest {
     
     assertThat(processInstance).task()
       .hasDefinitionKey("userTaskAntragEntscheiden")
-      .hasCandidateGroup("sachbearbeiter");
+      .hasCandidateGroup("clerk");
     
     complete(task(), withVariables("approved", Boolean.TRUE));
     

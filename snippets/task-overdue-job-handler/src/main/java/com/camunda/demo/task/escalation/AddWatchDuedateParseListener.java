@@ -16,11 +16,11 @@ public class AddWatchDuedateParseListener extends AbstractBpmnParseListener {
 
 	@Override
 	public void parseUserTask(Element userTaskElement, ScopeImpl scope, ActivityImpl activity) {
-		log.info("register " + WatchDuedateTaskListener.class.getName() + " on activity " + activity.getId());
-		
+		log.info("register " + DeleteWatchDuedateJobTaskListener.class.getName() + " on activity " + activity.getId());
+			
 		TaskDefinition taskDefinition = ((UserTaskActivityBehavior) activity.getActivityBehavior()).getTaskDefinition();
-		WatchDuedateTaskListener escalationTaskListener = new WatchDuedateTaskListener();
-		taskDefinition.addTaskListener(TaskListener.EVENTNAME_CREATE, escalationTaskListener);
-		taskDefinition.addTaskListener(TaskListener.EVENTNAME_COMPLETE, escalationTaskListener);		
+		taskDefinition.addTaskListener(TaskListener.EVENTNAME_CREATE, new CreateWatchDuedateJobTaskListener());
+		taskDefinition.addTaskListener(TaskListener.EVENTNAME_COMPLETE, new DeleteWatchDuedateJobTaskListener());		
+		taskDefinition.addTaskListener(TaskListener.EVENTNAME_DELETE, new DeleteWatchDuedateJobTaskListener());		
 	}
 }
