@@ -69,6 +69,8 @@ As all variables are stored as json object variables, I use script conditions in
 There is no web interface to access the application.
 To get started refer to the `InMemoryH2Test`.
 
+To run the tests, start the node server first. See the [readme](node-scripts/) in the node-scripts folder for a quick how-to. 
+
 You can also use `ant` to build and deploy the example to an application server.
 For that to work you need to copy the file `build.properties.example` to `build.properties`
 and configure the path to your application server inside it.
