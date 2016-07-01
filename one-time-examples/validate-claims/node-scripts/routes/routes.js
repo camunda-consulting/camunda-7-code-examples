@@ -23,8 +23,6 @@ var appRouter = function(app) {
 				console.log (JSON.stringify(claimsParsed.data[0].rows[i]));
 				if (claimsParsed.data[0].rows[i][mandatoryNumberFields[j]] &&
 						claimsParsed.data[0].rows[i][mandatoryNumberFields[j]].search(/[a-z]/i) > -1) {
-//					errorList.push("{errorMandatoryFieldFormat: {\"" + mandatoryNumberFields[j] + "\", \"" 
-//							+ i + "\"}}");
 					errorList.push({fieldName: mandatoryNumberFields[j], 
 									rowNumber: i}
 							);
@@ -33,7 +31,7 @@ var appRouter = function(app) {
 			
 		}
 		console.log(JSON.stringify(errorList));
-		return res.send(JSON.stringify(errorList));		
+		return res.send(errorList);		
 //		if(!req.body.username || !req.body.password || !req.body.twitter) {
 //			return res.send({"status": "error", "message": "missing a parameter"});
 //		} else {

@@ -71,6 +71,26 @@ To get started refer to the `InMemoryH2Test`.
 
 To run the tests, start the node server first. See the [readme](node-scripts/) in the node-scripts folder for a quick how-to. 
 
+To start the deployed process on a tomcat distro, you can use a REST client and call POST /process-definition/key/validate-claims/start with the payload
+
+    {
+    "variables": 
+        {"claims":{
+            "value": "{\n  \"data\": [\n    {\n      \"claimId\": \"189\",\n      \"rows\": [\n        {\n          \"repairServicePartnerId\": 12,\n          \"localClaimID\": 12,\n          \"serialNumberIn\" : \"123AE\",\n          \"customerComplaintCodePrimary\":\"100\"\n        },\n        {\n          \"repairServicePartnerId\": 11,\n          \"localClaimID\": 13,\n          \"serialNumberIn\": \"123\",\n          \"customerComplaintCodePrimary\":\"E100\"\n        }\n      ]\n    }\n  ]\n}", 
+            "type": "json", 
+            "valueInfo":{"serializationDataFormat":"application/json"}
+            }, 
+        "selectedRepairServicePartnerId":{
+            "value": 11
+            }
+        }
+    }
+
+There is a simple html page to convert other claim-files (json-formatted) into the payload for the camunda start process instance rest service: [json-converter](utils/start-process-payload-generator.html)
+
+(Sorry, http://htmlpreview.github.io/?https://github.com/camunda/camunda-consulting/blob/master/one-time-examples/validate-claims/utils/start-process-payload-generator.html didn't work for some reasons I can't find).
+
+
 You can also use `ant` to build and deploy the example to an application server.
 For that to work you need to copy the file `build.properties.example` to `build.properties`
 and configure the path to your application server inside it.

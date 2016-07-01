@@ -65,6 +65,9 @@ public class InMemoryH2Test {
                 "selectedRepairServicePartnerId", "11"));
     
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
+    assertThat(processInstance).isActive();
+    execute(job());
+    
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
     // To generate the coverage report for a single tests add this line as the last line of your test method:
@@ -88,6 +91,9 @@ public class InMemoryH2Test {
     HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery()
         .variableName("resultCheckUniqueRspID").singleResult();
     assertThat(result).isNotNull();
+
+    result = historyService().createHistoricVariableInstanceQuery().variableName("claims").singleResult();
+    System.out.println(result.getValue().toString());
     
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
@@ -129,6 +135,9 @@ public class InMemoryH2Test {
                 "selectedRepairServicePartnerId", "1247001"));
     
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
+    assertThat(processInstance).isActive();
+    execute(job());
+
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
     // To generate the coverage report for a single tests add this line as the last line of your test method:
@@ -148,8 +157,15 @@ public class InMemoryH2Test {
                 "selectedRepairServicePartnerId", "11"));
     
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
+    assertThat(processInstance).isActive();
+    execute(job());
+    
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
+    HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery().variableName("resultCheckMandatoryFields").singleResult();
+    assertThat(result).isNotNull();
+    assertThat(result.getValue().equals("[{\"fieldName\":\"serialNumberIn\",\"rowNumber\":0},{\"fieldName\":\"customerComplaintCodePrimary\",\"rowNumber\":1}]"));
+        
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
   }
