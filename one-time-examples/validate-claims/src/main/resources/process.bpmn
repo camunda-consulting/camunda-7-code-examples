@@ -5,14 +5,6 @@
       <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="End_validation_finished" name="validation finished">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="start">
-          <camunda:script scriptFormat="javascript"><![CDATA[print("listener on endevent finished");
-//print(resultCheckUniqueRspID);
-//print(resultCheckRspIDAgainstSelected);
-print(resultCheckMandatoryFields);]]></camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_10ncuwb</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="ScriptTask_138rcu3" />
@@ -23,20 +15,14 @@ print(resultCheckMandatoryFields);]]></camunda:script>
       <bpmn:outgoing>SequenceFlow_07080gs</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_07wntxb" name="yes" sourceRef="ExclusiveGateway_0kiyq7d" targetRef="ScriptTask_079np8h">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript">resultCheckUniqueRspID.length == 0</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript">S(resultCheckUniqueRspID).elements().length == 0;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="End_validation_failed" name="validation failed">
-      <bpmn:extensionElements>
-        <camunda:executionListener event="start">
-          <camunda:script scriptFormat="javascript"><![CDATA[print("listener on endevent failed");
-print(resultCheckUniqueRspID);]]></camunda:script>
-        </camunda:executionListener>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_07080gs</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_030kdct</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_07080gs" name="no" sourceRef="ExclusiveGateway_0kiyq7d" targetRef="End_validation_failed">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[resultCheckUniqueRspID.length > 0]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[S(resultCheckUniqueRspID).elements().length > 0]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:scriptTask id="ScriptTask_138rcu3" name="Check unique RSP ID" scriptFormat="javaScript" camunda:resultVariable="resultCheckUniqueRspID" camunda:resource="scripts/check_unique_rsp_id.js">
       <bpmn:incoming>SequenceFlow1</bpmn:incoming>
@@ -53,10 +39,10 @@ print(resultCheckUniqueRspID);]]></camunda:script>
       <bpmn:outgoing>SequenceFlow_030kdct</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0szeyms" name="yes" sourceRef="ExclusiveGateway_0tntrtu" targetRef="ServiceTask_1dwr4ge">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="Javascript">resultCheckRspIDAgainstSelected.length == 0;</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="Javascript">S(resultCheckRspIDAgainstSelected).elements().length == 0;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_030kdct" name="no" sourceRef="ExclusiveGateway_0tntrtu" targetRef="End_validation_failed">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[resultCheckRspIDAgainstSelected.length > 0;]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[S(resultCheckRspIDAgainstSelected).elements().length > 0;]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1dq3yj4" sourceRef="ServiceTask_1dwr4ge" targetRef="Task_0tutrz5" />
     <bpmn:serviceTask id="ServiceTask_1dwr4ge" name="Check mandatory field values" camunda:asyncBefore="true">

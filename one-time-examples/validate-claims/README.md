@@ -9,19 +9,41 @@ The input will be an array of claims as shown [in this small](src/test/resources
 
 ## How does it work?
 
-The process runs through a list of validations on the same data. The rules are written either as script tasks, if they don't depend of separate data or as REST services build with express and node.js, if the need access to some master data tables. The process uses the http-connector to call the services.
+The process runs through a list of validations on the same data. The rules are written either as script tasks, if they don't depend of separate data or as REST services build with Express and Node.js, if the need access to some master data tables. The process uses the http-connector to call the services.
 
 The input data are stored in a single process variable `claims`. Each check result will be saved in a single process variable, i.e. `resultCheckUniqueRspID`. The result can have a list of errors.
 
 ### Using script tasks
-As they are all build with Javascript, they are stored as json variables. To save even large error lists you must return them in scripts as Javascript array objects.
+All script tasks are build with Javascript. They return a process variable, built with SPIN from the stringified JSON Object. As they are serialized for the process engine, they have unlimited size.
 
-The external script:
+An external script example:
 
     var errorList = [];
     errorList.push('my first error');
     // more to follow
-    errorList;
+    S(errorList, "application/json");
+
+The complete script task:
+
+    <bpmn:scriptTask id="ScriptTask_1" name="Check unique RSP ID" scriptFormat="JavaScript" camunda:resultVariable="resultCheckUniqueRspID" camunda:resource="scripts/check_unique_rsp_id.js">
+    </bpmn:scriptTask>
+
+
+### Modeling conditions
+As all variables are stored as json object variables, you can use script conditions instead of JUEL expressions. The JUEL Expressions use Java-Objects and Java should be used as less as possible.
+
+To check the result on a conditional sequence flow, you have to deserialize the process variable and check for the conditions. This can be done in a script with 
+
+	S(resultCheckUniqueRspID).elements().length == 0;
+	
+Check [the docs](https://docs.camunda.org/manual/7.5/reference/spin/json/01-reading-json/#fetch-array-of-data) how to work on JSON arrays. 
+
+The complete script task may look like this:
+
+    <bpmn:sequenceFlow id="SequenceFlow_1" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ScriptTask_1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="JavaScript">S(resultCheckUniqueRspID).elements().length == 0;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  
 
 ### Using connectors
 All services are build as POST services, so the connectors need 4 input parameters:
@@ -32,7 +54,7 @@ All services are build as POST services, so the connectors need 4 input paramete
 
 The ouput parameter is a single process variable with the error list.
 
-This is an example for a service task:
+This is an example for a service task with [a connector](https://docs.camunda.org/manual/7.5/reference/connect/http-connector/#using-the-generic-api):
 
     <bpmn:serviceTask id="ServiceTask_1dwr4ge" name="Check mandatory field values">
       <bpmn:extensionElements>
@@ -59,11 +81,7 @@ This is an example for a service task:
 
 As the prebuilt connector passes the payload as a String to the underlying http-framework, you have to convert the SPIN-Object to a String by calling `.toString()`.
 
-To save the result from a String into a JSON-Object-Variable, you have to use the SPIN-Expression here to.
-
-### Modeling conditions
-As all variables are stored as json object variables, I use script conditions instead of JUEL expressions. The JUEL Expressions use Java-style and I want to avoid Java as much as possible.
-
+To save [the response of the service](https://docs.camunda.org/manual/7.5/reference/connect/http-connector/#using-the-generic-api-1), which arrives as a String, into a JSON-Object-Variable, you have to use the SPIN-Expression. See the output parameter in the code above.
  
 ## How to use it?
 There is no web interface to access the application.
@@ -89,7 +107,6 @@ To start the deployed process on a tomcat distro, you can use a REST client and 
 There is a simple html page to convert other claim-files (json-formatted) into the payload for the camunda start process instance rest service: [json-converter](utils/start-process-payload-generator.html)
 
 (Sorry, http://htmlpreview.github.io/?https://github.com/camunda/camunda-consulting/blob/master/one-time-examples/validate-claims/utils/start-process-payload-generator.html didn't work for some reasons I can't find).
-
 
 You can also use `ant` to build and deploy the example to an application server.
 For that to work you need to copy the file `build.properties.example` to `build.properties`

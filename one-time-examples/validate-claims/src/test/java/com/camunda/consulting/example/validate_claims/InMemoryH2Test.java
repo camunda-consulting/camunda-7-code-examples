@@ -2,7 +2,6 @@ package com.camunda.consulting.example.validate_claims;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.camunda.bpm.engine.variable.value.TypedValue;
 import org.camunda.spin.plugin.variable.SpinValues;
 import org.camunda.spin.plugin.variable.value.JsonValue;
 import org.camunda.bpm.engine.history.HistoricVariableInstance;
@@ -70,6 +69,16 @@ public class InMemoryH2Test {
     
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
+    HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery()
+        .variableName("resultCheckUniqueRspID").singleResult();
+    assertThat(result.getValue().toString()).isEqualTo("[]");
+    result = historyService().createHistoricVariableInstanceQuery()
+        .variableName("resultCheckRspIDAgainstSelected").singleResult();
+    assertThat(result.getValue().toString()).isEqualTo("[]");
+    result = historyService().createHistoricVariableInstanceQuery()
+        .variableName("resultCheckMandatoryFields").singleResult();
+    assertThat(result.getValue().toString()).isEqualTo("[]");
+    
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
   }
@@ -90,11 +99,8 @@ public class InMemoryH2Test {
 
     HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery()
         .variableName("resultCheckUniqueRspID").singleResult();
-    assertThat(result).isNotNull();
+    assertThat(result.getValue().toString()).isEqualTo("[\"errorMultipleRepairServicePartners\"]");
 
-    result = historyService().createHistoricVariableInstanceQuery().variableName("claims").singleResult();
-    System.out.println(result.getValue().toString());
-    
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
   } 
@@ -116,7 +122,7 @@ public class InMemoryH2Test {
     
     HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery()
         .variableName("resultCheckRspIDAgainstSelected").singleResult();
-    assertThat(result).isNotNull();
+    assertThat(result.getValue().toString()).isEqualTo("[\"errorSelectedRepairServicePartner\",\"errorSelectedRepairServicePartner\"]");
     
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
@@ -162,8 +168,8 @@ public class InMemoryH2Test {
     
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
-    HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery().variableName("resultCheckMandatoryFields").singleResult();
-    assertThat(result).isNotNull();
+    HistoricVariableInstance result = historyService().createHistoricVariableInstanceQuery()
+        .variableName("resultCheckMandatoryFields").singleResult();
     assertThat(result.getValue().equals("[{\"fieldName\":\"serialNumberIn\",\"rowNumber\":0},{\"fieldName\":\"customerComplaintCodePrimary\",\"rowNumber\":1}]"));
         
     // To generate the coverage report for a single tests add this line as the last line of your test method:

@@ -10,5 +10,5 @@ for (i = 0; i < claimsParsed.data[0].rows.length; i++) {
 		errorList.push("errorSelectedRepairServicePartner");
 	}
 }
-print(JSON.stringify(errorList));
-errorList;
+print(S(JSON.stringify(errorList), "application/json"));
+S(JSON.stringify(errorList), "application/json");
