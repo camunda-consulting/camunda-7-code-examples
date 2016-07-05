@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "claimId": "189",
+      "rows": [
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 12,
+          "serialNumberIn" : "123AE",
+          "customerComplaintCodePrimary":"100",
+          "materialNumber":"123456789012",
+          "courierIn":"12"
+        },
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 13,
+          "serialNumberIn": "123",
+          "customerComplaintCodePrimary":"100E",
+          "materialNumber":"1234567890123",
+          "courierIn":"1234"
+        },
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 13,
+          "serialNumberIn": "123",
+          "customerComplaintCodePrimary":"100E",
+          "materialNumber":"123456789012",
+          "courierIn":"1234"
+        }
+        
+      ]
+    }
+  ]
+}
