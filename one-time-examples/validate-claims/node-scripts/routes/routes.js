@@ -5,7 +5,7 @@ var appRouter = function(app) {
 	});
 	
 	app.post("/check-mandatory-fields", function(req, res) {
-		console.log("account request with POST");
+		console.log("check-mandatory-fields request with POST");
 		console.log(req.body);
 		
 		var errorList = [];
@@ -24,36 +24,45 @@ var appRouter = function(app) {
 				if (claimsParsed.data[0].rows[i][mandatoryNumberFields[j]] &&
 						claimsParsed.data[0].rows[i][mandatoryNumberFields[j]].search(/[a-z]/i) > -1) {
 					errorList.push({fieldName: mandatoryNumberFields[j], 
-									rowNumber: i}
-							);
+									rowNumber: i});
 				}
 			}
-			
 		}
 		console.log(JSON.stringify(errorList));
 		return res.send(errorList);		
-//		if(!req.body.username || !req.body.password || !req.body.twitter) {
-//			return res.send({"status": "error", "message": "missing a parameter"});
-//		} else {
-//			return res.send(req.body);
-//		}
 	});	
 	
-	app.get("/account", function(req, res) {
-		var accountMock = {
-			"username": "nraboy",
-			"password": "1234",
-			"twitter": "@nraboy"
+	app.post("/check-field-length", function(req, res) {
+		console.log("request with POST");
+		console.log(req.body);
+
+		var errorList = [];
+		
+		var fieldLengths = {"materialNumber": {maxlength: 10}, "courierIn": {maxlength: 3}}; 
+
+		var claimsParsed = req.body;
+		console.log('after parse check field length');
+		var maxLength;
+
+		for (var fieldName in fieldLengths) {
+			console.log(fieldName);
+			for (i = 0; i < claimsParsed.data[0].rows.length; i++) {
+//				console.log (JSON.stringify(claimsParsed.data[0].rows[i][fieldName].length));
+				maxLength = fieldLengths[fieldName].maxlength;
+				if (claimsParsed.data[0].rows[i][fieldName] &&
+						claimsParsed.data[0].rows[i][fieldName].length > maxLength) {
+					errorList.push({fieldName: fieldName, 
+									rowNumber: i});
+				}
+			}
 		}
-		console.log("account request with GET");
-		if(!req.query.username) {
-			return res.send({"status": "error", "message": "missing username"});
-		} else if(req.query.username != accountMock.username) {
-			return res.send({"status": "error", "message": "wrong username"});
-		} else {
-			return res.send(accountMock);
+		console.log(JSON.stringify(errorList));
+		if (errorList.length > 4) {
+			return res.status(403).send({tooManyErrors: errorList});
+		} else {			
+			return res.send(errorList);		
 		}
-	});
+	});		
 	
 }
  

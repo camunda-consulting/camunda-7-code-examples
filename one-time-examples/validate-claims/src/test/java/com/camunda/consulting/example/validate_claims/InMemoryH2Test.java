@@ -66,6 +66,7 @@ public class InMemoryH2Test {
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
     assertThat(processInstance).isActive();
     execute(job());
+    execute(job());
     
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
@@ -143,6 +144,7 @@ public class InMemoryH2Test {
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
     assertThat(processInstance).isActive();
     execute(job());
+    execute(job());
 
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
@@ -165,6 +167,7 @@ public class InMemoryH2Test {
     // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
     assertThat(processInstance).isActive();
     execute(job());
+    execute(job());
     
     assertThat(processInstance).isEnded().hasPassed("End_validation_finished");
     
@@ -172,6 +175,29 @@ public class InMemoryH2Test {
         .variableName("resultCheckMandatoryFields").singleResult();
     assertThat(result.getValue().equals("[{\"fieldName\":\"serialNumberIn\",\"rowNumber\":0},{\"fieldName\":\"customerComplaintCodePrimary\",\"rowNumber\":1}]"));
         
+    // To generate the coverage report for a single tests add this line as the last line of your test method:
+    //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testCheckFieldLengthError() throws IOException, URISyntaxException {
+    String claimsString = new String(
+        Files.readAllBytes(Paths.get(getClass().getResource(
+            "/claims/claims-check-field-length-error.json").toURI())));
+    JsonValue claims = SpinValues.jsonValue(claimsString).create();
+    
+    ProcessInstance processInstance = runtimeService()
+        .createProcessInstanceByKey(PROCESS_DEFINITION_KEY)
+        .startBeforeActivity("check_field_length")
+        .setVariables(withVariables("claims", claims))
+        .execute();
+    
+    assertThat(processInstance).isActive().isWaitingAt("check_field_length");
+    execute(job());
+    
+    assertThat(processInstance).isEnded().hasPassed("End_too_many_errors");
+
     // To generate the coverage report for a single tests add this line as the last line of your test method:
     //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
   }

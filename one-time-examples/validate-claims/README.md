@@ -38,7 +38,7 @@ To check the result on a conditional sequence flow, you have to deserialize the 
 	
 Check [the docs](https://docs.camunda.org/manual/7.5/reference/spin/json/01-reading-json/#fetch-array-of-data) how to work on JSON arrays. 
 
-The complete script task may look like this:
+The complete sequence flow may look like this:
 
     <bpmn:sequenceFlow id="SequenceFlow_1" name="yes" sourceRef="ExclusiveGateway_1" targetRef="ScriptTask_1">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="JavaScript">S(resultCheckUniqueRspID).elements().length == 0;</bpmn:conditionExpression>
@@ -82,7 +82,20 @@ This is an example for a service task with [a connector](https://docs.camunda.or
 As the prebuilt connector passes the payload as a String to the underlying http-framework, you have to convert the SPIN-Object to a String by calling `.toString()`.
 
 To save [the response of the service](https://docs.camunda.org/manual/7.5/reference/connect/http-connector/#using-the-generic-api-1), which arrives as a String, into a JSON-Object-Variable, you have to use the SPIN-Expression. See the output parameter in the code above.
- 
+
+###Error handling with connectors
+
+If you need to abort a service task with an attached error boundary event, you can throw a full qualified BpmnError from the script that evaluates the response. 
+
+As the `statusCode` is a [predefined variable](https://docs.camunda.org/manual/7.5/reference/connect/http-connector/#using-the-generic-api-1) from the connector, it is available in the script for further inspection:
+
+    if (statusCode == 403) {
+	    throw new org.camunda.bpm.engine.delegate.BpmnError("tooManyErrors");
+    }
+    S(response);
+
+Check the node script [route.js](node-scripts/routes/routes.js) how to respond with a different status. 
+
 ## How to use it?
 There is no web interface to access the application.
 To get started refer to the `InMemoryH2Test`.
@@ -126,7 +139,7 @@ Built and tested against Camunda BPM version 7.5.0.
 ## Known Limitations
 
 ## Improvements Backlog
-* error handling with connectors.
+* multi-instance
 
 ## License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
