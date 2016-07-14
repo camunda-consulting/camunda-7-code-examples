@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" exporter="camunda modeler" exporterVersion="2.6.0" targetNamespace="http://camunda.org/example/asynchronous-messaging-jms">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://camunda.org/example/asynchronous-messaging-jms" exporter="Camunda Modeler" exporterVersion="1.2.0-nightly" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
-    <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="process-started-by-jms-message"/>
-    <bpmn2:participant id="Participant_2" name="Start Process MDB"/>
-    <bpmn2:messageFlow id="MessageFlow_4" name="Java Method Call:                                                                           &#xA;runtimeService.startProcessInstanceByKey(processName, variables)&#xA;or:                                                                                                 &#xA;runtimeService.correlateMessage(messageName, variables)             " sourceRef="Participant_2" targetRef="StartEvent_1"/>
+    <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="process-started-by-jms-message" />
+    <bpmn2:participant id="Participant_2" name="Start Process MDB" />
+    <bpmn2:messageFlow id="MessageFlow_4" name="Java Method Call:                                                                           &#10;runtimeService.startProcessInstanceByKey(processName, variables)&#10;or:                                                                                                 &#10;runtimeService.correlateMessage(messageName, variables)             " sourceRef="Participant_2" targetRef="StartEvent_1" />
   </bpmn2:collaboration>
   <bpmn2:process id="process-started-by-jms-message" name="Process started by JMS message" isExecutable="true">
-    <bpmn2:startEvent id="StartEvent_1">
+    <bpmn2:startEvent id="StartEvent_1" name="Order received">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_2" messageRef="Message_1"/>
+      <bpmn2:messageEventDefinition id="_MessageEventDefinition_2" messageRef="Message_1" />
     </bpmn2:startEvent>
-    <bpmn2:sendTask id="ServiceTask_1" camunda:delegateExpression="#{jmsSender}" name="Send&#xA;Request">
+    <bpmn2:sendTask id="ServiceTask_1" name="Send&#10;Request" camunda:delegateExpression="#{jmsSender}">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:sendTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="StartEvent_1" targetRef="ServiceTask_1"/>
-    <bpmn2:receiveTask id="ReceiveTask_1" name="Wait for&#xA;Response">
+    <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="StartEvent_1" targetRef="ServiceTask_1" />
+    <bpmn2:receiveTask id="ReceiveTask_1" name="Wait for&#10;Response">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:receiveTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="ServiceTask_1" targetRef="ReceiveTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="ServiceTask_1" targetRef="ReceiveTask_1" />
     <bpmn2:endEvent id="EndEvent_4" name="End Event">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_10" sourceRef="ReceiveTask_1" targetRef="EndEvent_4"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" sourceRef="ReceiveTask_1" targetRef="EndEvent_4" />
   </bpmn2:process>
-  <bpmn2:message id="Message_1" name="myStartMessage"/>
+  <bpmn2:message id="Message_1" name="orderReceived" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
       <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="Process_Engine" isHorizontal="true">
-        <dc:Bounds height="200.0" width="605.0" x="48.0" y="288.0"/>
+        <dc:Bounds x="48" y="288" width="605" height="200" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="98.0" y="371.0"/>
+        <dc:Bounds x="98" y="371" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="119.0" y="409.0"/>
+          <dc:Bounds x="119" y="409" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_3" bpmnElement="ServiceTask_1">
-        <dc:Bounds height="80.0" width="100.0" x="184.0" y="349.0"/>
+        <dc:Bounds x="184" y="349" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_StartEvent_1" targetElement="_BPMNShape_ServiceTask_3">
-        <di:waypoint xsi:type="dc:Point" x="134.0" y="389.0"/>
-        <di:waypoint xsi:type="dc:Point" x="184.0" y="389.0"/>
+        <di:waypoint xsi:type="dc:Point" x="134" y="389" />
+        <di:waypoint xsi:type="dc:Point" x="184" y="389" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="159.0" y="389.0"/>
+          <dc:Bounds x="159" y="389" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_2" bpmnElement="ReceiveTask_1">
-        <dc:Bounds height="80.0" width="100.0" x="334.0" y="349.0"/>
+        <dc:Bounds x="334" y="349" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_ReceiveTask_2">
-        <di:waypoint xsi:type="dc:Point" x="284.0" y="389.0"/>
-        <di:waypoint xsi:type="dc:Point" x="334.0" y="389.0"/>
+        <di:waypoint xsi:type="dc:Point" x="284" y="389" />
+        <di:waypoint xsi:type="dc:Point" x="334" y="389" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="309.0" y="389.0"/>
+          <dc:Bounds x="309" y="389" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_3" bpmnElement="Participant_2" isHorizontal="true">
-        <dc:Bounds height="120.0" width="312.0" x="48.0" y="72.0"/>
+        <dc:Bounds x="48" y="72" width="312" height="120" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_4" bpmnElement="MessageFlow_4" sourceElement="_BPMNShape_Participant_3" targetElement="BPMNShape_StartEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="204.0" y="192.0"/>
-        <di:waypoint xsi:type="dc:Point" x="204.0" y="265.0"/>
-        <di:waypoint xsi:type="dc:Point" x="116.0" y="265.0"/>
-        <di:waypoint xsi:type="dc:Point" x="116.0" y="371.0"/>
+        <di:waypoint xsi:type="dc:Point" x="204" y="192" />
+        <di:waypoint xsi:type="dc:Point" x="204" y="265" />
+        <di:waypoint xsi:type="dc:Point" x="116" y="265" />
+        <di:waypoint xsi:type="dc:Point" x="116" y="371" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="70.0" width="412.0" x="216.0" y="204.0"/>
+          <dc:Bounds x="216" y="204" width="412" height="70" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_4" bpmnElement="EndEvent_4">
-        <dc:Bounds height="36.0" width="36.0" x="484.0" y="371.0"/>
+        <dc:Bounds x="484" y="371" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="67.0" x="469.0" y="412.0"/>
+          <dc:Bounds x="469" y="412" width="67" height="22" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ReceiveTask_2" targetElement="_BPMNShape_EndEvent_4">
-        <di:waypoint xsi:type="dc:Point" x="434.0" y="389.0"/>
-        <di:waypoint xsi:type="dc:Point" x="484.0" y="389.0"/>
+        <di:waypoint xsi:type="dc:Point" x="434" y="389" />
+        <di:waypoint xsi:type="dc:Point" x="484" y="389" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="459.0" y="389.0"/>
+          <dc:Bounds x="459" y="389" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

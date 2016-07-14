@@ -25,18 +25,26 @@ public class StartProcessMDB implements MessageListener {
     try {
       String payload = ((TextMessage) message).getText();
       
-      Map<String, Object> variables = new HashMap<String, Object>();
-      variables.put("startMessagePayload", payload);
+//      Map<String, Object> variables = new HashMap<String, Object>();
+//      variables.put("startMessagePayload", payload);
+
+      // TODO: retrieve business key from message header
+      String businessKey = "23";
       
       // Alternative 1:
       // TODO: retrieve/compute processDefinitionKey from JMS message payload
 //      String processDefinitionKey = "process-started-by-jms-message";
-//      runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
+//      runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
       
       // Alternative 2:
       // TODO: retrieve/compute the BPMN Message name from the JMS message payload
-      String messageName = "myStartMessage";
-      runtimeService.correlateMessage(messageName, variables); // trigger Message Event with name "myStartMessage"
+      String messageName = "orderReceived";
+//      runtimeService.correlateMessage(messageName, variables); // trigger Message Event with name "orderReceived"
+      
+      runtimeService.createMessageCorrelation(messageName)
+        .processInstanceBusinessKey(businessKey)
+        .setVariable("order", payload)
+        .correlate();
       
     } catch (Exception ex) {
       throw new RuntimeException("Could not process JMS message", ex);
