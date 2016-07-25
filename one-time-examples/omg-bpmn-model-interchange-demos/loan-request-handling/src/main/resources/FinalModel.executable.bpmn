@@ -287,7 +287,7 @@
     <semantic:scriptTask id="_8786cf05-8210-4649-b41e-4ffd27bc6b43" name="Transfer money on customer account" scriptFormat="javascript">
       <semantic:incoming>_fdcd745b-eba7-4d00-bb43-a815d46b3413</semantic:incoming>
       <semantic:outgoing>_8883d66f-6055-4329-adb1-96270a2e8fa2</semantic:outgoing>
-      <semantic:script>transferService.transfer(amount);</semantic:script>
+      <semantic:script><![CDATA[java.lang.System.out.println("test");]]></semantic:script>
     </semantic:scriptTask>
     <semantic:sequenceFlow id="_8883d66f-6055-4329-adb1-96270a2e8fa2" sourceRef="_8786cf05-8210-4649-b41e-4ffd27bc6b43" targetRef="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" triso:userConstraints="true" />
     <semantic:intermediateCatchEvent id="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" name="Every Month">
@@ -301,7 +301,7 @@
     <semantic:scriptTask id="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" name="Monthly debit customer account" scriptFormat="javascript">
       <semantic:incoming>_e1d7bdf9-3ffc-479f-9035-a4c1604da39e</semantic:incoming>
       <semantic:outgoing>_1cb49460-c352-4120-8f9e-2c4c7e6ee693</semantic:outgoing>
-      <semantic:script>debitService.calculate();</semantic:script>
+      <semantic:script><![CDATA[java.lang.System.out.println("test");]]></semantic:script>
     </semantic:scriptTask>
     <semantic:sequenceFlow id="_1cb49460-c352-4120-8f9e-2c4c7e6ee693" sourceRef="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" targetRef="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" triso:userConstraints="true" />
     <semantic:endEvent id="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" name="Loan&#10;completed">
