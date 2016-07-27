@@ -54,11 +54,18 @@ Or you have to replace it with some other JavaScript libraries drawing charts.
 How to use
 ----------------------
 
-Build and tested on Camunda BPM 7.3.0.
+Build and tested on Camunda BPM 7.5.0.
 
+You have to options to install the plugin:
+a)
 1. Build the plugin using maven with mvn clean install
 
 2. Integrate the JAR in your camunda-*.war file and there under WEB-INF/lib
+
+OR 
+
+b) 
+1. Build and Install the Plugin using maven with mvn clean package antrun:run
 
 Now it will be shown on the start screen.
 
