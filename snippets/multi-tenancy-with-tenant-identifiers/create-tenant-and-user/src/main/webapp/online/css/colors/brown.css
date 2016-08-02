@@ -1,0 +1,71 @@
+/* Brown #c69c6d & #9a7041*/
+.btn:focus, .subscribe-btn, .progress .progress-bar, .accordionMod .panel-heading .current, #current:after, .tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover, .contact-box:hover, #options li a.selected, .ch-info-front {
+    background: #c69c6d;
+}
+
+.bg-color {
+    background: #c69c6d;
+	color: #fff;
+}
+
+.spinner {
+	border-top-color: #c69c6d;
+}
+
+.ch-info-back {
+	background: rgba(198, 156, 109, 0.7) !important;
+}
+
+.tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover {
+	border-color: #c69c6d;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pager li > a:hover, .pager li > a:focus, .navbar-toggle i, .cn-wrapper li a, .cn-wrapper:after {
+    background-color: #c69c6d;
+    color: #fff;
+}
+
+.hero {
+    border-left-color: #c69c6d;
+}
+
+
+.ie8 .btn-color, .ie9 .btn-color {
+	background: #c69c6d !important;
+}
+
+.ie8 .btn-color:hover, .ie9 .btn-color:hover {
+	background: #c69c6d !important;
+}
+
+.btn-color:hover, .subscribe-btn:hover {
+	background: #9a7041;
+}
+
+.btn-color, .subscribe-btn {
+	background: #c69c6d;
+	cursor: pointer;
+}
+
+
+#current,.menu ul li a:hover,.menu ul>li:hover>a {
+    border-bottom: 3px solid #c69c6d;
+}
+
+ul.why li:before {
+    background: #c69c6d;
+}
+
+.menu ul ul {
+    border-top: 3px solid #c69c6d !important;
+}
+
+
+
+.author-content, div.content-box.big, #cn-tabs .service, .comment-des, .contact-box {
+	border-bottom-color:#c69c6d;
+}
+
+a, .post-item h4 a:hover, .cn-wrapper li a:hover, .cn-wrapper li a.active, .color {
+    color: #c69c6d;
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.2.0">
+  <bpmn:process id="tenant-specific-sub-process" name="Tenant specific sub-process 2" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1mqp6c8">
+      <bpmn:outgoing>SequenceFlow_1d8z52s</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_02u5xfc">
+      <bpmn:incoming>SequenceFlow_146w72u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:scriptTask id="ScriptTask_194loxw" name="Script Task" scriptFormat="JavaScript">
+      <bpmn:incoming>SequenceFlow_1d8z52s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_146w72u</bpmn:outgoing>
+      <bpmn:script><![CDATA[print('This is a sub-process for Awesome SaaS Ltd.');]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1d8z52s" sourceRef="StartEvent_1mqp6c8" targetRef="ScriptTask_194loxw" />
+    <bpmn:sequenceFlow id="SequenceFlow_146w72u" sourceRef="ScriptTask_194loxw" targetRef="EndEvent_02u5xfc" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="tenant-specific-sub-process">
+      <bpmndi:BPMNShape id="StartEvent_1mqp6c8_di" bpmnElement="StartEvent_1mqp6c8">
+        <dc:Bounds x="168" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="141" y="115" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_02u5xfc_di" bpmnElement="EndEvent_02u5xfc">
+        <dc:Bounds x="424" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="397" y="115" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ScriptTask_194loxw_di" bpmnElement="ScriptTask_194loxw">
+        <dc:Bounds x="259" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1d8z52s_di" bpmnElement="SequenceFlow_1d8z52s">
+        <di:waypoint xsi:type="dc:Point" x="204" y="97" />
+        <di:waypoint xsi:type="dc:Point" x="259" y="97" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="186.5" y="72" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_146w72u_di" bpmnElement="SequenceFlow_146w72u">
+        <di:waypoint xsi:type="dc:Point" x="359" y="97" />
+        <di:waypoint xsi:type="dc:Point" x="424" y="97" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="342.5" y="72" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
