@@ -56,7 +56,7 @@
       <!-- AssertJ Testing Library -->
       <groupId>org.camunda.bpm.extension</groupId>
       <artifactId>camunda-bpm-assert</artifactId>
-      <version>1.2</version>
+   <version>2.0-alpha1</version>
       <scope>test</scope>
     </dependency>
 
