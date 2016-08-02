@@ -14,7 +14,9 @@ Instrument your BPMN process
 
 *Hint:* All times are expressed in *seconds*.
 
-To make this really easy there are [Element Templates](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/element-templates/) provided to maintain it in the Camunda Modeler:
+To make this really easy there are [Element Templates](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/element-templates/) provided to maintain the attributes easily in the Camunda Modeler. See:
+
+- [Element Templates JSON for Demo Data Generator](element-templates/demo-data-generator.png)
 
 ![Element Templates in Camunda Modeler](elementTemplates.png)
 
