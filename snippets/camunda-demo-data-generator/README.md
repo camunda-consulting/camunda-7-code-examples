@@ -16,7 +16,7 @@ Instrument your BPMN process
 
 To make this really easy there are [Element Templates](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/element-templates/) provided to maintain the attributes easily in the Camunda Modeler. See:
 
-- [Element Templates JSON for Demo Data Generator](element-templates/demo-data-generator.png)
+- [Element Templates JSON for Demo Data Generator](element-templates/demo-data-generator.json)
 
 ![Element Templates in Camunda Modeler](elementTemplates.png)
 
