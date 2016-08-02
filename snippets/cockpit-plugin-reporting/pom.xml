@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.camunda.bpm.example.cockpit.plugin</groupId>
-	<artifactId>cockpit-plugin-process-kpi</artifactId>
+	<artifactId>cockpit-plugin-reporting</artifactId>
 	<version>2.5.0</version>
 	<packaging>jar</packaging>
 
@@ -70,4 +70,23 @@
 			<url>https://app.camunda.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
+	
+	<build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <!-- Allows to deploy the plugin using: mvn clean package antrun:run
+             Follow the instructions in build.properties.example to make it work!-->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <configuration>
+          <tasks>
+            <ant antfile="${basedir}/build.xml">
+              <target name="install.cockpit.plugin" />
+            </ant>
+          </tasks>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
