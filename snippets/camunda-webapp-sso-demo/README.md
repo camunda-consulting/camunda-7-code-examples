@@ -18,20 +18,22 @@ How to use it?
 
 Run
 
+```
  mvn install
-
+```
 
 Copy the resulting jar into your camunda webapp (WEB-INF/lib filder).
 
 Edit your web.xml to point to this filter:
 
+```
   <!-- Authentication filter -->
   <filter>
     <filter-name>Authentication Filter</filter-name>
     <filter-class>com.camunda.demo.sso.AutoLoginAuthenticationFilter</filter-class>
   </filter>
   ...
-
+```
 Environment Restrictions
 ------------------------
 
