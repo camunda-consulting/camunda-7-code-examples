@@ -19,7 +19,6 @@ import org.camunda.bpm.engine.authorization.Resource;
 import org.camunda.bpm.engine.authorization.Resources;
 import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
-import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity;
 
 public class UserDataGenerator {
@@ -31,13 +30,12 @@ public class UserDataGenerator {
  
     // /////////////////////////////////////
     // create user as otherwise the invoice exmaple will re-create users
-    // gets no authorizations - cannot do any harm :-)
+    // Give demo user Admin Rights as well
     addUser(engine, "demo", "demo", "Demo", "Demo");
 
     // Admin USer - is allowed to do anything
-    addUser(engine, "admin", "bpm", "Camunda", "BPM");
-    if (addGroup(engine, Groups.CAMUNDA_ADMIN, "Camunda BPM Admin", "admin")) {
-      // should be there already!!
+    addUser(engine, "admin", "admin", "Camunda", "BPM");
+    if (addGroup(engine, Groups.CAMUNDA_ADMIN, "Camunda BPM Admin", "admin", "demo")) {
       // create ADMIN authorizations on all built-in resources
       for (Resource resource : Resources.values()) {
         if (engine.getAuthorizationService().createAuthorizationQuery().groupIdIn(Groups.CAMUNDA_ADMIN).resourceType(resource).resourceId(ANY).count() == 0) {
@@ -49,8 +47,6 @@ public class UserDataGenerator {
           engine.getAuthorizationService().saveAuthorization(userAdminAuth);
         }
       }
-    } else {
-      // addMembership(engine, Groups.CAMUNDA_ADMIN, "admin");
     }
   }
 
@@ -129,14 +125,14 @@ public class UserDataGenerator {
     }
   }
 
-  public static String getPasswordSuffix() {
-    String passwordSuffix = UserProperties.readProperty("camunda.password.suffix");
-    if (passwordSuffix == null) {
-      return "";
-    } else {
-      return passwordSuffix;
-    }
-  }
+//  public static String getPasswordSuffix() {
+//    String passwordSuffix = UserProperties.readProperty("camunda.password.suffix");
+//    if (passwordSuffix == null) {
+//      return "";
+//    } else {
+//      return passwordSuffix;
+//    }
+//  }
 
   public static boolean addUser(ProcessEngine engine, String userName, String password, String firstname, String lastname) {
     if (engine.getIdentityService().isReadOnly()) {
@@ -149,7 +145,7 @@ public class UserDataGenerator {
     User user = engine.getIdentityService().newUser(userName);
     user.setFirstName(firstname);
     user.setLastName(lastname);
-    user.setPassword(password + getPasswordSuffix());
+    user.setPassword(password);
     user.setEmail("demo@camunda.org");
     engine.getIdentityService().saveUser(user);
     return true;

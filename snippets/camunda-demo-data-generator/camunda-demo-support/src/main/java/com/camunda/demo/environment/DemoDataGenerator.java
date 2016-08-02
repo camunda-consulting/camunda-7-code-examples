@@ -62,12 +62,12 @@ public class DemoDataGenerator {
       else {        
         String timeBetweenStartsBusinessDaysMean = findProperty(modelInstance, "simulateTimeBetweenStartsBusinessDaysMean");
         if (timeBetweenStartsBusinessDaysMean == null) {
-          timeBetweenStartsBusinessDaysMean = "900"; // 15 minutes
+          timeBetweenStartsBusinessDaysMean = "3600"; // 1 hour
         }
         String timeBetweenStartsBusinessDaysSd = findProperty(modelInstance, "simulateTimeBetweenStartsBusinessDaysSd");
         if (timeBetweenStartsBusinessDaysSd == null) {
-          timeBetweenStartsBusinessDaysSd = "1800"; // 30 minutes to get a more
-                                                    // flattered courve
+          timeBetweenStartsBusinessDaysSd = "7200"; // 2 hours to get a more
+                                                    // flattered curve
         }
 
         log.info("simulation properties set - auto generation applied (" + numberOfDaysInPast + " days in past, time between mean: " + timeBetweenStartsBusinessDaysMean + " and Standard Deviation: " + timeBetweenStartsBusinessDaysSd);

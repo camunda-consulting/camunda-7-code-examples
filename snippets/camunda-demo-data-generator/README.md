@@ -5,7 +5,7 @@ Demo Data Generator
 
 This project can start process instances and walk them through (skipping service tasks and other delegation code) in order to get some meaningful load in the history table - normally used to showcase reporting features.
 
-Check the version n-1 for your generated process instances!
+Check the *version n-1* for your generated process instances!
 
 In order to use this you have to 
 
@@ -13,6 +13,11 @@ Instrument your BPMN process
 ----------------
 
 *Hint:* All times are expressed in *seconds*.
+
+To make this really easy there are [Element Templates](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/element-templates/) provided to maintain it in the Camunda Modeler:
+
+![Element Templates in Camunda Modeler](elementTemplates.png)
+
 
 ### Add Probabilities to all outgoing Sequence Flows on XOR-Gateways:
 
