@@ -11,7 +11,7 @@
 
 	<groupId>org.camunda.consulting.snippets</groupId>
 	<artifactId>camunda-demo-support</artifactId>
-	<version>0.3.6</version>
+	<version>0.3.7-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
@@ -99,7 +99,7 @@
 		<url>https://github.com/camunda/camunda-consulting/tree/master/snippets/camunda-demo-data-generator/camunda-demo-support</url>
 		<connection>scm:git:git@github.com:camunda/camunda-consulting.git</connection>
 		<developerConnection>scm:git:git@github.com:camunda/camunda-consulting.git</developerConnection>
-		<tag>0.3.6</tag>
+		<tag>0.1.0</tag>
 	</scm>
 
 </project>
