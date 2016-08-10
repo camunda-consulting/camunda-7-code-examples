@@ -1,0 +1,92 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Data on analyzed media</legend>
+
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Media Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="mediaName"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Media Link</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="mediaLink"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" 
+             />
+    </div>
+  </div>
+
+<br><br><br>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Is the media funny?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="funny" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Is the media Musical?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="music" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Is it involve current events?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="currentEvent" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Is the media strange?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="strange" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Does the media appear authentic?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="authentic" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+</fieldset>
+</form>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="AssignMediaAnalyst" name="Assign Media Analyst">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
+      <input id="input1" label="Skill Level">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>analystSkillLevel</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1w0uuwj" label="Language">
+        <inputExpression id="LiteralExpression_1sp8oi2" typeRef="string">        <text>primaryLanguage</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_0ut3mxb" label="Estinated Time">
+        <inputExpression id="LiteralExpression_13xb0kw" typeRef="integer">        <text>estimatedTime</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Assignee" name="assigneeName" typeRef="string" />
+      <rule id="row-872021716-1">
+        <inputEntry id="UnaryTests_0lx8p1s">        <text><![CDATA["principal"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0vidnl6">        <text><![CDATA[not("chinese")]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1h76e9g">        <text><![CDATA[<4]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0t9xb70">        <text><![CDATA["john"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-2">
+        <inputEntry id="UnaryTests_0mqmdq0">        <text><![CDATA["senior"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0ueoldz">        <text><![CDATA["english", "korean"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kwkun0">        <text><![CDATA[>4]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0lvnxnk">        <text><![CDATA["mary"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-3">
+        <inputEntry id="UnaryTests_1015zq1">        <text><![CDATA["intern"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_01i880r">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_08ufft9">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1vii3a6">        <text><![CDATA["intern"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-4">
+        <inputEntry id="UnaryTests_1ekrv65">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0k1n91o">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0uxss5p">        <text>4</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0emibd1">        <text><![CDATA["dave"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-5">
+        <inputEntry id="UnaryTests_0yc3zxe">        <text><![CDATA["principal"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ikg5cz">        <text><![CDATA["chinese"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1ibltg4">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_159sd8k">        <text><![CDATA["lee"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-6">
+        <inputEntry id="UnaryTests_1i4nhw6">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_085f09u">        <text><![CDATA["german"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09kurxq">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0mgwvru">        <text><![CDATA["wolfgang"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-7">
+        <inputEntry id="UnaryTests_0d3uy80">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0emrh9y">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1qs29a9">        <text>[1.. 8]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0kynqg2">        <text><![CDATA["andy"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-872021716-8">
+        <inputEntry id="UnaryTests_01t2th7">        <text><![CDATA[not("senior")]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mt71vr">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bkahjq">        <text><![CDATA[>10]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0epdx4e">        <text><![CDATA["Niall"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-4">
+        <inputEntry id="UnaryTests_1mr9fuj">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_02igzb7">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1i5cbfl">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0vomuvb">        <text><![CDATA["NONE"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

@@ -16,7 +16,7 @@
       </input>
       <output id="output1" label="Decade" name="decade" typeRef="integer" />
       <rule id="row-552364181-7">
-        <inputEntry id="UnaryTests_0pzvnya">        <text><![CDATA["Frisbee", "Soccer"]]></text>
+        <inputEntry id="UnaryTests_0pzvnya">        <text><![CDATA["Frisbee", "Soccer", "I Hate Sport"]]></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0shbud3">        <text><![CDATA["Long"]]></text>
 </inputEntry>
@@ -55,6 +55,16 @@
         <outputEntry id="LiteralExpression_03dsm28">        <text>1990</text>
 </outputEntry>
       </rule>
+      <rule id="table-299685399-1">
+        <inputEntry id="UnaryTests_1gbp8t8">        <text><![CDATA["Rugby"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0takx8k">        <text><![CDATA["Short","Long"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1fr4gy3">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1nx92zp">        <text>1980</text>
+</outputEntry>
+      </rule>
       <rule id="row-552364181-6">
         <inputEntry id="UnaryTests_0u3bjhh">        <text><![CDATA["Soccer"]]></text>
 </inputEntry>
@@ -83,6 +93,16 @@
         <inputEntry id="UnaryTests_1ltmrkr">        <text></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0dw02h0">        <text>2000</text>
+</outputEntry>
+      </rule>
+      <rule id="table-299685399-2">
+        <inputEntry id="UnaryTests_169oxq9">        <text><![CDATA["I Hate Sport"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1y76vmh">        <text><![CDATA["Short", "Midlength"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0olybqy">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0qyw4qm">        <text>2010</text>
 </outputEntry>
       </rule>
       <rule id="row-552364181-10">

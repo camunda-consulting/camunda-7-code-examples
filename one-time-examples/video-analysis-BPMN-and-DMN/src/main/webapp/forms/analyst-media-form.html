@@ -1,0 +1,79 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Generate Meta Data</legend>
+
+<div class="control-group">
+    <label class="control-label">Media Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="mediaName"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Media Link</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="mediaLink"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" 
+             />
+    </div>
+  </div>
+
+<br><br><br>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Media's Primary Language</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" 
+    	cam-variable-name="primaryLanguage"
+        cam-variable-type="String" >
+      <option value="english">English</option>
+      <option value="german">German</option>
+      <option value="korean">Korean</option>
+      <option value="chinese">Chinese</option>
+    </select>
+  </div>
+</div>
+
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Analyst Skill Level Required</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control"
+    	cam-variable-name="analystSkillLevel"
+        cam-variable-type="String">
+      <option value="principal">Principal</option>
+      <option value="senior">Senior</option>
+      <option value="intern">Intern</option>
+    </select>
+  </div>
+</div>
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Duration">Estimated Analyst Time</label>  
+  <div class="col-md-4">
+  <input id="Duration" name="Duration" type="text" placeholder="eg. MM" class="form-control input-md"
+  		cam-variable-name="estimatedTime"
+  		cam-variable-type="Integer">
+  <span class="help-block">format: enter the number of minutes required to analyze</span>  
+  </div>
+</div>
+
+</fieldset>
+</form>
