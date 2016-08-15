@@ -18,5 +18,10 @@ Using these three projects one can see how KPIs can be defined and monitored by 
     * b) Add KPI information to your own process application by using Camunda Modeler property panel.
 5. Checkout Camunda Cockpit to see the Plugin working (see where to look for the plugin in [Cockpit Plugin Readme](./plugin/cockpit-kpi-overview-plugin/README.md)
 
+## Screenshots
+![Screenshot](./element-template/screenshot.png)
+![Screenshot](./plugin/cockpit-kpi-overview-plugin/screenshot-processdefinition.png)
+![Screenshot](./plugin/cockpit-kpi-overview-plugin/screenshot-processinstance.png)
+
 ## License
 Use under terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
