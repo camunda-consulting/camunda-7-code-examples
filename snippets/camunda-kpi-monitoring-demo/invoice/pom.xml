@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.camunda.cockpit.kpi.overview</groupId>
+  <artifactId>camunda-example-invoice-kpi</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.2-SNAPSHOT</version>
+  <name>camunda BPM - example - invoice</name>
+
+<properties>
+    <camunda.version>7.5.3-ee</camunda.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
+
+ <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm.dmn</groupId>
+        <artifactId>camunda-engine-dmn-bom</artifactId>
+        <version>${camunda.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <!-- process engine, needs to be provided -->
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <!-- decision engine -->
+      <groupId>org.camunda.bpm.dmn</groupId>
+      <artifactId>camunda-engine-dmn</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <!-- AssertJ Testing Library -->
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-assert</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Required to use Spin dataformat support in unit tests -->
+    <dependency>
+      <groupId>org.camunda.spin</groupId>
+      <artifactId>camunda-spin-dataformat-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-spin</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Required to use Connectors in unit tests -->
+    <dependency>
+      <groupId>org.camunda.connect</groupId>
+      <artifactId>camunda-connect-connectors-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-connect</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <!-- Needed for InMemoryH2Test -->
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.3.168</version>
+      <scope>test</scope>
+    </dependency>
+    
+		<dependency>
+		  <!-- Used to generate test coverage reports, see https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage -->
+			<groupId>org.camunda.consulting.snippets</groupId>
+			<artifactId>process-test-coverage</artifactId>
+			<version>0.2.3</version>
+			<scope>test</scope>
+		</dependency>     
+
+    <dependency>
+      <!-- use logback as logger -->
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <!-- apache commons logging => slf4j -->
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.7.7</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <!--  java util logging => slf4j -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.7</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Add your own dependencies here, if in compile scope, they are added to the war -->
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>Camunda BPM Maven Repository</name>
+      <url>https://app.camunda.com/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
