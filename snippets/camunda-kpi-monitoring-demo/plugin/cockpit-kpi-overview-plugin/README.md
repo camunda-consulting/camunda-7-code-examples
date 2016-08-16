@@ -1,7 +1,7 @@
 # Cockpit KPI Overview Plugin
 
 ## Show me the important parts!
-With the help of this Cockpit Plugin one can display KPIs that were defined within the BPMN model using the KPI Element Template provided within this repository. 
+With the help of this Cockpit Plugin one can display KPIs that were defined within the BPMN model using the KPI Element Template provided within this repository.
 This plugin integrates into two extension points to show the necessary information:
 ###Process Definition History Tab
 This view registers in 'cockpit.processDefinition.history.tab'.
@@ -12,6 +12,12 @@ This view registers in 'cockpit.processInstance.history.tab'.
 
 
 ## How does it work?
+The basic idea of this plugin is to read the KPI information from the BPMN process definition and show this information in the front-end next to other relevant data that is already saved in the Camunda History Database.
+From the architectural point of view the Plugin consists of two parts:
+> JavaScript Front-End which uses Angular to register within two pre-defined Camunda Cockpit Entry Points ('cockpit.processDefinition.history.tab' and 'cockpit.processInstance.history.tab'). You can see the basic definition in src/main/resources/plugin-webapp/kpi-overview-plugin/plugin.js.
+Within the same folder you can see two Angular Controller and other JS components which are used to call the Back-End and show the necessary information in Front-End.
+
+> Java Back-End which is responsible to provide specific REST endpoints and talking to the Camunda History database.
 
 ## How to use it?
 > ###Improving this plugin###
