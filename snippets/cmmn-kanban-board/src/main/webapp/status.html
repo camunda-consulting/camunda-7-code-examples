@@ -36,10 +36,10 @@
     }	
 	</style>
 
-	<link type="text/css" rel="stylesheet" href="webjars/bootstrap/2.3.2/css/bootstrap.css" />
+	<link type="text/css" rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.css" />
 	
 	<!-- load jquery and bpmn-js dependencies -->
-	<script type="text/javascript" src="webjars/jquery/1.9.0/jquery.js"></script>
+	<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.js"></script>
  
 	<!-- bpmn-js viewer -->
 	<script type="text/javascript" src="webjars/bpmn-js/0.13.1/dist/bpmn-navigated-viewer.js"></script>
@@ -48,7 +48,14 @@
 	<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
 </head>
 <body>
-      <ul id="activeExecutions"></ul>
+	<div class="container-fluid">
+	  <h1>CMMN Kanban Board</h1>
+		<div class="row">
+		  <div class="col-md-4"><h2>Enabled</h2><ul id="enabledExecutions"></ul></div>
+		  <div class="col-md-4"><h2>Active</h2><ul id="activeExecutions"></ul></div>
+		  <div class="col-md-4"><h2>Completed</h2><ul id="completedExecutions"></ul></div>
+		</div>
+	</div>
 
 			<script>
 	$(document).ready(function() {
@@ -70,8 +77,11 @@
 	    list.html(items.join(''));
 	  }
 		
-		$.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(caseExecutions) {
-		  populateList($("#activeExecutions"), caseExecutions);
+		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
+		  populateList($("#enabledExecutions"), enabledExecutions);
+	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
+	      populateList($("#activeExecutions"), activeExecutions);
+	    });
 		});
 
   });
