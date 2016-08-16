@@ -1,92 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cmmn:definitions id="underwriting-definition" name="Underwriting" targetNamespace="http://cmmn.org" xmlns:cmmn="http://www.omg.org/spec/CMMN/20131201/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <cmmn:case id="underwriting" name="Underwriting">
-        <cmmn:casePlanModel autoComplete="true" name="Underwriting"  id="_manual_underwriting">
-            <cmmn:planItem id="PI_humanTaskDecide" definitionRef="humanTaskDecide" />
-            <cmmn:planItem id="PI_milestoneApproved" definitionRef="milestoneApproved" entryCriteriaRefs="sentryApproved" />
-            <cmmn:planItem id="PI_milestoneRejected" definitionRef="milestoneRejected" entryCriteriaRefs="sentryRejected" />
-            <cmmn:planItem id="PI_humanTaskThereIsMore" definitionRef="humanTaskThereIsMore" />
-            <cmmn:planItem id="PI_humanTaskCoUnderwriter" definitionRef="humanTaskCoUnderwriter" />
-            <cmmn:planItem id="PI_processTaskDoctorRequest" definitionRef="processTaskDoctorRequest" />
-            <cmmn:planItem id="PI_humanTaskTeleInterview" definitionRef="humanTaskTeleInterview" />
-            <cmmn:planItem id="PI_humanTaskReviewInterview" definitionRef="humanTaskReviewInterview" entryCriteriaRefs="sentryInterviewFourEyesPrinciple" />
-            <cmmn:planItem id="PI_humanTaskSmoker" definitionRef="humanTaskSmoker" entryCriteriaRefs="sentrySmoker" />
-            
-            <!--  Sentries -->
-            <cmmn:sentry id="sentrySmoker">
-				<cmmn:ifPart>
-					<cmmn:condition>
-						<cmmn:body>${application.smoker}</cmmn:body>
-					</cmmn:condition>
-				</cmmn:ifPart>                
-            </cmmn:sentry>
+<cmmn:definitions id="_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" name="Underwriting" targetNamespace="http://www.trisotech.com/definitions/_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" xmlns="http://www.trisotech.com/definitions/_4a0c1dbe-7ee7-462e-ad49-6bcb88de8ad7" xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:trisofeed="http://trisotech.com/feed" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:rss="http://purl.org/rss/2.0/" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:trisob="http://www.trisotech.com/2014/triso/bpmn" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:trisocmmn="http://www.trisotech.com/2014/triso/cmmn">
+    <cmmn:case name="Underwriting" id="underwriting">
+        <cmmn:casePlanModel autoComplete="true" name="Underwriting" id="_manual_underwriting">
+            <cmmn:planItem definitionRef="PID_PI_humanTaskDecide" id="PI_humanTaskDecide"/>
+            <cmmn:planItem definitionRef="PID_PI_milestoneApproved" id="PI_milestoneApproved">
+                <cmmn:entryCriterion sentryRef="sentryApproved" id="N65559_entry1"/>
+            </cmmn:planItem>
+            <cmmn:planItem definitionRef="PID_PI_milestoneRejected" id="PI_milestoneRejected">
+                <cmmn:entryCriterion sentryRef="sentryRejected" id="N65564_entry1"/>
+            </cmmn:planItem>
+            <cmmn:planItem definitionRef="PID_PI_humanTaskThereIsMore" id="PI_humanTaskThereIsMore"/>
+            <cmmn:planItem definitionRef="PID_PI_humanTaskCoUnderwriter" id="PI_humanTaskCoUnderwriter"/>
+            <cmmn:planItem definitionRef="PID_PI_processTaskDoctorRequest" id="PI_processTaskDoctorRequest"/>
+            <cmmn:planItem definitionRef="PID_PI_humanTaskTeleInterview" id="PI_humanTaskTeleInterview"/>
+            <cmmn:planItem definitionRef="PID_PI_humanTaskReviewInterview" id="PI_humanTaskReviewInterview">
+                <cmmn:entryCriterion sentryRef="sentryInterviewFourEyesPrinciple" id="N65585_entry1"/>
+            </cmmn:planItem>
+            <cmmn:planItem definitionRef="PID_PI_humanTaskSmoker" id="PI_humanTaskSmoker">
+                <cmmn:entryCriterion sentryRef="sentrySmoker" id="N65590_entry1"/>
+            </cmmn:planItem>
             <cmmn:sentry id="sentryRejected">
-                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide" id="_8361221e-d2f3-4478-a893-f2f45cf32510">
                     <cmmn:standardEvent>complete</cmmn:standardEvent>
                 </cmmn:planItemOnPart>
-				<cmmn:ifPart>
-					<cmmn:condition>
-						<cmmn:body>${!approved}</cmmn:body>
+                <cmmn:ifPart id="_7cce7cf5-b6a3-4615-ac04-a743f142ad34">
+                    <cmmn:condition id="b88a2043-7bc8-448f-a61e-dd5227389791">
+						${!approved}
 					</cmmn:condition>
-				</cmmn:ifPart>                
-            </cmmn:sentry>
-            <cmmn:sentry id="sentryApproved">
-                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide">
-                    <cmmn:standardEvent>complete</cmmn:standardEvent>
-                </cmmn:planItemOnPart>
-				<cmmn:ifPart>
-					<cmmn:condition>
-						<cmmn:body>${approved}</cmmn:body>
-					</cmmn:condition>
-				</cmmn:ifPart>                
+                </cmmn:ifPart>
             </cmmn:sentry>
             <cmmn:sentry id="sentryInterviewFourEyesPrinciple">
-                <cmmn:planItemOnPart sourceRef="PI_humanTaskTeleInterview">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskTeleInterview" triso:userConstraints="true" id="_45455fb7-7307-47ef-82b2-387da237b4b8">
                     <cmmn:standardEvent>complete</cmmn:standardEvent>
                 </cmmn:planItemOnPart>
             </cmmn:sentry>
-
-			<!-- Plan Item Definitions -->
-            <cmmn:humanTask id="humanTaskSmoker" name="adjust risk profile for smoker" isBlocking="true" camunda:assignee="#{underwriter}" camunda:formKey="app:form-missing.jsf" />
-            <cmmn:humanTask id="humanTaskDecide" name="decide on application" isBlocking="true" camunda:assignee="#{underwriter}" camunda:formKey="app:form-decide-application.jsf">
-<!-- 				<cmmn:extensionElements>
-					<camunda:caseExecutionListener event="complete" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
-				</cmmn:extensionElements>
-				             -->
+            <cmmn:sentry id="sentrySmoker">
+                <cmmn:ifPart id="_8a54e75f-c7da-4562-9772-d715775cc5a0">
+                    <cmmn:condition id="b40d219d-e1c9-4e20-a420-d5a4a79bda8b">
+						${application.smoker}
+					</cmmn:condition>
+                </cmmn:ifPart>
+            </cmmn:sentry>
+            <cmmn:sentry id="sentryApproved">
+                <cmmn:planItemOnPart sourceRef="PI_humanTaskDecide" id="f4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7">
+                    <cmmn:standardEvent>complete</cmmn:standardEvent>
+                </cmmn:planItemOnPart>
+                <cmmn:ifPart id="_23bec5a8-8130-49f0-b5ca-7848a153c188">
+                    <cmmn:condition id="_5bdfbd10-45a1-4e5f-b296-f5fb3017fb6b">
+						${approved}
+					</cmmn:condition>
+                </cmmn:ifPart>
+            </cmmn:sentry>
+            <cmmn:humanTask isBlocking="true" name="decide on application" camunda:formKey="app:form-decide-application.jsf" camunda:assignee="#{underwriter}" id="PID_PI_humanTaskDecide"/>
+            <cmmn:milestone name="approved" id="PID_PI_milestoneApproved">
+                <cmmn:extensionElements>
+                    <camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener"/>
+                </cmmn:extensionElements>
+            </cmmn:milestone>
+            <cmmn:milestone name="rejected" id="PID_PI_milestoneRejected">
+                <cmmn:extensionElements>
+                    <camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener"/>
+                </cmmn:extensionElements>
+            </cmmn:milestone>
+            <cmmn:humanTask isBlocking="false" name="..." id="PID_PI_humanTaskThereIsMore">
                 <cmmn:defaultControl>
-					<cmmn:manualActivationRule>
-						<cmmn:condition>
-							<cmmn:body>${false}</cmmn:body>
-						</cmmn:condition>
-					</cmmn:manualActivationRule>
+                    <cmmn:manualActivationRule id="_5bb2cc25-1122-4a0f-b34a-9b315bc7a752"/>
                 </cmmn:defaultControl>
             </cmmn:humanTask>
-            <cmmn:humanTask id="humanTaskCoUnderwriter" name="comment from co-underwriter" isBlocking="true" camunda:assignee="#{underwriter}" camunda:formKey="app:form-missing.jsf" />
-            <cmmn:humanTask id="humanTaskTeleInterview" name="tele-Interview with applicant" isBlocking="true" camunda:assignee="#{underwriter}" camunda:formKey="app:form-missing.jsf"/>
-            <cmmn:humanTask id="humanTaskReviewInterview" name="review interview result" isBlocking="true" camunda:assignee="#{underwriter}" camunda:formKey="app:form-missing.jsf">
+            <cmmn:humanTask isBlocking="true" name="comment from co-underwriter" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}" id="PID_PI_humanTaskCoUnderwriter">
                 <cmmn:defaultControl>
-					<cmmn:manualActivationRule>
-						<cmmn:condition>
-							<cmmn:body>${false}</cmmn:body>
-						</cmmn:condition>
-					</cmmn:manualActivationRule>
-                </cmmn:defaultControl>            
+                    <cmmn:manualActivationRule id="_89ea34e0-4680-49e1-8164-cfbab7137b3b"/>
+                </cmmn:defaultControl>
             </cmmn:humanTask>
-            <cmmn:humanTask id="humanTaskThereIsMore" name="..." isBlocking="false"/>
-
-            <cmmn:processTask id="processTaskDoctorRequest" name="doctor information request"  processRef="DoctorInformationRequest" isBlocking="true" />
-            
-            <cmmn:milestone id="milestoneApproved" name="approved">
-				<cmmn:extensionElements>
-					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
-				</cmmn:extensionElements>             
-            </cmmn:milestone>
-            <cmmn:milestone id="milestoneRejected" name="rejected">
-				<cmmn:extensionElements>
-					<camunda:caseExecutionListener event="occur" class="com.camunda.demo.underwriting.listener.DisableRemainingActivitiesListener" />
-				</cmmn:extensionElements>             
-            </cmmn:milestone>
+            <cmmn:processTask processRef="DoctorInformationRequest" isBlocking="true" name="doctor information request" id="PID_PI_processTaskDoctorRequest">
+                <cmmn:defaultControl>
+                    <cmmn:manualActivationRule id="_8e69722f-bec7-4837-b74a-8b47400dd841"/>
+                </cmmn:defaultControl>
+            </cmmn:processTask>
+            <cmmn:humanTask isBlocking="true" name="tele-Interview with applicant" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}" id="PID_PI_humanTaskTeleInterview">
+                <cmmn:defaultControl>
+                    <cmmn:manualActivationRule id="d503ca27-b1bd-4d8f-9734-575ea85cdb7e"/>
+                </cmmn:defaultControl>
+            </cmmn:humanTask>
+            <cmmn:humanTask isBlocking="true" name="review interview result" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}" id="PID_PI_humanTaskReviewInterview"/>
+            <cmmn:humanTask isBlocking="true" name="adjust risk profile for smoker" camunda:formKey="app:form-missing.jsf" camunda:assignee="#{underwriter}" id="PID_PI_humanTaskSmoker">
+                <cmmn:defaultControl>
+                    <cmmn:manualActivationRule id="cc134c47-61da-43b6-b0f7-2c17b5e9adda"/>
+                </cmmn:defaultControl>
+            </cmmn:humanTask>
         </cmmn:casePlanModel>
     </cmmn:case>
+    <cmmndi:CMMNDI>
+        <cmmndi:CMMNDiagram name="Underwriting" id="P_manual_underwriting" sharedStyle="_378df23d-9b5b-43db-bd01-9453d98f3888">
+            <cmmndi:Size height="715.0" width="993.0"/>
+            <cmmndi:CMMNShape cmmnElementRef="_manual_underwriting" id="Shape__manual_underwriting">
+                <dc:Bounds height="415.0" width="693.0" x="150.0" y="150.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskDecide" id="Shape_PI_humanTaskDecide">
+                <dc:Bounds height="76.0" width="96.0" x="190.0" y="208.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_milestoneApproved" id="Shape_PI_milestoneApproved">
+                <dc:Bounds height="39.0" width="115.0" x="695.0" y="190.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_milestoneRejected" id="Shape_PI_milestoneRejected">
+                <dc:Bounds height="39.0" width="115.0" x="695.0" y="258.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskThereIsMore" id="Shape_PI_humanTaskThereIsMore">
+                <dc:Bounds height="76.0" width="96.0" x="601.0" y="338.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskCoUnderwriter" id="Shape_PI_humanTaskCoUnderwriter">
+                <dc:Bounds height="76.0" width="96.0" x="465.05148" y="338.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_processTaskDoctorRequest" id="Shape_PI_processTaskDoctorRequest">
+                <dc:Bounds height="76.0" width="96.0" x="326.0" y="338.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskTeleInterview" id="Shape_PI_humanTaskTeleInterview">
+                <dc:Bounds height="76.0" width="96.0" x="190.0" y="338.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskReviewInterview" id="Shape_PI_humanTaskReviewInterview">
+                <dc:Bounds height="76.0" width="96.0" x="269.0" y="449.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="PI_humanTaskSmoker" id="Shape_PI_humanTaskSmoker">
+                <dc:Bounds height="76.0" width="96.0" x="465.05148" y="449.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="N65564_entry1" id="Shape_N65564_entry1">
+                <dc:Bounds height="27.999992" width="20.0" x="685.25616" y="267.24493"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="N65585_entry1" id="Shape_N65585_entry1">
+                <dc:Bounds height="28.0" width="20.0" x="259.0" y="473.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="N65590_entry1" id="Shape_N65590_entry1">
+                <dc:Bounds height="28.0" width="20.0" x="455.05148" y="473.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNShape cmmnElementRef="N65559_entry1" id="Shape_N65559_entry1">
+                <dc:Bounds height="28.000004" width="20.0" x="685.05145" y="192.912228"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNShape>
+            <cmmndi:CMMNEdge cmmnElementRef="f4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7" isStandardEventVisible="false" targetCMMNElementRef="N65559_entry1" id="Cf4d4ec3e-4ec9-4a3c-8694-9744e05bcfd7">
+                <di:waypoint x="286.0" y="246.0"/>
+                <di:waypoint x="486.5257340400653" y="246.0"/>
+                <di:waypoint x="486.5257340400653" y="206.91222829189778"/>
+                <di:waypoint x="687.05145" y="206.912228"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNEdge>
+            <cmmndi:CMMNEdge cmmnElementRef="_8361221e-d2f3-4478-a893-f2f45cf32510" isStandardEventVisible="false" targetCMMNElementRef="N65564_entry1" id="C_8361221e-d2f3-4478-a893-f2f45cf32510">
+                <di:waypoint x="286.0" y="246.0"/>
+                <di:waypoint x="486.62807593197135" y="246.0"/>
+                <di:waypoint x="486.62807593197135" y="281.24492464441494"/>
+                <di:waypoint x="687.25616" y="281.24493"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNEdge>
+            <cmmndi:CMMNEdge cmmnElementRef="_45455fb7-7307-47ef-82b2-387da237b4b8" isStandardEventVisible="false" targetCMMNElementRef="N65585_entry1" id="C_45455fb7-7307-47ef-82b2-387da237b4b8">
+                <di:waypoint x="238.49484536082474" y="414.578125"/>
+                <di:waypoint x="238.49484536082474" y="487.0"/>
+                <di:waypoint x="259.0" y="487.0"/>
+                <cmmndi:CMMNLabel/>
+            </cmmndi:CMMNEdge>
+        </cmmndi:CMMNDiagram>
+        <cmmndi:CMMNStyle fontFamily="Arial,Helvetica,sans-serif" id="_378df23d-9b5b-43db-bd01-9453d98f3888"/>
+    </cmmndi:CMMNDI>
 </cmmn:definitions>
 

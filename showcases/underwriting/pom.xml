@@ -13,7 +13,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<camunda.version>7.4.0-alpha3</camunda.version>
+		<camunda.version>7.6.0-alpha3</camunda.version>
 	</properties>
 
 	<dependencyManagement>
