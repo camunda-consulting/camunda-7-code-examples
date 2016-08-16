@@ -49,11 +49,11 @@
 </head>
 <body>
 	<div class="container-fluid">
-	  <h1>CMMN Kanban Board</h1>
+	  <h2>CMMN Kanban Board</h2>
 		<div class="row">
-		  <div class="col-md-4"><h2>Enabled</h2><ul id="enabledExecutions"></ul></div>
-		  <div class="col-md-4"><h2>Active</h2><ul id="activeExecutions"></ul></div>
-		  <div class="col-md-4"><h2>Completed</h2><ul id="completedExecutions"></ul></div>
+		  <div class="col-md-4"><h3 class="bg-info">Enabled</h3><ul id="enabledExecutions"></ul></div>
+		  <div class="col-md-4"><h3 class="bg-primary">Active</h3><ul id="activeExecutions"></ul></div>
+		  <div class="col-md-4"><h3 class="bg-success">Completed</h3><ul id="completedExecutions"></ul></div>
 		</div>
 	</div>
 
@@ -72,15 +72,18 @@
 		function populateList(list, caseExecutions) {
 	    var items = [];
 	    $.each(caseExecutions, function (id, caseExecution) {
-	        items.push('<li>' + caseExecution.activityName + '</li>');
-	    });  
+	        items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+	    });
 	    list.html(items.join(''));
 	  }
-		
-		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
-		  populateList($("#enabledExecutions"), enabledExecutions);
-	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
+
+    $.get(restAccess + '/case-execution?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
+      populateList($("#enabledExecutions"), enabledExecutions);
+	    $.get(restAccess + '/case-execution?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
 	      populateList($("#activeExecutions"), activeExecutions);
+	      $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
+	        populateList($("#completedExecutions"), completedExecutions);
+	      });
 	    });
 		});
 
