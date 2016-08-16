@@ -37,7 +37,7 @@ public class DefaultFilter {
 
   private static String createFilter(ProcessEngine engine, String filterName) {
     if (FILTER_groupTasksFilter.equals(filterName)) {
-      return createFilter(engine, "Group Tasks", -20, "Tasks assigned to my Groups", //
+      return createFilter(engine, "My Group Tasks", -20, "Tasks assigned to my Groups", //
           engine.getTaskService().createTaskQuery().taskCandidateGroupInExpression("${currentUserGroups()}").taskUnassigned());
     }
     if (FILTER_myTasks.equals(filterName)) {

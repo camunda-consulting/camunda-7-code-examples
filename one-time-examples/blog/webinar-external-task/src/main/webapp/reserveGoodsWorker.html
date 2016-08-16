@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>External Task Demo</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+	
+    <div class="container-fluid">
+    
+	    <h1>Warehouse Worker</h1>
+	   
+	    <div class="row">
+	    	<div class="col-md-12">
+					    <button onclick="receiveExternalTasks()" class="btn btn-default">Receive Tasks</button>
+					    <div class="table-responsive">		    
+							<table id="tablereserveGoods" class="table table-striped">
+							    <thead>
+							        <tr>
+							            <th>Received External Task for processing</th>
+							        </tr>
+							    </thead>
+							    <tbody>
+							    </tbody>    
+							</table>
+						</div>
+	    	</div>
+		</div>
+	</div>
+	
+    <script>
+    var REST_BASE_URL = "http://localhost:8080/engine-rest/engine/default";
+
+    function receiveExternalTasks() {
+ 		var fetchRequest = {
+	  			"workerId":"jsWorker01",
+	  			"maxTasks":15,
+	  			"topics": [
+	  				{
+	  					"topicName": 'reserveGoods',
+						"lockDuration": 10000,
+	      				"variables": ["order"]
+	      			}
+	      	    ]
+			}
+       
+		   $.ajax(REST_BASE_URL + '/external-task/fetchAndLock/', {
+		         data: JSON.stringify(fetchRequest),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+		         
+					for (var index = 0; index < result.length; ++index) {
+						var externalTask = result[index];
+				
+					    console.log(externalTask);
+			        	addRowToTable('tablereserveGoods', JSON.stringify(externalTask));
+						
+						$.ajax(REST_BASE_URL + '/external-task/' + externalTask.id + '/complete', {
+		         			data: JSON.stringify({"workerId":"jsWorker01"}),
+		         			contentType : 'application/json',
+		         			type : 'POST'
+					    });
+					}		            
+		         }
+		    });
+	};
+	
+	
+	function addRowToTable(tableName, content) {
+		  var tableRef = document.getElementById(tableName).getElementsByTagName('tbody')[0];
+
+		  // Insert a row in the table at row index 0
+		  var newRow   = tableRef.insertRow(tableRef.rows.length);
+		
+		  // Insert a cell in the row at index 0
+		  var newCell  = newRow.insertCell(0);
+		
+		  // Append a text node to the cell
+		  var newText  = document.createTextNode(content)
+		  newCell.appendChild(newText);
+	}
+    </script>    
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

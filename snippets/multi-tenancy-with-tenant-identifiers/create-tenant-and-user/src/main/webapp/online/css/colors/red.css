@@ -1,0 +1,72 @@
+ /* Red #9e0b0f & #d12d32 */
+
+.btn:focus, .subscribe-btn, .progress .progress-bar, .accordionMod .panel-heading .current, #current:after, .tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover, .contact-box:hover, #options li a.selected, .ch-info-front {
+    background: #9e0b0f;
+}
+
+.bg-color {
+    background: #9e0b0f;
+	color: #fff;
+}
+
+.spinner {
+	border-top-color: #9e0b0f;
+}
+
+.ch-info-back {
+	background: rgba(158, 11, 15, 0.7) !important;
+}
+
+.tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover {
+	border-color: #9e0b0f;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pager li > a:hover, .pager li > a:focus, .navbar-toggle i, .cn-wrapper li a, .cn-wrapper:after {
+    background-color: #9e0b0f;
+    color: #fff;
+}
+
+.hero {
+    border-left-color: #9e0b0f;
+}
+
+
+.ie8 .btn-color, .ie9 .btn-color {
+	background: #9e0b0f !important;
+}
+
+.ie8 .btn-color:hover, .ie9 .btn-color:hover {
+	background: #9e0b0f !important;
+}
+
+.btn-color:hover, .subscribe-btn:hover {
+	background: #d12d32;
+}
+
+.btn-color, .subscribe-btn {
+	background: #9e0b0f;
+	cursor: pointer;
+}
+
+
+#current,.menu ul li a:hover,.menu ul>li:hover>a {
+    border-bottom: 3px solid #9e0b0f;
+}
+
+ul.why li:before {
+    background: #9e0b0f;
+}
+
+.menu ul ul {
+    border-top: 3px solid #9e0b0f !important;
+}
+
+
+
+.author-content, div.content-box.big, #cn-tabs .service, .comment-des, .contact-box {
+	border-bottom-color:#9e0b0f;
+}
+
+a, .post-item h4 a:hover, .cn-wrapper li a:hover, .cn-wrapper li a.active, .color {
+    color: #9e0b0f;
+}

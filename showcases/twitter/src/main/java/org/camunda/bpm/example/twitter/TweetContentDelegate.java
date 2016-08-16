@@ -1,5 +1,7 @@
 package org.camunda.bpm.example.twitter;
 
+import java.net.UnknownHostException;
+
 import javax.inject.Named;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -20,6 +22,11 @@ public class TweetContentDelegate implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
 	try {
 	    String content = (String) execution.getVariable("content");
+	    
+	    // For webex demos, force a network error
+	    if ("network error".equals(content)) {
+	      throw new UnknownHostException("demo twitter account");
+	    }
 	      
 	    AccessToken accessToken = new AccessToken("220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo", "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say");
 	    Twitter twitter = new TwitterFactory().getInstance();

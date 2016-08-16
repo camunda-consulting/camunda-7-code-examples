@@ -1,0 +1,110 @@
+<ng-include src="cssPath"></ng-include>
+
+<table class="cam-table">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Overdue</th>
+            <th>Target Duration</th>
+            <th>Current Duration</th>
+            <th>Started</th>
+            <th>Finished</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <span tooltip="Process completed" ng-if="processInst.endTime" class="glyphicon glyphicon-ok-circle"></span>
+                <span tooltip="Process running" ng-if="!processInst.endTime" class="glyphicon glyphicon-adjust"></span>
+            </td>
+            <td>
+                <span ng-if="processInst.overdue" tooltip="Overdue for {{processInst.overdueDuration}}" class="glyphicon glyphicon-exclamation-sign kpi-process-overlay-red"></span>
+                <span ng-if="!processInst.overdue" tooltip="In time" class="glyphicon glyphicon-ok-sign kpi-process-overlay-green"></span>
+            </td>
+            <td>{{processInst.targetDuration}}</td>
+            <td>{{processInst.currentDuration}}</td>
+            <td>{{processInst.startTime}}</td>
+            <td>{{processInst.endTime}}</td>
+        </tr>
+    </tbody>
+</table>
+<table class="cam-table">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Overdue</th>
+            <th>Activity</th>
+            <th>Target Duration</th>
+            <th>Current Duration</th>
+            <th>Started</th>
+            <th>Finished</th>
+            <th>
+                <select class="form-control" ng-model="search.$type" value="">
+                    <option value="">All Types</option>
+                    <option ng-repeat="filter in typeFilters" value="{{filter}}">{{filter.replace('bpmn:','')}}</option>
+                </select>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="task in taskActivityInstances | filter:search | orderBy:['task.startTime','-task.endTime']">
+           
+            <td>
+                <span tooltip="Activity completed" ng-if="task.endTime" class="glyphicon glyphicon-ok-circle"></span>
+                <span tooltip="Activity running" ng-if="!task.endTime && task.startTime" class="glyphicon glyphicon-adjust"></span>
+            </td>
+            <td>
+                <p>
+                    <span ng-if="task.overdue" tooltip="Overdue for {{task.overdueTime}}" class="glyphicon glyphicon-exclamation-sign" style="color:#b5152b;"> </span>
+                    <span ng-if="!task.overdue && task.startTime" tooltip="In time" class="glyphicon glyphicon-ok-sign" style="color: green;"> </span>
+                </p>
+            </td>
+ 			<td>
+                <a ng-click="selectActivity(task.id)" ng-href="{{ task.link }}" ng-if="task.link" tooltip="{{ task.bpmnElement.id }}"><b>{{ task.bpmnElement.name }}</b></a>
+                <span ng-if="!task.link" tooltip="{{task.bpmnElement.id}}">
+          <b>{{task.bpmnElement.name}}</b>
+        </span>
+            </td>
+            <td>
+                <p>
+                    {{ task.bpmnElement.kpiData.kpi }} {{ task.bpmnElement.kpiData.kpiunit }}
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    {{ task.duration || '-'}}
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    {{ task.startTime || '-'}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{ task.endTime || '-'}}
+                </p>
+            </td>
+            <td>
+                {{task.bpmnElement.$type.replace('bpmn:','')}}
+            </td>
+
+
+        </tr>
+
+        <tr ng-if="!taskActivityInstances">
+            <td colspan="6">
+                <i class="icon-loading"></i> loading activities...
+            </td>
+        </tr>
+
+        <tr ng-if="taskActivityInstances && !taskActivityInstances.length">
+            <td colspan="6">
+                No activities
+            </td>
+        </tr>
+
+    </tbody>
+</table>

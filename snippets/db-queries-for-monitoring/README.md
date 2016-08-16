@@ -156,4 +156,10 @@ historyService.createNativeHistoricProcessInstanceQuery().sql(
     + managementService.getTableName(HistoricProcessInstance.class) + " WHERE END_ACT_ID_ = #{endActivityId}")
   .parameter("endActivityId", "endEvent_23")
   .count();
+
+// Number of failed job incidents for a given process definition
+runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").incidentType(Incident.FAILED_JOB_HANDLER_TYPE).count();
+
+// Number of external task incidents for a given process definition
+runtimeService.createProcessInstanceQuery().processDefinitionKey("my-process").incidentType(Incident.EXTERNAL_TASK_HANDLER_TYPE).count();
 ```

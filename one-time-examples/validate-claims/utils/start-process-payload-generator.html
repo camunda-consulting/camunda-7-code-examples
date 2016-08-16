@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>Escape for JSON and Javascript online tool</title>
+
+<style>
+* {padding:0;margin:0;}
+body {background:#ecd6b9;font-family:Arial,sans-serif;color:#5d5449;font-size:16px;}
+.cont {padding:20px 50px;margin:0 auto;max-width:500px;}
+.block {max-width:500px;}
+textarea,input {width:100%}
+textarea {height:100px;}
+p, h1 {margin:20px 0;}
+h1 {font-size:40px;}
+small {font-size:10px;color:#bbaa93;}
+small a {color:#b6b2c8;}
+.noJsError {color:#900;font-weight:bold;}
+.jsEnabled .noJsError {display:none;}
+.descDisabled .desc {display:none;}
+
+@media (min-width:1200px) {
+h1 {font-size:50px;}
+.cont {max-width:none;width:1200px;padding:0;}
+.block {max-width:none;width:500px;float:left;padding:20px 50px;}
+.descDisabled .block {width:1100px;}
+}
+@media (min-width:1200px) and (min-height:700px) {
+textarea {height:200px;}
+}
+@media (min-width:1200px) and (min-height:900px) {
+textarea {height:300px;}
+}
+
+@media (max-width:400px) {
+h1 {font-size:20px;}
+.cont {padding:5px 10px;}
+}
+</style>
+
+<div class="cont">
+
+<div class="block desc">
+
+<h1>Generate payload for /process-definition/key/{key}/start from JSON variable</h1>
+
+<p>
+This tool lets you convert a normal string including 
+newlines, quotes and unicode characters into a payload
+string literal ready to use in your REST client.
+<a href="#nodesc">hide</a>
+</p>
+
+<p class="noJsError">
+You neeed Javascript enabled in your browser for this to work.
+</p>
+
+<p><small>
+&copy; Public Domain. 
+NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+Created 2011 by <a href="http://bernhardhaeussner.de/">Bernhard Häussner</a>. 
+Escaping code borrowed from Douglas Crockford's 
+<a href="https://github.com/douglascrockford/JSON-js/blob/ad6079cbd8dc362a3cc42e1f97c01aa5ccd48bfe/json2.js#L211"
+   title="line 211 of file json2.js at ad6079cbd8 in JSON-js by douglascrockford on github">
+JSON-js</a>. 
+</small></p>
+
+</div>
+<div class="block" id="app">
+
+
+<p>Normal:<br/>
+<textarea id="normal">example
+"text"</textarea></p>
+
+<p><input type="button" value="&darr; escape &darr;" id="btnEscape"/></p>
+
+<p>Ready to post as payload:<br/>
+<textarea id="jsonesc">{\"variables\":{\n\"claims\":{\n\"value\":"example\n\"text\""</textarea></p>
+
+</div>
+
+
+<script>
+
+document.body.className+=" jsEnabled";
+
+document.getElementById('btnEscape').onclick=function(){
+  var inp = document.getElementById('normal').value;
+  var outp = json_quote(inp);
+  document.getElementById('jsonesc').value=outp;
+}
+
+
+function hachcheck() {
+  if(window.location.hash == "#nodesc") {
+    document.body.className+=" descDisabled";
+    var a=document.createElement('a');
+    a.id='descLink';
+    a.href='#desc';
+    var tx=document.createTextNode('show description')
+    a.appendChild(tx);
+    document.getElementById('app').appendChild(a);
+  } else {
+    document.body.className=document.body.className.replace(/\bdescDisabled\b/g,'');
+    if(document.getElementById('descLink'))
+      document.getElementById('app').removeChild(document.getElementById('descLink'));
+  }
+}
+
+hachcheck();
+window.onhashchange=hachcheck;
+
+var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+    meta = { // table of character substitutions
+        '\b': '\\b',
+        '\t': '\\t',
+        '\n': '\\n',
+        '\f': '\\f',
+        '\r': '\\r',
+        '"' : '\\"',
+        '\\': '\\\\'
+    };
+
+function json_quote(string) {
+  escapable.lastIndex = 0;
+  var escapedBody = escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+      var c = meta[a];
+      return typeof c === 'string' ? c :
+          '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+  }) + '"' : '"' + string + '"';
+  var prefix = "{\"variables\":{\n\"claims\":{\n\"value\":";
+  var postfix = ",\n        \"type\": \"json\",\n        \"valueInfo\":{\"serializationDataFormat\":\"application/json\"}\n        },"
+  	+"    \"selectedRepairServicePartnerId\":{\n  \"value\": 11  }\n    }\n}";
+  return prefix + escapedBody + postfix;
+}
+
+</script>

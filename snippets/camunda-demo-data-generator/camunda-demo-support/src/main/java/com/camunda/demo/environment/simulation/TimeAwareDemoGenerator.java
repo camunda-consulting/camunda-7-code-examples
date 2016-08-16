@@ -223,7 +223,11 @@ public class TimeAwareDemoGenerator {
     Collection<SequenceFlow> flows = xorGateway.getOutgoing();
     if (flows.size() > 1) { // if outgoing flows = 1 it is a joining gateway
       for (SequenceFlow sequenceFlow : flows) {
-        double probability = Double.valueOf(readCamundaProperty(sequenceFlow, "probability"));
+        String camundaProperty = readCamundaProperty(sequenceFlow, "probability");
+        double probability = 1; // default
+        if (camundaProperty!=null) {
+        	probability = Double.valueOf(camundaProperty);
+        }
 
         ConditionExpression conditionExpression = bpmn.newInstance(ConditionExpression.class);
         conditionExpression.setTextContent("#{" + var + " >= " + probabilitySum + " && " + var + " < " + (probabilitySum + probability) + "}");
@@ -440,8 +444,18 @@ protected boolean handleMessages(ProcessEngine engine, ProcessInstance pi, List<
   protected NormalDistribution createDistributionForElement(ProcessInstance pi, String id) {
     try {
       BaseElement taskElement = engine.getRepositoryService().getBpmnModelInstance(pi.getProcessDefinitionId()).getModelElementById(id);
-      double durationMean = Double.parseDouble(readCamundaProperty(taskElement, "durationMean"));
-      double durationStandardDeviation = Double.parseDouble(readCamundaProperty(taskElement, "durationSd"));
+      
+	  double durationMean = 600; // Default = 10 minutes
+      String camundaPropertyMean = readCamundaProperty(taskElement, "durationMean");
+      if (camundaPropertyMean!= null) {
+    	  durationMean = Double.parseDouble(camundaPropertyMean);
+      }
+      
+	  double durationStandardDeviation = 600; // Default also 10 minutes
+	  String camundaPropertySd = readCamundaProperty(taskElement, "durationSd");
+	  if (camundaPropertySd!=null) {
+		  durationStandardDeviation = Double.parseDouble(camundaPropertySd);
+	  }
   
       NormalDistribution distribution = new NormalDistribution(durationMean, durationStandardDeviation);
       return distribution;
@@ -452,6 +466,9 @@ protected boolean handleMessages(ProcessEngine engine, ProcessInstance pi, List<
   }
 
   private String readCamundaProperty(BaseElement modelElementInstance, String propertyName) {
+	if (modelElementInstance.getExtensionElements()==null) {
+	  return null;
+	}
     Collection<CamundaProperty> properties = modelElementInstance.getExtensionElements().getElementsQuery() //
         .filterByType(CamundaProperties.class) //
         .singleResult() //

@@ -14,7 +14,7 @@ ngDefine('cockpit.plugin.reporting-process-count',
 
   var ProcessDefinitionKpiController = function($scope, $http, Uri) {
   	var baseUrl = "plugin://reporting-process-count/:engine/" + $scope.processDefinition.key;
-    $http.get(Uri.appUri(baseUrl + "/process-instance-count"))
+  	$http.get(Uri.appUri(baseUrl + "/process-instance-count"))
       .success(function(data) {
 					printStartedInstances(data);
       });
@@ -33,7 +33,7 @@ ngDefine('cockpit.plugin.reporting-process-count',
   
   var Configuration = function Configuration(ViewsProvider) {
 
-	    ViewsProvider.registerDefaultView('cockpit.dashboard', {
+	    ViewsProvider.registerDefaultView('cockpit.dashboard.section', {
 	      id: 'process-definitions',
 	      label: 'Statistics',
 	      url: 'plugin://reporting-process-count/static/app/dashboard.html',

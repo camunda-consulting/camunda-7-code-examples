@@ -1,0 +1,72 @@
+/*Teal #008080 & #1cb8b8 */
+
+.btn:focus, .subscribe-btn, .progress .progress-bar, .accordionMod .panel-heading .current, #current:after, .tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover, .contact-box:hover, #options li a.selected, .ch-info-front {
+    background: #008080;
+}
+
+.bg-color {
+    background: #008080;
+	color: #fff;
+}
+
+.spinner {
+	border-top-color: #008080;
+}
+
+.ch-info-back {
+	background: rgba(0, 128, 128, 0.7) !important;
+}
+
+.tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover {
+	border-color: #008080;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pager li > a:hover, .pager li > a:focus, .navbar-toggle i, .cn-wrapper li a, .cn-wrapper:after {
+    background-color: #008080;
+    color: #fff;
+}
+
+.hero {
+    border-left-color: #008080;
+}
+
+
+.ie8 .btn-color, .ie9 .btn-color {
+	background: #008080 !important;
+}
+
+.ie8 .btn-color:hover, .ie9 .btn-color:hover {
+	background: #008080 !important;
+}
+
+.btn-color:hover, .subscribe-btn:hover {
+	background: #1cb8b8;
+}
+
+.btn-color, .subscribe-btn {
+	background: #008080;
+	cursor: pointer;
+}
+
+
+#current,.menu ul li a:hover,.menu ul>li:hover>a {
+    border-bottom: 3px solid #008080;
+}
+
+ul.why li:before {
+    background: #008080;
+}
+
+.menu ul ul {
+    border-top: 3px solid #008080 !important;
+}
+
+
+
+.author-content, div.content-box.big, #cn-tabs .service, .comment-des, .contact-box {
+	border-bottom-color:#008080;
+}
+
+a, .post-item h4 a:hover, .cn-wrapper li a:hover, .cn-wrapper li a.active, .color {
+    color: #008080;
+}

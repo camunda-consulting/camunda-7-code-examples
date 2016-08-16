@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cockpit.kpi">
+	<resultMap id="taskStatisticHistory" type="org.camunda.consulting.cockpit.plugin.kpioverview.dto.TaskStatisticHistoryDto">
+		<result property="activityId" column="ACT_ID_" />
+		<result property="processInstanceId" column="PROC_INST_ID_" />
+   		<result property="definitionId" column="PROC_DEF_ID_" />
+   		<result property="startTime" column="START_TIME_" />
+   		<result property="endTime" column="END_TIME_" />
+   		<result property="diff" column="DIFF" />
+ 	</resultMap>
+
+ <select id="selectTaskStatisticHistory" parameterType="java.util.Map" resultMap="taskStatisticHistory">
+SELECT
+	ACT_ID_, PROC_INST_ID_, PROC_DEF_ID_, START_TIME_, END_TIME_, DATEDIFF(#{parameter.statisticDataUnit}, START_TIME_, NOW()) AS DIFF
+FROM
+	ACT_HI_ACTINST
+WHERE
+	PROC_DEF_ID_ = #{parameter.processDefinitionId} AND
+	ACT_ID_ = #{parameter.taskId} AND
+	END_TIME_ IS null
+ </select>
+</mapper>

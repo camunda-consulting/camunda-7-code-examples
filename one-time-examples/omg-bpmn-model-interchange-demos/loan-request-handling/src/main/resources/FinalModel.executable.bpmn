@@ -28,10 +28,10 @@
         <semantic:flowNodeRef>BoundaryEvent_01tha91</semantic:flowNodeRef>
       </semantic:lane>
       <semantic:lane id="_1db71c7d-a5c2-40a2-be7d-4b2935ef470b" name="Branch office manager&#10;">
-        <semantic:flowNodeRef>_4d41de8f-44f0-4dba-b271-55bd83e6443c</semantic:flowNodeRef>
-        <semantic:flowNodeRef>_1a2200db-e713-4f40-9631-435e12901415</semantic:flowNodeRef>
-        <semantic:flowNodeRef>ExclusiveGateway_Validated</semantic:flowNodeRef>
         <semantic:flowNodeRef>_bf66cc47-c8b6-4d4e-a17a-eac435da27b8</semantic:flowNodeRef>
+        <semantic:flowNodeRef>_4d41de8f-44f0-4dba-b271-55bd83e6443c</semantic:flowNodeRef>
+        <semantic:flowNodeRef>ExclusiveGateway_Validated</semantic:flowNodeRef>
+        <semantic:flowNodeRef>_1a2200db-e713-4f40-9631-435e12901415</semantic:flowNodeRef>
       </semantic:lane>
       <semantic:lane id="_1825d933-272d-4a6c-8b02-f48c078ee83d" name="IT">
         <semantic:flowNodeRef>_8786cf05-8210-4649-b41e-4ffd27bc6b43</semantic:flowNodeRef>
@@ -123,8 +123,8 @@
     <semantic:receiveTask id="fc8b2686-a70c-49df-bdb6-601ffcb14b36" name="Receive signed loan offer" implementation="##WebService" messageRef="_03778123-be84-4dc8-99ac-03f5dc08ad0b">
       <semantic:extensionElements>
         <camunda:properties>
-          <camunda:property name="durationMean" value="1200" />
-          <camunda:property name="durationSd" value="300" />
+          <camunda:property name="durationMean" value="60" />
+          <camunda:property name="durationSd" value="30" />
         </camunda:properties>
       </semantic:extensionElements>
       <semantic:incoming>f62a3868-64f3-44af-981d-5a18c8d46267</semantic:incoming>
@@ -146,7 +146,7 @@
     </semantic:receiveTask>
     <semantic:boundaryEvent id="m179958ec-d6e0-4160-8b36-a3ec0061f617" name="Cancellation" attachedToRef="fc8b2686-a70c-49df-bdb6-601ffcb14b36">
       <semantic:outgoing>e508f29e-7616-47cf-91e5-07c24c7bdcf8</semantic:outgoing>
-      <semantic:signalEventDefinition signalRef="signal3" />
+      <semantic:signalEventDefinition signalRef="signal2" />
     </semantic:boundaryEvent>
     <semantic:sequenceFlow id="e508f29e-7616-47cf-91e5-07c24c7bdcf8" sourceRef="m179958ec-d6e0-4160-8b36-a3ec0061f617" targetRef="b42c919d-5121-453e-9902-e28424e9fcf7" />
     <semantic:endEvent id="b42c919d-5121-453e-9902-e28424e9fcf7" name="Loan offer cancelled by customer">
@@ -226,18 +226,26 @@
     <semantic:dataObjectReference id="de84dd39-2440-4e2d-8b40-f831929d196b" name="Status" dataObjectRef="REF-de84dd39-2440-4e2d-8b40-f831929d196b">
       <semantic:dataState />
     </semantic:dataObjectReference>
+    <semantic:endEvent id="_bf66cc47-c8b6-4d4e-a17a-eac435da27b8" name="Loan offer not validated">
+      <semantic:incoming>_140000ef-df10-4bf4-9906-86c1efa04260</semantic:incoming>
+    </semantic:endEvent>
     <semantic:sequenceFlow id="_140000ef-df10-4bf4-9906-86c1efa04260" sourceRef="_4d41de8f-44f0-4dba-b271-55bd83e6443c" targetRef="_bf66cc47-c8b6-4d4e-a17a-eac435da27b8" />
     <semantic:serviceTask id="_4d41de8f-44f0-4dba-b271-55bd83e6443c" name="Notify Customer and Branch Office" implementation="##WebService" camunda:expression="${true}">
       <semantic:incoming>_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5</semantic:incoming>
       <semantic:outgoing>_140000ef-df10-4bf4-9906-86c1efa04260</semantic:outgoing>
     </semantic:serviceTask>
-    <semantic:sequenceFlow id="_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5" name="No" sourceRef="ExclusiveGateway_Validated" targetRef="_4d41de8f-44f0-4dba-b271-55bd83e6443c">
+    <semantic:sequenceFlow id="_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5" sourceRef="ExclusiveGateway_Validated" targetRef="_4d41de8f-44f0-4dba-b271-55bd83e6443c">
       <semantic:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="20" />
         </camunda:properties>
       </semantic:extensionElements>
     </semantic:sequenceFlow>
+    <semantic:exclusiveGateway id="ExclusiveGateway_Validated" name="Validated?">
+      <semantic:incoming>_2a2e03cb-182b-4a49-a641-a54d4dd30c8d</semantic:incoming>
+      <semantic:outgoing>_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5</semantic:outgoing>
+      <semantic:outgoing>_fdcd745b-eba7-4d00-bb43-a815d46b3413</semantic:outgoing>
+    </semantic:exclusiveGateway>
     <semantic:sequenceFlow id="_2a2e03cb-182b-4a49-a641-a54d4dd30c8d" sourceRef="_1a2200db-e713-4f40-9631-435e12901415" targetRef="ExclusiveGateway_Validated" />
     <semantic:sequenceFlow id="_fdcd745b-eba7-4d00-bb43-a815d46b3413" name="Yes" sourceRef="ExclusiveGateway_Validated" targetRef="_8786cf05-8210-4649-b41e-4ffd27bc6b43">
       <semantic:extensionElements>
@@ -247,37 +255,7 @@
       </semantic:extensionElements>
       <semantic:conditionExpression xsi:type="semantic:tFormalExpression">${true}</semantic:conditionExpression>
     </semantic:sequenceFlow>
-    <semantic:scriptTask id="_8786cf05-8210-4649-b41e-4ffd27bc6b43" name="Transfer money on customer account" scriptFormat="JavaScript">
-      <semantic:incoming>_fdcd745b-eba7-4d00-bb43-a815d46b3413</semantic:incoming>
-      <semantic:outgoing>_8883d66f-6055-4329-adb1-96270a2e8fa2</semantic:outgoing>
-      <semantic:script><![CDATA[print('transferService.transfer(amount, account)');]]></semantic:script>
-    </semantic:scriptTask>
-    <semantic:sequenceFlow id="_8883d66f-6055-4329-adb1-96270a2e8fa2" sourceRef="_8786cf05-8210-4649-b41e-4ffd27bc6b43" targetRef="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" triso:userConstraints="true" />
-    <semantic:intermediateCatchEvent id="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" name="Every Month">
-      <semantic:incoming>_8883d66f-6055-4329-adb1-96270a2e8fa2</semantic:incoming>
-      <semantic:outgoing>_e1d7bdf9-3ffc-479f-9035-a4c1604da39e</semantic:outgoing>
-      <semantic:timerEventDefinition>
-        <semantic:timeCycle xsi:type="semantic:tFormalExpression">R24/P1M</semantic:timeCycle>
-      </semantic:timerEventDefinition>
-    </semantic:intermediateCatchEvent>
-    <semantic:sequenceFlow id="_e1d7bdf9-3ffc-479f-9035-a4c1604da39e" sourceRef="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" targetRef="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" triso:userConstraints="true" />
-    <semantic:scriptTask id="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" name="Monthly debit customer account" scriptFormat="JavaScript">
-      <semantic:incoming>_e1d7bdf9-3ffc-479f-9035-a4c1604da39e</semantic:incoming>
-      <semantic:outgoing>_1cb49460-c352-4120-8f9e-2c4c7e6ee693</semantic:outgoing>
-      <semantic:script><![CDATA[print('debitService.calculate()');]]></semantic:script>
-    </semantic:scriptTask>
-    <semantic:sequenceFlow id="_1cb49460-c352-4120-8f9e-2c4c7e6ee693" sourceRef="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" targetRef="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" triso:userConstraints="true" />
-    <semantic:endEvent id="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" name="Loan&#10;completed">
-      <semantic:incoming>_1cb49460-c352-4120-8f9e-2c4c7e6ee693</semantic:incoming>
-    </semantic:endEvent>
-    <semantic:sequenceFlow id="SequenceFlow_0jr49i7" sourceRef="fc8b2686-a70c-49df-bdb6-601ffcb14b36" targetRef="_1a2200db-e713-4f40-9631-435e12901415" />
-    <semantic:boundaryEvent id="BoundaryEvent_01tha91" name="Every 10 days" cancelActivity="false" attachedToRef="fc8b2686-a70c-49df-bdb6-601ffcb14b36">
-      <semantic:outgoing>m09f91fad-9dee-484b-b6c2-795924c05785</semantic:outgoing>
-      <semantic:timerEventDefinition>
-        <semantic:timeCycle xsi:type="semantic:tFormalExpression">R1/PT10M</semantic:timeCycle>
-      </semantic:timerEventDefinition>
-    </semantic:boundaryEvent>
-    <semantic:userTask id="_1a2200db-e713-4f40-9631-435e12901415" name="Validate&#10;loan offer" implementation="##WebService">
+    <semantic:userTask id="_1a2200db-e713-4f40-9631-435e12901415" name="Validate loan offer" implementation="##WebService">
       <semantic:extensionElements>
         <camunda:properties>
           <camunda:property name="durationMean" value="600" />
@@ -296,10 +274,9 @@
           <semantic:dataOutputRefs>_f305f6dd-fef3-4ffd-8072-5580470326ef</semantic:dataOutputRefs>
         </semantic:outputSet>
       </semantic:ioSpecification>
-      <semantic:property id="Property_13zkd0k" name="__targetRef_placeholder" />
       <semantic:dataInputAssociation id="_632d2e70-bded-4251-980c-e35078f0e4db">
         <semantic:sourceRef>aaf7b8a9-2384-4d52-93a3-06f29901fbd7</semantic:sourceRef>
-        <semantic:targetRef>Property_13zkd0k</semantic:targetRef>
+        <semantic:targetRef>_84a12c33-2968-4ea4-9ca0-caaec523137d</semantic:targetRef>
       </semantic:dataInputAssociation>
       <semantic:dataOutputAssociation id="_41a692b6-e100-47e7-b0eb-82aee9f5d9b5" triso:userConstraints="true">
         <semantic:sourceRef>_f305f6dd-fef3-4ffd-8072-5580470326ef</semantic:sourceRef>
@@ -307,14 +284,36 @@
       </semantic:dataOutputAssociation>
       <semantic:performer id="_7eb212be-99be-402f-b6e9-a090ab66424d" />
     </semantic:userTask>
-    <semantic:exclusiveGateway id="ExclusiveGateway_Validated" name="Validated?">
-      <semantic:incoming>_2a2e03cb-182b-4a49-a641-a54d4dd30c8d</semantic:incoming>
-      <semantic:outgoing>_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5</semantic:outgoing>
-      <semantic:outgoing>_fdcd745b-eba7-4d00-bb43-a815d46b3413</semantic:outgoing>
-    </semantic:exclusiveGateway>
-    <semantic:endEvent id="_bf66cc47-c8b6-4d4e-a17a-eac435da27b8" name="Loan offer not validated">
-      <semantic:incoming>_140000ef-df10-4bf4-9906-86c1efa04260</semantic:incoming>
+    <semantic:scriptTask id="_8786cf05-8210-4649-b41e-4ffd27bc6b43" name="Transfer money on customer account" scriptFormat="javascript">
+      <semantic:incoming>_fdcd745b-eba7-4d00-bb43-a815d46b3413</semantic:incoming>
+      <semantic:outgoing>_8883d66f-6055-4329-adb1-96270a2e8fa2</semantic:outgoing>
+      <semantic:script><![CDATA[java.lang.System.out.println("test");]]></semantic:script>
+    </semantic:scriptTask>
+    <semantic:sequenceFlow id="_8883d66f-6055-4329-adb1-96270a2e8fa2" sourceRef="_8786cf05-8210-4649-b41e-4ffd27bc6b43" targetRef="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" triso:userConstraints="true" />
+    <semantic:intermediateCatchEvent id="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" name="Every Month">
+      <semantic:incoming>_8883d66f-6055-4329-adb1-96270a2e8fa2</semantic:incoming>
+      <semantic:outgoing>_e1d7bdf9-3ffc-479f-9035-a4c1604da39e</semantic:outgoing>
+      <semantic:timerEventDefinition>
+        <semantic:timeCycle xsi:type="semantic:tFormalExpression">R24/P1M</semantic:timeCycle>
+      </semantic:timerEventDefinition>
+    </semantic:intermediateCatchEvent>
+    <semantic:sequenceFlow id="_e1d7bdf9-3ffc-479f-9035-a4c1604da39e" sourceRef="_8fddaebf-8539-4e64-9c4b-1b75ecaf87fb" targetRef="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" triso:userConstraints="true" />
+    <semantic:scriptTask id="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" name="Monthly debit customer account" scriptFormat="javascript">
+      <semantic:incoming>_e1d7bdf9-3ffc-479f-9035-a4c1604da39e</semantic:incoming>
+      <semantic:outgoing>_1cb49460-c352-4120-8f9e-2c4c7e6ee693</semantic:outgoing>
+      <semantic:script><![CDATA[java.lang.System.out.println("test");]]></semantic:script>
+    </semantic:scriptTask>
+    <semantic:sequenceFlow id="_1cb49460-c352-4120-8f9e-2c4c7e6ee693" sourceRef="_35949c41-f3d6-44f1-97e2-f9b8a2cb8df3" targetRef="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" triso:userConstraints="true" />
+    <semantic:endEvent id="_e403315f-047a-4aa6-88f4-7bf3ab1945c6" name="Loan&#10;completed">
+      <semantic:incoming>_1cb49460-c352-4120-8f9e-2c4c7e6ee693</semantic:incoming>
     </semantic:endEvent>
+    <semantic:sequenceFlow id="SequenceFlow_0jr49i7" sourceRef="fc8b2686-a70c-49df-bdb6-601ffcb14b36" targetRef="_1a2200db-e713-4f40-9631-435e12901415" />
+    <semantic:boundaryEvent id="BoundaryEvent_01tha91" name="Every 10 days" cancelActivity="false" attachedToRef="fc8b2686-a70c-49df-bdb6-601ffcb14b36">
+      <semantic:outgoing>m09f91fad-9dee-484b-b6c2-795924c05785</semantic:outgoing>
+      <semantic:timerEventDefinition>
+        <semantic:timeCycle xsi:type="semantic:tFormalExpression">R1/PT10M</semantic:timeCycle>
+      </semantic:timerEventDefinition>
+    </semantic:boundaryEvent>
   </semantic:process>
   <semantic:process id="_aa06c380-a12a-4be8-9051-24434a552e62" name="Branch office - ADONIS - Customer - Process" processType="None" isClosed="false" isExecutable="false" triso:defaultName="true">
     <semantic:startEvent id="_1e12f452-5856-4ff8-825c-d0d8e983b1ad" name="Provided loan offer">
@@ -433,14 +432,15 @@
         <di:waypoint xsi:type="dc:Point" x="611" y="438" />
         <di:waypoint xsi:type="dc:Point" x="611" y="438" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="528" y="441" width="90" height="12" />
+          <dc:Bounds x="602" y="443" width="18" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="m57882941-566a-4429-94fc-938d94dbac3b-gr" bpmnElement="m57882941-566a-4429-94fc-938d94dbac3b" color:border-color="#000000">
         <di:waypoint xsi:type="dc:Point" x="493" y="458" />
         <di:waypoint xsi:type="dc:Point" x="493" y="536" />
+        <di:waypoint xsi:type="dc:Point" x="493" y="536" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="459" y="473" width="90" height="12" />
+          <dc:Bounds x="486" y="541" width="14" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="m2d64197b-8148-4a34-b410-dea43eb4cce2-gr" bpmnElement="m2d64197b-8148-4a34-b410-dea43eb4cce2" color:background-color="#ffffff" color:border-color="#000000">
@@ -476,7 +476,7 @@
       <bpmndi:BPMNShape id="m179958ec-d6e0-4160-8b36-a3ec0061f617-gr" bpmnElement="m179958ec-d6e0-4160-8b36-a3ec0061f617" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="745.5144957554276" y="463.85749292571256" width="30" height="30" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000">
-          <dc:Bounds x="691" y="492" width="90" height="12" />
+          <dc:Bounds x="731.5144957554276" y="495.85749292571256" width="58" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="e508f29e-7616-47cf-91e5-07c24c7bdcf8-gr" bpmnElement="e508f29e-7616-47cf-91e5-07c24c7bdcf8" color:border-color="#000000">
@@ -493,7 +493,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="m09f91fad-9dee-484b-b6c2-795924c05785-gr" bpmnElement="m09f91fad-9dee-484b-b6c2-795924c05785" color:border-color="#000000">
-        <di:waypoint xsi:type="dc:Point" x="765" y="381" />
+        <di:waypoint xsi:type="dc:Point" x="765" y="380" />
+        <di:waypoint xsi:type="dc:Point" x="765" y="392" />
         <di:waypoint xsi:type="dc:Point" x="765" y="378" />
         <di:waypoint xsi:type="dc:Point" x="880" y="378" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
@@ -523,14 +524,15 @@
         <di:waypoint xsi:type="dc:Point" x="1165" y="439" />
         <di:waypoint xsi:type="dc:Point" x="1165" y="439" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="1077" y="419" width="90" height="12" />
+          <dc:Bounds x="1156" y="444" width="18" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="cdbec676-0dc6-4465-8d88-f4ad6c68f167-gr" bpmnElement="cdbec676-0dc6-4465-8d88-f4ad6c68f167" color:border-color="#000000">
         <di:waypoint xsi:type="dc:Point" x="1065" y="419" />
         <di:waypoint xsi:type="dc:Point" x="1065" y="348" />
+        <di:waypoint xsi:type="dc:Point" x="1065" y="348" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="1036" y="392" width="90" height="12" />
+          <dc:Bounds x="1058" y="353" width="14" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="m5ed04d9b-396e-488e-a95d-d06d31d86f90-gr" bpmnElement="m5ed04d9b-396e-488e-a95d-d06d31d86f90" color:background-color="#ffffff" color:border-color="#000000">
@@ -540,7 +542,7 @@
       <bpmndi:BPMNShape id="m20c5a2a4-9563-4814-aff4-4c87be068e3d-gr" bpmnElement="m20c5a2a4-9563-4814-aff4-4c87be068e3d" color:background-color="#ffffff" color:border-color="#000000">
         <dc:Bounds x="1165" y="425" width="28" height="28" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000">
-          <dc:Bounds x="1134" y="458" width="90" height="26" />
+          <dc:Bounds x="1133" y="455" width="54" height="26" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_110e8cda-d926-4a09-9d12-ffe62f27ed90" bpmnElement="_04872159-1c32-4c40-861d-2fd47f934fda" color:background-color="#ffffff" color:border-color="#000000">
@@ -580,14 +582,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_b1393fbf-77b7-4ee6-87e5-651a8fcca88d" bpmnElement="_bf66cc47-c8b6-4d4e-a17a-eac435da27b8" color:background-color="#ffffff" color:border-color="#000000">
-        <dc:Bounds x="1163" y="700" width="31" height="31" />
+        <dc:Bounds x="1173" y="699.5" width="31" height="31" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="1123" y="739" width="112" height="12" />
+          <dc:Bounds x="1132.5" y="739.1111111111111" width="112" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="_94c2e9a6-82d0-4576-b2c0-a1baf23a7cd5" bpmnElement="_140000ef-df10-4bf4-9906-86c1efa04260" color:border-color="#000000">
-        <di:waypoint xsi:type="dc:Point" x="1060" y="716" />
-        <di:waypoint xsi:type="dc:Point" x="1163" y="716" />
+        <di:waypoint xsi:type="dc:Point" x="1061" y="715.5" />
+        <di:waypoint xsi:type="dc:Point" x="1173" y="714.5" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_aab81b97-82a7-4898-9236-affa0ec630f1" bpmnElement="_4d41de8f-44f0-4dba-b271-55bd83e6443c" color:background-color="#ffffff" color:border-color="#000000">
@@ -597,32 +599,32 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="_ad9b7659-6674-4513-b1a2-6a07e253581e" bpmnElement="_c2137fbe-fd59-4a0d-a2be-a3bdf41c3ae5" color:border-color="#000000">
-        <di:waypoint xsi:type="dc:Point" x="919" y="716" />
-        <di:waypoint xsi:type="dc:Point" x="981" y="716" />
+        <di:waypoint xsi:type="dc:Point" x="919" y="714.5" />
+        <di:waypoint xsi:type="dc:Point" x="981" y="715.5" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_cfdfc87f-c934-4e86-85ce-c838dcddbf18" bpmnElement="ExclusiveGateway_Validated" isMarkerVisible="true" color:background-color="#ffffff" color:border-color="#000000">
-        <dc:Bounds x="879" y="696" width="40" height="40" />
+        <dc:Bounds x="879" y="694.5" width="40" height="40" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="854" y="681" width="90" height="12" />
+          <dc:Bounds x="874.2051335129582" y="741.2704728311091" width="50" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="_f545ad82-2164-4442-97f0-c03629ae1f56" bpmnElement="_2a2e03cb-182b-4a49-a641-a54d4dd30c8d" color:border-color="#000000">
-        <di:waypoint xsi:type="dc:Point" x="816" y="716" />
-        <di:waypoint xsi:type="dc:Point" x="879" y="716" />
+        <di:waypoint xsi:type="dc:Point" x="796" y="715.5" />
+        <di:waypoint xsi:type="dc:Point" x="879" y="714.5" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="_241a8932-d61d-4e35-800c-fc0b9cbcfb24" bpmnElement="_fdcd745b-eba7-4d00-bb43-a815d46b3413" color:border-color="#000000">
-        <di:waypoint xsi:type="dc:Point" x="899" y="736" />
-        <di:waypoint xsi:type="dc:Point" x="899" y="763" />
-        <di:waypoint xsi:type="dc:Point" x="801" y="763" />
+        <di:waypoint xsi:type="dc:Point" x="899.2051335129582" y="735.2741289740177" />
+        <di:waypoint xsi:type="dc:Point" x="899.2051335129582" y="776.6370644870088" />
+        <di:waypoint xsi:type="dc:Point" x="801" y="776.6370644870088" />
         <di:waypoint xsi:type="dc:Point" x="801" y="817" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
-          <dc:Bounds x="861" y="745" width="110" height="12" />
+          <dc:Bounds x="795.1025667564791" y="781.6370644870088" width="110" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_21367d46-c545-419b-81bb-0263760eabd2" bpmnElement="_1a2200db-e713-4f40-9631-435e12901415" color:background-color="#ffffff" color:border-color="#000000">
-        <dc:Bounds x="736" y="683" width="80" height="65" />
+        <dc:Bounds x="716" y="682.5" width="80" height="65" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" trisobpmn:defaultBounds="true">
           <dc:Bounds x="716" y="702" width="80" height="26" />
         </bpmndi:BPMNLabel>
@@ -748,12 +750,14 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="ceaf0bbc-1ccc-4632-9f21-51a4bee53437-gr" bpmnElement="ceaf0bbc-1ccc-4632-9f21-51a4bee53437" sourceElement="fc8b2686-a70c-49df-bdb6-601ffcb14b36-gr" color:border-color="#000000">
         <di:waypoint xsi:type="dc:Point" x="700" y="478" />
+        <di:waypoint xsi:type="dc:Point" x="700" y="468" />
         <di:waypoint xsi:type="dc:Point" x="700" y="593" />
         <di:waypoint xsi:type="dc:Point" x="730" y="593" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="m9aa71b31-3838-4ecf-aa5a-eff90073eecf-gr" bpmnElement="m9aa71b31-3838-4ecf-aa5a-eff90073eecf" sourceElement="adbb1d6a-c16c-4402-9771-5b737f19e1e2-gr" color:border-color="#000000">
         <di:waypoint xsi:type="dc:Point" x="910" y="418" />
+        <di:waypoint xsi:type="dc:Point" x="910" y="408" />
         <di:waypoint xsi:type="dc:Point" x="910" y="503" />
         <di:waypoint xsi:type="dc:Point" x="940" y="503" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
@@ -784,13 +788,15 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="_b840e621-da56-4841-b140-85c86d89e0d8" bpmnElement="_632d2e70-bded-4251-980c-e35078f0e4db" targetElement="_21367d46-c545-419b-81bb-0263760eabd2" color:border-color="#000000">
         <di:waypoint xsi:type="dc:Point" x="750" y="615" />
-        <di:waypoint xsi:type="dc:Point" x="750" y="683" />
+        <di:waypoint xsi:type="dc:Point" x="750" y="649.25" />
+        <di:waypoint xsi:type="dc:Point" x="756" y="649.25" />
+        <di:waypoint xsi:type="dc:Point" x="756" y="682.5" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="_67a63a28-a88f-41f5-963f-b799f80b3349" bpmnElement="_41a692b6-e100-47e7-b0eb-82aee9f5d9b5" sourceElement="_21367d46-c545-419b-81bb-0263760eabd2" color:border-color="#000000" triso:userconstraints="true">
-        <di:waypoint xsi:type="dc:Point" x="811" y="688" />
-        <di:waypoint xsi:type="dc:Point" x="811" y="601" />
-        <di:waypoint xsi:type="dc:Point" x="947" y="601" />
+        <di:waypoint xsi:type="dc:Point" x="780" y="682.5" />
+        <di:waypoint xsi:type="dc:Point" x="780" y="600.507001876831" />
+        <di:waypoint xsi:type="dc:Point" x="946.5" y="600.507001876831" />
         <bpmndi:BPMNLabel labelStyle="LSm060c29d6-0ddf-4717-bdca-11c2209d2f15" color:color="#000000" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="_d729f124-034d-49ca-b733-438cc85e4d4d" bpmnElement="_618c33e2-4d9e-499a-a9b6-0c99616fe603" color:border-color="#000000" triso:userconstraints="true">
@@ -815,7 +821,9 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0jr49i7_di" bpmnElement="SequenceFlow_0jr49i7">
         <di:waypoint xsi:type="dc:Point" x="786" y="438" />
         <di:waypoint xsi:type="dc:Point" x="795" y="438" />
-        <di:waypoint xsi:type="dc:Point" x="795" y="683" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="581" />
+        <di:waypoint xsi:type="dc:Point" x="784" y="581" />
+        <di:waypoint xsi:type="dc:Point" x="784" y="683" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="701" y="571" width="90" height="20" />
         </bpmndi:BPMNLabel>
@@ -823,7 +831,7 @@
       <bpmndi:BPMNShape id="BoundaryEvent_01tha91_di" bpmnElement="BoundaryEvent_01tha91">
         <dc:Bounds x="744.5" y="379.5" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="783.5" y="387.5" width="90" height="20" />
+          <dc:Bounds x="717.5" y="415.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

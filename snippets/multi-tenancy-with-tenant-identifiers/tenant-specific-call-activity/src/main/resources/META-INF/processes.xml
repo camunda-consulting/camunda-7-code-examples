@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process-application
+  xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <process-archive name="tenant-specific-call-activity">
+    <process-engine>default</process-engine>
+    <resource>process.bpmn</resource>
+    <properties>
+      <property name="isDeleteUponUndeploy">false</property>
+      <property name="isScanForProcessDefinitions">false</property>
+    </properties>
+  </process-archive>
+  
+    <process-archive tenantId="acme_inc." name="tenant-specific-sub-process-for-acme">
+    <process-engine>default</process-engine>
+    <resource>sub-process-acme.bpmn</resource>
+    <properties>
+      <property name="isDeleteUponUndeploy">false</property>
+      <property name="isScanForProcessDefinitions">false</property>
+    </properties>
+  </process-archive>
+  
+    <process-archive tenantId="awesome_saas_ltd." name="tenant-specific-sub-process-for-awesomesaas">
+    <process-engine>default</process-engine>
+    <resource>sub-process-awesomesaas.bpmn</resource>
+    <properties>
+      <property name="isDeleteUponUndeploy">false</property>
+      <property name="isScanForProcessDefinitions">false</property>
+    </properties>
+  </process-archive>
+
+</process-application>

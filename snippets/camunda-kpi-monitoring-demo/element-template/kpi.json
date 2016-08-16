@@ -1,0 +1,45 @@
+[
+  {
+    "name": "KPI Template",
+    "id": "kpi",
+    "appliesTo": [
+      "bpmn:Collaboration","bpmn:Process","bpmn:Task","bpmn:IntermediateCatchEvent"
+    ],
+    "properties": [
+      {
+        "label": "KPI Unit",
+        "type": "Dropdown",
+        "value": "ms",
+        "choices": [
+          {
+            "name": "Milliseconds", "value": "ms"
+          },
+          {
+            "name": "Seconds", "value": "s"
+          },
+          {
+            "name": "Minutes", "value": "m"
+          },
+          {
+            "name": "Hours", "value": "h"
+          }
+        ],
+        "editable": true,
+        "binding": {
+          "type": "camunda:property",
+          "name": "kpiunit"
+        }
+      },
+      {
+        "label": "KPI Threshold",
+        "type": "String",
+        "value": "",
+        "editable": true,
+        "binding": {
+          "type": "camunda:property",
+          "name": "kpi"
+        }
+      }
+    ]
+  }
+]

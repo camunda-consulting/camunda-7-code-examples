@@ -1,0 +1,119 @@
+<form role="form"> 
+ <script cam-script type="text/form-script">
+  </script>
+  
+
+	 <div class="row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h2>Fall & Aufgaben-Daten</h2>
+         </div>
+         
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+         	<!-- CMMN Case Status / Lifecycle Operations -->
+
+
+ 			<h2>Verfügbare Aktivitäten starten</h2>
+			  <div class="form-group"> 			  
+			  	<label>Mitzugebende Hinweise:</label>
+			  	<textarea id="textareaHinweise" class="form-control"></textarea>
+			  </div>
+			  
+			  <table class="table table-striped table-hover">
+			  <tr ng-repeat="caseExecution in enabledCaseExecutions">
+			    <td>
+			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
+			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
+					<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='decisionTask'"></i>
+			    </td>
+			    <td>
+			    	{{caseExecution.activityName}}
+			    </td>	  
+			    <td>
+			        <a ng-click="manualStartCaseExecution(caseExecution)"><i class="glyphicon glyphicon-play"></i></a>
+			    </td>
+			  </tr>
+			  </table>
+
+			  <h2>Bereits laufende Aktivitäten</h2>
+			  <table class="table table-striped table-hover">
+			  <tr ng-repeat="caseExecution in activeCaseExecutions" >
+			    <td>
+			    	<i class="glyphicon glyphicon-user" ng-if="caseExecution.activityType=='humanTask'"></i>
+			    	<i class="glyphicon glyphicon-cog" ng-if="caseExecution.activityType=='processTask'"></i>
+			    	<i class="glyphicon glyphicon glyphicon-folder-open" ng-if="caseExecution.activityType=='casePlanModel'"></i>
+			    </td>
+			    <td>
+			    	{{caseExecution.activityName}}
+			    </td>	  
+			  </tr>
+			  </table>	
+
+
+
+
+         </div>
+     </div>
+ 
+ <script cam-script type="text/form-script">
+  
+	 function loadCaseStatus() {
+	   // load task details via REST API from Camunda
+  	   $.get( '/camunda/api/engine/engine/default/task/' + camForm.taskId, function( task ) {
+
+  	       // load "enabled" activities via REST API from Camunda
+		   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&enabled=true', function( result1 ) {
+	         $scope.$apply(function () {
+	            // remeber as Angular Scope Variable
+	            $scope.enabledCaseExecutions = result1;
+	         });
+		   });
+
+  	       // load "active" activities via REST API from Camunda
+	  	   $.get( '/camunda/api/engine/engine/default/case-execution?caseInstanceId=' + task.caseInstanceId + '&active=true', function( result2 ) {
+	         $scope.$apply(function () {
+	            // remeber as Angular Scope Variable
+	            $scope.activeCaseExecutions = result2;
+	         });
+		   });	 
+	   }); 	
+	 };
+	 
+	 // load case status when the form is rendered
+	 loadCaseStatus();  	     
+	 
+	 // define function to manually start an activity which is "enabled"
+	 $scope.manualStartCaseExecution = function(caseExecution) {
+	       var data = {
+	            "variables": { 
+	       			"hinweise": {
+	       				"value":  $('#textareaHinweise').val(), 
+	       				"type": "String"
+	       			}
+	       	    }, 
+	       	    "deletions" : []
+	       };
+	       $('#textareaHinweise').val("");
+	       
+	       // Call according REST API
+		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/manual-start', {
+		         data: JSON.stringify(data),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+		            // when successful reload case status to reflect possible changes
+		            loadCaseStatus();
+		         }
+		    });
+	 };
+	 
+
+  </script>
+
+<!--
+Todo: add toggle for nice UI (http://www.bootstraptoggle.com/#usage)
+Need to load from PA here - how to do that?
+ <script src="bootstrap-toggle.min.js"></script>
+ <link href="bootstrap-toggle.min.css" rel="stylesheet">
+ -->
+</form>

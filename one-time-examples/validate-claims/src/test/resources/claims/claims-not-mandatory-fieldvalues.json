@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "claimId": "189",
+      "rows": [
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 12,
+          "serialNumberIn" : "123AE",
+          "customerComplaintCodePrimary":"100"
+        },
+        {
+          "repairServicePartnerId": 11,
+          "localClaimID": 13,
+          "serialNumberIn": "123",
+          "customerComplaintCodePrimary":"E100"
+        }
+      ]
+    }
+  ]
+}

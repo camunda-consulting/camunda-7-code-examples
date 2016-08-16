@@ -1,0 +1,58 @@
+<ng-include src="cssPath"></ng-include>
+<table class="cam-table">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Process
+                <br/>Instance</th>
+            <th>Active
+                <br/>Activities</th>
+            <th>Completed
+                <br/>Activities</th>
+            <th>ID</th>
+            <th>Target Duration</th>
+            <th>Current Duration</th>
+            <th>Avg Duration</th>
+            <th>Started</th>
+            <th>Finished</th>
+            <th>Active overdue activities</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="processInst in processInstances | filter:search">
+            <td>
+                <span tooltip="Process instance completed" ng-if="processInst.endTime" class="glyphicon glyphicon-ok-circle"></span>
+                <span tooltip="Process instance running" ng-if="!processInst.endTime" class="glyphicon glyphicon-adjust"></span>
+            </td>
+            <td>
+                <span tooltip="Process overdue for {{processInst.overdueInUnit}}" ng-if="processInst.overdue" class="glyphicon glyphicon-exclamation-sign kpi-process-rounded-red"> </span>
+                <span tooltip="Process not overdue. Duration: {{processInst.currentDurationInUnit}}" ng-if="!processInst.overdue" class="glyphicon glyphicon-ok-sign kpi-process-rounded-green"> </span>
+            </td>
+            <td>
+                <a ng-href="{{getLinkInst(processInst)}}" tooltip="{{processInst.tasksoverdue}} running activity/ies overdue" ng-if="processInst.tasksoverdue > 0" class="glyphicon glyphicon-exclamation-sign kpi-process-rounded-red"> </a>
+                <span tooltip="No running activity overdue" ng-if="processInst.tasksoverdue == 0" class="glyphicon glyphicon-ok-sign kpi-process-rounded-green"> </span>
+            </td>
+            <td>
+                <span tooltip="{{processInst.completedtasksoverdue}} completed activity/ies overdue" ng-if="processInst.completedtasksoverdue > 0" class="glyphicon glyphicon-exclamation-sign kpi-process-rounded-red"> </span>
+                <span tooltip="No completed activity overdue" ng-if="processInst.completedtasksoverdue == 0" class="glyphicon glyphicon-ok-sign kpi-process-rounded-green"> </span>
+            </td>
+            <td><a ng-href="{{processInst.link}}" href="{{processInst.link}}">{{processInst.id}}</a></td>
+            
+            <td>{{processInst.targetDuration}}</td>
+            <td>{{processInst.currentDurationInUnit}}</td>
+            <td>
+                <span ng-if="processGeneral.avgDuration" tooltip="calculated based on finished process instances">{{processGeneral.avgDuration}} {{processInst.unit}}</span>
+                <span ng-if="!processGeneral.avgDuration" tooltip="no finished process instance yet">-</span>
+            </td>
+            <td>{{processInst.startTime}}</td>
+            <td>{{processInst.endTime || '-'}}</td>
+            <td>
+                <p ng-repeat="taskId in processInst.tasksOverdueIds">
+                    <a ng-href="{{getLink(processInst.id,taskId)}}">{{taskId}}</a>
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<pagination ng-if="pages.total > pages.size" class="pagination-sm" page="pages.current" ng-model="pages.current" total-items="pages.total" items-per-page="pages.size" max-size="7" boundary-links="true"></pagination>

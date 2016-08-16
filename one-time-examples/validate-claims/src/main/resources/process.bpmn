@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.0.0">
+  <bpmn:process id="validate-claims" name="validate-claims" isExecutable="true">
+    <bpmn:startEvent id="StartEventProcessStarted" name="Process&#10;started">
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="End_validation_finished" name="validation finished">
+      <bpmn:incoming>SequenceFlow_0wzbmov</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="ScriptTask_138rcu3" />
+    <bpmn:sequenceFlow id="SequenceFlow_0nq6rle" sourceRef="ScriptTask_138rcu3" targetRef="ExclusiveGateway_0kiyq7d" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0kiyq7d" name="RSP ID unique?">
+      <bpmn:incoming>SequenceFlow_0nq6rle</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_07wntxb</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_07080gs</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_07wntxb" name="yes" sourceRef="ExclusiveGateway_0kiyq7d" targetRef="ScriptTask_079np8h">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript">S(resultCheckUniqueRspID).elements().length == 0;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="End_validation_failed" name="validation failed">
+      <bpmn:incoming>SequenceFlow_07080gs</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_030kdct</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_07080gs" name="no" sourceRef="ExclusiveGateway_0kiyq7d" targetRef="End_validation_failed">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[S(resultCheckUniqueRspID).elements().length > 0]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:scriptTask id="ScriptTask_138rcu3" name="Check unique RSP ID" scriptFormat="javaScript" camunda:resultVariable="resultCheckUniqueRspID" camunda:resource="scripts/check_unique_rsp_id.js">
+      <bpmn:incoming>SequenceFlow1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0nq6rle</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0zxl8kz" sourceRef="ScriptTask_079np8h" targetRef="ExclusiveGateway_0tntrtu" />
+    <bpmn:scriptTask id="ScriptTask_079np8h" name="Check RSP ID against selected ID" scriptFormat="javascript" camunda:resultVariable="resultCheckRspIDAgainstSelected" camunda:resource="scripts/check_rsp_id_against_selected_id.js">
+      <bpmn:incoming>SequenceFlow_07wntxb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zxl8kz</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0tntrtu" name="RSP ID selected?">
+      <bpmn:incoming>SequenceFlow_0zxl8kz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0szeyms</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_030kdct</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0szeyms" name="yes" sourceRef="ExclusiveGateway_0tntrtu" targetRef="ServiceTask_1dwr4ge">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="Javascript">S(resultCheckRspIDAgainstSelected).elements().length == 0;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_030kdct" name="no" sourceRef="ExclusiveGateway_0tntrtu" targetRef="End_validation_failed">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javaScript"><![CDATA[S(resultCheckRspIDAgainstSelected).elements().length > 0;]]></bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1dq3yj4" sourceRef="ServiceTask_1dwr4ge" targetRef="check_field_length" />
+    <bpmn:serviceTask id="ServiceTask_1dwr4ge" name="Check mandatory field values" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://localhost:3000/check-mandatory-fields</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="javascript" resource="scripts/generate-service-payload.js" />
+            </camunda:inputParameter>
+            <camunda:outputParameter name="resultCheckMandatoryFields">
+              <camunda:script scriptFormat="javaScript">S(response);</camunda:script>
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0szeyms</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1dq3yj4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_17pi83j" sourceRef="check_field_length" targetRef="ScriptTask_1o4n5ec" />
+    <bpmn:sequenceFlow id="SequenceFlow_0wzbmov" sourceRef="ScriptTask_1o4n5ec" targetRef="End_validation_finished" />
+    <bpmn:scriptTask id="ScriptTask_1o4n5ec" name="Separate valid and faild Claims" scriptFormat="javascript" camunda:resultVariable="claims" camunda:resource="scripts/separate_claims.js">
+      <bpmn:incoming>SequenceFlow_17pi83j</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0wzbmov</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="check_field_length" name="Check field length" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://localhost:3000/check-field-length</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript" resource="scripts/generate-service-payload.js" />
+            </camunda:inputParameter>
+            <camunda:outputParameter name="resultCheckFieldLength">
+              <camunda:script scriptFormat="javascript" resource="scripts/evaluate-response-for-error.js" />
+            </camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1dq3yj4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_17pi83j</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_13ra56c" attachedToRef="check_field_length">
+      <bpmn:outgoing>SequenceFlow_1i046jq</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_1vpfe3t" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="End_too_many_errors" name="too many errors">
+      <bpmn:incoming>SequenceFlow_1i046jq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1i046jq" sourceRef="BoundaryEvent_13ra56c" targetRef="End_too_many_errors" />
+  </bpmn:process>
+  <bpmn:error id="Error_1vpfe3t" name="Too many Errors" errorCode="tooManyErrors" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="validate-claims">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEventProcessStarted">
+        <dc:Bounds x="23" y="66" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-4" y="102" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0fkea3f_di" bpmnElement="End_validation_finished">
+        <dc:Bounds x="1115" y="66" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1088" y="102" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
+        <di:waypoint xsi:type="dc:Point" x="59" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="101" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="188" y="74" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0nq6rle_di" bpmnElement="SequenceFlow_0nq6rle">
+        <di:waypoint xsi:type="dc:Point" x="201" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="252" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="278.5" y="59" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0kiyq7d_di" bpmnElement="ExclusiveGateway_0kiyq7d" isMarkerVisible="true">
+        <dc:Bounds x="252" y="59" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="232" y="35" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07wntxb_di" bpmnElement="SequenceFlow_07wntxb">
+        <di:waypoint xsi:type="dc:Point" x="302" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="370" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="275" y="62" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1u2r0p2_di" bpmnElement="End_validation_failed">
+        <dc:Bounds x="670" y="170" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="643" y="206" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07080gs_di" bpmnElement="SequenceFlow_07080gs">
+        <di:waypoint xsi:type="dc:Point" x="277" y="109" />
+        <di:waypoint xsi:type="dc:Point" x="277" y="188" />
+        <di:waypoint xsi:type="dc:Point" x="670" y="188" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="244" y="115" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_138rcu3_di" bpmnElement="ScriptTask_138rcu3">
+        <dc:Bounds x="101" y="44" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zxl8kz_di" bpmnElement="SequenceFlow_0zxl8kz">
+        <di:waypoint xsi:type="dc:Point" x="470" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="512" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="559.5" y="59" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_079np8h_di" bpmnElement="ScriptTask_079np8h">
+        <dc:Bounds x="370" y="44" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0tntrtu_di" bpmnElement="ExclusiveGateway_0tntrtu" isMarkerVisible="true">
+        <dc:Bounds x="512" y="59" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="492" y="39" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0szeyms_di" bpmnElement="SequenceFlow_0szeyms">
+        <di:waypoint xsi:type="dc:Point" x="562" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="638" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="553" y="60" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_030kdct_di" bpmnElement="SequenceFlow_030kdct">
+        <di:waypoint xsi:type="dc:Point" x="537" y="109" />
+        <di:waypoint xsi:type="dc:Point" x="537" y="188" />
+        <di:waypoint xsi:type="dc:Point" x="670" y="188" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="507" y="115" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1dq3yj4_di" bpmnElement="SequenceFlow_1dq3yj4">
+        <di:waypoint xsi:type="dc:Point" x="738" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="797" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="717" y="59" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1dwr4ge_di" bpmnElement="ServiceTask_1dwr4ge">
+        <dc:Bounds x="638" y="44" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17pi83j_di" bpmnElement="SequenceFlow_17pi83j">
+        <di:waypoint xsi:type="dc:Point" x="897" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="949" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="878" y="59" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wzbmov_di" bpmnElement="SequenceFlow_0wzbmov">
+        <di:waypoint xsi:type="dc:Point" x="1049" y="84" />
+        <di:waypoint xsi:type="dc:Point" x="1115" y="84" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1031.5" y="59" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_1o4n5ec_di" bpmnElement="ScriptTask_1o4n5ec">
+        <dc:Bounds x="949" y="44" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0l7qelw_di" bpmnElement="check_field_length">
+        <dc:Bounds x="797" y="44" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_13ra56c_di" bpmnElement="BoundaryEvent_13ra56c">
+        <dc:Bounds x="850" y="106" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="823" y="142" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1y5qlan_di" bpmnElement="End_too_many_errors">
+        <dc:Bounds x="922" y="170" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="895" y="206" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1i046jq_di" bpmnElement="SequenceFlow_1i046jq">
+        <di:waypoint xsi:type="dc:Point" x="868" y="142" />
+        <di:waypoint xsi:type="dc:Point" x="868" y="188" />
+        <di:waypoint xsi:type="dc:Point" x="922" y="188" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="838" y="155" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

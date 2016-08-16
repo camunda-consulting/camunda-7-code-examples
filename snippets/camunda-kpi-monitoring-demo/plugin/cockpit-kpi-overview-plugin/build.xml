@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="kpioverview" default="deploy.jboss">
+
+	<property file="build.properties" />
+	<property file="${user.home}/.camunda/build.properties" />
+	<property name="target.dir" value="target" />
+
+	<condition property="mvn.executable" value="mvn.bat" else="mvn">
+		<os family="windows"/>
+	</condition>
+
+	<target name="deploy.jboss" depends="package.mvn, install.cockpit.plugin" description="Copies the cockit plugin to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'" />
+
+	<target name="deploy.tomcat" depends="package.mvn" description="Copies the cockpit plugin to the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<fail unless="deploy.tomcat.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
+		<copy file="${target.dir}/${ant.project.name}.jar" todir="${deploy.tomcat.dir}/camunda/WEB-INF/lib" />
+		<touch file="${deploy.tomcat.dir}/camunda/WEB-INF/web.xml"/>
+	</target>
+
+	<target name="package.mvn">
+		<exec executable="${mvn.executable}" dir="." failonerror="true">
+			<env key="MAVEN_OPTS" value="-Xmx1024m -Xms512m -DskipTests=true -Dmaven.test.skip=true" />
+			<arg line="clean package" />
+		</exec>
+	</target>
+
+	<target name="install.cockpit.plugin">
+		<fail unless="deploy.jboss.dir" message="No deployment folder has been configured. Please copy the file '${basedir}/build.properties.example' to '${basedir}/build.properties' or '${user.home}/.camunda/build.properties' and change it according to your environment." />
+		<path id="cockpit.file.id"> 
+			<fileset dir="${deploy.jboss.dir}"> 
+				<include name="camunda-webapp-*.war"/> 
+			</fileset> 
+		</path> 
+		<property name="cockpit.file" refid="cockpit.file.id"/> 
+		<war destfile="${cockpit.file}" update="true">
+			<zipfileset file="${target.dir}/${ant.project.name}*.jar" fullpath="WEB-INF/lib/${ant.project.name}.jar" />
+		</war>
+	</target>
+
+	<target name="undeploy.jboss" description="Deletes the cockpit plugin from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<path id="cockpit.file.id"> 
+			<fileset dir="${deploy.jboss.dir}"> 
+				<include name="camunda-webapp-*.war"/> 
+			</fileset> 
+		</path> 
+		<property name="cockpit.file" refid="cockpit.file.id"/>
+		<basename property="cockpit.filename" file="${cockpit.file}"/>
+		<move file="${cockpit.file}" todir="${java.io.tmpdir}"/>
+		<zip destfile="${cockpit.file}">
+			<zipfileset src="${java.io.tmpdir}/${cockpit.filename}">
+				<exclude name="WEB-INF/lib/${ant.project.name}.jar"/>
+			</zipfileset>
+		</zip>
+	</target>
+
+	<target name="undeploy.tomcat" description="Deletes the cockpit plugin from the deployment directory defined in '${basedir}/build.properties' or '${user.home}/.camunda/build.properties'">
+		<delete file="${deploy.tomcat.dir}/camunda/WEB-INF/lib/${ant.project.name}.jar" />
+	</target>
+
+</project>

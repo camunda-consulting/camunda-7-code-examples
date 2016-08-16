@@ -4,11 +4,11 @@
 
 	<groupId>com.camunda.demo</groupId>
 	<artifactId>rechnungseingang</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>war</packaging>
 
 	<properties>
-		<camunda.version>7.4.0</camunda.version>
+		<camunda.version>7.5.0</camunda.version>
 
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -39,7 +39,7 @@
     <dependency>
         <groupId>org.camunda.consulting.snippets</groupId>
         <artifactId>camunda-demo-support</artifactId>
-        <version>0.3.4</version>    
+        <version>0.3.6</version>    
     </dependency>
 
 		<dependency>

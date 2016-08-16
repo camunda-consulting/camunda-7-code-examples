@@ -12,7 +12,7 @@ This example consists of a
 ** Visualizes this in the BpmnJS Viewer
 ** Loads history information for the Process Instance
 ** Add Overlays and Markers to the BPMN 2.0, to visualize these information
-* This example is a self contained [HTML page](src\main\webapp\status.html), but Maven and WebJars are used in order to build a WAR which can be deployed on a Java container. So no need to fiddle with JavaScript libraries or to include them into the project sources.
+* This example is a self contained [HTML page](src/main/webapp/status.html), but Maven and WebJars are used in order to build a WAR which can be deployed on a Java container. So no need to fiddle with JavaScript libraries or to include them into the project sources.
 
 How to use it?
 =========================
