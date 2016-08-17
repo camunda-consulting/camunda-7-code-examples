@@ -79,7 +79,7 @@
 
 	  $(".connectedSortable li").addClass("ui-state-disabled");
 	  
-    $( "#enabledExecutions, #activeExecutions").sortable({
+    $( "#enabledExecutions").sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
 
@@ -140,21 +140,19 @@
 		function populateList(list, caseExecutions) {
 	    var items = [];
 	    $.each(caseExecutions, function (id, caseExecution) {
-	        items.push('<li>' + caseExecution.activityName + '</li>');
+	    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
 	    });  
 
 	    list.html(items.join(''));
 	  }
 		
 		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
-		  populateList($("#enabledExecutions"), enabledExecutions);
+		  populateList($("#enabledExecutions"), enabledExecutions)});
 	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
-	      populateList($("#activeExecutions"), activeExecutions);
-
-
-
-	    });
-		});
+	      populateList($("#activeExecutions"), activeExecutions)});
+	    $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
+	      populateList($("#completedExecutions"), completedExecutions)});
+	 
   });
 			</script>
 
