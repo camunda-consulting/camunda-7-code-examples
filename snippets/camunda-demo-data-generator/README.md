@@ -68,7 +68,7 @@ Add this dependency to your process application:
 	<dependency>
 	    <groupId>org.camunda.consulting.snippets</groupId>
 	    <artifactId>camunda-demo-support</artifactId>
-	    <version>0.3.5</version>		
+	    <version>0.3.7</version>		
 	</dependency>
 ```
 
@@ -87,7 +87,7 @@ If you set up demo systems you might want to automatically generate data during 
 	<dependency>
 	    <groupId>org.camunda.consulting.snippets</groupId>
 	    <artifactId>camunda-demo-support</artifactId>
-	    <version>0.3.5</version>		
+	    <version>0.3.7</version>		
 	</dependency>
 ```
 
