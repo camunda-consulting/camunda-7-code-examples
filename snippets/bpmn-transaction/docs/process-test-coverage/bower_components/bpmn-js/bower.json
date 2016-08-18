@@ -1,0 +1,20 @@
+{
+  "name": "bpmn-js",
+  "version": "0.11.0",
+  "authors": [
+    "bpmn.io"
+  ],
+  "description": "A BPMN 2.0 renderer and web modeler",
+  "main": "dist/bpmn-viewer.js",
+  "keywords": [
+    "models",
+    "diagram",
+    "renderer",
+    "modeler",
+    "bpmn"
+  ],
+  "ignore": [
+    "test/*"
+  ],
+  "homepage": "http://bpmn.io"
+}

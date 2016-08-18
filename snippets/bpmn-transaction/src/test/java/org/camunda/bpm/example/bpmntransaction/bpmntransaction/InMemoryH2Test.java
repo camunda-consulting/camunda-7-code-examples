@@ -1,13 +1,16 @@
 package org.camunda.bpm.example.bpmntransaction.bpmntransaction;
 
-import org.apache.ibatis.logging.LogFactory;
-import org.camunda.bpm.engine.impl.util.LogUtil;
-import org.camunda.bpm.engine.test.ProcessEngineRule;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.init;
+
+import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
+import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.engine.variable.Variables;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import static org.junit.Assert.*;
 
@@ -16,10 +19,10 @@ import static org.junit.Assert.*;
  */
 public class InMemoryH2Test {
 
+  private static final String BPMN_PROCESS_KEY = "bpmntransaction";
+
   @Rule
   public ProcessEngineRule rule = new ProcessEngineRule();
-
-  private static final String PROCESS_DEFINITION_KEY = "bpmntransaction";
 
   // enable more detailed logging
   static {
@@ -38,7 +41,72 @@ public class InMemoryH2Test {
   @Test
   @Deployment(resources = "process.bpmn")
   public void testParsingAndDeployment() {
-    // nothing is done here, as we just want to check for exceptions during deployment
+    
   }
 
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testHappyPath() {
+	  ProcessInstance pi = processEngine().getRuntimeService().startProcessInstanceByKey( //
+			  BPMN_PROCESS_KEY, //
+			  Variables.createVariables() //
+			  		.putValue("chargeCardError", false)
+			  		.putValue("bookingHotelError", false));	  
+	  
+	  assertThat(pi).task("userTaskChooseHolidayDestination");
+	  complete(task());
+	  
+	  assertThat(pi).task("userTaskGoOnHoliday");
+	  assertThat(pi).hasPassedInOrder("serviceTaskBookHotel", "serviceTaskChargeCreditCard");
+
+	  complete(task());
+	  assertThat(pi).isEnded();
+	  
+	  ProcessTestCoverage.calculate(pi, processEngine());	  	  
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testErrorPath() {
+	  ProcessInstance pi = processEngine().getRuntimeService().createProcessInstanceByKey(BPMN_PROCESS_KEY) 
+			    .startBeforeActivity("serviceTaskBookHotel") // 
+			    .setVariables( // 
+			    		Variables.createVariables() //
+			    			.putValue("chargeCardError", false) //
+			    			.putValue("bookingHotelError", true)) //
+			    .execute();
+	  
+	  assertThat(pi).task("userTaskUnknownError");
+	  assertThat(pi).hasPassedInOrder("serviceTaskBookHotel", "boundaryEventUnknownError");
+	  
+	  complete(task());
+	  assertThat(pi).isEnded();
+	  
+	  ProcessTestCoverage.calculate(pi, processEngine());	  	  
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testCancelationPath() {
+	  ProcessInstance pi = processEngine().getRuntimeService().createProcessInstanceByKey(BPMN_PROCESS_KEY) 
+			    .startBeforeActivity("serviceTaskBookHotel") // 
+			    .setVariables( // 
+			    		Variables.createVariables() //
+			    			.putValue("chargeCardError", true) //
+			    			.putValue("bookingHotelError", false)) //
+			    .execute();
+	  
+	  assertThat(pi).task("userTaskCheckCancelationDetails");
+	  assertThat(pi).hasPassed("serviceTaskBookHotel", "serviceTaskChargeCreditCard", "compenationServiceTaskCancelHotelReservation", "cancelEndEventTripCanceled"); 
+	  
+	  complete(task());
+	  assertThat(pi).isEnded();
+	  
+	  ProcessTestCoverage.calculate(pi, processEngine());	  
+  }
+  
+  @After
+  public void calculateCoverageForAllTests() throws Exception {
+    ProcessTestCoverage.calculate(rule.getProcessEngine());
+  }    
 }

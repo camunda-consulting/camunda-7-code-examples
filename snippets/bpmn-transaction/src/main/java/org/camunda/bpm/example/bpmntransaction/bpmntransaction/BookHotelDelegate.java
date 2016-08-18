@@ -9,7 +9,7 @@ import org.camunda.bpm.engine.variable.value.ObjectValue;
 public class BookHotelDelegate implements JavaDelegate {
 
 	@Override
-	public void execute(DelegateExecution exec) throws Exception {
+	public void execute(DelegateExecution context) throws Exception {
 		
 		
 		//Map<String, String> booking  = new 
@@ -18,9 +18,9 @@ public class BookHotelDelegate implements JavaDelegate {
 										.serializationDataFormat(Variables.SerializationDataFormats.JAVA)
 										.create();
 		
-		exec.setVariable("ThisBooking", thisBookingValue);
+		context.setVariable("ThisBooking", thisBookingValue);
 		
-		boolean bookingError = (Boolean) exec.getVariable("bookingHotelError");
+		boolean bookingError = (Boolean) context.getVariable("bookingHotelError");
 		if(bookingError)
 			throw new BpmnError("THIS_IS_NOT_GOOD");
 
