@@ -42,18 +42,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Required to use Spin dataformat in unit tests -->
-		<dependency>
-			<groupId>org.camunda.spin</groupId>
-			<artifactId>camunda-spin-dataformat-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.camunda.bpm</groupId>
-			<artifactId>camunda-engine-plugin-spin</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<dependency>
 			<!-- Used to generate test coverage reports, see https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage -->
 			<groupId>org.camunda.consulting.snippets</groupId>
@@ -83,10 +71,6 @@
 			<version>1.3.168</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Add your own dependencies here, if in compile scope, they are added 
-			to the war -->
-
 	</dependencies>
 
 	<repositories>
