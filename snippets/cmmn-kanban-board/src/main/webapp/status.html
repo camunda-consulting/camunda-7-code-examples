@@ -1,63 +1,131 @@
 <!DOCTYPE html>
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			
-	<!-- own CCS style for highlight of activity - color can be easily changed here -->
-	<style type="text/css">
-	.djs-container .highlight .djs-outline {
-	   stroke-width: 2px important;
-	   stroke: #08c !important;
-	   fill: rgba(82,180,21,0.35) !important;
-	}
-	.djs-container .highlight .djs-visual>:nth-child(1) {
-	   fill: rgba(82,180,21,0.35) !important;
-	}
-	.bpmn-badge {
-	    display: inline-block;
-	    min-width: 10px;
-	    padding: 3px 7px;
-	    font-size: 12px;
-	    font-weight: bold;
-	    color: #fff;
-	    line-height: 1;
-	    vertical-align: baseline;
-	    white-space: nowrap;
-	    text-align: center;
-	    background-color: #777;
-	    border-radius: 10px;
-		
-		font-size: 12px;
-	    border-width: 1px;
-	    border-style: solid;
-	    background-color: #52b415; // bpmn.io #610000 // camunda
-	    border-color: #143d52;
-	    color: #143d52;
-    }	
-	</style>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-	<link type="text/css" rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.css" />
-	
-	<!-- load jquery and bpmn-js dependencies -->
-	<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.js"></script>
- 
-	<!-- bpmn-js viewer -->
-	<script type="text/javascript" src="webjars/bpmn-js/0.13.1/dist/bpmn-navigated-viewer.js"></script>
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/diagram-js.css" />
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/bpmn-font/css/bpmn-embedded.css" />
-	<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
+
+<!-- own CCS style for highlight of activity - color can be easily changed here -->
+<style type="text/css">
+.djs-container .highlight .djs-outline {
+	stroke-width: 2px important;
+	stroke: #08c !important;
+	fill: rgba(82, 180, 21, 0.35) !important;
+}
+
+.djs-container .highlight .djs-visual>:nth-child(1) {
+	fill: rgba(82, 180, 21, 0.35) !important;
+}
+
+.bpmn-badge {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 1;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-align: center;
+	background-color: #777;
+	border-radius: 10px;
+	font-size: 12px;
+	border-width: 1px;
+	border-style: solid;
+	background-color: #52b415; // bpmn .io #610000 // camunda border-color
+	: #143d52;
+	color: #143d52;
+}
+
+#enabledExecutions, #activeExecutions, #completedExecutions {
+	border: 1px solid #eee;
+	width: 142px;
+	min-height: 20px;
+	list-style-type: none;
+	margin: 0;
+	padding: 5px 0 0 0;
+	float: left;
+	margin-right: 10px;
+}
+
+#enabledExecutions li, #activeExecutions li, #completedExecutions li {
+	margin: 0 5px 5px 5px;
+	padding: 5px;
+	font-size: 1.2em;
+	width: 120px;
+}
+</style>
+
+<link type="text/css" rel="stylesheet"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.css" />
+
+<!-- load jquery and bpmn-js dependencies -->
+<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.js"></script>
+
+<!-- bpmn-js viewer -->
+<script type="text/javascript"
+	src="webjars/bpmn-js/0.13.1/dist/bpmn-navigated-viewer.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="webjars/bpmn-js/0.13.1/dist/assets/diagram-js.css" />
+<link type="text/css" rel="stylesheet"
+	href="webjars/bpmn-js/0.13.1/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script>
+  $( function() {
+
+	  $(".connectedSortable li").addClass("ui-state-disabled");
+	  
+    $( "#enabledExecutions").sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+
+    $( "#activeExecutions" ).sortable({
+        cancel: ".ui-state-disabled"
+      });
+    
+  } );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 	<div class="container-fluid">
-	  <h2>CMMN Kanban Board</h2>
+		<h1>CMMN Kanban Board</h1>
 		<div class="row">
-		  <div class="col-md-4"><h3 class="bg-info">Enabled</h3><ul id="enabledExecutions"></ul></div>
-		  <div class="col-md-4"><h3 class="bg-primary">Active</h3><ul id="activeExecutions"></ul></div>
-		  <div class="col-md-4"><h3 class="bg-success">Completed</h3><ul id="completedExecutions"></ul></div>
+			<div class="col-md-4">
+				<h3 class="bg-info">Enabled</h3>
+				<ul id="enabledExecutions" class="connectedSortable">
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h3 class="bg-primary">Active</h3>
+				<ul id="activeExecutions" class="connectedSortable">
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<h3 class="bg-success">Completed</h3>
+				<ul id="completedExecutions" class="connectedSortable">
+				</ul>
+			</div>
 		</div>
 	</div>
 
-			<script>
+
+
+	<script>
 	$(document).ready(function() {
 	
 	    // get URL query parameter
@@ -72,23 +140,22 @@
 		function populateList(list, caseExecutions) {
 	    var items = [];
 	    $.each(caseExecutions, function (id, caseExecution) {
-	        items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
-	    });
+	    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+	    });  
+
 	    list.html(items.join(''));
 	  }
-
-    $.get(restAccess + '/case-execution?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
-      populateList($("#enabledExecutions"), enabledExecutions);
-	    $.get(restAccess + '/case-execution?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
-	      populateList($("#activeExecutions"), activeExecutions);
-	      $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
-	        populateList($("#completedExecutions"), completedExecutions);
-	      });
-	    });
-		});
-
+		
+		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
+		  populateList($("#enabledExecutions"), enabledExecutions)});
+	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
+	      populateList($("#activeExecutions"), activeExecutions)});
+	    $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
+	      populateList($("#completedExecutions"), completedExecutions)});
+	 
   });
 			</script>
-			
-  </body>
+
+
+</body>
 </html>
