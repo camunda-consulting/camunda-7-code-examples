@@ -1,7 +1,7 @@
 BPMN Transaction
 =========================
 
-Working example of the [https://docs.camunda.org/manual/7.5/reference/bpmn20/subprocesses/transaction-subprocess/](BPMN Transaction Subprocess) in action.
+Working example of the [BPMN Transaction Subprocess](https://docs.camunda.org/manual/7.5/reference/bpmn20/subprocesses/transaction-subprocess/) in action.
 
 The process can fail when charging the credit card to showcase BPMN compensation, therefore set the variable `bookingHotelError` to true.
 
@@ -15,20 +15,21 @@ Show me the important parts!
 How to use it?
 --------------
 
-You can either
+Please choose
 
-- Click through it using Camunda web applications
+- Click through it using *Camunda web applications*
   - Package the project as WAR using Maven
-  - Deploy it on one of our distributions: (https://camunda.org/download/)[Download Camunda community edition]
+  - Deploy it on one of our distributions: [Download Camunda community edition](https://camunda.org/download/)
   - Start a new instance using
-[Camunda Tasklist](http://docs.camunda.org/latest/guides/user-guide/#tasklist): [http://localhost:8080/camunda/app/tasklist/default/](http://localhost:8080/camunda/app/tasklist/)
+[Camunda Tasklist](http://docs.camunda.org/latest/guides/user-guide/#tasklist): [http://localhost:8080/camunda/app/tasklist/](http://localhost:8080/camunda/app/tasklist/default/)
   - Inspect it using
-[Camunda Cockpit](http://docs.camunda.org/latest/guides/user-guide/#cockpit): [http://localhost:8080/camunda/app/cockpit/default/](http://localhost:8080/camunda/app/cockpit/)
+[Camunda Cockpit](http://docs.camunda.org/latest/guides/user-guide/#cockpit): [http://localhost:8080/camunda/app/cockpit/](http://localhost:8080/camunda/app/cockpit/default/)
   
-- Inspect the [src/test/java/org/camunda/bpm/example/bpmntransaction/bpmntransaction/InMemoryH2Test.java](InMemoryH2Test).
-  - You can see the [https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage](test coverage tool) in action: [docs/process-test-coverage/](docs/process-test-coverage/)
+- Inspect the *[JUnit test case]*(src/test/java/org/camunda/bpm/example/bpmntransaction/bpmntransaction/InMemoryH2Test.java).
+  - Simply import the Maven project into your favorite IDE and run the test case
+  - You can see the [process test coverage tool](https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage) in action: [docs/process-test-coverage/](docs/process-test-coverage/) - save it locally (including the sub folder) and open it in a web browser:
 
-
+![Process Test Coverage](docs/process-test-coverage.png)
 
 Environment Restrictions
 ------------------------
