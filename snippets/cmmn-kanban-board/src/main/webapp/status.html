@@ -72,6 +72,8 @@
 <link type="text/css" rel="stylesheet"
 	href="webjars/bpmn-js/0.13.1/dist/assets/bpmn-font/css/bpmn-embedded.css" />
 <link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -83,7 +85,7 @@
 		<h1>CMMN Kanban Board</h1>
 		<hr />
 		<div class="row">
-      <div class="col-md-3">
+			<div class="col-md-3">
         <div class="panel panel-default">
           <div class="panel-heading">Available</div>
           <div class="panel-body">
@@ -91,7 +93,7 @@
             </ul>
           </div>
         </div>
-      </div>
+			</div>
 			<div class="col-md-3">
 		    <div class="panel panel-info">
 		      <div class="panel-heading">Enabled</div>
@@ -116,9 +118,9 @@
           <div class="panel-body">
 				<ul id="completedExecutions" class="connectedSortable">
 				</ul>
-          </div>
-        </div>
 			</div>
+		</div>
+	</div>
 		</div>
     <br />
     <br />
@@ -143,8 +145,8 @@
 		    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 		}				    
 		
-    var caseInstanceId = getParameterByName('caseInstanceId');            
-    	var executions = [];     
+    var caseInstanceId = getParameterByName('caseInstanceId');       
+    var executions = [];     
     	var cssClassesForCmmnActivityTypes = {
     			'milestone':'cmmn-icon-milestone', 
     			'stage':'cmmn-icon-stage-collapsed',
@@ -163,11 +165,11 @@
 	    $.each(caseExecutions, function (id, caseExecution) {
 
 		    	if(cssClassesForCmmnActivityTypes[caseExecution.activityType] != undefined) {
-	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.activityType] + '">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
+	    	 		items.push('<li class="ui-state-default"><span class="' + cssClassesForCmmnActivityTypes[caseExecution.activityType] + '">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
 		    	} else if(cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] != undefined) {
-	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] + '">' + caseExecution.caseActivityName + '</span></li>');
+	    	 		items.push('<li class="ui-state-default"><span class="' + cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] + '">' + caseExecution.caseActivityName + '</span></li>');
 		    	} else 	{
-	    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+	    	 items.push('<li class="ui-state-default">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
 			   	}
 	    });  
 
@@ -249,7 +251,7 @@
 	    } );
 
 
-	 
+		 
   });
 			</script>
 
