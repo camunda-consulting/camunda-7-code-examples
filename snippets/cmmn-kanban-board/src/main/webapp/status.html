@@ -112,55 +112,40 @@
 	    // get URL query parameter
 		function getParameterByName(name) {
 		    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+
 		    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 		}				    
-    var caseInstanceId = getParameterByName('caseInstanceId');       
-    var executions = [];     
-	
-		var restAccess = '/engine-rest';
+		
+    	var caseInstanceId = getParameterByName('caseInstanceId');       
+    	var executions = [];     
+    	var cssClassesForCmmnActivityTypes = {
+    			'milestone':'cmmn-icon-milestone', 
+    			'stage':'cmmn-icon-stage-collapsed',
+    		   	'casePlanModel':'cmmn-icon-case-plan-model',
+    		   	'humanTask':'cmmn-icon-human-blocking-task',
+    		   	'processTask':'cmmn-icon-process-task'
+    			
+    	 };
+
+ 		var restAccess = '/engine-rest';
 		
 		function populateList(list, caseExecutions) {
-	    var items = [];
-	    $.each(caseExecutions, function (id, caseExecution) {
-		    if(caseExecution.activityType == 'milestone') {
-	    	 items.push('<li><span class="cmmn-icon-milestone">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-		    } else if(caseExecution.activityType == 'stage') {
-		    	 items.push('<li><span class="cmmn-icon-stage-collapsed">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-		    } else if(caseExecution.activityType == 'casePlanModel') {
-		    	 items.push('<li><span class="cmmn-icon-case-plan-model">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-		    } else if(caseExecution.activityType == 'humanTask') {
-		    	 items.push('<li><span class="cmmn-icon-human-blocking-task">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-		    } else if(caseExecution.activityType == 'processTask') {
-		    	 items.push('<li><span class="cmmn-icon-process-task">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-		    } else {
-		    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
-		    }			    
 
-	    });  
+	    	var items = [];
 
-	    list.html(items.join(''));
-	  }
+	    	$.each(caseExecutions, function (id, caseExecution) {
 
-		function populateHistoryList(list, caseExecutions) {
-		    var items = [];
-		    $.each(caseExecutions, function (id, caseExecution) {
-			    if(caseExecution.caseActivityType == 'milestone') {
-		    	 items.push('<li><span class="cmmn-icon-milestone">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-			    } else if(caseExecution.caseActivityType == 'stage') {
-			    	 items.push('<li><span class="cmmn-icon-stage-collapsed">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-			    } else if(caseExecution.caseActivityType == 'casePlanModel') {
-			    	 items.push('<li><span class="cmmn-icon-case-plan-model">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-			    } else if(caseExecution.caseActivityType == 'humanTask') {
-			    	 items.push('<li><span class="cmmn-icon-human-blocking-task">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-			    } else if(caseExecution.caseActivityType == 'processTask') {
-			    	 items.push('<li><span class="cmmn-icon-process-task">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
-			    } else {
-			    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
-			    }			    
-		    });  
-		    
-	    list.html(items.join(''));
-	  }
+		    	if(cssClassesForCmmnActivityTypes[caseExecution.activityType] != undefined) {
+	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.activityType] + '">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
+		    	} else if(cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] != undefined) {
+	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] + '">' + caseExecution.caseActivityName + '</span></li>');
+		    	} else 	{
+			    	items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+			   	}
+	    	});  
+
+	    	list.html(items.join(''));
+	  	}
 		
 /* 		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
 		  populateList($("#enabledExecutions"), enabledExecutions);
@@ -168,7 +153,7 @@
 	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
 	      populateList($("#activeExecutions"), activeExecutions)}); */
 	    $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
-	    	populateHistoryList($("#completedExecutions"), completedExecutions)});
+	    	populateList($("#completedExecutions"), completedExecutions)});
 
 
 
