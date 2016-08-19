@@ -7,9 +7,9 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 public class ChargeCreditCardDelegate implements JavaDelegate {
 
 	@Override
-	public void execute(DelegateExecution arg0) throws Exception {
+	public void execute(DelegateExecution context) throws Exception {
 		
-		boolean bookingError = (Boolean) arg0.getVariable("chargeCardError");
+		boolean bookingError = (Boolean) context.getVariable("chargeCardError");
 		if(bookingError)
 			throw new BpmnError("CHARGE_FAILURE");;
 		

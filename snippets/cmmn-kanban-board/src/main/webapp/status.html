@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+<link type="text/css" rel="stylesheet"
+	href="css/cmmn.css" />
 
 <!-- own CCS style for highlight of activity - color can be easily changed here -->
 <style type="text/css">
@@ -37,7 +39,7 @@
 	color: #143d52;
 }
 
-#enabledExecutions, #activeExecutions, #completedExecutions {
+#enabledExecutions, #activeExecutions, #completedExecutions, #availableExecutions {
 	border: 1px solid #eee;
 	width: 142px;
 	min-height: 20px;
@@ -48,7 +50,7 @@
 	margin-right: 10px;
 }
 
-#enabledExecutions li, #activeExecutions li, #completedExecutions li {
+#enabledExecutions li, #activeExecutions li, #completedExecutions li, #availableExecutions li {
 	margin: 0 5px 5px 5px;
 	padding: 5px;
 	font-size: 1.2em;
@@ -74,21 +76,6 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-<script>
-  $( function() {
-
-	  $(".connectedSortable li").addClass("ui-state-disabled");
-	  
-    $( "#enabledExecutions").sortable({
-      connectWith: ".connectedSortable"
-    }).disableSelection();
-
-    $( "#activeExecutions" ).sortable({
-        cancel: ".ui-state-disabled"
-      });
-    
-  } );
-  </script>
 
 </head>
 <body>
@@ -109,26 +96,26 @@
 		    <div class="panel panel-info">
 		      <div class="panel-heading">Enabled</div>
 		      <div class="panel-body">
-						<ul id="enabledExecutions" class="connectedSortable">
-						</ul>
-		      </div>
+				<ul id="enabledExecutions" class="connectedSortable">
+				</ul>
+			</div>
 		    </div>
 			</div>
 			<div class="col-md-3">
         <div class="panel panel-primary">
           <div class="panel-heading">Active</div>
           <div class="panel-body">
-            <ul id="activeExecutions" class="connectedSortable">
-            </ul>
-          </div>
+				<ul id="activeExecutions" class="connectedSortable">
+				</ul>
+			</div>
         </div>
 			</div>
 			<div class="col-md-3">
         <div class="panel panel-success">
           <div class="panel-heading">Completed</div>
           <div class="panel-body">
-            <ul id="completedExecutions" class="connectedSortable">
-            </ul>
+				<ul id="completedExecutions" class="connectedSortable">
+				</ul>
           </div>
         </div>
 			</div>
@@ -140,7 +127,7 @@
 		  <div class="panel-heading">CMMN Task Lifecycle</div>
 		  <div class="panel-body">
 		    <img src="https://docs.camunda.org/manual/7.5/reference/cmmn11/concepts/img/TaskStageLifecycle.png" />
-		  </div>
+			</div>
 		</div>
 	</div>
 
@@ -152,27 +139,116 @@
 	    // get URL query parameter
 		function getParameterByName(name) {
 		    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+
 		    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 		}				    
+		
     var caseInstanceId = getParameterByName('caseInstanceId');            
+    	var executions = [];     
+    	var cssClassesForCmmnActivityTypes = {
+    			'milestone':'cmmn-icon-milestone', 
+    			'stage':'cmmn-icon-stage-collapsed',
+    		   	'casePlanModel':'cmmn-icon-case-plan-model',
+    		   	'humanTask':'cmmn-icon-human-blocking-task',
+    		   	'processTask':'cmmn-icon-process-task'
+    			
+    	 };
 	
 		var restAccess = '/engine-rest';
 		
 		function populateList(list, caseExecutions) {
+
 	    var items = [];
+
 	    $.each(caseExecutions, function (id, caseExecution) {
+
+		    	if(cssClassesForCmmnActivityTypes[caseExecution.activityType] != undefined) {
+	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.activityType] + '">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
+		    	} else if(cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] != undefined) {
+	    	 		items.push('<li><span class="' + cssClassesForCmmnActivityTypes[caseExecution.caseActivityType] + '">' + caseExecution.caseActivityName + '</span></li>');
+		    	} else 	{
 	    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+			   	}
 	    });  
 
 	    list.html(items.join(''));
 	  }
 		
-		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
-		  populateList($("#enabledExecutions"), enabledExecutions)});
+/* 		$.get(restAccess + '/case-execution/?enabled=true&caseInstanceId=' + caseInstanceId, function(enabledExecutions) {
+		  populateList($("#enabledExecutions"), enabledExecutions);
+		  executions = enabledExecutions});
 	    $.get(restAccess + '/case-execution/?active=true&caseInstanceId=' + caseInstanceId, function(activeExecutions) {
-	      populateList($("#activeExecutions"), activeExecutions)});
+	      populateList($("#activeExecutions"), activeExecutions)}); */
 	    $.get(restAccess + '/history/case-activity-instance?completed=true&caseInstanceId=' + caseInstanceId, function(completedExecutions) {
 	      populateList($("#completedExecutions"), completedExecutions)});
+
+
+
+	    $.get(restAccess + '/case-execution/?caseInstanceId=' + caseInstanceId, function(allExecutions) {
+
+			var availableExecutions = [];
+			var enabledExecutions = [];
+			var activeExecutions = [];
+			
+	    	$.each(allExecutions, function (id, execution) {			
+
+				if (execution.enabled == false && execution.active == false && execution.disabled == false) {
+					availableExecutions.push(execution);
+				} else if (execution.enabled == true) {
+					enabledExecutions.push(execution);
+				} else if (execution.active == true) {
+					activeExecutions.push(execution);		
+				}
+	    	});
+
+	    	populateList($("#availableExecutions"), availableExecutions);
+			  populateList($("#enabledExecutions"), enabledExecutions);
+			  populateList($("#activeExecutions"), activeExecutions);
+			  executions = enabledExecutions
+			 });
+
+
+
+	    $( function() {
+
+	  	  $(".connectedSortable li").addClass("ui-state-disabled");
+	  	  
+	      $( ".connectedSortable").sortable({
+	      	start: function(event, ui) {
+	              item = ui.item;
+	              newList = oldList = ui.item.parent();
+	          },
+	          stop: function(event, ui) {
+
+	          	$.each(executions, function (id, caseExecution) {
+
+	  				if (caseExecution.activityName == item.text() && oldList.attr('id') == 'enabledExecutions' && newList.attr('id') == 'activeExecutions') {
+
+	  		/* 		$.post(restAccess + '/case-execution/'+caseExecution.id+'/manual-start', {}); */
+
+	  				$.ajax({
+	  					  method: "POST",
+	  					  url: restAccess + '/case-execution/'+caseExecution.id+'/manual-start',
+	  					  contentType: 'application/json; charset=utf-8',
+	  					  data: JSON.stringify({})
+	  					});
+	  				}
+	          	});
+	                  
+	          },
+	          change: function(event, ui) {  
+	              if(ui.sender) newList = ui.placeholder.parent();
+	          },
+	        connectWith: ".connectedSortable"
+	      }).disableSelection();
+
+	      $( "#activeExecutions" ).sortable({
+	          cancel: ".ui-state-disabled"
+	        });
+	      
+	    } );
+
+
 	 
   });
 			</script>

@@ -37,7 +37,7 @@ Once you installed the plugin it should appear in
 [Camunda Cockpit](http://docs.camunda.org/latest/guides/user-guide/#cockpit).
 
 ## More information
-[How to install a Cockpit plugin](http://docs.camunda.org/latest/real-life/how-to/#cockpit-how-to-develop-a-cockpit-plugin-integration-into-cockpit)
+[How to install a Cockpit plugin](https://docs.camunda.org/manual/latest/examples/tutorials/develop-cockpit-plugin/#integration-into-cockpit)
 
 ## Outlook
 There are few things that come to my head when I think about the plugin and features that could be of interest in the future:
