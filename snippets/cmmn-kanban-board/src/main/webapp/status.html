@@ -90,36 +90,57 @@
   } );
   </script>
 
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
 	<div class="container-fluid">
 		<h1>CMMN Kanban Board</h1>
+		<hr />
 		<div class="row">
-			<div class="col-md-4">
-				<h3 class="bg-info">Enabled</h3>
-				<ul id="enabledExecutions" class="connectedSortable">
-				</ul>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">Available</div>
+          <div class="panel-body">
+            <ul id="availableExecutions" class="connectedSortable">
+            </ul>
+          </div>
+        </div>
+      </div>
+			<div class="col-md-3">
+		    <div class="panel panel-info">
+		      <div class="panel-heading">Enabled</div>
+		      <div class="panel-body">
+						<ul id="enabledExecutions" class="connectedSortable">
+						</ul>
+		      </div>
+		    </div>
 			</div>
-			<div class="col-md-4">
-				<h3 class="bg-primary">Active</h3>
-				<ul id="activeExecutions" class="connectedSortable">
-				</ul>
+			<div class="col-md-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Active</div>
+          <div class="panel-body">
+            <ul id="activeExecutions" class="connectedSortable">
+            </ul>
+          </div>
+        </div>
 			</div>
-			<div class="col-md-4">
-				<h3 class="bg-success">Completed</h3>
-				<ul id="completedExecutions" class="connectedSortable">
-				</ul>
+			<div class="col-md-3">
+        <div class="panel panel-success">
+          <div class="panel-heading">Completed</div>
+          <div class="panel-body">
+            <ul id="completedExecutions" class="connectedSortable">
+            </ul>
+          </div>
+        </div>
 			</div>
+		</div>
+    <br />
+    <br />
+    <br />
+		<div class="panel panel-default">
+		  <div class="panel-heading">CMMN Task Lifecycle</div>
+		  <div class="panel-body">
+		    <img src="https://docs.camunda.org/manual/7.5/reference/cmmn11/concepts/img/TaskStageLifecycle.png" />
+		  </div>
 		</div>
 	</div>
 
