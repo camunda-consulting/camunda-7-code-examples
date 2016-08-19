@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+<link type="text/css" rel="stylesheet"
+	href="css/cmmn.css" />
 
 <!-- own CCS style for highlight of activity - color can be easily changed here -->
 <style type="text/css">
@@ -140,7 +142,7 @@
 		function populateList(list, caseExecutions) {
 	    var items = [];
 	    $.each(caseExecutions, function (id, caseExecution) {
-	    	 items.push('<li>' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</li>');
+	    	 items.push('<li><span class="cmmn-icon-milestone">' + (caseExecution.activityName ? caseExecution.activityName : caseExecution.caseActivityName) + '</span></li>');
 	    });  
 
 	    list.html(items.join(''));
