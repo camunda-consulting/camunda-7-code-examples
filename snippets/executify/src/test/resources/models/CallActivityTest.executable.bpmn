@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Camunda Modeler" exporterVersion="1.3.0-nightly" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
-  <bpmn:process id="Process_CallActivityTest" isClosed="false" isExecutable="false" name="Call Activity Test" processType="None">
+  <bpmn:process id="Process_CallActivityTest" isClosed="false" isExecutable="true" name="Call Activity Test" processType="None">
     <bpmn:startEvent id="StartEvent_1" isInterrupting="true" parallelMultiple="false">
       <bpmn:outgoing>SequenceFlow_1fq40ry</bpmn:outgoing>
     </bpmn:startEvent>

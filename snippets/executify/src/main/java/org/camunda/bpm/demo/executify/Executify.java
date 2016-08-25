@@ -14,12 +14,14 @@ public class Executify {
 
   private boolean generatePredictableConditionExpressions = true;
   private boolean removeDecisionRefs;
+  private boolean allProcessesExecutable;
 
   public List<ExecutableModel> makeExecutable(Map<String, InputStream> models) {
     List<ExecutableModel> executableModels = new ArrayList<ExecutableModel>();
     BpmnExecutifier bpmnExecutifier = new BpmnExecutifier();
     bpmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
     bpmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
+    bpmnExecutifier.setAllProcessesExecutable(allProcessesExecutable);
     for (Entry<String, InputStream> entry : models.entrySet()) {
       String filename = entry.getKey();
       InputStream stream = entry.getValue();
@@ -52,6 +54,10 @@ public class Executify {
   
   public void setRemoveDecisionRefs(boolean removeDecisionRefs) {
     this.removeDecisionRefs = removeDecisionRefs;
+  }
+
+  public void setAllProcessesExecutable(boolean allProcessesExecutable) {
+    this.allProcessesExecutable = allProcessesExecutable;
   }
 
 }

@@ -14,6 +14,7 @@ import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -60,6 +61,7 @@ public class InMemoryH2Test {
     makeModelsDeployable(fileNames);
   }
 
+  @Ignore
   @Test
   public void testCallActivities() throws IOException {
     String[] fileNames = {"CallActivityTest.bpmn", "A.bpmn"};
@@ -74,6 +76,7 @@ public class InMemoryH2Test {
     Executify executify = new Executify();
     executify.setGeneratePredictableConditionExpressions(true);
     executify.setRemoveDecisionRefs(true);
+    executify.setAllProcessesExecutable(true);
     List<ExecutableModel> executableModels = executify.makeExecutable(models);
     
     for (ExecutableModel executableModel : executableModels) {

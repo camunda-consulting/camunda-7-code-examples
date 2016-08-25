@@ -34,6 +34,7 @@ public class BpmnExecutifier {
   private BpmnModelInstance modelInstance;
   private boolean generatePredictableConditionExpressions;
   private boolean removeDecisionRefs;
+  private boolean allProcessesExecutable;
 
   public BpmnModelInstance executify(InputStream stream) {
     BpmnModelInstance modelInstance = Bpmn.readModelFromStream(stream);
@@ -98,7 +99,7 @@ public class BpmnExecutifier {
   private void setIsExecutableOnProcesses() {
     Collection<Process> processes = modelInstance.getModelElementsByType(Process.class);
     for (Process process : processes) {
-      if (process.getAttributeValue("isExecutable") == null) {
+      if (process.getAttributeValue("isExecutable") == null || allProcessesExecutable) {
         process.setExecutable(true);
       }
     }
@@ -223,6 +224,10 @@ public class BpmnExecutifier {
 
   public void setRemoveDecisionRefs(boolean removeDecisionRefs) {
     this.removeDecisionRefs = removeDecisionRefs;
+  }
+
+  public void setAllProcessesExecutable(boolean allProcessesExecutable) {
+    this.allProcessesExecutable = allProcessesExecutable;
   }
 
 }
