@@ -40,7 +40,7 @@
           <camunda:property name="probability" value="30"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_46fe53b4-a40a-4553-8ff0-19384532fd7e" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
+      <conditionExpression id="conditionExpression_2ae5e59c-ed01-4135-b64e-443ccb377ee0" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_3'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="green &#10;(no risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
@@ -48,7 +48,7 @@
           <camunda:property name="probability" value="55"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_df91019c-11d8-426d-bfcb-e5065799a075" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
+      <conditionExpression id="conditionExpression_1fac0e82-ac2f-43a8-8935-e16787a0fa54" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_7'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_16" name="red &#10;(At least one severe risk)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
@@ -56,7 +56,7 @@
           <camunda:property name="probability" value="15"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_34ad6dd6-c972-4778-92d4-f5026f7b2211" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
+      <conditionExpression id="conditionExpression_472b07ef-e227-4338-9f8f-8e4d5728f55b" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_16'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="Accept &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
@@ -64,7 +64,7 @@
           <camunda:property name="probability" value="80"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_dadfb966-2037-4833-bd9a-6dc9241b1f10" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
+      <conditionExpression id="conditionExpression_437bbabf-3501-415d-9dfc-c7c0ce006fc3" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_8'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Reject &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
@@ -72,7 +72,7 @@
           <camunda:property name="probability" value="20"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_5fff9a25-8fb4-4622-8187-6d2bcbc77b79" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
+      <conditionExpression id="conditionExpression_18439f80-8297-43db-b011-004b6790b7e6" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_12'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask camunda:expression="#{true}" completionQuantity="1" id="ServiceTaskPoliceAusstellen" implementation="##WebService" isForCompensation="false" name="Issue policy in insurance backend" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
@@ -134,7 +134,7 @@
     <bpmn2:boundaryEvent attachedToRef="userTaskAntragEntscheiden" cancelActivity="false" id="BoundaryEvent_1" name="2 days" parallelMultiple="false">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="_TimerEventDefinition_5">
-        <timeDuration id="timeDuration_fe879c87-b5ce-4b01-9fff-11559834d667" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">PT5M</timeDuration>
+        <timeDuration id="timeDuration_956c9371-078a-41d5-ab62-e7326d9e8ba8" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">PT5M</timeDuration>
       </bpmn2:timerEventDefinition>
     </bpmn2:boundaryEvent>
   </bpmn2:process>

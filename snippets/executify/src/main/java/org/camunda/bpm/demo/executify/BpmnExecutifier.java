@@ -26,10 +26,12 @@ import org.camunda.bpm.model.bpmn.instance.Signal;
 import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.TimeDuration;
 import org.camunda.bpm.model.bpmn.instance.TimerEventDefinition;
+import org.camunda.bpm.model.xml.type.ModelElementType;
 
 public class BpmnExecutifier {
   
   private BpmnModelInstance modelInstance;
+  private boolean generatePredictableConditionExpressions;
 
   public BpmnModelInstance executify(InputStream stream) {
     BpmnModelInstance modelInstance = Bpmn.readModelFromStream(stream);
@@ -48,12 +50,12 @@ public class BpmnExecutifier {
     addMissingTimerConfigurations();
     addMissingMessages();
     addMissingSignals();
-    Collection<Collaboration> collaborations = modelInstance.getModelElementsByType(Collaboration.class);
-    for (Collaboration collaboration : collaborations) {
-      if (collaboration.getChildElementsByType(Participant.class).isEmpty()) {
-        // TODO delete redundant collaboration
-      }
-    }
+//    Collection<Collaboration> collaborations = modelInstance.getModelElementsByType(Collaboration.class);
+//    for (Collaboration collaboration : collaborations) {
+//      if (collaboration.getChildElementsByType(Participant.class).isEmpty()) {
+//        // TODO delete redundant collaboration
+//      }
+//    }
     
 //    Collection<UserTask> userTasks = modelInstance.getModelElementsByType(UserTask.class);
 //    for (UserTask userTask : userTasks) {
@@ -82,9 +84,15 @@ public class BpmnExecutifier {
         Collection<SequenceFlow> outgoing = gateway.getOutgoing();
         if (outgoing.size() > 1) {
           for (SequenceFlow sequenceFlow : outgoing) {
-            if (isEmpty(sequenceFlow.getConditionExpression())) {
+            if (!generatePredictableConditionExpressions) {
+              if (isEmpty(sequenceFlow.getConditionExpression())) {
+                ConditionExpression conditionExpression = createElement(sequenceFlow, ConditionExpression.class);
+                conditionExpression.setTextContent("#{true}");
+                sequenceFlow.setConditionExpression(conditionExpression);
+              }
+            } else {
               ConditionExpression conditionExpression = createElement(sequenceFlow, ConditionExpression.class);
-              conditionExpression.setTextContent("#{true}");
+              conditionExpression.setTextContent("#{" + gateway.getId() + " == '" + sequenceFlow.getId() + "'}");
               sequenceFlow.setConditionExpression(conditionExpression);
             }
           }
@@ -205,6 +213,10 @@ public class BpmnExecutifier {
     T element = modelInstance.newInstance(elementClass);
     parentElement.addChildElement(element);
     return element;
+  }
+
+  public void setGeneratePredictableConditionExpressions(boolean generatePredictableConditionExpressions) {
+    this.generatePredictableConditionExpressions = generatePredictableConditionExpressions;
   }
 
 }

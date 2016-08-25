@@ -14,12 +14,14 @@ public class Executify {
 
   public static List<ExecutableModel> makeExecutable(Map<String, InputStream> models) {
     List<ExecutableModel> executableModels = new ArrayList<ExecutableModel>();
+    BpmnExecutifier bpmnExecutifier = new BpmnExecutifier();
+    bpmnExecutifier.setGeneratePredictableConditionExpressions(true);
     for (Entry<String, InputStream> entry : models.entrySet()) {
       String filename = entry.getKey();
       InputStream stream = entry.getValue();
       ModelInstance modelInstance;
       if (filename.endsWith(".bpmn")) {
-        modelInstance = new BpmnExecutifier().executify(stream);
+        modelInstance = bpmnExecutifier.executify(stream);
       } else if (filename.endsWith(".cmmn")) {
         modelInstance = Cmmn.readModelFromStream(stream);
       } else if (filename.endsWith(".dmn")) {
