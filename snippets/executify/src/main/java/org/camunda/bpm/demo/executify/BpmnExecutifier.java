@@ -1,5 +1,6 @@
 package org.camunda.bpm.demo.executify;
 
+import java.io.InputStream;
 import java.util.Collection;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -38,6 +39,12 @@ public class BpmnExecutifier {
   
   private BpmnModelInstance modelInstance;
 
+  public BpmnModelInstance executify(InputStream stream) {
+    BpmnModelInstance modelInstance = Bpmn.readModelFromStream(stream);
+    executify(modelInstance);
+    return modelInstance;
+  }
+  
   public void executify(BpmnModelInstance modelInstance) {
     this.modelInstance = modelInstance;
     setIsExecutableOnProcesses();
@@ -193,5 +200,5 @@ public class BpmnExecutifier {
     parentElement.addChildElement(element);
     return element;
   }
-  
+
 }
