@@ -57,6 +57,16 @@ public class InMemoryH2Test {
   @Test
   public void makeModelsDeployable() throws IOException {
     String[] fileNames = {"ApplicationCheck.cmmn", "InsuranceApplication.bpmn", "RiskAssessment.dmn"};
+    makeModelsDeployable(fileNames);
+  }
+
+  @Test
+  public void testCallActivities() throws IOException {
+    String[] fileNames = {"CallActivityTest.bpmn", "A.bpmn"};
+    makeModelsDeployable(fileNames);
+  }
+
+  private void makeModelsDeployable(String[] fileNames) throws IOException {
     Map<String,InputStream> models = new HashMap<String, InputStream> ();
     for (String fileName: fileNames) {
       models.put(fileName, getClass().getResourceAsStream(INPUT_DIR + fileName));

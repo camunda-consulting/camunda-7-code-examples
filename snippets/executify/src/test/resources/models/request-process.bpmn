@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.3.0-nightly">
-  <bpmn:process id="antrag-uvg" name="antrag-uvg" isExecutable="true">
+  <bpmn:process id="request-process" name="request-process" isExecutable="true">
     <bpmn:startEvent id="StartEventProcessStarted" name="">
       <bpmn:outgoing>SequenceFlow_0nwm1l1</bpmn:outgoing>
     </bpmn:startEvent>
@@ -71,7 +71,7 @@
     </bpmn:sendTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="antrag-uvg">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="request-process">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEventProcessStarted">
         <dc:Bounds x="185" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
