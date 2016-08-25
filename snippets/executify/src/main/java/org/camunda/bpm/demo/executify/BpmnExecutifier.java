@@ -2,14 +2,17 @@ package org.camunda.bpm.demo.executify;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BpmnModelElementInstance;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
+import org.camunda.bpm.model.bpmn.instance.CallActivity;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.Expression;
+import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.InclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.LoopCardinality;
@@ -24,6 +27,7 @@ import org.camunda.bpm.model.bpmn.instance.Signal;
 import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.TimeDuration;
 import org.camunda.bpm.model.bpmn.instance.TimerEventDefinition;
+import org.camunda.bpm.model.bpmn.instance.camunda.CamundaIn;
 
 public class BpmnExecutifier {
   
@@ -59,11 +63,36 @@ public class BpmnExecutifier {
 //    for (UserTask userTask : userTasks) {
 //      
 //    }
-   
-    // TODO call activity passes business key
+
+    addBusinessKeyToCallActivity();
     
     Bpmn.validateModel(modelInstance);
     
+  }
+
+  private void addBusinessKeyToCallActivity() {
+    Collection<CallActivity> callActivities = modelInstance.getModelElementsByType(CallActivity.class);
+    interationOverAllCallActivities : for (CallActivity callActivity : callActivities) {
+      ExtensionElements extensionElements = callActivity.getExtensionElements();
+      if (extensionElements != null) {
+        List<CamundaIn> camundaIns = extensionElements
+          .getElementsQuery()
+          .filterByType(CamundaIn.class)
+          .list();
+        for (CamundaIn camundaIn : camundaIns) {
+          if (!isEmpty(camundaIn.getCamundaBusinessKey())) {
+            continue interationOverAllCallActivities;
+          }
+        }
+        CamundaIn camundaIn = extensionElements.addExtensionElement(CamundaIn.class);
+        camundaIn.setCamundaBusinessKey("#{execution.processBusinessKey}");
+      } else {
+        extensionElements = createElement(callActivity, ExtensionElements.class);
+        CamundaIn camundaIn = extensionElements.addExtensionElement(CamundaIn.class);
+        camundaIn.setCamundaBusinessKey("#{execution.processBusinessKey}");
+        callActivity.setExtensionElements(extensionElements);
+      }
+    }
   }
 
   private void setIsExecutableOnProcesses() {

@@ -11,7 +11,7 @@
         <camunda:property name="simulateTimeBetweenStartsBusinessDaysSd" value="6000"/>
       </camunda:properties>
     </bpmn2:extensionElements>
-    <bpmn2:startEvent camunda:asyncAfter="true" id="StartEvent_1" isInterrupting="true" name="Application &#10;received" parallelMultiple="false">
+    <bpmn2:startEvent camunda:asyncAfter="true" id="StartEvent_1" isInterrupting="true" name="Application&#10;&#10;received" parallelMultiple="false">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="KPI-Cycle-Start" value="Decide about application"/>
@@ -34,45 +34,45 @@
     </bpmn2:businessRuleTask>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="BusinessRuleTaskAntragAutomatischPruefen"/>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="BusinessRuleTaskAntragAutomatischPruefen" targetRef="ExclusiveGatewayPruefung"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="yellow &#10;(medium risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="userTaskAntragEntscheiden">
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="yellow&#10;&#10;(medium risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="userTaskAntragEntscheiden">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="30"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_e7f7f92d-e462-449b-adbb-5e097df37409" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_3'}</conditionExpression>
+      <conditionExpression id="conditionExpression_e6f4abb8-99b4-4b7d-b2f0-1b86a1bf6ac0" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_3'}</conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="green &#10;(no risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="green&#10;&#10;(no risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="55"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_90510191-a152-4026-9ce6-f76e8b5d8f5b" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_7'}</conditionExpression>
+      <conditionExpression id="conditionExpression_e3dcfed8-9937-46bd-88ac-58b823ea7d84" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_7'}</conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_16" name="red &#10;(At least one severe risk)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
+    <bpmn2:sequenceFlow id="SequenceFlow_16" name="red&#10;&#10;(At least one severe risk)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="15"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_1edfc798-1e34-4f76-9c7b-114db778c528" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_16'}</conditionExpression>
+      <conditionExpression id="conditionExpression_f1262e4f-b0bb-4544-bc9a-811624aef521" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGatewayPruefung == 'SequenceFlow_16'}</conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Accept &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
+    <bpmn2:sequenceFlow id="SequenceFlow_8" name="Accept&#10;&#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="80"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_7120da5e-2375-42f3-b52e-f60efca7cbff" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_8'}</conditionExpression>
+      <conditionExpression id="conditionExpression_d18f4cf8-405f-4b18-9735-b7e9949ef945" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_8'}</conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_12" name="Reject &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
+    <bpmn2:sequenceFlow id="SequenceFlow_12" name="Reject&#10;&#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="probability" value="20"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <conditionExpression id="conditionExpression_0610f2ae-aa83-42a0-b767-266f811d757f" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_12'}</conditionExpression>
+      <conditionExpression id="conditionExpression_de6e08da-80b5-4dc8-9486-87563a692132" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{ExclusiveGateway_2 == 'SequenceFlow_12'}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask camunda:expression="#{true}" completionQuantity="1" id="ServiceTaskPoliceAusstellen" implementation="##WebService" isForCompensation="false" name="Issue policy in insurance backend" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
@@ -83,7 +83,7 @@
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:sendTask>
-    <bpmn2:endEvent id="EndEventAntragPoliciert" name="Policy &#10;issued">
+    <bpmn2:endEvent id="EndEventAntragPoliciert" name="Policy&#10;&#10;issued">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="KPI-Ratio" value="Accepted"/>
@@ -102,7 +102,7 @@
       <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_01vh1zw</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Application &#10;rejected">
+    <bpmn2:endEvent id="EndEventAntragAbgelehnt" name="Application&#10;&#10;rejected">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="KPI-Ratio" value="Rejected"/>
@@ -117,7 +117,7 @@
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:endEvent id="EndEventAntragBeschleunigt" name="Escalation &#10;handled">
+    <bpmn2:endEvent id="EndEventAntragBeschleunigt" name="Escalation&#10;&#10;handled">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="BoundaryEvent_1" targetRef="UserTaskAntragspruefungBeschleunigen"/>
@@ -128,13 +128,17 @@
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:callActivity camunda:caseRef="applicationCheck" completionQuantity="1" id="userTaskAntragEntscheiden" isForCompensation="false" name="Decide about application" startQuantity="1">
+      <bpmn2:extensionElements>
+        <camunda:in source="foo" target="bar"/>
+      <camunda:in businessKey="#{execution.processBusinessKey}"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:boundaryEvent attachedToRef="userTaskAntragEntscheiden" cancelActivity="false" id="BoundaryEvent_1" name="2 days" parallelMultiple="false">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="_TimerEventDefinition_5">
-        <timeDuration id="timeDuration_e7219273-7c40-442a-93d5-25c54adbf6ef" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">PT5M</timeDuration>
+        <timeDuration id="timeDuration_1f81a6de-a044-4fd8-aa17-230054b9ee47" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">PT5M</timeDuration>
       </bpmn2:timerEventDefinition>
     </bpmn2:boundaryEvent>
   </bpmn2:process>
