@@ -22,8 +22,8 @@ public class MyProcessApplication extends ServletProcessApplication {
 
     LicenseHelper.setLicense(engine);
     DemoDataGenerator.autoGenerateFor(engine, "insurance-application", 14, getReference());
-    createDefaultUsers(engine);
-    
+    UserDataGenerator.createDefaultUsers(engine);
+
     addUser(engine, "ben", "ben", "Ben", "Brooks");
     addGroup(engine, "clerk", "Clerk", "ben");  
     addFilterGroupAuthorization(engine, "clerk", FILTER_myTasks, FILTER_groupTasksFilter, FILTER_allTasksFilter);   
