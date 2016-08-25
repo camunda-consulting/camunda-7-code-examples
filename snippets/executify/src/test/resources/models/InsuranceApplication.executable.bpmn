@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Camunda Modeler" exporterVersion="1.2.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Camunda Modeler" exporterVersion="1.3.0-nightly" expressionLanguage="http://www.w3.org/1999/XPath" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:collaboration id="Collaboration_1u35ano" isClosed="false">
     <bpmn2:participant id="Participant_0477s11" name="Insurance Application" processRef="insurance-application"/>
   </bpmn2:collaboration>
@@ -40,7 +40,7 @@
           <camunda:property name="probability" value="30"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{true}</bpmn2:conditionExpression>
+      <conditionExpression id="conditionExpression_46fe53b4-a40a-4553-8ff0-19384532fd7e" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_7" name="green &#10;(no risks)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
@@ -48,7 +48,7 @@
           <camunda:property name="probability" value="55"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{false}</bpmn2:conditionExpression>
+      <conditionExpression id="conditionExpression_df91019c-11d8-426d-bfcb-e5065799a075" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_16" name="red &#10;(At least one severe risk)" sourceRef="ExclusiveGatewayPruefung" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
@@ -56,7 +56,7 @@
           <camunda:property name="probability" value="15"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{false}</bpmn2:conditionExpression>
+      <conditionExpression id="conditionExpression_34ad6dd6-c972-4778-92d4-f5026f7b2211" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="Accept &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskPoliceAusstellen">
       <bpmn2:extensionElements>
@@ -64,7 +64,7 @@
           <camunda:property name="probability" value="80"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{true}</bpmn2:conditionExpression>
+      <conditionExpression id="conditionExpression_dadfb966-2037-4833-bd9a-6dc9241b1f10" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_12" name="Reject &#10;application" sourceRef="ExclusiveGateway_2" targetRef="ServiceTaskAblehnungVermerken">
       <bpmn2:extensionElements>
@@ -72,34 +72,14 @@
           <camunda:property name="probability" value="20"/>
         </camunda:properties>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{false}</bpmn2:conditionExpression>
+      <conditionExpression id="conditionExpression_5fff9a25-8fb4-4622-8187-6d2bcbc77b79" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">#{true}</conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:serviceTask camunda:expression="#{true}" completionQuantity="1" id="ServiceTaskPoliceAusstellen" implementation="##WebService" isForCompensation="false" name="Issue policy in insurance backend" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sendTask camunda:async="true" camunda:expression="#{true}" completionQuantity="1" id="sendTaskPoliceZusenden" implementation="##WebService" isForCompensation="false" name="Send policy" startQuantity="1">
-      <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="mailBody">
-<![CDATA[
-            
-          ]]>            <camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
-
-We are happy to let you know that we issued your insurance policy! 
-
-Here you find the relevant data summarized: 
-- Contract number: ${application.contractNumber}
-- Yearly fee: ${application.fee}
-- Product: ${application.insuranceProduct}
-
-With kind regards
-Your Camundanzia.]]></camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="mailSubject">Your policy was issued</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn2:extensionElements>
+    <bpmn2:sendTask camunda:expression="#{true}" completionQuantity="1" id="sendTaskPoliceZusenden" implementation="##WebService" isForCompensation="false" name="Send policy" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
     </bpmn2:sendTask>
@@ -113,22 +93,7 @@ Your Camundanzia.]]></camunda:script>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ServiceTaskPoliceAusstellen" targetRef="sendTaskPoliceZusenden"/>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="" sourceRef="sendTaskPoliceZusenden" targetRef="EndEventAntragPoliciert"/>
-    <bpmn2:sendTask camunda:async="true" camunda:expression="#{true}" completionQuantity="1" id="SendTaskAblehnungZusenden" implementation="##WebService" isForCompensation="false" name="Send rejection" startQuantity="1">
-      <bpmn2:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="mailBody">
-<![CDATA[
-            
-          ]]>            <camunda:script scriptFormat="freemarker"><![CDATA[Dear <#if application.applicant.gender = "male">Mr.<#else>Mrs.</#if> ${application.applicant.name}.
-
-Unfortunately we cannot issue the policy you applied for. 
-
-With kind regards
-Your Camundanzia.]]></camunda:script>
-          </camunda:inputParameter>
-          <camunda:inputParameter name="mailSubject">Your application was rejected</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn2:extensionElements>
+    <bpmn2:sendTask camunda:expression="#{true}" completionQuantity="1" id="SendTaskAblehnungZusenden" implementation="##WebService" isForCompensation="false" name="Send rejection" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_01vh1zw</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
     </bpmn2:sendTask>
@@ -148,7 +113,7 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:sequenceFlow id="SequenceFlow_01vh1zw" sourceRef="ServiceTaskAblehnungVermerken" targetRef="SendTaskAblehnungZusenden"/>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="SendTaskAblehnungZusenden" targetRef="EndEventAntragAbgelehnt"/>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="UserTaskAntragspruefungBeschleunigen" targetRef="EndEventAntragBeschleunigt"/>
-    <bpmn2:userTask camunda:candidateGroups="management" completionQuantity="1" id="UserTaskAntragspruefungBeschleunigen" implementation="##unspecified" isForCompensation="false" name="Speed up decision making process" startQuantity="1">
+    <bpmn2:userTask completionQuantity="1" id="UserTaskAntragspruefungBeschleunigen" implementation="##unspecified" isForCompensation="false" name="Speed up decision making process" startQuantity="1">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -169,7 +134,7 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:boundaryEvent attachedToRef="userTaskAntragEntscheiden" cancelActivity="false" id="BoundaryEvent_1" name="2 days" parallelMultiple="false">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="_TimerEventDefinition_5">
-        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">P2D</bpmn2:timeDuration>
+        <timeDuration id="timeDuration_fe879c87-b5ce-4b01-9fff-11559834d667" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">PT5M</timeDuration>
       </bpmn2:timerEventDefinition>
     </bpmn2:boundaryEvent>
   </bpmn2:process>
@@ -260,7 +225,7 @@ Your Camundanzia.]]></camunda:script>
           <dc:Bounds height="6" width="6" x="271" y="70"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="BPMNEdge_SequenceFlow_3" sourceElement="_BPMNShape_ExclusiveGateway_2" targetElement="UserTask_0lcr7cx_di">
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_3" id="BPMNEdge_SequenceFlow_3" sourceElement="_BPMNShape_ExclusiveGateway_2">
         <di:waypoint x="298" xsi:type="dc:Point" y="95"/>
         <di:waypoint x="298" xsi:type="dc:Point" y="135"/>
         <di:waypoint x="420" xsi:type="dc:Point" y="135"/>
@@ -337,7 +302,7 @@ Your Camundanzia.]]></camunda:script>
           <dc:Bounds height="6" width="90" x="446" y="239"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_4" id="BPMNEdge_SequenceFlow_4" sourceElement="UserTask_0lcr7cx_di" targetElement="_BPMNShape_ExclusiveGateway_3">
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_4" id="BPMNEdge_SequenceFlow_4" targetElement="_BPMNShape_ExclusiveGateway_3">
         <di:waypoint x="520" xsi:type="dc:Point" y="135"/>
         <di:waypoint x="689" xsi:type="dc:Point" y="135"/>
         <bpmndi:BPMNLabel>

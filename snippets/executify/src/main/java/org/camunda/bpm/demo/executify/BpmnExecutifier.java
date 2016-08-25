@@ -5,16 +5,12 @@ import java.util.Collection;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.builder.AbstractBaseElementBuilder;
-import org.camunda.bpm.model.bpmn.impl.instance.LoopCardinalityImpl;
 import org.camunda.bpm.model.bpmn.instance.BpmnModelElementInstance;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
 import org.camunda.bpm.model.bpmn.instance.Collaboration;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
-import org.camunda.bpm.model.bpmn.instance.Documentation;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.Expression;
-import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.InclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.LoopCardinality;
@@ -28,12 +24,8 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.ServiceTask;
 import org.camunda.bpm.model.bpmn.instance.Signal;
 import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
-import org.camunda.bpm.model.bpmn.instance.UserTask;
-import org.camunda.bpm.model.bpmn.instance.di.DiagramElement;
-import org.camunda.bpm.model.xml.ModelInstance;
-import org.camunda.bpm.model.xml.instance.DomElement;
-import org.camunda.bpm.model.xml.instance.ModelElementInstance;
-import org.camunda.bpm.model.xml.type.ModelElementType;
+import org.camunda.bpm.model.bpmn.instance.TimeDuration;
+import org.camunda.bpm.model.bpmn.instance.TimerEventDefinition;
 
 public class BpmnExecutifier {
   
@@ -53,6 +45,7 @@ public class BpmnExecutifier {
     addMissingExpressionsToSendTasks();
     addMissingExpressionsToBusinessRuleTasks();
     addMissingMultiInstanceConfiguration();
+    addMissingTimerConfigurations();
     addMissingMessages();
     addMissingSignals();
     Collection<Collaboration> collaborations = modelInstance.getModelElementsByType(Collaboration.class);
@@ -146,6 +139,19 @@ public class BpmnExecutifier {
         LoopCardinality loopCardinality = createElement(miConfig, LoopCardinality.class);
         loopCardinality.setTextContent("2");
         miConfig.setLoopCardinality(loopCardinality);
+      }
+    }
+  }
+
+  private void addMissingTimerConfigurations() {
+    Collection<TimerEventDefinition> timers = modelInstance.getModelElementsByType(TimerEventDefinition.class);
+    for (TimerEventDefinition timer : timers) {
+      if (isEmpty(timer.getTimeCycle())
+          && isEmpty(timer.getTimeDate())
+          && isEmpty(timer.getTimeDuration())) {
+        TimeDuration timeDuration = createElement(timer, TimeDuration.class);
+        timeDuration.setTextContent("PT5M");
+        timer.setTimeDuration(timeDuration);
       }
     }
   }
