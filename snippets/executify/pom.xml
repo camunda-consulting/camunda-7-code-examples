@@ -32,19 +32,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.camunda.bpm.model</groupId>
-      <artifactId>camunda-bpmn-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.camunda.bpm.model</groupId>
-      <artifactId>camunda-cmmn-model</artifactId>
-    </dependency>
-
-    <dependency>
-      <!-- Needed for InMemoryH2Test -->
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine</artifactId>
-      <scope>test</scope>
     </dependency>
 
     <dependency>

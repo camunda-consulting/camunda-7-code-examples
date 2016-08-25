@@ -1,17 +1,17 @@
 package org.camunda.bpm.demo.executify;
 
+import static org.camunda.bpm.demo.executify.BpmnModelInstanceHelper.*;
+
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.BpmnModelElementInstance;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
 import org.camunda.bpm.model.bpmn.instance.CallActivity;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
-import org.camunda.bpm.model.bpmn.instance.Expression;
 import org.camunda.bpm.model.bpmn.instance.ExtensionElements;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.InclusiveGateway;
@@ -113,14 +113,10 @@ public class BpmnExecutifier {
           for (SequenceFlow sequenceFlow : outgoing) {
             if (!generatePredictableConditionExpressions) {
               if (isEmpty(sequenceFlow.getConditionExpression())) {
-                ConditionExpression conditionExpression = createElement(sequenceFlow, ConditionExpression.class);
-                conditionExpression.setTextContent("#{true}");
-                sequenceFlow.setConditionExpression(conditionExpression);
+                setExpression(sequenceFlow, ConditionExpression.class, "#{true}");
               }
             } else {
-              ConditionExpression conditionExpression = createElement(sequenceFlow, ConditionExpression.class);
-              conditionExpression.setTextContent("#{" + gateway.getId() + " == '" + sequenceFlow.getId() + "'}");
-              sequenceFlow.setConditionExpression(conditionExpression);
+              setExpression(sequenceFlow, ConditionExpression.class, "#{" + gateway.getId() + " == '" + sequenceFlow.getId() + "'}");
             }
           }
         }
@@ -175,9 +171,7 @@ public class BpmnExecutifier {
       if (isEmpty(miConfig.getLoopCardinality())
           && isEmpty(miConfig.getCamundaCollection())
           && miConfig.getLoopDataInputRef() == null) {
-        LoopCardinality loopCardinality = createElement(miConfig, LoopCardinality.class);
-        loopCardinality.setTextContent("2");
-        miConfig.setLoopCardinality(loopCardinality);
+        setExpression(miConfig, LoopCardinality.class, "2");
       }
     }
   }
@@ -188,9 +182,7 @@ public class BpmnExecutifier {
       if (isEmpty(timer.getTimeCycle())
           && isEmpty(timer.getTimeDate())
           && isEmpty(timer.getTimeDuration())) {
-        TimeDuration timeDuration = createElement(timer, TimeDuration.class);
-        timeDuration.setTextContent("PT5M");
-        timer.setTimeDuration(timeDuration);
+        setExpression(timer, TimeDuration.class, "PT5M");
       }
     }
   }
@@ -223,27 +215,6 @@ public class BpmnExecutifier {
         signalEventDefinition.setSignal(signal);
       }
     }
-  }
-
-  private boolean isEmpty(String string) {
-    return string == null || string.isEmpty();
-  }
-
-  private boolean isEmpty(Expression expression) {
-    return expression == null || expression.getTextContent() == null || expression.getTextContent().isEmpty();
-  }
-
-  protected <T extends BpmnModelElementInstance> T createElement(BpmnModelElementInstance parentElement, String id, Class<T> elementClass) {
-    T element = modelInstance.newInstance(elementClass);
-    element.setAttributeValue("id", id, true);
-    parentElement.addChildElement(element);
-    return element;
-  }
-  
-  protected <T extends BpmnModelElementInstance> T createElement(BpmnModelElementInstance parentElement, Class<T> elementClass) {
-    T element = modelInstance.newInstance(elementClass);
-    parentElement.addChildElement(element);
-    return element;
   }
 
   public void setGeneratePredictableConditionExpressions(boolean generatePredictableConditionExpressions) {
