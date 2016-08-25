@@ -7,7 +7,6 @@ import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BpmnModelElementInstance;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
-import org.camunda.bpm.model.bpmn.instance.Collaboration;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
 import org.camunda.bpm.model.bpmn.instance.ExclusiveGateway;
 import org.camunda.bpm.model.bpmn.instance.Expression;
@@ -17,7 +16,6 @@ import org.camunda.bpm.model.bpmn.instance.LoopCardinality;
 import org.camunda.bpm.model.bpmn.instance.Message;
 import org.camunda.bpm.model.bpmn.instance.MessageEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.MultiInstanceLoopCharacteristics;
-import org.camunda.bpm.model.bpmn.instance.Participant;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.SendTask;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
@@ -26,12 +24,12 @@ import org.camunda.bpm.model.bpmn.instance.Signal;
 import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.TimeDuration;
 import org.camunda.bpm.model.bpmn.instance.TimerEventDefinition;
-import org.camunda.bpm.model.xml.type.ModelElementType;
 
 public class BpmnExecutifier {
   
   private BpmnModelInstance modelInstance;
   private boolean generatePredictableConditionExpressions;
+  private boolean removeDecisionRefs;
 
   public BpmnModelInstance executify(InputStream stream) {
     BpmnModelInstance modelInstance = Bpmn.readModelFromStream(stream);
@@ -134,6 +132,10 @@ public class BpmnExecutifier {
           && isEmpty(task.getCamundaType())
           && isEmpty(task.getCamundaDecisionRef())) {
         task.setCamundaExpression("#{true}");
+      } else if (removeDecisionRefs && !isEmpty(task.getCamundaDecisionRef())) {
+        task.setCamundaDecisionRef(null);
+        task.setCamundaResultVariable(null);
+        task.setCamundaExpression("#{true}");
       }
     }
   }
@@ -217,6 +219,10 @@ public class BpmnExecutifier {
 
   public void setGeneratePredictableConditionExpressions(boolean generatePredictableConditionExpressions) {
     this.generatePredictableConditionExpressions = generatePredictableConditionExpressions;
+  }
+
+  public void setRemoveDecisionRefs(boolean removeDecisionRefs) {
+    this.removeDecisionRefs = removeDecisionRefs;
   }
 
 }

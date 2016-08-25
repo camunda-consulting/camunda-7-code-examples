@@ -12,10 +12,14 @@ import org.camunda.bpm.model.xml.ModelInstance;
 
 public class Executify {
 
-  public static List<ExecutableModel> makeExecutable(Map<String, InputStream> models) {
+  private boolean generatePredictableConditionExpressions = true;
+  private boolean removeDecisionRefs;
+
+  public List<ExecutableModel> makeExecutable(Map<String, InputStream> models) {
     List<ExecutableModel> executableModels = new ArrayList<ExecutableModel>();
     BpmnExecutifier bpmnExecutifier = new BpmnExecutifier();
-    bpmnExecutifier.setGeneratePredictableConditionExpressions(true);
+    bpmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
+    bpmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
     for (Entry<String, InputStream> entry : models.entrySet()) {
       String filename = entry.getKey();
       InputStream stream = entry.getValue();
@@ -32,6 +36,22 @@ public class Executify {
       executableModels.add(new ExecutableModel(filename, modelInstance));
     }
     return executableModels;
+  }
+
+  public boolean isGeneratePredictableConditionExpressions() {
+    return generatePredictableConditionExpressions;
+  }
+
+  public void setGeneratePredictableConditionExpressions(boolean generatePredictableConditionExpressions) {
+    this.generatePredictableConditionExpressions = generatePredictableConditionExpressions;
+  }
+
+  public boolean isRemoveDecisionRefs() {
+    return removeDecisionRefs;
+  }
+  
+  public void setRemoveDecisionRefs(boolean removeDecisionRefs) {
+    this.removeDecisionRefs = removeDecisionRefs;
   }
 
 }

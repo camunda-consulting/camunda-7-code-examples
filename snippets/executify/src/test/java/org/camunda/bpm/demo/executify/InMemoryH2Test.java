@@ -61,7 +61,10 @@ public class InMemoryH2Test {
     for (String fileName: fileNames) {
       models.put(fileName, getClass().getResourceAsStream(INPUT_DIR + fileName));
     }
-    List<ExecutableModel> executableModels = Executify.makeExecutable(models);
+    Executify executify = new Executify();
+    executify.setGeneratePredictableConditionExpressions(true);
+    executify.setRemoveDecisionRefs(true);
+    List<ExecutableModel> executableModels = executify.makeExecutable(models);
     
     for (ExecutableModel executableModel : executableModels) {
       writeToFile(executableModel.getFilename(), executableModel.getXmlString());

@@ -25,7 +25,7 @@
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_16</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" name="Check risks">
+    <bpmn2:businessRuleTask id="BusinessRuleTaskAntragAutomatischPruefen" name="Check risks" camunda:resultVariable="riskAssessmentResult" camunda:decisionRef="riskAssessment">
       <bpmn2:extensionElements>
         <camunda:executionListener class="com.camunda.demo.insuranceapplication.adapter.MapDmnResult" event="end" />
       </bpmn2:extensionElements>
