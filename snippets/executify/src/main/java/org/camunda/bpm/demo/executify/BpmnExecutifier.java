@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.impl.BpmnModelConstants;
 import org.camunda.bpm.model.bpmn.instance.BusinessRuleTask;
 import org.camunda.bpm.model.bpmn.instance.CallActivity;
 import org.camunda.bpm.model.bpmn.instance.ConditionExpression;
@@ -65,15 +66,25 @@ public class BpmnExecutifier {
 //      
 //    }
 
-    addBusinessKeyToCallActivity();
+    addMissingProcessAndBusinessKeyToCallActivity();
     
     Bpmn.validateModel(modelInstance);
     
   }
 
-  private void addBusinessKeyToCallActivity() {
+  private void addMissingProcessAndBusinessKeyToCallActivity() {
     Collection<CallActivity> callActivities = modelInstance.getModelElementsByType(CallActivity.class);
     interationOverAllCallActivities : for (CallActivity callActivity : callActivities) {
+      // add process or case if missing
+      String name = callActivity.getName();
+      if (!callActivity.getDomElement().hasAttribute("calledElement") && !callActivity.getDomElement().hasAttribute(BpmnModelConstants.CAMUNDA_NS, "caseRef")) {
+        callActivity.setCalledElement("TODO");
+      } else if (callActivity.getDomElement().hasAttribute("calledElement") && isEmpty(callActivity.getCalledElement())) {
+        callActivity.setCalledElement("TODO");
+      } else if (callActivity.getDomElement().hasAttribute(BpmnModelConstants.CAMUNDA_NS, "caseRef") && isEmpty(callActivity.getCamundaCaseRef())) {
+        callActivity.setCamundaCaseRef("TODO");
+      }
+      // add business key if missing
       ExtensionElements extensionElements = callActivity.getExtensionElements();
       if (extensionElements != null) {
         List<CamundaIn> camundaIns = extensionElements

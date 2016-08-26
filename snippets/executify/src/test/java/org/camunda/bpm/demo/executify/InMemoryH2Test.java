@@ -91,7 +91,6 @@ public class InMemoryH2Test {
     makeModelsDeployable(fileNames);
   }
 
-  @Ignore
   @Test
   public void testCallActivities() throws IOException {
     String[] fileNames = {"CallActivityTest.bpmn", "A.bpmn"};
