@@ -117,7 +117,7 @@ public class BpmnExecutifier {
                 setExpression(sequenceFlow, ConditionExpression.class, "#{true}");
               }
             } else {
-              setExpression(sequenceFlow, ConditionExpression.class, "#{" + gateway.getId() + " == '" + sequenceFlow.getId() + "'}");
+              setExpression(sequenceFlow, ConditionExpression.class, "#{execution.getVariable('" + gateway.getId() + "') == '" + sequenceFlow.getId() + "'}");
             }
           }
         }
