@@ -13,6 +13,8 @@ import org.camunda.bpm.engine.repository.DeploymentBuilder;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.cmmn.Cmmn;
+import org.camunda.bpm.model.cmmn.CmmnModelInstance;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -43,11 +45,39 @@ public class InMemoryH2Test {
   }
 
   @Test
-  public void makeModelDeployable() throws IOException {
+  public void testProcess() throws IOException {
     String fileName = "request-process.bpmn";
     InputStream stream = getClass().getResourceAsStream(INPUT_DIR + fileName);
     BpmnModelInstance modelInstance = new BpmnExecutifier().executify(stream);
     String xml = Bpmn.convertToString(modelInstance);
+    writeToFile(fileName, xml);
+    repositoryService()
+      .createDeployment()
+      .addString(fileName, xml)
+      .deploy();
+  }
+
+  @Test
+  public void testCase() throws IOException {
+    String fileName = "Case.cmmn";
+    InputStream stream = getClass().getResourceAsStream(INPUT_DIR + fileName);
+    CmmnModelInstance modelInstance = new CmmnExecutifier().executify(stream);
+    String xml = Cmmn.convertToString(modelInstance);
+    writeToFile(fileName, xml);
+    repositoryService()
+      .createDeployment()
+      .addString(fileName, xml)
+      .deploy();
+  }
+
+  @Test
+  public void testCaseWithOptions() throws IOException {
+    String fileName = "Case.cmmn";
+    InputStream stream = getClass().getResourceAsStream(INPUT_DIR + fileName);
+    CmmnExecutifier cmmnExecutifier = new CmmnExecutifier();
+    cmmnExecutifier.setGeneratePredictableConditionExpressions(true);
+    CmmnModelInstance modelInstance = cmmnExecutifier.executify(stream);
+    String xml = Cmmn.convertToString(modelInstance);
     writeToFile(fileName, xml);
     repositoryService()
       .createDeployment()

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.camunda.bpm.model.cmmn.Cmmn;
 import org.camunda.bpm.model.dmn.Dmn;
 import org.camunda.bpm.model.xml.ModelInstance;
 
@@ -22,6 +21,9 @@ public class Executify {
     bpmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
     bpmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
     bpmnExecutifier.setAllProcessesExecutable(allProcessesExecutable);
+    CmmnExecutifier cmmnExecutifier = new CmmnExecutifier();
+    cmmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
+    cmmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
     for (Entry<String, InputStream> entry : models.entrySet()) {
       String filename = entry.getKey();
       InputStream stream = entry.getValue();
@@ -29,7 +31,7 @@ public class Executify {
       if (filename.endsWith(".bpmn")) {
         modelInstance = bpmnExecutifier.executify(stream);
       } else if (filename.endsWith(".cmmn")) {
-        modelInstance = Cmmn.readModelFromStream(stream);
+        modelInstance = cmmnExecutifier.executify(stream);
       } else if (filename.endsWith(".dmn")) {
         modelInstance = Dmn.readModelFromStream(stream);
       } else {
