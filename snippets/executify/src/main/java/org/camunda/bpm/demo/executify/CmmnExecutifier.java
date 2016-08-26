@@ -71,11 +71,11 @@ public class CmmnExecutifier {
             }
           }
           CamundaIn camundaIn = extensionElements.addExtensionElement(CamundaIn.class);
-          camundaIn.setCamundaBusinessKey("#{execution.processBusinessKey}");
+          camundaIn.setCamundaBusinessKey("#{caseExecution.caseBusinessKey}");
         } else {
           extensionElements = createElement(callActivity, ExtensionElements.class);
           CamundaIn camundaIn = extensionElements.addExtensionElement(CamundaIn.class);
-          camundaIn.setCamundaBusinessKey("#{execution.processBusinessKey}");
+          camundaIn.setCamundaBusinessKey("#{caseExecution.caseBusinessKey}");
           callActivity.setExtensionElements(extensionElements);
         }
       }
@@ -92,7 +92,7 @@ public class CmmnExecutifier {
       }
       if (ifPart != null) {
         if (generatePredictableConditionExpressions) {
-          setExpression(ifPart, "#{execution.getVariable('" + sentry.getId() + "')}");
+          setExpression(ifPart, "#{caseExecution.getVariable('" + sentry.getId() + "')}");
         } else if (isEmpty(ifPart.getCondition())) {
           setExpression(ifPart, "#{true}");
         }

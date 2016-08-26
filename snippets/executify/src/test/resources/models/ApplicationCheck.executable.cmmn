@@ -74,7 +74,7 @@
         </cmmn:planItem>
         <cmmn:processTask id="ProcessTask_0ms4tbn" isBlocking="true" name="Document request" processRef="Process_SampleSubProcess">
           <extensionElements xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
-            <ns0:in businessKey="#{execution.processBusinessKey}"/>
+            <ns0:in businessKey="#{caseExecution.caseBusinessKey}"/>
           </extensionElements>
         </cmmn:processTask>
         <cmmn:humanTask id="HumanTask_0gu1j4z" isBlocking="true" name="Assess application [group leader]"/>

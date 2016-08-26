@@ -17,13 +17,13 @@
 </cmmn:planItemOnPart>
       </cmmn:sentry>
       <cmmn:sentry id="Sentry_1s21a23">
-        <ifPart id="ifPart_349da454-ab31-4142-a544-045432862a93" xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
-          <condition>#{execution.getVariable('Sentry_1s21a23')}</condition>
+        <ifPart id="ifPart_6664da94-ec47-487f-a883-db0728a64a74" xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
+          <condition>#{caseExecution.getVariable('Sentry_1s21a23')}</condition>
         </ifPart>
       </cmmn:sentry>
       <cmmn:sentry id="Sentry_1ccxa76">
         <cmmn:ifPart id="IfPart_1wj9dpd">
-          <condition xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">#{execution.getVariable('Sentry_1ccxa76')}</condition>
+          <condition xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">#{caseExecution.getVariable('Sentry_1ccxa76')}</condition>
         </cmmn:ifPart>
       </cmmn:sentry>
       <cmmn:processTask id="ProcessTask_1h1n6jt" isBlocking="true" processRef="Process_A">
@@ -33,12 +33,12 @@
       </cmmn:processTask>
       <cmmn:processTask id="ProcessTask_0ztw1ps" isBlocking="true" processRef="Process_SampleSubProcess">
         <extensionElements xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
-          <camunda:in businessKey="#{execution.processBusinessKey}"/>
+          <camunda:in businessKey="#{caseExecution.caseBusinessKey}"/>
         </extensionElements>
       </cmmn:processTask>
       <cmmn:caseTask caseRef="Case_SampleSubCase" id="CaseTask_16gv3oq" isBlocking="true">
         <extensionElements xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
-          <camunda:in businessKey="#{execution.processBusinessKey}"/>
+          <camunda:in businessKey="#{caseExecution.caseBusinessKey}"/>
         </extensionElements>
       </cmmn:caseTask>
       <cmmn:caseTask caseRef="Case_SampleSubCase" id="CaseTask_1gky8ix" isBlocking="true">
