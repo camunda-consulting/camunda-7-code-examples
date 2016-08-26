@@ -4,6 +4,7 @@ import static org.camunda.bpm.demo.executify.BpmnModelInstanceHelper.*;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -29,6 +30,7 @@ import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.TimeDuration;
 import org.camunda.bpm.model.bpmn.instance.TimerEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaIn;
+import org.camunda.bpm.model.cmmn.Cmmn;
 
 public class BpmnExecutifier {
   
@@ -36,6 +38,7 @@ public class BpmnExecutifier {
   private boolean generatePredictableConditionExpressions;
   private boolean removeDecisionRefs;
   private boolean allProcessesExecutable;
+  private HashMap<String,ExecutableModel> executableModels = new HashMap<String, ExecutableModel>();
 
   public BpmnModelInstance executify(InputStream stream) {
     BpmnModelInstance modelInstance = Bpmn.readModelFromStream(stream);
@@ -78,11 +81,14 @@ public class BpmnExecutifier {
       // add process or case if missing
       String name = callActivity.getName();
       if (!callActivity.getDomElement().hasAttribute("calledElement") && !callActivity.getDomElement().hasAttribute(BpmnModelConstants.CAMUNDA_NS, "caseRef")) {
-        callActivity.setCalledElement("TODO");
+        callActivity.setCalledElement("Process_SampleSubProcess");
+        addSampleSubProcess();
       } else if (callActivity.getDomElement().hasAttribute("calledElement") && isEmpty(callActivity.getCalledElement())) {
-        callActivity.setCalledElement("TODO");
+        callActivity.setCalledElement("Process_SampleSubProcess");
+        addSampleSubProcess();
       } else if (callActivity.getDomElement().hasAttribute(BpmnModelConstants.CAMUNDA_NS, "caseRef") && isEmpty(callActivity.getCamundaCaseRef())) {
-        callActivity.setCamundaCaseRef("TODO");
+        callActivity.setCamundaCaseRef("Case_SampleSubCase");
+        addSampleSubCase();
       }
       // add business key if missing
       ExtensionElements extensionElements = callActivity.getExtensionElements();
@@ -105,6 +111,18 @@ public class BpmnExecutifier {
         callActivity.setExtensionElements(extensionElements);
       }
     }
+  }
+
+  private void addSampleSubProcess() {
+    String filename = "SampleSubProcess.bpmn";
+    InputStream stream = getClass().getResourceAsStream("/" + filename);
+    executableModels.put(filename, new ExecutableModel(filename, Bpmn.readModelFromStream(stream)));
+  }
+
+  private void addSampleSubCase() {
+    String filename = "SampleSubCase.cmmn";
+    InputStream stream = getClass().getResourceAsStream("/" + filename);
+    executableModels.put(filename, new ExecutableModel(filename, Cmmn.readModelFromStream(stream)));
   }
 
   private void setIsExecutableOnProcesses() {
@@ -239,6 +257,14 @@ public class BpmnExecutifier {
 
   public void setAllProcessesExecutable(boolean allProcessesExecutable) {
     this.allProcessesExecutable = allProcessesExecutable;
+  }
+
+  public HashMap<String,ExecutableModel> getExecutableModels() {
+    return executableModels;
+  }
+
+  public void setExecutableModels(HashMap<String,ExecutableModel> executableModels) {
+    this.executableModels = executableModels;
   }
 
 }

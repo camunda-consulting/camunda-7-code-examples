@@ -72,7 +72,7 @@
             <cmmn:manualActivationRule id="ManualActivationRule_14zsusy"/>
           </cmmn:itemControl>
         </cmmn:planItem>
-        <cmmn:processTask id="ProcessTask_0ms4tbn" isBlocking="true" name="Document request" processRef="TODO">
+        <cmmn:processTask id="ProcessTask_0ms4tbn" isBlocking="true" name="Document request" processRef="Process_SampleSubProcess">
           <extensionElements xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
             <ns0:in businessKey="#{execution.processBusinessKey}"/>
           </extensionElements>

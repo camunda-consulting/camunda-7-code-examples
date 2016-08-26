@@ -1,8 +1,7 @@
 package org.camunda.bpm.demo.executify;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,15 +14,17 @@ public class Executify {
   private boolean removeDecisionRefs;
   private boolean allProcessesExecutable;
 
-  public List<ExecutableModel> makeExecutable(Map<String, InputStream> models) {
-    List<ExecutableModel> executableModels = new ArrayList<ExecutableModel>();
+  public HashMap<String, ExecutableModel> makeExecutable(Map<String, InputStream> models) {
+    HashMap<String,ExecutableModel> executableModels = new HashMap<String, ExecutableModel>();
     BpmnExecutifier bpmnExecutifier = new BpmnExecutifier();
     bpmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
     bpmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
     bpmnExecutifier.setAllProcessesExecutable(allProcessesExecutable);
+    bpmnExecutifier.setExecutableModels(executableModels);
     CmmnExecutifier cmmnExecutifier = new CmmnExecutifier();
     cmmnExecutifier.setGeneratePredictableConditionExpressions(isGeneratePredictableConditionExpressions());
     cmmnExecutifier.setRemoveDecisionRefs(removeDecisionRefs);
+    cmmnExecutifier.setExecutableModels(executableModels);
     for (Entry<String, InputStream> entry : models.entrySet()) {
       String filename = entry.getKey();
       InputStream stream = entry.getValue();
@@ -37,7 +38,7 @@ public class Executify {
       } else {
         throw new UnsupportedOperationException("Only *.bpmn, *.cmmn and *.dmn files are supported.");
       }
-      executableModels.add(new ExecutableModel(filename, modelInstance));
+      executableModels.put(filename, new ExecutableModel(filename, modelInstance));
     }
     return executableModels;
   }

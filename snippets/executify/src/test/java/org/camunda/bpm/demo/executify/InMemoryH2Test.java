@@ -3,6 +3,7 @@ package org.camunda.bpm.demo.executify;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,6 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.cmmn.Cmmn;
 import org.camunda.bpm.model.cmmn.CmmnModelInstance;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -106,7 +106,7 @@ public class InMemoryH2Test {
     executify.setGeneratePredictableConditionExpressions(true);
     executify.setRemoveDecisionRefs(true);
     executify.setAllProcessesExecutable(true);
-    List<ExecutableModel> executableModels = executify.makeExecutable(models);
+    Collection<ExecutableModel> executableModels = executify.makeExecutable(models).values();
     
     for (ExecutableModel executableModel : executableModels) {
       writeToFile(executableModel.getFilename(), executableModel.getXmlString());

@@ -4,8 +4,10 @@ import static org.camunda.bpm.demo.executify.CmmnModelInstanceHelper.*;
 
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
+import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.cmmn.Cmmn;
 import org.camunda.bpm.model.cmmn.CmmnModelInstance;
 import org.camunda.bpm.model.cmmn.instance.CaseTask;
@@ -21,6 +23,7 @@ public class CmmnExecutifier {
   private boolean generatePredictableConditionExpressions;
   private boolean removeDecisionRefs;
   private CmmnModelInstance modelInstance;
+  private HashMap<String,ExecutableModel> executableModels = new HashMap<String, ExecutableModel>();
 
   public void setGeneratePredictableConditionExpressions(boolean generatePredictableConditionExpressions) {
     this.generatePredictableConditionExpressions = generatePredictableConditionExpressions;
@@ -49,9 +52,11 @@ public class CmmnExecutifier {
         // add process or case if missing
         String name = callActivity.getName();
         if (callActivity instanceof ProcessTask && isEmpty(((ProcessTask) callActivity).getProcess())) {
-          ((ProcessTask) callActivity).setProcess("TODO");
+          ((ProcessTask) callActivity).setProcess("Process_SampleSubProcess");
+          addSampleSubProcess();
         } else if (callActivity instanceof CaseTask && isEmpty(((CaseTask) callActivity).getCase())) {
-          ((CaseTask) callActivity).setCase("TODO");
+          ((CaseTask) callActivity).setCase("Case_SampleSubCase");
+          addSampleSubCase();
         }
         // add business key if missing
         ExtensionElements extensionElements = callActivity.getExtensionElements();
@@ -93,6 +98,26 @@ public class CmmnExecutifier {
         }
       }
     }
+  }
+
+  private void addSampleSubProcess() {
+    String filename = "SampleSubProcess.bpmn";
+    InputStream stream = getClass().getResourceAsStream("/" + filename);
+    executableModels.put(filename, new ExecutableModel(filename, Bpmn.readModelFromStream(stream)));
+  }
+
+  private void addSampleSubCase() {
+    String filename = "SampleSubCase.cmmn";
+    InputStream stream = getClass().getResourceAsStream("/" + filename);
+    executableModels.put(filename, new ExecutableModel(filename, Cmmn.readModelFromStream(stream)));
+  }
+
+  public HashMap<String,ExecutableModel> getExecutableModels() {
+    return executableModels;
+  }
+
+  public void setExecutableModels(HashMap<String,ExecutableModel> executableModels) {
+    this.executableModels = executableModels;
   }
 
 }

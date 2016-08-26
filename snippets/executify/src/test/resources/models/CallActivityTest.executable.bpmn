@@ -14,7 +14,7 @@
       <bpmn:outgoing>SequenceFlow_1i44i0h</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:sequenceFlow id="SequenceFlow_1i44i0h" sourceRef="Task_0svf9e2" targetRef="Task_1tsvyed"/>
-    <bpmn:callActivity calledElement="TODO" completionQuantity="1" id="Task_1tsvyed" isForCompensation="false" name="B" startQuantity="1">
+    <bpmn:callActivity calledElement="Process_SampleSubProcess" completionQuantity="1" id="Task_1tsvyed" isForCompensation="false" name="B" startQuantity="1">
       <bpmn:extensionElements>
         <camunda:in businessKey="#{execution.processBusinessKey}"/>
       </bpmn:extensionElements>
@@ -22,7 +22,7 @@
       <bpmn:outgoing>SequenceFlow_1x9kxuo</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:sequenceFlow id="SequenceFlow_1x9kxuo" sourceRef="Task_1tsvyed" targetRef="Task_0lu5bnr"/>
-    <bpmn:callActivity camunda:caseRef="TODO" completionQuantity="1" id="Task_0lu5bnr" isForCompensation="false" name="C" startQuantity="1">
+    <bpmn:callActivity camunda:caseRef="Case_SampleSubCase" completionQuantity="1" id="Task_0lu5bnr" isForCompensation="false" name="C" startQuantity="1">
       <extensionElements xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
         <camunda:in businessKey="#{execution.processBusinessKey}"/>
       </extensionElements>
@@ -34,7 +34,7 @@
       <bpmn:incoming>SequenceFlow_0kcnotm</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0kcnotm" sourceRef="Task_0v9lhdn" targetRef="EndEvent_0wzknrg"/>
-    <bpmn:callActivity calledElement="TODO" completionQuantity="1" id="Task_0v9lhdn" isForCompensation="false" name="D" startQuantity="1">
+    <bpmn:callActivity calledElement="Process_SampleSubProcess" completionQuantity="1" id="Task_0v9lhdn" isForCompensation="false" name="D" startQuantity="1">
       <extensionElements xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
         <camunda:in businessKey="#{execution.processBusinessKey}"/>
       </extensionElements>
