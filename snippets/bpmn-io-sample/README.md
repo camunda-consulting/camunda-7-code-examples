@@ -8,11 +8,18 @@ This example consists of a
 * Simple HTML page
 * Including bpmn.io libraries and 
 * JavaScript code to 
-** Load the BPMN XML for agiven Process Instance Id from the Camunda BPM REST API
-** Visualizes this in the BpmnJS Viewer
-** Loads history information for the Process Instance
-** Add Overlays and Markers to the BPMN 2.0, to visualize these information
-* This example is a self contained [HTML page](src/main/webapp/status.html), but Maven and WebJars are used in order to build a WAR which can be deployed on a Java container. So no need to fiddle with JavaScript libraries or to include them into the project sources.
+** Load the BPMN or CMMN XML for agiven model instance id via the Camunda BPM REST API
+** Visualizes this in the BpmnJS or CmmnJS Viewer
+** Loads history information for the instance
+** Add Overlays and Markers to the model, to visualize these information
+* This example is a self contained [HTML page for BPMN](src/main/webapp/bpmn.html) and [HTML page for CMMN](src/main/webapp/cmmn.html), but Maven and WebJars are used in order to build a WAR which can be deployed on a Java container. So no need to fiddle with JavaScript libraries or to include them into the project sources.
+
+You can also navigate from BPMN to CMMN and vice-versa:
+
+![screenshot1](screenshot1.png)
+
+![screenshot2](screenshot2.png)
+
 
 How to use it?
 =========================
