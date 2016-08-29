@@ -4,12 +4,13 @@
   
 
 	 <div class="row">
-         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h2>Fall &amp; Aufgaben-Daten</h2>
-         </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h2>Case &amp; Task-Data</h2>
+        </div>
          
-         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<!-- CMMN Case Status / Lifecycle Operations -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+         	<!-- CMMN Case Status / Lifecycle Operations -->
 		     <div class="modal-content">
 		        <div class="modal-header ng-scope">
 		          <h3 class="modal-title ng-binding">
@@ -20,13 +21,14 @@
 		        <div class="modal-body ng-scope">
 		        	  <div class="alert alert-info" role="alert">
 					  	<p>
-					  	Bebobachten Sie den aktuellen Stand des CMMN Falls. Greifen Sie jederzeit ein, indem Sie die unten angezeigte Aktivitäten starten.
+					  	Introspect the current case status determined by the CMMN model. 
+					  	Control if by executing lifecycle methods shown below.
 						</p>
 					  </div> 
 					  
 					  <table class="table table-striped table-hover">
 						  <tr>		  
-		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Aktiv</td>
+		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Active</td>
 		  			  	  </tr>
 
 						  <tr ng-repeat="execution in activeCaseExecutions" >
@@ -45,7 +47,7 @@
 						  </tr>
 
 						  <tr>		  
-		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Startbar</td>
+		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Enabled</td>
 		  			  	  </tr>
 
 		  				  <tr ng-repeat="execution in enabledCaseExecutions">
@@ -63,7 +65,7 @@
 		  				  </tr>
 
 						  <tr>		  
-		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Beendet</td>
+		  			  		 <td colspan="3" style="background-color: #e5e5e5; font-weight: bold;">Finished</td>
 		  			  	  </tr>
 
 						  <tr ng-repeat="execution in finishedCaseExecutions" > <!--ng-if="execution.caseActivityType!='startEvent'"-->
@@ -86,8 +88,7 @@
 
 
 
-
-         </div>
+        </div>
      </div>
  
  <script cam-script type="text/form-script">
