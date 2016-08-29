@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="camunda modeler" exporterVersion="2.7.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="_5SVkEIXnEeSmwfgVk-ryvQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler" exporterVersion="1.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:collaboration id="Collaboration_1u35ano">
     <bpmn2:participant id="Participant_0477s11" name="Insurance Application" processRef="insurance-application" />
   </bpmn2:collaboration>
@@ -155,23 +155,6 @@ Your Camundanzia.]]></camunda:script>
     <bpmn2:endEvent id="EndEventAntragBeschleunigt" name="Escalation&#10;handled">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:userTask id="userTaskAntragEntscheiden" name="Decide about application" camunda:formKey="embedded:app:forms/decide.html" camunda:candidateGroups="clerk" camunda:dueDate="${dateTime().plusDays(1).toDate()}">
-      <bpmn2:extensionElements>
-        <camunda:properties>
-          <camunda:property name="KPI-Cycle-End" value="Decide about application" />
-          <camunda:property name="durationMean" value="25000" />
-          <camunda:property name="durationSd" value="10000" />
-        </camunda:properties>
-      </bpmn2:extensionElements>
-      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
-    </bpmn2:userTask>
-    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="2 days" cancelActivity="false" attachedToRef="userTaskAntragEntscheiden">
-      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
-      <bpmn2:timerEventDefinition id="_TimerEventDefinition_5">
-        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">P2D</bpmn2:timeDuration>
-      </bpmn2:timerEventDefinition>
-    </bpmn2:boundaryEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="BoundaryEvent_1" targetRef="UserTaskAntragspruefungBeschleunigen" />
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="userTaskAntragEntscheiden" targetRef="ExclusiveGateway_2" />
     <bpmn2:exclusiveGateway id="ExclusiveGateway_2" name="Decision?">
@@ -179,6 +162,22 @@ Your Camundanzia.]]></camunda:script>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
+    <bpmn2:callActivity id="userTaskAntragEntscheiden" name="Decide about application" camunda:caseRef="applicationCheck">
+      <bpmn2:extensionElements>
+        <camunda:out source="approved" target="approved" />
+        <camunda:in source="risks" target="risks" />
+        <camunda:in source="application" target="application" />
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+    </bpmn2:callActivity>
+    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="2 days" cancelActivity="false" attachedToRef="userTaskAntragEntscheiden">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="_TimerEventDefinition_5">
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">P2D</bpmn2:timeDuration>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:boundaryEvent>
   </bpmn2:process>
   <bpmn2:message id="Message_1" name="MSG_UnderwriterNotwendig" />
   <bpmn2:message id="Message_2" name="MSG_GruppenleiterNotwendig" />
@@ -270,9 +269,9 @@ Your Camundanzia.]]></camunda:script>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ExclusiveGateway_2" targetElement="UserTask_0lcr7cx_di">
         <di:waypoint xsi:type="dc:Point" x="298" y="95" />
         <di:waypoint xsi:type="dc:Point" x="298" y="135" />
-        <di:waypoint xsi:type="dc:Point" x="420" y="135" />
+        <di:waypoint xsi:type="dc:Point" x="419" y="135" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="300" y="95" width="114" height="38" />
+          <dc:Bounds x="299.5163934426229" y="95" width="114" height="38" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="_BPMNShape_ExclusiveGateway_2">
@@ -330,30 +329,30 @@ Your Camundanzia.]]></camunda:script>
           <dc:Bounds x="942" y="342" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0lcr7cx_di" bpmnElement="userTaskAntragEntscheiden">
-        <dc:Bounds x="420" y="95" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_7" bpmnElement="BoundaryEvent_1">
-        <dc:Bounds x="473" y="157" width="36" height="36" />
+        <dc:Bounds x="472" y="157" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="470" y="192" width="90" height="22" />
+          <dc:Bounds x="469" y="192" width="90" height="22" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_BoundaryEvent_7" targetElement="_BPMNShape_UserTask_6">
-        <di:waypoint xsi:type="dc:Point" x="491" y="193" />
-        <di:waypoint xsi:type="dc:Point" x="491" y="256" />
+        <di:waypoint xsi:type="dc:Point" x="490" y="193" />
+        <di:waypoint xsi:type="dc:Point" x="490" y="256" />
         <di:waypoint xsi:type="dc:Point" x="519" y="256" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="488" y="239" width="6" height="6" />
+          <dc:Bounds x="445" y="239" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="UserTask_0lcr7cx_di" targetElement="_BPMNShape_ExclusiveGateway_3">
-        <di:waypoint xsi:type="dc:Point" x="520" y="135" />
+        <di:waypoint xsi:type="dc:Point" x="519" y="135" />
         <di:waypoint xsi:type="dc:Point" x="689" y="135" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="601" y="134" width="6" height="6" />
+          <dc:Bounds x="558.4970414201183" y="134" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_1j9y8y5_di" bpmnElement="userTaskAntragEntscheiden">
+        <dc:Bounds x="419" y="95" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>

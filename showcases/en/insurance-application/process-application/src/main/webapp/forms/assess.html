@@ -1,0 +1,58 @@
+<form role="form">
+
+ <script cam-script type="text/form-script">
+    camForm.on('form-loaded', function() {
+      camForm.variableManager.fetchVariable('application');
+      camForm.variableManager.fetchVariable('risks');
+    });
+
+    camForm.on('variables-fetched', function() {
+      // after the variables are fetched, bind the value of vacationRequest to a angular
+      // scope value such that the form can work on it
+      $scope.application = camForm.variableManager.variable('application').value;
+      $scope.risks = camForm.variableManager.variable('risks').value;
+    });
+  </script>
+
+    <h3>Application</h3>
+    <table class="table table-striped">
+       <tr>
+          <td><b>Application number</b></td>
+          <td><b>{{application.number}}</b></td>
+       </tr>
+       <tr>
+          <td>Applicant</td>
+          <td>{{application.applicant.name}}</td>
+       </tr>	
+       <tr>
+          <td>Age</td>
+          <td>{{application.applicant.age}}</td>
+       </tr>               
+       <tr>
+          <td>Car</td>
+          <td>{{application.car.manufacturer}} {{application.car.type}}</td>
+       </tr>
+       <tr>
+          <td>Insurance product</td>
+          <td>{{application.insuranceProduct}}</td>
+       </tr>               
+       <tr>
+          <td>Price inidcation</td>
+          <td>{{application.priceIndication}}</td>
+       </tr>               
+    </table>
+
+    <h3>Risks</h3>
+	    <table class="table table-striped table-hover">
+			  <tr ng-repeat="risk in risks">
+			  	<td>{{risk}}</td>
+			  </tr>
+			</table>
+	
+				
+    <h3>Hints</h3>
+      <textarea class="form-control" 
+ 				cam-variable-name="hints"
+ 			    cam-variable-type="String" />	
+
+</form>
