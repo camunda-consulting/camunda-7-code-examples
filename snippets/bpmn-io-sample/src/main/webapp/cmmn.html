@@ -41,10 +41,10 @@
 	<!-- load jquery and bpmn-js dependencies -->
 	<script type="text/javascript" src="webjars/jquery/1.9.0/jquery.js"></script>
  
-	<!-- bpmn-js viewer -->
-	<script type="text/javascript" src="webjars/bpmn-js/0.13.1/dist/bpmn-navigated-viewer.js"></script>
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/diagram-js.css" />
-	<link type="text/css" rel="stylesheet" href="webjars/bpmn-js/0.13.1/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+	<!-- cmmn-js viewer -->
+	<script type="text/javascript" src="webjars/cmmn-js/0.5.3/dist/cmmn-navigated-viewer.js"></script>
+	<link type="text/css" rel="stylesheet" href="webjars/cmmn-js/0.5.3/dist/assets/diagram-js.css" />
+	<link type="text/css" rel="stylesheet" href="webjars/cmmn-js/0.5.3/dist/assets/cmmn-font/css/cmmn-embedded.css" />
 	<link type="text/css" rel="stylesheet" href="resources/css/modeler.css" />
 </head>
 <body>
@@ -62,20 +62,20 @@
 		    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 		}				    
 		var taskId = getParameterByName('taskId');				    
-		var processInstanceId = getParameterByName('processInstanceId');				    
+		var caseInstanceId = getParameterByName('caseInstanceId');				    
 	
 		var restAccess = '/engine-rest';
-		var BpmnViewer = window.BpmnJS;
-		var viewer = new BpmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
+		var CmmnViewer = window.CmmnJS;
+		var viewer = new CmmnViewer({container: '#diagramCanvas', width: '100%', height: '100%'});
 
 		var container = $('#js-drop-zone');
 		
 		
-			$.get(restAccess + '/history/process-instance/' + processInstanceId, function(pi) {
-				$.get(restAccess + '/process-definition/' + pi.processDefinitionId + '/xml', function(data) {
+			$.get(restAccess + '/history/case-instance/' + caseInstanceId, function(pi) {
+				$.get(restAccess + '/case-definition/' + pi.caseDefinitionId + '/xml', function(data) {
 
 					// show it in bpmn.io
-					viewer.importXML(data.bpmn20Xml, function(err) {
+					viewer.importXML(data.cmmnXml, function(err) {
 						if (err) {
 							console.log('error rendering', err);
 						} else {
@@ -89,12 +89,12 @@
 							canvas.zoom('fit-viewport');
 						    
 						    // load runtime status
-							$.get(restAccess + '/process-instance/' + processInstanceId + '/activity-instances/', function(actInstTree) {
-							   addMarkerForActivities(canvas, actInstTree);									       
-						    }).fail(function(){}); // ignore 404 - ProcessInstance might be ended
+							$.get(restAccess + '/case-execution/?caseInstanceId=' + caseInstanceId, function(executions) {
+							   addMarkerForActivities(canvas, executions);									       
+						    }).fail(function(){}); // ignore 404 - CaseInstance might be ended
 						    
 							// completed / not scope -> Overlay with Info										
-							$.get(restAccess + '/history/activity-instance/?processInstanceId=' + processInstanceId + '&finished=true&', function(actInstList) {
+							$.get(restAccess + '/history/case-activity-instance/?caseInstanceId=' + caseInstanceId, function(actInstList) {
 							   addHistoryInfoOverlay(overlays, actInstList)
 						    });
 							
@@ -106,37 +106,38 @@
 			});			
 	});
 	
-	function addMarkerForActivities(canvas, actInstTree) {
-		if (actInstTree.childTransitionInstances.length==0 && actInstTree.childActivityInstances.length==0) {
-			canvas.addMarker(actInstTree.activityId, 'highlight');	
-		}
-		else {
-			for (index=0; index < actInstTree.childTransitionInstances.length; ++index) {
-				canvas.addMarker(actInstTree.childTransitionInstances[index].activityId, 'highlight');	
-			}
-			for (index=0; index < actInstTree.childActivityInstances.length; ++index) {
-			    // add recursively
-				addMarkerForActivities(canvas, actInstTree.childActivityInstances[index]);	
-			}
+	function addMarkerForActivities(canvas, executions) {
+		for (index=0; index < executions.length; ++index) {
+			if (executions[index].active && // only active ones 
+				executions[index].activityType!='casePlanModel') { // skip case itself
+				canvas.addMarker(executions[index].activityId, 'highlight');
+			}	
 		}
 	}
 	
 	function addHistoryInfoOverlay(overlays, actInstList) {
-
-
 	
        for (index = 0; index < actInstList.length; ++index) {
 			var calledPiLink = '';
+			var finished = '';
+			if (actInstList[index].endTime) {
+				finished = '<i class="icon-ok icon-white"></i>';
+			}
 			if (actInstList[index].calledProcessInstanceId) {
-				calledPiLink = '<a href="status.html?processInstanceId=' + actInstList[index].calledProcessInstanceId + '"><i class="icon-circle-arrow-right icon-white"></i></a>';
+				calledPiLink = '<a href="bpmn.html?processInstanceId=' + actInstList[index].calledProcessInstanceId + '"><i class="icon-circle-arrow-right icon-white"></i></a>';
 			}		
-			overlays.add(actInstList[index].activityId, {
-			  position: {
-			    top: 0,
-			    right: 0
-			  },
-			  html: '<div class="bpmn-badge"><i class="icon-ok icon-white"></i>'+calledPiLink+'</div>'
-			});					        
+			if (actInstList[index].calledCaseInstanceId) {
+				calledPiLink = '<a href="cmmn.html?caseInstanceId=' + actInstList[index].calledProcessInstanceId + '"><i class="icon-circle-arrow-right icon-white"></i></a>';
+			}		
+			if (finished || calledPiLink) {			
+				overlays.add(actInstList[index].caseActivityId, {
+				  position: {
+				    top: 0,
+				    right: 0
+				  },
+				  html: '<div class="bpmn-badge">' + finished + calledPiLink + '</div>'
+				});
+			}					        
        }
 	}
 			</script>

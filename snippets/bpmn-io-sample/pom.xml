@@ -69,9 +69,13 @@
 		<dependency>
 		    <groupId>org.webjars.bower</groupId>
 		    <artifactId>bpmn-js</artifactId>
-		    <version>0.13.1</version>
+		    <version>0.16.0</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>cmmn-js</artifactId>
+		    <version>0.5.3</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -79,6 +83,10 @@
 			<id>camunda-bpm-nexus</id>
 			<name>camunda BPM Maven Repository</name>
 			<url>https://app.camunda.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>Webjars</id>			
+			<url>https://dl.bintray.com/webjars/maven/</url>
 		</repository>
 		<repository>
 			<id>jboss-public-repository</id>
