@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="fraudRating" name="Determine Fraud Rating">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="input1" label="Payment Has Been Rejected In the Past">
+        <inputExpression id="inputExpression1" typeRef="boolean">        <text>paymentRejected</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_09go3gl" label="Number of Past Payouts">
+        <inputExpression id="LiteralExpression_0fpef9d" typeRef="integer">        <text>numberOfPayouts</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1xsf95j" label="History of Fraud">
+        <inputExpression id="LiteralExpression_0je5cim" typeRef="boolean">        <text>historyOfFraud</text>
+</inputExpression>
+      </input>
+      <input id="InputClause_1m6kd8l" label="Payout Amount">
+        <inputExpression id="LiteralExpression_02te1go" typeRef="double">        <text>claimAmount</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Fraud Score" name="fraudScore" typeRef="integer" />
+      <rule id="row-310344083-5">
+        <inputEntry id="UnaryTests_0n142de">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0lbkal2">        <text><![CDATA[0, >5]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1p71avp">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0qhdip7">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1a13pae">        <text>-50</text>
+</outputEntry>
+      </rule>
+      <rule id="table-46065806-2">
+        <inputEntry id="UnaryTests_118br4w">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_12cg4se">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_18vbiqb">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1hu3gtj">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_14hpce7">        <text>-50</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-6">
+        <inputEntry id="UnaryTests_1hvqc5b">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1rc9gud">        <text>0</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0obzsye">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0q62idn">        <text><![CDATA[>600]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_16z7ps3">        <text>-50</text>
+</outputEntry>
+      </rule>
+      <rule id="table-46065806-3">
+        <inputEntry id="UnaryTests_02wno1w">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1emolri">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_075hnj3">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1azcph2">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1fz1k3u">        <text>-20</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-7">
+        <inputEntry id="UnaryTests_1d5haa4">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1le1sq1">        <text>0</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1806w6p">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0bijv24">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0mb2qnr">        <text>50</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-8">
+        <inputEntry id="UnaryTests_1hczi8m">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19i0bmq">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00c3822">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1q0m80v">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_110ua3w">        <text>20</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-9">
+        <inputEntry id="UnaryTests_1yiyq87">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_09h435n">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1w2oomw">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0io2u3q">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_01cwmtg">        <text>20</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-10">
+        <inputEntry id="UnaryTests_0l589dl">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0y9jjxo">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_19g0q05">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_17m39ax">        <text><![CDATA[<5000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_00pwhmr">        <text>75</text>
+</outputEntry>
+      </rule>
+      <rule id="table-46065806-1">
+        <inputEntry id="UnaryTests_1s14tax">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0yapfnm">        <text><![CDATA[>0]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_115qttn">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04nflwr">        <text>[5000.. 200000]</text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_14soyte">        <text>70</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-11">
+        <inputEntry id="UnaryTests_1rjxo1b">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1q4htxk">        <text><![CDATA[>5]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04mxvbi">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1kv4qnp">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0cva2sx">        <text>-40</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-12">
+        <inputEntry id="UnaryTests_0rjawbn">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1o2bfge">        <text><![CDATA[>5]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_095awae">        <text>false</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0kxcoka">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0hpgv92">        <text>-10</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-13">
+        <inputEntry id="UnaryTests_11st01u">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0u40588">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0b4sher">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_17c99jd">        <text><![CDATA[>10000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0cydq1m">        <text>-80</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-14">
+        <inputEntry id="UnaryTests_11e6z94">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_14svise">        <text>[0.. 3]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_00z1di5">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1kpl2cv">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1gkbgc0">        <text>10</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-15">
+        <inputEntry id="UnaryTests_1k56rwz">        <text>true</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0a5hgju">        <text>[4.. 8]</text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0mvko76">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1q2mffn">        <text><![CDATA[>1000]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_154suzi">        <text>-10</text>
+</outputEntry>
+      </rule>
+      <rule id="row-310344083-17">
+        <inputEntry id="UnaryTests_1yes8us">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_1bkct7t">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0t5zw99">        <text></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0awzipi">        <text></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0z8hlom">        <text>0</text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
