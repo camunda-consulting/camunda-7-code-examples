@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name=viewport content="width=device-width,initial-scale=1">
+
+  <title> Process Dashboard </title>
+
+  <script src="./vendor/jquery-2.2.2.min.js"></script>
+  <script src="./vendor/bootstrap.min.js"></script>
+
+  <script src="./app.js"></script>
+
+  <link rel="stylesheet" href="./vendor/camunda-styles.min.css">
+  <link rel="stylesheet" href="./app.css">
+
+  <link rel=icon href="./img/favicon.ico">
+
+  <!-- bpmn-js viewer -->
+  <script type="text/javascript" src="./bpmn-js/bpmn-navigated-viewer.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="./bpmn-js/assets/diagram-js.css"/> 
+  <link type="text/css" rel="stylesheet" href="./bpmn-js/assets/bpmn-font/css/bpmn-embedded.css"/> 
+  <link type="text/css" rel="stylesheet" href="./bpmn-js/assets/bpmn-font/css/bpmn.css"/> 
+</head>
+
+<body>
+  <header class="cam-brand-header">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="./index.html" title="Process Dashboard">
+        <span class="brand-logo"></span>
+        <span class="brand-name">Process Dashboard</span>
+      </a>
+    </div>
+  </header>
+
+  <div id=rootDiv" class="page-body container-fluid bs-docs-container">
+  	<div class="row">
+  		<div class="col-md-12">
+  			<!--
+  			<p>
+  				Datum: <input type="date" name="date">
+  			</p>
+  			-->
+  			<table id="statusTable" class="table table-striped">
+  				<thead>
+  					<tr id="statusTableHeadline">
+  						<th>Aktionen</th>
+  					</tr>
+  				</thead>  
+                <tbody>
+                </tbody>			
+  			</table>
+			<div class="content" id="bmmn-drop-zone" style=" height: 100%">
+              <div id="bpmnCanvas" class="bpmn-io-viewer-height" style=" height: 100%"></div>
+            </div>
+
+			<!-- Popup -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document" style="width: 90%; ">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Process details</h4>
+			      </div>
+			      <div id="popupPanel" class="modal-body" >
+
+	                     <script>
+	                      $(document).ready(function() {   
+	                        var BpmnViewer = window.BpmnJS;
+	                        bpmnViewer = new BpmnViewer({container: '#bpmnCanvas', width: '100%', height: '500px'});
+
+	                        init();	                        
+	                      });	                      
+	                     </script>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div> <!-- Popup -->
+
+  		</div>
+    </div> <!-- one and only row -->
+  </div> <!-- page body -->
+
+
+
+  <footer class="cam-brand-footer">
+    <div class="container-fluid">
+      <div class="col-xs-8">
+        Dashboard visualizing information from Camunda BPM
+      </div>
+      <div class="text-right col-xs-4">
+        &copy; Camunda services GmbH 2016, All Rights Reserved
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

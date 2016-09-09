@@ -14,10 +14,14 @@ import java.util.logging.Logger;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.camunda.bpm.application.ProcessApplicationReference;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.history.HistoricActivityInstance;
+import org.camunda.bpm.engine.history.HistoricCaseInstance;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.CaseExecution;
+import org.camunda.bpm.engine.runtime.CaseInstance;
 import org.camunda.bpm.engine.runtime.EventSubscription;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
@@ -323,7 +327,12 @@ public class TimeAwareDemoGenerator {
 
   protected void runSingleProcessInstance() {
     ProcessInstance pi = engine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
-    boolean piRunning = true;
+    driveProcessInstance(pi);
+
+  }
+
+protected void driveProcessInstance(ProcessInstance pi) {
+	boolean piRunning = true;
 
     while (piRunning) {
       // TODO:
@@ -337,6 +346,18 @@ public class TimeAwareDemoGenerator {
 
       List<Job> jobs = engine.getManagementService().createJobQuery().processInstanceId(pi.getId()).list();
       handleJobs(jobs);
+      
+      List<HistoricActivityInstance> callActivities = engine.getHistoryService().createHistoricActivityInstanceQuery().unfinished().processInstanceId(pi.getId()).activityType("callActivity").list();      
+      for (HistoricActivityInstance callActivityInstance : callActivities) {
+    	  if (callActivityInstance.getCalledProcessInstanceId()!=null) {
+    		  driveProcessInstance(
+    				 engine.getRuntimeService().createProcessInstanceQuery().processInstanceId(callActivityInstance.getCalledProcessInstanceId()).singleResult());
+    	  }
+    	  else if (callActivityInstance.getCalledCaseInstanceId()!=null) {
+    		  driveCaseInstance(
+    				 engine.getCaseService().createCaseInstanceQuery().caseInstanceId(callActivityInstance.getCalledCaseInstanceId()).singleResult());
+    	  }
+      }
 
       // do queries again if we have changed anything in the process instance
       // for the moment we do not query processInstance.isEnded as we are not
@@ -351,10 +372,54 @@ public class TimeAwareDemoGenerator {
       // TODO: Stop when we reach the NOW time (might leave open tasks - but
       // that is OK!)
     }
+}
 
+  private void driveCaseInstance(CaseInstance caseInstance) {
+	  boolean piRunning = true;
+	  while (piRunning) {
+		  piRunning = false;
+		  List<CaseExecution> activeExecutions = engine.getCaseService().createCaseExecutionQuery()
+				  .active()
+				  .list();
+		  if (activeExecutions.size()>0) {
+			  for (CaseExecution activeExecution : activeExecutions) {
+				if (activeExecution.getActivityType().equals("casePlanModel")) {
+					// Do this if everything else is done
+					if (activeExecutions.size()==1) {
+					  engine.getCaseService().completeCaseExecution(caseInstance.getId());
+					}
+				}
+				else if (activeExecution.getActivityType().equals("stage") ) {
+					// TODO					
+					if (activeExecutions.size()==2) {
+						  engine.getCaseService().completeCaseExecution(activeExecution.getId());
+						  piRunning = true;
+						  break;
+					}
+				}
+				else {
+					  //engine.getCaseService().
+					  engine.getCaseService().completeCaseExecution(activeExecution.getId());
+					  piRunning = true;
+					  break;
+				}
+			}
+		  }
+	  
+//		  piRunning = (activeExecutions.size() > 0);
+	  }
+	  
+	  HistoricCaseInstance historicCaseInstance = engine.getHistoryService().createHistoricCaseInstanceQuery().caseInstanceId(caseInstance.getId()).singleResult();
+	  if (historicCaseInstance.isActive()) {	  
+		  engine.getCaseService().completeCaseExecution(caseInstance.getId());
+	  }
+	  historicCaseInstance = engine.getHistoryService().createHistoricCaseInstanceQuery().caseInstanceId(caseInstance.getId()).singleResult();
+	  if (historicCaseInstance.isCompleted() || historicCaseInstance.isTerminated()) {
+		  engine.getCaseService().closeCaseInstance(caseInstance.getId());
+	  }
   }
 
-  protected boolean handleTasks(ProcessEngine engine, ProcessInstance pi, List<org.camunda.bpm.engine.task.Task> tasks) {
+protected boolean handleTasks(ProcessEngine engine, ProcessInstance pi, List<org.camunda.bpm.engine.task.Task> tasks) {
     for (org.camunda.bpm.engine.task.Task task : tasks) {
       String id = task.getTaskDefinitionKey();
 

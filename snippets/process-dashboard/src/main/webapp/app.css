@@ -1,0 +1,59 @@
+
+.alert-grey {
+    background-color: #e5e5e5;
+    border-color: #a7a5a5;    
+}
+.status-alert {
+	margin-bottom: 0px;
+	padding: 5px;
+	font-size: x-small;
+}
+.table-row-btn {
+    padding-top: 3px;
+    padding-bottom: 3px;	
+}
+
+
+
+
+
+
+
+.djs-container .highlight .djs-outline {
+   stroke-width: 2px important;
+   stroke: #08c !important;
+   fill: rgba(82,180,21,0.35) !important;
+}
+.djs-container .highlight .djs-visual>:nth-child(1) {
+   fill: rgba(82,180,21,0.35) !important;
+}
+.bpmn-badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+	
+	font-size: 12px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #e5e5e5; // bpmn.io #610000 // camunda
+    border-color: #143d52;
+    color: #143d52;
+}	
+.bpmn-badge-completed {
+	background-color: #52b415;
+}
+.bpmn-badge-running {
+	background-color: #d5ea20;
+}
+.bpmn-badge-failed {
+background-color: #e41717;
+}
+
