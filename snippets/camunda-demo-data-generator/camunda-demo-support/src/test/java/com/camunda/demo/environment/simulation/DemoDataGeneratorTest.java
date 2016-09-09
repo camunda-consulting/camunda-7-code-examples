@@ -68,6 +68,22 @@ public class DemoDataGeneratorTest {
     // complete(task());
     // assertThat(pi).isEnded();
   }
+  
+  /**
+   * Just tests if the process definition is deployable.
+   */
+  @Test
+  @Deployment(resources = {"InsuranceApplication.bpmn", "ApplicationCheck.cmmn"})
+  public void testInsuranceApplicationWithCmmn() {
+    TimeAwareDemoGenerator generator = new TimeAwareDemoGenerator(processEngine()) //
+        .processDefinitionKey("insurance-application") //
+        .numberOfDaysInPast(1) //
+        .timeBetweenStartsBusinessDays(6000.0, 100.0); // every 6000 seconds
+    generator.generateData();
+    
+    // everything should be finished as case instance gets completed
+    assertEquals(0, processEngine().getRuntimeService().createProcessInstanceQuery().processDefinitionKey("insurance-application").count());
+  }
 
   @Test
   public void testModelApiUtf8Bug() throws UnsupportedEncodingException {
