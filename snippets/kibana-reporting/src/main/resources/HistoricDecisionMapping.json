@@ -1,0 +1,216 @@
+{"mappings": {
+      "historicDecision": {
+        "properties": {
+          "activityId": {
+            "type": "string"
+          },
+          "activityInstanceId": {
+            "type": "string"
+          },
+          "collectResultValue": {
+            "type": "double"
+          },
+          "decisionDefinitionId": {
+            "type": "string"
+          },
+          "decisionDefinitionKey": {
+            "type": "string"
+          },
+          "decisionDefinitionName": {
+            "type": "string"
+          },
+          "evaluationTime": {
+            "type": "long"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inputs":
+          {
+            "type": "nested",
+            "properties": {
+              "clauseId": {
+                "type": "string"
+              },
+              "clauseName": {
+                "type": "string"
+              },
+              "decisionInstanceId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "longValue": {
+                "type": "long"
+              },
+              "name": {
+                "type": "string"
+              },
+              "persistentState": {
+                "type": "string"
+              },
+              "sequenceCounter": {
+                "type": "long"
+              },
+              "serializerName": {
+                "type": "string"
+              },
+              "textValue": {
+                "type": "string"
+              },
+              "typeName": {
+                "type": "string"
+              },
+              "typedValue": {
+                "properties": {
+                  "type": {
+                    "properties": {
+                      "abstract": {
+                        "type": "boolean"
+                      },
+                      "javaType": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parent": {
+                        "properties": {
+                          "abstract": {
+                            "type": "boolean"
+                          },
+                          "javaType": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "primitiveValueType": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "primitiveValueType": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          "outputs": {
+            "type": "nested",
+            "properties": {
+              "clauseId": {
+                "type": "string"
+              },
+              "clauseName": {
+                "type": "string"
+              },
+              "decisionInstanceId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "longValue": {
+                "type": "long"
+              },
+              "name": {
+                "type": "string"
+              },
+              "persistentState": {
+                "type": "string"
+              },
+              "ruleId": {
+                "type": "string"
+              },
+              "ruleOrder": {
+                "type": "long"
+              },
+              "sequenceCounter": {
+                "type": "long"
+              },
+              "serializerName": {
+                "type": "string"
+              },
+              "textValue": {
+                "type": "string"
+              },
+              "typeName": {
+                "type": "string"
+              },
+              "typedValue": {
+                "properties": {
+                  "type": {
+                    "properties": {
+                      "abstract": {
+                        "type": "boolean"
+                      },
+                      "javaType": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parent": {
+                        "properties": {
+                          "abstract": {
+                            "type": "boolean"
+                          },
+                          "javaType": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "primitiveValueType": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "primitiveValueType": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "long"
+                  }
+                }
+              },
+              "value": {
+                "type": "long"
+              },
+              "variableName": {
+                "type": "string"
+              }
+            }
+          },
+          "persistentState": {
+            "type": "string"
+          },
+          "processDefinitionId": {
+            "type": "string"
+          },
+          "processDefinitionKey": {
+            "type": "string"
+          },
+          "processInstanceId": {
+            "type": "string"
+          },
+          "sequenceCounter": {
+            "type": "long"
+          }
+        }
+      }
+    }
+}

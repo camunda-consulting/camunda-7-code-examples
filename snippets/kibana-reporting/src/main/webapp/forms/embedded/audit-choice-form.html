@@ -1,0 +1,69 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Application Audit Check</legend>
+
+<div class="control-group">
+    <label class="control-label">Candidate Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="candidateName"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Application Link</label>
+    <div class="controls">
+ 	<a cam-file-download="INVOICE_DOCUMENT"></a>
+
+    </div>
+  </div>
+
+<br><br><br>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Fraud Score: </label>
+  <div class="col-md-4">
+    <input type="text" 
+             cam-variable-name="fraudScore"
+             cam-variable-type="Integer"
+             readonly
+             class="form-control" />
+  <span class="help-block">"-100" being very likely and "100"" being very unlikely</span> 
+  </div>
+   
+</div>
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Analyst's opinion of likely fraud: </label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="userDeterminedFraud" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Do you want to further audit this claim?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="audit" cam-variable-type="Boolean" required>
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+
+</fieldset>
+</form>

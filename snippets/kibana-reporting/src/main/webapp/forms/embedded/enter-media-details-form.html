@@ -1,0 +1,81 @@
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Get Details of Applicant</legend>
+
+
+<div class="control-group">
+    <label class="control-label">Candidate Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="candidateName"
+             cam-variable-type="String"
+             required
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Application Link</label>
+    <div class="controls">
+ 	<a cam-file-download="INVOICE_DOCUMENT"></a>
+
+    </div>
+  </div>
+
+
+<br><br><br>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Has a payment been rejected for this client?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="paymentRejected" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">How many payouts have been made in the past?</label>
+  <div class="col-md-4">
+    <input type="text" 
+             cam-variable-name="numberOfPayouts"
+             cam-variable-type="Integer"
+             required
+             class="form-control" />
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Does this client have a history of Fraud?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="historyOfFraud" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Do you personally suspect any Fraud?</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control" cam-variable-name="userDeterminedFraud" cam-variable-type="Boolean">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+</div>
+
+
+
+</fieldset>
+</form>
