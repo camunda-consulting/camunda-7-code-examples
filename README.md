@@ -87,8 +87,8 @@ Showcases
 
   <tr>
     <td>
-      <a href="showcases/skill-based-routing">Skill-based-Routing</a> <br />
-      <img src="showcases/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
+      <a href="showcases/de/skill-based-routing">Skill-based-Routing</a> <br />
+      <img src="showcases/de/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
     </td>
     <td>
        Key Features showcased:
@@ -128,6 +128,11 @@ Snippets
     <td><img src="snippets/task-overdue-job-handler/dueDate.png" width="100"></td>
     <td><a href="snippets/task-overdue-job-handler">Watch Task Due Date and Automatically Take Action</a></td>
     <td>A Process engine Plugin which registers Jobs for all User Tasks having a due date. It allows to define an own JobHandler to take action whenever a due date is hit, e.g sending an email.</td>
+  </tr>
+  <tr>
+    <td><img src="snippets/single-task-process/src/main/resources/single-task-process.png" width="100"></td>
+    <td><a href="snippets/single-task-process">Dynamic single task process</a></td>
+    <td>A highly configurable process to get toDo items into your task list</td>
   </tr>
 </table>
 

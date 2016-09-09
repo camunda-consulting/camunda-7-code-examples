@@ -1,0 +1,156 @@
+[
+  {
+    "_id": "Claim-Amount",
+    "_type": "visualization",
+    "_source": {
+      "title": "Claim Amount",
+      "visState": "{\"title\":\"Claim Amount\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"calimAmount\",\"interval\":25000,\"extended_bounds\":{},\"customLabel\":\"Claim Amount\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"region\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Region\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Claim-Amount-by-Region-Large-Claims",
+    "_type": "visualization",
+    "_source": {
+      "title": "Claim Amount by Region Large Claims",
+      "visState": "{\"title\":\"Claim Amount by Region Large Claims\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"calimAmount\",\"interval\":5000,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"region\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"calimAmount:[1200 TO 210000]\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Claim-Amount-by-Region-Low-End",
+    "_type": "visualization",
+    "_source": {
+      "title": "Claim Amount by Region Small Claims",
+      "visState": "{\n  \"title\": \"New Visualization\",\n  \"type\": \"histogram\",\n  \"params\": {\n    \"shareYAxis\": true,\n    \"addTooltip\": true,\n    \"addLegend\": true,\n    \"scale\": \"linear\",\n    \"mode\": \"stacked\",\n    \"times\": [],\n    \"addTimeMarker\": false,\n    \"defaultYExtents\": false,\n    \"setYExtents\": false,\n    \"yAxis\": {}\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {}\n    },\n    {\n      \"id\": \"2\",\n      \"type\": \"histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"calimAmount\",\n        \"interval\": 50,\n        \"extended_bounds\": {}\n      }\n    },\n    {\n      \"id\": \"3\",\n      \"type\": \"terms\",\n      \"schema\": \"group\",\n      \"params\": {\n        \"field\": \"region\",\n        \"size\": 5,\n        \"order\": \"desc\",\n        \"orderBy\": \"1\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{\n  \"vis\": {\n    \"legendOpen\": false\n  }\n}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"camunda\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"calimAmount:[0 TO 1200]\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "Claim-Type-slash-Region-Pie-Chart",
+    "_type": "visualization",
+    "_source": {
+      "title": "Claim Type / Region Pie Chart",
+      "visState": "{\"title\":\"Claim Type / Region Pie Chart\",\"type\":\"pie\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":false,\"shareYAxis\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"claimType\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Claim Type\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"region\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Region\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Claims-over-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "Claims over time",
+      "visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{},\"schema\":\"metric\",\"type\":\"count\"},{\"id\":\"2\",\"params\":{\"customInterval\":\"2h\",\"extended_bounds\":{},\"field\":\"dateOfClaim\",\"interval\":\"auto\",\"min_doc_count\":1},\"schema\":\"segment\",\"type\":\"date_histogram\"},{\"id\":\"3\",\"params\":{\"field\":\"fraudScore\",\"ranges\":[{\"from\":-1000,\"to\":0},{\"from\":0,\"to\":1000}]},\"schema\":\"group\",\"type\":\"range\"}],\"listeners\":{},\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"smoothLines\":false,\"times\":[],\"yAxis\":{}},\"title\":\"New Visualization\",\"type\":\"area\"}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Fraud-Score-slash-Audit-Pie-Chart",
+    "_type": "visualization",
+    "_source": {
+      "title": "Fraud Score / Audit Pie Chart",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"requiredAudit\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"fraudScore\",\"ranges\":[{\"from\":-1000,\"to\":0},{\"from\":0,\"to\":1000}]}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Fraud-Score-slash-Region-Pie-Chart",
+    "_type": "visualization",
+    "_source": {
+      "title": "Fraud Score / Region Pie Chart",
+      "visState": "{\"title\":\"Fraud Region Pie Chart\",\"type\":\"pie\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":false,\"shareYAxis\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"region\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Region\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"fraudScore\",\"ranges\":[{\"from\":-1000,\"to\":0},{\"from\":0,\"to\":1000}]}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Fraud-Score-Histogram",
+    "_type": "visualization",
+    "_source": {
+      "title": "Fraud Score Histogram",
+      "visState": "{\"title\":\"Fraud Score Histogram\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"fraudScore\",\"interval\":25,\"extended_bounds\":{},\"customLabel\":\"Fraud Score\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"region\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Region\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Fraud-Score-Metrics",
+    "_type": "visualization",
+    "_source": {
+      "title": "Fraud Score Metrics",
+      "visState": "{\"title\":\"Fraud Score Metrics\",\"type\":\"metric\",\"params\":{\"fontSize\":\"25\",\"handleNoResults\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Number of tables evaluated in total\"}},{\"id\":\"3\",\"type\":\"percentile_ranks\",\"schema\":\"metric\",\"params\":{\"field\":\"fraudScore\",\"values\":[0],\"customLabel\":\"Fraudulent Claims\"}},{\"id\":\"6\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"calimAmount\",\"customLabel\":\"Total Amount Claimed\"}},{\"id\":\"4\",\"type\":\"min\",\"schema\":\"metric\",\"params\":{\"field\":\"fraudScore\",\"customLabel\":\"Min Fraud Score\"}},{\"id\":\"2\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"fraudScore\",\"percents\":[50],\"customLabel\":\"Fraud Score Median\"}},{\"id\":\"5\",\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"fraudScore\",\"customLabel\":\"Max Fraud Score\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "History-of-Fraud-slash-Payment-Rejected-Pie-Chart",
+    "_type": "visualization",
+    "_source": {
+      "title": "History of Fraud / Payment Rejected Pie Chart",
+      "visState": "{\"title\":\"History of Fraud / Payment Rejected Pie Chart\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"historyOfFraud\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"History of Fraud\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"paymentRejected\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Payment Rejected\"}},{\"id\":\"4\",\"type\":\"histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"numberOfPayouts\",\"interval\":5,\"extended_bounds\":{},\"customLabel\":\"Number of Payouts\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false,\"colors\":{\"0\":\"#64B0C8\",\"1\":\"#F2C96D\"}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "Users-and-Fraud-Score",
+    "_type": "visualization",
+    "_source": {
+      "title": "Users and Fraud Score",
+      "visState": "{\"title\":\"Users and Fraud Score\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"nameOfAssignedUser\",\"size\":10,\"order\":\"asc\",\"orderBy\":\"_term\",\"customLabel\":\"Assigned Users\"}},{\"id\":\"3\",\"type\":\"range\",\"schema\":\"group\",\"params\":{\"field\":\"fraudScore\",\"ranges\":[{\"from\":-1000,\"to\":0},{\"from\":0,\"to\":1000}],\"customLabel\":\"Fraud Score\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"camunda\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  }
+]
