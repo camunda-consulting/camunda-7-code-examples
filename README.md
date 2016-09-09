@@ -87,8 +87,8 @@ Showcases
 
   <tr>
     <td>
-      <a href="showcases/skill-based-routing">Skill-based-Routing</a> <br />
-      <img src="showcases/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
+      <a href="showcases/de/skill-based-routing">Skill-based-Routing</a> <br />
+      <img src="showcases/de/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
     </td>
     <td>
        Key Features showcased:
