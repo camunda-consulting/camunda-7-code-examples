@@ -1,0 +1,39 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+	<plugin-info>
+	    <description>${project.description}</description>
+	    <version>${project.version}</version>
+	    <vendor name="${project.organization.name}" url="${project.organization.url}" />
+	    <param name="plugin-icon">images/pluginIcon.png</param>
+	    <param name="plugin-logo">images/pluginLogo.png</param>
+	    <bundle-instructions>
+	      <Import-Package>com.atlassian.confluence.xhtml.api.*;resolution:=optional</Import-Package>
+	    </bundle-instructions>
+	</plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="bpmnjs"/>
+
+    <!-- add our web resources -->
+    <web-resource key="bpmnjs-resources" name="bpmnjs Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="bpmnjs.css" location="/css/bpmnjs.css"/>
+        <resource type="download" name="bpmnjs.js" location="/js/lib/bpmnjs.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>bpmnjs</context>
+    </web-resource>
+    <xhtml-macro name="bpmnviewer" class="org.camunda.consulting.api.BPMNViewerMacro" key="bpmnviewer">
+    	<description>Displays BPMN models by using bpmn-js.</description>
+    	<category name="visuals" />
+        <parameters>
+        	<parameter name="page" type="confluence-content" required="false" multiple="false" />
+        	<parameter name="height" type="string" default="500px"/>
+  			<parameter name="name" type="attachment"/>
+    	</parameters>
+    </xhtml-macro>
+	<web-resource name="macro-resources" key="macro-resources">
+    	<resource type="download" name="showattachments.js" location="/js/support/showattachments.js"/>
+    	<dependency>confluence.editor.actions:editor-macro-browser</dependency>
+    	<context>macro-browser</context>
+	</web-resource>
+
+</atlassian-plugin>
