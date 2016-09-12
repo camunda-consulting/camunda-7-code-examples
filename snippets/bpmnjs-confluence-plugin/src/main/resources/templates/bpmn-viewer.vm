@@ -1,0 +1,12 @@
+#requireResource("org.camunda.consulting.bpmnjs:bpmnjs-resources")
+<div id='canvas$macroid' style='height:$height'></div>
+<script>
+(function() {
+	var BpmnViewer = window.BpmnJS; 
+	var viewer = new BpmnViewer({ container: '#canvas$macroid' });
+  	var downloadPath = '/confluence$name';
+  	#if($name)
+  	  #include("js/importXML.js")
+  	#end
+})();
+</script>
