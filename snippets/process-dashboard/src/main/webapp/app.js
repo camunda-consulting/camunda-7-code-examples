@@ -72,6 +72,11 @@ function init() {
 function loadProcessInstances(processDefinitionKey) {
 	// load process instance information, load ALL for the moment
 	// sort it by startTime descending (latest started on top!)
+	
+	// you might only want process instances from today:
+	// let formattedDate = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate() + 'T00:00:00';
+    // and add: &startedAfter=' + formattedDate
+
 	$.get(baseUrlRest + '/history/process-instance/?processDefinitionKey=' + processDefinitionKey + '&sortBy=startTime&sortOrder=desc', function(processInstances) {
 		for (var i = 0; i < processInstances.length; i++) {
 			var pi = processInstances[i];
