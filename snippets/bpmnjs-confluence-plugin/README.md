@@ -9,3 +9,9 @@ With the help of this Plugin you can view BPMN files directly in Confluence.
 
 # How to install
 https://confluence.atlassian.com/display/UPM027/Installing+a+Plugin#InstallingaPlugin-Installingbyfileupload
+
+# How to build
+a) atlas-run
+b) atlas-package
+or
+mvn package to get jar
