@@ -72,7 +72,7 @@ Add this dependency to your process application:
 	</dependency>
 ```
 
-Build the camunda-demo-data-generator-webapp.war (in subproject camunda-demo-data-generator-webapp) using Maven. Deploy it to your containt, should work on any container (Wildfly, Tomcat, JBoss, ...).
+Build the camunda-demo-data-generator-webapp.war (in subfolder camunda-demo-data-generator-webapp) using Maven. Deploy it to your container, it works on any container (Wildfly, Tomcat, JBoss, ...).
 
 Once you deployed the application you can run it using
 [localhost:8080/camunda-demo-data-generator/](localhost:8080/camunda-demo-data-generator-webapp/). You might have to adjust the port.
@@ -124,7 +124,7 @@ That's it. You get automatically instances generated - if not more than 50 insta
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.3.0.
+Built and tested against Camunda BPM version 7.5.0.
 
 
 Improvements Backlog
