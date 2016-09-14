@@ -13,15 +13,16 @@
 		     <div class="modal-content">
 		        <div class="modal-header ng-scope">
 		          <h3 class="modal-title ng-binding">
-		            CMMN Case Control
+		            Fallsteuerung
 		          </h3>
 		        </div>
 
 		        <div class="modal-body ng-scope">
 		        	  <div class="alert alert-info" role="alert">
-					  	<p>
-					  	Bebobachten Sie den aktuellen Stand des CMMN Falls. Greifen Sie jederzeit ein, indem Sie die unten angezeigte Aktivitäten starten.
-						</p>
+			            <p>
+			              Sie sehen hier den aktuellen Stand des Falls (gesteuert durch ein CMMN-Modell). 
+			              Greifen Sie jederzeit ein, indem Sie startbare Aktivitäten manuell starten (<i class="glyphicon glyphicon-play"></i>).
+			            </p>
 					  </div> 
 					  
 					  <table class="table table-striped table-hover">
@@ -58,7 +59,8 @@
 		  				    	{{execution.activityName}}
 		  				    </td>	  
 		  				    <td style="vertical-align: middle;">
-		  				        <a ng-click="manualStartCaseExecution(execution)" title="manual start activity"><i class="glyphicon glyphicon-play"></i></a>
+		  				        <a ng-click="manualStartCaseExecution(execution)" title="manuell starten"><i class="glyphicon glyphicon-play"></i></a>
+		  				        <a ng-click="disableCaseExecution(execution)" title="deaktivieren"><i class="glyphicon glyphicon-ban-circle"></i></a>
 		  				    </td>
 		  				  </tr>
 
@@ -148,7 +150,18 @@
 		         }
 		    });
 	 };
-	 
+	 // define function to disable an activity which is "enabled"
+	 $scope.disableCaseExecution = function(caseExecution) {
+		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/disable', {
+		         data: JSON.stringify({}),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+		            // when successful reload case status to reflect possible changes
+		            loadCaseStatus();
+		         }
+		    });
+	 };	 
 
   </script>
 

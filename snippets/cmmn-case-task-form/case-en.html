@@ -21,8 +21,8 @@
 		        <div class="modal-body ng-scope">
 		        	  <div class="alert alert-info" role="alert">
 					  	<p>
-					  	Introspect the current case status determined by the CMMN model. 
-					  	Control if by executing lifecycle methods shown below.
+					  	Introspect the current status of the case (determined by a CMMN model). 
+					  	Control if by executing lifecycle methods shown below (e.g. <i class="glyphicon glyphicon-play"></i>).
 						</p>
 					  </div> 
 					  
@@ -61,6 +61,7 @@
 		  				    </td>	  
 		  				    <td style="vertical-align: middle;">
 		  				        <a ng-click="manualStartCaseExecution(execution)" title="manual start activity"><i class="glyphicon glyphicon-play"></i></a>
+		  				        <a ng-click="disableCaseExecution(execution)" title="disable"><i class="glyphicon glyphicon-ban-circle"></i></a>
 		  				    </td>
 		  				  </tr>
 
@@ -149,7 +150,18 @@
 		         }
 		    });
 	 };
-	 
+	 // define function to disable an activity which is "enabled"
+	 $scope.disableCaseExecution = function(caseExecution) {
+		   $.ajax('/camunda/api/engine/engine/default/case-execution/' + caseExecution.id + '/disable', {
+		         data: JSON.stringify({}),
+		         contentType : 'application/json',
+		         type : 'POST',
+		         success: function (result) {
+		            // when successful reload case status to reflect possible changes
+		            loadCaseStatus();
+		         }
+		    });
+	 };	 	 
 
   </script>
 
