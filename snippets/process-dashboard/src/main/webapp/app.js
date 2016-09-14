@@ -100,7 +100,6 @@ function loadProcessInstances(processDefinitionKey) {
 
 function renderVariables() {
 	for (var i = 0; i < variablesToShow.length; i++) {
-			;
 		 $("#statusTableHeadline").find("th:last").before('<th>'+variablesToShow[i].label+'</th>');
 	}	
 }
@@ -148,7 +147,7 @@ function renderProcessInstanceRow(pi) {
 	$("#statusTable > tbody").append(tr);
 }
 
-variablesToShow
+//variablesToShow
 function renderProcessInstanceDetails(pi, activityInstances, variables, incidents) {
 	var td = '';
 
@@ -172,10 +171,13 @@ function renderProcessInstanceDetails(pi, activityInstances, variables, incident
 		} else if (!activityInstance) { // not contained means -> not yet started.
 			td = td + '<td><div class="alert alert-grey status-alert">open</div></td>';
 		} else if (activityInstance.endTime) { // ended means -> done
-			td = td + '<td><div class="alert alert-success status-alert">'+ getRuntimeInfo(activityInstance.durationInMillis, "Took ") +'</div></td>';		
+			td = td + '<td><div class="alert alert-success status-alert">'+ getRuntimeInfo(activityInstance.durationInMillis, "Took ") +'</div></td>';
+		} else if (activityInstance.startTime) {
+			let durationInMillis = new Date() - new Date(Date.parse(activityInstance.startTime));
+			td = td + '<td><div class="alert alert-warning status-alert">'+ getRuntimeInfo(durationInMillis, "Running or waiting since ") +'</div></td>';
 		} else { //running
 			// javascript treat time as ISO string as UTC, but it is local time!
-			var durationInMillis = now - new Date(Date.parse("2016-09-09T11:04:30") + ( now.getTimezoneOffset() * 60000 ));
+			let durationInMillis = now - new Date(Date.parse("2016-09-09T11:04:30") + ( now.getTimezoneOffset() * 60000 ));
 			td = td + '<td><div class="alert alert-warning status-alert">'+ getRuntimeInfo(durationInMillis, "Running or waiting since ") +'</div></td>';
 		}
 	}
@@ -227,17 +229,17 @@ function getRuntimeInfo(millis, infoPrefix) {
     var days = Math.floor((millis / (24 * 60 * 60 * 1000)) % 60);
 
     var timeInfo = days + " days "  + hours + " hours and " + minutes + " minutes " + seconds + " seconds";
-
+	let result = "";
     if (days>0) {
-        return '<span title="' + infoPrefix + ' ' + timeInfo + '">' + days + ' days</span>';
+        result = '<span title="' + infoPrefix + ' ' + timeInfo + '">' + days + ' days</span>';
     } else if (hours>0) {
-        return '<span title="' + infoPrefix + timeInfo + '">' + hours + ":" + minutes + '</span>';
+        result = '<span title="' + infoPrefix + timeInfo + '">' + hours + ":" + minutes + '</span>';
     } else if (minutes>0) {
-        return '<span title="' + infoPrefix + timeInfo + '">' +  minutes + ' min</span>';
+        result = '<span title="' + infoPrefix + timeInfo + '">' +  minutes + ' min</span>';
     } else {
-        return '<span title="' + infoPrefix + timeInfo + '">' +  seconds + ' sec</span>';
+        result = '<span title="' + infoPrefix + timeInfo + '">' +  seconds + ' sec</span>';
     }
-    return "";
+    return result;
 }
 
 
@@ -295,13 +297,19 @@ function addHistoryInfoOverlay( actInstList) {
 			  show: {minZoom: 0, maxZoom: 100.0}, 
 			  html: '<div class="bpmn-badge bpmn-badge-completed"><span class="glyphicon glyphicon-ok"></span><br>'+getRuntimeInfo(actInstList[index].durationInMillis, "Took ")+'</div>'
 			});
-		}
-		else {
-			var durationInMillis = now - new Date(Date.parse("2016-09-09T11:04:30") + ( now.getTimezoneOffset() * 60000 ));
+		} else if (actInstList[index].startTime) {
+			let durationInMillis = new Date() - new Date(Date.parse(actInstList[index].startTime));
+			bpmnViewer.get('overlays').add(actInstList[index].activityId, {
+				position: { top: 0, right: 0 },
+				show: { minZoom: 0, maxZoom: 100.0 },
+				html: '<div class="bpmn-badge bpmn-badge-running"><span class="glyphicon glyphicon-ok"></span><br>' + getRuntimeInfo(durationInMillis, "Running since ") + '</div>'
+			});
+		} else {
+			let durationInMillis = now - new Date(Date.parse("2016-09-09T11:04:30") + ( now.getTimezoneOffset() * 60000 ));
 			bpmnViewer.get('overlays').add(actInstList[index].activityId, {
 			  position: {top: 0, right: 0},
 			  show: {minZoom: 0, maxZoom: 100.0}, 
-			  html: '<div class="bpmn-badge bpmn-badge-running"><span class="glyphicon glyphicon-time"></span><br>'+getRuntimeInfo(durationInMillis, "Running sice ")+'</div>'
+			  html: '<div class="bpmn-badge bpmn-badge-running"><span class="glyphicon glyphicon-time"></span><br>'+getRuntimeInfo(durationInMillis, "Running since ")+'</div>'
 			});
 		}					        
    }
