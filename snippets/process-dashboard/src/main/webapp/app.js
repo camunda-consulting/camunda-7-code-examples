@@ -121,9 +121,9 @@ function renderNextActivity(activityList, activityPredecessors) {
 					}
 				}
 			}
+			activityList.splice(i, 1);
+			return;
 		}
-		activityList.splice(i, 1);
-		return;
 	}
 }
 
@@ -173,7 +173,7 @@ function renderProcessInstanceDetails(pi, activityInstances, variables, incident
 		} else if (activityInstance.endTime) { // ended means -> done
 			td = td + '<td><div class="alert alert-success status-alert">'+ getRuntimeInfo(activityInstance.durationInMillis, "Took ") +'</div></td>';
 		} else if (activityInstance.startTime) {
-			let durationInMillis = new Date() - new Date(Date.parse(activityInstance.startTime));
+			let durationInMillis = new Date() - new Date(Date.parse(activityInstance.startTime) + ( now.getTimezoneOffset() * 60000 ));
 			td = td + '<td><div class="alert alert-warning status-alert">'+ getRuntimeInfo(durationInMillis, "Running or waiting since ") +'</div></td>';
 		} else { //running
 			// javascript treat time as ISO string as UTC, but it is local time!
