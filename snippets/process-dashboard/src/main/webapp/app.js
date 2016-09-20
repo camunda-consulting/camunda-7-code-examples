@@ -298,7 +298,7 @@ function addHistoryInfoOverlay( actInstList) {
 			  html: '<div class="bpmn-badge bpmn-badge-completed"><span class="glyphicon glyphicon-ok"></span><br>'+getRuntimeInfo(actInstList[index].durationInMillis, "Took ")+'</div>'
 			});
 		} else if (actInstList[index].startTime) {
-			let durationInMillis = new Date() - new Date(Date.parse(actInstList[index].startTime));
+			let durationInMillis = new Date() - new Date(Date.parse(actInstList[index].startTime) + ( now.getTimezoneOffset() * 60000 ));
 			bpmnViewer.get('overlays').add(actInstList[index].activityId, {
 				position: { top: 0, right: 0 },
 				show: { minZoom: 0, maxZoom: 100.0 },
