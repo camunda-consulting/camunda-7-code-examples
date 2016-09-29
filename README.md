@@ -261,19 +261,19 @@ Snippets
     <td><a href="snippets/async-joins">Making parallel joins asynchronous</a></td>
     <td>To avoid optimistic lock exceptions on heavy load processes, this plugin makes each joining gateway asynchronous without further configuration in the process diagram.</td>
   </tr>
-  
+
   <tr>
     <td><img src="http://docs.camunda.org/7.3/guides/user-guide/assets/img/transactions-2.png" width="100"></td>
     <td><a href="snippets/authenticated-async-continuation">authenticatedUserId after Asynchronous Continuation</a></td>
     <td>To use the userId after asynchronous continuation, this plugin puts it from the history on the current thread.</td>
   </tr>
-  
+
   <tr>
     <td><img src="snippets/authorization-demo/src/main/resources/process.png" width="100"></td>
     <td><a href="snippets/authorization-demo">Authorized User Tasks</a></td>
     <td>Only authorized users are able to complete a task. Obsolete since 7.3. Use <a href="http://docs.camunda.org/7.3/guides/user-guide/#process-engine-authorization-service">Authorization-Service</a> instead.</td>
   </tr>
-  
+
   <tr>
     <td><img src="http://docs.camunda.org/7.3/assets/img/user-guide/process-engine-history.png" width="100"></td>
     <td><a href="snippets/change-history-output">History Variable Filter</a></td>
@@ -291,7 +291,13 @@ Snippets
     <td><a href="snippets/extended-serialization">Extend serialization of process variables</a></td>
     <td>This snippets exends the serialization of process variables for special classes, builds a jboss module with a maven plugin and shows how to use complex objects in a process application.</td>
   </tr>
-  
+
+  <tr>
+    <td><img src="snippets/engine-plugin-add-save-points/screenshot.png" width="100"></td>
+    <td><a href="snippets/engine-plugin-add-save-points">Engine Plugin: Add Save Points</a></td>
+    <td>A plugin that automatically adds save points, i.e. asyncronous continuation or transaction boundaries, to certain BPMN elements.</td>
+  </tr>
+
 </table>
 
 ### Runtime Environments
