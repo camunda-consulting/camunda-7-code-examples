@@ -23,7 +23,3 @@ Built and tested against Camunda BPM version 7.5.0.
 
 ## License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-<!-- Tweet
-New @CamundaBPM example: Engine Plugin: Add Save Points - A plugin for [Camunda BPM](http://docs.camunda.org) that automatically adds save points, i.e. asynchronous continuation or transaction boundaries, to certain BPMN elements. https://github.com/camunda/camunda-consulting/tree/master/snippets/engine-plugin-add-save-points
--->
