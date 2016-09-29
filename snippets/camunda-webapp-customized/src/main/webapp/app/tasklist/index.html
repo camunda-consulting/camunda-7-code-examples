@@ -4,69 +4,80 @@
   <meta http-equiv="X-UA-Compatible"
         content="IE=edge" />
 
-  <title>camunda Tasklist</title>
+  <title>Camunda Tasklist</title>
 
   <meta charset="utf-8" />
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0" />
 
   <meta name="description"
-        content="camunda Tasklist" />
+        content="Camunda Tasklist" />
   <meta name="author"
-        content="camunda services GmbH" />
+        content="Camunda services GmbH" />
 
   <!--< base href="/" /> -->
   <base href="$BASE"
         admin-api="$APP_ROOT/api/admin/"
+        tasklist-api="$APP_ROOT/api/tasklist/"
         engine-api="$APP_ROOT/api/engine/"
         app-root="$APP_ROOT"
-        app-name="tasklist" 
-        cam-exclude-plugins="start-process-action, tasklist.navbar.action:create-task-action, task-detail-form, task-detail-history, task-search"
-        />
+        app-name="tasklist" />
 
   <link rel="stylesheet"
         type="text/css"
-        href="$APP_ROOT/app/tasklist/styles/styles.css">
+        href="$APP_ROOT/app/tasklist/styles/styles.css?bust=7.6.0-alpha3">
   <link rel="stylesheet"
         type="text/css"
-        href="$APP_ROOT/app/tasklist/styles/user-styles.css">
+        href="$APP_ROOT/app/tasklist/styles/user-styles.css?bust=7.6.0-alpha3">
 
   <!-- favicon -->
   <link rel="shortcut icon"
-        href="$APP_ROOT/app/tasklist/images/favicon.ico"
+        href="$APP_ROOT/app/tasklist/assets/images/favicon.ico"
         type="image/x-icon" />
   <link rel="apple-touch-icon"
-        href="$APP_ROOT/app/tasklist/images/camunda.60.png" />
+        href="$APP_ROOT/app/tasklist/assets/images/camunda.60.png" />
   <link rel="apple-touch-icon"
         sizes="72x72"
-        href="$APP_ROOT/app/tasklist/images/camunda.72.png" />
+        href="$APP_ROOT/app/tasklist/assets/images/camunda.72.png" />
   <link rel="apple-touch-icon"
         sizes="114x114"
-        href="$APP_ROOT/app/tasklist/images/camunda.114.png" />
-
- <style>
-  .app-switch {
-    visibility: hidden !important;
-  }
-    </style>
-
+        href="$APP_ROOT/app/tasklist/assets/images/camunda.114.png" />
 </head>
 
-<body>
-  <div class="site-wrap"
-       ng-controller="camTasklistAppCtrl">
+<body ng-controller="camTasklistAppCtrl">
+  <div cam-widget-header
+       authentication="authentication"
+       user-name="userFullName"
+       current-app="tasklist"
+       toggle-navigation="{{ 'TOGGLE_NAVIGATION' | translate }}"
+       sign-out="{{ 'SIGN_OUT_ACTION' | translate }}"
+       my-profile="{{ 'MY_PROFILE' | translate }}"
+       brand-name="{{ appVendor }} {{ appName }}"
+       ng-cloak>
+   <ul cam-if-logged-in
+       ng-controller="camHeaderViewsCtrl">
+      <li ng-repeat="actionProvider in navbarActions"
+          ng-class="actionProvider.id">
+        <view ng-cloak
+              provider="actionProvider"
+              vars="navbarVars">
+        </view>
+      </li>
+    </ul>
+  </div>
 
-    <!-- # page-navigation -->
-    <nav class="navbar navbar-default"
-         role="navigation"
-         cam-tasklist-navigation>
-    </nav>
-    <!-- / page-navigation -->
-
-
+  <div class="site-wrap">
 
     <!-- # page-content -->
-    <div class="page-wrap" ng-view></div>
+    <div class="page-wrap three-cols-layout" ng-view>
+      <style type="text/css">
+        .app-splash { position: absolute; width: 100%; height: 100%; top: 0; left: 0; display: table; }
+        .app-splash > div { display: table-cell; vertical-align: middle; text-align: center; }
+      </style>
+      <div class="app-splash"><div>
+        <img src="$APP_ROOT/app/tasklist/assets/images/camunda-animated-logo-140.gif" />
+      </div></div><!-- / .app-splash -->
+    </div>
     <!-- / page-content -->
 
   </div>
@@ -80,37 +91,48 @@
 
   <!-- # page-footer -->
   <footer cam-widget-footer
-          version="v7.3.0-ee"></footer>
+          version="v7.6.0-alpha3-ee"></footer>
 
 
   <script type="text/javascript">
     // override the following line to include configuration
-    var tasklistConf = {
-  "apiUri": "$APP_ROOT/api/engine",
-  "mock": false,
-  "resources": {}
-};
-  </script>
+     var tasklistConf = {
+	  "apiUri": "/camunda/api/engine",
+	  "mock": false,
+	  "resources": {}
+	};
 
-  <script type="text/javascript">
-    window.PLUGIN_DEPENDENCIES = $PLUGIN_DEPENDENCIES || [];
-    window.PLUGIN_PACKAGES = $PLUGIN_PACKAGES || [];
+     window.PLUGIN_DEPENDENCIES = [{ ngModuleName: 'tasklist.plugin.tasklistPlugins', requirePackageName: 'tasklist-plugin-tasklistPlugins' }] || [];
+     window.PLUGIN_PACKAGES = [{ name: 'tasklist-plugin-tasklistPlugins', location: '/camunda/api/tasklist/plugin/tasklistPlugins/static/app', main: 'plugin.js' }] || [];
+
+     window.require = {
+         waitSeconds: 0
+     };
   </script>
 
   <script type="text/javascript" src="$APP_ROOT/app/tasklist/scripts/config.js"></script>
-  <script type="text/javascript"
-          src="$APP_ROOT/app/tasklist/scripts/deps.js"
-          data-main="$APP_ROOT/app/tasklist/scripts/camunda-tasklist-ui"></script>
 
-  <!--[if lte IE 9]>
-  <script type="text/javascript"
-          src="$APP_ROOT/app/tasklist/scripts/placeholders.utils.js"></script>
-  <script type="text/javascript"
-          src="$APP_ROOT/app/tasklist/scripts/placeholders.main.js"></script>
-  <script type="text/javascript"
-          src="$APP_ROOT/app/tasklist/scripts/placeholders.jquery.js"></script>
-  <![endif]-->
+  <!--[if lte IE 9]><script type="text/javascript">
+    tasklistConf.polyfills = tasklistConf.polyfills || [];
+    tasklistConf.polyfills.push('placeholder');
+  </script><![endif]-->
 
-  
+  <script type="application/javascript"
+          src="$APP_ROOT/lib/require.js"></script>
+    <script type="text/javascript">
+
+window.__define = window.define;
+window.__require = window.require;
+window.define = undefined;
+window.require = undefined;
+
+requirejs.config({
+  baseUrl: '$APP_ROOT/app/tasklist',
+  urlArgs: 'bust=7.6.0-alpha3'
+});
+requirejs(['$APP_ROOT/lib/deps.js'], function () {
+  requirejs(['$APP_ROOT/app/tasklist/camunda-tasklist-bootstrap.js'], function () {});
+});
+    </script>
 </body>
 </html>

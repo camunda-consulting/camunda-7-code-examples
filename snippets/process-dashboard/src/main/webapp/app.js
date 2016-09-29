@@ -121,9 +121,9 @@ function renderNextActivity(activityList, activityPredecessors) {
 					}
 				}
 			}
+			activityList.splice(i, 1);
+			return;
 		}
-		activityList.splice(i, 1);
-		return;
 	}
 }
 
@@ -173,7 +173,7 @@ function renderProcessInstanceDetails(pi, activityInstances, variables, incident
 		} else if (activityInstance.endTime) { // ended means -> done
 			td = td + '<td><div class="alert alert-success status-alert">'+ getRuntimeInfo(activityInstance.durationInMillis, "Took ") +'</div></td>';
 		} else if (activityInstance.startTime) {
-			let durationInMillis = new Date() - new Date(Date.parse(activityInstance.startTime));
+			let durationInMillis = new Date() - new Date(Date.parse(activityInstance.startTime) + ( now.getTimezoneOffset() * 60000 ));
 			td = td + '<td><div class="alert alert-warning status-alert">'+ getRuntimeInfo(durationInMillis, "Running or waiting since ") +'</div></td>';
 		} else { //running
 			// javascript treat time as ISO string as UTC, but it is local time!
@@ -298,7 +298,7 @@ function addHistoryInfoOverlay( actInstList) {
 			  html: '<div class="bpmn-badge bpmn-badge-completed"><span class="glyphicon glyphicon-ok"></span><br>'+getRuntimeInfo(actInstList[index].durationInMillis, "Took ")+'</div>'
 			});
 		} else if (actInstList[index].startTime) {
-			let durationInMillis = new Date() - new Date(Date.parse(actInstList[index].startTime));
+			let durationInMillis = new Date() - new Date(Date.parse(actInstList[index].startTime) + ( now.getTimezoneOffset() * 60000 ));
 			bpmnViewer.get('overlays').add(actInstList[index].activityId, {
 				position: { top: 0, right: 0 },
 				show: { minZoom: 0, maxZoom: 100.0 },

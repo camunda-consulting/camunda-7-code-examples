@@ -10,7 +10,7 @@
 
 
 	<properties>
-		<camunda.version>7.4.0-ee</camunda.version>
+		<camunda.version>7.6.0-alpha3-ee</camunda.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
