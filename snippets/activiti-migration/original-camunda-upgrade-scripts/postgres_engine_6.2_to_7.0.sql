@@ -218,8 +218,8 @@ alter table ACT_RU_EXECUTION
     drop IS_MI_SCOPE_;
 
 /** add SUSPENSION_STATE_ column to task table */
-alter table ACT_RU_TASK
-    add SUSPENSION_STATE_ integer;
+/*alter table ACT_RU_TASK
+    add SUSPENSION_STATE_ integer;*/
 
 UPDATE ACT_RU_TASK T
 SET SUSPENSION_STATE_ = (
