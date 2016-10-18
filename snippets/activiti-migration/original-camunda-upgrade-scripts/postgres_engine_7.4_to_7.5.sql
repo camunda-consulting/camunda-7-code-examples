@@ -255,28 +255,23 @@ create table ACT_HI_BATCH (
     primary key (ID_)
 );
 
-/*create table ACT_HI_IDENTITYLINK (
-    ID_ varchar(64) not null,
-    TIMESTAMP_ timestamp not null,
-    TYPE_ varchar(255),
-    USER_ID_ varchar(255),
-    GROUP_ID_ varchar(255),
-    TASK_ID_ varchar(64),
-    PROC_DEF_ID_ varchar(64),
-    OPERATION_TYPE_ varchar(64),
-    ASSIGNER_ID_ varchar(64),
-    PROC_DEF_KEY_ varchar(255),
-    TENANT_ID_ varchar(64),
-    primary key (ID_)
-);
-*/
-
-ALTER TABLE ACT_HI_IDENTITYLINK
-  ADD TENANT_ID_ varchar(64);
-
+--create table ACT_HI_IDENTITYLINK (
+--    ID_ varchar(64) not null,
+--    TIMESTAMP_ timestamp not null,
+--    TYPE_ varchar(255),
+--    USER_ID_ varchar(255),
+--    GROUP_ID_ varchar(255),
+--    TASK_ID_ varchar(64),
+--    PROC_DEF_ID_ varchar(64),
+--    OPERATION_TYPE_ varchar(64),
+--    ASSIGNER_ID_ varchar(64),
+--    PROC_DEF_KEY_ varchar(255),
+--    TENANT_ID_ varchar(64),
+--    primary key (ID_)
+--);
 ---create index ACT_IDX_HI_IDENT_LNK_USER on ACT_HI_IDENTITYLINK(USER_ID_);
 create index ACT_IDX_HI_IDENT_LNK_GROUP on ACT_HI_IDENTITYLINK(GROUP_ID_);
-create index ACT_IDX_HI_IDENT_LNK_TENANT_ID on ACT_HI_IDENTITYLINK(TENANT_ID_);
+--create index ACT_IDX_HI_IDENT_LNK_TENANT_ID on ACT_HI_IDENTITYLINK(TENANT_ID_);
 
 create index ACT_IDX_JOB_JOB_DEF_ID on ACT_RU_JOB(JOB_DEF_ID_);
 create index ACT_IDX_HI_JOB_LOG_JOB_DEF_ID on ACT_HI_JOB_LOG(JOB_DEF_ID_);
