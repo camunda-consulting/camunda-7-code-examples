@@ -17,7 +17,7 @@ Important note: *Requires JSF - does not run on Tomcat!*
 Show me the important parts!
 ----------------------------
 
-![CMMN Case](docs/case.png)
+![CMMN Case](src/main/resources/underwriting-case.png)
 
 The BPMN process starts the underwriting. It implements all structured activities and calls the more CMMN case when the
 unstructured phase of the real underwriting from a clerk starts: 
