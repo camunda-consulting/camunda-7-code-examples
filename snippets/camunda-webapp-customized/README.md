@@ -8,8 +8,8 @@ It customizes:
 * The color schema (see [Logo and Header Color](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color))
 * The logo (see [Logo and Header Color](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color))
 * Add German language taken from [Community Extension: Tasklist Translations](https://github.com/camunda/camunda-tasklist-translations/) (see [Localization](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#localization))
-* Removes some built in plugins (see [Plugin exclusion](http://docs.camunda.org/latest/guides/user-guide/#cockpit-plugins-plugin-exclusion-client-side)): start-process-action, tasklist.navbar.action:create-task-action, task-detail-form, task-detail-history, task-search
-* Adds own Plugins (see [Tasklist Plugins](http://docs.camunda.org/latest/guides/user-guide/#tasklist-plugins) and [Cockpit Plugins](http://docs.camunda.org/latest/guides/user-guide/#cockpit-plugins))
+* Removes some built in plugins (see [Plugin exclusion](https://docs.camunda.org/manual/7.5/webapps/cockpit/extend/plugins/#plugin-exclusion-client-side)): start-process-action, tasklist.navbar.action:create-task-action, task-detail-form, task-detail-history, task-search
+* Adds own Plugins (see [Cockpit Plugins](https://docs.camunda.org/manual/7.5/examples/tutorials/develop-cockpit-plugin/))
 
 *Important Note:* You have to specify the webapp corresponding to your container (Tomcat, JBoss, WildFly, ...) in the pom.xml. This example builts the webapp for JBoss.
 
