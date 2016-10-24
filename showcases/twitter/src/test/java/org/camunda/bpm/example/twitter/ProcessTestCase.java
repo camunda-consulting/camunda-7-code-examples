@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
+import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
@@ -41,7 +42,7 @@ public class ProcessTestCase {
     	.isWaitingAt("user_task_review_tweet") //
     	.task() //
     	.isAssignedTo("demo");
-    
+       
     complete(task(), Variables.createVariables().putValue("approved", Boolean.FALSE));
     
     // or using the Java API
