@@ -5,11 +5,11 @@ This project shows how to easily customize the Camunda Webapp by using the Maven
 
 It customizes:
 
-* The color schema (see [https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color](Logo and Header Color))
-* The logo (see [https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color](Logo and Header Color))
-* Add German language taken from [https://github.com/camunda/camunda-tasklist-translations/](Community Extension: Tasklist Translations) (see [https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#localization](Localization))
-* Removes some built in plugins (see [http://docs.camunda.org/latest/guides/user-guide/#cockpit-plugins-plugin-exclusion-client-side](Plugin exclusion)): start-process-action, tasklist.navbar.action:create-task-action, task-detail-form, task-detail-history, task-search
-* Adds own Plugins (see [http://docs.camunda.org/latest/guides/user-guide/#tasklist-plugins](Tasklist Plugins) and [http://docs.camunda.org/latest/guides/user-guide/#cockpit-plugins](Cockpit Plugins))
+* The color schema (see [Logo and Header Color](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color))
+* The logo (see [Logo and Header Color](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#logo-and-header-color))
+* Add German language taken from [Community Extension: Tasklist Translations](https://github.com/camunda/camunda-tasklist-translations/) (see [Localization](https://docs.camunda.org/manual/7.5/webapps/tasklist/configuration/#localization))
+* Removes some built in plugins (see [Plugin exclusion](https://docs.camunda.org/manual/7.5/webapps/cockpit/extend/plugins/#plugin-exclusion-client-side)): start-process-action, tasklist.navbar.action:create-task-action, task-detail-form, task-detail-history, task-search
+* Adds own Plugins (see [Cockpit Plugins](https://docs.camunda.org/manual/7.5/examples/tutorials/develop-cockpit-plugin/))
 
 *Important Note:* You have to specify the webapp corresponding to your container (Tomcat, JBoss, WildFly, ...) in the pom.xml. This example builts the webapp for JBoss.
 
@@ -32,7 +32,7 @@ Before you need to download the EE version here: https://docs.camunda.org/enterp
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.6.0-alpha3 using WildFly 10.
+Built and tested against Camunda BPM version 7.6.0-alpha5 using WildFly 10.
 
 
 Improvements Backlog
