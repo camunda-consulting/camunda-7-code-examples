@@ -32,7 +32,7 @@ Before you need to download the EE version here: https://docs.camunda.org/enterp
 Environment Restrictions
 ------------------------
 
-Built and tested against Camunda BPM version 7.6.0-alpha3 using WildFly 10.
+Built and tested against Camunda BPM version 7.6.0-alpha5 using WildFly 10.
 
 
 Improvements Backlog

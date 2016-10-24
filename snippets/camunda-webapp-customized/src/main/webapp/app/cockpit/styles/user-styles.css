@@ -1,0 +1,46 @@
+body {
+	color: #2e2e2e;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+a {
+	color: #23527c;
+}
+a:hover, a:focus {
+    color: #15c;
+}
+.nav-tabs>li.active>a,.columns, .column-right,.three-cols-layout .column-left .list-unstyled>.item.active, .three-cols-layout .column-center .list-unstyled>li.active, .three-cols-layout .column-left .list-unstyled>.item:hover, .three-cols-layout .column-center .list-unstyled>li:hover, .three-cols-layout .column-left .list-unstyled>.item:focus, .three-cols-layout .column-center .list-unstyled>li:focus {
+	color: #2e2e2e;
+}
+[cam-widget-header] .navbar-brand {
+	background: url(../images/custom-logo.png);
+    background-size: 100px;
+    background-repeat: no-repeat;
+    margin-left: 10px;
+    background-position: 0 10px;
+    width: 280px;
+}
+[cam-widget-header] .navbar-brand .brand-logo {
+	display: none;
+}
+[cam-widget-header] {
+	border-bottom: 5px solid #cd9a24;
+}
+span.brand-name.ng-binding {
+	width: 200px;
+    display: block;
+    margin-left: 100px
+}
+.column .cell.top {
+	border-bottom: 1px solid #e0e0e0; 
+}
+.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus {
+	border-bottom: 3px solid #cd9a24;
+}
+.btn-primary {
+	background-color: #cd9a24;
+	border-color: #cd9a24;
+	border-radius: 15px;
+}
+[cam-widget-footer] {
+	background-color: #2f384a;
+}
