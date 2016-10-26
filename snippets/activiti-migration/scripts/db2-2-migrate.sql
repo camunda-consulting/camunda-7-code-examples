@@ -10,17 +10,17 @@ alter table ACT_HI_IDENTITYLINK     add TIMESTAMP_ timestamp;
 create index ACT_IDX_HI_IDENT_LNK_TENANT_ID on ACT_HI_IDENTITYLINK(TENANT_ID_);
 
 --- changes in attributes
-alter table ACT_HI_ACTINST      alter ASSIGNEE_ type varchar(64);
+alter table ACT_HI_ACTINST      alter ASSIGNEE_ varchar(64);
 
-alter table ACT_HI_ACTINST      alter TENANT_ID_ drop default; alter table ACT_HI_ACTINST         alter TENANT_ID_ type varchar(64);
-alter table ACT_HI_PROCINST     alter TENANT_ID_ drop default; alter table ACT_HI_PROCINST        alter TENANT_ID_ type varchar(64);
-alter table ACT_HI_TASKINST     alter TENANT_ID_ drop default; alter table ACT_HI_TASKINST        alter TENANT_ID_ type varchar(64);
-alter table ACT_RE_DEPLOYMENT   alter TENANT_ID_ drop default; alter table ACT_RE_DEPLOYMENT      alter TENANT_ID_ type varchar(64);
-alter table ACT_RE_PROCDEF      alter TENANT_ID_ drop default; alter table ACT_RE_PROCDEF         alter TENANT_ID_ type varchar(64);
-alter table ACT_RU_EVENT_SUBSCR alter TENANT_ID_ drop default; alter table ACT_RU_EVENT_SUBSCR    alter TENANT_ID_ type varchar(64);
-alter table ACT_RU_EXECUTION    alter TENANT_ID_ drop default; alter table ACT_RU_EXECUTION       alter TENANT_ID_ type varchar(64);
-alter table ACT_RU_JOB          alter TENANT_ID_ drop default; alter table ACT_RU_JOB             alter TENANT_ID_ type varchar(64);
-alter table ACT_RU_TASK         alter TENANT_ID_ drop default; alter table ACT_RU_TASK            alter TENANT_ID_ type varchar(64);
+alter table ACT_HI_ACTINST      alter TENANT_ID_ drop default; alter table ACT_HI_ACTINST         alter TENANT_ID_ varchar(64);
+alter table ACT_HI_PROCINST     alter TENANT_ID_ drop default; alter table ACT_HI_PROCINST        alter TENANT_ID_ varchar(64);
+alter table ACT_HI_TASKINST     alter TENANT_ID_ drop default; alter table ACT_HI_TASKINST        alter TENANT_ID_ varchar(64);
+alter table ACT_RE_DEPLOYMENT   alter TENANT_ID_ drop default; alter table ACT_RE_DEPLOYMENT      alter TENANT_ID_ varchar(64);
+alter table ACT_RE_PROCDEF      alter TENANT_ID_ drop default; alter table ACT_RE_PROCDEF         alter TENANT_ID_ varchar(64);
+alter table ACT_RU_EVENT_SUBSCR alter TENANT_ID_ drop default; alter table ACT_RU_EVENT_SUBSCR    alter TENANT_ID_ varchar(64);
+alter table ACT_RU_EXECUTION    alter TENANT_ID_ drop default; alter table ACT_RU_EXECUTION       alter TENANT_ID_ varchar(64);
+alter table ACT_RU_JOB          alter TENANT_ID_ drop default; alter table ACT_RU_JOB             alter TENANT_ID_ varchar(64);
+alter table ACT_RU_TASK         alter TENANT_ID_ drop default; alter table ACT_RU_TASK            alter TENANT_ID_ varchar(64);
 
 
 --- delete users and groups, as you have to re-create them (hashed passwords, different group types, required authorizations)
