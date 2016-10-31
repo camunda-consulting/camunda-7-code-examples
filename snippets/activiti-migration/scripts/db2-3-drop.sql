@@ -1,7 +1,14 @@
 --- drop tables not used in Camunda
-drop table ACT_EVT_LOG cascade; 
-drop table ACT_PROCDEF_INFO cascade;
-drop table ACT_RE_MODEL cascade;
+drop table ACT_EVT_LOG; 
+
+alter table ACT_PROCDEF_INFO drop foreign key ACT_FK_INFO_JSON_BA;
+alter table ACT_PROCDEF_INFO drop foreign key ACT_FK_INFO_PROCDEF;
+drop table ACT_PROCDEF_INFO;
+
+alter table ACT_RE_MODEL drop foreign key ACT_FK_MODEL_SOURCE;
+alter table ACT_RE_MODEL drop foreign key ACT_FK_MODEL_SOURCE_EXTRA; 
+alter table ACT_RE_MODEL drop foreign key ACT_FK_MODEL_DEPLOYMENT; 
+drop table ACT_RE_MODEL;
 
 --- columns not used in camunda                                                               
 alter table ACT_HI_IDENTITYLINK 
