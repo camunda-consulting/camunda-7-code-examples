@@ -1,0 +1,93 @@
+<form class="" role="form">
+    <div class="row">
+        <div class="col-xs-6">
+            <p>Do you approve this invoice?</p>
+            <div class="form-group">
+                <label class="control-label ">Creditor</label>
+                <div class="">
+                    <input cam-variable-name="creditor" type="text" name="creditor" readonly="true" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label ">Amount</label>
+                <div class="">
+                    <input cam-variable-name="amount" type="text" name="amount" readonly="true" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label ">Invoice Category</label>
+                <div class="">
+                    <input cam-variable-name="invoiceCategory" type="text" name="amount" readonly="true" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label ">Invoice Number</label>
+                <div class="">
+                    <input cam-variable-name="invoiceNumber" type="text" name="invoiceNumber" readonly="true" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <div class="checkbox">
+                        <label>
+                            <input cam-variable-name="approved" cam-variable-type="Boolean" type="checkbox" name="approved" class="form-control" /> Do you approve?
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <div class="">
+                    <p><strong>Invoice Documents</strong>
+                        <br/>
+                        <a href="{{folderUrl}}" target="_blank"><img src="/camunda-invoice/assets/img/b.png" height="10px"> | Open Box folder</a>
+                    </p>
+                    <ul>
+                        <li ng-repeat="obj in files">
+                            <span tooltip="{{obj.date}}">{{obj.filename}} (Version: {{obj.version}})</span>
+                            <br/>
+                            <a href="{{obj.downloadlink}}">Download</a> | <a href="" ng-click="previewFile(obj.filename,boxfoldername)">Preview</a> | <a href="{{folderUrl}}" target="_blank" ng-if="obj.versions">Show versions in box.com</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <strong>{{previewname}}</strong>
+            <iframe allowfullscreen="true" width="100%" height="400px" style="border: 1px solid #ccc"></iframe>
+        </div>
+    </div>
+    <script cam-script type="text/form-script">
+      inject([ '$scope', '$http', 'Uri', function($scope, $http, Uri) {
+        camForm.on('form-loaded', function() {
+          $scope.previewFile = function(fileName, foldername) {
+            $scope.previewname = fileName + " loading preview...";
+            $http.get(Uri.appUri('/camunda-invoice/rest/rest/embedLink'),{params:{"fileId":fileName,"boxfoldername":foldername}}).success(function(data){
+              if (data === "no") {
+                $scope.previewname = 'There is no preview for ' + fileName;
+              } else {
+                $('iframe').attr('src',data);
+                $scope.previewname = fileName;
+              }
+            });
+          };
+
+          camForm.variableManager.fetchVariable('files');
+          camForm.variableManager.fetchVariable('boxfolder');
+          camForm.variableManager.fetchVariable('folderUrl');
+        });
+        camForm.on('variables-fetched', function() {
+          // work with the variable (bind it to the current AngularJS $scope)
+          var files = camForm.variableManager.variableValue('files');
+          var folderUrl = camForm.variableManager.variableValue('folderUrl');
+          var boxfoldername = camForm.variableManager.variableValue('boxfolder');
+          if (files != null) {
+            $scope.files = JSON.parse(files);
+            $scope.folderUrl = folderUrl;
+            $scope.boxfoldername = boxfoldername;
+          }
+        });
+      }]);
+    </script>
+</form>

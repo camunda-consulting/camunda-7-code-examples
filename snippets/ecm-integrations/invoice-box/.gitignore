@@ -1,0 +1,3 @@
+src/main/resources/conf/config.properties
+src/main/resources/conf/private_key.pem
+src/main/resources/conf/public_key.pem

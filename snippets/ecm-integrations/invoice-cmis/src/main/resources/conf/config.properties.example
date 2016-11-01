@@ -1,0 +1,5 @@
+CmisBrowserUrl=http://localhost:8090/chemistry-opencmis-server-inmemory-1.0.0/browser
+CmisRepoId=A1
+CmisUser=Otto
+CmisPassword=Otto
+CmisRootFolder=insurance-data

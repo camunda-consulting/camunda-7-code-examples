@@ -1,0 +1,126 @@
+<form role="form">
+  <div class="row">
+    <div class="col-xs-6">
+      <p>
+        <strong>Please clarify:</strong>
+        <br/> This invoice needs clarification and could not be approved due to missing data.
+      </p>
+      <div class="form-group">
+        <label class="control-label">Creditor</label>
+        <div class="">
+          <input cam-variable-name="creditor" type="text" name="creditor" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Amount</label>
+        <div class="">
+          <input cam-variable-name="amount" type="text" name="amount" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Invoice Category</label>
+        <div class="">
+          <select cam-variable-name="invoiceCategory" class="form-control">
+            <option>Travel Expenses</option>
+            <option>Misc</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Invoice Number</label>
+        <div class="">
+          <input cam-variable-name="invoiceNumber" type="text" name="invoiceNumber" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="clarified" cam-variable-name="clarified" cam-variable-type="Boolean" class="form-control" /> Could you clarify the invoice?
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <div class="">
+          <p><strong>Invoice Documents</strong>
+            <br/>
+            <a href="" ng-click="startCaseInstance(case)" ng-if="case"><img src="/camunda-invoice-cmis/assets/img/b.png" height="10px"> | {{case.caseActivityName}}</a>
+          </p>
+          <ul>
+            <li ng-repeat="obj in files">
+              <span tooltip="{{obj.date}}">{{obj.filename}} (Version: {{obj.version}})</span>
+              <br/>
+              <a href="/camunda-invoice-cmis/rest/rest/filePreview?fileId={{obj.id}}&fileName={{obj.filename}}">Download</a> | <a href="" ng-click="previewFile(obj.filename,obj.id)">Preview</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <strong>{{previewname}}</strong>
+      <object data="" type="application/pdf" width="100%" height="400px" style="border: 1px solid #ccc">
+            <embed type="application/pdf" src=""></embed>
+      </object>
+    </div>
+  </div>
+
+  <script cam-script type="text/form-script">
+    inject([ '$scope', '$http', 'Uri', function($scope, $http, Uri) {
+     var getTaskData = function(scope) {
+        if (scope.taskData) {
+            return scope.taskData;
+        }
+        return scope.$parent && getTaskData(scope.$parent);
+      };
+
+    $scope.taskData = getTaskData($scope);
+
+    camForm.on('form-loaded', function() {
+      $scope.startCaseInstance = function(instance) {
+        $http.post(Uri.appUri('engine://engine/:engine/case-execution/' + instance.caseExecutionId + '/manual-start'),{})
+          .success(function() {
+            $http.get(Uri.appUri('engine://engine/:engine/task/'),{params:{"caseExecutionId":instance.caseExecutionId}}).success(function(data) {
+              $scope.taskData.changed('taskList');
+              var singleTaskId = data[0].id;
+              $scope.taskData.set('taskId', {taskId: singleTaskId});
+              $scope.taskData.changed('task');
+          });
+        });
+      };
+      $scope.previewFile = function(fileName, fileId) {
+            $scope.previewname = "Preview for " + fileName;
+			var newElement = "<embed type='application/pdf' src='/camunda-invoice-cmis/rest/rest/filePreview?inline=true&fileId="+fileId+"&fileName="+fileName+"'/>";
+			$('object').attr('data','/camunda-invoice-cmis/rest/rest/filePreview?inline=true&fileId='+fileId+'&fileName='+fileName);
+			$('object embed').remove();
+			$('object').append(newElement);
+      };
+
+      camForm.variableManager.fetchVariable('files');
+      camForm.variableManager.fetchVariable('folderName');
+      var taskId = camForm["options"]["taskId"];
+
+      $http.get(Uri.appUri('engine://engine/:engine/task/' + taskId)).success(function(content) {
+        var caseInstanceId = content.caseInstanceId;
+        $http.get(Uri.appUri('engine://engine/:engine/history/case-activity-instance'),{params:{"caseInstanceId":caseInstanceId,"enabled":true}}).success(function(singleTask) {
+          $scope.case = singleTask[0];
+        });
+      });
+    });
+    camForm.on('variables-fetched', function() {
+          // work with the variable (bind it to the current AngularJS $scope)
+          var files = camForm.variableManager.variableValue('files');
+          var folderName = camForm.variableManager.variableValue('folderName');
+          if (files != null) {
+            $scope.files = JSON.parse(files);
+            $scope.folderName = folderName;
+          }
+     });
+  }]);
+  </script>
+</form>

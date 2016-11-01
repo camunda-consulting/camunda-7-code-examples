@@ -1,0 +1,76 @@
+<form enctype="multipart/form-data" id="uploadForm" class="" role="form">
+	<div class="form-group">
+		<label class="control-label" for="file">Upload the updated Invoice Document</label>
+    	<div class="">
+    		<p ng-if="uploadedDocuments"><strong>Recently uploaded documents</strong><br/>
+    			<ul>
+    				<li ng-repeat="obj in uploadedDocuments">{{obj.name}}</li>
+    			</ul>
+    		</p>
+	    	<input name="file" type="file" class="form-control"/>
+	    	<div class="uploaded-file">
+	    		<input style="display:none" type="text" name="folderName" readonly cam-variable-name="folderName" cam-variable-type="String"/>
+	    	</div>
+	    	<div class="help-block">This field is required</div>
+	    	<div class="upload-area" style="display:none">
+	    		<img src="/camunda/app/tasklist/assets/images/camunda-animated-logo-140.gif" class="progressindicator" style="width:30px;display:none"/>
+	    		<input type="button" value="Upload" class="btn btn-primary upload-btn"/>
+	    	</div>
+    	</div>
+    </div>
+  
+	<script cam-script type="text/form-script">
+		var $form = $('#uploadForm');
+		var $fileUploadHelpBlock = $('.help-block', $form);
+		$('input[type="file"]', $form).change(function() {
+      		var hasFile = $('input[type="file"]', $form)[0].files.length > 0;
+      		if (hasFile) {
+				$('.upload-area').css('display','block');
+			} else {
+				$('.upload-area').css('display','none');
+			}
+		});
+		$('.upload-btn').click(function(){
+    		var formData = new FormData($form[0]);
+			$('.progressindicator').css('display','block');
+			$('.upload-btn').css('display','none');
+			$fileUploadHelpBlock.removeClass('error').css('display','none');
+    		$.ajax({
+        		url: '/camunda-invoice-cmis/rest/rest/upload',  //Server script to process data
+        		type: 'POST',
+				success: function(data) {
+					if (data != null) {
+						var response = JSON.parse(data);
+						var filename = response.filename;
+						$('input[name="folderName"]').val(response.uniqueID);
+						$('.progressindicator').css('display','none');
+						$('.upload-btn').css('display','block');
+
+						if ($scope.uploadedDocuments != null) {
+							$scope.uploadedDocuments.push({name:filename});
+						} else {
+							var uploadedDocuments = [];
+							uploadedDocuments.push({name:filename});
+							$scope.uploadedDocuments = uploadedDocuments;
+						}
+						$scope.$apply();
+					}
+				},
+				data: formData,
+        		//Options to tell jQuery not to process data or worry about content-type.
+        		cache: false,
+        		contentType: false,
+        		processData: false
+    		});
+		});
+ 		camForm.on('submit', function(evt) {
+			if ($scope.uploadedDocuments == null || $scope.uploadedDocuments.length<1) {
+				evt.submitPrevented = true;
+				$fileUploadHelpBlock.addClass('error').css('display','block');
+			} else {
+				$fileUploadHelpBlock.removeClass('error').css('display','none');
+			}
+    	});
+	</script>
+</form>
+
