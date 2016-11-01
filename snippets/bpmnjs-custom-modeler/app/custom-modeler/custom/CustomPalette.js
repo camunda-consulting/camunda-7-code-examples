@@ -59,6 +59,40 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
   }
 
   assign(actions, {
+    'custom-triangle': createAction(
+    'custom:triangle', 'custom', 'icon-custom-triangle'
+    ),
+    'custom-circle': createAction(
+      'custom:circle', 'custom', 'icon-custom-circle'
+    ),
+    'custom-separator': {
+      group: 'custom',
+      separator: true
+    },
+    'lasso-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-lasso-tool',
+      title: 'Activate the lasso tool',
+      action: {
+        click: function(event) {
+          lassoTool.activateSelection(event);
+        }
+      }
+    },
+    'space-tool': {
+      group: 'tools',
+      className: 'bpmn-icon-space-tool',
+      title: 'Activate the create/remove space tool',
+      action: {
+        click: function(event) {
+          spaceTool.activateSelection(event);
+        }
+      }
+    },
+    'tool-separator': {
+      group: 'tools',
+      separator: true
+    },
     'create.start-event': createAction(
       'bpmn:StartEvent', 'event', 'bpmn-icon-start-event-none'
     ),

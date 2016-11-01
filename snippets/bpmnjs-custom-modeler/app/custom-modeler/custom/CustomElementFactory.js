@@ -34,7 +34,7 @@ function CustomElementFactory(bpmnFactory, moddle) {
     if (/^custom\:/.test(type)) {
       if (!attrs.businessObject) {
         attrs.businessObject = {
-          type: type,
+          type: type
         };
 
         if(attrs.id) {

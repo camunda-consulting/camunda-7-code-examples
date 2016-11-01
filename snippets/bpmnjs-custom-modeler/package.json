@@ -60,7 +60,7 @@
     "diagram-js": "^0.17.0",
     "inherits": "^2.0.3",
     "lodash": "^3.10.1",
-    "bpmn-js-properties-panel": "^0.9",
+    "bpmn-js-properties-panel": "^0.10.0",
     "camunda-bpmn-moddle": "^0.8.1"
   }
 }

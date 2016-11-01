@@ -6,10 +6,8 @@ var assign = require('lodash/object/assign'),
     isArray = require('lodash/lang/isArray');
 
 var inherits = require('inherits');
-var propertiesPanelModule = require('bpmn-js-properties-panel'),
-    propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda'),
-    camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda');
-    
+
+
 function CustomModeler(options) {
   Modeler.call(this, options);
 
@@ -17,14 +15,15 @@ function CustomModeler(options) {
 }
 
 inherits(CustomModeler, Modeler);
-
-CustomModeler.prototype._modules = [propertiesPanelModule,
-propertiesProviderModule].concat(
+debugger;
+CustomModeler.prototype._modules = [].concat(
   CustomModeler.prototype._modules,
   [
     require('./custom')
   ]
 );
+
+
 
 /**
  * Add a single custom element to the underlying diagram

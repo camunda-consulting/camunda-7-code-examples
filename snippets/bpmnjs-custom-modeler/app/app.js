@@ -9,13 +9,19 @@ var customElements = require('./custom-elements.json');
 
 // our custom modeler
 var CustomModeler = require('./custom-modeler');
-
+var propertiesPanelModule = require('bpmn-js-properties-panel'),
+    propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda'),
+    camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda');
 
 var modeler = new CustomModeler({
   container: '#canvas',
   keyboard: { bindTo: document },
   propertiesPanel: {
     parent: '#js-properties-panel'
+  },
+  additionalModules: [propertiesPanelModule,propertiesProviderModule],
+  moddleExtensions: {
+    magic: camundaModdleDescriptor
   }
 });
 
