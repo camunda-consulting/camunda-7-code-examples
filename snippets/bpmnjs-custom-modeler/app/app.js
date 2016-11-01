@@ -21,7 +21,7 @@ var modeler = new CustomModeler({
   },
   additionalModules: [propertiesPanelModule,propertiesProviderModule],
   moddleExtensions: {
-    magic: camundaModdleDescriptor
+    camunda: camundaModdleDescriptor
   }
 });
 
