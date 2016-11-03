@@ -138,7 +138,7 @@ public class CMISConnector {
 		ContentStream contentStream = session.getObjectFactory().createContentStream(fileName, data.length, "charset=UTF-8", bin);
 		
 		try {
-			Document d = target.createDocument(props, contentStream, VersioningState.MAJOR);
+			target.createDocument(props, contentStream, VersioningState.MAJOR);
 		} catch (Exception e) {
 			Document d = (Document) FileUtils.getObject(target.getPath() + "/" + fileName, session);
 			ObjectId pwcId = d.checkOut();

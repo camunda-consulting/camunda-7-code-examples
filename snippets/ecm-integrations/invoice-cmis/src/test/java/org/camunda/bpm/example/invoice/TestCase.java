@@ -1,7 +1,5 @@
 package org.camunda.bpm.example.invoice;
 
-import static org.junit.Assert.*;
-
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Folder;
 import org.apache.chemistry.opencmis.client.api.ItemIterable;

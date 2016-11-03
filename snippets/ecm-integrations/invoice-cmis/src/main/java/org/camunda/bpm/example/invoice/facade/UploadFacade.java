@@ -2,7 +2,6 @@ package org.camunda.bpm.example.invoice.facade;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 import org.camunda.bpm.example.cmis.CMISConnector;
