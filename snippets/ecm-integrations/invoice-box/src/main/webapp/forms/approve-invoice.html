@@ -42,7 +42,7 @@
                 <div class="">
                     <p><strong>Invoice Documents</strong>
                         <br/>
-                        <a href="{{folderUrl}}" target="_blank"><img src="/camunda-invoice/assets/img/b.png" height="10px"> | Open Box folder</a>
+                        <a href="{{folderUrl}}" target="_blank"><img src="/camunda-invoice-box/assets/img/b.png" height="10px"> | Open Box folder</a>
                     </p>
                     <ul>
                         <li ng-repeat="obj in files">
@@ -63,7 +63,7 @@
         camForm.on('form-loaded', function() {
           $scope.previewFile = function(fileName, foldername) {
             $scope.previewname = fileName + " loading preview...";
-            $http.get(Uri.appUri('/camunda-invoice/rest/rest/embedLink'),{params:{"fileId":fileName,"boxfoldername":foldername}}).success(function(data){
+            $http.get(Uri.appUri('/camunda-invoice-box/rest/rest/embedLink'),{params:{"fileId":fileName,"boxfoldername":foldername}}).success(function(data){
               if (data === "no") {
                 $scope.previewname = 'There is no preview for ' + fileName;
               } else {
