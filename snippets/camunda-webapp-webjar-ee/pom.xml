@@ -8,7 +8,7 @@
   <artifactId>camunda-webapp-webjar-ee</artifactId>
   <packaging>jar</packaging>
   <name>camunda BPM - webapp - webjar - ee</name>
-  <version>7.6.0-alpha3-ee</version>
+  <version>7.6.0-alpha5-ee</version>
 
   <properties>
     <skipTests>true</skipTests>
