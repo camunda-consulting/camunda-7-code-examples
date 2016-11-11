@@ -41,40 +41,22 @@ var softwareSettings = require('./SoftwareSettings.js');
 
       documentationProps(documentationGroup, element, bpmnFactory);
 
-      var softwareSettings = {
-        id: 'softwareSettings',
-        label: 'Software Settings',
-        entries: []
-      };
-
-      documentationProps(softwareSettings, element, bpmnFactory);
-
-      return[
-        generalGroup,
-        detailsGroup,
-        documentationGroup,
-        softwareSettings
-      ];
-    }
-
-    // Create the custom magic tab
-    function createSoftwareSettingTabGroups(element, elementRegistry) {
-
       // Create a group called "Black Magic".
       var softwareSettingsGroup = {
         id: 'black-magic',
         label: 'Software Settings',
         entries: []
       };
-
       // Add the custom props to the softwareSettingsGroup.
       softwareSettings(softwareSettingsGroup, element);
 
-      return [
+      return[
+        generalGroup,
         softwareSettingsGroup
       ];
     }
 
+    
 
 function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
   console.log(this);
@@ -86,17 +68,9 @@ function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
       groups: createGeneralTabGroups(element, bpmnFactory, elementRegistry)
     };
 
-    // The "SoftwareSettingTab" tab
-    var SoftwareSettingTab = {
-      id: 'softwareSetting',
-      label: 'Software Settings',
-      groups: createSoftwareSettingTabGroups(element, elementRegistry)
-    };
-
     // Show general + "softwaresetting" tab
     return [
-      generalTab,
-      SoftwareSettingTab
+      generalTab
     ];
   };
 }
