@@ -1,7 +1,7 @@
 'use strict';
 var $ = require('jquery');
 // inlined diagram; load it from somewhere else if you like
-var pizzaDiagram = require('../resources/pizza-collaboration.bpmn');
+var diagram = require('../resources/diagram.bpmn');
 
 // custom elements JSON; load it from somewhere else if you like
 var customElements = require('./custom-elements.json');
@@ -10,7 +10,9 @@ var customElements = require('./custom-elements.json');
 // our custom modeler
 var CustomModeler = require('./custom-modeler');
 var propertiesPanelModule = require('bpmn-js-properties-panel'),
-    propertiesProviderModule = require('bpmn-js-properties-panel/lib/provider/camunda'),
+    propertiesProviderModule1 = require('bpmn-js-properties-panel/lib/provider/camunda'),
+    propertiesProviderModule = require('./custom-modeler/custom/propertyprovider'),
+    magicModdleDescriptor = require('./custom-modeler/custom/propertyprovider/descriptors/magic.json'),
     camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda');
 
 var modeler = new CustomModeler({
@@ -19,13 +21,17 @@ var modeler = new CustomModeler({
   propertiesPanel: {
     parent: '#js-properties-panel'
   },
-  additionalModules: [propertiesPanelModule,propertiesProviderModule],
+  additionalModules: [
+    propertiesPanelModule,
+    propertiesProviderModule
+  ],
   moddleExtensions: {
-    camunda: camundaModdleDescriptor
+    camunda: camundaModdleDescriptor,
+    custom: magicModdleDescriptor
   }
 });
 
-modeler.importXML(pizzaDiagram, function(err) {
+modeler.importXML(diagram, function(err) {
 
   if (err) {
     console.error('something went wrong:', err);

@@ -17,20 +17,17 @@ function CustomRenderer(eventBus, styles) {
 
   var computeStyle = styles.computeStyle;
 
-  this.drawTriangle = function(p, side) {
-    var halfSide = side / 2,
-        points,
-        attrs;
-
-    points = [ halfSide, 0, side, side, 0, side ];
+  this.drawCustomSoftware = function (p, width, height, r, offset, attrs) {
+    //TODO for now nothing fancy, just task
+    offset = offset || 0;
 
     attrs = computeStyle(attrs, {
-      stroke: '#3CAA82',
+      stroke: 'black',
       strokeWidth: 2,
-      fill: '#3CAA82'
+      fill: 'white'
     });
 
-    return p.polygon(points).attr(attrs);
+    return p.rect(offset, offset, width - offset * 2, height - offset * 2, 10).attr(attrs);
   };
 
   this.getTrianglePath = function(element) {
@@ -49,34 +46,6 @@ function CustomRenderer(eventBus, styles) {
     return componentsToPath(trianglePath);
   };
 
-  this.drawCircle = function(p, width, height) {
-    var cx = width / 2,
-        cy = height / 2;
-
-    var attrs = computeStyle(attrs, {
-      stroke: '#4488aa',
-      strokeWidth: 4,
-      fill: 'white'
-    });
-
-    return p.circle(cx, cy, Math.round((width + height) / 4)).attr(attrs);
-  };
-
-  this.getCirclePath = function(shape) {
-    var cx = shape.x + shape.width / 2,
-        cy = shape.y + shape.height / 2,
-        radius = shape.width / 2;
-
-    var circlePath = [
-      ['M', cx, cy],
-      ['m', 0, -radius],
-      ['a', radius, radius, 0, 1, 1, 0, 2 * radius],
-      ['a', radius, radius, 0, 1, 1, 0, -2 * radius],
-      ['z']
-    ];
-
-    return componentsToPath(circlePath);
-  };
 
   this.drawCustomConnection = function(p, element) {
     var attrs = computeStyle(attrs, {
@@ -120,24 +89,16 @@ CustomRenderer.prototype.canRender = function(element) {
 CustomRenderer.prototype.drawShape = function(p, element) {
   var type = element.type;
 
-  if (type === 'custom:triangle') {
-    return this.drawTriangle(p, element.width);
-  }
-
-  if (type === 'custom:circle') {
-    return this.drawCircle(p, element.width, element.height);
+  if (type === 'custom:softwaretask') {
+    return this.drawCustomSoftware(p, element.width, element.height);
   }
 };
 
 CustomRenderer.prototype.getShapePath = function(shape) {
   var type = shape.type;
 
-  if (type === 'custom:triangle') {
+  if (type === 'custom:softwaretask') {
     return this.getTrianglePath(shape);
-  }
-
-  if (type === 'custom:circle') {
-    return this.getCirclePath(shape);
   }
 };
 

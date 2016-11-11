@@ -15,7 +15,7 @@ function CustomModeler(options) {
 }
 
 inherits(CustomModeler, Modeler);
-debugger;
+
 CustomModeler.prototype._modules = [].concat(
   CustomModeler.prototype._modules,
   [

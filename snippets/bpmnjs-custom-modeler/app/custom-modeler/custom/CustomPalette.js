@@ -59,16 +59,6 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
   }
 
   assign(actions, {
-    'custom-triangle': createAction(
-    'custom:triangle', 'custom', 'icon-custom-triangle'
-    ),
-    'custom-circle': createAction(
-      'custom:circle', 'custom', 'icon-custom-circle'
-    ),
-    'custom-separator': {
-      group: 'custom',
-      separator: true
-    },
     'lasso-tool': {
       group: 'tools',
       className: 'bpmn-icon-lasso-tool',
@@ -120,7 +110,14 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
         dragstart: createParticipant,
         click: createParticipant
       }
-    }
+    },
+    'custom-separator': {
+      group: 'custom',
+      separator: true
+    },
+    'custom-softwaretask': createAction(
+    'custom:softwaretask', 'custom', 'icon-custom-triangle', 'Create action in Software'
+    )
   });
 
   return actions;
