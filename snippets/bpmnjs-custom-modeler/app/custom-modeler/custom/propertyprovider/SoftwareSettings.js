@@ -42,7 +42,14 @@ function findExtension(element, type) {
 }
 
 module.exports = function(group, element, bpmnFactory) {
-
+  var getMethod = function(element) {
+    var elementValue = getElementValue(element,null,'method');
+    if (elementValue != null && elementValue['method'] != null) {
+      return elementValue['method'];
+    } else {
+      return null;
+    }
+  };
   var getElementValue = function(element,node,propertyName) {
     var bo = getBusinessObject(element);
     var elements = bo.get('extensionElements');
@@ -129,10 +136,25 @@ module.exports = function(group, element, bpmnFactory) {
       }
     });
   };
+
   if (is(element, 'bpmn:ServiceTask')) {
+    group.entries.push(createSelectBox(
+      'method',
+      'Software Method',
+      [ { name: 'none', value: '' },{ name: 'OCR', value: 'ocr' },{ name: 'SCAN', value: 'scan' },{ name: 'ARCHIVE', value: 'archive' } ]
+    ));
+  }
+  if (is(element, 'bpmn:ServiceTask') && getMethod(element) === 'ocr') {
     group.entries.push(createTextField('setting0','Setting 0'));
     group.entries.push(createTextField('setting1','Setting 1'));
     group.entries.push(createTextField('setting2','Setting 2'));
+    group.entries.push(createSelectBox('setting3', 'Settings 3', [ { name: 'a', value: 'b' },{ name: 'b', value: 'c' } ]));
+  }
+  if (is(element, 'bpmn:ServiceTask') && getMethod(element) === 'scan') {
+    group.entries.push(createSelectBox('setting3', 'Settings 3', [ { name: 'a', value: 'b' },{ name: 'b', value: 'c' } ]));
+  }
+  if (is(element, 'bpmn:ServiceTask') && getMethod(element) === 'archive') {
+    group.entries.push(createTextField('setting0','Setting 0'));
     group.entries.push(createSelectBox('setting3', 'Settings 3', [ { name: 'a', value: 'b' },{ name: 'b', value: 'c' } ]));
   }
 };

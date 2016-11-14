@@ -23,23 +23,6 @@ var softwareSettings = require('./SoftwareSettings.js');
       };
       idProps(generalGroup, element, elementRegistry);
       nameProps(generalGroup, element);
-      processProps(generalGroup, element);
-
-      var detailsGroup = {
-        id: 'details',
-        label: 'Details',
-        entries: []
-      };
-      linkProps(detailsGroup, element);
-      eventProps(detailsGroup, element, bpmnFactory, elementRegistry);
-
-      var documentationGroup = {
-        id: 'documentation',
-        label: 'Documentation',
-        entries: []
-      };
-
-      documentationProps(documentationGroup, element, bpmnFactory);
 
       // Create a group called "Black Magic".
       var softwareSettingsGroup = {
@@ -59,8 +42,8 @@ var softwareSettings = require('./SoftwareSettings.js');
 
 
 function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
-  console.log(this);
   CamundaPropertiesProvider.call(this, eventBus, bpmnFactory, elementRegistry, []);
+
   this.getTabs = function(element) {
     var generalTab = {
       id: 'general',
@@ -68,7 +51,6 @@ function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
       groups: createGeneralTabGroups(element, bpmnFactory, elementRegistry)
     };
 
-    // Show general + "softwaresetting" tab
     return [
       generalTab
     ];
