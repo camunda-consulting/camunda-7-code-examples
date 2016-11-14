@@ -48,7 +48,7 @@ var softwareSettings = require('./SoftwareSettings.js');
         entries: []
       };
       // Add the custom props to the softwareSettingsGroup.
-      softwareSettings(softwareSettingsGroup, element);
+      softwareSettings(softwareSettingsGroup, element, bpmnFactory);
 
       return[
         generalGroup,
@@ -56,7 +56,7 @@ var softwareSettings = require('./SoftwareSettings.js');
       ];
     }
 
-    
+
 
 function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
   console.log(this);

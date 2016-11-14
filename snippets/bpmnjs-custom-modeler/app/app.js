@@ -10,9 +10,7 @@ var customElements = require('./custom-elements.json');
 // our custom modeler
 var CustomModeler = require('./custom-modeler');
 var propertiesPanelModule = require('bpmn-js-properties-panel'),
-    propertiesProviderModule1 = require('bpmn-js-properties-panel/lib/provider/camunda'),
     propertiesProviderModule = require('./custom-modeler/custom/propertyprovider'),
-    magicModdleDescriptor = require('./custom-modeler/custom/propertyprovider/descriptors/magic.json'),
     camundaModdleDescriptor = require('camunda-bpmn-moddle/resources/camunda');
 
 var modeler = new CustomModeler({
@@ -26,8 +24,7 @@ var modeler = new CustomModeler({
     propertiesProviderModule
   ],
   moddleExtensions: {
-    camunda: camundaModdleDescriptor,
-    custom: magicModdleDescriptor
+    camunda: camundaModdleDescriptor
   }
 });
 
