@@ -46,7 +46,7 @@
       <outgoing>sequenceFlow_178</outgoing>
     </businessRuleTask>
     <sequenceFlow id="sequenceFlow_178" isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice" />
-    <startEvent id="StartEvent_1" name="Invoice&#10;received" camunda:formKey="embedded:app:forms/start-form.html">
+    <startEvent id="StartEvent_1" name="Invoice&#10;received" camunda:asyncAfter="true" camunda:formKey="embedded:app:forms/start-form.html">
       <outgoing>SequenceFlow_1</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="assignApprover" />

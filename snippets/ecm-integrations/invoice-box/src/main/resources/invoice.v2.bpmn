@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="Camunda Modeler" exporterVersion="1.3.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="Camunda Modeler" exporterVersion="1.4.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <dataStore id="FinancialAccountingSystem" name="Financial Accounting System" isUnlimited="false">
     <dataState id="DataState_1" />
   </dataStore>
@@ -46,7 +46,7 @@
       <outgoing>sequenceFlow_178</outgoing>
     </businessRuleTask>
     <sequenceFlow id="sequenceFlow_178" isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice" />
-    <startEvent id="StartEvent_1" name="Invoice&#10;received" camunda:formKey="embedded:app:forms/start-form.html">
+    <startEvent id="StartEvent_1" name="Invoice&#10;received" camunda:asyncAfter="true" camunda:formKey="embedded:app:forms/start-form.html">
       <outgoing>SequenceFlow_1</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="assignApprover" />
