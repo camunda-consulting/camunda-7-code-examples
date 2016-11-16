@@ -51,7 +51,7 @@
         <div class="">
           <p><strong>Invoice Documents</strong>
             <br/>
-            <a href="" ng-click="startCaseInstance(case)" ng-if="case"><img src="/camunda-invoice-cmis/assets/img/b.png" height="10px"> | {{case.caseActivityName}}</a>
+            <a href="" ng-click="startCaseInstance(case)" ng-if="case">{{case.caseActivityName}}</a>
           </p>
           <ul>
             <li ng-repeat="obj in files">
