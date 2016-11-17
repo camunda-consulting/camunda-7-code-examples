@@ -4,9 +4,7 @@ var inherits = require('inherits');
 var ReplaceMenuProvider = require('bpmn-js/lib/features/popup-menu/ReplaceMenuProvider');
 
 function CustomReplaceMenuProvider(popupMenu, modeling, moddle, bpmnReplace, rules, translate) {
-  debugger;
   ReplaceMenuProvider.call(this, popupMenu, modeling, moddle, bpmnReplace, rules, translate);
-
 };
 
 inherits(CustomReplaceMenuProvider, ReplaceMenuProvider);
