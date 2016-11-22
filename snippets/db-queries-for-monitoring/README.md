@@ -90,8 +90,10 @@ select count(*) from act_hi_incident;
 
 -- number of open incidents with particular error type in running processes
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
+```
 
--- task durations
+### Task Durations
+```sql
 SELECT ACT_RE_PROCDEF.NAME_ AS process_name, ACT_HI_TASKINST.name_ AS task_name,
   round(min(duration_)/60000.0,1) AS min_duration,
   round(avg(duration_)/60000.0,1) AS avg_duration,
