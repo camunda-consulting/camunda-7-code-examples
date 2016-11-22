@@ -109,16 +109,16 @@ You can use the following query to get a snapshot at a single point in time:
 
 ### Example results from different systems
 <table cellspacing="0" border="0">
-	<colgroup width="115"></colgroup>
-	<colgroup width="364"></colgroup>
-	<colgroup span="3" width="112"></colgroup>
-	<colgroup width="96"></colgroup>
+	<colgroup width="98"></colgroup>
+	<colgroup width="346"></colgroup>
+	<colgroup width="86"></colgroup>
+	<colgroup span="3" width="87"></colgroup>
 	<tr>
 		<td height="20" align="left"><b><font size=3>POSITION&nbsp;&nbsp;</font></b></td>
 		<td align="left"><b><font size=3>METRIC</font></b></td>
-		<td align="right"><b><font size=3>System A&nbsp;&nbsp;</font></b></td>
-		<td align="right"><b><font size=3>System B&nbsp;&nbsp;</font></b></td>
-		<td align="right"><b><font size=3>System C&nbsp;&nbsp;</font></b></td>
+		<td align="right"><b><font size=3>System A</font></b></td>
+		<td align="right"><b><font size=3>System B</font></b></td>
+		<td align="right"><b><font size=3>System C</font></b></td>
 		<td align="right"><b><font size=3>System D</font></b></td>
 	</tr>
 	<tr>
@@ -215,6 +215,14 @@ You can use the following query to get a snapshot at a single point in time:
 		<td align="right" sdval="3" sdnum="1031;"><font size=3>3</font></td>
 		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
 		<td align="right" sdval="844" sdnum="1031;"><font size=3>844</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="41" sdnum="1031;"><font size=3>41</font></td>
+		<td align="left"><font size=3>Event Subscriptions (type: signal intermediate)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
 		<td align="right" sdval="36585" sdnum="1031;"><font size=3>36585</font></td>
 	</tr>
 	<tr>
