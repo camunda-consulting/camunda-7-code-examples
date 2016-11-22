@@ -28,7 +28,8 @@ SELECT ACT_RE_PROCDEF.NAME_, KEY_, COUNT(*) FROM ACT_HI_PROCINST
 ```
 <table cellspacing="0" cellpadding="0"><tbody>
 <tr><th>NAME_</th><th>KEY_</th><th>COUNT(*)</th></tr>
-<tr><td>TwitterDemoProcess</td><td>TwitterDemoProcess</td><td>48</td></tr><tr><td>Lastschriftverfahren</td><td>lastschriftverfahren</td><td>32</td></tr><tr><td>Invoice Receipt</td><td>invoice</td><td>14</td></tr><tr><td>Dummy Child Process</td><td>dummy-child-process</td><td>2</td></tr><tr><td>Insurance Underwriting</td><td>underwriting</td><td>1</td></tr></tbody></table>
+<tr><td>TwitterDemoProcess</td><td>TwitterDemoProcess</td><td>48</td></tr><tr><td>Lastschriftverfahren</td><td>lastschriftverfahren</td><td>32</td></tr><tr><td>Invoice Receipt</td><td>invoice</td><td>14</td></tr><tr><td>Dummy Child Process</td><td>dummy-child-process</td><td>2</td></tr><tr><td>Insurance Underwriting</td><td>underwriting</td><td>1</td></tr></tbody>
+</table>
 
 ```sql
 -- running and finished instances by version
@@ -43,7 +44,9 @@ SELECT KEY_, VERSION_, VERSION_TAG_,
 <table cellspacing="0" cellpadding="0"><tbody>
 <tr><th>KEY_&nbsp;&nbsp;</th><th>VERSION_&nbsp;&nbsp;</th><th>RUNNING&nbsp;&nbsp;</th><th>FINISHED</th></tr>
 <tr><td>DoctorInformationRequest</td><td>1</td><td>0</td><td>0</td></tr><tr><td>TwitterDemoProcess</td><td>1</td><td>1</td><td>2</td></tr><tr><td>TwitterDemoProcess</td><td>2</td><td>0</td><td>1</td></tr><tr><td>TwitterDemoProcess</td><td>3</td><td>0</td><td>1</td></tr><tr><td>TwitterDemoProcess</td><td>4</td><td>1</td><td>1</td></tr><tr><td>TwitterDemoProcess</td><td>5</td><td>0</td><td>1</td></tr><tr><td>TwitterDemoProcess</td><td>6</td><td>0</td><td>2</td></tr>
-<tr><td>dummy-child-process</td><td>1</td><td>0</td><td>2</td></tr><tr><td>invoice</td><td>1</td><td>3</td><td>3</td></tr><tr><td>invoice</td><td>2</td><td>4</td><td>4</td></tr><tr><td>underwriting</td><td>1</td><td>2</td><td>1</td></tr></tbody></table>
+<tr><td>dummy-child-process</td><td>1</td><td>0</td><td>2</td></tr><tr><td>invoice</td><td>1</td><td>3</td><td>3</td></tr><tr><td>invoice</td><td>2</td><td>4</td><td>4</td></tr><tr><td>underwriting</td><td>1</td><td>2</td><td>1</td></tr>
+</tbody>
+</table>
 
 ```sql
 -- running process instances by process definition key
