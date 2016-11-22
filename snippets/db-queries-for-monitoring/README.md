@@ -92,13 +92,83 @@ select count(*) from act_hi_incident;
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
 
 -- task durations
-SELECT name_ AS task_name,
-  round(min(duration_)/60000.0,2) AS min_duration,
-  round(avg(duration_)/60000.0,2) AS average_duration,
-  round(max(duration_)/60000.0,2) AS max_duration,
-  round(stddev(duration_)/60000.0,2) AS standard_devation
-  FROM act_hi_taskinst WHERE duration_ > 0 GROUP BY name_;
+SELECT ACT_RE_PROCDEF.NAME_ AS process_name, ACT_HI_TASKINST.name_ AS task_name,
+  round(min(duration_)/60000.0,1) AS min_duration,
+  round(avg(duration_)/60000.0,1) AS average_duration,
+  round(max(duration_)/60000.0,1) AS max_duration,
+  round(stddev(duration_)/60000.0,1) AS standard_devation
+  FROM act_hi_taskinst
+  JOIN ACT_RE_PROCDEF ON PROC_DEF_ID_ = ACT_RE_PROCDEF.ID_
+  WHERE duration_ > 0
+  GROUP BY process_name, task_name
+  order by process_name, average_duration desc
 ```
+
+<table cellspacing="0" border="0">
+	<colgroup width="135"></colgroup>
+	<colgroup width="297"></colgroup>
+	<colgroup width="120"></colgroup>
+	<colgroup width="160"></colgroup>
+	<colgroup width="125"></colgroup>
+	<colgroup width="166"></colgroup>
+	<tr>
+		<td height="17" align="left"><b>PROCESS_NAME&nbsp;&nbsp;</b></td>
+		<td align="left"><b>TASK_NAME&nbsp;&nbsp;</b></td>
+		<td align="left"><b>MIN_DURATION&nbsp;&nbsp;</b></td>
+		<td align="left"><b>AVERAGE_DURATION&nbsp;&nbsp;</b></td>
+		<td align="left"><b>MAX_DURATION&nbsp;&nbsp;</b></td>
+		<td align="left"><b>STANDARD_DEVATION&nbsp;&nbsp;</b></td>
+	</tr>
+	<tr>
+		<td height="17" align="left">Invoice Receipt</td>
+		<td align="left">Review Invoice</td>
+		<td align="left">18849.0</td>
+		<td align="left">24500.5</td>
+		<td align="left">30151.9</td>
+		<td align="left">7992.4</td>
+	</tr>
+	<tr>
+		<td height="17" align="left">Invoice Receipt</td>
+		<td align="left">Approve Invoice</td>
+		<td align="left">2.5</td>
+		<td align="left">19366.8</td>
+		<td align="left">41920.9</td>
+		<td align="left">16142.4</td>
+	</tr>
+	<tr>
+		<td height="47" align="left">Invoice Receipt</td>
+		<td align="left">Prepare Bank Transfer</td>
+		<td align="left">2.9</td>
+		<td align="left">2.9</td>
+		<td align="left">2.9</td>
+		<td align="left">null</td>
+	</tr>
+	<tr>
+		<td height="17" align="left">TwitterDemoProcess</td>
+		<td align="left">Handle duplicate</td>
+		<td align="left">1.1</td>
+		<td align="left">1.1</td>
+		<td align="left">1.1</td>
+		<td align="left">null</td>
+	</tr>
+	<tr>
+		<td height="17" align="left">TwitterDemoProcess</td>
+		<td align="left">Handle Duplicate</td>
+		<td align="left">0.6</td>
+		<td align="left">0.6</td>
+		<td align="left">0.6</td>
+		<td align="left">null</td>
+	</tr>
+	<tr>
+		<td height="17" align="left">TwitterDemoProcess</td>
+		<td align="left">Review Tweet</td>
+		<td align="left">0.1</td>
+		<td align="left">0.2</td>
+		<td align="left">0.7</td>
+		<td align="left">0.2</td>
+	</tr>
+</table>
+
 
 ## Many Metrics in one Query
 You can use the following query to get a snapshot at a single point in time:
