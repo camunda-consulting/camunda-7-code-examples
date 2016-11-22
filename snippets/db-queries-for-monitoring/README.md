@@ -88,109 +88,213 @@ select count(*) from act_hi_incident;
 -- number of open incidents with particular error type in running processes
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
 
--- many metrics in one query (tested in H2)
-SELECT *
-FROM
-  (
-  SELECT 10 AS Position, 'Deployments' AS Metric, COUNT(*) AS Count FROM ACT_RE_DEPLOYMENT
-  UNION SELECT 11, 'Process Definitions', COUNT(*) FROM (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF)
-  UNION SELECT 12, 'Process Definition Versions', COUNT(*) FROM ACT_RE_PROCDEF
-  UNION SELECT 20, 'Activity Instances', COUNT(*) FROM ACT_HI_ACTINST
-  UNION SELECT 21, 'Process Instances', COUNT(*) FROM ACT_HI_PROCINST
-  UNION SELECT 22, 'Process Instances (finished)', COUNT(*) FROM ACT_HI_PROCINST WHERE END_TIME_ IS NOT NULL
-  UNION SELECT 30, 'Process Instances (running)', COUNT(*) FROM ACT_RU_EXECUTION WHERE PARENT_ID_ IS NULL
-  UNION SELECT 30.1, 'Executions (running)', COUNT(*) FROM ACT_RU_EXECUTION
-  UNION SELECT 31, 'User Tasks', COUNT(*) FROM ACT_RU_TASK
-  UNION SELECT 32, 'User Tasks (unassigned)', COUNT(*) FROM ACT_RU_TASK WHERE ASSIGNEE_ IS NULL
-  UNION SELECT 40, 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-  UNION SELECT 41, 'Event Subscriptions (type: ' || EVENT_TYPE_ ||
-    DECODE (PROC_INST_ID_, NULL, ' start', ' intermediate') || ')',
-    COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-    GROUP BY EVENT_TYPE_, DECODE (PROC_INST_ID_, NULL, ' start', ' intermediate')
-  UNION SELECT 50, 'Jobs', COUNT(*) FROM ACT_RU_JOB
-  UNION SELECT 51, 'Jobs (running)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE)
-  UNION SELECT 51.1, 'Jobs (running at prio: ' || PRIORITY_ || ')', COUNT(*)  FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE) GROUP BY PRIORITY_
-  UNION SELECT 52, 'Jobs (due)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-  UNION SELECT 52.1, 'Jobs (due at prio: ' || PRIORITY_ || ')', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-    GROUP BY PRIORITY_
-  UNION SELECT 53, 'Jobs (waiting for timer)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NOT NULL AND DUEDATE_ >= SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-  UNION SELECT 54, 'Jobs (suspended)', COUNT(*) FROM ACT_RU_JOB WHERE SUSPENSION_STATE_ = 2
-  UNION SELECT 55, 'Jobs (failed)', COUNT(*) FROM ACT_RU_JOB WHERE RETRIES_ = 0
-  UNION SELECT 56, 'Jobs (timeout)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ < SYSDATE)
-  UNION SELECT 59, 'Jobs (type: ' || TYPE_ || ')', COUNT(*) FROM ACT_RU_JOB GROUP BY TYPE_
-  UNION SELECT 60, 'Process Variables', COUNT(*) FROM ACT_RU_VARIABLE
-  )
-ORDER BY 1,2;
-
--- many metrics in one query (Oracle version)
-SELECT *
-FROM
-  (
-  SELECT 10 AS Position, 'Deployments' AS Metric, COUNT(*) AS Count FROM ACT_RE_DEPLOYMENT
-  UNION SELECT 11, 'Process Definitions', COUNT(*) FROM (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF)
-  UNION SELECT 12, 'Process Definition Versions', COUNT(*) FROM ACT_RE_PROCDEF
-  UNION SELECT 20, 'Activity Instances', COUNT(*) FROM ACT_HI_ACTINST
-  UNION SELECT 21, 'Process Instances', COUNT(*) FROM ACT_HI_PROCINST
-  UNION SELECT 22, 'Process Instances (finished)', COUNT(*) FROM ACT_HI_PROCINST WHERE END_TIME_ IS NOT NULL
-  UNION SELECT 30, 'Process Instances (running)', COUNT(*) FROM ACT_RU_EXECUTION WHERE PARENT_ID_ IS NULL
-  UNION SELECT 30.1, 'Executions (running)', COUNT(*) FROM ACT_RU_EXECUTION
-  UNION SELECT 31, 'User Tasks', COUNT(*) FROM ACT_RU_TASK
-  UNION SELECT 32, 'User Tasks (unassigned)', COUNT(*) FROM ACT_RU_TASK WHERE ASSIGNEE_ IS NULL
-  UNION SELECT 40, 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-  UNION SELECT 41, 'Event Subscriptions (type: ' || TO_CHAR(EVENT_TYPE_) ||
-    DECODE (PROC_INST_ID_, NULL, ' start', ' intermediate') || ')',
-    COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-    GROUP BY TO_CHAR(EVENT_TYPE_), DECODE (PROC_INST_ID_, NULL, ' start', ' intermediate')
-  UNION SELECT 50, 'Jobs', COUNT(*) FROM ACT_RU_JOB
-  UNION SELECT 51, 'Jobs (running)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE)
-  UNION SELECT 51.1, 'Jobs (running at prio: ' || PRIORITY_ || ')', COUNT(*)  FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= SYSDATE) GROUP BY PRIORITY_
-  UNION SELECT 52, 'Jobs (due)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-  UNION SELECT 52.1, 'Jobs (due at prio: ' || PRIORITY_ || ')', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NULL OR DUEDATE_ < SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-    GROUP BY PRIORITY_
-  UNION SELECT 53, 'Jobs (waiting for timer)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (RETRIES_ > 0)
-    AND (DUEDATE_ IS NOT NULL AND DUEDATE_ >= SYSDATE)
-    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < SYSDATE)
-    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-  UNION SELECT 54, 'Jobs (suspended)', COUNT(*) FROM ACT_RU_JOB WHERE SUSPENSION_STATE_ = 2
-  UNION SELECT 55, 'Jobs (failed)', COUNT(*) FROM ACT_RU_JOB WHERE RETRIES_ = 0
-  UNION SELECT 56, 'Jobs (timeout)', COUNT(*) FROM ACT_RU_JOB
-    WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ < SYSDATE)
-  UNION SELECT 59, 'Jobs (type: ' || TO_CHAR(TYPE_) || ')', COUNT(*) FROM ACT_RU_JOB GROUP BY TYPE_
-  UNION SELECT 60, 'Process Variables', COUNT(*) FROM ACT_RU_VARIABLE
-  )
-ORDER BY 1,2;
+-- task durations
+SELECT name_ AS task_name,
+  round(min(duration_)/60000.0,2) AS min_duration,
+  round(avg(duration_)/60000.0,2) AS average_duration,
+  round(max(duration_)/60000.0,2) AS max_duration,
+  round(stddev(duration_)/60000.0,2) AS standard_devation
+  FROM act_hi_taskinst WHERE duration_ > 0 GROUP BY name_;
 ```
-<table cellspacing="0" cellpadding="0"><tbody>
-<tr><th>POSITION&nbsp;&nbsp;</th><th>METRIC</th><th>COUNT</th></tr>
-<tr><td>10</td><td>Deployments</td><td>24</td></tr><tr><td>11</td><td>Process Definitions</td><td>10</td></tr><tr><td>12</td><td>Process Definition Versions</td><td>23</td></tr><tr><td>20</td><td>Activity Instances</td><td>186</td></tr><tr><td>21</td><td>Process Instances</td><td>42</td></tr><tr><td>22</td><td>Process Instances (finished)</td><td>17</td></tr><tr><td>30</td><td>Process Instances (running)</td><td>25</td></tr><tr><td>30.1</td><td>Executions (running)</td><td>35</td></tr><tr><td>31</td><td>User Tasks</td><td>25</td></tr><tr><td>32</td><td>User Tasks (unassigned)</td><td>11</td></tr><tr><td>40</td><td>Event Subscriptions</td><td>3</td></tr><tr><td>41</td><td>Event Subscriptions (type: message start)&nbsp;&nbsp;</td><td>3</td></tr><tr><td>50</td><td>Jobs</td><td>0</td></tr><tr><td>51</td><td>Jobs (running)</td><td>0</td></tr><tr><td>52</td><td>Jobs (due)</td><td>0</td></tr><tr><td>53</td><td>Jobs (waiting for timer)</td><td>0</td></tr><tr><td>54</td><td>Jobs (suspended)</td><td>0</td></tr><tr><td>55</td><td>Jobs (failed)</td><td>0</td></tr><tr><td>56</td><td>Jobs (timeout)</td><td>0</td></tr><tr><td>60</td><td>Process Variables</td><td>79</td></tr></tbody></table>
 
+## Many Metrics in one Query
+You can use the following query to get a snapshot at a single point in time:
 
+* [metrics.h2.sql](metrics.h2.sql)
+* [metrics.oracle.sql](metrics.oracle.sql)
+* [metrics.postgres.sql](metrics.postgres.sql)
+
+### Example results from different systems
+<table cellspacing="0" border="0">
+	<colgroup width="115"></colgroup>
+	<colgroup width="364"></colgroup>
+	<colgroup span="3" width="112"></colgroup>
+	<colgroup width="96"></colgroup>
+	<tr>
+		<td height="20" align="left"><b><font size=3>POSITION&nbsp;&nbsp;</font></b></td>
+		<td align="left"><b><font size=3>METRIC</font></b></td>
+		<td align="right"><b><font size=3>System A&nbsp;&nbsp;</font></b></td>
+		<td align="right"><b><font size=3>System B&nbsp;&nbsp;</font></b></td>
+		<td align="right"><b><font size=3>System C&nbsp;&nbsp;</font></b></td>
+		<td align="right"><b><font size=3>System D</font></b></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="10" sdnum="1031;"><font size=3>10</font></td>
+		<td align="left"><font size=3>Deployments</font></td>
+		<td align="right" sdval="24" sdnum="1031;"><font size=3>24</font></td>
+		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
+		<td align="right" sdval="4" sdnum="1031;"><font size=3>4</font></td>
+		<td align="right" sdval="81" sdnum="1031;"><font size=3>81</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="11" sdnum="1031;"><font size=3>11</font></td>
+		<td align="left"><font size=3>Process Definitions</font></td>
+		<td align="right" sdval="10" sdnum="1031;"><font size=3>10</font></td>
+		<td align="right" sdval="5" sdnum="1031;"><font size=3>5</font></td>
+		<td align="right" sdval="21" sdnum="1031;"><font size=3>21</font></td>
+		<td align="right" sdval="7" sdnum="1031;"><font size=3>7</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="12" sdnum="1031;"><font size=3>12</font></td>
+		<td align="left"><font size=3>Process Definition Versions</font></td>
+		<td align="right" sdval="23" sdnum="1031;"><font size=3>23</font></td>
+		<td align="right" sdval="5" sdnum="1031;"><font size=3>5</font></td>
+		<td align="right" sdval="36" sdnum="1031;"><font size=3>36</font></td>
+		<td align="right" sdval="81" sdnum="1031;"><font size=3>81</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="20" sdnum="1031;"><font size=3>20</font></td>
+		<td align="left"><font size=3>Activity Instances</font></td>
+		<td align="right" sdval="186" sdnum="1031;"><font size=3>186</font></td>
+		<td align="right" sdval="380984" sdnum="1031;"><font size=3>380984</font></td>
+		<td align="right" sdval="67050" sdnum="1031;"><font size=3>67050</font></td>
+		<td align="right" sdval="7537175" sdnum="1031;"><font size=3>7537175</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="21" sdnum="1031;"><font size=3>21</font></td>
+		<td align="left"><font size=3>Process Instances</font></td>
+		<td align="right" sdval="42" sdnum="1031;"><font size=3>42</font></td>
+		<td align="right" sdval="23905" sdnum="1031;"><font size=3>23905</font></td>
+		<td align="right" sdval="11536" sdnum="1031;"><font size=3>11536</font></td>
+		<td align="right" sdval="780806" sdnum="1031;"><font size=3>780806</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="22" sdnum="1031;"><font size=3>22</font></td>
+		<td align="left"><font size=3>Process Instances (finished)</font></td>
+		<td align="right" sdval="17" sdnum="1031;"><font size=3>17</font></td>
+		<td align="right" sdval="22186" sdnum="1031;"><font size=3>22186</font></td>
+		<td align="right" sdval="9906" sdnum="1031;"><font size=3>9906</font></td>
+		<td align="right" sdval="596929" sdnum="1031;"><font size=3>596929</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="30" sdnum="1031;"><font size=3>30</font></td>
+		<td align="left"><font size=3>Process Instances (running)</font></td>
+		<td align="right" sdval="25" sdnum="1031;"><font size=3>25</font></td>
+		<td align="right" sdval="1719" sdnum="1031;"><font size=3>1719</font></td>
+		<td align="right" sdval="1630" sdnum="1031;"><font size=3>1630</font></td>
+		<td align="right" sdval="183877" sdnum="1031;"><font size=3>183877</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left"><font size=3>30.1</font></td>
+		<td align="left"><font size=3>Executions (running)</font></td>
+		<td align="right" sdval="35" sdnum="1031;"><font size=3>35</font></td>
+		<td align="right"><font size=3>?</font></td>
+		<td align="right"><font size=3>?</font></td>
+		<td align="right"><font size=3>?</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="31" sdnum="1031;"><font size=3>31</font></td>
+		<td align="left"><font size=3>User Tasks</font></td>
+		<td align="right" sdval="25" sdnum="1031;"><font size=3>25</font></td>
+		<td align="right" sdval="1715" sdnum="1031;"><font size=3>1715</font></td>
+		<td align="right" sdval="630" sdnum="1031;"><font size=3>630</font></td>
+		<td align="right" sdval="146672" sdnum="1031;"><font size=3>146672</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="32" sdnum="1031;"><font size=3>32</font></td>
+		<td align="left"><font size=3>User Tasks (unassigned)</font></td>
+		<td align="right" sdval="11" sdnum="1031;"><font size=3>11</font></td>
+		<td align="right" sdval="1715" sdnum="1031;"><font size=3>1715</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="146649" sdnum="1031;"><font size=3>146649</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="40" sdnum="1031;"><font size=3>40</font></td>
+		<td align="left"><font size=3>Event Subscriptions</font></td>
+		<td align="right" sdval="3" sdnum="1031;"><font size=3>3</font></td>
+		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
+		<td align="right" sdval="844" sdnum="1031;"><font size=3>844</font></td>
+		<td align="right" sdval="36585" sdnum="1031;"><font size=3>36585</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="41" sdnum="1031;"><font size=3>41</font></td>
+		<td align="left"><font size=3>Event Subscriptions (type: message start)&nbsp;&nbsp;</font></td>
+		<td align="right" sdval="3" sdnum="1031;"><font size=3>3</font></td>
+		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
+		<td align="right" sdval="844" sdnum="1031;"><font size=3>844</font></td>
+		<td align="right" sdval="36585" sdnum="1031;"><font size=3>36585</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="50" sdnum="1031;"><font size=3>50</font></td>
+		<td align="left"><font size=3>Jobs</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="1723" sdnum="1031;"><font size=3>1723</font></td>
+		<td align="right" sdval="328" sdnum="1031;"><font size=3>328</font></td>
+		<td align="right" sdval="806" sdnum="1031;"><font size=3>806</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="51" sdnum="1031;"><font size=3>51</font></td>
+		<td align="left"><font size=3>Jobs (running)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="804" sdnum="1031;"><font size=3>804</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="52" sdnum="1031;"><font size=3>52</font></td>
+		<td align="left"><font size=3>Jobs (due)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="2" sdnum="1031;"><font size=3>2</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="53" sdnum="1031;"><font size=3>53</font></td>
+		<td align="left"><font size=3>Jobs (waiting for timer)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="1719" sdnum="1031;"><font size=3>1719</font></td>
+		<td align="right" sdval="327" sdnum="1031;"><font size=3>327</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="54" sdnum="1031;"><font size=3>54</font></td>
+		<td align="left"><font size=3>Jobs (suspended)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="55" sdnum="1031;"><font size=3>55</font></td>
+		<td align="left"><font size=3>Jobs (failed)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="4" sdnum="1031;"><font size=3>4</font></td>
+		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="56" sdnum="1031;"><font size=3>56</font></td>
+		<td align="left"><font size=3>Jobs (timeout)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="59" sdnum="1031;"><font size=3>59</font></td>
+		<td align="left"><font size=3>Jobs (type: message)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="4" sdnum="1031;"><font size=3>4</font></td>
+		<td align="right" sdval="1" sdnum="1031;"><font size=3>1</font></td>
+		<td align="right" sdval="806" sdnum="1031;"><font size=3>806</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="59" sdnum="1031;"><font size=3>59</font></td>
+		<td align="left"><font size=3>Jobs (type: timer)</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+		<td align="right" sdval="1719" sdnum="1031;"><font size=3>1719</font></td>
+		<td align="right" sdval="327" sdnum="1031;"><font size=3>327</font></td>
+		<td align="right" sdval="0" sdnum="1031;"><font size=3>0</font></td>
+	</tr>
+	<tr>
+		<td height="20" align="left" sdval="60" sdnum="1031;"><font size=3>60</font></td>
+		<td align="left"><font size=3>Process Variables</font></td>
+		<td align="right" sdval="79" sdnum="1031;"><font size=3>79</font></td>
+		<td align="right" sdval="15651" sdnum="1031;"><font size=3>15651</font></td>
+		<td align="right" sdval="8610" sdnum="1031;"><font size=3>8610</font></td>
+		<td align="right" sdval="361211" sdnum="1031;"><font size=3>361211</font></td>
+	</tr>
+</table>
 
 ## Process/Case instances over time
 
