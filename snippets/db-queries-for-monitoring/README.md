@@ -94,14 +94,14 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitt
 -- task durations
 SELECT ACT_RE_PROCDEF.NAME_ AS process_name, ACT_HI_TASKINST.name_ AS task_name,
   round(min(duration_)/60000.0,1) AS min_duration,
-  round(avg(duration_)/60000.0,1) AS average_duration,
+  round(avg(duration_)/60000.0,1) AS avg_duration,
   round(max(duration_)/60000.0,1) AS max_duration,
-  round(stddev(duration_)/60000.0,1) AS standard_devation
+  round(stddev(duration_)/60000.0,1) AS stddev
   FROM act_hi_taskinst
   JOIN ACT_RE_PROCDEF ON PROC_DEF_ID_ = ACT_RE_PROCDEF.ID_
   WHERE duration_ > 0
   GROUP BY process_name, task_name
-  order by process_name, average_duration desc
+  order by process_name, avg_duration desc
 ```
 
 <table cellspacing="0" border="0">
@@ -115,9 +115,9 @@ SELECT ACT_RE_PROCDEF.NAME_ AS process_name, ACT_HI_TASKINST.name_ AS task_name,
 		<td height="17" align="left"><b>PROCESS_NAME&nbsp;&nbsp;</b></td>
 		<td align="left"><b>TASK_NAME&nbsp;&nbsp;</b></td>
 		<td align="left"><b>MIN_DURATION&nbsp;&nbsp;</b></td>
-		<td align="left"><b>AVERAGE_DURATION&nbsp;&nbsp;</b></td>
+		<td align="left"><b>AVG_DURATION&nbsp;&nbsp;</b></td>
 		<td align="left"><b>MAX_DURATION&nbsp;&nbsp;</b></td>
-		<td align="left"><b>STANDARD_DEVATION&nbsp;&nbsp;</b></td>
+		<td align="left"><b>STDDEV</b></td>
 	</tr>
 	<tr>
 		<td height="17" align="left">Invoice Receipt</td>
