@@ -5,15 +5,12 @@ var inherits = require('inherits');
 var ContextPadProvider = require('bpmn-js/lib/features/context-pad/ContextPadProvider');
 
 var isAny = require('bpmn-js/lib/features/modeling/util/ModelingUtil').isAny;
-
+var replaceMenuProvider = require('./CustomReplaceMenuProvider');
 var assign = require('lodash/object/assign'),
     bind = require('lodash/function/bind');
 
-function CustomContextPadProvider(eventBus, contextPad, modeling, elementFactory, connect,
-                                  create, popupMenu, canvas, rules, translate) {
-
-  ContextPadProvider.call(this, eventBus, contextPad, modeling, elementFactory, connect, create,
-                    popupMenu, canvas, rules, translate);
+function CustomContextPadProvider(eventBus, contextPad, modeling, elementFactory, connect, create, popupMenu, canvas, rules, translate) {
+  ContextPadProvider.call(this, eventBus, contextPad, modeling, elementFactory, connect, create, popupMenu, canvas, rules, translate);
 
   var cached = bind(this.getContextPadEntries, this);
 

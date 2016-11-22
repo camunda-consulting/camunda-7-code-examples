@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" id="uploadForm" class="form-horizontal" role="form">
+<form enctype="multipart/form-data" id="uploadFormCMIS" class="form-horizontal" role="form">
 	<div class="form-group">
 		<label class="control-label col-md-4" for="file">Upload your Invoice Document</label>
     	<div class="col-md-8">
@@ -11,11 +11,11 @@
 	    	<div class="uploaded-file">
 	    		<input style="display:none" type="text" name="folderName" readonly cam-variable-name="folderName" cam-variable-type="String"/>
 	    	</div>
-	    	<div class="help-block">This field is required</div>
+	    	<div class="help-block {{fileUploadHelpBlockClass}}" ng-show="fileUploadHelpBlockShow">This field is required</div>
 	    	<p ng-if="error">{{error}}</p>
-	    	<div class="upload-area" style="display:none">
-	    		<img src="/camunda/app/tasklist/assets/images/camunda-animated-logo-140.gif" class="progressindicator" style="width:30px;display:none"/>
-	    		<input type="button" value="Upload" class="btn btn-primary upload-btn"/>
+	    	<div class="upload-area" ng-show="showUploadArea">
+	    		<img src="/camunda-invoice-box/assets/img/ajax-loader.gif" ng-show="showProgressIndicator" style="width:30px;margin-top:10px;"/>
+	    		<input ng-show="showUploadBtn" ng-click="uploadFile()" type="button" value="Upload" class="btn btn-primary upload-btn"/>
 	    	</div>
     	</div>
     </div>
@@ -87,21 +87,27 @@
     </div>
   </div>
 <script cam-script type="text/form-script">
-		var $form = $('#uploadForm');
+		$scope.showUploadArea = false;
+		$scope.showUploadBtn = true;
+		$scope.showProgressIndicator = false;
+	
+		var $form = $('#uploadFormCMIS');
 		var $fileUploadHelpBlock = $('.help-block', $form);
-		$('.modal-body #uploadForm input[type="file"]').on('change',function(event) {
+		$('.modal-body #uploadFormCMIS input[type="file"]').on('change',function(event) {
       		var hasFile = event.target.files.length > 0;
       		if (hasFile) {
-				$('.upload-area').css('display','block');
+				$scope.showUploadArea = true;
 			} else {
-				$('.upload-area').css('display','none');
+				$scope.showUploadArea = false;
 			}
+			$scope.$apply();
 		});
 		$('.upload-btn').click(function(){
     		var formData = new FormData($form[0]);
-			$('.progressindicator').css('display','block');
-			$('.upload-btn').css('display','none');
-			$fileUploadHelpBlock.removeClass('error').css('display','none');
+			$scope.showProgressIndicator = true;
+			$scope.showUploadBtn = false;
+			$scope.fileUploadHelpBlockShow = false;
+			$scope.fileUploadHelpBlockClass = '';
     		$.ajax({
         		url: '/camunda-invoice-cmis/rest/rest/upload',  //Server script to process data
         		type: 'POST',
@@ -110,8 +116,8 @@
 						var response = JSON.parse(data);
 						var filename = response.filename;
 						$('input[name="folderName"]').val(response.uniqueID);
-						$('.progressindicator').css('display','none');
-						$('.upload-btn').css('display','block');
+						$scope.showProgressIndicator = false;
+						$scope.showUploadBtn = true;
 						
 						if (response.success) {
 							if ($scope.uploadedDocuments != null) {
@@ -140,9 +146,11 @@
  		camForm.on('submit', function(evt) {
 			if ($scope.uploadedDocuments == null || $scope.uploadedDocuments.length<1) {
 				evt.submitPrevented = true;
-				$fileUploadHelpBlock.addClass('error').css('display','block');
+				$scope.fileUploadHelpBlockShow = true;
+				$scope.fileUploadHelpBlockClass = 'error';
 			} else {
-				$fileUploadHelpBlock.removeClass('error').css('display','none');
+				$scope.fileUploadHelpBlockShow = false;
+				$scope.fileUploadHelpBlockClass = '';
 			}
     	});
 	</script>

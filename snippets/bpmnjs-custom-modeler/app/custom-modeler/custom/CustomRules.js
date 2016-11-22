@@ -135,4 +135,12 @@ CustomRules.prototype.init = function() {
     return canConnect(source, target, connection);
   });
 
+  this.addRule('shape.replace', HIGH_PRIORITY, function(element) {
+    var businessObject = element.element.businessObject;
+    if (is(businessObject, 'bpmn:ExclusiveGateway')) {
+      //return false; //here you could completely disable morph for gateways
+      return true;
+    }
+  });
+
 };
