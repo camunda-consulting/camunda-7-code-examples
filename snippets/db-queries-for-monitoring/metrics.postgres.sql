@@ -13,7 +13,8 @@ FROM
   UNION SELECT 31, 'User Tasks', COUNT(*) FROM ACT_RU_TASK
   UNION SELECT 32, 'User Tasks (unassigned)', COUNT(*) FROM ACT_RU_TASK WHERE ASSIGNEE_ IS NULL
   UNION SELECT 40, 'Event Subscriptions', COUNT(*) FROM ACT_RU_EVENT_SUBSCR
-  UNION SELECT 41, 'Event Subscriptions (type: ' || EVENT_TYPE_ ||
+  UNION SELECT 41, 'Event Subscriptions (type: ' ||
+    EVENT_TYPE_ ||
     CASE WHEN PROC_INST_ID_ IS NULL THEN ' start' ELSE 'intermediate' END || ')' AS Metric,
     COUNT(*) FROM ACT_RU_EVENT_SUBSCR
     GROUP BY Metric
@@ -23,7 +24,8 @@ FROM
   UNION SELECT 51.0, 'Jobs (running, node=' || LOCK_OWNER_ || ')', COUNT(*) FROM ACT_RU_JOB
     WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= NOW())
     GROUP BY LOCK_OWNER_
-  UNION SELECT 51.1, 'Jobs (running at prio: ' || PRIORITY_ || ')', COUNT(*)  FROM ACT_RU_JOB
+  UNION SELECT 51.1, 'Jobs (running at prio: ' || PRIORITY_ || ')',
+    COUNT(*)  FROM ACT_RU_JOB
     WHERE (LOCK_OWNER_ IS NOT NULL AND LOCK_EXP_TIME_ >= NOW())
     GROUP BY PRIORITY_
   UNION SELECT 52, 'Jobs (due)', COUNT(*) FROM ACT_RU_JOB
@@ -31,7 +33,8 @@ FROM
     AND (DUEDATE_ IS NULL OR DUEDATE_ < NOW())
     AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < NOW())
     AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
-  UNION SELECT 52.1, 'Jobs (due at prio: ' || PRIORITY_ || ')', COUNT(*) FROM ACT_RU_JOB
+  UNION SELECT 52.1, 'Jobs (due at prio: ' || PRIORITY_ || ')',
+    COUNT(*) FROM ACT_RU_JOB
     WHERE (RETRIES_ > 0)
     AND (DUEDATE_ IS NULL OR DUEDATE_ < NOW())
     AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < NOW())
