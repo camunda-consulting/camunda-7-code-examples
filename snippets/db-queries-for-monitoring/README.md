@@ -91,16 +91,9 @@ select count(*) from act_hi_incident;
 -- number of open incidents with particular error type in running processes
 select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitter.com%';
 
--- size of all byte arrays seperated by deployment/variables
+-- db space used by all byte arrays distinguished by deployments and variables
 SELECT ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB, (DEPLOYMENT_ID_ is not null) as Deployment FROM ACT_GE_BYTEARRAY
 GROUP BY (DEPLOYMENT_ID_ is not null)
-
--- size of byte array variables
-SELECT count(*), ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB
-  ,PROC_INST_ID_, ACT_HI_DETAIL.NAME_
-  FROM ACT_HI_DETAIL JOIN ACT_GE_BYTEARRAY ON ACT_GE_BYTEARRAY.ID_ = BYTEARRAY_ID_
---  WHERE PROC_INST_ID_ = '266b732d-639d-11e6-973e-56847afe9799' AND ACT_HI_DETAIL.NAME_ = 'invoiceDocument'
-  GROUP BY PROC_INST_ID_, ACT_HI_DETAIL.NAME_
 
 -- write traffic caused within the last hour by each byte array variable in runtime, history and variable log (hence the multiplication with 3.0)
 SELECT COUNT(*) as NumberOfWrites, ROUND(SUM(LENGTH(BYTES_))/1024.0/1024.0*3.0, 3) as MB, ACT_HI_DETAIL.NAME_
