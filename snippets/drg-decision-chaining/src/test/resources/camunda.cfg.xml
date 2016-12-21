@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.extension.process_test_coverage.junit.rules.ProcessCoverageInMemProcessEngineConfiguration">
+    <property name="history" value="full" />
+    <property name="expressionManager">
+        <bean class="org.camunda.bpm.engine.test.mock.MockExpressionManager"/>
+    </property>
+    <property name="processEnginePlugins">
+      <list>
+        <bean class="org.camunda.spin.plugin.impl.SpinProcessEnginePlugin" />
+        <bean class="org.camunda.connect.plugin.impl.ConnectProcessEnginePlugin" />
+      </list>
+    </property>
+  </bean>
+
+</beans>

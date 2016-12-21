@@ -54,7 +54,9 @@ public class DeployUploadedFileDelegate implements JavaDelegate {
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArray);
 		
 		
-		String deploymentID = execution.getProcessEngineServices().getRepositoryService().createDeployment().addInputStream(resourceName, byteArrayInputStream).deploy().getId();
+		String deploymentID = execution.getProcessEngineServices().getRepositoryService().createDeployment()
+				.enableDuplicateFiltering(false)
+				.addInputStream(resourceName, byteArrayInputStream).deploy().getId();
 		LOGGY.info("File " + resourceName + " was deployed: " + deploymentID);
 
 	}
