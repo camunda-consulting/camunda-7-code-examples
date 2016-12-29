@@ -9,13 +9,10 @@ var processProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/Pro
     linkProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/LinkProps'),
     documentationProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/DocumentationProps'),
     idProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/IdProps'),
-    nameProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps');
+    nameProps = require('bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps'),
+    softwareSettings = require('./SoftwareSettings.js');
 
-var softwareSettings = require('./SoftwareSettings.js');
-    // The general tab contains all bpmn relevant properties.
-    // The properties are organized in groups.
     function createGeneralTabGroups(element, bpmnFactory, elementRegistry) {
-
       var generalGroup = {
         id: 'general',
         label: 'General',
@@ -24,12 +21,13 @@ var softwareSettings = require('./SoftwareSettings.js');
       idProps(generalGroup, element, elementRegistry);
       nameProps(generalGroup, element);
 
-      // Create a group called "Black Magic".
+      // Create a group called "Software Settings".
       var softwareSettingsGroup = {
-        id: 'black-magic',
+        id: 'software-setting',
         label: 'Software Settings',
         entries: []
       };
+
       // Add the custom props to the softwareSettingsGroup.
       softwareSettings(softwareSettingsGroup, element, bpmnFactory);
 
@@ -39,9 +37,7 @@ var softwareSettings = require('./SoftwareSettings.js');
       ];
     }
 
-
-
-function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
+function SoftwarePropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
   CamundaPropertiesProvider.call(this, eventBus, bpmnFactory, elementRegistry, []);
 
   this.getTabs = function(element) {
@@ -57,7 +53,6 @@ function MagicPropertiesProvider(eventBus, bpmnFactory, elementRegistry) {
   };
 }
 
-inherits(MagicPropertiesProvider, CamundaPropertiesProvider);
+inherits(SoftwarePropertiesProvider, CamundaPropertiesProvider);
 
-
-module.exports = MagicPropertiesProvider;
+module.exports = SoftwarePropertiesProvider;

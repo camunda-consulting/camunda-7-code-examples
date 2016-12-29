@@ -9,10 +9,8 @@ var replaceMenuProvider = require('./CustomReplaceMenuProvider');
 var assign = require('lodash/object/assign'),
     bind = require('lodash/function/bind');
 
-function CustomContextPadProvider(eventBus, contextPad, modeling, elementFactory, connect,
-                                  create, popupMenu, canvas, rules, translate) {
-  ContextPadProvider.call(this, eventBus, contextPad, modeling, elementFactory, connect, create,
-                    popupMenu, canvas, rules, translate);
+function CustomContextPadProvider(eventBus, contextPad, modeling, elementFactory, connect, create, popupMenu, canvas, rules, translate) {
+  ContextPadProvider.call(this, eventBus, contextPad, modeling, elementFactory, connect, create, popupMenu, canvas, rules, translate);
 
   var cached = bind(this.getContextPadEntries, this);
 

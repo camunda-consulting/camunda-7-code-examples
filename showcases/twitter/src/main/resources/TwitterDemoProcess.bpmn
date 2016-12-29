@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="1.3.2" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="1.5.0-nightly" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <process id="TwitterDemoProcess" name="TwitterDemoProcess" isExecutable="true">
     <serviceTask id="service_task_send_rejection_notification" name="Send rejection notification" camunda:delegateExpression="#{emailAdapter}">
       <extensionElements>
@@ -43,20 +43,13 @@
       <outgoing>SequenceFlow_5</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="SequenceFlow_5" name="" sourceRef="gateway_join" targetRef="end_event_tweet_handled" />
-    <serviceTask id="service_task_publish_on_twitter" name="Publish on Twitter" camunda:asyncBefore="true" camunda:delegateExpression="#{tweetAdapter}">
-      <documentation><![CDATA[fdfdsfdsfsfs
-
-fdsf
-sd
-f
-dsf
-sd
+    <serviceTask id="service_task_publish_on_twitter" name="Publish on Twitter" camunda:delegateExpression="#{tweetAdapter}">
+      <documentation><![CDATA[
 ]]></documentation>
       <extensionElements>
         <camunda:properties>
           <camunda:property name="KPI-Ratio" value="Tweet Approved" />
         </camunda:properties>
-        <camunda:failedJobRetryTimeCycle>R5/PT5S</camunda:failedJobRetryTimeCycle>
       </extensionElements>
       <incoming>yes</incoming>
       <outgoing>SequenceFlow_3</outgoing>
@@ -74,6 +67,7 @@ sd
       <outgoing>SequenceFlow_9</outgoing>
     </startEvent>
     <sequenceFlow id="SequenceFlow_9" name="" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet" />
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="user_task_review_tweet" targetRef="gateway_approved" />
     <userTask id="user_task_review_tweet" name="Review Tweet" camunda:formKey="embedded:app:/forms/reviewTweet.html" camunda:assignee="demo">
       <extensionElements>
         <camunda:properties>
@@ -84,7 +78,6 @@ sd
       <incoming>SequenceFlow_9</incoming>
       <outgoing>SequenceFlow_2</outgoing>
     </userTask>
-    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="user_task_review_tweet" targetRef="gateway_approved" />
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="TwitterDemoProcess">
@@ -93,9 +86,6 @@ sd
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="22" y="151" width="82" height="22" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet">
-        <omgdc:Bounds x="156" y="94" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Approved__3" bpmnElement="gateway_approved" isMarkerVisible="true">
         <omgdc:Bounds x="387" y="114" width="40" height="40" />
@@ -164,16 +154,19 @@ sd
         <omgdi:waypoint xsi:type="omgdc:Point" x="78" y="134" />
         <omgdi:waypoint xsi:type="omgdc:Point" x="156" y="134" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="103" y="119" width="6" height="6" />
+          <omgdc:Bounds x="107" y="119" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_Review_Tweet_3" targetElement="BPMNShape_Approved__3">
         <omgdi:waypoint xsi:type="omgdc:Point" x="256" y="134" />
         <omgdi:waypoint xsi:type="omgdc:Point" x="387" y="134" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="322" y="119" width="0" height="0" />
+          <omgdc:Bounds x="323" y="119" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet">
+        <omgdc:Bounds x="156" y="94" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </definitions>
