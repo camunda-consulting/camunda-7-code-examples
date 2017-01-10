@@ -1,4 +1,4 @@
-<form role="form"> 
+<form class="form-horizontal" role="form"> 
  <script cam-script type="text/form-script">
  </script>
   
@@ -16,7 +16,8 @@
 			             readonly
 			             class="form-control" />
 			    </div>
-			    <div class="control-group">
+			</div>
+			<div class="control-group">
 			      <label class="control-label">Monatliche Rate</label>
 			      <div class="controls">
 			        <input type="text" 
@@ -25,9 +26,9 @@
 			               readonly
 			               class="form-control" />
 			      </div>
-			    </div>
-			    <div class="control-group">
-			      <label class="control-label">Und noch mehr Infos...</label>
+			</div>
+			<div class="control-group">
+			      <label class="control-label">Und noch mehr Infos:</label>
 			      <div class="controls">
 			        <input type="text" 
 			               cam-variable-name="infos"
@@ -35,9 +36,9 @@
 			               readonly
 			               class="form-control" />
 			      </div>
-			    </div>
-			    <div class="control-group">
-			      <label class="control-label">Vorerkrankung</label>
+		    </div>
+		    <div class="control-group">
+		      	<label class="control-label">Vorerkrankung</label>
 			      <div class="controls">
 			        <input id="vorerkrankung" 
 			        	   type="text" 
@@ -51,8 +52,8 @@
 		      		Vorerkrankung speichern
 		    	  </button>
 		    	  -->
-			    </div>
-				<div class="control-group">
+		    </div>
+			<div class="control-group">
 			      <label class="control-label">Bewertung Vorerkrankung</label>
 			      <div class="controls">
 			        <input type="text" 
@@ -61,22 +62,24 @@
 			               readonly
 			               class="form-control" />
 			      </div>
-			    </div>
-			    <div class="control-group">
-			      <label class="control-label">Annehmen?</label>
+		    </div>
+		    <div class="control-group">
+			      <label class="control-label">Antrag annehmen?</label>
 			      <div class="controls">
 			        <input type="checkbox" 
 			               cam-variable-name="approved"
 			               cam-variable-type="Boolean"
 			               class="form-control" />
 			      </div>
-			    </div>
-			  </div>
-			  <p>
-		      <button class="btn btn-primary" ng-click="saveRejectionOnServer()">
-	      		Vorzeitig ablehnen
-	    	  </button>
-	    	  </p>
+		    </div>
+		    <div class="control-group">
+			      <label class="control-label"></label>
+			      <div class="controls">
+				      <button class="btn btn-primary" ng-click="saveRejectionOnServer()">
+			      		Antrag vorzeitig ablehnen
+			    	  </button>
+		    	  </div>		    
+			</div>
          </div>
          
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
