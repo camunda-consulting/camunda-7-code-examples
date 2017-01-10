@@ -1,0 +1,47 @@
+<p>
+ Mit diesem Formular simulieren wir den Eingang eines neuen Antrags auf Lebensversicherung.</code>
+</p>
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="name"
+             cam-variable-type="String"
+             required
+             class="form-control" />
+    </div>
+    <div class="control-group">
+      <label class="control-label">Monatliche Rate</label>
+      <div class="controls">
+        <input type="text" 
+               cam-variable-name="rate"
+               cam-variable-type="Integer"
+               class="form-control" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Und noch mehr Infos...</label>
+      <div class="controls">
+        <textarea 
+               cam-variable-name="infos"
+               cam-variable-type="String"
+               class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Vorerkrankung</label>
+      <div class="controls">
+        <input type="text" 
+               cam-variable-name="vorerkrankung"
+               cam-variable-type="String"
+               class="form-control" />
+      </div>
+    </div>
+  </div>
+
+  <script cam-script type="text/form-script">
+  // custom JavaScript goes here
+  </script>
+</form>
