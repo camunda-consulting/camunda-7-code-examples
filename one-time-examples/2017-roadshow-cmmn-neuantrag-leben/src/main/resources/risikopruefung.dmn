@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_1lqi96d" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="bewertung" name="Erkrankungsbewertung">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT">
+      <input id="input1" label="Vorerkrankung" camunda:inputVariable="">
+        <inputExpression id="inputExpression1" typeRef="string">        <text>vorerkrankung</text>
+</inputExpression>
+      </input>
+      <output id="output1" label="Risikobewertung" name="bewertung" typeRef="string" />
+      <rule id="row-674068682-5">
+        <inputEntry id="UnaryTests_1lyl36p">        <text><![CDATA["Diabetis"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0gxbu17">        <text><![CDATA["rot"]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-674068682-6">
+        <inputEntry id="UnaryTests_1jz1ztp">        <text><![CDATA["Rücken"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0nv5jp6">        <text><![CDATA["gelb"]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
