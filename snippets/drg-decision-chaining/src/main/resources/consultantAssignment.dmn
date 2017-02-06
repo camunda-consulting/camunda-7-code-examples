@@ -42,7 +42,6 @@
       </input>
       <output id="output_1" label="Name of Consultant" name="consultantName" typeRef="string" />
       <rule id="row-365404946-1">
-        <description></description>
         <inputEntry id="UnaryTests_0jzzzbh">        <text>[150..500]</text>
 </inputEntry>
         <inputEntry id="UnaryTests_04qu9a2">        <text>true</text>
@@ -93,7 +92,6 @@
 </outputEntry>
       </rule>
       <rule id="row-365404946-15">
-        <description></description>
         <inputEntry id="UnaryTests_1aoyo3z">        <text></text>
 </inputEntry>
         <inputEntry id="UnaryTests_0baiv0h">        <text></text>
@@ -136,14 +134,14 @@
       <input id="InputClause_1rt4tyt" label="Location" camunda:inputVariable="">
         <inputExpression id="LiteralExpression_1t2rarq" typeRef="string">        <text>location</text>
 </inputExpression>
-        <inputValues id="UnaryTests_1vkuc4l">        <text><![CDATA["Europe","Asia","South America","North America","Africa"]]></text>
+        <inputValues id="UnaryTests_1vkuc4l">        <text><![CDATA["Europe","Asia","Africa","North_America","South_America"]]></text>
 </inputValues>
       </input>
       <output id="OutputClause_0er83h6" label="Complexity Score" name="complexityScore" typeRef="integer" />
       <rule id="row-365404946-6">
         <inputEntry id="UnaryTests_1bcz3ps">        <text><![CDATA[>= 12]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1omsmjg">        <text><![CDATA["Europe", "North America"]]></text>
+        <inputEntry id="UnaryTests_1omsmjg">        <text><![CDATA["Europe", "North_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0c1n87l">        <text>60</text>
 </outputEntry>
@@ -151,7 +149,7 @@
       <rule id="row-365404946-7">
         <inputEntry id="UnaryTests_1m1xawm">        <text>[1..3]</text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1g32ezr">        <text><![CDATA["Europe", "North America"]]></text>
+        <inputEntry id="UnaryTests_1g32ezr">        <text><![CDATA["Europe", "North_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0y9zm86">        <text>5</text>
 </outputEntry>
@@ -159,7 +157,7 @@
       <rule id="table-719563980-1">
         <inputEntry id="UnaryTests_0z0jmwl">        <text>]3..6]</text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1o4xyi8">        <text><![CDATA["Europe", "North America"]]></text>
+        <inputEntry id="UnaryTests_1o4xyi8">        <text><![CDATA["Europe", "North_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_14zdkp3">        <text>15</text>
 </outputEntry>
@@ -167,7 +165,7 @@
       <rule id="row-365404946-8">
         <inputEntry id="UnaryTests_1qd0v1l">        <text>[6..12[</text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1qlx2ct">        <text><![CDATA["Asia", "South America"]]></text>
+        <inputEntry id="UnaryTests_1qlx2ct">        <text><![CDATA["Asia", "South_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0b86rai">        <text>85</text>
 </outputEntry>
@@ -175,7 +173,7 @@
       <rule id="row-365404946-9">
         <inputEntry id="UnaryTests_1ofpak0">        <text>[1..6]</text>
 </inputEntry>
-        <inputEntry id="UnaryTests_0mg3wz3">        <text><![CDATA["Asia", "South America"]]></text>
+        <inputEntry id="UnaryTests_0mg3wz3">        <text><![CDATA["Asia", "South_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_11qaqqa">        <text>30</text>
 </outputEntry>
@@ -183,7 +181,7 @@
       <rule id="row-365404946-11">
         <inputEntry id="UnaryTests_167m1ag">        <text><![CDATA[>= 12]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_0ufx2op">        <text><![CDATA["Asia", "South America"]]></text>
+        <inputEntry id="UnaryTests_0ufx2op">        <text><![CDATA["Asia", "South_America"]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0cdpa3k">        <text>100</text>
 </outputEntry>
@@ -240,7 +238,7 @@
       <rule id="row-871392337-1">
         <inputEntry id="UnaryTests_0clve75">        <text></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_12nlc8m">        <text><![CDATA[not("Europe", "Asia", "South America", "North America", "Africa")]]></text>
+        <inputEntry id="UnaryTests_12nlc8m">        <text><![CDATA[not("Europe", "Asia", "South_America", "North_America", "Africa")]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_00j5wby">        <text>300</text>
 </outputEntry>
