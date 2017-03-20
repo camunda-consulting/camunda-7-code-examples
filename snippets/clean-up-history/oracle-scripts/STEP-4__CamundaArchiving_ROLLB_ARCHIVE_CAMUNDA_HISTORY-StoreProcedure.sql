@@ -1,17 +1,44 @@
-/* 
-Camunda Version: 7.3.2-ee; Oracle 12c tested
-State as of: 23.02.2015 
-S. Hellmann, M. Krassmann: Silpion; T. Hirsch for Haspa; Ingo Richtsmeier for Camunda;
+-- +================================================================+
+-- | STEP-4__CamundaArchiving_ROLLB_ARCHIVE_CAMUNDA_HISTORY-StoreProcedure.sql
+-- +================================================================+
+-- | Camunda Version: 7.6.0; Oracle 12c tested
+-- | State as of: 20.03.2017 
+-- | S. Hellmann, M. Krassmann: Silpion; T. Hirsch for Haspa; Ingo Richtsmeier for Camunda;
+-- | 
+-- | DOC.:
+-- | --------------------------------------------------------------------------------------
+-- | Create/Replace  ROLLB_ARCHIVE_CAMUNDA_HISTORY StoreProcedure -function for ROLLBACK (RESTORE)
+-- | of archived Camunda history tables.
+-- | 
+-- +================================================================+
 
-DOC.:
---------------------------------------------------------------------------------------
-Create/Replace  ROLLB_ARCHIVE_CAMUNDA_HISTORY StoreProcedure -function for ROLLBACK (RESTORE)
-of archived Camunda history tables.
-*/
+COLUMN vcomplogfile new_value vcomplogfile NOPRINT;
+SELECT 'STEP-4__CamundaArchiving_ROLLB_ARCHIVE_CAMUNDA_HISTORY-StoreProcedure_'|| TO_CHAR(SYSDATE,'DDMonYYYY_hh24_mi_ss') || '.lst' AS vcomplogfile
+FROM dual;
+spool &vcomplogfile
 
-WHENEVER SQLERROR EXIT SQL.SQLCODE;
+whenever sqlerror continue
+whenever oserror continue
+set autocommit off;
+set heading off;
+-- +================================================================+
+show user;
+select 'DATABASE = ' || sys_context('USERENV','DB_NAME') DB from dual;
+-- +================================================================+
+set heading on;
+set echo on;
+-- +================================================================+
+-- +==== ENDE SQL HEADER ===========================================+
+-- +================================================================+
+
+-- Block 1 ohne Abbruch bei Fehler [z.B. drop Table....]
+
+-- Block 2 Abbruch bei Fehler
+whenever SQLERROR EXIT sql.sqlcode ROLLBACK
+whenever OSERROR EXIT 20001 ROLLBACK
+
+
 SET SERVEROUTPUT ON;
-
 
 CREATE OR REPLACE TYPE TextArrayType IS TABLE OF VARCHAR2(80);
 /
@@ -24,10 +51,12 @@ AS
 
  PRAGMA AUTONOMOUS_TRANSACTION;
  P_archiveTablesArray TextArrayType;
+ P_archiveDecTablesArray TextArrayType;
  P_piProcessed number;          /* Number of PI's worked out */
  P_baProcessed number;        /* Number of Bytearray's workout */
+ P_decProcessed number;
  P_tableName NVARCHAR2(80);     /* temp tableName */
- P_tableFields NVARCHAR2(500);  /* temp für alle tableFields einer Tabelle */
+ P_tableFields NVARCHAR2(500);  /* temp f?r alle tableFields einer Tabelle */
  P_query VARCHAR2(600);         /* temp query */
  P_startDate DATE;              /* start Timestamp */
  P_executionDuration number;
@@ -82,8 +111,10 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
     
 
   P_archiveTablesArray := TextArrayType('ACT_HI_PROCINST', 'ACT_HI_ACTINST', 'ACT_HI_TASKINST', 'ACT_HI_VARINST', 'ACT_HI_DETAIL', 
-                                        'ACT_HI_COMMENT', 'ACT_HI_ATTACHMENT', 'ACT_HI_OP_LOG', 'ACT_HI_INCIDENT');
+                                        'ACT_HI_COMMENT', 'ACT_HI_ATTACHMENT', 'ACT_HI_OP_LOG', 'ACT_HI_INCIDENT', 'ACT_HI_DECINST');
                       
+  P_archiveDecTablesArray := TextArrayType('ACT_HI_DEC_IN', 'ACT_HI_DEC_OUT');
+
     /* START TRANSACTION */
     P_startDate := sysdate;
     
@@ -111,13 +142,13 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
     IF IN_maxProcessInstances = 0 THEN /* all */
     
         P_query := 'INSERT INTO TMP_ARCHIVING_PROCINST '|| chr(13)||chr(10)||
-                   '   SELECT PROC_INST_ID_, END_TIME_ FROM ARCHIVE_ACT_HI_PROCINST '|| chr(13)||chr(10)||
+                   '   SELECT PROC_INST_ID_, BUSINESS_KEY_, END_TIME_ FROM ARCHIVE_ACT_HI_PROCINST '|| chr(13)||chr(10)||
                    '   '||  P_query;
                    
     ELSE /* limit: IN_maxProcessInstances */
         P_query := 'INSERT INTO TMP_ARCHIVING_PROCINST ' ||chr(13)||chr(10)||
-                   ' SELECT PROC_INST_ID_, END_TIME_ FROM ( ' ||chr(13)||chr(10)||
-                   '   SELECT PROC_INST_ID_, END_TIME_ FROM ARCHIVE_ACT_HI_PROCINST ' ||chr(13)||chr(10)||
+                   ' SELECT PROC_INST_ID_, BUSINESS_KEY_, END_TIME_ FROM ( ' ||chr(13)||chr(10)||
+                   '   SELECT PROC_INST_ID_, BUSINESS_KEY_, END_TIME_ FROM ARCHIVE_ACT_HI_PROCINST ' ||chr(13)||chr(10)||
                    '   '||  P_query || chr(13)||chr(10)||
                    ') WHERE ROWNUM <= '|| IN_maxProcessInstances;   
     END IF;
@@ -142,7 +173,15 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
     dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: '|| P_baProcessed ||' ByteArray candidates for rollback found!' || chr(13)||chr(10));
     
                
-    /* 4. Check PI's im TEMP ready for ROLLBACK */
+    /* 4. Fill TMP_ARCHIVING_DECINST with candidates: */
+    INSERT INTO TMP_ARCHIVING_DEC
+        SELECT ID_ as DEC_INST_ID_, PROC_INST_ID_ FROM ARCHIVE_ACT_HI_DECINST archdec
+        where archdec.PROC_INST_ID_ in (SELECT PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST);
+        
+    select count(*) INTO P_decProcessed FROM TMP_ARCHIVING_DEC;
+    dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: '|| P_decProcessed ||' DecInst candidates for rollback found!' || chr(13)||chr(10));
+    
+    /* 5. Check PI's im TEMP ready for ROLLBACK */
     select count(*) INTO P_piProcessed FROM TMP_ARCHIVING_PROCINST;
     
     IF P_piProcessed = 0 THEN /* no candidates found */
@@ -193,8 +232,32 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
             dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10));
         END LOOP;
         
+        /* job_log, special treatment needed because of process_instance_id_ and not proc_inst_id_ */
+        dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: Copy from ARCHIVE_ACT_HI_JOB_LOG to history ...');
         /* INSERT */
+        P_tableFields := ''; /* reset, because had some problems with double columns  */
+        /* fetch table column names into P_tableFields : */
+        select LISTAGG(COLUMN_NAME, ', ') 
+            WITHIN GROUP (ORDER BY TABLE_NAME, COLUMN_ID) INTO P_tableFields 
+            from ALL_TAB_COLUMNS 
+            where TABLE_NAME = 'ACT_HI_JOB_LOG';
+            
+        P_query := 'INSERT INTO ACT_HI_JOB_LOG hi ' ||chr(13)||chr(10)||
+                   ' SELECT ' || P_tableFields ||chr(13)||chr(10)||
+                   '  FROM ARCHIVE_ACT_HI_JOB_LOG' ||chr(13)||chr(10)|| 
+                   '  WHERE PROCESS_INSTANCE_ID_ in ( SELECT tmp.PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST tmp)';
+        dbms_output.put_line('QUERY (before execute): /copy back to history table/ ' || P_query);
+        EXECUTE IMMEDIATE P_query;
+        dbms_output.put_line('.... rows inserted: ' || TO_CHAR(SQL%ROWCOUNT));
+        
+        /* DELETE */
+        dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]:         Delete in ARCHIVE_ACT_HI_JOB_LOG ...');
+        DELETE ARCHIVE_ACT_HI_JOB_LOG WHERE PROCESS_INSTANCE_ID_ in (select PROC_INST_ID_ FROM TMP_ARCHIVING_PROCINST);
+        dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10)); 
+        
+        /* bytearrays */
         dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: Copy from ARCHIVE_ACT_GE_BYTEARRAY to history ...');
+        /* INSERT */
         P_tableFields := ''; /* reset, becouse had some problems with double columns  */
         /* fetch table column names into P_tableFields : */
         select LISTAGG(COLUMN_NAME, ', ') 
@@ -215,6 +278,40 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
         DELETE ARCHIVE_ACT_GE_BYTEARRAY WHERE ID_ in (select BYTEARRAY_ID_ FROM TMP_ARCHIVING_BYTEARRAY);
         dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10)); 
         
+        /* DECINSTs */
+        dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: Copy from ARCHIVE_ACT_HI_DECINST to history ...');
+        
+        /* LOOP over tables */
+        FOR i IN 1 .. P_archiveDecTablesArray.count LOOP 
+        
+            P_tableName := P_archiveDecTablesArray(i);
+            
+            dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: #######  Start restore from:  ARCHIVE_' || P_tableName ||'  ...');
+            
+            P_tableFields := ''; /* reset, becouse had some problems with double columns  */
+            /* fetch table column names into P_tableFields : */
+            select LISTAGG(COLUMN_NAME, ', ') 
+                WITHIN GROUP (ORDER BY TABLE_NAME, COLUMN_ID) INTO P_tableFields 
+                from ALL_TAB_COLUMNS 
+                where TABLE_NAME = P_tableName;
+            
+            /* INSERT */
+            P_query := 'INSERT INTO '|| P_tableName  ||' hi ' ||chr(13)||chr(10)||
+                       ' SELECT ' || P_tableFields ||chr(13)||chr(10)||
+                       '  FROM ARCHIVE_' || P_tableName ||chr(13)||chr(10)|| 
+                       '  WHERE DEC_INST_ID_ in ( SELECT tmp.DEC_INST_ID_ FROM TMP_ARCHIVING_DEC tmp)';
+            dbms_output.put_line('QUERY (before execute): /copy back to history table/ ' || P_query);
+            EXECUTE IMMEDIATE P_query;
+            dbms_output.put_line('.... rows inserted: ' || TO_CHAR(SQL%ROWCOUNT));
+            
+            /* DELETE */
+            dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]:         Delete in Archive: ARCHIVE_' || P_tableName ||'  ...');          
+            P_query := ' DELETE ARCHIVE_' || P_tableName || ' ar WHERE ar.DEC_INST_ID_ in (select DEC_INST_ID_ FROM TMP_ARCHIVING_DEC)';
+            dbms_output.put_line('QUERY (before execute): ' || P_query);
+            EXECUTE IMMEDIATE P_query;
+            dbms_output.put_line('.... rows deleted: ' || TO_CHAR(SQL%ROWCOUNT) || chr(13)||chr(10));
+        END LOOP;
+                
         /* COMMIT TRANSACTION */
         dbms_output.put_line('[ROLLB_ARCHIVE_CAMUNDA_HISTORY]: PIs processed: ' || P_piProcessed );
         dbms_output.put_line('TRY TA-COMMIT ...');
@@ -258,5 +355,4 @@ ROLLBACK (RESTORE) of archived Camunda history tables:
 END ROLLB_ARCHIVE_CAMUNDA_HISTORY;
 /
 
-quit;
-/
+SPOOL OFF

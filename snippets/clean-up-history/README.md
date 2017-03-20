@@ -39,3 +39,9 @@ If you run
 
 you will restore all process instances from archive run 8 to 10.
 
+###Improvements Backlog
+
+- Handle INDENITYLINK
+- Handle Cases
+- Find Batches even if no process instances were selected
+
