@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.6.0">
+  <bpmn:process id="AssignConsultant" name="Assign Consultant" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1rfwx60</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1rfwx60" sourceRef="StartEvent_1" targetRef="Task_08h7bni" />
+    <bpmn:userTask id="Task_08h7bni" name="Enter Project parameters" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="programingLanguage" label="What is the primary programing language?" type="enum">
+            <camunda:value id="Java" name="Java" />
+            <camunda:value id="C" name="C" />
+            <camunda:value id="C-Sharp" name="C-Sharp" />
+            <camunda:value id="JavaScript" name="JavaScript" />
+            <camunda:value id="Python" name="Python" />
+          </camunda:formField>
+          <camunda:formField id="projectMonths" label="Estimated project length (Months)" type="long" defaultValue="1" />
+          <camunda:formField id="location" label="Where is the project site located?" type="enum">
+            <camunda:value id="Europe" name="Europe" />
+            <camunda:value id="Asia" name="Asia" />
+            <camunda:value id="South_America" name="South America" />
+            <camunda:value id="North_America" name="North America" />
+            <camunda:value id="Africa" name="Africa" />
+            <camunda:value id="Other" name="Other" />
+          </camunda:formField>
+          <camunda:formField id="vipCustomer" label="Is this a VIP customer?" type="boolean" />
+          <camunda:formField id="newUseCase" label="Would you consider this a unique use case?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1rfwx60</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ml4vdv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1ml4vdv" sourceRef="Task_08h7bni" targetRef="Task_0ql36g0" />
+    <bpmn:businessRuleTask id="Task_0ql36g0" name="Decide on suitable consultants" camunda:resultVariable="suitableConsultants" camunda:decisionRef="AssignConsultant" camunda:mapDecisionResult="collectEntries">
+      <bpmn:incoming>SequenceFlow_1ml4vdv</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_15zdbzm</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="SequenceFlow_15zdbzm" sourceRef="Task_0ql36g0" targetRef="Task_0cas379" />
+    <bpmn:endEvent id="EndEvent_1ka8yz6">
+      <bpmn:incoming>SequenceFlow_1mxj29z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1mxj29z" sourceRef="Task_0cas379" targetRef="EndEvent_1ka8yz6" />
+    <bpmn:userTask id="Task_0cas379" name="Choose from suitable candidates" camunda:formKey="embedded:app:forms/select-consultant-form.html" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="com.camunda.example.drg.DMNChainingExample.FormatConsultantNamesListener" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_15zdbzm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1mxj29z</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="AssignConsultant">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1rfwx60_di" bpmnElement="SequenceFlow_1rfwx60">
+        <di:waypoint xsi:type="dc:Point" x="209" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="284" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="247" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_08x4u9b_di" bpmnElement="Task_08h7bni">
+        <dc:Bounds x="284" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ml4vdv_di" bpmnElement="SequenceFlow_1ml4vdv">
+        <di:waypoint xsi:type="dc:Point" x="384" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="452" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="418" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_06gljpf_di" bpmnElement="Task_0ql36g0">
+        <dc:Bounds x="452" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_15zdbzm_di" bpmnElement="SequenceFlow_15zdbzm">
+        <di:waypoint xsi:type="dc:Point" x="552" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="634" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="593" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1ka8yz6_di" bpmnElement="EndEvent_1ka8yz6">
+        <dc:Bounds x="858" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="876" y="138" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1mxj29z_di" bpmnElement="SequenceFlow_1mxj29z">
+        <di:waypoint xsi:type="dc:Point" x="734" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="858" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="796" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0skwypc_di" bpmnElement="Task_0cas379">
+        <dc:Bounds x="634" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

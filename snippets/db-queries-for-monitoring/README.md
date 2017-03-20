@@ -95,6 +95,13 @@ select count(*) from act_ru_incident where lower(incident_msg_) like '%api.twitt
 SELECT ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB, (DEPLOYMENT_ID_ is not null) as Deployment FROM ACT_GE_BYTEARRAY
 GROUP BY (DEPLOYMENT_ID_ is not null)
 
+-- db space used by runtime variables
+SELECT ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB FROM ACT_RU_VARIABLE JOIN ACT_GE_BYTEARRAY ON ACT_GE_BYTEARRAY.ID_ = BYTEARRAY_ID_  WHERE BYTEARRAY_ID_ is not null;
+
+-- db space used by byte arrays that are referenced from history tables
+SELECT ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB FROM ACT_HI_DETAIL JOIN ACT_GE_BYTEARRAY ON ACT_GE_BYTEARRAY.ID_ = BYTEARRAY_ID_ WHERE BYTEARRAY_ID_ is not null;
+SELECT ROUND(SUM(LENGTH(BYTES_))/1024/1024, 1) as MB FROM ACT_HI_VARINST JOIN ACT_GE_BYTEARRAY ON ACT_GE_BYTEARRAY.ID_ = BYTEARRAY_ID_ WHERE BYTEARRAY_ID_ is not null;
+
 -- write traffic caused within the last hour by each byte array variable in runtime, history and variable log (hence the multiplication with 3.0)
 SELECT COUNT(*) as NumberOfWrites, ROUND(SUM(LENGTH(BYTES_))/1024.0/1024.0*3.0, 3) as MB, ACT_HI_DETAIL.NAME_
   FROM ACT_HI_DETAIL JOIN ACT_GE_BYTEARRAY ON ACT_GE_BYTEARRAY.ID_ = BYTEARRAY_ID_
