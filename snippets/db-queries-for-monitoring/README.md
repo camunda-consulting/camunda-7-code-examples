@@ -199,7 +199,7 @@ You can use the following query to get a snapshot at a single point in time:
 
 * [metrics.h2.sql](metrics.h2.sql)
 * [metrics.oracle.sql](metrics.oracle.sql)
-* [metrics.postgres.sql](metrics.postgres.sql)
+* [metrics.postgres.sql](metrics.postgres.sql) (works for MySQL as well)
 
 ### Example results from different systems
 <table cellspacing="0" border="0">
