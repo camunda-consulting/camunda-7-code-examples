@@ -14,6 +14,7 @@ import org.camunda.bpm.engine.repository.DeploymentBuilder;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.instance.Task;
 import org.camunda.bpm.model.cmmn.Cmmn;
 import org.camunda.bpm.model.cmmn.CmmnModelInstance;
 import org.junit.Before;
@@ -119,6 +120,19 @@ public class InMemoryH2Test {
     deployment.deploy();
   }  
 
+  @Test
+  public void testBpmnToCmmn() throws IOException {
+    String fileName = "InsuranceApplication.bpmn";
+    BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromStream(getClass().getResourceAsStream(INPUT_DIR + fileName));
+    CmmnModelInstance cmmnModelInstance = Cmmn.readModelFromStream(getClass().getResourceAsStream("/SampleSubCase.cmmn"));
+    Collection<Task> bpmnTasks = bpmnModelInstance.getModelElementsByType(Task.class);
+    org.camunda.bpm.model.cmmn.instance.Task cmmnSampleTask = cmmnModelInstance.getModelElementsByType(org.camunda.bpm.model.cmmn.instance.Task.class).iterator().next();
+    for (Task task : bpmnTasks) {
+      cmmnSampleTask.setName(task.getName());
+    }
+    Cmmn.writeModelToFile(new File(OUTPUT_DIR + fileName + ".cmmn"), cmmnModelInstance);
+  }
+  
   private void writeToFile(String fileName, String xml) throws IOException {
     FileUtils.writeStringToFile(new File(OUTPUT_DIR + fileName.replace(".bpmn", ".executable.bpmn").replace(".cmmn", ".executable.cmmn").replace(".dmn", ".executable.dmn")), xml);
   }

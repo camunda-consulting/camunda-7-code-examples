@@ -17,7 +17,7 @@
 </cmmn:planItemOnPart>
       </cmmn:sentry>
       <cmmn:sentry id="Sentry_1s21a23">
-        <ifPart id="ifPart_6664da94-ec47-487f-a883-db0728a64a74" xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
+        <ifPart id="ifPart_89cf7288-ae78-4172-ab54-729344c4fc85" xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL">
           <condition>#{caseExecution.getVariable('Sentry_1s21a23')}</condition>
         </ifPart>
       </cmmn:sentry>
