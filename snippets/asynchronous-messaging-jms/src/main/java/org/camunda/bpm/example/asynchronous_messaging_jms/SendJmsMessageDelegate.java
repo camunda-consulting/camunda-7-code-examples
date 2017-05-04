@@ -16,6 +16,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.model.bpmn.instance.FlowElement;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
+import org.camunda.bpm.model.bpmn.instance.ReceiveTask;
 import org.camunda.bpm.model.bpmn.instance.SendTask;
 
 /**
@@ -37,12 +38,12 @@ public class SendJmsMessageDelegate implements JavaDelegate {
     // Not Recommended
 //    String asynchronousCorrelationKey = execution.getId();
 
-    // UUID
+    // UUID in Process Variable
 //    String asynchronousCorrelationKey = UUID.randomUUID().toString();
 //    execution.setVariable("correlationId", asynchronousCorrelationKey);
-    
-    String currentActivityId = execution.getCurrentActivityId();
-    FlowNode receiveTask = ((SendTask) execution.getBpmnModelElementInstance()).getSucceedingNodes().singleResult();
+
+    // Combination of Process Instance (see above) and Activity ID
+    ReceiveTask receiveTask = (ReceiveTask) ((SendTask) execution.getBpmnModelElementInstance()).getSucceedingNodes().singleResult();
     String receiveTaskId = receiveTask.getId();
 
     // Business Key
