@@ -4,6 +4,8 @@ import org.camunda.bpm.application.PostDeploy;
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Process Application exposing this application's resources the process engine. 
@@ -11,7 +13,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 @ProcessApplication
 public class CamundaBpmProcessApplication extends ServletProcessApplication {
 
-  private static final String PROCESS_DEFINITION_KEY = "embedded-engine-without-spring";
+  public static final Logger log = LoggerFactory.getLogger(CamundaBpmProcessApplication.class);
 
   /**
    * In a @PostDeploy Hook you can interact with the process engine and access 
@@ -19,10 +21,7 @@ public class CamundaBpmProcessApplication extends ServletProcessApplication {
    */
   @PostDeploy
   public void onDeploymentFinished(ProcessEngine processEngine) {
-
-    // start an initial process instance
-    processEngine.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
-
+    log.info("Process Engine started?");
   }
 
 }

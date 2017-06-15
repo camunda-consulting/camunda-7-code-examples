@@ -3,15 +3,20 @@
   xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <process-engine name="default">
-    <configuration>org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration</configuration>
+  <process-engine name="embedded">
+    <!--
+    <configuration>org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration</configuration> 
+    -->
+    <configuration>org.camunda.bpm.engine.impl.cfg.JtaProcessEngineConfiguration</configuration>
     <datasource>java:jboss/datasources/ProcessEngine</datasource>
     <properties>
         <property name="history">full</property>
         <property name="databaseSchemaUpdate">true</property>
         <property name="authorizationEnabled">true</property>
         <property name="jobExecutorDeploymentAware">true</property>
+        <property name="transactionManagerJndiName">java:/TransactionManager</property>
     </properties>
+
     <plugins>
 
       <!-- plugin enabling Process Application event listener support -->
@@ -76,14 +81,16 @@
       -->
       
       <!-- Optional Plugin for Camunda BPM Workbench -->
+      <!-- 
       <plugin>
         <class>org.camunda.bpm.debugger.server.EmbeddableDebugWebsocketBootstrap</class>
-      </plugin>      
+      </plugin>
+       -->      
    </plugins>
   </process-engine>
 
   <process-archive>
-    <process-engine>default</process-engine>
+    <process-engine>embedded</process-engine>
     <properties>
       <property name="isDeleteUponUndeploy">false</property>
       <property name="isScanForProcessDefinitions">true</property>
