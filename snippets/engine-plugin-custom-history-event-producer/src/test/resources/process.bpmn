@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.1">
+  <bpmn:process id="custom-history-event-handler" name="custom-history-event-handler" isExecutable="true">
+    <bpmn:startEvent id="StartEventProcessStarted" name="Process&#10;started">
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEventProcessEnded" name="Process&#10;ended">
+      <bpmn:incoming>SequenceFlow_0527v1i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="Task_DoSomething" />
+    <bpmn:sequenceFlow id="SequenceFlow_0527v1i" sourceRef="IntermediateCatchEvent_1kqt8ia" targetRef="EndEventProcessEnded" />
+    <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_1kqt8ia" name="Our Message">
+      <bpmn:incoming>SequenceFlow_14t5oxg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0527v1i</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_1q3cvmc" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="Task_DoSomething" name="Do something" camunda:assignee="demo" camunda:candidateGroups="management">
+      <bpmn:incoming>SequenceFlow1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14t5oxg</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_14t5oxg" sourceRef="Task_DoSomething" targetRef="IntermediateCatchEvent_1kqt8ia" />
+  </bpmn:process>
+  <bpmn:message id="Message_1q3cvmc" name="correlateMe" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="custom-history-event-handler">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEventProcessStarted">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0fkea3f_di" bpmnElement="EndEventProcessEnded">
+        <dc:Bounds x="617" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="615" y="138" width="40" height="25" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
+        <di:waypoint xsi:type="dc:Point" x="209" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="269" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="194" y="105" width="90" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0527v1i_di" bpmnElement="SequenceFlow_0527v1i">
+        <di:waypoint xsi:type="dc:Point" x="503" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="617" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="560" y="98.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1e7et2s_di" bpmnElement="IntermediateCatchEvent_1kqt8ia">
+        <dc:Bounds x="467" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="452" y="141" width="67" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1rto8t1_di" bpmnElement="Task_DoSomething">
+        <dc:Bounds x="269" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_14t5oxg_di" bpmnElement="SequenceFlow_14t5oxg">
+        <di:waypoint xsi:type="dc:Point" x="369" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="467" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="373" y="105" width="90" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
