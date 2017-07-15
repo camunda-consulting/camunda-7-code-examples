@@ -155,6 +155,17 @@ See the guestbook entries with GET http://localhost:8080/embedded-engine-without
 ## Environment Restrictions
 Built and tested against Camunda BPM version 7.7.0 on a Wildfly 10 with [this configuration](standalone.xml).
 
+### Websphere Runtime
+There is a branch to change the configuration to run on WebSphere with transaction support. 
+
+It starts with a WebSphereProcessEngineConfiguration, referenced in the processes.xml.
+
+A docker compose starts a PostgreSQL database and a WebSphere Traditional server 9.0.0.4 with a datasource to the database. The WebSphere container is based on the official IBM image from [docker hub](https://hub.docker.com/r/ibmcom/websphere-traditional/)
+
+Deploy the war from this project to the WebSphere server with the WebSphere admin console. You can deploy the Camunda Standalone WebApp, too.
+
+![WebSphere Admin console](websphere-admin.png)
+
 ## Known Limitations
 Currently, it is not possible to configure the parameters of the Job Executor through the processes.xml file.
 

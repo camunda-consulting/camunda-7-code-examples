@@ -7,14 +7,15 @@
     <!--
     <configuration>org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration</configuration> 
     -->
-    <configuration>org.camunda.bpm.engine.impl.cfg.JtaProcessEngineConfiguration</configuration>
-    <datasource>java:jboss/datasources/ProcessEngine</datasource>
+    <configuration>com.camunda.demo.embedded_engine_without_spring.conf.WebSphereProcessEngineConfiguration</configuration>
+<!--     <datasource>java:jboss/datasources/ProcessEngine</datasource> -->
+    <datasource>jdbc/ProcessEngine</datasource>
     <properties>
         <property name="history">full</property>
         <property name="databaseSchemaUpdate">true</property>
         <property name="authorizationEnabled">true</property>
         <property name="jobExecutorDeploymentAware">true</property>
-        <property name="transactionManagerJndiName">java:/TransactionManager</property>
+<!--         <property name="transactionManagerJndiName">java:/TransactionManager</property> -->
     </properties>
 
     <plugins>

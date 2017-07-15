@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  bpmdb:
+    build: ./postgres-camunda-bpm-ee
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=camunda
+      - POSTGRES_USER=camunda
+      - POSTGRES_PASSWORD=camunda
+  websphere:
+    build: ./websphere-app-server
+    ports:
+      - "9043:9043"
+      - "9443:9443"
+    depends_on:
+      - bpmdb
