@@ -30,4 +30,8 @@ public class GuestEntry {
   public long getId() {
     return id;
   }
+  
+  public String getContent() {
+    return content;
+  }
 }

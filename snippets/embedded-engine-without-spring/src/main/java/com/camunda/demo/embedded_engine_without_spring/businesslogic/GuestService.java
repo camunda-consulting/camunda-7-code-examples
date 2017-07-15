@@ -15,6 +15,9 @@ public class GuestService {
   EntityManager em;
   
   public GuestEntry save(GuestEntry entry) {
+    if (entry.getContent().startsWith("shouldFail")) {
+      throw new RuntimeException("This operation should fail because of the content");
+    }
     return this.em.merge(entry);
   }
   

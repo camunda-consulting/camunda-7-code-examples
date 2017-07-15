@@ -1,7 +1,9 @@
 package com.camunda.demo.embedded_engine_without_spring.rest;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,6 +21,8 @@ import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+
+import com.camunda.demo.embedded_engine_without_spring.businesslogic.persistence.GuestEntry;
 
 @Stateless
 @Path("process")
@@ -44,10 +48,14 @@ public class ProcessResource {
   }
   
   @POST
-  public Response start(@Context UriInfo info) {
-    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("embedded-engine-without-spring");
+  public Response start(GuestEntry entry, @Context UriInfo info) {
+    String content = entry.getContent();
+    Map<String,Object> variables = new HashMap<String, Object>();
+    variables.put("content", content);
+    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("embedded-engine-without-spring", variables);
     String id = processInstance.getId();
     URI uri = info.getAbsolutePathBuilder().path("/" + id).build();
     return Response.created(uri).build();
   }
+
 }

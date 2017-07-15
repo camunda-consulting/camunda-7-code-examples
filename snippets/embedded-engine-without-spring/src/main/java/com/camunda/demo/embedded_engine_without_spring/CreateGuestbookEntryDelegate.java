@@ -23,9 +23,15 @@ public class CreateGuestbookEntryDelegate implements JavaDelegate {
   private static final Logger logger = LoggerFactory.getLogger(CreateGuestbookEntryDelegate.class);
 
   @Override
-  public void execute(DelegateExecution arg0) throws Exception {
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-    GuestEntry entry = new GuestEntry("created from delegate At " + dateFormatter.format(new Date()));
+  public void execute(DelegateExecution execution) throws Exception {
+    String content = (String) execution.getVariable("content");
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    GuestEntry entry;
+    if (content != null && content.length() > 0) {
+      entry = new GuestEntry(content + " from given variable");
+    } else {
+      entry = new GuestEntry("created from delegate At " + dateFormatter.format(new Date()));
+    }
     guestService.save(entry);
     logger.info("Guestbook entry created");
   }
