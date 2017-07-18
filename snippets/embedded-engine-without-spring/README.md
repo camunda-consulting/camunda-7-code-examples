@@ -158,7 +158,9 @@ Built and tested against Camunda BPM version 7.7.0 on a Wildfly 10 with [this co
 ### Websphere Runtime
 There is a branch to change the configuration to run on WebSphere with transaction support. 
 
-It starts with a WebSphereProcessEngineConfiguration, referenced in the processes.xml.
+It starts with a `com.camunda.demo.embedded_engine_without_spring.conf.WebSphereProcessEngineConfiguration`, referenced in the processes.xml.
+
+This configuration class sets the transaction mamanger to an undocumented IBM class `com.ibm.tx.jta.TransactionManagerFactory.getTransactionManager()`. This may not work with future WebSphere releases. (see [https://stackoverflow.com/a/37187719](https://stackoverflow.com/a/37187719))
 
 A docker compose starts a PostgreSQL database and a WebSphere Traditional server 9.0.0.4 with a datasource to the database. The WebSphere container is based on the official IBM image from [docker hub](https://hub.docker.com/r/ibmcom/websphere-traditional/)
 
