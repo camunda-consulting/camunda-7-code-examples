@@ -27,7 +27,7 @@ In the Tomcat shared engine it's quite easy to set up the bypass.
     </init-param>
 ...
 ```
-4. Create a file named `bypassUser.properties` in the configuration folder of the tomcat server: `camunda-bpm-ee-tomcat-7.7.1-ee\server\apache-tomcat-8.0.24\conf\`
+4. Create a file named `bypassUser.properties` in the configuration folder of the tomcat server: `camunda-bpm-ee-tomcat-7.7.1-ee\server\apache-tomcat-8.0.24\conf\`. Here is an example: [bypassUser.properties](src/test/resources/bypassUser.properties).
 5. The configuartion must contain the keys `userId`, `passwd` and `groups`. `groups` contains a comma separated list of existing groups. The groups are required to check authorizations.
 6. Start the server and check the configuration in the logs. You should find a snippet like:
 ```
