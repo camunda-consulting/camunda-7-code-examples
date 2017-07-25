@@ -42,4 +42,4 @@ INFO [localhost-startStop-1] com.camunda.consulting.rest.auth.AuthenticationProv
 The configuration file read on startup and the values a held in main memory until the server is restarted. To change the password, you have to restart the tomcat server.
 
 ### Tested environment
-Camunda 7.7 Tomcat distribution.
+Camunda 7.7.0 Tomcat distribution.
