@@ -1,0 +1,32 @@
+{
+  "name": "camunda-modeler-bpmn-js-plugin-color-picker",
+  "version": "0.1.0",
+  "description": "bpmn-js Color Picker Plugin for the Camunda Modeler",
+  "main": "index.js",
+  "scripts": {
+    "client": "browserify client/client.js > client/client-bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camunda/camunda-modeler-plugins.git"
+  },
+  "keywords": [
+    "camunda",
+    "modeler",
+    "plugin",
+    "color"
+  ],
+  "author": "Felix Mueller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camunda/camunda-modeler-plugins/issues"
+  },
+  "homepage": "https://github.com/camunda/camunda-modeler-plugins#readme",
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "camunda-modeler-plugin-helpers": "^1.7.0",
+    "inherits": "^2.0.3",
+    "min-dom": "^0.2.0",
+    "simple-color-picker": "^0.1.2"
+  }
+}
