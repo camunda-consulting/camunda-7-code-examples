@@ -245,8 +245,17 @@ Snippets
     <td>How to evaluate dependant DMN decisions on the Camunda BPM platform.</td>
   </tr>  
   
-</table>  
-  
+</table>
+
+### CMMN
+<table>
+  <tr>
+    <td><img src="snippets/cmmn-listener-extension/src/test/resources/assigned-tasks.png" width="100"></td>
+    <td><a href="snippets/cmmn-listener-extension">CMMN Human Task Listener in a Process Engine Plugin</a></td>
+    <td>Using task listener in all CMMN Human Tasks.</td>
+  </tr>
+</table>
+
 ### Process Engine Plugins
 
 <table>

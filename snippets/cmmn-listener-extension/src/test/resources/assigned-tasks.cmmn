@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/cmmn" id="Test" targetNamespace="http://bpmn.io/schema/cmmn" exporter="Camunda Modeler" exporterVersion="1.9.0">
+  <cmmn:case id="AssignTasksCase">
+    <cmmn:casePlanModel id="CasePlanModel_1" name="A CasePlanModel">
+      <cmmn:planItem id="forPeterHumanTask" definitionRef="HumanTask_0xkttie" />
+      <cmmn:planItem id="forMaryHumanTask" definitionRef="HumanTask_13spf6i" />
+      <cmmn:planItem id="forJohnHumanTask" definitionRef="HumanTask_1xfay4n">
+        <cmmn:itemControl id="PlanItemControl_0dw4stu">
+          <cmmn:manualActivationRule id="ManualActivationRule_1tfvy5y" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:planItem id="forDemoHumanTask" definitionRef="HumanTask_0a7yog0">
+        <cmmn:itemControl id="PlanItemControl_100khsi">
+          <cmmn:requiredRule id="RequiredRule_1e5rfqx" />
+          <cmmn:manualActivationRule id="ManualActivationRule_19c8um5" />
+        </cmmn:itemControl>
+      </cmmn:planItem>
+      <cmmn:humanTask id="HumanTask_0xkttie" name="task for peter" camunda:assignee="peter" />
+      <cmmn:humanTask id="HumanTask_13spf6i" name="task for mary" camunda:assignee="mary" />
+      <cmmn:humanTask id="HumanTask_1xfay4n" name="task for john" camunda:assignee="john" />
+      <cmmn:humanTask id="HumanTask_0a7yog0" name="task for demo" camunda:assignee="demo" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="_5a66685b-5f57-4e2f-b1d1-acca4fae04b2">
+      <cmmndi:Size xsi:type="dc:Dimension" width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1" cmmnElementRef="CasePlanModel_1">
+        <dc:Bounds x="114" y="63" width="336" height="395" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_07xt0au_di" cmmnElementRef="forPeterHumanTask">
+        <dc:Bounds x="150" y="96" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_0146egp_di" cmmnElementRef="forMaryHumanTask">
+        <dc:Bounds x="150" y="218" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1xvvsmp_di" cmmnElementRef="forJohnHumanTask">
+        <dc:Bounds x="150" y="340" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_1ke8au7_di" cmmnElementRef="forDemoHumanTask">
+        <dc:Bounds x="314" y="218" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>
