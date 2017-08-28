@@ -42,7 +42,7 @@ alter table ACT_RU_INCIDENT
 
 
 
-/** add ACT_INST_ID_ column to execution table */
+-- add ACT_INST_ID_ column to execution table
 alter table ACT_RU_EXECUTION
     add ACT_INST_ID_ NVARCHAR2(64);
 
@@ -64,7 +64,7 @@ WHERE
 AND
     E.ACT_ID_ is not null;
 
-/** set act_inst_id for inactive parents of scope executions */
+-- set act_inst_id for inactive parents of scope executions
 UPDATE
     ACT_RU_EXECUTION E_
 SET
@@ -104,7 +104,7 @@ WHERE
     E_.ACT_INST_ID_ is null;
 
 
-/** remaining executions get id from parent  */
+-- remaining executions get id from parent 
 UPDATE
     ACT_RU_EXECUTION E
 SET
@@ -119,7 +119,7 @@ SET
 WHERE
     E.ACT_INST_ID_ is null;
 
-/** remaining executions use execution id as activity instance id */
+-- remaining executions use execution id as activity instance id
 UPDATE
     ACT_RU_EXECUTION E
 SET
@@ -127,7 +127,7 @@ SET
 WHERE
     E.ACT_INST_ID_ is null;
 
-/** mark MI-scope executions in temporary column */
+-- mark MI-scope executions in temporary column
 alter table ACT_RU_EXECUTION
     add IS_MI_SCOPE_ NUMBER(1,0);
 
@@ -155,7 +155,7 @@ AND EXISTS (
         MI_CONCUR.ACT_ID_ = MI_SCOPE.ACT_ID_
 );
 
-/** set IS_ACTIVE to 0 for MI-Scopes: */
+-- set IS_ACTIVE to 0 for MI-Scopes:
 UPDATE
     ACT_RU_EXECUTION MI_SCOPE
 SET
@@ -163,8 +163,8 @@ SET
 WHERE
     MI_SCOPE.IS_MI_SCOPE_ = 1;
 
-/** set correct root for mi-parallel:
-    CASE 1: process instance (use ID_) */
+-- set correct root for mi-parallel:
+--   CASE 1: process instance (use ID_)
 UPDATE
     ACT_RU_EXECUTION MI_ROOT
 SET
@@ -182,8 +182,7 @@ AND EXISTS (
         MI_SCOPE.IS_MI_SCOPE_ = 1
 );
 
-/**
-    CASE 2: scopes below process instance (use ACT_INST_ID_ from parent) */
+--    CASE 2: scopes below process instance (use ACT_INST_ID_ from parent)
 UPDATE
     ACT_RU_EXECUTION MI_ROOT
 SET
@@ -211,7 +210,7 @@ AND EXISTS (
 alter table ACT_RU_EXECUTION
     DROP COLUMN IS_MI_SCOPE_;
 
-/** add SUSPENSION_STATE_ column to task table */
+-- add SUSPENSION_STATE_ column to task table
 -- alter table ACT_RU_TASK
 --    add SUSPENSION_STATE_ INTEGER;
 
@@ -226,7 +225,7 @@ UPDATE ACT_RU_TASK
 SET SUSPENSION_STATE_ = 1
 WHERE SUSPENSION_STATE_ is null;
 
-/** add authorizations **/
+-- add authorizations **/
 create table ACT_RU_AUTHORIZATION (
   ID_ varchar(64) not null,
   REV_ integer not null,
@@ -251,11 +250,11 @@ create unique index ACT_UNIQ_AUTH_GROUP on ACT_RU_AUTHORIZATION
     case when GROUP_ID_ is null then null else RESOURCE_ID_ end,
     case when GROUP_ID_ is null then null else GROUP_ID_ end);
 
-/** add deployment id to JOB table **/
+-- add deployment id to JOB table
 alter table ACT_RU_JOB
     add DEPLOYMENT_ID_ NVARCHAR2(64);
 
-/** add parent act inst ID */
+-- add parent act inst ID
 alter table ACT_HI_ACTINST
     add PARENT_ACT_INST_ID_ NVARCHAR2(64);-- add new column to historic activity instance table --
 alter table ACT_HI_ACTINST
@@ -838,17 +837,6 @@ ALTER TABLE ACT_HI_DETAIL
 ALTER TABLE ACT_RU_JOB
   ADD SEQUENCE_COUNTER_ NUMBER(19,0);
 
--- unused columns
-
-ALTER TABLE ACT_RU_VARIABLE
-  DROP COLUMN DATA_FORMAT_ID_;
-
-ALTER TABLE ACT_HI_VARINST
-  DROP COLUMN DATA_FORMAT_ID_;
-
-ALTER TABLE ACT_HI_DETAIL
-  DROP COLUMN DATA_FORMAT_ID_;
-
 -- AUTHORIZATION --
 
 -- add grant authorizations for group camunda-admin:
@@ -1068,7 +1056,8 @@ create index ACT_IDX_HI_ACT_INST_STATS on ACT_HI_ACTINST(PROC_DEF_ID_, ACT_ID_, 
 -- index to prevent deadlock on fk constraint - https://app.camunda.com/jira/browse/CAM-5440 --
 create index ACT_IDX_EXT_TASK_EXEC on ACT_RU_EXT_TASK(EXECUTION_ID_);
 -- https://app.camunda.com/jira/browse/CAM-5364 --
-create index ACT_IDX_AUTH_GROUP_ID on ACT_RU_AUTHORIZATION(GROUP_ID_);
+-- Falko: already done in a 7.3 patch above
+--create index ACT_IDX_AUTH_GROUP_ID on ACT_RU_AUTHORIZATION(GROUP_ID_);
 -- INCREASE process def key column size https://app.camunda.com/jira/browse/CAM-4328 --
 alter table ACT_RU_JOB
   modify PROCESS_DEF_KEY_ NVARCHAR2(255);-- semantic version --
