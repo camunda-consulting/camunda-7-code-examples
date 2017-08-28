@@ -1,0 +1,1 @@
+select * from ACT_HI_ACTINST where length(ASSIGNEE_) > 64
