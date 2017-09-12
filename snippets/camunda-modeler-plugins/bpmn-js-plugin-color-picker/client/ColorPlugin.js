@@ -16,7 +16,7 @@ function ColorPlugin(eventBus, bpmnRules, editorActions, canvas, commandStack) {
   eventBus.on('selection.changed', function(e) {
     self.selectedElement = e.newSelection[0];
     var color = ColorPlugin.prototype._getColor(self.selectedElement);
-    if (color != null) {
+    if (color != null  && self.colorPicker != null) {
       self.colorPicker.setColor(color);
     }
   });
