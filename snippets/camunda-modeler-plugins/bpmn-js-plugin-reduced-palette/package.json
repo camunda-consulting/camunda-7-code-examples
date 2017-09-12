@@ -1,0 +1,33 @@
+{
+  "name": "camunda-modeler-bpmn-js-plugin-reduced-palette",
+  "version": "0.1.0",
+  "description": "bpmn-js Reduced Palette Plugin for the Camunda Modeler",
+  "main": "index.js",
+  "scripts": {
+    "client": "browserify client/client.js > client/client-bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camunda/camunda-modeler-plugins.git"
+  },
+  "keywords": [
+    "camunda",
+    "modeler",
+    "plugin",
+    "symbols",
+    "bpmn"
+  ],
+  "author": "Felix Mueller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camunda/camunda-modeler-plugins/issues"
+  },
+  "homepage": "https://github.com/camunda/camunda-modeler-plugins#readme",
+  "devDependencies": {
+    "bpmn-js": "^0.22.1",
+    "browserify": "^14.1.0",
+    "camunda-modeler-plugin-helpers": "^1.7.0",
+    "inherits": "^2.0.3",
+    "lodash": "^3.10.1"
+  }
+}
