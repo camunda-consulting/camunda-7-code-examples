@@ -5,6 +5,10 @@ var camTasklistConf = {
   //   "long":   "LLLL"
   // },
   //
+  	"app": {
+  		"name": "Tasklüste",
+  		"vendor": "Camunda"
+  	},
    "locales": {
       "availableLocales": ["en", "de"],
       "fallbackLocale": "de"
