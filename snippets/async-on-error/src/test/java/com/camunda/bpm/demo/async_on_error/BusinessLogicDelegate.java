@@ -15,6 +15,7 @@ package com.camunda.bpm.demo.async_on_error;
 
 import javax.inject.Named;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -29,6 +30,7 @@ public class BusinessLogicDelegate implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
     if (Boolean.TRUE.equals(execution.getVariable("throwException"))) {
       throw new RuntimeException("I'm supposed to fail.");
+//      throw new BpmnError("23", "Duplicate");
     }
   }
 
