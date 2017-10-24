@@ -8,10 +8,10 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.cdi.CdiCamelContext;
 import org.camunda.bpm.camel.component.CamundaBpmComponent;
 import org.camunda.bpm.engine.ProcessEngine;
-
 
 /**
  * This class takes care of bootstrapping the camel context in a CDI
@@ -27,26 +27,23 @@ public class CamelBootStrap {
 	private final static Logger log = Logger.getLogger(CamelBootStrap.class.getCanonicalName());
 
 	@Inject
-	private CdiCamelContext cdiCamelContext;
-	
-  @Inject
-  private ProcessEngine processEngine;	
+	private CamelContext camelContext;
 
 	@Inject
-	private MyCamelRouteBuilder routeBuilder;
+	private ProcessEngine processEngine;
 
 	@PostConstruct
 	public void init() throws Exception {
-    log.info("=======================");
-    log.info("Initializing Camel");
-	  
-	  CamundaBpmComponent component = new CamundaBpmComponent(processEngine);
-    component.setCamelContext(cdiCamelContext);
-    cdiCamelContext.addComponent("camunda-bpm", component); 
-		cdiCamelContext.addRoutes(routeBuilder);
-		cdiCamelContext.start();
-		
-		log.info("Successfully started Camel with components: " + cdiCamelContext.getComponentNames());
+		log.info("=======================");
+		log.info("Initializing Camel");
+
+		CamundaBpmComponent component = new CamundaBpmComponent(processEngine);
+		component.setCamelContext(camelContext);
+		camelContext.addComponent("camunda-bpm", component);
+		camelContext.addRoutes(new MyCamelRouteBuilder());
+		camelContext.start();
+
+		log.info("Successfully started Camel with components: " + camelContext.getComponentNames());
 		log.info("=======================");
 	}
 
@@ -54,7 +51,7 @@ public class CamelBootStrap {
 	public void shutDown() throws Exception {
 		log.info("=======================");
 		log.info("Shutting down Camel");
-		cdiCamelContext.stop();
+		camelContext.stop();
 		log.info("=======================");
 	}
 

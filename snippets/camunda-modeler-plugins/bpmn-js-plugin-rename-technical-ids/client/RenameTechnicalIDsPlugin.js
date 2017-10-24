@@ -57,6 +57,7 @@ RenameTechnicalIDsPlugin.prototype.addRenameIDsContainer = function(container) {
     self.showIDs();
   });
   domEvent.bind(domQuery('.rename-ids', this.element), 'click', function(event) {
+    self.retry = 0;
     self.renameIDs();
   });
 };
@@ -86,7 +87,21 @@ RenameTechnicalIDsPlugin.prototype.generateIDs = function() {
       }
     }
   });
-  console.log(this.technicalIds);
+  this._verifyDuplicateIds();
+};
+
+RenameTechnicalIDsPlugin.prototype._verifyDuplicateIds = function() {
+  var self = this;
+  var values = {};
+  Object.keys(this.technicalIds).forEach(function(technicalId) {
+    var newTechnicalId = self.technicalIds[technicalId];
+    if (values[newTechnicalId] != null) {
+      values[newTechnicalId] = values[newTechnicalId] + 1;
+      self.technicalIds[technicalId] = self.technicalIds[technicalId] + values[newTechnicalId];
+    } else {
+      values[newTechnicalId] = 0;
+    }
+  });
 };
 
 RenameTechnicalIDsPlugin.prototype.showIDs = function() {
@@ -102,17 +117,23 @@ RenameTechnicalIDsPlugin.prototype.showIDs = function() {
 };
 
 RenameTechnicalIDsPlugin.prototype.renameIDs = function() {
-  console.log('rename IDs');
   var self = this;
 
   Object.keys(this.technicalIds).forEach(function(technicalId) {
-    var element = self._elementRegistry.get(technicalId);
-    var properties = {
-      id: self.technicalIds[technicalId]
-    };
-    self._modeling.updateProperties(element, properties)
+    if (technicalId != self.technicalIds[technicalId] && self._elementRegistry.get(self.technicalIds[technicalId]) != null) {
+      self.retry = self.retry + 1;
+    } else {
+      var element = self._elementRegistry.get(technicalId);
+      var properties = {
+        id: self.technicalIds[technicalId]
+      };
+      self._modeling.updateProperties(element, properties);
+    }
   });
 
+  if (self.retry>0 && self.retry<5) {
+    this.renameIDs();
+  }
 };
 
 RenameTechnicalIDsPlugin.prototype._getTechnicalID = function(name, type) {

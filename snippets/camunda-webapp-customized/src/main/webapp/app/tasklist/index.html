@@ -25,10 +25,10 @@
 
   <link rel="stylesheet"
         type="text/css"
-        href="$APP_ROOT/app/tasklist/styles/styles.css?bust=7.6.0-alpha3">
+        href="$APP_ROOT/app/tasklist/styles/styles.css?bust=7.7.3">
   <link rel="stylesheet"
         type="text/css"
-        href="$APP_ROOT/app/tasklist/styles/user-styles.css?bust=7.6.0-alpha3">
+        href="$APP_ROOT/app/tasklist/styles/user-styles.css?bust=7.7.3">
 
   <!-- favicon -->
   <link rel="shortcut icon"
@@ -91,7 +91,7 @@
 
   <!-- # page-footer -->
   <footer cam-widget-footer
-          version="v7.6.0-alpha3-ee"></footer>
+          version="v7.7.3-ee"></footer>
 
 
   <script type="text/javascript">
@@ -110,7 +110,7 @@
      };
   </script>
 
-  <script type="text/javascript" src="$APP_ROOT/app/tasklist/scripts/config.js"></script>
+  <script type="text/javascript" src="$APP_ROOT/app/tasklist/scripts/config.js" charset="utf-8"></script>
 
   <!--[if lte IE 9]><script type="text/javascript">
     tasklistConf.polyfills = tasklistConf.polyfills || [];
@@ -128,7 +128,7 @@ window.require = undefined;
 
 requirejs.config({
   baseUrl: '$APP_ROOT/app/tasklist',
-  urlArgs: 'bust=7.6.0-alpha3'
+  urlArgs: 'bust=7.7.3'
 });
 requirejs(['$APP_ROOT/lib/deps.js'], function () {
   requirejs(['$APP_ROOT/app/tasklist/camunda-tasklist-bootstrap.js'], function () {});
