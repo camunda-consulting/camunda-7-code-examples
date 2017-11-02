@@ -52,8 +52,8 @@
 
 	<repositories>
 	  <repository>
-	    <id>camunda-bpm-nexus</id>
-	    <name>camunda-bpm-nexus</name>
+	    <id>camunda-bpm-nexus-ee</id>
+	    <name>Camunda BPM Enterprise Maven Repository</name>
 	    <url>
 	      https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee
 	    </url>
