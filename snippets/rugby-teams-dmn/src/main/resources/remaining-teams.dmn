@@ -1,66 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="remainingTeams" name="Remaining Teams">
-    <decisionTable id="decisionTable">
+    <decisionTable id="decisionTable" hitPolicy="FIRST">
       <input id="input1" label="Random Number">
-        <inputExpression id="inputExpression1" typeRef="integer" expressionLanguage="Javascript">        <text>Math.floor((Math.random() * 10) + 1);</text>
-</inputExpression>
+        <inputExpression id="inputExpression1" typeRef="integer" expressionLanguage="Javascript">
+          <text>Math.floor((Math.random() * 10) + 1);</text>
+        </inputExpression>
       </input>
       <output id="output1" label="Team Name" name="chosenTeam" typeRef="string" />
       <output id="OutputClause_1ww7syb" label="Team Description" name="teamDescription" typeRef="string" />
       <rule id="row-615312060-4">
-        <inputEntry id="UnaryTests_1i2f3zn">        <text><![CDATA[<=1]]></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_101iwgv">        <text><![CDATA["British and Irish Lions"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1pnmbqo">        <text><![CDATA["This is a team that forms every 4 years and consists of England, Ireland, Scotland and Wales"]]></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_1i2f3zn">
+          <text><![CDATA[<=1]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_101iwgv">
+          <text><![CDATA["British and Irish Lions"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1pnmbqo">
+          <text><![CDATA["This is a team that forms every 4 years and consists of England, Ireland, Scotland and Wales"]]></text>
+        </outputEntry>
       </rule>
       <rule id="row-615312060-5">
-        <inputEntry id="UnaryTests_07eir71">        <text><![CDATA[<=3]]></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_0gc5c0o">        <text><![CDATA["East Africa"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1krgb86">        <text><![CDATA["Established in 1950, East Africa
+        <inputEntry id="UnaryTests_07eir71">
+          <text><![CDATA[<= 3]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gc5c0o">
+          <text><![CDATA["East Africa"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1krgb86">
+          <text><![CDATA["Established in 1950, East Africa
  has conducted seven tours between 1954 and 1982 and has played against 
 incoming international, representative and club touring sides including 
 twice against the British Lions;
  perhaps the only example of representative (as opposed to invitational)
  multinational teams playing against each other. They have also played 
 against the Barbarians."]]></text>
-</outputEntry>
+        </outputEntry>
       </rule>
       <rule id="row-615312060-6">
-        <inputEntry id="UnaryTests_1r3cvta">        <text><![CDATA[<=5]]></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_09ef3y7">        <text><![CDATA["Pacific Islanders"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0u753s3">        <text><![CDATA["Combination of Fiji, Samoa and Tonga originally formed in 2004 to play against the Lions"]]></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_1r3cvta">
+          <text><![CDATA[<=5]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09ef3y7">
+          <text><![CDATA["Pacific Islanders"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0u753s3">
+          <text><![CDATA["Combination of Fiji, Samoa and Tonga originally formed in 2004 to play against the Lions"]]></text>
+        </outputEntry>
       </rule>
       <rule id="row-615312060-7">
-        <inputEntry id="UnaryTests_0esjfu3">        <text><![CDATA[<=7]]></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_1c12qdq">        <text><![CDATA["South American Jaguars"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0rvahxz">        <text><![CDATA["Combination of Argentina, Chile and Uruguay originally formed in the early 80's to play against the Lions"]]></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_0esjfu3">
+          <text><![CDATA[<= 7]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1c12qdq">
+          <text><![CDATA["South American Jaguars"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rvahxz">
+          <text><![CDATA["Combination of Argentina, Chile and Uruguay originally formed in the early 80's to play against the Lions"]]></text>
+        </outputEntry>
       </rule>
       <rule id="row-615312060-8">
-        <inputEntry id="UnaryTests_15wy46c">        <text><![CDATA[<=9]]></text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_1baaofr">        <text><![CDATA["The Barbarians"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_0hljrku">        <text><![CDATA["The Barbarian Football Club is probably the most famous invitation side"]]></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_15wy46c">
+          <text><![CDATA[<= 9]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1baaofr">
+          <text><![CDATA["The Barbarians"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0hljrku">
+          <text><![CDATA["The Barbarian Football Club is probably the most famous invitation side"]]></text>
+        </outputEntry>
       </rule>
       <rule id="row-615312060-9">
-        <inputEntry id="UnaryTests_0au4eq2">        <text>=10</text>
-</inputEntry>
-        <outputEntry id="LiteralExpression_0o6m6yy">        <text><![CDATA["Rest of Europe"]]></text>
-</outputEntry>
-        <outputEntry id="LiteralExpression_1hl6r1r">        <text><![CDATA["That's right there was a team called 'the rest of europe' and it was formed to played a team called 'four home unions' which they lost"]]></text>
-</outputEntry>
+        <inputEntry id="UnaryTests_0au4eq2">
+          <text>10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0o6m6yy">
+          <text><![CDATA["Rest of Europe"]]></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1hl6r1r">
+          <text><![CDATA["That's right there was a team called 'the rest of europe' and it was formed to played a team called 'four home unions' which they lost"]]></text>
+        </outputEntry>
       </rule>
     </decisionTable>
   </decision>
