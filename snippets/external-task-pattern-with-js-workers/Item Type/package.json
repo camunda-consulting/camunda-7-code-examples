@@ -1,0 +1,12 @@
+{
+  "name": "example",
+  "version": "0.0.1",
+  "description": "A camunda external task / worker NodeJS example",
+  "main": "index.js",
+  "author": "Nico Rehwaldt <git_nikku@nixis.de>",
+  "license": "MIT",
+  "dependencies": {
+    "camunda-worker-node": "file:..",
+    "uuid": "^2.0.1"
+  }
+}
