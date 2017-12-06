@@ -41,7 +41,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0t0yn1p" sourceRef="ExclusiveGateway_005ktf7" targetRef="Task_1ydqs22" />
     <bpmn:sequenceFlow id="SequenceFlow_0qwtmw1" sourceRef="Task_1ydqs22" targetRef="EndEvent_0zm5n5b" />
-    <bpmn:receiveTask id="Task_1ydqs22" name="Wait for final confirmation">
+    <bpmn:receiveTask id="Task_1ydqs22" name="Wait for final confirmation" messageRef="Message_0ww3dou">
       <bpmn:incoming>SequenceFlow_0t0yn1p</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qwtmw1</bpmn:outgoing>
     </bpmn:receiveTask>
@@ -67,6 +67,7 @@
     <bpmn:association id="Association_0m8sg46" associationDirection="One" sourceRef="BoundaryEvent_0f15d3e" targetRef="Task_171upbo" />
     <bpmn:association id="Association_0w6evb3" associationDirection="One" sourceRef="BoundaryEvent_152ftdp" targetRef="Task_1t023zo" />
   </bpmn:process>
+  <bpmn:message id="Message_0ww3dou" name="confirmed" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CamDelivery">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
