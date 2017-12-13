@@ -6,7 +6,7 @@
   "author": "Nico Rehwaldt <git_nikku@nixis.de>",
   "license": "MIT",
   "dependencies": {
-    "camunda-worker-node": "file:..",
+    "camunda-worker-node": "https://github.com/nikku/camunda-worker-node",
     "uuid": "^2.0.1"
   }
 }
