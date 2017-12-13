@@ -16,6 +16,7 @@ package com.camunda.bpm.demo.async_on_error;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.impl.bpmn.behavior.TaskActivityBehavior;
@@ -43,6 +44,8 @@ public class AsyncOnErrorActivityBehavior extends TaskActivityBehavior implement
       try {
         executeBusinessLogic(execution);
         leave(execution);
+      } catch (BpmnError e) {
+        throw e;
       } catch (Exception e) {
         execution.setVariableLocal(getStateVariableName(execution), true);
         createAsynchronousContinuationJob(execution, e);
