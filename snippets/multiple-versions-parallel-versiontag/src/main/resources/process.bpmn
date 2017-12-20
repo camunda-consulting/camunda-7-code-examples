@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://www.example.org/bpmn" exporter="camunda modeler" exporterVersion="2.6.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://www.example.org/bpmn" exporter="Camunda Modeler" exporterVersion="1.12.0-nightly" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
-    <bpmn2:participant id="Process_Engine" name="Process Engine" processRef="multiple-versions-parallel-v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}">
+    <bpmn2:participant id="Process_Engine" name="Multiple Versions Parallel v${parsedVersion.majorVersion}" processRef="multiple-versions-parallel-versiontag">
       <bpmn2:extensionElements>
         <camunda:properties>
           <camunda:property name="version" value="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}" />
@@ -9,18 +9,21 @@
       </bpmn2:extensionElements>
     </bpmn2:participant>
   </bpmn2:collaboration>
-  <bpmn2:process id="multiple-versions-parallel-v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}" name="Multiple Versions Parallel ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}" isExecutable="true" camunda:versionTag="${parsedVersion.majorVersion}.${parsedVersion.minorVersion}">
+  <bpmn2:process id="multiple-versions-parallel-versiontag" name="Multiple Versions Parallel" isExecutable="true" camunda:versionTag="${parsedVersion.majorVersion}">
     <bpmn2:startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/start-form.html">
       <bpmn2:extensionElements>
         <camunda:executionListener class="org.camunda.bpm.example.multiple_versions_parallel.SetVersionVariableListener" event="start" />
       </bpmn2:extensionElements>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:userTask id="UserTask_1" name="Do something v${parsedVersion.majorVersion}.${parsedVersion.minorVersion}" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="demo">
+    <bpmn2:userTask id="UserTask_1" name="Do something v${parsedVersion.majorVersion}" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="demo">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:endEvent id="EndEvent_2">
+      <bpmn2:extensionElements>
+        <camunda:executionListener class="org.camunda.bpm.example.multiple_versions_parallel.LoggerDelegate" event="end" />
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="StartEvent_1" targetRef="UserTask_1" />
