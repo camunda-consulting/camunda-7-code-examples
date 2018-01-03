@@ -401,6 +401,24 @@ You can use the following query to get a snapshot at a single point in time:
 	</tr>
 </table>
 
+```sql
+-- analysis of a load test
+SELECT 
+  COUNT (*), 
+  MIN(START_TIME_), 
+  max(end_time_), 
+  (to_char((max(end_time_) - MIN(START_TIME_)),'mi') *60 + to_char((max(end_time_) - MIN(START_TIME_)),'ss')) as test_duration  FROM ACT_HI_PROCINST WHERE BUSINESS_KEY_ LIKE 'AsyncTest5%';
+
+SELECT 
+  COUNT (*), 
+  MIN(START_TIME_), 
+  max(end_time_), 
+  (cast(max(end_time_) as DATE) - CAST(MIN(START_TIME_) as DATE))*24*60*60 as test_duration,
+  COUNT(*)/((cast(max(end_time_) as DATE) - CAST(MIN(START_TIME_) as DATE))*24*60*60) AS PIperSecond
+  FROM ACT_HI_PROCINST
+  WHERE BUSINESS_KEY_ LIKE 'AsyncTest8%' AND START_TIME_ > to_date('2017.12.14 12:30:00','yyyy.mm.dd HH24:MI:ss');
+```
+
 ## Process/Case instances over time
 
 One count per hour for the last 30 days, can be drawn as line chart to see development, e.g.
