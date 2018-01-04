@@ -6,8 +6,10 @@ export default class Header extends Component {
   render() {
     return (
       <header className="header">
-        <h1>Camunda</h1>
-        <Menu fluid widths={3}>
+        <Menu fixed='top' inverted fluid>
+          <Menu.Item as='a' header>
+           Camunda Tasklist
+         </Menu.Item>
           <Menu.Item>
             <Link to="/">Home</Link>
           </Menu.Item>

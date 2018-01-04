@@ -8,7 +8,6 @@ import sortBy from 'lodash/sortBy'
 
 class TasklistPage extends Component {
   componentWillMount() {
-    debugger
     this.props.loadTasks();
   }
 
@@ -25,7 +24,6 @@ class TasklistPage extends Component {
   }
 
   render() {
-    debugger
     let { task } = this.props
     let taskForm = ''
     if (this.props.processDefinitionId) {
@@ -38,12 +36,10 @@ class TasklistPage extends Component {
       return (<div>Loading tasks</div>)
     } else {
       task = sortBy(task, 'created').reverse()
-          console.log(task)
       return (
         <Grid divided>
           <Grid.Row>
             <Grid.Column width={4}>
-              <h3>Tasklist</h3>
               <List divided relaxed>
               {task.map((item) => this.renderItem(item))}
               </List>
@@ -55,7 +51,6 @@ class TasklistPage extends Component {
         </Grid>
       )
     }
-
   }
 }
 
