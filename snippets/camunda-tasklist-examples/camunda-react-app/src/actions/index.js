@@ -3,7 +3,7 @@ import * as AT from '../constants/ActionTypes'
 
 const fetchTasks = () => ({
   [CALL_API]: {
-    types: [ AT.STARGAZERS_REQUEST, AT.STARGAZERS_SUCCESS, AT.STARGAZERS_FAILURE ],
+    types: [ AT.TASKS_REQUEST, AT.TASKS_SUCCESS, AT.TASKS_FAILURE ],
     endpoint: 'task?sortBy=created&sortOrder=desc',
     schema: Schemas.TASK_ARRAY
   }
@@ -52,7 +52,7 @@ export const loadFormKey = (processDefinitionKey) => (dispatch, getState) => {
 
 const fetchTaskFormKey = (taskId) => ({
   [CALL_API]: {
-    types: [ AT.STARGAZERS_REQUEST, AT.STARGAZERS_SUCCESS, AT.STARGAZERS_FAILURE ],
+    types: [ AT.TASK_FORM_KEY_REQUEST, AT.TASK_FORM_KEY_SUCCESS, AT.TASK_FORM_KEY_FAILURE ],
     endpoint: `task/${taskId}/form`,
     schema: Schemas.FORM_KEY
   }
@@ -100,6 +100,21 @@ const postCompleTask = (taskId, values) => ({
 
 export const completeTask = (taskId, values) => (dispatch, getState) => {
   return dispatch(postCompleTask(taskId, values))
+}
+
+const fetchTaskVariables = (taskId, variableNames) => {
+  const variableName = Object.keys(variableNames).join(',')
+  return {
+    [CALL_API]: {
+      types: [ AT.TASK_VARIABLES_REQUEST, AT.TASK_VARIABLES_SUCCESS, AT.TASK_VARIABLES_FAILURE ],
+      endpoint: `task/${taskId}/form-variables?variableNames=${variableName}`,
+      schema: Schemas.TASK_VARIABLES
+    }
+  }
+}
+
+export const loadTaskVariables = (taskId, variableNames) => (dispatch, getState) => {
+  return dispatch(fetchTaskVariables(taskId, variableNames))
 }
 
 // Resets the currently visible error message.

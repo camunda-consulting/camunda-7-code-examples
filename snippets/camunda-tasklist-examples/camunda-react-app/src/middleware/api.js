@@ -49,6 +49,27 @@ const taskSchema = new schema.Entity('task', {}, {
   id: task => task.id,
 });
 
+const taskVariableSchema = new schema.Entity('taskVariable', {}, {
+  processStrategy: (value, parent, key) => {
+    return {
+      values: value,
+      test: key,
+      parent: parent
+    }
+  }
+  //id: taskVariable => taskVariable.id,
+});
+const taskVariableArraySchema = new schema.Entity('taskVariables', {}, {
+  idAttribute: variable => 'variables',
+  processStrategy: (value, parent, key) => {
+    let values = {};
+    Object.keys(value).forEach((item) => {
+      values[item] = value[item].value
+    })
+    return values
+  }
+});
+
 // Schemas for Github API responses.
 export const Schemas = {
   PROCESS_DEFINITION: processDefinitionSchema,
@@ -56,7 +77,9 @@ export const Schemas = {
   FORM_KEY: formKeySchema,
   TASK: taskSchema,
   TASK_ARRAY: [taskSchema],
-  PROCESS_INSTANCE_STARTED: processInstanceStartedSchema
+  PROCESS_INSTANCE_STARTED: processInstanceStartedSchema,
+  TASK_VARIABLE: taskVariableSchema,
+  TASK_VARIABLES: taskVariableArraySchema
 }
 
 // Action key that carries API call info interpreted by this Redux middleware.

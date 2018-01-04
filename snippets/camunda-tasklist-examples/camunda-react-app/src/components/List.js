@@ -34,7 +34,6 @@ export default class List extends Component {
       isFetching, nextPageUrl, pageCount,
       items, renderItem, loadingLabel
     } = this.props
-    console.log(items);
     const isEmpty = items == null || Object.keys(items).length === 0
     if (isEmpty && isFetching) {
       return <h2><i>{loadingLabel}</i></h2>

@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-import * as FormTypes from './forms';
-import { completeTask, startProcessInstance } from '../actions'
+import * as FormTypes from './forms'
+import { completeTask, startProcessInstance, loadTaskVariables } from '../actions'
+import { connect } from 'react-redux'
 
-export default class GenericForm extends Component {
+class GenericForm extends Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state || !this.state.loading) {
+      this.loadExistingVariables()
+    }
+  }
+
   render() {
-    const { formKey, processDefinitionKey, task } = this.props
+    const { formKey, processDefinitionKey, taskId } = this.props
     const Form = FormTypes[processDefinitionKey][formKey]
-    if (task == null) {
+    if (taskId == null) {
       return (
         <div className="generic-form">
           <Form onSubmit={(values, dispatch) => this.handleStartInstance(values, dispatch)} />
@@ -21,9 +28,18 @@ export default class GenericForm extends Component {
     }
   }
 
+  loadExistingVariables() {
+    let { form, dispatch, taskId } = this.props
+    if (form) {
+      this.setState({ loading: true });
+      dispatch(loadTaskVariables(taskId, form.registeredFields))
+    }
+
+  }
+
   handleComplete(values, dispatch) {
     values = this.getBody(values)
-    return dispatch(completeTask(this.props.task, values))
+    return dispatch(completeTask(this.props.taskId, values))
   }
 
   handleStartInstance(values, dispatch) {
@@ -41,3 +57,7 @@ export default class GenericForm extends Component {
     }
   }
 }
+
+export default connect(
+  state => ({})
+)(GenericForm)

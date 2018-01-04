@@ -4,9 +4,11 @@ import { withRouter, Link } from 'react-router-dom'
 import { List, Grid } from 'semantic-ui-react'
 import { loadTasks } from '../actions'
 import TaskformPage from './TaskformPage'
+import sortBy from 'lodash/sortBy'
 
 class TasklistPage extends Component {
   componentWillMount() {
+    debugger
     this.props.loadTasks();
   }
 
@@ -23,7 +25,8 @@ class TasklistPage extends Component {
   }
 
   render() {
-    const { task } = this.props
+    debugger
+    let { task } = this.props
     let taskForm = ''
     if (this.props.processDefinitionId) {
       taskForm = <TaskformPage/>
@@ -34,13 +37,15 @@ class TasklistPage extends Component {
     if (!task) {
       return (<div>Loading tasks</div>)
     } else {
+      task = sortBy(task, 'created').reverse()
+          console.log(task)
       return (
         <Grid divided>
           <Grid.Row>
             <Grid.Column width={4}>
               <h3>Tasklist</h3>
               <List divided relaxed>
-              {Object.keys(task).map((id) => this.renderItem(task[id]))}
+              {task.map((item) => this.renderItem(item))}
               </List>
             </Grid.Column>
             <Grid.Column width={12}>
@@ -55,7 +60,6 @@ class TasklistPage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state)
   const params = ownProps.match.params
   return {
     ...params,

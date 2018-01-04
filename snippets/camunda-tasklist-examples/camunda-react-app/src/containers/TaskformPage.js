@@ -11,20 +11,20 @@ class TaskForm extends Component {
   }
 
   render() {
-    const { taskId, processDefinitionId, formKey, processDefinition, redirect } = this.props
 
+    const { taskId, processDefinitionId, formKey, processDefinition, redirect, simpleForm } = this.props
+    console.log(redirect)
     if (redirect) {
       return (
         <Redirect to={redirect}/>
       )
     }
-
     if (formKey && processDefinition && processDefinition[processDefinitionId] != null) {
       const process = processDefinition[processDefinitionId].key
       const key = formKey['undefined'].key
       return (
         <div>
-          <GenericForm task={taskId} formKey={key} processDefinitionKey={process} />
+          <GenericForm form={simpleForm} taskId={taskId} formKey={key} processDefinitionKey={process} />
         </div>
       )
     } else {
@@ -41,7 +41,8 @@ const mapStateToProps = (state, ownProps) => {
   const params = ownProps.match.params
   return {
     ...params,
-    ...state.entities
+    ...state.entities,
+    ...state.form
   }
 }
 
