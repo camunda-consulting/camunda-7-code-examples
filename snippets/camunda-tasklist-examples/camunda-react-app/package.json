@@ -2,6 +2,7 @@
   "name": "camunda-react-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "humps": "^2.0.0",
     "lodash": "^4.16.1",

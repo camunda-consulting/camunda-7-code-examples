@@ -13,7 +13,6 @@ class TaskForm extends Component {
   render() {
 
     const { taskId, processDefinitionId, formKey, processDefinition, redirect, simpleForm } = this.props
-    console.log(redirect)
     if (redirect) {
       return (
         <Redirect to={redirect}/>

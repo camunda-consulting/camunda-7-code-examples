@@ -1,7 +1,7 @@
 import { normalize, schema } from 'normalizr'
 import { camelizeKeys } from 'humps'
 
-const API_ROOT = 'http://localhost:8080/engine-rest/'
+const API_ROOT = '/engine-rest/'
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.

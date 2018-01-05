@@ -7,7 +7,6 @@ import { reducer as reduxFormReducer } from 'redux-form'
 const entities = (state = {}, action) => {
   const { type } = action
   if (type === ActionTypes.TASK_SUBMITTED_SUCCESS || type === ActionTypes.TASK_SUBMITTED_FAILURE) {
-    console.log("REDIRECT NOW")
     return merge({}, state, {
       redirect: '/tasklist'
     })
@@ -27,7 +26,6 @@ const entities = (state = {}, action) => {
   }
 
   if (action.response && action.response.entities) {
-    console.log("Merged",merge({}, state, action.response.entities))
     return merge({}, state, action.response.entities)
   }
   return state
