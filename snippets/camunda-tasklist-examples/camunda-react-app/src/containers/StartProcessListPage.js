@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-
+import { Container, Header } from 'semantic-ui-react'
 import List from '../components/List'
 import { loadProcessDefinitions } from '../actions'
 
@@ -23,13 +23,13 @@ class StartProcessListPage extends Component {
       )
     } else {
       return (
-        <div>
-          <h3>Choose process to start</h3>
+        <Container text>
+          <Header as='h2'>Choose process to start</Header>
           <List renderItem={this.renderProcess}
             items={processDefinition}
             loadingLabel={`Loading process definitions...`}
             />
-        </div>
+        </Container>
       )
     }
   }
