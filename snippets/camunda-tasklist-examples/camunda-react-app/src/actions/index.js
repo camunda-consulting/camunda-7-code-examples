@@ -1,5 +1,6 @@
 import { CALL_API, Schemas } from '../middleware/api'
 import * as AT from '../constants/ActionTypes'
+/* eslint import/no-webpack-loader-syntax: off */
 
 const fetchTasks = () => ({
   [CALL_API]: {
@@ -115,6 +116,30 @@ const fetchTaskVariables = (taskId, variableNames) => {
 
 export const loadTaskVariables = (taskId, variableNames) => (dispatch, getState) => {
   return dispatch(fetchTaskVariables(taskId, variableNames))
+}
+
+const postProcessXML = (filename, file) => {
+  let body = new FormData()
+  var blob = new Blob([file], { type: "text/xml"});
+  body.append('data', blob, filename);
+  return {
+    [CALL_API]: {
+      types: [ AT.PROCESS_DEPLOYMENT_REQUEST, AT.PROCESS_DEPLOYMENT_SUCCESS, AT.PROCESS_DEPLOYMENT_FAILURE ],
+      endpoint: `deployment/create`,
+      schema: Schemas.PROCESS_DEPLOYMENT,
+      settings: {
+        method: 'post',
+        body: body,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }
+    }
+  }
+}
+
+export const deployProcess = (filename, file) => (dispatch, getState) => {
+  return dispatch(postProcessXML(filename, file))
 }
 
 // Resets the currently visible error message.

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { List, Grid } from 'semantic-ui-react'
 import { loadTasks } from '../actions'
-import TaskformPage from './TaskformPage'
+import Taskform from '../components/Taskform'
 import sortBy from 'lodash/sortBy'
 
 class TasklistPage extends Component {
@@ -27,7 +27,7 @@ class TasklistPage extends Component {
     let { task } = this.props
     let taskForm = ''
     if (this.props.processDefinitionId) {
-      taskForm = <TaskformPage/>
+      taskForm = <Taskform/>
     } else {
       taskForm = <div>Please choose task.</div>
     }

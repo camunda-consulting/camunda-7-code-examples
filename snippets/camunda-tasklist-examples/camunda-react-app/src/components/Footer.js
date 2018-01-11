@@ -5,7 +5,7 @@ export default class Footer extends Component {
   render() {
     return (
       <footer className="footer">
-        <Menu fluid widths={1}>
+        <Menu inverted fluid widths={1}>
           <Menu.Item>
             Camunda - React Redux Example Tasklist 2018
           </Menu.Item>
