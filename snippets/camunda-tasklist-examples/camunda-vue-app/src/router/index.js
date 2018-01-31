@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import TaskList from '@/components/Tasklist';
 import ProcessList from '@/components/Processlist';
+import StartProcess from '@/components/StartProcess';
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/startprocess',
       name: 'Process List',
       component: ProcessList,
+    },
+    {
+      path: '/startprocess/:processDefinitionKey',
+      name: 'Process List',
+      component: StartProcess,
     },
   ],
 });
