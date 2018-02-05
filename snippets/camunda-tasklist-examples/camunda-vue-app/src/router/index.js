@@ -12,22 +12,27 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: Home
     },
     {
       path: '/tasklist',
       name: 'Tasklist',
-      component: TaskList,
+      component: TaskList
+    },
+    {
+      path: '/tasklist/:taskId',
+      name: 'Tasklist for specific Task',
+      component: TaskList
     },
     {
       path: '/startprocess',
       name: 'Process List',
-      component: ProcessList,
+      component: ProcessList
     },
     {
       path: '/startprocess/:processDefinitionKey',
-      name: 'Process List',
-      component: StartProcess,
-    },
-  ],
+      name: 'Start Process',
+      component: StartProcess
+    }
+  ]
 });

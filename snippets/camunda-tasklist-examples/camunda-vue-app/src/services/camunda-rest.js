@@ -4,7 +4,7 @@ class CamundaRest {
   static ENGINE_REST_ENDPOINT = '/engine-rest/';
 
   static getProcessDefinitions() {
-    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}process-definition`);
+    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}process-definition?latestVersion=true`);
   }
 
   static deployProcessDefinition(file) {
@@ -20,7 +20,7 @@ class CamundaRest {
   }
 
   static getTasks() {
-    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}task?sortBy=created&sortOrder=desc`);
+    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}task?sortBy=created&sortOrder=desc&maxResults=10`);
   }
 
   static getTaskFormKey(taskId) {
@@ -32,8 +32,7 @@ class CamundaRest {
   }
 
   static getTaskVariables(taskId, variableNames) {
-    const variableName = Object.keys(variableNames).join(',');
-    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}task/${taskId}/form-variables?variableNames=${variableName}`);
+    return axios.get(`${CamundaRest.ENGINE_REST_ENDPOINT}task/${taskId}/form-variables?variableNames=${variableNames}`);
   }
 }
 

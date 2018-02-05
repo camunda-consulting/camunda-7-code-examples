@@ -1,13 +1,13 @@
 import Vue from 'vue';
 
-import {startNewProcess, empty} from './forms/myprocess';
 import CamundaRest from '../services/camunda-rest';
+import * as FormTypes from './forms';
 
 export default Vue.component('GenericForm', {
+  props: ['formKey', 'taskId'],
   data() {
     return {
-      form: 'empty',
-      template: null,
+      template: null
     };
   },
   render(createElement) {
@@ -17,12 +17,45 @@ export default Vue.component('GenericForm', {
     return this.template();
   },
   mounted() {
-    CamundaRest.getFormKey('myprocess').then((result) => {
-      this.form = result.data.key;
-      this.template = Vue.compile('<div><component v-bind:is="form"></component></div>').render;
-    });
+    if (this.formKey !== '') {
+      this.changeTemplate();
+    }
+  },
+  methods: {
+    changeTemplate: function() {
+      const formdata = FormTypes.myprocess[this.formKey].data().formdata;
+      if (formdata && this.taskId) {
+        const variables = Object.keys(formdata);
+        this.loadVariables(variables);
+      }
+      this.mycomponent = Vue.compile(`<div>
+        <component ref="formsChild" :taskId="taskId" v-bind:is="formKey"></component>
+      </div>`);
+      this.template = this.mycomponent.render;
+    },
+    loadVariables: function(variables) {
+      CamundaRest.getTaskVariables(this.taskId, variables.join(',')).then((result) => {
+        const variableResult = result.data;
+        variables.forEach((item) => {
+          const itemData = this.$refs.formsChild.formdata[item];
+          if (typeof itemData === 'boolean') {
+            this.$refs.formsChild.formdata[item] = false;
+          } else {
+            this.$refs.formsChild.formdata[item] = '';
+          }
+        });
+        Object.keys(variableResult).forEach((item) => {
+          this.$refs.formsChild.formdata[item] = variableResult[item].value;
+        });
+      });
+    }
+  },
+  watch: {
+    formKey: 'changeTemplate',
+    taskId: 'changeTemplate'
   },
   components: {
-    startNewProcess,empty
-  },
+    // adding all forms for myprocess to components
+    ...FormTypes.myprocess
+  }
 });

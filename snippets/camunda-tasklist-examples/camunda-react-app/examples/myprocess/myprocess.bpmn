@@ -8,7 +8,7 @@
     <bpmn:endEvent id="EndEvent_0de2sxt" name="Order processed">
       <bpmn:incoming>SequenceFlow_16m9b2f</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_077xpif" name="Approve Data" camunda:formKey="myTask">
+    <bpmn:userTask id="Task_077xpif" name="Approve Data" camunda:formKey="approveDataTask">
       <bpmn:incoming>SequenceFlow_1g078nz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_109q686</bpmn:outgoing>
     </bpmn:userTask>
@@ -33,7 +33,7 @@
     <bpmn:scriptTask id="Task_0m60snr" name="Retrieve Data" scriptFormat="JavaScript">
       <bpmn:incoming>SequenceFlow_0wx426m</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1g078nz</bpmn:outgoing>
-      <bpmn:script><![CDATA[var test = S({"test":"hello"});
+      <bpmn:script><![CDATA[var test = {"test":"hello"}
 execution.setVariable("test",test);]]></bpmn:script>
     </bpmn:scriptTask>
     <bpmn:scriptTask id="Task_04omgpq" name="Order items" scriptFormat="JavaScript">

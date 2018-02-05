@@ -31,7 +31,7 @@
 
 <script>
   import CamundaRest from '../services/camunda-rest';
-  
+
   const STATUS_INITIAL = 0;
   const STATUS_SAVING = 1;
   const STATUS_SUCCESS = 2;
@@ -44,7 +44,7 @@
         uploadedFiles: [],
         uploadError: null,
         currentStatus: null,
-        uploadFieldName: 'data',
+        uploadFieldName: 'data'
       };
     },
     computed: {
@@ -59,7 +59,7 @@
       },
       isFailed() {
         return this.currentStatus === STATUS_FAILED;
-      },
+      }
     },
     methods: {
       reset() {
@@ -93,11 +93,11 @@
           });
         // save it
         this.save(formData);
-      },
+      }
     },
     mounted() {
       this.reset();
-    },
+    }
   };
 </script>
 
