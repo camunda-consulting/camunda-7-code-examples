@@ -2,6 +2,10 @@
   <div>
     <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
         <h1>Deploy a process</h1>
+        <p>
+          If this is the first time you are running this application, you might want to upload an example BPMN process. All you need to do is to upload the example BPMN file (e.g. choose the BPMN file in /examples/myprocess/myprocess.bpmn).
+          After uploading the process you should probably go to "Start Process" and choose e.g. the "My Process" Process.
+        </p>
         <div class="dropbox">
           <input type="file" :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = 1" class="input-file">
             <p v-if="isInitial">

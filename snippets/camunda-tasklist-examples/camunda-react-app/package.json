@@ -1,5 +1,7 @@
 {
   "name": "camunda-react-app",
+  "description": "Example Camunda Tasklist based on react redux",
+  "author": "Felix Mueller <felix.mueller@camunda.com>",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",

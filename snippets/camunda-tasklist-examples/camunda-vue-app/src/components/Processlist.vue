@@ -23,8 +23,7 @@ import CamundaRest from '../services/camunda-rest';
 export default {
   data() {
     return {
-      processDefinitions: [],
-      errors: []
+      processDefinitions: []
     };
   },
 
@@ -32,7 +31,7 @@ export default {
     CamundaRest.getProcessDefinitions().then((response) => {
       this.processDefinitions = response.data;
     }).catch((e) => {
-      this.errors.push(e);
+      console.error(e);
     });
   }
 };
