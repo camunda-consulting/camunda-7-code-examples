@@ -29,6 +29,14 @@ export const fetchFormKey = (processDefinitionKey) => ({
   }
 })
 
+export const fetchProcessDefinitionXML = (processDefinitionId) => ({
+  [CALL_API]: {
+    types: [ AT.PROCESS_DEFINITION_XML_REQUEST, AT.PROCESS_DEFINITION_XML_SUCCESS, AT.PROCESS_DEFINITION_XML_FAILURE ],
+    endpoint: `/process-definition/${processDefinitionId}/xml`,
+    schema: Schemas.PROCESS_DEFINITION_XML
+  }
+})
+
 export const postProcessInstance = (processDefinitionKey, values) => ({
   [CALL_API]: {
     types: [ AT.NEW_PROCESS_INSTANCE_REQUEST, AT.NEW_PROCESS_INSTANCE_SUCCESS, AT.NEW_PROCESS_INSTANCE_FAILURE ],

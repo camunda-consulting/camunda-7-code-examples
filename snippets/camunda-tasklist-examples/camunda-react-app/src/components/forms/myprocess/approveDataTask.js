@@ -12,9 +12,9 @@ let SimpleForm = props => {
       <legend>Approve Form</legend>
       <Field name='lastName' component={InputField} label='Last Name' placeholder='Last Name'
         validate={[ Validation.required, Validation.maxLength15, Validation.minLength2 ]}/>
-      <Field name='idea' component={TextAreaField} label='Idea'/>
+      <Field name='items' component={TextAreaField} label='Items'/>
       <Form.Group>
-        <Field name='approve' component={CheckboxField} label='Approve'/>
+        <Field name='approved' component={CheckboxField} label='Approve'/>
       </Form.Group>
 
       <Form.Field control={Button} primary type='submit'>Complete</Form.Field>

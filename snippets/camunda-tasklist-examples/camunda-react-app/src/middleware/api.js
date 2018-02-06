@@ -37,6 +37,10 @@ const processDefinitionSchema = new schema.Entity('processDefinition', {}, {
   name: processDefinition => processDefinition.name
 })
 
+const processDefinitionXMLSchema = new schema.Entity('processDefinitionXML', {}, {
+
+});
+
 const formKeySchema = new schema.Entity('formKey', {}, {
   idAttribute: 'test',
 });
@@ -75,6 +79,7 @@ const processDeploymentSchema = new schema.Entity('processDeployment', {}, {})
 export const Schemas = {
   PROCESS_DEFINITION: processDefinitionSchema,
   PROCESS_DEFINITION_ARRAY: [processDefinitionSchema],
+  PROCESS_DEFINITION_XML: processDefinitionXMLSchema,
   FORM_KEY: formKeySchema,
   TASK: taskSchema,
   TASK_ARRAY: [taskSchema],

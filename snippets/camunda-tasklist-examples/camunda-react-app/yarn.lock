@@ -1087,6 +1087,29 @@ boxen@^0.6.0:
     string-width "^1.0.1"
     widest-line "^1.0.0"
 
+bpmn-js@0.23.2:
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/bpmn-js/-/bpmn-js-0.23.2.tgz#f2c22a6700bff0f2ad46d0442b5eab0c4f9c992c"
+  dependencies:
+    bpmn-moddle "^0.14.1"
+    diagram-js "^0.22.1"
+    diagram-js-direct-editing "^0.19.0"
+    diagram-js-origin "^0.15.2"
+    ids "^0.2.0"
+    inherits "^2.0.1"
+    lodash "^3.0.1"
+    min-dom "^0.2.0"
+    object-refs "^0.1.1"
+    tiny-svg "^0.1.3"
+
+bpmn-moddle@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/bpmn-moddle/-/bpmn-moddle-0.14.1.tgz#99ac5614d7402669f6c1187cb6389d7a022a968d"
+  dependencies:
+    lodash "^3.0.0"
+    moddle "^1.0.0"
+    moddle-xml "^1.1.1"
+
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"
@@ -1478,6 +1501,25 @@ component-bind@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/component-bind/-/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
 
+component-classes@^1.2.3:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/component-classes/-/component-classes-1.2.6.tgz#c642394c3618a4d8b0b8919efccbbd930e5cd691"
+  dependencies:
+    component-indexof "0.0.3"
+
+component-closest@*, component-closest@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/component-closest/-/component-closest-0.1.4.tgz#5b72fc52d90607e75115cafdc3b07e27348de71b"
+  dependencies:
+    component-matches-selector "~0.1.5"
+
+component-delegate@^0.2.3:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/component-delegate/-/component-delegate-0.2.4.tgz#dc5028759ea681bea84a3d6bbd650207c3beb138"
+  dependencies:
+    component-closest "*"
+    component-event "*"
+
 component-emitter@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.1.2.tgz#296594f2753daa63996d2af08d15a95116c9aec3"
@@ -1486,9 +1528,27 @@ component-emitter@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
+component-event@*, component-event@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/component-event/-/component-event-0.1.4.tgz#3de78fc28782381787e24bf2a7c536bf0142c9b4"
+
+component-indexof@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/component-indexof/-/component-indexof-0.0.3.tgz#11d091312239eb8f32c8f25ae9cb002ffe8d3c24"
+
 component-inherit@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/component-inherit/-/component-inherit-0.0.3.tgz#645fc4adf58b72b649d5cae65135619db26ff143"
+
+component-matches-selector@^0.1.5, component-matches-selector@~0.1.5:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/component-matches-selector/-/component-matches-selector-0.1.6.tgz#7b630e04e7e0c3b0019f31749fd70af5ed8b972e"
+  dependencies:
+    component-query "*"
+
+component-query@*, component-query@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/component-query/-/component-query-0.0.3.tgz#07f49dab7071fa9606725df53e607f468acdaacf"
 
 compressible@~2.0.11:
   version "2.0.12"
@@ -1944,6 +2004,35 @@ di@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/di/-/di-0.0.1.tgz#806649326ceaa7caa3306d75d985ea2748ba913c"
 
+diagram-js-direct-editing@^0.19.0:
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/diagram-js-direct-editing/-/diagram-js-direct-editing-0.19.0.tgz#7d9e8e65c24357e4b799dc955928c54024df37b0"
+  dependencies:
+    lodash "^3.0.1"
+    min-dom "^0.2.0"
+
+diagram-js-origin@^0.15.2:
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/diagram-js-origin/-/diagram-js-origin-0.15.2.tgz#9ce0a93977bb3c361d63cc17dd89dfa9c485df2e"
+  dependencies:
+    tiny-svg "^0.1.0"
+
+diagram-js@^0.22.1:
+  version "0.22.5"
+  resolved "https://registry.yarnpkg.com/diagram-js/-/diagram-js-0.22.5.tgz#80fd03f6895b338de8880ec99d5d960a403f51de"
+  dependencies:
+    didi "^0.1.0"
+    hammerjs "^2.0.1"
+    inherits "^2.0.1"
+    lodash "^3.0.1"
+    min-dom "^0.2.0"
+    object-refs "^0.1.1"
+    tiny-svg "^0.1.3"
+
+didi@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/didi/-/didi-0.1.1.tgz#686e44691b9ca52bab1b89c3c66a8174b3249864"
+
 diff@^3.2.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
@@ -2031,6 +2120,10 @@ domhandler@2.1:
   resolved "https://registry.yarnpkg.com/domhandler/-/domhandler-2.1.0.tgz#d2646f5e57f6c3bab11cf6cb05d3c0acf7412594"
   dependencies:
     domelementtype "1"
+
+domify@^1.3.1:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/domify/-/domify-1.4.0.tgz#11483617f764f8695975b4bdc79b14f0803b629b"
 
 domutils@1.1:
   version "1.1.6"
@@ -2984,6 +3077,10 @@ gzip-size@3.0.0:
   dependencies:
     duplexer "^0.1.1"
 
+hammerjs@^2.0.1:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -3062,6 +3159,10 @@ hash.js@^1.0.0, hash.js@^1.0.3:
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.0"
+
+hat@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/hat/-/hat-0.0.3.tgz#bb014a9e64b3788aed8005917413d4ff3d502d8a"
 
 hawk@3.1.3, hawk@~3.1.3:
   version "3.1.3"
@@ -3237,6 +3338,12 @@ icss-utils@^2.1.0:
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-2.1.0.tgz#83f0a0ec378bf3246178b6c2ad9136f135b1c962"
   dependencies:
     postcss "^6.0.1"
+
+ids@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ids/-/ids-0.2.0.tgz#5835ab9272c154b5c42e9b61ffb2a31ad6232853"
+  dependencies:
+    hat "^0.0.3"
 
 ieee754@^1.1.4:
   version "1.1.8"
@@ -4151,7 +4258,7 @@ lodash.uniq@^4.5.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lodash@^3.8.0:
+lodash@^3.0.0, lodash@^3.0.1, lodash@^3.8.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
@@ -4328,6 +4435,18 @@ mimic-fn@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.1.0.tgz#e667783d92e89dbd342818b5230b9d62a672ad18"
 
+min-dom@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/min-dom/-/min-dom-0.2.0.tgz#7f1a3f8ac85c05adee7b3f40e00c52803075cd5d"
+  dependencies:
+    component-classes "^1.2.3"
+    component-closest "^0.1.4"
+    component-delegate "^0.2.3"
+    component-event "^0.1.4"
+    component-matches-selector "^0.1.5"
+    component-query "^0.0.3"
+    domify "^1.3.1"
+
 minimalistic-assert@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.0.tgz#702be2dda6b37f4836bcb3f5db56641b64a1d3d3"
@@ -4361,6 +4480,21 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moddle-xml@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/moddle-xml/-/moddle-xml-1.1.1.tgz#e866d5114ab7a075d455ae40effd94ee6d231baf"
+  dependencies:
+    lodash "^3.0.0"
+    moddle "^1.0.0"
+    sax "~0.6.0"
+    tiny-stack "^0.1.0"
+
+moddle@^1.0.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/moddle/-/moddle-1.2.1.tgz#59f75e2adc7634ba1bf966d433c43616672f1ce9"
+  dependencies:
+    lodash "^3.0.0"
 
 ms@0.7.1:
   version "0.7.1"
@@ -4580,6 +4714,10 @@ object-hash@^1.1.4:
 object-keys@^1.0.8:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
+
+object-refs@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/object-refs/-/object-refs-0.1.1.tgz#353f75da633ea846a61ef0df04ec6ba941f86fc4"
 
 object.omit@^2.0.0:
   version "2.0.1"
@@ -5863,6 +6001,10 @@ sax@^1.2.1, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
+sax@~0.6.0:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-0.6.1.tgz#563b19c7c1de892e09bfc4f2fc30e3c27f0952b9"
+
 schema-utils@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
@@ -6432,6 +6574,14 @@ timers-browserify@^2.0.4:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.4.tgz#96ca53f4b794a5e7c0e1bd7cc88a372298fa01e6"
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-stack@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-stack/-/tiny-stack-0.1.0.tgz#1a848173fc0bfc54e77bb2e9504d2d3c8ad79621"
+
+tiny-svg@^0.1.0, tiny-svg@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/tiny-svg/-/tiny-svg-0.1.3.tgz#f3b3c9810c7127584a7780e16e8108dc9da72e08"
 
 tmp@0.0.x, tmp@^0.0.33:
   version "0.0.33"

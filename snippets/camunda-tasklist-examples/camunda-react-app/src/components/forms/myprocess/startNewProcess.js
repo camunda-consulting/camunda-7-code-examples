@@ -12,11 +12,11 @@ const SimpleForm = props => {
         validate={[ Validation.required, Validation.maxLength15, Validation.minLength2 ]}/>
       <Field name='lastName' component={InputField} label='Last Name' placeholder='Last Name'
         validate={[ Validation.required, Validation.maxLength15, Validation.minLength2 ]} />
-      <Field name='idea' component={TextAreaField} label='Idea' />
       <Field name='email' component={InputField} label='E-Mail' placeholder='E-Mail'
-        validate={[ Validation.required, Validation.maxLength15, Validation.minLength2, Validation.email ]}/>
+        validate={[ Validation.required, Validation.minLength2, Validation.email ]}/>
+      <Field name='items' component={TextAreaField} label='Items' />
 
-      <Form.Field control={Button} primary type='submit'>Start instance</Form.Field>
+      <Form.Field control={Button} primary type='submit'>Order!</Form.Field>
     </Form>
   )
 }

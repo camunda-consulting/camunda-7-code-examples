@@ -18,6 +18,19 @@ export const loadProcessDefinitions = (processDefinitionId) => (dispatch, getSta
   return dispatch(ProcessDefinitionActions.fetchProcessDefinitions(processDefinitionId))
 }
 
+export const loadProcessDefinitionsWithXML = (processDefinitionId) => (dispatch, getState) => {
+  return dispatch(ProcessDefinitionActions.fetchProcessDefinitions(processDefinitionId)).then((data) => {
+    data.response.result.forEach((id) => {
+      dispatch(ProcessDefinitionActions.fetchProcessDefinitionXML(id))
+    });
+
+  })
+}
+
+export const loadProcessDefinitionXML = (processDefinitionId) => (dispatch, getState) => {
+  return dispatch(ProcessDefinitionActions.fetchProcessDefinitionXML(processDefinitionId))
+}
+
 export const loadFormKey = (processDefinitionKey) => (dispatch, getState) => {
   return dispatch(ProcessDefinitionActions.fetchFormKey(processDefinitionKey))
 }
