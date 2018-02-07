@@ -1,0 +1,15 @@
+<div class="ui grid">
+  <div class="ten wide column centered">
+    <h1>{{title}}</h1>
+  </div>
+  <div class="ten wide column centered">
+    <div class="ui pointing menu inverted">
+      <a routerLink="/home" class="item">Home</a>
+      <a routerLink="/processlist" class="item">Start Process</a>
+      <a routerLink="/tasklist" class="item">Tasklist</a>
+    </div>
+    <div class="ui segment">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
