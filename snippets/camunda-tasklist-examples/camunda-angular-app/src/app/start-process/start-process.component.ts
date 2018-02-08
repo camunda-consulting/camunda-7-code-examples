@@ -1,6 +1,7 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit, ViewChild,
   ViewContainerRef, ComponentFactoryResolver  } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { CamundaRestService } from '../camunda-rest.service';
 import { GenericForm } from '../generic-form.component';
@@ -21,9 +22,11 @@ export class StartProcessComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    if (this.route.paramMap && this.route.paramMap.source) {
-      this.processDefinitionKey = this.route.paramMap.source.value.processdefinitionkey;
-      this.loadTaskKey();
+    if (this.route.params != null) {
+      this.route.params.subscribe(params => {
+        this.processDefinitionKey = params['processdefinitionkey'];
+        this.loadTaskKey();
+      });
     }
   }
 
