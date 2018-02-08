@@ -15,6 +15,7 @@ export class GenericForm implements OnChanges {
   @ViewChild('dynamic', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef
 
   @Input() formKey:String = null;
+  @Input() taskId:String = null;
   private rootViewContainer = null;
   private myAddonModule = null;
 
@@ -41,7 +42,8 @@ export class GenericForm implements OnChanges {
 
   public addDynamicComponent(formKey: String) {
     console.log(MyAddon)
-    const factory = this.factoryResolver.resolveComponentFactory(MyAddon["StartNewProcessComponent"])
+    console.log(formKey)
+    const factory = this.factoryResolver.resolveComponentFactory(MyAddon[formKey+'Component'])
     const component = factory.create(this.rootViewContainer.parentInjector)
 
     this.rootViewContainer.insert(component.hostView)

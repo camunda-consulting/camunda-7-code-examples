@@ -1,23 +1,28 @@
 import { CamundaRestService } from '../../camunda-rest.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-export class StartProcessInstanceComponent {
+export class CompleteTaskComponent {
   model
   submitted
   route: ActivatedRoute
+  router: Router
   camundaRestService: CamundaRestService
 
   constructor(route: ActivatedRoute,
+    router: Router,
     camundaRestService: CamundaRestService,
     ) {
-
+      this.route = route;
+      this.router = router;
+      this.camundaRestService = camundaRestService;
   }
   onSubmit() {
     this.route.params.subscribe(params => {
-      const processDefinitionKey = params['processdefinitionkey'];
+      const taskId = params['id'];
       const variables = this.generateVariablesFromFormFields();
-      this.camundaRestService.postProcessInstance(processDefinitionKey, variables).subscribe();
+      this.camundaRestService.postCompleteTask(taskId, variables).subscribe();
       this.submitted = true;
+      this.router.navigate(['/tasklist']);
     });
   }
   generateVariablesFromFormFields() {

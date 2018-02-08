@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProcessDefinition } from './schemas/ProcessDefinition';
+import { Task } from './schemas/Task';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,6 +16,30 @@ export class CamundaRestService {
 
   constructor(private http: HttpClient) {
 
+  }
+
+  getTasks(): Observable<Task[]> {
+    const endpoint = `${this.engineRestUrl}task?sortBy=created&sortOrder=desc&maxResults=10`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched tasks`)),
+      catchError(this.handleError('getTasks', []))
+    );
+  }
+
+  getTaskFormKey(taskId: String): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task/${taskId}/form`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched taskform`)),
+      catchError(this.handleError('getTaskFormKey', []))
+    );
+  }
+
+  postCompleteTask(taskId: String, variables: Object): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task/${taskId}/complete`;
+    return this.http.post<any>(endpoint, variables).pipe(
+      tap(tasks => this.log(`posted complete task`)),
+      catchError(this.handleError('postCompleteTask', []))
+    );
   }
 
   getProcessDefinitionTaskKey(processDefinitionKey): Observable<any> {
@@ -35,8 +60,8 @@ export class CamundaRestService {
   postProcessInstance(processDefinitionKey, variables): Observable<any> {
     const endpoint = `${this.engineRestUrl}process-definition/key/${processDefinitionKey}/start`;
     return this.http.post<any>(endpoint, variables).pipe(
-      tap(processDefinitions => this.log(`fetched processDefinitions`)),
-      catchError(this.handleError('getProcessDefinitions', []))
+      tap(processDefinitions => this.log(`posted process instance`)),
+      catchError(this.handleError('postProcessInstance', []))
     );
   }
 

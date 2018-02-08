@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-import { StartNewProcessComponent } from './startNewProcess.component';
+import { startNewProcessComponent } from './startNewProcess.component';
+import { approveDataTaskComponent } from './approveDataTask.component';
+
 
 @NgModule({
-  entryComponents: [StartNewProcessComponent],
-  declarations: [StartNewProcessComponent],
+  entryComponents: [startNewProcessComponent,approveDataTaskComponent],
+  declarations: [startNewProcessComponent,approveDataTaskComponent],
   imports: [FormsModule],
-  exports: [StartNewProcessComponent]
+  exports: [startNewProcessComponent,approveDataTaskComponent]
 })
 export class MyAddonModule {}
 
-export { StartNewProcessComponent } from './startNewProcess.component';
+export { startNewProcessComponent } from './startNewProcess.component';
+export { approveDataTaskComponent } from './approveDataTask.component';

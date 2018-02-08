@@ -9,12 +9,12 @@ import { MyProcessData } from '../../schemas/MyProcessData';
   templateUrl: './startNewProcess.component.html',
   styleUrls: []
 })
-export class StartNewProcessComponent extends StartProcessInstanceComponent {
+export class startNewProcessComponent extends StartProcessInstanceComponent {
   submitted:boolean = false;
   model = new MyProcessData('','',false);
 
-  constructor(private route: ActivatedRoute,
-    private camundaRestService: CamundaRestService,) {
+  constructor(route: ActivatedRoute,
+    camundaRestService: CamundaRestService,) {
     super(route, camundaRestService);
   }
 
