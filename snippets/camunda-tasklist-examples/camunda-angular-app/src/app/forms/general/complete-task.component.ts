@@ -25,6 +25,16 @@ export class CompleteTaskComponent {
       this.router.navigate(['/tasklist']);
     });
   }
+  loadExistingVariables(taskId: String, variableNames: String) {
+    this.camundaRestService.getVariablesForTask(taskId, variableNames).subscribe((result) => {
+      this.generateModelFromVariables(result);
+    });
+  }
+  generateModelFromVariables(variables) {
+    Object.keys(variables).forEach((variableName) => {
+      this.model[variableName] = variables[variableName].value;
+    });
+  }
   generateVariablesFromFormFields() {
     const variables = {
       variables: { }

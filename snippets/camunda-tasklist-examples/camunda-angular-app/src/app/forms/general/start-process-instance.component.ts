@@ -8,9 +8,10 @@ export class StartProcessInstanceComponent {
   camundaRestService: CamundaRestService
 
   constructor(route: ActivatedRoute,
-    camundaRestService: CamundaRestService,
+    camundaRestService: CamundaRestService
     ) {
-
+      this.route = route;
+      this.camundaRestService = camundaRestService;
   }
   onSubmit() {
     this.route.params.subscribe(params => {

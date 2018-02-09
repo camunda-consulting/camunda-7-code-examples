@@ -12,7 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class CamundaRestService {
-  private engineRestUrl = 'http://localhost:8080/engine-rest/'
+  private engineRestUrl = '/engine-rest/'
 
   constructor(private http: HttpClient) {
 
@@ -31,6 +31,14 @@ export class CamundaRestService {
     return this.http.get<any>(endpoint).pipe(
       tap(form => this.log(`fetched taskform`)),
       catchError(this.handleError('getTaskFormKey', []))
+    );
+  }
+
+  getVariablesForTask(taskId: String, variableNames: String): Observable<any> {
+    const endpoint = `${this.engineRestUrl}task/${taskId}/form-variables?variableNames=${variableNames}`;
+    return this.http.get<any>(endpoint).pipe(
+      tap(form => this.log(`fetched variables`)),
+      catchError(this.handleError('getVariablesForTask', []))
     );
   }
 

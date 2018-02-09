@@ -1,7 +1,7 @@
 <div class="container">
   <div [hidden]="submitted">
     <h1>Approve Task</h1>
-    <form (ngSubmit)="onSubmit()" #approveDataTask="ngForm" class="ui form">
+    <form (ngSubmit)="onSubmit()" (ngModelChange)="changedExtraHandler($event)" #approveDataTask="ngForm" class="ui form">
       <div class="field">
         <label for="firstName">First Name</label>
         <input type="text" id="firstName"
@@ -17,7 +17,13 @@
       </div>
 
       <div class="field">
-        <button type="submit" class="ui button" [disabled]="!approveDataTask.form.valid">Start Process</button>
+        <label for="approved">Approve?</label>
+        <input type="checkbox" id="approved"
+               [(ngModel)]="model.approved" name="approved" #name="ngModel">
+      </div>
+
+      <div class="field">
+        <button type="submit" class="ui button" [disabled]="!approveDataTask.form.valid">Complete</button>
       </div>
     </form>
   </div>

@@ -24,8 +24,12 @@ export class TasklistComponent implements OnInit {
     this.getTasks();
     if (this.route.params != null) {
       this.route.params.subscribe(params => {
-        this.taskId = params['id'];
-        this.getFormKey();
+        if (params['id'] != null) {
+          this.taskId = params['id'];
+          this.getFormKey();
+        } else {
+          this.getTasks();
+        }
       });
     }
   }
