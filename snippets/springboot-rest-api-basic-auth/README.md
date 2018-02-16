@@ -2,6 +2,8 @@
 
 This is an example project created with the Spring Boot Archetype to showcase how to secure the embedded REST API using Camunda's Authentication Filter.
 
+More detailed information about how the filter works can be found in the [Docs](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/).
+
 #### Show me the important parts
 
 All you have to do is to add a `FilterRegistrationBean` to your Spring Boot app which registers a `ProcessEngineAuthenticationFilter`:
