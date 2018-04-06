@@ -7,7 +7,6 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
 @EnableZuulProxy
-@EnableProcessApplication("webapp-app")
 public class CamundaApplication {
   public static void main(String... args) {
     SpringApplication.run(CamundaApplication.class, args);

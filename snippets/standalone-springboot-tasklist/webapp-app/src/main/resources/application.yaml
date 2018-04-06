@@ -5,7 +5,7 @@ spring.datasource:
 camunda:
   bpm:
     job-execution:
-      deployment-aware: true
+      enabled: false
 
 server.port: 8081
 
