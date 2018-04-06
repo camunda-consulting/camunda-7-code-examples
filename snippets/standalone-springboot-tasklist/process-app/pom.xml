@@ -59,7 +59,7 @@
 
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+      <artifactId>camunda-bpm-spring-boot-starter</artifactId>
       <version>${camundaSpringBoot.version}</version>
     </dependency>
 
@@ -104,6 +104,11 @@
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <!-- Add your own dependencies here, if in compile scope, they are added to the jar -->
