@@ -14,6 +14,7 @@ This project implements a simplified version of this architecture using [docker-
     - *optimizePrivate*: the private net Optimize and the proxy are running in (it is the left box in the figure above)
     - *company*: the company network that enables access to Camunda engine's REST API
 - starts a Camunda Optimize standard installation inside a [docker image](optimize/Dockerfile), which is connected only to *optimizePrivate*
+    - configured to reach two engines with URLs ```http://<proxy>/engineOne``` and ```http://<proxy>/engineTwo```
 - use an [nginx image](https://hub.docker.com/_/nginx/) to start nginx with [custom configation](proxy.conf), which
     - is connected to *optimizePrivate* AND *company*
     - proxies requests to ```/engineOne``` to the first engine's REST-API
@@ -25,7 +26,7 @@ This project implements a simplified version of this architecture using [docker-
     - use [this lovely spring-security approach](https://github.com/camunda-consulting/code/tree/master/snippets/springboot-security-sso) to provide custom authentication
     - require every incoming request to contain a custom HTTP authentication header
     - are NOT secured by HTTPS, to simplify matters
-    - deploy and start a demo process, [Process One](processOne.bmpn) and [Process Two](processTwo.bpmn) respectively
+    - deploy and start a demo process, [Process One](processOne.bpmn) and [Process Two](processTwo.bpmn) respectively
 
 ## Try it out
 
