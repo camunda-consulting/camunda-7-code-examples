@@ -13,8 +13,9 @@ This project implements a simplified version of this architecture using [docker-
 - defines two networks:
     - *optimizePrivate*: the private net Optimize and the proxy are running in (it is the left box in the figure above)
     - *company*: the company network that enables access to Camunda engine's REST API
-- starts a Camunda Optimize standard installation inside a [docker image](optimize/Dockerfile), which is connected only to *optimizePrivate*
-    - configured to reach two engines with URLs ```http://<proxy>/engineOne``` and ```http://<proxy>/engineTwo```
+- starts a Camunda Optimize standard installation inside a [docker image](optimize/Dockerfile, which is
+    - connected to *optimizePrivate* only
+    - [configured](optimize.yml) to reach two engines with URLs ```http://<proxy>/engineOne``` and ```http://<proxy>/engineTwo```
 - use an [nginx image](https://hub.docker.com/_/nginx/) to start nginx with [custom configation](proxy.conf), which
     - is connected to *optimizePrivate* AND *company*
     - proxies requests to ```/engineOne``` to the first engine's REST-API
@@ -36,6 +37,12 @@ This project implements a simplified version of this architecture using [docker-
 - put the Camunda Optimize tarball into place
 ```
 cp <my download foler>/camunda-optimize-2.0.0-full.tar.gz ./optimize/camunda-optimize-2.0.0-full.tar.gz
+```
+- compile and package the engine
+```
+cd secure-engine
+mvn clean package
+cd ..
 ```
 
 ### Bring it up
