@@ -1,0 +1,27 @@
+---
+container:
+  host: 0.0.0.0
+  ports:
+    http: 8090
+engines:
+  'Engine One':
+    name: default
+    rest: http://proxy/engineOne
+    authentication:
+      accessGroup: ''
+      enabled: true
+      password: 'thisIsOnlyKnownToOptimize'
+      user: 'optimize'
+  'Engine Two':
+    name: default
+    rest: http://proxy/engineTwo
+    authentication:
+      accessGroup: ''
+      enabled: true
+      password: 'thisIsOnlyKnownToOptimize'
+      user: 'optimize'
+
+es:
+  host: localhost
+  index: optimize
+  port: 9300

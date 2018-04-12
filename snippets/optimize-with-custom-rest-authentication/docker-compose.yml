@@ -1,0 +1,51 @@
+version: "3"
+services:
+
+  engineOne:
+    image: camunda-secure-optimize-secure-engine
+    build: secure-engine
+    volumes:
+      - ./processOne.bpmn:/process.bpmn
+     # - ./shared.bpmn:/shared.bpmn
+    networks:
+      - company
+    environment:
+      - CUSTOM_TOKEN=secretOne # REST-API wants to see this in 'Custom-Auth-Token' header
+    ports:
+      - 8081:8080 # just for testing
+
+  engineTwo:
+    image: camunda-secure-optimize-secure-engine
+    volumes:
+      - ./processTwo.bpmn:/process.bpmn
+      #- ./shared.bpmn:/shared.bpmn
+    networks:
+      - company
+    environment:
+      - CUSTOM_TOKEN=secretTwo # REST-API wants to see this in 'Custom-Auth-Token' header
+    ports:
+      - 8082:8080 # just for testing
+  
+  proxy:
+    image: nginx
+    volumes:
+      - ./proxy.conf:/etc/nginx/conf.d/default.conf
+      - ./proxy.htpasswd:/htpasswd
+    networks:
+      - company
+      - optimizePrivate
+    ports:
+      - 8080:80 # just for testing
+  
+  optimize:
+    build: optimize
+    volumes:
+      - ./optimize.yml:/camunda/environment/environment-config.yaml
+    networks:
+      - optimizePrivate
+    ports:
+      - 8090:8090
+
+networks:
+  optimizePrivate:
+  company:
