@@ -1,0 +1,16 @@
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/process-engine
+  username: camunda
+  password: camunda
+camunda:
+  bpm:
+    job-execution:
+      enabled: false
+
+server.port: 8081
+
+zuul:
+  routes:
+    forms:
+      path: /myappforms/**
+      url: http://localhost:8080/forms

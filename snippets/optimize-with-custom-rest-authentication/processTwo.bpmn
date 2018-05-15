@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0g1huif" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.12.0-alpha-5">
+  <bpmn:process id="ProcessTwo" name="Process Two" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_02cs42y</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT5S</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_02cs42y" sourceRef="StartEvent_1" targetRef="Task_0y68ic9" />
+    <bpmn:scriptTask id="Task_0y68ic9" name="Generate data" scriptFormat="javascript" camunda:resultVariable="data">
+      <bpmn:incoming>SequenceFlow_02cs42y</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ogst9p</bpmn:outgoing>
+      <bpmn:script><![CDATA["datapoint_" + Math.round(Math.random()*50)]]></bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:endEvent id="EndEvent_1o3rro0">
+      <bpmn:incoming>SequenceFlow_0ogst9p</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0ogst9p" sourceRef="Task_0y68ic9" targetRef="EndEvent_1o3rro0" />
+    <bpmn:textAnnotation id="TextAnnotation_18r0fl7">
+      <bpmn:text>Process Two</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0e2ltlm" sourceRef="StartEvent_1" targetRef="TextAnnotation_18r0fl7" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ProcessTwo">
+      <bpmndi:BPMNShape id="StartEvent_07k47ax_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="146" y="138" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02cs42y_di" bpmnElement="SequenceFlow_02cs42y">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="259" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="234" y="98.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ScriptTask_03kx7n4_di" bpmnElement="Task_0y68ic9">
+        <dc:Bounds x="259" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1o3rro0_di" bpmnElement="EndEvent_1o3rro0">
+        <dc:Bounds x="409" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="427" y="141" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ogst9p_di" bpmnElement="SequenceFlow_0ogst9p">
+        <di:waypoint x="359" y="120" />
+        <di:waypoint x="409" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="384" y="98" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_18r0fl7_di" bpmnElement="TextAnnotation_18r0fl7">
+        <dc:Bounds x="209" y="22" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0e2ltlm_di" bpmnElement="Association_0e2ltlm">
+        <di:waypoint x="202" y="106" />
+        <di:waypoint x="247" y="52" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

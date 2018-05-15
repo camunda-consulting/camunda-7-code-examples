@@ -19,3 +19,6 @@ camunda-h2-dbs
 
 # Node.js
 node_modules
+
+# Finder
+**/.DS_Store
