@@ -13,11 +13,12 @@ In that way, authentication could be done in any (proprietary) Camunda specific 
 of this showcase.
 
 *Option 2:* Use any given Identity Management solution (e.g. keycloak, auth0, ...) and integrate it with Spring Security,
-then pass the authentication on to Camunda with a custom Camunda `AuthenticationFilter`. 
+then pass the authentication on to Camunda using Camunda's `AuthenticationFilter`. 
 Depending on what one needs to secure, one needs to add a [stateless filter](https://github.com/camunda-consulting/code/blob/master/snippets/springboot-security-sso/src/main/java/com/camunda/demo/filter/rest/StatelessUserAuthenticationFilter.java) for the REST API 
 (similar to `ProcessEngineAuthenticationFilter`, 
 see [here](https://github.com/camunda/camunda-bpm-platform/blob/master/engine-rest/engine-rest/src/main/java/org/camunda/bpm/engine/rest/security/auth/ProcessEngineAuthenticationFilter.java) )
-or a [session based one](https://github.com/camunda-consulting/code/blob/master/snippets/springboot-security-sso/src/main/java/com/camunda/demo/filter/webapp/SpringSecurityBasedUserAuthenticationFilter.java) for the web apps (similar to `AuthenticationFilter`, see [here](https://github.com/camunda/camunda-bpm-webapp/blob/master/src/main/java/org/camunda/bpm/webapp/impl/security/auth/AuthenticationFilter.java)).
+or a session based one for the web apps. For the latter, Camunda 7.9 introduced the [ContainerBasedAuthenticationFilter](https://github.com/camunda/camunda-bpm-webapp/blob/master/src/main/java/org/camunda/bpm/webapp/impl/security/auth/ContainerBasedAuthenticationFilter.java)
+that can be used in combination with a custom [Camunda AuthenticationProvider](https://github.com/camunda-consulting/code/blob/master/snippets/springboot-security-sso/src/main/java/com/camunda/demo/filter/webapp/SpringSecurityAuthenticationProvider.java).
  
 We also need to make sure that the existing AuthenticationFilter that is already used by the Web Apps does not interfere
 with our custom one. That means our filter should be first in the order, so that the existing one can serve as a fallback. 

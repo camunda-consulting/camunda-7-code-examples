@@ -13,15 +13,15 @@
     </description>
 
     <properties>
-        <camunda.version>7.8.0</camunda.version>
+        <camunda.version>7.9.0</camunda.version>
         <!--
         Adjust if you want to use EE:
         <camunda.version>7.8.0-ee</camunda.version>
         Make sure you also switch to the ee webapp dependency
         and EE repository below
         -->
-        <camundaSpringBoot.version>2.3.0</camundaSpringBoot.version>
-        <springBoot.version>1.5.7.RELEASE</springBoot.version>
+        <camundaSpringBoot.version>3.0.0</camundaSpringBoot.version>
+        <springBoot.version>2.0.2.RELEASE</springBoot.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -121,11 +121,6 @@
         </dependency>
 
         <!-- Add your own dependencies here, if in compile scope, they are added to the jar -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
