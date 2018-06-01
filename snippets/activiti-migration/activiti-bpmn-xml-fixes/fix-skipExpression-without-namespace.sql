@@ -1,6 +1,9 @@
 -- This is an example of how one could fix certain issues regarding a bpmn model in the database.
 -- In this case it's a missing activiti namespace
-select * from ACT_GE_BYTEARRAY where NAME_ LIKE '%.bpmn' and dbms_lob.instr(BYTES_, utl_raw.cast_to_raw(' skipExpression='))>0
+-- start /export/home/oracle/scripts/Camunda/fix-skipExpression-without-namespace.sql
+spool /export/home/oracle/scripts/Camunda/fix-skipExpression-without-namespace.txt
+
+select * from ACT_GE_BYTEARRAY where NAME_ LIKE '%.bpmn' and dbms_lob.instr(BYTES_, utl_raw.cast_to_raw(' skipExpression='))>0;
 
 CREATE OR REPLACE FUNCTION convert_to_clob(l_blob BLOB) RETURN CLOB IS
       l_clob         CLOB;
@@ -49,3 +52,9 @@ UPDATE ACT_GE_BYTEARRAY
                                    ' activiti:skipExpression=')
                             )
 	WHERE NAME_ LIKE '%.bpmn' and dbms_lob.instr(BYTES_, utl_raw.cast_to_raw(' skipExpression='))>0;
+
+drop function CONVERT_TO_BLOB;
+drop function CONVERT_TO_CLOB;
+
+commit;
+spool off

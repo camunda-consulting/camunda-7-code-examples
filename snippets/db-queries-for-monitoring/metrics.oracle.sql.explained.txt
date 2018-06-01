@@ -1,0 +1,154 @@
+Ohne 51
+
+Plan hash value: 3734246411
+---------------------------------------------------------------------------------------------------------------
+| Id  | Operation                 | Name                      | Rows  | Bytes |TempSpc| Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT          |                           | 49446 |    13M|       | 53866   (4)| 00:05:24 |
+|   1 |  SORT ORDER BY            |                           | 49446 |    13M|    14M| 53866   (4)| 00:05:24 |
+|   2 |   VIEW                    |                           | 49446 |    13M|       | 51029   (4)| 00:05:07 |
+|   3 |    SORT UNIQUE            |                           | 49446 |    12M|    74M| 51029   (4)| 00:05:07 |
+|   4 |     UNION-ALL             |                           |       |       |       |            |          |
+|   5 |      SORT AGGREGATE       |                           |     1 |       |       |     3  (34)| 00:00:01 |
+|   6 |       INDEX FAST FULL SCAN| SYS_C002160996            |   200 |       |       |     2   (0)| 00:00:01 |
+|   7 |      SORT AGGREGATE       |                           |     1 |       |       |    63   (5)| 00:00:01 |
+|   8 |       VIEW                |                           |    68 |       |       |    62   (4)| 00:00:01 |
+|   9 |        HASH UNIQUE        |                           |    68 |  5372 |       |    62   (4)| 00:00:01 |
+|  10 |         TABLE ACCESS FULL | ACT_RE_PROCDEF            |  7510 |   579K|       |    61   (2)| 00:00:01 |
+|  11 |      SORT AGGREGATE       |                           |     1 |       |       |    12  (17)| 00:00:01 |
+|  12 |       INDEX FAST FULL SCAN| SYS_C002161016            |  7510 |       |       |    10   (0)| 00:00:01 |
+|  13 |      SORT AGGREGATE       |                           |     1 |       |       | 18116   (7)| 00:01:49 |
+|  14 |       INDEX FAST FULL SCAN| ACT_IDX_HI_ACT_INST_START |  8420K|       |       |  2665   (6)| 00:00:16 |
+|  15 |      SORT AGGREGATE       |                           |     1 |       |       |  2324   (5)| 00:00:14 |
+|  16 |       INDEX FAST FULL SCAN| SYS_C002161090            |   791K|       |       |   883   (3)| 00:00:06 |
+|  17 |      SORT AGGREGATE       |                           |     1 |    10 |       |  8099   (2)| 00:00:49 |
+|* 18 |       TABLE ACCESS FULL   | ACT_HI_PROCINST           |   670K|  6552K|       |  5608   (2)| 00:00:34 |
+|  19 |      SORT AGGREGATE       |                           |     1 |    51 |       |  3939   (2)| 00:00:24 |
+|* 20 |       TABLE ACCESS FULL   | ACT_RU_EXECUTION          |   122K|  6121K|       |  2510   (2)| 00:00:16 |
+|  21 |      SORT AGGREGATE       |                           |     1 |       |       |  1345   (4)| 00:00:09 |
+|  22 |       INDEX FAST FULL SCAN| SYS_C002161001            |   397K|       |       |   622   (2)| 00:00:04 |
+|  23 |      SORT AGGREGATE       |                           |     1 |       |       |     1 (100)| 00:00:01 |
+|  24 |       INDEX FULL SCAN     | SYS_C002161017            |     1 |       |       |     0   (0)| 00:00:01 |
+|  25 |      SORT AGGREGATE       |                           |     1 |   257 |       |     3  (34)| 00:00:01 |
+|* 26 |       TABLE ACCESS FULL   | ACT_RU_TASK               |     1 |   257 |       |     2   (0)| 00:00:01 |
+|  27 |      SORT AGGREGATE       |                           |     1 |       |       |    10  (10)| 00:00:01 |
+|  28 |       INDEX FAST FULL SCAN| SYS_C002161027            |  5457 |       |       |     9   (0)| 00:00:01 |
+|  29 |      HASH GROUP BY        |                           |  5457 |  1721K|  1832K|   385   (2)| 00:00:03 |
+|  30 |       TABLE ACCESS FULL   | ACT_RU_EVENT_SUBSCR       |  5457 |  1721K|       |    36   (0)| 00:00:01 |
+|  31 |      SORT AGGREGATE       |                           |     1 |       |       |    22  (23)| 00:00:01 |
+|  32 |       INDEX FAST FULL SCAN| ACT_INX_RU_JOB_PRIORITY   | 43970 |       |       |    18   (6)| 00:00:01 |
+|  33 |      SORT AGGREGATE       |                           |     1 |   309 |       |  1057   (2)| 00:00:07 |
+|* 34 |       TABLE ACCESS FULL   | ACT_RU_JOB                |     1 |   309 |       |  1056   (2)| 00:00:07 |
+|  35 |      HASH GROUP BY        |                           |     1 |   322 |       |  1058   (2)| 00:00:07 |
+|* 36 |       TABLE ACCESS FULL   | ACT_RU_JOB                |     1 |   322 |       |  1056   (2)| 00:00:07 |
+|  37 |      SORT AGGREGATE       |                           |     1 |   309 |       |  1057   (2)| 00:00:07 |
+|* 38 |       TABLE ACCESS FULL   | ACT_RU_JOB                |     1 |   309 |       |  1056   (2)| 00:00:07 |
+|  39 |      SORT AGGREGATE       |                           |     1 |    13 |       |  1057   (2)| 00:00:07 |
+|* 40 |       TABLE ACCESS FULL   | ACT_RU_JOB                |   440 |  5720 |       |  1056   (2)| 00:00:07 |
+|  41 |      SORT AGGREGATE       |                           |     1 |    13 |       |  1056   (2)| 00:00:07 |
+|* 42 |       TABLE ACCESS FULL   | ACT_RU_JOB                |   440 |  5720 |       |  1055   (2)| 00:00:07 |
+|  43 |      SORT AGGREGATE       |                           |     1 |   270 |       |  1055   (2)| 00:00:07 |
+|* 44 |       TABLE ACCESS FULL   | ACT_RU_JOB                |   110 | 29700 |       |  1054   (1)| 00:00:07 |
+|  45 |      HASH GROUP BY        |                           | 43970 |    10M|    11M|  3281   (1)| 00:00:20 |
+|  46 |       TABLE ACCESS FULL   | ACT_RU_JOB                | 43970 |    10M|       |  1054   (1)| 00:00:07 |
+|  47 |      SORT AGGREGATE       |                           |     1 |       |       |  7088   (4)| 00:00:43 |
+|  48 |       INDEX FAST FULL SCAN| SYS_C002161023            |  1907K|       |       |  3605   (2)| 00:00:22 |
+---------------------------------------------------------------------------------------------------------------
+Query Block Name / Object Alias (identified by operation id):
+-------------------------------------------------------------
+   1 - SEL$1
+   2 - SET$1  / from$_subquery$_001@SEL$1
+   3 - SET$1
+   5 - SEL$2
+   6 - SEL$2  / ACT_RE_DEPLOYMENT@SEL$2
+   7 - SEL$3
+   8 - SEL$4  / from$_subquery$_003@SEL$3
+   9 - SEL$4
+  10 - SEL$4  / ACT_RE_PROCDEF@SEL$4
+  11 - SEL$5
+  12 - SEL$5  / ACT_RE_PROCDEF@SEL$5
+  13 - SEL$6
+  14 - SEL$6  / ACT_HI_ACTINST@SEL$6
+  15 - SEL$7
+  16 - SEL$7  / ACT_HI_PROCINST@SEL$7
+  17 - SEL$8
+  18 - SEL$8  / ACT_HI_PROCINST@SEL$8
+  19 - SEL$9
+  20 - SEL$9  / ACT_RU_EXECUTION@SEL$9
+  21 - SEL$10
+  22 - SEL$10 / ACT_RU_EXECUTION@SEL$10
+  23 - SEL$11
+  24 - SEL$11 / ACT_RU_TASK@SEL$11
+  25 - SEL$12
+  26 - SEL$12 / ACT_RU_TASK@SEL$12
+  27 - SEL$13
+  28 - SEL$13 / ACT_RU_EVENT_SUBSCR@SEL$13
+  29 - SEL$14
+  30 - SEL$14 / ACT_RU_EVENT_SUBSCR@SEL$14
+  31 - SEL$15
+  32 - SEL$15 / ACT_RU_JOB@SEL$15
+  33 - SEL$16
+  34 - SEL$16 / ACT_RU_JOB@SEL$16
+  35 - SEL$17
+  36 - SEL$17 / ACT_RU_JOB@SEL$17
+  37 - SEL$18
+  38 - SEL$18 / ACT_RU_JOB@SEL$18
+  39 - SEL$19
+  40 - SEL$19 / ACT_RU_JOB@SEL$19
+  41 - SEL$20
+  42 - SEL$20 / ACT_RU_JOB@SEL$20
+  43 - SEL$21
+  44 - SEL$21 / ACT_RU_JOB@SEL$21
+  45 - SEL$22
+  46 - SEL$22 / ACT_RU_JOB@SEL$22
+  47 - SEL$23
+  48 - SEL$23 / ACT_RU_VARIABLE@SEL$23
+Predicate Information (identified by operation id):
+---------------------------------------------------
+  18 - filter("END_TIME_" IS NOT NULL)
+  20 - filter("PARENT_ID_" IS NULL)
+  26 - filter("ASSIGNEE_" IS NULL)
+  34 - filter("SUSPENSION_STATE_"=1 AND "RETRIES_">0 AND ("DUEDATE_" IS NULL OR "DUEDATE_"<SYSDATE@!)
+              AND ("LOCK_OWNER_" IS NULL OR "LOCK_EXP_TIME_"<SYSDATE@!))
+  36 - filter("SUSPENSION_STATE_"=1 AND "RETRIES_">0 AND ("DUEDATE_" IS NULL OR "DUEDATE_"<SYSDATE@!)
+              AND ("LOCK_OWNER_" IS NULL OR "LOCK_EXP_TIME_"<SYSDATE@!))
+  38 - filter("SUSPENSION_STATE_"=1 AND "RETRIES_">0 AND "DUEDATE_">=SYSDATE@! AND ("LOCK_OWNER_" IS
+              NULL OR "LOCK_EXP_TIME_"<SYSDATE@!))
+  40 - filter("SUSPENSION_STATE_"=2)
+  42 - filter("RETRIES_"=0)
+  44 - filter("LOCK_OWNER_" IS NOT NULL AND "LOCK_EXP_TIME_"<SYSDATE@!) Column Projection Information (identified by operation id):
+-----------------------------------------------------------
+   1 - (#keys=2) "from$_subquery$_001"."POSITION"[NUMBER,3],
+       NLSSORT("from$_subquery$_001"."METRIC",'nls_sort=''GERMAN''')[2000],
+       "from$_subquery$_001"."COUNT"[NUMBER,22], "from$_subquery$_001"."METRIC"[VARCHAR2,551]
+   2 - "from$_subquery$_001"."POSITION"[NUMBER,3], "from$_subquery$_001"."METRIC"[VARCHAR2,551],
+       "from$_subquery$_001"."COUNT"[NUMBER,22]
+   3 - (#keys=3) STRDEF[3], STRDEF[551], STRDEF[22]
+   4 - STRDEF[3], STRDEF[551], STRDEF[22]
+   5 - (#keys=0) COUNT(*)[22]
+   7 - (#keys=0) COUNT(*)[22]
+   9 - (#keys=1) "KEY_"[NVARCHAR2,510]
+  10 - "KEY_"[NVARCHAR2,510]
+  11 - (#keys=0) COUNT(*)[22]
+  13 - (#keys=0) COUNT(*)[22]
+  15 - (#keys=0) COUNT(*)[22]
+  17 - (#keys=0) COUNT(*)[22]
+  19 - (#keys=0) COUNT(*)[22]
+  21 - (#keys=0) COUNT(*)[22]
+  23 - (#keys=0) COUNT(*)[22]
+  25 - (#keys=0) COUNT(*)[22]
+  27 - (#keys=0) COUNT(*)[22]
+  29 - (#keys=2) SYS_OP_C2C("EVENT_TYPE_")[510], DECODE(SYS_OP_C2C("PROC_INST_ID_"),NULL,' start','
+       intermediate')[13], COUNT(*)[22]
+  30 - "EVENT_TYPE_"[NVARCHAR2,510], "PROC_INST_ID_"[NVARCHAR2,128]
+  31 - (#keys=0) COUNT(*)[22]
+  33 - (#keys=0) COUNT(*)[22]
+  35 - (#keys=1) "PRIORITY_"[NUMBER,22], COUNT(*)[22]
+  36 - "PRIORITY_"[NUMBER,22]
+  37 - (#keys=0) COUNT(*)[22]
+  39 - (#keys=0) COUNT(*)[22]
+  41 - (#keys=0) COUNT(*)[22]
+  43 - (#keys=0) COUNT(*)[22]
+  45 - (#keys=1) "TYPE_"[NVARCHAR2,510], COUNT(*)[22]
+  46 - "TYPE_"[NVARCHAR2,510]
+  47 - (#keys=0) COUNT(*)[22]
