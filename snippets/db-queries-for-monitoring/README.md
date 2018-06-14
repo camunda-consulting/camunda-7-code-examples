@@ -4,6 +4,8 @@ In some use cases you want to query data from the process engine database direct
 
 In this Snippet we collect helpful SQL queries which can be used - no guarantee they work on your database as some of them are collected in real-life projects (but on certain databases).
 
+For further inspiration you can also have a look at the [original queries that the Camunda engine is using internally](https://github.com/camunda/camunda-bpm-platform/tree/master/engine/src/main/resources/org/camunda/bpm/engine/impl/mapping/entity). Many of hte queries here have been inspired by them.
+
 # Typical Monitoring Queries
 
 Put the following queries in your favorite monitoring tool, e.g. [Nagios](http://omdistro.org/),
