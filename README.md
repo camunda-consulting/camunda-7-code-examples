@@ -43,7 +43,7 @@ Showcases
   </tr>
   <tr>
     <td>
-      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases/camel-use-cases">Camel Use Cases</a> <br />
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/camel-use-cases">Camel Use Cases</a> <br />
 <img src="https://raw.github.com/camunda/camunda-bpm-camel/master/use-cases.png" width="200" />
     </td>
     <td>
@@ -55,8 +55,8 @@ Showcases
   </tr>
  <tr>
     <td>
-      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases/underwriting">Insurance Underwriting</a> <br />
-<img src="showcases/underwriting/docs/case.png" width="200" />
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/underwriting">Insurance Underwriting</a> <br />
+<img src="one-time-examples/underwriting/docs/case.png" width="200" />
     </td>
     <td>
        Key Features showcased:
@@ -69,8 +69,8 @@ Showcases
   </tr>  
  <tr>
     <td>
-      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases/incident-management">Incident Handling</a> <br />
-<img src="showcases/incident-management/src/main/resources/incidentManagement.png" width="200" />
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/incident-management">Incident Handling</a> <br />
+<img src="one-time-examples/incident-management/src/main/resources/incidentManagement.png" width="200" />
     </td>
     <td>
        Key Features showcased:
@@ -83,8 +83,8 @@ Showcases
 
   <tr>
     <td>
-      <a href="showcases/en/skill-based-routing">Skill-based-Routing</a> <br />
-      <img src="showcases/en/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
+      <a href="one-time-examples/en/skill-based-routing">Skill-based-Routing</a> <br />
+      <img src="one-time-examples/en/skill-based-routing/doc/skill-based-routing-decision-flow.png" width="200" />
     </td>
     <td>
        Key Features showcased:
