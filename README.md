@@ -27,8 +27,8 @@ Showcases
 <table>
   <tr>
     <td>
-      <a href="https://github.com/camunda/camunda-consulting/tree/master/showcases/twitter">Review Process for new Tweets</a> <br />
-<img src="showcases/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
+      <a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/twitter">Review Process for new Tweets</a> <br />
+<img src="one-time-examples/twitter/src/main/resources/TwitterDemoProcess.png" width="200" />
     </td>
     <td>
        Key Features showcased:
@@ -56,7 +56,7 @@ Showcases
  <tr>
     <td>
       <a href="https://github.com/camunda/camunda-consulting/tree/master/one-time-examples/underwriting">Insurance Underwriting</a> <br />
-<img src="one-time-examples/underwriting/docs/case.png" width="200" />
+<img src="one-time-examples/underwriting/docs/process-and-case.png" width="200" />
     </td>
     <td>
        Key Features showcased:
