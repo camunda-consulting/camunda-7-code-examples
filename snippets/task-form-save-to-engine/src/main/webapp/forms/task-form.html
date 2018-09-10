@@ -1,0 +1,66 @@
+<p>
+  Change the value in the name field and hit the 'Save' button provided by Camunda Tasklist.
+  Then go to Cockpit and check if the new value is stored in the variable.
+  If you close your browser and then reopen the task the new value should be loaded from the engine again.
+  This works with a different browser on a different computer, because the value is stored in the engine. 
+</p>
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label">Your Name</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="name"
+             cam-variable-type="String"
+             required
+             class="form-control" />
+    </div>
+  </div>
+
+  <script cam-script type="text/form-script">
+  inject(['$http', 'Uri', function($http, Uri) {
+    camForm.on('store', function(evt) {
+      // handle store
+	  // inspired by CamundaForm.prototype.submitVariables
+
+      // get values from form fields
+	  evt.retrieveVariables()
+
+	  var varManager = evt.variableManager;
+	  var vars = varManager.variables;
+
+	  var variableData = {};
+	  for(var v in vars) {
+	    // only submit dirty variables
+	    // LIMITATION: dirty checking is not performed for complex object variables
+	    if(varManager.isDirty(v)) {
+	      var val = vars[v].value;
+	      // if variable is JSON, serialize
+
+	      if(varManager.isJsonVariable(v)) {
+	        val = JSON.stringify(val);
+	      }
+
+	      variableData[v] = {
+	        value: val,
+	        type: vars[v].type,
+	        valueInfo: vars[v].valueInfo
+	      };
+	    }
+	  }
+
+	  var data = { modifications: variableData };
+	  var config = {
+        headers : {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      $http.post(Uri.appUri('engine://engine/:engine/task/' + camForm.taskId + '/variables'), data, config);
+
+      // prevent the store from being executed
+      evt.storePrevented = true;
+    });
+  }]);
+  </script>
+</form>

@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<camunda.version>7.7.3-ee</camunda.version>
+		<camunda.version>7.7.4-ee</camunda.version>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,12 +42,17 @@
 			<artifactId>tasklist-plugin-delegation</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.camunda.consulting.webapp.plugin</groupId>
+			<artifactId>camunda-cockpit-plugin-simple-kpi</artifactId>
+			<version>7.6.1-SNAPSHOT</version>
+		</dependency>
 		-->
 	</dependencies>
 
 
 	<build>
-		<finalName>camunda-webapp-customized</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -64,6 +69,19 @@
 					</archive>
 				</configuration>
 			</plugin>
+		  <plugin>
+		    <!-- Allows to deploy the application using: mvn clean package antrun:run
+		         Follow the instructions in build.properties.example to make it work!-->
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-antrun-plugin</artifactId>
+		    <configuration>
+		      <tasks>
+		        <ant antfile="${basedir}/build.xml">
+		          <target name="copy.war.into.${camunda.container}" />
+		        </ant>
+		      </tasks>
+		    </configuration>
+		  </plugin>
 	      <plugin>
 	        <!-- Usage: mvn jboss-as:deploy See also: https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html -->
 	        <groupId>org.jboss.as.plugins</groupId>

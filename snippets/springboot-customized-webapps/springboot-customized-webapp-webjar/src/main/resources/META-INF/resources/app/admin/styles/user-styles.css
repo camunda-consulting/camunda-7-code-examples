@@ -1,0 +1,72 @@
+body {
+	color: ${CUSTOM_COLOR_TEXT};
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+a, [cam-widget-inline-field]>.view-value, [cam-tasklist-task-meta] .groups, .batch-operation-page .page-flow-nav li.active a:after {
+	color: ${CUSTOM_COLOR_LINES};
+}
+a:hover, a:focus {
+    color: ${CUSTOM_COLOR_LINKS};
+}
+.nav-tabs>li.active>a,.columns,.three-cols-layout .column-left .list-unstyled>.item.active, .three-cols-layout .column-center .list-unstyled>li.active, .three-cols-layout .column-left .list-unstyled>.item:hover, .three-cols-layout .column-center .list-unstyled>li:hover, .three-cols-layout .column-left .list-unstyled>.item:focus, .three-cols-layout .column-center .list-unstyled>li:focus {
+	color: ${CUSTOM_COLOR_LINKS};
+}
+[cam-widget-header] .navbar-brand {
+    display: flex;
+}
+
+[cam-widget-header] .navbar-brand .brand-logo {
+    display: block;
+    background: url(../assets/images/custom-logo.png);
+    background-repeat: no-repeat;
+    background-size: ${CUSTOM_LOGO_BACKGROUND_SIZE};
+    background-position: ${CUSTOM_LOGO_BACKGROUND_POSITION};
+    width: ${CUSTOM_LOGO_WIDTH};
+    color: ${CUSTOM_COLOR_TEXT};
+}
+[cam-widget-header] .brand-logo:before {
+	display: none;
+}
+.sections-menu {
+	margin-left: 190px;
+}
+[cam-widget-header] {
+	border-top-color: ${CUSTOM_COLOR_LINES};
+}
+span.brand-name.ng-binding {
+	width: 200px;
+    display: block;
+}
+.column .cell.top {
+	border-bottom: 1px solid #e0e0e0; 
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+	border-bottom: ${CUSTOM_COLOR_LINES};
+}
+.btn-primary {
+	background-color: ${CUSTOM_COLOR_LINES};
+	border-color: ${CUSTOM_COLOR_LINES};
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary.focus {
+	color: ${CUSTOM_COLOR_LINKS};
+	background-color: #ededed;
+	border-color: #ededed;
+}
+
+.item.active,.item.active:hover,.list-unstyled>li.active, .three-cols-layout .column-left .list-unstyled>.item.active, .three-cols-layout .column-center .list-unstyled>li.active, .three-cols-layout .column-left .list-unstyled>.item.active:hover, .three-cols-layout .column-center .list-unstyled>li.active:hover {
+	border-color: ${CUSTOM_COLOR_LINES};
+}
+.item:hover {
+	border-color: ${CUSTOM_COLOR_LINKS};
+}
+[cam-widget-footer] {
+	color: white;
+	background-color: ${CUSTOM_COLOR_LINES};
+}
+
+[cam-widget-footer] a {
+	color: white;
+}
+[cam-widget-footer] a:hover, [cam-widget-footer] a:focus {
+    color: black;
+}

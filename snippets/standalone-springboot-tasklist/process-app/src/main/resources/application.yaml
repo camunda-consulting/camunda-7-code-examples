@@ -1,0 +1,9 @@
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/process-engine
+  username: camunda
+  password: camunda
+server.port: 8080
+camunda:
+  bpm:
+    job-execution:
+      deployment-aware: true

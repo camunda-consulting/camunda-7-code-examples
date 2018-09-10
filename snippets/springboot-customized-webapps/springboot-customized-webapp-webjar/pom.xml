@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-parent</artifactId>
+                <version>7.9.0</version>
+	</parent>
+
+	<!--
+	<parent>
+		<groupId>org.camunda.bpm.webapp</groupId>
+		<artifactId>camunda-webapp-ee-root</artifactId>
+		<version>7.9.2-ee</version>
+	</parent>
+	-->
+
+	<groupId>com.camunda.consulting</groupId>
+	<artifactId>springboot-customized-webapp-webjar</artifactId>
+	<!-- <artifactId>springboot-customized-webapp-webjar-ee</artifactId> -->
+	<packaging>jar</packaging>
+
+	<properties>
+		<skipTests>true</skipTests>
+
+		<!-- make sure that exists in https://github.com/camunda/camunda-webapp-translations -->
+		<CUSTOM_LANG>de</CUSTOM_LANG>
+		
+		<CUSTOM_TASKLIST_TITLE>Purple Camunda ToDo\'s</CUSTOM_TASKLIST_TITLE>
+
+		<CUSTOM_COLOR_LINES>#c34bc3</CUSTOM_COLOR_LINES>
+		<CUSTOM_COLOR_LINKS>#ff96ff</CUSTOM_COLOR_LINKS>
+		<CUSTOM_COLOR_TEXT>#4d1d4d</CUSTOM_COLOR_TEXT>
+
+		<CUSTOM_LOGO_BACKGROUND_SIZE>30px</CUSTOM_LOGO_BACKGROUND_SIZE>
+		<CUSTOM_LOGO_BACKGROUND_POSITION>0 6px</CUSTOM_LOGO_BACKGROUND_POSITION>
+		<CUSTOM_LOGO_WIDTH>40px</CUSTOM_LOGO_WIDTH>
+		<BRAND_NAME_WIDTH>15em</BRAND_NAME_WIDTH>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.camunda.bpm.webapp</groupId>
+			<artifactId>camunda-webapp</artifactId>
+			<type>jar</type>
+			<classifier>classes</classifier>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.camunda.bpm.webapp</groupId>
+			<artifactId>camunda-webapp-ee-plugins</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+			<classifier>classes</classifier>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.camunda.bpm.webapp</groupId>
+			<artifactId>camunda-webapp-webjar</artifactId>
+			<!-- <artifactId>camunda-webapp-webjar-ee</artifactId> -->
+			<type>jar</type>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.css</exclude>
+					<exclude>**/*.js</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<!-- first fetch and unpack the war -->
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.camunda.bpm.webapp</groupId>
+									<artifactId>camunda-webapp-webjar</artifactId>
+									<!-- <artifactId>camunda-webapp-webjar-ee</artifactId> -->
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+									<includes>META-INF/resources/**</includes>
+									<excludes>**/user*.css</excludes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.googlecode.maven-download-plugin</groupId>
+				<artifactId>download-maven-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+						<id>translation-tasklist</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/tasklist/${CUSTOM_LANG}.json</url>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/tasklist/locales/</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>translation-cockpit</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/cockpit/${CUSTOM_LANG}.json</url>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/cockpit/locales/</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>translation-admin</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>wget</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/admin/${CUSTOM_LANG}.json</url>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/admin/locales/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>images-tasklist</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/tasklist/assets/images</outputDirectory>
+							<resources>
+								<resource>
+									<directory>artwork</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>images-cockpit</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/cockpit/assets/images</outputDirectory>
+							<resources>
+								<resource>
+									<directory>artwork</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>images-admin</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/admin/assets/images</outputDirectory>
+							<resources>
+								<resource>
+									<directory>artwork</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--
+	<repositories>
+		<repository>
+			<id>camunda-bpm-nexus-ee</id>
+			<name>camunda-bpm-nexus</name>
+			<url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+		</repository>
+	</repositories>
+	-->
+
+</project>

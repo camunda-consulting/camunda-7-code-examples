@@ -4,6 +4,8 @@ In some use cases you want to query data from the process engine database direct
 
 In this Snippet we collect helpful SQL queries which can be used - no guarantee they work on your database as some of them are collected in real-life projects (but on certain databases).
 
+For further inspiration you can also have a look at the [original queries that the Camunda engine is using internally](https://github.com/camunda/camunda-bpm-platform/tree/master/engine/src/main/resources/org/camunda/bpm/engine/impl/mapping/entity). Many of hte queries here have been inspired by them.
+
 # Typical Monitoring Queries
 
 Put the following queries in your favorite monitoring tool, e.g. [Nagios](http://omdistro.org/),
@@ -400,6 +402,24 @@ You can use the following query to get a snapshot at a single point in time:
 		<td align="right" sdval="361211" sdnum="1031;"><font size=3>361211</font></td>
 	</tr>
 </table>
+
+```sql
+-- analysis of a load test
+SELECT 
+  COUNT (*), 
+  MIN(START_TIME_), 
+  max(end_time_), 
+  (to_char((max(end_time_) - MIN(START_TIME_)),'mi') *60 + to_char((max(end_time_) - MIN(START_TIME_)),'ss')) as test_duration  FROM ACT_HI_PROCINST WHERE BUSINESS_KEY_ LIKE 'AsyncTest5%';
+
+SELECT 
+  COUNT (*), 
+  MIN(START_TIME_), 
+  max(end_time_), 
+  (cast(max(end_time_) as DATE) - CAST(MIN(START_TIME_) as DATE))*24*60*60 as test_duration,
+  COUNT(*)/((cast(max(end_time_) as DATE) - CAST(MIN(START_TIME_) as DATE))*24*60*60) AS PIperSecond
+  FROM ACT_HI_PROCINST
+  WHERE BUSINESS_KEY_ LIKE 'AsyncTest8%' AND START_TIME_ > to_date('2017.12.14 12:30:00','yyyy.mm.dd HH24:MI:ss');
+```
 
 ## Process/Case instances over time
 

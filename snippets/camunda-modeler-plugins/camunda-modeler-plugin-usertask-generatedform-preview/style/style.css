@@ -1,0 +1,99 @@
+@import "bootstrap.min.css";
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 30px 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+
+}
+.copy-button {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 4px;
+  float: right;
+}
+.swal-button {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  font-weight: normal;
+  color: black;
+  padding: 6px 20px;
+}
+.swal-content {
+  text-align: left;
+  max-height: 500px;
+  overflow: auto;
+  min-height: 300px;
+}
+.djs-rename-technical-ids {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  overflow: hidden;
+}
+.djs-rename-technical-ids button {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin: 4px;
+  padding: 4px 10px;
+}
+.djs-rename-technical-ids ul {
+  padding-left: 4px;
+  padding-right: 4px;
+  max-height: 100px;
+  overflow: auto;
+}
+.djs-rename-technical-ids-toggle {
+  width: 46px;
+  height: 46px;
+  cursor: default;
+}
+.djs-rename-technical-ids.open .djs-rename-technical-ids-toggle {
+  height: 10px;
+  width: 100%;
+}
+.djs-rename-technical-ids-toggle:hover {
+  background: #666;
+}
+.djs-rename-technical-ids .djs-rename-technical-ids-container {
+  display: none;
+}
+.djs-rename-technical-ids.open .djs-rename-technical-ids-container {
+  display: block;
+}
+.bpp-properties-panel button.preview-button {
+  position: relative;
+  width: auto;
+}
