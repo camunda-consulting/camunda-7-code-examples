@@ -59,10 +59,10 @@
     <dependency>
       <groupId>com.camunda.consulting</groupId>
       <artifactId>springboot-customized-webapp-webjar</artifactId>
-      <version>7.9.0</version>
+      <version>${camunda.version}</version>
       <!--
       <artifactId>springboot-customized-webapp-webjar-ee</artifactId>
-      <version>7.9.2-ee</version>
+      <version>${camunda.version}</version>
       -->
     </dependency>
 
