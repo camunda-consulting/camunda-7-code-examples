@@ -1,5 +1,6 @@
 package com.camunda.demo.config;
 
+import com.camunda.demo.filter.webapp.SpringSecurityAuthenticationProvider;
 import org.camunda.bpm.webapp.impl.security.auth.ContainerBasedAuthenticationFilter;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import java.util.Collections;
+
+import static org.camunda.bpm.engine.rest.security.auth.ProcessEngineAuthenticationFilter.AUTHENTICATION_PROVIDER_PARAM;
 
 @Configuration
 @Order(SecurityProperties.BASIC_AUTH_ORDER - 15)
@@ -30,7 +33,8 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
         filterRegistration.setFilter(new ContainerBasedAuthenticationFilter());
-        filterRegistration.setInitParameters(Collections.singletonMap("authentication-provider", "com.camunda.demo.filter.webapp.SpringSecurityAuthenticationProvider"));
+        filterRegistration.setInitParameters(Collections.singletonMap(AUTHENTICATION_PROVIDER_PARAM, 
+                                                                      SpringSecurityAuthenticationProvider.class.getName()));
         filterRegistration.setOrder(101); // make sure the filter is registered after the Spring Security Filter Chain
         filterRegistration.addUrlPatterns("/app/*");
         return filterRegistration;
