@@ -41,6 +41,7 @@ public class InMemoryH2Test {
     assertThat(processInstance).isWaitingAt("StartEvent_ProcessStarted");
 
     execute(job());
+    assertThat(processInstance).isWaitingAt("UserTask_A");
     complete(task());
     assertThat(processInstance).isWaitingAt("UserTask_A");
 
