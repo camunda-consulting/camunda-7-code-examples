@@ -9,8 +9,6 @@ This process does not serve any real-life use case but shows the various use cas
 
 ![Process Model][1]
 
-[Discuss this process model on camunda share](http://camunda.org/share/#/process/f54a4ff9-4cc1-428c-829b-a4002dcdd81f) if you have questions or feedback.
-
 For details on [camunda-bpm-camel](https://github.com/camunda/camunda-bpm-camel) see the according GitHub page.
 
 
