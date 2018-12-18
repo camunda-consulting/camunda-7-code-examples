@@ -43,7 +43,7 @@ RenameTechnicalIDsPlugin.prototype.addRenameIDsContainer = function(container) {
       <button class="rename-ids">Rename IDs</button> \
       <ul class="id-list"></ul> \
     </div> \
-    <div class="djs-rename-technical-ids-toggle"></div> \
+    <div class="djs-rename-technical-ids-toggle">ID Renaming</div> \
     </div>';
   this.element = domify(markup);
 
@@ -111,7 +111,11 @@ RenameTechnicalIDsPlugin.prototype.showIDs = function() {
 
   if (this.technicalIds != null) {
     Object.keys(this.technicalIds).forEach(function(technicalId) {
-      idList.append(domify('<li>' + technicalId + ' --> ' + self.technicalIds[technicalId] + '</li>'));
+      if (technicalId == self.technicalIds[technicalId]) {
+        idList.append(domify('<li>' + technicalId + ' --> ' + self.technicalIds[technicalId] + '</li>'));
+      } else {
+        idList.append(domify('<li>' + technicalId + ' --> <span  style="background-color:#ffbc00">' + self.technicalIds[technicalId] + '</span></li>'));
+      }
     });
   }
 };
@@ -131,7 +135,7 @@ RenameTechnicalIDsPlugin.prototype.renameIDs = function() {
     }
   });
 
-  if (self.retry>0 && self.retry<5) {
+  if (self.retry>0 && self.retry<100) {
     this.renameIDs();
   }
 };
@@ -140,11 +144,23 @@ RenameTechnicalIDsPlugin.prototype._getTechnicalID = function(name, type) {
   var name = removeDiacritics(name); // remove diacritics
   name = name.replace(/[^\w\s]/gi, ''); // now replace special characters
   name = this._getCamelCase(name);; // get camelcase
-
+  
+  if ( !isNaN(name.charAt(0)) ) { // mask leading numbers
+     name = 'N' + name;
+  }
+  
   if ( type === 'bpmn:Process' ) {
-    return name + type.replace('bpmn:','');
+    return name + 'Process';
+  } else if ( type === 'bpmn:IntermediateCatchEvent' || type === 'bpmn:IntermediateThrowEvent' ) {
+    return name + 'Event';
+  } else if ( type === 'bpmn:UserTask' || type === 'bpmn:ServiceTask' || type === 'bpmn:ReceiveTask' || type === 'bpmn:SendTask' 
+                || type === 'bpmn:ManualTask' || type === 'bpmn:BusinessRuleTask' || type === 'bpmn:ScriptTask' ) {
+    return name + 'Task';
+  } else if ( type === 'bpmn:ExclusiveGateway' || type === 'bpmn:ParallelGateway' || type === 'bpmn:ComplexGateway' 
+                || type === 'bpmn:EventBasedGateway' ) {
+    return name + 'Gateway';
   } else {
-    return type.replace('bpmn:','') + '_' + name;
+    return name + type.replace('bpmn:','');
   }
 };
 

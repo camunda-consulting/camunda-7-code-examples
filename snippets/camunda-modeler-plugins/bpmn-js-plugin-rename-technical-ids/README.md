@@ -2,12 +2,20 @@
 
 *Have a large BPMN process and want to automate it? Are you annoyed about editing all technical IDs manually?*
 
-Then this is the right plugin for you. This plugin helps you to generate and rename technical IDs for most BPMN symbols:
+Then this is the right plugin for you. This plugin helps you to generate and rename technical IDs for all BPMN symbols:
 
 e.g.:
-- StartEvent_050orni with name Payload received becomes StartEvent_PayloadReceived
-- UserTask_0eyj290 with name Process data becomes UserTask_ProcessData
+- StartEvent_050orni with name Payload received becomes `PayloadReceivedStartEvent`
+- UserTask_0eyj290 with name Process data becomes `ProcessDataTask`
 - ...
+
+The generated IDs suite to our best practice.
+
+Usage:
+1. generate the technical IDs
+2. rename the IDs by clicking the button.
+3. IDs that will replace the exisiting ones are highlighted with a yellow background.
+4. If the name starts with a number (it is an invalid QName), the ID will start with a `N`: Time event with 10 Days will become `N10DaysEvent`
 
 ## Example
 

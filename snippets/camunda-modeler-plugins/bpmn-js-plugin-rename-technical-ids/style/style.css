@@ -19,8 +19,8 @@
   overflow: auto;
 }
 .djs-rename-technical-ids-toggle {
-  width: 46px;
-  height: 46px;
+  width: 80px;
+  height: 24px;
   cursor: default;
 }
 .djs-rename-technical-ids.open .djs-rename-technical-ids-toggle {

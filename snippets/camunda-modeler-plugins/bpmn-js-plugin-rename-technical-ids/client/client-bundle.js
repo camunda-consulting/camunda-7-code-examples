@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
 var removeDiacritics = require('diacritics').remove;
@@ -44,7 +44,7 @@ RenameTechnicalIDsPlugin.prototype.addRenameIDsContainer = function(container) {
       <button class="rename-ids">Rename IDs</button> \
       <ul class="id-list"></ul> \
     </div> \
-    <div class="djs-rename-technical-ids-toggle"></div> \
+    <div class="djs-rename-technical-ids-toggle">ID Renaming</div> \
     </div>';
   this.element = domify(markup);
 
@@ -112,7 +112,11 @@ RenameTechnicalIDsPlugin.prototype.showIDs = function() {
 
   if (this.technicalIds != null) {
     Object.keys(this.technicalIds).forEach(function(technicalId) {
-      idList.append(domify('<li>' + technicalId + ' --> ' + self.technicalIds[technicalId] + '</li>'));
+      if (technicalId == self.technicalIds[technicalId]) {
+        idList.append(domify('<li>' + technicalId + ' --> ' + self.technicalIds[technicalId] + '</li>'));
+      } else {
+        idList.append(domify('<li>' + technicalId + ' --> <span  style="background-color:#ffbc00">' + self.technicalIds[technicalId] + '</span></li>'));
+      }
     });
   }
 };
@@ -132,7 +136,7 @@ RenameTechnicalIDsPlugin.prototype.renameIDs = function() {
     }
   });
 
-  if (self.retry>0 && self.retry<5) {
+  if (self.retry>0 && self.retry<100) {
     this.renameIDs();
   }
 };
@@ -141,11 +145,23 @@ RenameTechnicalIDsPlugin.prototype._getTechnicalID = function(name, type) {
   var name = removeDiacritics(name); // remove diacritics
   name = name.replace(/[^\w\s]/gi, ''); // now replace special characters
   name = this._getCamelCase(name);; // get camelcase
-
+  
+  if ( !isNaN(name.charAt(0)) ) { // mask leading numbers
+     name = 'N' + name;
+  }
+  
   if ( type === 'bpmn:Process' ) {
-    return name + type.replace('bpmn:','');
+    return name + 'Process';
+  } else if ( type === 'bpmn:IntermediateCatchEvent' || type === 'bpmn:IntermediateThrowEvent' ) {
+    return name + 'Event';
+  } else if ( type === 'bpmn:UserTask' || type === 'bpmn:ServiceTask' || type === 'bpmn:ReceiveTask' || type === 'bpmn:SendTask' 
+                || type === 'bpmn:ManualTask' || type === 'bpmn:BusinessRuleTask' || type === 'bpmn:ScriptTask' ) {
+    return name + 'Task';
+  } else if ( type === 'bpmn:ExclusiveGateway' || type === 'bpmn:ParallelGateway' || type === 'bpmn:ComplexGateway' 
+                || type === 'bpmn:EventBasedGateway' ) {
+    return name + 'Gateway';
   } else {
-    return type.replace('bpmn:','') + '_' + name;
+    return name + type.replace('bpmn:','');
   }
 };
 
