@@ -1,6 +1,6 @@
 {
   "name": "camunda-modeler-plugin-usertask-generatedform-preview",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Camunda Modeler Plugin that helps you preview generated forms in user tasks and shows you the sourcecode you need for embedded forms in the Camunda Tasklist.",
   "main": "index.js",
   "scripts": {
@@ -27,11 +27,11 @@
   "devDependencies": {
     "bpmn-js": "^0.22.1",
     "browserify": "^14.1.0",
-    "camunda-modeler-plugin-helpers": "^1.7.0",
+    "camunda-modeler-plugin-helpers": "^2.1.0",
     "inherits": "^2.0.3",
     "min-dom": "^0.2.0",
     "watchify": "^3.9.0",
-    "bpmn-js-properties-panel": "^0.26.1"
+    "bpmn-js-properties-panel": "^0.28.2"
   },
   "dependencies": {
     "clipboard-copy": "^2.0.0",
