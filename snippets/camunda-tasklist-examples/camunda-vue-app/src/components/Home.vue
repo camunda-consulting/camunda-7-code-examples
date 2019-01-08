@@ -29,8 +29,6 @@
        <pre>{{ uploadError }}</pre>
      </div>
    </div>
- </div>
-  </div>
 </template>
 
 <script>
