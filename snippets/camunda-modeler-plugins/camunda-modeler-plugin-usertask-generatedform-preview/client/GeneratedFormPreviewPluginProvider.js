@@ -37,7 +37,7 @@ GeneratedFormPreviewPluginProvider.prototype.getFormsTab = function(formsTab) {
   var self = this;
   if (formsTab.groups.length > 0 && formsTab.groups[0].entries.length > 0) {
     formsTab.groups[0].entries.splice(2, 0, {
-      html: "<button class='preview-button' data-action='openPreview'>Preview Forms</button>",
+      html: "<button class='preview-button' data-action='openPreview'>Preview Form</button>",
       id: "form-fields-generate-button",
       openPreview: function(element, node) {
         var formFields = formHelper.getFormFields(element);
