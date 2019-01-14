@@ -6,14 +6,14 @@
 	<parent>
                 <groupId>org.camunda.bpm</groupId>
                 <artifactId>camunda-parent</artifactId>
-                <version>7.9.0</version>
+                <version>7.10.0</version>
 	</parent>
 
 	<!--
 	<parent>
 		<groupId>org.camunda.bpm.webapp</groupId>
 		<artifactId>camunda-webapp-ee-root</artifactId>
-		<version>7.9.2-ee</version>
+		<version>7.10.1-ee</version>
 	</parent>
 	-->
 
@@ -130,7 +130,7 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/tasklist/${CUSTOM_LANG}.json</url>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/tasklist/locales/</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/tasklist/locales/</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -141,7 +141,7 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/cockpit/${CUSTOM_LANG}.json</url>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/cockpit/locales/</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/cockpit/locales/</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -152,7 +152,7 @@
 						</goals>
 						<configuration>
 							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/admin/${CUSTOM_LANG}.json</url>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/admin/locales/</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/admin/locales/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -168,7 +168,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/tasklist/assets/images</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/tasklist/assets/images</outputDirectory>
 							<resources>
 								<resource>
 									<directory>artwork</directory>
@@ -184,7 +184,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/cockpit/assets/images</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/cockpit/assets/images</outputDirectory>
 							<resources>
 								<resource>
 									<directory>artwork</directory>
@@ -200,7 +200,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/app/admin/assets/images</outputDirectory>
+							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/admin/assets/images</outputDirectory>
 							<resources>
 								<resource>
 									<directory>artwork</directory>
