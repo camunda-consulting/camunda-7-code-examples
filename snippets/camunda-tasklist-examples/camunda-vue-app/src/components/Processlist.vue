@@ -30,8 +30,8 @@ export default {
   created() {
     CamundaRest.getProcessDefinitions().then((response) => {
       this.processDefinitions = response.data;
-    }).catch((e) => {
-      console.error(e);
+    }).catch(() => {
+      //console.error(e);
     });
   }
 };

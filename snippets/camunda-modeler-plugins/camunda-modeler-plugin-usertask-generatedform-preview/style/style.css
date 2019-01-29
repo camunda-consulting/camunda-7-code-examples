@@ -1,5 +1,11 @@
 @import "bootstrap.min.css";
 
+/* Style the Preview Button */
+button.preview-button {
+    position: relative;
+    width: 100px;
+}
+
 /* Style the tab */
 .tab {
     overflow: hidden;

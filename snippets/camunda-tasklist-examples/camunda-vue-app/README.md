@@ -20,9 +20,9 @@ As it uses standard vue.js mechanisms it should be very easy for a vue developer
 
 ### How to run the example process
 
-1. Prerequisite: Install [NPM](https://docs.npmjs.com/getting-started/installing-node) or [Yarn](https://yarnpkg.com/lang/en/docs/install/)
-1. run `npm install` or run `yarn install`
-1. run `npm run start` or `yarn start`
+1. Prerequisite: Install [Yarn](https://yarnpkg.com/lang/en/docs/install/)
+1. run `yarn install`
+1. run `yarn run serve` Compiles and hot-reloads for development,  run `yarn run build` Compiles and minifies for production, run `yarn run test` for tests.
 1. Start the Camunda Engine (standard distribution with REST-API at [localhost:8080/engine-rest](http://localhost:8080/engine-rest))
 1. Open Browser (e.g. Chrome) on [locahost:3000](http://locahost:3000)
 1. Deploy the example BPMN Process given in `examples/myprocess` using the example Tasklist
