@@ -1,0 +1,30 @@
+{
+   "target-url":"http://optimize:8090",
+   "bind-address":"0.0.0.0",
+   "http-port":"8095",
+   "send-access-token": true,
+   "applications":[
+      {
+         "base-path":"/",
+         "adapter-config":{
+             "realm": "demo",
+             "resource": "camunda",
+             "auth-server-url": "http://localhost:8080/auth",
+             "ssl-required" : "external",
+         	   "principal-attribute" : "preferred_username",
+             "expose-token": true,
+             "credentials": {
+                 "secret": "password"
+             }
+         },
+         "constraints":[
+            {
+               "pattern":"/*",
+               "roles-allowed":[
+                  "management"
+               ]
+            }
+         ]
+      }
+   ]
+}

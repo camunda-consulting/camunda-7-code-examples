@@ -1,0 +1,62 @@
+version: '2'
+
+services:
+  keycloak-proxy:
+    build: ./keycloak-proxy
+    ports:
+      - "8095:8095"
+    networks:
+      - keycloak
+    cap_add:
+      - ALL
+
+  keycloak-auth:
+    build: ./keycloak-auth
+    ports:
+      - "8080:8080"
+    networks:
+      - keycloak
+
+  optimize:
+    build: ./optimize
+    networks:
+      - keycloak
+
+  elasticsearch:
+     environment:
+       - cluster.routing.allocation.disk.threshold_enabled=true
+       - cluster.routing.allocation.disk.watermark.low=1024mb
+       - cluster.routing.allocation.disk.watermark.high=512mb
+       - cluster.routing.allocation.disk.watermark.flood_stage=256mb
+       - cluster.name=elasticsearch
+       - bootstrap.memory_lock=true
+       - discovery.type=single-node
+       - action.auto_create_index=false
+       - transport.host=0.0.0.0
+       - http.host=0.0.0.0
+       - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Djava.io.tmpdir=/usr/share/elasticsearch/tmp"
+       - client.transport.sniff=false
+     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.0
+     mem_limit: 1024m
+     ports:
+       - "9300:9300"
+       - "9200:9200"
+     volumes:
+       - elasticsearch-data:/usr/share/elasticsearch/data
+       - elasticsearch-logs:/usr/share/elasticsearch/logs
+     networks:
+       - keycloak
+
+  engine:
+    image: registry.camunda.cloud/camunda-bpm-platform-ee:7.9.5
+    ports:
+      - "8088:8080"
+    networks:
+      - keycloak
+
+volumes:
+  elasticsearch-data:
+  elasticsearch-logs:
+
+networks:
+  keycloak:
