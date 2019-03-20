@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_025ji88" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.3">
+  <bpmn:process id="CheckProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Account Number Verification">
+      <bpmn:extensionElements>
+        <camunda:formData />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0yubgq1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0yubgq1" sourceRef="StartEvent_1" targetRef="Task_0j9im96" />
+    <bpmn:serviceTask id="Task_0j9im96" name="Get Account Number">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://localhost:1027/getAccount</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Authorization">${basicAuth64}</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:outputParameter name="accountNumber">${JSON(response).prop("accountNumber").stringValue()}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="basicAuth64">
+            <camunda:script scriptFormat="Javascript">// Base64 encoder object
+
+var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f&lt;e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n&gt;&gt;2;o=(n&amp;3)&lt;&lt;4|r&gt;&gt;4;u=(r&amp;15)&lt;&lt;2|i&gt;&gt;6;a=i&amp;63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f&lt;e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s&lt;&lt;2|o&gt;&gt;4;r=(o&amp;15)&lt;&lt;4|u&gt;&gt;2;i=(u&amp;3)&lt;&lt;6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n&lt;e.length;n++){var r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r)}else if(r&gt;127&amp;&amp;r&lt;2048){t+=String.fromCharCode(r&gt;&gt;6|192);t+=String.fromCharCode(r&amp;63|128)}else{t+=String.fromCharCode(r&gt;&gt;12|224);t+=String.fromCharCode(r&gt;&gt;6&amp;63|128);t+=String.fromCharCode(r&amp;63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n&lt;e.length){r=e.charCodeAt(n);if(r&lt;128){t+=String.fromCharCode(r);n++}else if(r&gt;191&amp;&amp;r&lt;224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&amp;31)&lt;&lt;6|c2&amp;63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&amp;15)&lt;&lt;12|(c2&amp;63)&lt;&lt;6|c3&amp;63);n+=3}}return t}};
+
+// MailGun Username and Password go here.You could retrieve the username and password as process //variables if you wanted to
+
+var username = "demo";
+var password = "demo";
+
+var encoded = Base64.encode(username + ':' + password);
+"Basic " + encoded;</camunda:script>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0yubgq1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0rg2k6q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0m8blgy">
+      <bpmn:incoming>SequenceFlow_0rg2k6q</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0rg2k6q" sourceRef="Task_0j9im96" targetRef="EndEvent_0m8blgy" />
+    <bpmn:textAnnotation id="TextAnnotation_1vyjx6u">
+      <bpmn:text>Try starting process through rest api call</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_07ctrz3" sourceRef="StartEvent_1" targetRef="TextAnnotation_1vyjx6u" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CheckProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="96" y="137" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="73" y="173" width="83" height="25" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yubgq1_di" bpmnElement="SequenceFlow_0yubgq1">
+        <di:waypoint x="132" y="155" />
+        <di:waypoint x="216" y="155" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129" y="130" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_00kp2bu_di" bpmnElement="Task_0j9im96">
+        <dc:Bounds x="216" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1vyjx6u_di" bpmnElement="TextAnnotation_1vyjx6u">
+        <dc:Bounds x="64" y="9" width="100" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_07ctrz3_di" bpmnElement="Association_07ctrz3">
+        <di:waypoint x="114" y="155" />
+        <di:waypoint x="114" y="77" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0m8blgy_di" bpmnElement="EndEvent_0m8blgy">
+        <dc:Bounds x="400" y="137" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0rg2k6q_di" bpmnElement="SequenceFlow_0rg2k6q">
+        <di:waypoint x="316" y="155" />
+        <di:waypoint x="400" y="155" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

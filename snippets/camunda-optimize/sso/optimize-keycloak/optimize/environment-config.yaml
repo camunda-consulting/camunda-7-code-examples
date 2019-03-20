@@ -1,0 +1,116 @@
+---
+###############################################################################
+#                                                                             #
+#                     Optimize Environment Configuration                      #
+#                                                                             #
+###############################################################################
+
+# Note: for all possible configuration options please have a look
+#       at the Optimize documentation:
+#       https://docs.camunda.org/optimize/latest/technical-guide/setup/configuration/
+
+container:
+  # A host name or IP address, to identify a specific network interface on
+  # which to listen.
+  host: 0.0.0.0
+  ports:
+    # A port number that will be used by the embedded jetty server to process
+    # HTTP connections.
+    http: 8090
+    # A port number that will be used by the embedded jetty server to process
+    # secure HTTPS connections.
+    https: 8091
+
+# Configuration for engines used to import data. Please note that you have to have at
+# least one engine configured at all times.
+engines:
+  # An alias of the engine, which will be used for internal purposes like
+  # logging and displaying which data belong to which engine.
+  'camunda-bpm':
+    # The name of the engine that will be used to import data.
+    name: default
+    # A base URL that will be used for connections to the Camunda Engine REST API.
+    rest: 'http://engine:8080/engine-rest'
+    authentication:
+      #Toggles basic authentication on or off. When enabling basic
+      #authentication, please be aware that you also need to adjust the values
+      #of the user and password
+      enabled: false
+      #When basic authentication is enabled, this password is used to
+      #authenticate against the engine.
+      password: ''
+      #When basic authentication is enabled, this user is used to authenticate
+      #against the engine.
+      user: ''
+    # The webapps configuration allows Optimize to directly link
+    # to the other Camunda Web Applications, e.g. to jump from
+    # Optimize directly to a dedicated process instance in Cockpit
+    webapps:
+      # Defines the endpoint where to find the camunda webapps
+      endpoint: 'http://localhost:8080/camunda'
+      # Enables/disables linking to other Camunda Web Applications
+      enabled: true
+
+es:
+  # A hostname on which the Elasticsearch TCP listener is available.
+  host: elasticsearch
+  # The name of the Elasticsearch cluster Optimize should connect with.
+  clusterName: elasticsearch
+  ports:
+    # A port number used by Elasticsearch to accept TCP connections.
+    tcp: 9300
+    # A port number used by Elasticsearch to accept HTTP connections.
+    http: 9200
+  # define a secured connection to be able to communicate
+  # with an Elasticsearch instance secured with x-pack
+  security:
+    # the x-pack username that has the rights to start a transport connection
+    username: 'elastic'
+    # the x-pack password of the user
+    password: 'I-love-optimize'
+    ssl:
+      # the path to the PEM encoded file containing the private key
+      key: '/path/to/client.key'
+      # path to a PEM encoded file containing the certificate (or certificate chain)
+      # that will be presented to clients when they connect.
+      certificate: '/path/to/client.crt'
+      # the path to the PEM encoded certificate file that should be trusted.
+      # Note: if you are using a public CA that is already trusted by the Java runtime,
+      # you do not need to set the certificate_authorities.
+      certificate_authorities: '/path/to/ca.crt'
+      # controls the verification of certificates. Valid values are none, certificate, and full.
+      # See the elasticsearch security setting 'xpack.security.transport.ssl.verification_mode'
+      # for more information about the values.
+      verification_mode: 'certificate'
+      # used to enable or disable TLS/SSL and also decides if a secured connection is
+      # build up at all.
+      enabled: false
+  # An index name used to create all Camunda Optimize types, shards, etc.
+  index: optimize
+  settings:
+    index:
+      # How often should the data replicated in case of node failure.
+      # NOTE: this property only applies the first time Optimize is started and
+      # the schema/mapping is deployed on Elasticsearch. If you want to take
+      # this property to take effect again, you need to delete all indexes (with it all data)
+      # and restart Optimize.
+      number_of_replicas: 1
+
+      # How many shards should be used in the cluster.
+      # NOTE: this property only applies the first time Optimize is started and
+      # the schema/mapping is deployed on Elasticsearch. If you want to take
+      # this property to take effect again, you need to delete all indexes (with it all data)
+      # and restart Optimize.
+      number_of_shards: 5
+
+serialization:
+  # Define a custom date format that should be used for
+  # fetching date data from the engine(should be the same as in the engine)
+  # Please note that engine prior to 7.8 use yyyy-MM-dd'T'HH:mm:ss as default date format
+  engineDateFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+
+plugin:
+  authenticationExtractor:
+    # Looks in the given base package list for authentication extractor plugins.
+    # If empty, the standard Optimize authentication mechanism is used.
+    basePackages: ['com.camunda.optimize.plugin.sso']

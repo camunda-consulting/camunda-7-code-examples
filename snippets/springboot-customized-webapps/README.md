@@ -19,7 +19,7 @@ It customizes:
 
 * Replace the files in ```springboot-customized-webapp-webjar/artwork``` with your files
 * Adjust the properties in the top section of ```springboot-customized-webapp-webjar/pom.xml```
-* Possibly addionally adjust the contents of ```springboot-customized-webapp-webjar/src/main/resources/META-INF/resources/app/{tasklist|cockpit|admin}/{styles|scripts}/```
+* Possibly addionally adjust the contents of ```springboot-customized-webapp-webjar/src/main/resources/META-INF/resources/webjars/camunda/app/{tasklist|cockpit|admin}/{styles|scripts}/```
 * Run 
 ```bash
  cd springboot-customized-webapp-webjar

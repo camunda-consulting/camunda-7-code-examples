@@ -1,0 +1,177 @@
+---
+###############################################################################
+#                                                                             #
+#                     Optimize Environment Configuration                      #
+#                                                                             #
+###############################################################################
+
+# Note: for all possible configuration options please have a look
+#       at the Optimize documentation:
+#       https://docs.camunda.org/optimize/latest/technical-guide/setup/configuration/
+
+container:
+  # A host name or IP address, to identify a specific network interface on
+  # which to listen.
+  host: 0.0.0.0
+  ports:
+    # A port number that will be used by the embedded jetty server to process
+    # HTTP connections.
+    http: 8090
+    # A port number that will be used by the embedded jetty server to process
+    # secure HTTPS connections.
+    https: 8091
+
+# Configuration for engines used to import data. Please note that you have to have at
+# least one engine configured at all times.
+engines:
+  # An alias of the engine, which will be used for internal purposes like
+  # logging and displaying which data belong to which engine.
+  'camunda-bpm':
+    # The name of the engine that will be used to import data.
+    name: default
+    # A base URL that will be used for connections to the Camunda Engine REST API.
+    rest: 'http://engine:8080/engine-rest'
+    # Determines whether this instance of Optimize should import definition & historical data from this engine.
+    importEnabled: false
+    authentication:
+      #Toggles basic authentication on or off. When enabling basic
+      #authentication, please be aware that you also need to adjust the values
+      #of the user and password
+      #Also note, when enabled, it is required that the user has read history permission
+      #on the process/decision definition resources to enable Optimize to import the engine data.
+      enabled: false
+      #When basic authentication is enabled, this password is used to
+      #authenticate against the engine.
+      password: ''
+      #When basic authentication is enabled, this user is used to authenticate
+      #against the engine.
+      user: ''
+    # The webapps configuration allows Optimize to directly link
+    # to the other Camunda Web Applications, e.g. to jump from
+    # Optimize directly to a dedicated process instance in Cockpit
+    webapps:
+      # Defines the endpoint where to find the camunda webapps
+      endpoint: 'http://localhost:8080/camunda'
+      # Enables/disables linking to other Camunda Web Applications
+      enabled: false
+
+# everything that is related with configuring Elasticsearch or creating
+# a connection to it.
+es:
+  connection:
+    # The name of the Elasticsearch cluster Optimize should connect with.
+    clusterName: elasticsearch
+    # a list of Elasticsearch nodes Optimize can connect to. If you  have built
+    # an Elasticsearch cluster with several nodes it is recommended to define
+    # several connection points in case one node fails.
+    nodes:
+    # the address/hostname under which the Elasticsearch node is available.
+    - host: 'elasticsearch'
+      # A port number used by Elasticsearch to accept HTTP connections.
+      httpPort: 9200
+
+  # Elasticsearch security settings
+  security:
+    # the basic auth (x-pack) username
+    username: null
+    # the basic auth (x-pack) password
+    password: null
+    # SSL/HTTPS secured connection settings
+    ssl:
+      # path to a PEM encoded file containing the certificate (or certificate chain)
+      # that will be presented to clients when they connect.
+      certificate: null
+      # A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt'].
+      # Note: if you are using a public CA that is already trusted by the Java runtime,
+      # you do not need to set the certificate_authorities.
+      certificate_authorities: []
+      # used to enable or disable TLS/SSL for the HTTP connection
+      enabled: false
+
+  settings:
+    index:
+      # How often should the data replicated in case of node failure.
+      number_of_replicas: 1
+      # How many shards should be used in the cluster.
+      # NOTE: this property only applies the first time Optimize is started and
+      # the schema/mapping is deployed on Elasticsearch. If you want to take
+      # this property to take effect again, you need to delete all indexes (with it all data)
+      # and restart Optimize.
+      number_of_shards: 5
+
+import:
+  data:
+    dmn:
+      # Determines if the DMN/decision data, such as decision definitions and instances
+      # should be imported.
+      enabled: true
+
+serialization:
+  # Define a custom date format that should be used for
+  # fetching date data from the engine(should be the same as in the engine)
+  # Please note that engine prior to 7.8 use yyyy-MM-dd'T'HH:mm:ss as default date format
+  engineDateFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+
+plugin:
+  variableImport:
+    #Look in the given base package list for variable import adaption plugins.
+    #If empty, the import is not influenced.
+    basePackages: []
+  engineRestFilter:
+    #Look in the given base package list for engine rest filter plugins.
+    #If empty, the REST calls are not influenced.
+    basePackages: []
+  authenticationExtractor:
+    # Looks in the given base package list for authentication extractor plugins.
+    # If empty, the standard Optimize authentication mechanism is used.
+    basePackages: []
+
+email:
+  #A switch to control email sending process.
+  enabled: false
+  # Username of your smtp server
+  username: ''
+  # Corresponding password to the given user of your smtp server
+  password: ''
+  # Email address that can be used to send alerts
+  address: ''
+  # The smtp server name
+  hostname: ''
+  # The smtp server port. This one is also used as SSL port for the security connection.
+  port: 587
+  # States how the connection to the server should be secured.
+  # Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'
+  securityProtocol: 'NONE'
+
+sharing:
+  # decides if the sharing feature of Optimize can be used in the UI.
+  enabled: true
+
+historyCleanup:
+  # switch for the cleanup, defaults to false
+  enabled: false
+  # cron expression for when the cleanup should run
+  cronTrigger: '0 1 * * *'
+  # time to live (ttl) for process instance data, from when reached the process instance will get cleaned up
+  # Format is ISO_8601 duration  https://en.wikipedia.org/wiki/ISO_8601#Durations
+  ttl: 'P2Y'
+  # type of process data cleanup to perform, possible values:
+  # 'all' - delete everything related to the process instance
+  # 'variables' - only delete associated variables of a process instance
+  processDataCleanupMode: 'all'
+  # process definition specific configuration parameters that will overwrite the general parameters (ttl, processDataCleanupMode)
+  # for the specific processDefinition key
+  perProcessDefinitionConfig:
+  # 'myProcessDefinitionKey':
+  #   ttl: 'P2M'
+  #    mode: 'variables'
+  # decision definition specific configuration parameters that will overwrite the general parameters (ttl)
+  # for the specific decisionDefinition key
+  perDecisionDefinitionConfig:
+  # 'myDecisionDefinitionKey':
+  #   ttl: 'P2M'
+
+
+auth:
+  token:
+    secret: '3hfHP9Mp1JQCtkBmU506k1qARV8yJlywKApJfcYypYeuHqmVUYjaZCBvEG2EniRQ'
