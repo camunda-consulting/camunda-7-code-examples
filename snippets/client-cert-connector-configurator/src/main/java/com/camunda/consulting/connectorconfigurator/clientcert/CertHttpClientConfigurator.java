@@ -19,9 +19,9 @@ import connectjar.org.apache.http.impl.client.HttpClients;
 
 public class CertHttpClientConfigurator implements ConnectorConfigurator<HttpConnector> {
 
-  private static final String KEYSTOREPATH = "/BHO_BPoS_Schnittstelle.pfx";
-  private static final String KEYSTOREPASS = "A.fEoHis";
-  private static final String KEYPASS = "A.fEoHis";
+  private static final String KEYSTOREPATH = "/badssl.com-client.p12";
+  private static final String KEYSTOREPASS = "badssl.com";
+  private static final String KEYPASS = "badssl.com";
   
   public Class<HttpConnector> getConnectorClass() {
     return HttpConnector.class;
