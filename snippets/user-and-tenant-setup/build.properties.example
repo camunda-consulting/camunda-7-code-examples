@@ -1,0 +1,7 @@
+# Copy this file to 'build.properties' and modify it to match your system
+# Alternatively, you can also copy it to '${user.home}/.camunda/build.properties'
+# to have a central configuration that works with all camunda BPM projects
+
+# Defines the deployment folder in a camunda BPM installation (backslashes need to be escaped or replaced by forward slashes).
+deploy.jboss.dir=C:/camunda/camunda-bpm-jboss-7.10.0/server/jboss-as-7.2.0.Final/standalone/deployments
+deploy.tomcat.dir=C:/camunda/camunda-bpm-tomcat-7.10.0/server/apache-tomcat-8.0.47/webapps
