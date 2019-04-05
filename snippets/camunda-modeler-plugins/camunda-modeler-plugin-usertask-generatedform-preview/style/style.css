@@ -1,7 +1,7 @@
 @import "bootstrap.min.css";
 
 /* Style the Preview Button */
-button.preview-button {
+#preview-button {
     position: relative;
     width: 100px;
 }
