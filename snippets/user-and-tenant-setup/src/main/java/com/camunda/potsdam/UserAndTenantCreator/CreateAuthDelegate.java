@@ -11,7 +11,8 @@ import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
 import static org.camunda.bpm.engine.authorization.Resources.PROCESS_DEFINITION;
 import static org.camunda.bpm.engine.authorization.Resources.FILTER;
 import static org.camunda.bpm.engine.authorization.Resources.TASK;
-import static org.camunda.bpm.engine.authorization.Resources.USER;
+import static org.camunda.bpm.engine.authorization.Resources.*;
+
 
 import java.security.acl.Permission;
 
@@ -29,53 +30,55 @@ import org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity;
 public class CreateAuthDelegate implements JavaDelegate {
 
 	@Override
-	public void execute(DelegateExecution execution) throws Exception {
-		String userName = (String) execution.getVariable("userName");
-		String password = (String) execution.getVariable("password");
-		
-		final AuthorizationService authorizationService = execution.getProcessEngineServices().getAuthorizationService();
-		final IdentityService identityService = execution.getProcessEngineServices().getIdentityService();
-		
-	    
-		AuthorizationEntity userTasklistAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
-		userTasklistAuth.setUserId(userName);
-		userTasklistAuth.addPermission(ACCESS);
-		userTasklistAuth.setResourceId("tasklist");
-		userTasklistAuth.setResource(APPLICATION);
-		authorizationService.saveAuthorization(userTasklistAuth);
-		
-		AuthorizationEntity userCockpitAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
-		userCockpitAuth.setUserId(userName);
-		userCockpitAuth.addPermission(ACCESS);
-		userCockpitAuth.setResourceId("cockpit");
-		userCockpitAuth.setResource(APPLICATION);
-		authorizationService.saveAuthorization(userCockpitAuth);
-		
-	      // create ADMIN authorizations on all built-in resources
-	      for (Resource resource : Resources.values()) {
-	        if(authorizationService.createAuthorizationQuery().userIdIn(userName)
-	        		.resourceType(resource)
-	        		.resourceId(ANY)
-	        		.count() == 0) {
-	          AuthorizationEntity userAdminAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
-	          userAdminAuth.setUserId(userName);
-	          userAdminAuth.setResource(resource);
-	          userAdminAuth.setResourceId(ANY);
-	          userAdminAuth.addPermission(ALL);
-	          authorizationService.saveAuthorization(userAdminAuth);
-	        }
-	      
-	        // rove access to UserAndTenantCreator process
-	        AuthorizationEntity userCreateProcessAuth = new AuthorizationEntity(AUTH_TYPE_REVOKE);
-	        userCreateProcessAuth.setUserId(userName);
-	        userCreateProcessAuth.setResource(PROCESS_DEFINITION);
-	        userCreateProcessAuth.setResourceId("UserAndTenantCreator");
-	        userCreateProcessAuth.removePermission(ALL);
-	        authorizationService.saveAuthorization(userCreateProcessAuth);
-	        
-	}
-	    
-		
-	}
+    public void execute(DelegateExecution execution) throws Exception {
+        String userName = (String) execution.getVariable("userName");
+        String password = (String) execution.getVariable("password");
+        
+        final AuthorizationService authorizationService = execution.getProcessEngineServices().getAuthorizationService();
+        final IdentityService identityService = execution.getProcessEngineServices().getIdentityService();
+        
+        
+        AuthorizationEntity userTasklistAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
+        userTasklistAuth.setUserId(userName);
+        userTasklistAuth.addPermission(ACCESS);
+        userTasklistAuth.setResourceId("tasklist");
+        userTasklistAuth.setResource(APPLICATION);
+        authorizationService.saveAuthorization(userTasklistAuth);
+        
+        AuthorizationEntity userCockpitAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
+        userCockpitAuth.setUserId(userName);
+        userCockpitAuth.addPermission(ACCESS);
+        userCockpitAuth.setResourceId("cockpit");
+        userCockpitAuth.setResource(APPLICATION);
+        authorizationService.saveAuthorization(userCockpitAuth);
+        
+        // create ADMIN authorizations on all built-in resources
+        for (Resource resource : Resources.values()) {
+                if (resource != APPLICATION &&
+                    resource != AUTHORIZATION &&
+                    resource != TENANT &&
+                    resource != TENANT_MEMBERSHIP &&
+                    resource != USER &&
+                    resource != GROUP &&
+                    resource != GROUP_MEMBERSHIP) {
+                    AuthorizationEntity userAdminAuth = new AuthorizationEntity(AUTH_TYPE_GRANT);
+                    userAdminAuth.setUserId(userName);
+                    userAdminAuth.setResource(resource);
+                    userAdminAuth.setResourceId(ANY);
+                    userAdminAuth.addPermission(ALL);
+                    authorizationService.saveAuthorization(userAdminAuth);
+                }
+        }
 
+        // remove access to UserAndTenantCreator process
+        AuthorizationEntity userCreateProcessAuth = new AuthorizationEntity(AUTH_TYPE_REVOKE);
+        userCreateProcessAuth.setUserId(userName);
+        userCreateProcessAuth.setResource(PROCESS_DEFINITION);
+        userCreateProcessAuth.setResourceId("UserAndTenantCreator");
+        userCreateProcessAuth.removePermission(ALL);
+        authorizationService.saveAuthorization(userCreateProcessAuth);
+    }
+	    
+		
 }
+
