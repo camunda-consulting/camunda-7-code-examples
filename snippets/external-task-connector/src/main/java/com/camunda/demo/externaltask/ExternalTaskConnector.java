@@ -70,7 +70,7 @@ public class ExternalTaskConnector {
 			  }
 	    		  
 	    	  
-	    	  vars.put("response_"+externalTask.getActivityId(), response);
+	    	  vars.put("response_"+externalTask.getActivityId(), response.getBody());
 	    	  vars.put("response_status_"+externalTask.getActivityId(), response.getStatus());
 	    	  
 	    	  externalTaskService.complete(externalTask, vars);
