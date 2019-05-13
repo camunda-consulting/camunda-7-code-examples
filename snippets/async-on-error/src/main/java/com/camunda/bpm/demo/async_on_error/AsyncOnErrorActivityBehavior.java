@@ -69,6 +69,7 @@ public class AsyncOnErrorActivityBehavior extends TaskActivityBehavior implement
   public static void createAsynchronousContinuationJob(DelegateExecution execution, Exception exception) {
     MessageEntity message = new MessageEntity();
     message.setProcessInstanceId(execution.getProcessInstanceId());
+    message.setProcessDefinitionId(execution.getProcessDefinitionId());
     message.setExecutionId(execution.getId());
     message.setExclusive(true);
     message.setJobHandlerType(AsyncContinuationJobHandler.TYPE);

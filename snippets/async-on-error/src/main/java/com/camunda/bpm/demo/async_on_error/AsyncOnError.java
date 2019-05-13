@@ -13,8 +13,6 @@
 
 package com.camunda.bpm.demo.async_on_error;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.processEngine;
-
 import java.util.List;
 
 import javax.inject.Named;
