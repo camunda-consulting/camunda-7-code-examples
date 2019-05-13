@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.camunda.demo.externaltask</groupId>
+  <artifactId>ExternalTaskConnector</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+    <properties>
+    <camunda-ext-task-client.version>1.1.1</camunda-ext-task-client.version>   
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <version.java>1.8</version.java>
+  </properties>
+  
+    <dependencies>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-external-task-client</artifactId>
+      <version>${camunda-ext-task-client.version}</version>
+    </dependency>
+    
+    <!-- use logback as logger -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+    
+    <dependency>
+	    <groupId>com.mashape.unirest</groupId>
+	    <artifactId>unirest-java</artifactId>
+	    <version>1.4.9</version>
+	</dependency>
+ </dependencies>
+ 
+ 
+</project>
