@@ -167,7 +167,7 @@ GeneratedFormPreviewPluginProvider.prototype.generateSource = function(formField
                          cam-variable-name="${formField.id}"
                          cam-variable-type="Date"
                          class="form-control"
-                         datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+                         uib-datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
                          is-open="dateFieldOpened${formField.id}" />
 
                     <span class="input-group-btn">
