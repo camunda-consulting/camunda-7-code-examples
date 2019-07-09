@@ -1,0 +1,37 @@
+spring.datasource:
+  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE
+#shareable h2 database: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+  username: sa
+  password: sa
+spring.h2.console.enabled: true
+camunda.bpm:
+  filter:
+    create: All Tasks
+  authorization:
+    enabled: true
+server.port: 8080
+keycloak:
+  realm: camunda
+  auth-server-url: http://localhost:8085/auth
+  resource: camunda-identity-service
+  security-constraints:
+    - authRoles:
+        - camunda-user
+      securityCollections:
+        - name: everything
+          patterns:
+            - /app/*
+  ssl-required: none
+  enabled: true
+  credentials.secret : your-client-secret
+logging:
+  level:
+    ROOT: info
+
+plugin.identity.keycloak:
+  keycloakIssuerUrl: https://localhost:8448/auth/realms/camunda
+  keycloakAdminUrl: https://localhost:8448/auth/admin/realms/camunda
+  clientId: camunda-identity-service
+  clientSecret: your-client-secret
+  useUsernameAsCamundaUserId: true
+  disableSSLCertificateValidation: true
