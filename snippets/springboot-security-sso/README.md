@@ -27,5 +27,5 @@ Since the existing filter only reads auth info from the session, there should be
 If one needs to use IdentityService APIs or wants to see actual Users and Groups show up in Cockpit,
 a custom `IdentityProvider` needs to be implemented as well.
  
-Another example of how to use external authentication can be found in the [Camunda SSO JBoss Project](https://github.com/camunda/camunda-sso-jboss).
+Another example of how to use external authentication can be found in the [Camunda SSO JBoss Project](https://github.com/camunda/camunda-sso-jboss) or in the [Keycloak Spring Boot SSO snippet](https://github.com/camunda-consulting/code/tree/master/snippets/springboot-keycloak-sso)
  
