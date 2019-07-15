@@ -1,0 +1,50 @@
+{
+    "eventType" : "bla", 
+    "configuration": [
+        {   "id": "1",
+            "name": "Task 1",
+            "formkey": "foo", 
+            "children": [
+                {   "id": "2",
+                    "name": "Task 2",
+                    "formkey": "bar", 
+                    "children": [ ]
+                },
+                {   "id": "3",
+                    "name": "Task 3",
+                    "formkey": "foo", 
+                    "children": [ 
+                        {   "id": "5",
+                            "name": "Task 5",
+                            "formkey": "foo", 
+                            "children": [ 
+                                {   "id": "6",
+                                    "name": "Task 6",
+                                    "formkey": "foo", 
+                                    "children": [ ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+             ]
+        },
+        {   "id": "4", 
+            "name": "more work",
+            "formkey": "bar", 
+            "children": [ 
+                {   "id": "7",
+                    "name": "Task 7",
+                    "formkey": "foo", 
+                    "children": [
+                        {   "id": "8",
+                            "name": "Task 8",
+                            "formkey": "bar", 
+                            "children": [ ]
+                        }
+                     ]
+                }
+            ]
+        }
+    ]
+}
