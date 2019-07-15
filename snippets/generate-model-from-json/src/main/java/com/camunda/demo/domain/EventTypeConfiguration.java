@@ -3,12 +3,10 @@ package com.camunda.demo.domain;
 import java.util.List;
 import lombok.Data;
 
-
+@Data
 public class EventTypeConfiguration {
 
-    @Data
     private String eventType;
 
-    @Data
     private List<UserTaskData> configuration;
 }
