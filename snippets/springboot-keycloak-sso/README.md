@@ -1,6 +1,6 @@
 ## Integrating Keycloak with Camunda using the Keycloak Spring Boot adapter
 
-This is another example of how to achieve SSO with Camunda. This one uses the [plain Spring Boot adapter for Keycloak](https://www.keycloak.org/docs/latest/securing_apps/index.html#_spring_boot_adapter), not the one that integrates with Spring Security.
+This is another example of how to achieve SSO with Camunda. There are two flavours of this snippet: one for the [plain Spring Boot adapter for Keycloak](https://www.keycloak.org/docs/latest/securing_apps/index.html#_spring_boot_adapter) and one that integrates with [Keycloak's Spring Security adapter](https://www.keycloak.org/docs/latest/securing_apps/index.html#_spring_security_adapter).
 
 The example also uses the [camunda-identity-keycloak plugin](https://github.com/VonDerBeck/camunda-identity-keycloak) from the community.
 
