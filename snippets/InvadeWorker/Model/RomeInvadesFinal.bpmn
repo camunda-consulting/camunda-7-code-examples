@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0jiid8k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <bpmn:process id="ExpandRome" name="ExpandRome" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="New Emporer wants to invade somewhere">
+      <bpmn:outgoing>SequenceFlow_03y4eu2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_174y79c">
+      <bpmn:incoming>SequenceFlow_0qm2mcu</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_03y4eu2" sourceRef="StartEvent_1" targetRef="Task_0jsvmcx" />
+    <bpmn:sequenceFlow id="SequenceFlow_03alav2" sourceRef="Task_0jsvmcx" targetRef="ExclusiveGateway_0w2zr8e" />
+    <bpmn:serviceTask id="Task_0jsvmcx" name="Decide how best to expand rome" camunda:type="external" camunda:topic="ChooseDestination">
+      <bpmn:incoming>SequenceFlow_03y4eu2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_03alav2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0w2zr8e">
+      <bpmn:incoming>SequenceFlow_03alav2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_05e777t</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_11m5zqp</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_05e777t" name="Expand South" sourceRef="ExclusiveGateway_0w2zr8e" targetRef="Task_0nu3agd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{not north}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_11m5zqp" name="Expand North" sourceRef="ExclusiveGateway_0w2zr8e" targetRef="Task_0pnrg46">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{north}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0c40ajy" sourceRef="Task_0nu3agd" targetRef="ExclusiveGateway_15ly5uu" />
+    <bpmn:boundaryEvent id="BoundaryEvent_1vnac0r" name="Emporer doesn&#39;t like fighting" attachedToRef="Task_0jsvmcx">
+      <bpmn:outgoing>SequenceFlow_07mj73g</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0wycmlf" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_07mj73g" sourceRef="BoundaryEvent_1vnac0r" targetRef="Task_08rzant" />
+    <bpmn:endEvent id="EndEvent_0zjy80v">
+      <bpmn:incoming>SequenceFlow_0zfux3w</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0zfux3w" sourceRef="Task_08rzant" targetRef="EndEvent_0zjy80v" />
+    <bpmn:serviceTask id="Task_0pnrg46" name="Invade Gaul" camunda:type="external" camunda:topic="InvadeGaul">
+      <bpmn:incoming>SequenceFlow_11m5zqp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0v1tgll</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0nu3agd" name="Invade Persia" camunda:type="external" camunda:topic="InvadePersia">
+      <bpmn:incoming>SequenceFlow_05e777t</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0c40ajy</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_08rzant" name="Host Games" camunda:type="external" camunda:topic="HostGames">
+      <bpmn:incoming>SequenceFlow_07mj73g</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0zfux3w</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="SubProcess_0dp75u1" triggeredByEvent="true">
+      <bpmn:startEvent id="StartEvent_0pa7m5n" name="Emporer Killed In battle">
+        <bpmn:outgoing>SequenceFlow_1xur51p</bpmn:outgoing>
+        <bpmn:errorEventDefinition errorRef="Error_0umfo4f" />
+      </bpmn:startEvent>
+      <bpmn:endEvent id="EndEvent_0oilqxh" name="Expantion failed">
+        <bpmn:incoming>SequenceFlow_1xur51p</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_1xur51p" sourceRef="StartEvent_0pa7m5n" targetRef="EndEvent_0oilqxh" />
+    </bpmn:subProcess>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_15ly5uu">
+      <bpmn:incoming>SequenceFlow_0c40ajy</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0v1tgll</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1rfma7s</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1rfma7s" sourceRef="ExclusiveGateway_15ly5uu" targetRef="Task_00mmy8b" />
+    <bpmn:sequenceFlow id="SequenceFlow_0v1tgll" sourceRef="Task_0pnrg46" targetRef="ExclusiveGateway_15ly5uu" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qm2mcu" sourceRef="Task_00mmy8b" targetRef="EndEvent_174y79c" />
+    <bpmn:userTask id="Task_00mmy8b" name="Celebrate Roman Expansion">
+      <bpmn:incoming>SequenceFlow_1rfma7s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qm2mcu</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmn:error id="Error_0umfo4f" name="EmporerKilled" errorCode="EmporerKilled" />
+  <bpmn:error id="Error_0wycmlf" name="NoFighting" errorCode="NoFighting" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ExpandRome">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="361" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="404" width="76" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_174y79c_di" bpmnElement="EndEvent_174y79c">
+        <dc:Bounds x="982" y="361" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_03y4eu2_di" bpmnElement="SequenceFlow_03y4eu2">
+        <di:waypoint x="215" y="379" />
+        <di:waypoint x="276" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_03alav2_di" bpmnElement="SequenceFlow_03alav2">
+        <di:waypoint x="376" y="379" />
+        <di:waypoint x="426" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0722zui_di" bpmnElement="Task_0jsvmcx">
+        <dc:Bounds x="276" y="339" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0w2zr8e_di" bpmnElement="ExclusiveGateway_0w2zr8e" isMarkerVisible="true">
+        <dc:Bounds x="426" y="354" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_05e777t_di" bpmnElement="SequenceFlow_05e777t">
+        <di:waypoint x="476" y="379" />
+        <di:waypoint x="533" y="379" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="464" y="347" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11m5zqp_di" bpmnElement="SequenceFlow_11m5zqp">
+        <di:waypoint x="451" y="354" />
+        <di:waypoint x="451" y="230" />
+        <di:waypoint x="533" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="435" y="203" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0c40ajy_di" bpmnElement="SequenceFlow_0c40ajy">
+        <di:waypoint x="633" y="379" />
+        <di:waypoint x="675" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_0285h8r_di" bpmnElement="BoundaryEvent_1vnac0r">
+        <dc:Bounds x="295" y="401" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="328" y="436" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07mj73g_di" bpmnElement="SequenceFlow_07mj73g">
+        <di:waypoint x="313" y="419" />
+        <di:waypoint x="313" y="499" />
+        <di:waypoint x="401" y="499" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0zjy80v_di" bpmnElement="EndEvent_0zjy80v">
+        <dc:Bounds x="551" y="481" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0zfux3w_di" bpmnElement="SequenceFlow_0zfux3w">
+        <di:waypoint x="501" y="499" />
+        <di:waypoint x="551" y="499" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0nfdc7j_di" bpmnElement="Task_0pnrg46">
+        <dc:Bounds x="533" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0mbqdkz_di" bpmnElement="Task_0nu3agd">
+        <dc:Bounds x="533" y="339" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_184liwv_di" bpmnElement="Task_08rzant">
+        <dc:Bounds x="401" y="459" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_0z6g9kq_di" bpmnElement="SubProcess_0dp75u1" isExpanded="true">
+        <dc:Bounds x="130" y="70" width="282" height="193" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_080qdg4_di" bpmnElement="StartEvent_0pa7m5n">
+        <dc:Bounds x="150" y="148" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="136" y="194" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0oilqxh_di" bpmnElement="EndEvent_0oilqxh">
+        <dc:Bounds x="341" y="148" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="320" y="191" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1xur51p_di" bpmnElement="SequenceFlow_1xur51p">
+        <di:waypoint x="186" y="166" />
+        <di:waypoint x="341" y="166" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_15ly5uu_di" bpmnElement="ExclusiveGateway_15ly5uu" isMarkerVisible="true">
+        <dc:Bounds x="675" y="354" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1rfma7s_di" bpmnElement="SequenceFlow_1rfma7s">
+        <di:waypoint x="725" y="379" />
+        <di:waypoint x="802" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0v1tgll_di" bpmnElement="SequenceFlow_0v1tgll">
+        <di:waypoint x="633" y="230" />
+        <di:waypoint x="700" y="230" />
+        <di:waypoint x="700" y="354" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qm2mcu_di" bpmnElement="SequenceFlow_0qm2mcu">
+        <di:waypoint x="902" y="379" />
+        <di:waypoint x="982" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0zohal3_di" bpmnElement="Task_00mmy8b">
+        <dc:Bounds x="802" y="339" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

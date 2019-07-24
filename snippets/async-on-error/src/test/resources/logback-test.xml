@@ -18,7 +18,6 @@
   <logger name="org.springframework" level="info" />
 
   <logger name="org.camunda" level="info" />
-  <logger name="org.camunda" level="DEBUG"/>
 <!-- 
 -->  
 

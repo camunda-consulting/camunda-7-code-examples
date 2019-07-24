@@ -1,12 +1,13 @@
 package com.camunda.bpm.demo.async_on_error.nonarquillian;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.logging.LogFactory;
+import org.camunda.bpm.engine.runtime.Incident;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.camunda.bpm.engine.runtime.ProcessInstantiationBuilder;
@@ -27,9 +28,12 @@ import com.camunda.bpm.demo.async_on_error.BusinessLogicDelegate;
  */
 public class InMemoryH2Test {
 
-  @ClassRule
+//  @ClassRule
+//  @Rule
+//  public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
+  
   @Rule
-  public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
+  public ProcessEngineRule rule = new ProcessEngineRule();
 
   private static final String PROCESS_DEFINITION_KEY = "async-on-error";
 
@@ -68,6 +72,29 @@ public class InMemoryH2Test {
     execute(job());
     
     assertThat(processInstance).isEnded();
+  }
+  
+  @Test
+  @Deployment(resources = "process.bpmn")
+  public void testIncidentCreated() {
+    Mocks.register("asyncOnError", new AsyncOnError());
+    Mocks.register("businessLogicDelegate", new BusinessLogicDelegate());
+
+    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY, 
+        withVariables("throwException", true));
+    
+    assertThat(processInstance).job("Task_DoSomethingThatMightFail").hasExceptionMessage();
+    // do the retry
+    for (int i = 1; i < 4; i++) { 
+      try {
+        execute(job());
+      } catch (Exception e) {
+      }      
+    }
+    assertThat(processInstance).isWaitingAt("Task_DoSomethingThatMightFail");
+    
+    Incident incident = runtimeService().createIncidentQuery().singleResult();
+    assertThat(incident).isNotNull();
   }
 
   @Test

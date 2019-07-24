@@ -1,0 +1,8 @@
+# Test configuration using spring-boot
+
+camunda.bpm:
+  job-execution.enabled: false
+  id-generator: simple
+
+spring.datasource:
+  url: jdbc:h2:mem:camunda-spring-boot-test;DB_CLOSE_ON_EXIT=false
