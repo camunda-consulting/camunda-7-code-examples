@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: camunda-bpm
+  annotations:
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-prod-cluster"
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+    - host: ${HOSTNAME}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: camunda-bpm
+              servicePort: http
+  tls:
+    - hosts:
+      - ${HOSTNAME}
+      secretName: ${HOSTNAME}-tls

@@ -1,0 +1,14 @@
+# WARNING This file is templated by skaffold.yaml.tmpl
+
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/${GCLOUD_PROJECT}/camunda-bpm-k8s-demo
+    context: ./images/camunda-bpm
+  googleCloudBuild: {}
+  tagPolicy:
+    sha256: {}
+deploy:
+  kustomize:
+    path: .

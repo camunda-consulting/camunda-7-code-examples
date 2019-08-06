@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+     docker pull gcr.io/$PROJECT_ID/camunda-bpm-k8s-demo:latest || exit 0
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '-t', 'gcr.io/$PROJECT_ID/camunda-bpm-k8s-demo:latest',
+            '--cache-from', 'gcr.io/$PROJECT_ID/camunda-bpm-k8s-demo:latest',
+            '.'
+        ]
+  dir: 'camunda-bpm-kubernetes/images/camunda-bpm'
+images:
+- 'gcr.io/$PROJECT_ID/camunda-bpm-k8s-demo:latest'

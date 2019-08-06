@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: jmx
+  labels:
+spec:
+  selector:
+    matchLabels:
+        app.kubernetes.io/app: camunda-bpm
+  endpoints:
+  - port: metrics
+    interval: 10s

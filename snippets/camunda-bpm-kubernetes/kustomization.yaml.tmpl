@@ -1,0 +1,31 @@
+# WARNING This file is templated by kustomization.yaml.tmpl
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: camunda-bpm-demo
+
+# Labels to add to all resources and selectors.
+commonLabels:
+  app.kubernetes.io/env: demo
+
+bases:
+  - ./platform
+
+resources:
+  - namespace.yaml
+
+images:
+  - name: camunda-bpm
+
+    # If you don't want to build your own image, you can use ours
+    #newName: gcr.io/camunda-public-images/camunda-bpm-k8s-demo
+
+    newName: gcr.io/${GCLOUD_PROJECT}/camunda-bpm-k8s-demo
+
+    #skaffold will overwrite this, otherwise you should explicitly set it
+    newTag: latest
+
+# set url specific data and configure tls
+patchesStrategicMerge:
+  - ingress-patch.yaml
