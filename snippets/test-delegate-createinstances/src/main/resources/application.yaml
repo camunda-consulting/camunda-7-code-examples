@@ -1,0 +1,22 @@
+spring.datasource:
+  #url: jdbc:mysql://localhost:8050/camunda_db
+  #shareable h2 database: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+  #username: root
+  #password: camunda123
+  #driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+  username: sa
+  password: sa
+spring.h2.console.enabled: true
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  database:
+    schema-update: true
+    #type: mysql
+server.port: 8080
