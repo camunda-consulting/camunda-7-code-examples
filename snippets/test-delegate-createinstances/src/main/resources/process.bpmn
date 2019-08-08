@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1l2l540" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
+  <bpmn:process id="ParentProcess" name="Parent Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1h86h3o</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1h86h3o" sourceRef="StartEvent_1" targetRef="Task_1dkda8f" />
+    <bpmn:sequenceFlow id="SequenceFlow_0dzm1od" sourceRef="CreateInstancesTask" targetRef="ConditionEvent" />
+    <bpmn:serviceTask id="CreateInstancesTask" name="Create Instances" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.delegate.CreateInstancesDelegate">
+      <bpmn:incoming>SequenceFlow_0wkl2a4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0dzm1od</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0j50tg5">
+      <bpmn:incoming>SequenceFlow_0u48emg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="ConditionEvent" name="Condition">
+      <bpmn:incoming>SequenceFlow_0dzm1od</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0u48emg</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition camunda:variableName="finishedInstancesCount" camunda:variableEvent="create, update">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${finishedInstancesCount == instancesCount}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0u48emg" sourceRef="ConditionEvent" targetRef="EndEvent_0j50tg5" />
+    <bpmn:serviceTask id="Task_1dkda8f" name="Generate Random Data" camunda:class="org.camunda.bpm.delegate.GenerateRandomDataDelegate">
+      <bpmn:incoming>SequenceFlow_1h86h3o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_17p5pgo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_17p5pgo" sourceRef="Task_1dkda8f" targetRef="Task_0zmwrly" />
+    <bpmn:sequenceFlow id="SequenceFlow_0wkl2a4" sourceRef="Task_0zmwrly" targetRef="CreateInstancesTask" />
+    <bpmn:serviceTask id="Task_0zmwrly" name="Set Instance Count" camunda:class="org.camunda.bpm.delegate.SetInstanceCount">
+      <bpmn:incoming>SequenceFlow_17p5pgo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0wkl2a4</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ParentProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="156" y="105" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1h86h3o_di" bpmnElement="SequenceFlow_1h86h3o">
+        <di:waypoint x="192" y="123" />
+        <di:waypoint x="248" y="123" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0dzm1od_di" bpmnElement="SequenceFlow_0dzm1od">
+        <di:waypoint x="647" y="123" />
+        <di:waypoint x="686" y="123" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0a4257u_di" bpmnElement="CreateInstancesTask">
+        <dc:Bounds x="547" y="83" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0j50tg5_di" bpmnElement="EndEvent_0j50tg5">
+        <dc:Bounds x="777" y="105" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_15hpf6f_di" bpmnElement="ConditionEvent">
+        <dc:Bounds x="686" y="105" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="681" y="81" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0u48emg_di" bpmnElement="SequenceFlow_0u48emg">
+        <di:waypoint x="722" y="123" />
+        <di:waypoint x="777" y="123" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1lsmm6v_di" bpmnElement="Task_1dkda8f">
+        <dc:Bounds x="248" y="83" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_17p5pgo_di" bpmnElement="SequenceFlow_17p5pgo">
+        <di:waypoint x="348" y="123" />
+        <di:waypoint x="393" y="123" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wkl2a4_di" bpmnElement="SequenceFlow_0wkl2a4">
+        <di:waypoint x="493" y="123" />
+        <di:waypoint x="547" y="123" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0xvblf2_di" bpmnElement="Task_0zmwrly">
+        <dc:Bounds x="393" y="83" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

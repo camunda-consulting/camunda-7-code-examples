@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_13bulag" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
+  <bpmn:process id="ProcessMultInstance" name="Process Mult Instance" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_17h9qmv" camunda:asyncBefore="true">
+      <bpmn:outgoing>SequenceFlow_0hut6s1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="CallLogger" name="Call Logger" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.delegate.LoggerDelegate">
+      <bpmn:incoming>SequenceFlow_1efz012</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1nfck9i</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:asyncBefore="true" camunda:collection="${workItems}" camunda:elementVariable="workItem" />
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_0yxuvac">
+      <bpmn:incoming>SequenceFlow_1nfck9i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0hut6s1" sourceRef="StartEvent_17h9qmv" targetRef="ServiceTask_05f8d87" />
+    <bpmn:sequenceFlow id="SequenceFlow_1nfck9i" sourceRef="CallLogger" targetRef="EndEvent_0yxuvac" />
+    <bpmn:serviceTask id="ServiceTask_05f8d87" name="Generate Random Data" camunda:class="org.camunda.bpm.delegate.SetInstanceCount">
+      <bpmn:incoming>SequenceFlow_0hut6s1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1efz012</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1efz012" sourceRef="ServiceTask_05f8d87" targetRef="CallLogger" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ProcessMultInstance">
+      <bpmndi:BPMNShape id="StartEvent_17h9qmv_di" bpmnElement="StartEvent_17h9qmv">
+        <dc:Bounds x="156" y="140" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_19pp7zt_di" bpmnElement="CallLogger">
+        <dc:Bounds x="374" y="118" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0yxuvac_di" bpmnElement="EndEvent_0yxuvac">
+        <dc:Bounds x="517" y="140" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hut6s1_di" bpmnElement="SequenceFlow_0hut6s1">
+        <di:waypoint x="192" y="158" />
+        <di:waypoint x="231" y="158" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1nfck9i_di" bpmnElement="SequenceFlow_1nfck9i">
+        <di:waypoint x="474" y="158" />
+        <di:waypoint x="517" y="158" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_05f8d87_di" bpmnElement="ServiceTask_05f8d87">
+        <dc:Bounds x="231" y="118" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1efz012_di" bpmnElement="SequenceFlow_1efz012">
+        <di:waypoint x="331" y="158" />
+        <di:waypoint x="374" y="158" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

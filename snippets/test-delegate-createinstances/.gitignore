@@ -1,0 +1,9 @@
+# Idea Files
+.idea/
+testservicetaskbatchinstances.iml
+
+# Build results
+[Tt]arget/
+
+# Database Files
+camunda-db*
