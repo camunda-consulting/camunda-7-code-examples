@@ -1,12 +1,12 @@
 spring.datasource:
-  #url: jdbc:mysql://localhost:8050/camunda_db
+  #url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
   #shareable h2 database: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-  #username: root
-  #password: camunda123
-  #driver-class-name: com.mysql.jdbc.Driver
-  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-  username: sa
-  password: sa
+  #username: sa
+  #password: sa
+  url: jdbc:mysql://localhost:8050/camunda_db
+  driver-class-name: com.mysql.jdbc.Driver
+  username: root
+  password: camunda123
 spring.h2.console.enabled: true
 camunda.bpm:
   admin-user:
@@ -18,5 +18,10 @@ camunda.bpm:
     create: All Tasks
   database:
     schema-update: true
-    #type: mysql
 server.port: 8080
+camunda:
+  bpm:
+    default-serialization-format: application/json
+    job-execution:
+      wait-time-in-millis: 500
+      max-wait: 500
