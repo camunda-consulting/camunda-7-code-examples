@@ -1,5 +1,3 @@
-*Update:* This example is a little outdated as well. Today, I would recommend using a [signal event](https://docs.camunda.org/manual/latest/reference/bpmn20/events/signal-events/) with a dynamic signal name (can be an expression using e.g. the business key) to synchronize parallel branches within the same process instance. This is also what the BPMN spec suggests to solve this problem.
-
 # Introduction
 This example shows how to synchronize two parallel branches before they are joined.
 
