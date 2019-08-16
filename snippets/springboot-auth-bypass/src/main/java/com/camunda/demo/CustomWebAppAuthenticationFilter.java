@@ -73,8 +73,6 @@ public class CustomWebAppAuthenticationFilter extends ContainerBasedAuthenticati
           Authentications.setCurrent(authentications);
           Authentications.updateSession(req.getSession(), authentications);
 
-          //Authentications.revalidateSession(req,authentication); // is this needed?
-
           ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_OK);
           ((HttpServletResponse) response).setHeader("Content-Type", "application/json");
           AuthenticationDto authenticationDto = AuthenticationDto.fromAuthentication(authentication);

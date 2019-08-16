@@ -14,15 +14,3 @@ camunda:
     filter:
       create: All Tasks
 server.port: 8080
-
-
-logging:
-  level:
-    org:
-      camunda:
-        bpm: debug
-logging.level.org:
-  camunda:
-    bpm:
-      engine:
-        jobexecutor: info
