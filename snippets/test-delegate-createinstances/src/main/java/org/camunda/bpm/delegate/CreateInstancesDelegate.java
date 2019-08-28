@@ -29,7 +29,7 @@ public class CreateInstancesDelegate implements JavaDelegate {
 
         IntStream.range(createdInstancesCount, workItems.size()).forEachOrdered(workItem -> {
             CommandExecutor commandExecutor = configuration.getCommandExecutorTxRequiresNew();
-            configuration.getCommandExecutorTxRequiresNew().execute(new Command<Void>() {
+            commandExecutor.execute(new Command<Void>() {
                 @Override
                 public Void execute(CommandContext commandContext) {
                     ProcessInstantiationBuilderImpl.createProcessInstanceByKey(commandExecutor, "ChildProcess")
