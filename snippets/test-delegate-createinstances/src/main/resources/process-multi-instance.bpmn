@@ -4,7 +4,7 @@
     <bpmn:startEvent id="StartEvent_17h9qmv" camunda:asyncBefore="true">
       <bpmn:outgoing>SequenceFlow_0hut6s1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="CallLogger" name="Call Logger" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.delegate.LoggerDelegate">
+    <bpmn:serviceTask id="CallLogger" name="Call Logger" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.demo.delegate.LoggerDelegate">
       <bpmn:incoming>SequenceFlow_1efz012</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1nfck9i</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:asyncBefore="true" camunda:collection="${workItems}" camunda:elementVariable="workItem" />
@@ -14,7 +14,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0hut6s1" sourceRef="StartEvent_17h9qmv" targetRef="ServiceTask_05f8d87" />
     <bpmn:sequenceFlow id="SequenceFlow_1nfck9i" sourceRef="CallLogger" targetRef="EndEvent_0yxuvac" />
-    <bpmn:serviceTask id="ServiceTask_05f8d87" name="Generate Random Data" camunda:class="org.camunda.bpm.delegate.SetInstanceCount">
+    <bpmn:serviceTask id="ServiceTask_05f8d87" name="Generate Random Data" camunda:class="org.camunda.bpm.demo.delegate.SetInstanceCount">
       <bpmn:incoming>SequenceFlow_0hut6s1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1efz012</bpmn:outgoing>
     </bpmn:serviceTask>

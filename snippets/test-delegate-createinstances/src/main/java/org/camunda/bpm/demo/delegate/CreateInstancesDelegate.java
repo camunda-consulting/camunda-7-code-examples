@@ -1,4 +1,4 @@
-package org.camunda.bpm.delegate;
+package org.camunda.bpm.demo.delegate;
 
 import org.camunda.bpm.BpmPlatform;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -27,17 +27,18 @@ public class CreateInstancesDelegate implements JavaDelegate {
 
         int createdInstancesCount = (int) execution.getVariable("createdInstancesCount");
 
-        IntStream.range(createdInstancesCount, workItems.size()).forEachOrdered(workItem -> {
+        IntStream.range(createdInstancesCount, workItems.size()).forEachOrdered(index -> {
             CommandExecutor commandExecutor = configuration.getCommandExecutorTxRequiresNew();
             commandExecutor.execute(new Command<Void>() {
                 @Override
                 public Void execute(CommandContext commandContext) {
                     ProcessInstantiationBuilderImpl.createProcessInstanceByKey(commandExecutor, "ChildProcess")
                             .setVariable("parentBusinessKey", execution.getBusinessKey())
-                            .setVariable("workItem", workItems.get(workItem))
+                            .setVariable("workItem", workItems.get(index))
+                            .businessKey(execution.getBusinessKey()+"-"+(index+1))
                             .execute();
                     Map<String, Object> variables = new HashMap<String, Object>();
-                    variables.put("createdInstancesCount", workItem+1);
+                    variables.put("createdInstancesCount", index+1);
                     commandExecutor.execute(new SetExecutionVariablesCmd(execution.getId(), variables, false));
                     return null;
                 }

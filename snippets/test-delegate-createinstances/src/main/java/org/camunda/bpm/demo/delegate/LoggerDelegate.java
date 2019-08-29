@@ -1,10 +1,9 @@
-package org.camunda.bpm.delegate;
+package org.camunda.bpm.demo.delegate;
 
 import java.util.logging.Logger;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.stereotype.Component;
 
 
 /**

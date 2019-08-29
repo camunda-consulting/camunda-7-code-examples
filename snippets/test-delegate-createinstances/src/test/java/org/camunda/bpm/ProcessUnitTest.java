@@ -1,25 +1,16 @@
 package org.camunda.bpm;
 
 import org.apache.ibatis.logging.LogFactory;
-import org.camunda.bpm.delegate.CreateInstancesDelegate;
-import org.camunda.bpm.delegate.LoggerDelegate;
-import org.camunda.bpm.delegate.UpdateParentInstanceCountDelegate;
-import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.demo.CamundaApplication;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.runtime.ProcessInstanceQuery;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.spring.boot.starter.test.helper.StandaloneInMemoryTestConfiguration;
-import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,16 +20,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.NONE)
+@SpringBootTest(classes = CamundaApplication.class, webEnvironment = WebEnvironment.NONE)
 public class ProcessUnitTest {
 
   private Logger logger = Logger.getLogger(getClass().getName());
@@ -80,7 +69,6 @@ public class ProcessUnitTest {
       managementService().executeJob(job.getId());
     });
 
-
     List<HistoricProcessInstance> processInstances = historyService().createHistoricProcessInstanceQuery()
             .variableValueEquals("parentBusinessKey", businesKey).list();
 
@@ -115,3 +103,4 @@ public class ProcessUnitTest {
   }
 
 }
+

@@ -5,7 +5,7 @@
       <bpmn:outgoing>SequenceFlow_14ur8dk</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_14ur8dk" sourceRef="StartEvent_1" targetRef="CallLoggerTask" />
-    <bpmn:serviceTask id="CallLoggerTask" name="Call Logger" camunda:class="org.camunda.bpm.delegate.LoggerDelegate">
+    <bpmn:serviceTask id="CallLoggerTask" name="Call Logger" camunda:class="org.camunda.bpm.demo.delegate.LoggerDelegate">
       <bpmn:incoming>SequenceFlow_14ur8dk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07kwtsz</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -14,7 +14,7 @@
       <bpmn:incoming>SequenceFlow_13706ox</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_13706ox" sourceRef="UpdateParentInstanceCountTask" targetRef="EndEvent_0knjf4c" />
-    <bpmn:serviceTask id="UpdateParentInstanceCountTask" name="Update Parent Instance Count" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.delegate.UpdateParentInstanceCountDelegate">
+    <bpmn:serviceTask id="UpdateParentInstanceCountTask" name="Update Parent Instance Count" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.demo.delegate.UpdateParentInstanceCountDelegate">
       <bpmn:incoming>SequenceFlow_07kwtsz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13706ox</bpmn:outgoing>
     </bpmn:serviceTask>

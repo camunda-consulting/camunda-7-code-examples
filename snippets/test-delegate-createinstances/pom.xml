@@ -156,7 +156,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.6.0</version>
         <configuration>
-          <mainClass>org.camunda.bpm.CamundaApplication</mainClass>
+          <mainClass>org.camunda.bpm.demo.CamundaApplication</mainClass>
         </configuration>
       </plugin>
     </plugins>

@@ -6,7 +6,7 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1h86h3o" sourceRef="StartEvent_1" targetRef="Task_1dkda8f" />
     <bpmn:sequenceFlow id="SequenceFlow_0dzm1od" sourceRef="CreateInstancesTask" targetRef="ConditionEvent" />
-    <bpmn:serviceTask id="CreateInstancesTask" name="Create Instances" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.delegate.CreateInstancesDelegate">
+    <bpmn:serviceTask id="CreateInstancesTask" name="Create Instances" camunda:asyncBefore="true" camunda:class="org.camunda.bpm.demo.delegate.CreateInstancesDelegate">
       <bpmn:incoming>SequenceFlow_0wkl2a4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dzm1od</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -21,13 +21,13 @@
       </bpmn:conditionalEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0u48emg" sourceRef="ConditionEvent" targetRef="EndEvent_0j50tg5" />
-    <bpmn:serviceTask id="Task_1dkda8f" name="Generate Random Data" camunda:class="org.camunda.bpm.delegate.GenerateRandomDataDelegate">
+    <bpmn:serviceTask id="Task_1dkda8f" name="Generate Random Data" camunda:class="org.camunda.bpm.demo.delegate.GenerateRandomDataDelegate">
       <bpmn:incoming>SequenceFlow_1h86h3o</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_17p5pgo</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_17p5pgo" sourceRef="Task_1dkda8f" targetRef="Task_0zmwrly" />
     <bpmn:sequenceFlow id="SequenceFlow_0wkl2a4" sourceRef="Task_0zmwrly" targetRef="CreateInstancesTask" />
-    <bpmn:serviceTask id="Task_0zmwrly" name="Set Instance Count" camunda:class="org.camunda.bpm.delegate.SetInstanceCount">
+    <bpmn:serviceTask id="Task_0zmwrly" name="Set Instance Count" camunda:class="org.camunda.bpm.demo.delegate.SetInstanceCount">
       <bpmn:incoming>SequenceFlow_17p5pgo</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0wkl2a4</bpmn:outgoing>
     </bpmn:serviceTask>
