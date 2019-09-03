@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.2">
+  <bpmn:process id="tcs-demo" name="tcs-demo" isExecutable="true">
+    <bpmn:startEvent id="StartEvent" name="Process&#10;started">
+      <bpmn:outgoing>SequenceFlow_1l9888l</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent" name="Process&#10;ended">
+      <bpmn:incoming>SequenceFlow_16rz1ic</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1l9888l" sourceRef="StartEvent" targetRef="userTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_16rz1ic" sourceRef="userTask" targetRef="EndEvent" />
+    <bpmn:userTask id="userTask" name="User Task">
+      <bpmn:incoming>SequenceFlow_1l9888l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16rz1ic</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="timerEvent" camunda:asyncAfter="true" cancelActivity="false" attachedToRef="userTask">
+      <bpmn:outgoing>SequenceFlow_1e5o97n</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">${timerUtil.getNextTimer(execution)}</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="EndEvent_ReminderSent" name="Reminder sent">
+      <bpmn:incoming>SequenceFlow_0h2geyv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1e5o97n" sourceRef="timerEvent" targetRef="sendReminderTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_0h2geyv" sourceRef="sendReminderTask" targetRef="EndEvent_ReminderSent" />
+    <bpmn:sendTask id="sendReminderTask" name="Send reminder" camunda:type="external" camunda:topic="sendReminder">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${timerUtil.recalculateTimer(execution)}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1e5o97n</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0h2geyv</bpmn:outgoing>
+    </bpmn:sendTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="tcs-demo">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="171" y="138" width="41" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0fkea3f_di" bpmnElement="EndEvent">
+        <dc:Bounds x="592" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="591" y="138" width="40" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1l9888l_di" bpmnElement="SequenceFlow_1l9888l">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="300" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_16rz1ic_di" bpmnElement="SequenceFlow_16rz1ic">
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="592" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0atbcrv_di" bpmnElement="userTask">
+        <dc:Bounds x="300" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0ir53tp_di" bpmnElement="timerEvent">
+        <dc:Bounds x="342" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0ursj46_di" bpmnElement="EndEvent_ReminderSent">
+        <dc:Bounds x="592" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="574" y="295" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1e5o97n_di" bpmnElement="SequenceFlow_1e5o97n">
+        <di:waypoint x="360" y="178" />
+        <di:waypoint x="360" y="270" />
+        <di:waypoint x="410" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0h2geyv_di" bpmnElement="SequenceFlow_0h2geyv">
+        <di:waypoint x="510" y="270" />
+        <di:waypoint x="592" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_07eo8hi_di" bpmnElement="sendReminderTask">
+        <dc:Bounds x="410" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
