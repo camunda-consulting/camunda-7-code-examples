@@ -86,9 +86,9 @@ public class AuthenticationProviderWithBypass extends HttpBasicAuthenticationPro
 
   @Override
   protected boolean isAuthenticated(ProcessEngine engine, String userName, String password) {
-    log.debug("Check authentication for {}", userName);
+    log.info("Check authentication for {}", userName);
     if (userName.equals(bypassUserId) && password.equals(bypassUserPw)) {
-      log.debug("Authenticated as bypassUser");
+      log.info("Authenticated as bypassUser");
       return true;
     }
     return engine.getIdentityService().checkPassword(userName, password);
