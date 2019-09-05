@@ -51,7 +51,7 @@ The configuration file read on startup and the values a held in main memory unti
 #### Logging
 The filter adds additional debug output on the Log level `com.camunda.consulting.rest.auth.AuthenticationFilterWithBypass`.
 
-To enable the output add this line to the logging.:
+To enable the output add this line to the `logging.properties` file in the `conf` directory:
 
 ```
 com.camunda.consulting.rest.auth.AuthenticationFilterWithBypass.level = FINE
