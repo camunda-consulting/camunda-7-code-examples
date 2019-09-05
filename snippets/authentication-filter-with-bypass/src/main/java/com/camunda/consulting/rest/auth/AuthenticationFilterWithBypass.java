@@ -13,12 +13,12 @@ public class AuthenticationFilterWithBypass extends ProcessEngineAuthenticationF
   private static final Logger log = LoggerFactory.getLogger(AuthenticationFilterWithBypass.class);
   
   protected void setAuthenticatedUser(ProcessEngine engine, String userId, List<String> groupIds, List<String> tenantIds){
-    log.info("get groups and tenants for authenticated user {}", userId);
+    log.debug("get groups and tenants for authenticated user {}", userId);
     
     List<String> bypassGroupIds = ((AuthenticationProviderWithBypass) authenticationProvider).getBypassGroupIds();
     if (userId.equals(((AuthenticationProviderWithBypass)authenticationProvider).getBypassUserId())
         && bypassGroupIds != null) {
-      log.info("set user and group from bypassUser");
+      log.debug("set user and group from bypassUser");
       groupIds = bypassGroupIds;
       tenantIds = new ArrayList<String>();
     } else {
