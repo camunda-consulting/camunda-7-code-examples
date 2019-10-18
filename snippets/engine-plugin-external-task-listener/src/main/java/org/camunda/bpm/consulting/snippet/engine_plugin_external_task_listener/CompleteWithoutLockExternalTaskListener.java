@@ -12,11 +12,10 @@ public class CompleteWithoutLockExternalTaskListener implements ExternalTaskList
 
   @Override
   public void notify(ExternalTask externalTask) {
-    // TODO try to lock the task in the same TX that creates it 
     String externalTaskId = externalTask.getId();
     System.out.println("New External Task: " + externalTaskId);
     ProcessEngineConfigurationImpl processEngineConfiguration = Context.getProcessEngineConfiguration();
-    
+
     CompletableFuture.runAsync(() -> {
       // give the database enough time to commit the TX that creates the external task
       try {
@@ -30,6 +29,5 @@ public class CompleteWithoutLockExternalTaskListener implements ExternalTaskList
       return null;
     });
   }
-
 
 }

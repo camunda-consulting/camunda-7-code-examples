@@ -17,7 +17,7 @@ public class ExternalTaskListenerProcessEnginePlugin implements ProcessEnginePlu
       postCommandInterceptors = new ArrayList<>();
       processEngineConfiguration.setCustomPostCommandInterceptorsTxRequired(postCommandInterceptors);
     }
-    postCommandInterceptors.add(new ExternalTaskListenerCommandInterceptor(new CompleteWithoutLockExternalTaskListener()));
+    postCommandInterceptors.add(new ExternalTaskListenerCommandInterceptor(new LockingExternalTaskListener()));
   }
 
   @Override

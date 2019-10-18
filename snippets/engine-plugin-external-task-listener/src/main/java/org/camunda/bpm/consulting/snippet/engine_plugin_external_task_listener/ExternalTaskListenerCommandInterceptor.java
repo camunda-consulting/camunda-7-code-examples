@@ -1,11 +1,5 @@
 package org.camunda.bpm.consulting.snippet.engine_plugin_external_task_listener;
 
-import static org.camunda.bpm.consulting.snippet.engine_plugin_external_task_listener.CompleteExternalTaskWithoutLockCmd.completeExternalTaskWithoutLock;
-
-import java.util.concurrent.CompletableFuture;
-
-import org.camunda.bpm.engine.externaltask.ExternalTask;
-import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.context.Context;
 import org.camunda.bpm.engine.impl.db.entitymanager.cache.CachedDbEntity;
 import org.camunda.bpm.engine.impl.db.entitymanager.cache.DbEntityCache;

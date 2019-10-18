@@ -3,6 +3,7 @@ package org.camunda.bpm.consulting.snippet.engine_plugin_external_task_listener;
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.ExternalTaskService;
 import org.camunda.bpm.engine.externaltask.ExternalTask;
+import org.camunda.bpm.engine.history.HistoricVariableInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
@@ -39,16 +40,25 @@ public class ProcessUnitTest {
   @Test
   @Deployment(resources = "process.bpmn")
   public void testHappyPath() throws InterruptedException {
-    ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+    ProcessInstance processInstance = processEngine().getRuntimeService()
+        .createProcessInstanceByKey(PROCESS_DEFINITION_KEY)
+        .setVariable("foo", "bar")
+        .execute();
 
     assertThat(processInstance).isWaitingAt("Task_DoSomething");	  
 	  
 //    ExternalTaskService externalTaskService = processEngine().getExternalTaskService();
 //    ExternalTask externalTask = externalTaskService.createExternalTaskQuery().singleResult();
+//    externalTaskService.complete(externalTask.getId(), "PushedToWorkerInsideSameJVM"); // does not work without lock
 //    completeExternalTaskWithoutLock(processEngine(), externalTask);
     Thread.sleep(1_000L);
     
     assertThat(processInstance).isEnded();
+    
+    HistoricVariableInstance variableInstance = historyService().createHistoricVariableInstanceQuery()
+      .variableName("foo")
+      .singleResult();
+    assertEquals("bar changed by worker", variableInstance.getValue());
   }
 
 }
