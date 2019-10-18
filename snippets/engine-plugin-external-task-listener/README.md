@@ -1,5 +1,5 @@
 # Camunda External Task Listener Plugin
-A Process Engine Plugin for [Camunda BPM](http://docs.camunda.org) that allows to listen to newly created External Tasks.
+A Process Engine Plugin for [Camunda BPM](http://docs.camunda.org) that allows listening to newly created External Tasks.
 It also provides a way to complete External Tasks without locking them via `ExternalTaskService.fetchAndLock()`.
 This could be used to signal an External Task Worker that is running inside the same JVM
 and to save the database transaction of `ExternalTaskService.fetchAndLock()`.
