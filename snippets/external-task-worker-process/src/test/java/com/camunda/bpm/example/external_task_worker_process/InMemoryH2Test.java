@@ -41,13 +41,13 @@ public class InMemoryH2Test {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = {"parent-process.bpmn", "child-process.bpmn"})
+  @Deployment(resources = "process.bpmn")
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = {"parent-process.bpmn", "child-process.bpmn"})
+  @Deployment(resources = "process.bpmn")
   public void testHappyPath() {
     String businessKey = "23";
     ProcessInstance parentProcessInstance = processEngine().getRuntimeService()
@@ -70,12 +70,12 @@ public class InMemoryH2Test {
 	  
     assertThat(parentProcessInstance).isEnded();
 
-    // TODO: does not work yet
-//    assertEquals(ProcessConstants.CHILD_PROCESS,
-//        historyService().createHistoricProcessInstanceQuery()
-//        .superProcessInstanceId(parentProcessInstance.getId())
-//        .singleResult()
-//        .getProcessDefinitionKey());
+    assertEquals(ProcessConstants.CHILD_PROCESS,
+        historyService().createHistoricProcessInstanceQuery()
+        .processDefinitionKey(ProcessConstants.CHILD_PROCESS)
+        .variableValueEquals(ProcessConstants.VAR_PARENT_PROCESS_INSTANCE_ID, parentProcessInstance.getId())
+        .singleResult()
+        .getProcessDefinitionKey());
   }
 
   private ProcessInstance handleExternalTask(String workerId, LockedExternalTask lockedExternalTask) {
@@ -83,9 +83,9 @@ public class InMemoryH2Test {
     childProcessInstance = processEngine().getRuntimeService()
       .createProcessInstanceByKey(ProcessConstants.CHILD_PROCESS)
       .businessKey(lockedExternalTask.getBusinessKey())
-      .setVariable("parentProcessInstanceId", lockedExternalTask.getProcessInstanceId())
-      .setVariable("externalTaskId", lockedExternalTask.getId())
-      .setVariable("workerId", workerId)
+      .setVariable(ProcessConstants.VAR_PARENT_PROCESS_INSTANCE_ID, lockedExternalTask.getProcessInstanceId())
+      .setVariable(ProcessConstants.VAR_EXTERNAL_TASK_ID, lockedExternalTask.getId())
+      .setVariable(ProcessConstants.VAR_WORKER_ID, workerId)
       .execute();
     return childProcessInstance;
   }
