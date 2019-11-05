@@ -12,6 +12,8 @@ import org.joda.time.DateTime;
 
 public class LockingExternalTaskListener implements ExternalTaskListener {
 
+  public static final String WORKER_ID = "PushedToWorkerInsideSameJVM";
+
   @Override
   public void notify(ExternalTask externalTask) {
     String externalTaskId = externalTask.getId();
@@ -19,9 +21,7 @@ public class LockingExternalTaskListener implements ExternalTaskListener {
 
     // lock the task in the same TX that creates it
     ExternalTaskEntity entity = (ExternalTaskEntity) externalTask;
-    String workerId = "PushedToWorkerInsideSameJVM";
-    entity.setWorkerId(workerId);
-    entity.setLockExpirationTime(new DateTime().plusMinutes(5).toDate());
+    lockTask(entity, WORKER_ID);
     
     // get variables
     VariableMap variables = entity.getExecution().getVariables();
@@ -29,8 +29,19 @@ public class LockingExternalTaskListener implements ExternalTaskListener {
     
     ProcessEngineConfigurationImpl processEngineConfiguration = Context.getProcessEngineConfiguration();
 
+    workOnTask(externalTaskId, WORKER_ID, variables, localVariables, processEngineConfiguration);
+  }
+
+  public void lockTask(ExternalTaskEntity entity, String workerId) {
+    entity.setWorkerId(workerId);
+    entity.setLockExpirationTime(new DateTime().plusMinutes(5).toDate());
+  }
+
+  public void workOnTask(String externalTaskId, String workerId, VariableMap variables, VariableMap localVariables,
+      ProcessEngineConfigurationImpl processEngineConfiguration) {
     CompletableFuture.runAsync(() -> { 
-      // give the database enough time to commit the TX that creates the external task
+      // give the database enough time to commit the TX that creates the external task OR NOT?
+      // work on the task outside a TX
       try {
         Thread.sleep(200L); // TODO use ScheduledExecutorService and/or Queue
       } catch (InterruptedException e) {
@@ -41,6 +52,7 @@ public class LockingExternalTaskListener implements ExternalTaskListener {
       String variableValue = (String) variables.get("foo");
       variables.put("foo", variableValue + " changed by worker");
       
+      // complete task in new TX
       System.out.println("Completing External Task: " + externalTaskId);
       processEngineConfiguration.getCommandExecutorTxRequiresNew()
         .execute(
