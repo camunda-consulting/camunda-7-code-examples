@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "85f8ce27-a771-49f3-9972-a02ac7f6801d",
+		"name": "Migration - Case 1 Step 3 - Start Migration Process",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Process migrate-case-1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"processDefKey\": {\n            \"value\": \"use-case-1\",\n            \"type\": \"String\"\n        },\n        \"fromVersion\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        },\n        \"toVersion\": {\n            \"value\": 2,\n            \"type\": \"Integer\"\n        },\n        \"fromUserTaskKey\": {\n            \"value\": \"user-task-0\",\n            \"type\": \"String\"\n        },\n        \"toUserTaskKey\": {\n            \"value\": \"migration-task\",\n            \"type\": \"String\"\n        },\n        \"maxPerBatch\": {\n            \"value\": 50,\n            \"type\": \"Integer\"\n        },\n        \"skipIoMappings\": {\n            \"value\": true,\n            \"type\": \"Boolean\"\n        },\n        \"skipCustomListeners\": {\n            \"value\": true,\n            \"type\": \"Boolean\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/process-definition/key/migrate-case-1/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"migrate-case-1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
