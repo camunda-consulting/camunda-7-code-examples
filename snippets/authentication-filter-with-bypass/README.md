@@ -8,7 +8,7 @@ To overcome this, you may use a special user and configure his credentials outsi
 
 The AuthenticationFilter in the `engine-rest.war` now should check the user id from the request against this special user first and if its not found here, ask LDAP for the user.
 
-### Setup
+### Tomcat Setup
 In the Tomcat shared engine it's quite easy to set up the bypass.
 
 1. Build the jar file with `mvn clean install`.
@@ -26,6 +26,7 @@ In the Tomcat shared engine it's quite easy to set up the bypass.
       <param-value>com.camunda.consulting.rest.auth.AuthenticationProviderWithBypass</param-value>
     </init-param>
     <async-supported>true</async-supported>
+  </filter>
 ...
 ```
 4. Create a file named `bypassUser.properties` in the configuration folder of the tomcat server: `camunda-bpm-ee-tomcat-7.10.0\server\apache-tomcat-9.0.12\conf\`. Here is an example: [bypassUser.properties](src/test/resources/bypassUser.properties).
@@ -44,6 +45,17 @@ INFO [localhost-startStop-1] com.camunda.consulting.rest.auth.AuthenticationProv
 05-Sep-2019 22:03:06.358 FEIN [http-nio-8080-exec-7] com.camunda.consulting.rest.auth.AuthenticationFilterWithBypass.setAuthenticatedUser get groups and tenants for authenticated user someUserId
 05-Sep-2019 22:03:06.360 FEIN [http-nio-8080-exec-7] com.camunda.consulting.rest.auth.AuthenticationFilterWithBypass.setAuthenticatedUser set user and group from bypassUser
 ```
+
+### Wildfly setup
+1. Change the lines 37-42 of the AuthenticationProviderwithBypass to
+```
+String bypassConfigFileLocation = System.getProperty("jboss.server.config.dir") + File.separator + BYPASS_USER_CONFIG_FILE_NAME;
+```
+
+2. Same as Tomcat above.
+3. Same as Tomcat above.
+4. Create a file named `bypassUser.properties` in the configuration folder of the wildfly server: `camunda-bpm-ee-wildfly-7.10.0\server\wildfly-14.0.1-Final\configuration\`. Here is an example: [bypassUser.properties](src/test/resources/bypassUser.properties).
+5. to 7. Same as Tomcat above.
 
 ### How it works
 The configuration file read on startup and the values a held in main memory until the server is restarted. To change the password, you have to restart the tomcat server.
