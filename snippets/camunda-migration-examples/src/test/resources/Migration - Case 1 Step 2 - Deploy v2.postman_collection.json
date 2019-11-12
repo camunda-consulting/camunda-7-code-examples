@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "ed11d600-f01d-4367-869c-ce38f28463cd",
+		"name": "Migration - Case 1 Step 2 - Deploy v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Deploy version 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deployment-name",
+							"value": "use-case-1",
+							"type": "text"
+						},
+						{
+							"key": "deployment-source",
+							"value": "postman",
+							"type": "text"
+						},
+						{
+							"key": "tenant-id",
+							"value": "tenant1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "enable-duplicate-filtering",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "deploy-changed-only",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "data",
+							"type": "file",
+							"src": "/home/callen/dev/ideaWorkspace/camunda-sb-migration-example/case1_ver2_template.bpmn"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/deployment/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"deployment",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
