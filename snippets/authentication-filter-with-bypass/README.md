@@ -70,4 +70,4 @@ com.camunda.consulting.rest.auth.AuthenticationFilterWithBypass.level = FINE
 ```
 
 ### Tested environment
-Camunda 7.10.0 Tomcat distribution.
+Camunda 7.10.0 Tomcat distribution, Camunda 7.11.0 Wildfly distribution.
