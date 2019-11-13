@@ -2,7 +2,7 @@
 SELECT *
 FROM
   (
-  SELECT 10 AS Position, 'Deployments' AS Metric, COUNT(*) AS Count, '' AS GroupName FROM ACT_RE_DEPLOYMENT
+  SELECT 10 AS `Position`, 'Deployments' AS Metric, COUNT(*) AS Count, '' AS GroupName FROM ACT_RE_DEPLOYMENT
   UNION SELECT 11, 'Process Definitions', COUNT(*), '' FROM (SELECT DISTINCT KEY_ FROM ACT_RE_PROCDEF) AS PROCDEF
   UNION SELECT 12, 'Process Definition Versions', COUNT(*), '' FROM ACT_RE_PROCDEF
   UNION SELECT 20, 'Activity Instances', COUNT(*), '' FROM ACT_HI_ACTINST
@@ -47,7 +47,14 @@ FROM
     AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < NOW())
     AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
     GROUP BY TYPE_
-  UNION SELECT 52.3, 'Jobs (due by process)',
+  UNION SELECT 52.3, 'Jobs (due by job handler)',
+    COUNT(*), HANDLER_TYPE_ FROM ACT_RU_JOB
+    WHERE (RETRIES_ > 0)
+    AND (DUEDATE_ IS NULL OR DUEDATE_ < NOW())
+    AND (LOCK_OWNER_ IS NULL OR LOCK_EXP_TIME_ < NOW())
+    AND (SUSPENSION_STATE_ = 1 OR SUSPENSION_STATE_ IS NULL)
+    GROUP BY HANDLER_TYPE_
+  UNION SELECT 52.4, 'Jobs (due by process)',
     COUNT(*), PROCESS_DEF_KEY_ FROM ACT_RU_JOB
     WHERE (RETRIES_ > 0)
     AND (DUEDATE_ IS NULL OR DUEDATE_ < NOW())
@@ -66,4 +73,4 @@ FROM
   UNION SELECT 59, 'Jobs (by type)', COUNT(*), TYPE_ FROM ACT_RU_JOB GROUP BY TYPE_
   UNION SELECT 60, 'Process Variables', COUNT(*), '' FROM ACT_RU_VARIABLE
   ) AS Metrics
-ORDER BY Position, Metric;
+ORDER BY `Position`, Metric;
