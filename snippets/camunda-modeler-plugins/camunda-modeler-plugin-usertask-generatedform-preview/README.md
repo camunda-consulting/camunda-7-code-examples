@@ -19,4 +19,4 @@ Put the whole directory including subdirectories into the `plugins` directory of
 
 Model a UserTask and check in the Forms Tab if you are seeing the "Preview Form" button.
 
-If you're interested in how to create your own plugins see the [documentation]([https://github.com/camunda/camunda-modeler/tree/develop/docs/plugins/README.md](https://github.com/camunda/camunda-modeler/tree/develop/docs/plugins)) and this [example](https://github.com/camunda/camunda-modeler-plugin-example).
+If you're interested in how to create your own plugins see the [documentation](https://github.com/camunda/camunda-modeler/tree/develop/docs/plugins/README.md) and this [example](https://github.com/camunda/camunda-modeler-plugin-example).
