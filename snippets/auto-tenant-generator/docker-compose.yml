@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: camunda
+      POSTGRES_PASSWORD: camunda
+
+  camunda_tenant_1:
+    build:
+      context: ./dynamo
+    ports:
+      - "8080:8080"
+    environment:
+      PROCESS_ENGINE_NAME: tenant-1
+      DATABASE_URL: jdbc:postgresql://db:5432/camunda?user=camunda&password=camunda&characterEncoding=UTF-8
+
+  camunda_tenant_2:
+    build:
+      context: ./dynamo
+    ports:
+      - "9090:8080"
+    environment:
+      PROCESS_ENGINE_NAME: tenant-2
+      DATABASE_URL: jdbc:postgresql://db:5432/camunda?user=camunda&password=camunda&characterEncoding=UTF-8
+
