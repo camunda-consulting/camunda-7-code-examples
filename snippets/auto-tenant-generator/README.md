@@ -1,5 +1,5 @@
 # Dynamic Tenant Per Engine 
-Spring Boot Application using [Camunda](http://docs.camunda.org) to create a multi-tenant system by configuring an BPMN engine per-tenant and attaching to the same database. 
+Spring Boot Application using [Camunda](http://docs.camunda.org) to create a multi-tenant system by configuring a BPMN engine per-tenant and attaching to the same database. 
 
 Important bit is the same app can be deployed with different environment configuration automatically creating a new tenant.
 
