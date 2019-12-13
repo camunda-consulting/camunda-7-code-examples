@@ -1,32 +1,32 @@
 package org.camunda.create.bpmndi;
 
 public class SequenceReferencePoints {
-    private String xEntry;
-    private String yEntry;
-    private String xExit;
-    private String yExit;
+    private double xEntry;
+    private double yEntry;
+    private double xExit;
+    private double yExit;
 
     // TODO - add more entry and exit points to provide additional choices
-    public SequenceReferencePoints(String xEntry, String yEntry, String xExit, String yExit) {
+    public SequenceReferencePoints(double xEntry, double yEntry, double xExit, double yExit) {
         this.xEntry = xEntry;
         this.yEntry = yEntry;
         this.xExit = xExit;
         this.yExit = yExit;
     }
 
-    public String getXEntry() {
+    public double getXEntry() {
         return this.xEntry;
     }
 
-    public String getYEntry() {
+    public double getYEntry() {
         return this.yEntry;
     }
 
-    public String getXExit() {
+    public double getXExit() {
         return this.xExit;
     }
 
-    public String getYExit() {
+    public double getYExit() {
         return this.yExit;
     }
 
