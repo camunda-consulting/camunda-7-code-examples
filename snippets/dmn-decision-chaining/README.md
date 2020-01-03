@@ -1,6 +1,8 @@
 # DMN Decision Chaining Options
 
-**NOTE:** This example is slightly outdated - nowadays one would probably choose to use [DRDs](https://docs.camunda.org/manual/latest/user-guide/dmn-engine/evaluate-decisions/#decisions-with-required-decisions) for chaining decision tables. However, the snippet provides a nice example on how to implement custom functions for DMN.
+**NOTE: This example is slightly outdated - nowadays one would probably choose to use [DRDs](https://docs.camunda.org/manual/latest/user-guide/dmn-engine/evaluate-decisions/#decisions-with-required-decisions) for chaining decision tables. However, the snippet provides a nice example on how to implement custom functions for DMN.**
+
+----
 
 When you want to evaluate dependant decisions you have basically three options on the Camunda Platform:
 
