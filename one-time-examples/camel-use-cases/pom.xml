@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<camunda.version>7.7.0</camunda.version>
 		<camunda.camel.version>0.5</camunda.camel.version>
-		<camel.version>2.19.2</camel.version>
+		<camel.version>2.24.2</camel.version>
 		<jboss.version>7.2.1.Final</jboss.version>
 	</properties>
 

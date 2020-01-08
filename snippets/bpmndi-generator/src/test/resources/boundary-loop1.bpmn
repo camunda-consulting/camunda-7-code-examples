@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1atbkgi" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="Process_026e4ru" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1i7u3pi</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_1kgelek" name="A">
+      <bpmn:incoming>SequenceFlow_1i7u3pi</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1twg5ad</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_181u1nz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1i7u3pi" sourceRef="StartEvent_1" targetRef="Task_1kgelek" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_05zjale">
+      <bpmn:incoming>SequenceFlow_181u1nz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1d157ou</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_14ixw7a</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_181u1nz" sourceRef="Task_1kgelek" targetRef="ExclusiveGateway_05zjale" />
+    <bpmn:task id="Task_11lodjp" name="B">
+      <bpmn:incoming>SequenceFlow_1d157ou</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gsjo5v</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1d157ou" sourceRef="ExclusiveGateway_05zjale" targetRef="Task_11lodjp" />
+    <bpmn:task id="Task_1oqjpsx" name="C">
+      <bpmn:incoming>SequenceFlow_14ixw7a</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_075ensz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_14ixw7a" sourceRef="ExclusiveGateway_05zjale" targetRef="Task_1oqjpsx" />
+    <bpmn:endEvent id="EndEvent_0moowtc">
+      <bpmn:incoming>SequenceFlow_1l13ruy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0gsjo5v" sourceRef="Task_11lodjp" targetRef="ExclusiveGateway_1b4uipv" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1b4uipv">
+      <bpmn:incoming>SequenceFlow_0gsjo5v</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_075ensz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1l13ruy</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1l13ruy" sourceRef="ExclusiveGateway_1b4uipv" targetRef="EndEvent_0moowtc" />
+    <bpmn:sequenceFlow id="SequenceFlow_075ensz" sourceRef="Task_1oqjpsx" targetRef="ExclusiveGateway_1b4uipv" />
+    <bpmn:boundaryEvent id="IntermediateThrowEvent_13az2yn" attachedToRef="Task_1oqjpsx">
+      <bpmn:outgoing>SequenceFlow_1twg5ad</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1h04cwz" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1twg5ad" sourceRef="IntermediateThrowEvent_13az2yn" targetRef="Task_1kgelek" />
+  </bpmn:process>
+</bpmn:definitions>
