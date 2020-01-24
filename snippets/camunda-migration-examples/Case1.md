@@ -24,6 +24,10 @@ The development team decides to create a process to handle the migration.
 
 ![](src/main/resources/migrate-case-1.png)
 
+The reusable "Migrate Instances in Batch" subprocess looks like this:
+
+![](src/main/resources/migration-core.png)
+
 Migration is triggered by creating a process instance of this Migration process using the REST API.  The payload that initializes process instance variables in our local example looks like this:
 
 
@@ -55,6 +59,10 @@ Migration is triggered by creating a process instance of this Migration process 
             "value": 50,
             "type": "Integer"
         },
+        "maxUserComplete": {
+            "value": 10,
+            "type": "Integer"
+        },
         "skipIoMappings": {
             "value": true,
             "type": "Boolean"
@@ -68,6 +76,8 @@ Migration is triggered by creating a process instance of this Migration process 
 ```
 
 Notice the "maxPerBatch" variable.  In our local example, we will create 120 instances of version 1 with a token sitting on "user task 0".  Then we will run this migration process, instructing it to migrate in batches of 50 at a time.
+
+Also, note the "maxUserComplete" variable.  Here we are saying "complete no more than 10 user tasks in a single transaction".
 
 The migration process will loop for each batch of process instances to migrate.  For each batch, it will:
 
