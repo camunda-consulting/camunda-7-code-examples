@@ -1,3 +1,5 @@
+**NOTE: The described use case may be better handled with the [Timeout Task Listener](https://docs.camunda.org/manual/7.12/user-guide/process-engine/delegation-code/#task-listener-event-lifecycle) that was introduced in Camunda 7.12**
+
 Watch Task Due Date and Automatically Take Action
 ======================
 
