@@ -82,6 +82,7 @@ public class ProcessUnitTest {
             .createProcessInstanceByKey("ProcessMultInstance")
             .setVariable("listSize",1000)
             .execute();
+    runtimeService().createEventSubscriptionQuery().list();
     assertThat(processInstance).isWaitingAt("StartEvent_17h9qmv");
     execute(job());
     assertThat(processInstance).isWaitingAt("CallLogger#multiInstanceBody");
