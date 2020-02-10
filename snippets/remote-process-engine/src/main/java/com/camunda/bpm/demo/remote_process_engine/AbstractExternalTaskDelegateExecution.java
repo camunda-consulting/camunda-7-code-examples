@@ -60,6 +60,9 @@ public abstract class AbstractExternalTaskDelegateExecution extends SimpleVariab
     // TODO return own wrapper that talks to REST API for selected operations
   }
 
+  /**
+   * @since 7.10.0
+   */
   @Override
   public ProcessEngine getProcessEngine() {
     throw new UnsupportedOperationException();
@@ -101,24 +104,36 @@ public abstract class AbstractExternalTaskDelegateExecution extends SimpleVariab
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * @since 7.8.0
+   */
   @Override
   public Incident createIncident(String incidentType, String configuration) {
     throw new UnsupportedOperationException();
     // TODO via REST
   }
 
+  /**
+   * @since 7.8.0
+   */
   @Override
   public Incident createIncident(String incidentType, String configuration, String message) {
     throw new UnsupportedOperationException();
     // TODO via REST
   }
 
+  /**
+   * @since 7.8.0
+   */
   @Override
   public void resolveIncident(String incidentId) {
     throw new UnsupportedOperationException();
     // TODO via REST
   }
 
+  /**
+   * @since 7.10.0
+   */
   @Override
   public void setProcessBusinessKey(String businessKey) {
     throw new UnsupportedOperationException();
