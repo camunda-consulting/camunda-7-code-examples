@@ -16,10 +16,12 @@ public class OnDemandCallActivityParseListener extends AbstractBpmnParseListener
   @Override
   public void parseCallActivity(Element callActivityElement, ScopeImpl scope, ActivityImpl activity) {
     // Exchange the Behavior of the Call Activity to add additional functionality
-    CallActivityBehavior behavior = (CallActivityBehavior) activity.getActivityBehavior();
+    //CallActivityBehavior behavior = (CallActivityBehavior) activity.getActivityBehavior();
         
     // exchange behavior
-    activity.setActivityBehavior(new OnDemandCallActivityBehavior());
+    OnDemandCallActivityBehavior onDemandCallActivityBehavior = new OnDemandCallActivityBehavior();
+    onDemandCallActivityBehavior.setCallableElement(((CallActivityBehavior) activity.getActivityBehavior()).getCallableElement());
+    activity.setActivityBehavior(onDemandCallActivityBehavior);
             
   }
 
