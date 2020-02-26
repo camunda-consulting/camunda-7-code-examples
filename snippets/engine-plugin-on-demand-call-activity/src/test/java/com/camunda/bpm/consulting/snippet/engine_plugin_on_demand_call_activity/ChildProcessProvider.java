@@ -19,6 +19,10 @@ public class ChildProcessProvider {
     public String getChildProcessDefinitionKey(DelegateExecution execution) {
         Boolean retProcess = (Boolean) execution.getVariable("retProcess");
         logger.info("Running childProcessProvider...");
+        if (execution.hasVariable("skip_" + execution.getCurrentActivityId())) {
+          execution.setVariable("skip_" + execution.getCurrentActivityId(), null);
+          return null;
+        }
         if (retProcess) {
             return "process-child";
         } else {
@@ -29,6 +33,8 @@ public class ChildProcessProvider {
 
             Boolean doThrowException = (Boolean) execution.getVariable("doThrowException");
 
+            // TODO handle exceptions during request creation? Only needed during reactive REST calls
+            
             // Publish a task to a scheduled executor. This method returns after the task has
             // been put into the executor. The actual service implementation (lambda) will not yet
             // be invoked:
@@ -36,18 +42,17 @@ public class ChildProcessProvider {
             CompletableFuture.runAsync(() -> { // simulates the sending of a non-blocking REST request
                 // the code inside this lambda runs in a separate thread outside the TX
                 // this will not work: execution.setVariable("foo", "bar");
+                // THE EXECUTION IS NOT THREAD-SAFE
                 try {
-                    if(!doThrowException) {
-                        Logger logger = LoggerFactory.getLogger(getClass());
-                        logger.info("Executing async block...");
-                        Map<String, Object> newVariables = new HashMap<>();
-                        newVariables.put("foo", "bar");
-                        //TODO: IS RUNTIME SERVICE THREAD SAFE?
-                        runtimeService.signal(executionId, newVariables);
+                    if (doThrowException) {
+                      throw new Exception("Exception!");
                     }
-                    else{
-                        runtimeService.signal(executionId, null, new Exception("Exception!"), null);
-                    }
+                    Logger logger = LoggerFactory.getLogger(getClass());
+                    logger.info("Executing async block...");
+                    Map<String, Object> newVariables = new HashMap<>();
+                    newVariables.put("foo", "bar");
+                    //TODO: IS RUNTIME SERVICE THREAD SAFE? => Thorben says yes!
+                    runtimeService.signal(executionId, newVariables);
                 } catch (Exception e) {
                     e.printStackTrace();
                     runtimeService.signal(executionId, null, e, null);

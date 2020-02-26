@@ -1,33 +1,22 @@
 package com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity;
 
-import org.camunda.bpm.dmn.engine.impl.el.JuelExpression;
-import org.camunda.bpm.engine.delegate.BpmnError;
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.delegate.Expression;
-import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.exception.NullValueException;
-import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
-import org.camunda.bpm.engine.impl.bpmn.behavior.ServiceTaskDelegateExpressionActivityBehavior;
-import org.camunda.bpm.engine.impl.bpmn.delegate.JavaDelegateInvocation;
-import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.camunda.bpm.engine.impl.context.Context;
-import org.camunda.bpm.engine.impl.core.model.CallableElement;
-import org.camunda.bpm.engine.impl.el.ExpressionManager;
-import org.camunda.bpm.engine.impl.jobexecutor.AsyncContinuationJobHandler;
-import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
-import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
-import org.camunda.bpm.engine.impl.persistence.entity.JobUtil;
-import org.camunda.bpm.engine.impl.persistence.entity.MessageEntity;
-import org.camunda.bpm.engine.impl.pvm.delegate.ActivityBehavior;
-import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
-import org.camunda.bpm.engine.impl.pvm.runtime.ExecutionImpl;
-import org.camunda.bpm.engine.variable.VariableMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
+import org.camunda.bpm.engine.delegate.BpmnError;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.exception.NullValueException;
+import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
+import org.camunda.bpm.engine.impl.context.Context;
+import org.camunda.bpm.engine.impl.jobexecutor.AsyncContinuationJobHandler;
+import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
+import org.camunda.bpm.engine.impl.persistence.entity.JobUtil;
+import org.camunda.bpm.engine.impl.persistence.entity.MessageEntity;
+import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
+import org.camunda.bpm.engine.variable.VariableMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OnDemandCallActivityBehavior extends CallActivityBehavior {
 
@@ -36,29 +25,28 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
     @Override
     public void execute(ActivityExecution execution) throws Exception {
         List<JobEntity> jobs = Context.getCommandContext().getJobManager().findJobsByExecutionId(execution.getId());
-        if(jobs.size() > 0)
+        if (jobs.size() > 0) {
             execution.setVariable(getRetriesVariable(execution), jobs.get(0).getRetries());
-
+        }
         super.execute(execution);
     }
 
     @Override
     protected void startInstance(ActivityExecution execution, VariableMap variables, String businessKey) {
-        //TRY TO START A PROCESS WITH THE KEY PROVIDED
+        // try to start process with the provided process definition key
         try {
             super.startInstance(execution, variables, businessKey);
         }
-        //IN CASE THIS IS NOT FOUND, TRY TO FIND A BEAN IF THAT IS AN EXPRESSION
+        // process definition key is null => no child process needed
         catch (NullValueException e) {
+            // TODO: try catching a dedicated exception
             logger.info("Ignoring process without existing key...");
         }
     }
 
     @Override
     public void signal(ActivityExecution execution, String signalName, Object signalData) throws Exception {
-        if (signalData instanceof BpmnError) {
-            throw (BpmnError) signalData;
-        } else if (signalData instanceof Exception) {
+        if (signalData instanceof Exception) {
 
             Integer currentRetries = (Integer) execution.getVariable(getRetriesVariable(execution));
 
@@ -88,7 +76,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         message.setRetries(retries);
         Context.getCommandContext().getJobManager().send(message);
 
-        if(retries == 0)
+        if (retries == 0)
             JobUtil.createIncident(message);
 
     }

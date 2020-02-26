@@ -3,7 +3,6 @@ package com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.camunda.bpm.engine.test.assertions.ProcessInstanceAssert;
 import org.camunda.bpm.engine.test.mock.Mocks;
 import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
 import org.camunda.bpm.engine.test.Deployment;
@@ -95,9 +94,10 @@ public class ProcessUnitTest {
         runtimeService().setVariable(processInstance.getId(), "doThrowException", false);
         execute(job());
         Thread.sleep(sleepTime);
-        //assertThat(processInstance).hasPassed("EndEventProcessEnded");
+        assertThat(processInstance).hasPassed("EndEventProcessEnded");
         assertThat(processInstance).isEnded();
-
     }
+    
+    // TODO: test all operations that should normally work with a call activity (see engine test suite)
 
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.1.2">
+  <bpmn:process id="engine-plugin-on-demand-call-activity" name="engine-plugin-on-demand-call-activity" isExecutable="true">
+    <bpmn:startEvent id="StartEventProcessStarted" name="Process&#10;started">
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEventProcessEnded" name="Process&#10;ended">
+      <bpmn:incoming>SequenceFlow_14t5oxg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="Task_DoSomething" />
+    <bpmn:sequenceFlow id="SequenceFlow_14t5oxg" sourceRef="Task_DoSomething" targetRef="EndEventProcessEnded" />
+    <bpmn:callActivity id="Task_DoSomething" name="On-demand&#10;Call Activity" calledElement="${childProcessProvider.getChildProcessDefinitionKey(execution)}">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14t5oxg</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:boundaryEvent id="BoundaryEvent_0rlq29f" attachedToRef="Task_DoSomething">
+      <bpmn:outgoing>SequenceFlow_0bxovwq</bpmn:outgoing>
+      <bpmn:errorEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_1uva11p">
+      <bpmn:incoming>SequenceFlow_0bxovwq</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0bxovwq" sourceRef="BoundaryEvent_0rlq29f" targetRef="Task_1uva11p" />
+    <bpmn:serviceTask id="Task_141y4y3" />
+    <bpmn:boundaryEvent id="BoundaryEvent_0bves7p" attachedToRef="Task_141y4y3">
+      <bpmn:outgoing>SequenceFlow_1vajgq5</bpmn:outgoing>
+      <bpmn:errorEventDefinition />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_0r27f73">
+      <bpmn:incoming>SequenceFlow_1vajgq5</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_1vajgq5" sourceRef="BoundaryEvent_0bves7p" targetRef="Task_0r27f73" />
+    <bpmn:textAnnotation id="TextAnnotation_1bx346z">
+      <bpmn:text>BPMN Errors are not supported without child process</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1lwn37d" sourceRef="BoundaryEvent_0bves7p" targetRef="TextAnnotation_1bx346z" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="engine-plugin-on-demand-call-activity">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEventProcessStarted">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0fkea3f_di" bpmnElement="EndEventProcessEnded">
+        <dc:Bounds x="428" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="426" y="138" width="40" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="269" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="239" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14t5oxg_di" bpmnElement="SequenceFlow_14t5oxg">
+        <di:waypoint x="369" y="120" />
+        <di:waypoint x="428" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="399" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_1f50qwc_di" bpmnElement="Task_DoSomething">
+        <dc:Bounds x="269" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0qdqmmp_di" bpmnElement="BoundaryEvent_0rlq29f" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
+        <dc:Bounds x="333" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1uva11p_di" bpmnElement="Task_1uva11p">
+        <dc:Bounds x="412" y="208" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0bxovwq_di" bpmnElement="SequenceFlow_0bxovwq">
+        <di:waypoint x="351" y="178" />
+        <di:waypoint x="351" y="248" />
+        <di:waypoint x="412" y="248" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0hmug53_di" bpmnElement="Task_141y4y3">
+        <dc:Bounds x="269" y="288" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1vsg5c9_di" bpmnElement="BoundaryEvent_0bves7p" bioc:stroke="rgb(229, 57, 53)" bioc:fill="rgb(255, 205, 210)">
+        <dc:Bounds x="333" y="350" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0r27f73_di" bpmnElement="Task_0r27f73">
+        <dc:Bounds x="419" y="408" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1vajgq5_di" bpmnElement="SequenceFlow_1vajgq5">
+        <di:waypoint x="351" y="386" />
+        <di:waypoint x="351" y="448" />
+        <di:waypoint x="419" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1bx346z_di" bpmnElement="TextAnnotation_1bx346z">
+        <dc:Bounds x="419" y="305" width="100" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1lwn37d_di" bpmnElement="Association_1lwn37d">
+        <di:waypoint x="369" y="365" />
+        <di:waypoint x="419" y="355" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
