@@ -19,10 +19,13 @@ public class ChildProcessProvider {
     public String getChildProcessDefinitionKey(DelegateExecution execution) {
         Boolean retProcess = (Boolean) execution.getVariable("retProcess");
         logger.info("Running childProcessProvider...");
+        
+        // example on how to skip execution completely, e.g. during a retry after some manual fix
         if (execution.hasVariable("skip_" + execution.getCurrentActivityId())) {
           execution.setVariable("skip_" + execution.getCurrentActivityId(), null);
           return null;
         }
+        
         if (retProcess) {
             return "process-child";
         } else {
@@ -61,7 +64,6 @@ public class ChildProcessProvider {
             }, CompletableFuture.delayedExecutor(250L, TimeUnit.MILLISECONDS));
             // TODO prepare REST request using input variables
 
-            //TODO TRY TO CREATE AN SKIP EXCEPTION
             return null;
         }
     }

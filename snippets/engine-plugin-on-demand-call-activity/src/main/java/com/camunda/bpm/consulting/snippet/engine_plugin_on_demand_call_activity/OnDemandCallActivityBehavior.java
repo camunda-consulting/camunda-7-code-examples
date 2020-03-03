@@ -71,6 +71,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         message.setExecutionId(execution.getId());
         message.setExclusive(true);
         message.setJobHandlerType(AsyncContinuationJobHandler.TYPE);
+        // FIXME: eigenen Job-Handler bauen, der PvmAtomicOperation.ACTIVITY_EXECUTE anstößt. Dann steigst du wieder am richtigen Punkt in die Ausführung ein.
         message.setExceptionMessage(exception.getMessage());
         message.setExceptionStacktrace(getExceptionStacktrace(exception));
         message.setRetries(retries);
