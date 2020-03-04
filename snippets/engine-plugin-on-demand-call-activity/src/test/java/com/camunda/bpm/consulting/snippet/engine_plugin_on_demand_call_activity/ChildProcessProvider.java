@@ -27,7 +27,7 @@ public class ChildProcessProvider {
         }
         
         if (retProcess) {
-            return "process-child";
+            return "process-child"; // process definition key
         } else {
             VariableMap inputVariables = execution.getVariablesTyped();
             VariableMap inputVariablesLocal = execution.getVariablesLocalTyped();

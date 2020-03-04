@@ -50,7 +50,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
 
             Integer currentRetries = (Integer) execution.getVariable(getRetriesVariable(execution));
 
-            if(currentRetries == null){
+            if (currentRetries == null) {
                 currentRetries = 3;
             }
 
@@ -70,7 +70,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         message.setProcessDefinitionId(execution.getProcessDefinitionId());
         message.setExecutionId(execution.getId());
         message.setExclusive(true);
-        message.setJobHandlerType(AsyncContinuationJobHandler.TYPE);
+        message.setJobHandlerType(ScopelessAsyncContinuationJobHandler.TYPE);
         // FIXME: eigenen Job-Handler bauen, der PvmAtomicOperation.ACTIVITY_EXECUTE anstößt. Dann steigst du wieder am richtigen Punkt in die Ausführung ein.
         message.setExceptionMessage(exception.getMessage());
         message.setExceptionStacktrace(getExceptionStacktrace(exception));
