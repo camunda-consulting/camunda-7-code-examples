@@ -16,6 +16,8 @@
  */
 package com.camunda.bpm.consulting.snippet.asynchronous_service_task;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -65,8 +67,8 @@ public class AsynchronousServiceTask extends AbstractBpmnActivityBehavior {
 	public void execute(final ActivityExecution execution) throws Exception {
 	  
       // get variables
-      VariableMap variables = execution.getVariablesTyped();
-      VariableMap localVariables = execution.getVariablesLocalTyped();
+      VariableMap inputVariables = execution.getVariablesTyped();
+      VariableMap inputVariablesLocal = execution.getVariablesLocalTyped();
 
 	  String executionId = execution.getId();
 	  
@@ -74,9 +76,14 @@ public class AsynchronousServiceTask extends AbstractBpmnActivityBehavior {
 	  // been put into the executor. The actual service implementation (lambda) will not yet 
 	  // be invoked:
 	  RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
-      CompletableFuture.runAsync(() -> {
+	  // TODO prepare REST request using input variables
+      CompletableFuture.runAsync(() -> { // simulates the sending of a non-blocking REST request
+        // the code inside this lambda runs in a separate thread outside the TX
+        // this will not work: execution.setVariable("foo", "bar");
         System.out.println("Hello");
-        runtimeService.signal(executionId);
+        Map<String, Object> newVariables = new HashMap<>();
+        newVariables.put("foo", "bar");
+        runtimeService.signal(executionId, newVariables);
       }, CompletableFuture.delayedExecutor(250L, TimeUnit.MILLISECONDS));
 	  
 	}

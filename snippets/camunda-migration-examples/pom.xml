@@ -12,7 +12,9 @@
 
   <properties>
 <!--    <camunda.version>7.11.2</camunda.version>-->
+
     <camunda.version>7.11.1-ee</camunda.version>
+
     <!--
     Adjust if you want to use Camunda Enterprise Edition (EE):
     <camunda.version>7.11.2-ee</camunda.version>

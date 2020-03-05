@@ -1,0 +1,25 @@
+spring.datasource:
+#  url: jdbc:h2:mem:camunda
+  url: ${DATABASE_URL}
+  username: sa
+  password: sa
+  driverClassName: org.postgresql.Driver
+spring.h2.console.enabled: true
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  history-level: audit
+  process-engine-name: ${PROCESS_ENGINE_NAME}  
+  auto-deployment-enabled: false
+    
+server.port: 8080
+spring.devtools:
+    restart:
+      enabled: true
+      
+
