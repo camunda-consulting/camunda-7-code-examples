@@ -13,7 +13,7 @@ The core parts of this component are:
 [ProcessIncidentHandler](src/main/java/com/camunda/consulting/demo/incident/ProcessIncidentHandler.java): This class creates a process with key "IncidentManagementProcess" everytime a failedJob incident occurs.
 [SolveIncident](src/main/java/com/camunda/consulting/demo/incident/SolveIncident.java): This class is a delegate called from within the "IncidentManagementProcess" that fixes the incident.
 
-The actual process for the incident management is in the file [incident-managemnet](src/main/resources/incident-management.bpmn). It has a user task with a form and a service task to fix the incident.
+The actual process for the incident management is in the file [incident-management](src/main/resources/incident-management.bpmn). It has a user task with a form and a service task to fix the incident.
 
 ## How to use it?
 
