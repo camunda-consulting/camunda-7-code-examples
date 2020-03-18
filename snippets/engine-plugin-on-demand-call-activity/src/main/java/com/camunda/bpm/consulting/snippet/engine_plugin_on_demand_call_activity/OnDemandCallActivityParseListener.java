@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParseListener;
+import org.camunda.bpm.engine.impl.pvm.delegate.ActivityBehavior;
 import org.camunda.bpm.engine.impl.pvm.process.ActivityImpl;
 import org.camunda.bpm.engine.impl.pvm.process.ScopeImpl;
 import org.camunda.bpm.engine.impl.util.xml.Element;
@@ -19,9 +20,12 @@ public class OnDemandCallActivityParseListener extends AbstractBpmnParseListener
     //CallActivityBehavior behavior = (CallActivityBehavior) activity.getActivityBehavior();
         
     // exchange behavior
-    OnDemandCallActivityBehavior onDemandCallActivityBehavior = new OnDemandCallActivityBehavior();
-    onDemandCallActivityBehavior.setCallableElement(((CallActivityBehavior) activity.getActivityBehavior()).getCallableElement());
-    activity.setActivityBehavior(onDemandCallActivityBehavior);
+    ActivityBehavior activityBehavior = activity.getActivityBehavior();
+    if (activityBehavior instanceof CallActivityBehavior) { // ignore CaseCallActivityBehavior
+      OnDemandCallActivityBehavior onDemandCallActivityBehavior = new OnDemandCallActivityBehavior();
+      onDemandCallActivityBehavior.setCallableElement(((CallActivityBehavior) activityBehavior).getCallableElement());
+      activity.setActivityBehavior(onDemandCallActivityBehavior);
+    }
             
   }
 
