@@ -75,6 +75,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         message.setExceptionMessage(exception.getMessage());
         message.setExceptionStacktrace(getExceptionStacktrace(exception));
         message.setRetries(retries);
+        // TODO add retryTimeCycle
         Context.getCommandContext().getJobManager().send(message);
 
         if (retries == 0)
