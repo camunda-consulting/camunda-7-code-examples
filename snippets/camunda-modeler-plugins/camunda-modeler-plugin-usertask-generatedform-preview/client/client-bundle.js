@@ -1,19 +1,109 @@
-(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-'use strict';
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./client/client.js");
+/******/ })
+/************************************************************************/
+/******/ ({
 
-var domify = require('min-dom/lib/domify'),
-  domEvent = require('min-dom/lib/event'),
-  domClasses = require('min-dom/lib/classes'),
-  domQuery = require('min-dom/lib/query'),
-  clear = require('min-dom/lib/clear');
-var PropertiesActivator = require('bpmn-js-properties-panel/lib/PropertiesActivator');
-var CamundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider');
-var formHelper = require('bpmn-js-properties-panel/lib/helper/FormHelper');
-var swal = require('sweetalert');
-var copy = require('clipboard-copy');
+/***/ "./client/GeneratedFormPreviewPluginProvider.js":
+/*!******************************************************!*\
+  !*** ./client/GeneratedFormPreviewPluginProvider.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-function GeneratedFormPreviewPluginProvider(eventBus, elementRegistry, bpmnFactory, elementTemplates, translate) {
-  var camunda = new CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates, translate);
+"use strict";
+
+
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+var CamundaPropertiesProvider = __webpack_require__(/*! bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider.js");
+var formHelper = __webpack_require__(/*! bpmn-js-properties-panel/lib/helper/FormHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/FormHelper.js");
+var swal = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+var copy = __webpack_require__(/*! clipboard-copy */ "./node_modules/clipboard-copy/index.js");
+
+function GeneratedFormPreviewPluginProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate) {
+  var camunda = new CamundaPropertiesProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate);
 
   this.getTabs = function(element) {
     var array = camunda.getTabs(element);
@@ -267,7 +357,7 @@ GeneratedFormPreviewPluginProvider.prototype.generateHTMLSnippet = function(form
 };
 
 
-GeneratedFormPreviewPlugin.$inject = ['eventBus', 'elementRegistry', 'bpmnFactory', 'elementTemplates', 'translate'];
+GeneratedFormPreviewPlugin.$inject = ['eventBus', 'canvas', 'bpmnFactory', 'elementRegistry', 'elementTemplates', 'translate'];
 
 function GeneratedFormPreviewPlugin() {
 
@@ -279,14 +369,33 @@ module.exports = {
   generatedFormPreviewPlugin: ['type', GeneratedFormPreviewPlugin]
 };
 
-},{"bpmn-js-properties-panel/lib/PropertiesActivator":3,"bpmn-js-properties-panel/lib/helper/FormHelper":21,"bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider":42,"clipboard-copy":286,"min-dom/lib/classes":347,"min-dom/lib/clear":348,"min-dom/lib/domify":349,"min-dom/lib/event":350,"min-dom/lib/query":351,"sweetalert":354}],2:[function(require,module,exports){
-var registerBpmnJSPlugin = require('camunda-modeler-plugin-helpers').registerBpmnJSPlugin;
 
-var GeneratedFormPreviewPluginProvider = require('./GeneratedFormPreviewPluginProvider');
+/***/ }),
+
+/***/ "./client/client.js":
+/*!**************************!*\
+  !*** ./client/client.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var registerBpmnJSPlugin = __webpack_require__(/*! camunda-modeler-plugin-helpers */ "./node_modules/camunda-modeler-plugin-helpers/index.js").registerBpmnJSPlugin;
+
+var GeneratedFormPreviewPluginProvider = __webpack_require__(/*! ./GeneratedFormPreviewPluginProvider */ "./client/GeneratedFormPreviewPluginProvider.js");
 registerBpmnJSPlugin(GeneratedFormPreviewPluginProvider);
 
-},{"./GeneratedFormPreviewPluginProvider":1,"camunda-modeler-plugin-helpers":285}],3:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/PropertiesActivator.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/PropertiesActivator.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var DEFAULT_PRIORITY = 1000;
 
@@ -353,15 +462,25 @@ PropertiesActivator.prototype.isEntryVisible = function(entry, element) {
 PropertiesActivator.prototype.isPropertyEditable = function(entry, propertyName, element) {
   return true;
 };
-},{}],4:[function(require,module,exports){
-'use strict';
 
-var domQuery = require('min-dom').query,
-    domClear = require('min-dom').clear,
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    forEach = require('lodash/forEach'),
-    domify = require('min-dom').domify,
-    Ids = require('ids');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/Utils.js":
+/*!************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/Utils.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    domClear = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").clear,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    Ids = __webpack_require__(/*! ids */ "./node_modules/ids/dist/index.esm.js").default;
 
 var SPACE_REGEX = /\s/;
 
@@ -371,7 +490,13 @@ var QNAME_REGEX = /^([a-z][\w-.]*:)?[a-z_][\w-.]*$/i;
 // for ID validation as per BPMN Schema (QName - Namespace)
 var ID_REGEX = /^[a-z_][\w-.]*$/i;
 
-var PLACEHOLDER_REGEX = /\$\{([^}]*)\}/g;
+var HTML_ESCAPE_MAP = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  '\'': '&#39;'
+};
 
 function selectedOption(selectBox) {
   if (selectBox.selectedIndex >= 0) {
@@ -482,7 +607,7 @@ function updateOptionsDropDown(domSelector, businessObject, referencedType, entr
   domClear(selectBox);
 
   forEach(options, function(option) {
-    var optionEntry = domify('<option value="' + option.value + '">' + option.label + '</option>');
+    var optionEntry = domify('<option value="' + escapeHTML(option.value) + '">' + escapeHTML(option.label) + '</option>');
     selectBox.appendChild(optionEntry);
   });
   return options;
@@ -496,39 +621,38 @@ module.exports.updateOptionsDropDown = updateOptionsDropDown;
  *
  * @param {ModdleElement} bo
  * @param {String} idValue
+ * @param {Function} translate
  *
  * @return {String} error message
  */
-function isIdValid(bo, idValue) {
+function isIdValid(bo, idValue, translate) {
   var assigned = bo.$model.ids.assigned(idValue);
 
   var idExists = assigned && assigned !== bo;
 
   if (!idValue || idExists) {
-    return 'Element must have an unique id.';
+    return translate('Element must have an unique id.');
   }
 
-  return validateId(idValue);
+  return validateId(idValue, translate);
 }
 
 module.exports.isIdValid = isIdValid;
 
 
-function validateId(idValue) {
-
-  idValue = stripPlaceholders(idValue);
+function validateId(idValue, translate) {
 
   if (containsSpace(idValue)) {
-    return 'Id must not contain spaces.';
+    return translate('Id must not contain spaces.');
   }
 
   if (!ID_REGEX.test(idValue)) {
 
     if (QNAME_REGEX.test(idValue)) {
-      return 'Id must not contain prefix.';
+      return translate('Id must not contain prefix.');
     }
 
-    return 'Id must be a valid QName.';
+    return translate('Id must be a valid QName.');
   }
 }
 
@@ -540,15 +664,6 @@ function containsSpace(value) {
 }
 
 module.exports.containsSpace = containsSpace;
-
-
-function stripPlaceholders(idValue) {
-
-  // replace expression e.g. ${VERSION_TAG}
-  // use only the content between ${}
-  // for the REGEX check
-  return idValue.replace(PLACEHOLDER_REGEX, '$1');
-}
 
 /**
  * generate a semantic id with given prefix
@@ -587,33 +702,56 @@ function triggerClickEvent(element) {
 
 module.exports.triggerClickEvent = triggerClickEvent;
 
-},{"bpmn-js/lib/util/ModelUtil":284,"ids":293,"lodash/forEach":255,"min-dom":281}],5:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    cmdHelper = require('../helper/CmdHelper');
+function escapeHTML(str) {
+  str = '' + str;
 
-var entryFieldDescription = require('./EntryFieldDescription');
+  return str && str.replace(/[&<>"']/g, function(match) {
+    return HTML_ESCAPE_MAP[match];
+  });
+}
+
+module.exports.escapeHTML = escapeHTML;
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/CheckboxEntryFactory.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/CheckboxEntryFactory.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
 var checkbox = function(options, defaultParameters) {
   var resource = defaultParameters,
-      label = options.label || resource.id,
+      id = resource.id,
+      label = options.label || id,
       canBeDisabled = !!options.disabled && typeof options.disabled === 'function',
       canBeHidden = !!options.hidden && typeof options.hidden === 'function',
       description = options.description;
 
   resource.html =
-    '<input id="camunda-' + resource.id + '" ' +
+    '<input id="camunda-' + escapeHTML(id) + '" ' +
          'type="checkbox" ' +
-         'name="' + options.modelProperty + '" ' +
+         'name="' + escapeHTML(options.modelProperty) + '" ' +
          (canBeDisabled ? 'data-disable="isDisabled"' : '') +
          (canBeHidden ? 'data-show="isHidden"' : '') +
          ' />' +
-    '<label for="camunda-' + resource.id + '" ' +
+    '<label for="camunda-' + escapeHTML(id) + '" ' +
          (canBeDisabled ? 'data-disable="isDisabled"' : '') +
          (canBeHidden ? 'data-show="isHidden"' : '') +
-         '>' + label + '</label>';
+         '>' + escapeHTML(label) + '</label>';
 
   // add description below checkbox entry field
   if (description) {
@@ -664,16 +802,28 @@ var checkbox = function(options, defaultParameters) {
 
 module.exports = checkbox;
 
-},{"../helper/CmdHelper":17,"./EntryFieldDescription":8,"bpmn-js/lib/util/ModelUtil":284}],6:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign'),
-    find = require('lodash/find');
+/***/ }),
 
-var domQuery = require('min-dom').query;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/ComboEntryFactory.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/ComboEntryFactory.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var selectEntryFactory = require('./SelectEntryFactory'),
-    entryFieldDescription = require('./EntryFieldDescription');
+"use strict";
+
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js"),
+    find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var selectEntryFactory = __webpack_require__(/*! ./SelectEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/SelectEntryFactory.js"),
+    entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
 /**
@@ -767,8 +917,9 @@ var comboBox = function(options) {
   comboBoxEntry.html += '<div class="bpp-field-wrapper bpp-combo-input" ' +
     'data-show="showCustomInput"' +
     '>' +
-    '<input id="camunda-' + options.id + '-input" type="text" name="custom-' + modelProperty+'" ' +
-      ' />' +
+    '<input id="camunda-' + escapeHTML(options.id) + '-input" type="text" name="custom-' +
+      escapeHTML(modelProperty) + '" ' +
+    ' />' +
   '</div>';
 
   // add description below combo box entry field
@@ -781,23 +932,33 @@ var comboBox = function(options) {
 
 module.exports = comboBox;
 
-},{"./EntryFieldDescription":8,"./SelectEntryFactory":11,"lodash/assign":247,"lodash/find":252,"min-dom":281}],7:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
 
 // input entities
-var textInputField = require('./TextInputEntryFactory'),
-    checkboxField = require('./CheckboxEntryFactory'),
-    selectBoxField = require('./SelectEntryFactory'),
-    comboBoxField = require('./ComboEntryFactory'),
-    textBoxField = require('./TextBoxEntryFactory'),
-    validationAwareTextInputField = require('./ValidationAwareTextInput'),
-    tableField = require('./TableEntryFactory'),
-    labelEntry = require('./LabelFactory'),
-    link = require('./LinkEntryFactory');
+var textInputField = __webpack_require__(/*! ./TextInputEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/TextInputEntryFactory.js"),
+    checkboxField = __webpack_require__(/*! ./CheckboxEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/CheckboxEntryFactory.js"),
+    selectBoxField = __webpack_require__(/*! ./SelectEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/SelectEntryFactory.js"),
+    comboBoxField = __webpack_require__(/*! ./ComboEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/ComboEntryFactory.js"),
+    textBoxField = __webpack_require__(/*! ./TextBoxEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/TextBoxEntryFactory.js"),
+    validationAwareTextInputField = __webpack_require__(/*! ./ValidationAwareTextInput */ "./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js"),
+    tableField = __webpack_require__(/*! ./TableEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/TableEntryFactory.js"),
+    labelEntry = __webpack_require__(/*! ./LabelFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/LabelFactory.js"),
+    link = __webpack_require__(/*! ./LinkEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/LinkEntryFactory.js");
 
-var cmdHelper = require('../helper/CmdHelper');
+var cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 // helpers ////////////////////////////////////////
 
@@ -909,7 +1070,7 @@ EntryFactory.validationAwareTextField = function(options) {
  *
  * - get: getter method - Function
  *
- * - validate: validation mehtod - Function
+ * - validate: validation method - Function
  *
  * - modelProperty: name of the model property - String
  *
@@ -946,31 +1107,103 @@ EntryFactory.link = function(options) {
 
 module.exports = EntryFactory;
 
-},{"../helper/CmdHelper":17,"./CheckboxEntryFactory":5,"./ComboEntryFactory":6,"./LabelFactory":9,"./LinkEntryFactory":10,"./SelectEntryFactory":11,"./TableEntryFactory":12,"./TextBoxEntryFactory":13,"./TextInputEntryFactory":14,"./ValidationAwareTextInput":15,"bpmn-js/lib/util/ModelUtil":284}],8:[function(require,module,exports){
-'use strict';
 
-var MARKDOWN_LINK_REGEX = /\[([^)]+)\]\(([^\]]+)\)/g;
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
 /**
- * Replace MarkDown Link Syntax with HTML Link Syntax
- * [myLink](http://www.myLink.de) -> <a href=http://www.myLink.de>myLink</a>
+ * Create a linkified and HTML escaped entry field description.
  *
- * @param {String} value
+ * As a special feature, this description may contain both markdown,
+ * plain <a href> links and <br />
  *
- * @return {String}
+ * @param {String} description
  */
-function linkify(text) {
-  return text.replace(MARKDOWN_LINK_REGEX, '<a href="$2" target="_blank">$1</a>');
-}
-
 module.exports = function entryFieldDescription(description) {
-  description = linkify(description);
 
-  return '<div class="bpp-field-description">' + description + '</div>';
+  // we tokenize the description to extract text, HTML and markdown links
+  // text, links and new lines are handled seperately
+
+  var escaped = [];
+
+  // match markdown [{TEXT}]({URL}) and HTML links <a href="{URL}">{TEXT}</a>
+  var pattern = /(?:\[([^\]]+)\]\((https?:\/\/[^)]+)\))|(?:<a href="(https?:\/\/[^"]+)">(.+?(?=<\/))<\/a>)/gi;
+
+  var index = 0;
+  var match;
+  var link, text;
+
+  while ((match = pattern.exec(description))) {
+
+    // escape + insert text before match
+    if (match.index > index) {
+      escaped.push(escapeText(description.substring(index, match.index)));
+    }
+
+    link = match[2] && encodeURI(match[2]) || match[3];
+    text = match[1] || match[4];
+
+    // insert safe link
+    escaped.push('<a href="' + link + '" target="_blank">' + escapeText(text) + '</a>');
+
+    index = match.index + match[0].length;
+  }
+
+  // escape and insert text after last match
+  if (index < description.length) {
+    escaped.push(escapeText(description.substring(index)));
+  }
+
+  return '<div class="bpp-field-description">' + escaped.join('') + '</div>';
 };
 
-},{}],9:[function(require,module,exports){
-'use strict';
+function escapeText(text) {
+  var match, index = 0, escaped = [];
+
+  // match new line <br/> <br /> <br.... /> etc.
+  var pattern = /<br\s*\/?>/gi;
+
+  while ((match = pattern.exec(text))) {
+
+    if (match.index > index) {
+      escaped.push(escapeHTML(text.substring(index, match.index)));
+    }
+
+    escaped.push('<br />');
+
+    index = match.index + match[0].length;
+  }
+
+  if (index < text.length) {
+    escaped.push(escapeHTML(text.substring(index)));
+  }
+
+  return escaped.join('');
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/LabelFactory.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/LabelFactory.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /**
  * The label factory provides a label entry. For the label text
@@ -1009,12 +1242,24 @@ var label = function(options) {
 
 module.exports = label;
 
-},{}],10:[function(require,module,exports){
-'use strict';
 
-var entryFieldDescription = require('./EntryFieldDescription');
+/***/ }),
 
-var bind = require('lodash/bind');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/LinkEntryFactory.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/LinkEntryFactory.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var bind = __webpack_require__(/*! lodash/bind */ "./node_modules/lodash/bind.js");
 
 /**
  * An entry that renders a clickable link.
@@ -1066,8 +1311,8 @@ function link(options) {
   resource.html =
     '<a data-action="handleClick" ' +
     (showLink ? 'data-show="showLink" ' : '') +
-    'class="bpp-entry-link' + (options.cssClasses ? ' ' + options.cssClasses : '') +
-    '">' + label + '</a>';
+    'class="bpp-entry-link' + (options.cssClasses ? ' ' + escapeHTML(options.cssClasses) : '') +
+    '">' + escapeHTML(label) + '</a>';
 
   // add description below link entry field
   if (description) {
@@ -1087,14 +1332,26 @@ function link(options) {
 
 module.exports = link;
 
-},{"./EntryFieldDescription":8,"lodash/bind":248}],11:[function(require,module,exports){
-'use strict';
 
-var domify = require('min-dom').domify;
+/***/ }),
 
-var forEach = require('lodash/forEach');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/SelectEntryFactory.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/SelectEntryFactory.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var entryFieldDescription = require('./EntryFieldDescription');
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
 var isList = function(list) {
@@ -1139,18 +1396,20 @@ var selectbox = function(options, defaultParameters) {
 
 
   resource.html =
-    '<label for="camunda-' + resource.id + '"' +
+    '<label for="camunda-' + escapeHTML(resource.id) + '"' +
     (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
     (canBeHidden ? 'data-show="isHidden" ' : '') +
-    '>' + label + '</label>' +
-    '<select id="camunda-' + resource.id + '-select" name="' + modelProperty + '"' +
+    '>' + escapeHTML(label) + '</label>' +
+    '<select id="camunda-' + escapeHTML(resource.id) + '-select" name="' +
+    escapeHTML(modelProperty) + '"' +
     (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
     (canBeHidden ? 'data-show="isHidden" ' : '') +
     ' data-value>';
 
   if (isList(selectOptions)) {
     forEach(selectOptions, function(option) {
-      resource.html += '<option value="' + option.value + '">' + (option.name || '') + '</option>';
+      resource.html += '<option value="' + escapeHTML(option.value) + '">' +
+      (option.name ? escapeHTML(option.name) : '') + '</option>';
     });
   }
 
@@ -1222,24 +1481,36 @@ var selectbox = function(options, defaultParameters) {
 
 module.exports = selectbox;
 
-},{"./EntryFieldDescription":8,"lodash/forEach":255,"min-dom":281}],12:[function(require,module,exports){
-'use strict';
 
-var cmdHelper = require('../helper/CmdHelper');
+/***/ }),
 
-var domQuery = require('min-dom').query,
-    domAttr = require('min-dom').attr,
-    domClosest = require('min-dom').closest;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/TableEntryFactory.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/TableEntryFactory.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var filter = require('lodash/filter'),
-    forEach = require('lodash/forEach'),
-    keys = require('lodash/keys');
+"use strict";
 
-var domify = require('min-dom').domify;
 
-var entryFieldDescription = require('./EntryFieldDescription');
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
-var updateSelection = require('selection-update');
+var cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    domAttr = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").attr,
+    domClosest = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").closest;
+
+var filter = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js"),
+    forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
+    keys = __webpack_require__(/*! lodash/keys */ "./node_modules/lodash/keys.js");
+
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var updateSelection = __webpack_require__(/*! selection-update */ "./node_modules/selection-update/index.js");
 
 var TABLE_ROW_DIV_SNIPPET = '<div class="bpp-field-wrapper bpp-table-row">';
 var DELETE_ROW_BUTTON_SNIPPET = '<button class="clear" data-action="deleteElement">' +
@@ -1263,7 +1534,7 @@ function createInputTemplate(properties, canRemove) {
                                (canRemove ? 'bpp-table-row-removable' : '') + '" ' +
                        'id="camunda-table-row-cell-input-value" ' +
                        'type="text" ' +
-                       'name="' + prop + '" />';
+                       'name="' + escapeHTML(prop) + '" />';
   });
   return template;
 }
@@ -1280,7 +1551,7 @@ function createLabelTemplate(labels) {
   var columns = labels.length;
   var template = '';
   forEach(labels, function(label) {
-    template += '<label class="bpp-table-row-columns-' + columns + '">' + label + '</label>';
+    template += '<label class="bpp-table-row-columns-' + columns + '">' + escapeHTML(label) + '</label>';
   });
   return template;
 }
@@ -1385,7 +1656,7 @@ module.exports = function(options) {
     id: id,
     html: (canAdd ?
       '<div class="bpp-table-add-row" ' + (canBeShown ? 'data-show="show"' : '') + '>' +
-            '<label>' + addLabel + '</label>' +
+            '<label>' + escapeHTML(addLabel) + '</label>' +
             '<button class="add" data-action="addElement"><span>+</span></button>' +
           '</div>' : '') +
           '<div class="bpp-table" data-show="showTable">' +
@@ -1560,10 +1831,22 @@ module.exports = function(options) {
 
 };
 
-},{"../helper/CmdHelper":17,"./EntryFieldDescription":8,"lodash/filter":251,"lodash/forEach":255,"lodash/keys":269,"min-dom":281,"selection-update":353}],13:[function(require,module,exports){
-'use strict';
 
-var entryFieldDescription = require('./EntryFieldDescription');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/TextBoxEntryFactory.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/TextBoxEntryFactory.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
 var textBox = function(options, defaultParameters) {
@@ -1574,14 +1857,14 @@ var textBox = function(options, defaultParameters) {
       description = options.description;
 
   resource.html =
-    '<label for="camunda-' + resource.id + '" ' +
+    '<label for="camunda-' + escapeHTML(resource.id) + '" ' +
     (canBeShown ? 'data-show="isShown"' : '') +
     '>' + label + '</label>' +
     '<div class="bpp-field-wrapper" ' +
     (canBeShown ? 'data-show="isShown"' : '') +
     '>' +
-      '<div contenteditable="true" id="camunda-' + resource.id + '" ' +
-            'name="' + options.modelProperty + '" />' +
+      '<div contenteditable="true" id="camunda-' + escapeHTML(resource.id) + '" ' +
+            'name="' + escapeHTML(options.modelProperty) + '" />' +
     '</div>';
 
   // add description below text box entry field
@@ -1602,12 +1885,24 @@ var textBox = function(options, defaultParameters) {
 
 module.exports = textBox;
 
-},{"./EntryFieldDescription":8}],14:[function(require,module,exports){
-'use strict';
 
-var domQuery = require('min-dom').query;
+/***/ }),
 
-var entryFieldDescription = require('./EntryFieldDescription');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/TextInputEntryFactory.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/TextInputEntryFactory.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
 var textField = function(options, defaultParameters) {
@@ -1641,22 +1936,22 @@ var textField = function(options, defaultParameters) {
       description = options.description;
 
   resource.html =
-    '<label for="camunda-' + resource.id + '" ' +
+    '<label for="camunda-' + escapeHTML(resource.id) + '" ' +
       (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
       (canBeHidden ? 'data-show="isHidden" ' : '') +
-      (dataValueLabel ? 'data-value="' + dataValueLabel + '"' : '') + '>'+ label +'</label>' +
+      (dataValueLabel ? 'data-value="' + escapeHTML(dataValueLabel) + '"' : '') + '>'+ escapeHTML(label) +'</label>' +
     '<div class="bpp-field-wrapper" ' +
       (canBeDisabled ? 'data-disable="isDisabled"' : '') +
       (canBeHidden ? 'data-show="isHidden"' : '') +
       '>' +
-      '<input id="camunda-' + resource.id + '" type="text" name="' + options.modelProperty+'" ' +
+      '<input id="camunda-' + escapeHTML(resource.id) + '" type="text" name="' + escapeHTML(options.modelProperty) + '" ' +
         (canBeDisabled ? 'data-disable="isDisabled"' : '') +
         (canBeHidden ? 'data-show="isHidden"' : '') +
         ' />' +
-      '<button class="' + actionName + '" data-action="' + actionName + '" data-show="' + showName + '" ' +
+      '<button class="' + escapeHTML(actionName) + '" data-action="' + escapeHTML(actionName) + '" data-show="' + escapeHTML(showName) + '" ' +
         (canBeDisabled ? 'data-disable="isDisabled"' : '') +
         (canBeHidden ? ' data-show="isHidden"' : '') + '>' +
-        '<span>' + buttonLabel + '</span>' +
+        '<span>' + escapeHTML(buttonLabel) + '</span>' +
       '</button>' +
     '</div>';
 
@@ -1687,10 +1982,20 @@ var textField = function(options, defaultParameters) {
 
 module.exports = textField;
 
-},{"./EntryFieldDescription":8,"min-dom":281}],15:[function(require,module,exports){
-'use strict';
 
-var textField = require('./TextInputEntryFactory');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var textField = __webpack_require__(/*! ./TextInputEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/TextInputEntryFactory.js");
 
 /**
  * This function is a wrapper around TextInputEntryFactory.
@@ -1745,12 +2050,22 @@ var validationAwareTextField = function(options, defaultParameters) {
 
 module.exports = validationAwareTextField;
 
-},{"./TextInputEntryFactory":14}],16:[function(require,module,exports){
-'use strict';
 
-var map = require('lodash/map');
+/***/ }),
 
-var extensionElementsHelper = require('./ExtensionElementsHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/AsyncCapableHelper.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/AsyncCapableHelper.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var map = __webpack_require__(/*! lodash/map */ "./node_modules/lodash/map.js");
+
+var extensionElementsHelper = __webpack_require__(/*! ./ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js");
 
 /**
  * Returns true if the attribute 'camunda:asyncBefore' is set
@@ -1822,8 +2137,60 @@ function removeFailedJobRetryTimeCycle(bo, element) {
 }
 
 module.exports.removeFailedJobRetryTimeCycle = removeFailedJobRetryTimeCycle;
-},{"./ExtensionElementsHelper":20,"lodash/map":270}],17:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/CategoryHelper.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/CategoryHelper.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var collectionAdd = __webpack_require__(/*! diagram-js/lib/util/Collections */ "./node_modules/diagram-js/lib/util/Collections.js").add,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var CategoryHelper = {};
+
+module.exports = CategoryHelper;
+
+/**
+ * Creates a new bpmn:CategoryValue inside a new bpmn:Category
+ *
+ * @param {ModdleElement} definitions
+ * @param {BpmnFactory} bpmnFactory
+ *
+ * @return {ModdleElement} categoryValue.
+ */
+CategoryHelper.createCategoryValue = function(definitions, bpmnFactory) {
+  var categoryValue = bpmnFactory.create('bpmn:CategoryValue'),
+      category = bpmnFactory.create('bpmn:Category', {
+        categoryValue: [ categoryValue ]
+      });
+
+  // add to correct place
+  collectionAdd(definitions.get('rootElements'), category);
+  getBusinessObject(category).$parent = definitions;
+  getBusinessObject(categoryValue).$parent = category;
+
+  return categoryValue;
+
+};
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var CmdHelper = {};
 module.exports = CmdHelper;
@@ -1901,8 +2268,18 @@ CmdHelper.setList = function(element, businessObject, listPropertyName, updatedO
   };
 };
 
-},{}],18:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 var ElementHelper = {};
 module.exports = ElementHelper;
@@ -1926,12 +2303,22 @@ ElementHelper.createElement = function(elementType, properties, parent, factory)
   return element;
 };
 
-},{}],19:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    forEach = require('lodash/forEach');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 
 var EventDefinitionHelper = {};
 
@@ -1985,13 +2372,23 @@ EventDefinitionHelper.getConditionalEventDefinition = function(element) {
   return this.getEventDefinition(element, 'bpmn:ConditionalEventDefinition');
 };
 
-},{"bpmn-js/lib/util/ModelUtil":284,"lodash/forEach":255}],20:[function(require,module,exports){
-'use strict';
 
-var cmdHelper = require('./CmdHelper'),
-    elementHelper = require('./ElementHelper');
+/***/ }),
 
-var is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var cmdHelper = __webpack_require__(/*! ./CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ./ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
 
 var ExtensionElementsHelper = {};
 
@@ -2042,11 +2439,21 @@ ExtensionElementsHelper.removeEntry = function(bo, element, entry) {
 
 module.exports = ExtensionElementsHelper;
 
-},{"./CmdHelper":17,"./ElementHelper":18,"bpmn-js/lib/util/ModelUtil":284}],21:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    getExtensionElements = require('./ExtensionElementsHelper').getExtensionElements;
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/FormHelper.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/FormHelper.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    getExtensionElements = __webpack_require__(/*! ./ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js").getExtensionElements;
 
 var FormHelper = {};
 
@@ -2135,15 +2542,25 @@ FormHelper.getEnumValues = function(formField) {
 };
 
 
-},{"./ExtensionElementsHelper":20,"bpmn-js/lib/util/ModelUtil":284}],22:[function(require,module,exports){
-'use strict';
 
-var ModelUtil = require('bpmn-js/lib/util/ModelUtil'),
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ModelUtil = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js"),
     is = ModelUtil.is,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var eventDefinitionHelper = require('./EventDefinitionHelper');
-var extensionsElementHelper = require('./ExtensionElementsHelper');
+var eventDefinitionHelper = __webpack_require__(/*! ./EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js");
+var extensionsElementHelper = __webpack_require__(/*! ./ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js");
 
 var ImplementationTypeHelper = {};
 
@@ -2329,15 +2746,25 @@ ImplementationTypeHelper.getImplementationType = function(element) {
 
 };
 
-},{"./EventDefinitionHelper":19,"./ExtensionElementsHelper":20,"bpmn-js/lib/util/ModelUtil":284}],23:[function(require,module,exports){
-'use strict';
 
-var ModelUtil = require('bpmn-js/lib/util/ModelUtil'),
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ModelUtil = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js"),
     is = ModelUtil.is,
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var extensionElementsHelper = require('./ExtensionElementsHelper'),
-    implementationTypeHelper = require('./ImplementationTypeHelper');
+var extensionElementsHelper = __webpack_require__(/*! ./ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    implementationTypeHelper = __webpack_require__(/*! ./ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
 
 var InputOutputHelper = {};
 
@@ -2443,12 +2870,23 @@ InputOutputHelper.getOutputParameter = function(element, insideConnector, idx) {
  * @return {boolean} a boolean value
  */
 InputOutputHelper.isInputOutputSupported = function(element, insideConnector) {
+
+  if (insideConnector) {
+    return true;
+  }
+
   var bo = getBusinessObject(element);
-  return insideConnector ||
-         (is(bo, 'bpmn:FlowNode') &&
-         !is(bo, 'bpmn:StartEvent') &&
-         !is(bo, 'bpmn:BoundaryEvent') &&
-         !(is(bo, 'bpmn:SubProcess') && bo.get('triggeredByEvent')));
+
+  return (
+    is(bo, 'bpmn:FlowNode') && !(
+      is(bo, 'bpmn:StartEvent') ||
+      is(bo, 'bpmn:Gateway') ||
+      is(bo, 'bpmn:BoundaryEvent') ||
+      (
+        is(bo, 'bpmn:SubProcess') && bo.get('triggeredByEvent')
+      )
+    )
+  );
 };
 
 /**
@@ -2464,12 +2902,22 @@ InputOutputHelper.areOutputParametersSupported = function(element, insideConnect
   return insideConnector || (!is(bo, 'bpmn:EndEvent') && !bo.loopCharacteristics);
 };
 
-},{"./ExtensionElementsHelper":20,"./ImplementationTypeHelper":22,"bpmn-js/lib/util/ModelUtil":284}],24:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    cmdHelper = require('./CmdHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/helper/ParticipantHelper.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/helper/ParticipantHelper.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    cmdHelper = __webpack_require__(/*! ./CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 
 var ParticipantHelper = {};
@@ -2501,13 +2949,23 @@ ParticipantHelper.getProcessBusinessObject = function(element, propertyName) {
 
   return properties;
 };
-},{"./CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284}],25:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../factory/EntryFactory'),
-    cmdHelper = require('../../../helper/CmdHelper');
+/***/ }),
 
-var ModelUtil = require('bpmn-js/lib/util/ModelUtil'),
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/DocumentationProps.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/DocumentationProps.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var ModelUtil = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js"),
     is = ModelUtil.is,
     getBusinessObject = ModelUtil.getBusinessObject;
 
@@ -2576,23 +3034,33 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284}],26:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    isAny = require('bpmn-js/lib/features/modeling/util/ModelingUtil').isAny,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    eventDefinitionHelper = require('../../../helper/EventDefinitionHelper');
+/***/ }),
 
-var forEach = require('lodash/forEach');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/EventProps.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/EventProps.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var message = require('./implementation/MessageEventDefinition'),
-    signal = require('./implementation/SignalEventDefinition'),
-    error = require('./implementation/ErrorEventDefinition'),
-    escalation = require('./implementation/EscalationEventDefinition'),
-    timer = require('./implementation/TimerEventDefinition'),
-    compensation = require('./implementation/CompensateEventDefinition'),
-    condition = require('./implementation/ConditionalEventDefinition');
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    eventDefinitionHelper = __webpack_require__(/*! ../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js");
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
+
+var message = __webpack_require__(/*! ./implementation/MessageEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/MessageEventDefinition.js"),
+    signal = __webpack_require__(/*! ./implementation/SignalEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/SignalEventDefinition.js"),
+    error = __webpack_require__(/*! ./implementation/ErrorEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ErrorEventDefinition.js"),
+    escalation = __webpack_require__(/*! ./implementation/EscalationEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EscalationEventDefinition.js"),
+    timer = __webpack_require__(/*! ./implementation/TimerEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/TimerEventDefinition.js"),
+    compensation = __webpack_require__(/*! ./implementation/CompensateEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/CompensateEventDefinition.js"),
+    condition = __webpack_require__(/*! ./implementation/ConditionalEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ConditionalEventDefinition.js");
 
 
 module.exports = function(group, element, bpmnFactory, elementRegistry, translate) {
@@ -2612,11 +3080,11 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
           signalEventDefinition = eventDefinitionHelper.getSignalEventDefinition(element);
 
       if (messageEventDefinition) {
-        message(group, element, bpmnFactory, messageEventDefinition);
+        message(group, element, bpmnFactory, messageEventDefinition, translate);
       }
 
       if (signalEventDefinition) {
-        signal(group, element, bpmnFactory, signalEventDefinition);
+        signal(group, element, bpmnFactory, signalEventDefinition, translate);
       }
 
     }
@@ -2624,7 +3092,7 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
 
   // Special Case: Receive Task
   if (is(element, 'bpmn:ReceiveTask')) {
-    message(group, element, bpmnFactory, getBusinessObject(element));
+    message(group, element, bpmnFactory, getBusinessObject(element), translate);
   }
 
   // Error Event Definition
@@ -2640,12 +3108,8 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
       var errorEventDefinition = eventDefinitionHelper.getErrorEventDefinition(element);
 
       if (errorEventDefinition) {
-        var isCatchingErrorEvent = is(element, 'bpmn:StartEvent') || is (element, 'bpmn:BoundaryEvent');
 
-        var showErrorCodeVariable = isCatchingErrorEvent,
-            showErrorMessageVariable = isCatchingErrorEvent;
-
-        error(group, element, bpmnFactory, errorEventDefinition, showErrorCodeVariable, showErrorMessageVariable);
+        error(group, element, bpmnFactory, errorEventDefinition, translate);
       }
     }
   });
@@ -2667,7 +3131,8 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
       var escalationEventDefinition = eventDefinitionHelper.getEscalationEventDefinition(element);
 
       if (escalationEventDefinition) {
-        escalation(group, element, bpmnFactory, escalationEventDefinition, showEscalationCodeVariable);
+        escalation(group, element, bpmnFactory, escalationEventDefinition, showEscalationCodeVariable,
+          translate);
       }
     }
 
@@ -2687,7 +3152,7 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
       var timerEventDefinition = eventDefinitionHelper.getTimerEventDefinition(element);
 
       if (timerEventDefinition) {
-        timer(group, element, bpmnFactory, timerEventDefinition);
+        timer(group, element, bpmnFactory, timerEventDefinition, translate);
       }
     }
   });
@@ -2705,13 +3170,13 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
       var compensateEventDefinition = eventDefinitionHelper.getCompensateEventDefinition(element);
 
       if (compensateEventDefinition) {
-        compensation(group, element, bpmnFactory, compensateEventDefinition, elementRegistry);
+        compensation(group, element, bpmnFactory, compensateEventDefinition, elementRegistry, translate);
       }
     }
   });
 
 
-  // Conditional Event Defintion
+  // Conditional Event Definition
   var conditionalEvents = [
     'bpmn:StartEvent',
     'bpmn:BoundaryEvent',
@@ -2725,21 +3190,31 @@ module.exports = function(group, element, bpmnFactory, elementRegistry, translat
     var conditionalEventDefinition = eventDefinitionHelper.getConditionalEventDefinition(element);
 
     if (conditionalEventDefinition) {
-      condition(group, element, bpmnFactory, conditionalEventDefinition, elementRegistry);
+      condition(group, element, bpmnFactory, conditionalEventDefinition, elementRegistry, translate);
     }
   }
 
 };
 
-},{"../../../helper/EventDefinitionHelper":19,"./implementation/CompensateEventDefinition":32,"./implementation/ConditionalEventDefinition":33,"./implementation/ErrorEventDefinition":35,"./implementation/EscalationEventDefinition":36,"./implementation/MessageEventDefinition":38,"./implementation/SignalEventDefinition":40,"./implementation/TimerEventDefinition":41,"bpmn-js/lib/features/modeling/util/ModelingUtil":282,"bpmn-js/lib/util/ModelUtil":284,"lodash/forEach":255}],27:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var entryFactory = require('../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ExecutableProps.js":
+/*!******************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ExecutableProps.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var participantHelper = require('../../../helper/ParticipantHelper');
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var participantHelper = __webpack_require__(/*! ../../../helper/ParticipantHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ParticipantHelper.js");
 
 module.exports = function(group, element, translate) {
 
@@ -2773,13 +3248,23 @@ module.exports = function(group, element, translate) {
 
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/ParticipantHelper":24,"bpmn-js/lib/util/ModelUtil":284}],28:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../factory/EntryFactory'),
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    utils = require('../../../Utils'),
-    cmdHelper = require('../../../helper/CmdHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/IdProps.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/IdProps.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    utils = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(group, element, translate, options) {
 
@@ -2805,7 +3290,7 @@ module.exports = function(group, element, translate, options) {
 
       var bo = getBusinessObject(element);
 
-      var idError = utils.isIdValid(bo, idValue);
+      var idError = utils.isIdValid(bo, idValue, translate);
 
       return idError ? { id: idError } : {};
     }
@@ -2813,15 +3298,25 @@ module.exports = function(group, element, translate, options) {
 
 };
 
-},{"../../../Utils":4,"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284}],29:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    entryFactory = require('../../../factory/EntryFactory'),
-    cmdHelper = require('../../../helper/CmdHelper');
+/***/ }),
 
-var forEach = require('lodash/forEach');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/LinkProps.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/LinkProps.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 
 function getLinkEventDefinition(element) {
 
@@ -2872,19 +3367,72 @@ module.exports = function(group, element, translate) {
 };
 
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284,"lodash/forEach":255}],30:[function(require,module,exports){
-'use strict';
 
-var nameEntryFactory = require('./implementation/Name'),
-    is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-module.exports = function(group, element, translate) {
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps.js":
+/*!************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var nameEntryFactory = __webpack_require__(/*! ./implementation/Name */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/Name.js"),
+    createCategoryValue = __webpack_require__(/*! ../../../helper/CategoryHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CategoryHelper.js").createCategoryValue,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+module.exports = function(group, element, bpmnFactory, canvas, translate) {
+
+  function initializeCategory(semantic) {
+    var rootElement = canvas.getRootElement(),
+        definitions = getBusinessObject(rootElement).$parent,
+        categoryValue = createCategoryValue(definitions, bpmnFactory);
+
+    semantic.categoryValueRef = categoryValue;
+
+  }
+
+  function setGroupName(element, values) {
+    var bo = getBusinessObject(element),
+        categoryValueRef = bo.categoryValueRef;
+
+    if (!categoryValueRef) {
+      initializeCategory(bo);
+    }
+
+    // needs direct call to update categoryValue properly
+    return {
+      cmd: 'element.updateLabel',
+      context: {
+        element: element,
+        newLabel: values.categoryValue
+      }
+    };
+  }
+
+  function getGroupName(element) {
+    var bo = getBusinessObject(element),
+        value = (bo.categoryValueRef || {}).value;
+
+    return { categoryValue: value };
+  }
 
   if (!is(element, 'bpmn:Collaboration')) {
 
     var options;
     if (is(element, 'bpmn:TextAnnotation')) {
-      options = { modelProperty: 'text' };
+      options = { modelProperty: 'text', label: translate('Text') };
+    } else if (is(element, 'bpmn:Group')) {
+      options = {
+        modelProperty: 'categoryValue',
+        label: translate('Category Value'),
+        get: getGroupName,
+        set: setGroupName
+      };
     }
 
     // name
@@ -2894,15 +3442,25 @@ module.exports = function(group, element, translate) {
 
 };
 
-},{"./implementation/Name":39,"bpmn-js/lib/util/ModelUtil":284}],31:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    entryFactory = require('../../../factory/EntryFactory'),
-    participantHelper = require('../../../helper/ParticipantHelper'),
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    nameEntryFactory = require('./implementation/Name'),
-    utils = require('../../../Utils');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ProcessProps.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ProcessProps.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    participantHelper = __webpack_require__(/*! ../../../helper/ParticipantHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ParticipantHelper.js"),
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    nameEntryFactory = __webpack_require__(/*! ./implementation/Name */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/Name.js"),
+    utils = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 module.exports = function(group, element, translate, options) {
   var businessObject = getBusinessObject(element);
@@ -2937,7 +3495,7 @@ module.exports = function(group, element, translate, options) {
 
         var bo = getBusinessObject(element);
 
-        var processIdError = utils.isIdValid(bo.processRef, idValue);
+        var processIdError = utils.isIdValid(bo.processRef, idValue, translate);
 
         return processIdError ? { processId: processIdError } : {};
       };
@@ -2967,21 +3525,31 @@ module.exports = function(group, element, translate, options) {
   }
 };
 
-},{"../../../Utils":4,"../../../factory/EntryFactory":7,"../../../helper/ParticipantHelper":24,"./implementation/Name":39,"bpmn-js/lib/util/ModelUtil":284}],32:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper'),
-    eventDefinitionHelper = require('../../../../helper/EventDefinitionHelper'),
-    utils = require('../../../../Utils');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/CompensateEventDefinition.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/CompensateEventDefinition.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is;
+"use strict";
 
-var forEach = require('lodash/forEach'),
-    find = require('lodash/find'),
-    filter = require('lodash/filter');
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    eventDefinitionHelper = __webpack_require__(/*! ../../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
+    find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js"),
+    filter = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
 
 
 function getContainedActivities(element) {
@@ -3055,11 +3623,11 @@ function createActivityRefOptions(element) {
 }
 
 
-module.exports = function(group, element, bpmnFactory, compensateEventDefinition, elementRegistry) {
+module.exports = function(group, element, bpmnFactory, compensateEventDefinition, elementRegistry, translate) {
 
   group.entries.push(entryFactory.checkbox({
     id: 'wait-for-completion',
-    label: 'Wait for Completion',
+    label: translate('Wait for Completion'),
     modelProperty: 'waitForCompletion',
 
     get: function(element, node) {
@@ -3076,7 +3644,7 @@ module.exports = function(group, element, bpmnFactory, compensateEventDefinition
 
   group.entries.push(entryFactory.selectBox({
     id: 'activity-ref',
-    label: 'Activity Ref',
+    label: translate('Activity Ref'),
     selectOptions: createActivityRefOptions(element),
     modelProperty: 'activityRef',
 
@@ -3099,16 +3667,26 @@ module.exports = function(group, element, bpmnFactory, compensateEventDefinition
 
 };
 
-},{"../../../../Utils":4,"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/EventDefinitionHelper":19,"bpmn-js/lib/util/ModelUtil":284,"lodash/filter":251,"lodash/find":252,"lodash/forEach":255}],33:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    isEventSubProcess = require('bpmn-js/lib/util/DiUtil').isEventSubProcess;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ConditionalEventDefinition.js":
+/*!********************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ConditionalEventDefinition.js ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = function(group, element, bpmnFactory, conditionalEventDefinition) {
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isEventSubProcess = __webpack_require__(/*! bpmn-js/lib/util/DiUtil */ "./node_modules/bpmn-js/lib/util/DiUtil.js").isEventSubProcess;
+
+module.exports = function(group, element, bpmnFactory, conditionalEventDefinition, elementRegistry, translate) {
 
   var getValue = function(modelProperty) {
     return function(element) {
@@ -3131,8 +3709,8 @@ module.exports = function(group, element, bpmnFactory, conditionalEventDefinitio
   };
 
   group.entries.push(entryFactory.textField({
-    id : 'variableName',
-    label : 'Variable Name',
+    id: 'variableName',
+    label: translate('Variable Name'),
     modelProperty : 'variableName',
 
     get: getValue('variableName'),
@@ -3144,9 +3722,9 @@ module.exports = function(group, element, bpmnFactory, conditionalEventDefinitio
 
   if (!isConditionalStartEvent) {
     group.entries.push(entryFactory.textField({
-      id : 'variableEvent',
-      label : 'Variable Event',
-      description: 'Specify more than one variable change event as a comma separated list.',
+      id: 'variableEvent',
+      label: translate('Variable Event'),
+      description: translate('Specify more than one variable change event as a comma separated list.'),
       modelProperty : 'variableEvent',
 
       get: getValue('variableEvent'),
@@ -3155,12 +3733,22 @@ module.exports = function(group, element, bpmnFactory, conditionalEventDefinitio
   }
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"bpmn-js/lib/util/DiUtil":283,"bpmn-js/lib/util/ModelUtil":284}],34:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 /**
  * Create an entry to modify a property of an element which
@@ -3224,43 +3812,28 @@ module.exports = function(element, definition, bpmnFactory, options) {
   return [ entry ];
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],35:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var eventDefinitionReference = require('./EventDefinitionReference'),
-    elementReferenceProperty = require('./ElementReferenceProperty');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ErrorEventDefinition.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ErrorEventDefinition.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-module.exports = function(group, element, bpmnFactory, errorEventDefinition, showErrorCodeVariable,
-    showErrorMessageVariable) {
+var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
+    elementReferenceProperty = __webpack_require__(/*! ./ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
 
 
-  var getValue = function(modelProperty) {
-    return function(element) {
-      var modelPropertyValue = errorEventDefinition.get('camunda:' + modelProperty);
-      var value = {};
-
-      value[modelProperty] = modelPropertyValue;
-      return value;
-    };
-  };
-
-  var setValue = function(modelProperty) {
-    return function(element, values) {
-      var props = {};
-
-      props['camunda:' + modelProperty] = values[modelProperty] || undefined;
-
-      return cmdHelper.updateBusinessObject(element, errorEventDefinition, props);
-    };
-  };
+module.exports = function(group, element, bpmnFactory, errorEventDefinition, translate) {
 
 
   group.entries = group.entries.concat(eventDefinitionReference(element, errorEventDefinition, bpmnFactory, {
-    label: 'Error',
+    label: translate('Error'),
     elementName: 'error',
     elementType: 'bpmn:Error',
     referenceProperty: 'errorRef',
@@ -3270,7 +3843,7 @@ module.exports = function(group, element, bpmnFactory, errorEventDefinition, sho
 
   group.entries = group.entries.concat(elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
     id: 'error-element-name',
-    label: 'Error Name',
+    label: translate('Error Name'),
     referenceProperty: 'errorRef',
     modelProperty: 'name',
     shouldValidate: true
@@ -3279,50 +3852,37 @@ module.exports = function(group, element, bpmnFactory, errorEventDefinition, sho
 
   group.entries = group.entries.concat(elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
     id: 'error-element-code',
-    label: 'Error Code',
+    label: translate('Error Code'),
     referenceProperty: 'errorRef',
     modelProperty: 'errorCode'
   }));
 
-
-  if (showErrorCodeVariable) {
-    group.entries.push(entryFactory.textField({
-      id : 'errorCodeVariable',
-      label : 'Error Code Variable',
-      modelProperty : 'errorCodeVariable',
-
-      get: getValue('errorCodeVariable'),
-      set: setValue('errorCodeVariable')
-    }));
-  }
-
-  if (showErrorMessageVariable) {
-    group.entries.push(entryFactory.textField({
-      id : 'errorMessageVariable',
-      label : 'Error Message Variable',
-      modelProperty : 'errorMessageVariable',
-
-      get: getValue('errorMessageVariable'),
-      set: setValue('errorMessageVariable')
-    }));
-  }
-
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"./ElementReferenceProperty":34,"./EventDefinitionReference":37}],36:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var eventDefinitionReference = require('./EventDefinitionReference'),
-    elementReferenceProperty = require('./ElementReferenceProperty');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EscalationEventDefinition.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EscalationEventDefinition.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-module.exports = function(group, element, bpmnFactory, escalationEventDefinition, showEscalationCodeVariable) {
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
+    elementReferenceProperty = __webpack_require__(/*! ./ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+
+
+module.exports = function(group, element, bpmnFactory, escalationEventDefinition, showEscalationCodeVariable, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, escalationEventDefinition, bpmnFactory, {
-    label: 'Escalation',
+    label: translate('Escalation'),
     elementName: 'escalation',
     elementType: 'bpmn:Escalation',
     referenceProperty: 'escalationRef',
@@ -3332,7 +3892,7 @@ module.exports = function(group, element, bpmnFactory, escalationEventDefinition
 
   group.entries = group.entries.concat(elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, {
     id: 'escalation-element-name',
-    label: 'Escalation Name',
+    label: translate('Escalation Name'),
     referenceProperty: 'escalationRef',
     modelProperty: 'name',
     shouldValidate: true
@@ -3341,7 +3901,7 @@ module.exports = function(group, element, bpmnFactory, escalationEventDefinition
 
   group.entries = group.entries.concat(elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, {
     id: 'escalation-element-code',
-    label: 'Escalation Code',
+    label: translate('Escalation Code'),
     referenceProperty: 'escalationRef',
     modelProperty: 'escalationCode'
   }));
@@ -3350,7 +3910,7 @@ module.exports = function(group, element, bpmnFactory, escalationEventDefinition
   if (showEscalationCodeVariable) {
     group.entries.push(entryFactory.textField({
       id : 'escalationCodeVariable',
-      label : 'Escalation Code Variable',
+      label : translate('Escalation Code Variable'),
       modelProperty : 'escalationCodeVariable',
 
       get: function(element) {
@@ -3369,20 +3929,31 @@ module.exports = function(group, element, bpmnFactory, escalationEventDefinition
   }
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"./ElementReferenceProperty":34,"./EventDefinitionReference":37}],37:[function(require,module,exports){
-'use strict';
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var domQuery = require('min-dom').query,
-    domify = require('min-dom').domify,
-    domAttr = require('min-dom').attr;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js ***!
+  \******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var forEach = require('lodash/forEach'),
-    find = require('lodash/find');
+"use strict";
 
-var elementHelper = require('../../../../helper/ElementHelper');
-var utils = require('../../../../Utils');
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domAttr = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").attr;
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
+    find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+var utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js"),
+    escapeHTML = utils.escapeHTML;
 
 var selector = 'select[name=selectedElement]';
 
@@ -3446,9 +4017,9 @@ module.exports = function(element, definition, bpmnFactory, options) {
     id: 'event-definitions-' + elementName,
     description: description,
     html: '<div class="bpp-row bpp-select">' +
-             '<label for="camunda-' + elementName + '">' + label + '</label>' +
+             '<label for="camunda-' + escapeHTML(elementName) + '">' + escapeHTML(label) + '</label>' +
              '<div class="bpp-field-wrapper">' +
-               '<select id="camunda-' + elementName + '" name="selectedElement" data-value>' +
+               '<select id="camunda-' + escapeHTML(elementName) + '" name="selectedElement" data-value>' +
                '</select>' +
                '<button class="add" id="addElement" data-action="addElement"><span>+</span></button>' +
              '</div>' +
@@ -3496,7 +4067,7 @@ module.exports = function(element, definition, bpmnFactory, options) {
       // of the element and not as id
       var id = utils.nextId(newElementIdPrefix);
 
-      var optionTemplate = domify('<option value="' + id + '"> (id='+id+')' + '</option>');
+      var optionTemplate = domify('<option value="' + escapeHTML(id) + '"> (id='+escapeHTML(id)+')' + '</option>');
 
       // add new option
       var selectBox = getSelectBox(inputNode);
@@ -3520,17 +4091,27 @@ module.exports = function(element, definition, bpmnFactory, options) {
 
 };
 
-},{"../../../../Utils":4,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"lodash/find":252,"lodash/forEach":255,"min-dom":281}],38:[function(require,module,exports){
-'use strict';
 
-var eventDefinitionReference = require('./EventDefinitionReference'),
-    elementReferenceProperty = require('./ElementReferenceProperty');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/MessageEventDefinition.js":
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/MessageEventDefinition.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-module.exports = function(group, element, bpmnFactory, messageEventDefinition) {
+var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
+    elementReferenceProperty = __webpack_require__(/*! ./ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+
+
+module.exports = function(group, element, bpmnFactory, messageEventDefinition, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, messageEventDefinition, bpmnFactory, {
-    label: 'Message',
+    label: translate('Message'),
     elementName: 'message',
     elementType: 'bpmn:Message',
     referenceProperty: 'messageRef',
@@ -3540,7 +4121,7 @@ module.exports = function(group, element, bpmnFactory, messageEventDefinition) {
 
   group.entries = group.entries.concat(elementReferenceProperty(element, messageEventDefinition, bpmnFactory, {
     id: 'message-element-name',
-    label: 'Message Name',
+    label: translate('Message Name'),
     referenceProperty: 'messageRef',
     modelProperty: 'name',
     shouldValidate: true
@@ -3548,10 +4129,20 @@ module.exports = function(group, element, bpmnFactory, messageEventDefinition) {
 
 };
 
-},{"./ElementReferenceProperty":34,"./EventDefinitionReference":37}],39:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/Name.js":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/Name.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
 
 /**
  * Create an entry to modify the name of an an element.
@@ -3574,24 +4165,36 @@ module.exports = function(element, options, translate) {
   var nameEntry = entryFactory.textBox({
     id: id,
     label: label,
-    modelProperty: modelProperty
+    modelProperty: modelProperty,
+    get: options.get,
+    set: options.set
   });
 
   return [ nameEntry ];
 
 };
 
-},{"../../../../factory/EntryFactory":7}],40:[function(require,module,exports){
-'use strict';
 
-var eventDefinitionReference = require('./EventDefinitionReference'),
-    elementReferenceProperty = require('./ElementReferenceProperty');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/SignalEventDefinition.js":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/SignalEventDefinition.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-module.exports = function(group, element, bpmnFactory, signalEventDefinition) {
+var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
+    elementReferenceProperty = __webpack_require__(/*! ./ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+
+
+module.exports = function(group, element, bpmnFactory, signalEventDefinition, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, signalEventDefinition, bpmnFactory, {
-    label: 'Signal',
+    label: translate('Signal'),
     elementName: 'signal',
     elementType: 'bpmn:Signal',
     referenceProperty: 'signalRef',
@@ -3601,7 +4204,7 @@ module.exports = function(group, element, bpmnFactory, signalEventDefinition) {
 
   group.entries = group.entries.concat(elementReferenceProperty(element, signalEventDefinition, bpmnFactory, {
     id: 'signal-element-name',
-    label: 'Signal Name',
+    label: translate('Signal Name'),
     referenceProperty: 'signalRef',
     modelProperty: 'name',
     shouldValidate: true
@@ -3609,13 +4212,23 @@ module.exports = function(group, element, bpmnFactory, signalEventDefinition) {
 
 };
 
-},{"./ElementReferenceProperty":34,"./EventDefinitionReference":37}],41:[function(require,module,exports){
-'use strict';
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/TimerEventDefinition.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/TimerEventDefinition.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
 
 /**
  * Get the timer definition type for a given timer event definition.
@@ -3625,6 +4238,11 @@ var entryFactory = require('../../../../factory/EntryFactory');
  * @return {string|undefined} the timer definition type
  */
 function getTimerDefinitionType(timer) {
+
+  if (!timer) {
+    return;
+  }
+
   var timeDate = timer.get('timeDate');
   if (typeof timeDate !== 'undefined') {
     return 'timeDate';
@@ -3642,6 +4260,24 @@ function getTimerDefinitionType(timer) {
 }
 
 /**
+ * Get the actual timer event definition based on option, whether it's a getter
+ * to fetch the timer event definition or the exact event definition itself
+ *
+ * @param {ModdleElement<bpmn:TimerEventDefinition>|Function} timerOrFunction
+ * @param {Shape} element
+ * @param {HTMLElement} node
+ *
+ * @return ModdleElement<bpmn:TimerEventDefinition>
+ */
+function getTimerDefinition(timerOrFunction, element, node) {
+  if (typeof timerOrFunction === 'function') {
+    return timerOrFunction(element, node);
+  }
+
+  return timerOrFunction;
+}
+
+/**
  * Creates 'bpmn:FormalExpression' element.
  *
  * @param {ModdleElement} parent
@@ -3655,70 +4291,90 @@ function createFormalExpression(parent, body, bpmnFactory) {
   return elementHelper.createElement('bpmn:FormalExpression', { body: body }, parent, bpmnFactory);
 }
 
-function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition) {
+function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition, translate, options) {
 
   var selectOptions = [
-    { value: 'timeDate', name: 'Date' },
-    { value: 'timeDuration', name: 'Duration' },
-    { value: 'timeCycle', name: 'Cycle' }
+    { value: 'timeDate', name: translate('Date') },
+    { value: 'timeDuration', name: translate('Duration') },
+    { value: 'timeCycle', name: translate('Cycle') }
   ];
 
+  var prefix = options && options.idPrefix,
+      createTimerEventDefinition = options && options.createTimerEventDefinition;
+
+
   group.entries.push(entryFactory.selectBox({
-    id: 'timer-event-definition-type',
-    label: 'Timer Definition Type',
+    id: prefix + 'timer-event-definition-type',
+    label: translate('Timer Definition Type'),
     selectOptions: selectOptions,
     emptyParameter: true,
     modelProperty: 'timerDefinitionType',
 
     get: function(element, node) {
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node);
+
       return {
-        timerDefinitionType: getTimerDefinitionType(timerEventDefinition) || ''
+        timerDefinitionType: getTimerDefinitionType(timerDefinition) || ''
       };
     },
 
-    set: function(element, values) {
+    set: function(element, values, node) {
       var props = {
         timeDuration: undefined,
         timeDate: undefined,
         timeCycle: undefined
       };
 
-      var newType = values.timerDefinitionType;
+
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node),
+          newType = values.timerDefinitionType;
+
+      if (!timerDefinition && typeof createTimerEventDefinition === 'function') {
+        timerDefinition = createTimerEventDefinition(element, node);
+      }
+
       if (values.timerDefinitionType) {
-        var oldType = getTimerDefinitionType(timerEventDefinition);
+        var oldType = getTimerDefinitionType(timerDefinition);
 
         var value;
         if (oldType) {
-          var definition = timerEventDefinition.get(oldType);
+          var definition = timerDefinition.get(oldType);
           value = definition.get('body');
         }
 
-        props[newType] = createFormalExpression(timerEventDefinition, value, bpmnFactory);
+        props[newType] = createFormalExpression(timerDefinition, value, bpmnFactory);
       }
 
-      return cmdHelper.updateBusinessObject(element, timerEventDefinition, props);
+      return cmdHelper.updateBusinessObject(element, timerDefinition, props);
+    },
+
+    hidden: function(element, node) {
+      return getTimerDefinition(timerEventDefinition, element, node) === undefined;
     }
 
   }));
 
 
   group.entries.push(entryFactory.textField({
-    id: 'timer-event-definition',
-    label: 'Timer Definition',
+    id: prefix + 'timer-event-definition',
+    label: translate('Timer Definition'),
     modelProperty: 'timerDefinition',
 
     get: function(element, node) {
-      var type = getTimerDefinitionType(timerEventDefinition);
-      var definition = type && timerEventDefinition.get(type);
-      var value = definition && definition.get('body');
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node),
+          type = getTimerDefinitionType(timerDefinition),
+          definition = type && timerDefinition.get(type),
+          value = definition && definition.get('body');
+
       return {
         timerDefinition: value
       };
     },
 
-    set: function(element, values) {
-      var type = getTimerDefinitionType(timerEventDefinition);
-      var definition = type && timerEventDefinition.get(type);
+    set: function(element, values, node) {
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node),
+          type = getTimerDefinitionType(timerDefinition),
+          definition = type && timerDefinition.get(type);
 
       if (definition) {
         return cmdHelper.updateBusinessObject(element, definition, {
@@ -3727,21 +4383,25 @@ function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition)
       }
     },
 
-    validate: function(element) {
-      var type = getTimerDefinitionType(timerEventDefinition);
-      var definition = type && timerEventDefinition.get(type);
+    validate: function(element, node) {
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node),
+          type = getTimerDefinitionType(timerDefinition),
+          definition = type && timerDefinition.get(type);
+
       if (definition) {
         var value = definition.get('body');
         if (!value) {
           return {
-            timerDefinition: 'Must provide a value'
+            timerDefinition: translate('Must provide a value')
           };
         }
       }
     },
 
-    hidden: function(element) {
-      return !getTimerDefinitionType(timerEventDefinition);
+    hidden: function(element, node) {
+      var timerDefinition = getTimerDefinition(timerEventDefinition, element, node);
+
+      return !getTimerDefinitionType(timerDefinition);
     }
 
   }));
@@ -3750,80 +4410,91 @@ function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition)
 
 module.exports = TimerEventDefinition;
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18}],42:[function(require,module,exports){
-'use strict';
 
-var inherits = require('inherits');
+/***/ }),
 
-var PropertiesActivator = require('../../PropertiesActivator');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var asyncCapableHelper = require('../../helper/AsyncCapableHelper'),
-    ImplementationTypeHelper = require('../../helper/ImplementationTypeHelper');
+"use strict";
 
-var is = require('bpmn-js/lib/util/ModelUtil').is;
+
+var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+
+var PropertiesActivator = __webpack_require__(/*! ../../PropertiesActivator */ "./node_modules/bpmn-js-properties-panel/lib/PropertiesActivator.js");
+
+var asyncCapableHelper = __webpack_require__(/*! ../../helper/AsyncCapableHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/AsyncCapableHelper.js"),
+    ImplementationTypeHelper = __webpack_require__(/*! ../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
 
 // bpmn properties
-var processProps = require('../bpmn/parts/ProcessProps'),
-    eventProps = require('../bpmn/parts/EventProps'),
-    linkProps = require('../bpmn/parts/LinkProps'),
-    documentationProps = require('../bpmn/parts/DocumentationProps'),
-    idProps = require('../bpmn/parts/IdProps'),
-    nameProps = require('../bpmn/parts/NameProps'),
-    executableProps = require('../bpmn/parts/ExecutableProps');
+var processProps = __webpack_require__(/*! ../bpmn/parts/ProcessProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ProcessProps.js"),
+    eventProps = __webpack_require__(/*! ../bpmn/parts/EventProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/EventProps.js"),
+    linkProps = __webpack_require__(/*! ../bpmn/parts/LinkProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/LinkProps.js"),
+    documentationProps = __webpack_require__(/*! ../bpmn/parts/DocumentationProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/DocumentationProps.js"),
+    idProps = __webpack_require__(/*! ../bpmn/parts/IdProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/IdProps.js"),
+    nameProps = __webpack_require__(/*! ../bpmn/parts/NameProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/NameProps.js"),
+    executableProps = __webpack_require__(/*! ../bpmn/parts/ExecutableProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/ExecutableProps.js");
 
 // camunda properties
-var serviceTaskDelegateProps = require('./parts/ServiceTaskDelegateProps'),
-    userTaskProps = require('./parts/UserTaskProps'),
-    asynchronousContinuationProps = require('./parts/AsynchronousContinuationProps'),
-    callActivityProps = require('./parts/CallActivityProps'),
-    multiInstanceProps = require('./parts/MultiInstanceLoopProps'),
-    conditionalProps = require('./parts/ConditionalProps'),
-    scriptProps = require('./parts/ScriptTaskProps'),
-    formProps = require('./parts/FormProps'),
-    startEventInitiator = require('./parts/StartEventInitiator'),
-    variableMapping = require('./parts/VariableMappingProps'),
-    versionTag = require('./parts/VersionTagProps');
+var serviceTaskDelegateProps = __webpack_require__(/*! ./parts/ServiceTaskDelegateProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ServiceTaskDelegateProps.js"),
+    userTaskProps = __webpack_require__(/*! ./parts/UserTaskProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/UserTaskProps.js"),
+    asynchronousContinuationProps = __webpack_require__(/*! ./parts/AsynchronousContinuationProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/AsynchronousContinuationProps.js"),
+    callActivityProps = __webpack_require__(/*! ./parts/CallActivityProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CallActivityProps.js"),
+    multiInstanceProps = __webpack_require__(/*! ./parts/MultiInstanceLoopProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/MultiInstanceLoopProps.js"),
+    conditionalProps = __webpack_require__(/*! ./parts/ConditionalProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConditionalProps.js"),
+    scriptProps = __webpack_require__(/*! ./parts/ScriptTaskProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ScriptTaskProps.js"),
+    errorProps = __webpack_require__(/*! ./parts/ErrorEventProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorEventProps.js"),
+    formProps = __webpack_require__(/*! ./parts/FormProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FormProps.js"),
+    startEventInitiator = __webpack_require__(/*! ./parts/StartEventInitiator */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/StartEventInitiator.js"),
+    variableMapping = __webpack_require__(/*! ./parts/VariableMappingProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VariableMappingProps.js"),
+    versionTag = __webpack_require__(/*! ./parts/VersionTagProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VersionTagProps.js");
 
-var listenerProps = require('./parts/ListenerProps'),
-    listenerDetails = require('./parts/ListenerDetailProps'),
-    listenerFields = require('./parts/ListenerFieldInjectionProps');
+var listenerProps = __webpack_require__(/*! ./parts/ListenerProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerProps.js"),
+    listenerDetails = __webpack_require__(/*! ./parts/ListenerDetailProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerDetailProps.js"),
+    listenerFields = __webpack_require__(/*! ./parts/ListenerFieldInjectionProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerFieldInjectionProps.js");
 
-var elementTemplateChooserProps = require('./element-templates/parts/ChooserProps'),
-    elementTemplateCustomProps = require('./element-templates/parts/CustomProps');
+var elementTemplateChooserProps = __webpack_require__(/*! ./element-templates/parts/ChooserProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ChooserProps.js"),
+    elementTemplateCustomProps = __webpack_require__(/*! ./element-templates/parts/CustomProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps.js");
 
 // Input/Output
-var inputOutput = require('./parts/InputOutputProps'),
-    inputOutputParameter = require('./parts/InputOutputParameterProps');
+var inputOutput = __webpack_require__(/*! ./parts/InputOutputProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js"),
+    inputOutputParameter = __webpack_require__(/*! ./parts/InputOutputParameterProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js");
 
 // Connector
-var connectorDetails = require('./parts/ConnectorDetailProps'),
-    connectorInputOutput = require('./parts/ConnectorInputOutputProps'),
-    connectorInputOutputParameter = require('./parts/ConnectorInputOutputParameterProps');
+var connectorDetails = __webpack_require__(/*! ./parts/ConnectorDetailProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorDetailProps.js"),
+    connectorInputOutput = __webpack_require__(/*! ./parts/ConnectorInputOutputProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js"),
+    connectorInputOutputParameter = __webpack_require__(/*! ./parts/ConnectorInputOutputParameterProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js");
 
 // properties
-var properties = require('./parts/PropertiesProps');
+var properties = __webpack_require__(/*! ./parts/PropertiesProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js");
 
 // job configuration
-var jobConfiguration = require('./parts/JobConfigurationProps');
+var jobConfiguration = __webpack_require__(/*! ./parts/JobConfigurationProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/JobConfigurationProps.js");
 
 // history time to live
-var historyTimeToLive = require('./parts/HistoryTimeToLiveProps');
+var historyTimeToLive = __webpack_require__(/*! ./parts/HistoryTimeToLiveProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/HistoryTimeToLiveProps.js");
 
 // candidate starter groups/users
-var candidateStarter = require('./parts/CandidateStarterProps');
+var candidateStarter = __webpack_require__(/*! ./parts/CandidateStarterProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CandidateStarterProps.js");
 
 // tasklist
-var tasklist = require('./parts/TasklistProps');
+var tasklist = __webpack_require__(/*! ./parts/TasklistProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/TasklistProps.js");
 
 // external task configuration
-var externalTaskConfiguration = require('./parts/ExternalTaskConfigurationProps');
+var externalTaskConfiguration = __webpack_require__(/*! ./parts/ExternalTaskConfigurationProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ExternalTaskConfigurationProps.js");
 
 // field injection
-var fieldInjections = require('./parts/FieldInjectionProps');
+var fieldInjections = __webpack_require__(/*! ./parts/FieldInjectionProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FieldInjectionProps.js");
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    eventDefinitionHelper = require('../../helper/EventDefinitionHelper'),
-    implementationTypeHelper = require('../../helper/ImplementationTypeHelper');
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    eventDefinitionHelper = __webpack_require__(/*! ../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    implementationTypeHelper = __webpack_require__(/*! ../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
 
 // helpers ////////////////////////////////////////
 
@@ -3890,8 +4561,11 @@ var getListenerLabel = function(param, translate) {
 };
 
 var PROCESS_KEY_HINT = 'This maps to the process definition key.';
+var TASK_KEY_HINT = 'This maps to the task definition key.';
 
-function createGeneralTabGroups(element, bpmnFactory, elementRegistry, elementTemplates, translate) {
+function createGeneralTabGroups(
+    element, canvas, bpmnFactory,
+    elementRegistry, elementTemplates, translate) {
 
   // refer to target element for external labels
   element = element.labelTarget || element;
@@ -3909,12 +4583,16 @@ function createGeneralTabGroups(element, bpmnFactory, elementRegistry, elementTe
     idOptions = { description: PROCESS_KEY_HINT };
   }
 
+  if (is(element, 'bpmn:UserTask')) {
+    idOptions = { description: TASK_KEY_HINT };
+  }
+
   if (is(element, 'bpmn:Participant')) {
     processOptions = { processIdDescription: PROCESS_KEY_HINT };
   }
 
   idProps(generalGroup, element, translate, idOptions);
-  nameProps(generalGroup, element, translate);
+  nameProps(generalGroup, element, bpmnFactory, canvas, translate);
   processProps(generalGroup, element, translate, processOptions);
   versionTag(generalGroup, element, translate);
   executableProps(generalGroup, element, translate);
@@ -3933,6 +4611,7 @@ function createGeneralTabGroups(element, bpmnFactory, elementRegistry, elementTe
   linkProps(detailsGroup, element, translate);
   callActivityProps(detailsGroup, element, bpmnFactory, translate);
   eventProps(detailsGroup, element, bpmnFactory, elementRegistry, translate);
+  errorProps(detailsGroup, element, bpmnFactory, translate);
   conditionalProps(detailsGroup, element, bpmnFactory, translate);
   startEventInitiator(detailsGroup, element, translate); // this must be the last element of the details group!
 
@@ -4185,11 +4864,15 @@ function createExtensionElementsGroups(element, bpmnFactory, elementRegistry, tr
  * A properties provider for Camunda related properties.
  *
  * @param {EventBus} eventBus
+ * @param {Canvas} canvas
  * @param {BpmnFactory} bpmnFactory
  * @param {ElementRegistry} elementRegistry
  * @param {ElementTemplates} elementTemplates
+ * @param {Translate} translate
  */
-function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates, translate) {
+function CamundaPropertiesProvider(
+    eventBus, canvas, bpmnFactory,
+    elementRegistry, elementTemplates, translate) {
 
   PropertiesActivator.call(this, eventBus);
 
@@ -4199,7 +4882,7 @@ function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, eleme
       id: 'general',
       label: translate('General'),
       groups: createGeneralTabGroups(
-        element, bpmnFactory,
+        element, canvas, bpmnFactory,
         elementRegistry, elementTemplates, translate)
     };
 
@@ -4270,6 +4953,7 @@ function CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, eleme
 
 CamundaPropertiesProvider.$inject = [
   'eventBus',
+  'canvas',
   'bpmnFactory',
   'elementRegistry',
   'elementTemplates',
@@ -4280,10 +4964,20 @@ inherits(CamundaPropertiesProvider, PropertiesActivator);
 
 module.exports = CamundaPropertiesProvider;
 
-},{"../../PropertiesActivator":3,"../../helper/AsyncCapableHelper":16,"../../helper/EventDefinitionHelper":19,"../../helper/ImplementationTypeHelper":22,"../bpmn/parts/DocumentationProps":25,"../bpmn/parts/EventProps":26,"../bpmn/parts/ExecutableProps":27,"../bpmn/parts/IdProps":28,"../bpmn/parts/LinkProps":29,"../bpmn/parts/NameProps":30,"../bpmn/parts/ProcessProps":31,"./element-templates/parts/ChooserProps":45,"./element-templates/parts/CustomProps":46,"./parts/AsynchronousContinuationProps":47,"./parts/CallActivityProps":48,"./parts/CandidateStarterProps":49,"./parts/ConditionalProps":50,"./parts/ConnectorDetailProps":51,"./parts/ConnectorInputOutputParameterProps":52,"./parts/ConnectorInputOutputProps":53,"./parts/ExternalTaskConfigurationProps":54,"./parts/FieldInjectionProps":55,"./parts/FormProps":56,"./parts/HistoryTimeToLiveProps":57,"./parts/InputOutputParameterProps":58,"./parts/InputOutputProps":59,"./parts/JobConfigurationProps":60,"./parts/ListenerDetailProps":61,"./parts/ListenerFieldInjectionProps":62,"./parts/ListenerProps":63,"./parts/MultiInstanceLoopProps":64,"./parts/PropertiesProps":65,"./parts/ScriptTaskProps":66,"./parts/ServiceTaskDelegateProps":67,"./parts/StartEventInitiator":68,"./parts/TasklistProps":69,"./parts/UserTaskProps":70,"./parts/VariableMappingProps":71,"./parts/VersionTagProps":72,"bpmn-js/lib/util/ModelUtil":284,"inherits":294}],43:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
 
 /**
  * Create an input parameter representing the given
@@ -4533,15 +5227,25 @@ function createCamundaInOutAttrs(binding, value) {
   return properties;
 }
 
-},{"lodash/assign":247}],44:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    isAny = require('bpmn-js/lib/features/modeling/util/ModelingUtil').isAny;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var find = require('lodash/find');
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny;
+
+var find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
 
 
 var TEMPLATE_ATTR = 'camunda:modelerTemplate';
@@ -4774,17 +5478,27 @@ function isInOut(element, binding) {
   }
 }
 
-},{"bpmn-js/lib/features/modeling/util/ModelingUtil":282,"bpmn-js/lib/util/ModelUtil":284,"lodash/find":252}],45:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    getTemplate = require('../Helper').getTemplate,
-    getTemplateId = require('../Helper').getTemplateId;
+/***/ }),
 
-var find = require('lodash/find');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ChooserProps.js":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ChooserProps.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var TEMPLATE_ATTR = require('../Helper').TEMPLATE_ATTR;
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getTemplate = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplate,
+    getTemplateId = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplateId;
+
+var find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+
+var TEMPLATE_ATTR = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").TEMPLATE_ATTR;
 
 function isAny(element, types) {
   return types.reduce(function(result, type) {
@@ -4795,7 +5509,7 @@ function isAny(element, types) {
 
 module.exports = function(group, element, elementTemplates, translate) {
 
-  var options = getTemplateOptions(element, elementTemplates);
+  var options = getTemplateOptions(element, elementTemplates, translate);
 
   if (options.length === 1 && !options[0].isDefault) {
     return;
@@ -4849,7 +5563,7 @@ function applyTemplate(element, newTemplateId, elementTemplates) {
   };
 }
 
-function getTemplateOptions(element, elementTemplates) {
+function getTemplateOptions(element, elementTemplates, translate) {
 
   var currentTemplateId = getTemplateId(element);
 
@@ -4864,7 +5578,7 @@ function getTemplateOptions(element, elementTemplates) {
     }
 
     return templates.concat({
-      name: t.name,
+      name: translate(t.name),
       value: t.id,
       isDefault: t.isDefault
     });
@@ -4880,7 +5594,7 @@ function getTemplateOptions(element, elementTemplates) {
   });
 
   if (currentTemplateId && !currentOption) {
-    currentOption = unknownTemplate(currentTemplateId);
+    currentOption = unknownTemplate(currentTemplateId, translate);
 
     allOptions.push(currentOption);
   }
@@ -4916,9 +5630,9 @@ function getTemplateOptions(element, elementTemplates) {
   return options;
 }
 
-function unknownTemplate(templateId) {
+function unknownTemplate(templateId, translate) {
   return {
-    name: '[unknown template: ' + templateId + ']',
+    name: translate('[unknown template: {templateId}]', { templateId: templateId }),
     value: templateId
   };
 }
@@ -4926,31 +5640,41 @@ function unknownTemplate(templateId) {
 function isDefaultTemplate(elementTemplate) {
   return elementTemplate.isDefault;
 }
-},{"../../../../factory/EntryFactory":7,"../Helper":44,"bpmn-js/lib/util/ModelUtil":284,"lodash/find":252}],46:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign');
+/***/ }),
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    getTemplate = require('../Helper').getTemplate,
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    elementHelper = require('../../../../helper/ElementHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var findExtension = require('../Helper').findExtension,
-    findExtensions = require('../Helper').findExtensions,
-    findInputParameter = require('../Helper').findInputParameter,
-    findOutputParameter = require('../Helper').findOutputParameter,
-    findCamundaProperty = require('../Helper').findCamundaProperty,
-    findCamundaInOut = require('../Helper').findCamundaInOut;
+"use strict";
 
-var createCamundaProperty = require('../CreateHelper').createCamundaProperty,
-    createInputParameter = require('../CreateHelper').createInputParameter,
-    createOutputParameter = require('../CreateHelper').createOutputParameter,
-    createCamundaIn = require('../CreateHelper').createCamundaIn,
-    createCamundaOut = require('../CreateHelper').createCamundaOut,
-    createCamundaInWithBusinessKey = require('../CreateHelper').createCamundaInWithBusinessKey,
-    createCamundaFieldInjection = require('../CreateHelper').createCamundaFieldInjection;
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    getTemplate = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplate,
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+
+var findExtension = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findExtension,
+    findExtensions = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findExtensions,
+    findInputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findInputParameter,
+    findOutputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findOutputParameter,
+    findCamundaProperty = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaProperty,
+    findCamundaInOut = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaInOut;
+
+var createCamundaProperty = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaProperty,
+    createInputParameter = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createInputParameter,
+    createOutputParameter = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createOutputParameter,
+    createCamundaIn = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaIn,
+    createCamundaOut = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaOut,
+    createCamundaInWithBusinessKey = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaInWithBusinessKey,
+    createCamundaFieldInjection = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaFieldInjection;
 
 var CAMUNDA_PROPERTY_TYPE = 'camunda:property',
     CAMUNDA_INPUT_PARAMETER_TYPE = 'camunda:inputParameter',
@@ -4991,10 +5715,10 @@ var IN_OUT_BINDING_TYPES = [
 /**
  * Injects custom properties into the given group.
  *
- * @param {GroupDescriptor} group
  * @param {djs.model.Base} element
  * @param {ElementTemplates} elementTemplates
  * @param {BpmnFactory} bpmnFactory
+ * @param {Function} translate
  */
 module.exports = function(element, elementTemplates, bpmnFactory, translate) {
 
@@ -5010,11 +5734,11 @@ module.exports = function(element, elementTemplates, bpmnFactory, translate) {
     var entryOptions = {
       id: id,
       description: p.description,
-      label: p.label,
+      label: p.label ? translate(p.label) : p.label,
       modelProperty: id,
       get: propertyGetter(id, p),
       set: propertySetter(id, p, bpmnFactory),
-      validate: propertyValidator(id, p)
+      validate: propertyValidator(id, p, translate)
     };
 
     var entry;
@@ -5141,16 +5865,17 @@ function propertySetter(name, property, bpmnFactory) {
  *
  * @param {String} name
  * @param {PropertyDescriptor} property
+ * @param {Function} translate
  *
  * @return {Function}
  */
-function propertyValidator(name, property) {
+function propertyValidator(name, property, translate) {
 
   /* validator */
   return function validate(element, values) {
     var value = values[name];
 
-    var error = validateValue(value, property);
+    var error = validateValue(value, property, translate);
 
     if (error) {
       return objectWithKey(name, error);
@@ -5598,23 +6323,24 @@ module.exports.setPropertyValue = setPropertyValue;
  *
  * @param {String} value
  * @param {PropertyDescriptor} property
+ * @param {Function} translate
  *
  * @return {Object} with validation errors
  */
-function validateValue(value, property) {
+function validateValue(value, property, translate) {
 
   var constraints = property.constraints || {};
 
   if (constraints.notEmpty && isEmpty(value)) {
-    return 'Must not be empty';
+    return translate('Must not be empty');
   }
 
   if (constraints.maxLength && value.length > constraints.maxLength) {
-    return 'Must have max length ' + constraints.maxLength;
+    return translate('Must have max length {length}', { length: constraints.maxLength });
   }
 
   if (constraints.minLength && value.length < constraints.minLength) {
-    return 'Must have min length ' + constraints.minLength;
+    return translate('Must have min length {length}', { length: constraints.minLength });
   }
 
   var pattern = constraints.pattern,
@@ -5628,7 +6354,7 @@ function validateValue(value, property) {
     }
 
     if (!matchesPattern(value, pattern)) {
-      return message || 'Must match pattern ' + pattern;
+      return message || translate('Must match pattern {pattern}', { pattern: pattern });
     }
   }
 }
@@ -5696,12 +6422,22 @@ function unknownPropertyBinding(property) {
   return new Error('unknown binding: <' + binding.type + '>');
 }
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../CreateHelper":43,"../Helper":44,"bpmn-js/lib/util/ModelUtil":284,"lodash/assign":247}],47:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    asyncContinuation = require('./implementation/AsyncContinuation');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/AsynchronousContinuationProps.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/AsynchronousContinuationProps.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    asyncContinuation = __webpack_require__(/*! ./implementation/AsyncContinuation */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/AsyncContinuation.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
@@ -5713,20 +6449,30 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
   }
 };
-},{"./implementation/AsyncContinuation":73,"bpmn-js/lib/util/ModelUtil":284}],48:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var entryFactory = require('../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CallActivityProps.js":
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CallActivityProps.js ***!
+  \***********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var callable = require('./implementation/Callable');
+"use strict";
 
-var cmdHelper = require('../../../helper/CmdHelper');
 
-var flattenDeep = require('lodash/flattenDeep');
-var assign = require('lodash/assign');
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var callable = __webpack_require__(/*! ./implementation/Callable */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Callable.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var flattenDeep = __webpack_require__(/*! lodash/flattenDeep */ "./node_modules/lodash/flattenDeep.js");
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
 
 function getCallableType(element) {
   var bo = getBusinessObject(element);
@@ -5805,13 +6551,23 @@ module.exports = function(group, element, bpmnFactory, translate) {
   group.entries = flattenDeep(group.entries);
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"./implementation/Callable":74,"bpmn-js/lib/util/ModelUtil":284,"lodash/assign":247,"lodash/flattenDeep":254}],49:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var candidateStarter = require('./implementation/CandidateStarter');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CandidateStarterProps.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/CandidateStarterProps.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var candidateStarter = __webpack_require__(/*! ./implementation/CandidateStarter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/CandidateStarter.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
   var businessObject = getBusinessObject(element);
@@ -5834,17 +6590,28 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }
 };
 
-},{"./implementation/CandidateStarter":75,"bpmn-js/lib/util/ModelUtil":284}],50:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    isAny = require('bpmn-js/lib/features/modeling/util/ModelingUtil').isAny,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    domQuery = require('min-dom').query,
-    cmdHelper = require('../../../helper/CmdHelper'),
-    elementHelper = require('../../../helper/ElementHelper'),
-    eventDefinitionHelper = require('../../../helper/EventDefinitionHelper'),
-    script = require('./implementation/Script')('language', 'body', true);
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConditionalProps.js":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConditionalProps.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    escapeHTML = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    eventDefinitionHelper = __webpack_require__(/*! ../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    scriptImplementation = __webpack_require__(/*! ./implementation/Script */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js");
 
 
 module.exports = function(group, element, bpmnFactory, translate) {
@@ -5861,15 +6628,16 @@ module.exports = function(group, element, bpmnFactory, translate) {
     return;
   }
 
+  var script = scriptImplementation('language', 'body', true, translate);
   group.entries.push({
     id: 'condition',
     label: translate('Condition'),
     html: '<div class="bpp-row">' +
-              '<label for="cam-condition-type">'+translate('Condition Type')+'</label>' +
+              '<label for="cam-condition-type">'+ escapeHTML(translate('Condition Type')) + '</label>' +
               '<div class="bpp-field-wrapper">' +
                 '<select id="cam-condition-type" name="conditionType" data-value>' +
-                  '<option value="expression">'+translate('Expression')+'</option>' +
-                  '<option value="script">'+translate('Script')+'</option>' +
+                  '<option value="expression">'+ escapeHTML(translate('Expression')) + '</option>' +
+                  '<option value="script">'+ escapeHTML(translate('Script')) + '</option>' +
                   '<option value="" selected></option>' +
                 '</select>' +
               '</div>' +
@@ -5877,7 +6645,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
             // expression
             '<div class="bpp-row">' +
-              '<label for="cam-condition" data-show="isExpression">'+translate('Expression')+'</label>' +
+              '<label for="cam-condition" data-show="isExpression">' + escapeHTML(translate('Expression')) + '</label>' +
               '<div class="bpp-field-wrapper" data-show="isExpression">' +
                 '<input id="cam-condition" type="text" name="condition" />' +
                 '<button class="clear" data-action="clear" data-show="canClear">' +
@@ -5963,7 +6731,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
       var validationResult = {};
 
       if (!values.condition && values.conditionType === 'expression') {
-        validationResult.condition = 'Must provide a value';
+        validationResult.condition = translate('Must provide a value');
       }
       else if (values.conditionType === 'script') {
         validationResult = script.validate(element, values);
@@ -6019,14 +6787,24 @@ function isConditionalSource(element) {
   return isAny(element, CONDITIONAL_SOURCES);
 }
 
-},{"../../../helper/CmdHelper":17,"../../../helper/ElementHelper":18,"../../../helper/EventDefinitionHelper":19,"./implementation/Script":91,"bpmn-js/lib/features/modeling/util/ModelingUtil":282,"bpmn-js/lib/util/ModelUtil":284,"min-dom":281}],51:[function(require,module,exports){
-'use strict';
 
-var ImplementationTypeHelper = require('../../../helper/ImplementationTypeHelper'),
-    InputOutputHelper = require('../../../helper/InputOutputHelper');
+/***/ }),
 
-var entryFactory = require('../../../factory/EntryFactory'),
-    cmdHelper = require('../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorDetailProps.js":
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorDetailProps.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ImplementationTypeHelper = __webpack_require__(/*! ../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js"),
+    InputOutputHelper = __webpack_require__(/*! ../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js");
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 function getImplementationType(element) {
   return ImplementationTypeHelper.getImplementationType(element);
@@ -6078,12 +6856,22 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"../../../helper/ImplementationTypeHelper":22,"../../../helper/InputOutputHelper":23}],52:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign');
+/***/ }),
 
-var inputOutputParameter = require('./implementation/InputOutputParameter');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js":
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var inputOutputParameter = __webpack_require__(/*! ./implementation/InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
 
 module.exports = function(group, element, bpmnFactory, options, translate) {
 
@@ -6096,10 +6884,20 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 };
 
-},{"./implementation/InputOutputParameter":84,"lodash/assign":247}],53:[function(require,module,exports){
-'use strict';
 
-var inputOutput = require('./implementation/InputOutput');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var inputOutput = __webpack_require__(/*! ./implementation/InputOutput */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
@@ -6116,15 +6914,77 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"./implementation/InputOutput":83}],54:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var ImplementationTypeHelper = require('../../../helper/ImplementationTypeHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorEventProps.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorEventProps.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var externalTaskPriority = require('./implementation/ExternalTaskPriority');
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    eventDefinitionHelper = __webpack_require__(/*! ../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    error = __webpack_require__(/*! ./implementation/ErrorEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorEventDefinition.js");
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
+
+
+module.exports = function(group, element, bpmnFactory, translate) {
+
+  var errorEvents = [
+    'bpmn:StartEvent',
+    'bpmn:BoundaryEvent',
+    'bpmn:EndEvent'
+  ];
+
+  forEach(errorEvents, function(event) {
+    if (is(element, event)) {
+
+      var errorEventDefinition = eventDefinitionHelper.getErrorEventDefinition(element);
+
+      if (errorEventDefinition) {
+        var isCatchingErrorEvent = is(element, 'bpmn:StartEvent') || is (element, 'bpmn:BoundaryEvent');
+
+        var showErrorCodeVariable = isCatchingErrorEvent,
+            showErrorMessageVariable = isCatchingErrorEvent;
+
+        error(
+          group,
+          element,
+          bpmnFactory,
+          errorEventDefinition,
+          showErrorCodeVariable,
+          showErrorMessageVariable,
+          translate);
+      }
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ExternalTaskConfigurationProps.js":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ExternalTaskConfigurationProps.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var ImplementationTypeHelper = __webpack_require__(/*! ../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
+
+var externalTaskPriority = __webpack_require__(/*! ./implementation/ExternalTaskPriority */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExternalTaskPriority.js");
 
 function getServiceTaskLikeBusinessObject(element) {
   var bo = ImplementationTypeHelper.getServiceTaskLikeBusinessObject(element);
@@ -6157,12 +7017,22 @@ module.exports = function(group, element, bpmnFactory, translate) {
     }, translate));
   }
 };
-},{"../../../helper/ImplementationTypeHelper":22,"./implementation/ExternalTaskPriority":79,"bpmn-js/lib/util/ModelUtil":284}],55:[function(require,module,exports){
-'use strict';
 
-var ImplementationTypeHelper = require('../../../helper/ImplementationTypeHelper');
+/***/ }),
 
-var fieldInjection = require('./implementation/FieldInjection');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FieldInjectionProps.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FieldInjectionProps.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ImplementationTypeHelper = __webpack_require__(/*! ../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
+
+var fieldInjection = __webpack_require__(/*! ./implementation/FieldInjection */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/FieldInjection.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
@@ -6180,22 +7050,32 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../helper/ImplementationTypeHelper":22,"./implementation/FieldInjection":80}],56:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    getExtensionElements = require('../../../helper/ExtensionElementsHelper').getExtensionElements,
-    removeEntry = require('../../../helper/ExtensionElementsHelper').removeEntry,
-    extensionElements = require('./implementation/ExtensionElements'),
-    properties = require('./implementation/Properties'),
-    entryFactory = require('../../../factory/EntryFactory'),
-    elementHelper = require('../../../helper/ElementHelper'),
-    cmdHelper = require('../../../helper/CmdHelper'),
-    formHelper = require('../../../helper/FormHelper'),
-    utils = require('../../../Utils'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    find = require('lodash/find'),
-    each = require('lodash/forEach');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FormProps.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FormProps.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    getExtensionElements = __webpack_require__(/*! ../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js").getExtensionElements,
+    removeEntry = __webpack_require__(/*! ../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js").removeEntry,
+    extensionElements = __webpack_require__(/*! ./implementation/ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js"),
+    properties = __webpack_require__(/*! ./implementation/Properties */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Properties.js"),
+    entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    elementHelper = __webpack_require__(/*! ../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    formHelper = __webpack_require__(/*! ../../../helper/FormHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/FormHelper.js"),
+    utils = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js"),
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js"),
+    each = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 
 function generateValueId() {
   return utils.nextId('Value_');
@@ -6586,7 +7466,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
       if (enumValue) {
         // check if id is valid
-        var validationError = utils.isIdValid(enumValue, value.id);
+        var validationError = utils.isIdValid(enumValue, value.id, translate);
 
         if (validationError) {
           return { id: validationError };
@@ -6699,13 +7579,23 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }, translate));
 };
 
-},{"../../../Utils":4,"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"../../../helper/ElementHelper":18,"../../../helper/ExtensionElementsHelper":20,"../../../helper/FormHelper":21,"./implementation/ExtensionElements":77,"./implementation/Properties":89,"bpmn-js/lib/util/ModelUtil":284,"lodash/find":252,"lodash/forEach":255}],57:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var historyTimeToLive = require('./implementation/HistoryTimeToLive');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/HistoryTimeToLiveProps.js":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/HistoryTimeToLiveProps.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var historyTimeToLive = __webpack_require__(/*! ./implementation/HistoryTimeToLive */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/HistoryTimeToLive.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
   var businessObject = getBusinessObject(element);
@@ -6728,12 +7618,22 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }
 };
 
-},{"./implementation/HistoryTimeToLive":81,"bpmn-js/lib/util/ModelUtil":284}],58:[function(require,module,exports){
-'use strict';
 
-var inputOutputParameter = require('./implementation/InputOutputParameter');
+/***/ }),
 
-var assign = require('lodash/assign');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var inputOutputParameter = __webpack_require__(/*! ./implementation/InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
 
 module.exports = function(group, element, bpmnFactory, options, translate) {
 
@@ -6741,10 +7641,20 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 };
 
-},{"./implementation/InputOutputParameter":84,"lodash/assign":247}],59:[function(require,module,exports){
-'use strict';
 
-var inputOutput = require('./implementation/InputOutput');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js":
+/*!**********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var inputOutput = __webpack_require__(/*! ./implementation/InputOutput */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
@@ -6758,14 +7668,24 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"./implementation/InputOutput":83}],60:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var jobPriority = require('./implementation/JobPriority'),
-    jobRetryTimeCycle = require('./implementation/JobRetryTimeCycle');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/JobConfigurationProps.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/JobConfigurationProps.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var jobPriority = __webpack_require__(/*! ./implementation/JobPriority */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobPriority.js"),
+    jobRetryTimeCycle = __webpack_require__(/*! ./implementation/JobRetryTimeCycle */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobRetryTimeCycle.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
   var businessObject = getBusinessObject(element);
@@ -6794,25 +7714,38 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"./implementation/JobPriority":85,"./implementation/JobRetryTimeCycle":86,"bpmn-js/lib/util/ModelUtil":284}],61:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../helper/CmdHelper'),
-    ImplementationTypeHelper = require('../../../helper/ImplementationTypeHelper'),
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerDetailProps.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerDetailProps.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-    script = require('./implementation/Script')('scriptFormat', 'value', true);
+"use strict";
 
 
-var LISTENER_TYPE_LABEL = {
-  class: 'Java Class',
-  expression: 'Expression',
-  delegateExpression: 'Delegate Expression',
-  script: 'Script'
-};
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var find = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").find;
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    ImplementationTypeHelper = __webpack_require__(/*! ../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js"),
+    scriptImplementation = __webpack_require__(/*! ./implementation/Script */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js"),
+    timerImplementation = __webpack_require__(/*! ../../bpmn/parts/implementation/TimerEventDefinition */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/TimerEventDefinition.js");
 
 module.exports = function(group, element, bpmnFactory, options, translate) {
+
+  var LISTENER_TYPE_LABEL = {
+    class: translate('Java Class'),
+    expression: translate('Expression'),
+    delegateExpression: translate('Delegate Expression'),
+    script: translate('Script')
+  };
 
   options = options || {};
 
@@ -6824,23 +7757,27 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
       scriptProp = 'script';
 
   var executionListenerEventTypeOptions = ImplementationTypeHelper.isSequenceFlow(element) ? [
-    { name: 'take', value: 'take' }
+    { name: translate('take'), value: 'take' }
   ] : [
-    { name: 'start', value: 'start' },
-    { name: 'end', value: 'end' }
+    { name: translate('start'), value: 'start' },
+    { name: translate('end'), value: 'end' }
   ];
 
   var taskListenerEventTypeOptions = [
-    { name: 'create', value: 'create' },
-    { name: 'assignment', value: 'assignment' },
-    { name: 'complete', value: 'complete' },
-    { name: 'delete', value: 'delete' }
+    { name: translate('create'), value: 'create' },
+    { name: translate('assignment'), value: 'assignment' },
+    { name: translate('complete'), value: 'complete' },
+    { name: translate('delete'), value: 'delete' },
+    { name: translate('update'), value: 'update' },
+    { name: translate('timeout'), value: 'timeout' }
   ];
 
   var isSelected = function(element, node) {
     return getSelectedListener(element, node);
   };
 
+
+  // eventType ////////////////
   group.entries.push(entryFactory.selectBox({
     id: 'listener-event-type',
     label: translate('Event Type'),
@@ -6848,7 +7785,6 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
     emptyParameter: false,
 
     get: function(element, node) {
-
 
       var listener = getSelectedListener(element, node);
 
@@ -6860,9 +7796,21 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
     },
 
     set: function(element, values, node) {
-      var eventType = values.eventType;
+      var eventType = values.eventType,
+          listener = getSelectedListener(element, node),
+          eventDefinitions = listener && listener.eventDefinitions;
 
-      return cmdHelper.updateBusinessObject(element, getSelectedListener(element, node), { event: eventType });
+      // ensure only timeout events can have timer event definitions
+      if (eventDefinitions && eventType !== 'timeout') {
+        eventDefinitions = [];
+      }
+
+      return cmdHelper.updateBusinessObject(element, listener,
+        {
+          event: eventType,
+          eventDefinitions: eventDefinitions
+        }
+      );
     },
 
     selectOptions: function(element, node) {
@@ -6886,6 +7834,52 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
   }));
 
 
+  // listenerId ///////////////
+  group.entries.push(entryFactory.textField({
+    id: 'listener-id',
+    label: translate('Listener Id'),
+    modelProperty: 'listenerId',
+
+    get: function(element, node) {
+      var value = {},
+          listener = getSelectedListener(element, node);
+
+      value.listenerId = (listener && listener.get('id')) || undefined;
+
+      return value;
+    },
+
+    set: function(element, values, node) {
+      var update = {},
+          listener = getSelectedListener(element, node);
+
+      update['id'] = values.listenerId || '';
+
+      return cmdHelper.updateBusinessObject(element, listener, update);
+    },
+
+    hidden: function(element, node) {
+      var listener = getSelectedListener(element, node);
+
+      return !ImplementationTypeHelper.isTaskListener(listener);
+    },
+
+    validate: function(element, values, node) {
+      var value = values.listenerId,
+          listener = getSelectedListener(element, node),
+          validate = {};
+
+      if (!value && isTimeoutTaskListener(listener)) {
+        validate.listenerId = translate('Must provide a value for timeout task listener');
+      }
+
+      return validate;
+    }
+
+  }));
+
+
+  // listenerType ///////////////
   group.entries.push(entryFactory.selectBox({
     id: 'listener-type',
     label: translate('Listener Type'),
@@ -6925,6 +7919,7 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
   }));
 
 
+  // listenerValue //////////////
   group.entries.push(entryFactory.textField({
     id: 'listener-value',
     dataValueLabel: 'listenerValueLabel',
@@ -6970,6 +7965,9 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
   }));
 
 
+  // script ////////////////////
+  var script = scriptImplementation('scriptFormat', 'value', true, translate);
+
   group.entries.push({
     id: 'listener-script-value',
     html: '<div data-show="isScript">' +
@@ -7001,14 +7999,84 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
   });
 
+
+  // timerEventDefinition //////
+  var timerEventDefinitionHandler = function(element, node) {
+    var listener = getSelectedListener(element, node);
+
+    if (!listener || !isTimeoutTaskListener(listener)) {
+      return;
+    }
+
+    var timerEventDefinition = getTimerEventDefinition(listener);
+
+    if (!timerEventDefinition) {
+      return false;
+    }
+
+    return timerEventDefinition;
+  };
+
+  function createTimerEventDefinition(element, node) {
+
+    var listener = getSelectedListener(element, node);
+
+    if (!listener || !isTimeoutTaskListener(listener)) {
+      return;
+    }
+
+    var eventDefinitions = listener.get('eventDefinitions') || [],
+        timerEventDefinition = bpmnFactory.create('bpmn:TimerEventDefinition');
+
+    eventDefinitions.push(timerEventDefinition);
+
+    listener.eventDefinitions = eventDefinitions;
+
+    return timerEventDefinition;
+  }
+
+  var timerOptions = {
+    idPrefix: 'listener-',
+    createTimerEventDefinition: createTimerEventDefinition
+  };
+
+  timerImplementation(group, element, bpmnFactory, timerEventDefinitionHandler, translate, timerOptions);
+
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"../../../helper/ImplementationTypeHelper":22,"./implementation/Script":91}],62:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign');
+// helpers //////////////
 
-var fieldInjection = require('./implementation/FieldInjection');
+function isTimeoutTaskListener(listener) {
+  var eventType = listener && listener.event;
+  return eventType === 'timeout';
+}
+
+function getTimerEventDefinition(bo) {
+  var eventDefinitions = bo.eventDefinitions || [];
+
+  return find(eventDefinitions, function(event) {
+    return is(event, 'bpmn:TimerEventDefinition');
+  });
+
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerFieldInjectionProps.js":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerFieldInjectionProps.js ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var fieldInjection = __webpack_require__(/*! ./implementation/FieldInjection */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/FieldInjection.js");
 
 module.exports = function(group, element, bpmnFactory, options, translate) {
 
@@ -7025,10 +8093,20 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 };
 
-},{"./implementation/FieldInjection":80,"lodash/assign":247}],63:[function(require,module,exports){
-'use strict';
 
-var listener = require('./implementation/Listener');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerProps.js":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerProps.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var listener = __webpack_require__(/*! ./implementation/Listener */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Listener.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
@@ -7042,16 +8120,26 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"./implementation/Listener":87}],64:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var multiInstanceLoopCharacteristics = require('./implementation/MultiInstanceLoopCharacteristics');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/MultiInstanceLoopProps.js":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/MultiInstanceLoopProps.js ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var jobRetryTimeCycle = require('./implementation/JobRetryTimeCycle'),
-    asyncContinuation = require('./implementation/AsyncContinuation');
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var multiInstanceLoopCharacteristics = __webpack_require__(/*! ./implementation/MultiInstanceLoopCharacteristics */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/MultiInstanceLoopCharacteristics.js");
+
+var jobRetryTimeCycle = __webpack_require__(/*! ./implementation/JobRetryTimeCycle */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobRetryTimeCycle.js"),
+    asyncContinuation = __webpack_require__(/*! ./implementation/AsyncContinuation */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/AsyncContinuation.js");
 
 
 function getLoopCharacteristics(element) {
@@ -7090,12 +8178,22 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }, translate));
 };
 
-},{"./implementation/AsyncContinuation":73,"./implementation/JobRetryTimeCycle":86,"./implementation/MultiInstanceLoopCharacteristics":88,"bpmn-js/lib/util/ModelUtil":284}],65:[function(require,module,exports){
-'use strict';
 
-var properties = require('./implementation/Properties'),
-    elementHelper = require('../../../helper/ElementHelper'),
-    cmdHelper = require('../../../helper/CmdHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var properties = __webpack_require__(/*! ./implementation/Properties */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Properties.js"),
+    elementHelper = __webpack_require__(/*! ../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 
 module.exports = function(group, element, bpmnFactory, translate) {
@@ -7125,14 +8223,24 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../helper/CmdHelper":17,"../../../helper/ElementHelper":18,"./implementation/Properties":89}],66:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    entryFactory = require('../../../factory/EntryFactory'),
-    cmdHelper = require('../../../helper/CmdHelper'),
-    script = require('./implementation/Script')('scriptFormat', 'script', false);
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ScriptTaskProps.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ScriptTaskProps.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    scriptImplementation = __webpack_require__(/*! ./implementation/Script */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js");
 
 
 module.exports = function(group, element, bpmnFactory, translate) {
@@ -7146,6 +8254,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
     return;
   }
 
+  var script = scriptImplementation('scriptFormat', 'script', false, translate);
   group.entries.push({
     id: 'script-implementation',
     label: translate('Script'),
@@ -7194,25 +8303,37 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"./implementation/Script":91,"bpmn-js/lib/util/ModelUtil":284}],67:[function(require,module,exports){
-'use strict';
 
-var ImplementationTypeHelper = require('../../../helper/ImplementationTypeHelper'),
-    InputOutputHelper = require('../../../helper/InputOutputHelper');
+/***/ }),
 
-var triggerClickEvent = require('../../../Utils').triggerClickEvent;
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ServiceTaskDelegateProps.js":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ServiceTaskDelegateProps.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var implementationType = require('./implementation/ImplementationType'),
-    delegate = require('./implementation/Delegate'),
-    external = require('./implementation/External'),
-    callable = require('./implementation/Callable'),
-    resultVariable = require('./implementation/ResultVariable');
+"use strict";
 
-var entryFactory = require('../../../factory/EntryFactory');
 
-var domQuery = require('min-dom').query,
-    domClosest = require('min-dom').closest,
-    domClasses = require('min-dom').classes;
+var ImplementationTypeHelper = __webpack_require__(/*! ../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js"),
+    InputOutputHelper = __webpack_require__(/*! ../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js");
+
+var utils = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js"),
+    escapeHTML = utils.escapeHTML,
+    triggerClickEvent = utils.triggerClickEvent;
+
+var implementationType = __webpack_require__(/*! ./implementation/ImplementationType */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ImplementationType.js"),
+    delegate = __webpack_require__(/*! ./implementation/Delegate */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Delegate.js"),
+    external = __webpack_require__(/*! ./implementation/External */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/External.js"),
+    callable = __webpack_require__(/*! ./implementation/Callable */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Callable.js"),
+    resultVariable = __webpack_require__(/*! ./implementation/ResultVariable */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ResultVariable.js");
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    domClosest = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").closest,
+    domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes;
 
 function getImplementationType(element) {
   return ImplementationTypeHelper.getImplementationType(element);
@@ -7322,7 +8443,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
         if (connectorId) {
           link.textContent = translate('Configure Connector');
         } else {
-          link.innerHTML = '<span class="bpp-icon-warning"></span> Must configure Connector';
+          link.innerHTML = '<span class="bpp-icon-warning"></span> ' + escapeHTML(translate('Must configure Connector'));
           domClasses(link).add('bpp-error-message');
         }
 
@@ -7344,12 +8465,22 @@ function getTabNode(el, id) {
 
   return domQuery('a[data-tab-target="' + id + '"]', containerEl);
 }
-},{"../../../Utils":4,"../../../factory/EntryFactory":7,"../../../helper/ImplementationTypeHelper":22,"../../../helper/InputOutputHelper":23,"./implementation/Callable":74,"./implementation/Delegate":76,"./implementation/External":78,"./implementation/ImplementationType":82,"./implementation/ResultVariable":90,"min-dom":281}],68:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../factory/EntryFactory'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/StartEventInitiator.js":
+/*!*************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/StartEventInitiator.js ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
 
 
 module.exports = function(group, element, translate) {
@@ -7369,13 +8500,23 @@ module.exports = function(group, element, translate) {
   }
 };
 
-},{"../../../factory/EntryFactory":7,"bpmn-js/lib/util/ModelUtil":284}],69:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var tasklist = require('./implementation/Tasklist');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/TasklistProps.js":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/TasklistProps.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var tasklist = __webpack_require__(/*! ./implementation/Tasklist */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Tasklist.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
   var businessObject = getBusinessObject(element);
@@ -7398,11 +8539,21 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }
 };
 
-},{"./implementation/Tasklist":92,"bpmn-js/lib/util/ModelUtil":284}],70:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    entryFactory = require('../../../factory/EntryFactory');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/UserTaskProps.js":
+/*!*******************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/UserTaskProps.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
 
 
 module.exports = function(group, element, translate) {
@@ -7455,39 +8606,33 @@ module.exports = function(group, element, translate) {
   }
 };
 
-},{"../../../factory/EntryFactory":7,"bpmn-js/lib/util/ModelUtil":284}],71:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    isAny = require('bpmn-js/lib/features/modeling/util/ModelingUtil').isAny,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var filter = require('lodash/filter');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VariableMappingProps.js":
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VariableMappingProps.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var extensionElementsHelper = require('../../../helper/ExtensionElementsHelper'),
-    cmdHelper = require('../../../helper/CmdHelper'),
-    elementHelper = require('../../../helper/ElementHelper'),
-    eventDefinitionHelper = require('../../../helper/EventDefinitionHelper');
-
-var extensionElementsEntry = require('./implementation/ExtensionElements');
-
-var entryFactory = require('../../../factory/EntryFactory');
+"use strict";
 
 
-var inOutTypeOptions = [
-  {
-    name: 'Source',
-    value: 'source'
-  },
-  {
-    name: 'Source Expression',
-    value: 'sourceExpression'
-  },
-  {
-    name: 'All',
-    value: 'variables'
-  }
-];
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var filter = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
+
+var extensionElementsHelper = __webpack_require__(/*! ../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    eventDefinitionHelper = __webpack_require__(/*! ../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js");
+
+var extensionElementsEntry = __webpack_require__(/*! ./implementation/ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js");
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
 
 /**
   * return depend on parameter 'type' camunda:in or camunda:out extension elements
@@ -7535,6 +8680,22 @@ var WHITESPACE_REGEX = /\s/;
 
 
 module.exports = function(group, element, bpmnFactory, translate) {
+
+  var inOutTypeOptions = [
+    {
+      name: translate('Source'),
+      value: 'source'
+    },
+    {
+      name: translate('Source Expression'),
+      value: 'sourceExpression'
+    },
+    {
+      name: translate('All'),
+      value: 'variables'
+    }
+  ];
+
   var signalEventDefinition = eventDefinitionHelper.getSignalEventDefinition(element);
 
   if (!is(element, 'camunda:CallActivity') && !signalEventDefinition) {
@@ -7568,14 +8729,13 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
   var setOptionLabelValue = function(type) {
     return function(element, node, option, property, value, idx) {
-      var label = idx + ' : ';
-
       var variableMappings = getVariableMappings(element, type);
       var mappingValue = variableMappings[idx];
+      var label = (mappingValue.target || '<undefined>') + ' := ';
       var mappingType = getInOutType(mappingValue);
 
       if (mappingType === 'variables') {
-        label = label + 'all';
+        label = 'all';
       }
       else if (mappingType === 'source') {
         label = label + (mappingValue.source || '<empty>');
@@ -7740,10 +8900,10 @@ module.exports = function(group, element, bpmnFactory, translate) {
       var label = '';
       var inOutType = getInOutType(mapping);
       if (inOutType === 'source') {
-        label = 'Source';
+        label = translate('Source');
       }
       else if (inOutType === 'sourceExpression') {
-        label = 'Source Expression';
+        label = translate('Source Expression');
       }
 
       return {
@@ -7772,13 +8932,15 @@ module.exports = function(group, element, bpmnFactory, translate) {
       if (mapping) {
         if (!values.source) {
           validation.source =
-            'Mapping must have a ' + (values.sourceLabel.toLowerCase() || 'value');
+          validation.source = values.sourceLabel ?
+            translate('Mapping must have a {value}', { value: values.sourceLabel.toLowerCase() }) :
+            translate('Mapping must have a value');
         }
 
         var inOutType = getInOutType(mapping);
 
         if (WHITESPACE_REGEX.test(values.source) && inOutType !== 'sourceExpression') {
-          validation.source = values.sourceLabel + ' must not contain whitespace';
+          validation.source = translate('{label} must not contain whitespace', { label: values.sourceLabel });
         }
       }
 
@@ -7813,13 +8975,13 @@ module.exports = function(group, element, bpmnFactory, translate) {
         var mappingType = getInOutType(mapping);
 
         if (!values.target && mappingType !== 'variables') {
-          validation.target = 'Mapping must have a target';
+          validation.target = translate('Mapping must have a target');
         }
 
         if (values.target
           && WHITESPACE_REGEX.test(values.target)
           && mappingType !== 'variables') {
-          validation.target = 'Target must not contain whitespace';
+          validation.target = translate('Target must not contain whitespace');
         }
       }
 
@@ -7853,13 +9015,23 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"../../../helper/ElementHelper":18,"../../../helper/EventDefinitionHelper":19,"../../../helper/ExtensionElementsHelper":20,"./implementation/ExtensionElements":77,"bpmn-js/lib/features/modeling/util/ModelingUtil":282,"bpmn-js/lib/util/ModelUtil":284,"lodash/filter":251}],72:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../factory/EntryFactory'),
-    cmdHelper = require('../../../helper/CmdHelper'),
-    is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VersionTagProps.js":
+/*!*********************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VersionTagProps.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
 
 module.exports = function(group, element, translate) {
 
@@ -7900,16 +9072,26 @@ module.exports = function(group, element, translate) {
   }
 };
 
-},{"../../../factory/EntryFactory":7,"../../../helper/CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284}],73:[function(require,module,exports){
-'use strict';
 
-var assign = require('lodash/assign');
+/***/ }),
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/AsyncContinuation.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/AsyncContinuation.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var asyncCapableHelper = require('../../../../helper/AsyncCapableHelper'),
-    eventDefinitionHelper = require('../../../../helper/EventDefinitionHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+"use strict";
+
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var asyncCapableHelper = __webpack_require__(/*! ../../../../helper/AsyncCapableHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/AsyncCapableHelper.js"),
+    eventDefinitionHelper = __webpack_require__(/*! ../../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 function isAsyncBefore(bo) {
   return asyncCapableHelper.isAsyncBefore(bo);
@@ -8032,21 +9214,31 @@ module.exports = function(element, bpmnFactory, options, translate) {
   return [ asyncBeforeEntry, asyncAfterEntry, exclusiveEntry ];
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/AsyncCapableHelper":16,"../../../../helper/CmdHelper":17,"../../../../helper/EventDefinitionHelper":19,"lodash/assign":247}],74:[function(require,module,exports){
-'use strict';
 
-var cmdHelper = require('../../../../helper/CmdHelper'),
-    entryFactory = require('../../../../factory/EntryFactory'),
-    elementHelper = require('../../../../helper/ElementHelper'),
-    extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Callable.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Callable.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
-var resultVariable = require('./ResultVariable');
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js");
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
-var is = require('bpmn-js/lib/util/ModelUtil').is;
 
-var forEach = require('lodash/forEach');
+var resultVariable = __webpack_require__(/*! ./ResultVariable */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ResultVariable.js");
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 
 var attributeInfo = {
   bpmn: {
@@ -8073,40 +9265,21 @@ var attributeInfo = {
   }
 };
 
-var bindingOptions = [
-  {
-    name: 'latest',
-    value: 'latest'
-  },
-  {
-    name: 'deployment',
-    value: 'deployment'
-  },
-  {
-    name: 'version',
-    value: 'version'
-  },
-  {
-    name: 'versionTag',
-    value: 'versionTag'
-  }
-];
-
 var mapDecisionResultOptions = [
   {
-    name: 'singleEntry',
+    name: 'singleEntry (TypedValue)',
     value: 'singleEntry'
   },
   {
-    name:'singleResult',
+    name:'singleResult (Map<String, Object>)',
     value:'singleResult'
   },
   {
-    name:'collectEntries',
+    name:'collectEntries (List<Object>)',
     value:'collectEntries'
   },
   {
-    name:'resultList',
+    name:'resultList (List<Map<String, Object>>)',
     value:'resultList'
   }
 ];
@@ -8189,6 +9362,25 @@ function isSupportedCallableType(type) {
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
+  var bindingOptions = [
+    {
+      name: translate('latest'),
+      value: 'latest'
+    },
+    {
+      name: translate('deployment'),
+      value: 'deployment'
+    },
+    {
+      name: translate('version'),
+      value: 'version'
+    },
+    {
+      name: translate('versionTag'),
+      value: 'versionTag'
+    }
+  ];
+
   var getCallableType = options.getCallableType;
 
   var entries = [];
@@ -8269,7 +9461,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     validate: function(element, values, node) {
       var elementRef = values.callableElementRef;
       var type = getCallableType(element);
-      return isSupportedCallableType(type) && !elementRef ? { callableElementRef: 'Must provide a value.' } : {};
+      return isSupportedCallableType(type) && !elementRef ? { callableElementRef: translate('Must provide a value') } : {};
     },
 
     hidden: function(element, node) {
@@ -8283,14 +9475,16 @@ module.exports = function(element, bpmnFactory, options, translate) {
     label: translate('Binding'),
     selectOptions: function(element) {
       var type = getCallableType(element);
+      var options;
 
       if (type === 'cmmn') {
-        return bindingOptions.filter(function(bindingOption) {
+        options = bindingOptions.filter(function(bindingOption) {
           return bindingOption.value !== 'versionTag';
         });
       } else {
-        return bindingOptions;
+        options = bindingOptions;
       }
+      return options;
     },
     modelProperty: 'callableBinding',
 
@@ -8366,7 +9560,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       return (
         isSupportedCallableType(type) &&
         getCallActivityBindingValue(element) === 'version' && (
-          !version ? { callableVersion: translate('Must provide a value.') } : {}
+          !version ? { callableVersion: translate('Must provide a value') } : {}
         )
       );
     },
@@ -8419,7 +9613,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       return (
         isSupportedCallableType(type) &&
         getCallActivityBindingValue(element) === 'versionTag' && (
-          !versionTag ? { versionTag: translate('Must provide a value.') } : {}
+          !versionTag ? { versionTag: translate('Must provide a value') } : {}
         )
       );
     },
@@ -8518,7 +9712,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     validate: function(element, values, node) {
       var businessKey = values.businessKey;
 
-      return businessKey === '' ? { businessKey: 'Must provide a value.' } : {};
+      return businessKey === '' ? { businessKey: translate('Must provide a value') } : {};
     },
 
     hidden: function(element, node) {
@@ -8643,7 +9837,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       var delegateVariableMapping = values.delegateVariableMapping;
       return (
         getCallableType(element) === 'bpmn' && (
-          !delegateVariableMapping ? { delegateVariableMapping: translate('Must provide a value.') } : {}
+          !delegateVariableMapping ? { delegateVariableMapping: translate('Must provide a value') } : {}
         )
       );
     },
@@ -8657,12 +9851,22 @@ module.exports = function(element, bpmnFactory, options, translate) {
   return entries;
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"./ResultVariable":90,"bpmn-js/lib/util/ModelUtil":284,"lodash/forEach":255}],75:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/CandidateStarter.js":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/CandidateStarter.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -8672,7 +9876,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     id: 'candidateStarterGroups',
     label: translate('Candidate Starter Groups'),
     modelProperty: 'candidateStarterGroups',
-    description: 'Specify more than one group as a comma separated list.',
+    description: translate('Specify more than one group as a comma separated list.'),
 
     get: function(element, node) {
       var bo = getBusinessObject(element);
@@ -8696,7 +9900,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     id: 'candidateStarterUsers',
     label: translate('Candidate Starter Users'),
     modelProperty: 'candidateStarterUsers',
-    description: 'Specify more than one user as a comma separated list.',
+    description: translate('Specify more than one user as a comma separated list.'),
 
     get: function(element, node) {
       var bo = getBusinessObject(element);
@@ -8722,11 +9926,21 @@ module.exports = function(element, bpmnFactory, options, translate) {
   ];
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],76:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Delegate.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Delegate.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 var DELEGATE_TYPES = [
   'class',
@@ -8794,7 +10008,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     validate: function(element, values, node) {
-      return isDelegate(getImplementationType(element)) && !values.delegate ? { delegate: 'Must provide a value' } : {};
+      return isDelegate(getImplementationType(element)) && !values.delegate ? { delegate: translate('Must provide a value') } : {};
     },
 
     hidden: function(element, node) {
@@ -8807,19 +10021,107 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],77:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var domQuery = require('min-dom').query,
-    domClosest = require('min-dom').closest,
-    domify = require('min-dom').domify,
-    forEach = require('lodash/forEach');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorEventDefinition.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorEventDefinition.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    utils = require('../../../../Utils');
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementReferenceProperty = __webpack_require__(/*! ../../../bpmn/parts/implementation/ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+
+module.exports = function(
+    group, element, bpmnFactory, errorEventDefinition,
+    showErrorCodeVariable, showErrorMessageVariable, translate
+) {
+
+
+  var getValue = function(modelProperty) {
+    return function(element) {
+      var modelPropertyValue = errorEventDefinition.get('camunda:' + modelProperty);
+      var value = {};
+
+      value[modelProperty] = modelPropertyValue;
+      return value;
+    };
+  };
+
+  var setValue = function(modelProperty) {
+    return function(element, values) {
+      var props = {};
+
+      props['camunda:' + modelProperty] = values[modelProperty] || undefined;
+
+      return cmdHelper.updateBusinessObject(element, errorEventDefinition, props);
+    };
+  };
+
+
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
+      id: 'error-element-message',
+      label: translate('Error Message'),
+      referenceProperty: 'errorRef',
+      modelProperty: 'errorMessage'
+    })
+  );
+
+  if (showErrorCodeVariable) {
+    group.entries.push(entryFactory.textField({
+      id: 'errorCodeVariable',
+      label: translate('Error Code Variable'),
+      modelProperty : 'errorCodeVariable',
+
+      get: getValue('errorCodeVariable'),
+      set: setValue('errorCodeVariable')
+    }));
+  }
+
+  if (showErrorMessageVariable) {
+    group.entries.push(entryFactory.textField({
+      id: 'errorMessageVariable',
+      label: translate('Error Message Variable'),
+      modelProperty: 'errorMessageVariable',
+
+      get: getValue('errorMessageVariable'),
+      set: setValue('errorMessageVariable')
+    }));
+  }
+
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    domClosest = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").closest,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js"),
+    escapeHTML = utils.escapeHTML;
 
 function getSelectBox(node, id) {
   var currentTab = domClosest(node, 'div.bpp-properties-tab');
@@ -8880,7 +10182,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   };
 
   var createOption = function(value) {
-    return '<option value="' + value + '" data-value data-name="extensionElementValue">' + value + '</option>';
+    return '<option value="' + escapeHTML(value) + '" data-value data-name="extensionElementValue">' + escapeHTML(value) + '</option>';
   };
 
   var initSelectionSize = function(selectBox, optionsLength) {
@@ -8893,21 +10195,21 @@ module.exports = function(element, bpmnFactory, options, translate) {
     id: id,
     html: '<div class="bpp-row bpp-element-list" ' +
             (canBeHidden ? 'data-show="hideElements"' : '') + '>' +
-            '<label for="cam-extensionElements-' + id + '">' + label + '</label>' +
+            '<label for="cam-extensionElements-' + escapeHTML(id) + '">' + escapeHTML(label) + '</label>' +
             '<div class="bpp-field-wrapper">' +
-              '<select id="cam-extensionElements-' + id + '"' +
+              '<select id="cam-extensionElements-' + escapeHTML(id) + '"' +
                       'name="selectedExtensionElement" ' +
-                      'size="' + defaultSize + '" ' +
+                      'size="' + escapeHTML(defaultSize) + '" ' +
                       'data-list-entry-container ' +
                       'data-on-change="selectElement">' +
               '</select>' +
               (canCreate ? '<button class="add" ' +
-                                   'id="cam-extensionElements-create-' + id + '" ' +
+                                   'id="cam-extensionElements-create-' + escapeHTML(id) + '" ' +
                                    'data-action="createElement">' +
                              '<span>+</span>' +
                            '</button>' : '') +
               (canRemove ? '<button class="clear" ' +
-                                   'id="cam-extensionElements-remove-' + id + '" ' +
+                                   'id="cam-extensionElements-remove-' + escapeHTML(id) + '" ' +
                                    'data-action="removeElement" ' +
                                    'data-disable="disableRemove">' +
                              '<span>-</span>' +
@@ -9043,11 +10345,21 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../Utils":4,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"bpmn-js/lib/util/ModelUtil":284,"lodash/forEach":255,"min-dom":281}],78:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/External.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/External.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -9076,7 +10388,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     validate: function(element, values, node) {
-      return isExternal(element) && !values.externalTopic ? { externalTopic: 'Must provide a value' } : {};
+      return isExternal(element) && !values.externalTopic ? { externalTopic: translate('Must provide a value') } : {};
     },
 
     hidden: function(element, node) {
@@ -9089,12 +10401,22 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],79:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExternalTaskPriority.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExternalTaskPriority.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -9125,23 +10447,33 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],80:[function(require,module,exports){
-'use strict';
 
-var extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper'),
-    elementHelper = require('../../../../helper/ElementHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ }),
 
-var utils = require('../../../../Utils');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/FieldInjection.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/FieldInjection.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var entryFactory = require('../../../../factory/EntryFactory');
+"use strict";
 
-var extensionElementsEntry = require('./ExtensionElements');
 
-var ModelUtil = require('bpmn-js/lib/util/ModelUtil'),
+var extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var extensionElementsEntry = __webpack_require__(/*! ./ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js");
+
+var ModelUtil = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js"),
     getBusinessObject = ModelUtil.getBusinessObject;
 
-var assign = require('lodash/assign');
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
 
 
 var DEFAULT_PROPS = {
@@ -9437,12 +10769,22 @@ module.exports = function(element, bpmnFactory, translate, options) {
 
 };
 
-},{"../../../../Utils":4,"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"./ExtensionElements":77,"bpmn-js/lib/util/ModelUtil":284,"lodash/assign":247}],81:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/HistoryTimeToLive.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/HistoryTimeToLive.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -9474,16 +10816,26 @@ module.exports = function(element, bpmnFactory, options, translate) {
   return [ historyTimeToLiveEntry ];
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],82:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper'),
-    elementHelper = require('../../../../helper/ElementHelper');
+/***/ }),
 
-var assign = require('lodash/assign');
-var map = require('lodash/map');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ImplementationType.js":
+/*!***************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ImplementationType.js ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+var map = __webpack_require__(/*! lodash/map */ "./node_modules/lodash/map.js");
 
 var DEFAULT_DELEGATE_PROPS = [ 'class', 'expression', 'delegateExpression' ];
 
@@ -9649,17 +11001,27 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"lodash/assign":247,"lodash/map":270}],83:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper'),
-    inputOutputHelper = require('../../../../helper/InputOutputHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var extensionElementsEntry = require('./ExtensionElements');
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var extensionElementsEntry = __webpack_require__(/*! ./ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js");
 
 
 function getInputOutput(element, insideConnector) {
@@ -9876,18 +11238,28 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"../../../../helper/InputOutputHelper":23,"./ExtensionElements":77,"bpmn-js/lib/util/ModelUtil":284}],84:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    inputOutputHelper = require('../../../../helper/InputOutputHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    utils = require('../../../../Utils');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    script = require('./Script')('scriptFormat', 'value', true);
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    scriptImplementation = __webpack_require__(/*! ./Script */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js");
 
 
 function createElement(type, parent, factory, properties) {
@@ -9949,7 +11321,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   entries.push(entryFactory.validationAwareTextField({
     id: idPrefix + 'parameterName',
-    label: 'Name',
+    label: translate('Name'),
     modelProperty: 'name',
 
     getProperty: function(element, node) {
@@ -9970,10 +11342,10 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
         if (nameValue) {
           if (utils.containsSpace(nameValue)) {
-            validation.name = 'Name must not contain spaces';
+            validation.name = translate('Name must not contain spaces');
           }
         } else {
-          validation.name = 'Parameter must have a name';
+          validation.name = translate('Parameter must have a name');
         }
       }
 
@@ -9989,15 +11361,15 @@ module.exports = function(element, bpmnFactory, options, translate) {
   // parameter type //////////////////////////////////////////////////////
 
   var selectOptions = [
-    { value: 'text', name: 'Text' },
-    { value: 'script', name: 'Script' },
-    { value: 'list', name: 'List' },
-    { value: 'map', name: 'Map' }
+    { value: 'text', name: translate('Text') },
+    { value: 'script', name: translate('Script') },
+    { value: 'list', name: translate('List') },
+    { value: 'map', name: translate('Map') }
   ];
 
   entries.push(entryFactory.selectBox({
     id : idPrefix + 'parameterType',
-    label: 'Type',
+    label: translate('Type'),
     selectOptions: selectOptions,
     modelProperty: 'parameterType',
 
@@ -10057,7 +11429,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   entries.push(entryFactory.textBox({
     id : idPrefix + 'parameterType-text',
-    label : 'Value',
+    label : translate('Value'),
     modelProperty: 'value',
     get: function(element, node) {
       return {
@@ -10080,7 +11452,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 
   // parameter value (type = script) ///////////////////////////////////////////////////////
-
+  var script = scriptImplementation('scriptFormat', 'value', true, translate);
   entries.push({
     id: idPrefix + 'parameterType-script',
     html: '<div data-show="isScript">' +
@@ -10117,7 +11489,8 @@ module.exports = function(element, bpmnFactory, options, translate) {
   entries.push(entryFactory.table({
     id: idPrefix + 'parameterType-list',
     modelProperties: [ 'value' ],
-    labels: [ 'Value' ],
+    labels: [ translate('Value') ],
+    addLabel: translate('Add Value'),
 
     getElements: function(element, node) {
       var bo = getSelected(element, node);
@@ -10176,8 +11549,8 @@ module.exports = function(element, bpmnFactory, options, translate) {
   entries.push(entryFactory.table({
     id: idPrefix + 'parameterType-map',
     modelProperties: [ 'key', 'value' ],
-    labels: [ 'Key', 'Value' ],
-    addLabel: 'Add Entry',
+    labels: [ translate('Key'), translate('Value') ],
+    addLabel: translate('Add Entry'),
 
     getElements: function(element, node) {
       var bo = getSelected(element, node);
@@ -10241,12 +11614,22 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../Utils":4,"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/InputOutputHelper":23,"./Script":91,"bpmn-js/lib/util/ModelUtil":284}],85:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobPriority.js":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobPriority.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -10277,18 +11660,28 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],86:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobRetryTimeCycle.js":
+/*!**************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/JobRetryTimeCycle.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var asyncCapableHelper = require('../../../../helper/AsyncCapableHelper');
+"use strict";
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    eventDefinitionHelper = require('../../../../helper/EventDefinitionHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var asyncCapableHelper = __webpack_require__(/*! ../../../../helper/AsyncCapableHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/AsyncCapableHelper.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    eventDefinitionHelper = __webpack_require__(/*! ../../../../helper/EventDefinitionHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/EventDefinitionHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 function isAsyncBefore(bo) {
   return asyncCapableHelper.isAsyncBefore(bo);
@@ -10392,17 +11785,27 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/AsyncCapableHelper":16,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/EventDefinitionHelper":19,"bpmn-js/lib/util/ModelUtil":284}],87:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is,
-    getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var extensionElementsEntry = require('./ExtensionElements'),
-    extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    elementHelper = require('../../../../helper/ElementHelper'),
-    ImplementationTypeHelper = require('../../../../helper/ImplementationTypeHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Listener.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Listener.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var extensionElementsEntry = __webpack_require__(/*! ./ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    ImplementationTypeHelper = __webpack_require__(/*! ../../../../helper/ImplementationTypeHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ImplementationTypeHelper.js");
 
 
 function getListeners(bo, type) {
@@ -10550,17 +11953,29 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"../../../../helper/ImplementationTypeHelper":22,"./ExtensionElements":77,"bpmn-js/lib/util/ModelUtil":284}],88:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject;
+/***/ }),
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/MultiInstanceLoopCharacteristics.js":
+/*!*****************************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/MultiInstanceLoopCharacteristics.js ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+"use strict";
 
-var domClasses = require('min-dom').classes;
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes;
 
 /**
  * Get a property value of the loop characteristics.
@@ -10725,7 +12140,7 @@ module.exports = function(element, bpmnFactory, translate) {
     id: 'multiInstance-errorMessage',
     html: '<div data-show="isValid">' +
              '<span class="bpp-icon-warning"></span> ' +
-             translate('Must provide either loop cardinality or collection') +
+             escapeHTML(translate('Must provide either loop cardinality or collection')) +
           '</div>',
 
     isValid: function(element, node, notification, scope) {
@@ -10840,22 +12255,32 @@ module.exports = function(element, bpmnFactory, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"bpmn-js/lib/util/ModelUtil":284,"min-dom":281}],89:[function(require,module,exports){
-'use strict';
 
-var getBusinessObject = require('bpmn-js/lib/util/ModelUtil').getBusinessObject,
-    is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var factory = require('../../../../factory/EntryFactory');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Properties.js":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Properties.js ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var elementHelper = require('../../../../helper/ElementHelper'),
-    extensionElementsHelper = require('../../../../helper/ExtensionElementsHelper'),
-    cmdHelper = require('../../../../helper/CmdHelper'),
-    utils = require('../../../../Utils');
+"use strict";
 
-var assign = require('lodash/assign'),
-    forEach = require('lodash/forEach'),
-    find = require('lodash/find');
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var factory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js"),
+    forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
+    find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
 
 function generatePropertyId() {
   return utils.nextId('Property_');
@@ -11014,7 +12439,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
         if (property) {
           // check if id is valid
-          var validationError = utils.isIdValid(property, value.id);
+          var validationError = utils.isIdValid(property, value.id, translate);
 
           if (validationError) {
             return { id: validationError };
@@ -11051,15 +12476,25 @@ module.exports = function(element, bpmnFactory, options, translate) {
   return factory.table(options);
 };
 
-},{"../../../../Utils":4,"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"../../../../helper/ElementHelper":18,"../../../../helper/ExtensionElementsHelper":20,"bpmn-js/lib/util/ModelUtil":284,"lodash/assign":247,"lodash/find":252,"lodash/forEach":255}],90:[function(require,module,exports){
-'use strict';
 
-var is = require('bpmn-js/lib/util/ModelUtil').is;
+/***/ }),
 
-var assign = require('lodash/assign');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ResultVariable.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ResultVariable.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-var entryFactory = require('../../../../factory/EntryFactory'),
-    cmdHelper = require('../../../../helper/CmdHelper');
+"use strict";
+
+
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+
+var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -11106,12 +12541,22 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17,"bpmn-js/lib/util/ModelUtil":284,"lodash/assign":247}],91:[function(require,module,exports){
-'use strict';
 
-var domQuery = require('min-dom').query,
+/***/ }),
 
-    utils = require('../../../../Utils');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
+    escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML,
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 
 function getScriptType(node) {
@@ -11119,12 +12564,12 @@ function getScriptType(node) {
 }
 
 
-module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatRequired) {
+module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatRequired, translate) {
 
   return {
     template:
     '<div class="bpp-row bpp-textfield">' +
-      '<label for="cam-script-format">Script Format</label>' +
+      '<label for="cam-script-format">' + escapeHTML(translate('Script Format')) + '</label>' +
       '<div class="bpp-field-wrapper">' +
         '<input id="cam-script-format" type="text" name="scriptFormat" />' +
         '<button class="clear" data-action="script.clearScriptFormat" data-show="script.canClearScriptFormat">' +
@@ -11134,17 +12579,17 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
     '</div>' +
 
     '<div class="bpp-row">' +
-      '<label for="cam-script-type">Script Type</label>' +
+      '<label for="cam-script-type">' + escapeHTML(translate('Script Type')) + '</label>' +
       '<div class="bpp-field-wrapper">' +
         '<select id="cam-script-type" name="scriptType" data-value>' +
-          '<option value="script" selected>Inline Script</option>' +
-          '<option value="scriptResource">External Resource</option>' +
+          '<option value="script" selected>' + escapeHTML(translate('Inline Script')) + '</option>' +
+          '<option value="scriptResource">' + escapeHTML(translate('External Resource')) + '</option>' +
         '</select>' +
       '</div>' +
     '</div>' +
 
     '<div class="bpp-row bpp-textfield">' +
-      '<label for="cam-script-resource-val" data-show="script.isScriptResource">Resource</label>' +
+      '<label for="cam-script-resource-val" data-show="script.isScriptResource">' + escapeHTML(translate('Resource')) + '</label>' +
       '<div class="bpp-field-wrapper" data-show="script.isScriptResource">' +
         '<input id="cam-script-resource-val" type="text" name="scriptResourceValue" />' +
         '<button class="clear" data-action="script.clearScriptResource" data-show="script.canClearScriptResource">' +
@@ -11154,7 +12599,7 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
     '</div>' +
 
     '<div class="bpp-row">' +
-      '<label for="cam-script-val" data-show="script.isScript">Script</label>' +
+      '<label for="cam-script-val" data-show="script.isScript">' + escapeHTML(translate('Script')) + '</label>' +
       '<div class="bpp-field-wrapper" data-show="script.isScript">' +
         '<textarea id="cam-script-val" type="text" name="scriptValue"></textarea>' +
       '</div>'+
@@ -11217,15 +12662,15 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
       var validationResult = {};
 
       if (values.scriptType === 'script' && !values.scriptValue) {
-        validationResult.scriptValue = 'Must provide a value';
+        validationResult.scriptValue = translate('Must provide a value');
       }
 
       if (values.scriptType === 'scriptResource' && !values.scriptResourceValue) {
-        validationResult.scriptResourceValue = 'Must provide a value';
+        validationResult.scriptResourceValue = translate('Must provide a value');
       }
 
       if (isFormatRequired && (!values.scriptFormat || values.scriptFormat.length === 0)) {
-        validationResult.scriptFormat = 'Must provide a value';
+        validationResult.scriptFormat = translate('Must provide a value');
       }
 
       return validationResult;
@@ -11281,12 +12726,22 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
 
 };
 
-},{"../../../../Utils":4,"min-dom":281}],92:[function(require,module,exports){
-'use strict';
 
-var entryFactory = require('../../../../factory/EntryFactory');
+/***/ }),
 
-var cmdHelper = require('../../../../helper/CmdHelper');
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Tasklist.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Tasklist.js ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(element, bpmnFactory, options, translate) {
 
@@ -11320,21 +12775,705 @@ module.exports = function(element, bpmnFactory, options, translate) {
   ];
 };
 
-},{"../../../../factory/EntryFactory":7,"../../../../helper/CmdHelper":17}],93:[function(require,module,exports){
-var getNative = require('./_getNative'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js ***!
+  \*************************************************************************/
+/*! exports provided: isAny, getParent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isAny", function() { return isAny; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getParent", function() { return getParent; });
+/* harmony import */ var min_dash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js");
+/* harmony import */ var _util_ModelUtil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js");
+
+
+
+
+
+/**
+ * Return true if element has any of the given types.
+ *
+ * @param {djs.model.Base} element
+ * @param {Array<String>} types
+ *
+ * @return {Boolean}
+ */
+function isAny(element, types) {
+  return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["some"])(types, function(t) {
+    return Object(_util_ModelUtil__WEBPACK_IMPORTED_MODULE_1__["is"])(element, t);
+  });
+}
+
+
+/**
+ * Return the parent of the element with any of the given types.
+ *
+ * @param {djs.model.Base} element
+ * @param {String|Array<String>} anyType
+ *
+ * @return {djs.model.Base}
+ */
+function getParent(element, anyType) {
+
+  if (typeof anyType === 'string') {
+    anyType = [ anyType ];
+  }
+
+  while ((element = element.parent)) {
+    if (isAny(element, anyType)) {
+      return element;
+    }
+  }
+
+  return null;
+}
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js/lib/util/DiUtil.js":
+/*!*************************************************!*\
+  !*** ./node_modules/bpmn-js/lib/util/DiUtil.js ***!
+  \*************************************************/
+/*! exports provided: isExpanded, isInterrupting, isEventSubProcess, hasEventDefinition, hasErrorEventDefinition, hasEscalationEventDefinition, hasCompensateEventDefinition */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isExpanded", function() { return isExpanded; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInterrupting", function() { return isInterrupting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEventSubProcess", function() { return isEventSubProcess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasEventDefinition", function() { return hasEventDefinition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasErrorEventDefinition", function() { return hasErrorEventDefinition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasEscalationEventDefinition", function() { return hasEscalationEventDefinition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasCompensateEventDefinition", function() { return hasCompensateEventDefinition; });
+/* harmony import */ var _ModelUtil__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js");
+/* harmony import */ var min_dash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js");
+
+
+
+
+
+function isExpanded(element) {
+
+  if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(element, 'bpmn:CallActivity')) {
+    return false;
+  }
+
+  if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(element, 'bpmn:SubProcess')) {
+    return !!Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).di.isExpanded;
+  }
+
+  if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(element, 'bpmn:Participant')) {
+    return !!Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).processRef;
+  }
+
+  return true;
+}
+
+function isInterrupting(element) {
+  return element && Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).isInterrupting !== false;
+}
+
+function isEventSubProcess(element) {
+  return element && !!Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).triggeredByEvent;
+}
+
+function hasEventDefinition(element, eventType) {
+  var bo = Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element),
+      hasEventDefinition = false;
+
+  if (bo.eventDefinitions) {
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_1__["forEach"])(bo.eventDefinitions, function(event) {
+      if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(event, eventType)) {
+        hasEventDefinition = true;
+      }
+    });
+  }
+
+  return hasEventDefinition;
+}
+
+function hasErrorEventDefinition(element) {
+  return hasEventDefinition(element, 'bpmn:ErrorEventDefinition');
+}
+
+function hasEscalationEventDefinition(element) {
+  return hasEventDefinition(element, 'bpmn:EscalationEventDefinition');
+}
+
+function hasCompensateEventDefinition(element) {
+  return hasEventDefinition(element, 'bpmn:CompensateEventDefinition');
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js/lib/util/ModelUtil.js":
+/*!****************************************************!*\
+  !*** ./node_modules/bpmn-js/lib/util/ModelUtil.js ***!
+  \****************************************************/
+/*! exports provided: is, getBusinessObject */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "is", function() { return is; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBusinessObject", function() { return getBusinessObject; });
+/**
+ * Is an element of the given BPMN type?
+ *
+ * @param  {djs.model.Base|ModdleElement} element
+ * @param  {String} type
+ *
+ * @return {Boolean}
+ */
+function is(element, type) {
+  var bo = getBusinessObject(element);
+
+  return bo && (typeof bo.$instanceOf === 'function') && bo.$instanceOf(type);
+}
+
+
+/**
+ * Return the business object for a given element.
+ *
+ * @param  {djs.model.Base|ModdleElement} element
+ *
+ * @return {ModdleElement}
+ */
+function getBusinessObject(element) {
+  return (element && element.businessObject) || element;
+}
+
+/***/ }),
+
+/***/ "./node_modules/camunda-modeler-plugin-helpers/index.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/camunda-modeler-plugin-helpers/index.js ***!
+  \**************************************************************/
+/*! exports provided: registerClientPlugin, registerBpmnJSPlugin, registerBpmnJSModdleExtension, getModelerDirectory, getPluginsDirectory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerClientPlugin", function() { return registerClientPlugin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerBpmnJSPlugin", function() { return registerBpmnJSPlugin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerBpmnJSModdleExtension", function() { return registerBpmnJSModdleExtension; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getModelerDirectory", function() { return getModelerDirectory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPluginsDirectory", function() { return getPluginsDirectory; });
+/**
+ * Validate and register a client plugin.
+ *
+ * @param {Object} plugin
+ * @param {String} type
+ */
+function registerClientPlugin(plugin, type) {
+  var plugins = window.plugins || [];
+  window.plugins = plugins;
+
+  if (!plugin) {
+    throw new Error('plugin not specified');
+  }
+
+  if (!type) {
+    throw new Error('type not specified');
+  }
+
+  plugins.push({
+    plugin: plugin,
+    type: type
+  });
+}
+
+/**
+ * Validate and register a bpmn-js plugin.
+ *
+ * @param {Object} module
+ *
+ * @example
+ *
+ * import {
+ *   registerBpmnJSPlugin
+ * } from 'camunda-modeler-plugin-helpers';
+ *
+ * const BpmnJSModule = {
+ *   __init__: [ 'myService' ],
+ *   myService: [ 'type', ... ]
+ * };
+ *
+ * registerBpmnJSPlugin(BpmnJSModule);
+ */
+function registerBpmnJSPlugin(module) {
+  registerClientPlugin(module, 'bpmn.modeler.additionalModules');
+}
+
+/**
+ * Validate and register a bpmn-moddle extension plugin.
+ *
+ * @param {Object} descriptor
+ *
+ * @example
+ * import {
+ *   registerBpmnJSModdleExtension
+ * } from 'camunda-modeler-plugin-helpers';
+ *
+ * var moddleDescriptor = {
+ *   name: 'my descriptor',
+ *   uri: 'http://example.my.company.localhost/schema/my-descriptor/1.0',
+ *   prefix: 'mydesc',
+ *
+ *   ...
+ * };
+ *
+ * registerBpmnJSModdleExtension(moddleDescriptor);
+ */
+function registerBpmnJSModdleExtension(descriptor) {
+  registerClientPlugin(descriptor, 'bpmn.modeler.moddleExtension');
+}
+
+/**
+ * Return the modeler directory, as a string.
+ *
+ * @deprecated Will be removed in future Camunda Modeler versions without replacement.
+ *
+ * @return {String}
+ */
+function getModelerDirectory() {
+  return window.getModelerDirectory();
+}
+
+/**
+ * Return the modeler plugin directory, as a string.
+ *
+ * @deprecated Will be removed in future Camunda Modeler versions without replacement.
+ *
+ * @return {String}
+ */
+function getPluginsDirectory() {
+  return window.getPluginsDirectory();
+}
+
+/***/ }),
+
+/***/ "./node_modules/clipboard-copy/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/clipboard-copy/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* global DOMException */
+
+module.exports = clipboardCopy
+
+function clipboardCopy (text) {
+  // Use the Async Clipboard API when available. Requires a secure browing
+  // context (i.e. HTTPS)
+  if (navigator.clipboard) {
+    return navigator.clipboard.writeText(text).catch(function (err) {
+      throw (err !== undefined ? err : new DOMException('The request is not allowed', 'NotAllowedError'))
+    })
+  }
+
+  // ...Otherwise, use document.execCommand() fallback
+
+  // Put the text to copy into a <span>
+  var span = document.createElement('span')
+  span.textContent = text
+
+  // Preserve consecutive spaces and newlines
+  span.style.whiteSpace = 'pre'
+
+  // Add the <span> to the page
+  document.body.appendChild(span)
+
+  // Make a selection object representing the range of text selected by the user
+  var selection = window.getSelection()
+  var range = window.document.createRange()
+  selection.removeAllRanges()
+  range.selectNode(span)
+  selection.addRange(range)
+
+  // Copy text to the clipboard
+  var success = false
+  try {
+    success = window.document.execCommand('copy')
+  } catch (err) {
+    console.log('error', err)
+  }
+
+  // Cleanup
+  selection.removeAllRanges()
+  window.document.body.removeChild(span)
+
+  return success
+    ? Promise.resolve()
+    : Promise.reject(new DOMException('The request is not allowed', 'NotAllowedError'))
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/diagram-js/lib/util/Collections.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/diagram-js/lib/util/Collections.js ***!
+  \*********************************************************/
+/*! exports provided: remove, add, indexOf */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "indexOf", function() { return indexOf; });
+/**
+ * Failsafe remove an element from a collection
+ *
+ * @param  {Array<Object>} [collection]
+ * @param  {Object} [element]
+ *
+ * @return {Number} the previous index of the element
+ */
+function remove(collection, element) {
+
+  if (!collection || !element) {
+    return -1;
+  }
+
+  var idx = collection.indexOf(element);
+
+  if (idx !== -1) {
+    collection.splice(idx, 1);
+  }
+
+  return idx;
+}
+
+/**
+ * Fail save add an element to the given connection, ensuring
+ * it does not yet exist.
+ *
+ * @param {Array<Object>} collection
+ * @param {Object} element
+ * @param {Number} idx
+ */
+function add(collection, element, idx) {
+
+  if (!collection || !element) {
+    return;
+  }
+
+  if (typeof idx !== 'number') {
+    idx = -1;
+  }
+
+  var currentIdx = collection.indexOf(element);
+
+  if (currentIdx !== -1) {
+
+    if (currentIdx === idx) {
+
+      // nothing to do, position has not changed
+      return;
+    } else {
+
+      if (idx !== -1) {
+
+        // remove from current position
+        collection.splice(currentIdx, 1);
+      } else {
+
+        // already exists in collection
+        return;
+      }
+    }
+  }
+
+  if (idx !== -1) {
+
+    // insert at specified position
+    collection.splice(idx, 0, element);
+  } else {
+
+    // push to end
+    collection.push(element);
+  }
+}
+
+
+/**
+ * Fail save get the index of an element in a collection.
+ *
+ * @param {Array<Object>} collection
+ * @param {Object} element
+ *
+ * @return {Number} the index or -1 if collection or element do
+ *                  not exist or the element is not contained.
+ */
+function indexOf(collection, element) {
+
+  if (!collection || !element) {
+    return -1;
+  }
+
+  return collection.indexOf(element);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ids/dist/index.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/ids/dist/index.esm.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var hat_1 = createCommonjsModule(function (module) {
+var hat = module.exports = function (bits, base) {
+    if (!base) base = 16;
+    if (bits === undefined) bits = 128;
+    if (bits <= 0) return '0';
+    
+    var digits = Math.log(Math.pow(2, bits)) / Math.log(base);
+    for (var i = 2; digits === Infinity; i *= 2) {
+        digits = Math.log(Math.pow(2, bits / i)) / Math.log(base) * i;
+    }
+    
+    var rem = digits - Math.floor(digits);
+    
+    var res = '';
+    
+    for (var i = 0; i < Math.floor(digits); i++) {
+        var x = Math.floor(Math.random() * base).toString(base);
+        res = x + res;
+    }
+    
+    if (rem) {
+        var b = Math.pow(base, rem);
+        var x = Math.floor(Math.random() * b).toString(base);
+        res = x + res;
+    }
+    
+    var parsed = parseInt(res, base);
+    if (parsed !== Infinity && parsed >= Math.pow(2, bits)) {
+        return hat(bits, base)
+    }
+    else return res;
+};
+
+hat.rack = function (bits, base, expandBy) {
+    var fn = function (data) {
+        var iters = 0;
+        do {
+            if (iters ++ > 10) {
+                if (expandBy) bits += expandBy;
+                else throw new Error('too many ID collisions, use more bits')
+            }
+            
+            var id = hat(bits, base);
+        } while (Object.hasOwnProperty.call(hats, id));
+        
+        hats[id] = data;
+        return id;
+    };
+    var hats = fn.hats = {};
+    
+    fn.get = function (id) {
+        return fn.hats[id];
+    };
+    
+    fn.set = function (id, value) {
+        fn.hats[id] = value;
+        return fn;
+    };
+    
+    fn.bits = bits || 128;
+    fn.base = base || 16;
+    return fn;
+};
+});
+
+/**
+ * Create a new id generator / cache instance.
+ *
+ * You may optionally provide a seed that is used internally.
+ *
+ * @param {Seed} seed
+ */
+
+function Ids(seed) {
+  if (!(this instanceof Ids)) {
+    return new Ids(seed);
+  }
+
+  seed = seed || [128, 36, 1];
+  this._seed = seed.length ? hat_1.rack(seed[0], seed[1], seed[2]) : seed;
+}
+/**
+ * Generate a next id.
+ *
+ * @param {Object} [element] element to bind the id to
+ *
+ * @return {String} id
+ */
+
+Ids.prototype.next = function (element) {
+  return this._seed(element || true);
+};
+/**
+ * Generate a next id with a given prefix.
+ *
+ * @param {Object} [element] element to bind the id to
+ *
+ * @return {String} id
+ */
+
+
+Ids.prototype.nextPrefixed = function (prefix, element) {
+  var id;
+
+  do {
+    id = prefix + this.next(true);
+  } while (this.assigned(id)); // claim {prefix}{random}
+
+
+  this.claim(id, element); // return
+
+  return id;
+};
+/**
+ * Manually claim an existing id.
+ *
+ * @param {String} id
+ * @param {String} [element] element the id is claimed by
+ */
+
+
+Ids.prototype.claim = function (id, element) {
+  this._seed.set(id, element || true);
+};
+/**
+ * Returns true if the given id has already been assigned.
+ *
+ * @param  {String} id
+ * @return {Boolean}
+ */
+
+
+Ids.prototype.assigned = function (id) {
+  return this._seed.get(id) || false;
+};
+/**
+ * Unclaim an id.
+ *
+ * @param  {String} id the id to unclaim
+ */
+
+
+Ids.prototype.unclaim = function (id) {
+  delete this._seed.hats[id];
+};
+/**
+ * Clear all claimed ids.
+ */
+
+
+Ids.prototype.clear = function () {
+  var hats = this._seed.hats,
+      id;
+
+  for (id in hats) {
+    this.unclaim(id);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Ids);
+//# sourceMappingURL=index.esm.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/inherits/inherits_browser.js":
+/*!***************************************************!*\
+  !*** ./node_modules/inherits/inherits_browser.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    if (superCtor) {
+      ctor.super_ = superCtor
+      ctor.prototype = Object.create(superCtor.prototype, {
+        constructor: {
+          value: ctor,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }
+      })
+    }
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    if (superCtor) {
+      ctor.super_ = superCtor
+      var TempCtor = function () {}
+      TempCtor.prototype = superCtor.prototype
+      ctor.prototype = new TempCtor()
+      ctor.prototype.constructor = ctor
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_DataView.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_DataView.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
 
 module.exports = DataView;
 
-},{"./_getNative":182,"./_root":228}],94:[function(require,module,exports){
-var hashClear = require('./_hashClear'),
-    hashDelete = require('./_hashDelete'),
-    hashGet = require('./_hashGet'),
-    hashHas = require('./_hashHas'),
-    hashSet = require('./_hashSet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Hash.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_Hash.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var hashClear = __webpack_require__(/*! ./_hashClear */ "./node_modules/lodash/_hashClear.js"),
+    hashDelete = __webpack_require__(/*! ./_hashDelete */ "./node_modules/lodash/_hashDelete.js"),
+    hashGet = __webpack_require__(/*! ./_hashGet */ "./node_modules/lodash/_hashGet.js"),
+    hashHas = __webpack_require__(/*! ./_hashHas */ "./node_modules/lodash/_hashHas.js"),
+    hashSet = __webpack_require__(/*! ./_hashSet */ "./node_modules/lodash/_hashSet.js");
 
 /**
  * Creates a hash object.
@@ -11363,9 +13502,18 @@ Hash.prototype.set = hashSet;
 
 module.exports = Hash;
 
-},{"./_hashClear":189,"./_hashDelete":190,"./_hashGet":191,"./_hashHas":192,"./_hashSet":193}],95:[function(require,module,exports){
-var baseCreate = require('./_baseCreate'),
-    baseLodash = require('./_baseLodash');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_LazyWrapper.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_LazyWrapper.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js");
 
 /** Used as references for the maximum length and index of an array. */
 var MAX_ARRAY_LENGTH = 4294967295;
@@ -11393,12 +13541,21 @@ LazyWrapper.prototype.constructor = LazyWrapper;
 
 module.exports = LazyWrapper;
 
-},{"./_baseCreate":118,"./_baseLodash":139}],96:[function(require,module,exports){
-var listCacheClear = require('./_listCacheClear'),
-    listCacheDelete = require('./_listCacheDelete'),
-    listCacheGet = require('./_listCacheGet'),
-    listCacheHas = require('./_listCacheHas'),
-    listCacheSet = require('./_listCacheSet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_ListCache.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_ListCache.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var listCacheClear = __webpack_require__(/*! ./_listCacheClear */ "./node_modules/lodash/_listCacheClear.js"),
+    listCacheDelete = __webpack_require__(/*! ./_listCacheDelete */ "./node_modules/lodash/_listCacheDelete.js"),
+    listCacheGet = __webpack_require__(/*! ./_listCacheGet */ "./node_modules/lodash/_listCacheGet.js"),
+    listCacheHas = __webpack_require__(/*! ./_listCacheHas */ "./node_modules/lodash/_listCacheHas.js"),
+    listCacheSet = __webpack_require__(/*! ./_listCacheSet */ "./node_modules/lodash/_listCacheSet.js");
 
 /**
  * Creates an list cache object.
@@ -11427,9 +13584,18 @@ ListCache.prototype.set = listCacheSet;
 
 module.exports = ListCache;
 
-},{"./_listCacheClear":204,"./_listCacheDelete":205,"./_listCacheGet":206,"./_listCacheHas":207,"./_listCacheSet":208}],97:[function(require,module,exports){
-var baseCreate = require('./_baseCreate'),
-    baseLodash = require('./_baseLodash');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_LodashWrapper.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_LodashWrapper.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js");
 
 /**
  * The base constructor for creating `lodash` wrapper objects.
@@ -11451,21 +13617,39 @@ LodashWrapper.prototype.constructor = LodashWrapper;
 
 module.exports = LodashWrapper;
 
-},{"./_baseCreate":118,"./_baseLodash":139}],98:[function(require,module,exports){
-var getNative = require('./_getNative'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Map.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Map.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /* Built-in method references that are verified to be native. */
 var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-},{"./_getNative":182,"./_root":228}],99:[function(require,module,exports){
-var mapCacheClear = require('./_mapCacheClear'),
-    mapCacheDelete = require('./_mapCacheDelete'),
-    mapCacheGet = require('./_mapCacheGet'),
-    mapCacheHas = require('./_mapCacheHas'),
-    mapCacheSet = require('./_mapCacheSet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_MapCache.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_MapCache.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var mapCacheClear = __webpack_require__(/*! ./_mapCacheClear */ "./node_modules/lodash/_mapCacheClear.js"),
+    mapCacheDelete = __webpack_require__(/*! ./_mapCacheDelete */ "./node_modules/lodash/_mapCacheDelete.js"),
+    mapCacheGet = __webpack_require__(/*! ./_mapCacheGet */ "./node_modules/lodash/_mapCacheGet.js"),
+    mapCacheHas = __webpack_require__(/*! ./_mapCacheHas */ "./node_modules/lodash/_mapCacheHas.js"),
+    mapCacheSet = __webpack_require__(/*! ./_mapCacheSet */ "./node_modules/lodash/_mapCacheSet.js");
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -11494,28 +13678,55 @@ MapCache.prototype.set = mapCacheSet;
 
 module.exports = MapCache;
 
-},{"./_mapCacheClear":209,"./_mapCacheDelete":210,"./_mapCacheGet":211,"./_mapCacheHas":212,"./_mapCacheSet":213}],100:[function(require,module,exports){
-var getNative = require('./_getNative'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Promise.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_Promise.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /* Built-in method references that are verified to be native. */
 var Promise = getNative(root, 'Promise');
 
 module.exports = Promise;
 
-},{"./_getNative":182,"./_root":228}],101:[function(require,module,exports){
-var getNative = require('./_getNative'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Set.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/_Set.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /* Built-in method references that are verified to be native. */
 var Set = getNative(root, 'Set');
 
 module.exports = Set;
 
-},{"./_getNative":182,"./_root":228}],102:[function(require,module,exports){
-var MapCache = require('./_MapCache'),
-    setCacheAdd = require('./_setCacheAdd'),
-    setCacheHas = require('./_setCacheHas');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_SetCache.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_SetCache.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js"),
+    setCacheAdd = __webpack_require__(/*! ./_setCacheAdd */ "./node_modules/lodash/_setCacheAdd.js"),
+    setCacheHas = __webpack_require__(/*! ./_setCacheHas */ "./node_modules/lodash/_setCacheHas.js");
 
 /**
  *
@@ -11541,13 +13752,22 @@ SetCache.prototype.has = setCacheHas;
 
 module.exports = SetCache;
 
-},{"./_MapCache":99,"./_setCacheAdd":229,"./_setCacheHas":230}],103:[function(require,module,exports){
-var ListCache = require('./_ListCache'),
-    stackClear = require('./_stackClear'),
-    stackDelete = require('./_stackDelete'),
-    stackGet = require('./_stackGet'),
-    stackHas = require('./_stackHas'),
-    stackSet = require('./_stackSet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Stack.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_Stack.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    stackClear = __webpack_require__(/*! ./_stackClear */ "./node_modules/lodash/_stackClear.js"),
+    stackDelete = __webpack_require__(/*! ./_stackDelete */ "./node_modules/lodash/_stackDelete.js"),
+    stackGet = __webpack_require__(/*! ./_stackGet */ "./node_modules/lodash/_stackGet.js"),
+    stackHas = __webpack_require__(/*! ./_stackHas */ "./node_modules/lodash/_stackHas.js"),
+    stackSet = __webpack_require__(/*! ./_stackSet */ "./node_modules/lodash/_stackSet.js");
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -11570,32 +13790,68 @@ Stack.prototype.set = stackSet;
 
 module.exports = Stack;
 
-},{"./_ListCache":96,"./_stackClear":236,"./_stackDelete":237,"./_stackGet":238,"./_stackHas":239,"./_stackSet":240}],104:[function(require,module,exports){
-var root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Symbol.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_Symbol.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Built-in value references. */
 var Symbol = root.Symbol;
 
 module.exports = Symbol;
 
-},{"./_root":228}],105:[function(require,module,exports){
-var root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Uint8Array.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_Uint8Array.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Built-in value references. */
 var Uint8Array = root.Uint8Array;
 
 module.exports = Uint8Array;
 
-},{"./_root":228}],106:[function(require,module,exports){
-var getNative = require('./_getNative'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_WeakMap.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_WeakMap.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /* Built-in method references that are verified to be native. */
 var WeakMap = getNative(root, 'WeakMap');
 
 module.exports = WeakMap;
 
-},{"./_getNative":182,"./_root":228}],107:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_apply.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_apply.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A faster alternative to `Function#apply`, this function invokes `func`
  * with the `this` binding of `thisArg` and the arguments of `args`.
@@ -11618,7 +13874,16 @@ function apply(func, thisArg, args) {
 
 module.exports = apply;
 
-},{}],108:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayEach.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayEach.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `_.forEach` for arrays without support for
  * iteratee shorthands.
@@ -11642,7 +13907,16 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],109:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayFilter.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_arrayFilter.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `_.filter` for arrays without support for
  * iteratee shorthands.
@@ -11669,8 +13943,17 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],110:[function(require,module,exports){
-var baseIndexOf = require('./_baseIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayIncludes.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayIncludes.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIndexOf = __webpack_require__(/*! ./_baseIndexOf */ "./node_modules/lodash/_baseIndexOf.js");
 
 /**
  * A specialized version of `_.includes` for arrays without support for
@@ -11688,13 +13971,22 @@ function arrayIncludes(array, value) {
 
 module.exports = arrayIncludes;
 
-},{"./_baseIndexOf":129}],111:[function(require,module,exports){
-var baseTimes = require('./_baseTimes'),
-    isArguments = require('./isArguments'),
-    isArray = require('./isArray'),
-    isBuffer = require('./isBuffer'),
-    isIndex = require('./_isIndex'),
-    isTypedArray = require('./isTypedArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayLikeKeys.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseTimes = __webpack_require__(/*! ./_baseTimes */ "./node_modules/lodash/_baseTimes.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "./node_modules/lodash/isBuffer.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "./node_modules/lodash/isTypedArray.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -11739,7 +14031,16 @@ function arrayLikeKeys(value, inherited) {
 
 module.exports = arrayLikeKeys;
 
-},{"./_baseTimes":148,"./_isIndex":196,"./isArguments":259,"./isArray":260,"./isBuffer":262,"./isTypedArray":268}],112:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayMap.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_arrayMap.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `_.map` for arrays without support for iteratee
  * shorthands.
@@ -11762,7 +14063,16 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],113:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayPush.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arrayPush.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Appends the elements of `values` to `array`.
  *
@@ -11784,7 +14094,16 @@ function arrayPush(array, values) {
 
 module.exports = arrayPush;
 
-},{}],114:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arraySome.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_arraySome.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `_.some` for arrays without support for iteratee
  * shorthands.
@@ -11809,9 +14128,18 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],115:[function(require,module,exports){
-var baseAssignValue = require('./_baseAssignValue'),
-    eq = require('./eq');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_assignValue.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_assignValue.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseAssignValue = __webpack_require__(/*! ./_baseAssignValue */ "./node_modules/lodash/_baseAssignValue.js"),
+    eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -11839,8 +14167,17 @@ function assignValue(object, key, value) {
 
 module.exports = assignValue;
 
-},{"./_baseAssignValue":117,"./eq":250}],116:[function(require,module,exports){
-var eq = require('./eq');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_assocIndexOf.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_assocIndexOf.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js");
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -11862,8 +14199,17 @@ function assocIndexOf(array, key) {
 
 module.exports = assocIndexOf;
 
-},{"./eq":250}],117:[function(require,module,exports){
-var defineProperty = require('./_defineProperty');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseAssignValue.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseAssignValue.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var defineProperty = __webpack_require__(/*! ./_defineProperty */ "./node_modules/lodash/_defineProperty.js");
 
 /**
  * The base implementation of `assignValue` and `assignMergeValue` without
@@ -11889,8 +14235,17 @@ function baseAssignValue(object, key, value) {
 
 module.exports = baseAssignValue;
 
-},{"./_defineProperty":171}],118:[function(require,module,exports){
-var isObject = require('./isObject');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseCreate.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseCreate.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
 
 /** Built-in value references. */
 var objectCreate = Object.create;
@@ -11921,9 +14276,18 @@ var baseCreate = (function() {
 
 module.exports = baseCreate;
 
-},{"./isObject":265}],119:[function(require,module,exports){
-var baseForOwn = require('./_baseForOwn'),
-    createBaseEach = require('./_createBaseEach');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseEach.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseEach.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseForOwn = __webpack_require__(/*! ./_baseForOwn */ "./node_modules/lodash/_baseForOwn.js"),
+    createBaseEach = __webpack_require__(/*! ./_createBaseEach */ "./node_modules/lodash/_createBaseEach.js");
 
 /**
  * The base implementation of `_.forEach` without support for iteratee shorthands.
@@ -11937,8 +14301,17 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./_baseForOwn":124,"./_createBaseEach":161}],120:[function(require,module,exports){
-var baseEach = require('./_baseEach');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFilter.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseFilter.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseEach = __webpack_require__(/*! ./_baseEach */ "./node_modules/lodash/_baseEach.js");
 
 /**
  * The base implementation of `_.filter` without support for iteratee shorthands.
@@ -11960,7 +14333,16 @@ function baseFilter(collection, predicate) {
 
 module.exports = baseFilter;
 
-},{"./_baseEach":119}],121:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFindIndex.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_baseFindIndex.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.findIndex` and `_.findLastIndex` without
  * support for iteratee shorthands.
@@ -11986,9 +14368,18 @@ function baseFindIndex(array, predicate, fromIndex, fromRight) {
 
 module.exports = baseFindIndex;
 
-},{}],122:[function(require,module,exports){
-var arrayPush = require('./_arrayPush'),
-    isFlattenable = require('./_isFlattenable');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFlatten.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseFlatten.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "./node_modules/lodash/_arrayPush.js"),
+    isFlattenable = __webpack_require__(/*! ./_isFlattenable */ "./node_modules/lodash/_isFlattenable.js");
 
 /**
  * The base implementation of `_.flatten` with support for restricting flattening.
@@ -12026,8 +14417,17 @@ function baseFlatten(array, depth, predicate, isStrict, result) {
 
 module.exports = baseFlatten;
 
-},{"./_arrayPush":113,"./_isFlattenable":195}],123:[function(require,module,exports){
-var createBaseFor = require('./_createBaseFor');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFor.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseFor.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createBaseFor = __webpack_require__(/*! ./_createBaseFor */ "./node_modules/lodash/_createBaseFor.js");
 
 /**
  * The base implementation of `baseForOwn` which iterates over `object`
@@ -12044,9 +14444,18 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./_createBaseFor":162}],124:[function(require,module,exports){
-var baseFor = require('./_baseFor'),
-    keys = require('./keys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseForOwn.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseForOwn.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFor = __webpack_require__(/*! ./_baseFor */ "./node_modules/lodash/_baseFor.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /**
  * The base implementation of `_.forOwn` without support for iteratee shorthands.
@@ -12062,9 +14471,18 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"./_baseFor":123,"./keys":269}],125:[function(require,module,exports){
-var castPath = require('./_castPath'),
-    toKey = require('./_toKey');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseGet.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
 
 /**
  * The base implementation of `_.get` without support for default values.
@@ -12088,9 +14506,18 @@ function baseGet(object, path) {
 
 module.exports = baseGet;
 
-},{"./_castPath":153,"./_toKey":243}],126:[function(require,module,exports){
-var arrayPush = require('./_arrayPush'),
-    isArray = require('./isArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetAllKeys.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_baseGetAllKeys.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__(/*! ./_arrayPush */ "./node_modules/lodash/_arrayPush.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -12110,10 +14537,19 @@ function baseGetAllKeys(object, keysFunc, symbolsFunc) {
 
 module.exports = baseGetAllKeys;
 
-},{"./_arrayPush":113,"./isArray":260}],127:[function(require,module,exports){
-var Symbol = require('./_Symbol'),
-    getRawTag = require('./_getRawTag'),
-    objectToString = require('./_objectToString');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseGetTag.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__(/*! ./_getRawTag */ "./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__(/*! ./_objectToString */ "./node_modules/lodash/_objectToString.js");
 
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
@@ -12140,7 +14576,16 @@ function baseGetTag(value) {
 
 module.exports = baseGetTag;
 
-},{"./_Symbol":104,"./_getRawTag":183,"./_objectToString":222}],128:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseHasIn.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseHasIn.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.hasIn` without support for deep paths.
  *
@@ -12155,10 +14600,19 @@ function baseHasIn(object, key) {
 
 module.exports = baseHasIn;
 
-},{}],129:[function(require,module,exports){
-var baseFindIndex = require('./_baseFindIndex'),
-    baseIsNaN = require('./_baseIsNaN'),
-    strictIndexOf = require('./_strictIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIndexOf.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIndexOf.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFindIndex = __webpack_require__(/*! ./_baseFindIndex */ "./node_modules/lodash/_baseFindIndex.js"),
+    baseIsNaN = __webpack_require__(/*! ./_baseIsNaN */ "./node_modules/lodash/_baseIsNaN.js"),
+    strictIndexOf = __webpack_require__(/*! ./_strictIndexOf */ "./node_modules/lodash/_strictIndexOf.js");
 
 /**
  * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
@@ -12177,9 +14631,18 @@ function baseIndexOf(array, value, fromIndex) {
 
 module.exports = baseIndexOf;
 
-},{"./_baseFindIndex":121,"./_baseIsNaN":134,"./_strictIndexOf":241}],130:[function(require,module,exports){
-var baseGetTag = require('./_baseGetTag'),
-    isObjectLike = require('./isObjectLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsArguments.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsArguments.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]';
@@ -12197,9 +14660,18 @@ function baseIsArguments(value) {
 
 module.exports = baseIsArguments;
 
-},{"./_baseGetTag":127,"./isObjectLike":266}],131:[function(require,module,exports){
-var baseIsEqualDeep = require('./_baseIsEqualDeep'),
-    isObjectLike = require('./isObjectLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsEqual.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqual.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqualDeep = __webpack_require__(/*! ./_baseIsEqualDeep */ "./node_modules/lodash/_baseIsEqualDeep.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
 
 /**
  * The base implementation of `_.isEqual` which supports partial comparisons
@@ -12227,15 +14699,24 @@ function baseIsEqual(value, other, bitmask, customizer, stack) {
 
 module.exports = baseIsEqual;
 
-},{"./_baseIsEqualDeep":132,"./isObjectLike":266}],132:[function(require,module,exports){
-var Stack = require('./_Stack'),
-    equalArrays = require('./_equalArrays'),
-    equalByTag = require('./_equalByTag'),
-    equalObjects = require('./_equalObjects'),
-    getTag = require('./_getTag'),
-    isArray = require('./isArray'),
-    isBuffer = require('./isBuffer'),
-    isTypedArray = require('./isTypedArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsEqualDeep.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseIsEqualDeep.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js"),
+    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
+    equalByTag = __webpack_require__(/*! ./_equalByTag */ "./node_modules/lodash/_equalByTag.js"),
+    equalObjects = __webpack_require__(/*! ./_equalObjects */ "./node_modules/lodash/_equalObjects.js"),
+    getTag = __webpack_require__(/*! ./_getTag */ "./node_modules/lodash/_getTag.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isBuffer = __webpack_require__(/*! ./isBuffer */ "./node_modules/lodash/isBuffer.js"),
+    isTypedArray = __webpack_require__(/*! ./isTypedArray */ "./node_modules/lodash/isTypedArray.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -12312,9 +14793,18 @@ function baseIsEqualDeep(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = baseIsEqualDeep;
 
-},{"./_Stack":103,"./_equalArrays":172,"./_equalByTag":173,"./_equalObjects":174,"./_getTag":185,"./isArray":260,"./isBuffer":262,"./isTypedArray":268}],133:[function(require,module,exports){
-var Stack = require('./_Stack'),
-    baseIsEqual = require('./_baseIsEqual');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsMatch.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseIsMatch.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Stack = __webpack_require__(/*! ./_Stack */ "./node_modules/lodash/_Stack.js"),
+    baseIsEqual = __webpack_require__(/*! ./_baseIsEqual */ "./node_modules/lodash/_baseIsEqual.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -12376,7 +14866,16 @@ function baseIsMatch(object, source, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./_Stack":103,"./_baseIsEqual":131}],134:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsNaN.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseIsNaN.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.isNaN` without support for number objects.
  *
@@ -12390,11 +14889,20 @@ function baseIsNaN(value) {
 
 module.exports = baseIsNaN;
 
-},{}],135:[function(require,module,exports){
-var isFunction = require('./isFunction'),
-    isMasked = require('./_isMasked'),
-    isObject = require('./isObject'),
-    toSource = require('./_toSource');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsNative.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIsNative.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "./node_modules/lodash/isFunction.js"),
+    isMasked = __webpack_require__(/*! ./_isMasked */ "./node_modules/lodash/_isMasked.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "./node_modules/lodash/_toSource.js");
 
 /**
  * Used to match `RegExp`
@@ -12439,10 +14947,19 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
-},{"./_isMasked":201,"./_toSource":244,"./isFunction":263,"./isObject":265}],136:[function(require,module,exports){
-var baseGetTag = require('./_baseGetTag'),
-    isLength = require('./isLength'),
-    isObjectLike = require('./isObjectLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsTypedArray.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_baseIsTypedArray.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -12501,12 +15018,21 @@ function baseIsTypedArray(value) {
 
 module.exports = baseIsTypedArray;
 
-},{"./_baseGetTag":127,"./isLength":264,"./isObjectLike":266}],137:[function(require,module,exports){
-var baseMatches = require('./_baseMatches'),
-    baseMatchesProperty = require('./_baseMatchesProperty'),
-    identity = require('./identity'),
-    isArray = require('./isArray'),
-    property = require('./property');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIteratee.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseIteratee.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseMatches = __webpack_require__(/*! ./_baseMatches */ "./node_modules/lodash/_baseMatches.js"),
+    baseMatchesProperty = __webpack_require__(/*! ./_baseMatchesProperty */ "./node_modules/lodash/_baseMatchesProperty.js"),
+    identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    property = __webpack_require__(/*! ./property */ "./node_modules/lodash/property.js");
 
 /**
  * The base implementation of `_.iteratee`.
@@ -12534,9 +15060,18 @@ function baseIteratee(value) {
 
 module.exports = baseIteratee;
 
-},{"./_baseMatches":141,"./_baseMatchesProperty":142,"./identity":258,"./isArray":260,"./property":273}],138:[function(require,module,exports){
-var isPrototype = require('./_isPrototype'),
-    nativeKeys = require('./_nativeKeys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseKeys.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseKeys.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(/*! ./_isPrototype */ "./node_modules/lodash/_isPrototype.js"),
+    nativeKeys = __webpack_require__(/*! ./_nativeKeys */ "./node_modules/lodash/_nativeKeys.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -12566,7 +15101,16 @@ function baseKeys(object) {
 
 module.exports = baseKeys;
 
-},{"./_isPrototype":202,"./_nativeKeys":220}],139:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseLodash.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_baseLodash.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The function whose prototype chain sequence wrappers inherit from.
  *
@@ -12578,9 +15122,18 @@ function baseLodash() {
 
 module.exports = baseLodash;
 
-},{}],140:[function(require,module,exports){
-var baseEach = require('./_baseEach'),
-    isArrayLike = require('./isArrayLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseMap.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseMap.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseEach = __webpack_require__(/*! ./_baseEach */ "./node_modules/lodash/_baseEach.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js");
 
 /**
  * The base implementation of `_.map` without support for iteratee shorthands.
@@ -12602,10 +15155,19 @@ function baseMap(collection, iteratee) {
 
 module.exports = baseMap;
 
-},{"./_baseEach":119,"./isArrayLike":261}],141:[function(require,module,exports){
-var baseIsMatch = require('./_baseIsMatch'),
-    getMatchData = require('./_getMatchData'),
-    matchesStrictComparable = require('./_matchesStrictComparable');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseMatches.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseMatches.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsMatch = __webpack_require__(/*! ./_baseIsMatch */ "./node_modules/lodash/_baseIsMatch.js"),
+    getMatchData = __webpack_require__(/*! ./_getMatchData */ "./node_modules/lodash/_getMatchData.js"),
+    matchesStrictComparable = __webpack_require__(/*! ./_matchesStrictComparable */ "./node_modules/lodash/_matchesStrictComparable.js");
 
 /**
  * The base implementation of `_.matches` which doesn't clone `source`.
@@ -12626,14 +15188,23 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./_baseIsMatch":133,"./_getMatchData":181,"./_matchesStrictComparable":215}],142:[function(require,module,exports){
-var baseIsEqual = require('./_baseIsEqual'),
-    get = require('./get'),
-    hasIn = require('./hasIn'),
-    isKey = require('./_isKey'),
-    isStrictComparable = require('./_isStrictComparable'),
-    matchesStrictComparable = require('./_matchesStrictComparable'),
-    toKey = require('./_toKey');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseMatchesProperty.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/lodash/_baseMatchesProperty.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsEqual = __webpack_require__(/*! ./_baseIsEqual */ "./node_modules/lodash/_baseIsEqual.js"),
+    get = __webpack_require__(/*! ./get */ "./node_modules/lodash/get.js"),
+    hasIn = __webpack_require__(/*! ./hasIn */ "./node_modules/lodash/hasIn.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    isStrictComparable = __webpack_require__(/*! ./_isStrictComparable */ "./node_modules/lodash/_isStrictComparable.js"),
+    matchesStrictComparable = __webpack_require__(/*! ./_matchesStrictComparable */ "./node_modules/lodash/_matchesStrictComparable.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -12661,7 +15232,16 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"./_baseIsEqual":131,"./_isKey":198,"./_isStrictComparable":203,"./_matchesStrictComparable":215,"./_toKey":243,"./get":256,"./hasIn":257}],143:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseProperty.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseProperty.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -12677,8 +15257,17 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],144:[function(require,module,exports){
-var baseGet = require('./_baseGet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_basePropertyDeep.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_basePropertyDeep.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__(/*! ./_baseGet */ "./node_modules/lodash/_baseGet.js");
 
 /**
  * A specialized version of `baseProperty` which supports deep paths.
@@ -12695,10 +15284,19 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./_baseGet":125}],145:[function(require,module,exports){
-var identity = require('./identity'),
-    overRest = require('./_overRest'),
-    setToString = require('./_setToString');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseRest.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    overRest = __webpack_require__(/*! ./_overRest */ "./node_modules/lodash/_overRest.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js");
 
 /**
  * The base implementation of `_.rest` which doesn't validate or coerce arguments.
@@ -12714,9 +15312,18 @@ function baseRest(func, start) {
 
 module.exports = baseRest;
 
-},{"./_overRest":224,"./_setToString":233,"./identity":258}],146:[function(require,module,exports){
-var identity = require('./identity'),
-    metaMap = require('./_metaMap');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSetData.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_baseSetData.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js"),
+    metaMap = __webpack_require__(/*! ./_metaMap */ "./node_modules/lodash/_metaMap.js");
 
 /**
  * The base implementation of `setData` without support for hot loop shorting.
@@ -12733,10 +15340,19 @@ var baseSetData = !metaMap ? identity : function(func, data) {
 
 module.exports = baseSetData;
 
-},{"./_metaMap":218,"./identity":258}],147:[function(require,module,exports){
-var constant = require('./constant'),
-    defineProperty = require('./_defineProperty'),
-    identity = require('./identity');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSetToString.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_baseSetToString.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var constant = __webpack_require__(/*! ./constant */ "./node_modules/lodash/constant.js"),
+    defineProperty = __webpack_require__(/*! ./_defineProperty */ "./node_modules/lodash/_defineProperty.js"),
+    identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js");
 
 /**
  * The base implementation of `setToString` without support for hot loop shorting.
@@ -12757,7 +15373,16 @@ var baseSetToString = !defineProperty ? identity : function(func, string) {
 
 module.exports = baseSetToString;
 
-},{"./_defineProperty":171,"./constant":249,"./identity":258}],148:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseTimes.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseTimes.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.times` without support for iteratee shorthands
  * or max array length checks.
@@ -12779,11 +15404,20 @@ function baseTimes(n, iteratee) {
 
 module.exports = baseTimes;
 
-},{}],149:[function(require,module,exports){
-var Symbol = require('./_Symbol'),
-    arrayMap = require('./_arrayMap'),
-    isArray = require('./isArray'),
-    isSymbol = require('./isSymbol');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseToString.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_baseToString.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -12818,7 +15452,16 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{"./_Symbol":104,"./_arrayMap":112,"./isArray":260,"./isSymbol":267}],150:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseUnary.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_baseUnary.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * The base implementation of `_.unary` without support for storing metadata.
  *
@@ -12834,7 +15477,16 @@ function baseUnary(func) {
 
 module.exports = baseUnary;
 
-},{}],151:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_cacheHas.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_cacheHas.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if a `cache` value for `key` exists.
  *
@@ -12849,8 +15501,17 @@ function cacheHas(cache, key) {
 
 module.exports = cacheHas;
 
-},{}],152:[function(require,module,exports){
-var identity = require('./identity');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castFunction.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_castFunction.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var identity = __webpack_require__(/*! ./identity */ "./node_modules/lodash/identity.js");
 
 /**
  * Casts `value` to `identity` if it's not a function.
@@ -12865,11 +15526,20 @@ function castFunction(value) {
 
 module.exports = castFunction;
 
-},{"./identity":258}],153:[function(require,module,exports){
-var isArray = require('./isArray'),
-    isKey = require('./_isKey'),
-    stringToPath = require('./_stringToPath'),
-    toString = require('./toString');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_castPath.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_castPath.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    stringToPath = __webpack_require__(/*! ./_stringToPath */ "./node_modules/lodash/_stringToPath.js"),
+    toString = __webpack_require__(/*! ./toString */ "./node_modules/lodash/toString.js");
 
 /**
  * Casts `value` to a path array if it's not one.
@@ -12888,7 +15558,16 @@ function castPath(value, object) {
 
 module.exports = castPath;
 
-},{"./_isKey":198,"./_stringToPath":242,"./isArray":260,"./toString":279}],154:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_composeArgs.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_composeArgs.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
 
@@ -12929,7 +15608,16 @@ function composeArgs(args, partials, holders, isCurried) {
 
 module.exports = composeArgs;
 
-},{}],155:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_composeArgsRight.js":
+/*!**************************************************!*\
+  !*** ./node_modules/lodash/_composeArgsRight.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
 
@@ -12972,7 +15660,16 @@ function composeArgsRight(args, partials, holders, isCurried) {
 
 module.exports = composeArgsRight;
 
-},{}],156:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_copyArray.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_copyArray.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Copies the values of `source` to `array`.
  *
@@ -12994,9 +15691,18 @@ function copyArray(source, array) {
 
 module.exports = copyArray;
 
-},{}],157:[function(require,module,exports){
-var assignValue = require('./_assignValue'),
-    baseAssignValue = require('./_baseAssignValue');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_copyObject.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_copyObject.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assignValue = __webpack_require__(/*! ./_assignValue */ "./node_modules/lodash/_assignValue.js"),
+    baseAssignValue = __webpack_require__(/*! ./_baseAssignValue */ "./node_modules/lodash/_baseAssignValue.js");
 
 /**
  * Copies properties of `source` to `object`.
@@ -13036,15 +15742,33 @@ function copyObject(source, props, object, customizer) {
 
 module.exports = copyObject;
 
-},{"./_assignValue":115,"./_baseAssignValue":117}],158:[function(require,module,exports){
-var root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_coreJsData.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_coreJsData.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
 
 module.exports = coreJsData;
 
-},{"./_root":228}],159:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_countHolders.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_countHolders.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Gets the number of `placeholder` occurrences in `array`.
  *
@@ -13067,9 +15791,18 @@ function countHolders(array, placeholder) {
 
 module.exports = countHolders;
 
-},{}],160:[function(require,module,exports){
-var baseRest = require('./_baseRest'),
-    isIterateeCall = require('./_isIterateeCall');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createAssigner.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_createAssigner.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    isIterateeCall = __webpack_require__(/*! ./_isIterateeCall */ "./node_modules/lodash/_isIterateeCall.js");
 
 /**
  * Creates a function like `_.assign`.
@@ -13106,8 +15839,17 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"./_baseRest":145,"./_isIterateeCall":197}],161:[function(require,module,exports){
-var isArrayLike = require('./isArrayLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createBaseEach.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_createBaseEach.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js");
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.
@@ -13140,7 +15882,16 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./isArrayLike":261}],162:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createBaseFor.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createBaseFor.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Creates a base function for methods like `_.forIn` and `_.forOwn`.
  *
@@ -13167,9 +15918,18 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{}],163:[function(require,module,exports){
-var createCtor = require('./_createCtor'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createBind.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createBind.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1;
@@ -13197,9 +15957,18 @@ function createBind(func, bitmask, thisArg) {
 
 module.exports = createBind;
 
-},{"./_createCtor":164,"./_root":228}],164:[function(require,module,exports){
-var baseCreate = require('./_baseCreate'),
-    isObject = require('./isObject');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCtor.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createCtor.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseCreate = __webpack_require__(/*! ./_baseCreate */ "./node_modules/lodash/_baseCreate.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
 
 /**
  * Creates a function that produces an instance of `Ctor` regardless of
@@ -13236,14 +16005,23 @@ function createCtor(Ctor) {
 
 module.exports = createCtor;
 
-},{"./_baseCreate":118,"./isObject":265}],165:[function(require,module,exports){
-var apply = require('./_apply'),
-    createCtor = require('./_createCtor'),
-    createHybrid = require('./_createHybrid'),
-    createRecurry = require('./_createRecurry'),
-    getHolder = require('./_getHolder'),
-    replaceHolders = require('./_replaceHolders'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createCurry.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_createCurry.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    createHybrid = __webpack_require__(/*! ./_createHybrid */ "./node_modules/lodash/_createHybrid.js"),
+    createRecurry = __webpack_require__(/*! ./_createRecurry */ "./node_modules/lodash/_createRecurry.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /**
  * Creates a function that wraps `func` to enable currying.
@@ -13284,10 +16062,19 @@ function createCurry(func, bitmask, arity) {
 
 module.exports = createCurry;
 
-},{"./_apply":107,"./_createCtor":164,"./_createHybrid":167,"./_createRecurry":169,"./_getHolder":179,"./_replaceHolders":227,"./_root":228}],166:[function(require,module,exports){
-var baseIteratee = require('./_baseIteratee'),
-    isArrayLike = require('./isArrayLike'),
-    keys = require('./keys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createFind.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createFind.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /**
  * Creates a `_.find` or `_.findLast` function.
@@ -13311,16 +16098,25 @@ function createFind(findIndexFunc) {
 
 module.exports = createFind;
 
-},{"./_baseIteratee":137,"./isArrayLike":261,"./keys":269}],167:[function(require,module,exports){
-var composeArgs = require('./_composeArgs'),
-    composeArgsRight = require('./_composeArgsRight'),
-    countHolders = require('./_countHolders'),
-    createCtor = require('./_createCtor'),
-    createRecurry = require('./_createRecurry'),
-    getHolder = require('./_getHolder'),
-    reorder = require('./_reorder'),
-    replaceHolders = require('./_replaceHolders'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createHybrid.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_createHybrid.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var composeArgs = __webpack_require__(/*! ./_composeArgs */ "./node_modules/lodash/_composeArgs.js"),
+    composeArgsRight = __webpack_require__(/*! ./_composeArgsRight */ "./node_modules/lodash/_composeArgsRight.js"),
+    countHolders = __webpack_require__(/*! ./_countHolders */ "./node_modules/lodash/_countHolders.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    createRecurry = __webpack_require__(/*! ./_createRecurry */ "./node_modules/lodash/_createRecurry.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    reorder = __webpack_require__(/*! ./_reorder */ "./node_modules/lodash/_reorder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1,
@@ -13405,10 +16201,19 @@ function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, 
 
 module.exports = createHybrid;
 
-},{"./_composeArgs":154,"./_composeArgsRight":155,"./_countHolders":159,"./_createCtor":164,"./_createRecurry":169,"./_getHolder":179,"./_reorder":226,"./_replaceHolders":227,"./_root":228}],168:[function(require,module,exports){
-var apply = require('./_apply'),
-    createCtor = require('./_createCtor'),
-    root = require('./_root');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createPartial.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createPartial.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js"),
+    createCtor = __webpack_require__(/*! ./_createCtor */ "./node_modules/lodash/_createCtor.js"),
+    root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1;
@@ -13450,10 +16255,19 @@ function createPartial(func, bitmask, thisArg, partials) {
 
 module.exports = createPartial;
 
-},{"./_apply":107,"./_createCtor":164,"./_root":228}],169:[function(require,module,exports){
-var isLaziable = require('./_isLaziable'),
-    setData = require('./_setData'),
-    setWrapToString = require('./_setWrapToString');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createRecurry.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_createRecurry.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isLaziable = __webpack_require__(/*! ./_isLaziable */ "./node_modules/lodash/_isLaziable.js"),
+    setData = __webpack_require__(/*! ./_setData */ "./node_modules/lodash/_setData.js"),
+    setWrapToString = __webpack_require__(/*! ./_setWrapToString */ "./node_modules/lodash/_setWrapToString.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1,
@@ -13508,17 +16322,26 @@ function createRecurry(func, bitmask, wrapFunc, placeholder, thisArg, partials, 
 
 module.exports = createRecurry;
 
-},{"./_isLaziable":200,"./_setData":231,"./_setWrapToString":234}],170:[function(require,module,exports){
-var baseSetData = require('./_baseSetData'),
-    createBind = require('./_createBind'),
-    createCurry = require('./_createCurry'),
-    createHybrid = require('./_createHybrid'),
-    createPartial = require('./_createPartial'),
-    getData = require('./_getData'),
-    mergeData = require('./_mergeData'),
-    setData = require('./_setData'),
-    setWrapToString = require('./_setWrapToString'),
-    toInteger = require('./toInteger');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_createWrap.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_createWrap.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseSetData = __webpack_require__(/*! ./_baseSetData */ "./node_modules/lodash/_baseSetData.js"),
+    createBind = __webpack_require__(/*! ./_createBind */ "./node_modules/lodash/_createBind.js"),
+    createCurry = __webpack_require__(/*! ./_createCurry */ "./node_modules/lodash/_createCurry.js"),
+    createHybrid = __webpack_require__(/*! ./_createHybrid */ "./node_modules/lodash/_createHybrid.js"),
+    createPartial = __webpack_require__(/*! ./_createPartial */ "./node_modules/lodash/_createPartial.js"),
+    getData = __webpack_require__(/*! ./_getData */ "./node_modules/lodash/_getData.js"),
+    mergeData = __webpack_require__(/*! ./_mergeData */ "./node_modules/lodash/_mergeData.js"),
+    setData = __webpack_require__(/*! ./_setData */ "./node_modules/lodash/_setData.js"),
+    setWrapToString = __webpack_require__(/*! ./_setWrapToString */ "./node_modules/lodash/_setWrapToString.js"),
+    toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -13616,8 +16439,17 @@ function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arit
 
 module.exports = createWrap;
 
-},{"./_baseSetData":146,"./_createBind":163,"./_createCurry":165,"./_createHybrid":167,"./_createPartial":168,"./_getData":177,"./_mergeData":217,"./_setData":231,"./_setWrapToString":234,"./toInteger":277}],171:[function(require,module,exports){
-var getNative = require('./_getNative');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_defineProperty.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_defineProperty.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js");
 
 var defineProperty = (function() {
   try {
@@ -13629,10 +16461,19 @@ var defineProperty = (function() {
 
 module.exports = defineProperty;
 
-},{"./_getNative":182}],172:[function(require,module,exports){
-var SetCache = require('./_SetCache'),
-    arraySome = require('./_arraySome'),
-    cacheHas = require('./_cacheHas');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalArrays.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_equalArrays.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var SetCache = __webpack_require__(/*! ./_SetCache */ "./node_modules/lodash/_SetCache.js"),
+    arraySome = __webpack_require__(/*! ./_arraySome */ "./node_modules/lodash/_arraySome.js"),
+    cacheHas = __webpack_require__(/*! ./_cacheHas */ "./node_modules/lodash/_cacheHas.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -13714,13 +16555,22 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalArrays;
 
-},{"./_SetCache":102,"./_arraySome":114,"./_cacheHas":151}],173:[function(require,module,exports){
-var Symbol = require('./_Symbol'),
-    Uint8Array = require('./_Uint8Array'),
-    eq = require('./eq'),
-    equalArrays = require('./_equalArrays'),
-    mapToArray = require('./_mapToArray'),
-    setToArray = require('./_setToArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalByTag.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_equalByTag.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    Uint8Array = __webpack_require__(/*! ./_Uint8Array */ "./node_modules/lodash/_Uint8Array.js"),
+    eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js"),
+    equalArrays = __webpack_require__(/*! ./_equalArrays */ "./node_modules/lodash/_equalArrays.js"),
+    mapToArray = __webpack_require__(/*! ./_mapToArray */ "./node_modules/lodash/_mapToArray.js"),
+    setToArray = __webpack_require__(/*! ./_setToArray */ "./node_modules/lodash/_setToArray.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -13828,8 +16678,17 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalByTag;
 
-},{"./_Symbol":104,"./_Uint8Array":105,"./_equalArrays":172,"./_mapToArray":214,"./_setToArray":232,"./eq":250}],174:[function(require,module,exports){
-var getAllKeys = require('./_getAllKeys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_equalObjects.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_equalObjects.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getAllKeys = __webpack_require__(/*! ./_getAllKeys */ "./node_modules/lodash/_getAllKeys.js");
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -13919,18 +16778,35 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 
 module.exports = equalObjects;
 
-},{"./_getAllKeys":176}],175:[function(require,module,exports){
-(function (global){
-/** Detect free variable `global` from Node.js. */
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_freeGlobal.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
 var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
 module.exports = freeGlobal;
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],176:[function(require,module,exports){
-var baseGetAllKeys = require('./_baseGetAllKeys'),
-    getSymbols = require('./_getSymbols'),
-    keys = require('./keys');
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getAllKeys.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getAllKeys.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetAllKeys = __webpack_require__(/*! ./_baseGetAllKeys */ "./node_modules/lodash/_baseGetAllKeys.js"),
+    getSymbols = __webpack_require__(/*! ./_getSymbols */ "./node_modules/lodash/_getSymbols.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /**
  * Creates an array of own enumerable property names and symbols of `object`.
@@ -13945,9 +16821,18 @@ function getAllKeys(object) {
 
 module.exports = getAllKeys;
 
-},{"./_baseGetAllKeys":126,"./_getSymbols":184,"./keys":269}],177:[function(require,module,exports){
-var metaMap = require('./_metaMap'),
-    noop = require('./noop');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getData.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_getData.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var metaMap = __webpack_require__(/*! ./_metaMap */ "./node_modules/lodash/_metaMap.js"),
+    noop = __webpack_require__(/*! ./noop */ "./node_modules/lodash/noop.js");
 
 /**
  * Gets metadata for `func`.
@@ -13962,8 +16847,17 @@ var getData = !metaMap ? noop : function(func) {
 
 module.exports = getData;
 
-},{"./_metaMap":218,"./noop":272}],178:[function(require,module,exports){
-var realNames = require('./_realNames');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getFuncName.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_getFuncName.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var realNames = __webpack_require__(/*! ./_realNames */ "./node_modules/lodash/_realNames.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -13995,7 +16889,16 @@ function getFuncName(func) {
 
 module.exports = getFuncName;
 
-},{"./_realNames":225}],179:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getHolder.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getHolder.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Gets the argument placeholder value for `func`.
  *
@@ -14010,8 +16913,17 @@ function getHolder(func) {
 
 module.exports = getHolder;
 
-},{}],180:[function(require,module,exports){
-var isKeyable = require('./_isKeyable');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getMapData.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getMapData.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isKeyable = __webpack_require__(/*! ./_isKeyable */ "./node_modules/lodash/_isKeyable.js");
 
 /**
  * Gets the data for `map`.
@@ -14030,9 +16942,18 @@ function getMapData(map, key) {
 
 module.exports = getMapData;
 
-},{"./_isKeyable":199}],181:[function(require,module,exports){
-var isStrictComparable = require('./_isStrictComparable'),
-    keys = require('./keys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getMatchData.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_getMatchData.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isStrictComparable = __webpack_require__(/*! ./_isStrictComparable */ "./node_modules/lodash/_isStrictComparable.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /**
  * Gets the property names, values, and compare flags of `object`.
@@ -14056,9 +16977,18 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"./_isStrictComparable":203,"./keys":269}],182:[function(require,module,exports){
-var baseIsNative = require('./_baseIsNative'),
-    getValue = require('./_getValue');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getNative.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getNative.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsNative = __webpack_require__(/*! ./_baseIsNative */ "./node_modules/lodash/_baseIsNative.js"),
+    getValue = __webpack_require__(/*! ./_getValue */ "./node_modules/lodash/_getValue.js");
 
 /**
  * Gets the native function at `key` of `object`.
@@ -14075,8 +17005,17 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"./_baseIsNative":135,"./_getValue":186}],183:[function(require,module,exports){
-var Symbol = require('./_Symbol');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_getRawTag.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -14123,9 +17062,18 @@ function getRawTag(value) {
 
 module.exports = getRawTag;
 
-},{"./_Symbol":104}],184:[function(require,module,exports){
-var arrayFilter = require('./_arrayFilter'),
-    stubArray = require('./stubArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getSymbols.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_getSymbols.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayFilter = __webpack_require__(/*! ./_arrayFilter */ "./node_modules/lodash/_arrayFilter.js"),
+    stubArray = __webpack_require__(/*! ./stubArray */ "./node_modules/lodash/stubArray.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -14155,14 +17103,23 @@ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
 
 module.exports = getSymbols;
 
-},{"./_arrayFilter":109,"./stubArray":274}],185:[function(require,module,exports){
-var DataView = require('./_DataView'),
-    Map = require('./_Map'),
-    Promise = require('./_Promise'),
-    Set = require('./_Set'),
-    WeakMap = require('./_WeakMap'),
-    baseGetTag = require('./_baseGetTag'),
-    toSource = require('./_toSource');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getTag.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/_getTag.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DataView = __webpack_require__(/*! ./_DataView */ "./node_modules/lodash/_DataView.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js"),
+    Promise = __webpack_require__(/*! ./_Promise */ "./node_modules/lodash/_Promise.js"),
+    Set = __webpack_require__(/*! ./_Set */ "./node_modules/lodash/_Set.js"),
+    WeakMap = __webpack_require__(/*! ./_WeakMap */ "./node_modules/lodash/_WeakMap.js"),
+    baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    toSource = __webpack_require__(/*! ./_toSource */ "./node_modules/lodash/_toSource.js");
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -14215,7 +17172,16 @@ if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
 
 module.exports = getTag;
 
-},{"./_DataView":93,"./_Map":98,"./_Promise":100,"./_Set":101,"./_WeakMap":106,"./_baseGetTag":127,"./_toSource":244}],186:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getValue.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_getValue.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Gets the value at `key` of `object`.
  *
@@ -14230,7 +17196,16 @@ function getValue(object, key) {
 
 module.exports = getValue;
 
-},{}],187:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getWrapDetails.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_getWrapDetails.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used to match wrap detail comments. */
 var reWrapDetails = /\{\n\/\* \[wrapped with (.+)\] \*/,
     reSplitDetails = /,? & /;
@@ -14249,13 +17224,22 @@ function getWrapDetails(source) {
 
 module.exports = getWrapDetails;
 
-},{}],188:[function(require,module,exports){
-var castPath = require('./_castPath'),
-    isArguments = require('./isArguments'),
-    isArray = require('./isArray'),
-    isIndex = require('./_isIndex'),
-    isLength = require('./isLength'),
-    toKey = require('./_toKey');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hasPath.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hasPath.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
 
 /**
  * Checks if `path` exists on `object`.
@@ -14290,8 +17274,17 @@ function hasPath(object, path, hasFunc) {
 
 module.exports = hasPath;
 
-},{"./_castPath":153,"./_isIndex":196,"./_toKey":243,"./isArguments":259,"./isArray":260,"./isLength":264}],189:[function(require,module,exports){
-var nativeCreate = require('./_nativeCreate');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashClear.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_hashClear.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
 
 /**
  * Removes all key-value entries from the hash.
@@ -14307,7 +17300,16 @@ function hashClear() {
 
 module.exports = hashClear;
 
-},{"./_nativeCreate":219}],190:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashDelete.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_hashDelete.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Removes `key` and its value from the hash.
  *
@@ -14326,8 +17328,17 @@ function hashDelete(key) {
 
 module.exports = hashDelete;
 
-},{}],191:[function(require,module,exports){
-var nativeCreate = require('./_nativeCreate');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashGet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashGet.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -14358,8 +17369,17 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-},{"./_nativeCreate":219}],192:[function(require,module,exports){
-var nativeCreate = require('./_nativeCreate');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashHas.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashHas.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -14383,8 +17403,17 @@ function hashHas(key) {
 
 module.exports = hashHas;
 
-},{"./_nativeCreate":219}],193:[function(require,module,exports){
-var nativeCreate = require('./_nativeCreate');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_hashSet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_hashSet.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var nativeCreate = __webpack_require__(/*! ./_nativeCreate */ "./node_modules/lodash/_nativeCreate.js");
 
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -14408,7 +17437,16 @@ function hashSet(key, value) {
 
 module.exports = hashSet;
 
-},{"./_nativeCreate":219}],194:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_insertWrapDetails.js":
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_insertWrapDetails.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used to match wrap detail comments. */
 var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/;
 
@@ -14433,10 +17471,19 @@ function insertWrapDetails(source, details) {
 
 module.exports = insertWrapDetails;
 
-},{}],195:[function(require,module,exports){
-var Symbol = require('./_Symbol'),
-    isArguments = require('./isArguments'),
-    isArray = require('./isArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isFlattenable.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_isFlattenable.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__(/*! ./_Symbol */ "./node_modules/lodash/_Symbol.js"),
+    isArguments = __webpack_require__(/*! ./isArguments */ "./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
 
 /** Built-in value references. */
 var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -14455,7 +17502,16 @@ function isFlattenable(value) {
 
 module.exports = isFlattenable;
 
-},{"./_Symbol":104,"./isArguments":259,"./isArray":260}],196:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isIndex.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_isIndex.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -14482,11 +17538,20 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],197:[function(require,module,exports){
-var eq = require('./eq'),
-    isArrayLike = require('./isArrayLike'),
-    isIndex = require('./_isIndex'),
-    isObject = require('./isObject');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isIterateeCall.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_isIterateeCall.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var eq = __webpack_require__(/*! ./eq */ "./node_modules/lodash/eq.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
 
 /**
  * Checks if the given arguments are from an iteratee call.
@@ -14514,9 +17579,18 @@ function isIterateeCall(value, index, object) {
 
 module.exports = isIterateeCall;
 
-},{"./_isIndex":196,"./eq":250,"./isArrayLike":261,"./isObject":265}],198:[function(require,module,exports){
-var isArray = require('./isArray'),
-    isSymbol = require('./isSymbol');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isKey.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_isKey.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
 
 /** Used to match property names within property paths. */
 var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -14545,7 +17619,16 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"./isArray":260,"./isSymbol":267}],199:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isKeyable.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_isKeyable.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if `value` is suitable for use as unique object key.
  *
@@ -14562,11 +17645,20 @@ function isKeyable(value) {
 
 module.exports = isKeyable;
 
-},{}],200:[function(require,module,exports){
-var LazyWrapper = require('./_LazyWrapper'),
-    getData = require('./_getData'),
-    getFuncName = require('./_getFuncName'),
-    lodash = require('./wrapperLodash');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isLaziable.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_isLaziable.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    getData = __webpack_require__(/*! ./_getData */ "./node_modules/lodash/_getData.js"),
+    getFuncName = __webpack_require__(/*! ./_getFuncName */ "./node_modules/lodash/_getFuncName.js"),
+    lodash = __webpack_require__(/*! ./wrapperLodash */ "./node_modules/lodash/wrapperLodash.js");
 
 /**
  * Checks if `func` has a lazy counterpart.
@@ -14592,8 +17684,17 @@ function isLaziable(func) {
 
 module.exports = isLaziable;
 
-},{"./_LazyWrapper":95,"./_getData":177,"./_getFuncName":178,"./wrapperLodash":280}],201:[function(require,module,exports){
-var coreJsData = require('./_coreJsData');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isMasked.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_isMasked.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var coreJsData = __webpack_require__(/*! ./_coreJsData */ "./node_modules/lodash/_coreJsData.js");
 
 /** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
@@ -14614,7 +17715,16 @@ function isMasked(func) {
 
 module.exports = isMasked;
 
-},{"./_coreJsData":158}],202:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isPrototype.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_isPrototype.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -14634,8 +17744,17 @@ function isPrototype(value) {
 
 module.exports = isPrototype;
 
-},{}],203:[function(require,module,exports){
-var isObject = require('./isObject');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isStrictComparable.js":
+/*!****************************************************!*\
+  !*** ./node_modules/lodash/_isStrictComparable.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
 
 /**
  * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -14651,7 +17770,16 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"./isObject":265}],204:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheClear.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_listCacheClear.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Removes all key-value entries from the list cache.
  *
@@ -14666,8 +17794,17 @@ function listCacheClear() {
 
 module.exports = listCacheClear;
 
-},{}],205:[function(require,module,exports){
-var assocIndexOf = require('./_assocIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheDelete.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_listCacheDelete.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
 
 /** Used for built-in method references. */
 var arrayProto = Array.prototype;
@@ -14703,8 +17840,17 @@ function listCacheDelete(key) {
 
 module.exports = listCacheDelete;
 
-},{"./_assocIndexOf":116}],206:[function(require,module,exports){
-var assocIndexOf = require('./_assocIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheGet.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheGet.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
 
 /**
  * Gets the list cache value for `key`.
@@ -14724,8 +17870,17 @@ function listCacheGet(key) {
 
 module.exports = listCacheGet;
 
-},{"./_assocIndexOf":116}],207:[function(require,module,exports){
-var assocIndexOf = require('./_assocIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheHas.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheHas.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
 
 /**
  * Checks if a list cache value for `key` exists.
@@ -14742,8 +17897,17 @@ function listCacheHas(key) {
 
 module.exports = listCacheHas;
 
-},{"./_assocIndexOf":116}],208:[function(require,module,exports){
-var assocIndexOf = require('./_assocIndexOf');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_listCacheSet.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_listCacheSet.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assocIndexOf = __webpack_require__(/*! ./_assocIndexOf */ "./node_modules/lodash/_assocIndexOf.js");
 
 /**
  * Sets the list cache `key` to `value`.
@@ -14770,10 +17934,19 @@ function listCacheSet(key, value) {
 
 module.exports = listCacheSet;
 
-},{"./_assocIndexOf":116}],209:[function(require,module,exports){
-var Hash = require('./_Hash'),
-    ListCache = require('./_ListCache'),
-    Map = require('./_Map');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheClear.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheClear.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Hash = __webpack_require__(/*! ./_Hash */ "./node_modules/lodash/_Hash.js"),
+    ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js");
 
 /**
  * Removes all key-value entries from the map.
@@ -14793,8 +17966,17 @@ function mapCacheClear() {
 
 module.exports = mapCacheClear;
 
-},{"./_Hash":94,"./_ListCache":96,"./_Map":98}],210:[function(require,module,exports){
-var getMapData = require('./_getMapData');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheDelete.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_mapCacheDelete.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
 
 /**
  * Removes `key` and its value from the map.
@@ -14813,8 +17995,17 @@ function mapCacheDelete(key) {
 
 module.exports = mapCacheDelete;
 
-},{"./_getMapData":180}],211:[function(require,module,exports){
-var getMapData = require('./_getMapData');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheGet.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheGet.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
 
 /**
  * Gets the map value for `key`.
@@ -14831,8 +18022,17 @@ function mapCacheGet(key) {
 
 module.exports = mapCacheGet;
 
-},{"./_getMapData":180}],212:[function(require,module,exports){
-var getMapData = require('./_getMapData');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheHas.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheHas.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
 
 /**
  * Checks if a map value for `key` exists.
@@ -14849,8 +18049,17 @@ function mapCacheHas(key) {
 
 module.exports = mapCacheHas;
 
-},{"./_getMapData":180}],213:[function(require,module,exports){
-var getMapData = require('./_getMapData');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapCacheSet.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_mapCacheSet.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getMapData = __webpack_require__(/*! ./_getMapData */ "./node_modules/lodash/_getMapData.js");
 
 /**
  * Sets the map `key` to `value`.
@@ -14873,7 +18082,16 @@ function mapCacheSet(key, value) {
 
 module.exports = mapCacheSet;
 
-},{"./_getMapData":180}],214:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mapToArray.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_mapToArray.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Converts `map` to its key-value pairs.
  *
@@ -14893,7 +18111,16 @@ function mapToArray(map) {
 
 module.exports = mapToArray;
 
-},{}],215:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_matchesStrictComparable.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lodash/_matchesStrictComparable.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `matchesProperty` for source values suitable
  * for strict equality comparisons, i.e. `===`.
@@ -14915,8 +18142,17 @@ function matchesStrictComparable(key, srcValue) {
 
 module.exports = matchesStrictComparable;
 
-},{}],216:[function(require,module,exports){
-var memoize = require('./memoize');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_memoizeCapped.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_memoizeCapped.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoize = __webpack_require__(/*! ./memoize */ "./node_modules/lodash/memoize.js");
 
 /** Used as the maximum memoize cache size. */
 var MAX_MEMOIZE_SIZE = 500;
@@ -14943,10 +18179,19 @@ function memoizeCapped(func) {
 
 module.exports = memoizeCapped;
 
-},{"./memoize":271}],217:[function(require,module,exports){
-var composeArgs = require('./_composeArgs'),
-    composeArgsRight = require('./_composeArgsRight'),
-    replaceHolders = require('./_replaceHolders');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_mergeData.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_mergeData.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var composeArgs = __webpack_require__(/*! ./_composeArgs */ "./node_modules/lodash/_composeArgs.js"),
+    composeArgsRight = __webpack_require__(/*! ./_composeArgsRight */ "./node_modules/lodash/_composeArgsRight.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
 
 /** Used as the internal argument placeholder. */
 var PLACEHOLDER = '__lodash_placeholder__';
@@ -15035,35 +18280,71 @@ function mergeData(data, source) {
 
 module.exports = mergeData;
 
-},{"./_composeArgs":154,"./_composeArgsRight":155,"./_replaceHolders":227}],218:[function(require,module,exports){
-var WeakMap = require('./_WeakMap');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_metaMap.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_metaMap.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var WeakMap = __webpack_require__(/*! ./_WeakMap */ "./node_modules/lodash/_WeakMap.js");
 
 /** Used to store function metadata. */
 var metaMap = WeakMap && new WeakMap;
 
 module.exports = metaMap;
 
-},{"./_WeakMap":106}],219:[function(require,module,exports){
-var getNative = require('./_getNative');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nativeCreate.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_nativeCreate.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getNative = __webpack_require__(/*! ./_getNative */ "./node_modules/lodash/_getNative.js");
 
 /* Built-in method references that are verified to be native. */
 var nativeCreate = getNative(Object, 'create');
 
 module.exports = nativeCreate;
 
-},{"./_getNative":182}],220:[function(require,module,exports){
-var overArg = require('./_overArg');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nativeKeys.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_nativeKeys.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(/*! ./_overArg */ "./node_modules/lodash/_overArg.js");
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeKeys = overArg(Object.keys, Object);
 
 module.exports = nativeKeys;
 
-},{"./_overArg":223}],221:[function(require,module,exports){
-var freeGlobal = require('./_freeGlobal');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_nodeUtil.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_nodeUtil.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
 
 /** Detect free variable `exports`. */
-var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+var freeExports =  true && exports && !exports.nodeType && exports;
 
 /** Detect free variable `module`. */
 var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
@@ -15091,7 +18372,17 @@ var nodeUtil = (function() {
 
 module.exports = nodeUtil;
 
-},{"./_freeGlobal":175}],222:[function(require,module,exports){
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_objectToString.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
 
@@ -15115,7 +18406,16 @@ function objectToString(value) {
 
 module.exports = objectToString;
 
-},{}],223:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_overArg.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_overArg.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Creates a unary function that invokes `func` with its argument transformed.
  *
@@ -15132,8 +18432,17 @@ function overArg(func, transform) {
 
 module.exports = overArg;
 
-},{}],224:[function(require,module,exports){
-var apply = require('./_apply');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_overRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_overRest.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var apply = __webpack_require__(/*! ./_apply */ "./node_modules/lodash/_apply.js");
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -15170,15 +18479,33 @@ function overRest(func, start, transform) {
 
 module.exports = overRest;
 
-},{"./_apply":107}],225:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_realNames.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/_realNames.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used to lookup unminified function names. */
 var realNames = {};
 
 module.exports = realNames;
 
-},{}],226:[function(require,module,exports){
-var copyArray = require('./_copyArray'),
-    isIndex = require('./_isIndex');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_reorder.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_reorder.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var copyArray = __webpack_require__(/*! ./_copyArray */ "./node_modules/lodash/_copyArray.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js");
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMin = Math.min;
@@ -15207,7 +18534,16 @@ function reorder(array, indexes) {
 
 module.exports = reorder;
 
-},{"./_copyArray":156,"./_isIndex":196}],227:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_replaceHolders.js":
+/*!************************************************!*\
+  !*** ./node_modules/lodash/_replaceHolders.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used as the internal argument placeholder. */
 var PLACEHOLDER = '__lodash_placeholder__';
 
@@ -15238,8 +18574,17 @@ function replaceHolders(array, placeholder) {
 
 module.exports = replaceHolders;
 
-},{}],228:[function(require,module,exports){
-var freeGlobal = require('./_freeGlobal');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/_root.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ "./node_modules/lodash/_freeGlobal.js");
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -15249,7 +18594,16 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":175}],229:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setCacheAdd.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheAdd.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used to stand-in for `undefined` hash values. */
 var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
@@ -15270,7 +18624,16 @@ function setCacheAdd(value) {
 
 module.exports = setCacheAdd;
 
-},{}],230:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setCacheHas.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setCacheHas.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if `value` is in the array cache.
  *
@@ -15286,9 +18649,18 @@ function setCacheHas(value) {
 
 module.exports = setCacheHas;
 
-},{}],231:[function(require,module,exports){
-var baseSetData = require('./_baseSetData'),
-    shortOut = require('./_shortOut');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setData.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_setData.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseSetData = __webpack_require__(/*! ./_baseSetData */ "./node_modules/lodash/_baseSetData.js"),
+    shortOut = __webpack_require__(/*! ./_shortOut */ "./node_modules/lodash/_shortOut.js");
 
 /**
  * Sets metadata for `func`.
@@ -15308,7 +18680,16 @@ var setData = shortOut(baseSetData);
 
 module.exports = setData;
 
-},{"./_baseSetData":146,"./_shortOut":235}],232:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setToArray.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_setToArray.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Converts `set` to an array of its values.
  *
@@ -15328,9 +18709,18 @@ function setToArray(set) {
 
 module.exports = setToArray;
 
-},{}],233:[function(require,module,exports){
-var baseSetToString = require('./_baseSetToString'),
-    shortOut = require('./_shortOut');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setToString.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_setToString.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseSetToString = __webpack_require__(/*! ./_baseSetToString */ "./node_modules/lodash/_baseSetToString.js"),
+    shortOut = __webpack_require__(/*! ./_shortOut */ "./node_modules/lodash/_shortOut.js");
 
 /**
  * Sets the `toString` method of `func` to return `string`.
@@ -15344,11 +18734,20 @@ var setToString = shortOut(baseSetToString);
 
 module.exports = setToString;
 
-},{"./_baseSetToString":147,"./_shortOut":235}],234:[function(require,module,exports){
-var getWrapDetails = require('./_getWrapDetails'),
-    insertWrapDetails = require('./_insertWrapDetails'),
-    setToString = require('./_setToString'),
-    updateWrapDetails = require('./_updateWrapDetails');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_setWrapToString.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_setWrapToString.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getWrapDetails = __webpack_require__(/*! ./_getWrapDetails */ "./node_modules/lodash/_getWrapDetails.js"),
+    insertWrapDetails = __webpack_require__(/*! ./_insertWrapDetails */ "./node_modules/lodash/_insertWrapDetails.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js"),
+    updateWrapDetails = __webpack_require__(/*! ./_updateWrapDetails */ "./node_modules/lodash/_updateWrapDetails.js");
 
 /**
  * Sets the `toString` method of `wrapper` to mimic the source of `reference`
@@ -15367,7 +18766,16 @@ function setWrapToString(wrapper, reference, bitmask) {
 
 module.exports = setWrapToString;
 
-},{"./_getWrapDetails":187,"./_insertWrapDetails":194,"./_setToString":233,"./_updateWrapDetails":245}],235:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_shortOut.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_shortOut.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used to detect hot functions by number of calls within a span of milliseconds. */
 var HOT_COUNT = 800,
     HOT_SPAN = 16;
@@ -15406,8 +18814,17 @@ function shortOut(func) {
 
 module.exports = shortOut;
 
-},{}],236:[function(require,module,exports){
-var ListCache = require('./_ListCache');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackClear.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_stackClear.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js");
 
 /**
  * Removes all key-value entries from the stack.
@@ -15423,7 +18840,16 @@ function stackClear() {
 
 module.exports = stackClear;
 
-},{"./_ListCache":96}],237:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackDelete.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/_stackDelete.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Removes `key` and its value from the stack.
  *
@@ -15443,7 +18869,16 @@ function stackDelete(key) {
 
 module.exports = stackDelete;
 
-},{}],238:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackGet.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackGet.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Gets the stack value for `key`.
  *
@@ -15459,7 +18894,16 @@ function stackGet(key) {
 
 module.exports = stackGet;
 
-},{}],239:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackHas.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackHas.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if a stack value for `key` exists.
  *
@@ -15475,10 +18919,19 @@ function stackHas(key) {
 
 module.exports = stackHas;
 
-},{}],240:[function(require,module,exports){
-var ListCache = require('./_ListCache'),
-    Map = require('./_Map'),
-    MapCache = require('./_MapCache');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stackSet.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_stackSet.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ListCache = __webpack_require__(/*! ./_ListCache */ "./node_modules/lodash/_ListCache.js"),
+    Map = __webpack_require__(/*! ./_Map */ "./node_modules/lodash/_Map.js"),
+    MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js");
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -15511,7 +18964,16 @@ function stackSet(key, value) {
 
 module.exports = stackSet;
 
-},{"./_ListCache":96,"./_Map":98,"./_MapCache":99}],241:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_strictIndexOf.js":
+/*!***********************************************!*\
+  !*** ./node_modules/lodash/_strictIndexOf.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * A specialized version of `_.indexOf` which performs strict equality
  * comparisons of values, i.e. `===`.
@@ -15536,8 +18998,17 @@ function strictIndexOf(array, value, fromIndex) {
 
 module.exports = strictIndexOf;
 
-},{}],242:[function(require,module,exports){
-var memoizeCapped = require('./_memoizeCapped');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_stringToPath.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_stringToPath.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var memoizeCapped = __webpack_require__(/*! ./_memoizeCapped */ "./node_modules/lodash/_memoizeCapped.js");
 
 /** Used to match property names within property paths. */
 var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -15565,8 +19036,17 @@ var stringToPath = memoizeCapped(function(string) {
 
 module.exports = stringToPath;
 
-},{"./_memoizeCapped":216}],243:[function(require,module,exports){
-var isSymbol = require('./isSymbol');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_toKey.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/_toKey.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -15588,7 +19068,16 @@ function toKey(value) {
 
 module.exports = toKey;
 
-},{"./isSymbol":267}],244:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_toSource.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_toSource.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used for built-in method references. */
 var funcProto = Function.prototype;
 
@@ -15616,9 +19105,18 @@ function toSource(func) {
 
 module.exports = toSource;
 
-},{}],245:[function(require,module,exports){
-var arrayEach = require('./_arrayEach'),
-    arrayIncludes = require('./_arrayIncludes');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_updateWrapDetails.js":
+/*!***************************************************!*\
+  !*** ./node_modules/lodash/_updateWrapDetails.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayEach = __webpack_require__(/*! ./_arrayEach */ "./node_modules/lodash/_arrayEach.js"),
+    arrayIncludes = __webpack_require__(/*! ./_arrayIncludes */ "./node_modules/lodash/_arrayIncludes.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1,
@@ -15664,10 +19162,19 @@ function updateWrapDetails(details, bitmask) {
 
 module.exports = updateWrapDetails;
 
-},{"./_arrayEach":108,"./_arrayIncludes":110}],246:[function(require,module,exports){
-var LazyWrapper = require('./_LazyWrapper'),
-    LodashWrapper = require('./_LodashWrapper'),
-    copyArray = require('./_copyArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_wrapperClone.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/_wrapperClone.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    LodashWrapper = __webpack_require__(/*! ./_LodashWrapper */ "./node_modules/lodash/_LodashWrapper.js"),
+    copyArray = __webpack_require__(/*! ./_copyArray */ "./node_modules/lodash/_copyArray.js");
 
 /**
  * Creates a clone of `wrapper`.
@@ -15689,13 +19196,22 @@ function wrapperClone(wrapper) {
 
 module.exports = wrapperClone;
 
-},{"./_LazyWrapper":95,"./_LodashWrapper":97,"./_copyArray":156}],247:[function(require,module,exports){
-var assignValue = require('./_assignValue'),
-    copyObject = require('./_copyObject'),
-    createAssigner = require('./_createAssigner'),
-    isArrayLike = require('./isArrayLike'),
-    isPrototype = require('./_isPrototype'),
-    keys = require('./keys');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/assign.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/assign.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assignValue = __webpack_require__(/*! ./_assignValue */ "./node_modules/lodash/_assignValue.js"),
+    copyObject = __webpack_require__(/*! ./_copyObject */ "./node_modules/lodash/_copyObject.js"),
+    createAssigner = __webpack_require__(/*! ./_createAssigner */ "./node_modules/lodash/_createAssigner.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js"),
+    isPrototype = __webpack_require__(/*! ./_isPrototype */ "./node_modules/lodash/_isPrototype.js"),
+    keys = __webpack_require__(/*! ./keys */ "./node_modules/lodash/keys.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -15749,11 +19265,20 @@ var assign = createAssigner(function(object, source) {
 
 module.exports = assign;
 
-},{"./_assignValue":115,"./_copyObject":157,"./_createAssigner":160,"./_isPrototype":202,"./isArrayLike":261,"./keys":269}],248:[function(require,module,exports){
-var baseRest = require('./_baseRest'),
-    createWrap = require('./_createWrap'),
-    getHolder = require('./_getHolder'),
-    replaceHolders = require('./_replaceHolders');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/bind.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/bind.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseRest = __webpack_require__(/*! ./_baseRest */ "./node_modules/lodash/_baseRest.js"),
+    createWrap = __webpack_require__(/*! ./_createWrap */ "./node_modules/lodash/_createWrap.js"),
+    getHolder = __webpack_require__(/*! ./_getHolder */ "./node_modules/lodash/_getHolder.js"),
+    replaceHolders = __webpack_require__(/*! ./_replaceHolders */ "./node_modules/lodash/_replaceHolders.js");
 
 /** Used to compose bitmasks for function metadata. */
 var WRAP_BIND_FLAG = 1,
@@ -15808,7 +19333,16 @@ bind.placeholder = {};
 
 module.exports = bind;
 
-},{"./_baseRest":145,"./_createWrap":170,"./_getHolder":179,"./_replaceHolders":227}],249:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/constant.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/constant.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Creates a function that returns `value`.
  *
@@ -15836,7 +19370,16 @@ function constant(value) {
 
 module.exports = constant;
 
-},{}],250:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/eq.js":
+/*!***********************************!*\
+  !*** ./node_modules/lodash/eq.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Performs a
  * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
@@ -15875,11 +19418,20 @@ function eq(value, other) {
 
 module.exports = eq;
 
-},{}],251:[function(require,module,exports){
-var arrayFilter = require('./_arrayFilter'),
-    baseFilter = require('./_baseFilter'),
-    baseIteratee = require('./_baseIteratee'),
-    isArray = require('./isArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/filter.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/filter.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayFilter = __webpack_require__(/*! ./_arrayFilter */ "./node_modules/lodash/_arrayFilter.js"),
+    baseFilter = __webpack_require__(/*! ./_baseFilter */ "./node_modules/lodash/_baseFilter.js"),
+    baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
 
 /**
  * Iterates over elements of `collection`, returning an array of all elements
@@ -15925,9 +19477,18 @@ function filter(collection, predicate) {
 
 module.exports = filter;
 
-},{"./_arrayFilter":109,"./_baseFilter":120,"./_baseIteratee":137,"./isArray":260}],252:[function(require,module,exports){
-var createFind = require('./_createFind'),
-    findIndex = require('./findIndex');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/find.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/find.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var createFind = __webpack_require__(/*! ./_createFind */ "./node_modules/lodash/_createFind.js"),
+    findIndex = __webpack_require__(/*! ./findIndex */ "./node_modules/lodash/findIndex.js");
 
 /**
  * Iterates over elements of `collection`, returning the first element
@@ -15969,10 +19530,19 @@ var find = createFind(findIndex);
 
 module.exports = find;
 
-},{"./_createFind":166,"./findIndex":253}],253:[function(require,module,exports){
-var baseFindIndex = require('./_baseFindIndex'),
-    baseIteratee = require('./_baseIteratee'),
-    toInteger = require('./toInteger');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/findIndex.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/findIndex.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFindIndex = __webpack_require__(/*! ./_baseFindIndex */ "./node_modules/lodash/_baseFindIndex.js"),
+    baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    toInteger = __webpack_require__(/*! ./toInteger */ "./node_modules/lodash/toInteger.js");
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -16026,8 +19596,17 @@ function findIndex(array, predicate, fromIndex) {
 
 module.exports = findIndex;
 
-},{"./_baseFindIndex":121,"./_baseIteratee":137,"./toInteger":277}],254:[function(require,module,exports){
-var baseFlatten = require('./_baseFlatten');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/flattenDeep.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/flattenDeep.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFlatten = __webpack_require__(/*! ./_baseFlatten */ "./node_modules/lodash/_baseFlatten.js");
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0;
@@ -16053,11 +19632,20 @@ function flattenDeep(array) {
 
 module.exports = flattenDeep;
 
-},{"./_baseFlatten":122}],255:[function(require,module,exports){
-var arrayEach = require('./_arrayEach'),
-    baseEach = require('./_baseEach'),
-    castFunction = require('./_castFunction'),
-    isArray = require('./isArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/forEach.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/forEach.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayEach = __webpack_require__(/*! ./_arrayEach */ "./node_modules/lodash/_arrayEach.js"),
+    baseEach = __webpack_require__(/*! ./_baseEach */ "./node_modules/lodash/_baseEach.js"),
+    castFunction = __webpack_require__(/*! ./_castFunction */ "./node_modules/lodash/_castFunction.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
 
 /**
  * Iterates over elements of `collection` and invokes `iteratee` for each element.
@@ -16096,8 +19684,17 @@ function forEach(collection, iteratee) {
 
 module.exports = forEach;
 
-},{"./_arrayEach":108,"./_baseEach":119,"./_castFunction":152,"./isArray":260}],256:[function(require,module,exports){
-var baseGet = require('./_baseGet');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/get.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/get.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__(/*! ./_baseGet */ "./node_modules/lodash/_baseGet.js");
 
 /**
  * Gets the value at `path` of `object`. If the resolved value is
@@ -16131,9 +19728,18 @@ function get(object, path, defaultValue) {
 
 module.exports = get;
 
-},{"./_baseGet":125}],257:[function(require,module,exports){
-var baseHasIn = require('./_baseHasIn'),
-    hasPath = require('./_hasPath');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/hasIn.js":
+/*!**************************************!*\
+  !*** ./node_modules/lodash/hasIn.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseHasIn = __webpack_require__(/*! ./_baseHasIn */ "./node_modules/lodash/_baseHasIn.js"),
+    hasPath = __webpack_require__(/*! ./_hasPath */ "./node_modules/lodash/_hasPath.js");
 
 /**
  * Checks if `path` is a direct or inherited property of `object`.
@@ -16167,7 +19773,16 @@ function hasIn(object, path) {
 
 module.exports = hasIn;
 
-},{"./_baseHasIn":128,"./_hasPath":188}],258:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/identity.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/identity.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * This method returns the first argument it receives.
  *
@@ -16190,9 +19805,18 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],259:[function(require,module,exports){
-var baseIsArguments = require('./_baseIsArguments'),
-    isObjectLike = require('./isObjectLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArguments.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArguments.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsArguments = __webpack_require__(/*! ./_baseIsArguments */ "./node_modules/lodash/_baseIsArguments.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -16228,7 +19852,16 @@ var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsAr
 
 module.exports = isArguments;
 
-},{"./_baseIsArguments":130,"./isObjectLike":266}],260:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArray.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/isArray.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if `value` is classified as an `Array` object.
  *
@@ -16256,9 +19889,18 @@ var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],261:[function(require,module,exports){
-var isFunction = require('./isFunction'),
-    isLength = require('./isLength');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArrayLike.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isArrayLike.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(/*! ./isFunction */ "./node_modules/lodash/isFunction.js"),
+    isLength = __webpack_require__(/*! ./isLength */ "./node_modules/lodash/isLength.js");
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -16291,12 +19933,21 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./isFunction":263,"./isLength":264}],262:[function(require,module,exports){
-var root = require('./_root'),
-    stubFalse = require('./stubFalse');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isBuffer.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isBuffer.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(/*! ./_root */ "./node_modules/lodash/_root.js"),
+    stubFalse = __webpack_require__(/*! ./stubFalse */ "./node_modules/lodash/stubFalse.js");
 
 /** Detect free variable `exports`. */
-var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
+var freeExports =  true && exports && !exports.nodeType && exports;
 
 /** Detect free variable `module`. */
 var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
@@ -16331,9 +19982,19 @@ var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-},{"./_root":228,"./stubFalse":275}],263:[function(require,module,exports){
-var baseGetTag = require('./_baseGetTag'),
-    isObject = require('./isObject');
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/module.js */ "./node_modules/webpack/buildin/module.js")(module)))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isFunction.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lodash/isFunction.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js");
 
 /** `Object#toString` result references. */
 var asyncTag = '[object AsyncFunction]',
@@ -16370,7 +20031,16 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./_baseGetTag":127,"./isObject":265}],264:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isLength.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isLength.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /** Used as references for various `Number` constants. */
 var MAX_SAFE_INTEGER = 9007199254740991;
 
@@ -16407,7 +20077,16 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],265:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObject.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isObject.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -16440,7 +20119,16 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],266:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isObjectLike.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -16471,9 +20159,18 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],267:[function(require,module,exports){
-var baseGetTag = require('./_baseGetTag'),
-    isObjectLike = require('./isObjectLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isSymbol.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/isSymbol.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ "./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js");
 
 /** `Object#toString` result references. */
 var symbolTag = '[object Symbol]';
@@ -16502,10 +20199,19 @@ function isSymbol(value) {
 
 module.exports = isSymbol;
 
-},{"./_baseGetTag":127,"./isObjectLike":266}],268:[function(require,module,exports){
-var baseIsTypedArray = require('./_baseIsTypedArray'),
-    baseUnary = require('./_baseUnary'),
-    nodeUtil = require('./_nodeUtil');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isTypedArray.js":
+/*!*********************************************!*\
+  !*** ./node_modules/lodash/isTypedArray.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsTypedArray = __webpack_require__(/*! ./_baseIsTypedArray */ "./node_modules/lodash/_baseIsTypedArray.js"),
+    baseUnary = __webpack_require__(/*! ./_baseUnary */ "./node_modules/lodash/_baseUnary.js"),
+    nodeUtil = __webpack_require__(/*! ./_nodeUtil */ "./node_modules/lodash/_nodeUtil.js");
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -16531,10 +20237,19 @@ var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedA
 
 module.exports = isTypedArray;
 
-},{"./_baseIsTypedArray":136,"./_baseUnary":150,"./_nodeUtil":221}],269:[function(require,module,exports){
-var arrayLikeKeys = require('./_arrayLikeKeys'),
-    baseKeys = require('./_baseKeys'),
-    isArrayLike = require('./isArrayLike');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/keys.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/keys.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(/*! ./_arrayLikeKeys */ "./node_modules/lodash/_arrayLikeKeys.js"),
+    baseKeys = __webpack_require__(/*! ./_baseKeys */ "./node_modules/lodash/_baseKeys.js"),
+    isArrayLike = __webpack_require__(/*! ./isArrayLike */ "./node_modules/lodash/isArrayLike.js");
 
 /**
  * Creates an array of the own enumerable property names of `object`.
@@ -16570,11 +20285,20 @@ function keys(object) {
 
 module.exports = keys;
 
-},{"./_arrayLikeKeys":111,"./_baseKeys":138,"./isArrayLike":261}],270:[function(require,module,exports){
-var arrayMap = require('./_arrayMap'),
-    baseIteratee = require('./_baseIteratee'),
-    baseMap = require('./_baseMap'),
-    isArray = require('./isArray');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/map.js":
+/*!************************************!*\
+  !*** ./node_modules/lodash/map.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(/*! ./_arrayMap */ "./node_modules/lodash/_arrayMap.js"),
+    baseIteratee = __webpack_require__(/*! ./_baseIteratee */ "./node_modules/lodash/_baseIteratee.js"),
+    baseMap = __webpack_require__(/*! ./_baseMap */ "./node_modules/lodash/_baseMap.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js");
 
 /**
  * Creates an array of values by running each element in `collection` thru
@@ -16625,8 +20349,17 @@ function map(collection, iteratee) {
 
 module.exports = map;
 
-},{"./_arrayMap":112,"./_baseIteratee":137,"./_baseMap":140,"./isArray":260}],271:[function(require,module,exports){
-var MapCache = require('./_MapCache');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/memoize.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/memoize.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MapCache = __webpack_require__(/*! ./_MapCache */ "./node_modules/lodash/_MapCache.js");
 
 /** Error message constants. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -16700,7 +20433,16 @@ memoize.Cache = MapCache;
 
 module.exports = memoize;
 
-},{"./_MapCache":99}],272:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/noop.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/noop.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * This method returns `undefined`.
  *
@@ -16719,11 +20461,20 @@ function noop() {
 
 module.exports = noop;
 
-},{}],273:[function(require,module,exports){
-var baseProperty = require('./_baseProperty'),
-    basePropertyDeep = require('./_basePropertyDeep'),
-    isKey = require('./_isKey'),
-    toKey = require('./_toKey');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/property.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/property.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseProperty = __webpack_require__(/*! ./_baseProperty */ "./node_modules/lodash/_baseProperty.js"),
+    basePropertyDeep = __webpack_require__(/*! ./_basePropertyDeep */ "./node_modules/lodash/_basePropertyDeep.js"),
+    isKey = __webpack_require__(/*! ./_isKey */ "./node_modules/lodash/_isKey.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
 
 /**
  * Creates a function that returns the value at `path` of a given object.
@@ -16753,7 +20504,16 @@ function property(path) {
 
 module.exports = property;
 
-},{"./_baseProperty":143,"./_basePropertyDeep":144,"./_isKey":198,"./_toKey":243}],274:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/stubArray.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubArray.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * This method returns a new empty array.
  *
@@ -16778,7 +20538,16 @@ function stubArray() {
 
 module.exports = stubArray;
 
-},{}],275:[function(require,module,exports){
+
+/***/ }),
+
+/***/ "./node_modules/lodash/stubFalse.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/stubFalse.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
 /**
  * This method returns `false`.
  *
@@ -16798,8 +20567,17 @@ function stubFalse() {
 
 module.exports = stubFalse;
 
-},{}],276:[function(require,module,exports){
-var toNumber = require('./toNumber');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toFinite.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toFinite.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toNumber = __webpack_require__(/*! ./toNumber */ "./node_modules/lodash/toNumber.js");
 
 /** Used as references for various `Number` constants. */
 var INFINITY = 1 / 0,
@@ -16842,8 +20620,17 @@ function toFinite(value) {
 
 module.exports = toFinite;
 
-},{"./toNumber":278}],277:[function(require,module,exports){
-var toFinite = require('./toFinite');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toInteger.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/toInteger.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toFinite = __webpack_require__(/*! ./toFinite */ "./node_modules/lodash/toFinite.js");
 
 /**
  * Converts `value` to an integer.
@@ -16880,9 +20667,18 @@ function toInteger(value) {
 
 module.exports = toInteger;
 
-},{"./toFinite":276}],278:[function(require,module,exports){
-var isObject = require('./isObject'),
-    isSymbol = require('./isSymbol');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toNumber.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toNumber.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
 
 /** Used as references for various `Number` constants. */
 var NAN = 0 / 0;
@@ -16948,8 +20744,17 @@ function toNumber(value) {
 
 module.exports = toNumber;
 
-},{"./isObject":265,"./isSymbol":267}],279:[function(require,module,exports){
-var baseToString = require('./_baseToString');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/toString.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/toString.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseToString = __webpack_require__(/*! ./_baseToString */ "./node_modules/lodash/_baseToString.js");
 
 /**
  * Converts `value` to a string. An empty string is returned for `null`
@@ -16978,13 +20783,22 @@ function toString(value) {
 
 module.exports = toString;
 
-},{"./_baseToString":149}],280:[function(require,module,exports){
-var LazyWrapper = require('./_LazyWrapper'),
-    LodashWrapper = require('./_LodashWrapper'),
-    baseLodash = require('./_baseLodash'),
-    isArray = require('./isArray'),
-    isObjectLike = require('./isObjectLike'),
-    wrapperClone = require('./_wrapperClone');
+
+/***/ }),
+
+/***/ "./node_modules/lodash/wrapperLodash.js":
+/*!**********************************************!*\
+  !*** ./node_modules/lodash/wrapperLodash.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var LazyWrapper = __webpack_require__(/*! ./_LazyWrapper */ "./node_modules/lodash/_LazyWrapper.js"),
+    LodashWrapper = __webpack_require__(/*! ./_LodashWrapper */ "./node_modules/lodash/_LodashWrapper.js"),
+    baseLodash = __webpack_require__(/*! ./_baseLodash */ "./node_modules/lodash/_baseLodash.js"),
+    isArray = __webpack_require__(/*! ./isArray */ "./node_modules/lodash/isArray.js"),
+    isObjectLike = __webpack_require__(/*! ./isObjectLike */ "./node_modules/lodash/isObjectLike.js"),
+    wrapperClone = __webpack_require__(/*! ./_wrapperClone */ "./node_modules/lodash/_wrapperClone.js");
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -17127,11 +20941,667 @@ lodash.prototype.constructor = lodash;
 
 module.exports = lodash;
 
-},{"./_LazyWrapper":95,"./_LodashWrapper":97,"./_baseLodash":139,"./_wrapperClone":246,"./isArray":260,"./isObjectLike":266}],281:[function(require,module,exports){
-'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
+/***/ }),
 
+/***/ "./node_modules/min-dash/dist/index.esm.js":
+/*!*************************************************!*\
+  !*** ./node_modules/min-dash/dist/index.esm.js ***!
+  \*************************************************/
+/*! exports provided: flatten, find, findIndex, filter, forEach, without, reduce, every, some, map, keys, size, values, groupBy, uniqueBy, unionBy, sortBy, matchPattern, debounce, throttle, bind, isUndefined, isDefined, isNil, isArray, isObject, isNumber, isFunction, isString, ensureArray, has, assign, pick, omit, merge */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flatten", function() { return flatten; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "find", function() { return find; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findIndex", function() { return findIndex; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return filter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forEach", function() { return forEach; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "without", function() { return without; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reduce", function() { return reduce; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "every", function() { return every; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "some", function() { return some; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "map", function() { return map; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keys", function() { return keys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "size", function() { return size; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "values", function() { return values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "groupBy", function() { return groupBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uniqueBy", function() { return uniqueBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unionBy", function() { return unionBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortBy", function() { return sortBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchPattern", function() { return matchPattern; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debounce", function() { return debounce; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throttle", function() { return throttle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bind", function() { return bind; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNil", function() { return isNil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ensureArray", function() { return ensureArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "has", function() { return has; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assign", function() { return assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pick", function() { return pick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "omit", function() { return omit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "merge", function() { return merge; });
+/**
+ * Flatten array, one level deep.
+ *
+ * @param {Array<?>} arr
+ *
+ * @return {Array<?>}
+ */
+function flatten(arr) {
+  return Array.prototype.concat.apply([], arr);
+}
+
+var nativeToString = Object.prototype.toString;
+var nativeHasOwnProperty = Object.prototype.hasOwnProperty;
+function isUndefined(obj) {
+  return obj === undefined;
+}
+function isDefined(obj) {
+  return obj !== undefined;
+}
+function isNil(obj) {
+  return obj == null;
+}
+function isArray(obj) {
+  return nativeToString.call(obj) === '[object Array]';
+}
+function isObject(obj) {
+  return nativeToString.call(obj) === '[object Object]';
+}
+function isNumber(obj) {
+  return nativeToString.call(obj) === '[object Number]';
+}
+function isFunction(obj) {
+  var tag = nativeToString.call(obj);
+  return tag === '[object Function]' || tag === '[object AsyncFunction]' || tag === '[object GeneratorFunction]' || tag === '[object AsyncGeneratorFunction]' || tag === '[object Proxy]';
+}
+function isString(obj) {
+  return nativeToString.call(obj) === '[object String]';
+}
+/**
+ * Ensure collection is an array.
+ *
+ * @param {Object} obj
+ */
+
+function ensureArray(obj) {
+  if (isArray(obj)) {
+    return;
+  }
+
+  throw new Error('must supply array');
+}
+/**
+ * Return true, if target owns a property with the given key.
+ *
+ * @param {Object} target
+ * @param {String} key
+ *
+ * @return {Boolean}
+ */
+
+function has(target, key) {
+  return nativeHasOwnProperty.call(target, key);
+}
+
+/**
+ * Find element in collection.
+ *
+ * @param  {Array|Object} collection
+ * @param  {Function|Object} matcher
+ *
+ * @return {Object}
+ */
+
+function find(collection, matcher) {
+  matcher = toMatcher(matcher);
+  var match;
+  forEach(collection, function (val, key) {
+    if (matcher(val, key)) {
+      match = val;
+      return false;
+    }
+  });
+  return match;
+}
+/**
+ * Find element index in collection.
+ *
+ * @param  {Array|Object} collection
+ * @param  {Function} matcher
+ *
+ * @return {Object}
+ */
+
+function findIndex(collection, matcher) {
+  matcher = toMatcher(matcher);
+  var idx = isArray(collection) ? -1 : undefined;
+  forEach(collection, function (val, key) {
+    if (matcher(val, key)) {
+      idx = key;
+      return false;
+    }
+  });
+  return idx;
+}
+/**
+ * Find element in collection.
+ *
+ * @param  {Array|Object} collection
+ * @param  {Function} matcher
+ *
+ * @return {Array} result
+ */
+
+function filter(collection, matcher) {
+  var result = [];
+  forEach(collection, function (val, key) {
+    if (matcher(val, key)) {
+      result.push(val);
+    }
+  });
+  return result;
+}
+/**
+ * Iterate over collection; returning something
+ * (non-undefined) will stop iteration.
+ *
+ * @param  {Array|Object} collection
+ * @param  {Function} iterator
+ *
+ * @return {Object} return result that stopped the iteration
+ */
+
+function forEach(collection, iterator) {
+  var val, result;
+
+  if (isUndefined(collection)) {
+    return;
+  }
+
+  var convertKey = isArray(collection) ? toNum : identity;
+
+  for (var key in collection) {
+    if (has(collection, key)) {
+      val = collection[key];
+      result = iterator(val, convertKey(key));
+
+      if (result === false) {
+        return val;
+      }
+    }
+  }
+}
+/**
+ * Return collection without element.
+ *
+ * @param  {Array} arr
+ * @param  {Function} matcher
+ *
+ * @return {Array}
+ */
+
+function without(arr, matcher) {
+  if (isUndefined(arr)) {
+    return [];
+  }
+
+  ensureArray(arr);
+  matcher = toMatcher(matcher);
+  return arr.filter(function (el, idx) {
+    return !matcher(el, idx);
+  });
+}
+/**
+ * Reduce collection, returning a single result.
+ *
+ * @param  {Object|Array} collection
+ * @param  {Function} iterator
+ * @param  {Any} result
+ *
+ * @return {Any} result returned from last iterator
+ */
+
+function reduce(collection, iterator, result) {
+  forEach(collection, function (value, idx) {
+    result = iterator(result, value, idx);
+  });
+  return result;
+}
+/**
+ * Return true if every element in the collection
+ * matches the criteria.
+ *
+ * @param  {Object|Array} collection
+ * @param  {Function} matcher
+ *
+ * @return {Boolean}
+ */
+
+function every(collection, matcher) {
+  return !!reduce(collection, function (matches, val, key) {
+    return matches && matcher(val, key);
+  }, true);
+}
+/**
+ * Return true if some elements in the collection
+ * match the criteria.
+ *
+ * @param  {Object|Array} collection
+ * @param  {Function} matcher
+ *
+ * @return {Boolean}
+ */
+
+function some(collection, matcher) {
+  return !!find(collection, matcher);
+}
+/**
+ * Transform a collection into another collection
+ * by piping each member through the given fn.
+ *
+ * @param  {Object|Array}   collection
+ * @param  {Function} fn
+ *
+ * @return {Array} transformed collection
+ */
+
+function map(collection, fn) {
+  var result = [];
+  forEach(collection, function (val, key) {
+    result.push(fn(val, key));
+  });
+  return result;
+}
+/**
+ * Get the collections keys.
+ *
+ * @param  {Object|Array} collection
+ *
+ * @return {Array}
+ */
+
+function keys(collection) {
+  return collection && Object.keys(collection) || [];
+}
+/**
+ * Shorthand for `keys(o).length`.
+ *
+ * @param  {Object|Array} collection
+ *
+ * @return {Number}
+ */
+
+function size(collection) {
+  return keys(collection).length;
+}
+/**
+ * Get the values in the collection.
+ *
+ * @param  {Object|Array} collection
+ *
+ * @return {Array}
+ */
+
+function values(collection) {
+  return map(collection, function (val) {
+    return val;
+  });
+}
+/**
+ * Group collection members by attribute.
+ *
+ * @param  {Object|Array} collection
+ * @param  {Function} extractor
+ *
+ * @return {Object} map with { attrValue => [ a, b, c ] }
+ */
+
+function groupBy(collection, extractor) {
+  var grouped = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  extractor = toExtractor(extractor);
+  forEach(collection, function (val) {
+    var discriminator = extractor(val) || '_';
+    var group = grouped[discriminator];
+
+    if (!group) {
+      group = grouped[discriminator] = [];
+    }
+
+    group.push(val);
+  });
+  return grouped;
+}
+function uniqueBy(extractor) {
+  extractor = toExtractor(extractor);
+  var grouped = {};
+
+  for (var _len = arguments.length, collections = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    collections[_key - 1] = arguments[_key];
+  }
+
+  forEach(collections, function (c) {
+    return groupBy(c, extractor, grouped);
+  });
+  var result = map(grouped, function (val, key) {
+    return val[0];
+  });
+  return result;
+}
+var unionBy = uniqueBy;
+/**
+ * Sort collection by criteria.
+ *
+ * @param  {Object|Array} collection
+ * @param  {String|Function} extractor
+ *
+ * @return {Array}
+ */
+
+function sortBy(collection, extractor) {
+  extractor = toExtractor(extractor);
+  var sorted = [];
+  forEach(collection, function (value, key) {
+    var disc = extractor(value, key);
+    var entry = {
+      d: disc,
+      v: value
+    };
+
+    for (var idx = 0; idx < sorted.length; idx++) {
+      var d = sorted[idx].d;
+
+      if (disc < d) {
+        sorted.splice(idx, 0, entry);
+        return;
+      }
+    } // not inserted, append (!)
+
+
+    sorted.push(entry);
+  });
+  return map(sorted, function (e) {
+    return e.v;
+  });
+}
+/**
+ * Create an object pattern matcher.
+ *
+ * @example
+ *
+ * const matcher = matchPattern({ id: 1 });
+ *
+ * var element = find(elements, matcher);
+ *
+ * @param  {Object} pattern
+ *
+ * @return {Function} matcherFn
+ */
+
+function matchPattern(pattern) {
+  return function (el) {
+    return every(pattern, function (val, key) {
+      return el[key] === val;
+    });
+  };
+}
+
+function toExtractor(extractor) {
+  return isFunction(extractor) ? extractor : function (e) {
+    return e[extractor];
+  };
+}
+
+function toMatcher(matcher) {
+  return isFunction(matcher) ? matcher : function (e) {
+    return e === matcher;
+  };
+}
+
+function identity(arg) {
+  return arg;
+}
+
+function toNum(arg) {
+  return Number(arg);
+}
+
+/**
+ * Debounce fn, calling it only once if
+ * the given time elapsed between calls.
+ *
+ * @param  {Function} fn
+ * @param  {Number} timeout
+ *
+ * @return {Function} debounced function
+ */
+function debounce(fn, timeout) {
+  var timer;
+  var lastArgs;
+  var lastThis;
+  var lastNow;
+
+  function fire() {
+    var now = Date.now();
+    var scheduledDiff = lastNow + timeout - now;
+
+    if (scheduledDiff > 0) {
+      return schedule(scheduledDiff);
+    }
+
+    fn.apply(lastThis, lastArgs);
+    timer = lastNow = lastArgs = lastThis = undefined;
+  }
+
+  function schedule(timeout) {
+    timer = setTimeout(fire, timeout);
+  }
+
+  return function () {
+    lastNow = Date.now();
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    lastArgs = args;
+    lastThis = this; // ensure an execution is scheduled
+
+    if (!timer) {
+      schedule(timeout);
+    }
+  };
+}
+/**
+ * Throttle fn, calling at most once
+ * in the given interval.
+ *
+ * @param  {Function} fn
+ * @param  {Number} interval
+ *
+ * @return {Function} throttled function
+ */
+
+function throttle(fn, interval) {
+  var throttling = false;
+  return function () {
+    if (throttling) {
+      return;
+    }
+
+    fn.apply(void 0, arguments);
+    throttling = true;
+    setTimeout(function () {
+      throttling = false;
+    }, interval);
+  };
+}
+/**
+ * Bind function against target <this>.
+ *
+ * @param  {Function} fn
+ * @param  {Object}   target
+ *
+ * @return {Function} bound function
+ */
+
+function bind(fn, target) {
+  return fn.bind(target);
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/**
+ * Convenience wrapper for `Object.assign`.
+ *
+ * @param {Object} target
+ * @param {...Object} others
+ *
+ * @return {Object} the target
+ */
+
+function assign(target) {
+  for (var _len = arguments.length, others = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    others[_key - 1] = arguments[_key];
+  }
+
+  return _extends.apply(void 0, [target].concat(others));
+}
+/**
+ * Pick given properties from the target object.
+ *
+ * @param {Object} target
+ * @param {Array} properties
+ *
+ * @return {Object} target
+ */
+
+function pick(target, properties) {
+  var result = {};
+  var obj = Object(target);
+  forEach(properties, function (prop) {
+    if (prop in obj) {
+      result[prop] = target[prop];
+    }
+  });
+  return result;
+}
+/**
+ * Pick all target properties, excluding the given ones.
+ *
+ * @param {Object} target
+ * @param {Array} properties
+ *
+ * @return {Object} target
+ */
+
+function omit(target, properties) {
+  var result = {};
+  var obj = Object(target);
+  forEach(obj, function (prop, key) {
+    if (properties.indexOf(key) === -1) {
+      result[key] = prop;
+    }
+  });
+  return result;
+}
+/**
+ * Recursively merge `...sources` into given target.
+ *
+ * Does support merging objects; does not support merging arrays.
+ *
+ * @param {Object} target
+ * @param {...Object} sources
+ *
+ * @return {Object} the target
+ */
+
+function merge(target) {
+  for (var _len2 = arguments.length, sources = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    sources[_key2 - 1] = arguments[_key2];
+  }
+
+  if (!sources.length) {
+    return target;
+  }
+
+  forEach(sources, function (source) {
+    // skip non-obj sources, i.e. null
+    if (!source || !isObject(source)) {
+      return;
+    }
+
+    forEach(source, function (sourceVal, key) {
+      if (key === '__proto__') {
+        return;
+      }
+
+      var targetVal = target[key];
+
+      if (isObject(sourceVal)) {
+        if (!isObject(targetVal)) {
+          // override target[key] with object
+          targetVal = {};
+        }
+
+        target[key] = merge(targetVal, sourceVal);
+      } else {
+        target[key] = sourceVal;
+      }
+    });
+  });
+  return target;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/min-dom/dist/index.esm.js":
+/*!************************************************!*\
+  !*** ./node_modules/min-dom/dist/index.esm.js ***!
+  \************************************************/
+/*! exports provided: attr, classes, clear, closest, delegate, domify, event, matches, query, queryAll, remove */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attr", function() { return attr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "classes", function() { return classes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clear", function() { return clear; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closest", function() { return closest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delegate", function() { return delegateEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "domify", function() { return domify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "event", function() { return componentEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matches", function() { return matchesSelector$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryAll", function() { return all; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
 /**
  * Set attribute `name` to `val`, or get attr `name`.
  *
@@ -17669,2626 +22139,93 @@ function remove(el) {
   el.parentNode && el.parentNode.removeChild(el);
 }
 
-exports.attr = attr;
-exports.classes = classes;
-exports.clear = clear;
-exports.closest = closest;
-exports.delegate = delegateEvents;
-exports.domify = domify;
-exports.event = componentEvent;
-exports.matches = matchesSelector$1;
-exports.query = query;
-exports.queryAll = all;
-exports.remove = remove;
-
-},{}],282:[function(require,module,exports){
-'use strict';
-
-var any = require('lodash/collection/any');
-
-var is = require('../../../util/ModelUtil').is;
 
 
-/**
- * Return true if element has any of the given types.
- *
- * @param {djs.model.Base} element
- * @param {Array<String>} types
- *
- * @return {Boolean}
- */
-function isAny(element, types) {
-  return any(types, function(t) {
-    return is(element, t);
-  });
-}
 
-module.exports.isAny = isAny;
+/***/ }),
 
+/***/ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/node-libs-browser/node_modules/timers-browserify/main.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Return the parent of the element with any of the given types.
- *
- * @param {djs.model.Base} element
- * @param {String|Array<String>} anyType
- *
- * @return {djs.model.Base}
- */
-function getParent(element, anyType) {
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
 
-  if (typeof anyType === 'string') {
-    anyType = [ anyType ];
+// DOM APIs, for completeness
+
+exports.setTimeout = function() {
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+};
+exports.setInterval = function() {
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+};
+exports.clearTimeout =
+exports.clearInterval = function(timeout) {
+  if (timeout) {
+    timeout.close();
   }
-
-  while ((element = element.parent)) {
-    if (isAny(element, anyType)) {
-      return element;
-    }
-  }
-
-  return null;
-}
-
-module.exports.getParent = getParent;
-
-},{"../../../util/ModelUtil":284,"lodash/collection/any":296}],283:[function(require,module,exports){
-'use strict';
-
-var is = require('./ModelUtil').is,
-    getBusinessObject = require('./ModelUtil').getBusinessObject;
-
-var forEach = require('lodash/collection/forEach');
-
-module.exports.isExpanded = function(element) {
-
-  if (is(element, 'bpmn:CallActivity')) {
-    return false;
-  }
-
-  if (is(element, 'bpmn:SubProcess')) {
-    return !!getBusinessObject(element).di.isExpanded;
-  }
-
-  if (is(element, 'bpmn:Participant')) {
-    return !!getBusinessObject(element).processRef;
-  }
-
-  return true;
 };
 
-module.exports.isInterrupting = function(element) {
-  return element && getBusinessObject(element).isInterrupting !== false;
+function Timeout(id, clearFn) {
+  this._id = id;
+  this._clearFn = clearFn;
+}
+Timeout.prototype.unref = Timeout.prototype.ref = function() {};
+Timeout.prototype.close = function() {
+  this._clearFn.call(scope, this._id);
 };
 
-module.exports.isEventSubProcess = function(element) {
-  return element && !!getBusinessObject(element).triggeredByEvent;
+// Does not start the time, just sets up the members needed.
+exports.enroll = function(item, msecs) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = msecs;
 };
 
-function hasEventDefinition(element, eventType) {
-  var bo = getBusinessObject(element),
-      hasEventDefinition = false;
-
-  if (bo.eventDefinitions) {
-    forEach(bo.eventDefinitions, function(event) {
-      if (is(event, eventType)) {
-        hasEventDefinition = true;
-      }
-    });
-  }
-
-  return hasEventDefinition;
-}
-
-module.exports.hasEventDefinition = hasEventDefinition;
-
-module.exports.hasErrorEventDefinition = function(element) {
-  return hasEventDefinition(element, 'bpmn:ErrorEventDefinition');
+exports.unenroll = function(item) {
+  clearTimeout(item._idleTimeoutId);
+  item._idleTimeout = -1;
 };
 
-module.exports.hasEscalationEventDefinition = function(element) {
-  return hasEventDefinition(element, 'bpmn:EscalationEventDefinition');
-};
-
-module.exports.hasCompensateEventDefinition = function(element) {
-  return hasEventDefinition(element, 'bpmn:CompensateEventDefinition');
-};
-
-},{"./ModelUtil":284,"lodash/collection/forEach":297}],284:[function(require,module,exports){
-'use strict';
-
-/**
- * Is an element of the given BPMN type?
- *
- * @param  {djs.model.Base|ModdleElement} element
- * @param  {String} type
- *
- * @return {Boolean}
- */
-function is(element, type) {
-  var bo = getBusinessObject(element);
-
-  return bo && (typeof bo.$instanceOf === 'function') && bo.$instanceOf(type);
-}
-
-module.exports.is = is;
-
-
-/**
- * Return the business object for a given element.
- *
- * @param  {djs.model.Base|ModdleElement} element
- *
- * @return {ModdleElement}
- */
-function getBusinessObject(element) {
-  return (element && element.businessObject) || element;
-}
-
-module.exports.getBusinessObject = getBusinessObject;
-
-},{}],285:[function(require,module,exports){
-/**
- * Validate and register a client plugin.
- *
- * @param {Object} plugin
- * @param {String} type
- */
-function registerClientPlugin(plugin, type) {
-  var plugins = window.plugins || [];
-  window.plugins = plugins;
-
-  if (!plugin) {
-    throw new Error('plugin not specified');
-  }
-
-  if (!type) {
-    throw new Error('type not specified');
-  }
-
-  plugins.push({
-    plugin: plugin,
-    type: type
-  });
-}
-
-/**
- * Validate and register a bpmn-js plugin.
- *
- * Example use:
- *
- *    var registerBpmnJSPlugin = require('./camundaModelerPluginHelpers').registerBpmnJSPlugin;
- *    var module = require('./index');
- *
- *    registerBpmnJSPlugin(module);
- *
- * @param {Object} plugin
- */
-function registerBpmnJSPlugin(plugin) {
-  registerClientPlugin(plugin, 'bpmn.modeler.additionalModules');
-}
-
-module.exports.registerBpmnJSPlugin = registerBpmnJSPlugin;
-
-/**
- * Validate and register a bpmn-moddle extension plugin.
- *
- * Example use:
- *
- *    var registerBpmnJSModdleExtension = require('./camundaModelerPluginHelpers').registerBpmnJSModdleExtension;
- *    var module = require('./index');
- *
- *    registerBpmnJSModdleExtension(module);
- *
- * @param {Object} plugin
- */
-function registerBpmnJSModdleExtension(plugin) {
-  registerClientPlugin(plugin, 'bpmn.modeler.moddleExtension');
-}
-
-module.exports.registerBpmnJSModdleExtension = registerBpmnJSModdleExtension;
-
-},{}],286:[function(require,module,exports){
-module.exports = clipboardCopy
-
-function clipboardCopy (text) {
-  // Use the Async Clipboard API when available
-  if (navigator.clipboard) {
-    return navigator.clipboard.writeText(text)
-  }
-
-  // ...Otherwise, use document.execCommand() fallback
-
-  // Put the text to copy into a <span>
-  var span = document.createElement('span')
-  span.textContent = text
-
-  // Preserve consecutive spaces and newlines
-  span.style.whiteSpace = 'pre'
-
-  // An <iframe> isolates the <span> from the page's styles
-  var iframe = document.createElement('iframe')
-  iframe.sandbox = 'allow-same-origin'
-
-  // Add the <iframe> to the page
-  document.body.appendChild(iframe)
-  var win = iframe.contentWindow
-
-  // Add the <span> to the <iframe>
-  win.document.body.appendChild(span)
-
-  // Get a Selection object representing the range of text selected by the user
-  var selection = win.getSelection()
-
-  // Fallback for Firefox which fails to get a selection from an <iframe>
-  if (!selection) {
-    win = window
-    selection = win.getSelection()
-    document.body.appendChild(span)
-  }
-
-  var range = win.document.createRange()
-  selection.removeAllRanges()
-  range.selectNode(span)
-  selection.addRange(range)
-
-  var success = false
-  try {
-    success = win.document.execCommand('copy')
-  } catch (err) {}
-
-  selection.removeAllRanges()
-  win.document.body.removeChild(span)
-  document.body.removeChild(iframe)
-
-  // The Async Clipboard API returns a promise that may reject with `undefined` so we
-  // match that here for consistency.
-  return success
-    ? Promise.resolve()
-    : Promise.reject() // eslint-disable-line prefer-promise-reject-errors
-}
-
-},{}],287:[function(require,module,exports){
-/**
- * Module dependencies.
- */
-
-try {
-  var index = require('indexof');
-} catch (err) {
-  var index = require('component-indexof');
-}
-
-/**
- * Whitespace regexp.
- */
-
-var re = /\s+/;
-
-/**
- * toString reference.
- */
-
-var toString = Object.prototype.toString;
-
-/**
- * Wrap `el` in a `ClassList`.
- *
- * @param {Element} el
- * @return {ClassList}
- * @api public
- */
-
-module.exports = function(el){
-  return new ClassList(el);
-};
-
-/**
- * Initialize a new ClassList for `el`.
- *
- * @param {Element} el
- * @api private
- */
-
-function ClassList(el) {
-  if (!el || !el.nodeType) {
-    throw new Error('A DOM element reference is required');
-  }
-  this.el = el;
-  this.list = el.classList;
-}
-
-/**
- * Add class `name` if not already present.
- *
- * @param {String} name
- * @return {ClassList}
- * @api public
- */
-
-ClassList.prototype.add = function(name){
-  // classList
-  if (this.list) {
-    this.list.add(name);
-    return this;
-  }
-
-  // fallback
-  var arr = this.array();
-  var i = index(arr, name);
-  if (!~i) arr.push(name);
-  this.el.className = arr.join(' ');
-  return this;
-};
-
-/**
- * Remove class `name` when present, or
- * pass a regular expression to remove
- * any which match.
- *
- * @param {String|RegExp} name
- * @return {ClassList}
- * @api public
- */
-
-ClassList.prototype.remove = function(name){
-  if ('[object RegExp]' == toString.call(name)) {
-    return this.removeMatching(name);
-  }
-
-  // classList
-  if (this.list) {
-    this.list.remove(name);
-    return this;
-  }
-
-  // fallback
-  var arr = this.array();
-  var i = index(arr, name);
-  if (~i) arr.splice(i, 1);
-  this.el.className = arr.join(' ');
-  return this;
-};
-
-/**
- * Remove all classes matching `re`.
- *
- * @param {RegExp} re
- * @return {ClassList}
- * @api private
- */
-
-ClassList.prototype.removeMatching = function(re){
-  var arr = this.array();
-  for (var i = 0; i < arr.length; i++) {
-    if (re.test(arr[i])) {
-      this.remove(arr[i]);
-    }
-  }
-  return this;
-};
-
-/**
- * Toggle class `name`, can force state via `force`.
- *
- * For browsers that support classList, but do not support `force` yet,
- * the mistake will be detected and corrected.
- *
- * @param {String} name
- * @param {Boolean} force
- * @return {ClassList}
- * @api public
- */
-
-ClassList.prototype.toggle = function(name, force){
-  // classList
-  if (this.list) {
-    if ("undefined" !== typeof force) {
-      if (force !== this.list.toggle(name, force)) {
-        this.list.toggle(name); // toggle again to correct
-      }
-    } else {
-      this.list.toggle(name);
-    }
-    return this;
-  }
-
-  // fallback
-  if ("undefined" !== typeof force) {
-    if (!force) {
-      this.remove(name);
-    } else {
-      this.add(name);
-    }
-  } else {
-    if (this.has(name)) {
-      this.remove(name);
-    } else {
-      this.add(name);
-    }
-  }
-
-  return this;
-};
-
-/**
- * Return an array of classes.
- *
- * @return {Array}
- * @api public
- */
-
-ClassList.prototype.array = function(){
-  var className = this.el.getAttribute('class') || '';
-  var str = className.replace(/^\s+|\s+$/g, '');
-  var arr = str.split(re);
-  if ('' === arr[0]) arr.shift();
-  return arr;
-};
-
-/**
- * Check if class `name` is present.
- *
- * @param {String} name
- * @return {ClassList}
- * @api public
- */
-
-ClassList.prototype.has =
-ClassList.prototype.contains = function(name){
-  return this.list
-    ? this.list.contains(name)
-    : !! ~index(this.array(), name);
-};
-
-},{"component-indexof":289,"indexof":289}],288:[function(require,module,exports){
-var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
-    unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
-    prefix = bind !== 'addEventListener' ? 'on' : '';
-
-/**
- * Bind `el` event `type` to `fn`.
- *
- * @param {Element} el
- * @param {String} type
- * @param {Function} fn
- * @param {Boolean} capture
- * @return {Function}
- * @api public
- */
-
-exports.bind = function(el, type, fn, capture){
-  el[bind](prefix + type, fn, capture || false);
-  return fn;
-};
-
-/**
- * Unbind `el` event `type`'s callback `fn`.
- *
- * @param {Element} el
- * @param {String} type
- * @param {Function} fn
- * @param {Boolean} capture
- * @return {Function}
- * @api public
- */
-
-exports.unbind = function(el, type, fn, capture){
-  el[unbind](prefix + type, fn, capture || false);
-  return fn;
-};
-},{}],289:[function(require,module,exports){
-module.exports = function(arr, obj){
-  if (arr.indexOf) return arr.indexOf(obj);
-  for (var i = 0; i < arr.length; ++i) {
-    if (arr[i] === obj) return i;
-  }
-  return -1;
-};
-},{}],290:[function(require,module,exports){
-function one(selector, el) {
-  return el.querySelector(selector);
-}
-
-exports = module.exports = function(selector, el){
-  el = el || document;
-  return one(selector, el);
-};
-
-exports.all = function(selector, el){
-  el = el || document;
-  return el.querySelectorAll(selector);
-};
-
-exports.engine = function(obj){
-  if (!obj.one) throw new Error('.one callback required');
-  if (!obj.all) throw new Error('.all callback required');
-  one = obj.one;
-  exports.all = obj.all;
-  return exports;
-};
-
-},{}],291:[function(require,module,exports){
-
-/**
- * Expose `parse`.
- */
-
-module.exports = parse;
-
-/**
- * Tests for browser support.
- */
-
-var innerHTMLBug = false;
-var bugTestDiv;
-if (typeof document !== 'undefined') {
-  bugTestDiv = document.createElement('div');
-  // Setup
-  bugTestDiv.innerHTML = '  <link/><table></table><a href="/a">a</a><input type="checkbox"/>';
-  // Make sure that link elements get serialized correctly by innerHTML
-  // This requires a wrapper element in IE
-  innerHTMLBug = !bugTestDiv.getElementsByTagName('link').length;
-  bugTestDiv = undefined;
-}
-
-/**
- * Wrap map from jquery.
- */
-
-var map = {
-  legend: [1, '<fieldset>', '</fieldset>'],
-  tr: [2, '<table><tbody>', '</tbody></table>'],
-  col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
-  // for script/link/style tags to work in IE6-8, you have to wrap
-  // in a div with a non-whitespace character in front, ha!
-  _default: innerHTMLBug ? [1, 'X<div>', '</div>'] : [0, '', '']
-};
-
-map.td =
-map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
-
-map.option =
-map.optgroup = [1, '<select multiple="multiple">', '</select>'];
-
-map.thead =
-map.tbody =
-map.colgroup =
-map.caption =
-map.tfoot = [1, '<table>', '</table>'];
-
-map.polyline =
-map.ellipse =
-map.polygon =
-map.circle =
-map.text =
-map.line =
-map.path =
-map.rect =
-map.g = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
-
-/**
- * Parse `html` and return a DOM Node instance, which could be a TextNode,
- * HTML DOM Node of some kind (<div> for example), or a DocumentFragment
- * instance, depending on the contents of the `html` string.
- *
- * @param {String} html - HTML string to "domify"
- * @param {Document} doc - The `document` instance to create the Node for
- * @return {DOMNode} the TextNode, DOM Node, or DocumentFragment instance
- * @api private
- */
-
-function parse(html, doc) {
-  if ('string' != typeof html) throw new TypeError('String expected');
-
-  // default to the global `document` object
-  if (!doc) doc = document;
-
-  // tag name
-  var m = /<([\w:]+)/.exec(html);
-  if (!m) return doc.createTextNode(html);
-
-  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
-
-  var tag = m[1];
-
-  // body support
-  if (tag == 'body') {
-    var el = doc.createElement('html');
-    el.innerHTML = html;
-    return el.removeChild(el.lastChild);
-  }
-
-  // wrap map
-  var wrap = map[tag] || map._default;
-  var depth = wrap[0];
-  var prefix = wrap[1];
-  var suffix = wrap[2];
-  var el = doc.createElement('div');
-  el.innerHTML = prefix + html + suffix;
-  while (depth--) el = el.lastChild;
-
-  // one element
-  if (el.firstChild == el.lastChild) {
-    return el.removeChild(el.firstChild);
-  }
-
-  // several elements
-  var fragment = doc.createDocumentFragment();
-  while (el.firstChild) {
-    fragment.appendChild(el.removeChild(el.firstChild));
-  }
-
-  return fragment;
-}
-
-},{}],292:[function(require,module,exports){
-var hat = module.exports = function (bits, base) {
-    if (!base) base = 16;
-    if (bits === undefined) bits = 128;
-    if (bits <= 0) return '0';
-    
-    var digits = Math.log(Math.pow(2, bits)) / Math.log(base);
-    for (var i = 2; digits === Infinity; i *= 2) {
-        digits = Math.log(Math.pow(2, bits / i)) / Math.log(base) * i;
-    }
-    
-    var rem = digits - Math.floor(digits);
-    
-    var res = '';
-    
-    for (var i = 0; i < Math.floor(digits); i++) {
-        var x = Math.floor(Math.random() * base).toString(base);
-        res = x + res;
-    }
-    
-    if (rem) {
-        var b = Math.pow(base, rem);
-        var x = Math.floor(Math.random() * b).toString(base);
-        res = x + res;
-    }
-    
-    var parsed = parseInt(res, base);
-    if (parsed !== Infinity && parsed >= Math.pow(2, bits)) {
-        return hat(bits, base)
-    }
-    else return res;
-};
-
-hat.rack = function (bits, base, expandBy) {
-    var fn = function (data) {
-        var iters = 0;
-        do {
-            if (iters ++ > 10) {
-                if (expandBy) bits += expandBy;
-                else throw new Error('too many ID collisions, use more bits')
-            }
-            
-            var id = hat(bits, base);
-        } while (Object.hasOwnProperty.call(hats, id));
-        
-        hats[id] = data;
-        return id;
-    };
-    var hats = fn.hats = {};
-    
-    fn.get = function (id) {
-        return fn.hats[id];
-    };
-    
-    fn.set = function (id, value) {
-        fn.hats[id] = value;
-        return fn;
-    };
-    
-    fn.bits = bits || 128;
-    fn.base = base || 16;
-    return fn;
-};
-
-},{}],293:[function(require,module,exports){
-'use strict';
-
-var hat = require('hat');
-
-
-/**
- * Create a new id generator / cache instance.
- *
- * You may optionally provide a seed that is used internally.
- *
- * @param {Seed} seed
- */
-function Ids(seed) {
-
-  if (!(this instanceof Ids)) {
-    return new Ids(seed);
-  }
-
-  seed = seed || [ 128, 36, 1 ];
-  this._seed = seed.length ? hat.rack(seed[0], seed[1], seed[2]) : seed;
-}
-
-module.exports = Ids;
-
-/**
- * Generate a next id.
- *
- * @param {Object} [element] element to bind the id to
- *
- * @return {String} id
- */
-Ids.prototype.next = function(element) {
-  return this._seed(element || true);
-};
-
-/**
- * Generate a next id with a given prefix.
- *
- * @param {Object} [element] element to bind the id to
- *
- * @return {String} id
- */
-Ids.prototype.nextPrefixed = function(prefix, element) {
-  var id;
-
-  do {
-    id = prefix + this.next(true);
-  } while (this.assigned(id));
-
-  // claim {prefix}{random}
-  this.claim(id, element);
-
-  // return
-  return id;
-};
-
-/**
- * Manually claim an existing id.
- *
- * @param {String} id
- * @param {String} [element] element the id is claimed by
- */
-Ids.prototype.claim = function(id, element) {
-  this._seed.set(id, element || true);
-};
-
-/**
- * Returns true if the given id has already been assigned.
- *
- * @param  {String} id
- * @return {Boolean}
- */
-Ids.prototype.assigned = function(id) {
-  return this._seed.get(id) || false;
-};
-
-/**
- * Unclaim an id.
- *
- * @param  {String} id the id to unclaim
- */
-Ids.prototype.unclaim = function(id) {
-  delete this._seed.hats[id];
-};
-
-
-/**
- * Clear all claimed ids.
- */
-Ids.prototype.clear = function() {
-
-  var hats = this._seed.hats,
-      id;
-
-  for (id in hats) {
-    this.unclaim(id);
+exports._unrefActive = exports.active = function(item) {
+  clearTimeout(item._idleTimeoutId);
+
+  var msecs = item._idleTimeout;
+  if (msecs >= 0) {
+    item._idleTimeoutId = setTimeout(function onTimeout() {
+      if (item._onTimeout)
+        item._onTimeout();
+    }, msecs);
   }
 };
-},{"hat":292}],294:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
 
-},{}],295:[function(require,module,exports){
-/**
- * Gets the last element of `array`.
- *
- * @static
- * @memberOf _
- * @category Array
- * @param {Array} array The array to query.
- * @returns {*} Returns the last element of `array`.
- * @example
- *
- * _.last([1, 2, 3]);
- * // => 3
- */
-function last(array) {
-  var length = array ? array.length : 0;
-  return length ? array[length - 1] : undefined;
-}
+// setimmediate attaches itself to the global object
+__webpack_require__(/*! setimmediate */ "./node_modules/setimmediate/setImmediate.js");
+// On some exotic environments, it's not clear which object `setimmediate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/process/browser.js":
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-module.exports = last;
-
-},{}],296:[function(require,module,exports){
-module.exports = require('./some');
-
-},{"./some":298}],297:[function(require,module,exports){
-var arrayEach = require('../internal/arrayEach'),
-    baseEach = require('../internal/baseEach'),
-    createForEach = require('../internal/createForEach');
-
-/**
- * Iterates over elements of `collection` invoking `iteratee` for each element.
- * The `iteratee` is bound to `thisArg` and invoked with three arguments:
- * (value, index|key, collection). Iteratee functions may exit iteration early
- * by explicitly returning `false`.
- *
- * **Note:** As with other "Collections" methods, objects with a "length" property
- * are iterated like arrays. To avoid this behavior `_.forIn` or `_.forOwn`
- * may be used for object iteration.
- *
- * @static
- * @memberOf _
- * @alias each
- * @category Collection
- * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @param {*} [thisArg] The `this` binding of `iteratee`.
- * @returns {Array|Object|string} Returns `collection`.
- * @example
- *
- * _([1, 2]).forEach(function(n) {
- *   console.log(n);
- * }).value();
- * // => logs each value from left to right and returns the array
- *
- * _.forEach({ 'a': 1, 'b': 2 }, function(n, key) {
- *   console.log(n, key);
- * });
- * // => logs each value-key pair and returns the object (iteration order is not guaranteed)
- */
-var forEach = createForEach(arrayEach, baseEach);
-
-module.exports = forEach;
-
-},{"../internal/arrayEach":299,"../internal/baseEach":302,"../internal/createForEach":319}],298:[function(require,module,exports){
-var arraySome = require('../internal/arraySome'),
-    baseCallback = require('../internal/baseCallback'),
-    baseSome = require('../internal/baseSome'),
-    isArray = require('../lang/isArray'),
-    isIterateeCall = require('../internal/isIterateeCall');
-
-/**
- * Checks if `predicate` returns truthy for **any** element of `collection`.
- * The function returns as soon as it finds a passing value and does not iterate
- * over the entire collection. The predicate is bound to `thisArg` and invoked
- * with three arguments: (value, index|key, collection).
- *
- * If a property name is provided for `predicate` the created `_.property`
- * style callback returns the property value of the given element.
- *
- * If a value is also provided for `thisArg` the created `_.matchesProperty`
- * style callback returns `true` for elements that have a matching property
- * value, else `false`.
- *
- * If an object is provided for `predicate` the created `_.matches` style
- * callback returns `true` for elements that have the properties of the given
- * object, else `false`.
- *
- * @static
- * @memberOf _
- * @alias any
- * @category Collection
- * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function|Object|string} [predicate=_.identity] The function invoked
- *  per iteration.
- * @param {*} [thisArg] The `this` binding of `predicate`.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- * @example
- *
- * _.some([null, 0, 'yes', false], Boolean);
- * // => true
- *
- * var users = [
- *   { 'user': 'barney', 'active': true },
- *   { 'user': 'fred',   'active': false }
- * ];
- *
- * // using the `_.matches` callback shorthand
- * _.some(users, { 'user': 'barney', 'active': false });
- * // => false
- *
- * // using the `_.matchesProperty` callback shorthand
- * _.some(users, 'active', false);
- * // => true
- *
- * // using the `_.property` callback shorthand
- * _.some(users, 'active');
- * // => true
- */
-function some(collection, predicate, thisArg) {
-  var func = isArray(collection) ? arraySome : baseSome;
-  if (thisArg && isIterateeCall(collection, predicate, thisArg)) {
-    predicate = undefined;
-  }
-  if (typeof predicate != 'function' || thisArg !== undefined) {
-    predicate = baseCallback(predicate, thisArg, 3);
-  }
-  return func(collection, predicate);
-}
-
-module.exports = some;
-
-},{"../internal/arraySome":300,"../internal/baseCallback":301,"../internal/baseSome":314,"../internal/isIterateeCall":328,"../lang/isArray":337}],299:[function(require,module,exports){
-/**
- * A specialized version of `_.forEach` for arrays without support for callback
- * shorthands and `this` binding.
- *
- * @private
- * @param {Array} array The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns `array`.
- */
-function arrayEach(array, iteratee) {
-  var index = -1,
-      length = array.length;
-
-  while (++index < length) {
-    if (iteratee(array[index], index, array) === false) {
-      break;
-    }
-  }
-  return array;
-}
-
-module.exports = arrayEach;
-
-},{}],300:[function(require,module,exports){
-/**
- * A specialized version of `_.some` for arrays without support for callback
- * shorthands and `this` binding.
- *
- * @private
- * @param {Array} array The array to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- */
-function arraySome(array, predicate) {
-  var index = -1,
-      length = array.length;
-
-  while (++index < length) {
-    if (predicate(array[index], index, array)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-module.exports = arraySome;
-
-},{}],301:[function(require,module,exports){
-var baseMatches = require('./baseMatches'),
-    baseMatchesProperty = require('./baseMatchesProperty'),
-    bindCallback = require('./bindCallback'),
-    identity = require('../utility/identity'),
-    property = require('../utility/property');
-
-/**
- * The base implementation of `_.callback` which supports specifying the
- * number of arguments to provide to `func`.
- *
- * @private
- * @param {*} [func=_.identity] The value to convert to a callback.
- * @param {*} [thisArg] The `this` binding of `func`.
- * @param {number} [argCount] The number of arguments to provide to `func`.
- * @returns {Function} Returns the callback.
- */
-function baseCallback(func, thisArg, argCount) {
-  var type = typeof func;
-  if (type == 'function') {
-    return thisArg === undefined
-      ? func
-      : bindCallback(func, thisArg, argCount);
-  }
-  if (func == null) {
-    return identity;
-  }
-  if (type == 'object') {
-    return baseMatches(func);
-  }
-  return thisArg === undefined
-    ? property(func)
-    : baseMatchesProperty(func, thisArg);
-}
-
-module.exports = baseCallback;
-
-},{"../utility/identity":345,"../utility/property":346,"./baseMatches":309,"./baseMatchesProperty":310,"./bindCallback":316}],302:[function(require,module,exports){
-var baseForOwn = require('./baseForOwn'),
-    createBaseEach = require('./createBaseEach');
-
-/**
- * The base implementation of `_.forEach` without support for callback
- * shorthands and `this` binding.
- *
- * @private
- * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array|Object|string} Returns `collection`.
- */
-var baseEach = createBaseEach(baseForOwn);
-
-module.exports = baseEach;
-
-},{"./baseForOwn":304,"./createBaseEach":317}],303:[function(require,module,exports){
-var createBaseFor = require('./createBaseFor');
-
-/**
- * The base implementation of `baseForIn` and `baseForOwn` which iterates
- * over `object` properties returned by `keysFunc` invoking `iteratee` for
- * each property. Iteratee functions may exit iteration early by explicitly
- * returning `false`.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @returns {Object} Returns `object`.
- */
-var baseFor = createBaseFor();
-
-module.exports = baseFor;
-
-},{"./createBaseFor":318}],304:[function(require,module,exports){
-var baseFor = require('./baseFor'),
-    keys = require('../object/keys');
-
-/**
- * The base implementation of `_.forOwn` without support for callback
- * shorthands and `this` binding.
- *
- * @private
- * @param {Object} object The object to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Object} Returns `object`.
- */
-function baseForOwn(object, iteratee) {
-  return baseFor(object, iteratee, keys);
-}
-
-module.exports = baseForOwn;
-
-},{"../object/keys":342,"./baseFor":303}],305:[function(require,module,exports){
-var toObject = require('./toObject');
-
-/**
- * The base implementation of `get` without support for string paths
- * and default values.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array} path The path of the property to get.
- * @param {string} [pathKey] The key representation of path.
- * @returns {*} Returns the resolved value.
- */
-function baseGet(object, path, pathKey) {
-  if (object == null) {
-    return;
-  }
-  if (pathKey !== undefined && pathKey in toObject(object)) {
-    path = [pathKey];
-  }
-  var index = 0,
-      length = path.length;
-
-  while (object != null && index < length) {
-    object = object[path[index++]];
-  }
-  return (index && index == length) ? object : undefined;
-}
-
-module.exports = baseGet;
-
-},{"./toObject":334}],306:[function(require,module,exports){
-var baseIsEqualDeep = require('./baseIsEqualDeep'),
-    isObject = require('../lang/isObject'),
-    isObjectLike = require('./isObjectLike');
-
-/**
- * The base implementation of `_.isEqual` without support for `this` binding
- * `customizer` functions.
- *
- * @private
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @param {Function} [customizer] The function to customize comparing values.
- * @param {boolean} [isLoose] Specify performing partial comparisons.
- * @param {Array} [stackA] Tracks traversed `value` objects.
- * @param {Array} [stackB] Tracks traversed `other` objects.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- */
-function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
-  if (value === other) {
-    return true;
-  }
-  if (value == null || other == null || (!isObject(value) && !isObjectLike(other))) {
-    return value !== value && other !== other;
-  }
-  return baseIsEqualDeep(value, other, baseIsEqual, customizer, isLoose, stackA, stackB);
-}
-
-module.exports = baseIsEqual;
-
-},{"../lang/isObject":340,"./baseIsEqualDeep":307,"./isObjectLike":331}],307:[function(require,module,exports){
-var equalArrays = require('./equalArrays'),
-    equalByTag = require('./equalByTag'),
-    equalObjects = require('./equalObjects'),
-    isArray = require('../lang/isArray'),
-    isTypedArray = require('../lang/isTypedArray');
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    objectTag = '[object Object]';
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objToString = objectProto.toString;
-
-/**
- * A specialized version of `baseIsEqual` for arrays and objects which performs
- * deep comparisons and tracks traversed objects enabling objects with circular
- * references to be compared.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Function} [customizer] The function to customize comparing objects.
- * @param {boolean} [isLoose] Specify performing partial comparisons.
- * @param {Array} [stackA=[]] Tracks traversed `value` objects.
- * @param {Array} [stackB=[]] Tracks traversed `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
-  var objIsArr = isArray(object),
-      othIsArr = isArray(other),
-      objTag = arrayTag,
-      othTag = arrayTag;
-
-  if (!objIsArr) {
-    objTag = objToString.call(object);
-    if (objTag == argsTag) {
-      objTag = objectTag;
-    } else if (objTag != objectTag) {
-      objIsArr = isTypedArray(object);
-    }
-  }
-  if (!othIsArr) {
-    othTag = objToString.call(other);
-    if (othTag == argsTag) {
-      othTag = objectTag;
-    } else if (othTag != objectTag) {
-      othIsArr = isTypedArray(other);
-    }
-  }
-  var objIsObj = objTag == objectTag,
-      othIsObj = othTag == objectTag,
-      isSameTag = objTag == othTag;
-
-  if (isSameTag && !(objIsArr || objIsObj)) {
-    return equalByTag(object, other, objTag);
-  }
-  if (!isLoose) {
-    var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
-        othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
-
-    if (objIsWrapped || othIsWrapped) {
-      return equalFunc(objIsWrapped ? object.value() : object, othIsWrapped ? other.value() : other, customizer, isLoose, stackA, stackB);
-    }
-  }
-  if (!isSameTag) {
-    return false;
-  }
-  // Assume cyclic values are equal.
-  // For more information on detecting circular references see https://es5.github.io/#JO.
-  stackA || (stackA = []);
-  stackB || (stackB = []);
-
-  var length = stackA.length;
-  while (length--) {
-    if (stackA[length] == object) {
-      return stackB[length] == other;
-    }
-  }
-  // Add `object` and `other` to the stack of traversed objects.
-  stackA.push(object);
-  stackB.push(other);
-
-  var result = (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, isLoose, stackA, stackB);
-
-  stackA.pop();
-  stackB.pop();
-
-  return result;
-}
-
-module.exports = baseIsEqualDeep;
-
-},{"../lang/isArray":337,"../lang/isTypedArray":341,"./equalArrays":320,"./equalByTag":321,"./equalObjects":322}],308:[function(require,module,exports){
-var baseIsEqual = require('./baseIsEqual'),
-    toObject = require('./toObject');
-
-/**
- * The base implementation of `_.isMatch` without support for callback
- * shorthands and `this` binding.
- *
- * @private
- * @param {Object} object The object to inspect.
- * @param {Array} matchData The propery names, values, and compare flags to match.
- * @param {Function} [customizer] The function to customize comparing objects.
- * @returns {boolean} Returns `true` if `object` is a match, else `false`.
- */
-function baseIsMatch(object, matchData, customizer) {
-  var index = matchData.length,
-      length = index,
-      noCustomizer = !customizer;
-
-  if (object == null) {
-    return !length;
-  }
-  object = toObject(object);
-  while (index--) {
-    var data = matchData[index];
-    if ((noCustomizer && data[2])
-          ? data[1] !== object[data[0]]
-          : !(data[0] in object)
-        ) {
-      return false;
-    }
-  }
-  while (++index < length) {
-    data = matchData[index];
-    var key = data[0],
-        objValue = object[key],
-        srcValue = data[1];
-
-    if (noCustomizer && data[2]) {
-      if (objValue === undefined && !(key in object)) {
-        return false;
-      }
-    } else {
-      var result = customizer ? customizer(objValue, srcValue, key) : undefined;
-      if (!(result === undefined ? baseIsEqual(srcValue, objValue, customizer, true) : result)) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-module.exports = baseIsMatch;
-
-},{"./baseIsEqual":306,"./toObject":334}],309:[function(require,module,exports){
-var baseIsMatch = require('./baseIsMatch'),
-    getMatchData = require('./getMatchData'),
-    toObject = require('./toObject');
-
-/**
- * The base implementation of `_.matches` which does not clone `source`.
- *
- * @private
- * @param {Object} source The object of property values to match.
- * @returns {Function} Returns the new function.
- */
-function baseMatches(source) {
-  var matchData = getMatchData(source);
-  if (matchData.length == 1 && matchData[0][2]) {
-    var key = matchData[0][0],
-        value = matchData[0][1];
-
-    return function(object) {
-      if (object == null) {
-        return false;
-      }
-      return object[key] === value && (value !== undefined || (key in toObject(object)));
-    };
-  }
-  return function(object) {
-    return baseIsMatch(object, matchData);
-  };
-}
-
-module.exports = baseMatches;
-
-},{"./baseIsMatch":308,"./getMatchData":324,"./toObject":334}],310:[function(require,module,exports){
-var baseGet = require('./baseGet'),
-    baseIsEqual = require('./baseIsEqual'),
-    baseSlice = require('./baseSlice'),
-    isArray = require('../lang/isArray'),
-    isKey = require('./isKey'),
-    isStrictComparable = require('./isStrictComparable'),
-    last = require('../array/last'),
-    toObject = require('./toObject'),
-    toPath = require('./toPath');
-
-/**
- * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
- *
- * @private
- * @param {string} path The path of the property to get.
- * @param {*} srcValue The value to compare.
- * @returns {Function} Returns the new function.
- */
-function baseMatchesProperty(path, srcValue) {
-  var isArr = isArray(path),
-      isCommon = isKey(path) && isStrictComparable(srcValue),
-      pathKey = (path + '');
-
-  path = toPath(path);
-  return function(object) {
-    if (object == null) {
-      return false;
-    }
-    var key = pathKey;
-    object = toObject(object);
-    if ((isArr || !isCommon) && !(key in object)) {
-      object = path.length == 1 ? object : baseGet(object, baseSlice(path, 0, -1));
-      if (object == null) {
-        return false;
-      }
-      key = last(path);
-      object = toObject(object);
-    }
-    return object[key] === srcValue
-      ? (srcValue !== undefined || (key in object))
-      : baseIsEqual(srcValue, object[key], undefined, true);
-  };
-}
-
-module.exports = baseMatchesProperty;
-
-},{"../array/last":295,"../lang/isArray":337,"./baseGet":305,"./baseIsEqual":306,"./baseSlice":313,"./isKey":329,"./isStrictComparable":332,"./toObject":334,"./toPath":335}],311:[function(require,module,exports){
-/**
- * The base implementation of `_.property` without support for deep paths.
- *
- * @private
- * @param {string} key The key of the property to get.
- * @returns {Function} Returns the new function.
- */
-function baseProperty(key) {
-  return function(object) {
-    return object == null ? undefined : object[key];
-  };
-}
-
-module.exports = baseProperty;
-
-},{}],312:[function(require,module,exports){
-var baseGet = require('./baseGet'),
-    toPath = require('./toPath');
-
-/**
- * A specialized version of `baseProperty` which supports deep paths.
- *
- * @private
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new function.
- */
-function basePropertyDeep(path) {
-  var pathKey = (path + '');
-  path = toPath(path);
-  return function(object) {
-    return baseGet(object, path, pathKey);
-  };
-}
-
-module.exports = basePropertyDeep;
-
-},{"./baseGet":305,"./toPath":335}],313:[function(require,module,exports){
-/**
- * The base implementation of `_.slice` without an iteratee call guard.
- *
- * @private
- * @param {Array} array The array to slice.
- * @param {number} [start=0] The start position.
- * @param {number} [end=array.length] The end position.
- * @returns {Array} Returns the slice of `array`.
- */
-function baseSlice(array, start, end) {
-  var index = -1,
-      length = array.length;
-
-  start = start == null ? 0 : (+start || 0);
-  if (start < 0) {
-    start = -start > length ? 0 : (length + start);
-  }
-  end = (end === undefined || end > length) ? length : (+end || 0);
-  if (end < 0) {
-    end += length;
-  }
-  length = start > end ? 0 : ((end - start) >>> 0);
-  start >>>= 0;
-
-  var result = Array(length);
-  while (++index < length) {
-    result[index] = array[index + start];
-  }
-  return result;
-}
-
-module.exports = baseSlice;
-
-},{}],314:[function(require,module,exports){
-var baseEach = require('./baseEach');
-
-/**
- * The base implementation of `_.some` without support for callback shorthands
- * and `this` binding.
- *
- * @private
- * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} predicate The function invoked per iteration.
- * @returns {boolean} Returns `true` if any element passes the predicate check,
- *  else `false`.
- */
-function baseSome(collection, predicate) {
-  var result;
-
-  baseEach(collection, function(value, index, collection) {
-    result = predicate(value, index, collection);
-    return !result;
-  });
-  return !!result;
-}
-
-module.exports = baseSome;
-
-},{"./baseEach":302}],315:[function(require,module,exports){
-/**
- * Converts `value` to a string if it's not one. An empty string is returned
- * for `null` or `undefined` values.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {string} Returns the string.
- */
-function baseToString(value) {
-  return value == null ? '' : (value + '');
-}
-
-module.exports = baseToString;
-
-},{}],316:[function(require,module,exports){
-var identity = require('../utility/identity');
-
-/**
- * A specialized version of `baseCallback` which only supports `this` binding
- * and specifying the number of arguments to provide to `func`.
- *
- * @private
- * @param {Function} func The function to bind.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {number} [argCount] The number of arguments to provide to `func`.
- * @returns {Function} Returns the callback.
- */
-function bindCallback(func, thisArg, argCount) {
-  if (typeof func != 'function') {
-    return identity;
-  }
-  if (thisArg === undefined) {
-    return func;
-  }
-  switch (argCount) {
-    case 1: return function(value) {
-      return func.call(thisArg, value);
-    };
-    case 3: return function(value, index, collection) {
-      return func.call(thisArg, value, index, collection);
-    };
-    case 4: return function(accumulator, value, index, collection) {
-      return func.call(thisArg, accumulator, value, index, collection);
-    };
-    case 5: return function(value, other, key, object, source) {
-      return func.call(thisArg, value, other, key, object, source);
-    };
-  }
-  return function() {
-    return func.apply(thisArg, arguments);
-  };
-}
-
-module.exports = bindCallback;
-
-},{"../utility/identity":345}],317:[function(require,module,exports){
-var getLength = require('./getLength'),
-    isLength = require('./isLength'),
-    toObject = require('./toObject');
-
-/**
- * Creates a `baseEach` or `baseEachRight` function.
- *
- * @private
- * @param {Function} eachFunc The function to iterate over a collection.
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseEach(eachFunc, fromRight) {
-  return function(collection, iteratee) {
-    var length = collection ? getLength(collection) : 0;
-    if (!isLength(length)) {
-      return eachFunc(collection, iteratee);
-    }
-    var index = fromRight ? length : -1,
-        iterable = toObject(collection);
-
-    while ((fromRight ? index-- : ++index < length)) {
-      if (iteratee(iterable[index], index, iterable) === false) {
-        break;
-      }
-    }
-    return collection;
-  };
-}
-
-module.exports = createBaseEach;
-
-},{"./getLength":323,"./isLength":330,"./toObject":334}],318:[function(require,module,exports){
-var toObject = require('./toObject');
-
-/**
- * Creates a base function for `_.forIn` or `_.forInRight`.
- *
- * @private
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {Function} Returns the new base function.
- */
-function createBaseFor(fromRight) {
-  return function(object, iteratee, keysFunc) {
-    var iterable = toObject(object),
-        props = keysFunc(object),
-        length = props.length,
-        index = fromRight ? length : -1;
-
-    while ((fromRight ? index-- : ++index < length)) {
-      var key = props[index];
-      if (iteratee(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-    return object;
-  };
-}
-
-module.exports = createBaseFor;
-
-},{"./toObject":334}],319:[function(require,module,exports){
-var bindCallback = require('./bindCallback'),
-    isArray = require('../lang/isArray');
-
-/**
- * Creates a function for `_.forEach` or `_.forEachRight`.
- *
- * @private
- * @param {Function} arrayFunc The function to iterate over an array.
- * @param {Function} eachFunc The function to iterate over a collection.
- * @returns {Function} Returns the new each function.
- */
-function createForEach(arrayFunc, eachFunc) {
-  return function(collection, iteratee, thisArg) {
-    return (typeof iteratee == 'function' && thisArg === undefined && isArray(collection))
-      ? arrayFunc(collection, iteratee)
-      : eachFunc(collection, bindCallback(iteratee, thisArg, 3));
-  };
-}
-
-module.exports = createForEach;
-
-},{"../lang/isArray":337,"./bindCallback":316}],320:[function(require,module,exports){
-var arraySome = require('./arraySome');
-
-/**
- * A specialized version of `baseIsEqualDeep` for arrays with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Array} array The array to compare.
- * @param {Array} other The other array to compare.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Function} [customizer] The function to customize comparing arrays.
- * @param {boolean} [isLoose] Specify performing partial comparisons.
- * @param {Array} [stackA] Tracks traversed `value` objects.
- * @param {Array} [stackB] Tracks traversed `other` objects.
- * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
- */
-function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stackB) {
-  var index = -1,
-      arrLength = array.length,
-      othLength = other.length;
-
-  if (arrLength != othLength && !(isLoose && othLength > arrLength)) {
-    return false;
-  }
-  // Ignore non-index properties.
-  while (++index < arrLength) {
-    var arrValue = array[index],
-        othValue = other[index],
-        result = customizer ? customizer(isLoose ? othValue : arrValue, isLoose ? arrValue : othValue, index) : undefined;
-
-    if (result !== undefined) {
-      if (result) {
-        continue;
-      }
-      return false;
-    }
-    // Recursively compare arrays (susceptible to call stack limits).
-    if (isLoose) {
-      if (!arraySome(other, function(othValue) {
-            return arrValue === othValue || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB);
-          })) {
-        return false;
-      }
-    } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, customizer, isLoose, stackA, stackB))) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = equalArrays;
-
-},{"./arraySome":300}],321:[function(require,module,exports){
-/** `Object#toString` result references. */
-var boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    numberTag = '[object Number]',
-    regexpTag = '[object RegExp]',
-    stringTag = '[object String]';
-
-/**
- * A specialized version of `baseIsEqualDeep` for comparing objects of
- * the same `toStringTag`.
- *
- * **Note:** This function only supports comparing values with tags of
- * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {string} tag The `toStringTag` of the objects to compare.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalByTag(object, other, tag) {
-  switch (tag) {
-    case boolTag:
-    case dateTag:
-      // Coerce dates and booleans to numbers, dates to milliseconds and booleans
-      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal.
-      return +object == +other;
-
-    case errorTag:
-      return object.name == other.name && object.message == other.message;
-
-    case numberTag:
-      // Treat `NaN` vs. `NaN` as equal.
-      return (object != +object)
-        ? other != +other
-        : object == +other;
-
-    case regexpTag:
-    case stringTag:
-      // Coerce regexes to strings and treat strings primitives and string
-      // objects as equal. See https://es5.github.io/#x15.10.6.4 for more details.
-      return object == (other + '');
-  }
-  return false;
-}
-
-module.exports = equalByTag;
-
-},{}],322:[function(require,module,exports){
-var keys = require('../object/keys');
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A specialized version of `baseIsEqualDeep` for objects with support for
- * partial deep comparisons.
- *
- * @private
- * @param {Object} object The object to compare.
- * @param {Object} other The other object to compare.
- * @param {Function} equalFunc The function to determine equivalents of values.
- * @param {Function} [customizer] The function to customize comparing values.
- * @param {boolean} [isLoose] Specify performing partial comparisons.
- * @param {Array} [stackA] Tracks traversed `value` objects.
- * @param {Array} [stackB] Tracks traversed `other` objects.
- * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
- */
-function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, stackB) {
-  var objProps = keys(object),
-      objLength = objProps.length,
-      othProps = keys(other),
-      othLength = othProps.length;
-
-  if (objLength != othLength && !isLoose) {
-    return false;
-  }
-  var index = objLength;
-  while (index--) {
-    var key = objProps[index];
-    if (!(isLoose ? key in other : hasOwnProperty.call(other, key))) {
-      return false;
-    }
-  }
-  var skipCtor = isLoose;
-  while (++index < objLength) {
-    key = objProps[index];
-    var objValue = object[key],
-        othValue = other[key],
-        result = customizer ? customizer(isLoose ? othValue : objValue, isLoose? objValue : othValue, key) : undefined;
-
-    // Recursively compare objects (susceptible to call stack limits).
-    if (!(result === undefined ? equalFunc(objValue, othValue, customizer, isLoose, stackA, stackB) : result)) {
-      return false;
-    }
-    skipCtor || (skipCtor = key == 'constructor');
-  }
-  if (!skipCtor) {
-    var objCtor = object.constructor,
-        othCtor = other.constructor;
-
-    // Non `Object` object instances with different constructors are not equal.
-    if (objCtor != othCtor &&
-        ('constructor' in object && 'constructor' in other) &&
-        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
-          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-module.exports = equalObjects;
-
-},{"../object/keys":342}],323:[function(require,module,exports){
-var baseProperty = require('./baseProperty');
-
-/**
- * Gets the "length" property value of `object`.
- *
- * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
- * that affects Safari on at least iOS 8.1-8.3 ARM64.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {*} Returns the "length" value.
- */
-var getLength = baseProperty('length');
-
-module.exports = getLength;
-
-},{"./baseProperty":311}],324:[function(require,module,exports){
-var isStrictComparable = require('./isStrictComparable'),
-    pairs = require('../object/pairs');
-
-/**
- * Gets the propery names, values, and compare flags of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the match data of `object`.
- */
-function getMatchData(object) {
-  var result = pairs(object),
-      length = result.length;
-
-  while (length--) {
-    result[length][2] = isStrictComparable(result[length][1]);
-  }
-  return result;
-}
-
-module.exports = getMatchData;
-
-},{"../object/pairs":344,"./isStrictComparable":332}],325:[function(require,module,exports){
-var isNative = require('../lang/isNative');
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = object == null ? undefined : object[key];
-  return isNative(value) ? value : undefined;
-}
-
-module.exports = getNative;
-
-},{"../lang/isNative":339}],326:[function(require,module,exports){
-var getLength = require('./getLength'),
-    isLength = require('./isLength');
-
-/**
- * Checks if `value` is array-like.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
- */
-function isArrayLike(value) {
-  return value != null && isLength(getLength(value));
-}
-
-module.exports = isArrayLike;
-
-},{"./getLength":323,"./isLength":330}],327:[function(require,module,exports){
-/** Used to detect unsigned integer values. */
-var reIsUint = /^\d+$/;
-
-/**
- * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
- * of an array-like value.
- */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  value = (typeof value == 'number' || reIsUint.test(value)) ? +value : -1;
-  length = length == null ? MAX_SAFE_INTEGER : length;
-  return value > -1 && value % 1 == 0 && value < length;
-}
-
-module.exports = isIndex;
-
-},{}],328:[function(require,module,exports){
-var isArrayLike = require('./isArrayLike'),
-    isIndex = require('./isIndex'),
-    isObject = require('../lang/isObject');
-
-/**
- * Checks if the provided arguments are from an iteratee call.
- *
- * @private
- * @param {*} value The potential iteratee value argument.
- * @param {*} index The potential iteratee index or key argument.
- * @param {*} object The potential iteratee object argument.
- * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
- */
-function isIterateeCall(value, index, object) {
-  if (!isObject(object)) {
-    return false;
-  }
-  var type = typeof index;
-  if (type == 'number'
-      ? (isArrayLike(object) && isIndex(index, object.length))
-      : (type == 'string' && index in object)) {
-    var other = object[index];
-    return value === value ? (value === other) : (other !== other);
-  }
-  return false;
-}
-
-module.exports = isIterateeCall;
-
-},{"../lang/isObject":340,"./isArrayLike":326,"./isIndex":327}],329:[function(require,module,exports){
-var isArray = require('../lang/isArray'),
-    toObject = require('./toObject');
-
-/** Used to match property names within property paths. */
-var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
-    reIsPlainProp = /^\w*$/;
-
-/**
- * Checks if `value` is a property name and not a property path.
- *
- * @private
- * @param {*} value The value to check.
- * @param {Object} [object] The object to query keys on.
- * @returns {boolean} Returns `true` if `value` is a property name, else `false`.
- */
-function isKey(value, object) {
-  var type = typeof value;
-  if ((type == 'string' && reIsPlainProp.test(value)) || type == 'number') {
-    return true;
-  }
-  if (isArray(value)) {
-    return false;
-  }
-  var result = !reIsDeepProp.test(value);
-  return result || (object != null && value in toObject(object));
-}
-
-module.exports = isKey;
-
-},{"../lang/isArray":337,"./toObject":334}],330:[function(require,module,exports){
-/**
- * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
- * of an array-like value.
- */
-var MAX_SAFE_INTEGER = 9007199254740991;
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This function is based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- */
-function isLength(value) {
-  return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-module.exports = isLength;
-
-},{}],331:[function(require,module,exports){
-/**
- * Checks if `value` is object-like.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-module.exports = isObjectLike;
-
-},{}],332:[function(require,module,exports){
-var isObject = require('../lang/isObject');
-
-/**
- * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` if suitable for strict
- *  equality comparisons, else `false`.
- */
-function isStrictComparable(value) {
-  return value === value && !isObject(value);
-}
-
-module.exports = isStrictComparable;
-
-},{"../lang/isObject":340}],333:[function(require,module,exports){
-var isArguments = require('../lang/isArguments'),
-    isArray = require('../lang/isArray'),
-    isIndex = require('./isIndex'),
-    isLength = require('./isLength'),
-    keysIn = require('../object/keysIn');
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * A fallback implementation of `Object.keys` which creates an array of the
- * own enumerable property names of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function shimKeys(object) {
-  var props = keysIn(object),
-      propsLength = props.length,
-      length = propsLength && object.length;
-
-  var allowIndexes = !!length && isLength(length) &&
-    (isArray(object) || isArguments(object));
-
-  var index = -1,
-      result = [];
-
-  while (++index < propsLength) {
-    var key = props[index];
-    if ((allowIndexes && isIndex(key, length)) || hasOwnProperty.call(object, key)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = shimKeys;
-
-},{"../lang/isArguments":336,"../lang/isArray":337,"../object/keysIn":343,"./isIndex":327,"./isLength":330}],334:[function(require,module,exports){
-var isObject = require('../lang/isObject');
-
-/**
- * Converts `value` to an object if it's not one.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {Object} Returns the object.
- */
-function toObject(value) {
-  return isObject(value) ? value : Object(value);
-}
-
-module.exports = toObject;
-
-},{"../lang/isObject":340}],335:[function(require,module,exports){
-var baseToString = require('./baseToString'),
-    isArray = require('../lang/isArray');
-
-/** Used to match property names within property paths. */
-var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
-
-/** Used to match backslashes in property paths. */
-var reEscapeChar = /\\(\\)?/g;
-
-/**
- * Converts `value` to property path array if it's not one.
- *
- * @private
- * @param {*} value The value to process.
- * @returns {Array} Returns the property path array.
- */
-function toPath(value) {
-  if (isArray(value)) {
-    return value;
-  }
-  var result = [];
-  baseToString(value).replace(rePropName, function(match, number, quote, string) {
-    result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
-  });
-  return result;
-}
-
-module.exports = toPath;
-
-},{"../lang/isArray":337,"./baseToString":315}],336:[function(require,module,exports){
-var isArrayLike = require('../internal/isArrayLike'),
-    isObjectLike = require('../internal/isObjectLike');
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Native method references. */
-var propertyIsEnumerable = objectProto.propertyIsEnumerable;
-
-/**
- * Checks if `value` is classified as an `arguments` object.
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-function isArguments(value) {
-  return isObjectLike(value) && isArrayLike(value) &&
-    hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
-}
-
-module.exports = isArguments;
-
-},{"../internal/isArrayLike":326,"../internal/isObjectLike":331}],337:[function(require,module,exports){
-var getNative = require('../internal/getNative'),
-    isLength = require('../internal/isLength'),
-    isObjectLike = require('../internal/isObjectLike');
-
-/** `Object#toString` result references. */
-var arrayTag = '[object Array]';
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objToString = objectProto.toString;
-
-/* Native method references for those with the same name as other `lodash` methods. */
-var nativeIsArray = getNative(Array, 'isArray');
-
-/**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(function() { return arguments; }());
- * // => false
- */
-var isArray = nativeIsArray || function(value) {
-  return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
-};
-
-module.exports = isArray;
-
-},{"../internal/getNative":325,"../internal/isLength":330,"../internal/isObjectLike":331}],338:[function(require,module,exports){
-var isObject = require('./isObject');
-
-/** `Object#toString` result references. */
-var funcTag = '[object Function]';
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objToString = objectProto.toString;
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction(value) {
-  // The use of `Object#toString` avoids issues with the `typeof` operator
-  // in older versions of Chrome and Safari which return 'function' for regexes
-  // and Safari 8 which returns 'object' for typed array constructors.
-  return isObject(value) && objToString.call(value) == funcTag;
-}
-
-module.exports = isFunction;
-
-},{"./isObject":340}],339:[function(require,module,exports){
-var isFunction = require('./isFunction'),
-    isObjectLike = require('../internal/isObjectLike');
-
-/** Used to detect host constructors (Safari > 5). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to resolve the decompiled source of functions. */
-var fnToString = Function.prototype.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' +
-  fnToString.call(hasOwnProperty).replace(/[\\^$.*+?()[\]{}|]/g, '\\$&')
-  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-/**
- * Checks if `value` is a native function.
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function, else `false`.
- * @example
- *
- * _.isNative(Array.prototype.push);
- * // => true
- *
- * _.isNative(_);
- * // => false
- */
-function isNative(value) {
-  if (value == null) {
-    return false;
-  }
-  if (isFunction(value)) {
-    return reIsNative.test(fnToString.call(value));
-  }
-  return isObjectLike(value) && reIsHostCtor.test(value);
-}
-
-module.exports = isNative;
-
-},{"../internal/isObjectLike":331,"./isFunction":338}],340:[function(require,module,exports){
-/**
- * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
- * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(1);
- * // => false
- */
-function isObject(value) {
-  // Avoid a V8 JIT bug in Chrome 19-20.
-  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-  var type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
-}
-
-module.exports = isObject;
-
-},{}],341:[function(require,module,exports){
-var isLength = require('../internal/isLength'),
-    isObjectLike = require('../internal/isObjectLike');
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    arrayTag = '[object Array]',
-    boolTag = '[object Boolean]',
-    dateTag = '[object Date]',
-    errorTag = '[object Error]',
-    funcTag = '[object Function]',
-    mapTag = '[object Map]',
-    numberTag = '[object Number]',
-    objectTag = '[object Object]',
-    regexpTag = '[object RegExp]',
-    setTag = '[object Set]',
-    stringTag = '[object String]',
-    weakMapTag = '[object WeakMap]';
-
-var arrayBufferTag = '[object ArrayBuffer]',
-    float32Tag = '[object Float32Array]',
-    float64Tag = '[object Float64Array]',
-    int8Tag = '[object Int8Array]',
-    int16Tag = '[object Int16Array]',
-    int32Tag = '[object Int32Array]',
-    uint8Tag = '[object Uint8Array]',
-    uint8ClampedTag = '[object Uint8ClampedArray]',
-    uint16Tag = '[object Uint16Array]',
-    uint32Tag = '[object Uint32Array]';
-
-/** Used to identify `toStringTag` values of typed arrays. */
-var typedArrayTags = {};
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
-typedArrayTags[int8Tag] = typedArrayTags[int16Tag] =
-typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] =
-typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
-typedArrayTags[uint32Tag] = true;
-typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
-typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
-typedArrayTags[dateTag] = typedArrayTags[errorTag] =
-typedArrayTags[funcTag] = typedArrayTags[mapTag] =
-typedArrayTags[numberTag] = typedArrayTags[objectTag] =
-typedArrayTags[regexpTag] = typedArrayTags[setTag] =
-typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objToString = objectProto.toString;
-
-/**
- * Checks if `value` is classified as a typed array.
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
- * @example
- *
- * _.isTypedArray(new Uint8Array);
- * // => true
- *
- * _.isTypedArray([]);
- * // => false
- */
-function isTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && !!typedArrayTags[objToString.call(value)];
-}
-
-module.exports = isTypedArray;
-
-},{"../internal/isLength":330,"../internal/isObjectLike":331}],342:[function(require,module,exports){
-var getNative = require('../internal/getNative'),
-    isArrayLike = require('../internal/isArrayLike'),
-    isObject = require('../lang/isObject'),
-    shimKeys = require('../internal/shimKeys');
-
-/* Native method references for those with the same name as other `lodash` methods. */
-var nativeKeys = getNative(Object, 'keys');
-
-/**
- * Creates an array of the own enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects. See the
- * [ES spec](http://ecma-international.org/ecma-262/6.0/#sec-object.keys)
- * for more details.
- *
- * @static
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keys(new Foo);
- * // => ['a', 'b'] (iteration order is not guaranteed)
- *
- * _.keys('hi');
- * // => ['0', '1']
- */
-var keys = !nativeKeys ? shimKeys : function(object) {
-  var Ctor = object == null ? undefined : object.constructor;
-  if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-      (typeof object != 'function' && isArrayLike(object))) {
-    return shimKeys(object);
-  }
-  return isObject(object) ? nativeKeys(object) : [];
-};
-
-module.exports = keys;
-
-},{"../internal/getNative":325,"../internal/isArrayLike":326,"../internal/shimKeys":333,"../lang/isObject":340}],343:[function(require,module,exports){
-var isArguments = require('../lang/isArguments'),
-    isArray = require('../lang/isArray'),
-    isIndex = require('../internal/isIndex'),
-    isLength = require('../internal/isLength'),
-    isObject = require('../lang/isObject');
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @static
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keysIn(new Foo);
- * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
- */
-function keysIn(object) {
-  if (object == null) {
-    return [];
-  }
-  if (!isObject(object)) {
-    object = Object(object);
-  }
-  var length = object.length;
-  length = (length && isLength(length) &&
-    (isArray(object) || isArguments(object)) && length) || 0;
-
-  var Ctor = object.constructor,
-      index = -1,
-      isProto = typeof Ctor == 'function' && Ctor.prototype === object,
-      result = Array(length),
-      skipIndexes = length > 0;
-
-  while (++index < length) {
-    result[index] = (index + '');
-  }
-  for (var key in object) {
-    if (!(skipIndexes && isIndex(key, length)) &&
-        !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = keysIn;
-
-},{"../internal/isIndex":327,"../internal/isLength":330,"../lang/isArguments":336,"../lang/isArray":337,"../lang/isObject":340}],344:[function(require,module,exports){
-var keys = require('./keys'),
-    toObject = require('../internal/toObject');
-
-/**
- * Creates a two dimensional array of the key-value pairs for `object`,
- * e.g. `[[key1, value1], [key2, value2]]`.
- *
- * @static
- * @memberOf _
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the new array of key-value pairs.
- * @example
- *
- * _.pairs({ 'barney': 36, 'fred': 40 });
- * // => [['barney', 36], ['fred', 40]] (iteration order is not guaranteed)
- */
-function pairs(object) {
-  object = toObject(object);
-
-  var index = -1,
-      props = keys(object),
-      length = props.length,
-      result = Array(length);
-
-  while (++index < length) {
-    var key = props[index];
-    result[index] = [key, object[key]];
-  }
-  return result;
-}
-
-module.exports = pairs;
-
-},{"../internal/toObject":334,"./keys":342}],345:[function(require,module,exports){
-/**
- * This method returns the first argument provided to it.
- *
- * @static
- * @memberOf _
- * @category Utility
- * @param {*} value Any value.
- * @returns {*} Returns `value`.
- * @example
- *
- * var object = { 'user': 'fred' };
- *
- * _.identity(object) === object;
- * // => true
- */
-function identity(value) {
-  return value;
-}
-
-module.exports = identity;
-
-},{}],346:[function(require,module,exports){
-var baseProperty = require('../internal/baseProperty'),
-    basePropertyDeep = require('../internal/basePropertyDeep'),
-    isKey = require('../internal/isKey');
-
-/**
- * Creates a function that returns the property value at `path` on a
- * given object.
- *
- * @static
- * @memberOf _
- * @category Utility
- * @param {Array|string} path The path of the property to get.
- * @returns {Function} Returns the new function.
- * @example
- *
- * var objects = [
- *   { 'a': { 'b': { 'c': 2 } } },
- *   { 'a': { 'b': { 'c': 1 } } }
- * ];
- *
- * _.map(objects, _.property('a.b.c'));
- * // => [2, 1]
- *
- * _.pluck(_.sortBy(objects, _.property(['a', 'b', 'c'])), 'a.b.c');
- * // => [1, 2]
- */
-function property(path) {
-  return isKey(path) ? baseProperty(path) : basePropertyDeep(path);
-}
-
-module.exports = property;
-
-},{"../internal/baseProperty":311,"../internal/basePropertyDeep":312,"../internal/isKey":329}],347:[function(require,module,exports){
-module.exports = require('component-classes');
-},{"component-classes":287}],348:[function(require,module,exports){
-module.exports = function(el) {
-
-  var c;
-
-  while (el.childNodes.length) {
-    c = el.childNodes[0];
-    el.removeChild(c);
-  }
-
-  return el;
-};
-},{}],349:[function(require,module,exports){
-module.exports = require('domify');
-},{"domify":291}],350:[function(require,module,exports){
-module.exports = require('component-event');
-},{"component-event":288}],351:[function(require,module,exports){
-module.exports = require('component-query');
-},{"component-query":290}],352:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -20474,8 +22411,18 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],353:[function(require,module,exports){
-'use strict';
+
+/***/ }),
+
+/***/ "./node_modules/selection-update/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/selection-update/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 /**
  * Calculate the selection update for the given
@@ -20626,87 +22573,282 @@ function splitStr(str, position) {
     after: str.substring(position)
   };
 }
-},{}],354:[function(require,module,exports){
-(function (setImmediate,clearImmediate){
-!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.swal=e():t.swal=e()}(this,function(){return function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=8)}([function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o="swal-button";e.CLASS_NAMES={MODAL:"swal-modal",OVERLAY:"swal-overlay",SHOW_MODAL:"swal-overlay--show-modal",MODAL_TITLE:"swal-title",MODAL_TEXT:"swal-text",ICON:"swal-icon",ICON_CUSTOM:"swal-icon--custom",CONTENT:"swal-content",FOOTER:"swal-footer",BUTTON_CONTAINER:"swal-button-container",BUTTON:o,CONFIRM_BUTTON:o+"--confirm",CANCEL_BUTTON:o+"--cancel",DANGER_BUTTON:o+"--danger",BUTTON_LOADING:o+"--loading",BUTTON_LOADER:o+"__loader"},e.default=e.CLASS_NAMES},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.getNode=function(t){var e="."+t;return document.querySelector(e)},e.stringToNode=function(t){var e=document.createElement("div");return e.innerHTML=t.trim(),e.firstChild},e.insertAfter=function(t,e){var n=e.nextSibling;e.parentNode.insertBefore(t,n)},e.removeNode=function(t){t.parentElement.removeChild(t)},e.throwErr=function(t){throw t=t.replace(/ +(?= )/g,""),"SweetAlert: "+(t=t.trim())},e.isPlainObject=function(t){if("[object Object]"!==Object.prototype.toString.call(t))return!1;var e=Object.getPrototypeOf(t);return null===e||e===Object.prototype},e.ordinalSuffixOf=function(t){var e=t%10,n=t%100;return 1===e&&11!==n?t+"st":2===e&&12!==n?t+"nd":3===e&&13!==n?t+"rd":t+"th"}},function(t,e,n){"use strict";function o(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}Object.defineProperty(e,"__esModule",{value:!0}),o(n(25));var r=n(26);e.overlayMarkup=r.default,o(n(27)),o(n(28)),o(n(29));var i=n(0),a=i.default.MODAL_TITLE,s=i.default.MODAL_TEXT,c=i.default.ICON,l=i.default.FOOTER;e.iconMarkup='\n  <div class="'+c+'"></div>',e.titleMarkup='\n  <div class="'+a+'"></div>\n',e.textMarkup='\n  <div class="'+s+'"></div>',e.footerMarkup='\n  <div class="'+l+'"></div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1);e.CONFIRM_KEY="confirm",e.CANCEL_KEY="cancel";var r={visible:!0,text:null,value:null,className:"",closeModal:!0},i=Object.assign({},r,{visible:!1,text:"Cancel",value:null}),a=Object.assign({},r,{text:"OK",value:!0});e.defaultButtonList={cancel:i,confirm:a};var s=function(t){switch(t){case e.CONFIRM_KEY:return a;case e.CANCEL_KEY:return i;default:var n=t.charAt(0).toUpperCase()+t.slice(1);return Object.assign({},r,{text:n,value:t})}},c=function(t,e){var n=s(t);return!0===e?Object.assign({},n,{visible:!0}):"string"==typeof e?Object.assign({},n,{visible:!0,text:e}):o.isPlainObject(e)?Object.assign({visible:!0},n,e):Object.assign({},n,{visible:!1})},l=function(t){for(var e={},n=0,o=Object.keys(t);n<o.length;n++){var r=o[n],a=t[r],s=c(r,a);e[r]=s}return e.cancel||(e.cancel=i),e},u=function(t){var n={};switch(t.length){case 1:n[e.CANCEL_KEY]=Object.assign({},i,{visible:!1});break;case 2:n[e.CANCEL_KEY]=c(e.CANCEL_KEY,t[0]),n[e.CONFIRM_KEY]=c(e.CONFIRM_KEY,t[1]);break;default:o.throwErr("Invalid number of 'buttons' in array ("+t.length+").\n      If you want more than 2 buttons, you need to use an object!")}return n};e.getButtonListOpts=function(t){var n=e.defaultButtonList;return"string"==typeof t?n[e.CONFIRM_KEY]=c(e.CONFIRM_KEY,t):Array.isArray(t)?n=u(t):o.isPlainObject(t)?n=l(t):!0===t?n=u([!0,!0]):!1===t?n=u([!1,!1]):void 0===t&&(n=e.defaultButtonList),n}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(2),i=n(0),a=i.default.MODAL,s=i.default.OVERLAY,c=n(30),l=n(31),u=n(32),f=n(33);e.injectElIntoModal=function(t){var e=o.getNode(a),n=o.stringToNode(t);return e.appendChild(n),n};var d=function(t){t.className=a,t.textContent=""},p=function(t,e){d(t);var n=e.className;n&&t.classList.add(n)};e.initModalContent=function(t){var e=o.getNode(a);p(e,t),c.default(t.icon),l.initTitle(t.title),l.initText(t.text),f.default(t.content),u.default(t.buttons,t.dangerMode)};var m=function(){var t=o.getNode(s),e=o.stringToNode(r.modalMarkup);t.appendChild(e)};e.default=m},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(3),r={isOpen:!1,promise:null,actions:{},timer:null},i=Object.assign({},r);e.resetState=function(){i=Object.assign({},r)},e.setActionValue=function(t){if("string"==typeof t)return a(o.CONFIRM_KEY,t);for(var e in t)a(e,t[e])};var a=function(t,e){i.actions[t]||(i.actions[t]={}),Object.assign(i.actions[t],{value:e})};e.setActionOptionsFor=function(t,e){var n=(void 0===e?{}:e).closeModal,o=void 0===n||n;Object.assign(i.actions[t],{closeModal:o})},e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(3),i=n(0),a=i.default.OVERLAY,s=i.default.SHOW_MODAL,c=i.default.BUTTON,l=i.default.BUTTON_LOADING,u=n(5);e.openModal=function(){o.getNode(a).classList.add(s),u.default.isOpen=!0};var f=function(){o.getNode(a).classList.remove(s),u.default.isOpen=!1};e.onAction=function(t){void 0===t&&(t=r.CANCEL_KEY);var e=u.default.actions[t],n=e.value;if(!1===e.closeModal){var i=c+"--"+t;o.getNode(i).classList.add(l)}else f();u.default.promise.resolve(n)},e.getState=function(){var t=Object.assign({},u.default);return delete t.promise,delete t.timer,t},e.stopLoading=function(){for(var t=document.querySelectorAll("."+c),e=0;e<t.length;e++){t[e].classList.remove(l)}}},function(t,e){var n;n=function(){return this}();try{n=n||Function("return this")()||(0,eval)("this")}catch(t){"object"==typeof window&&(n=window)}t.exports=n},function(t,e,n){(function(e){t.exports=e.sweetAlert=n(9)}).call(e,n(7))},function(t,e,n){(function(e){t.exports=e.swal=n(10)}).call(e,n(7))},function(t,e,n){"undefined"!=typeof window&&n(11),n(16);var o=n(23).default;t.exports=o},function(t,e,n){var o=n(12);"string"==typeof o&&(o=[[t.i,o,""]]);var r={insertAt:"top"};r.transform=void 0;n(14)(o,r);o.locals&&(t.exports=o.locals)},function(t,e,n){e=t.exports=n(13)(void 0),e.push([t.i,'.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button:not([disabled]):hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger:not([disabled]):hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}',""])},function(t,e){function n(t,e){var n=t[1]||"",r=t[3];if(!r)return n;if(e&&"function"==typeof btoa){var i=o(r);return[n].concat(r.sources.map(function(t){return"/*# sourceURL="+r.sourceRoot+t+" */"})).concat([i]).join("\n")}return[n].join("\n")}function o(t){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(t))))+" */"}t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var o=n(e,t);return e[2]?"@media "+e[2]+"{"+o+"}":o}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var o={},r=0;r<this.length;r++){var i=this[r][0];"number"==typeof i&&(o[i]=!0)}for(r=0;r<t.length;r++){var a=t[r];"number"==typeof a[0]&&o[a[0]]||(n&&!a[2]?a[2]=n:n&&(a[2]="("+a[2]+") and ("+n+")"),e.push(a))}},e}},function(t,e,n){function o(t,e){for(var n=0;n<t.length;n++){var o=t[n],r=m[o.id];if(r){r.refs++;for(var i=0;i<r.parts.length;i++)r.parts[i](o.parts[i]);for(;i<o.parts.length;i++)r.parts.push(u(o.parts[i],e))}else{for(var a=[],i=0;i<o.parts.length;i++)a.push(u(o.parts[i],e));m[o.id]={id:o.id,refs:1,parts:a}}}}function r(t,e){for(var n=[],o={},r=0;r<t.length;r++){var i=t[r],a=e.base?i[0]+e.base:i[0],s=i[1],c=i[2],l=i[3],u={css:s,media:c,sourceMap:l};o[a]?o[a].parts.push(u):n.push(o[a]={id:a,parts:[u]})}return n}function i(t,e){var n=v(t.insertInto);if(!n)throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");var o=w[w.length-1];if("top"===t.insertAt)o?o.nextSibling?n.insertBefore(e,o.nextSibling):n.appendChild(e):n.insertBefore(e,n.firstChild),w.push(e);else{if("bottom"!==t.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");n.appendChild(e)}}function a(t){if(null===t.parentNode)return!1;t.parentNode.removeChild(t);var e=w.indexOf(t);e>=0&&w.splice(e,1)}function s(t){var e=document.createElement("style");return t.attrs.type="text/css",l(e,t.attrs),i(t,e),e}function c(t){var e=document.createElement("link");return t.attrs.type="text/css",t.attrs.rel="stylesheet",l(e,t.attrs),i(t,e),e}function l(t,e){Object.keys(e).forEach(function(n){t.setAttribute(n,e[n])})}function u(t,e){var n,o,r,i;if(e.transform&&t.css){if(!(i=e.transform(t.css)))return function(){};t.css=i}if(e.singleton){var l=h++;n=g||(g=s(e)),o=f.bind(null,n,l,!1),r=f.bind(null,n,l,!0)}else t.sourceMap&&"function"==typeof URL&&"function"==typeof URL.createObjectURL&&"function"==typeof URL.revokeObjectURL&&"function"==typeof Blob&&"function"==typeof btoa?(n=c(e),o=p.bind(null,n,e),r=function(){a(n),n.href&&URL.revokeObjectURL(n.href)}):(n=s(e),o=d.bind(null,n),r=function(){a(n)});return o(t),function(e){if(e){if(e.css===t.css&&e.media===t.media&&e.sourceMap===t.sourceMap)return;o(t=e)}else r()}}function f(t,e,n,o){var r=n?"":o.css;if(t.styleSheet)t.styleSheet.cssText=x(e,r);else{var i=document.createTextNode(r),a=t.childNodes;a[e]&&t.removeChild(a[e]),a.length?t.insertBefore(i,a[e]):t.appendChild(i)}}function d(t,e){var n=e.css,o=e.media;if(o&&t.setAttribute("media",o),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}function p(t,e,n){var o=n.css,r=n.sourceMap,i=void 0===e.convertToAbsoluteUrls&&r;(e.convertToAbsoluteUrls||i)&&(o=y(o)),r&&(o+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(r))))+" */");var a=new Blob([o],{type:"text/css"}),s=t.href;t.href=URL.createObjectURL(a),s&&URL.revokeObjectURL(s)}var m={},b=function(t){var e;return function(){return void 0===e&&(e=t.apply(this,arguments)),e}}(function(){return window&&document&&document.all&&!window.atob}),v=function(t){var e={};return function(n){return void 0===e[n]&&(e[n]=t.call(this,n)),e[n]}}(function(t){return document.querySelector(t)}),g=null,h=0,w=[],y=n(15);t.exports=function(t,e){if("undefined"!=typeof DEBUG&&DEBUG&&"object"!=typeof document)throw new Error("The style-loader cannot be used in a non-browser environment");e=e||{},e.attrs="object"==typeof e.attrs?e.attrs:{},e.singleton||(e.singleton=b()),e.insertInto||(e.insertInto="head"),e.insertAt||(e.insertAt="bottom");var n=r(t,e);return o(n,e),function(t){for(var i=[],a=0;a<n.length;a++){var s=n[a],c=m[s.id];c.refs--,i.push(c)}if(t){o(r(t,e),e)}for(var a=0;a<i.length;a++){var c=i[a];if(0===c.refs){for(var l=0;l<c.parts.length;l++)c.parts[l]();delete m[c.id]}}}};var x=function(){var t=[];return function(e,n){return t[e]=n,t.filter(Boolean).join("\n")}}()},function(t,e){t.exports=function(t){var e="undefined"!=typeof window&&window.location;if(!e)throw new Error("fixUrls requires window.location");if(!t||"string"!=typeof t)return t;var n=e.protocol+"//"+e.host,o=n+e.pathname.replace(/\/[^\/]*$/,"/");return t.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi,function(t,e){var r=e.trim().replace(/^"(.*)"$/,function(t,e){return e}).replace(/^'(.*)'$/,function(t,e){return e});if(/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(r))return t;var i;return i=0===r.indexOf("//")?r:0===r.indexOf("/")?n+r:o+r.replace(/^\.\//,""),"url("+JSON.stringify(i)+")"})}},function(t,e,n){var o=n(17);"undefined"==typeof window||window.Promise||(window.Promise=o),n(21),String.prototype.includes||(String.prototype.includes=function(t,e){"use strict";return"number"!=typeof e&&(e=0),!(e+t.length>this.length)&&-1!==this.indexOf(t,e)}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{value:function(t,e){if(null==this)throw new TypeError('"this" is null or not defined');var n=Object(this),o=n.length>>>0;if(0===o)return!1;for(var r=0|e,i=Math.max(r>=0?r:o-Math.abs(r),0);i<o;){if(function(t,e){return t===e||"number"==typeof t&&"number"==typeof e&&isNaN(t)&&isNaN(e)}(n[i],t))return!0;i++}return!1}}),"undefined"!=typeof window&&function(t){t.forEach(function(t){t.hasOwnProperty("remove")||Object.defineProperty(t,"remove",{configurable:!0,enumerable:!0,writable:!0,value:function(){this.parentNode.removeChild(this)}})})}([Element.prototype,CharacterData.prototype,DocumentType.prototype])},function(t,e,n){(function(e){!function(n){function o(){}function r(t,e){return function(){t.apply(e,arguments)}}function i(t){if("object"!=typeof this)throw new TypeError("Promises must be constructed via new");if("function"!=typeof t)throw new TypeError("not a function");this._state=0,this._handled=!1,this._value=void 0,this._deferreds=[],f(t,this)}function a(t,e){for(;3===t._state;)t=t._value;if(0===t._state)return void t._deferreds.push(e);t._handled=!0,i._immediateFn(function(){var n=1===t._state?e.onFulfilled:e.onRejected;if(null===n)return void(1===t._state?s:c)(e.promise,t._value);var o;try{o=n(t._value)}catch(t){return void c(e.promise,t)}s(e.promise,o)})}function s(t,e){try{if(e===t)throw new TypeError("A promise cannot be resolved with itself.");if(e&&("object"==typeof e||"function"==typeof e)){var n=e.then;if(e instanceof i)return t._state=3,t._value=e,void l(t);if("function"==typeof n)return void f(r(n,e),t)}t._state=1,t._value=e,l(t)}catch(e){c(t,e)}}function c(t,e){t._state=2,t._value=e,l(t)}function l(t){2===t._state&&0===t._deferreds.length&&i._immediateFn(function(){t._handled||i._unhandledRejectionFn(t._value)});for(var e=0,n=t._deferreds.length;e<n;e++)a(t,t._deferreds[e]);t._deferreds=null}function u(t,e,n){this.onFulfilled="function"==typeof t?t:null,this.onRejected="function"==typeof e?e:null,this.promise=n}function f(t,e){var n=!1;try{t(function(t){n||(n=!0,s(e,t))},function(t){n||(n=!0,c(e,t))})}catch(t){if(n)return;n=!0,c(e,t)}}var d=setTimeout;i.prototype.catch=function(t){return this.then(null,t)},i.prototype.then=function(t,e){var n=new this.constructor(o);return a(this,new u(t,e,n)),n},i.all=function(t){var e=Array.prototype.slice.call(t);return new i(function(t,n){function o(i,a){try{if(a&&("object"==typeof a||"function"==typeof a)){var s=a.then;if("function"==typeof s)return void s.call(a,function(t){o(i,t)},n)}e[i]=a,0==--r&&t(e)}catch(t){n(t)}}if(0===e.length)return t([]);for(var r=e.length,i=0;i<e.length;i++)o(i,e[i])})},i.resolve=function(t){return t&&"object"==typeof t&&t.constructor===i?t:new i(function(e){e(t)})},i.reject=function(t){return new i(function(e,n){n(t)})},i.race=function(t){return new i(function(e,n){for(var o=0,r=t.length;o<r;o++)t[o].then(e,n)})},i._immediateFn="function"==typeof e&&function(t){e(t)}||function(t){d(t,0)},i._unhandledRejectionFn=function(t){"undefined"!=typeof console&&console&&console.warn("Possible Unhandled Promise Rejection:",t)},i._setImmediateFn=function(t){i._immediateFn=t},i._setUnhandledRejectionFn=function(t){i._unhandledRejectionFn=t},void 0!==t&&t.exports?t.exports=i:n.Promise||(n.Promise=i)}(this)}).call(e,n(18).setImmediate)},function(t,e,n){function o(t,e){this._id=t,this._clearFn=e}var r=Function.prototype.apply;e.setTimeout=function(){return new o(r.call(setTimeout,window,arguments),clearTimeout)},e.setInterval=function(){return new o(r.call(setInterval,window,arguments),clearInterval)},e.clearTimeout=e.clearInterval=function(t){t&&t.close()},o.prototype.unref=o.prototype.ref=function(){},o.prototype.close=function(){this._clearFn.call(window,this._id)},e.enroll=function(t,e){clearTimeout(t._idleTimeoutId),t._idleTimeout=e},e.unenroll=function(t){clearTimeout(t._idleTimeoutId),t._idleTimeout=-1},e._unrefActive=e.active=function(t){clearTimeout(t._idleTimeoutId);var e=t._idleTimeout;e>=0&&(t._idleTimeoutId=setTimeout(function(){t._onTimeout&&t._onTimeout()},e))},n(19),e.setImmediate=setImmediate,e.clearImmediate=clearImmediate},function(t,e,n){(function(t,e){!function(t,n){"use strict";function o(t){"function"!=typeof t&&(t=new Function(""+t));for(var e=new Array(arguments.length-1),n=0;n<e.length;n++)e[n]=arguments[n+1];var o={callback:t,args:e};return l[c]=o,s(c),c++}function r(t){delete l[t]}function i(t){var e=t.callback,o=t.args;switch(o.length){case 0:e();break;case 1:e(o[0]);break;case 2:e(o[0],o[1]);break;case 3:e(o[0],o[1],o[2]);break;default:e.apply(n,o)}}function a(t){if(u)setTimeout(a,0,t);else{var e=l[t];if(e){u=!0;try{i(e)}finally{r(t),u=!1}}}}if(!t.setImmediate){var s,c=1,l={},u=!1,f=t.document,d=Object.getPrototypeOf&&Object.getPrototypeOf(t);d=d&&d.setTimeout?d:t,"[object process]"==={}.toString.call(t.process)?function(){s=function(t){e.nextTick(function(){a(t)})}}():function(){if(t.postMessage&&!t.importScripts){var e=!0,n=t.onmessage;return t.onmessage=function(){e=!1},t.postMessage("","*"),t.onmessage=n,e}}()?function(){var e="setImmediate$"+Math.random()+"$",n=function(n){n.source===t&&"string"==typeof n.data&&0===n.data.indexOf(e)&&a(+n.data.slice(e.length))};t.addEventListener?t.addEventListener("message",n,!1):t.attachEvent("onmessage",n),s=function(n){t.postMessage(e+n,"*")}}():t.MessageChannel?function(){var t=new MessageChannel;t.port1.onmessage=function(t){a(t.data)},s=function(e){t.port2.postMessage(e)}}():f&&"onreadystatechange"in f.createElement("script")?function(){var t=f.documentElement;s=function(e){var n=f.createElement("script");n.onreadystatechange=function(){a(e),n.onreadystatechange=null,t.removeChild(n),n=null},t.appendChild(n)}}():function(){s=function(t){setTimeout(a,0,t)}}(),d.setImmediate=o,d.clearImmediate=r}}("undefined"==typeof self?void 0===t?this:t:self)}).call(e,n(7),n(20))},function(t,e){function n(){throw new Error("setTimeout has not been defined")}function o(){throw new Error("clearTimeout has not been defined")}function r(t){if(u===setTimeout)return setTimeout(t,0);if((u===n||!u)&&setTimeout)return u=setTimeout,setTimeout(t,0);try{return u(t,0)}catch(e){try{return u.call(null,t,0)}catch(e){return u.call(this,t,0)}}}function i(t){if(f===clearTimeout)return clearTimeout(t);if((f===o||!f)&&clearTimeout)return f=clearTimeout,clearTimeout(t);try{return f(t)}catch(e){try{return f.call(null,t)}catch(e){return f.call(this,t)}}}function a(){b&&p&&(b=!1,p.length?m=p.concat(m):v=-1,m.length&&s())}function s(){if(!b){var t=r(a);b=!0;for(var e=m.length;e;){for(p=m,m=[];++v<e;)p&&p[v].run();v=-1,e=m.length}p=null,b=!1,i(t)}}function c(t,e){this.fun=t,this.array=e}function l(){}var u,f,d=t.exports={};!function(){try{u="function"==typeof setTimeout?setTimeout:n}catch(t){u=n}try{f="function"==typeof clearTimeout?clearTimeout:o}catch(t){f=o}}();var p,m=[],b=!1,v=-1;d.nextTick=function(t){var e=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)e[n-1]=arguments[n];m.push(new c(t,e)),1!==m.length||b||r(s)},c.prototype.run=function(){this.fun.apply(null,this.array)},d.title="browser",d.browser=!0,d.env={},d.argv=[],d.version="",d.versions={},d.on=l,d.addListener=l,d.once=l,d.off=l,d.removeListener=l,d.removeAllListeners=l,d.emit=l,d.prependListener=l,d.prependOnceListener=l,d.listeners=function(t){return[]},d.binding=function(t){throw new Error("process.binding is not supported")},d.cwd=function(){return"/"},d.chdir=function(t){throw new Error("process.chdir is not supported")},d.umask=function(){return 0}},function(t,e,n){"use strict";n(22).polyfill()},function(t,e,n){"use strict";function o(t,e){if(void 0===t||null===t)throw new TypeError("Cannot convert first argument to object");for(var n=Object(t),o=1;o<arguments.length;o++){var r=arguments[o];if(void 0!==r&&null!==r)for(var i=Object.keys(Object(r)),a=0,s=i.length;a<s;a++){var c=i[a],l=Object.getOwnPropertyDescriptor(r,c);void 0!==l&&l.enumerable&&(n[c]=r[c])}}return n}function r(){Object.assign||Object.defineProperty(Object,"assign",{enumerable:!1,configurable:!0,writable:!0,value:o})}t.exports={assign:o,polyfill:r}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(24),r=n(6),i=n(5),a=n(36),s=function(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];if("undefined"!=typeof window){var n=a.getOpts.apply(void 0,t);return new Promise(function(t,e){i.default.promise={resolve:t,reject:e},o.default(n),setTimeout(function(){r.openModal()})})}};s.close=r.onAction,s.getState=r.getState,s.setActionValue=i.setActionValue,s.stopLoading=r.stopLoading,s.setDefaults=a.setDefaults,e.default=s},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(0),i=r.default.MODAL,a=n(4),s=n(34),c=n(35),l=n(1);e.init=function(t){o.getNode(i)||(document.body||l.throwErr("You can only use SweetAlert AFTER the DOM has loaded!"),s.default(),a.default()),a.initModalContent(t),c.default(t)},e.default=e.init},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.MODAL;e.modalMarkup='\n  <div class="'+r+'" role="dialog" aria-modal="true"></div>',e.default=e.modalMarkup},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.OVERLAY,i='<div \n    class="'+r+'"\n    tabIndex="-1">\n  </div>';e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.ICON;e.errorIconMarkup=function(){var t=r+"--error",e=t+"__line";return'\n    <div class="'+t+'__x-mark">\n      <span class="'+e+" "+e+'--left"></span>\n      <span class="'+e+" "+e+'--right"></span>\n    </div>\n  '},e.warningIconMarkup=function(){var t=r+"--warning";return'\n    <span class="'+t+'__body">\n      <span class="'+t+'__dot"></span>\n    </span>\n  '},e.successIconMarkup=function(){var t=r+"--success";return'\n    <span class="'+t+"__line "+t+'__line--long"></span>\n    <span class="'+t+"__line "+t+'__line--tip"></span>\n\n    <div class="'+t+'__ring"></div>\n    <div class="'+t+'__hide-corners"></div>\n  '}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.CONTENT;e.contentMarkup='\n  <div class="'+r+'">\n\n  </div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.BUTTON_CONTAINER,i=o.default.BUTTON,a=o.default.BUTTON_LOADER;e.buttonMarkup='\n  <div class="'+r+'">\n\n    <button\n      class="'+i+'"\n    ></button>\n\n    <div class="'+a+'">\n      <div></div>\n      <div></div>\n      <div></div>\n    </div>\n\n  </div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(4),r=n(2),i=n(0),a=i.default.ICON,s=i.default.ICON_CUSTOM,c=["error","warning","success","info"],l={error:r.errorIconMarkup(),warning:r.warningIconMarkup(),success:r.successIconMarkup()},u=function(t,e){var n=a+"--"+t;e.classList.add(n);var o=l[t];o&&(e.innerHTML=o)},f=function(t,e){e.classList.add(s);var n=document.createElement("img");n.src=t,e.appendChild(n)},d=function(t){if(t){var e=o.injectElIntoModal(r.iconMarkup);c.includes(t)?u(t,e):f(t,e)}};e.default=d},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(2),r=n(4),i=function(t){navigator.userAgent.includes("AppleWebKit")&&(t.style.display="none",t.offsetHeight,t.style.display="")};e.initTitle=function(t){if(t){var e=r.injectElIntoModal(o.titleMarkup);e.textContent=t,i(e)}},e.initText=function(t){if(t){var e=document.createDocumentFragment();t.split("\n").forEach(function(t,n,o){e.appendChild(document.createTextNode(t)),n<o.length-1&&e.appendChild(document.createElement("br"))});var n=r.injectElIntoModal(o.textMarkup);n.appendChild(e),i(n)}}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(4),i=n(0),a=i.default.BUTTON,s=i.default.DANGER_BUTTON,c=n(3),l=n(2),u=n(6),f=n(5),d=function(t,e,n){var r=e.text,i=e.value,d=e.className,p=e.closeModal,m=o.stringToNode(l.buttonMarkup),b=m.querySelector("."+a),v=a+"--"+t;if(b.classList.add(v),d){(Array.isArray(d)?d:d.split(" ")).filter(function(t){return t.length>0}).forEach(function(t){b.classList.add(t)})}n&&t===c.CONFIRM_KEY&&b.classList.add(s),b.textContent=r;var g={};return g[t]=i,f.setActionValue(g),f.setActionOptionsFor(t,{closeModal:p}),b.addEventListener("click",function(){return u.onAction(t)}),m},p=function(t,e){var n=r.injectElIntoModal(l.footerMarkup);for(var o in t){var i=t[o],a=d(o,i,e);i.visible&&n.appendChild(a)}0===n.children.length&&n.remove()};e.default=p},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(3),r=n(4),i=n(2),a=n(5),s=n(6),c=n(0),l=c.default.CONTENT,u=function(t){t.addEventListener("input",function(t){var e=t.target,n=e.value;a.setActionValue(n)}),t.addEventListener("keyup",function(t){if("Enter"===t.key)return s.onAction(o.CONFIRM_KEY)}),setTimeout(function(){t.focus(),a.setActionValue("")},0)},f=function(t,e,n){var o=document.createElement(e),r=l+"__"+e;o.classList.add(r);for(var i in n){var a=n[i];o[i]=a}"input"===e&&u(o),t.appendChild(o)},d=function(t){if(t){var e=r.injectElIntoModal(i.contentMarkup),n=t.element,o=t.attributes;"string"==typeof n?f(e,n,o):e.appendChild(n)}};e.default=d},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(2),i=function(){var t=o.stringToNode(r.overlayMarkup);document.body.appendChild(t)};e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(5),r=n(6),i=n(1),a=n(3),s=n(0),c=s.default.MODAL,l=s.default.BUTTON,u=s.default.OVERLAY,f=function(t){t.preventDefault(),v()},d=function(t){t.preventDefault(),g()},p=function(t){if(o.default.isOpen)switch(t.key){case"Escape":return r.onAction(a.CANCEL_KEY)}},m=function(t){if(o.default.isOpen)switch(t.key){case"Tab":return f(t)}},b=function(t){if(o.default.isOpen)return"Tab"===t.key&&t.shiftKey?d(t):void 0},v=function(){var t=i.getNode(l);t&&(t.tabIndex=0,t.focus())},g=function(){var t=i.getNode(c),e=t.querySelectorAll("."+l),n=e.length-1,o=e[n];o&&o.focus()},h=function(t){t[t.length-1].addEventListener("keydown",m)},w=function(t){t[0].addEventListener("keydown",b)},y=function(){var t=i.getNode(c),e=t.querySelectorAll("."+l);e.length&&(h(e),w(e))},x=function(t){if(i.getNode(u)===t.target)return r.onAction(a.CANCEL_KEY)},_=function(t){var e=i.getNode(u);e.removeEventListener("click",x),t&&e.addEventListener("click",x)},k=function(t){o.default.timer&&clearTimeout(o.default.timer),t&&(o.default.timer=window.setTimeout(function(){return r.onAction(a.CANCEL_KEY)},t))},O=function(t){t.closeOnEsc?document.addEventListener("keyup",p):document.removeEventListener("keyup",p),t.dangerMode?v():g(),y(),_(t.closeOnClickOutside),k(t.timer)};e.default=O},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(3),i=n(37),a=n(38),s={title:null,text:null,icon:null,buttons:r.defaultButtonList,content:null,className:null,closeOnClickOutside:!0,closeOnEsc:!0,dangerMode:!1,timer:null},c=Object.assign({},s);e.setDefaults=function(t){c=Object.assign({},s,t)};var l=function(t){var e=t&&t.button,n=t&&t.buttons;return void 0!==e&&void 0!==n&&o.throwErr("Cannot set both 'button' and 'buttons' options!"),void 0!==e?{confirm:e}:n},u=function(t){return o.ordinalSuffixOf(t+1)},f=function(t,e){o.throwErr(u(e)+" argument ('"+t+"') is invalid")},d=function(t,e){var n=t+1,r=e[n];o.isPlainObject(r)||void 0===r||o.throwErr("Expected "+u(n)+" argument ('"+r+"') to be a plain object")},p=function(t,e){var n=t+1,r=e[n];void 0!==r&&o.throwErr("Unexpected "+u(n)+" argument ("+r+")")},m=function(t,e,n,r){var i=typeof e,a="string"===i,s=e instanceof Element;if(a){if(0===n)return{text:e};if(1===n)return{text:e,title:r[0]};if(2===n)return d(n,r),{icon:e};f(e,n)}else{if(s&&0===n)return d(n,r),{content:e};if(o.isPlainObject(e))return p(n,r),e;f(e,n)}};e.getOpts=function(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];var n={};t.forEach(function(e,o){var r=m(0,e,o,t);Object.assign(n,r)});var o=l(n);n.buttons=r.getButtonListOpts(o),delete n.button,n.content=i.getContentOpts(n.content);var u=Object.assign({},s,c,n);return Object.keys(u).forEach(function(t){a.DEPRECATED_OPTS[t]&&a.logDeprecation(t)}),u}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r={element:"input",attributes:{placeholder:""}};e.getContentOpts=function(t){var e={};return o.isPlainObject(t)?Object.assign(e,t):t instanceof Element?{element:t}:"input"===t?r:null}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.logDeprecation=function(t){var n=e.DEPRECATED_OPTS[t],o=n.onlyRename,r=n.replacement,i=n.subOption,a=n.link,s=o?"renamed":"deprecated",c='SweetAlert warning: "'+t+'" option has been '+s+".";if(r){c+=" Please use"+(i?' "'+i+'" in ':" ")+'"'+r+'" instead.'}var l="https://sweetalert.js.org";c+=a?" More details: "+l+a:" More details: "+l+"/guides/#upgrading-from-1x",console.warn(c)},e.DEPRECATED_OPTS={type:{replacement:"icon",link:"/docs/#icon"},imageUrl:{replacement:"icon",link:"/docs/#icon"},customClass:{replacement:"className",onlyRename:!0,link:"/docs/#classname"},imageSize:{},showCancelButton:{replacement:"buttons",link:"/docs/#buttons"},showConfirmButton:{replacement:"button",link:"/docs/#button"},confirmButtonText:{replacement:"button",link:"/docs/#button"},confirmButtonColor:{},cancelButtonText:{replacement:"buttons",link:"/docs/#buttons"},closeOnConfirm:{replacement:"button",subOption:"closeModal",link:"/docs/#button"},closeOnCancel:{replacement:"buttons",subOption:"closeModal",link:"/docs/#buttons"},showLoaderOnConfirm:{replacement:"buttons"},animation:{},inputType:{replacement:"content",link:"/docs/#content"},inputValue:{replacement:"content",link:"/docs/#content"},inputPlaceholder:{replacement:"content",link:"/docs/#content"},html:{replacement:"content",link:"/docs/#content"},allowEscapeKey:{replacement:"closeOnEsc",onlyRename:!0,link:"/docs/#closeonesc"},allowClickOutside:{replacement:"closeOnClickOutside",onlyRename:!0,link:"/docs/#closeonclickoutside"}}}])});
-}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"timers":355}],355:[function(require,module,exports){
-(function (setImmediate,clearImmediate){
-var nextTick = require('process/browser.js').nextTick;
-var apply = Function.prototype.apply;
-var slice = Array.prototype.slice;
-var immediateIds = {};
-var nextImmediateId = 0;
 
-// DOM APIs, for completeness
+/***/ }),
 
-exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-};
-exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-};
-exports.clearTimeout =
-exports.clearInterval = function(timeout) { timeout.close(); };
+/***/ "./node_modules/setimmediate/setImmediate.js":
+/*!***************************************************!*\
+  !*** ./node_modules/setimmediate/setImmediate.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-function Timeout(id, clearFn) {
-  this._id = id;
-  this._clearFn = clearFn;
-}
-Timeout.prototype.unref = Timeout.prototype.ref = function() {};
-Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
-};
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
 
-// Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = msecs;
-};
-
-exports.unenroll = function(item) {
-  clearTimeout(item._idleTimeoutId);
-  item._idleTimeout = -1;
-};
-
-exports._unrefActive = exports.active = function(item) {
-  clearTimeout(item._idleTimeoutId);
-
-  var msecs = item._idleTimeout;
-  if (msecs >= 0) {
-    item._idleTimeoutId = setTimeout(function onTimeout() {
-      if (item._onTimeout)
-        item._onTimeout();
-    }, msecs);
-  }
-};
-
-// That's not how node.js implements it but the exposed api is the same.
-exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function(fn) {
-  var id = nextImmediateId++;
-  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-
-  immediateIds[id] = true;
-
-  nextTick(function onNextTick() {
-    if (immediateIds[id]) {
-      // fn.call() is faster so we optimize for the common use-case
-      // @see http://jsperf.com/call-apply-segu
-      if (args) {
-        fn.apply(null, args);
-      } else {
-        fn.call(null);
-      }
-      // Prevent ids from leaking
-      exports.clearImmediate(id);
+    if (global.setImmediate) {
+        return;
     }
-  });
 
-  return id;
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/sweetalert/dist/sweetalert.min.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sweetalert/dist/sweetalert.min.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {!function(t,e){ true?module.exports=e():undefined}(this,function(){return function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p="",e(e.s=8)}([function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o="swal-button";e.CLASS_NAMES={MODAL:"swal-modal",OVERLAY:"swal-overlay",SHOW_MODAL:"swal-overlay--show-modal",MODAL_TITLE:"swal-title",MODAL_TEXT:"swal-text",ICON:"swal-icon",ICON_CUSTOM:"swal-icon--custom",CONTENT:"swal-content",FOOTER:"swal-footer",BUTTON_CONTAINER:"swal-button-container",BUTTON:o,CONFIRM_BUTTON:o+"--confirm",CANCEL_BUTTON:o+"--cancel",DANGER_BUTTON:o+"--danger",BUTTON_LOADING:o+"--loading",BUTTON_LOADER:o+"__loader"},e.default=e.CLASS_NAMES},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.getNode=function(t){var e="."+t;return document.querySelector(e)},e.stringToNode=function(t){var e=document.createElement("div");return e.innerHTML=t.trim(),e.firstChild},e.insertAfter=function(t,e){var n=e.nextSibling;e.parentNode.insertBefore(t,n)},e.removeNode=function(t){t.parentElement.removeChild(t)},e.throwErr=function(t){throw t=t.replace(/ +(?= )/g,""),"SweetAlert: "+(t=t.trim())},e.isPlainObject=function(t){if("[object Object]"!==Object.prototype.toString.call(t))return!1;var e=Object.getPrototypeOf(t);return null===e||e===Object.prototype},e.ordinalSuffixOf=function(t){var e=t%10,n=t%100;return 1===e&&11!==n?t+"st":2===e&&12!==n?t+"nd":3===e&&13!==n?t+"rd":t+"th"}},function(t,e,n){"use strict";function o(t){for(var n in t)e.hasOwnProperty(n)||(e[n]=t[n])}Object.defineProperty(e,"__esModule",{value:!0}),o(n(25));var r=n(26);e.overlayMarkup=r.default,o(n(27)),o(n(28)),o(n(29));var i=n(0),a=i.default.MODAL_TITLE,s=i.default.MODAL_TEXT,c=i.default.ICON,l=i.default.FOOTER;e.iconMarkup='\n  <div class="'+c+'"></div>',e.titleMarkup='\n  <div class="'+a+'"></div>\n',e.textMarkup='\n  <div class="'+s+'"></div>',e.footerMarkup='\n  <div class="'+l+'"></div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1);e.CONFIRM_KEY="confirm",e.CANCEL_KEY="cancel";var r={visible:!0,text:null,value:null,className:"",closeModal:!0},i=Object.assign({},r,{visible:!1,text:"Cancel",value:null}),a=Object.assign({},r,{text:"OK",value:!0});e.defaultButtonList={cancel:i,confirm:a};var s=function(t){switch(t){case e.CONFIRM_KEY:return a;case e.CANCEL_KEY:return i;default:var n=t.charAt(0).toUpperCase()+t.slice(1);return Object.assign({},r,{text:n,value:t})}},c=function(t,e){var n=s(t);return!0===e?Object.assign({},n,{visible:!0}):"string"==typeof e?Object.assign({},n,{visible:!0,text:e}):o.isPlainObject(e)?Object.assign({visible:!0},n,e):Object.assign({},n,{visible:!1})},l=function(t){for(var e={},n=0,o=Object.keys(t);n<o.length;n++){var r=o[n],a=t[r],s=c(r,a);e[r]=s}return e.cancel||(e.cancel=i),e},u=function(t){var n={};switch(t.length){case 1:n[e.CANCEL_KEY]=Object.assign({},i,{visible:!1});break;case 2:n[e.CANCEL_KEY]=c(e.CANCEL_KEY,t[0]),n[e.CONFIRM_KEY]=c(e.CONFIRM_KEY,t[1]);break;default:o.throwErr("Invalid number of 'buttons' in array ("+t.length+").\n      If you want more than 2 buttons, you need to use an object!")}return n};e.getButtonListOpts=function(t){var n=e.defaultButtonList;return"string"==typeof t?n[e.CONFIRM_KEY]=c(e.CONFIRM_KEY,t):Array.isArray(t)?n=u(t):o.isPlainObject(t)?n=l(t):!0===t?n=u([!0,!0]):!1===t?n=u([!1,!1]):void 0===t&&(n=e.defaultButtonList),n}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(2),i=n(0),a=i.default.MODAL,s=i.default.OVERLAY,c=n(30),l=n(31),u=n(32),f=n(33);e.injectElIntoModal=function(t){var e=o.getNode(a),n=o.stringToNode(t);return e.appendChild(n),n};var d=function(t){t.className=a,t.textContent=""},p=function(t,e){d(t);var n=e.className;n&&t.classList.add(n)};e.initModalContent=function(t){var e=o.getNode(a);p(e,t),c.default(t.icon),l.initTitle(t.title),l.initText(t.text),f.default(t.content),u.default(t.buttons,t.dangerMode)};var m=function(){var t=o.getNode(s),e=o.stringToNode(r.modalMarkup);t.appendChild(e)};e.default=m},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(3),r={isOpen:!1,promise:null,actions:{},timer:null},i=Object.assign({},r);e.resetState=function(){i=Object.assign({},r)},e.setActionValue=function(t){if("string"==typeof t)return a(o.CONFIRM_KEY,t);for(var e in t)a(e,t[e])};var a=function(t,e){i.actions[t]||(i.actions[t]={}),Object.assign(i.actions[t],{value:e})};e.setActionOptionsFor=function(t,e){var n=(void 0===e?{}:e).closeModal,o=void 0===n||n;Object.assign(i.actions[t],{closeModal:o})},e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(3),i=n(0),a=i.default.OVERLAY,s=i.default.SHOW_MODAL,c=i.default.BUTTON,l=i.default.BUTTON_LOADING,u=n(5);e.openModal=function(){o.getNode(a).classList.add(s),u.default.isOpen=!0};var f=function(){o.getNode(a).classList.remove(s),u.default.isOpen=!1};e.onAction=function(t){void 0===t&&(t=r.CANCEL_KEY);var e=u.default.actions[t],n=e.value;if(!1===e.closeModal){var i=c+"--"+t;o.getNode(i).classList.add(l)}else f();u.default.promise.resolve(n)},e.getState=function(){var t=Object.assign({},u.default);return delete t.promise,delete t.timer,t},e.stopLoading=function(){for(var t=document.querySelectorAll("."+c),e=0;e<t.length;e++){t[e].classList.remove(l)}}},function(t,e){var n;n=function(){return this}();try{n=n||Function("return this")()||(0,eval)("this")}catch(t){"object"==typeof window&&(n=window)}t.exports=n},function(t,e,n){(function(e){t.exports=e.sweetAlert=n(9)}).call(e,n(7))},function(t,e,n){(function(e){t.exports=e.swal=n(10)}).call(e,n(7))},function(t,e,n){"undefined"!=typeof window&&n(11),n(16);var o=n(23).default;t.exports=o},function(t,e,n){var o=n(12);"string"==typeof o&&(o=[[t.i,o,""]]);var r={insertAt:"top"};r.transform=void 0;n(14)(o,r);o.locals&&(t.exports=o.locals)},function(t,e,n){e=t.exports=n(13)(void 0),e.push([t.i,'.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button:not([disabled]):hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger:not([disabled]):hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}',""])},function(t,e){function n(t,e){var n=t[1]||"",r=t[3];if(!r)return n;if(e&&"function"==typeof btoa){var i=o(r);return[n].concat(r.sources.map(function(t){return"/*# sourceURL="+r.sourceRoot+t+" */"})).concat([i]).join("\n")}return[n].join("\n")}function o(t){return"/*# sourceMappingURL=data:application/json;charset=utf-8;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(t))))+" */"}t.exports=function(t){var e=[];return e.toString=function(){return this.map(function(e){var o=n(e,t);return e[2]?"@media "+e[2]+"{"+o+"}":o}).join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var o={},r=0;r<this.length;r++){var i=this[r][0];"number"==typeof i&&(o[i]=!0)}for(r=0;r<t.length;r++){var a=t[r];"number"==typeof a[0]&&o[a[0]]||(n&&!a[2]?a[2]=n:n&&(a[2]="("+a[2]+") and ("+n+")"),e.push(a))}},e}},function(t,e,n){function o(t,e){for(var n=0;n<t.length;n++){var o=t[n],r=m[o.id];if(r){r.refs++;for(var i=0;i<r.parts.length;i++)r.parts[i](o.parts[i]);for(;i<o.parts.length;i++)r.parts.push(u(o.parts[i],e))}else{for(var a=[],i=0;i<o.parts.length;i++)a.push(u(o.parts[i],e));m[o.id]={id:o.id,refs:1,parts:a}}}}function r(t,e){for(var n=[],o={},r=0;r<t.length;r++){var i=t[r],a=e.base?i[0]+e.base:i[0],s=i[1],c=i[2],l=i[3],u={css:s,media:c,sourceMap:l};o[a]?o[a].parts.push(u):n.push(o[a]={id:a,parts:[u]})}return n}function i(t,e){var n=v(t.insertInto);if(!n)throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");var o=w[w.length-1];if("top"===t.insertAt)o?o.nextSibling?n.insertBefore(e,o.nextSibling):n.appendChild(e):n.insertBefore(e,n.firstChild),w.push(e);else{if("bottom"!==t.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");n.appendChild(e)}}function a(t){if(null===t.parentNode)return!1;t.parentNode.removeChild(t);var e=w.indexOf(t);e>=0&&w.splice(e,1)}function s(t){var e=document.createElement("style");return t.attrs.type="text/css",l(e,t.attrs),i(t,e),e}function c(t){var e=document.createElement("link");return t.attrs.type="text/css",t.attrs.rel="stylesheet",l(e,t.attrs),i(t,e),e}function l(t,e){Object.keys(e).forEach(function(n){t.setAttribute(n,e[n])})}function u(t,e){var n,o,r,i;if(e.transform&&t.css){if(!(i=e.transform(t.css)))return function(){};t.css=i}if(e.singleton){var l=h++;n=g||(g=s(e)),o=f.bind(null,n,l,!1),r=f.bind(null,n,l,!0)}else t.sourceMap&&"function"==typeof URL&&"function"==typeof URL.createObjectURL&&"function"==typeof URL.revokeObjectURL&&"function"==typeof Blob&&"function"==typeof btoa?(n=c(e),o=p.bind(null,n,e),r=function(){a(n),n.href&&URL.revokeObjectURL(n.href)}):(n=s(e),o=d.bind(null,n),r=function(){a(n)});return o(t),function(e){if(e){if(e.css===t.css&&e.media===t.media&&e.sourceMap===t.sourceMap)return;o(t=e)}else r()}}function f(t,e,n,o){var r=n?"":o.css;if(t.styleSheet)t.styleSheet.cssText=x(e,r);else{var i=document.createTextNode(r),a=t.childNodes;a[e]&&t.removeChild(a[e]),a.length?t.insertBefore(i,a[e]):t.appendChild(i)}}function d(t,e){var n=e.css,o=e.media;if(o&&t.setAttribute("media",o),t.styleSheet)t.styleSheet.cssText=n;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(n))}}function p(t,e,n){var o=n.css,r=n.sourceMap,i=void 0===e.convertToAbsoluteUrls&&r;(e.convertToAbsoluteUrls||i)&&(o=y(o)),r&&(o+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(r))))+" */");var a=new Blob([o],{type:"text/css"}),s=t.href;t.href=URL.createObjectURL(a),s&&URL.revokeObjectURL(s)}var m={},b=function(t){var e;return function(){return void 0===e&&(e=t.apply(this,arguments)),e}}(function(){return window&&document&&document.all&&!window.atob}),v=function(t){var e={};return function(n){return void 0===e[n]&&(e[n]=t.call(this,n)),e[n]}}(function(t){return document.querySelector(t)}),g=null,h=0,w=[],y=n(15);t.exports=function(t,e){if("undefined"!=typeof DEBUG&&DEBUG&&"object"!=typeof document)throw new Error("The style-loader cannot be used in a non-browser environment");e=e||{},e.attrs="object"==typeof e.attrs?e.attrs:{},e.singleton||(e.singleton=b()),e.insertInto||(e.insertInto="head"),e.insertAt||(e.insertAt="bottom");var n=r(t,e);return o(n,e),function(t){for(var i=[],a=0;a<n.length;a++){var s=n[a],c=m[s.id];c.refs--,i.push(c)}if(t){o(r(t,e),e)}for(var a=0;a<i.length;a++){var c=i[a];if(0===c.refs){for(var l=0;l<c.parts.length;l++)c.parts[l]();delete m[c.id]}}}};var x=function(){var t=[];return function(e,n){return t[e]=n,t.filter(Boolean).join("\n")}}()},function(t,e){t.exports=function(t){var e="undefined"!=typeof window&&window.location;if(!e)throw new Error("fixUrls requires window.location");if(!t||"string"!=typeof t)return t;var n=e.protocol+"//"+e.host,o=n+e.pathname.replace(/\/[^\/]*$/,"/");return t.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi,function(t,e){var r=e.trim().replace(/^"(.*)"$/,function(t,e){return e}).replace(/^'(.*)'$/,function(t,e){return e});if(/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(r))return t;var i;return i=0===r.indexOf("//")?r:0===r.indexOf("/")?n+r:o+r.replace(/^\.\//,""),"url("+JSON.stringify(i)+")"})}},function(t,e,n){var o=n(17);"undefined"==typeof window||window.Promise||(window.Promise=o),n(21),String.prototype.includes||(String.prototype.includes=function(t,e){"use strict";return"number"!=typeof e&&(e=0),!(e+t.length>this.length)&&-1!==this.indexOf(t,e)}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{value:function(t,e){if(null==this)throw new TypeError('"this" is null or not defined');var n=Object(this),o=n.length>>>0;if(0===o)return!1;for(var r=0|e,i=Math.max(r>=0?r:o-Math.abs(r),0);i<o;){if(function(t,e){return t===e||"number"==typeof t&&"number"==typeof e&&isNaN(t)&&isNaN(e)}(n[i],t))return!0;i++}return!1}}),"undefined"!=typeof window&&function(t){t.forEach(function(t){t.hasOwnProperty("remove")||Object.defineProperty(t,"remove",{configurable:!0,enumerable:!0,writable:!0,value:function(){this.parentNode.removeChild(this)}})})}([Element.prototype,CharacterData.prototype,DocumentType.prototype])},function(t,e,n){(function(e){!function(n){function o(){}function r(t,e){return function(){t.apply(e,arguments)}}function i(t){if("object"!=typeof this)throw new TypeError("Promises must be constructed via new");if("function"!=typeof t)throw new TypeError("not a function");this._state=0,this._handled=!1,this._value=void 0,this._deferreds=[],f(t,this)}function a(t,e){for(;3===t._state;)t=t._value;if(0===t._state)return void t._deferreds.push(e);t._handled=!0,i._immediateFn(function(){var n=1===t._state?e.onFulfilled:e.onRejected;if(null===n)return void(1===t._state?s:c)(e.promise,t._value);var o;try{o=n(t._value)}catch(t){return void c(e.promise,t)}s(e.promise,o)})}function s(t,e){try{if(e===t)throw new TypeError("A promise cannot be resolved with itself.");if(e&&("object"==typeof e||"function"==typeof e)){var n=e.then;if(e instanceof i)return t._state=3,t._value=e,void l(t);if("function"==typeof n)return void f(r(n,e),t)}t._state=1,t._value=e,l(t)}catch(e){c(t,e)}}function c(t,e){t._state=2,t._value=e,l(t)}function l(t){2===t._state&&0===t._deferreds.length&&i._immediateFn(function(){t._handled||i._unhandledRejectionFn(t._value)});for(var e=0,n=t._deferreds.length;e<n;e++)a(t,t._deferreds[e]);t._deferreds=null}function u(t,e,n){this.onFulfilled="function"==typeof t?t:null,this.onRejected="function"==typeof e?e:null,this.promise=n}function f(t,e){var n=!1;try{t(function(t){n||(n=!0,s(e,t))},function(t){n||(n=!0,c(e,t))})}catch(t){if(n)return;n=!0,c(e,t)}}var d=setTimeout;i.prototype.catch=function(t){return this.then(null,t)},i.prototype.then=function(t,e){var n=new this.constructor(o);return a(this,new u(t,e,n)),n},i.all=function(t){var e=Array.prototype.slice.call(t);return new i(function(t,n){function o(i,a){try{if(a&&("object"==typeof a||"function"==typeof a)){var s=a.then;if("function"==typeof s)return void s.call(a,function(t){o(i,t)},n)}e[i]=a,0==--r&&t(e)}catch(t){n(t)}}if(0===e.length)return t([]);for(var r=e.length,i=0;i<e.length;i++)o(i,e[i])})},i.resolve=function(t){return t&&"object"==typeof t&&t.constructor===i?t:new i(function(e){e(t)})},i.reject=function(t){return new i(function(e,n){n(t)})},i.race=function(t){return new i(function(e,n){for(var o=0,r=t.length;o<r;o++)t[o].then(e,n)})},i._immediateFn="function"==typeof e&&function(t){e(t)}||function(t){d(t,0)},i._unhandledRejectionFn=function(t){"undefined"!=typeof console&&console&&console.warn("Possible Unhandled Promise Rejection:",t)},i._setImmediateFn=function(t){i._immediateFn=t},i._setUnhandledRejectionFn=function(t){i._unhandledRejectionFn=t},void 0!==t&&t.exports?t.exports=i:n.Promise||(n.Promise=i)}(this)}).call(e,n(18).setImmediate)},function(t,e,n){function o(t,e){this._id=t,this._clearFn=e}var r=Function.prototype.apply;e.setTimeout=function(){return new o(r.call(setTimeout,window,arguments),clearTimeout)},e.setInterval=function(){return new o(r.call(setInterval,window,arguments),clearInterval)},e.clearTimeout=e.clearInterval=function(t){t&&t.close()},o.prototype.unref=o.prototype.ref=function(){},o.prototype.close=function(){this._clearFn.call(window,this._id)},e.enroll=function(t,e){clearTimeout(t._idleTimeoutId),t._idleTimeout=e},e.unenroll=function(t){clearTimeout(t._idleTimeoutId),t._idleTimeout=-1},e._unrefActive=e.active=function(t){clearTimeout(t._idleTimeoutId);var e=t._idleTimeout;e>=0&&(t._idleTimeoutId=setTimeout(function(){t._onTimeout&&t._onTimeout()},e))},n(19),e.setImmediate=setImmediate,e.clearImmediate=clearImmediate},function(t,e,n){(function(t,e){!function(t,n){"use strict";function o(t){"function"!=typeof t&&(t=new Function(""+t));for(var e=new Array(arguments.length-1),n=0;n<e.length;n++)e[n]=arguments[n+1];var o={callback:t,args:e};return l[c]=o,s(c),c++}function r(t){delete l[t]}function i(t){var e=t.callback,o=t.args;switch(o.length){case 0:e();break;case 1:e(o[0]);break;case 2:e(o[0],o[1]);break;case 3:e(o[0],o[1],o[2]);break;default:e.apply(n,o)}}function a(t){if(u)setTimeout(a,0,t);else{var e=l[t];if(e){u=!0;try{i(e)}finally{r(t),u=!1}}}}if(!t.setImmediate){var s,c=1,l={},u=!1,f=t.document,d=Object.getPrototypeOf&&Object.getPrototypeOf(t);d=d&&d.setTimeout?d:t,"[object process]"==={}.toString.call(t.process)?function(){s=function(t){e.nextTick(function(){a(t)})}}():function(){if(t.postMessage&&!t.importScripts){var e=!0,n=t.onmessage;return t.onmessage=function(){e=!1},t.postMessage("","*"),t.onmessage=n,e}}()?function(){var e="setImmediate$"+Math.random()+"$",n=function(n){n.source===t&&"string"==typeof n.data&&0===n.data.indexOf(e)&&a(+n.data.slice(e.length))};t.addEventListener?t.addEventListener("message",n,!1):t.attachEvent("onmessage",n),s=function(n){t.postMessage(e+n,"*")}}():t.MessageChannel?function(){var t=new MessageChannel;t.port1.onmessage=function(t){a(t.data)},s=function(e){t.port2.postMessage(e)}}():f&&"onreadystatechange"in f.createElement("script")?function(){var t=f.documentElement;s=function(e){var n=f.createElement("script");n.onreadystatechange=function(){a(e),n.onreadystatechange=null,t.removeChild(n),n=null},t.appendChild(n)}}():function(){s=function(t){setTimeout(a,0,t)}}(),d.setImmediate=o,d.clearImmediate=r}}("undefined"==typeof self?void 0===t?this:t:self)}).call(e,n(7),n(20))},function(t,e){function n(){throw new Error("setTimeout has not been defined")}function o(){throw new Error("clearTimeout has not been defined")}function r(t){if(u===setTimeout)return setTimeout(t,0);if((u===n||!u)&&setTimeout)return u=setTimeout,setTimeout(t,0);try{return u(t,0)}catch(e){try{return u.call(null,t,0)}catch(e){return u.call(this,t,0)}}}function i(t){if(f===clearTimeout)return clearTimeout(t);if((f===o||!f)&&clearTimeout)return f=clearTimeout,clearTimeout(t);try{return f(t)}catch(e){try{return f.call(null,t)}catch(e){return f.call(this,t)}}}function a(){b&&p&&(b=!1,p.length?m=p.concat(m):v=-1,m.length&&s())}function s(){if(!b){var t=r(a);b=!0;for(var e=m.length;e;){for(p=m,m=[];++v<e;)p&&p[v].run();v=-1,e=m.length}p=null,b=!1,i(t)}}function c(t,e){this.fun=t,this.array=e}function l(){}var u,f,d=t.exports={};!function(){try{u="function"==typeof setTimeout?setTimeout:n}catch(t){u=n}try{f="function"==typeof clearTimeout?clearTimeout:o}catch(t){f=o}}();var p,m=[],b=!1,v=-1;d.nextTick=function(t){var e=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)e[n-1]=arguments[n];m.push(new c(t,e)),1!==m.length||b||r(s)},c.prototype.run=function(){this.fun.apply(null,this.array)},d.title="browser",d.browser=!0,d.env={},d.argv=[],d.version="",d.versions={},d.on=l,d.addListener=l,d.once=l,d.off=l,d.removeListener=l,d.removeAllListeners=l,d.emit=l,d.prependListener=l,d.prependOnceListener=l,d.listeners=function(t){return[]},d.binding=function(t){throw new Error("process.binding is not supported")},d.cwd=function(){return"/"},d.chdir=function(t){throw new Error("process.chdir is not supported")},d.umask=function(){return 0}},function(t,e,n){"use strict";n(22).polyfill()},function(t,e,n){"use strict";function o(t,e){if(void 0===t||null===t)throw new TypeError("Cannot convert first argument to object");for(var n=Object(t),o=1;o<arguments.length;o++){var r=arguments[o];if(void 0!==r&&null!==r)for(var i=Object.keys(Object(r)),a=0,s=i.length;a<s;a++){var c=i[a],l=Object.getOwnPropertyDescriptor(r,c);void 0!==l&&l.enumerable&&(n[c]=r[c])}}return n}function r(){Object.assign||Object.defineProperty(Object,"assign",{enumerable:!1,configurable:!0,writable:!0,value:o})}t.exports={assign:o,polyfill:r}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(24),r=n(6),i=n(5),a=n(36),s=function(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];if("undefined"!=typeof window){var n=a.getOpts.apply(void 0,t);return new Promise(function(t,e){i.default.promise={resolve:t,reject:e},o.default(n),setTimeout(function(){r.openModal()})})}};s.close=r.onAction,s.getState=r.getState,s.setActionValue=i.setActionValue,s.stopLoading=r.stopLoading,s.setDefaults=a.setDefaults,e.default=s},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(0),i=r.default.MODAL,a=n(4),s=n(34),c=n(35),l=n(1);e.init=function(t){o.getNode(i)||(document.body||l.throwErr("You can only use SweetAlert AFTER the DOM has loaded!"),s.default(),a.default()),a.initModalContent(t),c.default(t)},e.default=e.init},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.MODAL;e.modalMarkup='\n  <div class="'+r+'" role="dialog" aria-modal="true"></div>',e.default=e.modalMarkup},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.OVERLAY,i='<div \n    class="'+r+'"\n    tabIndex="-1">\n  </div>';e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.ICON;e.errorIconMarkup=function(){var t=r+"--error",e=t+"__line";return'\n    <div class="'+t+'__x-mark">\n      <span class="'+e+" "+e+'--left"></span>\n      <span class="'+e+" "+e+'--right"></span>\n    </div>\n  '},e.warningIconMarkup=function(){var t=r+"--warning";return'\n    <span class="'+t+'__body">\n      <span class="'+t+'__dot"></span>\n    </span>\n  '},e.successIconMarkup=function(){var t=r+"--success";return'\n    <span class="'+t+"__line "+t+'__line--long"></span>\n    <span class="'+t+"__line "+t+'__line--tip"></span>\n\n    <div class="'+t+'__ring"></div>\n    <div class="'+t+'__hide-corners"></div>\n  '}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.CONTENT;e.contentMarkup='\n  <div class="'+r+'">\n\n  </div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(0),r=o.default.BUTTON_CONTAINER,i=o.default.BUTTON,a=o.default.BUTTON_LOADER;e.buttonMarkup='\n  <div class="'+r+'">\n\n    <button\n      class="'+i+'"\n    ></button>\n\n    <div class="'+a+'">\n      <div></div>\n      <div></div>\n      <div></div>\n    </div>\n\n  </div>\n'},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(4),r=n(2),i=n(0),a=i.default.ICON,s=i.default.ICON_CUSTOM,c=["error","warning","success","info"],l={error:r.errorIconMarkup(),warning:r.warningIconMarkup(),success:r.successIconMarkup()},u=function(t,e){var n=a+"--"+t;e.classList.add(n);var o=l[t];o&&(e.innerHTML=o)},f=function(t,e){e.classList.add(s);var n=document.createElement("img");n.src=t,e.appendChild(n)},d=function(t){if(t){var e=o.injectElIntoModal(r.iconMarkup);c.includes(t)?u(t,e):f(t,e)}};e.default=d},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(2),r=n(4),i=function(t){navigator.userAgent.includes("AppleWebKit")&&(t.style.display="none",t.offsetHeight,t.style.display="")};e.initTitle=function(t){if(t){var e=r.injectElIntoModal(o.titleMarkup);e.textContent=t,i(e)}},e.initText=function(t){if(t){var e=document.createDocumentFragment();t.split("\n").forEach(function(t,n,o){e.appendChild(document.createTextNode(t)),n<o.length-1&&e.appendChild(document.createElement("br"))});var n=r.injectElIntoModal(o.textMarkup);n.appendChild(e),i(n)}}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(4),i=n(0),a=i.default.BUTTON,s=i.default.DANGER_BUTTON,c=n(3),l=n(2),u=n(6),f=n(5),d=function(t,e,n){var r=e.text,i=e.value,d=e.className,p=e.closeModal,m=o.stringToNode(l.buttonMarkup),b=m.querySelector("."+a),v=a+"--"+t;if(b.classList.add(v),d){(Array.isArray(d)?d:d.split(" ")).filter(function(t){return t.length>0}).forEach(function(t){b.classList.add(t)})}n&&t===c.CONFIRM_KEY&&b.classList.add(s),b.textContent=r;var g={};return g[t]=i,f.setActionValue(g),f.setActionOptionsFor(t,{closeModal:p}),b.addEventListener("click",function(){return u.onAction(t)}),m},p=function(t,e){var n=r.injectElIntoModal(l.footerMarkup);for(var o in t){var i=t[o],a=d(o,i,e);i.visible&&n.appendChild(a)}0===n.children.length&&n.remove()};e.default=p},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(3),r=n(4),i=n(2),a=n(5),s=n(6),c=n(0),l=c.default.CONTENT,u=function(t){t.addEventListener("input",function(t){var e=t.target,n=e.value;a.setActionValue(n)}),t.addEventListener("keyup",function(t){if("Enter"===t.key)return s.onAction(o.CONFIRM_KEY)}),setTimeout(function(){t.focus(),a.setActionValue("")},0)},f=function(t,e,n){var o=document.createElement(e),r=l+"__"+e;o.classList.add(r);for(var i in n){var a=n[i];o[i]=a}"input"===e&&u(o),t.appendChild(o)},d=function(t){if(t){var e=r.injectElIntoModal(i.contentMarkup),n=t.element,o=t.attributes;"string"==typeof n?f(e,n,o):e.appendChild(n)}};e.default=d},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(2),i=function(){var t=o.stringToNode(r.overlayMarkup);document.body.appendChild(t)};e.default=i},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(5),r=n(6),i=n(1),a=n(3),s=n(0),c=s.default.MODAL,l=s.default.BUTTON,u=s.default.OVERLAY,f=function(t){t.preventDefault(),v()},d=function(t){t.preventDefault(),g()},p=function(t){if(o.default.isOpen)switch(t.key){case"Escape":return r.onAction(a.CANCEL_KEY)}},m=function(t){if(o.default.isOpen)switch(t.key){case"Tab":return f(t)}},b=function(t){if(o.default.isOpen)return"Tab"===t.key&&t.shiftKey?d(t):void 0},v=function(){var t=i.getNode(l);t&&(t.tabIndex=0,t.focus())},g=function(){var t=i.getNode(c),e=t.querySelectorAll("."+l),n=e.length-1,o=e[n];o&&o.focus()},h=function(t){t[t.length-1].addEventListener("keydown",m)},w=function(t){t[0].addEventListener("keydown",b)},y=function(){var t=i.getNode(c),e=t.querySelectorAll("."+l);e.length&&(h(e),w(e))},x=function(t){if(i.getNode(u)===t.target)return r.onAction(a.CANCEL_KEY)},_=function(t){var e=i.getNode(u);e.removeEventListener("click",x),t&&e.addEventListener("click",x)},k=function(t){o.default.timer&&clearTimeout(o.default.timer),t&&(o.default.timer=window.setTimeout(function(){return r.onAction(a.CANCEL_KEY)},t))},O=function(t){t.closeOnEsc?document.addEventListener("keyup",p):document.removeEventListener("keyup",p),t.dangerMode?v():g(),y(),_(t.closeOnClickOutside),k(t.timer)};e.default=O},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r=n(3),i=n(37),a=n(38),s={title:null,text:null,icon:null,buttons:r.defaultButtonList,content:null,className:null,closeOnClickOutside:!0,closeOnEsc:!0,dangerMode:!1,timer:null},c=Object.assign({},s);e.setDefaults=function(t){c=Object.assign({},s,t)};var l=function(t){var e=t&&t.button,n=t&&t.buttons;return void 0!==e&&void 0!==n&&o.throwErr("Cannot set both 'button' and 'buttons' options!"),void 0!==e?{confirm:e}:n},u=function(t){return o.ordinalSuffixOf(t+1)},f=function(t,e){o.throwErr(u(e)+" argument ('"+t+"') is invalid")},d=function(t,e){var n=t+1,r=e[n];o.isPlainObject(r)||void 0===r||o.throwErr("Expected "+u(n)+" argument ('"+r+"') to be a plain object")},p=function(t,e){var n=t+1,r=e[n];void 0!==r&&o.throwErr("Unexpected "+u(n)+" argument ("+r+")")},m=function(t,e,n,r){var i=typeof e,a="string"===i,s=e instanceof Element;if(a){if(0===n)return{text:e};if(1===n)return{text:e,title:r[0]};if(2===n)return d(n,r),{icon:e};f(e,n)}else{if(s&&0===n)return d(n,r),{content:e};if(o.isPlainObject(e))return p(n,r),e;f(e,n)}};e.getOpts=function(){for(var t=[],e=0;e<arguments.length;e++)t[e]=arguments[e];var n={};t.forEach(function(e,o){var r=m(0,e,o,t);Object.assign(n,r)});var o=l(n);n.buttons=r.getButtonListOpts(o),delete n.button,n.content=i.getContentOpts(n.content);var u=Object.assign({},s,c,n);return Object.keys(u).forEach(function(t){a.DEPRECATED_OPTS[t]&&a.logDeprecation(t)}),u}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var o=n(1),r={element:"input",attributes:{placeholder:""}};e.getContentOpts=function(t){var e={};return o.isPlainObject(t)?Object.assign(e,t):t instanceof Element?{element:t}:"input"===t?r:null}},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.logDeprecation=function(t){var n=e.DEPRECATED_OPTS[t],o=n.onlyRename,r=n.replacement,i=n.subOption,a=n.link,s=o?"renamed":"deprecated",c='SweetAlert warning: "'+t+'" option has been '+s+".";if(r){c+=" Please use"+(i?' "'+i+'" in ':" ")+'"'+r+'" instead.'}var l="https://sweetalert.js.org";c+=a?" More details: "+l+a:" More details: "+l+"/guides/#upgrading-from-1x",console.warn(c)},e.DEPRECATED_OPTS={type:{replacement:"icon",link:"/docs/#icon"},imageUrl:{replacement:"icon",link:"/docs/#icon"},customClass:{replacement:"className",onlyRename:!0,link:"/docs/#classname"},imageSize:{},showCancelButton:{replacement:"buttons",link:"/docs/#buttons"},showConfirmButton:{replacement:"button",link:"/docs/#button"},confirmButtonText:{replacement:"button",link:"/docs/#button"},confirmButtonColor:{},cancelButtonText:{replacement:"buttons",link:"/docs/#buttons"},closeOnConfirm:{replacement:"button",subOption:"closeModal",link:"/docs/#button"},closeOnCancel:{replacement:"buttons",subOption:"closeModal",link:"/docs/#buttons"},showLoaderOnConfirm:{replacement:"buttons"},animation:{},inputType:{replacement:"content",link:"/docs/#content"},inputValue:{replacement:"content",link:"/docs/#content"},inputPlaceholder:{replacement:"content",link:"/docs/#content"},html:{replacement:"content",link:"/docs/#content"},allowEscapeKey:{replacement:"closeOnEsc",onlyRename:!0,link:"/docs/#closeonesc"},allowClickOutside:{replacement:"closeOnClickOutside",onlyRename:!0,link:"/docs/#closeonclickoutside"}}}])});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node-libs-browser/node_modules/timers-browserify/main.js */ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js").setImmediate, __webpack_require__(/*! ./../../node-libs-browser/node_modules/timers-browserify/main.js */ "./node_modules/node-libs-browser/node_modules/timers-browserify/main.js").clearImmediate))
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/global.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/module.js":
+/*!***********************************!*\
+  !*** (webpack)/buildin/module.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
 };
 
-exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
-  delete immediateIds[id];
-};
-}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":352,"timers":355}]},{},[2]);
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=client-bundle.js.map
