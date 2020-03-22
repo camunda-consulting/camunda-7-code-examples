@@ -27,7 +27,7 @@ The reusable "Migrate Instances in Batch" subprocess looks like this:
 ![](src/main/resources/migration-core.png)
 
 Migration is triggered by creating a process instance of this Migration process using the REST API.  The payload that initializes process instance variables in our local example looks like this:
-
+```json
     {
         "variables": {
             "processDefKey": {
@@ -68,6 +68,8 @@ Migration is triggered by creating a process instance of this Migration process 
             }
         }
     }
+```
+
 
 Notice the "maxPerBatch" variable.  In our local example, we will create 120 instances of version 1 with a token sitting on "user task 0".  Then we will run this migration process, instructing it to migrate in batches of 50 at a time.
 

@@ -1,11 +1,11 @@
 # Camunda - Process Migration Patterns
 
-The following example project shows how you can use the power of BPMN to handle more complex process version migration scenarios.  To do that, we have created some examples of how you might build 
+The following example projects show how you can use the power of BPMN to handle more complex process version migration scenarios.  To do that, we have created some examples of how you might build 
 processes that migrate other processes from one version to another. 
 
 [Use Case 1 - Using a Migration Island with Limited Batch Sizes](Case1.md)
 
-
+[Use Case 2 - Using an Intermediate Process](Case2.md)
 
 ## Camunda Version
 

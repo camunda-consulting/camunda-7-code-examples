@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "d18d69c3-5dda-4710-922b-ed162db71a76",
+		"name": "Migration - Case 2 Step 1 - gen data for v1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Process v1 (path 1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"mypath\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/process-definition/key/use-case-2/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"use-case-2",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process v1 (path 2)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"mypath\": {\n            \"value\": 2,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/process-definition/key/use-case-2/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"use-case-2",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Path 2 Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0bac19b-ac8f-49a5-9642-0aa10b94c914",
+						"exec": [
+							"pm.environment.unset(\"user21id\");",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"console.log(\"id = \" + jsonData[0].id);",
+							"",
+							"pm.environment.set(\"user2id\", jsonData[0].id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rest/task?taskDefinitionKey=user-task-1-c2&active=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"task"
+					],
+					"query": [
+						{
+							"key": "taskDefinitionKey",
+							"value": "user-task-1-c2"
+						},
+						{
+							"key": "active",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Complete Path 2 Task",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "971d4446-5771-4cb2-8b6d-f7210cfe1fd2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "974c753c-8a55-45fe-a561-b818e24ef788",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/task/{{user2id}}/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"task",
+						"{{user2id}}",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process v1 (path 3)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d678118-fd68-4d90-8f04-773c0c870e06",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"mypath\": {\n            \"value\": 3,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/process-definition/key/use-case-2/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"use-case-2",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Path 3 Task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0bac19b-ac8f-49a5-9642-0aa10b94c914",
+						"exec": [
+							"pm.environment.unset(\"user2id\");",
+							"",
+							"var jsonData = pm.response.json();",
+							"",
+							"console.log(\"id = \" + jsonData[0].id);",
+							"",
+							"pm.environment.set(\"user2id\", jsonData[0].id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rest/task?taskDefinitionKey=user-task-2-c2&active=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"task"
+					],
+					"query": [
+						{
+							"key": "taskDefinitionKey",
+							"value": "user-task-2-c2"
+						},
+						{
+							"key": "active",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Complete Path 3 Task",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "971d4446-5771-4cb2-8b6d-f7210cfe1fd2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "974c753c-8a55-45fe-a561-b818e24ef788",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/task/{{user2id}}/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"task",
+						"{{user2id}}",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
