@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_1hsfd4e" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <bpmn:process id="migrate-case-2" name="migrate-case-2" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Migration started" camunda:asyncAfter="true">
+      <bpmn:outgoing>SequenceFlow_0q59kd5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0q59kd5" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_0bmqy54" />
+    <bpmn:sequenceFlow id="SequenceFlow_1toyc2f" sourceRef="Task_1gujm36" targetRef="ExclusiveGateway_1f1yngw" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1f1yngw" name="Any instances to migrate?">
+      <bpmn:incoming>SequenceFlow_1toyc2f</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06oprzd</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0itohku</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_1gujm36" name="Check for Process Instances" camunda:delegateExpression="#{checkForInstancesCase2Step1}">
+      <bpmn:incoming>SequenceFlow_0r12dhk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1toyc2f</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0rb66p1" name="Complete User Tasks" camunda:asyncAfter="true" camunda:delegateExpression="#{completeTasksCase2}">
+      <bpmn:incoming>SequenceFlow_1v8d6yq</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1u24me9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1j2e3rc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_06oprzd" name="yes" sourceRef="ExclusiveGateway_1f1yngw" targetRef="migrate-ca">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{hasPI}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1gb23qk" name="no" sourceRef="ExclusiveGateway_0edg723" targetRef="ExclusiveGateway_0bmqy54">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!moreTasksToComplete}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:callActivity id="migrate-ca" name="Migrate Instances in Batch" calledElement="migration-core">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_06oprzd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1v8d6yq</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="SequenceFlow_1v8d6yq" sourceRef="migrate-ca" targetRef="Task_0rb66p1" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0edg723" name="More tasks to complete?">
+      <bpmn:incoming>SequenceFlow_1j2e3rc</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1gb23qk</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1u24me9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1j2e3rc" sourceRef="Task_0rb66p1" targetRef="ExclusiveGateway_0edg723" />
+    <bpmn:sequenceFlow id="SequenceFlow_1u24me9" name="yes" sourceRef="ExclusiveGateway_0edg723" targetRef="Task_0rb66p1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{moreTasksToComplete}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0bmqy54">
+      <bpmn:incoming>SequenceFlow_0q59kd5</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1gb23qk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0r12dhk</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0r12dhk" sourceRef="ExclusiveGateway_0bmqy54" targetRef="Task_1gujm36" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0skttkw" name="Any instances to migrate?">
+      <bpmn:incoming>SequenceFlow_090tdvj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0flt2hf</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1kyfxnf</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_0bu4zib" name="Migration completed">
+      <bpmn:incoming>SequenceFlow_0flt2hf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="ServiceTask_1h2njyd" name="Check for Process Instances" camunda:delegateExpression="#{checkForInstancesCase2Step2}">
+      <bpmn:incoming>SequenceFlow_1uwp9l8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_090tdvj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="CallActivity_1g8onzb" name="Migrate Instances in Batch" calledElement="migration-core">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1kyfxnf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ma0o1u</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0cg1m9t">
+      <bpmn:incoming>SequenceFlow_1ma0o1u</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0itohku</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1uwp9l8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_090tdvj" sourceRef="ServiceTask_1h2njyd" targetRef="ExclusiveGateway_0skttkw" />
+    <bpmn:sequenceFlow id="SequenceFlow_0flt2hf" name="no" sourceRef="ExclusiveGateway_0skttkw" targetRef="EndEvent_0bu4zib">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!hasPI}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1kyfxnf" name="yes" sourceRef="ExclusiveGateway_0skttkw" targetRef="CallActivity_1g8onzb">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{hasPI}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1uwp9l8" sourceRef="ExclusiveGateway_0cg1m9t" targetRef="ServiceTask_1h2njyd" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ma0o1u" sourceRef="CallActivity_1g8onzb" targetRef="ExclusiveGateway_0cg1m9t" />
+    <bpmn:sequenceFlow id="SequenceFlow_0itohku" name="no" sourceRef="ExclusiveGateway_1f1yngw" targetRef="ExclusiveGateway_0cg1m9t">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{!hasPI}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:textAnnotation id="TextAnnotation_1u1trup">
+      <bpmn:text>Move tasks off of user task.
+
+Will only complete the number of tasks set by the "maxUserComplete" variable in a single transaction.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1nvmian" sourceRef="Task_0rb66p1" targetRef="TextAnnotation_1u1trup" />
+    <bpmn:textAnnotation id="TextAnnotation_0zlbhab">
+      <bpmn:text>Will only migrate the number of process instances set by the "maxPerBatch" variable.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0cbu1wk" sourceRef="migrate-ca" targetRef="TextAnnotation_0zlbhab" />
+    <bpmn:textAnnotation id="TextAnnotation_1ucfcaz">
+      <bpmn:text>Will only migrate the number of process instances set by the "maxPerBatch" variable.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0p51sbn" sourceRef="CallActivity_1g8onzb" targetRef="TextAnnotation_1ucfcaz" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="migrate-case-2">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="152" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="129" y="265" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0q59kd5_di" bpmnElement="SequenceFlow_0q59kd5">
+        <di:waypoint x="188" y="240" />
+        <di:waypoint x="255" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1auz13f_di" bpmnElement="Task_0rb66p1">
+        <dc:Bounds x="840" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1u1trup_di" bpmnElement="TextAnnotation_1u1trup">
+        <dc:Bounds x="660" y="330" width="230" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1nvmian_di" bpmnElement="Association_1nvmian">
+        <di:waypoint x="856" y="280" />
+        <di:waypoint x="811" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1toyc2f_di" bpmnElement="SequenceFlow_1toyc2f">
+        <di:waypoint x="450" y="240" />
+        <di:waypoint x="505" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1f1yngw_di" bpmnElement="ExclusiveGateway_1f1yngw" isMarkerVisible="true" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="505" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="490" y="178" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_19f8chr_di" bpmnElement="Task_1gujm36">
+        <dc:Bounds x="350" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_06oprzd_di" bpmnElement="SequenceFlow_06oprzd" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="555" y="240" />
+        <di:waypoint x="660" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="596" y="222" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gb23qk_di" bpmnElement="SequenceFlow_1gb23qk" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="1050" y="215" />
+        <di:waypoint x="1050" y="80" />
+        <di:waypoint x="280" y="80" />
+        <di:waypoint x="280" y="215" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1023" y="173" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_1livxcn_di" bpmnElement="migrate-ca">
+        <dc:Bounds x="660" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1v8d6yq_di" bpmnElement="SequenceFlow_1v8d6yq">
+        <di:waypoint x="760" y="240" />
+        <di:waypoint x="840" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0edg723_di" bpmnElement="ExclusiveGateway_0edg723" isMarkerVisible="true" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="1025" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1087" y="226" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1j2e3rc_di" bpmnElement="SequenceFlow_1j2e3rc">
+        <di:waypoint x="940" y="240" />
+        <di:waypoint x="1025" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1u24me9_di" bpmnElement="SequenceFlow_1u24me9" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="1050" y="265" />
+        <di:waypoint x="1050" y="320" />
+        <di:waypoint x="890" y="320" />
+        <di:waypoint x="890" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1021" y="283" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0zlbhab_di" bpmnElement="TextAnnotation_0zlbhab">
+        <dc:Bounds x="620" y="100" width="180" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0cbu1wk_di" bpmnElement="Association_0cbu1wk">
+        <di:waypoint x="710" y="200" />
+        <di:waypoint x="710" y="154" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0bmqy54_di" bpmnElement="ExclusiveGateway_0bmqy54" isMarkerVisible="true">
+        <dc:Bounds x="255" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0r12dhk_di" bpmnElement="SequenceFlow_0r12dhk">
+        <di:waypoint x="305" y="240" />
+        <di:waypoint x="350" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0skttkw_di" bpmnElement="ExclusiveGateway_0skttkw" isMarkerVisible="true" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="885" y="555" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="870" y="518" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0bu4zib_di" bpmnElement="EndEvent_0bu4zib" bioc:stroke="#000" bioc:fill="#fff">
+        <dc:Bounds x="892" y="675" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="885" y="718" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1h2njyd_di" bpmnElement="ServiceTask_1h2njyd">
+        <dc:Bounds x="730" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_1g8onzb_di" bpmnElement="CallActivity_1g8onzb">
+        <dc:Bounds x="1040" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0cg1m9t_di" bpmnElement="ExclusiveGateway_0cg1m9t" isMarkerVisible="true">
+        <dc:Bounds x="635" y="555" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ucfcaz_di" bpmnElement="TextAnnotation_1ucfcaz">
+        <dc:Bounds x="1080" y="666" width="180" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_090tdvj_di" bpmnElement="SequenceFlow_090tdvj">
+        <di:waypoint x="830" y="580" />
+        <di:waypoint x="885" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0flt2hf_di" bpmnElement="SequenceFlow_0flt2hf" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="910" y="605" />
+        <di:waypoint x="910" y="675" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="924" y="605" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kyfxnf_di" bpmnElement="SequenceFlow_1kyfxnf" bioc:stroke="#000" bioc:fill="#fff">
+        <di:waypoint x="935" y="580" />
+        <di:waypoint x="1040" y="580" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="976" y="562" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1uwp9l8_di" bpmnElement="SequenceFlow_1uwp9l8">
+        <di:waypoint x="685" y="580" />
+        <di:waypoint x="730" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ma0o1u_di" bpmnElement="SequenceFlow_1ma0o1u">
+        <di:waypoint x="1090" y="540" />
+        <di:waypoint x="1090" y="480" />
+        <di:waypoint x="660" y="480" />
+        <di:waypoint x="660" y="555" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0p51sbn_di" bpmnElement="Association_0p51sbn">
+        <di:waypoint x="1118" y="620" />
+        <di:waypoint x="1151" y="666" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0itohku_di" bpmnElement="SequenceFlow_0itohku">
+        <di:waypoint x="530" y="265" />
+        <di:waypoint x="530" y="580" />
+        <di:waypoint x="635" y="580" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="420" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,4 +1,4 @@
-package org.camunda.case1;
+package org.camunda.case2;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("checkForInstances")
-public class CheckForProcessInstances implements JavaDelegate {
+@Component("checkForInstancesCase2Step2")
+public class CheckForProcessInstancesStep2 implements JavaDelegate {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CheckForProcessInstances.class.getName());
+    private final Logger LOGGER = LoggerFactory.getLogger(CheckForProcessInstancesStep2.class.getName());
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
@@ -32,14 +32,14 @@ public class CheckForProcessInstances implements JavaDelegate {
         Boolean skipIoMappings = (Boolean) execution.getVariable("skipIoMappings");
         Boolean skipCustomListeners = (Boolean) execution.getVariable("skipCustomListeners");
 
-        execution.setVariable("origProcessDefKey", processDefKey);
-        execution.setVariable("origProcessDefVersion", fromVersion);
-        execution.setVariable("destProcessDefKey", processDefKey);
-        execution.setVariable("destProcessDefVersion", toVersion);
+        String intProcDefKey = (String) execution.getVariable("intermediateProcessDefKey");
+        Integer intVersion = (Integer) execution.getVariable("intermediateProcessVersion");
+        String intPitstopOne = (String) execution.getVariable("intStepOneTask");
+        String intPitstopTwo = (String) execution.getVariable("intStepTwoTask");
 
-        execution.setVariable("origProcessDefKey", processDefKey);
-        execution.setVariable("origProcessDefVersion", fromVersion);
-        execution.setVariable("origTargetTask", fromUserTaskKey);
+        execution.setVariable("origProcessDefKey", intProcDefKey);
+        execution.setVariable("origProcessDefVersion", intVersion);
+        execution.setVariable("origTargetTask", intPitstopTwo);
         execution.setVariable("destProcessDefKey", processDefKey);
         execution.setVariable("destProcessDefVersion", toVersion);
         execution.setVariable("destTargetTask", toUserTaskKey);
@@ -66,8 +66,8 @@ public class CheckForProcessInstances implements JavaDelegate {
             // query to get the process definition metadata
             ProcessDefinition v1def = processEngine.getRepositoryService()
                     .createProcessDefinitionQuery()
-                    .processDefinitionKey(processDefKey)
-                    .processDefinitionVersion(fromVersion)
+                    .processDefinitionKey(intProcDefKey)
+                    .processDefinitionVersion(intVersion)
                     .singleResult();
 
             // check for process instances eligible for migration

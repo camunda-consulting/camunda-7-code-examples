@@ -1,8 +1,14 @@
-## Use Case 1 - Using a Migration Island with Limited Batch Sizes
+## Use Case 2 - Using an Intermediate Process for Migration
 
-In this use case, we have a process that loses a User Task from version 1 to version 2.
+Just like in Use Case 1 we have a process that loses a User Task from version 1 to version 2.  But instead of using a "migration island" pattern, we instead do two migrations.
 
-**Version 1** looks like this.  Notice on path 2 that there is a "User Task 0".
+The first migration will be to an "intermediate process" whose sole purpose is to handle the data manipulation required for the final migration.  Once that is done, a final migration is made to the new version of the original process.  Therefore, the intermediate process takes the place of the "migration island".  
+
+The upside with this approach is that we never have any migration-specific modeling hanging around in our models moving forward as we would with the migration island approach.  This can be distracting, depending on your models and current design.
+
+The downside is that you are doing twice the number of migrations.  This might be difficult depending on your volume.  In the end you have flexibility and choices to do what is right for your situation.
+
+Just like in Use Case 1, **Version 1** looks like this.  Notice on path 2 that there is a "User Task 0".
 
 ![src/main/resources/case1.png](src/main/resources/case1.png)
 

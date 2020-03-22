@@ -1,4 +1,4 @@
-package org.camunda.case1;
+package org.camunda.migration;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.batch.BatchStatistics;
@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component("case1CheckStatus")
+@Component("checkBatchStatus")
 public class CheckBatchStatus implements JavaDelegate {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CheckBatchStatus.class.getName());

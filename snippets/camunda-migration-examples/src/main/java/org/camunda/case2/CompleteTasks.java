@@ -1,4 +1,4 @@
-package org.camunda.case1;
+package org.camunda.case2;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("completeTasks")
+@Component("completeTasksCase2")
 public class CompleteTasks implements JavaDelegate {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CompleteTasks.class.getName());
@@ -18,7 +18,7 @@ public class CompleteTasks implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
 
-        String toUserTaskKey = (String) execution.getVariable("toUserTaskKey");
+        String toUserTaskKey = (String) execution.getVariable("intStepOneTask");
         Integer maxUserComplete = (Integer) execution.getVariable("maxUserComplete");
 
         if (maxUserComplete == null || maxUserComplete < 1) {

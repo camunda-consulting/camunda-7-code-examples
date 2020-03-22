@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1olzt0k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1olzt0k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
   <bpmn:process id="migration-core" name="migration-core" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" camunda:asyncAfter="true">
       <bpmn:outgoing>SequenceFlow_0aycmim</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_00b4t6u" name="Execute Migration Async" camunda:asyncAfter="true" camunda:delegateExpression="#{case1ExecMigration}">
+    <bpmn:serviceTask id="ServiceTask_00b4t6u" name="Execute Migration Async" camunda:asyncAfter="true" camunda:delegateExpression="#{execMigrationAsync}">
       <bpmn:incoming>SequenceFlow_1tbskvs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_13m02ts</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -20,16 +20,16 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="ServiceTask_0k01gcq" name="Check Batch Status" camunda:delegateExpression="#{case1CheckStatus}">
+    <bpmn:serviceTask id="ServiceTask_0k01gcq" name="Check Batch Status" camunda:delegateExpression="#{checkBatchStatus}">
       <bpmn:incoming>SequenceFlow_13m02ts</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1osviay</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0fz7d1o</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_03yksqn" name="Suspend Processes" camunda:asyncAfter="true" camunda:delegateExpression="#{case1Suspend}">
+    <bpmn:serviceTask id="ServiceTask_03yksqn" name="Suspend Processes" camunda:asyncAfter="true" camunda:delegateExpression="#{suspendProcesses}">
       <bpmn:incoming>SequenceFlow_0aycmim</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1tbskvs</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0hri1dr" name="Activate Processes" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="#{case1Activate}">
+    <bpmn:serviceTask id="ServiceTask_0hri1dr" name="Activate Processes" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="#{activateProcesses}">
       <bpmn:incoming>SequenceFlow_1l3sfel</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0l67vid</bpmn:outgoing>
     </bpmn:serviceTask>

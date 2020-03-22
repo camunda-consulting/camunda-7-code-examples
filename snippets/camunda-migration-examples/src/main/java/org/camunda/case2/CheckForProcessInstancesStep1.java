@@ -1,4 +1,4 @@
-package org.camunda.case1;
+package org.camunda.case2;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("checkForInstances")
-public class CheckForProcessInstances implements JavaDelegate {
+@Component("checkForInstancesCase2Step1")
+public class CheckForProcessInstancesStep1 implements JavaDelegate {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(CheckForProcessInstances.class.getName());
+    private final Logger LOGGER = LoggerFactory.getLogger(CheckForProcessInstancesStep1.class.getName());
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
@@ -32,17 +32,23 @@ public class CheckForProcessInstances implements JavaDelegate {
         Boolean skipIoMappings = (Boolean) execution.getVariable("skipIoMappings");
         Boolean skipCustomListeners = (Boolean) execution.getVariable("skipCustomListeners");
 
-        execution.setVariable("origProcessDefKey", processDefKey);
-        execution.setVariable("origProcessDefVersion", fromVersion);
-        execution.setVariable("destProcessDefKey", processDefKey);
-        execution.setVariable("destProcessDefVersion", toVersion);
+        String intProcDefKey = (String) execution.getVariable("intermediateProcessDefKey");
+        Integer intVersion = (Integer) execution.getVariable("intermediateProcessVersion");
+        String intPitstopOne = (String) execution.getVariable("intStepOneTask");
+        String intPitstopTwo = (String) execution.getVariable("intStepTwoTask");
 
         execution.setVariable("origProcessDefKey", processDefKey);
         execution.setVariable("origProcessDefVersion", fromVersion);
         execution.setVariable("origTargetTask", fromUserTaskKey);
-        execution.setVariable("destProcessDefKey", processDefKey);
-        execution.setVariable("destProcessDefVersion", toVersion);
-        execution.setVariable("destTargetTask", toUserTaskKey);
+        execution.setVariable("destProcessDefKey", intProcDefKey);
+        execution.setVariable("destProcessDefVersion", intVersion);
+        execution.setVariable("destTargetTask", intPitstopOne);
+
+//        set
+//                - origProcessDefKey
+//                - origProcessDefVersion
+//                - destProcessDefKey
+//                - destProcessDefVersion
 
         if (processDefKey == null || fromVersion == null || toVersion == null ||
                 fromUserTaskKey == null || toUserTaskKey == null) {

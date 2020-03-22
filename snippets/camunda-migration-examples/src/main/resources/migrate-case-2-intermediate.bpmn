@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1o8a9s7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <bpmn:process id="use-case-2-migrate-intermediate" name="Use Case 2 Migration Intermediate" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Never Starts Here">
+      <bpmn:outgoing>SequenceFlow_0w1kx0o</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0n8scjr" sourceRef="prepare-data" targetRef="token-pitstop-2" />
+    <bpmn:serviceTask id="prepare-data" name="Prepare Data" camunda:delegateExpression="#{logger}">
+      <bpmn:incoming>SequenceFlow_0vmnpxf</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0n8scjr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0w1kx0o" sourceRef="StartEvent_1" targetRef="token-pitstop-1" />
+    <bpmn:userTask id="token-pitstop-1" name="Catch Migration Token">
+      <bpmn:incoming>SequenceFlow_0w1kx0o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vmnpxf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_0n9xf9r" name="Completed">
+      <bpmn:incoming>SequenceFlow_1cxij3f</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0vmnpxf" sourceRef="token-pitstop-1" targetRef="prepare-data" />
+    <bpmn:userTask id="token-pitstop-2" name="Catch Token for Final Migration">
+      <bpmn:incoming>SequenceFlow_0n8scjr</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1cxij3f</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1cxij3f" sourceRef="token-pitstop-2" targetRef="EndEvent_0n9xf9r" />
+    <bpmn:textAnnotation id="TextAnnotation_1bs0t7b">
+      <bpmn:text>change the process instance variables as needed locally</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1cda9lg" sourceRef="prepare-data" targetRef="TextAnnotation_1bs0t7b" />
+    <bpmn:textAnnotation id="TextAnnotation_1jdzjy2">
+      <bpmn:text>this process instance now has the v1 process instance variables</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0zyhvkz" sourceRef="token-pitstop-1" targetRef="TextAnnotation_1jdzjy2" />
+    <bpmn:textAnnotation id="TextAnnotation_0arxz5d">
+      <bpmn:text>INTERESTING NOTE:  As an intermediate migration process, these models will never have a token on the start or end events.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0cjjhjy" sourceRef="EndEvent_0n9xf9r" targetRef="TextAnnotation_0arxz5d" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="use-case-2-migrate-intermediate">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="199" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="242" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0n8scjr_di" bpmnElement="SequenceFlow_0n8scjr">
+        <di:waypoint x="580" y="217" />
+        <di:waypoint x="660" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0k4igxk_di" bpmnElement="prepare-data">
+        <dc:Bounds x="480" y="177" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1bs0t7b_di" bpmnElement="TextAnnotation_1bs0t7b">
+        <dc:Bounds x="370" y="320" width="130" height="59" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1cda9lg_di" bpmnElement="Association_1cda9lg">
+        <di:waypoint x="502" y="257" />
+        <di:waypoint x="457" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0w1kx0o_di" bpmnElement="SequenceFlow_0w1kx0o">
+        <di:waypoint x="215" y="217" />
+        <di:waypoint x="280" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1jdzjy2_di" bpmnElement="TextAnnotation_1jdzjy2">
+        <dc:Bounds x="350" y="83" width="130" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0zyhvkz_di" bpmnElement="Association_0zyhvkz">
+        <di:waypoint x="334" y="177" />
+        <di:waypoint x="369" y="151" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_04rdra4_di" bpmnElement="token-pitstop-1">
+        <dc:Bounds x="280" y="177" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0n9xf9r_di" bpmnElement="EndEvent_0n9xf9r">
+        <dc:Bounds x="852" y="199" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="843" y="242" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vmnpxf_di" bpmnElement="SequenceFlow_0vmnpxf">
+        <di:waypoint x="380" y="217" />
+        <di:waypoint x="480" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1yqv0du_di" bpmnElement="token-pitstop-2">
+        <dc:Bounds x="660" y="177" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0arxz5d_di" bpmnElement="TextAnnotation_0arxz5d">
+        <dc:Bounds x="880" y="83" width="220" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0cjjhjy_di" bpmnElement="Association_0cjjhjy">
+        <di:waypoint x="884" y="206" />
+        <di:waypoint x="949" y="151" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1cxij3f_di" bpmnElement="SequenceFlow_1cxij3f">
+        <di:waypoint x="760" y="217" />
+        <di:waypoint x="852" y="217" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

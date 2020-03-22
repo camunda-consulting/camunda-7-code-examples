@@ -1,4 +1,4 @@
-package org.camunda.case1;
+package org.camunda.migration;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.batch.Batch;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Component("case1ExecMigration")
+@Component("execMigrationAsync")
 public class ExecuteMigration implements JavaDelegate {
 
     private final Logger LOGGER = LoggerFactory.getLogger(ExecuteMigration.class.getName());
@@ -26,11 +26,15 @@ public class ExecuteMigration implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
 
-        String processDefKey = (String) execution.getVariable("processDefKey");
-        Integer fromVersion = (Integer) execution.getVariable("fromVersion");
-        Integer toVersion = (Integer) execution.getVariable("toVersion");
-        String fromUserTaskKey = (String) execution.getVariable("fromUserTaskKey");
-        String toUserTaskKey = (String) execution.getVariable("toUserTaskKey");
+        String origProcessDefKey = (String) execution.getVariable("origProcessDefKey");
+        Integer origProcessDefVersion = (Integer) execution.getVariable("origProcessDefVersion");
+        String destProcessDefKey = (String) execution.getVariable("destProcessDefKey");
+        Integer destProcessDefVersion = (Integer) execution.getVariable("destProcessDefVersion");
+        String origTargetTask = (String) execution.getVariable("origTargetTask");
+        String destTargetTask = (String) execution.getVariable("destTargetTask");
+
+//        String fromUserTaskKey = (String) execution.getVariable("fromUserTaskKey");
+//        String toUserTaskKey = (String) execution.getVariable("toUserTaskKey");
         Integer maxPerBatch = (Integer) execution.getVariable("maxPerBatch");
         Boolean skipIoMappings = (Boolean) execution.getVariable("skipIoMappings");
         Boolean skipCustomListeners = (Boolean) execution.getVariable("skipCustomListeners");
@@ -40,14 +44,14 @@ public class ExecuteMigration implements JavaDelegate {
         // query to get the process definition metadata
         ProcessDefinition v1def = processEngine.getRepositoryService()
                 .createProcessDefinitionQuery()
-                .processDefinitionKey(processDefKey)
-                .processDefinitionVersion(fromVersion)
+                .processDefinitionKey(origProcessDefKey)
+                .processDefinitionVersion(origProcessDefVersion)
                 .singleResult();
 
         ProcessDefinition v2def = processEngine.getRepositoryService()
                 .createProcessDefinitionQuery()
-                .processDefinitionKey(processDefKey)
-                .processDefinitionVersion(toVersion)
+                .processDefinitionKey(destProcessDefKey)
+                .processDefinitionVersion(destProcessDefVersion)
                 .singleResult();
 
         LOGGER.info(" *** v1def.getId() = " + v1def.getId() + " *** ");
@@ -56,7 +60,7 @@ public class ExecuteMigration implements JavaDelegate {
         MigrationPlan migrationPlan = processEngine.getRuntimeService()
                 .createMigrationPlan(v1def.getId(), v2def.getId())
                 .mapEqualActivities()
-                .mapActivities(fromUserTaskKey, toUserTaskKey)
+                .mapActivities(origTargetTask, destTargetTask)
                 .build();
 
         ProcessInstanceQuery query =
@@ -77,7 +81,7 @@ public class ExecuteMigration implements JavaDelegate {
         MigrationPlanExecutionBuilder builder =
                 processEngine.getRuntimeService().newMigration(migrationPlan);
 
-        if (instanceListSize.intValue() <= maxPerBatch.intValue()) {
+        if (instanceListSize <= maxPerBatch) {
             builder.processInstanceQuery(query);
         } else {
             List<String> idList = new ArrayList<>();
