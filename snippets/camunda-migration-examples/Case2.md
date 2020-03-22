@@ -44,15 +44,6 @@ The "Migrate Instances in Batch" process being called by the Call Activity is th
 
 The DevOps team also has a concern during this migration.  They are concerned that there might be over 50,000 instances to migrate on deployment night, and that the migration itself might cause unexpected load on the infrastructure.  Therefore, they are asking the development team to migrate in controlled batches, setting a proper maximum number of process instances to migrate during each batch.  For instance, let us say 500 at a time.  Therefore the same batch mechanism used in Use Case 1 is used here.
 
-
-The development team decides to create a process to handle the migration.
-
-![](src/main/resources/migrate-case-1.png)
-
-The reusable "Migrate Instances in Batch" subprocess looks like this:
-
-![](src/main/resources/migration-core.png)
-
 Migration is triggered by creating a process instance of this Migration process using the REST API.  The payload that initializes process instance variables in our local example looks like this:
 ```json
 {
