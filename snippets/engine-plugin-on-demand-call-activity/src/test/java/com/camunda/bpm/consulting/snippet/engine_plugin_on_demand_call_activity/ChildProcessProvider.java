@@ -3,6 +3,7 @@ package com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.impl.pvm.delegate.ActivityExecution;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+
+import static com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity.util.OnDemandCallActivityUtil.getAsyncServiceCallVarName;
+import static com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity.util.OnDemandCallActivityUtil.getSkipVarName;
 
 public class ChildProcessProvider {
 
@@ -21,8 +25,8 @@ public class ChildProcessProvider {
         logger.info("Running childProcessProvider...");
         
         // example on how to skip execution completely, e.g. during a retry after some manual fix
-        if (execution.hasVariable("skip_" + execution.getCurrentActivityId())) {
-          execution.setVariable("skip_" + execution.getCurrentActivityId(), null);
+        if (execution.hasVariable(getSkipVarName(execution))) {
+          execution.setVariable(getSkipVarName(execution), null);
           return null;
         }
         
@@ -64,6 +68,7 @@ public class ChildProcessProvider {
             }, CompletableFuture.delayedExecutor(250L, TimeUnit.MILLISECONDS));
             // TODO prepare REST request using input variables
 
+            execution.setVariableLocal(getAsyncServiceCallVarName(execution), true);
             return null;
         }
     }

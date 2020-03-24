@@ -1,30 +1,33 @@
 package com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity;
 
 import org.apache.ibatis.logging.LogFactory;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngineConfiguration;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
-import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity.TestUtil.cleanUpAndCreateEngine;
+import static org.camunda.bpm.engine.impl.test.TestHelper.createSchema;
+import static org.camunda.bpm.engine.impl.test.TestHelper.dropSchema;
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
+import static org.camunda.bpm.engine.test.assertions.bpmn.AbstractAssertions.processEngine;
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
  */
-@Deployment(resources = {"process.bpmn", "process_child.bpmn"})
-public class ProcessUnitTest {
+public class OnDemandCallActivityProcessEnginePluginTest {
 
-    @ClassRule
     @Rule
-    public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
+    public ProcessEngineRule rule;
 
     private static final String PROCESS_DEFINITION_KEY = "engine-plugin-on-demand-call-activity";
 
@@ -38,6 +41,7 @@ public class ProcessUnitTest {
 
     @Before
     public void setup() {
+        rule = cleanUpAndCreateEngine("camunda_on_demand_call_activity_test.cfg.xml", "process.bpmn", "process_child.bpmn");
         Mocks.register("childProcessProvider", new ChildProcessProvider());
         Mocks.register("loggerDelegate", new LoggerDelegate());
         init(rule.getProcessEngine());

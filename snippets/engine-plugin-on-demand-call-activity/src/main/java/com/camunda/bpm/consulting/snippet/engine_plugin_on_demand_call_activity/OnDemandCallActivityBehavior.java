@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.Expression;
 import org.camunda.bpm.engine.exception.NullValueException;
 import org.camunda.bpm.engine.impl.bpmn.behavior.CallActivityBehavior;
 import org.camunda.bpm.engine.impl.context.Context;
@@ -18,15 +19,30 @@ import org.camunda.bpm.engine.variable.VariableMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity.util.OnDemandCallActivityUtil.getAsyncServiceCallVarName;
+import static com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity.util.OnDemandCallActivityUtil.getRetriesVarName;
+
 public class OnDemandCallActivityBehavior extends CallActivityBehavior {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    public OnDemandCallActivityBehavior(){
+        super();
+    }
+
+    public OnDemandCallActivityBehavior(Expression expression){
+        super(expression);
+    }
+
+    public OnDemandCallActivityBehavior(String className){
+        super(className);
+    }
 
     @Override
     public void execute(ActivityExecution execution) throws Exception {
         List<JobEntity> jobs = Context.getCommandContext().getJobManager().findJobsByExecutionId(execution.getId());
         if (jobs.size() > 0) {
-            execution.setVariable(getRetriesVariable(execution), jobs.get(0).getRetries());
+            execution.setVariable(getRetriesVarName(execution), jobs.get(0).getRetries());
         }
         super.execute(execution);
     }
@@ -39,8 +55,12 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         }
         // process definition key is null => no child process needed
         catch (NullValueException e) {
-            // TODO: try catching a dedicated exception
-            logger.info("Ignoring process without existing key...");
+            if(!execution.hasVariableLocal(getAsyncServiceCallVarName(execution))){
+                throw e;
+            }
+            else {
+                logger.info("Ignoring process without existing key...");
+            }
         }
     }
 
@@ -48,7 +68,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
     public void signal(ActivityExecution execution, String signalName, Object signalData) throws Exception {
         if (signalData instanceof Exception) {
 
-            Integer currentRetries = (Integer) execution.getVariable(getRetriesVariable(execution));
+            Integer currentRetries = (Integer) execution.getVariable(getRetriesVarName(execution));
 
             if (currentRetries == null) {
                 currentRetries = 3;
@@ -56,10 +76,11 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
 
             Exception exception = (Exception) signalData;
             currentRetries--;
-            execution.setVariable(getRetriesVariable(execution), currentRetries);
+            execution.setVariable(getRetriesVarName(execution), currentRetries);
             createAsynchronousContinuationJob(execution, currentRetries, exception);
         } else {
-            execution.setVariableLocal(getRetriesVariable(execution), null);
+            execution.setVariableLocal(getRetriesVarName(execution), null);
+            execution.setVariableLocal(getAsyncServiceCallVarName(execution), null);
             leave(execution);
         }
     }
@@ -81,11 +102,6 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         if (retries == 0)
             JobUtil.createIncident(message);
 
-    }
-
-
-    private String getRetriesVariable(ActivityExecution execution) {
-        return "AsyncOnError_RETRIES_" + execution.getActivity().getId();
     }
 
     public static String getExceptionStacktrace(Exception exception) {
