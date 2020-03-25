@@ -11,7 +11,7 @@ It includes configuration for activating the Process Events Monitoring feature w
 2. Start Docker
 3. Add Optimize License in "licenses/OptimizeLicense.txt"
 4. Run `docker-compose up -d`
-5. Open `localhost:8080` in your Browser
+5. Open `localhost:8090` in your Browser
 
 ## Details
 

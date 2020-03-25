@@ -15,11 +15,12 @@ services:
     mem_limit: 2g
 
   optimize:
-    image: registry.camunda.cloud/optimize:3.0.0-alpha2
+    image: registry.camunda.cloud/optimize:3.0.0
     environment:
       - OPTIMIZE_CAMUNDABPM_REST_URL=http://application:8080/rest
       - OPTIMIZE_ELASTICSEARCH_HOST=elasticsearch
-      - OPTIMIZE_EVENT_BASED_PROCESSES_ENABLED=true
+      - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
       - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=['demo']
       - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
     volumes:
