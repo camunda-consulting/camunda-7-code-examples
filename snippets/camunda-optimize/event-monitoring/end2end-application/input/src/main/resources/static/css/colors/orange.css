@@ -1,0 +1,72 @@
+ /* Orange Color #FA6900 & #c75c0f */
+
+.btn:focus, .subscribe-btn, .progress .progress-bar, .accordionMod .panel-heading .current, #current:after, .tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover, .contact-box:hover, #options li a.selected, .ch-info-front {
+    background: #FA6900;
+}
+
+.bg-color {
+    background: #FA6900;
+	color: #fff;
+}
+
+.spinner {
+	border-top-color: #FA6900;
+}
+
+.ch-info-back {
+	background: rgba(250, 105, 0, 0.7) !important;
+}
+
+.tp-leftarrow.default:hover,.tp-rightarrow.default:hover, .nivo-prevNav:hover, .nivo-nextNav:hover {
+	border-color: #FA6900;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pager li > a:hover, .pager li > a:focus, .navbar-toggle i, .cn-wrapper li a, .cn-wrapper:after {
+    background-color: #FA6900;
+    color: #fff;
+}
+
+.hero {
+    border-left-color: #FA6900;
+}
+
+
+.ie8 .btn-color, .ie9 .btn-color {
+	background: #FA6900 !important;
+}
+
+.ie8 .btn-color:hover, .ie9 .btn-color:hover {
+	background: #FA6900 !important;
+}
+
+.btn-color:hover, .subscribe-btn:hover {
+	background: #c75c0f;
+}
+
+.btn-color, .subscribe-btn {
+	background: #FA6900;
+	cursor: pointer;
+}
+
+
+#current,.menu ul li a:hover,.menu ul>li:hover>a {
+    border-bottom: 3px solid #FA6900;
+}
+
+ul.why li:before {
+    background: #FA6900;
+}
+
+.menu ul ul {
+    border-top: 3px solid #FA6900 !important;
+}
+
+
+
+.author-content, div.content-box.big, #cn-tabs .service, .comment-des, .contact-box {
+	border-bottom-color:#FA6900;
+}
+
+a, .post-item h4 a:hover, .cn-wrapper li a:hover, .cn-wrapper li a.active, .color {
+    color: #FA6900;
+}

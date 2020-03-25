@@ -1,0 +1,29 @@
+<%@ page pageEncoding="UTF-8" %>
+      <!-- The Scripts -->
+      <script src="../js/js/jquery.min.js"></script>
+      <script src="../js/js/jquery-migrate-1.2.1.min.js"></script>
+      <script src="../js/js/jquery-ui.js"></script>
+      <script src="../js/js/bootstrap.js"></script>
+      <script src="../js/js/jquery.parallax.js"></script>
+      <script src="../js/js/jquery.wait.js"></script>
+      <script src="../js/js/modernizr-2.6.2.min.js"></script>
+      <script src="../js/js/modernizr.custom.js"></script>
+      <script src="../js/js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
+      <script src="../js/js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
+      <script src="../js/js/jquery.nivo.slider.pack.js"></script>
+      <script src="../js/js/jquery.prettyPhoto.js"></script>
+      <script src="../js/js/superfish.js"></script>
+      <script src="../js/js/tweetMachine.js"></script>
+      <script src="../js/js/tytabs.js"></script>
+      <script src="../js/js/jquery.gmap.min.js"></script>
+      <script src="../js/js/circularnav.js"></script>
+      <script src="../js/js/jquery.sticky.js"></script>
+      <script src="../js/js/jflickrfeed.js"></script>
+      <script src="../js/js/imagesloaded.pkgd.min.js"></script>
+      <script src="../js/js/waypoints.min.js"></script>
+      <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+      <script src="../js/js/jquery.gmap.min.js"></script>
+      <script src="../js/js/custom.js"></script>
+      <script src="lang/de.js"></script>
+      <script src="lang/en.js"></script>
+      <script src="app.js" ></script>
