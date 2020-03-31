@@ -1,0 +1,14 @@
+spring:
+   application:
+      name: zuulproxy
+zuul:
+   prefix: /optimize/
+   routes:
+      users:
+         path: /**
+         url:  http://localhost:8090
+ribbon:
+   eureka:
+      enabled: false
+server:
+   port: 8111
