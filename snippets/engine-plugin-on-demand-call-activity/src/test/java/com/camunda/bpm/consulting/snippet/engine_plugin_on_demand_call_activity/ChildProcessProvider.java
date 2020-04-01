@@ -51,13 +51,14 @@ public class ChildProcessProvider {
                 // this will not work: execution.setVariable("foo", "bar");
                 // THE EXECUTION IS NOT THREAD-SAFE
                 try {
+                    logger.info("Do throw exception: "+doThrowException);
                     if (doThrowException) {
                       throw new Exception("Exception!");
                     }
                     Logger logger = LoggerFactory.getLogger(getClass());
                     logger.info("Executing async block...");
                     Map<String, Object> newVariables = new HashMap<>();
-                    newVariables.put("foo", "bar");
+                    newVariables.put("outputVar", "someValue");
                     //TODO: IS RUNTIME SERVICE THREAD SAFE? => Thorben says yes!
                     runtimeService.signal(executionId, newVariables);
                 } catch (Exception e) {
