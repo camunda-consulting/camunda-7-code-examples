@@ -23,7 +23,7 @@ As it uses standard react mechanisms it should be very easy for a React develope
 1. run `npm install` or run `yarn install`
 1. run `npm run start` or `yarn start`
 1. Start the Camunda Engine (standard distribution with REST-API at `localhost:8080/engine-rest`)
-1. Open Browser (e.g. Chrome) on `locahost:4200`
+1. Open Browser (e.g. Chrome) on `localhost:4200`
 1. Deploy the example BPMN Process given in `examples/myprocess` using the example Tasklist
 1. Start Instance & fill in forms
 1. Click on Tasklist and complete tasks
