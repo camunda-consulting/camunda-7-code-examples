@@ -1,0 +1,231 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Camunda Shop</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+  <div class="shopping-cart">
+  <!-- Title -->
+  <div class="title">
+    Shopping Bag
+  </div>
+
+  <!-- Product #1 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn-small"></span>
+      <span class="like-btn-small"></span>
+    </div>
+
+    <div class="image">
+      <img src="item-1.png" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Common Projects</span>
+      <span>Bball High</span>
+      <span>White</span>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn-small" type="button" name="button">
+        <img src="plus.svg" alt="" />
+      </button>
+      <input type="text" name="product-1" value="1">
+      <button class="minus-btn-small" type="button" name="button">
+        <img src="minus.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="total-price">$549</div>
+  </div>
+
+  <!-- Product #2 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn-small"></span>
+      <span class="like-btn-small"></span>
+    </div>
+
+    <div class="image">
+      <img src="item-2.png" alt=""/>
+    </div>
+
+    <div class="description">
+      <span>Maison</span>
+      <span>Future Sneakers</span>
+      <span>White</span>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn-small" type="button" name="button">
+        <img src="plus.svg" alt="" />
+      </button>
+      <input type="text" name="product-2" value="1">
+      <button class="minus-btn-small" type="button" name="button">
+        <img src="minus.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="total-price">$870</div>
+  </div>
+
+  <!-- Product #3 -->
+  <div class="item">
+    <div class="buttons">
+      <span class="delete-btn-small"></span>
+      <span class="like-btn-small"></span>
+    </div>
+
+    <div class="image">
+      <img src="item-3.png" alt="" />
+    </div>
+
+    <div class="description">
+      <span>Our Legacy</span>
+      <span>Brushed Scarf</span>
+      <span>Brown</span>
+    </div>
+
+    <div class="quantity">
+      <button class="plus-btn-small" type="button" name="button">
+        <img src="plus.svg" alt="" />
+      </button>
+      <input type="text" name="product-3" value="1">
+      <button class="minus-btn-small" type="button" name="button">
+        <img src="minus.svg" alt="" />
+      </button>
+    </div>
+
+    <div class="total-price">$349</div>
+  </div>
+
+<div class="mb-3">
+  <div class="">
+    <h2 class="title">Delivery Address</h2>
+    <div class="form-group pr-4 pl-4">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" value="Optimize Team" placeholder="Enter Name">
+    </div>
+    <div class="form-group pr-4 pl-4">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" value="Zossenerstr. 55" placeholder="Address">
+    </div>
+    <button id="orderbutton" class="btn btn-primary ml-4" onclick="placeOrder()">Place Order</button>
+  </div>
+</div>
+<div id="thanks" class="pl-4 pr-4 mb-3"></div>
+</div>
+
+
+
+
+
+</body>
+
+	<script type="text/javascript">
+    var count = 0;
+
+		function placeOrder() {
+      var customer = {
+        name: $('#name').val(),
+        address: $('#address').val()
+      };
+      var item1 = {
+        articleId: "bball-high-white",
+        amount:$('[name="product-1"]').val()
+      }
+      var item2 = {
+        articleId: "future-sneakers-white",
+        amount:$('[name="product-2"]').val()
+      };
+      var item3 = {
+        articleId: "brushed-scarf",
+        amount: $('[name="product-3"]').val()
+      }
+
+
+      var order = {
+        items: [],
+        customer: customer
+      };
+
+      order.items.push(item1);
+      order.items.push(item2);
+      order.items.push(item3);
+
+			 $.ajax({
+              url: "./api/order",
+              type: "put",
+              data: JSON.stringify(order),
+              dataType: 'json',
+              headers: {
+                "Content-Type": "application/json"
+              }
+          }).done(function(result) {
+            count = count+1;
+            $('#thanks').html('Thank you for order #' + count + '.<br>Trace id: <b>' + result.traceId + '</b>');
+          })
+		}
+
+
+
+    $('.minus-btn-small').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		var value = parseInt($input.val());
+
+    		if (value > 1) {
+    			value = value - 1;
+    		} else {
+    			value = 0;
+    		}
+
+        $input.val(value);
+
+    	});
+
+    	$('.plus-btn-small').on('click', function(e) {
+    		e.preventDefault();
+    		var $this = $(this);
+    		var $input = $this.closest('div').find('input');
+    		var value = parseInt($input.val());
+
+    		if (value < 100) {
+      		value = value + 1;
+    		} else {
+    			value =100;
+    		}
+
+    		$input.val(value);
+    	});
+
+      $('.like-btn-small').on('click', function() {
+        $(this).toggleClass('is-active');
+      });
+
+
+	</script>
+</html>

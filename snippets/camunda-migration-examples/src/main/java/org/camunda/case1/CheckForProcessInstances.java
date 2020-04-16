@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("case1CheckForInstances")
+@Component("checkForInstances")
 public class CheckForProcessInstances implements JavaDelegate {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CheckForProcessInstances.class.getName());
@@ -32,6 +32,18 @@ public class CheckForProcessInstances implements JavaDelegate {
         Boolean skipIoMappings = (Boolean) execution.getVariable("skipIoMappings");
         Boolean skipCustomListeners = (Boolean) execution.getVariable("skipCustomListeners");
 
+        execution.setVariable("origProcessDefKey", processDefKey);
+        execution.setVariable("origProcessDefVersion", fromVersion);
+        execution.setVariable("destProcessDefKey", processDefKey);
+        execution.setVariable("destProcessDefVersion", toVersion);
+
+        execution.setVariable("origProcessDefKey", processDefKey);
+        execution.setVariable("origProcessDefVersion", fromVersion);
+        execution.setVariable("origTargetTask", fromUserTaskKey);
+        execution.setVariable("destProcessDefKey", processDefKey);
+        execution.setVariable("destProcessDefVersion", toVersion);
+        execution.setVariable("destTargetTask", toUserTaskKey);
+
         if (processDefKey == null || fromVersion == null || toVersion == null ||
                 fromUserTaskKey == null || toUserTaskKey == null) {
             LOGGER.info("******* WARNING:  Insufficient Data.  No Migration will take place. ********");
@@ -44,12 +56,10 @@ public class CheckForProcessInstances implements JavaDelegate {
             }
             if (skipIoMappings == null) {
                 // default to true
-                skipIoMappings = true;
                 execution.setVariable("skipIoMappings", true);
             }
             if (skipCustomListeners == null) {
                 // default to true
-                skipCustomListeners = true;
                 execution.setVariable("skipCustomListeners", true);
             }
 

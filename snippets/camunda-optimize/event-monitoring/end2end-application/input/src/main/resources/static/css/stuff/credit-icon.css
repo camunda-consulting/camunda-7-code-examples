@@ -1,0 +1,146 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?l52080');
+  src:  url('../fonts/icomoon.eot?l52080#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?l52080') format('truetype'),
+    url('../fonts/icomoon.woff?l52080') format('woff'),
+    url('../fonts/icomoon.svg?l52080#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-point-of-service:before {
+  content: "\e900";
+}
+.icon-purse:before {
+  content: "\e901";
+}
+.icon-tax-1:before {
+  content: "\e902";
+}
+.icon-diamond:before {
+  content: "\e903";
+}
+.icon-tax:before {
+  content: "\e904";
+}
+.icon-profits-1:before {
+  content: "\e905";
+}
+.icon-safebox:before {
+  content: "\e906";
+}
+.icon-idea:before {
+  content: "\e907";
+}
+.icon-smartphone-1:before {
+  content: "\e908";
+}
+.icon-piggy-bank:before {
+  content: "\e909";
+}
+.icon-pound-sterling:before {
+  content: "\e90a";
+}
+.icon-yuan:before {
+  content: "\e90b";
+}
+.icon-bitcoin:before {
+  content: "\e90c";
+}
+.icon-dollar:before {
+  content: "\e90d";
+}
+.icon-euro:before {
+  content: "\e90e";
+}
+.icon-exchange:before {
+  content: "\e90f";
+}
+.icon-growth:before {
+  content: "\e910";
+}
+.icon-briefcase-1:before {
+  content: "\e911";
+}
+.icon-briefcase:before {
+  content: "\e912";
+}
+.icon-gold-ingot:before {
+  content: "\e913";
+}
+.icon-auction:before {
+  content: "\e914";
+}
+.icon-search:before {
+  content: "\e915";
+}
+.icon-check:before {
+  content: "\e916";
+}
+.icon-profits:before {
+  content: "\e917";
+}
+.icon-loss:before {
+  content: "\e918";
+}
+.icon-invoice:before {
+  content: "\e919";
+}
+.icon-smartphone:before {
+  content: "\e91a";
+}
+.icon-coin-1:before {
+  content: "\e91b";
+}
+.icon-calculator:before {
+  content: "\e91c";
+}
+.icon-bank:before {
+  content: "\e91d";
+}
+.icon-atm-machine-1:before {
+  content: "\e91e";
+}
+.icon-atm-machine:before {
+  content: "\e91f";
+}
+.icon-money-bag:before {
+  content: "\e920";
+}
+.icon-credit-card-1:before {
+  content: "\e921";
+}
+.icon-credit-card:before {
+  content: "\e922";
+}
+.icon-wallet:before {
+  content: "\e923";
+}
+.icon-money-1:before {
+  content: "\e924";
+}
+.icon-balance:before {
+  content: "\e925";
+}
+.icon-money:before {
+  content: "\e926";
+}
+.icon-coin:before {
+  content: "\e927";
+}

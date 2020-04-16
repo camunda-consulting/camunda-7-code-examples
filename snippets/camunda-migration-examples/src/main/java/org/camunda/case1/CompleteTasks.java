@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("case1CompleteTasks")
+@Component("completeTasks")
 public class CompleteTasks implements JavaDelegate {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CompleteTasks.class.getName());
@@ -21,8 +21,8 @@ public class CompleteTasks implements JavaDelegate {
         String toUserTaskKey = (String) execution.getVariable("toUserTaskKey");
         Integer maxUserComplete = (Integer) execution.getVariable("maxUserComplete");
 
-        if (maxUserComplete == null || maxUserComplete.intValue() < 1) {
-            maxUserComplete = new Integer(1);
+        if (maxUserComplete == null || maxUserComplete < 1) {
+            maxUserComplete = 1;
         }
 
         ProcessEngine processEngine = execution.getProcessEngine();
@@ -33,10 +33,10 @@ public class CompleteTasks implements JavaDelegate {
                         .list();
 
         // if there are tasks to complete
-        int count = maxUserComplete.intValue();
+        int count = maxUserComplete;
         if (taskList != null && taskList.size() > 0) {
-            if (taskList.size() > maxUserComplete.intValue()) {
-                taskList = taskList.subList(0, maxUserComplete.intValue());
+            if (taskList.size() > maxUserComplete) {
+                taskList = taskList.subList(0, maxUserComplete);
                 execution.setVariable("moreTasksToComplete", true);
             } else {
                 count = taskList.size();

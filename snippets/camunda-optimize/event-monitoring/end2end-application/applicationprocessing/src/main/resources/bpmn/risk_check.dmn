@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="checkRisk_en" name="Risk Check">
+    <decisionTable id="decisionTable" hitPolicy="COLLECT">
+      <input id="input1" label="Age" camunda:inputVariable="">
+        <inputExpression id="inputExpression1" typeRef="integer">
+          <text>application.applicant.age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0sbc829" label="Employment">
+        <inputExpression id="LiteralExpression_0fpyor4" typeRef="string">
+          <text>application.employment</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ohc5m6" label="Category" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0o7difo" typeRef="string">
+          <text>application.category</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0g6gbjp" label="Score">
+        <inputExpression id="LiteralExpression_0zotgls" typeRef="integer">
+          <text>score</text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Risk" name="risk" typeRef="string" />
+      <output id="OutputClause_0hh62nv" label="Risk Level" name="riskLevel" typeRef="string" />
+      <rule id="DecisionRule_09dgf3c">
+        <description></description>
+        <inputEntry id="UnaryTests_0ual6ir">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1e397n3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c3lrnz">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l0btob">
+          <text>&lt;=85</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1f3y5xd">
+          <text>"Won't Pay In Time"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1w57ha5">
+          <text>"red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s72fjf">
+        <description></description>
+        <inputEntry id="UnaryTests_1dkokb9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0d5r6v3">
+          <text>"Unemployed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v6fey5">
+          <text>not("Basic Package")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rw2hjn">
+          <text>&lt;=95</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18kpqx8">
+          <text>"Lack Of Income"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mrbkzr">
+          <text>"red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0c99hq3">
+        <description></description>
+        <inputEntry id="UnaryTests_16q1ghi">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c86j25">
+          <text>"Self-employed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l8wmca">
+          <text>"Premium Package"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qkgqif">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jlpe55">
+          <text>"Irregular And Possibly Lack Of Income"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05qilq2">
+          <text>"yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1euaw2y">
+        <description></description>
+        <inputEntry id="UnaryTests_0bctfm4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12o8otd">
+          <text>"Freelancer", "Self-employed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o842fe">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1h8e7id">
+          <text>&lt;=95</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pwrw8z">
+          <text>"Not Trustworthy"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zcjpew">
+          <text>"yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08nz8pq">
+        <description></description>
+        <inputEntry id="UnaryTests_0adgp9c">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jzpweh">
+          <text>"Salaried"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17itih0">
+          <text>"Premium Package"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dgmj4d">
+          <text>&lt;90</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xwbye7">
+          <text>"Too Low Income"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1s5g29d">
+          <text>"yellow"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

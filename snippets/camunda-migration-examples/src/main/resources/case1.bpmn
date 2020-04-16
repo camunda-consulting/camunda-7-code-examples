@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
   <bpmn:process id="use-case-1" name="use-case-1" isExecutable="true">
     <bpmn:startEvent id="StartEvent" name="Process&#10;started">
       <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
@@ -23,14 +23,14 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ny8yfe" name="2" sourceRef="ExclusiveGateway_0vgkf2i" targetRef="user-task-1">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{mypath==2}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:endEvent id="EndEvent_0tqk6qk">
+    <bpmn:endEvent id="EndEvent_0tqk6qk" name="Process&#10;ended">
       <bpmn:incoming>SequenceFlow_13t0dak</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1qmev44" sourceRef="user-task-1" targetRef="user-task-0" />
     <bpmn:sequenceFlow id="SequenceFlow_163dgt3" name="3" sourceRef="ExclusiveGateway_0vgkf2i" targetRef="user-task-2">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{mypath==3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:endEvent id="EndEvent_102ggsf">
+    <bpmn:endEvent id="EndEvent_102ggsf" name="Process&#10;ended">
       <bpmn:incoming>SequenceFlow_18c5nog</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_18c5nog" sourceRef="user-task-2" targetRef="EndEvent_102ggsf" />
@@ -107,6 +107,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0tqk6qk_di" bpmnElement="EndEvent_0tqk6qk">
         <dc:Bounds x="942" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="940" y="275" width="41" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1qmev44_di" bpmnElement="SequenceFlow_1qmev44">
         <di:waypoint x="750" y="250" />
@@ -122,6 +125,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_102ggsf_di" bpmnElement="EndEvent_102ggsf">
         <dc:Bounds x="942" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="940" y="415" width="41" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_18c5nog_di" bpmnElement="SequenceFlow_18c5nog">
         <di:waypoint x="750" y="390" />

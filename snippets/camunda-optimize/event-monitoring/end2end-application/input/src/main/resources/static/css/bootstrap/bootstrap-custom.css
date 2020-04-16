@@ -1,0 +1,54 @@
+.productdiv {
+  max-width:30%;
+  padding-bottom: 1em;
+  border: black;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.productimg {
+  margin-bottom:2em;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    border-top-right-radius: 0;
+}
+
+.bulletpoint-no-point {
+font-weight: bold
+}
+
+.bulletpoint-no-point span:only-of-type {
+font-weight: 300
+}
+
+.bulletpoint-no-point a:only-of-type {
+font-weight: 300
+}
+
+.smallCheckmark {
+  width:18px;
+  height:18px;
+}
+
+.smallCross{
+  width:18px;
+  height:18px;
+}
+
+.bigCheckmark {
+  width:21px;
+  height:21px;
+}
+
+.span-decoration-underlined {
+  border-bottom: 1px solid black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.span-decoration-underlined:hover {
+  border-bottom: 1px solid blue;
+}

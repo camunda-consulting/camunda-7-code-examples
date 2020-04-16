@@ -1,18 +1,13 @@
 'use strict';
 
-var domify = require('min-dom/lib/domify'),
-  domEvent = require('min-dom/lib/event'),
-  domClasses = require('min-dom/lib/classes'),
-  domQuery = require('min-dom/lib/query'),
-  clear = require('min-dom/lib/clear');
-var PropertiesActivator = require('bpmn-js-properties-panel/lib/PropertiesActivator');
+var domify = require('min-dom').domify;
 var CamundaPropertiesProvider = require('bpmn-js-properties-panel/lib/provider/camunda/CamundaPropertiesProvider');
 var formHelper = require('bpmn-js-properties-panel/lib/helper/FormHelper');
 var swal = require('sweetalert');
 var copy = require('clipboard-copy');
 
-function GeneratedFormPreviewPluginProvider(eventBus, elementRegistry, bpmnFactory, elementTemplates, translate) {
-  var camunda = new CamundaPropertiesProvider(eventBus, bpmnFactory, elementRegistry, elementTemplates, translate);
+function GeneratedFormPreviewPluginProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate) {
+  var camunda = new CamundaPropertiesProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate);
 
   this.getTabs = function(element) {
     var array = camunda.getTabs(element);
@@ -266,7 +261,7 @@ GeneratedFormPreviewPluginProvider.prototype.generateHTMLSnippet = function(form
 };
 
 
-GeneratedFormPreviewPlugin.$inject = ['eventBus', 'elementRegistry', 'bpmnFactory', 'elementTemplates', 'translate'];
+GeneratedFormPreviewPlugin.$inject = ['eventBus', 'canvas', 'bpmnFactory', 'elementRegistry', 'elementTemplates', 'translate'];
 
 function GeneratedFormPreviewPlugin() {
 

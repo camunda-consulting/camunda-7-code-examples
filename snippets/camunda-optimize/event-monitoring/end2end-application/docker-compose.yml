@@ -1,0 +1,75 @@
+version: "2"
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.6.1
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+      - elasticsearch-logs:/usr/share/elasticsearch/logs
+    restart: always
+    mem_limit: 2g
+
+  optimize:
+    image: registry.camunda.cloud/optimize:3.0.0
+    environment:
+      - OPTIMIZE_CAMUNDABPM_REST_URL=http://application:8080/rest
+      - OPTIMIZE_ELASTICSEARCH_HOST=elasticsearch
+      - OPTIMIZE_CAMUNDA_BPM_EVENT_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_BASED_PROCESSES_IMPORT_ENABLED=true
+      - OPTIMIZE_EVENT_BASED_PROCESSES_USER_IDS=['demo']
+      - OPTIMIZE_EVENT_INGESTION_ACCESS_TOKEN=mytoken
+    volumes:
+      - ./environment/OptimizeLicense.txt:/optimize/environment/OptimizeLicense.txt
+    container_name: optimize
+    ports:
+      - 8090:8090
+    depends_on:
+      - application
+      - elasticsearch
+    restart: always
+    mem_limit: 2g
+
+
+#####
+  rabbitconnector:
+    build: ./rabbitconnector
+    container_name: rabbitconnector
+    restart: always
+    depends_on:
+      - rabbit
+      - optimize
+####
+
+  rabbit:
+    image: "rabbitmq:3-management"
+    hostname: rabbit
+    restart: always
+    ports:
+      - "15672:15672"
+    mem_limit: 2g
+
+####
+
+  application:
+    build: ./applicationprocessing
+    container_name: application
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rabbit
+
+  input:
+    build: ./input
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbit
+
+volumes:
+  elasticsearch-data:
+  elasticsearch-logs:

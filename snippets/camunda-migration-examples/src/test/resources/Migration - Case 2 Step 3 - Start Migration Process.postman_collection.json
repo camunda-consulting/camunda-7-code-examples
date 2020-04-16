@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "05b9aeff-236a-4a71-8db2-953ef09d1da0",
+		"name": "Migration - Case 2 Step 3 - Start Migration Process",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Start Process migrate-case-2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"processDefKey\": {\n            \"value\": \"use-case-2\",\n            \"type\": \"String\"\n        },\n        \"fromVersion\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        },\n        \"toVersion\": {\n            \"value\": 2,\n            \"type\": \"Integer\"\n        },\n        \"fromUserTaskKey\": {\n            \"value\": \"user-task-0-c2\",\n            \"type\": \"String\"\n        },\n        \"toUserTaskKey\": {\n            \"value\": \"user-task-2-c2\",\n            \"type\": \"String\"\n        },\n        \"intermediateProcessDefKey\": {\n            \"value\": \"use-case-2-migrate-intermediate\",\n            \"type\": \"String\"\n        },\n        \"intermediateProcessVersion\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        },\n        \"intStepOneTask\": {\n            \"value\": \"token-pitstop-1\",\n            \"type\": \"String\"\n        },\n        \"intStepTwoTask\": {\n            \"value\": \"token-pitstop-2\",\n            \"type\": \"String\"\n        },\n        \"maxPerBatch\": {\n            \"value\": 50,\n            \"type\": \"Integer\"\n        },\n        \"maxUserComplete\": {\n            \"value\": 10,\n            \"type\": \"Integer\"\n        },\n        \"skipIoMappings\": {\n            \"value\": true,\n            \"type\": \"Boolean\"\n        },\n        \"skipCustomListeners\": {\n            \"value\": true,\n            \"type\": \"Boolean\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/process-definition/key/migrate-case-2/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"migrate-case-2",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
