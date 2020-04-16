@@ -2,6 +2,7 @@ package com.camunda.bpm.consulting.snippet.engine_plugin_on_demand_call_activity
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.List;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -71,7 +72,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
             Integer currentRetries = (Integer) execution.getVariable(getRetriesVarName(execution));
 
             if (currentRetries == null) {
-                currentRetries = 3;
+                currentRetries = 0; // TODO: read this from ProcessEngineConfiguration
             }
 
             Exception exception = (Exception) signalData;
@@ -85,7 +86,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         }
     }
 
-    public static void createAsynchronousContinuationJob(DelegateExecution execution, Integer retries, Exception exception) {
+    public static void createAsynchronousContinuationJob(DelegateExecution execution, Integer retries, Exception exception/*, Date duedate*/) {
         MessageEntity message = new MessageEntity();
         message.setProcessInstanceId(execution.getProcessInstanceId());
         message.setProcessDefinitionId(execution.getProcessDefinitionId());
@@ -96,6 +97,7 @@ public class OnDemandCallActivityBehavior extends CallActivityBehavior {
         message.setExceptionMessage(exception.getMessage());
         message.setExceptionStacktrace(getExceptionStacktrace(exception));
         message.setRetries(retries);
+        //message.setDuedate(duedate);
         // TODO add retryTimeCycle
         Context.getCommandContext().getJobManager().send(message);
 

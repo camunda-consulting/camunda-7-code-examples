@@ -62,8 +62,24 @@ public class ChildProcessProvider {
                     //TODO: IS RUNTIME SERVICE THREAD SAFE? => Thorben says yes!
                     runtimeService.signal(executionId, newVariables);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    runtimeService.signal(executionId, null, e, null);
+                  e.printStackTrace();
+                  runtimeService.signal(executionId, null, e, null);
+                  // sketch for self healing
+//                  try {
+//                    // synchronously call self-healing µs
+//                    if (isIgnore) {
+//                      runtimeService.signal(executionId, newVariables);
+//                    } else if (isRetry) {
+//                      // rule with define number of retries and delay
+//                      runtimeService.signal(executionId, null, e, null);                      
+//                    } else {
+//                      // fallout => incident without retries 
+//                      e.printStackTrace();
+//                      runtimeService.signal(executionId, null, e, null);
+//                    }
+//                  } catch (Exception selfHealingException) {
+//                    runtimeService.signal(executionId, null, selfHealingException, null); // maybe indicate that delayed retry by Camunda is needed 
+//                  }
                 }
                 //INCIDENT AND BPMN ERROR
             }, CompletableFuture.delayedExecutor(250L, TimeUnit.MILLISECONDS));
