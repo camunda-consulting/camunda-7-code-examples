@@ -1,0 +1,46 @@
+<strong>Please check your incident and fix it.</strong>
+
+<form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label">Incident Id</label>
+    <div class="controls">
+      <input type="text" 
+             cam-variable-name="incidentId"
+             cam-variable-type="String"
+             readonly
+             class="form-control" />      
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Incident Message</label>
+    <div class="controls">
+      <input type="text"
+             cam-variable-name="incidentMessage"
+             cam-variable-type="String"
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label">Execution Id</label>
+    <div class="controls">
+      <input type="text"
+             cam-variable-name="incidentExecutionId"
+             cam-variable-type="String"
+             readonly
+             class="form-control" />
+    </div>
+  </div>
+
+  <script cam-script type="text/form-script">
+  // custom JavaScript goes here
+  </script>
+  <style>
+    .form-horizontal .form-group{
+      margin-left: 0;
+      margin-right: 0;
+    }
+  </style>
+</form>
