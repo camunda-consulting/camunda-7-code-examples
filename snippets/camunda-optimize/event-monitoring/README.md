@@ -13,4 +13,4 @@ You can find details about how to get started:
 
 ## Example Connectors
 
-tbd
+1. [Kafka Adapter](https://github.com/camunda/camunda-optimize-examples/tree/master/kafka-event-adapter)

@@ -8,8 +8,8 @@ target
 .settings
 
 # IntelliJ
-.idea
-.iml
+*.idea
+*.iml
 
 # Ant
 build.properties

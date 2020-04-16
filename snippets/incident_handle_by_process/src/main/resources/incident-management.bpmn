@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_16vvy5z" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="IncidentManagementProcess" name="Incident Management" isExecutable="true" camunda:isStartableInTasklist="false">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0w4y3cs</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0w4y3cs" sourceRef="StartEvent_1" targetRef="CheckIncidentTask" />
+    <bpmn:sequenceFlow id="Flow_0uicrn8" sourceRef="CheckIncidentTask" targetRef="SolveIncidentTask" />
+    <bpmn:endEvent id="Event_0z5pyk2">
+      <bpmn:incoming>Flow_0lqxk1h</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0lqxk1h" sourceRef="SolveIncidentTask" targetRef="Event_0z5pyk2" />
+    <bpmn:userTask id="CheckIncidentTask" name="Check Incident" camunda:formKey="embedded:app:forms/incident-form.html">
+      <bpmn:incoming>Flow_0w4y3cs</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uicrn8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="SolveIncidentTask" name="Solve Incident" camunda:delegateExpression="${solveIncident}">
+      <bpmn:incoming>Flow_0uicrn8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lqxk1h</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="IncidentManagementProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0w4y3cs_di" bpmnElement="Flow_0w4y3cs">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uicrn8_di" bpmnElement="Flow_0uicrn8">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0z5pyk2_di" bpmnElement="Event_0z5pyk2">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0lqxk1h_di" bpmnElement="Flow_0lqxk1h">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1f2so2y_di" bpmnElement="CheckIncidentTask">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h1jpgw_di" bpmnElement="SolveIncidentTask">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
