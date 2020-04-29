@@ -66,7 +66,8 @@ into the folder ![META_INF/services](src/main/resources/META-INF/services/org.ca
 The project also contains a JUnit test ![AssignmentTest](src/test/java/org/camunda/demo/AssignmentTest.java) with a few tests for different task assignments.
 You can run it in your IDE or using:<br/>
 ```mvn clean test```
-### Step through the process manually 
+
+## Step through the process manually 
 To step through the process manually, you can start the server using your IDE or
 
 ```mvn spring-boot:run```
