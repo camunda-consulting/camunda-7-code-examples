@@ -45,14 +45,14 @@ This can be done on the "Input/Output" properties tab of the business rule task 
 To determine the list of candidate users / candidate user groups we
 - go through list of results (rows), picking the "candidateUsers" / "candidateGroups" value from each row
 - filter empty entries from the resulting list<br/>
-```javascript  (for r in dmnResult return get value(r, "candidateUsers"))[item != null]```
-```javascript (for r in dmnResult return get value(r, "candidateGroups"))[item != null]```
+```(for r in dmnResult return get value(r, "candidateUsers"))[item != null]```
+```(for r in dmnResult return get value(r, "candidateGroups"))[item != null]```
 
 To determine the assignee we 
 - go through list of results (rows), picking the "assignee" value from each row
 - filter empty values from the resulting list
 - pick the first assignee in the list (assignee can only be one value, not a list)<br/>
-```javascript ((for r in dmnResult return get value(r, "assignee"))[item != null])[1]```
+```((for r in dmnResult return get value(r, "assignee"))[item != null])[1]```
 
 ![Business Rule Task - Mapping of DMN result to process variables](resources/images/DMNTaskOutputParameters.png)
 
