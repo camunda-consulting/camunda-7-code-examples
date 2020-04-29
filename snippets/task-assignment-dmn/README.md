@@ -45,7 +45,7 @@ This can be done on the "Input/Output" properties tab of the business rule task 
 To determine the list of candidate users / candidate user groups we
 - go through list of results (rows), picking the "candidateUsers" / "candidateGroups" value from each row
 - filter empty entries from the resulting list<br/>
-```(for r in dmnResult return get value(r, "candidateUsers"))[item != null]```
+```(for r in dmnResult return get value(r, "candidateUsers"))[item != null]```<br/>
 ```(for r in dmnResult return get value(r, "candidateGroups"))[item != null]```
 
 To determine the assignee we 
