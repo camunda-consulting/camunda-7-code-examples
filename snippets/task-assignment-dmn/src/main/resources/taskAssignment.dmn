@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1joi52j" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <decision id="Decision_Task_Assignment" name="Task Assignment">
+    <extensionElements>
+      <biodi:bounds x="270" y="80" width="180" height="80" />
+      <biodi:edge source="InputData_10om2ir">
+        <biodi:waypoints x="362" y="197" />
+        <biodi:waypoints x="365" y="160" />
+      </biodi:edge>
+      <biodi:edge source="InputData_1yx62j9">
+        <biodi:waypoints x="252" y="197" />
+        <biodi:waypoints x="303" y="160" />
+      </biodi:edge>
+      <biodi:edge source="InputData_0nlu0rm">
+        <biodi:waypoints x="476" y="197" />
+        <biodi:waypoints x="420" y="160" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredInput href="#InputData_10om2ir" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_1yx62j9" />
+    </informationRequirement>
+    <informationRequirement>
+      <requiredInput href="#InputData_0nlu0rm" />
+    </informationRequirement>
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
+      <input id="input_1" label="Product Group">
+        <inputExpression id="inputExpression_1" typeRef="string">
+          <text>productGroup</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1kbunbs" label="Product Department">
+        <inputExpression id="LiteralExpression_0voa1w2" typeRef="string">
+          <text>productDepartment</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1s8d3yq" label="Product Class">
+        <inputExpression id="LiteralExpression_18jssay" typeRef="string">
+          <text>productClass</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_13tdrsd" label="Halal">
+        <inputExpression id="LiteralExpression_0s9vwhh" typeRef="boolean">
+          <text>halal</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Assignee" name="assignee" typeRef="string" />
+      <output id="OutputClause_1habr1z" label="Candidate Users" name="candidateUsers" typeRef="string">
+        <outputValues id="UnaryTests_1y2ojy7">
+          <text>"Huey","Duey","Louie"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_1imvqd2" label="Candidate Groups" name="candidateGroups" typeRef="string" />
+      <rule id="DecisionRule_11lj47i">
+        <description>All users in group</description>
+        <inputEntry id="UnaryTests_1dgd0eo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16jeayp">
+          <text>"Seafood"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jogffx">
+          <text>not ("Wale")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19ce2p7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0s3ror4">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09h5af8">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dir33k">
+          <text>"Seafood"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_163nim4">
+        <description>Will be assigned to ONLY specific user</description>
+        <inputEntry id="UnaryTests_1x9xgk4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ve1zlt">
+          <text>"Seafood"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1li1trg">
+          <text>"Wale"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1n097dw">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07ad4oq">
+          <text>"Scrooge"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f90lhf">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1iljk5y">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0m4dv7v">
+        <description>Donald is not part of group and can only handle clams in seafood</description>
+        <inputEntry id="UnaryTests_1hwp1i1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pp43b6">
+          <text>"Seafood"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yw78ot">
+          <text>"Clams"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0izjlpz">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1t2rt64">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j4jfpy">
+          <text>"Donald"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0olkt2l">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ec8d0k">
+        <description>can handle all fruits and vegetables</description>
+        <inputEntry id="UnaryTests_0grawmp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ltb729">
+          <text>"Fruit", "Vegetables"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0epilti">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wgf3uc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_02ehwo1">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0c5zon1" expressionLanguage="feel">
+          <text>"Duey"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1nadpnk">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dl99n3">
+        <description>can handle all fruits and vegetables, excluding banana</description>
+        <inputEntry id="UnaryTests_1r53avo">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d7smmw">
+          <text>"Fruit", "Vegetables"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hhrnhc">
+          <text>not ("Organic")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yf93uo">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vbot53">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19w14t9" expressionLanguage="feel">
+          <text>"Huey"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xzt4mb">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rfqvk2">
+        <description>Organic fruits and vegetable are handled by a specific group</description>
+        <inputEntry id="UnaryTests_1pvnv0r">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y1sux6">
+          <text>"Fruit", "Vegetables"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lpo0j4">
+          <text>"Organic"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jj57kd">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1njpqv2">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0l2df3t">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1f0gbvg">
+          <text>"Organic"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sdo5f8">
+        <description>Louie can only handle a list of product classes in fruit</description>
+        <inputEntry id="UnaryTests_0y1rdrh">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zwx3nd">
+          <text>"Fruit"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1onyrya">
+          <text>"Mango", "Pineapple"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pxq25t">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ztr6fa">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1liejey" expressionLanguage="feel">
+          <text>"Louie"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1wqaybm">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02krdgi">
+        <description>can be handle by the 18plus group, but assigned to Scrooge</description>
+        <inputEntry id="UnaryTests_1a8ifzv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dhlgl0">
+          <text>"Alcohol","Tobacco"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0to0xq4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aljjmt">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04m4qek">
+          <text>"Scrooge"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0hcjs5q" expressionLanguage="feel">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mh5k9r">
+          <text>"18plus"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ojnwor">
+        <description>Alcohol can also be handled by Daisy</description>
+        <inputEntry id="UnaryTests_0obbf5r">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0edktqj">
+          <text>"Alcohol"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14v9wq9">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d882m0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1es5l6c">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0e214jr" expressionLanguage="feel">
+          <text>"Daisy"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_021nfby">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_179i2f4">
+        <description>Meat is handled by the meat group if it is not halal</description>
+        <inputEntry id="UnaryTests_1q8bmh8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cx53iq">
+          <text>"Meat"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19qsj9l">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jmlif3">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n7lq04">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_03nc2ex">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09vtzma">
+          <text>"Meat"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0tsgtaz">
+        <description>All halal products accross departments are handled by a specific group</description>
+        <inputEntry id="UnaryTests_1gg6iua">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_169senv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07d8amf">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14zaebh">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0adhwrk">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10d6r6i">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0j70krb">
+          <text>"Halal"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1yx62j9" name="Product Goup">
+    <extensionElements>
+      <biodi:bounds x="157" y="197" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_0nlu0rm" name="Product Class">
+    <extensionElements>
+      <biodi:bounds x="447" y="197" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+  <inputData id="InputData_10om2ir" name="Product Department">
+    <extensionElements>
+      <biodi:bounds x="297" y="197" width="125" height="45" />
+    </extensionElements>
+  </inputData>
+</definitions>
