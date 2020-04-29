@@ -34,7 +34,7 @@ possible task assignments. (The task assignment logic will later automatically a
 ![DMN Decision Table](resources/images/DMNTableTaskAssignment.png)
 
 ### Business Rule Task
-Due to the hit policy (**C**) the result will be a list of rules (rows) which fire for a given instance. As the decision table produces several outputs (colums) each item in the result list will contain a collection 
+Due to the hit policy (**C**) the result will be a list of rules (rows) which fire for a given instance. As the decision table produces several outputs (columns) each item in the result list will contain a collection 
 of up to 3 values (*assignee, candidateUsers, candidateGroups*). In the properties tab of the business rule task the decision result needs to be set to reflect this expected data structure (a List of collections) as shown below. The result variable name, here *dmnResult*, can be chosen freely. It variable name is subsequently used in the mapping expressions.  
     
 ![Business Rule Task - Setting properties to store result](resources/images/DMNTaskResultProperties.png)
