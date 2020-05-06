@@ -17,7 +17,7 @@ The actual process for the message control is in the file [control-message-event
 Simply start the "MessageControlExampleProcess" and complete the first human task. As soon as the process reaches the message task, you will see an instance of the process "MonitorMessageEvent".
 
 ### Unit Test
-You can run the JUnit test [ProcessUnitTest](src/test/java/org/camunda/bpm/demo/TestProcessWithControlTimeProcess.java) in your IDE or using:
+You can run the JUnit test [TestProcessWithControlTimeProcess](src/test/java/org/camunda/bpm/demo/TestProcessWithControlTimeProcess.java) in your IDE or using:
 ```bash
 mvn clean test
 ```
