@@ -30,8 +30,18 @@ public class ChildProcessProvider {
           return null;
         }
         
+        if (execution.hasVariable("firstTryHasFailed")) {
+          return "process-child"; // process definition key
+          // maybe also another process for repair or self-healing
+        }
+        
         if (retProcess) {
             return "process-child"; // process definition key
+//        } else if (isGlobalTaskSupported) {
+//            return "global-service-task";
+        // TODO implement plugin check that detects if the plugin is installed in the engine
+//        } else if (!isOnDemandCallActivitySupported) {
+//            return "process-child"; // maybe "fallback-process-with-single-service-task" but that wouldn't have error handling
         } else {
             VariableMap inputVariables = execution.getVariablesTyped();
             VariableMap inputVariablesLocal = execution.getVariablesLocalTyped();
@@ -61,9 +71,11 @@ public class ChildProcessProvider {
                     newVariables.put("outputVar", "someValue");
                     //TODO: IS RUNTIME SERVICE THREAD SAFE? => Thorben says yes!
                     runtimeService.signal(executionId, newVariables);
-                } catch (Exception e) {
-                  e.printStackTrace();
-                  runtimeService.signal(executionId, null, e, null);
+                } catch (Exception exception) {
+                  exception.printStackTrace();
+                  Map<String, Object> processVariables = new HashMap<>();
+                  processVariables.put("firstTryHasFailed", true); // TODO make variable name more unique and delete after use
+                  runtimeService.signal(executionId, null, exception, processVariables);
                   // sketch for self healing
 //                  try {
 //                    // synchronously call self-healing µs
