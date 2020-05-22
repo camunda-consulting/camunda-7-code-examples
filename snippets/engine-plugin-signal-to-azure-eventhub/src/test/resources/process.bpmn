@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.2">
+  <bpmn:process id="camunda-plugin-signal-to-event" name="camunda-plugin-signal-to-event" isExecutable="true">
+    <bpmn:startEvent id="StartEventProcessStarted" name="Process&#10;started">
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="IntermediateThrowEvent_0pkh4nf" />
+    <bpmn:sequenceFlow id="SequenceFlow_14t5oxg" sourceRef="Task_DoSomething" targetRef="IntermediateThrowEvent_0r7kvqc" />
+    <bpmn:userTask id="Task_DoSomething" name="Do something" camunda:assignee="demo" camunda:candidateGroups="management">
+      <bpmn:incoming>SequenceFlow_024q0m5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14t5oxg</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_024q0m5" sourceRef="IntermediateThrowEvent_0pkh4nf" targetRef="Task_DoSomething" />
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0pkh4nf" name="before task">
+      <bpmn:incoming>SequenceFlow1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_024q0m5</bpmn:outgoing>
+      <bpmn:signalEventDefinition signalRef="Signal_14waxag">
+        <bpmn:extensionElements>
+          <camunda:in source="testVariable" target="testVariable" />
+          <camunda:in sourceExpression="Here we go ${1+1} times" target="testExpression" />
+        </bpmn:extensionElements>
+      </bpmn:signalEventDefinition>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0hhlnpr" sourceRef="IntermediateThrowEvent_0r7kvqc" targetRef="EndEventProcessEnded" />
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0r7kvqc" name="after task">
+      <bpmn:incoming>SequenceFlow_14t5oxg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hhlnpr</bpmn:outgoing>
+      <bpmn:signalEventDefinition signalRef="Signal_1runwh4" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="EndEventProcessEnded" name="Process&#10;ended">
+      <bpmn:incoming>SequenceFlow_0hhlnpr</bpmn:incoming>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0pt7xsy" signalRef="Signal_0ungqpw">
+        <bpmn:extensionElements>
+          <camunda:in sourceExpression="${S(&#39;{&#34;key1&#34;:&#34;val1&#34;, &#34;key2&#34;:&#34;val2&#34;}&#39;)}" target="testObject" />
+        </bpmn:extensionElements>
+      </bpmn:signalEventDefinition>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_14waxag" name="Signal_BeforeTask" />
+  <bpmn:signal id="Signal_1runwh4" name="Signal_AfterTask" />
+  <bpmn:signal id="Signal_0ungqpw" name="Signal_EndEvent" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="camunda-plugin-signal-to-event">
+      <bpmndi:BPMNEdge id="SequenceFlow_0hhlnpr_di" bpmnElement="SequenceFlow_0hhlnpr">
+        <di:waypoint x="534" y="120" />
+        <di:waypoint x="604" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_024q0m5_di" bpmnElement="SequenceFlow_024q0m5">
+        <di:waypoint x="289" y="120" />
+        <di:waypoint x="348" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14t5oxg_di" bpmnElement="SequenceFlow_14t5oxg">
+        <di:waypoint x="448" y="120" />
+        <di:waypoint x="498" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="399" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="253" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="239" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEventProcessStarted">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1rto8t1_di" bpmnElement="Task_DoSomething">
+        <dc:Bounds x="348" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_1t7n82v_di" bpmnElement="IntermediateThrowEvent_0pkh4nf">
+        <dc:Bounds x="253" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="244" y="145" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_1xhqt3t_di" bpmnElement="IntermediateThrowEvent_0r7kvqc">
+        <dc:Bounds x="498" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="493" y="145" width="46" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0fa0oqq_di" bpmnElement="EndEventProcessEnded">
+        <dc:Bounds x="604" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="602" y="138" width="40" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

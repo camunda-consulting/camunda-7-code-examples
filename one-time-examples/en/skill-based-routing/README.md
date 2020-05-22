@@ -1,4 +1,4 @@
-# Skill Based Rotuing using DMN on Camunda BPM
+# Skill Based Routing using DMN on Camunda BPM
 A sample process application for [Camunda BPM](http://www.camunda.org).
 
 ## Show me the important parts!
