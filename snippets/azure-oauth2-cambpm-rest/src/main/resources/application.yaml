@@ -1,0 +1,66 @@
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  authorization:
+    enabled: true
+#    enabled: false
+
+logging:
+  level:
+    org.springframework: DEBUG
+    org.camunda: INFO
+    com.camunda.example.oauth2: DEBUG
+
+server:
+  #  ssl:
+  #    key-store-type: PKCS12
+  #    key-store: classpath:keystore/keystore.p12
+  #    key-store-password: password
+  #    key-alias: testCert
+  servlet:
+    session:
+      cookie:
+        secure: true
+  port: 8081
+  forward-headers-strategy: native
+
+
+## Specifies your Active Directory ID:
+#  azure.activedirectory.tenant-id=22222222-2222-2222-2222-222222222222
+#
+#  # Specifies your App Registration's Application ID:
+#  spring.security.oauth2.client.registration.azure.client-id=11111111-1111-1111-1111-1111111111111111
+#
+#  # Specifies your App Registration's secret key:
+#  spring.security.oauth2.client.registration.azure.client-secret=AbCdEfGhIjKlMnOpQrStUvWxYz==
+#
+#  # Specifies the list of Active Directory groups to use for authorization:
+#  azure.activedirectory.active-directory-groups=Users
+
+
+azure:
+  activedirectory:
+    tenant-id: aaaaaaaa-YOUR-TENANT-ID-HERE-zzzzzzzzzzzz
+    client-id: aaaaaaaa-YOUR-CLIENT-ID-HERE-zzzzzzzzzzzz
+    active-directory-groups: camunda-read, camunda-admin
+    session-stateless: true
+
+spring:
+  datasource:
+    url: jdbc:postgresql://your-db-domain.postgres.database.azure.com:5432/postgres?ssl=true&sslmode=require
+    username: camunda@your-db-domain
+    password: yourdbpass
+    driver-class-name: org.postgresql.Driver
+  security:
+    oauth2:
+      client:
+        registration:
+          azure:
+            client-id: aaaaaaaa-YOUR-CLIENT-ID-HERE-zzzzzzzzzzzz
+            client-secret: aaaaaaaa-YOUR-CLIENT-SECRET-HERE-zzzzzzzzzzzz
+            redirect-uri: http://localhost:8081
