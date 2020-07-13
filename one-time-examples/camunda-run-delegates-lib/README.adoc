@@ -1,0 +1,21 @@
+= Camunda RUN Delegate Generator Example
+
+If you want to use camunda java delegates with Camunda Run you must generate the delgates in a seperate jar project (in java world known as a library) and put them in the userlib directory.
+
+``<project-hom>/configuration/userlib``
+
+== Generate the lib
+ TIP: Use maven to generate the jar file.
+
+1. Go to the project home directory and
+
+2. run the maven command.
+
+``mvn clean package``
+
+3. You should see a jar file in the director `target\<project-name.jar>`
+
+4. move the jar file to the userlib directory in your Camunda Run install.
+
+== Caveat you must use the fully qualified class name in your BPMN model
+NOTE: TODO figure out how to use a spring bean instead of class name.
