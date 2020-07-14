@@ -1,96 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1jt0m49" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:process id="MessageTimeoutTestProcess" name="Message Timeout Test" isExecutable="true">
-    <bpmn:extensionElements>
-      <camunda:properties>
-        <camunda:property name="timeoutDuration" value="12345" />
-        <camunda:property name="timeoutListener" value="someExpression" />
-      </camunda:properties>
-    </bpmn:extensionElements>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0kq20co</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:intermediateCatchEvent id="SomeMessageEvent" name="Some Message">
-      <bpmn:extensionElements>
-        <camunda:properties>
-          <camunda:property name="timeoutDuration" value="${now()}" />
-          <camunda:property name="timeoutListener" value="${someBean}" />
-        </camunda:properties>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0kq20co</bpmn:incoming>
-      <bpmn:outgoing>Flow_1fc7lhu</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0rma42h" messageRef="Message_1m9cqf8" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_0kq20co" sourceRef="StartEvent_1" targetRef="SomeMessageEvent" />
+    <bpmn:sequenceFlow id="Flow_0kq20co" sourceRef="StartEvent_1" targetRef="Gateway_1htv4gx" />
     <bpmn:endEvent id="Event_1v10848">
-      <bpmn:incoming>Flow_1t94knb</bpmn:incoming>
+      <bpmn:incoming>Flow_1kof6mr</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1fc7lhu" sourceRef="SomeMessageEvent" targetRef="SomeMessageTask" />
-    <bpmn:sequenceFlow id="Flow_1t94knb" sourceRef="SomeMessageTask" targetRef="Event_1v10848" />
+    <bpmn:sequenceFlow id="Flow_1t94knb" sourceRef="SomeMessageTask" targetRef="Gateway_1go8kwc" />
     <bpmn:receiveTask id="SomeMessageTask" name="Some Message Task" messageRef="Message_1m9cqf8">
       <bpmn:extensionElements>
         <camunda:properties>
-          <camunda:property name="timeoutDuration" value="${now()}" />
-          <camunda:property name="timeoutListener" value="${someBean}" />
+          <camunda:property name="timeoutDuration" value="${dateTime().plusMinutes(minutes).toDate()}" />
+          <camunda:property name="timeoutListener" value="${emailListener}" />
           <camunda:property name="timeoutListenerType" value="delegateExpression" />
         </camunda:properties>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1fc7lhu</bpmn:incoming>
+      <bpmn:incoming>Flow_1ggexp6</bpmn:incoming>
       <bpmn:outgoing>Flow_1t94knb</bpmn:outgoing>
     </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="Flow_1ggexp6" sourceRef="Gateway_1htv4gx" targetRef="SomeMessageTask" />
+    <bpmn:parallelGateway id="Gateway_1htv4gx">
+      <bpmn:incoming>Flow_0kq20co</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ggexp6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_05v8wky</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_05v8wky" sourceRef="Gateway_1htv4gx" targetRef="SomeUserTask" />
+    <bpmn:userTask id="SomeUserTask" name="Some User Task">
+      <bpmn:incoming>Flow_05v8wky</bpmn:incoming>
+      <bpmn:outgoing>Flow_1e41j3p</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1kof6mr" sourceRef="Gateway_1go8kwc" targetRef="Event_1v10848" />
+    <bpmn:sequenceFlow id="Flow_1e41j3p" sourceRef="SomeUserTask" targetRef="Gateway_1go8kwc" />
+    <bpmn:parallelGateway id="Gateway_1go8kwc">
+      <bpmn:incoming>Flow_1t94knb</bpmn:incoming>
+      <bpmn:incoming>Flow_1e41j3p</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kof6mr</bpmn:outgoing>
+    </bpmn:parallelGateway>
     <bpmn:textAnnotation id="TextAnnotation_1z11gjd">
       <bpmn:text>Plugin reads all message events and creates a job for each one that has a certain extension property</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_025bzcw" sourceRef="SomeMessageEvent" targetRef="TextAnnotation_1z11gjd" />
     <bpmn:textAnnotation id="TextAnnotation_1nknczu">
       <bpmn:text>When the job triggers, it calls an expression, also provided in an extension</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0nt9ct4" sourceRef="SomeMessageEvent" targetRef="TextAnnotation_1nknczu" />
+    <bpmn:association id="Association_0nhhd3r" sourceRef="SomeMessageTask" targetRef="TextAnnotation_1z11gjd" />
+    <bpmn:association id="Association_0ncgpiv" sourceRef="SomeMessageTask" targetRef="TextAnnotation_1nknczu" />
   </bpmn:process>
   <bpmn:message id="Message_1m9cqf8" name="SomeMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MessageTimeoutTestProcess">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="279" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0gh2f4g_di" bpmnElement="SomeMessageEvent">
-        <dc:Bounds x="322" y="279" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="301" y="255" width="77" height="14" />
-        </bpmndi:BPMNLabel>
+        <dc:Bounds x="122" y="279" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0kq20co_di" bpmnElement="Flow_0kq20co">
+        <di:waypoint x="158" y="297" />
         <di:waypoint x="215" y="297" />
-        <di:waypoint x="322" y="297" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1z11gjd_di" bpmnElement="TextAnnotation_1z11gjd">
-        <dc:Bounds x="290" y="80" width="100" height="138" />
+        <dc:Bounds x="250" y="40" width="100" height="130" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_025bzcw_di" bpmnElement="Association_025bzcw">
-        <di:waypoint x="340" y="279" />
-        <di:waypoint x="340" y="218" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1nknczu_di" bpmnElement="TextAnnotation_1nknczu">
-        <dc:Bounds x="290" y="450" width="100" height="82" />
+        <dc:Bounds x="470" y="40" width="100" height="100" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0nt9ct4_di" bpmnElement="Association_0nt9ct4">
-        <di:waypoint x="340" y="315" />
-        <di:waypoint x="340" y="450" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1v10848_di" bpmnElement="Event_1v10848">
-        <dc:Bounds x="592" y="279" width="36" height="36" />
+        <dc:Bounds x="642" y="279" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1fc7lhu_di" bpmnElement="Flow_1fc7lhu">
-        <di:waypoint x="358" y="297" />
-        <di:waypoint x="430" y="297" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1t94knb_di" bpmnElement="Flow_1t94knb">
-        <di:waypoint x="530" y="297" />
-        <di:waypoint x="592" y="297" />
+        <di:waypoint x="440" y="297" />
+        <di:waypoint x="515" y="297" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_1pwqr0u_di" bpmnElement="SomeMessageTask">
-        <dc:Bounds x="430" y="257" width="100" height="80" />
+        <dc:Bounds x="340" y="257" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ggexp6_di" bpmnElement="Flow_1ggexp6">
+        <di:waypoint x="265" y="297" />
+        <di:waypoint x="340" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Gateway_0tzzh1e_di" bpmnElement="Gateway_1htv4gx">
+        <dc:Bounds x="215" y="272" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_05v8wky_di" bpmnElement="Flow_05v8wky">
+        <di:waypoint x="240" y="322" />
+        <di:waypoint x="240" y="410" />
+        <di:waypoint x="340" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_027m9fk_di" bpmnElement="SomeUserTask">
+        <dc:Bounds x="340" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1kof6mr_di" bpmnElement="Flow_1kof6mr">
+        <di:waypoint x="565" y="297" />
+        <di:waypoint x="642" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e41j3p_di" bpmnElement="Flow_1e41j3p">
+        <di:waypoint x="440" y="410" />
+        <di:waypoint x="540" y="410" />
+        <di:waypoint x="540" y="322" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Gateway_0ol08yt_di" bpmnElement="Gateway_1go8kwc">
+        <dc:Bounds x="515" y="272" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0nhhd3r_di" bpmnElement="Association_0nhhd3r">
+        <di:waypoint x="366" y="257" />
+        <di:waypoint x="312" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ncgpiv_di" bpmnElement="Association_0ncgpiv">
+        <di:waypoint x="415" y="257" />
+        <di:waypoint x="488" y="140" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

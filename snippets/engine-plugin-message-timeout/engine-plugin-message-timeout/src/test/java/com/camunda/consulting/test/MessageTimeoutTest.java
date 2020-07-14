@@ -29,7 +29,6 @@ import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
-@Deployment(resources = {"MessageTimeoutMissingProperties.bpmn"})
 public class MessageTimeoutTest {
 
     @Rule
@@ -68,7 +67,7 @@ public class MessageTimeoutTest {
         verify(executionListener).notify(any());
     }
     
-    //@Test
+    @Test
     @Deployment(resources = "MessageTimeoutWithExpression.bpmn")
     public void testWithMessageTaskAndExpression() throws Exception {
     	Mocks.register("expressionBean", executionListener);
@@ -169,5 +168,4 @@ public class MessageTimeoutTest {
         	
         	Assertions.assertThat(thrownException).isInstanceOf(TimeoutListenerTypeMissingException.class);
     }
-}
 }
