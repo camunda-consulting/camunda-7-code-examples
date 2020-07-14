@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.camunda.consulting.openapi.client</groupId>
+  <artifactId>camunda-openapi-client-generator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <version.camunda>7.13.0</version.camunda>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>unpack-openapi.json</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.camunda.bpm</groupId>
+                  <artifactId>camunda-engine-rest-openapi</artifactId>
+                  <version>${version.camunda}</version>
+                  <type>jar</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${classes.dir}</outputDirectory>
+                  <includes>openapi.json</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>4.3.1</version>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>generate</goal>
+                  </goals>
+                  <configuration>
+                      <inputSpec>${project.basedir}/target/dependency/openapi.json</inputSpec>
+                      <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+                      <output>../camunda-openapi-client</output>
+                      <generatorName>java</generatorName>
+                      <configOptions>
+                         <sourceFolder>src/gen/java/main</sourceFolder>
+                      </configOptions>
+                      <groupId>com.camunda.consulting.openapi.client</groupId>
+                      <artifactId>camunda-openapi-client</artifactId>
+                      <version>${version.camunda}</version>
+                      <packageName>com.camunda.consulting.openapi.client</packageName>
+                      <apiPackage>com.camunda.consulting.openapi.client.handler</apiPackage>
+                      <modelPackage>com.camunda.consulting.openapi.client.model</modelPackage>
+                      <invokerPackage>com.camunda.consulting.openapi.client.handler</invokerPackage>
+                      <importMappings>oas_any_type_not_mapped=java.lang.String</importMappings>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>    
+    </plugins>
+  </build>
+
+</project>
