@@ -118,6 +118,30 @@ public class MessageTimeoutTest {
         Assertions.assertThat(jobQuery().list()).isEmpty();
    }
 
+	@Test
+	@Deployment(resources = "IntermediateMessageTimeoutWithJavaClass.bpmn")
+	public void testWithIntermediateMessageTaskAndJavaClass() throws Exception {
+		logger.info("Test");
+		ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("IntermediateMessageTimeoutWithJavaClass");
+		assertThat(processInstance).isStarted();
+
+		List<Job> jobs = managementService().createJobQuery().list();
+		Assertions.assertThat(!jobs.isEmpty());
+		Assertions.assertThat(jobs.size()==1);
+
+		List<EventSubscription> events = runtimeService().createEventSubscriptionQuery().list();
+		Assertions.assertThat(!events.isEmpty());
+		Assertions.assertThat(events.size()==1);
+
+		execute(jobs.get(0));
+
+		assertThat(processInstance).isWaitingAt("SomeMessageEvent");
+		runtimeService().createMessageCorrelation("SomeMessage").correlate();
+
+		assertThat(processInstance).isEnded();
+		Assertions.assertThat(jobQuery().list()).isEmpty();
+	}
+
     @Test
     public void testMessageTimeoutMissingPropertiesTimeoutDuration() throws Exception {
     	DeploymentBuilder deploymentBuilder = repositoryService()

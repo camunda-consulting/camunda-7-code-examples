@@ -37,8 +37,13 @@ public class MessageTimeoutBpmnParseListener extends AbstractBpmnParseListener i
         parseTimeoutMessageEvent(intermediateEventElement, activity);
     }
 
+    @Override
+    public void parseBoundaryEvent(Element boundaryEventElement, ScopeImpl scopeElement, ActivityImpl nestedActivity){
+        parseTimeoutMessageEvent(boundaryEventElement, nestedActivity);
+    }
+
     private void parseTimeoutMessageEvent(Element bpmnElement, ActivityImpl activity) {
-        if (/*bpmnElement.element("messageEventDefinition") != null ||*/ bpmnElement.getTagName().equals("receiveTask")) {
+        if (bpmnElement.element("messageEventDefinition") != null || bpmnElement.getTagName().equals("receiveTask")) {
             Expression timeoutDuration = expressionManager.createExpression(getExtensionPropertyValue(bpmnElement, "timeoutDuration"));
             String timeoutListener = getExtensionPropertyValue(bpmnElement, "timeoutListener");
             String timeoutListenerTypeS = getExtensionPropertyValue(bpmnElement, "timeoutListenerType");
@@ -51,8 +56,6 @@ public class MessageTimeoutBpmnParseListener extends AbstractBpmnParseListener i
             logger.info("timeoutListener is {}", timeoutListener);
             logger.info("timeoutListenerTypeString is {}", timeoutListenerType);
             activity.addListener("start", new MessageTimeoutReceiveTaskListener(timeoutDuration, timeoutListener, timeoutListenerType));
-
-            //activity.setActivityBehavior(new MessageTimeoutRTActivityBehavior(timeoutDuration, timeoutListenerString, timeoutListenerType));
         }
     }
 }
