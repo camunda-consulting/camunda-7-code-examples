@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0acgmvu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <bpmn:process id="MessageTimeoutMissingPropertiesListenerType" name="MessageTimeoutMissingPropertiesListenerType" isExecutable="true">
+    <bpmn:startEvent id="Event_0x6jzlt">
+      <bpmn:outgoing>Flow_03m90ck</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0x3uli5">
+      <bpmn:incoming>Flow_1tuii6k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:receiveTask id="SomeMessageTask" name="Some Message Task" messageRef="Message_1vi4f8l">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="timeoutDuration" value="${now()}" />
+          <camunda:property name="timeoutListener" value="${someBean}" />
+          <camunda:property name="timeoutListenerType" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_03m90ck</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tuii6k</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="Flow_1tuii6k" sourceRef="SomeMessageTask" targetRef="Event_0x3uli5" />
+    <bpmn:sequenceFlow id="Flow_03m90ck" sourceRef="Event_0x6jzlt" targetRef="SomeMessageTask" />
+  </bpmn:process>
+  <bpmn:message id="Message_1wa3q1u" name="SomeMessage" />
+  <bpmn:message id="Message_1vi4f8l" name="SomeMessage" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MessageTimeoutMissingPropertiesListenerType">
+      <bpmndi:BPMNShape id="Event_0x6jzlt_di" bpmnElement="Event_0x6jzlt">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0x3uli5_di" bpmnElement="Event_0x3uli5">
+        <dc:Bounds x="412" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03ufxfb_di" bpmnElement="SomeMessageTask">
+        <dc:Bounds x="250" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1tuii6k_di" bpmnElement="Flow_1tuii6k">
+        <di:waypoint x="350" y="120" />
+        <di:waypoint x="412" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03m90ck_di" bpmnElement="Flow_03m90ck">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="250" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

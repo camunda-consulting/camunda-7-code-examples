@@ -49,48 +49,6 @@ public class MessageTimeoutBpmnParseListener extends AbstractBpmnParseListener i
             logger.info("timeoutListenerTypeString is {}", timeoutListenerType);
 
             activity.setActivityBehavior(new MessageTimeoutRTActivityBehavior(timeoutDuration, timeoutListenerString, timeoutListenerType));
-
-
-
-            /*if (type != null) {
-                if (type.equalsIgnoreCase("mail")) {
-                    parseEmailServiceTask(activity, serviceTaskElement, parseFieldDeclarations(serviceTaskElement));
-                } else if (type.equalsIgnoreCase("shell")) {
-                    parseShellServiceTask(activity, serviceTaskElement, parseFieldDeclarations(serviceTaskElement));
-                } else if (type.equalsIgnoreCase("external")) {
-                    parseExternalServiceTask(activity, serviceTaskElement);
-                } else {
-                    addError("Invalid usage of type attribute on " + elementName + ": '" + type + "'", serviceTaskElement);
-                }
-            } else if (className != null && className.trim().length() > 0) {
-                if (resultVariableName != null) {
-                    addError("'resultVariableName' not supported for " + elementName + " elements using 'class'", serviceTaskElement);
-                }
-                activity.setActivityBehavior(new ClassDelegateActivityBehavior(className, parseFieldDeclarations(serviceTaskElement)));
-
-            } else if (delegateExpression != null) {
-                if (resultVariableName != null) {
-                    addError("'resultVariableName' not supported for " + elementName + " elements using 'delegateExpression'", serviceTaskElement);
-                }
-                activity.setActivityBehavior(new ServiceTaskDelegateExpressionActivityBehavior(expressionManager.createExpression(delegateExpression),
-                        parseFieldDeclarations(serviceTaskElement)));
-
-            } else if (expression != null && expression.trim().length() > 0) {
-                activity.setActivityBehavior(new ServiceTaskExpressionActivityBehavior(expressionManager.createExpression(expression), resultVariableName));
-
-            }
-
-            parseExecutionListenersOnScope(serviceTaskElement, activity);
-
-            for (BpmnParseListener parseListener : parseListeners) {
-                parseListener.parseServiceTask(serviceTaskElement, scope, activity);
-            }
-
-            // activity behavior could be set by a listener (e.g. connector); thus,
-            // check is after listener invocation
-            if (activity.getActivityBehavior() == null) {
-                addError("One of the attributes 'class', 'delegateExpression', 'type', or 'expression' is mandatory on " + elementName + ".", serviceTaskElement);
-            }*/
         }
     }
 }

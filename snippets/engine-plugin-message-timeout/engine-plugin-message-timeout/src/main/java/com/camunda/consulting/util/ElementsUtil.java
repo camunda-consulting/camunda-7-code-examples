@@ -2,6 +2,11 @@ package com.camunda.consulting.util;
 
 import org.camunda.bpm.engine.impl.util.xml.Element;
 
+import com.camunda.consulting.MessageTimeoutPluginProperties;
+import com.camunda.consulting.exception.TimeoutDurationMissingException;
+import com.camunda.consulting.exception.TimeoutListenerMissingException;
+import com.camunda.consulting.exception.TimeoutListenerTypeMissingException;
+
 import java.util.Optional;
 
 public class ElementsUtil {
@@ -13,8 +18,16 @@ public class ElementsUtil {
 
         if (extensionOptional.isPresent()) {
             Element extension = extensionOptional.get();
+            String name = extension.attribute("name");
             if (extension.attribute("value") == null) {
-                throw new RuntimeException("Value for extension " + extension.attribute("name") + " is empty");
+            	if (name.equalsIgnoreCase(MessageTimeoutPluginProperties.TIMEOUTDURATION.name())) {
+            		throw new TimeoutDurationMissingException("Value for extension " + name + " is empty");
+            	} else if (name.equalsIgnoreCase(MessageTimeoutPluginProperties.TIMEOUTLISTENER.name())) {
+            		throw new TimeoutListenerMissingException("Value for extension " + name + " is empty");
+            	} else if (name.equalsIgnoreCase(MessageTimeoutPluginProperties.TIMEOUTLISTENERTYPE.name())) {
+            		throw new TimeoutListenerTypeMissingException("Value for extension " + name + " is empty");
+            	} 
+                
             } else {
                 return extension.attribute("value");
             }

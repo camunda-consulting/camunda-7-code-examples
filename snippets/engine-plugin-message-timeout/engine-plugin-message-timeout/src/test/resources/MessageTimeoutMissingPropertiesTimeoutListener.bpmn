@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0acgmvu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
-  <bpmn:process id="MessageTimeoutMissingProperties" name="MessageTimeoutMissingProperties" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0acgmvu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <bpmn:process id="MessageTimeoutMissingPropertiesTimeoutListener" name="MessageTimeoutMissingPropertiesTimeoutListener" isExecutable="true">
     <bpmn:startEvent id="Event_0x6jzlt">
       <bpmn:outgoing>Flow_03m90ck</bpmn:outgoing>
     </bpmn:startEvent>
@@ -11,7 +11,7 @@
       <bpmn:extensionElements>
         <camunda:properties>
           <camunda:property name="timeoutDuration" value="${now()}" />
-          <camunda:property name="timeoutListener" value="${someBean}" />
+          <camunda:property name="timeoutListener" />
           <camunda:property name="timeoutListenerType" value="delegateExpression" />
         </camunda:properties>
       </bpmn:extensionElements>
@@ -24,7 +24,7 @@
   <bpmn:message id="Message_1wa3q1u" name="SomeMessage" />
   <bpmn:message id="Message_1vi4f8l" name="SomeMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MessageTimeoutMissingProperties">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MessageTimeoutMissingPropertiesTimeoutListener">
       <bpmndi:BPMNShape id="Event_0x6jzlt_di" bpmnElement="Event_0x6jzlt">
         <dc:Bounds x="152" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
