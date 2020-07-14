@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.camunda.bpm.demo</groupId>
+  <artifactId>engine-control-demo</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <properties>
+      <version.java>1.8</version.java>
+      <camundaSpringBoot.version>3.3.5</camundaSpringBoot.version>
+      <camunda.version>7.11.4-ee</camunda.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.8.RELEASE</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+      <version>${camundaSpringBoot.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
+      <version>${camundaSpringBoot.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
