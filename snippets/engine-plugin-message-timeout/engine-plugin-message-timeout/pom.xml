@@ -82,7 +82,13 @@
             <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+        
+        <dependency>
+  			<groupId>ch.qos.logback</groupId>
+  			<artifactId>logback-classic</artifactId>
+  			<version>1.1.2</version>
+		</dependency>
+        </dependencies>
 
     <build>
         <plugins>
