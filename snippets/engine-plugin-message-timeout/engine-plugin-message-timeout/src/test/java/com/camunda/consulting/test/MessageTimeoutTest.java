@@ -62,7 +62,7 @@ public class MessageTimeoutTest {
         verify(executionListener).notify(any());
     }
     
-    @Test
+    //@Test
     @Deployment(resources = "MessageTimeoutWithExpression.bpmn")
     public void testWithMessageTaskAndExpression() throws Exception {
     	Mocks.register("expressionBean", executionListener);
