@@ -97,7 +97,6 @@ public class MessageTimeoutTest {
     @Test
     @Deployment(resources = "MessageTimeoutWithJavaClass.bpmn")
     public void testWithMessageTaskAndJavaClass() throws Exception {
-    	logger.info("Test");
     	ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("MessageTimeoutWithJavaClass");
     	assertThat(processInstance).isStarted();
     	
@@ -121,7 +120,6 @@ public class MessageTimeoutTest {
 	@Test
 	@Deployment(resources = "IntermediateMessageTimeoutWithJavaClass.bpmn")
 	public void testWithIntermediateMessageTaskAndJavaClass() throws Exception {
-		logger.info("Test");
 		ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("IntermediateMessageTimeoutWithJavaClass");
 		assertThat(processInstance).isStarted();
 
