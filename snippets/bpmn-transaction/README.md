@@ -5,7 +5,7 @@ Working example of the [BPMN Transaction Subprocess](https://docs.camunda.org/ma
 
 The process can fail when charging the credit card to showcase BPMN compensation, therefore set the variable `bookingHotelError` to true.
 
-Built and tested against Camunda BPM version 7.5.0.
+Built and tested against Camunda BPM version 7.13.0.
 
 Show me the important parts!
 ----------------------------
