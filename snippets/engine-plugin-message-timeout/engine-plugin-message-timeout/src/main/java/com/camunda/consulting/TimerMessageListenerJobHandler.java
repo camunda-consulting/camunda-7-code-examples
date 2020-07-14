@@ -47,7 +47,12 @@ public class TimerMessageListenerJobHandler implements JobHandler<TimerMessageLi
             Expression expression = commandContext.getProcessEngineConfiguration().getExpressionManager().createExpression(configuration.getTimeoutListener());
             expression.getValue(execution);
         } else if (timeoutListenerType.equals(TimeoutListenerTypes.JAVA)) {
-            instantiateDelegate(timeoutListener, new ArrayList<>());
+            ExecutionListener executionListener = (ExecutionListener) instantiateDelegate(timeoutListener, new ArrayList<>());
+            try {
+                executionListener.notify(execution);
+            } catch (Exception e) {
+                logger.error("Error when calling listener", e);
+            }
 
         } else if (timeoutListenerType.equals(TimeoutListenerTypes.SCRIPT)) {
             throw new UnsupportedOperationException("We don't support script yet.");
