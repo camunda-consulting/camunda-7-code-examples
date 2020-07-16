@@ -63,7 +63,9 @@ Depending on the amount of instances the size may vary. To check progress, you c
 docker logs -f camunda-database-size-calculator_camunda_1
 ```  
 
-You should get the HTML report in a folder "database-report".
+You should get the HTML report in a folder "database-report":
+
+
 
 You can then clean the images and containers using "clean.sh" or run:
 
@@ -79,6 +81,8 @@ docker rmi camunda-database-size-calculator_camunda
 Built and tested against Camunda BPM version 7.11.15-ee and JDK 8.
 
 Postgresql docker image used is [postgres:11](https://github.com/docker-library/postgres/blob/aa4f329a17fd82077536602da12f4264fa195b20/11/Dockerfile).
+
+This project also uses Lombok, so make sure to configure it in your IDE before opening the source.
 
 ## Known Limitations
 

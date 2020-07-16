@@ -1,7 +1,7 @@
 package com.camunda.consulting.db;
 
 import com.camunda.consulting.dto.TableMetadataDto;
-import com.camunda.consulting.dto.TableMetadataRowMapper;
+import com.camunda.consulting.dto.TableSizeReportDto;
 import com.camunda.consulting.report.Reporter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class PostgresqlDatabaseCalculator implements DatabaseCalculator {
         String size = jdbcTemplate.queryForObject("SELECT PG_SIZE_PRETTY( PG_DATABASE_SIZE('camunda'))", String.class);
         logger.debug("Total database size: {}", size);
 
-        List<TableMetadataDto> tableMetadataDtos = jdbcTemplate.query("SELECT oid, table_name, pg_size_pretty(total_bytes) AS total\n" +
+        List<TableMetadataDto> tableMetadataDtoList = jdbcTemplate.query("SELECT oid, table_name, pg_size_pretty(total_bytes) AS total\n" +
                 "    , pg_size_pretty(index_bytes) AS index\n" +
                 "    , pg_size_pretty(toast_bytes) AS toast\n" +
                 "    , pg_size_pretty(table_bytes) AS table\n" +
@@ -48,15 +48,17 @@ public class PostgresqlDatabaseCalculator implements DatabaseCalculator {
 
         logger.info("Printing metadata about tables");
 
-        tableMetadataDtos.forEach(tableMetadataDto -> {
+        tableMetadataDtoList.forEach(tableMetadataDto -> {
             Long rowCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM " + tableMetadataDto.getTableName(), Long.class);
             tableMetadataDto.setTotalRows(rowCount);
         });
 
-        tableMetadataDtos.sort(Comparator.comparing(TableMetadataDto::getTotalRows).reversed());
+        tableMetadataDtoList.sort(Comparator.comparing(TableMetadataDto::getTotalRows).reversed());
 
-        tableMetadataDtos.forEach(tableMetadataDto -> logger.debug(tableMetadataDto.toString()));
+        tableMetadataDtoList.forEach(tableMetadataDto -> logger.debug(tableMetadataDto.toString()));
 
-        reporter.writeReport(size, tableMetadataDtos);
+        TableSizeReportDto tableSizeReportDto = TableSizeReportDto.builder().size(size).tableMetadataDtoList(tableMetadataDtoList).databaseType(DatabaseTypes.POSTGRESQL).build();
+
+        reporter.writeReport(tableSizeReportDto);
     }
 }

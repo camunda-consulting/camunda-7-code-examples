@@ -1,6 +1,6 @@
-package com.camunda.consulting.dto;
+package com.camunda.consulting.db;
 
-
+import com.camunda.consulting.dto.TableMetadataDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
