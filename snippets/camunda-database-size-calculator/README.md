@@ -32,7 +32,7 @@ public class OracleDatabaseCalculator implements DatabaseCalculator {
 
 ```
 @Component
-@Profile({"log"})
+@Profile({"logger"})
 public class LogReportWriter implements Reporter {
 
 /* Your implementation */
@@ -46,6 +46,7 @@ environment:
   - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@db:1521:ORCL
   - SPRING_DATASOURCE_USERNAME=camunda
   - SPRING_DATASOURCE_PASSWORD=camunda
+  - SPRING_PROFILES_ACTIVE=oracle,logger
 ```
 
 ## How to use it?
