@@ -1,10 +1,7 @@
 package com.camunda.consulting.report;
 
-import com.camunda.consulting.dto.TableMetadataDto;
 import com.camunda.consulting.dto.TableSizeReportDto;
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.RepositoryService;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.Context;
@@ -13,10 +10,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-
-import static j2html.TagCreator.*;
-import static j2html.TagCreator.td;
 
 @Component
 @Profile({"html", "default"})
