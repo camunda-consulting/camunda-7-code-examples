@@ -1,0 +1,3 @@
+<manifest package="com.camunda.consulting.openapi.client.handler" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application />
+</manifest>

@@ -61,7 +61,7 @@ and inspect it using
 [Camunda Cockpit](http://docs.camunda.org/latest/guides/user-guide/#cockpit).
 
 ## Environment Restrictions
-Built and tested against Camunda BPM version 7.5.0.
+Built and tested against Camunda BPM version 7.13.0.
 
 ## License
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).

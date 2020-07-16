@@ -10,7 +10,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.*;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
