@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    build: ./camunda-postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=camunda
+      - POSTGRES_USER=camunda
+      - POSTGRES_PASSWORD=camunda
+  camunda:
+    build: ./
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      - CUSTOM_PROCESS_INSTANCE_AMOUNT=200
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/camunda
+      - SPRING_DATASOURCE_USERNAME=camunda
+      - SPRING_DATASOURCE_PASSWORD=camunda
+    volumes:
+      - ./database-report:/database-report
