@@ -53,7 +53,7 @@ environment:
 You can either execute the "run.sh" or just run:
 ```
 mvn clean package
-docker compose up -d --build
+docker-compose up -d --build
 ```
 This will create two docker images and run the containers for both. You can modifiy the configurations used in the file [docker-compose.yml](docker-compose.yml). 
 
