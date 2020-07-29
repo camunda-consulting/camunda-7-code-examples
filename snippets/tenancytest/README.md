@@ -31,25 +31,22 @@ This project example walks thru deploying a process with business rules, creatin
 ## Steps
 
 1. Run the CamundaApplication class in Spring Boot. This should start up a Camunda BPM instance with no process definitions deployed, using an H2 Database in an &quot;embedded&quot; form. That means that on start, H2 will persist data in files in the root of the project with files ending in &quot;.db&quot;. It might look something like this:
-    ``
+
     ![](images/db_files.png)
     
 2. Open Postman. Import the &quot;tenancy retroactively.postman\_collection.json&quot; file into Postman. You should see something like this:
 
-    ``
     ![](images/PostmanCollection.png)
 
 3. In Postman, select the &quot;Deploy model (no tenant)&quot; request. Make sure that the values for &quot;data&quot; and &quot;data2&quot; are cleared out and reestablished to be the files that are directly in the root of this project with the same name. The BPMN file is &quot;tenancy-test.bpmn&quot; and the DMN file is &quot;dmn-tenancy-test.dmn&quot;.
 
-    ``
     ![](images/createRequest.png)
 
 * Once this is done, run the request. You should be able to log in to Cockpit locally and see that the process resources have been deployed.
 
 4. Run the following three requests in sequence, one at a time. Confirm in Cockpit that it created two completed process instances, and one runtime instance that is waiting for a message.
 
-    ``
-    ![](images/startProcess3.png)
+   ![](images/startProcess3.png)
 
 5. Repeat steps 3 and 4 two more times. This should create 3 versions of the workflow, each with 2 completed instances, and one that is in flight. This will represent our &quot;as-is&quot; data for the test. Go into Cockpit one more time. Look at the process versions and the data.
 6. Run the request &quot;add tenant1&quot; in Postman. This will create the tenant reference in the Camunda database. This is equivalent to doing this in Camunda Admin.
@@ -64,7 +61,7 @@ This project example walks thru deploying a process with business rules, creatin
     * Pass: sa
 
     *Note the &quot;path&quot; value is the direct path to the \*.db file in the root of the Camunda Spring Boot BPM project. My setup looks like this (for reference):
-    ``
+    
     ![](images/dataGrip.png)
 
 9. After connecting, run the contents of &quot;addTenant.sql&quot; found in the root of this project. A quick inspection of this script shows that it only does updates to existing rows (no inserts), and the only thing that it is updating is the tenant designation to both runtime and history data.
