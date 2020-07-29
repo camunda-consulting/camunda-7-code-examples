@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0yllhu8" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+  <decision id="dmn-tenancy-test" name="dmn-tenancy-test">
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="input_1" label="someInput" camunda:inputVariable="someInput">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="mypath" name="mypath" typeRef="integer" />
+      <rule id="DecisionRule_0my8vy3">
+        <inputEntry id="UnaryTests_0dcxwwf">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wmss7y">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13ca0nl">
+        <inputEntry id="UnaryTests_0q6a1o5">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15223ds">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1g647x3">
+        <inputEntry id="UnaryTests_0ih4tj0">
+          <text>3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h0yqw2">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1drn6mv">
+        <inputEntry id="UnaryTests_0l2r11z">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1lnbzcx">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
