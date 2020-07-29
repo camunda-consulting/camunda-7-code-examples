@@ -19,7 +19,7 @@ The purpose of this proof of concept is to show how one might handle the followi
 
 This project example walks thru deploying a process with business rules, creating data for many versions, then creating a tenant designation, and finally running a database script that will retroactively label existing data for that process in both History and Runtime as belonging to the tenant.
 
-**NOTE**** :** Please follow the instructions carefully and note that any time that you directly massage data like this, you are taking a RISK. PLEASE TEST EXTENSIVELY AND THOROUGHLY against production-like data in a testing/staging environment, per your own SDLC, before moving forward with doing this in your production environment. The information included here is meant to be an example that you are to follow and comprehend before conforming a similar strategy in your own environment.
+**NOTE** : Please follow the instructions carefully and note that any time that you directly massage data like this, you are taking a RISK. PLEASE TEST EXTENSIVELY AND THOROUGHLY against production-like data in a testing/staging environment, per your own SDLC, before moving forward with doing this in your production environment. The information included here is meant to be an example that you are to follow and comprehend before conforming a similar strategy in your own environment.
 
 ## Prerequisites
 
