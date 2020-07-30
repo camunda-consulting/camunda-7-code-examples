@@ -9,6 +9,10 @@ Process used as part of the sample:
 DMN Decision Table used as part of the sample:
 ![DMN Decision Table](images/dmn-tenancy-test.png)
 
+The included addTenant.sql will update all relevant history tables with the new tenant identifier into the TENANT_ID_ column which effectively
+migrates all previously completed process instances. It will also update all relevant runtime tables with the new tenant identifier into the TENANT_ID_ 
+column, which migrates any currently running process instances to the new tenant.
+
 ## Introduction
 
 The purpose of this proof of concept is to show how one might handle the following scenario:
@@ -69,7 +73,7 @@ This project example walks thru deploying a process with business rules, creatin
 11. Start Camunda BPM back up. Go into Cockpit and observe the results.
 12. Run the remaining requests in Postman which show how to deploy and execute a process while specifying a tenant. After running, go to Cockpit and confirm that the data was simply added to the existing process.
 
-##Summary
+## Summary
 
 This is meant to be a very simple example that can be tailored to your environment as needed. Once again, please note that this is meant to be a PoC and nothing more. Please use it as a guide to your own situation.
 
