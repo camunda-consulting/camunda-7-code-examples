@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "cecf3170-65d6-4a14-86c5-c4d5358e0d9d",
+		"name": "tenancy retroactively",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Deploy model (no tenant)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deployment-name",
+							"value": "tenancy-test",
+							"type": "text"
+						},
+						{
+							"key": "deployment-source",
+							"value": "postman",
+							"type": "text"
+						},
+						{
+							"key": "tenant-id",
+							"value": "tenant1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "enable-duplicate-filtering",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "deploy-changed-only",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "data",
+							"type": "file",
+							"src": "/home/callen/Desktop/tenancy-test.bpmn"
+						},
+						{
+							"key": "data2",
+							"type": "file",
+							"src": "/home/callen/Desktop/dmn-tenancy-test.dmn"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/deployment/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"deployment",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process (path 1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process (path 2)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 2,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process (path 3)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 3,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add tenant1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\":\"tenant1\",\n  \"name\":\"tenant1\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/tenant/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"tenant",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deploy model (with tenant)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "deployment-name",
+							"value": "tenancy-test",
+							"type": "text"
+						},
+						{
+							"key": "deployment-source",
+							"value": "postman",
+							"type": "text"
+						},
+						{
+							"key": "tenant-id",
+							"value": "tenant1",
+							"type": "text"
+						},
+						{
+							"key": "enable-duplicate-filtering",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "deploy-changed-only",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "data",
+							"type": "file",
+							"src": "/home/callen/Desktop/tenancy-test.bpmn"
+						},
+						{
+							"key": "data2",
+							"type": "file",
+							"src": "/home/callen/Desktop/dmn-tenancy-test.dmn"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/deployment/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"deployment",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Tenant Process (path 1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 1,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/tenant-id/tenant1/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"tenant-id",
+						"tenant1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Tenant Process (path 2)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 2,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/tenant-id/tenant1/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"tenant-id",
+						"tenant1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Tenant Process (path 3)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"variables\": {\n        \"someInput\": {\n            \"value\": 3,\n            \"type\": \"Integer\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/tenancy-test/tenant-id/tenant1/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"process-definition",
+						"key",
+						"tenancy-test",
+						"tenant-id",
+						"tenant1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
