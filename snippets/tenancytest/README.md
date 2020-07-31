@@ -28,26 +28,30 @@ This portion of the SQL updates historical process instances with the
 new tenant identifier into the TENANT_ID_ columns of the tables in this example. 
 Please see complete file: [here](addTenant.sql).
 
-Snippet from [addTenant.sql](addTenant.sql#L30-L46) : 
+Snippet from [addTenant.sql](addTenant.sql#L108-L128) : 
 
 ```
-update ACT_HI_PROCINST
+update ACT_RU_INCIDENT
 set TENANT_ID_='tenant1'
-where PROC_DEF_ID_ in (
-    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
-    );
+where  PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_='tenancy-test'
+           );
 
-update ACT_HI_TASKINST
+update ACT_RU_JOBDEF
 set TENANT_ID_='tenant1'
-where PROC_DEF_ID_ in (
-    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
-    );
+where PROC_DEF_KEY_='tenancy-test';
 
-update ACT_HI_VARINST
+update ACT_RU_IDENTITYLINK
 set TENANT_ID_='tenant1'
-where PROC_DEF_ID_ in (
-    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
-    );
+where  PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_='tenancy-test'
+           );
+
+update ACT_RU_TASK
+set TENANT_ID_='tenant1'
+where  PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_='tenancy-test'
+           );
 ```
 This portion of the SQL updates running process instances with the 
 new tenant identifier into the TENANT_ID_ columns of the tables in this example. 
