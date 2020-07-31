@@ -1,9 +1,34 @@
 # Retroactively Apply Tenancy to Existing BPMN Process and DMN Decision Table 
-A sample application with [Camunda BPM](http://docs.camunda.org) that retroactively applies tenancy to an existing process and decision table.
+A sample application with [Camunda BPM](http://docs.camunda.org) that retroactively applies tenancy to an example existing process and decision definition.
 
 ## Show me the important parts!
 
-Snippet from [addTenant.sql](addTenant.sql#L36-L46) : 
+Snippet from [addTenant.sql](addTenant.sql#L6-L22) : 
+
+```
+update ACT_HI_ACTINST
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+
+update ACT_HI_DETAIL
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+
+update ACT_HI_IDENTITYLINK
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+```
+This portion of the SQL updates historical process instances with the 
+new tenant identifier into the TENANT_ID_ columns of the tables in this example. 
+Please see complete file: [here](addTenant.sql).
+
+Snippet from [addTenant.sql](addTenant.sql#L30-L46) : 
 
 ```
 update ACT_HI_PROCINST
@@ -24,6 +49,9 @@ where PROC_DEF_ID_ in (
     select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
     );
 ```
+This portion of the SQL updates running process instances with the 
+new tenant identifier into the TENANT_ID_ columns of the tables in this example. 
+Please see complete file: [here](addTenant.sql).
 
 ## Example BPMN Process used in example:
 
@@ -61,7 +89,7 @@ This project example walks thru deploying a process with business rules, creatin
 
     ![](images/db_files.png)
     
-2. Open Postman. Import the &quot;tenancy retroactively.postman\_collection.json&quot; file into Postman. You should see something like this:
+2. Open Postman. Import the [tenancy retroactively.postman_collection.json](tenancy%20retroactively.postman_collection.json) file into Postman. You should see something like this:
 
     ![](images/PostmanCollection.png)
 
@@ -78,7 +106,6 @@ This project example walks thru deploying a process with business rules, creatin
 5. Repeat steps 3 and 4 two more times. This should create 3 versions of the workflow, each with 2 completed instances, and one that is in flight. This will represent our &quot;as-is&quot; data for the test. Go into Cockpit one more time. Look at the process versions and the data.
 6. Run the request &quot;add tenant1&quot; in Postman. This will create the tenant reference in the Camunda database. This is equivalent to doing this in Camunda Admin.
 7. Stop the Camunda Spring Boot application server.
-
 8. Connect to the H2 Database using a database client of your choice. I did this with Jetbrains Datagrip using this JDBC URL;
 
     * jdbc:h2:~/IdeaProjects/tenancytest/camunda-db;DB\_CLOSE\_DELAY=-1;MVCC=TRUE;DB\_CLOSE\_ON\_EXIT=FALSE;AUTO\_SERVER=TRUE
@@ -87,14 +114,14 @@ This project example walks thru deploying a process with business rules, creatin
 
     * Pass: sa
 
-    *Note the &quot;path&quot; value is the direct path to the \*.db file in the root of the Camunda Spring Boot BPM project. My setup looks like this (for reference):
+    * Note the &quot;path&quot; value is the direct path to the \*.db file in the root of the Camunda Spring Boot BPM project. My setup looks like this (for reference):
     
     ![](images/dataGrip.png)
 
-9. After connecting, run the contents of &quot;addTenant.sql&quot; found in the root of this project. A quick inspection of this script shows that it only does updates to existing rows (no inserts), and the only thing that it is updating is the tenant designation to both runtime and history data.
+9.  After connecting, run the contents of [addTenant.sql](addTenant.sql) found in the root of this project. A quick inspection of this script shows that it only does updates to existing rows (no inserts), and the only thing that it is updating is the tenant designation to both runtime and history data.
 10. Make sure that your database client is disconnected completely from the database.
 11. Start Camunda BPM back up. Go into Cockpit and observe the results.
-12. Run the remaining requests in Postman which show how to deploy and execute a process while specifying a tenant. After running, go to Cockpit and confirm that the data was simply added to the existing process.
+12. Run the remaining requests in Postman which show how to deploy and execute a process while specifying a tenant. After running, go to Cockpit and confirm that the data was added to the existing process.
 
 ## Summary
 
