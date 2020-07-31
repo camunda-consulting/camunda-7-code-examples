@@ -2,11 +2,34 @@
 A sample application with [Camunda BPM](http://docs.camunda.org) that retroactively applies tenancy to an existing process and decision table.
 
 ## Show me the important parts!
-Process used as part of the sample:
+
+Snippet from [addTenant.sql](addTenant.sql#L36-L46) : 
+
+```
+update ACT_HI_PROCINST
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+
+update ACT_HI_TASKINST
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+
+update ACT_HI_VARINST
+set TENANT_ID_='tenant1'
+where PROC_DEF_ID_ in (
+    select ID_ from ACT_RE_PROCDEF where KEY_ = 'tenancy-test'
+    );
+```
+
+## Example BPMN Process used in example:
 
 ![BPMN Process](images/tenancy-test.png)
 
-DMN Decision Table used as part of the sample:
+## Example DMN Decision Table used in example:
 ![DMN Decision Table](images/dmn-tenancy-test.png)
 
 The included addTenant.sql will update all relevant history tables with the new tenant identifier into the TENANT_ID_ column which effectively
