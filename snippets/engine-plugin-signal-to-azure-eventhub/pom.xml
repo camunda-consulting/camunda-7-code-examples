@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.mongeralaegon</groupId>
+    <groupId>com.camunda.consulting</groupId>
     <artifactId>camunda-plugin-signal-to-event</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -13,7 +13,7 @@
     <description>Camunda Engine Plugin to make every signal throw event sent an event to Azure event hub.</description>
 
     <properties>
-        <camunda.version>7.12.0</camunda.version>
+        <camunda.version>7.13.0</camunda.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>LATEST</version>
+            <version>3.4.6</version>
         </dependency>
 
         <dependency>

@@ -27,7 +27,7 @@ They are handed into Azure's [ConnectionStringBuilder](https://docs.microsoft.co
  
 ## Environment Restrictions
 
-Built and tested against Camunda BPM version 7.12.0.
+Built and tested against Camunda BPM version 7.12.0 and 7.13.0.
 
 ## Known Limitations
 
