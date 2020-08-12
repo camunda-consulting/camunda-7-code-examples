@@ -32,6 +32,9 @@ Built and tested against Camunda BPM version 7.12.0 and 7.13.0.
 ## Known Limitations
 
 ## Improvements Backlog
+This example uses the outdated azure-eventhubs and azure-eventhubs-eph packages
+https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-java-get-started-send
+not the latest latest azure-messaging-eventhubs package
 
 ## License
 

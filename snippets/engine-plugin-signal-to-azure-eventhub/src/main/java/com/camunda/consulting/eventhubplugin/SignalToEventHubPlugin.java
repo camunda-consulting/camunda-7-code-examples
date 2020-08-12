@@ -1,6 +1,5 @@
 package com.camunda.consulting.eventhubplugin;
 
-import com.microsoft.azure.eventhubs.EventHubClient;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParseListener;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -10,12 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignalToEventHubPlugin implements ProcessEnginePlugin {
-
-  static private EventHubClient eventHubClient;
-
-  public static EventHubClient getEventHubClient() {
-    return eventHubClient;
-  }
 
   private String namespaceName;
   private String eventHubName;
@@ -33,7 +26,7 @@ public class SignalToEventHubPlugin implements ProcessEnginePlugin {
   private void registerParseListener(ProcessEngineConfigurationImpl processEngineConfiguration) {
     List<BpmnParseListener> postParseListeners = processEngineConfiguration.getCustomPostBPMNParseListeners();
     if (postParseListeners == null) {
-      postParseListeners = new ArrayList<BpmnParseListener>();
+      postParseListeners = new ArrayList<>();
       processEngineConfiguration.setCustomPostBPMNParseListeners(postParseListeners);
     }
     postParseListeners.add(new ParseListener());

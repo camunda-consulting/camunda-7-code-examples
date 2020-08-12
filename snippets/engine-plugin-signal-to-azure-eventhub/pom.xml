@@ -9,7 +9,7 @@
 
     <packaging>jar</packaging>
 
-    <name>Camunda Plugin Singal to EventHub</name>
+    <name>Camunda Plugin Signal to EventHub</name>
     <description>Camunda Engine Plugin to make every signal throw event sent an event to Azure event hub.</description>
 
     <properties>
