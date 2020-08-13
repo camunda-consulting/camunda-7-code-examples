@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_01tct36" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
+  <bpmn:collaboration id="Collaboration_0y7k7ot">
+    <bpmn:participant id="Participant_1s2tgeh" name="Hotel check in" processRef="CheckIn" />
+  </bpmn:collaboration>
+  <bpmn:process id="CheckIn" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1hhh6nk">
+      <bpmn:lane id="Lane_0wdvzkt" name="Front desk employee">
+        <bpmn:flowNodeRef>Event_0ch3vv3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1vqcp5z</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_08g83m1" name="Customer">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0z6sabi</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:endEvent id="Event_0ch3vv3" name="Check in complete">
+      <bpmn:incoming>Flow_0cpnyij</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_1vqcp5z" name="Greet customer">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="roomUpgrade" label="Does customer have room upgrade?" type="boolean" />
+          <camunda:formField id="freeDrinks" label="Number of free drinks for stay?" type="long" />
+          <camunda:formField id="breakfast" label="Type of breakfast included?" type="string" />
+          <camunda:formField id="email" label="Customer email" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_139zsjy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cpnyij</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_1" name="New check in">
+      <bpmn:outgoing>Flow_0bom8rj</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_030a757" messageRef="Message_0cdpn6u" />
+    </bpmn:startEvent>
+    <bpmn:businessRuleTask id="Activity_0z6sabi" name="Determine benefits" camunda:asyncBefore="true" camunda:resultVariable="benefits" camunda:decisionRef="determineBenefits" camunda:mapDecisionResult="singleResult">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="roomUpgrade">${benefits.get('roomUpgrade')}</camunda:outputParameter>
+          <camunda:outputParameter name="freeDrinks">${benefits.get('freeDrinks')}</camunda:outputParameter>
+          <camunda:outputParameter name="breakfast">${benefits.get('breakfast')}</camunda:outputParameter>
+          <camunda:outputParameter name="email">${bookingInfo.get('email')}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bom8rj</bpmn:incoming>
+      <bpmn:outgoing>Flow_139zsjy</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_0cpnyij" sourceRef="Activity_1vqcp5z" targetRef="Event_0ch3vv3" />
+    <bpmn:sequenceFlow id="Flow_139zsjy" sourceRef="Activity_0z6sabi" targetRef="Activity_1vqcp5z" />
+    <bpmn:sequenceFlow id="Flow_0bom8rj" sourceRef="StartEvent_1" targetRef="Activity_0z6sabi" />
+  </bpmn:process>
+  <bpmn:message id="Message_0cdpn6u" name="check" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y7k7ot">
+      <bpmndi:BPMNShape id="Participant_1s2tgeh_di" bpmnElement="Participant_1s2tgeh" isHorizontal="true">
+        <dc:Bounds x="140" y="80" width="703" height="440" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0wdvzkt_di" bpmnElement="Lane_0wdvzkt" isHorizontal="true">
+        <dc:Bounds x="170" y="350" width="673" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_08g83m1_di" bpmnElement="Lane_08g83m1" isHorizontal="true">
+        <dc:Bounds x="170" y="80" width="673" height="270" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0cpnyij_di" bpmnElement="Flow_0cpnyij">
+        <di:waypoint x="710" y="410" />
+        <di:waypoint x="782" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_139zsjy_di" bpmnElement="Flow_139zsjy">
+        <di:waypoint x="450" y="200" />
+        <di:waypoint x="500" y="200" />
+        <di:waypoint x="500" y="410" />
+        <di:waypoint x="610" y="410" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bom8rj_di" bpmnElement="Flow_0bom8rj">
+        <di:waypoint x="278" y="200" />
+        <di:waypoint x="350" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0ch3vv3_di" bpmnElement="Event_0ch3vv3">
+        <dc:Bounds x="782" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="778" y="435" width="45" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13k8mon_di" bpmnElement="Activity_1vqcp5z">
+        <dc:Bounds x="610" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0hq88gl_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="242" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="227" y="225" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_170qr8a_di" bpmnElement="Activity_0z6sabi">
+        <dc:Bounds x="350" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
