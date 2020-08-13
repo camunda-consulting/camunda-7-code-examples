@@ -56,9 +56,6 @@ More on working with Springboot and Thymeleaf can be found here https://spring.i
 
 ## DEV:  How to update variables that are passed in to Camunda
 
-This Springboot app has a controller that is used to receive the check in request from the index.html website. After the request is received (by CheckInController.java). Some random variables are created and then passed on to Camunda Engine via Rest API call as a JSON object. A Rest API call and a JSON object was preferred  to show how easy it is to parse a JSON object using DMN-FEEL in the latest Camunda Engine version. 
-
-
-
+This Springboot app has a controller that is used to receive the check in request from the index.html website. After the request is received (by CheckInController.java). Some random variables are created and then passed on to Camunda Engine via  as a JSON object. A JSON object was preferred  to show how easy it is to parse a JSON object using DMN-FEEL in the latest Camunda Engine version. 
 
 
