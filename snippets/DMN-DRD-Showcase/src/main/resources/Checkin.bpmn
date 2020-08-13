@@ -39,7 +39,7 @@
           <camunda:outputParameter name="roomUpgrade">${benefits.get('roomUpgrade')}</camunda:outputParameter>
           <camunda:outputParameter name="freeDrinks">${benefits.get('freeDrinks')}</camunda:outputParameter>
           <camunda:outputParameter name="breakfast">${benefits.get('breakfast')}</camunda:outputParameter>
-          <camunda:outputParameter name="email">${bookingInfo.get('email')}</camunda:outputParameter>
+          <camunda:outputParameter name="email">${bookingInfo.email}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0bom8rj</bpmn:incoming>
@@ -55,15 +55,15 @@
       <bpmndi:BPMNShape id="Participant_1s2tgeh_di" bpmnElement="Participant_1s2tgeh" isHorizontal="true">
         <dc:Bounds x="140" y="80" width="703" height="440" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0wdvzkt_di" bpmnElement="Lane_0wdvzkt" isHorizontal="true">
-        <dc:Bounds x="170" y="350" width="673" height="170" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_08g83m1_di" bpmnElement="Lane_08g83m1" isHorizontal="true">
         <dc:Bounds x="170" y="80" width="673" height="270" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0cpnyij_di" bpmnElement="Flow_0cpnyij">
-        <di:waypoint x="710" y="410" />
-        <di:waypoint x="782" y="410" />
+      <bpmndi:BPMNShape id="Lane_0wdvzkt_di" bpmnElement="Lane_0wdvzkt" isHorizontal="true">
+        <dc:Bounds x="170" y="350" width="673" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0bom8rj_di" bpmnElement="Flow_0bom8rj">
+        <di:waypoint x="278" y="200" />
+        <di:waypoint x="350" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_139zsjy_di" bpmnElement="Flow_139zsjy">
         <di:waypoint x="450" y="200" />
@@ -71,9 +71,9 @@
         <di:waypoint x="500" y="410" />
         <di:waypoint x="610" y="410" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bom8rj_di" bpmnElement="Flow_0bom8rj">
-        <di:waypoint x="278" y="200" />
-        <di:waypoint x="350" y="200" />
+      <bpmndi:BPMNEdge id="Flow_0cpnyij_di" bpmnElement="Flow_0cpnyij">
+        <di:waypoint x="710" y="410" />
+        <di:waypoint x="782" y="410" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0ch3vv3_di" bpmnElement="Event_0ch3vv3">
         <dc:Bounds x="782" y="392" width="36" height="36" />

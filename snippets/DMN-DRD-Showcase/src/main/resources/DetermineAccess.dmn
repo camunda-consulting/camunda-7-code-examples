@@ -124,7 +124,7 @@
     </informationRequirement>
     <decisionTable id="DecisionTable_1ppgdod" hitPolicy="FIRST">
       <input id="InputClause_1spa4de" biodi:width="246">
-        <inputExpression id="LiteralExpression_1xppfxu" typeRef="boolean">
+        <inputExpression id="LiteralExpression_1xppfxu" typeRef="boolean" expressionLanguage="feel">
           <text>bookingInfo.hotelCreditCard</text>
         </inputExpression>
       </input>
@@ -164,7 +164,7 @@
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_017jwel">
-          <text></text>
+          <text>false</text>
         </outputEntry>
       </rule>
     </decisionTable>
