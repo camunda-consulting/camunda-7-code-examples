@@ -2,6 +2,8 @@ package com.camunda.com.meetup;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -40,32 +43,21 @@ public class CheckInController {
 		logger.info(" just received a checkin...");
 
 		Random rd = new Random();
-
-		String email = checkin.getEmail();
-		Boolean hotelCreditCard = rd.nextBoolean();
-		int yearsWithMembership = (int) ((Math.random() * (20 - 1)) + 1);
-		Boolean weekend = rd.nextBoolean();
+		checkin.setHotelCreditCard(rd.nextBoolean());
+		checkin.setWeekend(rd.nextBoolean());
+		checkin.setYearsWithMembership((int) ((Math.random() * (20 - 1)) + 1));
 		List<String> givenList = Arrays.asList("Bronze", "Silver", "Gold");
-		Random rand = new Random();
-		String clubMembership = givenList.get(rand.nextInt(givenList.size()));
-
-		String completeTaskUrl = "http://localhost:8080/engine-rest/message";
-		RestTemplate restTemplateComplete = new RestTemplate();
-		HttpHeaders headersComplete = new HttpHeaders();
-		headersComplete.setContentType(MediaType.APPLICATION_JSON);
-
-		HttpEntity<String> entityComplete = new HttpEntity<String>("{\"messageName\":\"check\",\"processVariables\":"
-				+ " {\"bookingInfo\": {\"value\": \"{ \\\"hotelCreditCard\\\":" + hotelCreditCard
-				+ ",\\\"yearsWithMembership\\\":" + yearsWithMembership + "," + "\\\"weekend\\\":" + weekend
-				+ ",\\\"clubMembership\\\":\\\"" + clubMembership + "\\\",\\\"email\\\":\\\"" + email
-				+ "\\\"}\",\"type\": \"object\","
-				+ "\"valueInfo\": {\"objectTypeName\": \"java.lang.Object\",\"serializationDataFormat\": "
-				+ "\"application/json\"}}}}", headersComplete);
-		// HttpEntity<String> entityComplete = new HttpEntity<String>("{\"variables\": {
-		// \"approved\": {\"value\": true}}}",
-		// headersComplete);
-		restTemplateComplete.exchange(completeTaskUrl, HttpMethod.POST, entityComplete, String.class);
-
+		checkin.setClubMembership(givenList.get(rd.nextInt(givenList.size())));
+		
+		ObjectValue typedCustomerValue = Variables.objectValue(checkin).serializationDataFormat("application/json").create();
+		HashMap<String, Object> variables = new HashMap<String, Object>();
+		variables.put("bookingInfo", typedCustomerValue);
+		
+		runtimeService.startProcessInstanceByMessage("check", variables);
+		
+	
+		
+		
 		model.addAttribute("checkin", checkin);
 
 		return "result";
