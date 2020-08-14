@@ -1,4 +1,4 @@
-package com.camunda.consulting.eventhubplugin;
+package com.camunda.consulting.eventhub.plugin;
 
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import static org.camunda.bpm.engine.impl.bpmn.parser.BpmnParse.SIGNAL_EVENT_DEFINITION;
 
-public class ParseListener extends AbstractBpmnParseListener implements BpmnParseListener {
+public class AttachEventHubProducerParseListener extends AbstractBpmnParseListener implements BpmnParseListener {
 
-  private final Logger LOGGER = LoggerFactory.getLogger(ParseListener.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(AttachEventHubProducerParseListener.class);
 
   @Override
   public void parseIntermediateThrowEvent(Element intermediateEventElement, ScopeImpl scope, ActivityImpl activity) {

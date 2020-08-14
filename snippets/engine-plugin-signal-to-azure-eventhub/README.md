@@ -6,47 +6,34 @@ It uses the [Passing Variables](https://docs.camunda.org/manual/latest/reference
 ![Signal](signal.png)
 
 ## Show me the important parts
+The project contains two Maven modules. 
 
-- [SignalToEventHubPlugin.java](src/main/java/com/camunda/consulting/eventhubplugin/SignalToEventHubPlugin.java) is the main plugin class, preparing the Azure Event Hub Client and registering a parse listener.
-- [ParseListener.java](src/main/java/com/camunda/consulting/eventhubplugin/ParseListener.java) attaches an [end execution listener](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) to every throwing signal event.
-- [SignalToEventHubListener.java](src/main/java/com/camunda/consulting/eventhubplugin/SignalToEventHubListener.java) collects data of the issued signal, calculates the variable in-mapping elements and creates a JSON message to be sent to EventHub. 
-- [AzureEventHubClient.java](src/main/java/com/camunda/consulting/eventhubplugin/AzureEventHubClient.java) contains a simple Azure EventHub client implementation.
+The module **signal-to-AzureEventHub-engine-plugin** contains the process engine plugin. 
+- [SignalToEventHubPlugin.java](signal-to-AzureEventHub-engine-plugin/src/main/java/com/camunda/consulting/eventhub/plugin/SignalToEventHubPlugin.java) is the main plugin class, preparing the Azure Event Hub Client and registering a parse listener.
+- [ParseListener.java](signal-to-AzureEventHub-engine-plugin/src/main/java/com/camunda/consulting/eventhub/plugin/AttachEventHubProducerParseListener.java) attaches an [end execution listener](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#execution-listener) to every throwing signal event.
+- [SignalToEventHubListener.java](signal-to-AzureEventHub-engine-plugin/src/main/java/com/camunda/consulting/eventhub/plugin/SignalToEventHubListener.java) collects data of the issued signal, calculates the variable in-mapping elements and creates a JSON message to be sent to EventHub. 
+- [AzureEventHubClient.java](signal-to-AzureEventHub-engine-plugin/src/main/java/com/camunda/consulting/eventhub/plugin/AzureEventHubClient.java) contains a simple Azure EventHub client implementation.
+
+The module **demo-runtime** is a simple Spring Boot Camunda environment. 
+- [BpmPlatformConfiguration.java](snippets/engine-plugin-signal-to-azure-eventhub/demo-runtime/src/main/java/eventhub/BpmPlatformConfiguration.java) shows how the plugin is registered and configured.
+- The process model [process.bpmn](demo-runtime/src/main/resources/process.bpmn) shows how the plugin is used and how the signal payload is configured in the variables tab of a signal.
+- [SecondProcess.bpmn](demo-runtime/src/main/resources/process.bpmn) is a trivial process, which can be used if this example is combined with the [event consumer example](../azure-eventhub-consumer-java)   
+
 
 ## How to use it
+To use an engine plugin you have to [integrate the plugin into your Camunda BPM configuration](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/).
+In the demo-runtime this wis done using the Spring Configuration 
+[BpmPlatformConfiguration.java](snippets/engine-plugin-signal-to-azure-eventhub/demo-runtime/src/main/java/eventhub/BpmPlatformConfiguration.java).
+Adjust the *ConnectionString* and *EventHubName* here to the values applicable to your Azure environment.
 
-For using it in a Camunda installation, you have to [integrate the plugin into your Camunda BPM configuration](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/).
-You can set the following plugin properties:
+In the root folder run:
 
-- namespaceName
-- eventHubName
-- sasKeyName
-- sasKey
-- endpoint
+*mvn spring-boot:run*
 
-They are handed into Azure's [ConnectionStringBuilder](https://docs.microsoft.com/en-us/java/api/com.microsoft.azure.eventhubs.connectionstringbuilder) to create the connection to EventHub.
+to build both modules and start the demo environment using the engine plugin jar. 
  
 ## Environment Restrictions
-
-Built and tested against Camunda BPM version 7.12.0 and 7.13.0.
-
-## Known Limitations
-
-## Improvements Backlog
-This example uses the outdated azure-eventhubs and azure-eventhubs-eph packages
-https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-java-get-started-send
-not the latest latest azure-messaging-eventhubs package
+Built and tested against Camunda BPM version 7.13.0.
 
 ## License
-
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
-<!-- HTML snippet for index page
-  <tr>
-    <td><img src="snippets/engine-plugin-signal-to-azure-eventhub/signal.png" width="100"></td>
-    <td><a href="snippets/engine-plugin-on-demand-call-activity">On-demand Call Activity Plugin</a></td>
-    <td>A Plugin for [Camunda BPM](http://docs.camunda.org) that sends an event to Azure Event Hub whenever a [Throwing Signal Event](https://docs.camunda.org/manual/latest/reference/bpmn20/events/signal-events/#throwing-signal-events) is visited.</td>
-  </tr>
--->
-<!-- Tweet
-New @CamundaBPM example: Push Signal to Azure Event Hub Plugin - A Plugin for Camunda BPM] that sends an event to Azure Event Hub whenever a Throwing Signal Event is visited. that allows to skip the invocation of a sub-process. https://github.com/camunda-consulting/code/tree/master/snippets/engine-plugin-signal-to-azure-eventhub
--->

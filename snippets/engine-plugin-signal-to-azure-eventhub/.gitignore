@@ -1,2 +1,5 @@
 .idea
 target
+/camunda-h2-database.mv.db
+/demo-runtime/camunda-h2-database.trace.db
+/demo-runtime/camunda-h2-database.mv.db

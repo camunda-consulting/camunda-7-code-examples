@@ -1,5 +1,6 @@
-package com.camunda.consulting.eventhubplugin;
+package com.camunda.consulting.eventhub.plugin;
 
+import lombok.Setter;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParseListener;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
@@ -10,17 +11,15 @@ import java.util.List;
 
 public class SignalToEventHubPlugin implements ProcessEnginePlugin {
 
-  private String namespaceName;
-  private String eventHubName;
-  private String sasKeyName;
-  private String sasKey;
-  private String endpoint;
+  @Setter
+  private static String eventHubName;
+  @Setter
+  private static String connectionString;
 
   @Override
   public void preInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
     registerParseListener(processEngineConfiguration);
-
-    AzureEventHubClient.setConfig(namespaceName,eventHubName,sasKeyName,sasKey,endpoint);
+    AzureEventHubClient.setConfig(connectionString, eventHubName);
   }
 
   private void registerParseListener(ProcessEngineConfigurationImpl processEngineConfiguration) {
@@ -29,7 +28,7 @@ public class SignalToEventHubPlugin implements ProcessEnginePlugin {
       postParseListeners = new ArrayList<>();
       processEngineConfiguration.setCustomPostBPMNParseListeners(postParseListeners);
     }
-    postParseListeners.add(new ParseListener());
+    postParseListeners.add(new AttachEventHubProducerParseListener());
   }
 
   @Override
@@ -40,45 +39,5 @@ public class SignalToEventHubPlugin implements ProcessEnginePlugin {
   @Override
   public void postProcessEngineBuild(ProcessEngine processEngine) {
 
-  }
-
-  public String getNamespaceName() {
-    return namespaceName;
-  }
-
-  public void setNamespaceName(String namespaceName) {
-    this.namespaceName = namespaceName;
-  }
-
-  public String getEventHubName() {
-    return eventHubName;
-  }
-
-  public void setEventHubName(String eventHubName) {
-    this.eventHubName = eventHubName;
-  }
-
-  public String getSasKeyName() {
-    return sasKeyName;
-  }
-
-  public void setSasKeyName(String sasKeyName) {
-    this.sasKeyName = sasKeyName;
-  }
-
-  public String getSasKey() {
-    return sasKey;
-  }
-
-  public void setSasKey(String sasKey) {
-    this.sasKey = sasKey;
-  }
-
-  public String getEndpoint() {
-    return endpoint;
-  }
-
-  public void setEndpoint(String endpoint) {
-    this.endpoint = endpoint;
   }
 }
