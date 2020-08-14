@@ -1,5 +1,6 @@
-package com.camunda.consulting.eventhubplugin;
+package com.camunda.consulting.eventhub.plugin;
 
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.impl.context.Context;
@@ -9,14 +10,11 @@ import org.camunda.bpm.model.bpmn.instance.SignalEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.ThrowEvent;
 import org.camunda.bpm.model.bpmn.instance.camunda.CamundaIn;
 import org.camunda.spin.json.SpinJsonNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.camunda.spin.Spin.JSON;
 
+@Slf4j
 public class SignalToEventHubListener implements ExecutionListener {
-
-  private final Logger LOGGER = LoggerFactory.getLogger(SignalToEventHubListener.class);
 
   @Override
   public void notify(DelegateExecution execution) throws Exception {
@@ -69,7 +67,7 @@ public class SignalToEventHubListener implements ExecutionListener {
     message.prop("businessKey", processBusinessKey);
     message.prop("payload", payload);
 
-    LOGGER.trace(message.toString());
+    log.trace(message.toString());
     AzureEventHubClient.sendMessage(message);
   }
 }

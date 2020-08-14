@@ -31,4 +31,5 @@ Finally, run [EventConsumer.java](src/main/java/org/camunda/azure/eventhub/consu
     
 ## License
 The project is based on code licensed by Microsoft under the MIT License (MIT)
+
 https://github.com/Azure/azure-sdk-for-java/blob/master/LICENSE.txt
