@@ -39,3 +39,10 @@ Notice the following:
 - after starting the process instance in tasklist, refresh the screen.  You will notice that your user can only see the tenant instance of the user task that they are allowed to see per the dynamic tenant designation.
 - in Cockpit, you will notice that userx, usery, and userz can only see the process instances associated to their tenant.
 - finally, log into Cockpit as demo/demo.  Since demo is part of the "camunda-admin" group, demo can see all three instances for all tenants.
+
+### Files to examine:
+
+in src/main/java/org/example:
+
+- CustomTenantIdProvider.java
+- MyTenantPlugin.java
