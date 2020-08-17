@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1p0p2ns" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
+  <bpmn:process id="groovyProcess" name="A Very Groovy Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0udxx8v</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0udxx8v" sourceRef="StartEvent_1" targetRef="Activity_0ch0own" />
+    <bpmn:scriptTask id="Activity_0ch0own" name="Hardcode Path" scriptFormat="groovy">
+      <bpmn:incoming>Flow_0udxx8v</bpmn:incoming>
+      <bpmn:outgoing>Flow_0b5puvb</bpmn:outgoing>
+      <bpmn:script>println 'Task XXX'
+execution.setVariable("mypath", 2)</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:exclusiveGateway id="Gateway_1h8dykx" name="Which path?">
+      <bpmn:incoming>Flow_0b5puvb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g335el</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1w8l1cr</bpmn:outgoing>
+      <bpmn:outgoing>Flow_124a0cl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0b5puvb" sourceRef="Activity_0ch0own" targetRef="Gateway_1h8dykx" />
+    <bpmn:sequenceFlow id="Flow_0g335el" name="1" sourceRef="Gateway_1h8dykx" targetRef="Activity_1xvl26n">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{mypath==1}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1w8l1cr" name="2" sourceRef="Gateway_1h8dykx" targetRef="Activity_1sy8n7u">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{mypath==2}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_124a0cl" name="3" sourceRef="Gateway_1h8dykx" targetRef="Activity_08edr4e">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{mypath==3}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0ildtgy">
+      <bpmn:incoming>Flow_1gq0juw</bpmn:incoming>
+      <bpmn:incoming>Flow_0j2tm67</bpmn:incoming>
+      <bpmn:incoming>Flow_016jn4e</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nsc0hv</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1gq0juw" sourceRef="Activity_1xvl26n" targetRef="Gateway_0ildtgy" />
+    <bpmn:sequenceFlow id="Flow_0j2tm67" sourceRef="Activity_1sy8n7u" targetRef="Gateway_0ildtgy" />
+    <bpmn:sequenceFlow id="Flow_016jn4e" sourceRef="Activity_08edr4e" targetRef="Gateway_0ildtgy" />
+    <bpmn:endEvent id="Event_1tgctl3">
+      <bpmn:incoming>Flow_037l943</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1nsc0hv" sourceRef="Gateway_0ildtgy" targetRef="Activity_00864ps" />
+    <bpmn:scriptTask id="Activity_1xvl26n" name="Path 1" scriptFormat="groovy">
+      <bpmn:incoming>Flow_0g335el</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gq0juw</bpmn:outgoing>
+      <bpmn:script>println 'Path 1'</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_1sy8n7u" name="Path 2" scriptFormat="groovy">
+      <bpmn:incoming>Flow_1w8l1cr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j2tm67</bpmn:outgoing>
+      <bpmn:script>println 'Path 2'</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:scriptTask id="Activity_08edr4e" name="Path 3" scriptFormat="groovy">
+      <bpmn:incoming>Flow_124a0cl</bpmn:incoming>
+      <bpmn:outgoing>Flow_016jn4e</bpmn:outgoing>
+      <bpmn:script>println 'Path 3'</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_037l943" sourceRef="Activity_1r26g75" targetRef="Event_1tgctl3" />
+    <bpmn:serviceTask id="Activity_1r26g75" name="Use LoggerDelegate" camunda:delegateExpression="#{logger}">
+      <bpmn:incoming>Flow_0jetcq4</bpmn:incoming>
+      <bpmn:outgoing>Flow_037l943</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0jetcq4" sourceRef="Activity_00864ps" targetRef="Activity_1r26g75" />
+    <bpmn:userTask id="Activity_00864ps" name="Auto Generated Form">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="mypath" label="My Path (number):" type="long" />
+          <camunda:formField id="someOtherValue" label="Some Other Value (not set yet):" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1nsc0hv</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jetcq4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_1jdgjps">
+      <bpmn:text>Some Groovy Scripting examples</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_05uzbu2" sourceRef="Activity_0ch0own" targetRef="TextAnnotation_1jdgjps" />
+    <bpmn:textAnnotation id="TextAnnotation_0m55mpx">
+      <bpmn:text>Use delegate expression to call a Spring Bean</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1d2stco" sourceRef="Activity_1r26g75" targetRef="TextAnnotation_0m55mpx" />
+    <bpmn:textAnnotation id="TextAnnotation_1q32ko6">
+      <bpmn:text>Start this process with Tasklist</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_192u10i" sourceRef="StartEvent_1" targetRef="TextAnnotation_1q32ko6" />
+    <bpmn:textAnnotation id="TextAnnotation_13575zj">
+      <bpmn:text>Sequence flows downstream of this gateway use UEL expressions to evaluate a process instance variable set in the "Hardcode Path" activity.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_07lau1u" sourceRef="Gateway_1h8dykx" targetRef="TextAnnotation_13575zj" />
+    <bpmn:textAnnotation id="TextAnnotation_0k4pot4">
+      <bpmn:text>Look at the "Forms" tab in the Properties Panel to see how we set a form field for both an existing and a non-existing variable.  See what it looks like in Tasklist once the token arrives.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1iv0o52" sourceRef="Activity_00864ps" targetRef="TextAnnotation_0k4pot4" />
+    <bpmn:textAnnotation id="TextAnnotation_1vrzj6s">
+      <bpmn:text>Look at the app server console to see the output statements of both the Groovy scripts and the LoggerDelegate.  If you are running EE then go look at history in Cockpit.  There you can see the someOtherValue variable that you set in the user task.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0mgthcp" sourceRef="Event_1tgctl3" targetRef="TextAnnotation_1vrzj6s" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="groovyProcess">
+      <bpmndi:BPMNShape id="TextAnnotation_1jdgjps_di" bpmnElement="TextAnnotation_1jdgjps">
+        <dc:Bounds x="350" y="80" width="150" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1q32ko6_di" bpmnElement="TextAnnotation_1q32ko6">
+        <dc:Bounds x="160" y="340" width="120" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_13575zj_di" bpmnElement="TextAnnotation_13575zj">
+        <dc:Bounds x="530" y="80" width="245" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0m55mpx_di" bpmnElement="TextAnnotation_0m55mpx">
+        <dc:Bounds x="1120" y="80" width="170" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0k4pot4_di" bpmnElement="TextAnnotation_0k4pot4">
+        <dc:Bounds x="840" y="360" width="250" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1vrzj6s_di" bpmnElement="TextAnnotation_1vrzj6s">
+        <dc:Bounds x="1200" y="363" width="320" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0udxx8v_di" bpmnElement="Flow_0udxx8v">
+        <di:waypoint x="268" y="240" />
+        <di:waypoint x="320" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b5puvb_di" bpmnElement="Flow_0b5puvb">
+        <di:waypoint x="420" y="240" />
+        <di:waypoint x="475" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g335el_di" bpmnElement="Flow_0g335el">
+        <di:waypoint x="525" y="240" />
+        <di:waypoint x="580" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="222" width="6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w8l1cr_di" bpmnElement="Flow_1w8l1cr">
+        <di:waypoint x="500" y="265" />
+        <di:waypoint x="500" y="350" />
+        <di:waypoint x="580" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="333" width="6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_124a0cl_di" bpmnElement="Flow_124a0cl">
+        <di:waypoint x="500" y="265" />
+        <di:waypoint x="500" y="460" />
+        <di:waypoint x="580" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="443" width="6" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gq0juw_di" bpmnElement="Flow_1gq0juw">
+        <di:waypoint x="680" y="240" />
+        <di:waypoint x="735" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j2tm67_di" bpmnElement="Flow_0j2tm67">
+        <di:waypoint x="680" y="350" />
+        <di:waypoint x="760" y="350" />
+        <di:waypoint x="760" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_016jn4e_di" bpmnElement="Flow_016jn4e">
+        <di:waypoint x="680" y="460" />
+        <di:waypoint x="760" y="460" />
+        <di:waypoint x="760" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nsc0hv_di" bpmnElement="Flow_1nsc0hv">
+        <di:waypoint x="785" y="240" />
+        <di:waypoint x="870" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_037l943_di" bpmnElement="Flow_037l943">
+        <di:waypoint x="1170" y="240" />
+        <di:waypoint x="1242" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jetcq4_di" bpmnElement="Flow_0jetcq4">
+        <di:waypoint x="970" y="240" />
+        <di:waypoint x="1070" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="232" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pes9l1_di" bpmnElement="Activity_0ch0own">
+        <dc:Bounds x="320" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1h8dykx_di" bpmnElement="Gateway_1h8dykx" isMarkerVisible="true">
+        <dc:Bounds x="475" y="215" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="469" y="185" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ildtgy_di" bpmnElement="Gateway_0ildtgy" isMarkerVisible="true">
+        <dc:Bounds x="735" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hpluza_di" bpmnElement="Activity_1xvl26n">
+        <dc:Bounds x="580" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18udcco_di" bpmnElement="Activity_1sy8n7u">
+        <dc:Bounds x="580" y="310" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hb63gk_di" bpmnElement="Activity_08edr4e">
+        <dc:Bounds x="580" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tgctl3_di" bpmnElement="Event_1tgctl3">
+        <dc:Bounds x="1242" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1be00h7_di" bpmnElement="Activity_1r26g75">
+        <dc:Bounds x="1070" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xekzjt_di" bpmnElement="Activity_00864ps">
+        <dc:Bounds x="870" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_05uzbu2_di" bpmnElement="Association_05uzbu2">
+        <di:waypoint x="378" y="200" />
+        <di:waypoint x="395" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_192u10i_di" bpmnElement="Association_192u10i">
+        <di:waypoint x="244" y="257" />
+        <di:waypoint x="215" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_07lau1u_di" bpmnElement="Association_07lau1u">
+        <di:waypoint x="509" y="224" />
+        <di:waypoint x="550" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1d2stco_di" bpmnElement="Association_1d2stco">
+        <di:waypoint x="1134" y="200" />
+        <di:waypoint x="1161" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1iv0o52_di" bpmnElement="Association_1iv0o52">
+        <di:waypoint x="911" y="280" />
+        <di:waypoint x="893" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0mgthcp_di" bpmnElement="Association_0mgthcp">
+        <di:waypoint x="1265" y="257" />
+        <di:waypoint x="1296" y="363" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
