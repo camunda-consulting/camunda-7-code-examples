@@ -20,8 +20,8 @@ Presentation of this demo can be found here https://docs.google.com/presentation
 To use this demonstration locally, please follow these steps:
 
 1. Clone the repository locally.
-2. Copy the 'settings.xml' file (from the root of the local repository you just created) into your local home .m2 directory.  For example, if your home directory is "C:\Users\Joe", then copy the 'settings.xml' file to 'C:\Users\Joe\.m2\settings.xml'.
-3. Run `mvn clean package -DskipTests` in the child `meetup` directory.
+2. Run `mvn clean package -DskipTests` in the child `meetup` directory.
+3. Run command `mvn spring-boot:run` in  the child `meetup` directory.
 6. Login to Camunda BPM at [http://localhost:8080/app/cockpit/](http://localhost:8080/app/cockpit/).
 7. Login using "demo"/"demo".
 8. Input license if wanting to use Enterprise Edition
