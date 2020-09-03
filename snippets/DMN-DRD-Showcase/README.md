@@ -22,7 +22,7 @@ To use this demonstration locally, please follow these steps:
 1. Clone the repository locally.
 2. Run `mvn clean package -DskipTests` in the child `meetup` directory.
 3. Run command `mvn spring-boot:run` in  the child `meetup` directory.
-6. Login to Camunda BPM at [http://localhost:8080/app/cockpit/](http://localhost:8080/app/cockpit/).
+6. Login to Camunda BPM at [http://localhost:8080/camunda/app/cockpit/default/#/login](http://localhost:8080/camunda/app/cockpit/default/#/login).
 7. Login using "demo"/"demo".
 8. Input license if wanting to use Enterprise Edition
 8. Follow the steps on the next section.
