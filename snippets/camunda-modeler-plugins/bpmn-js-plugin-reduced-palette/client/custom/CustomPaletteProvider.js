@@ -1,6 +1,6 @@
 'use strict';
 
-var assign = require('lodash/object/assign');
+var assign = require('min-dash').assign;
 
 /**
  * A palette that allows you to create BPMN _and_ custom elements.
