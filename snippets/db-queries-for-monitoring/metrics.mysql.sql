@@ -1,4 +1,4 @@
- -- many metrics in one query (PostgreSQL version)
+ -- many metrics in one query (MySQL version)
 SELECT *
 FROM
   (
