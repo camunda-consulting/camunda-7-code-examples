@@ -8,7 +8,7 @@ implementations, as documented in the related [product documentation](https://do
 
 
 ## The important parts
-[application.properties](src/main/resources/application.properties) enabling camunda.bpm.eventing propeties for event streams: execution, history and task
+[application.properties](src/main/resources/application.properties) enabling camunda.bpm.eventing properties for event streams: execution, history and task
 
 [Listener implementation](src/main/java/org/camunda/bpm/example/events/CamundaEventListener.java) invoked when events occur
 
