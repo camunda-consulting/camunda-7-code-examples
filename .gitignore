@@ -17,6 +17,8 @@ build.properties
 # H2
 camunda-h2-dbs
 camunda-db*
+*.mv.db
+*.trace.db
 
 # Node.js
 node_modules
