@@ -6,8 +6,8 @@ var formHelper = require('bpmn-js-properties-panel/lib/helper/FormHelper');
 var swal = require('sweetalert');
 var copy = require('clipboard-copy');
 
-function GeneratedFormPreviewPluginProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate) {
-  var camunda = new CamundaPropertiesProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate);
+function GeneratedFormPreviewPluginProvider(injector) {
+  var camunda = new CamundaPropertiesProvider(...CamundaPropertiesProvider.$inject.map(dependency => injector.get(dependency)));
 
   this.getTabs = function(element) {
     var array = camunda.getTabs(element);
@@ -261,7 +261,7 @@ GeneratedFormPreviewPluginProvider.prototype.generateHTMLSnippet = function(form
 };
 
 
-GeneratedFormPreviewPlugin.$inject = ['eventBus', 'canvas', 'bpmnFactory', 'elementRegistry', 'elementTemplates', 'translate'];
+GeneratedFormPreviewPlugin.$inject = ['injector'];
 
 function GeneratedFormPreviewPlugin() {
 
