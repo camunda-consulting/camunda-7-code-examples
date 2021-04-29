@@ -12,13 +12,13 @@ The FEEL operation being used is a String function called Substring. Substring h
 In this example, we are extracting the product type from a supplier’s product ID from a JSON Object. Then we use such information to determine the type of product category. 
 
 
-[BPMN Process](src/main/resources/process.bpmn)
+[DMN Process](substring.dmn)
 
 
 ## Screenshots
 
-![Drag Racing](first.png)
+![first](first.png)
 -----
-![Drag Racing](second.png)
+![second](second.png)
 
 
