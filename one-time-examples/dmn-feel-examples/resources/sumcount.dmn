@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_0q9sh7c" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <decision id="sumcount" name="Determine Discount with SUM ">
+    <decisionTable id="DecisionTable_07a3vvi" hitPolicy="FIRST">
+      <input id="Input_1" label="Order total">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text>sum(order.items.total)</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Discount" name="discount" typeRef="string" />
+      <rule id="DecisionRule_0ak2nwn">
+        <description></description>
+        <inputEntry id="UnaryTests_0zg11hn">
+          <text>&gt;1000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00863j1">
+          <text>"10%"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08pyd6i">
+        <inputEntry id="UnaryTests_1852xcv">
+          <text>&gt;500</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10qi899">
+          <text>"5%"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jrcjz2">
+        <inputEntry id="UnaryTests_0oj8duf">
+          <text>&gt;200</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11dldzx">
+          <text>"0%"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1f0rj0t">
+        <inputEntry id="UnaryTests_0y695ck">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10qy763">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="sumcount">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
