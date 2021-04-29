@@ -1,4 +1,5 @@
 # Name
+
 Determine Product Type  using  Substring  
 
 
@@ -12,13 +13,13 @@ The FEEL operation being used is a String function called Substring. Substring h
 In this example, we are extracting the product type from a supplier’s product ID from a JSON Object. Then we use such information to determine the type of product category. 
 
 
-[DMN Process](substring.dmn)
+[DMN Example](substring.dmn)
 
 
 ## Screenshots
 
-![first](first.png)
+![first](images/first.png)
 -----
-![second](second.png)
+![second](images/second.png)
 
 

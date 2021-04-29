@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0tcfjqh" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <decision id="Decision_1htr9nv" name="Determine Product Type using Substring">
+    <decisionTable id="DecisionTable_0hqzppf">
+      <input id="Input_1" label="Product ID type">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>substring(order,3,3)</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Product category" name="deliveryTime" typeRef="string" biodi:width="337" />
+      <rule id="DecisionRule_0kd0y5u">
+        <description></description>
+        <inputEntry id="UnaryTests_1deiaki">
+          <text>"PUZ"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13o9poc">
+          <text>"puzzle"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1f3psmf">
+        <inputEntry id="UnaryTests_183irwa">
+          <text>"VGE"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12fwpoe">
+          <text>"video game"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15opysm">
+        <inputEntry id="UnaryTests_0d9m1kp">
+          <text>"STA"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_039egm6">
+          <text>"stuffed animal"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1htr9nv">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
