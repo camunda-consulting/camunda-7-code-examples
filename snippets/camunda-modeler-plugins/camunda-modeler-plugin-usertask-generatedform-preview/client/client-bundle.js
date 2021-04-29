@@ -102,8 +102,8 @@ var formHelper = __webpack_require__(/*! bpmn-js-properties-panel/lib/helper/For
 var swal = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 var copy = __webpack_require__(/*! clipboard-copy */ "./node_modules/clipboard-copy/index.js");
 
-function GeneratedFormPreviewPluginProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate) {
-  var camunda = new CamundaPropertiesProvider(eventBus, canvas, bpmnFactory, elementRegistry, elementTemplates, translate);
+function GeneratedFormPreviewPluginProvider(injector) {
+  var camunda = new CamundaPropertiesProvider(...CamundaPropertiesProvider.$inject.map(dependency => injector.get(dependency)));
 
   this.getTabs = function(element) {
     var array = camunda.getTabs(element);
@@ -357,7 +357,7 @@ GeneratedFormPreviewPluginProvider.prototype.generateHTMLSnippet = function(form
 };
 
 
-GeneratedFormPreviewPlugin.$inject = ['eventBus', 'canvas', 'bpmnFactory', 'elementRegistry', 'elementTemplates', 'translate'];
+GeneratedFormPreviewPlugin.$inject = ['injector'];
 
 function GeneratedFormPreviewPlugin() {
 
@@ -383,6 +383,714 @@ var registerBpmnJSPlugin = __webpack_require__(/*! camunda-modeler-plugin-helper
 
 var GeneratedFormPreviewPluginProvider = __webpack_require__(/*! ./GeneratedFormPreviewPluginProvider */ "./client/GeneratedFormPreviewPluginProvider.js");
 registerBpmnJSPlugin(GeneratedFormPreviewPluginProvider);
+
+
+/***/ }),
+
+/***/ "./node_modules/@bpmn-io/extract-process-variables/dist/index.esm.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@bpmn-io/extract-process-variables/dist/index.esm.js ***!
+  \***************************************************************************/
+/*! exports provided: getProcessVariables, getVariablesForScope */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProcessVariables", function() { return getProcessVariables; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVariablesForScope", function() { return getVariablesForScope; });
+/* harmony import */ var min_dash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js");
+
+
+/**
+ * Get a inputOutput from the business object
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {ModdleElement} the inputOutput object
+ */
+function getInputOutput(element) {
+  return (getElements(element, 'camunda:InputOutput') || [])[0];
+}
+
+/**
+ * Return all input parameters existing in the business object, and
+ * an empty array if none exist.
+ *
+ * @param  {ModdleElement} element
+ *
+ * @return {Array<ModdleElement>} a list of input parameter objects
+ */
+function getInputParameters(element) {
+  return getParameters(element, 'inputParameters');
+}
+
+/**
+ * Return all output parameters existing in the business object, and
+ * an empty array if none exist.
+ *
+ * @param  {ModdleElement} element
+ * @param  {boolean} insideConnector
+ *
+ * @return {Array<ModdleElement>} a list of output parameter objects
+ */
+function getOutputParameters(element) {
+  return getParameters(element, 'outputParameters');
+}
+
+/**
+ * Return all form fields existing in the business object, and
+ * an empty array if none exist.
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {Array<ModdleElement>} a list of form fields
+ */
+function getFormFields(element) {
+  var formData = getFormData(element);
+  return (formData && formData.get('fields')) || [];
+}
+
+/**
+ * Return form data existing in the business object
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {ModdleElement}
+ */
+function getFormData(element) {
+  return (getElements(element, 'camunda:FormData') || [])[0];
+}
+
+/**
+ * Return out mappings existing in the business object
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {Array<ModdleElement>}
+ */
+function getOutMappings(element) {
+  return getElements(element, 'camunda:Out') || [];
+}
+
+
+// helpers //////////
+
+function getElements(element, type, property) {
+  var elements = getExtensionElements(element, type) || [];
+
+  return !property ? elements : (elements[0] || {})[property] || [];
+}
+
+function getParameters(element, property) {
+  var inputOutput = getInputOutput(element);
+
+  return (inputOutput && inputOutput.get(property)) || [];
+}
+
+function getExtensionElements(element, type) {
+  var extensionElements = element.get('extensionElements');
+
+  if (typeof extensionElements !== 'undefined') {
+    var extensionValues = extensionElements.get('values');
+
+    if (typeof extensionValues !== 'undefined') {
+      var elements = Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["filter"])(extensionValues, function(value) {
+        return is(value, type);
+      });
+
+      if (elements.length) {
+        return elements;
+      }
+    }
+  }
+}
+
+function is(element, type) {
+  return (
+    element &&
+    typeof element.$instanceOf === 'function' &&
+    element.$instanceOf(type)
+  );
+}
+
+/**
+ * Get all parent elements for a given element.
+ *
+ * @param {ModdleElement|string} element
+ *
+ * @returns {Array<ModdleElement>}
+ */
+function getParents(element) {
+  var parents = [];
+  var current = element;
+
+  while (current.$parent) {
+    parents.push(current.$parent);
+    current = current.$parent;
+  }
+
+  return parents;
+}
+
+/**
+ * Iterate over each element in a collection, calling the iterator function `fn`
+ * with (element, index, recursionDepth).
+ *
+ * Recurse into all elements that are returned by `fn`.
+ *
+ * @param  {Object|Array<Object>} elements
+ * @param  {Function} fn iterator function called with (element, index, recursionDepth)
+ * @param  {number} [depth] maximum recursion depth
+ */
+function eachElement(elements, fn, depth) {
+  depth = depth || 0;
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [elements];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(s, i) {
+    var filter = fn(s, i, depth);
+
+    if (Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(filter) && filter.length) {
+      eachElement(filter, fn, depth + 1);
+    }
+  });
+}
+
+/**
+ * Adds an element to a collection and returns true if the
+ * element was added.
+ *
+ * @param {Array<Object>} elements
+ * @param {Object} e
+ * @param {boolean} unique
+ */
+function add(elements, e, unique) {
+  var canAdd = !unique || elements.indexOf(e) === -1;
+
+  if (canAdd) {
+    elements.push(e);
+  }
+
+  return canAdd;
+}
+
+/**
+ * Collects self + flow elements up to a given depth from a list of elements.
+ *
+ * @param  {ModdleElement|Array<ModdleElement>} elements the elements to select the flowElements from
+ * @param  {boolean} unique whether to return a unique result set (no duplicates)
+ * @param  {number} maxDepth the depth to search through or -1 for infinite
+ *
+ * @return {Array<ModdleElement>} found elements
+ */
+function selfAndFlowElements(elements, unique, maxDepth) {
+  var result = [],
+      processedFlowElements = [];
+
+  eachElement(elements, function(element, i, depth) {
+    add(result, element, unique);
+
+    var flowElements = element.flowElements;
+
+    // max traversal depth not reached yet
+    if (maxDepth === -1 || depth < maxDepth) {
+
+      // flowElements exist && flowElements not yet processed
+      if (flowElements && add(processedFlowElements, flowElements, unique)) {
+        return flowElements;
+      }
+    }
+  });
+
+  return result;
+}
+
+/**
+ * Return self + ALL flowElements for a number of elements
+ *
+ * @param  {Array<ModdleElement>} elements to query
+ * @param  {boolean} allowDuplicates to allow duplicates in the result set
+ *
+ * @return {Array<ModdleElement>} the collected elements
+ */
+function selfAndAllFlowElements(elements, allowDuplicates) {
+  return selfAndFlowElements(elements, !allowDuplicates, -1);
+}
+
+/**
+ * Return full moddle element for given element id
+ *
+ * @param {string} elementId
+ * @param {ModdleElement} rootElement
+ *
+ * @returns {ModdleElement}
+ */
+function getElement(elementId, rootElement) {
+  var allElements = selfAndAllFlowElements(rootElement);
+
+  return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["find"])(allElements, function(element) {
+    return element.id === elementId;
+  });
+}
+
+function addVariableToList(variablesList, newVariable) {
+  var foundIdx = Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["findIndex"])(variablesList, function(variable) {
+    return (
+      variable.name === newVariable.name && variable.scope === newVariable.scope
+    );
+  });
+
+  if (foundIdx >= 0) {
+    variablesList[foundIdx].origin = combineArrays(
+      variablesList[foundIdx].origin,
+      newVariable.origin
+    );
+  } else {
+    variablesList.push(newVariable);
+  }
+}
+
+/**
+ * Creates new process variable definition object
+ * Identifies correct (highest) scope, in which variable is available
+ *
+ * @param {ModdleElement} flowElement
+ * @param {String} name
+ * @param {ModdleElement} defaultScope
+ *
+ * @returns {ProcessVariable}
+ */
+function createProcessVariable(flowElement, name, defaultScope) {
+  var scope = getScope(flowElement, defaultScope, name);
+
+  return {
+    name: name,
+    origin: [flowElement],
+    scope: scope,
+  };
+}
+
+
+// helpers ////////////////////
+
+/**
+ * Set parent container if it defines it's own scope for the variable, so
+ * when it defines an input mapping for it. Otherwise returns the default global scope
+ */
+function getScope(element, globalScope, variableName) {
+  var parents = getParents(element);
+
+  var scopedParent = Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["find"])(parents, function(parent) {
+    return (
+      is$1(parent, 'bpmn:SubProcess') && hasInputParameter(parent, variableName)
+    );
+  });
+
+  return scopedParent ? scopedParent : globalScope;
+}
+
+function is$1(element, type) {
+  return (
+    element &&
+      typeof element.$instanceOf === 'function' &&
+      element.$instanceOf(type)
+  );
+}
+
+function hasInputParameter(element, name) {
+  return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["find"])(getInputParameters(element), function(input) {
+    return input.name === name;
+  });
+}
+
+function combineArrays(a, b) {
+  return a.concat(b);
+}
+
+/**
+ * Retrieves process variables defined in output parameters, e.g.
+ *
+ * <camunda:inputOutput>
+ *   <camunda:outputParameter name="variable1">200</camunda:outputParameter>
+ *   <camunda:outputParameter name="variable2">${myLocalVar + 20}</camunda:outputParameter>
+ * </camunda:inputOutput>
+ *
+ * => Adds two variables "variable1" & "variable2" to the list.
+ *
+ */
+function extractOutputParameters(options) {
+  var elements = options.elements,
+      containerElement = options.containerElement,
+      processVariables = options.processVariables;
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [ elements ];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(element) {
+
+    // variables are created by output parameters
+    var outputParameters = getOutputParameters(element);
+
+    // extract all variables with correct scope
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(outputParameters, function(parameter) {
+      var newVariable = createProcessVariable(
+        element,
+        parameter.name,
+        containerElement
+      );
+
+      addVariableToList(processVariables, newVariable);
+    });
+  });
+
+  return processVariables;
+}
+
+/**
+ * Retrieves process variables defined in result variables, e.g.
+ *
+ * <bpmn:sendTask
+ *   id="SendTask_1"
+ *   camunda:expression="${myBean.ready}"
+ *   camunda:resultVariable="variable1"
+ * />
+ *
+ * => Adds one variable "variable1"to the list.
+ *
+ */
+function extractResultVariables(options) {
+  var elements = options.elements,
+      containerElement = options.containerElement,
+      processVariables = options.processVariables;
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [ elements ];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(element) {
+
+    var resultVariable = getResultVariable(element);
+
+    if (resultVariable) {
+      var newVariable = createProcessVariable(
+        element,
+        resultVariable,
+        containerElement
+      );
+
+      addVariableToList(processVariables, newVariable);
+    }
+  });
+
+  return processVariables;
+}
+
+
+// helpers ///////////////////////
+
+function getResultVariable(element) {
+  return element.get('camunda:resultVariable');
+}
+
+/**
+ * Retrieves process variables defined in form fields, e.g.
+ *
+ * <camunda:formData>
+ *   <camunda:formField id="variable1" />
+ *   <camunda:formField id="variable2" />
+ * </camunda:formData>
+ *
+ * => Adds two variables "variable1" & "variable2" to the list.
+ *
+ */
+function extractFormFields(options) {
+  var elements = options.elements,
+      containerElement = options.containerElement,
+      processVariables = options.processVariables;
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [ elements ];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(element) {
+
+    var formFields = getFormFields(element);
+
+    // extract all variables with correct scope
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(formFields, function(field) {
+      var newVariable = createProcessVariable(
+        element,
+        field.id,
+        containerElement
+      );
+
+      addVariableToList(processVariables, newVariable);
+    });
+  });
+
+  return processVariables;
+}
+
+/**
+ * Retrieves process variables defined in output mappings and
+ * ignores local variables, e.g.
+ *
+ * <bpmn:extensionElements>
+ *   <camunda:out sourceExpression="${myBean.ready}" target="variable1" />
+ *   <camunda:out source="foo" target="variableLocal" local="true" />
+ * </bpmn:extensionElements>
+ *
+ * => Adds one variable "variable1" to the list.
+ *
+ */
+function extractOutMappings(options) {
+  var elements = options.elements,
+      containerElement = options.containerElement,
+      processVariables = options.processVariables;
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [ elements ];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(element) {
+
+    var outMappings = getOutMappings(element);
+
+    // extract all variables with correct scope
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(outMappings, function(mapping) {
+
+      // do not use variables marked as <local>
+      if (mapping.local) {
+        return;
+      }
+
+      var newVariable = createProcessVariable(
+        element,
+        mapping.target,
+        containerElement
+      );
+
+      addVariableToList(processVariables, newVariable);
+    });
+  });
+
+  return processVariables;
+}
+
+/**
+ *
+ * @param {ModdleElement} element
+ * @param {string} [type] - optional
+ *
+ * @return {Array<ModdleElement>|undefined} collection of event definitions or none
+ */
+function getEventDefinitions(element, type) {
+  var eventDefinitions = element.eventDefinitions;
+
+  if (!eventDefinitions || !type) {
+    return eventDefinitions;
+  }
+
+  return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["filter"])(eventDefinitions, function(definition) {
+    return is$2(definition, type);
+  });
+}
+
+/**
+ * Returns error event definitions for a given element.
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {Array<ModdleElement>} collection of error event definitions
+ */
+function getErrorEventDefinitions(element) {
+  return getEventDefinitions(element, 'bpmn:ErrorEventDefinition');
+}
+
+/**
+ * Returns escalation event definitions for a given element.
+ *
+ * @param {ModdleElement} element
+ *
+ * @return {Array<ModdleElement>} collection of escalation event definitions
+ */
+function getEscalationEventDefinitions(element) {
+  return getEventDefinitions(element, 'bpmn:EscalationEventDefinition');
+}
+
+
+// helper ////////////////
+
+function is$2(element, type) {
+  return (
+    element &&
+    typeof element.$instanceOf === 'function' &&
+    element.$instanceOf(type)
+  );
+}
+
+/**
+ * Retrieves process variables defined in event definitions, e.g.
+ *
+ * <bpmn:escalationEventDefinition
+ *   id="EscalationEventDefinition_1"
+ *   escalationRef="Escalation_1"
+ *   camunda:escalationCodeVariable="variable1"
+ * />
+ *
+ * => Adds one variable "variable1" to the list.
+ *
+ * <bpmn:errorEventDefinition
+ *   id="ErrorEventDefinition_1"
+ *   errorRef="Error_1"
+ *   camunda:errorCodeVariable="variable2"
+ *   camunda:errorMessageVariable="variable3"
+ * />
+ *
+ * => Adds two variables "variable2" & "variable3" to the list.
+ *
+ */
+function extractEventDefinitionVariables(options) {
+  var elements = options.elements,
+      containerElement = options.containerElement,
+      processVariables = options.processVariables;
+
+  var addVariable = function(element, name) {
+    var newVariable = createProcessVariable(
+      element,
+      name,
+      containerElement
+    );
+
+    addVariableToList(processVariables, newVariable);
+  };
+
+  if (!Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["isArray"])(elements)) {
+    elements = [ elements ];
+  }
+
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(elements, function(element) {
+
+    // (1) error event code + message variable
+    var errorEventDefinitions = getErrorEventDefinitions(element);
+
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(errorEventDefinitions, function(definition) {
+
+      var errorCodeVariable = definition.get('errorCodeVariable'),
+          errorMessageVariable = definition.get('errorMessageVariable');
+
+      if (errorCodeVariable) {
+        addVariable(element, errorCodeVariable);
+      }
+
+      if (errorMessageVariable) {
+        addVariable(element, errorMessageVariable);
+      }
+    });
+
+    // (2) escalation code variable
+    var escalationEventDefinitions = getEscalationEventDefinitions(element);
+
+    Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(escalationEventDefinitions, function(definition) {
+
+      var escalationCodeVariable = definition.get('escalationCodeVariable');
+
+      if (escalationCodeVariable) {
+        addVariable(element, escalationCodeVariable);
+      }
+    });
+
+  });
+
+  return processVariables;
+}
+
+var extractors = [
+  extractOutputParameters,
+  extractResultVariables,
+  extractFormFields,
+  extractOutMappings,
+  extractEventDefinitionVariables
+];
+
+/**
+ * @typedef {Object} ProcessVariable
+ * @property {string} name
+ * @property {Array<ModdleElement>} origin
+ * @property {ModdleElement} scope
+ */
+
+// api /////////////////////////
+
+/**
+ * Retrieves all process variables for a given container element.
+ * @param {ModdleElement} containerElement
+ *
+ * @returns {Array<ProcessVariable>}
+ */
+function getProcessVariables(containerElement) {
+  var processVariables = [];
+
+  // (1) extract all flow elements inside the container
+  var elements = selfAndAllFlowElements([containerElement], false);
+
+  // (2) extract all variables from the extractors
+  Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["forEach"])(extractors, function(extractor) {
+    extractor({
+      elements: elements,
+      containerElement: containerElement,
+      processVariables: processVariables
+    });
+  });
+
+  return processVariables;
+}
+
+/**
+ * Retrieves all variables which are available in the given scope
+ *
+ * * Exclude variables which are only available in other scopes
+ * * Exclude variables which are produced by the given element
+ * * Include variables which are available in parent scopes
+ *
+ * @param {string} scope
+ * @param {ModdleElement} rootElement element from where to extract all variables
+ *
+ * @returns {Array<ProcessVariable>}
+ */
+function getVariablesForScope(scope, rootElement) {
+
+  var allVariables = getProcessVariables(rootElement);
+
+  var scopeElement = getElement(scope, rootElement);
+
+  // (1) get variables for given scope
+  var scopeVariables = Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["filter"])(allVariables, function(variable) {
+    return variable.scope.id === scopeElement.id;
+  });
+
+  // (2) get variables for parent scopes
+  var parents = getParents(scopeElement);
+
+  var parentsScopeVariables = Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["filter"])(allVariables, function(variable) {
+    return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["find"])(parents, function(parent) {
+      return parent.id === variable.scope.id;
+    });
+  });
+
+  return combineArrays$1(scopeVariables, parentsScopeVariables);
+}
+
+// helpers ////////////////////
+
+function combineArrays$1(a, b) {
+  return a.concat(b);
+}
+
+
 
 
 /***/ }),
@@ -420,12 +1128,23 @@ function PropertiesActivator(eventBus, priority) {
 
   priority = priority || DEFAULT_PRIORITY;
 
-  eventBus.on('propertiesPanel.isEntryVisible', priority, function(e) {
-    return self.isEntryVisible(e.entry, e.element);
+  eventBus.on('propertiesPanel.isEntryVisible', priority, function(context) {
+    var element = context.element,
+        entry = context.entry,
+        group = context.group,
+        tab = context.tab;
+
+    return self.isEntryVisible(element, entry, group, tab);
   });
 
-  eventBus.on('propertiesPanel.isPropertyEditable', priority, function(e) {
-    return self.isPropertyEditable(e.entry, e.propertyName, e.element);
+  eventBus.on('propertiesPanel.isPropertyEditable', priority, function(context) {
+    var element = context.element,
+        entry = context.entry,
+        group = context.group,
+        propertyName = context.propertyName,
+        tab = context.tab;
+
+    return self.isPropertyEditable(propertyName, element, entry, group, tab);
   });
 }
 
@@ -439,12 +1158,14 @@ module.exports = PropertiesActivator;
  *
  * @method  PropertiesActivator#isEntryVisible
  *
- * @param {EntryDescriptor} entry
  * @param {ModdleElement} element
+ * @param {Object} entry
+ * @param {Object} group
+ * @param {Object} tab
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
-PropertiesActivator.prototype.isEntryVisible = function(entry, element) {
+PropertiesActivator.prototype.isEntryVisible = function(element, entry, group, tab) {
   return true;
 };
 
@@ -453,13 +1174,15 @@ PropertiesActivator.prototype.isEntryVisible = function(entry, element) {
  *
  * @method  PropertiesActivator#isPropertyEditable
  *
- * @param {EntryDescriptor} entry
- * @param {String} propertyName
+ * @param {string} propertyName
  * @param {ModdleElement} element
+ * @param {Object} entry
+ * @param {Object} group
+ * @param {Object} tab
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
-PropertiesActivator.prototype.isPropertyEditable = function(entry, propertyName, element) {
+PropertiesActivator.prototype.isPropertyEditable = function(propertyName, element, entry, group, tab) {
   return true;
 };
 
@@ -477,6 +1200,7 @@ PropertiesActivator.prototype.isPropertyEditable = function(entry, propertyName,
 
 var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query,
     domClear = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").clear,
+    domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
     is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
     forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js"),
     domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
@@ -579,6 +1303,20 @@ module.exports.addEmptyParameter = addEmptyParameter;
 
 
 /**
+ * returns a dropdown option label depending on the defined event attributes
+ */
+function getOptionLabel(obj) {
+  var label = obj.name || '';
+
+  if (obj.errorCode)
+    label += ' (code=' + obj.errorCode + ')';
+  if (obj.escalationCode)
+    label += ' (code=' + obj.escalationCode + ')';
+
+  return label;
+}
+
+/**
  * returns a list with all root elements for the given parameter 'referencedType'
  */
 function refreshOptionsModel(businessObject, referencedType) {
@@ -586,7 +1324,7 @@ function refreshOptionsModel(businessObject, referencedType) {
   var referableObjects = findRootElementsByType(businessObject, referencedType);
   forEach(referableObjects, function(obj) {
     model.push({
-      label: (obj.name || '') + ' (id='+obj.id+')',
+      label: getOptionLabel(obj),
       value: obj.id,
       name: obj.name
     });
@@ -683,9 +1421,11 @@ function triggerClickEvent(element) {
 
   if (document.createEvent) {
     try {
+
       // Chrome, Safari, Firefox
       evt = new MouseEvent((eventType), { view: window, bubbles: true, cancelable: true });
     } catch (e) {
+
       // IE 11, PhantomJS (wat!)
       evt = document.createEvent('MouseEvent');
 
@@ -693,6 +1433,7 @@ function triggerClickEvent(element) {
     }
     return element.dispatchEvent(evt);
   } else {
+
     // Welcome IE
     evt = document.createEventObject();
 
@@ -713,6 +1454,389 @@ function escapeHTML(str) {
 
 module.exports.escapeHTML = escapeHTML;
 
+function createDropdown(dropdown) {
+  var menu = dropdown.menu;
+
+  var dropdownNode = domify(
+    '<div class="group__dropdown">' +
+      '<button class="group__dropdown-button">' +
+      '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"></path></svg>' +
+      '</button>' +
+      '<div class="group__dropdown-menu"></div>' +
+    '</div>'
+  );
+
+  var buttonNode = domQuery('.group__dropdown-button', dropdownNode),
+      menuNode = domQuery('.group__dropdown-menu', dropdownNode);
+
+  buttonNode.addEventListener('click', function(event) {
+    domClasses(dropdownNode).toggle('group__dropdown--open');
+
+    createOnGlobalClick(event);
+  });
+
+  forEach(menu, function(menuItem) {
+    var menuItemNode = domify('<div class="group__dropdown-menu-item" data-dropdown-action="' +
+      menuItem.id +
+      '">' + escapeHTML(menuItem.label) + '</div>');
+
+    menuItemNode.addEventListener('click', function() {
+      menuItem.onClick();
+
+      domClasses(dropdownNode).remove('group__dropdown--open');
+    });
+
+    menuNode.appendChild(menuItemNode);
+  });
+
+  var _onGlobalClick;
+
+  function createOnGlobalClick(_event) {
+    function onGlobalClick(event) {
+      if (event === _event) {
+        return;
+      }
+
+      var target = event.target;
+
+      if (menuNode !== target && !menuNode.contains(target)) {
+        domClasses(dropdownNode).remove('group__dropdown--open');
+
+        document.removeEventListener('click', onGlobalClick);
+      }
+    }
+
+    if (_onGlobalClick) {
+      document.removeEventListener('click', _onGlobalClick);
+    }
+
+    document.addEventListener('click', onGlobalClick);
+
+    _onGlobalClick = onGlobalClick;
+  }
+
+  return dropdownNode;
+}
+
+module.exports.createDropdown = createDropdown;
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/AutoSuggestTextBoxFactory.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/AutoSuggestTextBoxFactory.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var assign = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").assign,
+    find = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").find,
+    forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach,
+    debounce = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").debounce;
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var CLASS_ACTIVE = 'active';
+
+var FOCUS_LEAVE_DELAY = '150';
+
+var TEXT_NODE_NAME = '#text';
+
+var SUGGESTION_LIST_BOX_THRESHOLD = 15;
+
+var noop = function() {};
+
+
+var autoSuggestTextBox = function(translate, options, defaultParameters) {
+
+  var resource = defaultParameters,
+      label = options.label || resource.id,
+      canBeShown = !!options.show && typeof options.show === 'function',
+      description = options.description;
+
+  resource.html =
+    domify('<label ' +
+      'for="camunda-' + escapeHTML(resource.id) + '" ' +
+      (canBeShown ? 'data-show="isShown"' : '') +
+      '>' + label + '</label>' +
+    '<div class="bpp-field-wrapper" ' +
+      (canBeShown ? 'data-show="isShown"' : '') +
+    '>' +
+      '<div ' +
+        'contenteditable="true"' +
+        'id="camunda-' + escapeHTML(resource.id) + '" ' +
+        'name="' + escapeHTML(options.modelProperty) + '" ' +
+        'data-auto-suggest="suggestItems"' +
+        'data-blur="handleFocusLeave"' +
+      '></div>' +
+      '<div class="bpp-autosuggest-list"></div>' +
+    '</div>');
+
+  if (description) {
+    domQuery('.bpp-field-wrapper', resource.html).appendChild(entryFieldDescription(translate, description));
+  }
+
+  if (canBeShown) {
+    resource.isShown = function() {
+      return options.show.apply(resource, arguments);
+    };
+  }
+
+  /**
+   * Ensure selected item got recognized before list got hidden
+   */
+  resource.handleFocusLeave = debounce(function(element, entryNode) {
+    clearSuggestionList(entryNode);
+    hideSuggestionList(entryNode);
+  }, FOCUS_LEAVE_DELAY);
+
+  /**
+   * Fill the suggestion list relative to the current word under the cursor.
+   *
+   * @param {djs.model.Base} element
+   * @param {HTMLElement} entryNode
+   * @param {Event} event
+   */
+  resource.suggestItems = function(element, entryNode, event) {
+    var editorNode = event.delegateTarget,
+        range = getSelectionRange(),
+        focusNode = range.focusNode,
+        caretPosition = getCaretPosition(range.range),
+        canSuggest = options.canSuggest || noop,
+        getItems = options.getItems;
+
+    function updateSuggestionList(items) {
+      var listNode = domQuery('.bpp-autosuggest-list', entryNode);
+
+      // (1) clear list before
+      clearSuggestionList(entryNode);
+
+      // (2) keep list invisible if no items
+      if (!items.length) {
+        return;
+      }
+
+      domClasses(listNode).add(CLASS_ACTIVE);
+
+      // (3) create new items
+      forEach(items, function(item) {
+        createSuggestionItem(listNode, item);
+      });
+
+      // (4) place list relative to cursor
+      var position = getSuggestionListPosition(listNode, document.body).position;
+      setPosition(listNode, position.x, position.y);
+    }
+
+    function createSuggestionItem(parentNode, value) {
+      var itemNode = domify('<div class="bpp-autosuggest-item"></div>');
+      itemNode.innerText = escapeHTML(value);
+
+      parentNode.appendChild(itemNode);
+
+      itemNode.addEventListener('click', handleItemClick);
+    }
+
+    function handleItemClick(event) {
+      var value = event.target.innerText,
+          wordIndex = currentWord.index,
+          start = wordIndex,
+          end = wordIndex + currentWord[0].length;
+
+      selectRange(focusNode, start, end);
+
+      document.execCommand('insertText', false, value);
+
+      clearSuggestionList(entryNode);
+      hideSuggestionList(entryNode);
+    }
+
+    hideSuggestionList(entryNode);
+
+    var currentWord = (getWordUnderCursor(focusNode, caretPosition) || []);
+
+    if (currentWord && canSuggest(currentWord, editorNode, focusNode)) {
+      var items = getItems(element, entryNode),
+          results = [],
+          value = currentWord[0];
+
+      // sort matches by
+      // (1) item starts with value (case insensitive)
+      // (2) value is inside suggested item (case insensitive)
+      forEach(items, function(item) {
+        var itemLowerCase = item.toLowerCase(),
+            valueLowerCase = value && value.toLowerCase();
+
+        if (itemLowerCase.indexOf(valueLowerCase) === 0) {
+          results.push(item);
+        }
+      });
+
+      forEach(items, function(item) {
+        var itemLowerCase = item.toLowerCase(item),
+            valueLowerCase = value && value.toLowerCase();
+
+        if (itemLowerCase.indexOf(valueLowerCase) >= 1) {
+          results.push(item);
+        }
+      });
+
+      updateSuggestionList(results);
+    }
+  };
+
+  /**
+  * Calculates the position coordinates of the suggestion list,
+  * dependant on position of cursor
+  *
+  * @return {Object} coordinates
+  */
+  function getSuggestionListPosition(listNode, container) {
+    var range = getSelectionRange().range,
+        cursorBounds = range.getBoundingClientRect(),
+        clientBounds = container.getBoundingClientRect(),
+        listBounds = listNode.getBoundingClientRect();
+
+    var coordinates = {
+      'top-left': {
+        x: cursorBounds.right - listBounds.width,
+        y: cursorBounds.top - listBounds.height
+      },
+      'top-right': {
+        x: cursorBounds.right,
+        y: cursorBounds.top - listBounds.height
+      },
+      'bottom-left': {
+        x: cursorBounds.right - listBounds.width,
+        y: cursorBounds.top + SUGGESTION_LIST_BOX_THRESHOLD
+      },
+      'bottom-right': {
+        x: cursorBounds.right,
+        y: cursorBounds.top + SUGGESTION_LIST_BOX_THRESHOLD
+      }
+    };
+
+    var orientation = '';
+
+    if (cursorBounds.top + SUGGESTION_LIST_BOX_THRESHOLD + listBounds.height > (clientBounds.height + clientBounds.top)) {
+      orientation = 'top-';
+    } else {
+      orientation = 'bottom-';
+    }
+
+    if (cursorBounds.right + listBounds.width > (clientBounds.width + clientBounds.left)) {
+      orientation += 'left';
+    } else {
+      orientation += 'right';
+    }
+
+    return { orientation: orientation, position: coordinates[orientation] };
+  }
+
+  resource.getSuggestionListPosition = getSuggestionListPosition;
+
+
+  resource.cssClasses = ['bpp-autosuggest-textbox'];
+
+  return resource;
+};
+
+module.exports = autoSuggestTextBox;
+
+
+// helpers /////////////////////////////
+
+function getSelectionRange() {
+  var selection = document.getSelection();
+
+  return {
+    range: selection.getRangeAt(0),
+    focusNode: selection.focusNode
+  };
+}
+
+function getCaretPosition(range) {
+  return range.startOffset;
+}
+
+function selectRange(focusNode, start, end) {
+  var range = document.createRange(),
+      selection = window.getSelection();
+
+  range.setStart(focusNode, start);
+  range.setEnd(focusNode, end);
+
+  selection.removeAllRanges();
+
+  selection.addRange(range);
+}
+
+function hideSuggestionList(entryNode) {
+  var listNode = domQuery('.bpp-autosuggest-list', entryNode);
+  domClasses(listNode).remove(CLASS_ACTIVE);
+}
+
+function clearSuggestionList(entryNode) {
+  var listNode = domQuery('.bpp-autosuggest-list', entryNode);
+  while (listNode.firstChild) {
+    listNode.removeChild(listNode.firstChild);
+  }
+}
+
+function getWordUnderCursor(node, currentCursorPositon) {
+  var value = node.nodeName === TEXT_NODE_NAME ? node.wholeText : node.innerText,
+      allWords = findWords(value);
+
+  return find(allWords, function(word) {
+    var matchValue = word[0],
+        wordStart = word.index,
+        wordEnd = wordStart + matchValue.length - 1;
+
+    return (
+      wordStart <= (currentCursorPositon - 1) &&
+      wordEnd >= (currentCursorPositon - 1)
+    );
+  });
+}
+
+/**
+ * Retrieves all words inside a text (also inside clauses and after operators)
+ *
+ * @param {string} value
+ *
+ * @return {Array<Object>}
+ */
+function findWords(value) {
+
+  // eslint-disable-next-line no-useless-escape
+  return matchAll(value, /[^\s\r\(\)\,\+\-\*\/\{\}]+/g);
+}
+
+function matchAll(value, regex) {
+  var regexp = RegExp(regex),
+      match,
+      matches = [];
+
+  while ((match = regexp.exec(value)) !== null) {
+    matches.push(match);
+  }
+
+  return matches;
+}
+
+function setPosition(el, x, y) {
+  assign(el.style, { left: x + 'px', top: y + 'px' });
+}
+
 
 /***/ }),
 
@@ -726,6 +1850,8 @@ module.exports.escapeHTML = escapeHTML;
 "use strict";
 
 
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
 var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
     cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
     escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
@@ -733,7 +1859,7 @@ var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ ".
 var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
-var checkbox = function(options, defaultParameters) {
+var checkbox = function(translate, options, defaultParameters) {
   var resource = defaultParameters,
       id = resource.id,
       label = options.label || id,
@@ -742,7 +1868,7 @@ var checkbox = function(options, defaultParameters) {
       description = options.description;
 
   resource.html =
-    '<input id="camunda-' + escapeHTML(id) + '" ' +
+    domify('<input id="camunda-' + escapeHTML(id) + '" ' +
          'type="checkbox" ' +
          'name="' + escapeHTML(options.modelProperty) + '" ' +
          (canBeDisabled ? 'data-disable="isDisabled"' : '') +
@@ -751,11 +1877,11 @@ var checkbox = function(options, defaultParameters) {
     '<label for="camunda-' + escapeHTML(id) + '" ' +
          (canBeDisabled ? 'data-disable="isDisabled"' : '') +
          (canBeHidden ? 'data-show="isHidden"' : '') +
-         '>' + escapeHTML(label) + '</label>';
+         '>' + escapeHTML(label) + '</label>');
 
   // add description below checkbox entry field
   if (description) {
-    resource.html += entryFieldDescription(description);
+    resource.html.appendChild(entryFieldDescription(translate, description, { show: canBeHidden && 'isHidden' }));
   }
 
   resource.get = function(element) {
@@ -805,6 +1931,139 @@ module.exports = checkbox;
 
 /***/ }),
 
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/CollapsibleEntryFactory.js":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/CollapsibleEntryFactory.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+
+/**
+ * @param  {object} options
+ * @param  {string} options.id
+ * @param  {string} [options.title='']
+ * @param  {string} [options.description='']
+ * @param  {boolean} [options.open=false]
+ * @param  {Function} [options.onToggle]
+ * @param  {Function} [options.onRemove]
+ *
+ * @return {object}
+ */
+function Collapsible(options) {
+
+  var id = options.id,
+      title = options.title || '',
+      description = options.description || '',
+      open = !!options.open || false,
+      onToggle = options.onToggle || noop,
+      onRemove = options.onRemove,
+      cssClasses = options.cssClasses || [];
+
+
+  var collapsibleEntry = {
+    id: id,
+    toggle: toggle,
+    isOpen: isOpen,
+    set: set,
+    setOpen: setOpen,
+    get: get
+  };
+
+  if (typeof onRemove === 'function') {
+    collapsibleEntry.onRemove = function(entry, entryNode, actionId, event) {
+      var commands = onRemove(entry, entryNode, actionId, event);
+
+      if (commands) {
+        scheduleCommands(commands, entryNode);
+        return true;
+      }
+    };
+  }
+
+  function get(element, entryNode) {
+    if (options.get) {
+      return options.get(element, entryNode);
+    }
+
+    return {
+      title: title || '',
+      description: description || ''
+    };
+  }
+
+  function set() {
+    var commands = this._commands;
+
+    if (commands) {
+      delete this._commands;
+      return commands;
+    }
+  }
+
+  function toggle(element, entryNode, event, scope) {
+    var value = !open;
+
+    setOpen(value, entryNode);
+    onToggle(value, entryNode);
+  }
+
+  /**
+   * Set entry's open state.
+   *
+   * @param {boolean} value
+   * @param {HTMLElement} entryNode
+   */
+  function setOpen(value, entryNode) {
+    open = value;
+    entryNode.classList.toggle('bpp-collapsible--collapsed', !value);
+  }
+
+  function isOpen() {
+    return open;
+  }
+
+  /**
+   * Schedule commands to be run with next `set` method call.
+   *
+   * @param {Array<any>} commands
+   * @param {HTMLElement} entryNode
+   */
+  function scheduleCommands(commands, entryNode) {
+    collapsibleEntry._commands = commands;
+
+    // @barmac: hack to make properties panel call `set`
+    var input = domQuery('input[type="hidden"]', entryNode);
+    input.value = 1;
+  }
+
+  collapsibleEntry.html = '<div class="bpp-field-wrapper" data-action="toggle"><input name="hidden" type="hidden">' +
+    '<span class="bpp-collapsible__icon"></span>' +
+    '<label class="bpp-collapsible__title" data-value="title">' + escapeHTML(title) + '</label>' +
+    '<label class="bpp-collapsible__description" data-value="description">' + escapeHTML(description) + '</label>' +
+    (onRemove ? '<button class="bpp-collapsible__remove action-button clear" data-action="onRemove"></button>' : '') +
+  '</div>';
+
+  collapsibleEntry.cssClasses = cssClasses.concat(open ?
+    [ 'bpp-collapsible' ] : [ 'bpp-collapsible', 'bpp-collapsible--collapsed' ]
+  );
+
+  return collapsibleEntry;
+}
+
+module.exports = Collapsible;
+
+function noop() {}
+
+
+/***/ }),
+
 /***/ "./node_modules/bpmn-js-properties-panel/lib/factory/ComboEntryFactory.js":
 /*!********************************************************************************!*\
   !*** ./node_modules/bpmn-js-properties-panel/lib/factory/ComboEntryFactory.js ***!
@@ -818,7 +2077,8 @@ module.exports = checkbox;
 var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js"),
     find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
 
-var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
 
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
@@ -843,7 +2103,7 @@ var selectEntryFactory = __webpack_require__(/*! ./SelectEntryFactory */ "./node
  *
  * @return {Object}
  */
-var comboBox = function(options) {
+var comboBox = function(translate, options) {
 
   var selectOptions = options.selectOptions,
       modelProperty = options.modelProperty,
@@ -912,19 +2172,25 @@ var comboBox = function(options) {
 
   comboOptions.selectOptions.push({ name: customName, value: customValue });
 
-  var comboBoxEntry = assign({}, selectEntryFactory(comboOptions, comboOptions));
+  var comboBoxEntry = assign({}, selectEntryFactory(translate, comboOptions, comboOptions));
 
-  comboBoxEntry.html += '<div class="bpp-field-wrapper bpp-combo-input" ' +
+  var fragment = document.createDocumentFragment();
+
+  fragment.appendChild(comboBoxEntry.html);
+
+  comboBoxEntry.html = fragment;
+
+  comboBoxEntry.html.appendChild(domify('<div class="bpp-field-wrapper bpp-combo-input" ' +
     'data-show="showCustomInput"' +
     '>' +
     '<input id="camunda-' + escapeHTML(options.id) + '-input" type="text" name="custom-' +
       escapeHTML(modelProperty) + '" ' +
     ' />' +
-  '</div>';
+  '</div>'));
 
   // add description below combo box entry field
   if (description) {
-    comboBoxEntry.html += entryFieldDescription(description);
+    comboBoxEntry.html.appendChild(entryFieldDescription(translate, description, { show: 'showCustomInput' }));
   }
 
   return comboBoxEntry;
@@ -956,7 +2222,10 @@ var textInputField = __webpack_require__(/*! ./TextInputEntryFactory */ "./node_
     validationAwareTextInputField = __webpack_require__(/*! ./ValidationAwareTextInput */ "./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js"),
     tableField = __webpack_require__(/*! ./TableEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/TableEntryFactory.js"),
     labelEntry = __webpack_require__(/*! ./LabelFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/LabelFactory.js"),
-    link = __webpack_require__(/*! ./LinkEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/LinkEntryFactory.js");
+    link = __webpack_require__(/*! ./LinkEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/LinkEntryFactory.js"),
+    autoSuggestTextBoxField = __webpack_require__(/*! ./AutoSuggestTextBoxFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/AutoSuggestTextBoxFactory.js"),
+    collapsible = __webpack_require__(/*! ./CollapsibleEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/CollapsibleEntryFactory.js"),
+    toggleSwitch = __webpack_require__(/*! ./ToggleSwitchEntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/ToggleSwitchEntryFactory.js");
 
 var cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
@@ -1049,12 +2318,12 @@ function EntryFactory() {
  * @param options
  * @returns the propertyPanel entry resource object
  */
-EntryFactory.textField = function(options) {
-  return textInputField(options, setDefaultParameters(options));
+EntryFactory.textField = function(translate, options) {
+  return textInputField(translate, options, setDefaultParameters(options));
 };
 
-EntryFactory.validationAwareTextField = function(options) {
-  return validationAwareTextInputField(options, setDefaultParameters(options));
+EntryFactory.validationAwareTextField = function(translate, options) {
+  return validationAwareTextInputField(translate, options, setDefaultParameters(options));
 };
 
 /**
@@ -1077,32 +2346,44 @@ EntryFactory.validationAwareTextField = function(options) {
  * @param options
  * @returns the propertyPanel entry resource object
  */
-EntryFactory.checkbox = function(options) {
-  return checkboxField(options, setDefaultParameters(options));
+EntryFactory.checkbox = function(translate, options) {
+  return checkboxField(translate, options, setDefaultParameters(options));
 };
 
-EntryFactory.textBox = function(options) {
-  return textBoxField(options, setDefaultParameters(options));
+EntryFactory.textBox = function(translate, options) {
+  return textBoxField(translate, options, setDefaultParameters(options));
 };
 
-EntryFactory.selectBox = function(options) {
-  return selectBoxField(options, setDefaultParameters(options));
+EntryFactory.selectBox = function(translate, options) {
+  return selectBoxField(translate, options, setDefaultParameters(options));
 };
 
-EntryFactory.comboBox = function(options) {
-  return comboBoxField(options);
+EntryFactory.comboBox = function(translate, options) {
+  return comboBoxField(translate, options);
 };
 
-EntryFactory.table = function(options) {
-  return tableField(options);
+EntryFactory.table = function(translate, options) {
+  return tableField(translate, options);
 };
 
 EntryFactory.label = function(options) {
   return labelEntry(options);
 };
 
-EntryFactory.link = function(options) {
-  return link(options);
+EntryFactory.link = function(translate, options) {
+  return link(translate, options);
+};
+
+EntryFactory.autoSuggest = function(translate, options) {
+  return autoSuggestTextBoxField(translate, options, setDefaultParameters(options));
+};
+
+EntryFactory.collapsible = function(options) {
+  return collapsible(options);
+};
+
+EntryFactory.toggleSwitch = function(translate, options) {
+  return toggleSwitch(translate, options, setDefaultParameters(options));
 };
 
 module.exports = EntryFactory;
@@ -1120,7 +2401,13 @@ module.exports = EntryFactory;
 "use strict";
 
 
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
+    domEvent = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").event;
+
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var MAX_DESCRIPTION_LENGTH = 200;
 
 /**
  * Create a linkified and HTML escaped entry field description.
@@ -1128,9 +2415,12 @@ var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-pro
  * As a special feature, this description may contain both markdown,
  * plain <a href> links and <br />
  *
- * @param {String} description
+ * @param {string} description
+ * @param {object} [options]
+ * @param {string} [options.show] - name of callback to determine whether description is shown
  */
-module.exports = function entryFieldDescription(description) {
+module.exports = function entryFieldDescription(translate, description, options) {
+  var show = options && options.show;
 
   // we tokenize the description to extract text, HTML and markdown links
   // text, links and new lines are handled seperately
@@ -1165,7 +2455,59 @@ module.exports = function entryFieldDescription(description) {
     escaped.push(escapeText(description.substring(index)));
   }
 
-  return '<div class="bpp-field-description">' + escaped.join('') + '</div>';
+  description = escaped.join('');
+
+  var html = domify(
+    '<div class="bpp-field-description description description--expanded"' +
+    (show ? 'data-show="' + show + '">' : '>') +
+    '</div>'
+  );
+
+  var descriptionText = domify('<span class="description__text">' + description + '</span>');
+
+  html.appendChild(descriptionText);
+
+  function toggleExpanded(expanded) {
+    if (expanded) {
+      domClasses(html).add('description--expanded');
+
+      descriptionText.textContent = description + ' ';
+
+      expand.textContent = translate('Less');
+    } else {
+      domClasses(html).remove('description--expanded');
+
+      descriptionText.textContent = descriptionShortened + ' ... ';
+
+      expand.textContent = translate('More');
+    }
+  }
+
+  var descriptionShortened,
+      expand,
+      expanded = false;
+
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    descriptionShortened = description.slice(0, MAX_DESCRIPTION_LENGTH);
+
+    expand = domify(
+      '<span class="bpp-entry-link description__expand">' +
+        translate('More') +
+      '</span>'
+    );
+
+    domEvent.bind(expand, 'click', function() {
+      expanded = !expanded;
+
+      toggleExpanded(expanded);
+    });
+
+    html.appendChild(expand);
+
+    toggleExpanded(expanded);
+  }
+
+  return html;
 };
 
 function escapeText(text) {
@@ -1191,7 +2533,6 @@ function escapeText(text) {
 
   return escaped.join('');
 }
-
 
 /***/ }),
 
@@ -1255,6 +2596,8 @@ module.exports = label;
 "use strict";
 
 
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
 var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
@@ -1272,7 +2615,7 @@ var bind = __webpack_require__(/*! lodash/bind */ "./node_modules/lodash/bind.js
  *
  * @param {Object} options
  * @param {String} options.id
- * @param {String} [options.label]
+ * @param {String} [options.buttonLabel]
  * @param {Function} options.handleClick
  * @param {Function} [options.showLink] returning false to hide link
  * @param {String} [options.description]
@@ -1288,13 +2631,14 @@ var bind = __webpack_require__(/*! lodash/bind */ "./node_modules/lodash/bind.js
  *
  * @return {Entry} the newly created entry
  */
-function link(options) {
+function link(translate, options) {
 
   var id = options.id,
-      label = options.label || id,
+      buttonLabel = options.buttonLabel || id,
       showLink = options.showLink,
       handleClick = options.handleClick,
-      description = options.description;
+      description = options.description,
+      label = options.label;
 
   if (showLink && typeof showLink !== 'function') {
     throw new Error('options.showLink must be a function');
@@ -1305,18 +2649,26 @@ function link(options) {
   }
 
   var resource = {
-    id: id
+    id: id,
+    html: document.createDocumentFragment()
   };
 
-  resource.html =
+  if (label) {
+    resource.html.appendChild(domify('<label for="camunda-' + escapeHTML(id) + '" ' +
+      (showLink ? 'data-show="showLink" ' : '') +
+      '>'+ escapeHTML(label) +'</label>'));
+  }
+
+  resource.html.appendChild(domify('<div class="bpp-field-wrapper">' +
     '<a data-action="handleClick" ' +
     (showLink ? 'data-show="showLink" ' : '') +
     'class="bpp-entry-link' + (options.cssClasses ? ' ' + escapeHTML(options.cssClasses) : '') +
-    '">' + escapeHTML(label) + '</a>';
+    '">' + escapeHTML(buttonLabel) + '</a></div>'));
+
 
   // add description below link entry field
   if (description) {
-    resource.html += entryFieldDescription(description);
+    resource.html.appendChild(entryFieldDescription(translate, description, { show: 'showLink' }));
   }
 
   resource.handleClick = bind(handleClick, resource);
@@ -1347,7 +2699,8 @@ module.exports = link;
 
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
-var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
 
 var forEach = __webpack_require__(/*! lodash/forEach */ "./node_modules/lodash/forEach.js");
 
@@ -1379,7 +2732,7 @@ var createOption = function(option) {
  *
  * @return {Object}
  */
-var selectbox = function(options, defaultParameters) {
+var selectbox = function(translate, options, defaultParameters) {
   var resource = defaultParameters,
       label = options.label || resource.id,
       selectOptions = options.selectOptions || [ { name: '', value: '' } ],
@@ -1396,7 +2749,7 @@ var selectbox = function(options, defaultParameters) {
 
 
   resource.html =
-    '<label for="camunda-' + escapeHTML(resource.id) + '"' +
+    domify('<label for="camunda-' + escapeHTML(resource.id) + '"' +
     (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
     (canBeHidden ? 'data-show="isHidden" ' : '') +
     '>' + escapeHTML(label) + '</label>' +
@@ -1404,20 +2757,27 @@ var selectbox = function(options, defaultParameters) {
     escapeHTML(modelProperty) + '"' +
     (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
     (canBeHidden ? 'data-show="isHidden" ' : '') +
-    ' data-value>';
+    ' data-value></select>');
+
+  var select = domQuery('select', resource.html);
 
   if (isList(selectOptions)) {
     forEach(selectOptions, function(option) {
-      resource.html += '<option value="' + escapeHTML(option.value) + '">' +
-      (option.name ? escapeHTML(option.name) : '') + '</option>';
+      select.appendChild(
+        domify(
+          '<option value="' + escapeHTML(option.value) +
+          (option.title ? '" title="' + escapeHTML(option.title) : '') +
+          '">' +
+          (option.name ? escapeHTML(option.name) : '') +
+          '</option>'
+        )
+      );
     });
   }
 
-  resource.html += '</select>';
-
   // add description below select box entry field
   if (description && typeof options.showCustomInput !== 'function') {
-    resource.html += entryFieldDescription(description);
+    resource.html.appendChild(entryFieldDescription(translate, description, { show: canBeHidden && 'isHidden' }));
   }
 
   /**
@@ -1513,7 +2873,7 @@ var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "
 var updateSelection = __webpack_require__(/*! selection-update */ "./node_modules/selection-update/index.js");
 
 var TABLE_ROW_DIV_SNIPPET = '<div class="bpp-field-wrapper bpp-table-row">';
-var DELETE_ROW_BUTTON_SNIPPET = '<button class="clear" data-action="deleteElement">' +
+var DELETE_ROW_BUTTON_SNIPPET = '<button class="action-button clear" data-action="deleteElement">' +
                                   '<span>X</span>' +
                                 '</button>';
 
@@ -1621,7 +2981,7 @@ function setSelection(node, selection) {
  *
  * @return {Object}
  */
-module.exports = function(options) {
+module.exports = function(translate, options) {
 
   var id = options.id,
       modelProperties = options.modelProperties,
@@ -1652,23 +3012,26 @@ module.exports = function(options) {
     return pick(getElements(element, node), modelProperties);
   };
 
+  var html = domify((canAdd ?
+    '<div class="bpp-table-add-row" ' + (canBeShown ? 'data-show="show"' : '') + '>' +
+          '<label>' + escapeHTML(addLabel) + '</label>' +
+          '<button class="action-button add" data-action="addElement"><span>+</span></button>' +
+        '</div>' : '') +
+        '<div class="bpp-table" data-show="showTable">' +
+          '<div class="bpp-field-wrapper bpp-table-row">' +
+             labelRow +
+          '</div>' +
+          '<div data-list-entry-container>' +
+          '</div>' +
+        '</div>');
+
+  if (description) {
+    html.appendChild(entryFieldDescription(translate, description, { show: 'showTable' }));
+  }
+
   var factory = {
     id: id,
-    html: (canAdd ?
-      '<div class="bpp-table-add-row" ' + (canBeShown ? 'data-show="show"' : '') + '>' +
-            '<label>' + escapeHTML(addLabel) + '</label>' +
-            '<button class="add" data-action="addElement"><span>+</span></button>' +
-          '</div>' : '') +
-          '<div class="bpp-table" data-show="showTable">' +
-            '<div class="bpp-field-wrapper bpp-table-row">' +
-               labelRow +
-            '</div>' +
-            '<div data-list-entry-container>' +
-            '</div>' +
-          '</div>' +
-
-          // add description below table entry field
-          (description ? entryFieldDescription(description) : ''),
+    html: html,
 
     get: function(element, node) {
       var boElements = elements(element, node, this.__invalidValues);
@@ -1723,6 +3086,7 @@ module.exports = function(options) {
               commands.push(cmd);
             }
           } else {
+
             // cache invalid value in an object by index as key
             self.__invalidValues = self.__invalidValues || {};
             self.__invalidValues[idx] = value;
@@ -1844,12 +3208,14 @@ module.exports = function(options) {
 "use strict";
 
 
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
 var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
-var textBox = function(options, defaultParameters) {
+var textBox = function(translate, options, defaultParameters) {
 
   var resource = defaultParameters,
       label = options.label || resource.id,
@@ -1857,7 +3223,7 @@ var textBox = function(options, defaultParameters) {
       description = options.description;
 
   resource.html =
-    '<label for="camunda-' + escapeHTML(resource.id) + '" ' +
+    domify('<label for="camunda-' + escapeHTML(resource.id) + '" ' +
     (canBeShown ? 'data-show="isShown"' : '') +
     '>' + label + '</label>' +
     '<div class="bpp-field-wrapper" ' +
@@ -1865,11 +3231,11 @@ var textBox = function(options, defaultParameters) {
     '>' +
       '<div contenteditable="true" id="camunda-' + escapeHTML(resource.id) + '" ' +
             'name="' + escapeHTML(options.modelProperty) + '" />' +
-    '</div>';
+    '</div>');
 
   // add description below text box entry field
   if (description) {
-    resource.html += entryFieldDescription(description);
+    resource.html.appendChild(entryFieldDescription(translate, description, { show: canBeShown && 'isShown' }));
   }
 
   if (canBeShown) {
@@ -1900,12 +3266,13 @@ module.exports = textBox;
 
 var escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
 
-var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
 
 var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
 
 
-var textField = function(options, defaultParameters) {
+var textField = function(translate, options, defaultParameters) {
 
   // Default action for the button next to the input-field
   var defaultButtonAction = function(element, inputNode) {
@@ -1936,7 +3303,7 @@ var textField = function(options, defaultParameters) {
       description = options.description;
 
   resource.html =
-    '<label for="camunda-' + escapeHTML(resource.id) + '" ' +
+    domify('<label for="camunda-' + escapeHTML(resource.id) + '" ' +
       (canBeDisabled ? 'data-disable="isDisabled" ' : '') +
       (canBeHidden ? 'data-show="isHidden" ' : '') +
       (dataValueLabel ? 'data-value="' + escapeHTML(dataValueLabel) + '"' : '') + '>'+ escapeHTML(label) +'</label>' +
@@ -1948,16 +3315,16 @@ var textField = function(options, defaultParameters) {
         (canBeDisabled ? 'data-disable="isDisabled"' : '') +
         (canBeHidden ? 'data-show="isHidden"' : '') +
         ' />' +
-      '<button class="' + escapeHTML(actionName) + '" data-action="' + escapeHTML(actionName) + '" data-show="' + escapeHTML(showName) + '" ' +
+      '<button class="action-button ' + escapeHTML(actionName) + '" data-action="' + escapeHTML(actionName) + '" data-show="' + escapeHTML(showName) + '" ' +
         (canBeDisabled ? 'data-disable="isDisabled"' : '') +
         (canBeHidden ? ' data-show="isHidden"' : '') + '>' +
         '<span>' + escapeHTML(buttonLabel) + '</span>' +
       '</button>' +
-    '</div>';
+    '</div>');
 
   // add description below text input entry field
   if (description) {
-    resource.html += entryFieldDescription(description);
+    resource.html.appendChild(entryFieldDescription(translate, description, { show: canBeHidden && 'isHidden' }));
   }
 
   resource[actionName] = actionMethod;
@@ -1985,6 +3352,122 @@ module.exports = textField;
 
 /***/ }),
 
+/***/ "./node_modules/bpmn-js-properties-panel/lib/factory/ToggleSwitchEntryFactory.js":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/factory/ToggleSwitchEntryFactory.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    cmdHelper = __webpack_require__(/*! ../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    escapeHTML = __webpack_require__(/*! ../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFieldDescription = __webpack_require__(/*! ./EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify;
+
+var toggleSwitch = function(translate, options, defaultParameters) {
+  var resource = defaultParameters,
+      id = resource.id,
+      label = options.label || id,
+      canBeHidden = !!options.hidden && typeof options.hidden === 'function',
+      isOn = options.isOn,
+      descriptionOn = options.descriptionOn,
+      descriptionOff = options.descriptionOff,
+      labelOn = options.labelOn,
+      labelOff = options.labelOff;
+
+  resource.html = document.createDocumentFragment();
+
+  resource.html.appendChild(domify('<label for="' + escapeHTML(id) + '" ' +
+      (canBeHidden ? 'data-show="shouldShow"' : '') +
+      '>' + escapeHTML(label) + '</label>' +
+    '<div class="bpp-field-wrapper"' +
+    (canBeHidden ? 'data-show="shouldShow"' : '') +
+    '>' +
+      '<label class="bpp-toggle-switch__switcher">' +
+        '<input id="' + escapeHTML(id) + '" ' +
+            'type="checkbox" ' +
+            'name="' + escapeHTML(options.modelProperty) + '" />' +
+        '<span class="bpp-toggle-switch__slider"></span>' +
+      '</label>' +
+      '<p class="bpp-toggle-switch__label" data-show="isOn">' +
+        escapeHTML(labelOn) +
+      '</p>' +
+      '<p class="bpp-toggle-switch__label" data-show="isOff">' +
+        escapeHTML(labelOff) +
+      '</p>' +
+    '</div>'));
+
+  if (descriptionOn) {
+    resource.html.appendChild(entryFieldDescription(translate, descriptionOn, { show: 'isOn' }));
+  }
+
+  if (descriptionOff) {
+    resource.html.appendChild(entryFieldDescription(translate, descriptionOff, { show: 'isOff' }));
+  }
+
+  resource.get = function(element) {
+    var bo = getBusinessObject(element),
+        res = {};
+
+    res[options.modelProperty] = bo.get(options.modelProperty);
+
+    return res;
+  };
+
+  resource.set = function(element, values) {
+    var res = {};
+
+    res[options.modelProperty] = !!values[options.modelProperty];
+
+    return cmdHelper.updateProperties(element, res);
+  };
+
+  if (typeof options.set === 'function') {
+    resource.set = options.set;
+  }
+
+  if (typeof options.get === 'function') {
+    resource.get = options.get;
+  }
+
+  if (canBeHidden) {
+    resource.shouldShow = function() {
+      return !options.hidden.apply(resource, arguments);
+    };
+  }
+
+  resource.isOn = function() {
+    if (canBeHidden && !resource.shouldShow()) {
+      return false;
+    }
+
+    return isOn.apply(resource, arguments);
+  };
+
+  resource.isOff = function() {
+    if (canBeHidden && !resource.shouldShow()) {
+      return false;
+    }
+
+    return !resource.isOn();
+  };
+
+  resource.cssClasses = ['bpp-toggle-switch'];
+
+  return resource;
+};
+
+module.exports = toggleSwitch;
+
+
+/***/ }),
+
 /***/ "./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js":
 /*!***************************************************************************************!*\
   !*** ./node_modules/bpmn-js-properties-panel/lib/factory/ValidationAwareTextInput.js ***!
@@ -2002,7 +3485,7 @@ var textField = __webpack_require__(/*! ./TextInputEntryFactory */ "./node_modul
  * It adds functionality to cache an invalid value entered in the
  * text input, instead of setting it on the business object.
  */
-var validationAwareTextField = function(options, defaultParameters) {
+var validationAwareTextField = function(translate, options, defaultParameters) {
 
   var modelProperty = options.modelProperty;
 
@@ -2045,7 +3528,7 @@ var validationAwareTextField = function(options, defaultParameters) {
     return options.validate(element, property, node);
   };
 
-  return textField(options, defaultParameters);
+  return textField(translate, options, defaultParameters);
 };
 
 module.exports = validationAwareTextField;
@@ -2117,7 +3600,7 @@ module.exports.isExclusive = isExclusive;
  * @return {Array<ModdleElement>} a list of 'camunda:FailedJobRetryTimeCycle'
  */
 function getFailedJobRetryTimeCycle(bo) {
-  return (extensionElementsHelper.getExtensionElements(bo, 'camunda:FailedJobRetryTimeCycle') || [])[0];
+  return extensionElementsHelper.getExtensionElements(bo, 'camunda:FailedJobRetryTimeCycle')[0];
 }
 
 module.exports.getFailedJobRetryTimeCycle = getFailedJobRetryTimeCycle;
@@ -2213,13 +3696,14 @@ CmdHelper.updateBusinessObject = function(element, businessObject, newProperties
   };
 };
 
-CmdHelper.addElementsTolist = function(element, businessObject, listPropertyName, objectsToAdd) {
+CmdHelper.addElementsTolist = function(element, businessObject, listPropertyName, objectsToAdd, objectsToPrepend) {
   return {
     cmd: 'properties-panel.update-businessobject-list',
     context: {
       element: element,
       currentObject: businessObject,
       propertyName: listPropertyName,
+      objectsToPrepend: objectsToPrepend,
       objectsToAdd: objectsToAdd
     }
   };
@@ -2392,23 +3876,20 @@ var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/b
 
 var ExtensionElementsHelper = {};
 
-var getExtensionElements = function(bo) {
-  return bo.get('extensionElements');
-};
-
 ExtensionElementsHelper.getExtensionElements = function(bo, type) {
-  var extensionElements = getExtensionElements(bo);
+  var elements = [];
+  var extensionElements = bo.get('extensionElements');
+
   if (typeof extensionElements !== 'undefined') {
     var extensionValues = extensionElements.get('values');
     if (typeof extensionValues !== 'undefined') {
-      var elements = extensionValues.filter(function(value) {
+      elements = extensionValues.filter(function(value) {
         return is(value, type);
       });
-      if (elements.length) {
-        return elements;
-      }
     }
   }
+
+  return elements;
 };
 
 ExtensionElementsHelper.addEntry = function(bo, element, entry, bpmnFactory) {
@@ -2416,10 +3897,12 @@ ExtensionElementsHelper.addEntry = function(bo, element, entry, bpmnFactory) {
 
   // if there is no extensionElements list, create one
   if (!extensionElements) {
+
     // TODO: Ask Daniel which operation costs more
     extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [entry] }, bo, bpmnFactory);
     return { extensionElements : extensionElements };
   } else {
+
     // add new failedJobRetryExtensionElement to existing extensionElements list
     return cmdHelper.addElementsTolist(element, extensionElements, 'values', [entry]);
   }
@@ -2471,9 +3954,7 @@ FormHelper.getFormData = function(element) {
 
   var formData = getExtensionElements(bo, 'camunda:FormData');
 
-  if (typeof formData !== 'undefined') {
-    return formData[0];
-  }
+  return formData[0];
 };
 
 
@@ -2710,7 +4191,7 @@ ImplementationTypeHelper.getImplementationType = function(element) {
 
   if (this.isServiceTaskLike(bo)) {
     var connectors = extensionsElementHelper.getExtensionElements(bo, 'camunda:Connector');
-    if (typeof connectors !== 'undefined') {
+    if (connectors.length) {
       return 'connector';
     }
   }
@@ -2771,7 +4252,7 @@ var InputOutputHelper = {};
 module.exports = InputOutputHelper;
 
 function getElements(bo, type, prop) {
-  var elems = extensionElementsHelper.getExtensionElements(bo, type) || [];
+  var elems = extensionElementsHelper.getExtensionElements(bo, type);
   return !prop ? elems : (elems[0] || {})[prop] || [];
 }
 
@@ -2996,7 +4477,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   };
 
   // Element Documentation
-  var elementDocuEntry = entryFactory.textBox({
+  var elementDocuEntry = entryFactory.textBox(translate, {
     id: 'documentation',
     label: translate('Element Documentation'),
     modelProperty: 'documentation'
@@ -3018,7 +4499,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
     // do not show for collapsed Pools/Participants
     if (processRef) {
-      var processDocuEntry = entryFactory.textBox({
+      var processDocuEntry = entryFactory.textBox(translate, {
         id: 'process-documentation',
         label: translate('Process Documentation'),
         modelProperty: 'documentation'
@@ -3226,7 +4707,7 @@ module.exports = function(group, element, translate) {
 
   if (is(element, 'bpmn:Process') || (is(element, 'bpmn:Participant') && bo.get('processRef'))) {
 
-    var executableEntry = entryFactory.checkbox({
+    var executableEntry = entryFactory.checkbox(translate, {
       id: 'process-is-executable',
       label: translate('Executable'),
       modelProperty: 'isExecutable'
@@ -3267,14 +4748,15 @@ var entryFactory = __webpack_require__(/*! ../../../factory/EntryFactory */ "./n
     cmdHelper = __webpack_require__(/*! ../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
 
 module.exports = function(group, element, translate, options) {
-
-  var description = options && options.description;
+  if (!options) {
+    options = {};
+  }
 
   // Id
-  group.entries.push(entryFactory.validationAwareTextField({
-    id: 'id',
-    label: translate('Id'),
-    description: description && translate(description),
+  group.entries.push(entryFactory.validationAwareTextField(translate, {
+    id: options.id || 'id',
+    label: translate(options.label || 'Id'),
+    description: options.description && translate(options.description),
     modelProperty: 'id',
     getProperty: function(element) {
       return getBusinessObject(element).id;
@@ -3343,7 +4825,7 @@ module.exports = function(group, element, translate) {
       var linkEventDefinition = getLinkEventDefinition(element);
 
       if (linkEventDefinition) {
-        var entry = entryFactory.textField({
+        var entry = entryFactory.textField(translate, {
           id: 'link-event',
           label: translate('Link Name'),
           modelProperty: 'link-name'
@@ -3385,7 +4867,10 @@ var nameEntryFactory = __webpack_require__(/*! ./implementation/Name */ "./node_
     is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
     getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
 
-module.exports = function(group, element, bpmnFactory, canvas, translate) {
+module.exports = function(group, element, bpmnFactory, canvas, translate, options) {
+  if (!options) {
+    options = {};
+  }
 
   function initializeCategory(semantic) {
     var rootElement = canvas.getRootElement(),
@@ -3422,24 +4907,24 @@ module.exports = function(group, element, bpmnFactory, canvas, translate) {
   }
 
   if (!is(element, 'bpmn:Collaboration')) {
+    var nameOptions = {
+      id: options.id,
+      label: options.label && translate(options.label)
+    };
 
-    var options;
     if (is(element, 'bpmn:TextAnnotation')) {
-      options = { modelProperty: 'text', label: translate('Text') };
+      nameOptions.modelProperty = 'text';
+      nameOptions.label = translate('Text');
     } else if (is(element, 'bpmn:Group')) {
-      options = {
-        modelProperty: 'categoryValue',
-        label: translate('Category Value'),
-        get: getGroupName,
-        set: setGroupName
-      };
+      nameOptions.modelProperty = 'categoryValue';
+      nameOptions.label = translate('Category Value');
+      nameOptions.get = getGroupName;
+      nameOptions.set = setGroupName;
     }
 
     // name
-    group.entries = group.entries.concat(nameEntryFactory(element, options, translate));
-
+    group.entries = group.entries.concat(nameEntryFactory(element, nameOptions, translate));
   }
-
 };
 
 
@@ -3473,7 +4958,7 @@ module.exports = function(group, element, translate, options) {
      * processId
      */
     if (is(element, 'bpmn:Participant')) {
-      var idEntry = entryFactory.validationAwareTextField({
+      var idEntry = entryFactory.validationAwareTextField(translate, {
         id: 'process-id',
         label: translate('Process Id'),
         description: processIdDescription && translate(processIdDescription),
@@ -3625,7 +5110,7 @@ function createActivityRefOptions(element) {
 
 module.exports = function(group, element, bpmnFactory, compensateEventDefinition, elementRegistry, translate) {
 
-  group.entries.push(entryFactory.checkbox({
+  group.entries.push(entryFactory.checkbox(translate, {
     id: 'wait-for-completion',
     label: translate('Wait for Completion'),
     modelProperty: 'waitForCompletion',
@@ -3642,7 +5127,7 @@ module.exports = function(group, element, bpmnFactory, compensateEventDefinition
     }
   }));
 
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: 'activity-ref',
     label: translate('Activity Ref'),
     selectOptions: createActivityRefOptions(element),
@@ -3708,7 +5193,7 @@ module.exports = function(group, element, bpmnFactory, conditionalEventDefinitio
     };
   };
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'variableName',
     label: translate('Variable Name'),
     modelProperty : 'variableName',
@@ -3721,14 +5206,14 @@ module.exports = function(group, element, bpmnFactory, conditionalEventDefinitio
     is(element, 'bpmn:StartEvent') && !isEventSubProcess(element.parent);
 
   if (!isConditionalStartEvent) {
-    group.entries.push(entryFactory.textField({
-      id: 'variableEvent',
-      label: translate('Variable Event'),
+    group.entries.push(entryFactory.textField(translate, {
+      id: 'variableEvents',
+      label: translate('Variable Events'),
       description: translate('Specify more than one variable change event as a comma separated list.'),
-      modelProperty : 'variableEvent',
+      modelProperty : 'variableEvents',
 
-      get: getValue('variableEvent'),
-      set: setValue('variableEvent')
+      get: getValue('variableEvents'),
+      set: setValue('variableEvents')
     }));
   }
 };
@@ -3766,18 +5251,21 @@ var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_
  *
  * @return {Array<Object>} return an array containing the entries
  */
-module.exports = function(element, definition, bpmnFactory, options) {
+module.exports = function(element, definition, bpmnFactory, translate, options) {
 
   var id = options.id || 'element-property';
   var label = options.label;
   var referenceProperty = options.referenceProperty;
   var modelProperty = options.modelProperty || 'name';
   var shouldValidate = options.shouldValidate || false;
+  var description = options.description;
+  var canBeHidden = !!options.hidden && typeof options.hidden === 'function';
 
-  var entry = entryFactory.textField({
+  var entry = entryFactory.textField(translate, {
     id: id,
     label: label,
     modelProperty: modelProperty,
+    description: description,
 
     get: function(element, node) {
       var reference = definition.get(referenceProperty);
@@ -3794,6 +5282,9 @@ module.exports = function(element, definition, bpmnFactory, options) {
     },
 
     hidden: function(element, node) {
+      if (canBeHidden) {
+        return options.hidden.apply(definition, arguments) || !definition.get(referenceProperty);
+      }
       return !definition.get(referenceProperty);
     }
   });
@@ -3833,7 +5324,7 @@ module.exports = function(group, element, bpmnFactory, errorEventDefinition, tra
 
 
   group.entries = group.entries.concat(eventDefinitionReference(element, errorEventDefinition, bpmnFactory, {
-    label: translate('Error'),
+    label: translate('Global Error referenced'),
     elementName: 'error',
     elementType: 'bpmn:Error',
     referenceProperty: 'errorRef',
@@ -3841,21 +5332,25 @@ module.exports = function(group, element, bpmnFactory, errorEventDefinition, tra
   }));
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
-    id: 'error-element-name',
-    label: translate('Error Name'),
-    referenceProperty: 'errorRef',
-    modelProperty: 'name',
-    shouldValidate: true
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, errorEventDefinition, bpmnFactory, translate, {
+      id: 'error-element-name',
+      label: translate('Name'),
+      referenceProperty: 'errorRef',
+      modelProperty: 'name',
+      shouldValidate: true
+    })
+  );
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
-    id: 'error-element-code',
-    label: translate('Error Code'),
-    referenceProperty: 'errorRef',
-    modelProperty: 'errorCode'
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, errorEventDefinition, bpmnFactory, translate, {
+      id: 'error-element-code',
+      label: translate('Code'),
+      referenceProperty: 'errorRef',
+      modelProperty: 'errorCode'
+    })
+  );
 
 };
 
@@ -3873,7 +5368,8 @@ module.exports = function(group, element, bpmnFactory, errorEventDefinition, tra
 
 
 var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
-    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
     elementReferenceProperty = __webpack_require__(/*! ./ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
@@ -3882,7 +5378,7 @@ var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReferenc
 module.exports = function(group, element, bpmnFactory, escalationEventDefinition, showEscalationCodeVariable, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, escalationEventDefinition, bpmnFactory, {
-    label: translate('Escalation'),
+    label: translate('Global Escalation referenced'),
     elementName: 'escalation',
     elementType: 'bpmn:Escalation',
     referenceProperty: 'escalationRef',
@@ -3890,40 +5386,56 @@ module.exports = function(group, element, bpmnFactory, escalationEventDefinition
   }));
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, {
-    id: 'escalation-element-name',
-    label: translate('Escalation Name'),
-    referenceProperty: 'escalationRef',
-    modelProperty: 'name',
-    shouldValidate: true
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, translate, {
+      id: 'escalation-element-name',
+      label: translate('Global Escalation Name'),
+      referenceProperty: 'escalationRef',
+      modelProperty: 'name',
+      shouldValidate: true
+    })
+  );
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, {
-    id: 'escalation-element-code',
-    label: translate('Escalation Code'),
-    referenceProperty: 'escalationRef',
-    modelProperty: 'escalationCode'
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, escalationEventDefinition, bpmnFactory, translate, {
+      id: 'escalation-element-code',
+      label: translate('Global Escalation Code'),
+      referenceProperty: 'escalationRef',
+      modelProperty: 'escalationCode'
+    })
+  );
 
 
   if (showEscalationCodeVariable) {
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.validationAwareTextField(translate, {
       id : 'escalationCodeVariable',
       label : translate('Escalation Code Variable'),
       modelProperty : 'escalationCodeVariable',
+      description: translate('Define the name of the variable that will contain the escalation code'),
 
-      get: function(element) {
+      getProperty: function(element) {
         var codeVariable = escalationEventDefinition.get('camunda:escalationCodeVariable');
-        return {
-          escalationCodeVariable: codeVariable
-        };
+
+        return codeVariable;
       },
 
-      set: function(element, values) {
-        return cmdHelper.updateBusinessObject(element, escalationEventDefinition, {
-          'camunda:escalationCodeVariable': values.escalationCodeVariable || undefined
-        });
+      setProperty: function(element, values) {
+        if (values.escalationCodeVariable === '')
+          values.escalationCodeVariable = undefined;
+
+        return cmdHelper.updateBusinessObject(element, escalationEventDefinition, values);
+      },
+
+      validate: function(element, values) {
+        var validation = {},
+            targetValue = values.escalationCodeVariable;
+
+        if (utils.containsSpace(targetValue)) {
+          validation.escalationCodeVariable = translate('Escalation code variable must not contain spaces.');
+        }
+
+        return validation;
       }
     }));
   }
@@ -3965,7 +5477,7 @@ var selector = 'select[name=selectedElement]';
  * @return {DOMElement} the select box
  */
 function getSelectBox(node) {
-  return domQuery(selector, node.parentElement);
+  return domQuery(selector, node);
 }
 
 /**
@@ -4012,16 +5524,24 @@ module.exports = function(element, definition, bpmnFactory, options) {
 
   var entries = [];
 
+  var canBeHidden = !!options.hidden && typeof options.hidden === 'function';
+
   entries.push({
 
-    id: 'event-definitions-' + elementName,
+    id: options.id || 'event-definitions-' + elementName,
     description: description,
-    html: '<div class="bpp-row bpp-select">' +
+    isShown: function() {
+      if (canBeHidden) {
+        return !options.hidden.apply(definition, arguments);
+      }
+      return !options.hidden;
+    },
+    html: '<div class="bpp-row bpp-select" data-show="isShown">' +
              '<label for="camunda-' + escapeHTML(elementName) + '">' + escapeHTML(label) + '</label>' +
              '<div class="bpp-field-wrapper">' +
                '<select id="camunda-' + escapeHTML(elementName) + '" name="selectedElement" data-value>' +
                '</select>' +
-               '<button class="add" id="addElement" data-action="addElement"><span>+</span></button>' +
+               '<button class="action-button add" id="addElement" data-action="addElement"><span>+</span></button>' +
              '</div>' +
           '</div>',
 
@@ -4039,6 +5559,7 @@ module.exports = function(element, definition, bpmnFactory, options) {
       var props = {};
 
       if (!selection || typeof selection === 'undefined') {
+
         // remove reference to element
         props[referenceProperty] = undefined;
         return cmdHelper.updateBusinessObject(element, definition, props);
@@ -4063,6 +5584,7 @@ module.exports = function(element, definition, bpmnFactory, options) {
     },
 
     addElement: function(element, inputNode) {
+
       // note: this generated id will be used as name
       // of the element and not as id
       var id = utils.nextId(newElementIdPrefix);
@@ -4111,7 +5633,7 @@ var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReferenc
 module.exports = function(group, element, bpmnFactory, messageEventDefinition, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, messageEventDefinition, bpmnFactory, {
-    label: translate('Message'),
+    label: translate('Global Message referenced'),
     elementName: 'message',
     elementType: 'bpmn:Message',
     referenceProperty: 'messageRef',
@@ -4119,13 +5641,15 @@ module.exports = function(group, element, bpmnFactory, messageEventDefinition, t
   }));
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, messageEventDefinition, bpmnFactory, {
-    id: 'message-element-name',
-    label: translate('Message Name'),
-    referenceProperty: 'messageRef',
-    modelProperty: 'name',
-    shouldValidate: true
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, messageEventDefinition, bpmnFactory, translate, {
+      id: 'message-element-name',
+      label: translate('Global Message Name'),
+      referenceProperty: 'messageRef',
+      modelProperty: 'name',
+      shouldValidate: true
+    })
+  );
 
 };
 
@@ -4162,7 +5686,7 @@ module.exports = function(element, options, translate) {
       label = options.label || translate('Name'),
       modelProperty = options.modelProperty || 'name';
 
-  var nameEntry = entryFactory.textBox({
+  var nameEntry = entryFactory.textBox(translate, {
     id: id,
     label: label,
     modelProperty: modelProperty,
@@ -4194,7 +5718,7 @@ var eventDefinitionReference = __webpack_require__(/*! ./EventDefinitionReferenc
 module.exports = function(group, element, bpmnFactory, signalEventDefinition, translate) {
 
   group.entries = group.entries.concat(eventDefinitionReference(element, signalEventDefinition, bpmnFactory, {
-    label: translate('Signal'),
+    label: translate('Global Signal referenced'),
     elementName: 'signal',
     elementType: 'bpmn:Signal',
     referenceProperty: 'signalRef',
@@ -4202,13 +5726,15 @@ module.exports = function(group, element, bpmnFactory, signalEventDefinition, tr
   }));
 
 
-  group.entries = group.entries.concat(elementReferenceProperty(element, signalEventDefinition, bpmnFactory, {
-    id: 'signal-element-name',
-    label: translate('Signal Name'),
-    referenceProperty: 'signalRef',
-    modelProperty: 'name',
-    shouldValidate: true
-  }));
+  group.entries = group.entries.concat(
+    elementReferenceProperty(element, signalEventDefinition, bpmnFactory, translate, {
+      id: 'signal-element-name',
+      label: translate('Global Signal Name'),
+      referenceProperty: 'signalRef',
+      modelProperty: 'name',
+      shouldValidate: true
+    })
+  );
 
 };
 
@@ -4303,7 +5829,7 @@ function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition,
       createTimerEventDefinition = options && options.createTimerEventDefinition;
 
 
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: prefix + 'timer-event-definition-type',
     label: translate('Timer Definition Type'),
     selectOptions: selectOptions,
@@ -4355,7 +5881,7 @@ function TimerEventDefinition(group, element, bpmnFactory, timerEventDefinition,
   }));
 
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: prefix + 'timer-event-definition',
     label: translate('Timer Definition'),
     modelProperty: 'timerDefinition',
@@ -4453,23 +5979,31 @@ var serviceTaskDelegateProps = __webpack_require__(/*! ./parts/ServiceTaskDelega
     formProps = __webpack_require__(/*! ./parts/FormProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/FormProps.js"),
     startEventInitiator = __webpack_require__(/*! ./parts/StartEventInitiator */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/StartEventInitiator.js"),
     variableMapping = __webpack_require__(/*! ./parts/VariableMappingProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VariableMappingProps.js"),
-    versionTag = __webpack_require__(/*! ./parts/VersionTagProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VersionTagProps.js");
+    versionTag = __webpack_require__(/*! ./parts/VersionTagProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/VersionTagProps.js"),
+    processVariablesProps = __webpack_require__(/*! ./parts/ProcessVariablesProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ProcessVariablesProps.js");
 
 var listenerProps = __webpack_require__(/*! ./parts/ListenerProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerProps.js"),
     listenerDetails = __webpack_require__(/*! ./parts/ListenerDetailProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerDetailProps.js"),
     listenerFields = __webpack_require__(/*! ./parts/ListenerFieldInjectionProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ListenerFieldInjectionProps.js");
 
-var elementTemplateChooserProps = __webpack_require__(/*! ./element-templates/parts/ChooserProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ChooserProps.js"),
-    elementTemplateCustomProps = __webpack_require__(/*! ./element-templates/parts/CustomProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps.js");
+// element template properties
+var elementTemplateDescriptionProps = __webpack_require__(/*! ./element-templates/parts/DescriptionProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/DescriptionProps.js"),
+    elementTemplateChooserProps = __webpack_require__(/*! ./element-templates/parts/ChooserProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ChooserProps.js"),
+    elementTemplateCustomProps = __webpack_require__(/*! ./element-templates/parts/CustomProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/CustomProps.js"),
+    elementTemplateInputParametersProps = __webpack_require__(/*! ./element-templates/parts/InputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/InputParametersProps.js"),
+    elementTemplateOutputParametersProps = __webpack_require__(/*! ./element-templates/parts/OutputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/OutputParametersProps.js"),
+    elementTemplateErrorsProps = __webpack_require__(/*! ./element-templates/parts/ErrorsProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ErrorsProps.js"),
+    getTemplateId = __webpack_require__(/*! ./element-templates/Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplateId;
 
 // Input/Output
-var inputOutput = __webpack_require__(/*! ./parts/InputOutputProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js"),
-    inputOutputParameter = __webpack_require__(/*! ./parts/InputOutputParameterProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js");
+var inputParameters = __webpack_require__(/*! ./parts/InputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputParametersProps.js"),
+    outputParameters = __webpack_require__(/*! ./parts/OutputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/OutputParametersProps.js"),
+    errorsProps = __webpack_require__(/*! ./parts/ErrorsProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorsProps.js");
 
 // Connector
 var connectorDetails = __webpack_require__(/*! ./parts/ConnectorDetailProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorDetailProps.js"),
-    connectorInputOutput = __webpack_require__(/*! ./parts/ConnectorInputOutputProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js"),
-    connectorInputOutputParameter = __webpack_require__(/*! ./parts/ConnectorInputOutputParameterProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js");
+    connectorInputParameters = __webpack_require__(/*! ./parts/ConnectorInputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputParametersProps.js"),
+    connectorOutputParameters = __webpack_require__(/*! ./parts/ConnectorOutputParametersProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorOutputParametersProps.js");
 
 // properties
 var properties = __webpack_require__(/*! ./parts/PropertiesProps */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js");
@@ -4534,19 +6068,6 @@ var isJobConfigEnabled = function(element) {
   return false;
 };
 
-var getInputOutputParameterLabel = function(param, translate) {
-
-  if (is(param, 'camunda:InputParameter')) {
-    return translate('Input Parameter');
-  }
-
-  if (is(param, 'camunda:OutputParameter')) {
-    return translate('Output Parameter');
-  }
-
-  return '';
-};
-
 var getListenerLabel = function(param, translate) {
 
   if (is(param, 'camunda:ExecutionListener')) {
@@ -4563,6 +6084,94 @@ var getListenerLabel = function(param, translate) {
 var PROCESS_KEY_HINT = 'This maps to the process definition key.';
 var TASK_KEY_HINT = 'This maps to the task definition key.';
 
+function getIdOptions(element) {
+
+  if (is(element, 'bpmn:Participant')) {
+    return { id: 'participant-id', label: 'Participant Id' };
+  }
+
+  if (is(element, 'bpmn:Process')) {
+    return { description: PROCESS_KEY_HINT };
+  }
+
+  if (is(element, 'bpmn:UserTask')) {
+    return { description: TASK_KEY_HINT };
+  }
+}
+
+function getNameOptions(element) {
+  if (is(element, 'bpmn:Participant')) {
+    return { id: 'participant-name', label: 'Participant Name' };
+  }
+}
+
+function getProcessOptions(element) {
+  if (is(element, 'bpmn:Participant')) {
+    return { processIdDescription: PROCESS_KEY_HINT };
+  }
+}
+
+function createElementTemplateGroups(
+    element,
+    bpmnFactory,
+    canvas,
+    commandStack,
+    elementTemplates,
+    modeling,
+    replace,
+    selection,
+    translate) {
+  var templateId = getTemplateId(element);
+
+  if (!templateId) {
+    return [];
+  }
+
+  var descriptionGroup = elementTemplateDescriptionProps(
+    element, commandStack, elementTemplates, modeling, replace, selection, translate);
+
+  var idOptions = getIdOptions(element) || {};
+
+  idOptions.id = 'element-template-element-id';
+
+  var nameOptions = { id: 'element-template-element-name' };
+
+  idProps(descriptionGroup, element, translate, idOptions);
+  nameProps(descriptionGroup, element, bpmnFactory, canvas, translate, nameOptions);
+  processProps(descriptionGroup, element, translate, getProcessOptions(element));
+
+  var elementTemplateInputParametersGroup = {
+    id: 'template-inputs',
+    label: translate('Input Parameters'),
+    entries: []
+  };
+  elementTemplateInputParametersProps(elementTemplateInputParametersGroup, element, elementTemplates, bpmnFactory, translate);
+
+  var elementTemplateOutputParametersGroup = {
+    id: 'template-outputs',
+    label: translate('Output Parameters'),
+    entries: []
+  };
+  elementTemplateOutputParametersProps(elementTemplateOutputParametersGroup, element, elementTemplates, bpmnFactory, translate);
+
+
+  var elementTemplateErrorsGroup = {
+    id: 'template-errors',
+    label: translate('Errors'),
+    entries: []
+  };
+  elementTemplateErrorsProps(elementTemplateErrorsGroup, element, elementTemplates, bpmnFactory, translate);
+
+  var customFieldsGroups = elementTemplateCustomProps(element, elementTemplates, bpmnFactory, translate);
+
+  return [
+    descriptionGroup,
+    elementTemplateInputParametersGroup,
+    elementTemplateOutputParametersGroup,
+    elementTemplateErrorsGroup
+  ].concat(customFieldsGroups);
+}
+
 function createGeneralTabGroups(
     element, canvas, bpmnFactory,
     elementRegistry, elementTemplates, translate) {
@@ -4576,29 +6185,12 @@ function createGeneralTabGroups(
     entries: []
   };
 
-  var idOptions;
-  var processOptions;
-
-  if (is(element, 'bpmn:Process')) {
-    idOptions = { description: PROCESS_KEY_HINT };
-  }
-
-  if (is(element, 'bpmn:UserTask')) {
-    idOptions = { description: TASK_KEY_HINT };
-  }
-
-  if (is(element, 'bpmn:Participant')) {
-    processOptions = { processIdDescription: PROCESS_KEY_HINT };
-  }
-
-  idProps(generalGroup, element, translate, idOptions);
-  nameProps(generalGroup, element, bpmnFactory, canvas, translate);
-  processProps(generalGroup, element, translate, processOptions);
+  idProps(generalGroup, element, translate, getIdOptions(element));
+  nameProps(generalGroup, element, bpmnFactory, canvas, translate, getNameOptions(element));
+  processProps(generalGroup, element, translate, getProcessOptions(element));
   versionTag(generalGroup, element, translate);
   executableProps(generalGroup, element, translate);
   elementTemplateChooserProps(generalGroup, element, elementTemplates, translate);
-
-  var customFieldsGroups = elementTemplateCustomProps(element, elementTemplates, bpmnFactory, translate);
 
   var detailsGroup = {
     id: 'details',
@@ -4676,9 +6268,6 @@ function createGeneralTabGroups(
 
   var groups = [];
   groups.push(generalGroup);
-  customFieldsGroups.forEach(function(group) {
-    groups.push(group);
-  });
   groups.push(detailsGroup);
   groups.push(externalTaskGroup);
   groups.push(multiInstanceGroup);
@@ -4702,6 +6291,20 @@ function createVariablesTabGroups(element, bpmnFactory, elementRegistry, transla
 
   return [
     variablesGroup
+  ];
+}
+
+function createProcessVariablesTabGroups(element, translate) {
+  var processVariablesGroup = {
+    id : 'process-variables',
+    label : translate('Variables'),
+    entries: []
+  };
+
+  processVariablesProps(processVariablesGroup, element, translate);
+
+  return [
+    processVariablesGroup
   ];
 }
 
@@ -4760,33 +6363,43 @@ function createListenersTabGroups(element, bpmnFactory, elementRegistry, transla
   ];
 }
 
-function createInputOutputTabGroups(element, bpmnFactory, elementRegistry, translate) {
+function createInputOutputTabGroups(element, bpmnFactory, elementTemplates, translate) {
 
-  var inputOutputGroup = {
-    id: 'input-output',
-    label: translate('Parameters'),
+  var inputParametersGroup = {
+    id: 'input-parameters',
+    label: translate('Input Parameters'),
     entries: []
   };
 
-  var options = inputOutput(inputOutputGroup, element, bpmnFactory, translate);
+  inputParameters(inputParametersGroup, element, bpmnFactory, elementTemplates, translate);
 
-  var inputOutputParameterGroup = {
-    id: 'input-output-parameter',
-    entries: [],
-    enabled: function(element, node) {
-      return options.getSelectedParameter(element, node);
-    },
-    label: function(element, node) {
-      var param = options.getSelectedParameter(element, node);
-      return getInputOutputParameterLabel(param, translate);
-    }
+  var outputParametersGroup = {
+    id: 'output-parameters',
+    label: translate('Output Parameters'),
+    entries: []
   };
 
-  inputOutputParameter(inputOutputParameterGroup, element, bpmnFactory, options, translate);
+  outputParameters(outputParametersGroup, element, bpmnFactory, elementTemplates, translate);
+
+  var errorsGroup = {
+    id: 'errors',
+    label: translate('Errors'),
+    entries: [],
+
+    enabled: function(element, node) {
+      var businessObject = getBusinessObject(element);
+      var isExternal = ImplementationTypeHelper.getImplementationType(businessObject) === 'external';
+
+      return is(element, 'bpmn:ServiceTask') && isExternal;
+    },
+  };
+
+  errorsProps(errorsGroup, element, bpmnFactory, elementTemplates, translate);
 
   return [
-    inputOutputGroup,
-    inputOutputParameterGroup
+    inputParametersGroup,
+    outputParametersGroup,
+    errorsGroup
   ];
 }
 
@@ -4799,32 +6412,26 @@ function createConnectorTabGroups(element, bpmnFactory, elementRegistry, transla
 
   connectorDetails(connectorDetailsGroup, element, bpmnFactory, translate);
 
-  var connectorInputOutputGroup = {
-    id: 'connector-input-output',
-    label: translate('Input/Output'),
+  var connectorInputParametersGroup = {
+    id: 'connector-input-parameters',
+    label: translate('Input Parameters'),
     entries: []
   };
 
-  var options = connectorInputOutput(connectorInputOutputGroup, element, bpmnFactory, translate);
+  connectorInputParameters(connectorInputParametersGroup, element, bpmnFactory, translate);
 
-  var connectorInputOutputParameterGroup = {
-    id: 'connector-input-output-parameter',
-    entries: [],
-    enabled: function(element, node) {
-      return options.getSelectedParameter(element, node);
-    },
-    label: function(element, node) {
-      var param = options.getSelectedParameter(element, node);
-      return getInputOutputParameterLabel(param, translate);
-    }
+  var connectorOutputParametersGroup = {
+    id: 'connector-output-parameters',
+    label: translate('Output Parameters'),
+    entries: []
   };
 
-  connectorInputOutputParameter(connectorInputOutputParameterGroup, element, bpmnFactory, options, translate);
+  connectorOutputParameters(connectorOutputParametersGroup, element, bpmnFactory, translate);
 
   return [
     connectorDetailsGroup,
-    connectorInputOutputGroup,
-    connectorInputOutputParameterGroup
+    connectorInputParametersGroup,
+    connectorOutputParametersGroup
   ];
 }
 
@@ -4863,17 +6470,28 @@ function createExtensionElementsGroups(element, bpmnFactory, elementRegistry, tr
 /**
  * A properties provider for Camunda related properties.
  *
- * @param {EventBus} eventBus
- * @param {Canvas} canvas
  * @param {BpmnFactory} bpmnFactory
+ * @param {Canvas} canvas
  * @param {ElementRegistry} elementRegistry
  * @param {ElementTemplates} elementTemplates
+ * @param {EventBus} eventBus
+ * @param {Modeling} modeling
+ * @param {Replace} replace
+ * @param {Selection} selection
  * @param {Translate} translate
  */
 function CamundaPropertiesProvider(
-    eventBus, canvas, bpmnFactory,
-    elementRegistry, elementTemplates, translate) {
-
+    bpmnFactory,
+    canvas,
+    commandStack,
+    elementRegistry,
+    elementTemplates,
+    eventBus,
+    modeling,
+    replace,
+    selection,
+    translate
+) {
   PropertiesActivator.call(this, eventBus);
 
   this.getTabs = function(element) {
@@ -4886,10 +6504,32 @@ function CamundaPropertiesProvider(
         elementRegistry, elementTemplates, translate)
     };
 
+    var elementTemplateTab = {
+      id: 'element-template',
+      label: translate('Template'),
+      groups: createElementTemplateGroups(
+        element,
+        bpmnFactory,
+        canvas,
+        commandStack,
+        elementTemplates,
+        modeling,
+        replace,
+        selection,
+        translate
+      )
+    };
+
     var variablesTab = {
       id: 'variables',
       label: translate('Variables'),
       groups: createVariablesTabGroups(element, bpmnFactory, elementRegistry, translate)
+    };
+
+    var processVariablesTab = {
+      id: 'process-variables',
+      label: translate('Variables'),
+      groups: createProcessVariablesTabGroups(element, translate)
     };
 
     var formsTab = {
@@ -4912,7 +6552,7 @@ function CamundaPropertiesProvider(
     var inputOutputTab = {
       id: 'input-output',
       label: translate('Input/Output'),
-      groups: createInputOutputTabGroups(element, bpmnFactory, elementRegistry, translate)
+      groups: createInputOutputTabGroups(element, bpmnFactory, elementTemplates, translate)
     };
 
     var connectorTab = {
@@ -4939,7 +6579,9 @@ function CamundaPropertiesProvider(
 
     return [
       generalTab,
+      elementTemplateTab,
       variablesTab,
+      processVariablesTab,
       connectorTab,
       formsTab,
       listenersTab,
@@ -4952,11 +6594,15 @@ function CamundaPropertiesProvider(
 }
 
 CamundaPropertiesProvider.$inject = [
-  'eventBus',
-  'canvas',
   'bpmnFactory',
+  'canvas',
+  'commandStack',
   'elementRegistry',
   'elementTemplates',
+  'eventBus',
+  'modeling',
+  'replace',
+  'selection',
   'translate'
 ];
 
@@ -4978,6 +6624,8 @@ module.exports = CamundaPropertiesProvider;
 
 
 var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+
+var nextId = __webpack_require__(/*! ../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").nextId;
 
 /**
  * Create an input parameter representing the given
@@ -5180,8 +6828,59 @@ function createCamundaFieldInjection(binding, value, bpmnFactory) {
 
   return bpmnFactory.create('camunda:Field', props);
 }
+
 module.exports.createCamundaFieldInjection = createCamundaFieldInjection;
 
+/**
+ * Create camunda:errorEventDefinition element containing expression and errorRef
+ * from given binding.
+ *
+ * @param {PropertyBinding} binding
+ * @param {String} value
+ * @param {ModdleElement} error
+ * @param {ModdleElement} parent
+ * @param {BpmnFactory} bpmnFactory
+ *
+ * @return {ModdleElement}
+ */
+function createCamundaErrorEventDefinition(binding, value, error, parent, bpmnFactory) {
+  var errorRef = error,
+      expression = value;
+
+  var newErrorEventDefinition = bpmnFactory.create('camunda:ErrorEventDefinition', {
+    expression: expression,
+    errorRef: errorRef
+  });
+
+  newErrorEventDefinition.$parent = parent;
+
+  return newErrorEventDefinition;
+}
+
+module.exports.createCamundaErrorEventDefinition = createCamundaErrorEventDefinition;
+
+/**
+ * Create bpmn:error element containing a specific error id given by a binding.
+ *
+ * @param {String} bindingErrorRef
+ * @param {ModdleElement} parent
+ * @param {BpmnFactory} bpmnFactory
+ *
+ * @return { ModdleElement }
+ */
+function createError(bindingErrorRef, parent, bpmnFactory) {
+  var error = bpmnFactory.create('bpmn:Error', {
+
+    // we need to later retrieve the error from a binding
+    id: nextId('Error_' + bindingErrorRef + '_')
+  });
+
+  error.$parent = parent;
+
+  return error;
+}
+
+module.exports.createError = createError;
 
 // helpers ////////////////////////////
 
@@ -5247,16 +6946,24 @@ var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/b
 
 var find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
 
-
-var TEMPLATE_ATTR = 'camunda:modelerTemplate';
+var TEMPLATE_ID_ATTR = 'camunda:modelerTemplate',
+    TEMPLATE_VERSION_ATTR = 'camunda:modelerTemplateVersion';
 
 /**
  * The BPMN 2.0 extension attribute name under
- * which the element template is stored.
+ * which the element template ID is stored.
  *
  * @type {String}
  */
-module.exports.TEMPLATE_ATTR = TEMPLATE_ATTR;
+module.exports.TEMPLATE_ID_ATTR = TEMPLATE_ID_ATTR;
+
+/**
+ * The BPMN 2.0 extension attribute name under
+ * which the element template version is stored.
+ *
+ * @type {String}
+ */
+module.exports.TEMPLATE_VERSION_ATTR = TEMPLATE_VERSION_ATTR;
 
 
 /**
@@ -5271,48 +6978,29 @@ function getTemplateId(element) {
   var bo = getBusinessObject(element);
 
   if (bo) {
-    return bo.get(TEMPLATE_ATTR);
+    return bo.get(TEMPLATE_ID_ATTR);
   }
 }
 
 module.exports.getTemplateId = getTemplateId;
 
-
 /**
- * Get template of a given element.
+ * Get template version for a given diagram element.
  *
- * @param {Element} element
- * @param {ElementTemplates} elementTemplates
+ * @param {djs.model.Base} element
  *
- * @return {TemplateDefinition}
+ * @return {String}
  */
-function getTemplate(element, elementTemplates) {
-  var id = getTemplateId(element);
+function getTemplateVersion(element) {
 
-  return id && elementTemplates.get(id);
+  var bo = getBusinessObject(element);
+
+  if (bo) {
+    return bo.get(TEMPLATE_VERSION_ATTR);
+  }
 }
 
-module.exports.getTemplate = getTemplate;
-
-/**
- * Get default template for a given element.
- *
- * @param {Element} element
- * @param {ElementTemplates} elementTemplates
- *
- * @return {TemplateDefinition}
- */
-function getDefaultTemplate(element, elementTemplates) {
-
-  // return first default template, if any exists
-  return (
-    elementTemplates.getAll().filter(function(t) {
-      return isAny(element, t.appliesTo) && t.isDefault;
-    })
-  )[0];
-}
-
-module.exports.getDefaultTemplate = getDefaultTemplate;
+module.exports.getTemplateVersion = getTemplateVersion;
 
 
 /**
@@ -5436,6 +7124,23 @@ function findOutputParameter(inputOutput, binding) {
 module.exports.findOutputParameter = findOutputParameter;
 
 
+function findCamundaErrorEventDefinition(element, bindingErrorRef) {
+  var errorEventDefinitions = findExtensions(element, [ 'camunda:ErrorEventDefinition' ]),
+      error;
+
+  // error id has to start with <Error_${binding.errorRef}_>
+  return find(errorEventDefinitions, function(definition) {
+    error = definition.errorRef;
+
+    if (error) {
+      return error.id.indexOf('Error_' + bindingErrorRef) == 0;
+    }
+  });
+}
+
+module.exports.findCamundaErrorEventDefinition = findCamundaErrorEventDefinition;
+
+
 
 // helpers /////////////////////////////////
 
@@ -5453,6 +7158,7 @@ function getExtensionElements(element) {
 function isInOut(element, binding) {
 
   if (binding.type === 'camunda:in') {
+
     // find based on target attribute
     if (binding.target) {
       return element.target === binding.target;
@@ -5460,6 +7166,7 @@ function isInOut(element, binding) {
   }
 
   if (binding.type === 'camunda:out') {
+
     // find based on source / sourceExpression
     if (binding.source) {
       return element.source === binding.source;
@@ -5491,63 +7198,65 @@ function isInOut(element, binding) {
 "use strict";
 
 
-var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
-    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
-    getTemplate = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplate,
-    getTemplateId = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplateId;
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
 
-var find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js");
+var getOption = __webpack_require__(/*! ./Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/Helper.js").getOption,
+    getOptions = __webpack_require__(/*! ./Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/Helper.js").getOptions,
+    getTemplateId = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplateId,
+    ELEMENT_TEMPLATE_OPTION_EMPTY = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").ELEMENT_TEMPLATE_OPTION_EMPTY;
 
-var TEMPLATE_ATTR = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").TEMPLATE_ATTR;
-
-function isAny(element, types) {
-  return types.reduce(function(result, type) {
-    return result || is(element, type);
-  }, false);
-}
-
+var isNull = __webpack_require__(/*! lodash/isNull */ "./node_modules/lodash/isNull.js"),
+    isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js"),
+    pick = __webpack_require__(/*! lodash/pick */ "./node_modules/lodash/pick.js");
 
 module.exports = function(group, element, elementTemplates, translate) {
-
-  var options = getTemplateOptions(element, elementTemplates, translate);
-
-  if (options.length === 1 && !options[0].isDefault) {
+  if (!isUndefined(getTemplateId(element)) && !isNull(getTemplateId(element))) {
     return;
   }
 
+  var options = getOptions(element, elementTemplates, translate);
+
+  // Return if empty option is only option
+  if (options.length === 1) {
+    return;
+  }
+
+  var selectOptions = options.map(function(option) {
+    return pick(option, [ 'name', 'value' ]);
+  });
+
   // select element template (via dropdown)
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: 'elementTemplate-chooser',
     label: translate('Element Template'),
-    modelProperty: 'camunda:modelerTemplate',
-    selectOptions: options,
-    set: function(element, properties) {
-      return applyTemplate(element, properties[TEMPLATE_ATTR], elementTemplates);
+    modelProperty: 'elementTemplateOption',
+    selectOptions: selectOptions,
+    get: function(element) {
+      return {
+        elementTemplateOption: ELEMENT_TEMPLATE_OPTION_EMPTY
+      };
     },
-    disabled: function() {
-      var template = getTemplate(element, elementTemplates);
+    set: function(element, properties) {
+      var optionId = properties['elementTemplateOption'];
 
-      return template && isDefaultTemplate(template);
+      var option = getOption(optionId, options);
+
+      var id = option.id,
+          version = option.version;
+
+      var newTemplate = elementTemplates.get(id, version);
+
+      return applyTemplate(element, newTemplate, elementTemplates);
     }
   }));
 
 };
 
 
-// helpers //////////////////////////////////////
+// helpers //////////
 
-function applyTemplate(element, newTemplateId, elementTemplates) {
-
-  // cleanup
-  // clear input output mappings
-  // undo changes to properties defined in template
-
-  // re-establish
-  // set input output mappings
-  // apply changes to properties as defined in new template
-
-  var oldTemplate = getTemplate(element, elementTemplates),
-      newTemplate = elementTemplates.get(newTemplateId);
+function applyTemplate(element, newTemplate, elementTemplates) {
+  var oldTemplate = elementTemplates.get(element);
 
   if (oldTemplate === newTemplate) {
     return;
@@ -5561,84 +7270,6 @@ function applyTemplate(element, newTemplateId, elementTemplates) {
       newTemplate: newTemplate
     }
   };
-}
-
-function getTemplateOptions(element, elementTemplates, translate) {
-
-  var currentTemplateId = getTemplateId(element);
-
-  var emptyOption = {
-    name: '',
-    value: ''
-  };
-
-  var allOptions = elementTemplates.getAll().reduce(function(templates, t) {
-    if (!isAny(element, t.appliesTo)) {
-      return templates;
-    }
-
-    return templates.concat({
-      name: translate(t.name),
-      value: t.id,
-      isDefault: t.isDefault
-    });
-  }, [ emptyOption ]);
-
-
-  var defaultOption = find(allOptions, function(option) {
-    return isDefaultTemplate(option);
-  });
-
-  var currentOption = find(allOptions, function(option) {
-    return option.value === currentTemplateId;
-  });
-
-  if (currentTemplateId && !currentOption) {
-    currentOption = unknownTemplate(currentTemplateId, translate);
-
-    allOptions.push(currentOption);
-  }
-
-  if (!defaultOption) {
-
-    // return all options, including empty
-    // and optionally unknownTemplate option
-    return allOptions;
-  }
-
-  // special limited handling for
-  // default options
-
-  var options = [];
-
-  // current template not set
-  if (!currentTemplateId) {
-    options.push({
-      name: '',
-      value: ''
-    });
-  }
-
-  // current template not default
-  if (currentOption && currentOption !== defaultOption) {
-    options.push(currentOption);
-  }
-
-  options.push(defaultOption);
-
-  // [ (empty), (current), defaultOption ]
-  return options;
-}
-
-function unknownTemplate(templateId, translate) {
-  return {
-    name: translate('[unknown template: {templateId}]', { templateId: templateId }),
-    value: templateId
-  };
-}
-
-function isDefaultTemplate(elementTemplate) {
-  return elementTemplate.isDefault;
 }
 
 /***/ }),
@@ -5657,7 +7288,6 @@ var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/ass
 
 var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
     getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
-    getTemplate = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplate,
     cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
     elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
 
@@ -5666,7 +7296,8 @@ var findExtension = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js
     findInputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findInputParameter,
     findOutputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findOutputParameter,
     findCamundaProperty = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaProperty,
-    findCamundaInOut = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaInOut;
+    findCamundaInOut = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaInOut,
+    findCamundaErrorEventDefinition = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaErrorEventDefinition;
 
 var createCamundaProperty = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaProperty,
     createInputParameter = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createInputParameter,
@@ -5674,16 +7305,24 @@ var createCamundaProperty = __webpack_require__(/*! ../CreateHelper */ "./node_m
     createCamundaIn = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaIn,
     createCamundaOut = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaOut,
     createCamundaInWithBusinessKey = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaInWithBusinessKey,
-    createCamundaFieldInjection = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaFieldInjection;
+    createCamundaFieldInjection = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaFieldInjection,
+    createCamundaErrorEventDefinition = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createCamundaErrorEventDefinition,
+    createError = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createError;
 
-var CAMUNDA_PROPERTY_TYPE = 'camunda:property',
+var handleLegacyScopes = __webpack_require__(/*! ../util/handleLegacyScopes */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/util/handleLegacyScopes.js");
+
+var getRoot = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").getRoot;
+
+var PROPERTY_TYPE = 'property',
+    CAMUNDA_PROPERTY_TYPE = 'camunda:property',
     CAMUNDA_INPUT_PARAMETER_TYPE = 'camunda:inputParameter',
     CAMUNDA_OUTPUT_PARAMETER_TYPE = 'camunda:outputParameter',
     CAMUNDA_IN_TYPE = 'camunda:in',
     CAMUNDA_OUT_TYPE = 'camunda:out',
     CAMUNDA_IN_BUSINESS_KEY_TYPE = 'camunda:in:businessKey',
     CAMUNDA_EXECUTION_LISTENER_TYPE = 'camunda:executionListener',
-    CAMUNDA_FIELD = 'camunda:field';
+    CAMUNDA_FIELD = 'camunda:field',
+    CAMUNDA_ERROR_EVENT_DEFINITION = 'camunda:errorEventDefinition';
 
 var BASIC_MODDLE_TYPES = [
   'Boolean',
@@ -5698,7 +7337,8 @@ var EXTENSION_BINDING_TYPES = [
   CAMUNDA_IN_TYPE,
   CAMUNDA_OUT_TYPE,
   CAMUNDA_IN_BUSINESS_KEY_TYPE,
-  CAMUNDA_FIELD
+  CAMUNDA_FIELD,
+  CAMUNDA_ERROR_EVENT_DEFINITION
 ];
 
 var IO_BINDING_TYPES = [
@@ -5722,7 +7362,7 @@ var IN_OUT_BINDING_TYPES = [
  */
 module.exports = function(element, elementTemplates, bpmnFactory, translate) {
 
-  var template = getTemplate(element, elementTemplates);
+  var template = elementTemplates.get(element);
 
   if (!template) {
     return [];
@@ -5743,22 +7383,26 @@ module.exports = function(element, elementTemplates, bpmnFactory, translate) {
 
     var entry;
 
+    if (!propertyType) {
+      propertyType = getDefaultType(p);
+    }
+
     if (propertyType === 'Boolean') {
-      entry = entryFactory.checkbox(entryOptions);
+      entry = entryFactory.checkbox(translate, entryOptions);
     }
 
     if (propertyType === 'String') {
-      entry = entryFactory.textField(entryOptions);
+      entry = entryFactory.textField(translate, entryOptions);
     }
 
     if (propertyType === 'Text') {
-      entry = entryFactory.textBox(entryOptions);
+      entry = entryFactory.textBox(translate, entryOptions);
     }
 
     if (propertyType === 'Dropdown') {
       entryOptions.selectOptions = p.choices;
 
-      entry = entryFactory.selectBox(entryOptions);
+      entry = entryFactory.selectBox(translate, entryOptions);
     }
 
     return entry;
@@ -5786,14 +7430,16 @@ module.exports = function(element, elementTemplates, bpmnFactory, translate) {
   }
 
   if (template.scopes) {
-    for (var scopeName in template.scopes) {
 
-      var scope = template.scopes[scopeName];
-      var idScopeName = scopeName.replace(/:/g, '_');
+    handleLegacyScopes(template.scopes).forEach(function(scope) {
+
+      var scopeType = scope.type;
+
+      var idScopeName = scopeType.replace(/:/g, '_');
 
       var customScopeFieldsGroup = {
         id: 'customField-' + idScopeName,
-        label: translate('Custom Fields for scope: ') + scopeName,
+        label: translate('Custom Fields for scope: ') + scopeType,
         entries: []
       };
 
@@ -5801,7 +7447,7 @@ module.exports = function(element, elementTemplates, bpmnFactory, translate) {
 
         var propertyId = 'custom-' + template.id + '-' + idScopeName + '-' + idx;
 
-        var scopedProperty = propertyWithScope(p, scopeName);
+        var scopedProperty = propertyWithScope(p, scope);
 
         entry = renderCustomField(propertyId, scopedProperty, idx);
         if (entry) {
@@ -5812,7 +7458,7 @@ module.exports = function(element, elementTemplates, bpmnFactory, translate) {
       if (customScopeFieldsGroup.entries.length > 0) {
         groups.push(customScopeFieldsGroup);
       }
-    }
+    });
   }
 
   return groups;
@@ -5908,7 +7554,7 @@ function getPropertyValue(element, property) {
   var propertyValue = property.value || '';
 
   if (scope) {
-    bo = findExtension(bo, scope.name);
+    bo = findScopeElement(bo, scope);
     if (!bo) {
       return propertyValue;
     }
@@ -5923,10 +7569,12 @@ function getPropertyValue(element, property) {
       if (value) {
         return value.body;
       } else {
+
         // return defined default
         return propertyValue;
       }
     } else {
+
       // return value; default to defined default
       return typeof value !== 'undefined' ? value : propertyValue;
     }
@@ -5965,6 +7613,7 @@ function getPropertyValue(element, property) {
     }
 
     if (!inputOutput) {
+
       // ioParameter cannot exist yet, return property value
       return propertyValue;
     }
@@ -6045,6 +7694,17 @@ function getPropertyValue(element, property) {
     }
   }
 
+  var errorEventDefinition;
+  if (CAMUNDA_ERROR_EVENT_DEFINITION === bindingType) {
+    errorEventDefinition = findCamundaErrorEventDefinition(bo, binding.errorRef);
+
+    if (errorEventDefinition) {
+      return errorEventDefinition.expression;
+    } else {
+      return '';
+    }
+  }
+
   throw unknownPropertyBinding(property);
 }
 
@@ -6074,6 +7734,8 @@ function setPropertyValue(element, property, value, bpmnFactory) {
   var bindingType = binding.type,
       bindingName = binding.name;
 
+  var rootElement = getRoot(bo);
+
   var propertyValue;
 
   var updates = [];
@@ -6094,13 +7756,23 @@ function setPropertyValue(element, property, value, bpmnFactory) {
   }
 
   if (scope) {
-    bo = findExtension(bo, scope.name);
+    bo = findScopeElement(bo, scope);
     if (!bo) {
-      bo = elementHelper.createElement(scope.name, null, element, bpmnFactory);
 
-      updates.push(cmdHelper.addElementsTolist(
-        bo, extensionElements, 'values', [ bo ]
-      ));
+      // bpmn:Error
+      if (scope.name === 'bpmn:Error') {
+        bo = createError(scope.id, rootElement, bpmnFactory);
+
+        updates.push(cmdHelper.addElementsTolist(
+          bo, rootElement, 'rootElements', [ bo ]
+        ));
+      } else {
+        bo = elementHelper.createElement(scope.name, null, element, bpmnFactory);
+
+        updates.push(cmdHelper.addElementsTolist(
+          bo, extensionElements, 'values', [ bo ]
+        ));
+      }
     }
   }
 
@@ -6132,6 +7804,7 @@ function setPropertyValue(element, property, value, bpmnFactory) {
         propertyValue = parseInt(value, 10);
 
         if (isNaN(propertyValue)) {
+
           // do not write NaN value
           propertyValue = undefined;
         }
@@ -6308,6 +7981,41 @@ function setPropertyValue(element, property, value, bpmnFactory) {
     ));
   }
 
+  // camunda:errorEventDefinition
+  if (bindingType === CAMUNDA_ERROR_EVENT_DEFINITION) {
+    var existingErrorEventDefinition = findCamundaErrorEventDefinition(bo, binding.errorRef);
+
+    if (existingErrorEventDefinition) {
+      updates.push(cmdHelper.updateBusinessObject(
+        element, existingErrorEventDefinition, { expression: value }
+      ));
+    } else {
+
+      var newError = createError(binding.errorRef, rootElement, bpmnFactory),
+          newEventDefinition =
+            createCamundaErrorEventDefinition(binding, value, newError, extensionElements, bpmnFactory);
+
+      updates.push(cmdHelper.addAndRemoveElementsFromList(
+        element,
+        rootElement,
+        'rootElements',
+        null,
+        [ newError ],
+        []
+      ));
+
+      updates.push(cmdHelper.addAndRemoveElementsFromList(
+        element,
+        extensionElements,
+        'values',
+        null,
+        [ newEventDefinition ],
+        []
+      ));
+    }
+
+  }
+
   if (updates.length) {
     return updates;
   }
@@ -6362,14 +8070,18 @@ function validateValue(value, property, translate) {
 
 // misc helpers ///////////////////////////////
 
-function propertyWithScope(property, scopeName) {
+function propertyWithScope(property, scope) {
+  var scopeName = scope.type,
+      scopeId = scope.id;
+
   if (!scopeName) {
     return property;
   }
 
   return assign({}, property, {
     scope: {
-      name: scopeName
+      name: scopeName,
+      id: scopeId
     }
   });
 }
@@ -6422,6 +8134,1342 @@ function unknownPropertyBinding(property) {
   return new Error('unknown binding: <' + binding.type + '>');
 }
 
+function getDefaultType(property) {
+  var binding = property.binding,
+      bindingType = binding.type;
+
+  if (bindingType === PROPERTY_TYPE ||
+      bindingType === CAMUNDA_PROPERTY_TYPE ||
+      bindingType === CAMUNDA_IN_TYPE ||
+      bindingType === CAMUNDA_IN_BUSINESS_KEY_TYPE ||
+      bindingType === CAMUNDA_OUT_TYPE ||
+      bindingType === CAMUNDA_FIELD) {
+    return 'String';
+  }
+
+  if (bindingType === CAMUNDA_EXECUTION_LISTENER_TYPE) {
+    return 'Hidden';
+  }
+}
+
+function findScopeElement(businessObject, scope) {
+
+  var scopeName = scope.name,
+      scopeId = scope.id;
+
+  if (scopeName === 'bpmn:Error') {
+
+    // retrieve error over referenced error event definition
+    var errorEventDefinition = findCamundaErrorEventDefinition(businessObject, scopeId);
+
+    if (errorEventDefinition) {
+      return errorEventDefinition.errorRef;
+    }
+  }
+
+  return findExtension(businessObject, scopeName);
+}
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/DescriptionProps.js":
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/DescriptionProps.js ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var getTemplateId = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").getTemplateId;
+
+var domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
+    domEvent = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").event,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js");
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var getVersionOrDateFromTemplate = __webpack_require__(/*! ./Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/Helper.js").getVersionOrDateFromTemplate;
+
+var MAX_DESCRIPTION_LENGTH = 200;
+
+module.exports = function(
+    element,
+    commandStack,
+    elementTemplates,
+    modeling,
+    replace,
+    selection,
+    translate) {
+  var currentElementTemplate = elementTemplates.get(element);
+
+  var entries = [];
+
+  var description,
+      newestElementTemplate;
+
+  if (currentElementTemplate) {
+    newestElementTemplate = findNewestElementTemplate(elementTemplates, currentElementTemplate);
+
+    if (newestElementTemplate) {
+      entries.push({
+        id: 'element-template-update',
+        cssClasses: [ 'bpp-entry--warning' ],
+        html: createUpdateTemplateEntry(element, currentElementTemplate, newestElementTemplate, commandStack, translate)
+      });
+    }
+
+    description = currentElementTemplate.description;
+
+    if (description) {
+      entries.push(createDescriptionEntry(description, translate));
+    }
+  } else {
+    entries.push({
+      id: 'element-template-not-found',
+      cssClasses: [ 'bpp-entry--warning' ],
+      html: createTemplateNotFoundEntry(element, modeling, translate)
+    });
+  }
+
+  if (currentElementTemplate && currentElementTemplate.version) {
+    entries.push({
+      id: 'element-template-version',
+      html: '<p>' + getVersionOrDateFromTemplate(currentElementTemplate) + '</p>'
+    });
+  }
+
+  return {
+    id: 'elementTemplateDescription',
+    label: currentElementTemplate ? currentElementTemplate.name : translate('Missing Template'),
+    dropdown: {
+      menu: [
+        {
+          id: 'element-template-unlink',
+          label: translate('Unlink'),
+          onClick: function() {
+            modeling.updateProperties(element, {
+              'camunda:modelerTemplate': null,
+              'camunda:modelerTemplateVersion': null
+            });
+          }
+        },
+        {
+          id: 'element-template-remove',
+          label: translate('Remove'),
+          onClick: function() {
+            var businessObject = getBusinessObject(element);
+
+            var type = businessObject.$type,
+                eventDefinitionType = getEventDefinitionType(businessObject);
+
+            var newElement = replace.replaceElement(element, {
+              type: type,
+              eventDefinitionType: eventDefinitionType
+            });
+
+            selection.select(newElement);
+          }
+        }
+      ]
+    },
+    entries: entries
+  };
+};
+
+// helpers //////////
+
+function createDescriptionEntry(description, translate) {
+  description = escapeHTML(description);
+
+  var html = domify('<p class="description description--expanded"></p>');
+
+  var descriptionText = domify('<span class="description__text">' + description + '</span>');
+
+  html.appendChild(descriptionText);
+
+  function toggleExpanded(expanded) {
+    if (expanded) {
+      domClasses(html).add('description--expanded');
+
+      descriptionText.textContent = description + ' ';
+
+      expand.textContent = translate('Less');
+    } else {
+      domClasses(html).remove('description--expanded');
+
+      descriptionText.textContent = descriptionShortened + ' ... ';
+
+      expand.textContent = translate('More');
+    }
+  }
+
+  var descriptionShortened,
+      expand,
+      expanded = false;
+
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    descriptionShortened = description.slice(0, MAX_DESCRIPTION_LENGTH);
+
+    expand = domify(
+      '<span class="bpp-entry-link description__expand">' +
+        translate('More') +
+      '</span>'
+    );
+
+    domEvent.bind(expand, 'click', function() {
+      expanded = !expanded;
+
+      toggleExpanded(expanded);
+    });
+
+    html.appendChild(expand);
+
+    toggleExpanded(expanded);
+  }
+
+  return {
+    id: 'element-template-description',
+    html: html
+  };
+}
+
+function getEventDefinitionType(businessObject) {
+  if (!businessObject.eventDefinitions) {
+    return null;
+  }
+
+  var eventDefinition = businessObject.eventDefinitions[ 0 ];
+
+  if (!eventDefinition) {
+    return null;
+  }
+
+  return eventDefinition.$type;
+}
+
+function createTemplateNotFoundEntry(element, modeling, translate) {
+  var templateId = getTemplateId(element);
+
+  var html = domify(
+    '<p>' +
+    translate(
+      'The applied Template &lt;{templateId}&gt; was not found and therefore its data is not accessible.' +
+      '<br />' +
+      '<br />' +
+      'Unlink in order to access the data.', { templateId: templateId }
+    ) +
+    '</p>' +
+    '<p style="text-align: right;">' +
+    '<a class="bpp-entry-link bpp-entry-link-button">Unlink</a>' +
+    '</p>'
+  );
+
+  domQuery('.bpp-entry-link', html).addEventListener('click', function() {
+    modeling.updateProperties(element, {
+      'camunda:modelerTemplate': null
+    });
+  });
+
+  return html;
+}
+
+function createUpdateTemplateEntry(element, oldElementTemplate, newElementTemplate, commandStack, translate) {
+  var newElementTemplateVersion = getVersionOrDateFromTemplate(newElementTemplate);
+
+  var html = domify(
+    '<p>' +
+    translate(
+      'A new version of the Template ({newElementTemplateVersion}) is available.',
+      { newElementTemplateVersion: newElementTemplateVersion }
+    ) +
+    '</p>' +
+    '<p style="text-align: right;">' +
+    '<a class="bpp-entry-link bpp-entry-link-button">Update</a>' +
+    '</p>'
+  );
+
+  domQuery('.bpp-entry-link', html).addEventListener('click', function() {
+    commandStack.execute('propertiesPanel.camunda.changeTemplate', {
+      element: element,
+      newTemplate: newElementTemplate,
+      oldTemplate: oldElementTemplate
+    });
+  });
+
+  return html;
+}
+
+function findNewestElementTemplate(elementTemplates, currentElementTemplate) {
+  if (isUndefined(currentElementTemplate.version)) {
+    return null;
+  }
+
+  return elementTemplates
+    .getAll()
+    .filter(function(elementTemplate) {
+      return currentElementTemplate.id === elementTemplate.id && !isUndefined(elementTemplate.version);
+    })
+    .reduce(function(newestElementTemplate, elementTemplate) {
+      if (currentElementTemplate.version < elementTemplate.version) {
+        return elementTemplate;
+      }
+
+      if (newestElementTemplate && newestElementTemplate.version < elementTemplate.version) {
+        return elementTemplate;
+      }
+
+      return newestElementTemplate;
+    }, null);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ErrorsProps.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/ErrorsProps.js ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach,
+    filter = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").filter,
+    flatten = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").flatten,
+    findIndex = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").findIndex;
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var findExtensions = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findExtensions,
+    findCamundaErrorEventDefinition = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findCamundaErrorEventDefinition;
+
+var ErrorEntries = __webpack_require__(/*! ../../parts/implementation/ErrorsEntries */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorsEntries.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var CAMUNDA_ERROR_EVENT_DEFINITION_TYPE = 'camunda:errorEventDefinition';
+
+var EMPTY_ERROR = {
+  get: function() {},
+  set: function() {},
+  errorRef: {}
+};
+
+/**
+ * Injects element template errors into the given group.
+ *
+ * @param {Object} group
+ * @param {djs.model.Base} element
+ * @param {ElementTemplates} elementTemplates
+ * @param {BpmnFactory} bpmnFactory
+ * @param {Function} translate
+ */
+module.exports = function(group, element, elementTemplates, bpmnFactory, translate) {
+  var template = elementTemplates.get(element);
+
+  if (!template) {
+    return [];
+  }
+
+  var errorEntries = [];
+
+  function onToggle(value, entryNode) {
+    if (!value) {
+      return;
+    }
+
+    var currentEntryId = entryNode.dataset.entry;
+
+    // collapse all other items
+    errorEntries.forEach(function(entries) {
+      var collapsible = entries[0];
+
+      if (collapsible.id === currentEntryId) {
+        return;
+      }
+
+      var entryNode = domQuery('[data-entry="' + collapsible.id + '"]');
+      collapsible.setOpen(false, entryNode);
+    });
+  }
+
+
+  function renderError(id, templateProperty) {
+    var binding = templateProperty.binding,
+        bindingErrorRef = binding.errorRef,
+        errorEntries = [],
+        collapsibleEntry;
+
+    // find error event definition first
+    var bo = getBusinessObject(element),
+        errorEventDefinitions = findExtensions(bo, [ 'camunda:ErrorEventDefinition' ]);
+
+    if (!errorEventDefinitions) {
+      return errorEntries;
+    }
+
+    var getError = function() {
+      var definition = findCamundaErrorEventDefinition(element, bindingErrorRef);
+
+      if (!definition) {
+        return EMPTY_ERROR;
+      }
+
+      return definition;
+    };
+
+    var error = getError();
+
+    var isOpen = function() {
+      return collapsibleEntry.isOpen();
+    };
+
+    var options = {
+      idPrefix: id + '-',
+      onToggle: onToggle,
+      getError: getError,
+      isOpen: function() {
+        return isOpen();
+      }
+    };
+
+    // (1) use errors implementation
+    var errorImplementation = ErrorEntries(error, bpmnFactory, element, options, translate);
+    errorEntries = errorImplementation.entries;
+
+    var errorReferenceIdx = findEntry(errorEntries, id + '-error-reference');
+
+    collapsibleEntry = errorEntries[findEntry(errorEntries, id + '-collapsible')];
+
+    // (2) replace validated expression entry by a simple, disabled entry
+    var expressionIdx = findEntry(errorEntries, id + '-error-expression');
+    removeEntry(errorEntries, expressionIdx);
+
+    var expressionEntry = entryFactory.textField(translate, {
+      id: id + '-error-expression',
+      label: translate('Throw Expression'),
+      modelProperty: 'expression',
+
+      get: function() {
+        return { expression: getError().expression };
+      },
+
+      buttonShow: {
+        method: function() {
+          return false;
+        }
+      },
+
+      hidden: function() {
+        return !isOpen();
+      },
+      disabled: function() {
+        return true;
+      }
+    });
+
+    errorEntries.splice(expressionIdx, 0, expressionEntry);
+
+    // (3) remove error selection
+    removeEntry(errorEntries, errorReferenceIdx);
+
+    return errorEntries;
+  }
+
+  // filter specific errors from template
+  var errors = filter(template.properties, function(p) {
+    return !p.type && p.binding.type === CAMUNDA_ERROR_EVENT_DEFINITION_TYPE;
+  });
+
+  forEach(errors, function(property, idx) {
+    var id = 'template-errors-' + template.id + '-' + idx;
+    errorEntries.push(renderError(id, property));
+  });
+
+  group.entries = group.entries.concat(flatten(errorEntries));
+};
+
+
+// helper //////////////////////////
+
+function findEntry(entries, id) {
+  return findIndex(entries, function(entry) {
+    return entry.id === id;
+  });
+}
+
+function removeEntry(entries, idx) {
+  entries.splice(idx, 1);
+}
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/Helper.js":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/Helper.js ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var find = __webpack_require__(/*! lodash/find */ "./node_modules/lodash/find.js"),
+    isUndefined = __webpack_require__(/*! lodash/isUndefined */ "./node_modules/lodash/isUndefined.js");
+
+var isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny;
+
+var ELEMENT_TEMPLATE_OPTION_EMPTY = 'element-template-option-empty';
+
+module.exports.ELEMENT_TEMPLATE_OPTION_EMPTY = ELEMENT_TEMPLATE_OPTION_EMPTY;
+
+var emptyOption = {
+  name: '',
+  value: ELEMENT_TEMPLATE_OPTION_EMPTY
+};
+
+/**
+ * Get options for given element and templates.
+ *
+ * @param {dj.model.Base} element
+ * @param {ElementTemplates} elementTemplates
+ * @param {Translate} translate
+ */
+function getOptions(element, elementTemplates, translate) {
+  var options = [ emptyOption ];
+
+  var defaultTemplate = elementTemplates.getDefault(element);
+
+  if (defaultTemplate) {
+    options.push(option('element-template-option-0', defaultTemplate, translate));
+
+    return options;
+  }
+
+  var index = 0;
+
+  elementTemplates.getAll().forEach(function(template) {
+    if (!isAny(element, template.appliesTo)) {
+      return;
+    }
+
+    options.push(option('element-template-option-' + index, template, translate));
+
+    index++;
+  });
+
+  return options;
+}
+
+module.exports.getOptions = getOptions;
+
+function getOption(optionId, options) {
+  return find(options, function(option) {
+    return optionId === option.value;
+  });
+}
+
+module.exports.getOption = getOption;
+
+function option(value, template, translate) {
+  var name = translate(template.name);
+
+  if (template.version) {
+    name += ' (v' + template.version + ')';
+  }
+
+  var option = {
+    id: template.id,
+    name: name,
+    value: value
+  };
+
+  if (template.version) {
+    option.version = template.version;
+  }
+
+  return option;
+}
+
+module.exports.getVersionOrDateFromTemplate = function(template) {
+  var metadata = template.metadata,
+      version = template.version;
+
+  if (metadata) {
+    if (!isUndefined(metadata.created)) {
+      return 'Version ' + toDateString(metadata.created);
+    } else if (!isUndefined(metadata.updated)) {
+      return 'Version ' + toDateString(metadata.updated);
+    }
+  }
+
+  if (isUndefined(version)) {
+    return null;
+  }
+
+  return 'Version ' + version;
+};
+
+function toDateString(timestamp) {
+  var date = new Date(timestamp);
+
+  var year = date.getFullYear();
+
+  var month = leftPad(String(date.getMonth() + 1), 2, '0');
+
+  var day = leftPad(String(date.getDate()), 2, '0');
+
+  return day + '.' + month + '.' + year;
+}
+
+function leftPad(string, length, character) {
+  while (string.length < length) {
+    string = character + string;
+  }
+
+  return string;
+}
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/InputParametersProps.js":
+/*!********************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/InputParametersProps.js ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").assign,
+    flatten = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").flatten,
+    filter = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").filter,
+    findIndex = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").findIndex,
+    forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach;
+
+var domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
+    domEvent = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").event,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var findExtension = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findExtension,
+    findInputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findInputParameter;
+
+var createInputParameter = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createInputParameter;
+
+var escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+
+var InputOutputParameter = __webpack_require__(/*! ../../parts/implementation/InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+
+var CAMUNDA_INPUT_PARAMETER_TYPE = 'camunda:inputParameter';
+
+var MAX_DESCRIPTION_LENGTH = 200;
+
+var EMPTY_PARAMETER = {
+  get: function() {},
+  set: function() {}
+};
+
+
+/**
+ * Injects element template input parameters into the given group.
+ *
+ * @param {Object} group
+ * @param {djs.model.Base} element
+ * @param {ElementTemplates} elementTemplates
+ * @param {BpmnFactory} bpmnFactory
+ * @param {Function} translate
+ */
+module.exports = function(group, element, elementTemplates, bpmnFactory, translate) {
+
+  var template = elementTemplates.get(element);
+
+  if (!template) {
+    return [];
+  }
+
+  var inputEntries = [];
+
+
+  function onToggle(value, entryNode) {
+    if (!value) {
+      return;
+    }
+
+    var currentEntryId = entryNode.dataset.entry;
+
+    // collapse all other items
+    inputEntries.forEach(function(entries) {
+      var collapsible = entries[0];
+
+      if (collapsible.id === currentEntryId) {
+        return;
+      }
+
+      var entryNode = domQuery('[data-entry="' + collapsible.id + '"]');
+      collapsible.setOpen(false, entryNode);
+    });
+  }
+
+  function renderInputParameter(id, templateProperty) {
+
+    var parameterEntries = [],
+        collapsibleEntry;
+
+    var bo = getBusinessObject(element),
+        inputOutput = findExtension(bo, 'camunda:InputOutput');
+
+    if (!inputOutput) {
+      return parameterEntries;
+    }
+
+    var getParameter = function() {
+      return findInputParameter(inputOutput, templateProperty.binding) || EMPTY_PARAMETER;
+    };
+
+    var parameter = getParameter();
+
+    var isOpen = function() {
+      return collapsibleEntry.isOpen();
+    };
+
+    var assignmentIsOn = function() {
+      var inputOutput = findExtension(getBusinessObject(element), 'camunda:InputOutput'),
+          parameter = findInputParameter(inputOutput, templateProperty.binding);
+
+      return !!parameter;
+    };
+
+    var options = {
+      idPrefix: id + '-',
+      onToggle: onToggle,
+      getParameter: getParameter,
+      isOpen: function() {
+        return isOpen() && assignmentIsOn();
+      }
+    };
+
+
+    // (1) use input parameter implementation
+    var inputImplementation = InputOutputParameter(parameter, bpmnFactory, options, translate);
+    parameterEntries = inputImplementation.entries;
+
+    var nameIdx = findEntry(parameterEntries, id + '-parameterName');
+
+    collapsibleEntry = parameterEntries[findEntry(parameterEntries, id + '-collapsible')];
+
+    // (2) update title getter
+    var defaultGet = collapsibleEntry.get;
+    collapsibleEntry.get = function() {
+      return assign(defaultGet(), {
+        title: templateProperty.label ?
+          translate(templateProperty.label) :
+          templateProperty.binding.name
+      });
+    };
+
+    // (3) remove name property entry
+    removeEntry(parameterEntries, nameIdx);
+
+    // (4) add description entry
+    if (templateProperty.description) {
+      parameterEntries.splice(1, 0, createDescriptionEntry(
+        templateProperty.description,
+        id,
+        collapsibleEntry.isOpen,
+        translate
+      ));
+    }
+
+    // (5) add parameter toggle
+    parameterEntries.splice(templateProperty.description ? 2 : 1, 0, entryFactory.toggleSwitch(translate, {
+      id: id + '-assignment-toggle',
+      label: translate('Local Variable Assignment'),
+      modelProperty: 'isActive',
+      labelOn: translate('On'),
+      labelOff: translate('Off'),
+      descriptionOff: translate('The parameter won\'t be created as local variable.'),
+      isOn: assignmentIsOn,
+      get: function(element, node) {
+        return { isActive: assignmentIsOn() };
+      },
+      set: function(element, values, node) {
+        var isActive = values.isActive || false;
+
+        if (isActive) {
+          return createNewInputParameter(element, templateProperty.binding, bpmnFactory);
+        } else {
+          return removeInputParameter(element, templateProperty.binding);
+        }
+
+      },
+      hidden: function(element, node) {
+        return !isOpen();
+      }
+    }));
+
+    return parameterEntries;
+  }
+
+
+  // filter specific input parameters from template
+  var inputParameters = filter(template.properties, function(p) {
+    return !p.type && p.binding.type === CAMUNDA_INPUT_PARAMETER_TYPE;
+  });
+
+  forEach(inputParameters, function(property, idx) {
+    var id = 'template-inputs-' + template.id + '-' + idx;
+    inputEntries.push(renderInputParameter(id, property));
+  });
+
+  group.entries = group.entries.concat(flatten(inputEntries));
+};
+
+
+// helper ///////////////////////
+
+function findEntry(entries, id) {
+  return findIndex(entries, function(entry) {
+    return entry.id === id;
+  });
+}
+
+function removeEntry(entries, idx) {
+  entries.splice(idx, 1);
+}
+
+function createDescriptionEntry(description, id, show, translate) {
+  description = escapeHTML(description);
+
+  var html = domify('<p class="description description--expanded" data-show="show"></p>');
+
+  var descriptionText = domify('<span class="description__text">' + description + '</span>');
+
+  html.appendChild(descriptionText);
+
+  function toggleExpanded(expanded) {
+    if (expanded) {
+      domClasses(html).add('description--expanded');
+
+      descriptionText.textContent = description + ' ';
+
+      expand.textContent = translate('Less');
+    } else {
+      domClasses(html).remove('description--expanded');
+
+      descriptionText.textContent = descriptionShortened + ' ... ';
+
+      expand.textContent = translate('More');
+    }
+  }
+
+  var descriptionShortened,
+      expand,
+      expanded = false;
+
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    descriptionShortened = description.slice(0, MAX_DESCRIPTION_LENGTH);
+
+    expand = domify(
+      '<span class="bpp-entry-link description__expand">' +
+        translate('More') +
+      '</span>'
+    );
+
+    domEvent.bind(expand, 'click', function() {
+      expanded = !expanded;
+
+      toggleExpanded(expanded);
+    });
+
+    html.appendChild(expand);
+
+    toggleExpanded(expanded);
+  }
+
+  return {
+    id: id + '-description',
+    html: html,
+    show: show
+  };
+}
+
+function removeInputParameter(element, binding) {
+  var bo = getBusinessObject(element),
+      updates = [],
+      extensionElements = bo.get('extensionElements');
+
+  if (!extensionElements) {
+    return updates;
+  }
+
+  var inputOutput = findExtension(extensionElements, 'camunda:InputOutput');
+
+  if (!inputOutput) {
+    return updates;
+  }
+
+  var inputParameter = findInputParameter(inputOutput, binding);
+
+  if (!inputParameter) {
+    return updates;
+  }
+
+  updates.push(cmdHelper.removeElementsFromList(element, inputOutput, 'inputParameters', null, [inputParameter]));
+
+  return updates;
+}
+
+function createNewInputParameter(element, binding, bpmnFactory) {
+  var bo = getBusinessObject(element),
+      updates = [],
+      extensionElements = bo.get('extensionElements');
+
+  // (1) ensure extension elements
+  if (!extensionElements) {
+    extensionElements = elementHelper.createElement('bpmn:ExtensionElements', null, element, bpmnFactory);
+
+    updates.push(cmdHelper.updateBusinessObject(
+      element, bo, { extensionElements: extensionElements }
+    ));
+  }
+
+  var inputOutput = findExtension(extensionElements, 'camunda:InputOutput');
+
+  // (2) ensure inputOutput element
+  if (!inputOutput) {
+    inputOutput = elementHelper.createElement('camunda:InputOutput', null, bo, bpmnFactory);
+
+    updates.push(cmdHelper.addElementsTolist(
+      element, extensionElements, 'values', inputOutput
+    ));
+  }
+
+  // (3) create input parameter
+  var inputParameter = createInputParameter(binding, null, bpmnFactory);
+
+  updates.push(cmdHelper.addAndRemoveElementsFromList(
+    element,
+    inputOutput,
+    'inputParameters',
+    null,
+    [ inputParameter ],
+    [ ]
+  ));
+
+  return updates;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/OutputParametersProps.js":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/parts/OutputParametersProps.js ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var flatten = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").flatten,
+    filter = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").filter,
+    forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach;
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js");
+
+var findExtension = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findExtension,
+    findOutputParameter = __webpack_require__(/*! ../Helper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/Helper.js").findOutputParameter;
+
+var createOutputParameter = __webpack_require__(/*! ../CreateHelper */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/CreateHelper.js").createOutputParameter;
+
+var domClasses = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").classes,
+    domEvent = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").event,
+    domify = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").domify,
+    domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var CAMUNDA_OUTPUT_PARAMETER_TYPE = 'camunda:outputParameter';
+
+var MAX_DESCRIPTION_LENGTH = 200;
+
+var EMPTY_PARAMETER = {
+  get: function() {},
+  set: function() {}
+};
+
+/**
+ * Injects element template output parameters into the given group.
+ *
+ * @param {Object} group
+ * @param {djs.model.Base} element
+ * @param {ElementTemplates} elementTemplates
+ * @param {BpmnFactory} bpmnFactory
+ * @param {Function} translate
+ */
+module.exports = function(group, element, elementTemplates, bpmnFactory, translate) {
+
+  var template = elementTemplates.get(element);
+
+  if (!template) {
+    return [];
+  }
+
+  var outputEntries = [];
+
+
+  function onToggle(value, entryNode) {
+    if (!value) {
+      return;
+    }
+
+    var currentEntryId = entryNode.dataset.entry;
+
+    // collapse all other items
+    outputEntries.forEach(function(entries) {
+      var collapsible = entries[0];
+
+      if (collapsible.id === currentEntryId) {
+        return;
+      }
+
+      var entryNode = domQuery('[data-entry="' + collapsible.id + '"]');
+      collapsible.setOpen(false, entryNode);
+    });
+  }
+
+  function renderOutputParameter(id, templateProperty) {
+
+    var parameterEntries = [];
+
+    // find input parameter first
+    var bo = getBusinessObject(element),
+        inputOutput = findExtension(bo, 'camunda:InputOutput');
+
+    if (!inputOutput) {
+      return parameterEntries;
+    }
+
+    var getParameter = function() {
+      return findOutputParameter(inputOutput, templateProperty.binding) || EMPTY_PARAMETER;
+    };
+
+    // (1) add collapsible header
+    var collapsible = entryFactory.collapsible({
+      id: id + '-collapsible',
+      title: translate(templateProperty.label),
+      cssClasses: [
+        'bpp-collapsible--with-mapping',
+        'bpp-collapsible--with-template-out'
+      ],
+      onToggle: onToggle,
+      open: false,
+      get: function() {
+        return {
+          title: translate(templateProperty.label),
+          description: getParameter().name
+        };
+      }
+    });
+    parameterEntries.push(collapsible);
+
+    var isOpen = collapsible.isOpen;
+
+    var assignmentIsOn = function() {
+      var inputOutput = findExtension(getBusinessObject(element), 'camunda:InputOutput'),
+          parameter = findOutputParameter(inputOutput, templateProperty.binding);
+
+      return !!parameter;
+    };
+
+    // (2) add description
+    if (templateProperty.description) {
+      parameterEntries.push(createDescriptionEntry(
+        templateProperty.description,
+        id,
+        isOpen,
+        translate
+      ));
+    }
+
+    // (3) add parameter toggle
+    parameterEntries.splice(templateProperty.description ? 2 : 1, 0, entryFactory.toggleSwitch(translate, {
+      id: id + '-assignment-toggle',
+      label: translate('Process Variable Assignment'),
+      modelProperty: 'isActive',
+      labelOn: translate('On'),
+      labelOff: translate('Off'),
+      descriptionOff: translate('The parameter won\'t be available in the process scope.'),
+      isOn: assignmentIsOn,
+      get: function(element, node) {
+        return { isActive: assignmentIsOn() };
+      },
+      set: function(element, values, node) {
+        var isActive = values.isActive || false;
+
+        if (isActive) {
+          return createNewOutputParameter(element, templateProperty.binding, bpmnFactory);
+        } else {
+          return removeOutputParameter(element, templateProperty.binding);
+        }
+
+      },
+      hidden: function(element, node) {
+        return !isOpen();
+      }
+    }));
+
+    // (4) add process variable name field
+    parameterEntries.push(entryFactory.validationAwareTextField(translate, {
+      id: id + '-variableName',
+      label: translate('Assign to Process Variable'),
+      modelProperty: 'variableName',
+      getProperty: function(element) {
+        return getParameter().name;
+      },
+      setProperty: function(element, values) {
+        return cmdHelper.updateBusinessObject(element, getParameter(), { name: values.variableName });
+      },
+      validate: function(element, values) {
+        var validation = {},
+            nameValue = values.variableName;
+
+        if (nameValue) {
+          if (utils.containsSpace(nameValue)) {
+            validation.variableName = translate('Process Variable Name must not contain spaces.');
+          }
+        } else {
+          validation.variableName = translate('Process Variable Name must not be empty.');
+        }
+
+        return validation;
+      },
+      hidden: function(element, node) {
+        return !isOpen() || !assignmentIsOn();
+      }
+    }));
+
+    return parameterEntries;
+  }
+
+  // filter specific output parameters from template
+  var outputParameters = filter(template.properties, function(p) {
+    return !p.type && p.binding.type === CAMUNDA_OUTPUT_PARAMETER_TYPE;
+  });
+
+  forEach(outputParameters, function(property, idx) {
+    var id = 'template-outputs-' + template.id + '-' + idx;
+    outputEntries.push(renderOutputParameter(id, property));
+  });
+
+  group.entries = group.entries.concat(flatten(outputEntries));
+};
+
+// helpers ///////////////
+
+function createDescriptionEntry(description, id, show, translate) {
+  description = escapeHTML(description);
+
+  var html = domify('<p class="description description--expanded" data-show="show"></p>');
+
+  var descriptionText = domify('<span class="description__text">' + description + '</span>');
+
+  html.appendChild(descriptionText);
+
+  function toggleExpanded(expanded) {
+    if (expanded) {
+      domClasses(html).add('description--expanded');
+
+      descriptionText.textContent = description + ' ';
+
+      expand.textContent = translate('Less');
+    } else {
+      domClasses(html).remove('description--expanded');
+
+      descriptionText.textContent = descriptionShortened + ' ... ';
+
+      expand.textContent = translate('More');
+    }
+  }
+
+  var descriptionShortened,
+      expand,
+      expanded = false;
+
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    descriptionShortened = description.slice(0, MAX_DESCRIPTION_LENGTH);
+
+    expand = domify(
+      '<span class="bpp-entry-link description__expand">' +
+        translate('More') +
+      '</span>'
+    );
+
+    domEvent.bind(expand, 'click', function() {
+      expanded = !expanded;
+
+      toggleExpanded(expanded);
+    });
+
+    html.appendChild(expand);
+
+    toggleExpanded(expanded);
+  }
+
+  return {
+    id: id + '-description',
+    html: html,
+    show: show
+  };
+}
+
+function removeOutputParameter(element, binding) {
+  var bo = getBusinessObject(element),
+      updates = [],
+      extensionElements = bo.get('extensionElements');
+
+  if (!extensionElements) {
+    return updates;
+  }
+
+  var inputOutput = findExtension(extensionElements, 'camunda:InputOutput');
+
+  if (!inputOutput) {
+    return updates;
+  }
+
+  var outputParameter = findOutputParameter(inputOutput, binding);
+
+  if (!outputParameter) {
+    return updates;
+  }
+
+  updates.push(cmdHelper.removeElementsFromList(element, inputOutput, 'outputParameters', null, [outputParameter]));
+
+  return updates;
+}
+
+function createNewOutputParameter(element, binding, bpmnFactory) {
+  var bo = getBusinessObject(element),
+      updates = [],
+      extensionElements = bo.get('extensionElements');
+
+  // (1) ensure extension elements
+  if (!extensionElements) {
+    extensionElements = elementHelper.createElement('bpmn:ExtensionElements', null, element, bpmnFactory);
+
+    updates.push(cmdHelper.updateBusinessObject(
+      element, bo, { extensionElements: extensionElements }
+    ));
+  }
+
+  var inputOutput = findExtension(extensionElements, 'camunda:InputOutput');
+
+  // (2) ensure inputOutput element
+  if (!inputOutput) {
+    inputOutput = elementHelper.createElement('camunda:InputOutput', null, bo, bpmnFactory);
+
+    updates.push(cmdHelper.addElementsTolist(
+      element, extensionElements, 'values', inputOutput
+    ));
+  }
+
+  // (3) create output parameter
+  var outputParameter = createOutputParameter(binding, null, bpmnFactory);
+
+  updates.push(cmdHelper.addAndRemoveElementsFromList(
+    element,
+    inputOutput,
+    'outputParameters',
+    null,
+    [ outputParameter ],
+    [ ]
+  ));
+
+  return updates;
+}
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/util/handleLegacyScopes.js":
+/*!*****************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/element-templates/util/handleLegacyScopes.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var assign = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").assign,
+    forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach,
+    keys = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").keys,
+    isObject = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").isObject;
+
+/**
+ * Converts legacy scopes descriptor to newer supported array structure.
+ *
+ * For example, it transforms
+ *
+ * scopes: {
+ *   'camunda:Connector':
+ *     { properties: []
+ *   }
+ * }
+ *
+ * to
+ *
+ * scopes: [
+ *   {
+ *     type: 'camunda:Connector',
+ *     properties: []
+ *   }
+ * ]
+ *
+ * @param {ScopesDescriptor} scopes
+ *
+ * @returns {Array}
+ */
+module.exports = function handleLegacyScopes(scopes) {
+  var scopesAsArray = [];
+
+  if (!isObject(scopes)) {
+    return scopes;
+  }
+
+  forEach(keys(scopes), function(scopeName) {
+    scopesAsArray.push(assign({
+      type: scopeName
+    }, scopes[scopeName]));
+  });
+
+  return scopesAsArray;
+};
 
 /***/ }),
 
@@ -6511,7 +9559,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
     return;
   }
 
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id : 'callActivity',
     label: translate('CallActivity Type'),
     selectOptions: [
@@ -6648,7 +9696,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
               '<label for="cam-condition" data-show="isExpression">' + escapeHTML(translate('Expression')) + '</label>' +
               '<div class="bpp-field-wrapper" data-show="isExpression">' +
                 '<input id="cam-condition" type="text" name="condition" />' +
-                '<button class="clear" data-action="clear" data-show="canClear">' +
+                '<button class="action-button clear" data-action="clear" data-show="canClear">' +
                   '<span>X</span>' +
                 '</button>' +
               '</div>' +
@@ -6755,6 +9803,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
     },
 
     clear: function(element, inputNode) {
+
       // clear text input
       domQuery('input[name=condition]', inputNode).value='';
 
@@ -6824,7 +9873,7 @@ function isConnector(element) {
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'connectorId',
     label: translate('Connector Id'),
     modelProperty: 'connectorId',
@@ -6859,59 +9908,51 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 /***/ }),
 
-/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js":
-/*!****************************************************************************************************************!*\
-  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputParameterProps.js ***!
-  \****************************************************************************************************************/
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputParametersProps.js":
+/*!***********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputParametersProps.js ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+var inputParameters = __webpack_require__(/*! ./implementation/InputParameters */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputParameters.js");
 
-var inputOutputParameter = __webpack_require__(/*! ./implementation/InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+module.exports = function(group, element, bpmnFactory, translate) {
 
-module.exports = function(group, element, bpmnFactory, options, translate) {
-
-  options = assign({
+  var inputParametersEntry = inputParameters(element, bpmnFactory, {
     idPrefix: 'connector-',
     insideConnector: true
-  }, options);
+  }, translate);
 
-  group.entries = group.entries.concat(inputOutputParameter(element, bpmnFactory, options, translate));
-
+  group.entries = group.entries.concat(inputParametersEntry.entries);
 };
 
 
 /***/ }),
 
-/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorInputOutputProps.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorOutputParametersProps.js":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ConnectorOutputParametersProps.js ***!
+  \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var inputOutput = __webpack_require__(/*! ./implementation/InputOutput */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js");
+var outputParameters = __webpack_require__(/*! ./implementation/OutputParameters */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/OutputParameters.js");
 
 module.exports = function(group, element, bpmnFactory, translate) {
 
-  var inputOutputEntry = inputOutput(element, bpmnFactory, {
+  var outputParametersEntry = outputParameters(element, bpmnFactory, {
     idPrefix: 'connector-',
     insideConnector: true
   }, translate);
 
-  group.entries = group.entries.concat(inputOutputEntry.entries);
-
-  return {
-    getSelectedParameter: inputOutputEntry.getSelectedParameter
-  };
-
+  group.entries = group.entries.concat(outputParametersEntry.entries);
 };
 
 
@@ -6964,6 +10005,34 @@ module.exports = function(group, element, bpmnFactory, translate) {
       }
     }
   });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorsProps.js":
+/*!*****************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ErrorsProps.js ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var errors = __webpack_require__(/*! ./implementation/Errors */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Errors.js");
+
+module.exports = function(group, element, bpmnFactory, elementTemplates, translate) {
+
+  var template = elementTemplates.get(element);
+
+  if (template) {
+    return;
+  }
+
+  var errorsEntry = errors(element, bpmnFactory, {}, translate);
+
+  group.entries = group.entries.concat(errorsEntry.entries);
 };
 
 
@@ -7084,21 +10153,22 @@ function generateValueId() {
 /**
  * Generate a form field specific textField using entryFactory.
  *
- * @param  {string} options.id
- * @param  {string} options.label
- * @param  {string} options.modelProperty
- * @param  {function} options.validate
+ * @param {Function} translate
+ * @param {string} options.id
+ * @param {string} options.label
+ * @param {string} options.modelProperty
+ * @param {Function} options.validate
  *
  * @return {Object} an entryFactory.textField object
  */
-function formFieldTextField(options, getSelectedFormField) {
+function formFieldTextField(translate, options, getSelectedFormField) {
 
   var id = options.id,
       label = options.label,
       modelProperty = options.modelProperty,
       validate = options.validate;
 
-  return entryFactory.textField({
+  return entryFactory.textField(translate, {
     id: id,
     label: label,
     modelProperty: modelProperty,
@@ -7171,7 +10241,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }
 
   // [FormKey] form key text input field
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id : 'form-key',
     label : translate('Form Key'),
     modelProperty: 'formKey',
@@ -7255,7 +10325,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   group.entries.push(formFieldsEntry);
 
   // [FormData] business key form field select box
-  var formBusinessKeyFormFieldEntry = entryFactory.selectBox({
+  var formBusinessKeyFormFieldEntry = entryFactory.selectBox(translate, {
     id: 'form-business-key',
     label: translate('Business Key'),
     modelProperty: 'businessKey',
@@ -7273,7 +10343,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
       var result = { businessKey: '' };
       var bo = getBusinessObject(element);
       var formDataExtension = getExtensionElements(bo, 'camunda:FormData');
-      if (formDataExtension) {
+      if (formDataExtension.length) {
         var formData = formDataExtension[0];
         var storedValue = formData.get('businessKey');
         result = { businessKey: storedValue };
@@ -7301,9 +10371,9 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
   // [FormData] form field id text input field
-  group.entries.push(entryFactory.validationAwareTextField({
+  group.entries.push(entryFactory.validationAwareTextField(translate, {
     id: 'form-field-id',
-    label: translate('ID'),
+    label: translate('ID (process variable name)'),
     modelProperty: 'id',
 
     getProperty: function(element, node) {
@@ -7348,7 +10418,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
   // [FormData] form field type combo box
-  group.entries.push(entryFactory.comboBox({
+  group.entries.push(entryFactory.comboBox(translate, {
     id: 'form-field-type',
     label: translate('Type'),
     selectOptions: [
@@ -7376,6 +10446,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
           commands = [];
 
       if (selectedFormField.type === 'enum' && values.type !== 'enum') {
+
         // delete camunda:value objects from formField.values when switching from type enum
         commands.push(cmdHelper.updateBusinessObject(element, selectedFormField, { values: undefined }));
       }
@@ -7392,14 +10463,14 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
   // [FormData] form field label text input field
-  group.entries.push(formFieldTextField({
+  group.entries.push(formFieldTextField(translate, {
     id: 'form-field-label',
     label: translate('Label'),
     modelProperty: 'label'
   }, getSelectedFormField));
 
   // [FormData] form field defaultValue text input field
-  group.entries.push(formFieldTextField({
+  group.entries.push(formFieldTextField(translate, {
     id: 'form-field-defaultValue',
     label: translate('Default Value'),
     modelProperty: 'defaultValue'
@@ -7419,7 +10490,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
   // [FormData] form field enum values table
-  group.entries.push(entryFactory.table({
+  group.entries.push(entryFactory.table(translate, {
     id: 'form-field-enum-values',
     labels: [ translate('Id'), translate('Name') ],
     modelProperties: [ 'id', 'name' ],
@@ -7465,6 +10536,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
           enumValue = selectedFormField.values[idx];
 
       if (enumValue) {
+
         // check if id is valid
         var validationError = utils.isIdValid(enumValue, value.id, translate);
 
@@ -7486,7 +10558,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
   // [FormData] form field constraints table
-  group.entries.push(entryFactory.table({
+  group.entries.push(entryFactory.table(translate, {
     id: 'constraints-list',
     modelProperties: [ 'name', 'config' ],
     labels: [ translate('Name'), translate('Config') ],
@@ -7503,6 +10575,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
           validation = formField.validation;
 
       if (!validation) {
+
         // create validation business object and add it to form data, if it doesn't exist
         validation = elementHelper.createElement('camunda:Validation', {}, getBusinessObject(element), bpmnFactory);
 
@@ -7544,6 +10617,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
       ));
 
       if (constraints.length === 1) {
+
         // remove camunda:validation if the last existing constraint has been removed
         commands.push(cmdHelper.updateBusinessObject(element, formField, { validation: undefined }));
       }
@@ -7621,51 +10695,29 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 /***/ }),
 
-/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js":
-/*!*******************************************************************************************************!*\
-  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputParameterProps.js ***!
-  \*******************************************************************************************************/
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputParametersProps.js":
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputParametersProps.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var inputOutputParameter = __webpack_require__(/*! ./implementation/InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+var inputParameters = __webpack_require__(/*! ./implementation/InputParameters */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputParameters.js");
 
-var assign = __webpack_require__(/*! lodash/assign */ "./node_modules/lodash/assign.js");
+module.exports = function(group, element, bpmnFactory, elementTemplates, translate) {
 
-module.exports = function(group, element, bpmnFactory, options, translate) {
+  var template = elementTemplates.get(element);
 
-  group.entries = group.entries.concat(inputOutputParameter(element, bpmnFactory, assign({}, options), translate));
+  if (template) {
+    return;
+  }
 
-};
+  var inputParametersEntry = inputParameters(element, bpmnFactory, {}, translate);
 
-
-/***/ }),
-
-/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js":
-/*!**********************************************************************************************!*\
-  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/InputOutputProps.js ***!
-  \**********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var inputOutput = __webpack_require__(/*! ./implementation/InputOutput */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js");
-
-module.exports = function(group, element, bpmnFactory, translate) {
-
-  var inputOutputEntry = inputOutput(element, bpmnFactory, {}, translate);
-
-  group.entries = group.entries.concat(inputOutputEntry.entries);
-
-  return {
-    getSelectedParameter: inputOutputEntry.getSelectedParameter
-  };
-
+  group.entries = group.entries.concat(inputParametersEntry.entries);
 };
 
 
@@ -7778,7 +10830,7 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 
   // eventType ////////////////
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: 'listener-event-type',
     label: translate('Event Type'),
     modelProperty: 'eventType',
@@ -7835,7 +10887,7 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 
   // listenerId ///////////////
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'listener-id',
     label: translate('Listener Id'),
     modelProperty: 'listenerId',
@@ -7880,7 +10932,7 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 
   // listenerType ///////////////
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: 'listener-type',
     label: translate('Listener Type'),
     selectOptions: [
@@ -7920,7 +10972,7 @@ module.exports = function(group, element, bpmnFactory, options, translate) {
 
 
   // listenerValue //////////////
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'listener-value',
     dataValueLabel: 'listenerValueLabel',
     modelProperty: 'listenerValue',
@@ -8181,6 +11233,73 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
 /***/ }),
 
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/OutputParametersProps.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/OutputParametersProps.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var outputParameters = __webpack_require__(/*! ./implementation/OutputParameters */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/OutputParameters.js");
+
+module.exports = function(group, element, bpmnFactory, elementTemplates, translate) {
+
+  var template = elementTemplates.get(element);
+
+  if (template) {
+    return;
+  }
+
+  var outputParametersEntry = outputParameters(element, bpmnFactory, {}, translate);
+
+  group.entries = group.entries.concat(outputParametersEntry.entries);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ProcessVariablesProps.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/ProcessVariablesProps.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var processVariables = __webpack_require__(/*! ./implementation/ProcessVariables */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ProcessVariables.js");
+
+module.exports = function(group, element, translate) {
+  if (canHaveOverview(element)) {
+    var processVariablesEntries = processVariables(element, translate);
+
+    group.entries = group.entries.concat(processVariablesEntries);
+  }
+};
+
+
+// helpers //////////
+
+function canHaveOverview(element) {
+  var businessObject = getBusinessObject(element);
+
+  return (
+    isAny(element, ['bpmn:Process', 'bpmn:SubProcess']) ||
+    (is(element, 'bpmn:Participant') && businessObject.get('processRef'))
+  );
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js":
 /*!*********************************************************************************************!*\
   !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/PropertiesProps.js ***!
@@ -8280,7 +11399,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
   });
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id : 'scriptResultVariable',
     label : translate('Result Variable'),
     modelProperty : 'scriptResultVariable',
@@ -8418,9 +11537,9 @@ module.exports = function(group, element, bpmnFactory, translate) {
     return getImplementationType(element) === 'connector';
   };
 
-  group.entries.push(entryFactory.link({
+  group.entries.push(entryFactory.link(translate, {
     id: 'configureConnectorLink',
-    label: translate('Configure Connector'),
+    buttonLabel: translate('Configure Connector'),
     handleClick: function(element, node, event) {
 
       var connectorTabEl = getTabNode(node, 'connector');
@@ -8492,7 +11611,7 @@ module.exports = function(group, element, translate) {
   }
 
   if (is(element, 'camunda:Initiator') && !is(element.parent, 'bpmn:SubProcess')) {
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id: 'initiator',
       label: translate('Initiator'),
       modelProperty: 'initiator'
@@ -8560,28 +11679,28 @@ module.exports = function(group, element, translate) {
   if (is(element, 'camunda:Assignable')) {
 
     // Assignee
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'assignee',
       label : translate('Assignee'),
       modelProperty : 'assignee'
     }));
 
     // Candidate Users
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'candidateUsers',
       label : translate('Candidate Users'),
       modelProperty : 'candidateUsers'
     }));
 
     // Candidate Groups
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'candidateGroups',
       label : translate('Candidate Groups'),
       modelProperty : 'candidateGroups'
     }));
 
     // Due Date
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'dueDate',
       description : translate('The due date as an EL expression (e.g. ${someDate} or an ISO date (e.g. 2015-06-26T09:54:00)'),
       label : translate('Due Date'),
@@ -8589,7 +11708,7 @@ module.exports = function(group, element, translate) {
     }));
 
     // FollowUp Date
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'followUpDate',
       description : translate('The follow up date as an EL expression (e.g. ${someDate} or an ' +
                     'ISO date (e.g. 2015-06-26T09:54:00)'),
@@ -8598,7 +11717,7 @@ module.exports = function(group, element, translate) {
     }));
 
     // priority
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.textField(translate, {
       id : 'priority',
       label : translate('Priority'),
       modelProperty : 'priority'
@@ -8642,7 +11761,7 @@ function getCamundaInOutMappings(element, type) {
 
   var signalEventDefinition = eventDefinitionHelper.getSignalEventDefinition(bo);
 
-  return extensionElementsHelper.getExtensionElements(signalEventDefinition || bo, type) || [];
+  return extensionElementsHelper.getExtensionElements(signalEventDefinition || bo, type);
 }
 
 /**
@@ -8849,7 +11968,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
 
-  group.entries.push(entryFactory.selectBox({
+  group.entries.push(entryFactory.selectBox(translate, {
     id: 'variableMapping-inOutType',
     label: translate('Type'),
     selectOptions: inOutTypeOptions,
@@ -8890,7 +12009,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'variableMapping-source',
     dataValueLabel: 'sourceLabel',
     modelProperty: 'source',
@@ -8922,6 +12041,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
 
       return cmdHelper.updateBusinessObject(element, mapping, props);
     },
+
     // one of both (source or sourceExpression) must have a value to make
     // the configuration easier and more understandable
     // it is not engine conform
@@ -8953,7 +12073,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
 
-  group.entries.push(entryFactory.textField({
+  group.entries.push(entryFactory.textField(translate, {
     id: 'variableMapping-target',
     label: translate('Target'),
     modelProperty: 'target',
@@ -8994,7 +12114,7 @@ module.exports = function(group, element, bpmnFactory, translate) {
   }));
 
 
-  group.entries.push(entryFactory.checkbox({
+  group.entries.push(entryFactory.checkbox(translate, {
     id: 'variableMapping-local',
     label: translate('Local'),
     modelProperty: 'local',
@@ -9042,7 +12162,7 @@ module.exports = function(group, element, translate) {
   }
 
   if (is(element, 'bpmn:Process') || is(element, 'bpmn:Participant') && bo.get('processRef')) {
-    var versionTagEntry = entryFactory.textField({
+    var versionTagEntry = entryFactory.textField(translate, {
       id: 'versionTag',
       label: translate('Version Tag'),
       modelProperty: 'versionTag'
@@ -9121,7 +12241,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       labelPrefix = options.labelPrefix || '';
 
 
-  var asyncBeforeEntry = entryFactory.checkbox({
+  var asyncBeforeEntry = entryFactory.checkbox(translate, {
     id: idPrefix + 'asyncBefore',
     label: labelPrefix + translate('Asynchronous Before'),
     modelProperty: 'asyncBefore',
@@ -9156,7 +12276,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   });
 
 
-  var asyncAfterEntry = entryFactory.checkbox({
+  var asyncAfterEntry = entryFactory.checkbox(translate, {
     id: idPrefix + 'asyncAfter',
     label: labelPrefix + translate('Asynchronous After'),
     modelProperty: 'asyncAfter',
@@ -9190,7 +12310,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   });
 
 
-  var exclusiveEntry = entryFactory.checkbox({
+  var exclusiveEntry = entryFactory.checkbox(translate, {
     id: idPrefix + 'exclusive',
     label: labelPrefix + translate('Exclusive'),
     modelProperty: 'exclusive',
@@ -9300,13 +12420,13 @@ function getCamundaInWithBusinessKey(element) {
       bo = getBusinessObject(element);
 
   var camundaInParams = extensionElementsHelper.getExtensionElements(bo, 'camunda:In');
-  if (camundaInParams) {
-    forEach(camundaInParams, function(param) {
-      if (param.businessKey !== undefined) {
-        camundaIn.push(param);
-      }
-    });
-  }
+
+  forEach(camundaInParams, function(param) {
+    if (param.businessKey !== undefined) {
+      camundaIn.push(param);
+    }
+  });
+
   return camundaIn;
 }
 
@@ -9416,7 +12536,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   }
 
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'callable-element-ref',
     dataValueLabel: 'callableElementLabel',
     modelProperty: 'callableElementRef',
@@ -9470,7 +12590,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   }));
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id: 'callable-binding',
     label: translate('Binding'),
     selectOptions: function(element) {
@@ -9524,7 +12644,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   }));
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'callable-version',
     label: translate('Version'),
     modelProperty: 'callableVersion',
@@ -9572,7 +12692,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   }));
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'callable-version-tag',
     label: translate('Version Tag'),
     modelProperty: 'versionTag',
@@ -9626,7 +12746,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   }));
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'tenant-id',
     label: translate('Tenant Id'),
     modelProperty: 'tenantId',
@@ -9663,7 +12783,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   }));
 
   if (is(getBusinessObject(element), 'bpmn:CallActivity')) {
-    entries.push(entryFactory.checkbox({
+    entries.push(entryFactory.checkbox(translate, {
       id: 'callable-business-key',
       label: translate('Business Key'),
       modelProperty: 'callableBusinessKey',
@@ -9686,7 +12806,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     }));
   }
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'business-key-expression',
     label: translate('Business Key Expression'),
     modelProperty: 'businessKey',
@@ -9730,7 +12850,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     }
   }, translate));
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id: 'dmn-map-decision-result',
     label: translate('Map Decision Result'),
     selectOptions: mapDecisionResultOptions,
@@ -9758,7 +12878,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   }));
 
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id: 'delegateVariableMappingType',
     label: translate('Delegate Variable Mapping'),
     selectOptions: delegateVariableMappingOptions,
@@ -9795,7 +12915,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   }));
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'delegateVariableMapping',
     dataValueLabel: 'delegateVariableMappingLabel',
     modelProperty: 'delegateVariableMapping',
@@ -9872,7 +12992,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   var getBusinessObject = options.getBusinessObject;
 
-  var candidateStarterGroupsEntry = entryFactory.textField({
+  var candidateStarterGroupsEntry = entryFactory.textField(translate, {
     id: 'candidateStarterGroups',
     label: translate('Candidate Starter Groups'),
     modelProperty: 'candidateStarterGroups',
@@ -9896,7 +13016,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   });
 
-  var candidateStarterUsersEntry = entryFactory.textField({
+  var candidateStarterUsersEntry = entryFactory.textField(translate, {
     id: 'candidateStarterUsers',
     label: translate('Candidate Starter Users'),
     modelProperty: 'candidateStarterUsers',
@@ -9981,7 +13101,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     }
   }
 
-  var delegateEntry = entryFactory.textField({
+  var delegateEntry = entryFactory.textField(translate, {
     id: 'delegate',
     label: translate('Value'),
     dataValueLabel: 'delegationLabel',
@@ -10036,7 +13156,8 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
     cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
-    elementReferenceProperty = __webpack_require__(/*! ../../../bpmn/parts/implementation/ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+    elementReferenceProperty = __webpack_require__(/*! ../../../bpmn/parts/implementation/ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 module.exports = function(
     group, element, bpmnFactory, errorEventDefinition,
@@ -10047,55 +13168,428 @@ module.exports = function(
   var getValue = function(modelProperty) {
     return function(element) {
       var modelPropertyValue = errorEventDefinition.get('camunda:' + modelProperty);
-      var value = {};
 
-      value[modelProperty] = modelPropertyValue;
-      return value;
+      return modelPropertyValue;
     };
   };
 
   var setValue = function(modelProperty) {
     return function(element, values) {
-      var props = {};
+      if (values[modelProperty] === '')
+        values[modelProperty] = undefined;
 
-      props['camunda:' + modelProperty] = values[modelProperty] || undefined;
-
-      return cmdHelper.updateBusinessObject(element, errorEventDefinition, props);
+      return cmdHelper.updateBusinessObject(element, errorEventDefinition, values);
     };
   };
 
 
   group.entries = group.entries.concat(
-    elementReferenceProperty(element, errorEventDefinition, bpmnFactory, {
+    elementReferenceProperty(element, errorEventDefinition, bpmnFactory, translate, {
       id: 'error-element-message',
-      label: translate('Error Message'),
+      label: translate('Message'),
       referenceProperty: 'errorRef',
       modelProperty: 'errorMessage'
     })
   );
 
   if (showErrorCodeVariable) {
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.validationAwareTextField(translate, {
       id: 'errorCodeVariable',
-      label: translate('Error Code Variable'),
+      label: translate('Code Variable'),
       modelProperty : 'errorCodeVariable',
+      description: translate('Define the name of the variable that will contain the error code'),
 
-      get: getValue('errorCodeVariable'),
-      set: setValue('errorCodeVariable')
+      getProperty: getValue('errorCodeVariable'),
+      setProperty: setValue('errorCodeVariable'),
+
+      validate: function(element, values) {
+        var validation = {},
+            targetValue = values.errorCodeVariable;
+
+        if (utils.containsSpace(targetValue)) {
+          validation.errorCodeVariable = translate('Error code variable must not contain spaces.');
+        }
+
+        return validation;
+      }
     }));
   }
 
   if (showErrorMessageVariable) {
-    group.entries.push(entryFactory.textField({
+    group.entries.push(entryFactory.validationAwareTextField(translate, {
       id: 'errorMessageVariable',
-      label: translate('Error Message Variable'),
+      label: translate('Message Variable'),
       modelProperty: 'errorMessageVariable',
 
-      get: getValue('errorMessageVariable'),
-      set: setValue('errorMessageVariable')
+      getProperty: getValue('errorMessageVariable'),
+      setProperty: setValue('errorMessageVariable'),
+      description: translate('Define the name of the variable that will contain the error message'),
+
+      validate: function(element, values) {
+        var validation = {},
+            targetValue = values.errorMessageVariable;
+
+        if (utils.containsSpace(targetValue)) {
+          validation.errorMessageVariable = translate('Error message variable must not contain spaces.');
+        }
+
+        return validation;
+      }
     }));
   }
 
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Errors.js":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Errors.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+
+var entryFieldDescription = __webpack_require__(/*! ../../../../factory/EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var ErrorsEntries = __webpack_require__(/*! ./ErrorsEntries */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorsEntries.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+module.exports = function(element, bpmnFactory, options, translate) {
+
+  options = options || {};
+
+  var result = {};
+
+  var entries = result.entries = [];
+
+  entries.push(
+    getErrorsHeading(element, bpmnFactory, {
+      type: 'camunda:ErrorEventDefinition',
+      prop: 'errorEventDefinition',
+      prefix: 'Error'
+    }));
+
+  append(entries,
+    getErrorsEntries(element, bpmnFactory, {}, translate)
+  );
+
+  return result;
+};
+
+function getErrorsHeading(element, bpmnFactory, options) {
+  var prefix = options.prefix;
+
+  var entry = {
+    id: prefix + '-heading',
+    cssClasses: [ 'bpp-error' ],
+    html: '<div class="bpp-field-wrapper">' +
+            '<button type="button" class="bpp-error__add add action-button" ' + 'data-action="createElement">' +
+            '</button><input name="hidden" type="hidden">' +
+          '</div>'
+  };
+
+  entry.createElement = function(_, entryNode) {
+    var commands = createElement();
+
+    if (commands) {
+      scheduleCommands(commands, entryNode);
+      return true;
+    }
+  };
+
+  entry.set = function() {
+    var commands = entry._commands;
+
+    if (commands) {
+      delete entry._commands;
+      return commands;
+    }
+  };
+
+  function createElement() {
+    var commands = [];
+    var bo = getBusinessObject(element);
+    var extensionElements = bo.get('extensionElements');
+
+    if (!extensionElements) {
+      extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [] }, bo, bpmnFactory);
+      commands.push(cmdHelper.updateBusinessObject(element, bo, { extensionElements: extensionElements }));
+    }
+    var newElem = elementHelper.createElement('camunda:ErrorEventDefinition', {}, extensionElements, bpmnFactory);
+    commands.push(cmdHelper.addElementsTolist(element, extensionElements, 'values', [ newElem ]));
+
+    return commands;
+  }
+
+  /**
+   * Schedule commands to be run with next `set` method call.
+   *
+   * @param {Array<any>} commands
+   * @param {HTMLElement} entryNode
+   */
+  function scheduleCommands(commands, entryNode) {
+    entry._commands = commands;
+
+    // @barmac: hack to make properties panel call `set`
+    var input = domQuery('input[type="hidden"]', entryNode);
+    input.value = 1;
+  }
+
+  return entry;
+}
+
+function getErrors(bo) {
+  return extensionElementsHelper.getExtensionElements(bo, 'camunda:ErrorEventDefinition') || [];
+}
+
+
+function getErrorsEntries(element, bpmnFactory, options, translate) {
+  var idPrefix = options.idPrefix || '',
+      bo = getBusinessObject(element),
+      errorEventDefinitions = getErrors(bo),
+      extensionElements = bo.get('extensionElements'),
+      entries;
+
+  if (errorEventDefinitions && !errorEventDefinitions.length) {
+    var description = entryFieldDescription(translate, translate('No errors defined.'));
+
+    return [{
+      id: idPrefix + 'error-placeholder',
+      cssClasses: [ 'bpp-error-placeholder' ],
+      html: description
+    }];
+  }
+
+  var errorsEntries = errorEventDefinitions.map(function(definition, index) {
+
+    function onRemove() {
+      var commands = [];
+
+      commands.push(cmdHelper.removeElementsFromList(element, extensionElements, 'values', 'extensionElements', [definition]));
+      return commands;
+    }
+
+    return ErrorsEntries(definition, bpmnFactory, element,
+      {
+        idPrefix: idPrefix + 'error-' + index,
+        onRemove: onRemove,
+        onToggle: onToggle
+      }, translate);
+
+    /**
+     * Close remaining collapsible entries within group.
+     *
+     * @param {boolean} value
+     * @param {HTMLElement} entryNode
+     */
+    function onToggle(value, entryNode) {
+      if (!value) {
+        return;
+      }
+
+      var currentEntryId = entryNode.dataset.entry;
+
+      errorsEntries.forEach(function(entry) {
+        if (entry.entries[0].id === currentEntryId) {
+          return;
+        }
+
+        entry.setOpen(false);
+      });
+
+    }
+  });
+
+  entries = errorsEntries.map(function(input) {
+    return input.entries;
+  });
+
+  return flatten(entries);
+}
+
+function flatten(arrays) {
+  return Array.prototype.concat.apply([], arrays);
+}
+
+function append(array, items) {
+  Array.prototype.push.apply(array, items);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorsEntries.js":
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ErrorsEntries.js ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
+
+var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var eventDefinitionReference = __webpack_require__(/*! ../../../bpmn/parts/implementation/EventDefinitionReference */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/EventDefinitionReference.js"),
+    elementReferenceProperty = __webpack_require__(/*! ../../../bpmn/parts/implementation/ElementReferenceProperty */ "./node_modules/bpmn-js-properties-panel/lib/provider/bpmn/parts/implementation/ElementReferenceProperty.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+module.exports = function(error, bpmnFactory, element, options, translate) {
+
+  options = options || {};
+
+  var idPrefix = options.idPrefix || '';
+
+  var getError =
+    (options.getError && typeof options.getError === 'function') ?
+      function() {
+        return options.getError();
+      } :
+      function() {
+        return error;
+      };
+
+  var result = {},
+      entries = [];
+
+  result.entries = entries;
+
+  var getCollapsibleTitle = function() {
+    var error = getError();
+    var title = 'No Error referenced';
+
+    if (error.errorRef) {
+      title = error.errorRef.name;
+      if (error.errorRef.errorCode) {
+        title += ' (code = ' + error.errorRef.errorCode + ')';
+      }
+    }
+    return title;
+  };
+
+  // heading ////////////////////////////////////////////////////////
+  var collapsible = entryFactory.collapsible({
+    id: idPrefix + 'collapsible',
+    title: getCollapsibleTitle(),
+    description: getError().expression || '',
+    cssClasses: [ 'bpp-collapsible-error' ],
+    open: false,
+    onRemove: options.onRemove,
+    onToggle: options.onToggle,
+    get: function() {
+      return {
+        title: getCollapsibleTitle(),
+        description: getError().expression || '',
+      };
+    }
+  });
+
+  var isOpen = options.isOpen || collapsible.isOpen;
+
+  result.setOpen = function(value) {
+    var entryNode = domQuery('[data-entry="' + collapsible.id + '"]');
+    collapsible.setOpen(value, entryNode);
+  };
+
+  entries.push(collapsible);
+
+  entries.push(entryFactory.validationAwareTextField(translate, {
+    id: idPrefix + 'error-expression',
+    label: translate('Throw Expression'),
+    modelProperty: 'expression',
+
+    getProperty: function(element, node) {
+      return error.expression;
+    },
+
+    setProperty: function(element, values, node) {
+      return cmdHelper.updateBusinessObject(element, error, values);
+    },
+
+    validate: function(element, values, node) {
+      var validation = {};
+      var expressionValue = values.expression;
+
+      if (!expressionValue) {
+        validation.expression = translate('Error must have an expression');
+      }
+
+      return validation;
+    },
+
+    hidden: function(element, node) {
+      return !isOpen();
+    }
+  }));
+
+
+  entries.push.apply(entries, eventDefinitionReference(element, error, bpmnFactory, {
+    id: idPrefix + 'error-reference',
+    label: translate('Global Error referenced'),
+    elementName: 'error',
+    elementType: 'bpmn:Error',
+    referenceProperty: 'errorRef',
+    newElementIdPrefix: 'Error_',
+
+    hidden: function(element, node) {
+      return !isOpen();
+    }
+  }));
+
+
+  entries.push.apply(entries, elementReferenceProperty(element, error, bpmnFactory, translate, {
+    id: idPrefix + 'error-element-name',
+    label: translate('Name'),
+    referenceProperty: 'errorRef',
+    modelProperty: 'name',
+    shouldValidate: true,
+
+    hidden: function(element, node) {
+      return !isOpen();
+    }
+  }));
+
+
+  entries.push.apply(entries, elementReferenceProperty(element, error, bpmnFactory, translate, {
+    id: idPrefix + 'error-element-code',
+    label: translate('Code'),
+    referenceProperty: 'errorRef',
+    modelProperty: 'errorCode',
+    shouldValidate: true,
+
+    hidden: function(element, node) {
+      return !isOpen();
+    }
+  }));
+
+
+  entries.push.apply(entries, elementReferenceProperty(element, error, bpmnFactory, translate, {
+    id: idPrefix + 'error-element-message',
+    label: translate('Message'),
+    referenceProperty: 'errorRef',
+    modelProperty: 'errorMessage',
+
+    hidden: function(element, node) {
+      return !isOpen();
+    }
+  }));
+
+  return result;
 };
 
 
@@ -10203,12 +13697,12 @@ module.exports = function(element, bpmnFactory, options, translate) {
                       'data-list-entry-container ' +
                       'data-on-change="selectElement">' +
               '</select>' +
-              (canCreate ? '<button class="add" ' +
+              (canCreate ? '<button class="action-button add" ' +
                                    'id="cam-extensionElements-create-' + escapeHTML(id) + '" ' +
                                    'data-action="createElement">' +
                              '<span>+</span>' +
                            '</button>' : '') +
-              (canRemove ? '<button class="clear" ' +
+              (canRemove ? '<button class="action-button clear" ' +
                                    'id="cam-extensionElements-remove-' + escapeHTML(id) + '" ' +
                                    'data-action="removeElement" ' +
                                    'data-disable="disableRemove">' +
@@ -10287,6 +13781,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     createElement: function(element, node) {
+
       // create option template
       var generatedId;
       if (idGeneration) {
@@ -10370,7 +13865,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     return getImplementationType(element) === 'external';
   }
 
-  var topicEntry = entryFactory.textField({
+  var topicEntry = entryFactory.textField(translate, {
     id: 'externalTopic',
     label: translate('Topic'),
     modelProperty: 'externalTopic',
@@ -10422,7 +13917,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   var getBusinessObject = options.getBusinessObject;
 
-  var externalTaskPriorityEntry = entryFactory.textField({
+  var externalTaskPriorityEntry = entryFactory.textField(translate, {
     id: 'externalTaskPriority',
     label: translate('Task Priority'),
     modelProperty: 'taskPriority',
@@ -10516,7 +14011,7 @@ module.exports = function(element, bpmnFactory, translate, options) {
       return (
         businessObject &&
         extensionElementsHelper.getExtensionElements(businessObject, CAMUNDA_FIELD_EXTENSION_ELEMENT)
-      ) || [];
+      );
     }
     return getCamundaListenerFields(element, node);
   }
@@ -10616,7 +14111,7 @@ module.exports = function(element, bpmnFactory, translate, options) {
   entries.push(fieldEntry);
 
 
-  entries.push(entryFactory.validationAwareTextField({
+  entries.push(entryFactory.validationAwareTextField(translate, {
     id: idPrefix + 'field-name',
     label: translate('Name'),
     modelProperty: 'fieldName',
@@ -10666,7 +14161,7 @@ module.exports = function(element, bpmnFactory, translate, options) {
     }
   ];
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id: idPrefix + 'field-type',
     label: translate('Type'),
     selectOptions: fieldTypeOptions,
@@ -10704,7 +14199,7 @@ module.exports = function(element, bpmnFactory, translate, options) {
   }));
 
 
-  entries.push(entryFactory.textBox({
+  entries.push(entryFactory.textBox(translate, {
     id: idPrefix + 'field-value',
     label: translate('Value'),
     modelProperty: 'fieldValue',
@@ -10790,7 +14285,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   var getBusinessObject = options.getBusinessObject;
 
-  var historyTimeToLiveEntry = entryFactory.textField({
+  var historyTimeToLiveEntry = entryFactory.textField(translate, {
     id: 'historyTimeToLive',
     label: translate('History Time To Live'),
     modelProperty: 'historyTimeToLive',
@@ -10914,7 +14409,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   selectOptions.push({ value: '' });
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id : 'implementation',
     label: translate('Implementation'),
     selectOptions: selectOptions,
@@ -10968,6 +14463,13 @@ module.exports = function(element, bpmnFactory, options, translate) {
       var commands = [];
       commands.push(cmdHelper.updateBusinessObject(element, bo, props));
 
+      if (oldType === 'external' && newType !== 'external') {
+        var errorEventDefinitions = extensionElementsHelper.getExtensionElements(bo, 'camunda:ErrorEventDefinition');
+        commands.push(map(errorEventDefinitions, function(errorEventDefinition) {
+          return extensionElementsHelper.removeEntry(bo, element, errorEventDefinition);
+        }));
+      }
+
       if (hasServiceTaskLikeSupport) {
         var connectors = extensionElementsHelper.getExtensionElements(bo, 'camunda:Connector');
         commands.push(map(connectors, function(connector) {
@@ -11004,243 +14506,6 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
 /***/ }),
 
-/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js":
-/*!********************************************************************************************************!*\
-  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutput.js ***!
-  \********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
-
-var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
-    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
-    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
-    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js");
-
-var extensionElementsEntry = __webpack_require__(/*! ./ExtensionElements */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ExtensionElements.js");
-
-
-function getInputOutput(element, insideConnector) {
-  return inputOutputHelper.getInputOutput(element, insideConnector);
-}
-
-function getConnector(element) {
-  return inputOutputHelper.getConnector(element);
-}
-
-function getInputParameters(element, insideConnector) {
-  return inputOutputHelper.getInputParameters(element, insideConnector);
-}
-
-function getOutputParameters(element, insideConnector) {
-  return inputOutputHelper.getOutputParameters(element, insideConnector);
-}
-
-function getInputParameter(element, insideConnector, idx) {
-  return inputOutputHelper.getInputParameter(element, insideConnector, idx);
-}
-
-function getOutputParameter(element, insideConnector, idx) {
-  return inputOutputHelper.getOutputParameter(element, insideConnector, idx);
-}
-
-
-function createElement(type, parent, factory, properties) {
-  return elementHelper.createElement(type, properties, parent, factory);
-}
-
-function createInputOutput(parent, bpmnFactory, properties) {
-  return createElement('camunda:InputOutput', parent, bpmnFactory, properties);
-}
-
-function createParameter(type, parent, bpmnFactory, properties) {
-  return createElement(type, parent, bpmnFactory, properties);
-}
-
-
-function ensureInputOutputSupported(element, insideConnector) {
-  return inputOutputHelper.isInputOutputSupported(element, insideConnector);
-}
-
-function ensureOutparameterSupported(element, insideConnector) {
-  return inputOutputHelper.areOutputParametersSupported(element, insideConnector);
-}
-
-module.exports = function(element, bpmnFactory, options, translate) {
-
-  var TYPE_LABEL = {
-    'camunda:Map': translate('Map'),
-    'camunda:List': translate('List'),
-    'camunda:Script': translate('Script')
-  };
-
-  options = options || {};
-
-  var insideConnector = !!options.insideConnector,
-      idPrefix = options.idPrefix || '';
-
-  var getSelected = function(element, node) {
-    var selection = (inputEntry && inputEntry.getSelected(element, node)) || { idx: -1 };
-
-    var parameter = getInputParameter(element, insideConnector, selection.idx);
-    if (!parameter && outputEntry) {
-      selection = outputEntry.getSelected(element, node);
-      parameter = getOutputParameter(element, insideConnector, selection.idx);
-    }
-    return parameter;
-  };
-
-  var result = {
-    getSelectedParameter: getSelected
-  };
-
-  var entries = result.entries = [];
-
-  if (!ensureInputOutputSupported(element)) {
-    return result;
-  }
-
-  var newElement = function(type, prop, factory) {
-
-    return function(element, extensionElements, value) {
-      var commands = [];
-
-      var inputOutput = getInputOutput(element, insideConnector);
-      if (!inputOutput) {
-        var parent = !insideConnector ? extensionElements : getConnector(element);
-        inputOutput = createInputOutput(parent, bpmnFactory, {
-          inputParameters: [],
-          outputParameters: []
-        });
-
-        if (!insideConnector) {
-          commands.push(cmdHelper.addAndRemoveElementsFromList(
-            element,
-            extensionElements,
-            'values',
-            'extensionElements',
-            [ inputOutput ],
-            []
-          ));
-        } else {
-          commands.push(cmdHelper.updateBusinessObject(element, parent, { inputOutput: inputOutput }));
-        }
-      }
-
-      var newElem = createParameter(type, inputOutput, bpmnFactory, { name: value });
-      commands.push(cmdHelper.addElementsTolist(element, inputOutput, prop, [ newElem ]));
-
-      return commands;
-    };
-  };
-
-  var removeElement = function(getter, prop, otherProp) {
-    return function(element, extensionElements, value, idx) {
-      var inputOutput = getInputOutput(element, insideConnector);
-      var parameter = getter(element, insideConnector, idx);
-
-      var commands = [];
-      commands.push(cmdHelper.removeElementsFromList(element, inputOutput, prop, null, [ parameter ]));
-
-      var firstLength = inputOutput.get(prop).length-1;
-      var secondLength = (inputOutput.get(otherProp) || []).length;
-
-      if (!firstLength && !secondLength) {
-
-        if (!insideConnector) {
-          commands.push(extensionElementsHelper.removeEntry(getBusinessObject(element), element, inputOutput));
-        } else {
-          var connector = getConnector(element);
-          commands.push(cmdHelper.updateBusinessObject(element, connector, { inputOutput: undefined }));
-        }
-
-      }
-
-      return commands;
-    };
-  };
-
-  var setOptionLabelValue = function(getter) {
-    return function(element, node, option, property, value, idx) {
-      var parameter = getter(element, insideConnector, idx);
-
-      var suffix = 'Text';
-
-      var definition = parameter.get('definition');
-      if (typeof definition !== 'undefined') {
-        var type = definition.$type;
-        suffix = TYPE_LABEL[type];
-      }
-
-      option.text = (value || '') + ' : ' + suffix;
-    };
-  };
-
-
-  // input parameters ///////////////////////////////////////////////////////////////
-
-  var inputEntry = extensionElementsEntry(element, bpmnFactory, {
-    id: idPrefix + 'inputs',
-    label: translate('Input Parameters'),
-    modelProperty: 'name',
-    prefix: 'Input',
-    resizable: true,
-
-    createExtensionElement: newElement('camunda:InputParameter', 'inputParameters'),
-    removeExtensionElement: removeElement(getInputParameter, 'inputParameters', 'outputParameters'),
-
-    getExtensionElements: function(element) {
-      return getInputParameters(element, insideConnector);
-    },
-
-    onSelectionChange: function(element, node, event, scope) {
-      outputEntry && outputEntry.deselect(element, node);
-    },
-
-    setOptionLabelValue: setOptionLabelValue(getInputParameter)
-
-  });
-  entries.push(inputEntry);
-
-
-  // output parameters ///////////////////////////////////////////////////////
-
-  if (ensureOutparameterSupported(element, insideConnector)) {
-    var outputEntry = extensionElementsEntry(element, bpmnFactory, {
-      id: idPrefix + 'outputs',
-      label: translate('Output Parameters'),
-      modelProperty: 'name',
-      prefix: 'Output',
-      resizable: true,
-
-      createExtensionElement: newElement('camunda:OutputParameter', 'outputParameters'),
-      removeExtensionElement: removeElement(getOutputParameter, 'outputParameters', 'inputParameters'),
-
-      getExtensionElements: function(element) {
-        return getOutputParameters(element, insideConnector);
-      },
-
-      onSelectionChange: function(element, node, event, scope) {
-        inputEntry.deselect(element, node);
-      },
-
-      setOptionLabelValue: setOptionLabelValue(getOutputParameter)
-
-    });
-    entries.push(outputEntry);
-  }
-
-  return result;
-
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js":
 /*!*****************************************************************************************************************!*\
   !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js ***!
@@ -11251,38 +14516,27 @@ module.exports = function(element, bpmnFactory, options, translate) {
 "use strict";
 
 
-var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is;
+var is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny;
+
+var getVariablesForScope = __webpack_require__(/*! @bpmn-io/extract-process-variables */ "./node_modules/@bpmn-io/extract-process-variables/dist/index.esm.js").getVariablesForScope;
+
+var filter = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").filter,
+    map = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").map,
+    sortBy = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").sortBy;
 
 var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
-    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
     cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
     utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 var entryFactory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js"),
     scriptImplementation = __webpack_require__(/*! ./Script */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script.js");
 
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
 
-function createElement(type, parent, factory, properties) {
-  return elementHelper.createElement(type, properties, parent, factory);
-}
-
-function isScript(elem) {
-  return is(elem, 'camunda:Script');
-}
-
-function isList(elem) {
-  return is(elem, 'camunda:List');
-}
-
-function isMap(elem) {
-  return is(elem, 'camunda:Map');
-}
-
-function ensureInputOutputSupported(element, insideConnector) {
-  return inputOutputHelper.isInputOutputSupported(element, insideConnector);
-}
-
-module.exports = function(element, bpmnFactory, options, translate) {
+module.exports = function(parameter, bpmnFactory, options, translate) {
 
   var typeInfo = {
     'camunda:Map': {
@@ -11301,59 +14555,80 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   options = options || {};
 
-  var insideConnector = !!options.insideConnector,
-      idPrefix = options.idPrefix || '';
+  var idPrefix = options.idPrefix || '';
 
-  var getSelected = options.getSelectedParameter;
+  var getParameter =
+    (options.getParameter && typeof options.getParameter === 'function') ?
+      function() {
+        return options.getParameter();
+      } :
+      function() {
+        return parameter;
+      };
 
-  if (!ensureInputOutputSupported(element, insideConnector)) {
-    return [];
-  }
+  var result = {},
+      entries = [];
 
-  var entries = [];
+  result.entries = entries;
 
-  var isSelected = function(element, node) {
-    return getSelected(element, node);
+  // heading ////////////////////////////////////////////////////////
+  var collapsible = entryFactory.collapsible({
+    id: idPrefix + 'collapsible',
+    title: parameter.name,
+    description: getDescription(parameter),
+    cssClasses: [ 'bpp-collapsible--with-mapping' ],
+    open: false,
+    onRemove: options.onRemove,
+    onToggle: options.onToggle,
+    get: function() {
+      return {
+        title: getParameter().name,
+        description: getDescription(getParameter())
+      };
+    }
+  });
+
+  var isOpen = options.isOpen || collapsible.isOpen;
+
+  result.setOpen = function(value) {
+    var entryNode = domQuery('[data-entry="' + collapsible.id + '"]');
+    collapsible.setOpen(value, entryNode);
   };
 
+  entries.push(collapsible);
 
   // parameter name ////////////////////////////////////////////////////////
-
-  entries.push(entryFactory.validationAwareTextField({
+  entries.push(entryFactory.validationAwareTextField(translate, {
     id: idPrefix + 'parameterName',
-    label: translate('Name'),
+    label: is(parameter, 'camunda:InputParameter') ?
+      translate('Local Variable Name') : translate('Process Variable Name'),
     modelProperty: 'name',
 
     getProperty: function(element, node) {
-      return (getSelected(element, node) || {}).name;
+      return parameter.name;
     },
 
     setProperty: function(element, values, node) {
-      var param = getSelected(element, node);
-      return cmdHelper.updateBusinessObject(element, param, values);
+      return cmdHelper.updateBusinessObject(element, parameter, values);
     },
 
     validate: function(element, values, node) {
-      var bo = getSelected(element, node);
-
       var validation = {};
-      if (bo) {
-        var nameValue = values.name;
+      var nameValue = values.name;
 
-        if (nameValue) {
-          if (utils.containsSpace(nameValue)) {
-            validation.name = translate('Name must not contain spaces');
-          }
-        } else {
-          validation.name = translate('Parameter must have a name');
+      if (nameValue) {
+        if (utils.containsSpace(nameValue)) {
+          validation.name = translate('Name must not contain spaces');
         }
+      } else {
+        validation.name = translate('Parameter must have a name');
       }
 
       return validation;
     },
 
     hidden: function(element, node) {
-      return !isSelected(element, node);
+      return !isOpen();
     }
   }));
 
@@ -11361,29 +14636,25 @@ module.exports = function(element, bpmnFactory, options, translate) {
   // parameter type //////////////////////////////////////////////////////
 
   var selectOptions = [
-    { value: 'text', name: translate('Text') },
+    { value: 'text', name: translate('String or Expression') },
     { value: 'script', name: translate('Script') },
     { value: 'list', name: translate('List') },
     { value: 'map', name: translate('Map') }
   ];
 
-  entries.push(entryFactory.selectBox({
+  entries.push(entryFactory.selectBox(translate, {
     id : idPrefix + 'parameterType',
-    label: translate('Type'),
+    label: translate('Variable Assignment Type'),
     selectOptions: selectOptions,
     modelProperty: 'parameterType',
 
     get: function(element, node) {
-      var bo = getSelected(element, node);
-
       var parameterType = 'text';
 
-      if (typeof bo !== 'undefined') {
-        var definition = bo.get('definition');
-        if (typeof definition !== 'undefined') {
-          var type = definition.$type;
-          parameterType = typeInfo[type].value;
-        }
+      var definition = getParameter().get('definition');
+      if (typeof definition !== 'undefined') {
+        var type = definition.$type;
+        parameterType = typeInfo[type].value;
       }
 
       return {
@@ -11392,15 +14663,13 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     set: function(element, values, node) {
-      var bo = getSelected(element, node);
-
       var properties = {
         value: undefined,
         definition: undefined
       };
 
       var createParameterTypeElem = function(type) {
-        return createElement(type, bo, bpmnFactory);
+        return createElement(type, getParameter(), bpmnFactory);
       };
 
       var parameterType = values.parameterType;
@@ -11415,11 +14684,11 @@ module.exports = function(element, bpmnFactory, options, translate) {
         properties.definition = createParameterTypeElem('camunda:Map');
       }
 
-      return cmdHelper.updateBusinessObject(element, bo, properties);
+      return cmdHelper.updateBusinessObject(element, getParameter(), properties);
     },
 
-    show: function(element, node) {
-      return isSelected(element, node);
+    hidden: function(element, node) {
+      return !isOpen();
     }
 
   }));
@@ -11427,107 +14696,134 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   // parameter value (type = text) ///////////////////////////////////////////////////////
 
-  entries.push(entryFactory.textBox({
+  entries.push(entryFactory.autoSuggest(translate, {
     id : idPrefix + 'parameterType-text',
-    label : translate('Value'),
+    label : translate('Variable Assignment Value'),
+    description: translate('Start typing "${}" to create an expression.'),
     modelProperty: 'value',
     get: function(element, node) {
       return {
-        value: (getSelected(element, node) || {}).value
+        value: getParameter().value
       };
     },
 
     set: function(element, values, node) {
-      var param = getSelected(element, node);
       values.value = values.value || undefined;
-      return cmdHelper.updateBusinessObject(element, param, values);
+      return cmdHelper.updateBusinessObject(element, getParameter(), values);
     },
 
     show: function(element, node) {
-      var bo = getSelected(element, node);
-      return bo && !bo.definition;
+      return isOpen() && !getParameter().definition;
+    },
+
+    getItems: function(element) {
+      var scope = getScope(element),
+          rootElement = getRootElement(element);
+
+      // (1) get all available variables for the current scope
+      var variables = getVariablesForScope(scope, rootElement);
+
+      // (2) ignore all variables which are (only) written in the current element
+      variables = filter(variables, function(variable) {
+        var origin = variable.origin,
+            withOutCurrent = filter(origin, function(o) {
+              return o.id !== element.id;
+            });
+
+        return !!withOutCurrent.length;
+      });
+
+      // (3) sort by name
+      var sorted = sortByName(variables);
+
+      // (4) retrieve names as suggestion items
+      return map(sorted, function(variable) {
+        return variable.name;
+      });
+    },
+
+    canSuggest: function(word, editorNode, focusNode) {
+      var globalIndex = findWordInContentEditable(word, editorNode, focusNode);
+
+      if (isInsideExpression(editorNode.innerText, globalIndex)) {
+        return true;
+      }
+
+      if (isInsideUnclosedExpression(editorNode.innerText, globalIndex)) {
+        return true;
+      }
+
+      return false;
     }
 
   }));
 
 
   // parameter value (type = script) ///////////////////////////////////////////////////////
-  var script = scriptImplementation('scriptFormat', 'value', true, translate);
+  var script = scriptImplementation('scriptFormat', 'value', true, translate, { idPrefix: idPrefix });
   entries.push({
     id: idPrefix + 'parameterType-script',
-    html: '<div data-show="isScript">' +
+    html: '<div data-show="show">' +
             script.template +
           '</div>',
     get: function(element, node) {
-      var bo = getSelected(element, node);
-      return bo && isScript(bo.definition) ? script.get(element, bo.definition) : {};
+      return isScript(getParameter().definition) ? script.get(element, getParameter().definition) : {};
     },
 
     set: function(element, values, node) {
-      var bo = getSelected(element, node);
       var update = script.set(element, values);
-      return cmdHelper.updateBusinessObject(element, bo.definition, update);
+      return cmdHelper.updateBusinessObject(element, getParameter().definition, update);
     },
 
     validate: function(element, values, node) {
-      var bo = getSelected(element, node);
-      return bo && isScript(bo.definition) ? script.validate(element, bo.definition) : {};
+      return isScript(getParameter().definition) ? script.validate(element, getParameter().definition) : {};
     },
 
-    isScript: function(element, node) {
-      var bo = getSelected(element, node);
-      return bo && isScript(bo.definition);
-    },
-
-    script: script
-
+    script: script,
+    show: function(element, node) {
+      return isOpen() && getParameter().definition && isScript(getParameter().definition);
+    }
   });
 
 
   // parameter value (type = list) ///////////////////////////////////////////////////////
 
-  entries.push(entryFactory.table({
+  entries.push(entryFactory.table(translate, {
     id: idPrefix + 'parameterType-list',
     modelProperties: [ 'value' ],
     labels: [ translate('Value') ],
     addLabel: translate('Add Value'),
 
     getElements: function(element, node) {
-      var bo = getSelected(element, node);
 
-      if (bo && isList(bo.definition)) {
-        return bo.definition.items;
+      if (isList(getParameter().definition)) {
+        return getParameter().definition.items;
       }
 
       return [];
     },
 
     updateElement: function(element, values, node, idx) {
-      var bo = getSelected(element, node);
-      var item = bo.definition.items[idx];
+      var item = getParameter().definition.items[idx];
       return cmdHelper.updateBusinessObject(element, item, values);
     },
 
     addElement: function(element, node) {
-      var bo = getSelected(element, node);
-      var newValue = createElement('camunda:Value', bo.definition, bpmnFactory, { value: undefined });
-      return cmdHelper.addElementsTolist(element, bo.definition, 'items', [ newValue ]);
+      var newValue = createElement('camunda:Value', getParameter().definition, bpmnFactory, { value: undefined });
+      return cmdHelper.addElementsTolist(element, getParameter().definition, 'items', [ newValue ]);
     },
 
     removeElement: function(element, node, idx) {
-      var bo = getSelected(element, node);
-      return cmdHelper.removeElementsFromList(element, bo.definition, 'items', null, [ bo.definition.items[idx] ]);
+      return cmdHelper.removeElementsFromList(element, getParameter().definition, 'items', null, [ getParameter().definition.items[idx] ]);
     },
 
     editable: function(element, node, prop, idx) {
-      var bo = getSelected(element, node);
-      var item = bo.definition.items[idx];
+      var item = getParameter().definition.items[idx];
       return !isMap(item) && !isList(item) && !isScript(item);
     },
 
     setControlValue: function(element, node, input, prop, value, idx) {
-      var bo = getSelected(element, node);
-      var item = bo.definition.items[idx];
+      var item = getParameter().definition.items[idx];
 
       if (!isMap(item) && !isList(item) && !isScript(item)) {
         input.value = value;
@@ -11537,8 +14833,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     show: function(element, node) {
-      var bo = getSelected(element, node);
-      return bo && bo.definition && isList(bo.definition);
+      return isOpen() && getParameter().definition && isList(getParameter().definition);
     }
 
   }));
@@ -11546,25 +14841,23 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   // parameter value (type = map) ///////////////////////////////////////////////////////
 
-  entries.push(entryFactory.table({
+  entries.push(entryFactory.table(translate, {
     id: idPrefix + 'parameterType-map',
     modelProperties: [ 'key', 'value' ],
     labels: [ translate('Key'), translate('Value') ],
     addLabel: translate('Add Entry'),
 
     getElements: function(element, node) {
-      var bo = getSelected(element, node);
 
-      if (bo && isMap(bo.definition)) {
-        return bo.definition.entries;
+      if (getParameter() && isMap(getParameter().definition)) {
+        return getParameter().definition.entries;
       }
 
       return [];
     },
 
     updateElement: function(element, values, node, idx) {
-      var bo = getSelected(element, node);
-      var entry = bo.definition.entries[idx];
+      var entry = getParameter().definition.entries[idx];
 
       if (isMap(entry.definition) || isList(entry.definition) || isScript(entry.definition)) {
         values = {
@@ -11576,25 +14869,21 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     addElement: function(element, node) {
-      var bo = getSelected(element, node);
-      var newEntry = createElement('camunda:Entry', bo.definition, bpmnFactory, { key: undefined, value: undefined });
-      return cmdHelper.addElementsTolist(element, bo.definition, 'entries', [ newEntry ]);
+      var newEntry = createElement('camunda:Entry', getParameter().definition, bpmnFactory, { key: undefined, value: undefined });
+      return cmdHelper.addElementsTolist(element, getParameter().definition, 'entries', [ newEntry ]);
     },
 
     removeElement: function(element, node, idx) {
-      var bo = getSelected(element, node);
-      return cmdHelper.removeElementsFromList(element, bo.definition, 'entries', null, [ bo.definition.entries[idx] ]);
+      return cmdHelper.removeElementsFromList(element, getParameter().definition, 'entries', null, [ getParameter().definition.entries[idx] ]);
     },
 
     editable: function(element, node, prop, idx) {
-      var bo = getSelected(element, node);
-      var entry = bo.definition.entries[idx];
+      var entry = getParameter().definition.entries[idx];
       return prop === 'key' || (!isMap(entry.definition) && !isList(entry.definition) && !isScript(entry.definition));
     },
 
     setControlValue: function(element, node, input, prop, value, idx) {
-      var bo = getSelected(element, node);
-      var entry = bo.definition.entries[idx];
+      var entry = getParameter().definition.entries[idx];
 
       if (prop === 'key' || (!isMap(entry.definition) && !isList(entry.definition) && !isScript(entry.definition))) {
         input.value = value;
@@ -11604,15 +14893,386 @@ module.exports = function(element, bpmnFactory, options, translate) {
     },
 
     show: function(element, node) {
-      var bo = getSelected(element, node);
-      return bo && bo.definition && isMap(bo.definition);
+      return isOpen() && getParameter().definition && isMap(getParameter().definition);
     }
 
   }));
 
-  return entries;
-
+  return result;
 };
+
+
+
+// helper /////////////////////
+
+function createElement(type, parent, factory, properties) {
+  return elementHelper.createElement(type, properties, parent, factory);
+}
+
+function isScript(elem) {
+  return is(elem, 'camunda:Script');
+}
+
+function isList(elem) {
+  return is(elem, 'camunda:List');
+}
+
+function isMap(elem) {
+  return is(elem, 'camunda:Map');
+}
+
+function sortByName(variables) {
+  return sortBy(variables, function(variable) {
+    return variable.name;
+  });
+}
+
+function getScope(element) {
+  var businessObject = getBusinessObject(element);
+
+  if (isAny(businessObject, [ 'bpmn:Process', 'bpmn:SubProcess' ])) {
+    return businessObject.id;
+  }
+
+  // look for processes or sub process in parents
+  var parent = businessObject;
+
+  while (parent.$parent && !isAny(parent, [ 'bpmn:Process', 'bpmn:SubProcess' ])) {
+    parent = parent.$parent;
+  }
+
+  return parent.id;
+}
+
+function getRootElement(element) {
+  var businessObject = getBusinessObject(element),
+      parent = businessObject;
+
+  while (parent.$parent && !is(parent, 'bpmn:Process')) {
+    parent = parent.$parent;
+  }
+
+  return parent;
+}
+
+function isInsideExpression(value, index) {
+  var openIndex = value.indexOf('${'),
+      closeIndex = value.indexOf('}');
+
+  return (
+    openIndex > -1 && openIndex <= index &&
+    closeIndex > -1 && index < closeIndex
+  );
+}
+
+function isInsideUnclosedExpression(value, index) {
+  var closeIndex = value.lastIndexOf('}', index),
+      openIndex = value.indexOf('${', closeIndex + 1);
+
+  return (
+    openIndex > -1 && openIndex <= index
+  );
+}
+
+function findWordInContentEditable(word, editorNode, focusNode) {
+
+  // retrieve value before focusNode (row)
+  var children = editorNode.childNodes,
+      textBefore = '';
+
+  for (var i = 0; i <= children.length - 1; i++) {
+    var child = children[i];
+
+    if (child.contains(focusNode)) {
+      break;
+    }
+
+    textBefore += (child.innerText || child.wholeText) + '\n';
+  }
+
+  return textBefore.length + (word.index || 0);
+}
+
+function getDescription(parameter) {
+  var definition = parameter.get('definition');
+
+  if (!definition) {
+    return parameter.value;
+  }
+
+  if (isScript(definition)) {
+    return definition.value;
+  } else if (isList(definition)) {
+    return 'List';
+  } else if (isMap(definition)) {
+    return 'Map';
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputParameters.js":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputParameters.js ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var entryFieldDescription = __webpack_require__(/*! ../../../../factory/EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var InputOutputParameter = __webpack_require__(/*! ./InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+
+module.exports = function(element, bpmnFactory, options, translate) {
+
+  options = options || {};
+
+  var insideConnector = !!options.insideConnector,
+      idPrefix = options.idPrefix || '';
+
+  var result = {};
+
+  var entries = result.entries = [];
+
+  if (!inputOutputHelper.isInputOutputSupported(element, insideConnector)) {
+    return result;
+  }
+
+  var parametersOptions = {
+    insideConnector: insideConnector,
+    idPrefix: idPrefix
+  };
+
+  // input parameters ///////////////////////////////////////////////////////////////
+  entries.push(
+    getParametersHeading(element, bpmnFactory, {
+      idPrefix: idPrefix,
+      insideConnector: insideConnector,
+      type: 'camunda:InputParameter',
+      prop: 'inputParameters',
+      prefix: 'Input'
+    }));
+
+  append(entries,
+    getInputParameterEntries(element, bpmnFactory, parametersOptions, translate)
+  );
+
+  return result;
+};
+
+function getParametersHeading(element, bpmnFactory, options) {
+  var idPrefix = options.idPrefix || '',
+      prefix = options.prefix,
+      type = options.type,
+      prop = options.prop,
+      insideConnector = options.insideConnector;
+
+  var entry = {
+    id: idPrefix + prefix + '-heading',
+    cssClasses: [ 'bpp-input-output' ],
+    html: '<div class="bpp-field-wrapper">' +
+      '<button type="button" class="bpp-input-output__add add action-button" ' + 'data-action="createElement">' +
+      '</button><input name="hidden" type="hidden">' +
+      '</div>'
+  };
+
+  entry.createElement = function(_, entryNode) {
+    var commands = createElement();
+
+    if (commands) {
+      scheduleCommands(commands, entryNode);
+      return true;
+    }
+  };
+
+  entry.set = function() {
+    var commands = entry._commands;
+
+    if (commands) {
+      delete entry._commands;
+      return commands;
+    }
+  };
+
+  function createElement() {
+    var commands = [];
+    var bo = getBusinessObject(element);
+    var extensionElements = bo.get('extensionElements');
+
+    if (!extensionElements) {
+      extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [] }, bo, bpmnFactory);
+      commands.push(cmdHelper.updateBusinessObject(element, bo, { extensionElements: extensionElements }));
+    }
+
+    var inputOutput = getInputOutput(element, insideConnector);
+    if (!inputOutput) {
+      var parent = !insideConnector ? extensionElements : getConnector(element);
+      inputOutput = createInputOutput(parent, bpmnFactory, {
+        inputParameters: [],
+        outputParameters: []
+      });
+
+      if (!insideConnector) {
+        commands.push(cmdHelper.addAndRemoveElementsFromList(
+          element,
+          extensionElements,
+          'values',
+          'extensionElements',
+          [ inputOutput ],
+          []
+        ));
+      } else {
+        commands.push(cmdHelper.updateBusinessObject(element, parent, { inputOutput: inputOutput }));
+      }
+    }
+
+    var newElem = createParameter(type, inputOutput, bpmnFactory, { name: generateElementId(prefix) });
+    commands.push(cmdHelper.addElementsTolist(element, inputOutput, prop, [], [ newElem ]));
+
+    return commands;
+  }
+
+  /**
+   * Schedule commands to be run with next `set` method call.
+   *
+   * @param {Array<any>} commands
+   * @param {HTMLElement} entryNode
+   */
+  function scheduleCommands(commands, entryNode) {
+    entry._commands = commands;
+
+    // @barmac: hack to make properties panel call `set`
+    var input = domQuery('input[type="hidden"]', entryNode);
+    input.value = 1;
+  }
+
+  return entry;
+}
+
+function getInputParameterEntries(element, bpmnFactory, options, translate) {
+  var idPrefix = options.idPrefix,
+      insideConnector = options.insideConnector,
+      inputOutput = getInputOutput(element, insideConnector),
+      params = getInputParameters(element, insideConnector),
+      entries;
+
+  if (!params.length) {
+    var description = entryFieldDescription(translate, translate('No variables defined.'));
+
+    return [{
+      id: idPrefix + 'input-parameter' + '-placeholder',
+      cssClasses: [ 'bpp-input-output-placeholder' ],
+      html: description
+    }];
+  }
+
+  var inputParameters = params.map(function(param, index) {
+    function onRemove() {
+      var commands = [];
+      commands.push(cmdHelper.removeElementsFromList(element, inputOutput, 'inputParameters', null, [param]));
+
+      // remove inputOutput if there are no input/output parameters anymore
+      if (inputOutput.get('inputParameters').length === 1 && (inputOutput.get('outputParameters') || []).length === 0) {
+
+        if (!insideConnector) {
+          commands.push(extensionElementsHelper.removeEntry(getBusinessObject(element), element, inputOutput));
+        }
+        else {
+          var connector = getConnector(element);
+          commands.push(cmdHelper.updateBusinessObject(element, connector, { inputOutput: undefined }));
+        }
+      }
+
+      return commands;
+    }
+
+    return InputOutputParameter(param, bpmnFactory,
+      {
+        idPrefix: idPrefix + 'input-parameter-' + index,
+        onRemove: onRemove,
+        onToggle: onToggle
+      }, translate);
+  });
+
+  /**
+   * Close remaining collapsible entries within group.
+   *
+   * @param {boolean} value
+   * @param {HTMLElement} entryNode
+   */
+  function onToggle(value, entryNode) {
+    if (!value) {
+      return;
+    }
+
+    var currentEntryId = entryNode.dataset.entry;
+
+    inputParameters.forEach(function(inputParameter) {
+      if (inputParameter.entries[0].id === currentEntryId) {
+        return;
+      }
+
+      inputParameter.setOpen(false);
+    });
+  }
+
+  entries = inputParameters.map(function(input) {
+    return input.entries;
+  });
+
+  return flatten(entries);
+}
+
+
+function append(array, items) {
+  Array.prototype.push.apply(array, items);
+}
+
+function flatten(arrays) {
+  return Array.prototype.concat.apply([], arrays);
+}
+
+function generateElementId(prefix) {
+  prefix = prefix + '_';
+  return utils.nextId(prefix);
+}
+
+function getInputOutput(element, insideConnector) {
+  return inputOutputHelper.getInputOutput(element, insideConnector);
+}
+
+function getConnector(element) {
+  return inputOutputHelper.getConnector(element);
+}
+
+function getInputParameters(element, insideConnector) {
+  return inputOutputHelper.getInputParameters(element, insideConnector);
+}
+
+function createElement(type, parent, factory, properties) {
+  return elementHelper.createElement(type, properties, parent, factory);
+}
+
+function createInputOutput(parent, bpmnFactory, properties) {
+  return createElement('camunda:InputOutput', parent, bpmnFactory, properties);
+}
+
+function createParameter(type, parent, bpmnFactory, properties) {
+  return createElement(type, parent, bpmnFactory, properties);
+}
 
 
 /***/ }),
@@ -11635,7 +15295,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   var getBusinessObject = options.getBusinessObject;
 
-  var jobPriorityEntry = entryFactory.textField({
+  var jobPriorityEntry = entryFactory.textField(translate, {
     id: 'jobPriority',
     label: translate('Job Priority'),
     modelProperty: 'jobPriority',
@@ -11714,7 +15374,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
   var idPrefix = options.idPrefix || '',
       labelPrefix = options.labelPrefix || '';
 
-  var retryTimeCycleEntry = entryFactory.textField({
+  var retryTimeCycleEntry = entryFactory.textField(translate, {
     id: idPrefix + 'retryTimeCycle',
     label: labelPrefix + translate('Retry Time Cycle'),
     modelProperty: 'cycle',
@@ -11732,6 +15392,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       var bo = getBusinessObject(element);
 
       if (newCycle === '' || typeof newCycle === 'undefined') {
+
         // remove retry time cycle element(s)
         return removeFailedJobRetryTimeCycle(bo, element);
       }
@@ -11739,6 +15400,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       var retryTimeCycle = getFailedJobRetryTimeCycle(bo);
 
       if (!retryTimeCycle) {
+
         // add new retry time cycle element
         var commands = [];
 
@@ -12110,6 +15772,7 @@ function updateFormalExpression(element, propertyName, newValue, bpmnFactory) {
   var expressionProps = {};
 
   if (!newValue) {
+
     // remove formal expression
     expressionProps[propertyName] = undefined;
     return cmdHelper.updateBusinessObject(element, loopCharacteristics, expressionProps);
@@ -12118,6 +15781,7 @@ function updateFormalExpression(element, propertyName, newValue, bpmnFactory) {
   var existingExpression = loopCharacteristics.get(propertyName);
 
   if (!existingExpression) {
+
     // add formal expression
     expressionProps[propertyName] = createFormalExpression(loopCharacteristics, newValue, bpmnFactory);
     return cmdHelper.updateBusinessObject(element, loopCharacteristics, expressionProps);
@@ -12163,7 +15827,7 @@ module.exports = function(element, bpmnFactory, translate) {
 
   // loop cardinality //////////////////////////////////////////////////////////////
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'multiInstance-loopCardinality',
     label: translate('Loop Cardinality'),
     modelProperty: 'loopCardinality',
@@ -12182,7 +15846,7 @@ module.exports = function(element, bpmnFactory, translate) {
 
   // collection //////////////////////////////////////////////////////////////////
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'multiInstance-collection',
     label: translate('Collection'),
     modelProperty: 'collection',
@@ -12213,7 +15877,7 @@ module.exports = function(element, bpmnFactory, translate) {
 
   // element variable ////////////////////////////////////////////////////////////
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'multiInstance-elementVariable',
     label: translate('Element Variable'),
     modelProperty: 'elementVariable',
@@ -12235,7 +15899,7 @@ module.exports = function(element, bpmnFactory, translate) {
 
   // Completion Condition //////////////////////////////////////////////////////
 
-  entries.push(entryFactory.textField({
+  entries.push(entryFactory.textField(translate, {
     id: 'multiInstance-completionCondition',
     label: translate('Completion Condition'),
     modelProperty: 'completionCondition',
@@ -12255,6 +15919,501 @@ module.exports = function(element, bpmnFactory, translate) {
 
 };
 
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/OutputParameters.js":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/OutputParameters.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject;
+
+var elementHelper = __webpack_require__(/*! ../../../../helper/ElementHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ElementHelper.js"),
+    extensionElementsHelper = __webpack_require__(/*! ../../../../helper/ExtensionElementsHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/ExtensionElementsHelper.js"),
+    inputOutputHelper = __webpack_require__(/*! ../../../../helper/InputOutputHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/InputOutputHelper.js"),
+    cmdHelper = __webpack_require__(/*! ../../../../helper/CmdHelper */ "./node_modules/bpmn-js-properties-panel/lib/helper/CmdHelper.js"),
+    utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
+
+var entryFieldDescription = __webpack_require__(/*! ../../../../factory/EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/index.esm.js").query;
+
+var InputOutputParameter = __webpack_require__(/*! ./InputOutputParameter */ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/InputOutputParameter.js");
+
+module.exports = function(element, bpmnFactory, options, translate) {
+
+  options = options || {};
+
+  var insideConnector = !!options.insideConnector,
+      idPrefix = options.idPrefix || '';
+
+  var result = {};
+
+  var entries = result.entries = [];
+
+  if (!inputOutputHelper.isInputOutputSupported(element, insideConnector) ||
+    !inputOutputHelper.areOutputParametersSupported(element, insideConnector)) {
+    return result;
+  }
+
+  var parametersOptions = {
+    insideConnector: insideConnector,
+    idPrefix: idPrefix
+  };
+
+  // output parameters ///////////////////////////////////////////////////////
+  entries.push(
+    getParametersHeading(element, bpmnFactory, {
+      idPrefix: idPrefix,
+      insideConnector: insideConnector,
+      type: 'camunda:OutputParameter',
+      prop: 'outputParameters',
+      prefix: 'Output'
+    }));
+
+  append(entries,
+    getOutputParameterEntries(element, bpmnFactory, parametersOptions, translate)
+  );
+
+  return result;
+};
+
+function getParametersHeading(element, bpmnFactory, options) {
+  var idPrefix = options.idPrefix || '',
+      prefix = options.prefix,
+      type = options.type,
+      prop = options.prop,
+      insideConnector = options.insideConnector;
+
+  var entry = {
+    id: idPrefix + prefix + '-heading',
+    cssClasses: [ 'bpp-input-output' ],
+    html: '<div class="bpp-field-wrapper">' +
+      '<button type="button" class="bpp-input-output__add add action-button" ' + 'data-action="createElement">' +
+      '</button><input name="hidden" type="hidden">' +
+      '</div>'
+  };
+
+  entry.createElement = function(_, entryNode) {
+    var commands = createElement();
+
+    if (commands) {
+      scheduleCommands(commands, entryNode);
+      return true;
+    }
+  };
+
+  entry.set = function() {
+    var commands = entry._commands;
+
+    if (commands) {
+      delete entry._commands;
+      return commands;
+    }
+  };
+
+  function createElement() {
+    var commands = [];
+    var bo = getBusinessObject(element);
+    var extensionElements = bo.get('extensionElements');
+
+    if (!extensionElements) {
+      extensionElements = elementHelper.createElement('bpmn:ExtensionElements', { values: [] }, bo, bpmnFactory);
+      commands.push(cmdHelper.updateBusinessObject(element, bo, { extensionElements: extensionElements }));
+    }
+
+    var inputOutput = getInputOutput(element, insideConnector);
+    if (!inputOutput) {
+      var parent = !insideConnector ? extensionElements : getConnector(element);
+      inputOutput = createInputOutput(parent, bpmnFactory, {
+        inputParameters: [],
+        outputParameters: []
+      });
+
+      if (!insideConnector) {
+        commands.push(cmdHelper.addAndRemoveElementsFromList(
+          element,
+          extensionElements,
+          'values',
+          'extensionElements',
+          [ inputOutput ],
+          []
+        ));
+      } else {
+        commands.push(cmdHelper.updateBusinessObject(element, parent, { inputOutput: inputOutput }));
+      }
+    }
+
+    var newElem = createParameter(type, inputOutput, bpmnFactory, { name: generateElementId(prefix) });
+    commands.push(cmdHelper.addElementsTolist(element, inputOutput, prop, [], [ newElem ]));
+
+    return commands;
+  }
+
+  /**
+   * Schedule commands to be run with next `set` method call.
+   *
+   * @param {Array<any>} commands
+   * @param {HTMLElement} entryNode
+   */
+  function scheduleCommands(commands, entryNode) {
+    entry._commands = commands;
+
+    // @barmac: hack to make properties panel call `set`
+    var input = domQuery('input[type="hidden"]', entryNode);
+    input.value = 1;
+  }
+
+  return entry;
+}
+
+function getOutputParameterEntries(element, bpmnFactory, options, translate) {
+  var idPrefix = options.idPrefix,
+      insideConnector = options.insideConnector,
+      inputOutput = getInputOutput(element, insideConnector),
+      params = getOutputParameters(element, insideConnector),
+      entries;
+
+  if (!params.length) {
+    var description = entryFieldDescription(translate, translate('No variables defined.'));
+
+    return [{
+      id: idPrefix + 'output-parameter' + '-placeholder',
+      cssClasses: [ 'bpp-input-output-placeholder' ],
+      html: description
+    }];
+  }
+
+  var outputParameters = params.map(function(param, index) {
+    function onRemove() {
+      var commands = [];
+      commands.push(cmdHelper.removeElementsFromList(element, inputOutput, 'outputParameters', null, [param]));
+
+      // remove inputOutput if there are no input/output parameters anymore
+      if (inputOutput.get('outputParameters').length === 1 && (inputOutput.get('inputParameters') || []).length === 0) {
+
+        if (!insideConnector) {
+          commands.push(extensionElementsHelper.removeEntry(getBusinessObject(element), element, inputOutput));
+        }
+        else {
+          var connector = getConnector(element);
+          commands.push(cmdHelper.updateBusinessObject(element, connector, { inputOutput: undefined }));
+        }
+      }
+
+      return commands;
+    }
+
+    return InputOutputParameter(param, bpmnFactory,
+      {
+        idPrefix: idPrefix + 'output-parameter-' + index,
+        onRemove: onRemove,
+        onToggle: onToggle
+      }, translate);
+  });
+
+  /**
+   * Close remaining collapsible entries within group.
+   *
+   * @param {boolean} value
+   * @param {HTMLElement} entryNode
+   */
+  function onToggle(value, entryNode) {
+    if (!value) {
+      return;
+    }
+
+    var currentEntryId = entryNode.dataset.entry;
+
+    outputParameters.forEach(function(outputParameter) {
+      if (outputParameter.entries[0].id === currentEntryId) {
+        return;
+      }
+
+      outputParameter.setOpen(false);
+    });
+  }
+
+  entries = outputParameters.map(function(input) {
+    return input.entries;
+  });
+
+  return flatten(entries);
+}
+
+function append(array, items) {
+  Array.prototype.push.apply(array, items);
+}
+
+function flatten(arrays) {
+  return Array.prototype.concat.apply([], arrays);
+}
+
+function generateElementId(prefix) {
+  prefix = prefix + '_';
+  return utils.nextId(prefix);
+}
+
+function getInputOutput(element, insideConnector) {
+  return inputOutputHelper.getInputOutput(element, insideConnector);
+}
+
+function getConnector(element) {
+  return inputOutputHelper.getConnector(element);
+}
+
+function getOutputParameters(element, insideConnector) {
+  return inputOutputHelper.getOutputParameters(element, insideConnector);
+}
+
+function createElement(type, parent, factory, properties) {
+  return elementHelper.createElement(type, properties, parent, factory);
+}
+
+function createInputOutput(parent, bpmnFactory, properties) {
+  return createElement('camunda:InputOutput', parent, bpmnFactory, properties);
+}
+
+function createParameter(type, parent, bpmnFactory, properties) {
+  return createElement(type, parent, bpmnFactory, properties);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ProcessVariables.js":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/ProcessVariables.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getVariablesForScope = __webpack_require__(/*! @bpmn-io/extract-process-variables */ "./node_modules/@bpmn-io/extract-process-variables/dist/index.esm.js").getVariablesForScope;
+
+var groupBy = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").groupBy,
+    flatten = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").flatten,
+    forEach = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").forEach,
+    keys = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").keys,
+    map = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").map,
+    sortBy = __webpack_require__(/*! min-dash */ "./node_modules/min-dash/dist/index.esm.js").sortBy;
+
+var getBusinessObject = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").getBusinessObject,
+    is = __webpack_require__(/*! bpmn-js/lib/util/ModelUtil */ "./node_modules/bpmn-js/lib/util/ModelUtil.js").is,
+    isAny = __webpack_require__(/*! bpmn-js/lib/features/modeling/util/ModelingUtil */ "./node_modules/bpmn-js/lib/features/modeling/util/ModelingUtil.js").isAny;
+
+var escapeHTML = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js").escapeHTML;
+
+var factory = __webpack_require__(/*! ../../../../factory/EntryFactory */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFactory.js");
+
+var entryFieldDescription = __webpack_require__(/*! ../../../../factory/EntryFieldDescription */ "./node_modules/bpmn-js-properties-panel/lib/factory/EntryFieldDescription.js");
+
+
+module.exports = function(element, translate) {
+
+  var entries = [];
+
+  function createVariablesList(variables, scope) {
+    var scopePrefix = scope ? scope + '-' : '';
+
+    return flatten(map(variables, function(variable, idx) {
+
+      var name = variable.name,
+          origin = variable.origin,
+          variableEntries = [];
+
+      // title ///////////////////
+
+      var collapsible = factory.collapsible({
+        id: scopePrefix + 'variable- ' + idx + '-collapsible',
+        title: escapeHTML(name),
+        description: origin.toString(),
+        open: false,
+        get: function() {
+          return {
+            title: escapeHTML(name),
+            description: origin.toString()
+          };
+        }
+      });
+
+      var isOpen = collapsible.isOpen;
+
+      variableEntries.push(collapsible);
+
+      // created in //////////////////
+
+      var createdInHtml = '<div data-show="show">' +
+        '<b>' + escapeHTML(translate('Created in')) + '</b>' +
+        createdInList(origin) +
+      '</div>';
+
+      variableEntries.push({
+        id: scopePrefix + 'variable- ' + idx + '-created-in',
+        html: createdInHtml,
+        cssClasses: [
+          'bpp-process-variables',
+          'bpp-process-variables__created-in'
+        ],
+        show: function() {
+          return isOpen();
+        }
+      });
+
+      return variableEntries;
+    }));
+  }
+
+
+  if (!canHaveProcessVariables(element)) {
+    return entries;
+  }
+
+  var businessObject = getBusinessObject(element),
+      rootElement = getRootElement(businessObject),
+      scope = getScope(element);
+
+  var variables = getVariablesForScope(scope, rootElement),
+      sorted = sortByName(variables),
+      withNames = populateElementNames(sorted),
+      byScope = groupByScope(withNames);
+
+  // (1) tab description entry
+  var description = entryFieldDescription(translate, translate('Available process variables, identified in the diagram.'));
+
+  entries.push({
+    id: 'process-variables-description',
+    html: description,
+    cssClasses: [
+      'bpp-process-variables',
+      'bpp-process-variables__description'
+    ]
+  });
+
+  // (2) empty list placeholder
+  if (!withNames.length) {
+    var placeholder = entryFieldDescription(translate, translate('No variables found.'));
+
+    entries.push({
+      id: 'process-variables-placeholder',
+      html: placeholder
+    });
+
+    return entries;
+  }
+
+  if (keys(byScope).length > 1) {
+
+    // (3a) multiple scopes variables lists
+
+    // assumption: variables extractor fetches parent variables first
+    forEach(reverse(keys(byScope)), function(scope) {
+      var variables = byScope[scope];
+
+      entries.push({
+        id: scope + '-scope-title',
+        html: '<div>' + escapeHTML(translate('Scope: ')) + scope + '</div>',
+        cssClasses: [
+          'bpp-process-variables',
+          'bpp-process-variables__scope-title',
+          'bpp-collapsible-break'
+        ]
+      });
+
+      entries = entries.concat(createVariablesList(variables, scope));
+    });
+  } else {
+
+    // (3b) single scope variables list
+    entries = entries.concat(createVariablesList(withNames));
+  }
+
+
+  return entries;
+};
+
+
+// helpers //////////
+
+function getRootElement(element) {
+  var businessObject = getBusinessObject(element);
+
+  if (is(businessObject, 'bpmn:Participant')) {
+    return businessObject.processRef;
+  }
+
+  if (is(businessObject, 'bpmn:Process')) {
+    return businessObject;
+  }
+
+  var parent = businessObject;
+
+  while (parent.$parent && !is(parent, 'bpmn:Process')) {
+    parent = parent.$parent;
+  }
+
+  return parent;
+}
+
+function getScope(element) {
+  if (is(element, 'bpmn:Participant')) {
+    return getBusinessObject(element).processRef.id;
+  }
+
+  return element.id;
+}
+
+function sortByName(variables) {
+  return sortBy(variables, function(variable) {
+    return variable.name;
+  });
+}
+
+function populateElementNames(variables) {
+  forEach(variables, function(variable) {
+    var names = map(variable.origin, function(element) {
+      return element.name || element.id;
+    });
+
+    variable.origin = names;
+    variable.scope = variable.scope.name || variable.scope.id;
+  });
+
+  return variables;
+}
+
+function canHaveProcessVariables(element) {
+  var businessObject = getBusinessObject(element);
+
+  return (
+    isAny(element, ['bpmn:Process', 'bpmn:SubProcess']) ||
+      (is(element, 'bpmn:Participant') && businessObject.get('processRef'))
+  );
+}
+
+function groupByScope(variables) {
+  return groupBy(variables, 'scope');
+}
+
+function createdInList(origin) {
+  var html = '';
+
+  forEach(origin, function(o) {
+    html += '<p class="bpp-process-variables__created-in-item">' + o + '</p>';
+  });
+  return html;
+}
+
+function reverse(array) {
+  return map(array, function(a, i) {
+    return array[array.length - 1 - i];
+  });
+}
 
 /***/ }),
 
@@ -12430,6 +16589,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       return cmdHelper.updateBusinessObject(element, property, value);
     },
     validate: function(element, value, node, idx) {
+
       // validate id if necessary
       if (modelProperties.indexOf('id') >= 0) {
 
@@ -12438,6 +16598,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
             property = properties[idx];
 
         if (property) {
+
           // check if id is valid
           var validationError = utils.isIdValid(property, value.id, translate);
 
@@ -12457,6 +16618,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       commands.push(cmdHelper.removeElementsFromList(element, properties, 'values', null, [ currentProperty ]));
 
       if (propertyValues.length === 1) {
+
         // remove camunda:properties if the last existing property has been removed
         if (!isExtensionElements(parent)) {
           commands.push(cmdHelper.updateBusinessObject(element, parent, { properties: undefined }));
@@ -12473,7 +16635,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
     }
   });
 
-  return factory.table(options);
+  return factory.table(translate, options);
 };
 
 
@@ -12503,7 +16665,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
       id = options.id || 'resultVariable';
 
 
-  var resultVariableEntry = entryFactory.textField({
+  var resultVariableEntry = entryFactory.textField(translate, {
     id: id,
     label: translate('Result Variable'),
     modelProperty: 'resultVariable',
@@ -12559,29 +16721,40 @@ var domQuery = __webpack_require__(/*! min-dom */ "./node_modules/min-dom/dist/i
     utils = __webpack_require__(/*! ../../../../Utils */ "./node_modules/bpmn-js-properties-panel/lib/Utils.js");
 
 
-function getScriptType(node) {
-  return utils.selectedType('select[name=scriptType]', node.parentElement);
+function getScriptType(node, idPrefix) {
+
+  // if we have an idPrefix, work with specific selector
+  var selector;
+
+  if (idPrefix && idPrefix != '') {
+    selector = 'select[id="' + idPrefix + 'cam-script-type"]';
+  } else {
+    selector = 'select[name="scriptType"]';
+  }
+
+  return utils.selectedType(selector, node.parentElement);
 }
 
 
-module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatRequired, translate) {
+module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatRequired, translate, options) {
+  var idPrefix = options && options.idPrefix || '';
 
   return {
     template:
     '<div class="bpp-row bpp-textfield">' +
-      '<label for="cam-script-format">' + escapeHTML(translate('Script Format')) + '</label>' +
+      '<label for="' + idPrefix + 'cam-script-format">' + escapeHTML(translate('Script Format')) + '</label>' +
       '<div class="bpp-field-wrapper">' +
-        '<input id="cam-script-format" type="text" name="scriptFormat" />' +
-        '<button class="clear" data-action="script.clearScriptFormat" data-show="script.canClearScriptFormat">' +
+        '<input id="' + idPrefix + 'cam-script-format" type="text" name="scriptFormat" />' +
+        '<button class="action-button clear" data-action="script.clearScriptFormat" data-show="script.canClearScriptFormat">' +
           '<span>X</span>' +
         '</button>' +
       '</div>' +
     '</div>' +
 
     '<div class="bpp-row">' +
-      '<label for="cam-script-type">' + escapeHTML(translate('Script Type')) + '</label>' +
+      '<label for="' + idPrefix + 'cam-script-type">' + escapeHTML(translate('Script Type')) + '</label>' +
       '<div class="bpp-field-wrapper">' +
-        '<select id="cam-script-type" name="scriptType" data-value>' +
+        '<select id="' + idPrefix + 'cam-script-type" name="scriptType" data-value>' +
           '<option value="script" selected>' + escapeHTML(translate('Inline Script')) + '</option>' +
           '<option value="scriptResource">' + escapeHTML(translate('External Resource')) + '</option>' +
         '</select>' +
@@ -12589,19 +16762,19 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
     '</div>' +
 
     '<div class="bpp-row bpp-textfield">' +
-      '<label for="cam-script-resource-val" data-show="script.isScriptResource">' + escapeHTML(translate('Resource')) + '</label>' +
+      '<label for="' + idPrefix + 'cam-script-resource-val" data-show="script.isScriptResource">' + escapeHTML(translate('Resource')) + '</label>' +
       '<div class="bpp-field-wrapper" data-show="script.isScriptResource">' +
-        '<input id="cam-script-resource-val" type="text" name="scriptResourceValue" />' +
-        '<button class="clear" data-action="script.clearScriptResource" data-show="script.canClearScriptResource">' +
+        '<input id="' + idPrefix + 'cam-script-resource-val" type="text" name="scriptResourceValue" />' +
+        '<button class="action-button clear" data-action="script.clearScriptResource" data-show="script.canClearScriptResource">' +
           '<span>X</span>' +
         '</button>' +
       '</div>' +
     '</div>' +
 
     '<div class="bpp-row">' +
-      '<label for="cam-script-val" data-show="script.isScript">' + escapeHTML(translate('Script')) + '</label>' +
+      '<label for="' + idPrefix + 'cam-script-val" data-show="script.isScript">' + escapeHTML(translate('Script')) + '</label>' +
       '<div class="bpp-field-wrapper" data-show="script.isScript">' +
-        '<textarea id="cam-script-val" type="text" name="scriptValue"></textarea>' +
+        '<textarea id="' + idPrefix + 'cam-script-val" type="text" name="scriptValue"></textarea>' +
       '</div>'+
     '</div>',
 
@@ -12640,9 +16813,11 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
       update[scriptLanguagePropName] = undefined;
 
       if (isFormatRequired) {
+
         // always set language
         update[scriptLanguagePropName] = scriptFormat || '';
       } else
+
       // set language only when scriptFormat has a value
       if (scriptFormat !== '') {
         update[scriptLanguagePropName] = scriptFormat;
@@ -12713,12 +16888,12 @@ module.exports = function(scriptLanguagePropName, scriptValuePropName, isFormatR
     },
 
     isScriptResource: function(element, inputNode, btnNode, scopeNode) {
-      var scriptType = getScriptType(scopeNode);
+      var scriptType = getScriptType(scopeNode, idPrefix);
       return scriptType === 'scriptResource';
     },
 
     isScript: function(element, inputNode, btnNode, scopeNode) {
-      var scriptType = getScriptType(scopeNode);
+      var scriptType = getScriptType(scopeNode, idPrefix);
       return scriptType === 'script';
     }
 
@@ -12747,7 +16922,7 @@ module.exports = function(element, bpmnFactory, options, translate) {
 
   var getBusinessObject = options.getBusinessObject;
 
-  var isStartableInTasklistEntry = entryFactory.checkbox({
+  var isStartableInTasklistEntry = entryFactory.checkbox(translate, {
     id: 'isStartableInTasklist',
     label: translate('Startable'),
     modelProperty: 'isStartableInTasklist',
@@ -12800,9 +16975,9 @@ __webpack_require__.r(__webpack_exports__);
  * Return true if element has any of the given types.
  *
  * @param {djs.model.Base} element
- * @param {Array<String>} types
+ * @param {Array<string>} types
  *
- * @return {Boolean}
+ * @return {boolean}
  */
 function isAny(element, types) {
   return Object(min_dash__WEBPACK_IMPORTED_MODULE_0__["some"])(types, function(t) {
@@ -12815,7 +16990,7 @@ function isAny(element, types) {
  * Return the parent of the element with any of the given types.
  *
  * @param {djs.model.Base} element
- * @param {String|Array<String>} anyType
+ * @param {string|Array<string>} anyType
  *
  * @return {djs.model.Base}
  */
@@ -12866,7 +17041,7 @@ function isExpanded(element) {
   }
 
   if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(element, 'bpmn:SubProcess')) {
-    return !!Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).di.isExpanded;
+    return Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).di && !!Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["getBusinessObject"])(element).di.isExpanded;
   }
 
   if (Object(_ModelUtil__WEBPACK_IMPORTED_MODULE_0__["is"])(element, 'bpmn:Participant')) {
@@ -12929,9 +17104,9 @@ __webpack_require__.r(__webpack_exports__);
  * Is an element of the given BPMN type?
  *
  * @param  {djs.model.Base|ModdleElement} element
- * @param  {String} type
+ * @param  {string} type
  *
- * @return {Boolean}
+ * @return {boolean}
  */
 function is(element, type) {
   var bo = getBusinessObject(element);
@@ -13138,7 +17313,7 @@ __webpack_require__.r(__webpack_exports__);
  * @param  {Array<Object>} [collection]
  * @param  {Object} [element]
  *
- * @return {Number} the previous index of the element
+ * @return {number} the previous index of the element
  */
 function remove(collection, element) {
 
@@ -13161,7 +17336,7 @@ function remove(collection, element) {
  *
  * @param {Array<Object>} collection
  * @param {Object} element
- * @param {Number} idx
+ * @param {number} idx
  */
 function add(collection, element, idx) {
 
@@ -13213,7 +17388,7 @@ function add(collection, element, idx) {
  * @param {Array<Object>} collection
  * @param {Object} element
  *
- * @return {Number} the index or -1 if collection or element do
+ * @return {number} the index or -1 if collection or element do
  *                  not exist or the element is not contained.
  */
 function indexOf(collection, element) {
@@ -15235,6 +19410,77 @@ module.exports = baseMatchesProperty;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_basePick.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_basePick.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var basePickBy = __webpack_require__(/*! ./_basePickBy */ "./node_modules/lodash/_basePickBy.js"),
+    hasIn = __webpack_require__(/*! ./hasIn */ "./node_modules/lodash/hasIn.js");
+
+/**
+ * The base implementation of `_.pick` without support for individual
+ * property identifiers.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} paths The property paths to pick.
+ * @returns {Object} Returns the new object.
+ */
+function basePick(object, paths) {
+  return basePickBy(object, paths, function(value, path) {
+    return hasIn(object, path);
+  });
+}
+
+module.exports = basePick;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_basePickBy.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/_basePickBy.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGet = __webpack_require__(/*! ./_baseGet */ "./node_modules/lodash/_baseGet.js"),
+    baseSet = __webpack_require__(/*! ./_baseSet */ "./node_modules/lodash/_baseSet.js"),
+    castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js");
+
+/**
+ * The base implementation of  `_.pickBy` without support for iteratee shorthands.
+ *
+ * @private
+ * @param {Object} object The source object.
+ * @param {string[]} paths The property paths to pick.
+ * @param {Function} predicate The function invoked per property.
+ * @returns {Object} Returns the new object.
+ */
+function basePickBy(object, paths, predicate) {
+  var index = -1,
+      length = paths.length,
+      result = {};
+
+  while (++index < length) {
+    var path = paths[index],
+        value = baseGet(object, path);
+
+    if (predicate(value, path)) {
+      baseSet(result, castPath(path, object), value);
+    }
+  }
+  return result;
+}
+
+module.exports = basePickBy;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_baseProperty.js":
 /*!**********************************************!*\
   !*** ./node_modules/lodash/_baseProperty.js ***!
@@ -15311,6 +19557,68 @@ function baseRest(func, start) {
 }
 
 module.exports = baseRest;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseSet.js":
+/*!*****************************************!*\
+  !*** ./node_modules/lodash/_baseSet.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var assignValue = __webpack_require__(/*! ./_assignValue */ "./node_modules/lodash/_assignValue.js"),
+    castPath = __webpack_require__(/*! ./_castPath */ "./node_modules/lodash/_castPath.js"),
+    isIndex = __webpack_require__(/*! ./_isIndex */ "./node_modules/lodash/_isIndex.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+    toKey = __webpack_require__(/*! ./_toKey */ "./node_modules/lodash/_toKey.js");
+
+/**
+ * The base implementation of `_.set`.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {Array|string} path The path of the property to set.
+ * @param {*} value The value to set.
+ * @param {Function} [customizer] The function to customize path creation.
+ * @returns {Object} Returns `object`.
+ */
+function baseSet(object, path, value, customizer) {
+  if (!isObject(object)) {
+    return object;
+  }
+  path = castPath(path, object);
+
+  var index = -1,
+      length = path.length,
+      lastIndex = length - 1,
+      nested = object;
+
+  while (nested != null && ++index < length) {
+    var key = toKey(path[index]),
+        newValue = value;
+
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      return object;
+    }
+
+    if (index != lastIndex) {
+      var objValue = nested[key];
+      newValue = customizer ? customizer(objValue, key, nested) : undefined;
+      if (newValue === undefined) {
+        newValue = isObject(objValue)
+          ? objValue
+          : (isIndex(path[index + 1]) ? [] : {});
+      }
+    }
+    assignValue(nested, key, newValue);
+    nested = nested[key];
+  }
+  return object;
+}
+
+module.exports = baseSet;
 
 
 /***/ }),
@@ -15451,6 +19759,36 @@ function baseToString(value) {
 }
 
 module.exports = baseToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseTrim.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_baseTrim.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var trimmedEndIndex = __webpack_require__(/*! ./_trimmedEndIndex */ "./node_modules/lodash/_trimmedEndIndex.js");
+
+/** Used to match leading whitespace. */
+var reTrimStart = /^\s+/;
+
+/**
+ * The base implementation of `_.trim`.
+ *
+ * @private
+ * @param {string} string The string to trim.
+ * @returns {string} Returns the trimmed string.
+ */
+function baseTrim(string) {
+  return string
+    ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+    : string;
+}
+
+module.exports = baseTrim;
 
 
 /***/ }),
@@ -16500,10 +20838,11 @@ function equalArrays(array, other, bitmask, customizer, equalFunc, stack) {
   if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
     return false;
   }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(array);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
+  // Check that cyclic values are equal.
+  var arrStacked = stack.get(array);
+  var othStacked = stack.get(other);
+  if (arrStacked && othStacked) {
+    return arrStacked == other && othStacked == array;
   }
   var index = -1,
       result = true,
@@ -16729,10 +21068,11 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
       return false;
     }
   }
-  // Assume cyclic values are equal.
-  var stacked = stack.get(object);
-  if (stacked && stack.get(other)) {
-    return stacked == other;
+  // Check that cyclic values are equal.
+  var objStacked = stack.get(object);
+  var othStacked = stack.get(other);
+  if (objStacked && othStacked) {
+    return objStacked == other && othStacked == object;
   }
   var result = true;
   stack.set(object, other);
@@ -16777,6 +21117,33 @@ function equalObjects(object, other, bitmask, customizer, equalFunc, stack) {
 }
 
 module.exports = equalObjects;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_flatRest.js":
+/*!******************************************!*\
+  !*** ./node_modules/lodash/_flatRest.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var flatten = __webpack_require__(/*! ./flatten */ "./node_modules/lodash/flatten.js"),
+    overRest = __webpack_require__(/*! ./_overRest */ "./node_modules/lodash/_overRest.js"),
+    setToString = __webpack_require__(/*! ./_setToString */ "./node_modules/lodash/_setToString.js");
+
+/**
+ * A specialized version of `baseRest` which flattens the rest array.
+ *
+ * @private
+ * @param {Function} func The function to apply a rest parameter to.
+ * @returns {Function} Returns the new function.
+ */
+function flatRest(func) {
+  return setToString(overRest(func, undefined, flatten), func + '');
+}
+
+module.exports = flatRest;
 
 
 /***/ }),
@@ -19108,6 +23475,36 @@ module.exports = toSource;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/_trimmedEndIndex.js":
+/*!*************************************************!*\
+  !*** ./node_modules/lodash/_trimmedEndIndex.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/** Used to match a single whitespace character. */
+var reWhitespace = /\s/;
+
+/**
+ * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+ * character of `string`.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {number} Returns the index of the last non-whitespace character.
+ */
+function trimmedEndIndex(string) {
+  var index = string.length;
+
+  while (index-- && reWhitespace.test(string.charAt(index))) {}
+  return index;
+}
+
+module.exports = trimmedEndIndex;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/_updateWrapDetails.js":
 /*!***************************************************!*\
   !*** ./node_modules/lodash/_updateWrapDetails.js ***!
@@ -19469,6 +23866,10 @@ var arrayFilter = __webpack_require__(/*! ./_arrayFilter */ "./node_modules/loda
  * // The `_.property` iteratee shorthand.
  * _.filter(users, 'active');
  * // => objects for ['barney']
+ *
+ * // Combining several predicates using `_.overEvery` or `_.overSome`.
+ * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+ * // => objects for ['fred', 'barney']
  */
 function filter(collection, predicate) {
   var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -19595,6 +23996,39 @@ function findIndex(array, predicate, fromIndex) {
 }
 
 module.exports = findIndex;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/flatten.js":
+/*!****************************************!*\
+  !*** ./node_modules/lodash/flatten.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseFlatten = __webpack_require__(/*! ./_baseFlatten */ "./node_modules/lodash/_baseFlatten.js");
+
+/**
+ * Flattens `array` a single level deep.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to flatten.
+ * @returns {Array} Returns the new flattened array.
+ * @example
+ *
+ * _.flatten([1, [2, [3, [4]], 5]]);
+ * // => [1, 2, [3, [4]], 5]
+ */
+function flatten(array) {
+  var length = array == null ? 0 : array.length;
+  return length ? baseFlatten(array, 1) : [];
+}
+
+module.exports = flatten;
 
 
 /***/ }),
@@ -20080,6 +24514,39 @@ module.exports = isLength;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/isNull.js":
+/*!***************************************!*\
+  !*** ./node_modules/lodash/isNull.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is `null`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `null`, else `false`.
+ * @example
+ *
+ * _.isNull(null);
+ * // => true
+ *
+ * _.isNull(void 0);
+ * // => false
+ */
+function isNull(value) {
+  return value === null;
+}
+
+module.exports = isNull;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/isObject.js":
 /*!*****************************************!*\
   !*** ./node_modules/lodash/isObject.js ***!
@@ -20236,6 +24703,39 @@ var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 
 module.exports = isTypedArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isUndefined.js":
+/*!********************************************!*\
+  !*** ./node_modules/lodash/isUndefined.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is `undefined`.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+ * @example
+ *
+ * _.isUndefined(void 0);
+ * // => true
+ *
+ * _.isUndefined(null);
+ * // => false
+ */
+function isUndefined(value) {
+  return value === undefined;
+}
+
+module.exports = isUndefined;
 
 
 /***/ }),
@@ -20464,6 +24964,42 @@ module.exports = noop;
 
 /***/ }),
 
+/***/ "./node_modules/lodash/pick.js":
+/*!*************************************!*\
+  !*** ./node_modules/lodash/pick.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var basePick = __webpack_require__(/*! ./_basePick */ "./node_modules/lodash/_basePick.js"),
+    flatRest = __webpack_require__(/*! ./_flatRest */ "./node_modules/lodash/_flatRest.js");
+
+/**
+ * Creates an object composed of the picked `object` properties.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The source object.
+ * @param {...(string|string[])} [paths] The property paths to pick.
+ * @returns {Object} Returns the new object.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': '2', 'c': 3 };
+ *
+ * _.pick(object, ['a', 'c']);
+ * // => { 'a': 1, 'c': 3 }
+ */
+var pick = flatRest(function(object, paths) {
+  return object == null ? {} : basePick(object, paths);
+});
+
+module.exports = pick;
+
+
+/***/ }),
+
 /***/ "./node_modules/lodash/property.js":
 /*!*****************************************!*\
   !*** ./node_modules/lodash/property.js ***!
@@ -20677,14 +25213,12 @@ module.exports = toInteger;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
+var baseTrim = __webpack_require__(/*! ./_baseTrim */ "./node_modules/lodash/_baseTrim.js"),
+    isObject = __webpack_require__(/*! ./isObject */ "./node_modules/lodash/isObject.js"),
     isSymbol = __webpack_require__(/*! ./isSymbol */ "./node_modules/lodash/isSymbol.js");
 
 /** Used as references for various `Number` constants. */
 var NAN = 0 / 0;
-
-/** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
 
 /** Used to detect bad signed hexadecimal string values. */
 var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -20735,7 +25269,7 @@ function toNumber(value) {
   if (typeof value != 'string') {
     return value === 0 ? value : +value;
   }
-  value = value.replace(reTrim, '');
+  value = baseTrim(value);
   var isBinary = reIsBinary.test(value);
   return (isBinary || reIsOctal.test(value))
     ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
@@ -20948,46 +25482,48 @@ module.exports = lodash;
 /*!*************************************************!*\
   !*** ./node_modules/min-dash/dist/index.esm.js ***!
   \*************************************************/
-/*! exports provided: flatten, find, findIndex, filter, forEach, without, reduce, every, some, map, keys, size, values, groupBy, uniqueBy, unionBy, sortBy, matchPattern, debounce, throttle, bind, isUndefined, isDefined, isNil, isArray, isObject, isNumber, isFunction, isString, ensureArray, has, assign, pick, omit, merge */
+/*! exports provided: assign, bind, debounce, ensureArray, every, filter, find, findIndex, flatten, forEach, get, groupBy, has, isArray, isDefined, isFunction, isNil, isNumber, isObject, isString, isUndefined, keys, map, matchPattern, merge, omit, pick, reduce, set, size, some, sortBy, throttle, unionBy, uniqueBy, values, without */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flatten", function() { return flatten; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assign", function() { return assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bind", function() { return bind; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debounce", function() { return debounce; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ensureArray", function() { return ensureArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "every", function() { return every; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return filter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "find", function() { return find; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findIndex", function() { return findIndex; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filter", function() { return filter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flatten", function() { return flatten; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forEach", function() { return forEach; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "without", function() { return without; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reduce", function() { return reduce; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "every", function() { return every; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "some", function() { return some; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "map", function() { return map; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keys", function() { return keys; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "size", function() { return size; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "values", function() { return values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "groupBy", function() { return groupBy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uniqueBy", function() { return uniqueBy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unionBy", function() { return unionBy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortBy", function() { return sortBy; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchPattern", function() { return matchPattern; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debounce", function() { return debounce; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throttle", function() { return throttle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bind", function() { return bind; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNil", function() { return isNil; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ensureArray", function() { return ensureArray; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "has", function() { return has; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assign", function() { return assign; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pick", function() { return pick; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "omit", function() { return omit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNil", function() { return isNil; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keys", function() { return keys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "map", function() { return map; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matchPattern", function() { return matchPattern; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "merge", function() { return merge; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "omit", function() { return omit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pick", function() { return pick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reduce", function() { return reduce; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set", function() { return set; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "size", function() { return size; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "some", function() { return some; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sortBy", function() { return sortBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throttle", function() { return throttle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unionBy", function() { return unionBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uniqueBy", function() { return uniqueBy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "values", function() { return values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "without", function() { return without; });
 /**
  * Flatten array, one level deep.
  *
@@ -21492,6 +26028,63 @@ function assign(target) {
   return _extends.apply(void 0, [target].concat(others));
 }
 /**
+ * Sets a nested property of a given object to the specified value.
+ *
+ * This mutates the object and returns it.
+ *
+ * @param {Object} target The target of the set operation.
+ * @param {(string|number)[]} path The path to the nested value.
+ * @param {any} value The value to set.
+ */
+
+function set(target, path, value) {
+  var currentTarget = target;
+  forEach(path, function (key, idx) {
+    if (key === '__proto__') {
+      throw new Error('illegal key: __proto__');
+    }
+
+    var nextKey = path[idx + 1];
+    var nextTarget = currentTarget[key];
+
+    if (isDefined(nextKey) && isNil(nextTarget)) {
+      nextTarget = currentTarget[key] = isNaN(+nextKey) ? {} : [];
+    }
+
+    if (isUndefined(nextKey)) {
+      if (isUndefined(value)) {
+        delete currentTarget[key];
+      } else {
+        currentTarget[key] = value;
+      }
+    } else {
+      currentTarget = nextTarget;
+    }
+  });
+  return target;
+}
+/**
+ * Gets a nested property of a given object.
+ *
+ * @param {Object} target The target of the get operation.
+ * @param {(string|number)[]} path The path to the nested value.
+ * @param {any} [defaultValue] The value to return if no value exists.
+ */
+
+function get(target, path, defaultValue) {
+  var currentTarget = target;
+  forEach(path, function (key) {
+    // accessing nil property yields <undefined>
+    if (isNil(currentTarget)) {
+      currentTarget = undefined;
+      return false;
+    }
+
+    currentTarget = currentTarget[key];
+  });
+  return isUndefined(currentTarget) ? defaultValue : currentTarget;
+}
+/**
  * Pick given properties from the target object.
  *
  * @param {Object} target
@@ -21595,10 +26188,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "classes", function() { return classes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clear", function() { return clear; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "closest", function() { return closest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delegate", function() { return delegateEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delegate", function() { return delegate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "domify", function() { return domify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "event", function() { return componentEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matches", function() { return matchesSelector$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "matches", function() { return matchesSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryAll", function() { return all; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "remove", function() { return remove; });
@@ -21837,25 +26430,13 @@ function clear(el) {
   return el;
 }
 
-/**
- * Element prototype.
- */
-
-var proto = Element.prototype;
-
-/**
- * Vendor function.
- */
-
-var vendor = proto.matchesSelector
+var proto = typeof Element !== 'undefined' ? Element.prototype : {};
+var vendor = proto.matches
+  || proto.matchesSelector
   || proto.webkitMatchesSelector
   || proto.mozMatchesSelector
   || proto.msMatchesSelector
   || proto.oMatchesSelector;
-
-/**
- * Expose `match()`.
- */
 
 var matchesSelector = match;
 
@@ -21869,22 +26450,36 @@ var matchesSelector = match;
  */
 
 function match(el, selector) {
+  if (!el || el.nodeType !== 1) return false;
   if (vendor) return vendor.call(el, selector);
   var nodes = el.parentNode.querySelectorAll(selector);
-  for (var i = 0; i < nodes.length; ++i) {
+  for (var i = 0; i < nodes.length; i++) {
     if (nodes[i] == el) return true;
   }
   return false;
 }
 
-var closest = function (element, selector, checkYoSelf) {
-  var parent = checkYoSelf ? element : element.parentNode;
+/**
+ * Closest
+ *
+ * @param {Element} el
+ * @param {String} selector
+ * @param {Boolean} checkYourSelf (optional)
+ */
+function closest (element, selector, checkYourSelf) {
+  var currentElem = checkYourSelf ? element : element.parentNode;
 
-  while (parent && parent !== document) {
-    if (matchesSelector(parent, selector)) return parent;
-    parent = parent.parentNode;
+  while (currentElem && currentElem.nodeType !== document.DOCUMENT_NODE && currentElem.nodeType !== document.DOCUMENT_FRAGMENT_NODE) {
+
+    if (matchesSelector(currentElem, selector)) {
+      return currentElem;
+    }
+
+    currentElem = currentElem.parentNode;
   }
-};
+
+  return matchesSelector(currentElem, selector) ? currentElem : null;
+}
 
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
@@ -21931,8 +26526,6 @@ var componentEvent = {
  * Module dependencies.
  */
 
-
-
 /**
  * Delegate event `type` to `selector`
  * and invoke `fn(e)`. A callback function
@@ -21951,15 +26544,19 @@ var componentEvent = {
 // when delegating.
 var forceCaptureEvents = ['focus', 'blur'];
 
-var bind$1 = function(el, selector, type, fn, capture){
-  if (forceCaptureEvents.indexOf(type) !== -1) capture = true;
+function bind$1(el, selector, type, fn, capture) {
+  if (forceCaptureEvents.indexOf(type) !== -1) {
+    capture = true;
+  }
 
-  return componentEvent.bind(el, type, function(e){
+  return componentEvent.bind(el, type, function (e) {
     var target = e.target || e.srcElement;
     e.delegateTarget = closest(target, selector, true, el);
-    if (e.delegateTarget) fn.call(el, e);
+    if (e.delegateTarget) {
+      fn.call(el, e);
+    }
   }, capture);
-};
+}
 
 /**
  * Unbind event `type`'s callback `fn`.
@@ -21970,16 +26567,17 @@ var bind$1 = function(el, selector, type, fn, capture){
  * @param {Boolean} capture
  * @api public
  */
+function unbind$1(el, type, fn, capture) {
+  if (forceCaptureEvents.indexOf(type) !== -1) {
+    capture = true;
+  }
 
-var unbind$1 = function(el, type, fn, capture){
-  if (forceCaptureEvents.indexOf(type) !== -1) capture = true;
+  return componentEvent.unbind(el, type, fn, capture);
+}
 
-  componentEvent.unbind(el, type, fn, capture);
-};
-
-var delegateEvents = {
-	bind: bind$1,
-	unbind: unbind$1
+var delegate = {
+  bind: bind$1,
+  unbind: unbind$1
 };
 
 /**
@@ -22092,35 +26690,6 @@ function parse(html, doc) {
   }
 
   return fragment;
-}
-
-var proto$1 = typeof Element !== 'undefined' ? Element.prototype : {};
-var vendor$1 = proto$1.matches
-  || proto$1.matchesSelector
-  || proto$1.webkitMatchesSelector
-  || proto$1.mozMatchesSelector
-  || proto$1.msMatchesSelector
-  || proto$1.oMatchesSelector;
-
-var matchesSelector$1 = match$1;
-
-/**
- * Match `el` to `selector`.
- *
- * @param {Element} el
- * @param {String} selector
- * @return {Boolean}
- * @api public
- */
-
-function match$1(el, selector) {
-  if (!el || el.nodeType !== 1) return false;
-  if (vendor$1) return vendor$1.call(el, selector);
-  var nodes = el.parentNode.querySelectorAll(selector);
-  for (var i = 0; i < nodes.length; i++) {
-    if (nodes[i] == el) return true;
-  }
-  return false;
 }
 
 function query(selector, el) {
