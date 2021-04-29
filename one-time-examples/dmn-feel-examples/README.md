@@ -9,7 +9,7 @@ Below you will find the list of DMN FEEL examples. Click the each link to naviga
 
 ## Examples
 
-1. [Determine Product Type using Substring ](substring/substring.dmn)
+1. [Determine Product Type using Substring ](resources/substring/)
 2. 
 
 
