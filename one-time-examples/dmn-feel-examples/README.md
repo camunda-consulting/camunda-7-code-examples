@@ -11,6 +11,9 @@ Below you will find the list of DMN FEEL examples. Click the each link to naviga
 
 1. [Determine Product Type using Substring ](resources/substring/)
 2. [Determine Discount with SUM ](resources/sumcount/)
+3. [Determine Price Discount with Uppercase  ](resources/uppercase/)
+4. [Decide on stock investment using average ](resources/mean/)
+
 
 
 
