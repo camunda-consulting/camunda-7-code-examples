@@ -25,6 +25,8 @@ public class RuntimeQueryRemovalTimeCalculationStrategy implements DynamicRemova
 	@Override
 	public Integer apply(HistoricProcessInstanceEventEntity t, ProcessDefinition u)
 	{
+		// runtime can be used here, as the variable instance still lives at the time
+		// the process instance is archived
 		return this.findInRuntime(t);
 	}
 
@@ -33,7 +35,7 @@ public class RuntimeQueryRemovalTimeCalculationStrategy implements DynamicRemova
 		Map<String, Object> variables = this.processEngine
 			.getRuntimeService()
 			.getVariables(historicRootProcessInstance.getProcessInstanceId());
-		if (variables.isEmpty() || (variables.size() > 1))
+		if (variables.isEmpty() || (variables.containsKey("historyTimeToLive") == false))
 		{
 			return null;
 		}

@@ -12,6 +12,7 @@ public class CamundaAppConfig
 	@Bean
 	public ProcessEnginePlugin getPlugin()
 	{
+		// return the plugin you want to use here
 		return new RuntimeQueryRemovalTimeProcessEnginePlugin();
 	}
 }

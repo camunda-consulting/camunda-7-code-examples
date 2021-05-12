@@ -9,6 +9,13 @@ import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import com.camunda.bpm.demo.engine_plugin_variable_depending_history_ttl.DynamicHistoryRemovalTimeProvider;
 import com.camunda.bpm.demo.engine_plugin_variable_depending_history_ttl.strategy.DynamicRemovalTimeCalculationStrategy;
 
+/**
+ * This abstract plugin prepares everything for the implemented strategies, the
+ * function enables the possibility to use the process engine in the strategy
+ * 
+ * @author jonathanlukas
+ *
+ */
 public abstract class DynamicHistoryRemovalTimeProcessEnginePlugin extends AbstractProcessEnginePlugin
 {
 	private final DynamicHistoryRemovalTimeProvider p = new DynamicHistoryRemovalTimeProvider();

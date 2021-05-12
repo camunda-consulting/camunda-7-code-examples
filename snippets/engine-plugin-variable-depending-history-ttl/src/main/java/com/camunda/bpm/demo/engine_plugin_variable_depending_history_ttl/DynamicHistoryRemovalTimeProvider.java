@@ -9,6 +9,13 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 
 import com.camunda.bpm.demo.engine_plugin_variable_depending_history_ttl.strategy.DynamicRemovalTimeCalculationStrategy;
 
+/**
+ * The provider holds the strategy to determine the history time to live
+ * dynamically
+ * 
+ * @author jonathanlukas
+ *
+ */
 public class DynamicHistoryRemovalTimeProvider extends DefaultHistoryRemovalTimeProvider
 {
 	private Optional<DynamicRemovalTimeCalculationStrategy> strategy = Optional.empty();
