@@ -26,5 +26,5 @@ Built and tested against Camunda Platform version 7.15.0.
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 <!-- Tweet
-New @Camunda example: Camunda Spring Boot Application - Spring Boot Application using [Camunda](http://docs.camunda.org). https://github.com/camunda-consulting/code/tree/master/snippets/engine-plugin-variable-depending-history-tt
+New @Camunda example: Camunda Spring Boot Application - Spring Boot Application using [Camunda](http://docs.camunda.org). https://github.com/camunda-consulting/code/tree/master/snippets/engine-plugin-variable-depending-history-ttl
 -->
