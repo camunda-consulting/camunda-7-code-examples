@@ -4,8 +4,8 @@ A Plugin for [Camunda BPM](http://docs.camunda.org). Example on how to implement
 This strategy is a function that takes the same parameters as the HistoryRemovalTimeProvider and returns an Integer object (may also be null).
 
 Here, two example implementations exist:
-* RuntimeQueryRemovalTimeCalculationStrategy: Queries the RuntimeService of the Engine for a certain variable, useful if you want to use a variable
-* BusinessKeyDmnRemovalTimeCalculationStrategy: Takes the BusinessKey and executes a DMN table on the DecisionService, useful if the business key contains the information required
+* RuntimeQueryRemovalTimeCalculationStrategy: Queries the RuntimeService of the Engine for a certain variable, useful if you want to use a variable and calculate the time to live during the execution of a process instance
+* BusinessKeyDmnRemovalTimeCalculationStrategy: Takes the BusinessKey and executes a DMN table on the DecisionService, useful if the business key contains the information required and the business process itself does not need to be changed
 
 Both implementation are totally valid depending on how you might want to determine the History TTL for a certain process instance.
 If you start the spring boot application, the plugin provided by the CamundaAppConfig.getPlugin() method will be used.
