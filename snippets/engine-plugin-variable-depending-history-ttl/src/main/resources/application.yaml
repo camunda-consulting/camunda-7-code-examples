@@ -1,0 +1,14 @@
+spring.datasource:
+  username: sa
+  password: sa
+spring.h2.console.enabled: true
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+#  default-serialization-format: application/json
+server.port: 8080
