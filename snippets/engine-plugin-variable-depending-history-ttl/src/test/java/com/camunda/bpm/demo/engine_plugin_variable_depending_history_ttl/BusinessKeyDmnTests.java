@@ -12,9 +12,6 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
-import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Test case starting an in-memory database-backed Process Engine.
  */
 @RunWith(SpringRunner.class)
-public class ProcessUnitTest
+public class BusinessKeyDmnTests
 {
 
 	static
@@ -32,18 +29,11 @@ public class ProcessUnitTest
 		LogFactory.useSlf4jLogging(); // MyBatis
 	}
 
-	@ClassRule
 	@Rule
-	public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
-
-	@Before
-	public void setup()
-	{
-		init(rule.getProcessEngine());
-	}
+	public ProcessEngineRule rule = new ProcessEngineRule("camundaBusinessKeyDmn.cfg.xml", true);
 
 	@Test
-	@Deployment(resources = "process.bpmn") // only required for process test coverage
+	@Deployment(resources = { "process.bpmn", "historyTtlRules.dmn" })
 	public void testHappyPath()
 	{
 		// Start the process and add the required variable
@@ -51,11 +41,11 @@ public class ProcessUnitTest
 		ProcessInstance processInstance = processEngine()
 			.getRuntimeService()
 			.createProcessInstanceByKey(ProcessConstants.PROCESS_DEFINITION_KEY)
-			.setVariable("historyTimeToLive", 10)
+			.businessKey("siefbfooawidb")
 			.execute();
 		// assert that the process instance has ended and still contains the required
 		// variable
-		assertThat(processInstance).isEnded().hasVariables("historyTimeToLive");
+		assertThat(processInstance).isEnded();
 		LocalDate removalTime = historyService()
 			.createHistoricProcessInstanceQuery()
 			.processInstanceId(processInstance.getProcessInstanceId())
