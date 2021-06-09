@@ -13,17 +13,17 @@ To add a plugin configuration dynamically or to register Spring beans, which can
 
 In Camunda RUN the [Spring component scan](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html) is set to scan the package **org.camunda.bpm.run**. If Classes with Spring annotations within our jar reside in this base package (includeing its sub packages), then they will found automatically.
 
-If the custom code in our jar uses another package, as it usually would, then additional configuration is required to tell Spring that additinal base package need to be scanned.
+If the custom code in our jar uses another package, as it usually would, then additional configuration is required to tell Spring that additinal base package needs to be scanned.
 
 - In the class name inside [/src/main/resources/spring.META-INF/spring.factories](/src/main/resources/spring.META-INF/spring.factories) points to a Spring Configuration class, which will be loaded during startup.
   
-- The configuration class, here [org.company.camunda.MySpringConfig.java](src/main/java/org/company/camunda/MySpringConfig.java) defines the additional configuration extending the Spring composnent scan to the desired custom base package names.
+- The configuration class, here [org.company.camunda.MySpringConfig.java](src/main/java/org/company/camunda/MySpringConfig.java) defines the additional configuration extending the Spring component scan to the desired custom base package names.
 
-Sicne the component scan has been extended to *org.company.camunda.plugin* and *org.company.camunda.delegate* the delegate implementataion and the process engine plugin will now be loaded by Spring during startup.
+Since the component scan has been extended to *org.company.camunda.plugin* and *org.company.camunda.delegate* the delegate implementataion and the process engine plugin will now be loaded by Spring during startup.
 
 
 ## Usage
 
 - build the jar file using **maven clean package**
-- coopy the resulting jar file (e.g. run-engine-plugin-1.0-SNAPSHOT.jar) from the target foler into the Camunda RUN **configuration\userlib** folder and start the server.
+- copy the resulting jar file (e.g. run-engine-plugin-1.0-SNAPSHOT.jar) from the target folder into the Camunda RUN **configuration\userlib** folder and start the server.
 - deploy [/model/process.bpmn](/model/process.bpmn) an start a process. The delegate should be found and the log output *!!! Executing MyJobRetryCmd for job...* from the engine plugin should be visible in the console.
