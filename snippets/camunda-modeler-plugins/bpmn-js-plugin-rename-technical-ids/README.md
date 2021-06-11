@@ -1,6 +1,6 @@
 # Camunda Modeler - Rename Technical IDs
 
-## ### This plugin has moved to a new home in the [Camunda Community Hub](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) and its name has been updated to reflect our [journey from Camunda BPM to Camunda Platform](https://camunda.com/blog/2021/04/the-journey-from-camunda-bpm-to-camunda-platform).
+## This plugin has moved to a new home in the [Camunda Community Hub](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) and its name has been updated to reflect our [journey from Camunda BPM to Camunda Platform](https://camunda.com/blog/2021/04/the-journey-from-camunda-bpm-to-camunda-platform).
 
 *Have a large BPMN process and want to automate it? Are you annoyed about editing all technical IDs manually?*
 
