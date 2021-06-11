@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "type": "default",
+  "components": [
+    {
+      "text": "# Thank you for your interest\n\nWe will evaluate your submission and a member of our team might reach out to you for further steps.",
+      "type": "text"
+    },
+    {
+      "action": "submit",
+      "key": "button4",
+      "label": "Close",
+      "type": "button"
+    }
+  ]
+}
