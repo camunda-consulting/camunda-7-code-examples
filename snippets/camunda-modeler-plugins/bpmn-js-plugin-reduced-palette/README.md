@@ -1,10 +1,12 @@
 # Camunda Modeler - Reduce Palette
 
+## This plugin has moved to a new home in the [Camunda Community Hub](https://github.com/camunda-community-hub/camunda-modeler-plugin-reduced-palette) and its name has been updated to reflect our [journey from Camunda BPM to Camunda Platform](https://camunda.com/blog/2021/04/the-journey-from-camunda-bpm-to-camunda-platform).
+
 *Do you need a custom BPMN Symbol palette?*
 
 Then this is the right plugin for you. By default we removed the pool, data objects and the complex gateway from the modeler, but you can extend the plugin and remove more symbols that you don't need.
 
-## Example
+### Example
 
 ![Screenshot 1](screenshot1.png)
 ![Screenshot 2](screenshot2.png)
