@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "type": "default",
+  "components": [
+    {
+      "key": "company_name",
+      "label": "Where are you working?",
+      "type": "textfield",
+      "description": "Company Name",
+      "validate": {
+        "required": false
+      }
+    },
+    {
+      "key": "purpose",
+      "label": "For what purpose are you using Cawemo?",
+      "type": "select",
+      "values": [
+        {
+          "label": "Education",
+          "value": "education"
+        },
+        {
+          "label": "Process Automation",
+          "value": "automation"
+        },
+        {
+          "label": "Process Documentation",
+          "value": "documentation"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "key": "role",
+      "label": "What desribes best your job title / role?",
+      "type": "select",
+      "values": [
+        {
+          "label": "Software Developer / Engineer",
+          "value": "engineer"
+        },
+        {
+          "label": "Business Analyst",
+          "value": "analyst"
+        },
+        {
+          "label": "Process Owner / Product Owner",
+          "value": "process_owner"
+        },
+        {
+          "label": "Student",
+          "value": "student"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        }
+      ],
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "action": "submit",
+      "key": "button3",
+      "label": "Submit",
+      "type": "button"
+    }
+  ]
+}
