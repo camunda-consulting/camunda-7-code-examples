@@ -5,27 +5,21 @@ import "../styles/CamundaForm.scss";
 
 // see https://github.com/bpmn-io/react-bpmn
 
-export default class CamundaForm extends Component{
+export default class CamundaForm extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { };
-
-    this.containerRef = React.createRef();
+    this.containerRef = React.createRef();   // create a container reference
   }
 
   componentDidMount() {
-
     const {
       data,
       schema
-    } = this.props;
-
-    const container = this.containerRef.current;
+    } = this.props;                          // fetch data and schema from component props
 
     this.formViewer = createForm({
-      container: container,
+      container: this.containerRef.current,  // render the form into the container
       schema,
       data
     });
@@ -35,10 +29,6 @@ export default class CamundaForm extends Component{
         this.props.submitCallback(event.data);
       }
     });
-
-  }
-
-  componentWillUnmount() {
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,7 +36,7 @@ export default class CamundaForm extends Component{
   }
 
   render() {
-    return(
+    return(                                  // create the container and use the reference
       <div ref={ this.containerRef }></div>
     )
   }

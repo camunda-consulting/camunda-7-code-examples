@@ -229,13 +229,21 @@ async function nextForm(process_instance_id) {
             data.formSchema = form;
             const variableNames = form.components.map(field => field.key);
             formVariables("task", task.id, variableNames).then((variables) => {
-              // transform Camunda Platform variables to form-js schema
-              const formVariables = Object.fromEntries( Object.keys(variables).map( varName => [varName, variables[varName].value ] ))
+              // convert from process variables to formData
+              const formVariables = Object.fromEntries( Object.keys(variables).map(
+                varName => [varName, variables[varName].value ]
+              ));
 
               data.formVariables = formVariables;
               resolve(data);
             });
           });
+        } else {
+          data.formType = "customForm";
+          data.formSchema = {
+            key: task.formKey
+          };
+          resolve(data);
         }
       });
     }).catch( (error) => {
@@ -281,10 +289,12 @@ async function completeTask(task_id, variables) {
   });
 }
 
-async function submitForm(task_id, data) {
+async function submitForm(task_id, formData) {
   return new Promise((resolve, reject) => {
-    // transform form-js submitted variables to Camunda schema
-    const variables = Object.fromEntries( Object.keys(data).map( varName => [varName, {value: data[varName] } ] ))
+    // convert from formData to process variables
+    const variables = Object.fromEntries( Object.keys(formData).map(
+      varName => [varName, {value: formData[varName] } ]
+    ));
     completeTask(task_id, variables).then(() => {
       resolve();
     }).catch(console.log);

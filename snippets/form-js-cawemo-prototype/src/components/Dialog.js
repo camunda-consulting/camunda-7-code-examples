@@ -2,6 +2,7 @@ import React, { Component} from "react";
 import "../styles/Dialog.scss";
 
 import CamundaForm from "./CamundaForm.js";
+import CustomForm from "./CustomForm.js";
 
 export default class Dialog extends Component{
 
@@ -19,7 +20,7 @@ export default class Dialog extends Component{
                             schema={this.props.content.schema}
                             submitCallback={this.props.submitCallback}/>
 
-              : ""
+              : <CustomForm schema={this.props.content.schema}/>
             }
           </div>
         </div>
