@@ -5,7 +5,7 @@
       <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="RequestReceivedStartEvent" targetRef="ServiceTask1Task" />
-    <bpmn:serviceTask id="ServiceTask1Task" name="Service task 1" camunda:delegateExpression="${logger}">
+    <bpmn:serviceTask id="ServiceTask1Task" name="Service task 1" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
       <bpmn:incoming>SequenceFlow1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow2</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -21,19 +21,24 @@
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="Flow_0wc1264" sourceRef="ErrorOccuredStartEvent" targetRef="ErrorHandlingInitiatedEvent" />
       <bpmn:intermediateThrowEvent id="ErrorHandlingInitiatedEvent" name="Error handling initiated">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:outputParameter name="failingTask">"none"</camunda:outputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
         <bpmn:incoming>Flow_0wc1264</bpmn:incoming>
         <bpmn:outgoing>Flow_0fnhdek</bpmn:outgoing>
-        <bpmn:messageEventDefinition id="MessageEventDefinition_1seh0jm" messageRef="Message_1l70a7r" camunda:delegateExpression="${startErrorHandlerProcess}" />
+        <bpmn:messageEventDefinition id="MessageEventDefinition_1seh0jm" messageRef="Message_1l70a7r" camunda:delegateExpression="${startErrorHandlingProcess}" />
       </bpmn:intermediateThrowEvent>
       <bpmn:sequenceFlow id="Flow_0fnhdek" sourceRef="ErrorHandlingInitiatedEvent" targetRef="ErrorHandlingCompletedEvent" />
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="Flow_1l2mkdo" sourceRef="ServiceTask2Task" targetRef="ServiceTask3Task" />
     <bpmn:sequenceFlow id="Flow_0q4m3ss" sourceRef="ServiceTask3Task" targetRef="RequestProcessedEndEvent" />
-    <bpmn:serviceTask id="ServiceTask2Task" name="Service task 2" camunda:delegateExpression="${logger}">
+    <bpmn:serviceTask id="ServiceTask2Task" name="Service task 2" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
       <bpmn:incoming>SequenceFlow2</bpmn:incoming>
       <bpmn:outgoing>Flow_1l2mkdo</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask3Task" name="Service task 3" camunda:delegateExpression="${logger}">
+    <bpmn:serviceTask id="ServiceTask3Task" name="Service task 3" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
       <bpmn:incoming>Flow_1l2mkdo</bpmn:incoming>
       <bpmn:outgoing>Flow_0q4m3ss</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -80,13 +85,13 @@
       <bpmndi:BPMNShape id="Activity_0qamwim_di" bpmnElement="Activity_0qamwim" isExpanded="true">
         <dc:Bounds x="200" y="320" width="280" height="180" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0wc1264_di" bpmnElement="Flow_0wc1264">
-        <di:waypoint x="258" y="400" />
-        <di:waypoint x="322" y="400" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fnhdek_di" bpmnElement="Flow_0fnhdek">
         <di:waypoint x="358" y="400" />
         <di:waypoint x="402" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wc1264_di" bpmnElement="Flow_0wc1264">
+        <di:waypoint x="258" y="400" />
+        <di:waypoint x="322" y="400" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0p0l0r8_di" bpmnElement="ErrorOccuredStartEvent">
         <dc:Bounds x="222" y="382" width="36" height="36" />

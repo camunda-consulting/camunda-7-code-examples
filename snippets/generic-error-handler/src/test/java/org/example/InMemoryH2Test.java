@@ -1,48 +1,48 @@
 package org.example;
 
-import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
-import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.mock.Mocks;
-import org.camunda.bpm.extension.process_test_coverage.junit.rules.TestCoverageProcessEngineRuleBuilder;
+import org.camunda.bpm.spring.boot.starter.test.helper.AbstractProcessEngineRuleTest;
 import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 
-import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.assertThat;
+import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.processEngine;
+import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.*;
+import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.processInstanceQuery;
 
 /**
  * Test case starting an in-memory database-backed Process Engine.
  */
-public class InMemoryH2Test {
-
-  static {
-    LogFactory.useSlf4jLogging(); // MyBatis
-  }
-
-  @ClassRule
-  @Rule
-  public static ProcessEngineRule rule = TestCoverageProcessEngineRuleBuilder.create().build();
+public class InMemoryH2Test extends AbstractProcessEngineRuleTest {
 
   @Before
-  public void setup() {
-    init(rule.getProcessEngine());
+  public void setUp() throws Exception {
+    Mocks.register("serviceTaskDelegateMayFail", new ServiceTaskDelegateMayFail());
+    Mocks.register("modifyCallingProcess", new ModifyCallingProcess());
+    Mocks.register("startErrorHandlingProcess", new StartErrorHandlingProcess());
   }
 
   @Test
-  @Deployment(resources = "process.bpmn")
+  @Deployment(resources = {"GenericErrorHandlerProcess.bpmn","ErrorHandlingProcess.bpmn"})
   public void testHappyPath() {
-    // Drive the process by API and assert correct behavior by camunda-bpm-assert
 
-    Mocks.register("logger", new LoggerDelegate());
+    // Start process and let second task produce BPMNError
+    var pi = processEngine().getRuntimeService()
+        .startProcessInstanceByKey("GenericErrorHandlerProcess",
+            "businessKey1",
+            withVariables("failingTask", "ServiceTask2Task"));
+    // Ensure event-based sub process has been triggered and started the handling process
+    assertThat(pi).hasPassed("ServiceTask1Task","ErrorHandlingInitiatedEvent");
 
-    ProcessInstance processInstance = processEngine().getRuntimeService()
-        .startProcessInstanceByKey(ProcessConstants.PROCESS_DEFINITION_KEY);
+    //find user task in handling process (other process instance) and complete it
+    var task = taskQuery().taskDefinitionKey("FixItTask").singleResult();
+    taskService().complete(task.getId());
 
-    assertThat(processInstance).isEnded();
+    // after completing the user task the error handling process should have modified the
+    // process instance started initially and it should have continued and completed
+    assertThat(pi).hasPassed("ServiceTask2Task","ServiceTask3Task")
+        .isEnded();
   }
-
 }
