@@ -117,7 +117,6 @@ class App extends Component{
   }
 
   handleFormSubmission(data) {
-    console.log(this.state.type);
     if(this.state.type == 'task') {
       this.comm.submitForm(this.state.resourceId, data).then(this.showNextStep.bind(this));
     } else {
