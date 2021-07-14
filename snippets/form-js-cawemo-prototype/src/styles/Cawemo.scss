@@ -1,0 +1,31 @@
+.cawemo {
+  .header {
+    height: 48px;
+    border-bottom: 1px solid hsl(0,0%,87%);
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      line-height: 48px;
+    }
+  }
+  .welcome {
+    height: 135px;
+    border-bottom: 1px solid hsl(0,0%,87%);
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      line-height: 135px;
+      margin-right: 50px;
+    }
+  }
+  .content {
+    background: hsl(0,0%,97%);
+    img {
+      display: block;
+      width: 1206px;
+      margin: 0px auto;
+    }
+  }
+}

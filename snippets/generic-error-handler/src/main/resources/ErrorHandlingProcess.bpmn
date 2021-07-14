@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0rttjx1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0-nightly.20210607" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
+  <bpmn:process id="ErrorHandlingProcess" name="Error Handling" isExecutable="true">
+    <bpmn:startEvent id="SomethingHappenedStartEvent" name="Something happened">
+      <bpmn:outgoing>Flow_0hqkxe4</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0hqkxe4" sourceRef="SomethingHappenedStartEvent" targetRef="FixItTask" />
+    <bpmn:userTask id="FixItTask" name="Fix it">
+      <bpmn:incoming>Flow_0hqkxe4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u3retj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="ResumeMainProcessEndEvent" name="Resume main process">
+      <bpmn:incoming>Flow_1u3z8k7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0u3retj" sourceRef="FixItTask" targetRef="ModifyCallingProcessTask" />
+    <bpmn:sequenceFlow id="Flow_1u3z8k7" sourceRef="ModifyCallingProcessTask" targetRef="ResumeMainProcessEndEvent" />
+    <bpmn:serviceTask id="ModifyCallingProcessTask" name="Modify calling process" camunda:delegateExpression="${modifyCallingProcess}">
+      <bpmn:incoming>Flow_0u3retj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1u3z8k7</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ErrorHandlingProcess">
+      <bpmndi:BPMNEdge id="Flow_1u3z8k7_di" bpmnElement="Flow_1u3z8k7">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="622" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u3retj_di" bpmnElement="Flow_0u3retj">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hqkxe4_di" bpmnElement="Flow_0hqkxe4">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="SomethingHappenedStartEvent">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="171" y="142" width="53" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pgpnhh_di" bpmnElement="FixItTask">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0z2eim7_di" bpmnElement="ResumeMainProcessEndEvent">
+        <dc:Bounds x="622" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="606" y="142" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04ho9ia_di" bpmnElement="ModifyCallingProcessTask">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

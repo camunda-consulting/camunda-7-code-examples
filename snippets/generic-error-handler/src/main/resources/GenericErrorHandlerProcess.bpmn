@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0-nightly.20210607">
+  <bpmn:process id="GenericErrorHandlerProcess" name="GenericErrorHandler" isExecutable="true">
+    <bpmn:startEvent id="RequestReceivedStartEvent" name="Request&#10;received">
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="RequestReceivedStartEvent" targetRef="ServiceTask1Task" />
+    <bpmn:serviceTask id="ServiceTask1Task" name="Service task 1" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
+      <bpmn:incoming>SequenceFlow1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow2" sourceRef="ServiceTask1Task" targetRef="ServiceTask2Task" />
+    <bpmn:subProcess id="Activity_0qamwim" triggeredByEvent="true">
+      <bpmn:startEvent id="ErrorOccuredStartEvent" name="Error occured">
+        <bpmn:outgoing>Flow_0wc1264</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_07rxi43" errorRef="Error_1ejmva3" camunda:errorMessageVariable="errorTaskId" />
+      </bpmn:startEvent>
+      <bpmn:intermediateCatchEvent id="ErrorHandlingCompletedEvent" name="Error handling completed">
+        <bpmn:incoming>Flow_0fnhdek</bpmn:incoming>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_133fuj0" messageRef="Message_0u3xid4" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="Flow_0wc1264" sourceRef="ErrorOccuredStartEvent" targetRef="ErrorHandlingInitiatedEvent" />
+      <bpmn:intermediateThrowEvent id="ErrorHandlingInitiatedEvent" name="Error handling initiated">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:outputParameter name="failingTask">"none"</camunda:outputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0wc1264</bpmn:incoming>
+        <bpmn:outgoing>Flow_0fnhdek</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_1seh0jm" messageRef="Message_1l70a7r" camunda:delegateExpression="${startErrorHandlingProcess}" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="Flow_0fnhdek" sourceRef="ErrorHandlingInitiatedEvent" targetRef="ErrorHandlingCompletedEvent" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1l2mkdo" sourceRef="ServiceTask2Task" targetRef="ServiceTask3Task" />
+    <bpmn:sequenceFlow id="Flow_0q4m3ss" sourceRef="ServiceTask3Task" targetRef="RequestProcessedEndEvent" />
+    <bpmn:serviceTask id="ServiceTask2Task" name="Service task 2" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
+      <bpmn:incoming>SequenceFlow2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l2mkdo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask3Task" name="Service task 3" camunda:delegateExpression="${serviceTaskDelegateMayFail}">
+      <bpmn:incoming>Flow_1l2mkdo</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q4m3ss</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="RequestProcessedEndEvent" name="Request&#10;processed">
+      <bpmn:incoming>Flow_0q4m3ss</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:error id="Error_1ejmva3" name="GenericError" errorCode="GenericError" />
+  <bpmn:message id="Message_0u3xid4" name="Message_ErrorFixed" />
+  <bpmn:message id="Message_1l70a7r" name="Message_HandleError" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GenericErrorHandlerProcess">
+      <bpmndi:BPMNEdge id="Flow_0q4m3ss_di" bpmnElement="Flow_0q4m3ss">
+        <di:waypoint x="720" y="120" />
+        <di:waypoint x="812" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1l2mkdo_di" bpmnElement="Flow_1l2mkdo">
+        <di:waypoint x="540" y="120" />
+        <di:waypoint x="620" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow2_di" bpmnElement="SequenceFlow2">
+        <di:waypoint x="370" y="120" />
+        <di:waypoint x="440" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="496.5" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="270" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="228" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="RequestReceivedStartEvent">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="171" y="138" width="42" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_16vok30_di" bpmnElement="ServiceTask1Task">
+        <dc:Bounds x="270" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qamwim_di" bpmnElement="Activity_0qamwim" isExpanded="true">
+        <dc:Bounds x="200" y="320" width="280" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0fnhdek_di" bpmnElement="Flow_0fnhdek">
+        <di:waypoint x="358" y="400" />
+        <di:waypoint x="402" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wc1264_di" bpmnElement="Flow_0wc1264">
+        <di:waypoint x="258" y="400" />
+        <di:waypoint x="322" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0p0l0r8_di" bpmnElement="ErrorOccuredStartEvent">
+        <dc:Bounds x="222" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="208" y="425" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14f38t9_di" bpmnElement="ErrorHandlingCompletedEvent">
+        <dc:Bounds x="402" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="386" y="425" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qagabb_di" bpmnElement="ErrorHandlingInitiatedEvent">
+        <dc:Bounds x="322" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="305" y="425" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tbji2o_di" bpmnElement="ServiceTask2Task">
+        <dc:Bounds x="440" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_047fl5p_di" bpmnElement="ServiceTask3Task">
+        <dc:Bounds x="620" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1u1pc9l_di" bpmnElement="RequestProcessedEndEvent">
+        <dc:Bounds x="812" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="805" y="138" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_6a0e9c1e-7e0a-4a0c-a5a8-da884d685c99" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.8.1-form-js-test" camunda:diagramRelationId="e33bceab-ac68-4f5c-9e80-cca393a2954d">
+  <decision id="general_config_decision" name="General Config">
+    <decisionTable id="DecisionTable_0azx1hv" hitPolicy="FIRST">
+      <output id="Output_1" label="General Switch" name="general_switch" typeRef="boolean" />
+      <output id="OutputClause_100p91x" label="Link Label" name="linkLabel" typeRef="string" />
+      <rule id="DecisionRule_0eyry39">
+        <outputEntry id="LiteralExpression_1k0i1d8">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1q9wb8y">
+          <text>"Join our user research"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nkudn8">
+        <outputEntry id="LiteralExpression_1pprek2">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ihr9i6">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="evaluate_answers_decision" name="Evaluate Answers">
+    <decisionTable id="DecisionTable_1v81uad" hitPolicy="FIRST">
+      <input id="InputClause_144nnza" label="Purpose">
+        <inputExpression id="LiteralExpression_01xlu5k" typeRef="string">
+          <text>purpose</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0fj9tc8">
+          <text>"education","automation","documentation"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0rm88uj" label="Job Title / Role">
+        <inputExpression id="LiteralExpression_1cb575g" typeRef="string">
+          <text>role</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0dailv3">
+          <text>"engineer","analyst","process_owner","student","other"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_1yuiwih" label="We want to talk to them" name="is_included" typeRef="boolean" />
+      <rule id="DecisionRule_0qgrseo">
+        <inputEntry id="UnaryTests_0hl2v6i">
+          <text>"automation"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s61pef">
+          <text>"engineer","analyst","process_owner","other"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10l2oq4">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_085ghav">
+        <inputEntry id="UnaryTests_0q8fzwt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bbtn1z">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tzhsby">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="general_config_decision">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_13yft2s" dmnElementRef="evaluate_answers_decision">
+        <dc:Bounds height="80" width="180" x="400" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "type": "default",
+  "components": [
+    {
+      "text": "# Thank you for scheduling a call\n\nWe're looking forward to talking to you.",
+      "type": "text"
+    },
+    {
+      "action": "submit",
+      "key": "button5",
+      "label": "Close",
+      "type": "button"
+    }
+  ]
+}
