@@ -1,7 +1,7 @@
 {
   "name": "UserResearchRecruiting",
   "dependencies": {
-    "@bpmn-io/form-js-viewer": ">=0.0.12",
+    "@bpmn-io/form-js-viewer": ">=0.2.1",
     "koa": ">=2.13.1",
     "koa-body": "^4.2.0",
     "koa-send": ">=5.0.0",
@@ -23,7 +23,7 @@
     "webpack-cli": "^4.7.0"
   },
   "scripts": {
-    "build": "webpack && cp src/index.html dist/index.html && cp src/form-viewer.umd.js dist/form-viewer.umd.js  && mkdir dist/images && cp -r src/images/* dist/images/",
+    "build": "webpack && cp src/index.html dist/index.html && mkdir dist/images && cp -r src/images/* dist/images/",
     "start": "npm run build && node --harmony index.js"
   }
 }
