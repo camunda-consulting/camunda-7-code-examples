@@ -18,8 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.camunda.consulting.delegate.TestSendMessageDelegate;
 
 /**
- * Testing the behaviour of the global message correlation process against a
- * test process
+ * Testing the behaviour of the Conditional Event on Async set Variable
  * 
  * @author jonathanlukas
  *
@@ -49,7 +48,7 @@ public class ConditionalEventProcessTests
 		assertThat(processInstance).isWaitingAt(findId("Ergebnisdaten erhalten"));
 		// no job can be found as variable is not yet set
 		assertNull(job());
-		// set variable
+		// set variable in job
 		execute(jobWithoutProcessInstanceId()); // batch-seed-job
 		execute(jobWithoutProcessInstanceId()); // set-variables
 		execute(jobWithoutProcessInstanceId()); // batch-monitor-job
@@ -71,7 +70,7 @@ public class ConditionalEventProcessTests
 		// we will wait here (not yet ready to receive a message)
 		runtimeService()
 			.setVariablesAsync(List.of(processInstance.getId()), withVariables("result", TEST_RESULT));
-		// set variable
+		// set variable in job
 		execute(jobWithoutProcessInstanceId()); // batch-seed-job
 		execute(jobWithoutProcessInstanceId()); // set-variables
 		execute(jobWithoutProcessInstanceId()); // batch-monitor-job
