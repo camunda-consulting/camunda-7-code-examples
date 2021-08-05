@@ -75,7 +75,7 @@ public class ConditionalEventProcessTests
 		execute(jobWithoutProcessInstanceId()); // batch-seed-job
 		execute(jobWithoutProcessInstanceId()); // set-variables
 		execute(jobWithoutProcessInstanceId()); // batch-monitor-job
-		// move token towards the Conditional Event
+		// move token over the Conditional Event
 		execute(job());
 		assertThat(processInstance).isEnded().variables().contains(entry("result", TEST_RESULT));
 	}
