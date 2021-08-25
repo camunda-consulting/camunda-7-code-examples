@@ -1,0 +1,65 @@
+<form >
+    <h2>Example form, close with a modal dialogue</h2>
+
+    <script cam-script type="text/form-script">
+        var template = `
+            <div class="modal-header row">
+                <h3 class="modal-title">Header!</h3>
+            </div>
+            <div class="modal-body">
+                Do you really want to submit?
+            </div>
+            <div class="modal-footer row">
+                <div class="col-xs-12 text-right">
+                    <button class="btn btn-link"
+                            ng-click="$dismiss()">Cancel</button>
+                    <button class="btn btn-primary"
+                            ng-click="$close()">Ok</button>
+                </div>
+            </div>
+        `
+        var fromModal = false;
+        var openModal = () => {
+            var dialog = $modal.open({
+                scope: $scope,
+                controller: ['$scope', function(scope) {
+                    //console.log(scope);
+                }],
+                template: template
+            });
+
+            dialog.result.then(res => {
+                fromModal = true;
+                camForm.submit(() => {
+					console.log("Submit");
+                    var $location = injector.get('$location');
+
+                    // Deselect Task
+                    var searchParams = $location.search();
+                    delete searchParams.task;
+                    delete searchParams.detailsTab;
+                    $location.search(searchParams);
+
+                    // Refresh List of Task
+                    //$scope.$emit('refresh'); // shows a 404 for the task in the console
+					console.log("dialogue submit handled");
+                });
+            }).catch(err => {
+                // Cancel Button, do nothing
+				console.log("Canceled");
+            });
+        }
+
+        var $modal = injector.get('$uibModal');     
+
+        camForm.on('submit', function(evt) {
+            // handle submit
+            // may prevent the submit from being executed:
+            if(!fromModal) {
+                evt.submitPrevented = true;
+                openModal();
+            }
+			console.log("submit handled");
+        });
+    </script>
+</form>
