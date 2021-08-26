@@ -122,19 +122,16 @@
     </dependency>
 
     <dependency>
-      <groupId>org.camunda.example</groupId>
-      <artifactId>swaggerui</artifactId>
-      <version>7.15</version>
-      <scope>system</scope>
-      <systemPath>{{PATH TO}}/camunda-bpm-run-modules-swaggerui.jar</systemPath>
-    </dependency>
-    <dependency>
-      <groupId>org.camunda.example</groupId>
-      <artifactId>openapi</artifactId>
-      <version>7.15</version>
-      <scope>system</scope>
-      <systemPath>{{PATH TO}}/camunda-engine-rest-openapi-7.15.0.jar</systemPath>
-    </dependency>
+		<groupId>org.camunda.bpm.run</groupId>
+		<artifactId>camunda-bpm-run-modules-swaggerui</artifactId>
+		<version>7.15.0</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.camunda.bpm</groupId>
+		<artifactId>camunda-engine-rest-openapi</artifactId>
+		<version>7.15.0</version>
+	</dependency>
 
   </dependencies>
 
