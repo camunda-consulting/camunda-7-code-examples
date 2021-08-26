@@ -10,13 +10,13 @@ This is just a generic Spring Boot application with a SwaggerUI. The pom has bee
 	<dependency>
 		<groupId>org.camunda.bpm.run</groupId>
 		<artifactId>camunda-bpm-run-modules-swaggerui</artifactId>
-		<version>7.15.0</version>
+		<version>${camunda.version}</version>
 	</dependency>
 
 	<dependency>
 		<groupId>org.camunda.bpm</groupId>
 		<artifactId>camunda-engine-rest-openapi</artifactId>
-		<version>7.15.0</version>
+		<version>${camunda.version}</version>
 	</dependency>
 ```
 The Camunda Application class has been updated to permit CORS. Start the application and you're done!
