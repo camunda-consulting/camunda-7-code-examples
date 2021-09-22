@@ -3,14 +3,8 @@ package com.camunda.consulting.correlator;
 import org.camunda.bpm.engine.runtime.MessageCorrelationBuilder;
 import org.camunda.bpm.engine.runtime.MessageCorrelationResult;
 
-/**
- * That runner that performs the actual message correlation Invoked by the
- * {@link ActualMessageCorrelator}
- * 
- * @author jonathanlukas
- *
- */
-public class TestMessageCorrelationRunner implements MessageCorrelationRunner {
+public class TestStartMessageCorrelationRunner implements MessageCorrelationRunner {
+
   private String result;
 
   @Override
@@ -20,7 +14,7 @@ public class TestMessageCorrelationRunner implements MessageCorrelationRunner {
 
   @Override
   public String messageName() {
-    return "test_receive_message";
+    return "answer_message";
   }
 
   public String getResult() {

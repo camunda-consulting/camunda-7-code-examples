@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0htjb6i" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="MultipleCandidatesConditionalProcess" name="Multiple Candidates Conditional" isExecutable="true">
+    <bpmn:startEvent id="ProzessGestartetStartEvent" name="Prozess gestartet">
+      <bpmn:outgoing>Flow_0xcbxp2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0xcbxp2" sourceRef="ProzessGestartetStartEvent" targetRef="Event_0wtxd0l" />
+    <bpmn:eventBasedGateway id="Gateway_18z3774">
+      <bpmn:incoming>Flow_1ysgugv</bpmn:incoming>
+      <bpmn:outgoing>Flow_107q0u4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0whv1pa</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:sequenceFlow id="Flow_107q0u4" sourceRef="Gateway_18z3774" targetRef="Ergebnisdaten1VorhandenEvent" />
+    <bpmn:sequenceFlow id="Flow_0whv1pa" sourceRef="Gateway_18z3774" targetRef="Ergebnisdaten2VorhandenEvent" />
+    <bpmn:endEvent id="ProzessBeendet1EndEvent" name="Prozess beendet 1">
+      <bpmn:incoming>Flow_09ny4vb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_09ny4vb" sourceRef="Ergebnisdaten1VorhandenEvent" targetRef="ProzessBeendet1EndEvent" />
+    <bpmn:endEvent id="ProzessBeendet2EndEvent" name="Prozess beendet 2">
+      <bpmn:incoming>Flow_14u3ddt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_14u3ddt" sourceRef="Ergebnisdaten2VorhandenEvent" targetRef="ProzessBeendet2EndEvent" />
+    <bpmn:intermediateThrowEvent id="Event_0wtxd0l" name="Künstlicher Wartezustand" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_0xcbxp2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ysgugv</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1ysgugv" sourceRef="Event_0wtxd0l" targetRef="Gateway_18z3774" />
+    <bpmn:intermediateCatchEvent id="Ergebnisdaten1VorhandenEvent" name="Ergebnisdaten 1 erhalten">
+      <bpmn:incoming>Flow_107q0u4</bpmn:incoming>
+      <bpmn:outgoing>Flow_09ny4vb</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0jhh6ix" messageRef="Message_0cbx84v" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Ergebnisdaten2VorhandenEvent" name="Ergebnisdaten 2 erhalten">
+      <bpmn:incoming>Flow_0whv1pa</bpmn:incoming>
+      <bpmn:outgoing>Flow_14u3ddt</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_02saa43" messageRef="Message_0yd3m3z" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:textAnnotation id="TextAnnotation_0grhhcg">
+      <bpmn:text>Hier kann das Eintreten der Race Condition geprüft werden</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dzwnze" sourceRef="TextAnnotation_0grhhcg" targetRef="Event_0wtxd0l" />
+  </bpmn:process>
+  <bpmn:message id="Message_0cbx84v" name="response1" />
+  <bpmn:message id="Message_0yd3m3z" name="response2" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MultipleCandidatesConditionalProcess">
+      <bpmndi:BPMNEdge id="Flow_1ysgugv_di" bpmnElement="Flow_1ysgugv">
+        <di:waypoint x="298" y="247" />
+        <di:waypoint x="365" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14u3ddt_di" bpmnElement="Flow_14u3ddt">
+        <di:waypoint x="508" y="360" />
+        <di:waypoint x="572" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09ny4vb_di" bpmnElement="Flow_09ny4vb">
+        <di:waypoint x="508" y="247" />
+        <di:waypoint x="572" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0whv1pa_di" bpmnElement="Flow_0whv1pa">
+        <di:waypoint x="390" y="272" />
+        <di:waypoint x="390" y="360" />
+        <di:waypoint x="472" y="360" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_107q0u4_di" bpmnElement="Flow_107q0u4">
+        <di:waypoint x="415" y="247" />
+        <di:waypoint x="472" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xcbxp2_di" bpmnElement="Flow_0xcbxp2">
+        <di:waypoint x="215" y="247" />
+        <di:waypoint x="262" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ProzessGestartetStartEvent">
+        <dc:Bounds x="179" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="272" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1b44wpi_di" bpmnElement="Gateway_18z3774">
+        <dc:Bounds x="365" y="222" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lpua8v_di" bpmnElement="ProzessBeendet1EndEvent">
+        <dc:Bounds x="572" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="549" y="272" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_098my5c_di" bpmnElement="ProzessBeendet2EndEvent">
+        <dc:Bounds x="572" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="549" y="385" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wtxd0l_di" bpmnElement="Event_0wtxd0l">
+        <dc:Bounds x="262" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="246" y="272" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0grhhcg_di" bpmnElement="TextAnnotation_0grhhcg">
+        <dc:Bounds x="300" y="80" width="100" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06f0to4_di" bpmnElement="Ergebnisdaten1VorhandenEvent">
+        <dc:Bounds x="472" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="450" y="272" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_080rdjr_di" bpmnElement="Ergebnisdaten2VorhandenEvent">
+        <dc:Bounds x="472" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="450" y="385" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dzwnze_di" bpmnElement="Association_0dzwnze">
+        <di:waypoint x="332" y="148" />
+        <di:waypoint x="288" y="231" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
