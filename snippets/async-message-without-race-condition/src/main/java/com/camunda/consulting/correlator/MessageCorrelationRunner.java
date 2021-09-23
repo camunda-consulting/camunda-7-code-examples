@@ -13,5 +13,5 @@ import org.camunda.bpm.engine.runtime.MessageCorrelationResult;
  */
 public interface MessageCorrelationRunner extends Function<MessageCorrelationBuilder, MessageCorrelationResult>
 {
-	String messageName();
+	String getMessageName();
 }

@@ -26,6 +26,6 @@ public class ActualMessageCorrelator
 
 	public void correlateMessageWith(MessageCorrelationRunner runner)
 	{
-		runner.apply(this.processEngine.getRuntimeService().createMessageCorrelation(runner.messageName()));
+		runner.apply(this.processEngine.getRuntimeService().createMessageCorrelation(runner.getMessageName()));
 	}
 }

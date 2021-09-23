@@ -14,7 +14,7 @@
       <bpmn:outgoing>Flow_0hopl87</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0l66v63" messageRef="Message_0vmgid7" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateThrowEvent id="KunstlicherWartezustandEvent" name="Künstlicher Wartezustand" camunda:asyncBefore="true">
+    <bpmn:intermediateThrowEvent id="KunstlicherWartezustandEvent" name="Künstlicher Wartezustand 1" camunda:asyncBefore="true">
       <bpmn:incoming>Flow_1qccnp4</bpmn:incoming>
       <bpmn:outgoing>Flow_02uiti0</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
@@ -27,9 +27,6 @@
   <bpmn:message id="Message_0vmgid7" name="test_receive_message" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="AsyncCommunicationMessageProcess">
-      <bpmndi:BPMNShape id="TextAnnotation_0cq9o3f_di" bpmnElement="TextAnnotation_0cq9o3f">
-        <dc:Bounds x="400" y="80" width="100" height="68" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_02uiti0_di" bpmnElement="Flow_02uiti0">
         <di:waypoint x="338" y="247" />
         <di:waypoint x="402" y="247" />
@@ -63,8 +60,11 @@
       <bpmndi:BPMNShape id="Event_1n3hx1q_di" bpmnElement="KunstlicherWartezustandEvent">
         <dc:Bounds x="302" y="229" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="286" y="272" width="68" height="27" />
+          <dc:Bounds x="282" y="272" width="77" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0cq9o3f_di" bpmnElement="TextAnnotation_0cq9o3f">
+        <dc:Bounds x="400" y="80" width="100" height="68" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1d6v9r8_di" bpmnElement="Association_1d6v9r8">
         <di:waypoint x="332" y="233" />

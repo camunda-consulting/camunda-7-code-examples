@@ -11,12 +11,9 @@ import java.util.List;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
-import org.camunda.bpm.engine.test.mock.Mocks;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import com.camunda.consulting.delegate.TestSendMessageDelegate;
 
 /**
  * Testing the behaviour of the Conditional Event on Async set Variable
@@ -42,7 +39,6 @@ public class ConditionalEventProcessTests implements PsiScenarioCoverage {
   @Deployment(resources = { "async_communication_conditional.bpmn" })
   @Override
   public void answerBeforeProcess() {
-    Mocks.register("test_send_message", new TestSendMessageDelegate());
     ProcessInstance processInstance = runtimeService()
         .startProcessInstanceByKey("AsyncCommunicationConditionalProcess");
     assertThat(processInstance).isWaitingAt(findId("Künstlicher Wartezustand"));
@@ -59,7 +55,6 @@ public class ConditionalEventProcessTests implements PsiScenarioCoverage {
   @Deployment(resources = { "async_communication_conditional.bpmn" })
   @Override
   public void processBeforeAnswer() {
-    Mocks.register("test_send_message", new TestSendMessageDelegate());
     ProcessInstance processInstance = runtimeService()
         .startProcessInstanceByKey("AsyncCommunicationConditionalProcess");
     assertThat(processInstance).isWaitingAt(findId("Künstlicher Wartezustand"));
