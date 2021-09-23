@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1dlt3bc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.10.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ConditionalBoundaryEventProcess" name="Conditional Boundary Event" isExecutable="true">
+    <bpmn:startEvent id="ProzessGestartetStartEvent" name="Prozess gestartet">
+      <bpmn:outgoing>Flow_1j1rin8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1j1rin8" sourceRef="ProzessGestartetStartEvent" targetRef="AufAntwortWartenTask" />
+    <bpmn:endEvent id="ProzessBeendetEndEvent" name="Prozess beendet">
+      <bpmn:incoming>Flow_0h9azsp</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0h9azsp" sourceRef="AufAntwortWartenTask" targetRef="ProzessBeendetEndEvent" />
+    <bpmn:receiveTask id="AufAntwortWartenTask" name="Auf Antwort warten" messageRef="Message_1lgn1hc">
+      <bpmn:incoming>Flow_1j1rin8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0h9azsp</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:boundaryEvent id="EtwasIstPassiertBoundaryEvent" name="Etwas ist passiert" cancelActivity="false" attachedToRef="AufAntwortWartenTask">
+      <bpmn:outgoing>Flow_1h3bezb</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1fozkh9" camunda:variableName="test" camunda:variableEvents="create">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${test != null}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1h3bezb" sourceRef="EtwasIstPassiertBoundaryEvent" targetRef="EreignisBehandelnTask" />
+    <bpmn:serviceTask id="EreignisBehandelnTask" name="Ereignis behandeln" camunda:type="external" camunda:topic="handle-event">
+      <bpmn:incoming>Flow_1h3bezb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uiuzk6</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="AufEreignisReagiertEndEvent" name="Auf Ereignis reagiert">
+      <bpmn:incoming>Flow_1uiuzk6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1uiuzk6" sourceRef="EreignisBehandelnTask" targetRef="AufEreignisReagiertEndEvent" />
+  </bpmn:process>
+  <bpmn:message id="Message_1lgn1hc" name="stop-the-wait" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ConditionalBoundaryEventProcess">
+      <bpmndi:BPMNEdge id="Flow_1j1rin8_di" bpmnElement="Flow_1j1rin8">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0h9azsp_di" bpmnElement="Flow_0h9azsp">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="432" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h3bezb_di" bpmnElement="Flow_1h3bezb">
+        <di:waypoint x="370" y="175" />
+        <di:waypoint x="370" y="240" />
+        <di:waypoint x="440" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1uiuzk6_di" bpmnElement="Flow_1uiuzk6">
+        <di:waypoint x="540" y="240" />
+        <di:waypoint x="592" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ProzessGestartetStartEvent">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="142" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1piod6j_di" bpmnElement="ProzessBeendetEndEvent">
+        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="409" y="142" width="83" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1sci3h2_di" bpmnElement="AufAntwortWartenTask">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ejdyb1_di" bpmnElement="EreignisBehandelnTask">
+        <dc:Bounds x="440" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1h9fiq6_di" bpmnElement="AufEreignisReagiertEndEvent">
+        <dc:Bounds x="592" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="580" y="265" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1w2i7b0_di" bpmnElement="EtwasIstPassiertBoundaryEvent">
+        <dc:Bounds x="352" y="139" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="277" y="173" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
