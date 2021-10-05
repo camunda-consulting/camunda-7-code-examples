@@ -1,37 +1,79 @@
 spring.datasource:
-  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE
-#shareable h2 database: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;MVCC=TRUE;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+  url: jdbc:h2:mem:camunda;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
   username: sa
   password: sa
-spring.h2.console.enabled: true
+spring.h2.console.enabled: false
 camunda.bpm:
-  filter:
-    create: All Tasks
-  authorization:
-    enabled: true
-server.port: 8080
-keycloak:
-  realm: camunda
-  auth-server-url: http://localhost:8085/auth
-  resource: camunda-identity-service
-  security-constraints:
-    - authRoles:
-        - camunda-user
-      securityCollections:
-        - name: everything
-          patterns:
-            - /app/*
-  ssl-required: none
-  enabled: true
-  credentials.secret : your-client-secret
-logging:
-  level:
-    ROOT: info
+  job-execution:
+      deployment-aware: true
+  history-level: FULL
+  authorization.enabled: true
+  default-serialization-format: application/json
+  filter.create: All Tasks
 
+# Metrics & Health
+management:
+  health.probes.enabled: true
+  endpoints:
+    web.exposure.include: env,health,info,metrics
+
+# Camunda Rest API
+rest.security:
+  enabled: true
+  provider: keycloak
+  required-audience: camunda-rest-api
+
+# Camunda Keycloak Identity Provider Plugin
 plugin.identity.keycloak:
-  keycloakIssuerUrl: https://localhost:8448/auth/realms/camunda
-  keycloakAdminUrl: https://localhost:8448/auth/admin/realms/camunda
+  keycloakIssuerUrl: http://localhost:8000/auth/realms/camunda
+  keycloakAdminUrl: http://localhost:8000/auth/admin/realms/camunda
   clientId: camunda-identity-service
-  clientSecret: your-client-secret
+  clientSecret: 6a0de924-1776-4b5a-b108-93e934d1d812
+  useEmailAsCamundaUserId: false
   useUsernameAsCamundaUserId: true
+  useGroupPathAsCamundaGroupId: true
+  administratorGroupName: administrator
   disableSSLCertificateValidation: true
+
+# Spring Boot Security OAuth2 SSO
+spring.security:
+  oauth2:
+    client:
+      registration:
+        keycloak:
+          provider: keycloak
+          client-id: camunda-identity-service
+          client-secret: 6a0de924-1776-4b5a-b108-93e934d1d812
+          authorization-grant-type: authorization_code
+          redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+          scope: openid, profile, email
+      provider:
+        keycloak:
+          issuer-uri: http://localhost:8000/auth/realms/camunda
+          authorization-uri: http://localhost:8000/auth/realms/camunda/protocol/openid-connect/auth
+          user-info-uri: http://localhost:8000/auth/realms/camunda/protocol/openid-connect/userinfo
+          token-uri: http://localhost:8000/auth/realms/camunda/protocol/openid-connect/token
+          jwk-set-uri: http://localhost:8000/auth/realms/camunda/protocol/openid-connect/certs
+          # set user-name-attribute one of: 
+          # - sub                -> default; using keycloak ID as camunda user ID
+          # - email              -> useEmailAsCamundaUserId=true
+          # - preferred_username -> useUsernameAsCamundaUserId=true
+          user-name-attribute: preferred_username
+
+# Logging
+logging.level:
+  root: DEBUG
+  io.micrometer: INFO
+  org.jboss: INFO
+  org.springframework: INFO
+  org.apache.ibatis: INFO
+  com.zaxxer.hikari: INFO
+  org.hibernate: INFO
+  org.apache.http: INFO
+  org.camunda:
+    bpm:
+      engine: INFO
+      spring: INFO
+      extension:
+        keycloak: INFO
+    spin: INFO

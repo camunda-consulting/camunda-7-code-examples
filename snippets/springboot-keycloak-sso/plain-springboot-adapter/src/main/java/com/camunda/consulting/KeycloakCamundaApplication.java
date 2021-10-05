@@ -1,16 +1,15 @@
-package com.camunda.demo;
+package com.camunda.consulting;
 
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableProcessApplication("sso-keycloak")
-public class CamundaApplication {
+@EnableProcessApplication
+public class KeycloakCamundaApplication {
+
   public static void main(String... args) {
-    SpringApplication.run(CamundaApplication.class, args);
+    SpringApplication.run(KeycloakCamundaApplication.class, args);
   }
 
 }
-
-
