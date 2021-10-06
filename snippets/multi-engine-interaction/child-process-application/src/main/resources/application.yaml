@@ -1,0 +1,20 @@
+spring.datasource:
+  url: jdbc:postgresql:camunda-db
+  username: camunda
+  password: camunda
+spring.h2.console.enabled: false
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  job-execution:
+      deployment-aware: true
+  history-level: FULL
+  authorization.enabled: true
+  default-serialization-format: application/json
+
+server.port: 8090
