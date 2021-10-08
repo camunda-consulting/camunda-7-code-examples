@@ -20,3 +20,6 @@ camunda.bpm:
 job:
   breaks:
     - THURSDAY,13:00,03:00
+  schedule:
+    shutdown: 0 0 3 * * *
+    start: 0 0 5 * * *

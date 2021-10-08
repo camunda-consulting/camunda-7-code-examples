@@ -17,12 +17,12 @@ public class JobExecutorScheduleConfiguration {
     this.processEngine = processEngine;
   }
 
-  @Scheduled(cron = "0 5 10 * * *")
+  @Scheduled(cron = "${job.schedule.shutdown}")
   public void stopJobExecutor() {
     getProcessEngineConfigurationImpl(this.processEngine).getJobExecutor().shutdown();
   }
 
-  @Scheduled(cron = "0 10 10 * * *")
+  @Scheduled(cron = "${job.schedule.start}")
   public void startJobExecutor() {
     getProcessEngineConfigurationImpl(this.processEngine).getJobExecutor().start();
   }
