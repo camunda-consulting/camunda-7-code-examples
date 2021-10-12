@@ -1,15 +1,13 @@
 package com.camunda.consulting;
 
-import java.util.Set;
-
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.jobexecutor.DefaultFailedJobCommandFactory;
 
 public class ScheduledFailedJobCommandFactory extends DefaultFailedJobCommandFactory {
 
-  private final Set<JobExecutorBreak> schedule;
+  private final JobExecutorSchedule schedule;
 
-  public ScheduledFailedJobCommandFactory(Set<JobExecutorBreak> schedule) {
+  public ScheduledFailedJobCommandFactory(JobExecutorSchedule schedule) {
     this.schedule = schedule;
   }
 

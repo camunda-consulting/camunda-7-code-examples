@@ -3,15 +3,16 @@ package com.camunda.consulting;
 import org.camunda.bpm.engine.impl.cfg.AbstractProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 
-public class OfflineSchedulePlugin extends AbstractProcessEnginePlugin {
+public class ScheduleAwareJobAcquisitionPlugin extends AbstractProcessEnginePlugin {
   private final JobExecutorSchedule schedule;
 
-  public OfflineSchedulePlugin(JobExecutorSchedule schedule) {
+  public ScheduleAwareJobAcquisitionPlugin(JobExecutorSchedule schedule) {
     this.schedule = schedule;
   }
 
   @Override
   public void preInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
-    processEngineConfiguration.setFailedJobCommandFactory(new ScheduledFailedJobCommandFactory(this.schedule));
-  }
+    processEngineConfiguration.getJobExecutor().setAcquireJobsCmdFactory(
+        new ScheduleAwareAquireJobsCommandFactory(processEngineConfiguration.getJobExecutor(), this.schedule));
+  };
 }

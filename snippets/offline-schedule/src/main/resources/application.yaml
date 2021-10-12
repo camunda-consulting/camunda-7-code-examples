@@ -23,3 +23,8 @@ job:
   schedule:
     shutdown: 0 0 3 * * *
     start: 0 0 5 * * *
+
+logging:
+  level:
+    ROOT: INFO
+    com.camunda.consulting: DEBUG
