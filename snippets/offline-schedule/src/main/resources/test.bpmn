@@ -6,9 +6,6 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0gzq20c" sourceRef="StartEvent_1" targetRef="Activity_0ulvkk1" />
     <bpmn:serviceTask id="Activity_0ulvkk1" name="Failing Task" camunda:asyncBefore="true" camunda:delegateExpression="${failingDelegate}">
-      <bpmn:extensionElements>
-        <camunda:failedJobRetryTimeCycle>R3/PT3S</camunda:failedJobRetryTimeCycle>
-      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0gzq20c</bpmn:incoming>
       <bpmn:outgoing>Flow_0c56jvx</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -19,13 +16,13 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="failingProcess">
-      <bpmndi:BPMNEdge id="Flow_0gzq20c_di" bpmnElement="Flow_0gzq20c">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0c56jvx_di" bpmnElement="Flow_0c56jvx">
         <di:waypoint x="370" y="117" />
         <di:waypoint x="432" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gzq20c_di" bpmnElement="Flow_0gzq20c">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />

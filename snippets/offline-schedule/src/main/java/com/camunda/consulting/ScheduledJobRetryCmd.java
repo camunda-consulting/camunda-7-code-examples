@@ -6,16 +6,35 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Set;
 
+import org.camunda.bpm.engine.impl.ProcessEngineLogger;
 import org.camunda.bpm.engine.impl.calendar.DurationHelper;
 import org.camunda.bpm.engine.impl.cmd.DefaultJobRetryCmd;
+import org.camunda.bpm.engine.impl.interceptor.CommandContext;
+import org.camunda.bpm.engine.impl.jobexecutor.JobExecutorLogger;
+import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
 
 public class ScheduledJobRetryCmd extends DefaultJobRetryCmd {
+  private final static JobExecutorLogger LOG = ProcessEngineLogger.JOB_EXECUTOR_LOGGER;
 
   private final Set<JobExecutorBreak> schedule;
 
   public ScheduledJobRetryCmd(String jobId, Throwable exception, Set<JobExecutorBreak> schedule) {
     super(jobId, exception);
     this.schedule = schedule;
+  }
+
+  @Override
+  protected void executeStandardStrategy(CommandContext commandContext) {
+    JobEntity job = this.getJob();
+    if (job != null) {
+      job.setDuedate(this.calculateStartDateFromSchedule());
+      job.unlock();
+      this.logException(job);
+      this.decrementRetries(job);
+      this.notifyAcquisition(commandContext);
+    } else {
+      LOG.debugFailedJobNotFound(this.jobId);
+    }
   }
 
   @Override
