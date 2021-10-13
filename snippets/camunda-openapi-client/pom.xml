@@ -11,7 +11,7 @@
 
    <modules>
      <module>camunda-openapi-client-generator</module>
-     <module>camunda-openapi-client</module>
+     <module>camunda-openapi-client-generated</module>
    </modules>
 
 </project>

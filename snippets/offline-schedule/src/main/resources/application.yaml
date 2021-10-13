@@ -19,7 +19,9 @@ camunda.bpm:
 
 job:
   breaks:
-    - 07:00,11:00
+    - 03:00,05:00
+    - SATURDAY,00:00,23:59
+    - SUNDAY,00:00,23:59
   schedule:
     shutdown: 0 0 3 * * *
     start: 0 0 5 * * *
