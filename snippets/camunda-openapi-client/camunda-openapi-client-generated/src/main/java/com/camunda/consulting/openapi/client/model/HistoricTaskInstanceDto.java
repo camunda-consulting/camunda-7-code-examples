@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -60,90 +57,90 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricTaskInstanceDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
 })
 @JsonTypeName("HistoricTaskInstanceDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricTaskInstanceDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_KEY = "caseDefinitionKey";
-  private JsonNullable<String> caseDefinitionKey = JsonNullable.<String>undefined();
+  private String caseDefinitionKey;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_ID = "caseDefinitionId";
-  private JsonNullable<String> caseDefinitionId = JsonNullable.<String>undefined();
+  private String caseDefinitionId;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
-  private JsonNullable<String> caseInstanceId = JsonNullable.<String>undefined();
+  private String caseInstanceId;
 
   public static final String JSON_PROPERTY_CASE_EXECUTION_ID = "caseExecutionId";
-  private JsonNullable<String> caseExecutionId = JsonNullable.<String>undefined();
+  private String caseExecutionId;
 
   public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID = "activityInstanceId";
-  private JsonNullable<String> activityInstanceId = JsonNullable.<String>undefined();
+  private String activityInstanceId;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
-  private JsonNullable<String> description = JsonNullable.<String>undefined();
+  private String description;
 
   public static final String JSON_PROPERTY_DELETE_REASON = "deleteReason";
-  private JsonNullable<String> deleteReason = JsonNullable.<String>undefined();
+  private String deleteReason;
 
   public static final String JSON_PROPERTY_OWNER = "owner";
-  private JsonNullable<String> owner = JsonNullable.<String>undefined();
+  private String owner;
 
   public static final String JSON_PROPERTY_ASSIGNEE = "assignee";
-  private JsonNullable<String> assignee = JsonNullable.<String>undefined();
+  private String assignee;
 
   public static final String JSON_PROPERTY_START_TIME = "startTime";
-  private JsonNullable<OffsetDateTime> startTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime startTime;
 
   public static final String JSON_PROPERTY_END_TIME = "endTime";
-  private JsonNullable<OffsetDateTime> endTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime endTime;
 
   public static final String JSON_PROPERTY_DURATION = "duration";
-  private JsonNullable<Long> duration = JsonNullable.<Long>undefined();
+  private Long duration;
 
   public static final String JSON_PROPERTY_TASK_DEFINITION_KEY = "taskDefinitionKey";
-  private JsonNullable<String> taskDefinitionKey = JsonNullable.<String>undefined();
+  private String taskDefinitionKey;
 
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  private JsonNullable<Integer> priority = JsonNullable.<Integer>undefined();
+  private Integer priority;
 
   public static final String JSON_PROPERTY_DUE = "due";
-  private JsonNullable<OffsetDateTime> due = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime due;
 
   public static final String JSON_PROPERTY_PARENT_TASK_ID = "parentTaskId";
-  private JsonNullable<String> parentTaskId = JsonNullable.<String>undefined();
+  private String parentTaskId;
 
   public static final String JSON_PROPERTY_FOLLOW_UP = "followUp";
-  private JsonNullable<OffsetDateTime> followUp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime followUp;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
 
   public HistoricTaskInstanceDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -153,32 +150,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task id.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricTaskInstanceDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -188,32 +175,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition the task belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public HistoricTaskInstanceDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -223,32 +200,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition the task belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public HistoricTaskInstanceDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -258,32 +225,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance the task belongs to.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public HistoricTaskInstanceDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -293,32 +250,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the execution the task belongs to.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public HistoricTaskInstanceDto caseDefinitionKey(String caseDefinitionKey) {
-    this.caseDefinitionKey = JsonNullable.<String>of(caseDefinitionKey);
     
+    this.caseDefinitionKey = caseDefinitionKey;
     return this;
   }
 
@@ -328,32 +275,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the case definition the task belongs to.")
-  @JsonIgnore
-
-  public String getCaseDefinitionKey() {
-        return caseDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionKey_JsonNullable() {
+  public String getCaseDefinitionKey() {
     return caseDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_KEY)
-  public void setCaseDefinitionKey_JsonNullable(JsonNullable<String> caseDefinitionKey) {
-    this.caseDefinitionKey = caseDefinitionKey;
-  }
+
 
   public void setCaseDefinitionKey(String caseDefinitionKey) {
-    this.caseDefinitionKey = JsonNullable.<String>of(caseDefinitionKey);
+    this.caseDefinitionKey = caseDefinitionKey;
   }
 
 
   public HistoricTaskInstanceDto caseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
     
+    this.caseDefinitionId = caseDefinitionId;
     return this;
   }
 
@@ -363,32 +300,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case definition the task belongs to.")
-  @JsonIgnore
-
-  public String getCaseDefinitionId() {
-        return caseDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionId_JsonNullable() {
+  public String getCaseDefinitionId() {
     return caseDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
-  public void setCaseDefinitionId_JsonNullable(JsonNullable<String> caseDefinitionId) {
-    this.caseDefinitionId = caseDefinitionId;
-  }
+
 
   public void setCaseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
+    this.caseDefinitionId = caseDefinitionId;
   }
 
 
   public HistoricTaskInstanceDto caseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
     
+    this.caseInstanceId = caseInstanceId;
     return this;
   }
 
@@ -398,32 +325,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case instance the task belongs to.")
-  @JsonIgnore
-
-  public String getCaseInstanceId() {
-        return caseInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceId_JsonNullable() {
+  public String getCaseInstanceId() {
     return caseInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  public void setCaseInstanceId_JsonNullable(JsonNullable<String> caseInstanceId) {
-    this.caseInstanceId = caseInstanceId;
-  }
+
 
   public void setCaseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
+    this.caseInstanceId = caseInstanceId;
   }
 
 
   public HistoricTaskInstanceDto caseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
     
+    this.caseExecutionId = caseExecutionId;
     return this;
   }
 
@@ -433,32 +350,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case execution the task belongs to.")
-  @JsonIgnore
-
-  public String getCaseExecutionId() {
-        return caseExecutionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseExecutionId_JsonNullable() {
+  public String getCaseExecutionId() {
     return caseExecutionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
-  public void setCaseExecutionId_JsonNullable(JsonNullable<String> caseExecutionId) {
-    this.caseExecutionId = caseExecutionId;
-  }
+
 
   public void setCaseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
+    this.caseExecutionId = caseExecutionId;
   }
 
 
   public HistoricTaskInstanceDto activityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
     
+    this.activityInstanceId = activityInstanceId;
     return this;
   }
 
@@ -468,32 +375,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity that this object is an instance of.")
-  @JsonIgnore
-
-  public String getActivityInstanceId() {
-        return activityInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityInstanceId_JsonNullable() {
+  public String getActivityInstanceId() {
     return activityInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
-  public void setActivityInstanceId_JsonNullable(JsonNullable<String> activityInstanceId) {
-    this.activityInstanceId = activityInstanceId;
-  }
+
 
   public void setActivityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
+    this.activityInstanceId = activityInstanceId;
   }
 
 
   public HistoricTaskInstanceDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -503,32 +400,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task name.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public HistoricTaskInstanceDto description(String description) {
-    this.description = JsonNullable.<String>of(description);
     
+    this.description = description;
     return this;
   }
 
@@ -538,32 +425,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task's description.")
-  @JsonIgnore
-
-  public String getDescription() {
-        return description.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDescription_JsonNullable() {
+  public String getDescription() {
     return description;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  public void setDescription_JsonNullable(JsonNullable<String> description) {
-    this.description = description;
-  }
+
 
   public void setDescription(String description) {
-    this.description = JsonNullable.<String>of(description);
+    this.description = description;
   }
 
 
   public HistoricTaskInstanceDto deleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
     
+    this.deleteReason = deleteReason;
     return this;
   }
 
@@ -573,32 +450,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task's delete reason.")
-  @JsonIgnore
-
-  public String getDeleteReason() {
-        return deleteReason.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETE_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeleteReason_JsonNullable() {
+  public String getDeleteReason() {
     return deleteReason;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETE_REASON)
-  public void setDeleteReason_JsonNullable(JsonNullable<String> deleteReason) {
-    this.deleteReason = deleteReason;
-  }
+
 
   public void setDeleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
+    this.deleteReason = deleteReason;
   }
 
 
   public HistoricTaskInstanceDto owner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
     
+    this.owner = owner;
     return this;
   }
 
@@ -608,32 +475,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The owner's id.")
-  @JsonIgnore
-
-  public String getOwner() {
-        return owner.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OWNER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOwner_JsonNullable() {
+  public String getOwner() {
     return owner;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OWNER)
-  public void setOwner_JsonNullable(JsonNullable<String> owner) {
-    this.owner = owner;
-  }
+
 
   public void setOwner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
+    this.owner = owner;
   }
 
 
   public HistoricTaskInstanceDto assignee(String assignee) {
-    this.assignee = JsonNullable.<String>of(assignee);
     
+    this.assignee = assignee;
     return this;
   }
 
@@ -643,32 +500,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The assignee's id.")
-  @JsonIgnore
-
-  public String getAssignee() {
-        return assignee.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssignee_JsonNullable() {
+  public String getAssignee() {
     return assignee;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE)
-  public void setAssignee_JsonNullable(JsonNullable<String> assignee) {
-    this.assignee = assignee;
-  }
+
 
   public void setAssignee(String assignee) {
-    this.assignee = JsonNullable.<String>of(assignee);
+    this.assignee = assignee;
   }
 
 
   public HistoricTaskInstanceDto startTime(OffsetDateTime startTime) {
-    this.startTime = JsonNullable.<OffsetDateTime>of(startTime);
     
+    this.startTime = startTime;
     return this;
   }
 
@@ -678,32 +525,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time the task was started. Default [format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getStartTime() {
-        return startTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_START_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getStartTime_JsonNullable() {
+  public OffsetDateTime getStartTime() {
     return startTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_START_TIME)
-  public void setStartTime_JsonNullable(JsonNullable<OffsetDateTime> startTime) {
-    this.startTime = startTime;
-  }
+
 
   public void setStartTime(OffsetDateTime startTime) {
-    this.startTime = JsonNullable.<OffsetDateTime>of(startTime);
+    this.startTime = startTime;
   }
 
 
   public HistoricTaskInstanceDto endTime(OffsetDateTime endTime) {
-    this.endTime = JsonNullable.<OffsetDateTime>of(endTime);
     
+    this.endTime = endTime;
     return this;
   }
 
@@ -713,32 +550,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time the task ended. Default [format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getEndTime() {
-        return endTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_END_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getEndTime_JsonNullable() {
+  public OffsetDateTime getEndTime() {
     return endTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_END_TIME)
-  public void setEndTime_JsonNullable(JsonNullable<OffsetDateTime> endTime) {
-    this.endTime = endTime;
-  }
+
 
   public void setEndTime(OffsetDateTime endTime) {
-    this.endTime = JsonNullable.<OffsetDateTime>of(endTime);
+    this.endTime = endTime;
   }
 
 
   public HistoricTaskInstanceDto duration(Long duration) {
-    this.duration = JsonNullable.<Long>of(duration);
     
+    this.duration = duration;
     return this;
   }
 
@@ -748,32 +575,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time the task took to finish (in milliseconds).")
-  @JsonIgnore
-
-  public Long getDuration() {
-        return duration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getDuration_JsonNullable() {
+  public Long getDuration() {
     return duration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DURATION)
-  public void setDuration_JsonNullable(JsonNullable<Long> duration) {
-    this.duration = duration;
-  }
+
 
   public void setDuration(Long duration) {
-    this.duration = JsonNullable.<Long>of(duration);
+    this.duration = duration;
   }
 
 
   public HistoricTaskInstanceDto taskDefinitionKey(String taskDefinitionKey) {
-    this.taskDefinitionKey = JsonNullable.<String>of(taskDefinitionKey);
     
+    this.taskDefinitionKey = taskDefinitionKey;
     return this;
   }
 
@@ -783,32 +600,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task's key.")
-  @JsonIgnore
-
-  public String getTaskDefinitionKey() {
-        return taskDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskDefinitionKey_JsonNullable() {
+  public String getTaskDefinitionKey() {
     return taskDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY)
-  public void setTaskDefinitionKey_JsonNullable(JsonNullable<String> taskDefinitionKey) {
-    this.taskDefinitionKey = taskDefinitionKey;
-  }
+
 
   public void setTaskDefinitionKey(String taskDefinitionKey) {
-    this.taskDefinitionKey = JsonNullable.<String>of(taskDefinitionKey);
+    this.taskDefinitionKey = taskDefinitionKey;
   }
 
 
   public HistoricTaskInstanceDto priority(Integer priority) {
-    this.priority = JsonNullable.<Integer>of(priority);
     
+    this.priority = priority;
     return this;
   }
 
@@ -818,32 +625,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task's priority.")
-  @JsonIgnore
-
-  public Integer getPriority() {
-        return priority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getPriority_JsonNullable() {
+  public Integer getPriority() {
     return priority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY)
-  public void setPriority_JsonNullable(JsonNullable<Integer> priority) {
-    this.priority = priority;
-  }
+
 
   public void setPriority(Integer priority) {
-    this.priority = JsonNullable.<Integer>of(priority);
+    this.priority = priority;
   }
 
 
   public HistoricTaskInstanceDto due(OffsetDateTime due) {
-    this.due = JsonNullable.<OffsetDateTime>of(due);
     
+    this.due = due;
     return this;
   }
 
@@ -853,32 +650,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The task's due date. Default [format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getDue() {
-        return due.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDue_JsonNullable() {
+  public OffsetDateTime getDue() {
     return due;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE)
-  public void setDue_JsonNullable(JsonNullable<OffsetDateTime> due) {
-    this.due = due;
-  }
+
 
   public void setDue(OffsetDateTime due) {
-    this.due = JsonNullable.<OffsetDateTime>of(due);
+    this.due = due;
   }
 
 
   public HistoricTaskInstanceDto parentTaskId(String parentTaskId) {
-    this.parentTaskId = JsonNullable.<String>of(parentTaskId);
     
+    this.parentTaskId = parentTaskId;
     return this;
   }
 
@@ -888,32 +675,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the parent task, if this task is a subtask.")
-  @JsonIgnore
-
-  public String getParentTaskId() {
-        return parentTaskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PARENT_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getParentTaskId_JsonNullable() {
+  public String getParentTaskId() {
     return parentTaskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PARENT_TASK_ID)
-  public void setParentTaskId_JsonNullable(JsonNullable<String> parentTaskId) {
-    this.parentTaskId = parentTaskId;
-  }
+
 
   public void setParentTaskId(String parentTaskId) {
-    this.parentTaskId = JsonNullable.<String>of(parentTaskId);
+    this.parentTaskId = parentTaskId;
   }
 
 
   public HistoricTaskInstanceDto followUp(OffsetDateTime followUp) {
-    this.followUp = JsonNullable.<OffsetDateTime>of(followUp);
     
+    this.followUp = followUp;
     return this;
   }
 
@@ -923,32 +700,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The follow-up date for the task. Default [format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getFollowUp() {
-        return followUp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFollowUp_JsonNullable() {
+  public OffsetDateTime getFollowUp() {
     return followUp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP)
-  public void setFollowUp_JsonNullable(JsonNullable<OffsetDateTime> followUp) {
-    this.followUp = followUp;
-  }
+
 
   public void setFollowUp(OffsetDateTime followUp) {
-    this.followUp = JsonNullable.<OffsetDateTime>of(followUp);
+    this.followUp = followUp;
   }
 
 
   public HistoricTaskInstanceDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -958,32 +725,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the task instance.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public HistoricTaskInstanceDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -993,32 +750,22 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the task should be removed by the History Cleanup job. Default [format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public HistoricTaskInstanceDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -1028,26 +775,16 @@ public class HistoricTaskInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing this task.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

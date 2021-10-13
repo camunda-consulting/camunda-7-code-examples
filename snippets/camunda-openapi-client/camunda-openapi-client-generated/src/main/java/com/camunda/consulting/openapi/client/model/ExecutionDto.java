@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,24 +34,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ExecutionDto.JSON_PROPERTY_TENANT_ID
 })
 @JsonTypeName("ExecutionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ExecutionDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_ENDED = "ended";
-  private JsonNullable<Boolean> ended = JsonNullable.<Boolean>undefined();
+  private Boolean ended;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
 
   public ExecutionDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -64,32 +61,22 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the Execution.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public ExecutionDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -99,32 +86,22 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the root of the execution tree representing the process instance.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public ExecutionDto ended(Boolean ended) {
-    this.ended = JsonNullable.<Boolean>of(ended);
     
+    this.ended = ended;
     return this;
   }
 
@@ -134,32 +111,22 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates if the execution is ended.")
-  @JsonIgnore
-
-  public Boolean getEnded() {
-        return ended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getEnded_JsonNullable() {
+  public Boolean getEnded() {
     return ended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENDED)
-  public void setEnded_JsonNullable(JsonNullable<Boolean> ended) {
-    this.ended = ended;
-  }
+
 
   public void setEnded(Boolean ended) {
-    this.ended = JsonNullable.<Boolean>of(ended);
+    this.ended = ended;
   }
 
 
   public ExecutionDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -169,26 +136,16 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant this execution belongs to. Can be `null` if the execution belongs to no single tenant.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 

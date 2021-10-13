@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,18 +33,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SortTaskQueryParametersDto.JSON_PROPERTY_TYPE
 })
 @JsonTypeName("SortTaskQueryParametersDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SortTaskQueryParametersDto {
   public static final String JSON_PROPERTY_VARIABLE = "variable";
-  private JsonNullable<String> variable = JsonNullable.<String>undefined();
+  private String variable;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
 
   public SortTaskQueryParametersDto variable(String variable) {
-    this.variable = JsonNullable.<String>of(variable);
     
+    this.variable = variable;
     return this;
   }
 
@@ -57,32 +54,22 @@ public class SortTaskQueryParametersDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the variable to sort by.")
-  @JsonIgnore
-
-  public String getVariable() {
-        return variable.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getVariable_JsonNullable() {
+  public String getVariable() {
     return variable;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE)
-  public void setVariable_JsonNullable(JsonNullable<String> variable) {
-    this.variable = variable;
-  }
+
 
   public void setVariable(String variable) {
-    this.variable = JsonNullable.<String>of(variable);
+    this.variable = variable;
   }
 
 
   public SortTaskQueryParametersDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -92,26 +79,16 @@ public class SortTaskQueryParametersDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the type of the variable value.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 

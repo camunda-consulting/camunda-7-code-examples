@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -50,51 +47,51 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobDefinitionQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("JobDefinitionQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobDefinitionQueryDto {
   public static final String JSON_PROPERTY_JOB_DEFINITION_ID = "jobDefinitionId";
-  private JsonNullable<String> jobDefinitionId = JsonNullable.<String>undefined();
+  private String jobDefinitionId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID_IN = "activityIdIn";
-  private JsonNullable<List<String>> activityIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> activityIdIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_JOB_TYPE = "jobType";
-  private JsonNullable<String> jobType = JsonNullable.<String>undefined();
+  private String jobType;
 
   public static final String JSON_PROPERTY_JOB_CONFIGURATION = "jobConfiguration";
-  private JsonNullable<String> jobConfiguration = JsonNullable.<String>undefined();
+  private String jobConfiguration;
 
   public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>undefined();
+  private Boolean active;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
   public static final String JSON_PROPERTY_WITH_OVERRIDING_JOB_PRIORITY = "withOverridingJobPriority";
-  private JsonNullable<Boolean> withOverridingJobPriority = JsonNullable.<Boolean>undefined();
+  private Boolean withOverridingJobPriority;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean withoutTenantId;
 
   public static final String JSON_PROPERTY_INCLUDE_JOB_DEFINITIONS_WITHOUT_TENANT_ID = "includeJobDefinitionsWithoutTenantId";
-  private JsonNullable<Boolean> includeJobDefinitionsWithoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean includeJobDefinitionsWithoutTenantId;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<JobDefinitionQueryDtoSorting>> sorting = JsonNullable.<List<JobDefinitionQueryDtoSorting>>undefined();
+  private List<JobDefinitionQueryDtoSorting> sorting = null;
 
 
   public JobDefinitionQueryDto jobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
     
+    this.jobDefinitionId = jobDefinitionId;
     return this;
   }
 
@@ -104,44 +101,30 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by job definition id.")
-  @JsonIgnore
-
-  public String getJobDefinitionId() {
-        return jobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionId_JsonNullable() {
+  public String getJobDefinitionId() {
     return jobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
-  public void setJobDefinitionId_JsonNullable(JsonNullable<String> jobDefinitionId) {
-    this.jobDefinitionId = jobDefinitionId;
-  }
+
 
   public void setJobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
+    this.jobDefinitionId = jobDefinitionId;
   }
 
 
   public JobDefinitionQueryDto activityIdIn(List<String> activityIdIn) {
-    this.activityIdIn = JsonNullable.<List<String>>of(activityIdIn);
     
+    this.activityIdIn = activityIdIn;
     return this;
   }
 
   public JobDefinitionQueryDto addActivityIdInItem(String activityIdInItem) {
-    if (this.activityIdIn == null || !this.activityIdIn.isPresent()) {
-      this.activityIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.activityIdIn == null) {
+      this.activityIdIn = new ArrayList<>();
     }
-    try {
-      this.activityIdIn.get().add(activityIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.activityIdIn.add(activityIdInItem);
     return this;
   }
 
@@ -151,32 +134,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which belong to one of the passed activity ids.")
-  @JsonIgnore
-
-  public List<String> getActivityIdIn() {
-        return activityIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getActivityIdIn_JsonNullable() {
+  public List<String> getActivityIdIn() {
     return activityIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID_IN)
-  public void setActivityIdIn_JsonNullable(JsonNullable<List<String>> activityIdIn) {
-    this.activityIdIn = activityIdIn;
-  }
+
 
   public void setActivityIdIn(List<String> activityIdIn) {
-    this.activityIdIn = JsonNullable.<List<String>>of(activityIdIn);
+    this.activityIdIn = activityIdIn;
   }
 
 
   public JobDefinitionQueryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -186,32 +159,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which exist for the given process definition id.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public JobDefinitionQueryDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -221,32 +184,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which exist for the given process definition key.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public JobDefinitionQueryDto jobType(String jobType) {
-    this.jobType = JsonNullable.<String>of(jobType);
     
+    this.jobType = jobType;
     return this;
   }
 
@@ -256,32 +209,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which exist for the given job type. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/the-job-executor/#job-creation) for more information about job types.")
-  @JsonIgnore
-
-  public String getJobType() {
-        return jobType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobType_JsonNullable() {
+  public String getJobType() {
     return jobType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_TYPE)
-  public void setJobType_JsonNullable(JsonNullable<String> jobType) {
-    this.jobType = jobType;
-  }
+
 
   public void setJobType(String jobType) {
-    this.jobType = JsonNullable.<String>of(jobType);
+    this.jobType = jobType;
   }
 
 
   public JobDefinitionQueryDto jobConfiguration(String jobConfiguration) {
-    this.jobConfiguration = JsonNullable.<String>of(jobConfiguration);
     
+    this.jobConfiguration = jobConfiguration;
     return this;
   }
 
@@ -291,32 +234,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which exist for the given job configuration. For example: for timer jobs it is the timer configuration.")
-  @JsonIgnore
-
-  public String getJobConfiguration() {
-        return jobConfiguration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobConfiguration_JsonNullable() {
+  public String getJobConfiguration() {
     return jobConfiguration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_CONFIGURATION)
-  public void setJobConfiguration_JsonNullable(JsonNullable<String> jobConfiguration) {
-    this.jobConfiguration = jobConfiguration;
-  }
+
 
   public void setJobConfiguration(String jobConfiguration) {
-    this.jobConfiguration = JsonNullable.<String>of(jobConfiguration);
+    this.jobConfiguration = jobConfiguration;
   }
 
 
   public JobDefinitionQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
     
+    this.active = active;
     return this;
   }
 
@@ -326,32 +259,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include active job definitions. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getActive() {
-        return active.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getActive_JsonNullable() {
+  public Boolean getActive() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public JobDefinitionQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -361,32 +284,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include suspended job definitions. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public JobDefinitionQueryDto withOverridingJobPriority(Boolean withOverridingJobPriority) {
-    this.withOverridingJobPriority = JsonNullable.<Boolean>of(withOverridingJobPriority);
     
+    this.withOverridingJobPriority = withOverridingJobPriority;
     return this;
   }
 
@@ -396,44 +309,30 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions that have an overriding job priority defined. The only effective value is `true`. If set to `false`, this filter is not applied.")
-  @JsonIgnore
-
-  public Boolean getWithOverridingJobPriority() {
-        return withOverridingJobPriority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITH_OVERRIDING_JOB_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithOverridingJobPriority_JsonNullable() {
+  public Boolean getWithOverridingJobPriority() {
     return withOverridingJobPriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_OVERRIDING_JOB_PRIORITY)
-  public void setWithOverridingJobPriority_JsonNullable(JsonNullable<Boolean> withOverridingJobPriority) {
-    this.withOverridingJobPriority = withOverridingJobPriority;
-  }
+
 
   public void setWithOverridingJobPriority(Boolean withOverridingJobPriority) {
-    this.withOverridingJobPriority = JsonNullable.<Boolean>of(withOverridingJobPriority);
+    this.withOverridingJobPriority = withOverridingJobPriority;
   }
 
 
   public JobDefinitionQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public JobDefinitionQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -443,32 +342,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which belong to one of the passed tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public JobDefinitionQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -478,32 +367,22 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include job definitions which belong to no tenant. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public JobDefinitionQueryDto includeJobDefinitionsWithoutTenantId(Boolean includeJobDefinitionsWithoutTenantId) {
-    this.includeJobDefinitionsWithoutTenantId = JsonNullable.<Boolean>of(includeJobDefinitionsWithoutTenantId);
     
+    this.includeJobDefinitionsWithoutTenantId = includeJobDefinitionsWithoutTenantId;
     return this;
   }
 
@@ -513,44 +392,30 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Include job definitions which belong to no tenant. Can be used in combination with `tenantIdIn`. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getIncludeJobDefinitionsWithoutTenantId() {
-        return includeJobDefinitionsWithoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_JOB_DEFINITIONS_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeJobDefinitionsWithoutTenantId_JsonNullable() {
+  public Boolean getIncludeJobDefinitionsWithoutTenantId() {
     return includeJobDefinitionsWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_JOB_DEFINITIONS_WITHOUT_TENANT_ID)
-  public void setIncludeJobDefinitionsWithoutTenantId_JsonNullable(JsonNullable<Boolean> includeJobDefinitionsWithoutTenantId) {
-    this.includeJobDefinitionsWithoutTenantId = includeJobDefinitionsWithoutTenantId;
-  }
+
 
   public void setIncludeJobDefinitionsWithoutTenantId(Boolean includeJobDefinitionsWithoutTenantId) {
-    this.includeJobDefinitionsWithoutTenantId = JsonNullable.<Boolean>of(includeJobDefinitionsWithoutTenantId);
+    this.includeJobDefinitionsWithoutTenantId = includeJobDefinitionsWithoutTenantId;
   }
 
 
   public JobDefinitionQueryDto sorting(List<JobDefinitionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<JobDefinitionQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public JobDefinitionQueryDto addSortingItem(JobDefinitionQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<JobDefinitionQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -560,26 +425,16 @@ public class JobDefinitionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of criteria to sort the result by. Each element of the array is                        an object that specifies one ordering. The position in the array                        identifies the rank of an ordering, i.e., whether it is primary, secondary,                        etc. Sorting has no effect for `count` endpoints.")
-  @JsonIgnore
-
-  public List<JobDefinitionQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<JobDefinitionQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<JobDefinitionQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<JobDefinitionQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<JobDefinitionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<JobDefinitionQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

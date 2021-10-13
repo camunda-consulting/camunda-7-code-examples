@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PriorityDto.JSON_PROPERTY_PRIORITY
 })
 @JsonTypeName("PriorityDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class PriorityDto {
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  private JsonNullable<Long> priority = JsonNullable.<Long>undefined();
+  private Long priority;
 
 
   public PriorityDto priority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
     
+    this.priority = priority;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class PriorityDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The priority of the resource.")
-  @JsonIgnore
-
-  public Long getPriority() {
-        return priority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getPriority_JsonNullable() {
+  public Long getPriority() {
     return priority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY)
-  public void setPriority_JsonNullable(JsonNullable<Long> priority) {
-    this.priority = priority;
-  }
+
 
   public void setPriority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
+    this.priority = priority;
   }
 
 

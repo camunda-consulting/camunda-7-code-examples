@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -60,90 +57,90 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   UserOperationLogEntryDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
 })
 @JsonTypeName("UserOperationLogEntryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class UserOperationLogEntryDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  private JsonNullable<OffsetDateTime> timestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime timestamp;
 
   public static final String JSON_PROPERTY_OPERATION_ID = "operationId";
-  private JsonNullable<String> operationId = JsonNullable.<String>undefined();
+  private String operationId;
 
   public static final String JSON_PROPERTY_OPERATION_TYPE = "operationType";
-  private JsonNullable<String> operationType = JsonNullable.<String>undefined();
+  private String operationType;
 
   public static final String JSON_PROPERTY_ENTITY_TYPE = "entityType";
-  private JsonNullable<String> entityType = JsonNullable.<String>undefined();
+  private String entityType;
 
   public static final String JSON_PROPERTY_CATEGORY = "category";
-  private JsonNullable<String> category = JsonNullable.<String>undefined();
+  private String category;
 
   public static final String JSON_PROPERTY_ANNOTATION = "annotation";
-  private JsonNullable<String> annotation = JsonNullable.<String>undefined();
+  private String annotation;
 
   public static final String JSON_PROPERTY_PROPERTY = "property";
-  private JsonNullable<String> property = JsonNullable.<String>undefined();
+  private String property;
 
   public static final String JSON_PROPERTY_ORG_VALUE = "orgValue";
-  private JsonNullable<String> orgValue = JsonNullable.<String>undefined();
+  private String orgValue;
 
   public static final String JSON_PROPERTY_NEW_VALUE = "newValue";
-  private JsonNullable<String> newValue = JsonNullable.<String>undefined();
+  private String newValue;
 
   public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
-  private JsonNullable<String> deploymentId = JsonNullable.<String>undefined();
+  private String deploymentId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_ID = "caseDefinitionId";
-  private JsonNullable<String> caseDefinitionId = JsonNullable.<String>undefined();
+  private String caseDefinitionId;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
-  private JsonNullable<String> caseInstanceId = JsonNullable.<String>undefined();
+  private String caseInstanceId;
 
   public static final String JSON_PROPERTY_CASE_EXECUTION_ID = "caseExecutionId";
-  private JsonNullable<String> caseExecutionId = JsonNullable.<String>undefined();
+  private String caseExecutionId;
 
   public static final String JSON_PROPERTY_TASK_ID = "taskId";
-  private JsonNullable<String> taskId = JsonNullable.<String>undefined();
+  private String taskId;
 
   public static final String JSON_PROPERTY_EXTERNAL_TASK_ID = "externalTaskId";
-  private JsonNullable<String> externalTaskId = JsonNullable.<String>undefined();
+  private String externalTaskId;
 
   public static final String JSON_PROPERTY_BATCH_ID = "batchId";
-  private JsonNullable<String> batchId = JsonNullable.<String>undefined();
+  private String batchId;
 
   public static final String JSON_PROPERTY_JOB_ID = "jobId";
-  private JsonNullable<String> jobId = JsonNullable.<String>undefined();
+  private String jobId;
 
   public static final String JSON_PROPERTY_JOB_DEFINITION_ID = "jobDefinitionId";
-  private JsonNullable<String> jobDefinitionId = JsonNullable.<String>undefined();
+  private String jobDefinitionId;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
 
   public UserOperationLogEntryDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -153,32 +150,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The unique identifier of this log entry.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public UserOperationLogEntryDto userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -188,32 +175,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The user who performed this operation.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public UserOperationLogEntryDto timestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
     
+    this.timestamp = timestamp;
     return this;
   }
 
@@ -223,32 +200,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Timestamp of this operation.")
-  @JsonIgnore
-
-  public OffsetDateTime getTimestamp() {
-        return timestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTimestamp_JsonNullable() {
+  public OffsetDateTime getTimestamp() {
     return timestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  public void setTimestamp_JsonNullable(JsonNullable<OffsetDateTime> timestamp) {
-    this.timestamp = timestamp;
-  }
+
 
   public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
+    this.timestamp = timestamp;
   }
 
 
   public UserOperationLogEntryDto operationId(String operationId) {
-    this.operationId = JsonNullable.<String>of(operationId);
     
+    this.operationId = operationId;
     return this;
   }
 
@@ -258,32 +225,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The unique identifier of this operation. A composite operation that changes multiple properties has a common `operationId`.")
-  @JsonIgnore
-
-  public String getOperationId() {
-        return operationId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPERATION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOperationId_JsonNullable() {
+  public String getOperationId() {
     return operationId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPERATION_ID)
-  public void setOperationId_JsonNullable(JsonNullable<String> operationId) {
-    this.operationId = operationId;
-  }
+
 
   public void setOperationId(String operationId) {
-    this.operationId = JsonNullable.<String>of(operationId);
+    this.operationId = operationId;
   }
 
 
   public UserOperationLogEntryDto operationType(String operationType) {
-    this.operationType = JsonNullable.<String>of(operationType);
     
+    this.operationType = operationType;
     return this;
   }
 
@@ -293,32 +250,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of this operation, e.g., `Assign`, `Claim` and so on.")
-  @JsonIgnore
-
-  public String getOperationType() {
-        return operationType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPERATION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOperationType_JsonNullable() {
+  public String getOperationType() {
     return operationType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPERATION_TYPE)
-  public void setOperationType_JsonNullable(JsonNullable<String> operationType) {
-    this.operationType = operationType;
-  }
+
 
   public void setOperationType(String operationType) {
-    this.operationType = JsonNullable.<String>of(operationType);
+    this.operationType = operationType;
   }
 
 
   public UserOperationLogEntryDto entityType(String entityType) {
-    this.entityType = JsonNullable.<String>of(entityType);
     
+    this.entityType = entityType;
     return this;
   }
 
@@ -328,32 +275,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the entity on which this operation was executed, e.g., `Task` or `Attachment`.")
-  @JsonIgnore
-
-  public String getEntityType() {
-        return entityType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ENTITY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getEntityType_JsonNullable() {
+  public String getEntityType() {
     return entityType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENTITY_TYPE)
-  public void setEntityType_JsonNullable(JsonNullable<String> entityType) {
-    this.entityType = entityType;
-  }
+
 
   public void setEntityType(String entityType) {
-    this.entityType = JsonNullable.<String>of(entityType);
+    this.entityType = entityType;
   }
 
 
   public UserOperationLogEntryDto category(String category) {
-    this.category = JsonNullable.<String>of(category);
     
+    this.category = category;
     return this;
   }
 
@@ -363,32 +300,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the category this operation was associated with, e.g., `TaskWorker` or `Admin`.")
-  @JsonIgnore
-
-  public String getCategory() {
-        return category.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CATEGORY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCategory_JsonNullable() {
+  public String getCategory() {
     return category;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CATEGORY)
-  public void setCategory_JsonNullable(JsonNullable<String> category) {
-    this.category = category;
-  }
+
 
   public void setCategory(String category) {
-    this.category = JsonNullable.<String>of(category);
+    this.category = category;
   }
 
 
   public UserOperationLogEntryDto annotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
     
+    this.annotation = annotation;
     return this;
   }
 
@@ -398,32 +325,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An arbitrary annotation set by a user for auditing reasons.")
-  @JsonIgnore
-
-  public String getAnnotation() {
-        return annotation.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ANNOTATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAnnotation_JsonNullable() {
+  public String getAnnotation() {
     return annotation;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ANNOTATION)
-  public void setAnnotation_JsonNullable(JsonNullable<String> annotation) {
-    this.annotation = annotation;
-  }
+
 
   public void setAnnotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
+    this.annotation = annotation;
   }
 
 
   public UserOperationLogEntryDto property(String property) {
-    this.property = JsonNullable.<String>of(property);
     
+    this.property = property;
     return this;
   }
 
@@ -433,32 +350,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The property changed by this operation.")
-  @JsonIgnore
-
-  public String getProperty() {
-        return property.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROPERTY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProperty_JsonNullable() {
+  public String getProperty() {
     return property;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROPERTY)
-  public void setProperty_JsonNullable(JsonNullable<String> property) {
-    this.property = property;
-  }
+
 
   public void setProperty(String property) {
-    this.property = JsonNullable.<String>of(property);
+    this.property = property;
   }
 
 
   public UserOperationLogEntryDto orgValue(String orgValue) {
-    this.orgValue = JsonNullable.<String>of(orgValue);
     
+    this.orgValue = orgValue;
     return this;
   }
 
@@ -468,32 +375,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The original value of the changed property.")
-  @JsonIgnore
-
-  public String getOrgValue() {
-        return orgValue.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ORG_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOrgValue_JsonNullable() {
+  public String getOrgValue() {
     return orgValue;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ORG_VALUE)
-  public void setOrgValue_JsonNullable(JsonNullable<String> orgValue) {
-    this.orgValue = orgValue;
-  }
+
 
   public void setOrgValue(String orgValue) {
-    this.orgValue = JsonNullable.<String>of(orgValue);
+    this.orgValue = orgValue;
   }
 
 
   public UserOperationLogEntryDto newValue(String newValue) {
-    this.newValue = JsonNullable.<String>of(newValue);
     
+    this.newValue = newValue;
     return this;
   }
 
@@ -503,32 +400,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The new value of the changed property.")
-  @JsonIgnore
-
-  public String getNewValue() {
-        return newValue.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NEW_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getNewValue_JsonNullable() {
+  public String getNewValue() {
     return newValue;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NEW_VALUE)
-  public void setNewValue_JsonNullable(JsonNullable<String> newValue) {
-    this.newValue = newValue;
-  }
+
 
   public void setNewValue(String newValue) {
-    this.newValue = JsonNullable.<String>of(newValue);
+    this.newValue = newValue;
   }
 
 
   public UserOperationLogEntryDto deploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
     
+    this.deploymentId = deploymentId;
     return this;
   }
 
@@ -538,32 +425,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this deployment.")
-  @JsonIgnore
-
-  public String getDeploymentId() {
-        return deploymentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeploymentId_JsonNullable() {
+  public String getDeploymentId() {
     return deploymentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  public void setDeploymentId_JsonNullable(JsonNullable<String> deploymentId) {
-    this.deploymentId = deploymentId;
-  }
+
 
   public void setDeploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
+    this.deploymentId = deploymentId;
   }
 
 
   public UserOperationLogEntryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -573,32 +450,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public UserOperationLogEntryDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -608,32 +475,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to process definitions with this key.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public UserOperationLogEntryDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -643,32 +500,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this process instance.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public UserOperationLogEntryDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -678,32 +525,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this execution.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public UserOperationLogEntryDto caseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
     
+    this.caseDefinitionId = caseDefinitionId;
     return this;
   }
 
@@ -713,32 +550,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this case definition.")
-  @JsonIgnore
-
-  public String getCaseDefinitionId() {
-        return caseDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionId_JsonNullable() {
+  public String getCaseDefinitionId() {
     return caseDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
-  public void setCaseDefinitionId_JsonNullable(JsonNullable<String> caseDefinitionId) {
-    this.caseDefinitionId = caseDefinitionId;
-  }
+
 
   public void setCaseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
+    this.caseDefinitionId = caseDefinitionId;
   }
 
 
   public UserOperationLogEntryDto caseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
     
+    this.caseInstanceId = caseInstanceId;
     return this;
   }
 
@@ -748,32 +575,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this case instance.")
-  @JsonIgnore
-
-  public String getCaseInstanceId() {
-        return caseInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceId_JsonNullable() {
+  public String getCaseInstanceId() {
     return caseInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  public void setCaseInstanceId_JsonNullable(JsonNullable<String> caseInstanceId) {
-    this.caseInstanceId = caseInstanceId;
-  }
+
 
   public void setCaseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
+    this.caseInstanceId = caseInstanceId;
   }
 
 
   public UserOperationLogEntryDto caseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
     
+    this.caseExecutionId = caseExecutionId;
     return this;
   }
 
@@ -783,32 +600,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this case execution.")
-  @JsonIgnore
-
-  public String getCaseExecutionId() {
-        return caseExecutionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseExecutionId_JsonNullable() {
+  public String getCaseExecutionId() {
     return caseExecutionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
-  public void setCaseExecutionId_JsonNullable(JsonNullable<String> caseExecutionId) {
-    this.caseExecutionId = caseExecutionId;
-  }
+
 
   public void setCaseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
+    this.caseExecutionId = caseExecutionId;
   }
 
 
   public UserOperationLogEntryDto taskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
     
+    this.taskId = taskId;
     return this;
   }
 
@@ -818,32 +625,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this task.")
-  @JsonIgnore
-
-  public String getTaskId() {
-        return taskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskId_JsonNullable() {
+  public String getTaskId() {
     return taskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_ID)
-  public void setTaskId_JsonNullable(JsonNullable<String> taskId) {
-    this.taskId = taskId;
-  }
+
 
   public void setTaskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
+    this.taskId = taskId;
   }
 
 
   public UserOperationLogEntryDto externalTaskId(String externalTaskId) {
-    this.externalTaskId = JsonNullable.<String>of(externalTaskId);
     
+    this.externalTaskId = externalTaskId;
     return this;
   }
 
@@ -853,32 +650,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this external task.")
-  @JsonIgnore
-
-  public String getExternalTaskId() {
-        return externalTaskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExternalTaskId_JsonNullable() {
+  public String getExternalTaskId() {
     return externalTaskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID)
-  public void setExternalTaskId_JsonNullable(JsonNullable<String> externalTaskId) {
-    this.externalTaskId = externalTaskId;
-  }
+
 
   public void setExternalTaskId(String externalTaskId) {
-    this.externalTaskId = JsonNullable.<String>of(externalTaskId);
+    this.externalTaskId = externalTaskId;
   }
 
 
   public UserOperationLogEntryDto batchId(String batchId) {
-    this.batchId = JsonNullable.<String>of(batchId);
     
+    this.batchId = batchId;
     return this;
   }
 
@@ -888,32 +675,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this batch.")
-  @JsonIgnore
-
-  public String getBatchId() {
-        return batchId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBatchId_JsonNullable() {
+  public String getBatchId() {
     return batchId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_ID)
-  public void setBatchId_JsonNullable(JsonNullable<String> batchId) {
-    this.batchId = batchId;
-  }
+
 
   public void setBatchId(String batchId) {
-    this.batchId = JsonNullable.<String>of(batchId);
+    this.batchId = batchId;
   }
 
 
   public UserOperationLogEntryDto jobId(String jobId) {
-    this.jobId = JsonNullable.<String>of(jobId);
     
+    this.jobId = jobId;
     return this;
   }
 
@@ -923,32 +700,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this job.")
-  @JsonIgnore
-
-  public String getJobId() {
-        return jobId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobId_JsonNullable() {
+  public String getJobId() {
     return jobId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_ID)
-  public void setJobId_JsonNullable(JsonNullable<String> jobId) {
-    this.jobId = jobId;
-  }
+
 
   public void setJobId(String jobId) {
-    this.jobId = JsonNullable.<String>of(jobId);
+    this.jobId = jobId;
   }
 
 
   public UserOperationLogEntryDto jobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
     
+    this.jobDefinitionId = jobDefinitionId;
     return this;
   }
 
@@ -958,32 +725,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If not `null`, the operation is restricted to entities in relation to this job definition.")
-  @JsonIgnore
-
-  public String getJobDefinitionId() {
-        return jobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionId_JsonNullable() {
+  public String getJobDefinitionId() {
     return jobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
-  public void setJobDefinitionId_JsonNullable(JsonNullable<String> jobDefinitionId) {
-    this.jobDefinitionId = jobDefinitionId;
-  }
+
 
   public void setJobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
+    this.jobDefinitionId = jobDefinitionId;
   }
 
 
   public UserOperationLogEntryDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -993,32 +750,22 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the entry should be removed by the History Cleanup job. [Default format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public UserOperationLogEntryDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -1028,26 +775,16 @@ public class UserOperationLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing this entry.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

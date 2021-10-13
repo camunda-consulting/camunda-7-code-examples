@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,18 +37,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CheckPasswordPolicyResultDto.JSON_PROPERTY_RULES
 })
 @JsonTypeName("CheckPasswordPolicyResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CheckPasswordPolicyResultDto {
   public static final String JSON_PROPERTY_VALID = "valid";
-  private JsonNullable<Boolean> valid = JsonNullable.<Boolean>undefined();
+  private Boolean valid;
 
   public static final String JSON_PROPERTY_RULES = "rules";
-  private JsonNullable<List<PasswordPolicyRuleDto>> rules = JsonNullable.<List<PasswordPolicyRuleDto>>undefined();
+  private List<PasswordPolicyRuleDto> rules = null;
 
 
   public CheckPasswordPolicyResultDto valid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
     
+    this.valid = valid;
     return this;
   }
 
@@ -61,44 +58,30 @@ public class CheckPasswordPolicyResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "`true` if the password is compliant with the policy, otherwise `false`.")
-  @JsonIgnore
-
-  public Boolean getValid() {
-        return valid.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getValid_JsonNullable() {
+  public Boolean getValid() {
     return valid;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALID)
-  public void setValid_JsonNullable(JsonNullable<Boolean> valid) {
-    this.valid = valid;
-  }
+
 
   public void setValid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
+    this.valid = valid;
   }
 
 
   public CheckPasswordPolicyResultDto rules(List<PasswordPolicyRuleDto> rules) {
-    this.rules = JsonNullable.<List<PasswordPolicyRuleDto>>of(rules);
     
+    this.rules = rules;
     return this;
   }
 
   public CheckPasswordPolicyResultDto addRulesItem(PasswordPolicyRuleDto rulesItem) {
-    if (this.rules == null || !this.rules.isPresent()) {
-      this.rules = JsonNullable.<List<PasswordPolicyRuleDto>>of(new ArrayList<>());
+    if (this.rules == null) {
+      this.rules = new ArrayList<>();
     }
-    try {
-      this.rules.get().add(rulesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.rules.add(rulesItem);
     return this;
   }
 
@@ -108,26 +91,16 @@ public class CheckPasswordPolicyResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of password policy rules. Each element of the array is representing one rule of the policy.")
-  @JsonIgnore
-
-  public List<PasswordPolicyRuleDto> getRules() {
-        return rules.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RULES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<PasswordPolicyRuleDto>> getRules_JsonNullable() {
+  public List<PasswordPolicyRuleDto> getRules() {
     return rules;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RULES)
-  public void setRules_JsonNullable(JsonNullable<List<PasswordPolicyRuleDto>> rules) {
-    this.rules = rules;
-  }
+
 
   public void setRules(List<PasswordPolicyRuleDto> rules) {
-    this.rules = JsonNullable.<List<PasswordPolicyRuleDto>>of(rules);
+    this.rules = rules;
   }
 
 

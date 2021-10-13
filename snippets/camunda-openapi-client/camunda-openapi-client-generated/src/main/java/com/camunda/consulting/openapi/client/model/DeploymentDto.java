@@ -28,9 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -45,30 +42,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DeploymentDto.JSON_PROPERTY_LINKS
 })
 @JsonTypeName("DeploymentDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DeploymentDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_DEPLOYMENT_TIME = "deploymentTime";
-  private JsonNullable<OffsetDateTime> deploymentTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime deploymentTime;
 
   public static final String JSON_PROPERTY_SOURCE = "source";
-  private JsonNullable<String> source = JsonNullable.<String>undefined();
+  private String source;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_LINKS = "links";
-  private JsonNullable<List<AtomLink>> links = JsonNullable.<List<AtomLink>>undefined();
+  private List<AtomLink> links = null;
 
 
   public DeploymentDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -78,32 +75,22 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public DeploymentDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -113,32 +100,22 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the deployment.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public DeploymentDto deploymentTime(OffsetDateTime deploymentTime) {
-    this.deploymentTime = JsonNullable.<OffsetDateTime>of(deploymentTime);
     
+    this.deploymentTime = deploymentTime;
     return this;
   }
 
@@ -148,32 +125,22 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the deployment was created.")
-  @JsonIgnore
-
-  public OffsetDateTime getDeploymentTime() {
-        return deploymentTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYMENT_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDeploymentTime_JsonNullable() {
+  public OffsetDateTime getDeploymentTime() {
     return deploymentTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_TIME)
-  public void setDeploymentTime_JsonNullable(JsonNullable<OffsetDateTime> deploymentTime) {
-    this.deploymentTime = deploymentTime;
-  }
+
 
   public void setDeploymentTime(OffsetDateTime deploymentTime) {
-    this.deploymentTime = JsonNullable.<OffsetDateTime>of(deploymentTime);
+    this.deploymentTime = deploymentTime;
   }
 
 
   public DeploymentDto source(String source) {
-    this.source = JsonNullable.<String>of(source);
     
+    this.source = source;
     return this;
   }
 
@@ -183,32 +150,22 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The source of the deployment.")
-  @JsonIgnore
-
-  public String getSource() {
-        return source.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SOURCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSource_JsonNullable() {
+  public String getSource() {
     return source;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  public void setSource_JsonNullable(JsonNullable<String> source) {
-    this.source = source;
-  }
+
 
   public void setSource(String source) {
-    this.source = JsonNullable.<String>of(source);
+    this.source = source;
   }
 
 
   public DeploymentDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -218,44 +175,30 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the deployment.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public DeploymentDto links(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
     
+    this.links = links;
     return this;
   }
 
   public DeploymentDto addLinksItem(AtomLink linksItem) {
-    if (this.links == null || !this.links.isPresent()) {
-      this.links = JsonNullable.<List<AtomLink>>of(new ArrayList<>());
+    if (this.links == null) {
+      this.links = new ArrayList<>();
     }
-    try {
-      this.links.get().add(linksItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.links.add(linksItem);
     return this;
   }
 
@@ -265,26 +208,16 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonIgnore
-
-  public List<AtomLink> getLinks() {
-        return links.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LINKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<AtomLink>> getLinks_JsonNullable() {
+  public List<AtomLink> getLinks() {
     return links;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  public void setLinks_JsonNullable(JsonNullable<List<AtomLink>> links) {
-    this.links = links;
-  }
+
 
   public void setLinks(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
+    this.links = links;
   }
 
 

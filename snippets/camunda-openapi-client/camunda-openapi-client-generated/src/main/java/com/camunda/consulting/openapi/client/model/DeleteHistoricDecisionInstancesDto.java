@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,33 +36,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DeleteHistoricDecisionInstancesDto.JSON_PROPERTY_DELETE_REASON
 })
 @JsonTypeName("DeleteHistoricDecisionInstancesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DeleteHistoricDecisionInstancesDto {
   public static final String JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS = "historicDecisionInstanceIds";
-  private JsonNullable<List<String>> historicDecisionInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicDecisionInstanceIds = null;
 
   public static final String JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_QUERY = "historicDecisionInstanceQuery";
   private HistoricDecisionInstanceQueryDto historicDecisionInstanceQuery;
 
   public static final String JSON_PROPERTY_DELETE_REASON = "deleteReason";
-  private JsonNullable<String> deleteReason = JsonNullable.<String>undefined();
+  private String deleteReason;
 
 
   public DeleteHistoricDecisionInstancesDto historicDecisionInstanceIds(List<String> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(historicDecisionInstanceIds);
     
+    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
     return this;
   }
 
   public DeleteHistoricDecisionInstancesDto addHistoricDecisionInstanceIdsItem(String historicDecisionInstanceIdsItem) {
-    if (this.historicDecisionInstanceIds == null || !this.historicDecisionInstanceIds.isPresent()) {
-      this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicDecisionInstanceIds == null) {
+      this.historicDecisionInstanceIds = new ArrayList<>();
     }
-    try {
-      this.historicDecisionInstanceIds.get().add(historicDecisionInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicDecisionInstanceIds.add(historicDecisionInstanceIdsItem);
     return this;
   }
 
@@ -75,26 +68,16 @@ public class DeleteHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of historic decision instance ids to delete.")
-  @JsonIgnore
-
-  public List<String> getHistoricDecisionInstanceIds() {
-        return historicDecisionInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricDecisionInstanceIds_JsonNullable() {
+  public List<String> getHistoricDecisionInstanceIds() {
     return historicDecisionInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS)
-  public void setHistoricDecisionInstanceIds_JsonNullable(JsonNullable<List<String>> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
-  }
+
 
   public void setHistoricDecisionInstanceIds(List<String> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(historicDecisionInstanceIds);
+    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
   }
 
 
@@ -124,8 +107,8 @@ public class DeleteHistoricDecisionInstancesDto {
 
 
   public DeleteHistoricDecisionInstancesDto deleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
     
+    this.deleteReason = deleteReason;
     return this;
   }
 
@@ -135,26 +118,16 @@ public class DeleteHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A string with delete reason.")
-  @JsonIgnore
-
-  public String getDeleteReason() {
-        return deleteReason.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETE_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeleteReason_JsonNullable() {
+  public String getDeleteReason() {
     return deleteReason;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETE_REASON)
-  public void setDeleteReason_JsonNullable(JsonNullable<String> deleteReason) {
-    this.deleteReason = deleteReason;
-  }
+
 
   public void setDeleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
+    this.deleteReason = deleteReason;
   }
 
 

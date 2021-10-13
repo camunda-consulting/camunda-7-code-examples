@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   UserIdDto.JSON_PROPERTY_USER_ID
 })
 @JsonTypeName("UserIdDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class UserIdDto {
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
 
   public UserIdDto userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class UserIdDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user that the current action refers to.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 

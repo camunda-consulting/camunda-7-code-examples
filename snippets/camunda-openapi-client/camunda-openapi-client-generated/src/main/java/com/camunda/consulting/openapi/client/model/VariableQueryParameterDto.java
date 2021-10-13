@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,10 +35,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   VariableQueryParameterDto.JSON_PROPERTY_VALUE
 })
 @JsonTypeName("VariableQueryParameterDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class VariableQueryParameterDto {
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   /**
    * Comparison operator to be used. &#x60;notLike&#x60; is not supported by all endpoints.
@@ -91,15 +88,15 @@ public class VariableQueryParameterDto {
   }
 
   public static final String JSON_PROPERTY_OPERATOR = "operator";
-  private JsonNullable<OperatorEnum> operator = JsonNullable.<OperatorEnum>undefined();
+  private OperatorEnum operator;
 
   public static final String JSON_PROPERTY_VALUE = "value";
-  private JsonNullable<Object> value = JsonNullable.<Object>of(null);
+  private Object value = null;
 
 
   public VariableQueryParameterDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -109,32 +106,22 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Variable name")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public VariableQueryParameterDto operator(OperatorEnum operator) {
-    this.operator = JsonNullable.<OperatorEnum>of(operator);
     
+    this.operator = operator;
     return this;
   }
 
@@ -144,32 +131,22 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Comparison operator to be used. `notLike` is not supported by all endpoints.")
-  @JsonIgnore
-
-  public OperatorEnum getOperator() {
-        return operator.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPERATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OperatorEnum> getOperator_JsonNullable() {
+  public OperatorEnum getOperator() {
     return operator;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPERATOR)
-  public void setOperator_JsonNullable(JsonNullable<OperatorEnum> operator) {
-    this.operator = operator;
-  }
+
 
   public void setOperator(OperatorEnum operator) {
-    this.operator = JsonNullable.<OperatorEnum>of(operator);
+    this.operator = operator;
   }
 
 
   public VariableQueryParameterDto value(Object value) {
-    this.value = JsonNullable.<Object>of(value);
     
+    this.value = value;
     return this;
   }
 
@@ -179,26 +156,16 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be any value - string, number, boolean, array or object.  **Note**: Not every endpoint supports every type.")
-  @JsonIgnore
-
-  public Object getValue() {
-        return value.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Object> getValue_JsonNullable() {
+  public Object getValue() {
     return value;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  public void setValue_JsonNullable(JsonNullable<Object> value) {
-    this.value = value;
-  }
+
 
   public void setValue(Object value) {
-    this.value = JsonNullable.<Object>of(value);
+    this.value = value;
   }
 
 

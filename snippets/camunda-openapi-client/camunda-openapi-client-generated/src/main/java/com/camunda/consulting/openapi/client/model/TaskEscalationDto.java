@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,18 +36,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TaskEscalationDto.JSON_PROPERTY_VARIABLES
 })
 @JsonTypeName("TaskEscalationDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TaskEscalationDto {
   public static final String JSON_PROPERTY_ESCALATION_CODE = "escalationCode";
-  private JsonNullable<String> escalationCode = JsonNullable.<String>undefined();
+  private String escalationCode;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
 
   public TaskEscalationDto escalationCode(String escalationCode) {
-    this.escalationCode = JsonNullable.<String>of(escalationCode);
     
+    this.escalationCode = escalationCode;
     return this;
   }
 
@@ -60,44 +57,30 @@ public class TaskEscalationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An escalation code that indicates the predefined escalation. It is used to identify the BPMN escalation handler.")
-  @JsonIgnore
-
-  public String getEscalationCode() {
-        return escalationCode.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ESCALATION_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getEscalationCode_JsonNullable() {
+  public String getEscalationCode() {
     return escalationCode;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ESCALATION_CODE)
-  public void setEscalationCode_JsonNullable(JsonNullable<String> escalationCode) {
-    this.escalationCode = escalationCode;
-  }
+
 
   public void setEscalationCode(String escalationCode) {
-    this.escalationCode = JsonNullable.<String>of(escalationCode);
+    this.escalationCode = escalationCode;
   }
 
 
   public TaskEscalationDto variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public TaskEscalationDto putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -107,26 +90,16 @@ public class TaskEscalationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 

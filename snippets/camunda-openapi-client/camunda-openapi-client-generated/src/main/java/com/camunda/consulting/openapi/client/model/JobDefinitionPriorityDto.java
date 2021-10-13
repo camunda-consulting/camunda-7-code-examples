@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobDefinitionPriorityDto.JSON_PROPERTY_INCLUDE_JOBS
 })
 @JsonTypeName("JobDefinitionPriorityDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobDefinitionPriorityDto {
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  private JsonNullable<Long> priority = JsonNullable.<Long>undefined();
+  private Long priority;
 
   public static final String JSON_PROPERTY_INCLUDE_JOBS = "includeJobs";
-  private JsonNullable<Boolean> includeJobs = JsonNullable.<Boolean>undefined();
+  private Boolean includeJobs;
 
 
   public JobDefinitionPriorityDto priority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
     
+    this.priority = priority;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class JobDefinitionPriorityDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The new execution priority number for jobs of the given definition. The definition's priority can be reset by using the value `null`. In that case, the job definition's priority no longer applies but a new job's priority is determined as specified in the process model.")
-  @JsonIgnore
-
-  public Long getPriority() {
-        return priority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getPriority_JsonNullable() {
+  public Long getPriority() {
     return priority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY)
-  public void setPriority_JsonNullable(JsonNullable<Long> priority) {
-    this.priority = priority;
-  }
+
 
   public void setPriority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
+    this.priority = priority;
   }
 
 
   public JobDefinitionPriorityDto includeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
     
+    this.includeJobs = includeJobs;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class JobDefinitionPriorityDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A boolean value indicating whether existing jobs of the given definition should receive the priority as well. Default value is `false`. Can only be `true` when the __priority__ parameter is not `null`.")
-  @JsonIgnore
-
-  public Boolean getIncludeJobs() {
-        return includeJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeJobs_JsonNullable() {
+  public Boolean getIncludeJobs() {
     return includeJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
-  public void setIncludeJobs_JsonNullable(JsonNullable<Boolean> includeJobs) {
-    this.includeJobs = includeJobs;
-  }
+
 
   public void setIncludeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
+    this.includeJobs = includeJobs;
   }
 
 

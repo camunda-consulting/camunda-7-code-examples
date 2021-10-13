@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CreateIncidentDto.JSON_PROPERTY_MESSAGE
 })
 @JsonTypeName("CreateIncidentDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CreateIncidentDto {
   public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
-  private JsonNullable<String> incidentType = JsonNullable.<String>undefined();
+  private String incidentType;
 
   public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
-  private JsonNullable<String> _configuration = JsonNullable.<String>undefined();
+  private String _configuration;
 
   public static final String JSON_PROPERTY_MESSAGE = "message";
-  private JsonNullable<String> message = JsonNullable.<String>undefined();
+  private String message;
 
 
   public CreateIncidentDto incidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
     
+    this.incidentType = incidentType;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class CreateIncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A type of the new incident.")
-  @JsonIgnore
-
-  public String getIncidentType() {
-        return incidentType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentType_JsonNullable() {
+  public String getIncidentType() {
     return incidentType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  public void setIncidentType_JsonNullable(JsonNullable<String> incidentType) {
-    this.incidentType = incidentType;
-  }
+
 
   public void setIncidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
+    this.incidentType = incidentType;
   }
 
 
   public CreateIncidentDto _configuration(String _configuration) {
-    this._configuration = JsonNullable.<String>of(_configuration);
     
+    this._configuration = _configuration;
     return this;
   }
 
@@ -95,32 +82,22 @@ public class CreateIncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A configuration for the new incident.")
-  @JsonIgnore
-
-  public String getConfiguration() {
-        return _configuration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getConfiguration_JsonNullable() {
+  public String getConfiguration() {
     return _configuration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CONFIGURATION)
-  public void setConfiguration_JsonNullable(JsonNullable<String> _configuration) {
-    this._configuration = _configuration;
-  }
+
 
   public void setConfiguration(String _configuration) {
-    this._configuration = JsonNullable.<String>of(_configuration);
+    this._configuration = _configuration;
   }
 
 
   public CreateIncidentDto message(String message) {
-    this.message = JsonNullable.<String>of(message);
     
+    this.message = message;
     return this;
   }
 
@@ -130,26 +107,16 @@ public class CreateIncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A message for the new incident.")
-  @JsonIgnore
-
-  public String getMessage() {
-        return message.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessage_JsonNullable() {
+  public String getMessage() {
     return message;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  public void setMessage_JsonNullable(JsonNullable<String> message) {
-    this.message = message;
-  }
+
 
   public void setMessage(String message) {
-    this.message = JsonNullable.<String>of(message);
+    this.message = message;
   }
 
 

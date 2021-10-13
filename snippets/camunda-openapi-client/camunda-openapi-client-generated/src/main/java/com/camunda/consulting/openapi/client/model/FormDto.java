@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FormDto.JSON_PROPERTY_CONTEXT_PATH
 })
 @JsonTypeName("FormDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class FormDto {
   public static final String JSON_PROPERTY_KEY = "key";
-  private JsonNullable<String> key = JsonNullable.<String>undefined();
+  private String key;
 
   public static final String JSON_PROPERTY_CONTEXT_PATH = "contextPath";
-  private JsonNullable<String> contextPath = JsonNullable.<String>undefined();
+  private String contextPath;
 
 
   public FormDto key(String key) {
-    this.key = JsonNullable.<String>of(key);
     
+    this.key = key;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class FormDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The form key.")
-  @JsonIgnore
-
-  public String getKey() {
-        return key.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getKey_JsonNullable() {
+  public String getKey() {
     return key;
   }
-  
-  @JsonProperty(JSON_PROPERTY_KEY)
-  public void setKey_JsonNullable(JsonNullable<String> key) {
-    this.key = key;
-  }
+
 
   public void setKey(String key) {
-    this.key = JsonNullable.<String>of(key);
+    this.key = key;
   }
 
 
   public FormDto contextPath(String contextPath) {
-    this.contextPath = JsonNullable.<String>of(contextPath);
     
+    this.contextPath = contextPath;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class FormDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The context path of the process application. If the task (or the process definition) does not belong to a process application deployment or a process definition at all, this property is not set.")
-  @JsonIgnore
-
-  public String getContextPath() {
-        return contextPath.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CONTEXT_PATH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getContextPath_JsonNullable() {
+  public String getContextPath() {
     return contextPath;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CONTEXT_PATH)
-  public void setContextPath_JsonNullable(JsonNullable<String> contextPath) {
-    this.contextPath = contextPath;
-  }
+
 
   public void setContextPath(String contextPath) {
-    this.contextPath = JsonNullable.<String>of(contextPath);
+    this.contextPath = contextPath;
   }
 
 

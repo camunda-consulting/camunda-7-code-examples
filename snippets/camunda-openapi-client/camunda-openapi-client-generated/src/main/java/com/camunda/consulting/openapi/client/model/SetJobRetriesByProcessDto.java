@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,13 +38,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetJobRetriesByProcessDto.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY
 })
 @JsonTypeName("SetJobRetriesByProcessDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetJobRetriesByProcessDto {
   public static final String JSON_PROPERTY_PROCESS_INSTANCES = "processInstances";
-  private JsonNullable<List<String>> processInstances = JsonNullable.<List<String>>undefined();
+  private List<String> processInstances = null;
 
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
   private ProcessInstanceQueryDto processInstanceQuery;
@@ -57,20 +54,16 @@ public class SetJobRetriesByProcessDto {
 
 
   public SetJobRetriesByProcessDto processInstances(List<String> processInstances) {
-    this.processInstances = JsonNullable.<List<String>>of(processInstances);
     
+    this.processInstances = processInstances;
     return this;
   }
 
   public SetJobRetriesByProcessDto addProcessInstancesItem(String processInstancesItem) {
-    if (this.processInstances == null || !this.processInstances.isPresent()) {
-      this.processInstances = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstances == null) {
+      this.processInstances = new ArrayList<>();
     }
-    try {
-      this.processInstances.get().add(processInstancesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstances.add(processInstancesItem);
     return this;
   }
 
@@ -80,32 +73,22 @@ public class SetJobRetriesByProcessDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of process instance ids to fetch jobs, for which retries will be set.")
-  @JsonIgnore
-
-  public List<String> getProcessInstances() {
-        return processInstances.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstances_JsonNullable() {
+  public List<String> getProcessInstances() {
     return processInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCES)
-  public void setProcessInstances_JsonNullable(JsonNullable<List<String>> processInstances) {
-    this.processInstances = processInstances;
-  }
+
 
   public void setProcessInstances(List<String> processInstances) {
-    this.processInstances = JsonNullable.<List<String>>of(processInstances);
+    this.processInstances = processInstances;
   }
 
 
   public SetJobRetriesByProcessDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -116,26 +99,16 @@ public class SetJobRetriesByProcessDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An integer representing the number of retries. Please note that the value cannot be negative or null.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 

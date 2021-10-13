@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -69,105 +66,105 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProcessInstanceQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("ProcessInstanceQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProcessInstanceQueryDto {
   public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
-  private JsonNullable<String> deploymentId = JsonNullable.<String>undefined();
+  private String deploymentId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN = "processDefinitionKeyIn";
-  private JsonNullable<List<String>> processDefinitionKeyIn = JsonNullable.<List<String>>undefined();
+  private List<String> processDefinitionKeyIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN = "processDefinitionKeyNotIn";
-  private JsonNullable<List<String>> processDefinitionKeyNotIn = JsonNullable.<List<String>>undefined();
+  private List<String> processDefinitionKeyNotIn = null;
 
   public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
-  private JsonNullable<String> businessKey = JsonNullable.<String>undefined();
+  private String businessKey;
 
   public static final String JSON_PROPERTY_BUSINESS_KEY_LIKE = "businessKeyLike";
-  private JsonNullable<String> businessKeyLike = JsonNullable.<String>undefined();
+  private String businessKeyLike;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
-  private JsonNullable<String> caseInstanceId = JsonNullable.<String>undefined();
+  private String caseInstanceId;
 
   public static final String JSON_PROPERTY_SUPER_PROCESS_INSTANCE = "superProcessInstance";
-  private JsonNullable<String> superProcessInstance = JsonNullable.<String>undefined();
+  private String superProcessInstance;
 
   public static final String JSON_PROPERTY_SUB_PROCESS_INSTANCE = "subProcessInstance";
-  private JsonNullable<String> subProcessInstance = JsonNullable.<String>undefined();
+  private String subProcessInstance;
 
   public static final String JSON_PROPERTY_SUPER_CASE_INSTANCE = "superCaseInstance";
-  private JsonNullable<String> superCaseInstance = JsonNullable.<String>undefined();
+  private String superCaseInstance;
 
   public static final String JSON_PROPERTY_SUB_CASE_INSTANCE = "subCaseInstance";
-  private JsonNullable<String> subCaseInstance = JsonNullable.<String>undefined();
+  private String subCaseInstance;
 
   public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>undefined();
+  private Boolean active;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
-  private JsonNullable<List<String>> processInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIds = null;
 
   public static final String JSON_PROPERTY_WITH_INCIDENT = "withIncident";
-  private JsonNullable<Boolean> withIncident = JsonNullable.<Boolean>undefined();
+  private Boolean withIncident;
 
   public static final String JSON_PROPERTY_INCIDENT_ID = "incidentId";
-  private JsonNullable<String> incidentId = JsonNullable.<String>undefined();
+  private String incidentId;
 
   public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
-  private JsonNullable<String> incidentType = JsonNullable.<String>undefined();
+  private String incidentType;
 
   public static final String JSON_PROPERTY_INCIDENT_MESSAGE = "incidentMessage";
-  private JsonNullable<String> incidentMessage = JsonNullable.<String>undefined();
+  private String incidentMessage;
 
   public static final String JSON_PROPERTY_INCIDENT_MESSAGE_LIKE = "incidentMessageLike";
-  private JsonNullable<String> incidentMessageLike = JsonNullable.<String>undefined();
+  private String incidentMessageLike;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean withoutTenantId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID = "processDefinitionWithoutTenantId";
-  private JsonNullable<Boolean> processDefinitionWithoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean processDefinitionWithoutTenantId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID_IN = "activityIdIn";
-  private JsonNullable<List<String>> activityIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> activityIdIn = null;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCES = "rootProcessInstances";
-  private JsonNullable<Boolean> rootProcessInstances = JsonNullable.<Boolean>undefined();
+  private Boolean rootProcessInstances;
 
   public static final String JSON_PROPERTY_LEAF_PROCESS_INSTANCES = "leafProcessInstances";
-  private JsonNullable<Boolean> leafProcessInstances = JsonNullable.<Boolean>undefined();
+  private Boolean leafProcessInstances;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<List<VariableQueryParameterDto>> variables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> variables = null;
 
   public static final String JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
-  private JsonNullable<Boolean> variableNamesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableNamesIgnoreCase;
 
   public static final String JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
-  private JsonNullable<Boolean> variableValuesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableValuesIgnoreCase;
 
   public static final String JSON_PROPERTY_OR_QUERIES = "orQueries";
-  private JsonNullable<List<ProcessInstanceQueryDto>> orQueries = JsonNullable.<List<ProcessInstanceQueryDto>>undefined();
+  private List<ProcessInstanceQueryDto> orQueries = null;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<ProcessInstanceQueryDtoSorting>> sorting = JsonNullable.<List<ProcessInstanceQueryDtoSorting>>undefined();
+  private List<ProcessInstanceQueryDtoSorting> sorting = null;
 
 
   public ProcessInstanceQueryDto deploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
     
+    this.deploymentId = deploymentId;
     return this;
   }
 
@@ -177,32 +174,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the deployment the id belongs to.")
-  @JsonIgnore
-
-  public String getDeploymentId() {
-        return deploymentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeploymentId_JsonNullable() {
+  public String getDeploymentId() {
     return deploymentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  public void setDeploymentId_JsonNullable(JsonNullable<String> deploymentId) {
-    this.deploymentId = deploymentId;
-  }
+
 
   public void setDeploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
+    this.deploymentId = deploymentId;
   }
 
 
   public ProcessInstanceQueryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -212,32 +199,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the process definition the instances run on.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public ProcessInstanceQueryDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -247,44 +224,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the key of the process definition the instances run on.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public ProcessInstanceQueryDto processDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
     
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
     return this;
   }
 
   public ProcessInstanceQueryDto addProcessDefinitionKeyInItem(String processDefinitionKeyInItem) {
-    if (this.processDefinitionKeyIn == null || !this.processDefinitionKeyIn.isPresent()) {
-      this.processDefinitionKeyIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processDefinitionKeyIn == null) {
+      this.processDefinitionKeyIn = new ArrayList<>();
     }
-    try {
-      this.processDefinitionKeyIn.get().add(processDefinitionKeyInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processDefinitionKeyIn.add(processDefinitionKeyInItem);
     return this;
   }
 
@@ -294,44 +257,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Must be a JSON array of Strings.")
-  @JsonIgnore
-
-  public List<String> getProcessDefinitionKeyIn() {
-        return processDefinitionKeyIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessDefinitionKeyIn_JsonNullable() {
+  public List<String> getProcessDefinitionKeyIn() {
     return processDefinitionKeyIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
-  public void setProcessDefinitionKeyIn_JsonNullable(JsonNullable<List<String>> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = processDefinitionKeyIn;
-  }
+
 
   public void setProcessDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
   }
 
 
   public ProcessInstanceQueryDto processDefinitionKeyNotIn(List<String> processDefinitionKeyNotIn) {
-    this.processDefinitionKeyNotIn = JsonNullable.<List<String>>of(processDefinitionKeyNotIn);
     
+    this.processDefinitionKeyNotIn = processDefinitionKeyNotIn;
     return this;
   }
 
   public ProcessInstanceQueryDto addProcessDefinitionKeyNotInItem(String processDefinitionKeyNotInItem) {
-    if (this.processDefinitionKeyNotIn == null || !this.processDefinitionKeyNotIn.isPresent()) {
-      this.processDefinitionKeyNotIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processDefinitionKeyNotIn == null) {
+      this.processDefinitionKeyNotIn = new ArrayList<>();
     }
-    try {
-      this.processDefinitionKeyNotIn.get().add(processDefinitionKeyNotInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processDefinitionKeyNotIn.add(processDefinitionKeyNotInItem);
     return this;
   }
 
@@ -341,32 +290,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Exclude instances by a list of process definition keys. A process instance must not have one of the given process definition keys. Must be a JSON array of Strings.")
-  @JsonIgnore
-
-  public List<String> getProcessDefinitionKeyNotIn() {
-        return processDefinitionKeyNotIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessDefinitionKeyNotIn_JsonNullable() {
+  public List<String> getProcessDefinitionKeyNotIn() {
     return processDefinitionKeyNotIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN)
-  public void setProcessDefinitionKeyNotIn_JsonNullable(JsonNullable<List<String>> processDefinitionKeyNotIn) {
-    this.processDefinitionKeyNotIn = processDefinitionKeyNotIn;
-  }
+
 
   public void setProcessDefinitionKeyNotIn(List<String> processDefinitionKeyNotIn) {
-    this.processDefinitionKeyNotIn = JsonNullable.<List<String>>of(processDefinitionKeyNotIn);
+    this.processDefinitionKeyNotIn = processDefinitionKeyNotIn;
   }
 
 
   public ProcessInstanceQueryDto businessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
     
+    this.businessKey = businessKey;
     return this;
   }
 
@@ -376,32 +315,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance business key.")
-  @JsonIgnore
-
-  public String getBusinessKey() {
-        return businessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKey_JsonNullable() {
+  public String getBusinessKey() {
     return businessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  public void setBusinessKey_JsonNullable(JsonNullable<String> businessKey) {
-    this.businessKey = businessKey;
-  }
+
 
   public void setBusinessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
+    this.businessKey = businessKey;
   }
 
 
   public ProcessInstanceQueryDto businessKeyLike(String businessKeyLike) {
-    this.businessKeyLike = JsonNullable.<String>of(businessKeyLike);
     
+    this.businessKeyLike = businessKeyLike;
     return this;
   }
 
@@ -411,32 +340,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance business key that the parameter is a substring of.")
-  @JsonIgnore
-
-  public String getBusinessKeyLike() {
-        return businessKeyLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKeyLike_JsonNullable() {
+  public String getBusinessKeyLike() {
     return businessKeyLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY_LIKE)
-  public void setBusinessKeyLike_JsonNullable(JsonNullable<String> businessKeyLike) {
-    this.businessKeyLike = businessKeyLike;
-  }
+
 
   public void setBusinessKeyLike(String businessKeyLike) {
-    this.businessKeyLike = JsonNullable.<String>of(businessKeyLike);
+    this.businessKeyLike = businessKeyLike;
   }
 
 
   public ProcessInstanceQueryDto caseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
     
+    this.caseInstanceId = caseInstanceId;
     return this;
   }
 
@@ -446,32 +365,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by case instance id.")
-  @JsonIgnore
-
-  public String getCaseInstanceId() {
-        return caseInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceId_JsonNullable() {
+  public String getCaseInstanceId() {
     return caseInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  public void setCaseInstanceId_JsonNullable(JsonNullable<String> caseInstanceId) {
-    this.caseInstanceId = caseInstanceId;
-  }
+
 
   public void setCaseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
+    this.caseInstanceId = caseInstanceId;
   }
 
 
   public ProcessInstanceQueryDto superProcessInstance(String superProcessInstance) {
-    this.superProcessInstance = JsonNullable.<String>of(superProcessInstance);
     
+    this.superProcessInstance = superProcessInstance;
     return this;
   }
 
@@ -481,32 +390,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.")
-  @JsonIgnore
-
-  public String getSuperProcessInstance() {
-        return superProcessInstance.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUPER_PROCESS_INSTANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSuperProcessInstance_JsonNullable() {
+  public String getSuperProcessInstance() {
     return superProcessInstance;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUPER_PROCESS_INSTANCE)
-  public void setSuperProcessInstance_JsonNullable(JsonNullable<String> superProcessInstance) {
-    this.superProcessInstance = superProcessInstance;
-  }
+
 
   public void setSuperProcessInstance(String superProcessInstance) {
-    this.superProcessInstance = JsonNullable.<String>of(superProcessInstance);
+    this.superProcessInstance = superProcessInstance;
   }
 
 
   public ProcessInstanceQueryDto subProcessInstance(String subProcessInstance) {
-    this.subProcessInstance = JsonNullable.<String>of(subProcessInstance);
     
+    this.subProcessInstance = subProcessInstance;
     return this;
   }
 
@@ -516,32 +415,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that have the given process instance as a sub process instance. Takes a process instance id.")
-  @JsonIgnore
-
-  public String getSubProcessInstance() {
-        return subProcessInstance.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUB_PROCESS_INSTANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSubProcessInstance_JsonNullable() {
+  public String getSubProcessInstance() {
     return subProcessInstance;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUB_PROCESS_INSTANCE)
-  public void setSubProcessInstance_JsonNullable(JsonNullable<String> subProcessInstance) {
-    this.subProcessInstance = subProcessInstance;
-  }
+
 
   public void setSubProcessInstance(String subProcessInstance) {
-    this.subProcessInstance = JsonNullable.<String>of(subProcessInstance);
+    this.subProcessInstance = subProcessInstance;
   }
 
 
   public ProcessInstanceQueryDto superCaseInstance(String superCaseInstance) {
-    this.superCaseInstance = JsonNullable.<String>of(superCaseInstance);
     
+    this.superCaseInstance = superCaseInstance;
     return this;
   }
 
@@ -551,32 +440,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.")
-  @JsonIgnore
-
-  public String getSuperCaseInstance() {
-        return superCaseInstance.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUPER_CASE_INSTANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSuperCaseInstance_JsonNullable() {
+  public String getSuperCaseInstance() {
     return superCaseInstance;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUPER_CASE_INSTANCE)
-  public void setSuperCaseInstance_JsonNullable(JsonNullable<String> superCaseInstance) {
-    this.superCaseInstance = superCaseInstance;
-  }
+
 
   public void setSuperCaseInstance(String superCaseInstance) {
-    this.superCaseInstance = JsonNullable.<String>of(superCaseInstance);
+    this.superCaseInstance = superCaseInstance;
   }
 
 
   public ProcessInstanceQueryDto subCaseInstance(String subCaseInstance) {
-    this.subCaseInstance = JsonNullable.<String>of(subCaseInstance);
     
+    this.subCaseInstance = subCaseInstance;
     return this;
   }
 
@@ -586,32 +465,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that have the given case instance as a sub case instance. Takes a case instance id.")
-  @JsonIgnore
-
-  public String getSubCaseInstance() {
-        return subCaseInstance.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUB_CASE_INSTANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSubCaseInstance_JsonNullable() {
+  public String getSubCaseInstance() {
     return subCaseInstance;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUB_CASE_INSTANCE)
-  public void setSubCaseInstance_JsonNullable(JsonNullable<String> subCaseInstance) {
-    this.subCaseInstance = subCaseInstance;
-  }
+
 
   public void setSubCaseInstance(String subCaseInstance) {
-    this.subCaseInstance = JsonNullable.<String>of(subCaseInstance);
+    this.subCaseInstance = subCaseInstance;
   }
 
 
   public ProcessInstanceQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
     
+    this.active = active;
     return this;
   }
 
@@ -621,32 +490,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include active process instances. Value may only be true, as false is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getActive() {
-        return active.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getActive_JsonNullable() {
+  public Boolean getActive() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public ProcessInstanceQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -656,44 +515,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include suspended process instances. Value may only be true, as false is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public ProcessInstanceQueryDto processInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
     
+    this.processInstanceIds = processInstanceIds;
     return this;
   }
 
   public ProcessInstanceQueryDto addProcessInstanceIdsItem(String processInstanceIdsItem) {
-    if (this.processInstanceIds == null || !this.processInstanceIds.isPresent()) {
-      this.processInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIds == null) {
+      this.processInstanceIds = new ArrayList<>();
     }
-    try {
-      this.processInstanceIds.get().add(processInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIds.add(processInstanceIdsItem);
     return this;
   }
 
@@ -703,32 +548,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of process instance ids. Must be a JSON array of Strings.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIds() {
-        return processInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIds_JsonNullable() {
+  public List<String> getProcessInstanceIds() {
     return processInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  public void setProcessInstanceIds_JsonNullable(JsonNullable<List<String>> processInstanceIds) {
-    this.processInstanceIds = processInstanceIds;
-  }
+
 
   public void setProcessInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
+    this.processInstanceIds = processInstanceIds;
   }
 
 
   public ProcessInstanceQueryDto withIncident(Boolean withIncident) {
-    this.withIncident = JsonNullable.<Boolean>of(withIncident);
     
+    this.withIncident = withIncident;
     return this;
   }
 
@@ -738,32 +573,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by presence of incidents. Selects only process instances that have an incident.")
-  @JsonIgnore
-
-  public Boolean getWithIncident() {
-        return withIncident.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITH_INCIDENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithIncident_JsonNullable() {
+  public Boolean getWithIncident() {
     return withIncident;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_INCIDENT)
-  public void setWithIncident_JsonNullable(JsonNullable<Boolean> withIncident) {
-    this.withIncident = withIncident;
-  }
+
 
   public void setWithIncident(Boolean withIncident) {
-    this.withIncident = JsonNullable.<Boolean>of(withIncident);
+    this.withIncident = withIncident;
   }
 
 
   public ProcessInstanceQueryDto incidentId(String incidentId) {
-    this.incidentId = JsonNullable.<String>of(incidentId);
     
+    this.incidentId = incidentId;
     return this;
   }
 
@@ -773,32 +598,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident id.")
-  @JsonIgnore
-
-  public String getIncidentId() {
-        return incidentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentId_JsonNullable() {
+  public String getIncidentId() {
     return incidentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_ID)
-  public void setIncidentId_JsonNullable(JsonNullable<String> incidentId) {
-    this.incidentId = incidentId;
-  }
+
 
   public void setIncidentId(String incidentId) {
-    this.incidentId = JsonNullable.<String>of(incidentId);
+    this.incidentId = incidentId;
   }
 
 
   public ProcessInstanceQueryDto incidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
     
+    this.incidentType = incidentType;
     return this;
   }
 
@@ -808,32 +623,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident type. See the User Guide for a list of incident types.")
-  @JsonIgnore
-
-  public String getIncidentType() {
-        return incidentType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentType_JsonNullable() {
+  public String getIncidentType() {
     return incidentType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  public void setIncidentType_JsonNullable(JsonNullable<String> incidentType) {
-    this.incidentType = incidentType;
-  }
+
 
   public void setIncidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
+    this.incidentType = incidentType;
   }
 
 
   public ProcessInstanceQueryDto incidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
     
+    this.incidentMessage = incidentMessage;
     return this;
   }
 
@@ -843,32 +648,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message. Exact match.")
-  @JsonIgnore
-
-  public String getIncidentMessage() {
-        return incidentMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentMessage_JsonNullable() {
+  public String getIncidentMessage() {
     return incidentMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
-  public void setIncidentMessage_JsonNullable(JsonNullable<String> incidentMessage) {
-    this.incidentMessage = incidentMessage;
-  }
+
 
   public void setIncidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
+    this.incidentMessage = incidentMessage;
   }
 
 
   public ProcessInstanceQueryDto incidentMessageLike(String incidentMessageLike) {
-    this.incidentMessageLike = JsonNullable.<String>of(incidentMessageLike);
     
+    this.incidentMessageLike = incidentMessageLike;
     return this;
   }
 
@@ -878,44 +673,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message that the parameter is a substring of.")
-  @JsonIgnore
-
-  public String getIncidentMessageLike() {
-        return incidentMessageLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentMessageLike_JsonNullable() {
+  public String getIncidentMessageLike() {
     return incidentMessageLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE_LIKE)
-  public void setIncidentMessageLike_JsonNullable(JsonNullable<String> incidentMessageLike) {
-    this.incidentMessageLike = incidentMessageLike;
-  }
+
 
   public void setIncidentMessageLike(String incidentMessageLike) {
-    this.incidentMessageLike = JsonNullable.<String>of(incidentMessageLike);
+    this.incidentMessageLike = incidentMessageLike;
   }
 
 
   public ProcessInstanceQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public ProcessInstanceQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -925,32 +706,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Must be a JSON array of Strings.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public ProcessInstanceQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -960,32 +731,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances which belong to no tenant. Value may only be true, as false is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public ProcessInstanceQueryDto processDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
     
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
     return this;
   }
 
@@ -995,44 +756,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances which process definition has no tenant id.")
-  @JsonIgnore
-
-  public Boolean getProcessDefinitionWithoutTenantId() {
-        return processDefinitionWithoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getProcessDefinitionWithoutTenantId_JsonNullable() {
+  public Boolean getProcessDefinitionWithoutTenantId() {
     return processDefinitionWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
-  public void setProcessDefinitionWithoutTenantId_JsonNullable(JsonNullable<Boolean> processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
-  }
+
 
   public void setProcessDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
   }
 
 
   public ProcessInstanceQueryDto activityIdIn(List<String> activityIdIn) {
-    this.activityIdIn = JsonNullable.<List<String>>of(activityIdIn);
     
+    this.activityIdIn = activityIdIn;
     return this;
   }
 
   public ProcessInstanceQueryDto addActivityIdInItem(String activityIdInItem) {
-    if (this.activityIdIn == null || !this.activityIdIn.isPresent()) {
-      this.activityIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.activityIdIn == null) {
+      this.activityIdIn = new ArrayList<>();
     }
-    try {
-      this.activityIdIn.get().add(activityIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.activityIdIn.add(activityIdInItem);
     return this;
   }
 
@@ -1042,32 +789,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of activity ids. A process instance must currently wait in a leaf activity with one of the given activity ids.")
-  @JsonIgnore
-
-  public List<String> getActivityIdIn() {
-        return activityIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getActivityIdIn_JsonNullable() {
+  public List<String> getActivityIdIn() {
     return activityIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID_IN)
-  public void setActivityIdIn_JsonNullable(JsonNullable<List<String>> activityIdIn) {
-    this.activityIdIn = activityIdIn;
-  }
+
 
   public void setActivityIdIn(List<String> activityIdIn) {
-    this.activityIdIn = JsonNullable.<List<String>>of(activityIdIn);
+    this.activityIdIn = activityIdIn;
   }
 
 
   public ProcessInstanceQueryDto rootProcessInstances(Boolean rootProcessInstances) {
-    this.rootProcessInstances = JsonNullable.<Boolean>of(rootProcessInstances);
     
+    this.rootProcessInstances = rootProcessInstances;
     return this;
   }
 
@@ -1077,32 +814,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict the query to all process instances that are top level process instances.")
-  @JsonIgnore
-
-  public Boolean getRootProcessInstances() {
-        return rootProcessInstances.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getRootProcessInstances_JsonNullable() {
+  public Boolean getRootProcessInstances() {
     return rootProcessInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCES)
-  public void setRootProcessInstances_JsonNullable(JsonNullable<Boolean> rootProcessInstances) {
-    this.rootProcessInstances = rootProcessInstances;
-  }
+
 
   public void setRootProcessInstances(Boolean rootProcessInstances) {
-    this.rootProcessInstances = JsonNullable.<Boolean>of(rootProcessInstances);
+    this.rootProcessInstances = rootProcessInstances;
   }
 
 
   public ProcessInstanceQueryDto leafProcessInstances(Boolean leafProcessInstances) {
-    this.leafProcessInstances = JsonNullable.<Boolean>of(leafProcessInstances);
     
+    this.leafProcessInstances = leafProcessInstances;
     return this;
   }
 
@@ -1112,44 +839,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict the query to all process instances that are leaf instances. (i.e. don't have any sub instances)")
-  @JsonIgnore
-
-  public Boolean getLeafProcessInstances() {
-        return leafProcessInstances.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LEAF_PROCESS_INSTANCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getLeafProcessInstances_JsonNullable() {
+  public Boolean getLeafProcessInstances() {
     return leafProcessInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LEAF_PROCESS_INSTANCES)
-  public void setLeafProcessInstances_JsonNullable(JsonNullable<Boolean> leafProcessInstances) {
-    this.leafProcessInstances = leafProcessInstances;
-  }
+
 
   public void setLeafProcessInstances(Boolean leafProcessInstances) {
-    this.leafProcessInstances = JsonNullable.<Boolean>of(leafProcessInstances);
+    this.leafProcessInstances = leafProcessInstances;
   }
 
 
   public ProcessInstanceQueryDto variables(List<VariableQueryParameterDto> variables) {
-    this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public ProcessInstanceQueryDto addVariablesItem(VariableQueryParameterDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.variables == null) {
+      this.variables = new ArrayList<>();
     }
-    try {
-      this.variables.get().add(variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.add(variablesItem);
     return this;
   }
 
@@ -1159,32 +872,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array to only include process instances that have variables with certain values. The array consists of objects with the three properties `name`, `operator` and `value`. `name` (String) is the variable name, `operator` (String) is the comparison operator to be used and `value` the variable value. The `value` may be String, Number or Boolean.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(List<VariableQueryParameterDto> variables) {
-    this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(variables);
+    this.variables = variables;
   }
 
 
   public ProcessInstanceQueryDto variableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
     
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
     return this;
   }
 
@@ -1194,32 +897,22 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable names in this query case-insensitively. If set to true variableName and variablename are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableNamesIgnoreCase() {
-        return variableNamesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableNamesIgnoreCase_JsonNullable() {
+  public Boolean getVariableNamesIgnoreCase() {
     return variableNamesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  public void setVariableNamesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
-  }
+
 
   public void setVariableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
   }
 
 
   public ProcessInstanceQueryDto variableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
     
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
     return this;
   }
 
@@ -1229,44 +922,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable values in this query case-insensitively. If set to true variableValue and variablevalue are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableValuesIgnoreCase() {
-        return variableValuesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableValuesIgnoreCase_JsonNullable() {
+  public Boolean getVariableValuesIgnoreCase() {
     return variableValuesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  public void setVariableValuesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
-  }
+
 
   public void setVariableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
   }
 
 
   public ProcessInstanceQueryDto orQueries(List<ProcessInstanceQueryDto> orQueries) {
-    this.orQueries = JsonNullable.<List<ProcessInstanceQueryDto>>of(orQueries);
     
+    this.orQueries = orQueries;
     return this;
   }
 
   public ProcessInstanceQueryDto addOrQueriesItem(ProcessInstanceQueryDto orQueriesItem) {
-    if (this.orQueries == null || !this.orQueries.isPresent()) {
-      this.orQueries = JsonNullable.<List<ProcessInstanceQueryDto>>of(new ArrayList<>());
+    if (this.orQueries == null) {
+      this.orQueries = new ArrayList<>();
     }
-    try {
-      this.orQueries.get().add(orQueriesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.orQueries.add(orQueriesItem);
     return this;
   }
 
@@ -1276,44 +955,30 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of nested process instance queries with OR semantics. A process instance matches a nested query if it fulfills at least one of the query's predicates. With multiple nested queries, a process instance must fulfill at least one predicate of each query (Conjunctive Normal Form). All process instance query properties can be used except for: `sorting` See the [User guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/process-engine-api/#or-queries) for more information about OR queries.")
-  @JsonIgnore
-
-  public List<ProcessInstanceQueryDto> getOrQueries() {
-        return orQueries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OR_QUERIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ProcessInstanceQueryDto>> getOrQueries_JsonNullable() {
+  public List<ProcessInstanceQueryDto> getOrQueries() {
     return orQueries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OR_QUERIES)
-  public void setOrQueries_JsonNullable(JsonNullable<List<ProcessInstanceQueryDto>> orQueries) {
-    this.orQueries = orQueries;
-  }
+
 
   public void setOrQueries(List<ProcessInstanceQueryDto> orQueries) {
-    this.orQueries = JsonNullable.<List<ProcessInstanceQueryDto>>of(orQueries);
+    this.orQueries = orQueries;
   }
 
 
   public ProcessInstanceQueryDto sorting(List<ProcessInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<ProcessInstanceQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public ProcessInstanceQueryDto addSortingItem(ProcessInstanceQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<ProcessInstanceQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -1323,26 +988,16 @@ public class ProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonIgnore
-
-  public List<ProcessInstanceQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ProcessInstanceQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<ProcessInstanceQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<ProcessInstanceQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<ProcessInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<ProcessInstanceQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

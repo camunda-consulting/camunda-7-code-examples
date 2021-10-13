@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,36 +37,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DeleteHistoricProcessInstancesDto.JSON_PROPERTY_FAIL_IF_NOT_EXISTS
 })
 @JsonTypeName("DeleteHistoricProcessInstancesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DeleteHistoricProcessInstancesDto {
   public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
-  private JsonNullable<List<String>> historicProcessInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicProcessInstanceIds = null;
 
   public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
   private HistoricProcessInstanceQueryDto historicProcessInstanceQuery;
 
   public static final String JSON_PROPERTY_DELETE_REASON = "deleteReason";
-  private JsonNullable<String> deleteReason = JsonNullable.<String>undefined();
+  private String deleteReason;
 
   public static final String JSON_PROPERTY_FAIL_IF_NOT_EXISTS = "failIfNotExists";
-  private JsonNullable<Boolean> failIfNotExists = JsonNullable.<Boolean>undefined();
+  private Boolean failIfNotExists;
 
 
   public DeleteHistoricProcessInstancesDto historicProcessInstanceIds(List<String> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = JsonNullable.<List<String>>of(historicProcessInstanceIds);
     
+    this.historicProcessInstanceIds = historicProcessInstanceIds;
     return this;
   }
 
   public DeleteHistoricProcessInstancesDto addHistoricProcessInstanceIdsItem(String historicProcessInstanceIdsItem) {
-    if (this.historicProcessInstanceIds == null || !this.historicProcessInstanceIds.isPresent()) {
-      this.historicProcessInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicProcessInstanceIds == null) {
+      this.historicProcessInstanceIds = new ArrayList<>();
     }
-    try {
-      this.historicProcessInstanceIds.get().add(historicProcessInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicProcessInstanceIds.add(historicProcessInstanceIdsItem);
     return this;
   }
 
@@ -79,26 +72,16 @@ public class DeleteHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list historic process instance ids to delete.")
-  @JsonIgnore
-
-  public List<String> getHistoricProcessInstanceIds() {
-        return historicProcessInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricProcessInstanceIds_JsonNullable() {
+  public List<String> getHistoricProcessInstanceIds() {
     return historicProcessInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
-  public void setHistoricProcessInstanceIds_JsonNullable(JsonNullable<List<String>> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = historicProcessInstanceIds;
-  }
+
 
   public void setHistoricProcessInstanceIds(List<String> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = JsonNullable.<List<String>>of(historicProcessInstanceIds);
+    this.historicProcessInstanceIds = historicProcessInstanceIds;
   }
 
 
@@ -128,8 +111,8 @@ public class DeleteHistoricProcessInstancesDto {
 
 
   public DeleteHistoricProcessInstancesDto deleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
     
+    this.deleteReason = deleteReason;
     return this;
   }
 
@@ -139,32 +122,22 @@ public class DeleteHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A string with delete reason.")
-  @JsonIgnore
-
-  public String getDeleteReason() {
-        return deleteReason.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETE_REASON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeleteReason_JsonNullable() {
+  public String getDeleteReason() {
     return deleteReason;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETE_REASON)
-  public void setDeleteReason_JsonNullable(JsonNullable<String> deleteReason) {
-    this.deleteReason = deleteReason;
-  }
+
 
   public void setDeleteReason(String deleteReason) {
-    this.deleteReason = JsonNullable.<String>of(deleteReason);
+    this.deleteReason = deleteReason;
   }
 
 
   public DeleteHistoricProcessInstancesDto failIfNotExists(Boolean failIfNotExists) {
-    this.failIfNotExists = JsonNullable.<Boolean>of(failIfNotExists);
     
+    this.failIfNotExists = failIfNotExists;
     return this;
   }
 
@@ -174,26 +147,16 @@ public class DeleteHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If set to `false`, the request will still be successful if one ore more of the process ids are not found.")
-  @JsonIgnore
-
-  public Boolean getFailIfNotExists() {
-        return failIfNotExists.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAIL_IF_NOT_EXISTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getFailIfNotExists_JsonNullable() {
+  public Boolean getFailIfNotExists() {
     return failIfNotExists;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAIL_IF_NOT_EXISTS)
-  public void setFailIfNotExists_JsonNullable(JsonNullable<Boolean> failIfNotExists) {
-    this.failIfNotExists = failIfNotExists;
-  }
+
 
   public void setFailIfNotExists(Boolean failIfNotExists) {
-    this.failIfNotExists = JsonNullable.<Boolean>of(failIfNotExists);
+    this.failIfNotExists = failIfNotExists;
   }
 
 

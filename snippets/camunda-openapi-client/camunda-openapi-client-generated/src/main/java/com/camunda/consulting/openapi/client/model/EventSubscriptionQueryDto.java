@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -47,13 +44,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   EventSubscriptionQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("EventSubscriptionQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class EventSubscriptionQueryDto {
   public static final String JSON_PROPERTY_EVENT_SUBSCRIPTION_ID = "eventSubscriptionId";
-  private JsonNullable<String> eventSubscriptionId = JsonNullable.<String>undefined();
+  private String eventSubscriptionId;
 
   public static final String JSON_PROPERTY_EVENT_NAME = "eventName";
-  private JsonNullable<String> eventName = JsonNullable.<String>undefined();
+  private String eventName;
 
   /**
    * The type of the event subscription.
@@ -95,33 +92,33 @@ public class EventSubscriptionQueryDto {
   }
 
   public static final String JSON_PROPERTY_EVENT_TYPE = "eventType";
-  private JsonNullable<EventTypeEnum> eventType = JsonNullable.<EventTypeEnum>undefined();
+  private EventTypeEnum eventType;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean withoutTenantId;
 
   public static final String JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID = "includeEventSubscriptionsWithoutTenantId";
-  private JsonNullable<Boolean> includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean includeEventSubscriptionsWithoutTenantId;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<EventSubscriptionQueryDtoSorting>> sorting = JsonNullable.<List<EventSubscriptionQueryDtoSorting>>undefined();
+  private List<EventSubscriptionQueryDtoSorting> sorting = null;
 
 
   public EventSubscriptionQueryDto eventSubscriptionId(String eventSubscriptionId) {
-    this.eventSubscriptionId = JsonNullable.<String>of(eventSubscriptionId);
     
+    this.eventSubscriptionId = eventSubscriptionId;
     return this;
   }
 
@@ -131,32 +128,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the event subscription.")
-  @JsonIgnore
-
-  public String getEventSubscriptionId() {
-        return eventSubscriptionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EVENT_SUBSCRIPTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getEventSubscriptionId_JsonNullable() {
+  public String getEventSubscriptionId() {
     return eventSubscriptionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EVENT_SUBSCRIPTION_ID)
-  public void setEventSubscriptionId_JsonNullable(JsonNullable<String> eventSubscriptionId) {
-    this.eventSubscriptionId = eventSubscriptionId;
-  }
+
 
   public void setEventSubscriptionId(String eventSubscriptionId) {
-    this.eventSubscriptionId = JsonNullable.<String>of(eventSubscriptionId);
+    this.eventSubscriptionId = eventSubscriptionId;
   }
 
 
   public EventSubscriptionQueryDto eventName(String eventName) {
-    this.eventName = JsonNullable.<String>of(eventName);
     
+    this.eventName = eventName;
     return this;
   }
 
@@ -166,32 +153,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the event this subscription belongs to as defined in the process model.")
-  @JsonIgnore
-
-  public String getEventName() {
-        return eventName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EVENT_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getEventName_JsonNullable() {
+  public String getEventName() {
     return eventName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EVENT_NAME)
-  public void setEventName_JsonNullable(JsonNullable<String> eventName) {
-    this.eventName = eventName;
-  }
+
 
   public void setEventName(String eventName) {
-    this.eventName = JsonNullable.<String>of(eventName);
+    this.eventName = eventName;
   }
 
 
   public EventSubscriptionQueryDto eventType(EventTypeEnum eventType) {
-    this.eventType = JsonNullable.<EventTypeEnum>of(eventType);
     
+    this.eventType = eventType;
     return this;
   }
 
@@ -201,32 +178,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the event subscription.")
-  @JsonIgnore
-
-  public EventTypeEnum getEventType() {
-        return eventType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EVENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<EventTypeEnum> getEventType_JsonNullable() {
+  public EventTypeEnum getEventType() {
     return eventType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EVENT_TYPE)
-  public void setEventType_JsonNullable(JsonNullable<EventTypeEnum> eventType) {
-    this.eventType = eventType;
-  }
+
 
   public void setEventType(EventTypeEnum eventType) {
-    this.eventType = JsonNullable.<EventTypeEnum>of(eventType);
+    this.eventType = eventType;
   }
 
 
   public EventSubscriptionQueryDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -236,32 +203,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution that is subscribed on the referenced event.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public EventSubscriptionQueryDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -271,32 +228,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance this subscription belongs to.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public EventSubscriptionQueryDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -306,44 +253,30 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The identifier of the activity that this event subscription belongs to. This could for example be the id of a receive task.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public EventSubscriptionQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public EventSubscriptionQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -353,32 +286,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a comma-separated list of tenant ids. Only select subscriptions that belong to one of the given tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public EventSubscriptionQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -388,32 +311,22 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only select subscriptions which have no tenant id. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public EventSubscriptionQueryDto includeEventSubscriptionsWithoutTenantId(Boolean includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>of(includeEventSubscriptionsWithoutTenantId);
     
+    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
     return this;
   }
 
@@ -423,44 +336,30 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Select event subscriptions which have no tenant id. Can be used in combination with tenantIdIn parameter. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getIncludeEventSubscriptionsWithoutTenantId() {
-        return includeEventSubscriptionsWithoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeEventSubscriptionsWithoutTenantId_JsonNullable() {
+  public Boolean getIncludeEventSubscriptionsWithoutTenantId() {
     return includeEventSubscriptionsWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID)
-  public void setIncludeEventSubscriptionsWithoutTenantId_JsonNullable(JsonNullable<Boolean> includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
-  }
+
 
   public void setIncludeEventSubscriptionsWithoutTenantId(Boolean includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>of(includeEventSubscriptionsWithoutTenantId);
+    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
   }
 
 
   public EventSubscriptionQueryDto sorting(List<EventSubscriptionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<EventSubscriptionQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public EventSubscriptionQueryDto addSortingItem(EventSubscriptionQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<EventSubscriptionQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -470,26 +369,16 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonIgnore
-
-  public List<EventSubscriptionQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<EventSubscriptionQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<EventSubscriptionQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<EventSubscriptionQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<EventSubscriptionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<EventSubscriptionQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

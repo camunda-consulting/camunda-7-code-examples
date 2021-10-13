@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,24 +36,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AuthenticationResult.JSON_PROPERTY_GROUPS
 })
 @JsonTypeName("AuthenticationResult")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AuthenticationResult {
   public static final String JSON_PROPERTY_AUTHENTICATED_USER = "authenticatedUser";
-  private JsonNullable<String> authenticatedUser = JsonNullable.<String>undefined();
+  private String authenticatedUser;
 
   public static final String JSON_PROPERTY_IS_AUTHENTICATED = "isAuthenticated";
-  private JsonNullable<Boolean> isAuthenticated = JsonNullable.<Boolean>undefined();
+  private Boolean isAuthenticated;
 
   public static final String JSON_PROPERTY_TENANTS = "tenants";
-  private JsonNullable<List<String>> tenants = JsonNullable.<List<String>>undefined();
+  private List<String> tenants = null;
 
   public static final String JSON_PROPERTY_GROUPS = "groups";
-  private JsonNullable<List<String>> groups = JsonNullable.<List<String>>undefined();
+  private List<String> groups = null;
 
 
   public AuthenticationResult authenticatedUser(String authenticatedUser) {
-    this.authenticatedUser = JsonNullable.<String>of(authenticatedUser);
     
+    this.authenticatedUser = authenticatedUser;
     return this;
   }
 
@@ -66,32 +63,22 @@ public class AuthenticationResult {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An id of authenticated user.")
-  @JsonIgnore
-
-  public String getAuthenticatedUser() {
-        return authenticatedUser.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_AUTHENTICATED_USER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAuthenticatedUser_JsonNullable() {
+  public String getAuthenticatedUser() {
     return authenticatedUser;
   }
-  
-  @JsonProperty(JSON_PROPERTY_AUTHENTICATED_USER)
-  public void setAuthenticatedUser_JsonNullable(JsonNullable<String> authenticatedUser) {
-    this.authenticatedUser = authenticatedUser;
-  }
+
 
   public void setAuthenticatedUser(String authenticatedUser) {
-    this.authenticatedUser = JsonNullable.<String>of(authenticatedUser);
+    this.authenticatedUser = authenticatedUser;
   }
 
 
   public AuthenticationResult isAuthenticated(Boolean isAuthenticated) {
-    this.isAuthenticated = JsonNullable.<Boolean>of(isAuthenticated);
     
+    this.isAuthenticated = isAuthenticated;
     return this;
   }
 
@@ -101,44 +88,30 @@ public class AuthenticationResult {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating if user is authenticated.")
-  @JsonIgnore
-
-  public Boolean getIsAuthenticated() {
-        return isAuthenticated.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_IS_AUTHENTICATED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIsAuthenticated_JsonNullable() {
+  public Boolean getIsAuthenticated() {
     return isAuthenticated;
   }
-  
-  @JsonProperty(JSON_PROPERTY_IS_AUTHENTICATED)
-  public void setIsAuthenticated_JsonNullable(JsonNullable<Boolean> isAuthenticated) {
-    this.isAuthenticated = isAuthenticated;
-  }
+
 
   public void setIsAuthenticated(Boolean isAuthenticated) {
-    this.isAuthenticated = JsonNullable.<Boolean>of(isAuthenticated);
+    this.isAuthenticated = isAuthenticated;
   }
 
 
   public AuthenticationResult tenants(List<String> tenants) {
-    this.tenants = JsonNullable.<List<String>>of(tenants);
     
+    this.tenants = tenants;
     return this;
   }
 
   public AuthenticationResult addTenantsItem(String tenantsItem) {
-    if (this.tenants == null || !this.tenants.isPresent()) {
-      this.tenants = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenants == null) {
+      this.tenants = new ArrayList<>();
     }
-    try {
-      this.tenants.get().add(tenantsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenants.add(tenantsItem);
     return this;
   }
 
@@ -148,44 +121,30 @@ public class AuthenticationResult {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Will be null.")
-  @JsonIgnore
-
-  public List<String> getTenants() {
-        return tenants.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenants_JsonNullable() {
+  public List<String> getTenants() {
     return tenants;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANTS)
-  public void setTenants_JsonNullable(JsonNullable<List<String>> tenants) {
-    this.tenants = tenants;
-  }
+
 
   public void setTenants(List<String> tenants) {
-    this.tenants = JsonNullable.<List<String>>of(tenants);
+    this.tenants = tenants;
   }
 
 
   public AuthenticationResult groups(List<String> groups) {
-    this.groups = JsonNullable.<List<String>>of(groups);
     
+    this.groups = groups;
     return this;
   }
 
   public AuthenticationResult addGroupsItem(String groupsItem) {
-    if (this.groups == null || !this.groups.isPresent()) {
-      this.groups = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.groups == null) {
+      this.groups = new ArrayList<>();
     }
-    try {
-      this.groups.get().add(groupsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.groups.add(groupsItem);
     return this;
   }
 
@@ -195,26 +154,16 @@ public class AuthenticationResult {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Will be null.")
-  @JsonIgnore
-
-  public List<String> getGroups() {
-        return groups.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getGroups_JsonNullable() {
+  public List<String> getGroups() {
     return groups;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUPS)
-  public void setGroups_JsonNullable(JsonNullable<List<String>> groups) {
-    this.groups = groups;
-  }
+
 
   public void setGroups(List<String> groups) {
-    this.groups = JsonNullable.<List<String>>of(groups);
+    this.groups = groups;
   }
 
 

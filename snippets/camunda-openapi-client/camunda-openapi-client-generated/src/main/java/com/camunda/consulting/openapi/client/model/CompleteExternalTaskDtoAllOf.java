@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,30 +36,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CompleteExternalTaskDtoAllOf.JSON_PROPERTY_LOCAL_VARIABLES
 })
 @JsonTypeName("CompleteExternalTaskDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CompleteExternalTaskDtoAllOf {
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
   public static final String JSON_PROPERTY_LOCAL_VARIABLES = "localVariables";
-  private JsonNullable<Map<String, VariableValueDto>> localVariables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> localVariables = null;
 
 
   public CompleteExternalTaskDtoAllOf variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public CompleteExternalTaskDtoAllOf putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -72,44 +65,30 @@ public class CompleteExternalTaskDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 
   public CompleteExternalTaskDtoAllOf localVariables(Map<String, VariableValueDto> localVariables) {
-    this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(localVariables);
     
+    this.localVariables = localVariables;
     return this;
   }
 
   public CompleteExternalTaskDtoAllOf putLocalVariablesItem(String key, VariableValueDto localVariablesItem) {
-    if (this.localVariables == null || !this.localVariables.isPresent()) {
-      this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.localVariables == null) {
+      this.localVariables = new HashMap<>();
     }
-    try {
-      this.localVariables.get().put(key, localVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.localVariables.put(key, localVariablesItem);
     return this;
   }
 
@@ -119,26 +98,16 @@ public class CompleteExternalTaskDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing local variable key-value pairs. Local variables are set only in the scope of external task. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getLocalVariables() {
-        return localVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getLocalVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getLocalVariables() {
     return localVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
-  public void setLocalVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> localVariables) {
-    this.localVariables = localVariables;
-  }
+
 
   public void setLocalVariables(Map<String, VariableValueDto> localVariables) {
-    this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(localVariables);
+    this.localVariables = localVariables;
   }
 
 

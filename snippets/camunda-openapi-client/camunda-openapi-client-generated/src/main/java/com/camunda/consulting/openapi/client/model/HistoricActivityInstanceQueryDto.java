@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -57,69 +54,69 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricActivityInstanceQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("HistoricActivityInstanceQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricActivityInstanceQueryDto {
   public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID = "activityInstanceId";
-  private JsonNullable<String> activityInstanceId = JsonNullable.<String>undefined();
+  private String activityInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_ACTIVITY_NAME = "activityName";
-  private JsonNullable<String> activityName = JsonNullable.<String>undefined();
+  private String activityName;
 
   public static final String JSON_PROPERTY_ACTIVITY_TYPE = "activityType";
-  private JsonNullable<String> activityType = JsonNullable.<String>undefined();
+  private String activityType;
 
   public static final String JSON_PROPERTY_TASK_ASSIGNEE = "taskAssignee";
-  private JsonNullable<String> taskAssignee = JsonNullable.<String>undefined();
+  private String taskAssignee;
 
   public static final String JSON_PROPERTY_FINISHED = "finished";
-  private JsonNullable<Boolean> finished = JsonNullable.<Boolean>undefined();
+  private Boolean finished;
 
   public static final String JSON_PROPERTY_UNFINISHED = "unfinished";
-  private JsonNullable<Boolean> unfinished = JsonNullable.<Boolean>undefined();
+  private Boolean unfinished;
 
   public static final String JSON_PROPERTY_CANCELED = "canceled";
-  private JsonNullable<Boolean> canceled = JsonNullable.<Boolean>undefined();
+  private Boolean canceled;
 
   public static final String JSON_PROPERTY_COMPLETE_SCOPE = "completeScope";
-  private JsonNullable<Boolean> completeScope = JsonNullable.<Boolean>undefined();
+  private Boolean completeScope;
 
   public static final String JSON_PROPERTY_STARTED_BEFORE = "startedBefore";
-  private JsonNullable<OffsetDateTime> startedBefore = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime startedBefore;
 
   public static final String JSON_PROPERTY_STARTED_AFTER = "startedAfter";
-  private JsonNullable<OffsetDateTime> startedAfter = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime startedAfter;
 
   public static final String JSON_PROPERTY_FINISHED_BEFORE = "finishedBefore";
-  private JsonNullable<OffsetDateTime> finishedBefore = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime finishedBefore;
 
   public static final String JSON_PROPERTY_FINISHED_AFTER = "finishedAfter";
-  private JsonNullable<OffsetDateTime> finishedAfter = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime finishedAfter;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean withoutTenantId;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<HistoricActivityInstanceQueryDtoSorting>> sorting = JsonNullable.<List<HistoricActivityInstanceQueryDtoSorting>>undefined();
+  private List<HistoricActivityInstanceQueryDtoSorting> sorting = null;
 
 
   public HistoricActivityInstanceQueryDto activityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
     
+    this.activityInstanceId = activityInstanceId;
     return this;
   }
 
@@ -129,32 +126,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by activity instance id.")
-  @JsonIgnore
-
-  public String getActivityInstanceId() {
-        return activityInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityInstanceId_JsonNullable() {
+  public String getActivityInstanceId() {
     return activityInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
-  public void setActivityInstanceId_JsonNullable(JsonNullable<String> activityInstanceId) {
-    this.activityInstanceId = activityInstanceId;
-  }
+
 
   public void setActivityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
+    this.activityInstanceId = activityInstanceId;
   }
 
 
   public HistoricActivityInstanceQueryDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -164,32 +151,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance id.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public HistoricActivityInstanceQueryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -199,32 +176,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process definition id.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public HistoricActivityInstanceQueryDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -234,32 +201,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the execution that executed the activity instance.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public HistoricActivityInstanceQueryDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -269,32 +226,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the activity id (according to BPMN 2.0 XML).")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public HistoricActivityInstanceQueryDto activityName(String activityName) {
-    this.activityName = JsonNullable.<String>of(activityName);
     
+    this.activityName = activityName;
     return this;
   }
 
@@ -304,32 +251,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the activity name (according to BPMN 2.0 XML).")
-  @JsonIgnore
-
-  public String getActivityName() {
-        return activityName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityName_JsonNullable() {
+  public String getActivityName() {
     return activityName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
-  public void setActivityName_JsonNullable(JsonNullable<String> activityName) {
-    this.activityName = activityName;
-  }
+
 
   public void setActivityName(String activityName) {
-    this.activityName = JsonNullable.<String>of(activityName);
+    this.activityName = activityName;
   }
 
 
   public HistoricActivityInstanceQueryDto activityType(String activityType) {
-    this.activityType = JsonNullable.<String>of(activityType);
     
+    this.activityType = activityType;
     return this;
   }
 
@@ -339,32 +276,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by activity type.")
-  @JsonIgnore
-
-  public String getActivityType() {
-        return activityType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityType_JsonNullable() {
+  public String getActivityType() {
     return activityType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
-  public void setActivityType_JsonNullable(JsonNullable<String> activityType) {
-    this.activityType = activityType;
-  }
+
 
   public void setActivityType(String activityType) {
-    this.activityType = JsonNullable.<String>of(activityType);
+    this.activityType = activityType;
   }
 
 
   public HistoricActivityInstanceQueryDto taskAssignee(String taskAssignee) {
-    this.taskAssignee = JsonNullable.<String>of(taskAssignee);
     
+    this.taskAssignee = taskAssignee;
     return this;
   }
 
@@ -374,32 +301,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include activity instances that are user tasks and assigned to a given user.")
-  @JsonIgnore
-
-  public String getTaskAssignee() {
-        return taskAssignee.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_ASSIGNEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskAssignee_JsonNullable() {
+  public String getTaskAssignee() {
     return taskAssignee;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_ASSIGNEE)
-  public void setTaskAssignee_JsonNullable(JsonNullable<String> taskAssignee) {
-    this.taskAssignee = taskAssignee;
-  }
+
 
   public void setTaskAssignee(String taskAssignee) {
-    this.taskAssignee = JsonNullable.<String>of(taskAssignee);
+    this.taskAssignee = taskAssignee;
   }
 
 
   public HistoricActivityInstanceQueryDto finished(Boolean finished) {
-    this.finished = JsonNullable.<Boolean>of(finished);
     
+    this.finished = finished;
     return this;
   }
 
@@ -409,32 +326,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include finished activity instances. Value may only be `true`, as `false` behaves the same as when the property is not set.")
-  @JsonIgnore
-
-  public Boolean getFinished() {
-        return finished.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getFinished_JsonNullable() {
+  public Boolean getFinished() {
     return finished;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED)
-  public void setFinished_JsonNullable(JsonNullable<Boolean> finished) {
-    this.finished = finished;
-  }
+
 
   public void setFinished(Boolean finished) {
-    this.finished = JsonNullable.<Boolean>of(finished);
+    this.finished = finished;
   }
 
 
   public HistoricActivityInstanceQueryDto unfinished(Boolean unfinished) {
-    this.unfinished = JsonNullable.<Boolean>of(unfinished);
     
+    this.unfinished = unfinished;
     return this;
   }
 
@@ -444,32 +351,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include unfinished activity instances. Value may only be `true`, as `false` behaves the same as when the property is not set.")
-  @JsonIgnore
-
-  public Boolean getUnfinished() {
-        return unfinished.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_UNFINISHED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getUnfinished_JsonNullable() {
+  public Boolean getUnfinished() {
     return unfinished;
   }
-  
-  @JsonProperty(JSON_PROPERTY_UNFINISHED)
-  public void setUnfinished_JsonNullable(JsonNullable<Boolean> unfinished) {
-    this.unfinished = unfinished;
-  }
+
 
   public void setUnfinished(Boolean unfinished) {
-    this.unfinished = JsonNullable.<Boolean>of(unfinished);
+    this.unfinished = unfinished;
   }
 
 
   public HistoricActivityInstanceQueryDto canceled(Boolean canceled) {
-    this.canceled = JsonNullable.<Boolean>of(canceled);
     
+    this.canceled = canceled;
     return this;
   }
 
@@ -479,32 +376,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include canceled activity instances. Value may only be `true`, as `false` behaves the same as when the property is not set.")
-  @JsonIgnore
-
-  public Boolean getCanceled() {
-        return canceled.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANCELED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCanceled_JsonNullable() {
+  public Boolean getCanceled() {
     return canceled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANCELED)
-  public void setCanceled_JsonNullable(JsonNullable<Boolean> canceled) {
-    this.canceled = canceled;
-  }
+
 
   public void setCanceled(Boolean canceled) {
-    this.canceled = JsonNullable.<Boolean>of(canceled);
+    this.canceled = canceled;
   }
 
 
   public HistoricActivityInstanceQueryDto completeScope(Boolean completeScope) {
-    this.completeScope = JsonNullable.<Boolean>of(completeScope);
     
+    this.completeScope = completeScope;
     return this;
   }
 
@@ -514,32 +401,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include activity instances which completed a scope. Value may only be `true`, as `false` behaves the same as when the property is not set.")
-  @JsonIgnore
-
-  public Boolean getCompleteScope() {
-        return completeScope.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_COMPLETE_SCOPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCompleteScope_JsonNullable() {
+  public Boolean getCompleteScope() {
     return completeScope;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COMPLETE_SCOPE)
-  public void setCompleteScope_JsonNullable(JsonNullable<Boolean> completeScope) {
-    this.completeScope = completeScope;
-  }
+
 
   public void setCompleteScope(Boolean completeScope) {
-    this.completeScope = JsonNullable.<Boolean>of(completeScope);
+    this.completeScope = completeScope;
   }
 
 
   public HistoricActivityInstanceQueryDto startedBefore(OffsetDateTime startedBefore) {
-    this.startedBefore = JsonNullable.<OffsetDateTime>of(startedBefore);
     
+    this.startedBefore = startedBefore;
     return this;
   }
 
@@ -549,32 +426,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getStartedBefore() {
-        return startedBefore.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_STARTED_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getStartedBefore_JsonNullable() {
+  public OffsetDateTime getStartedBefore() {
     return startedBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_STARTED_BEFORE)
-  public void setStartedBefore_JsonNullable(JsonNullable<OffsetDateTime> startedBefore) {
-    this.startedBefore = startedBefore;
-  }
+
 
   public void setStartedBefore(OffsetDateTime startedBefore) {
-    this.startedBefore = JsonNullable.<OffsetDateTime>of(startedBefore);
+    this.startedBefore = startedBefore;
   }
 
 
   public HistoricActivityInstanceQueryDto startedAfter(OffsetDateTime startedAfter) {
-    this.startedAfter = JsonNullable.<OffsetDateTime>of(startedAfter);
     
+    this.startedAfter = startedAfter;
     return this;
   }
 
@@ -584,32 +451,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getStartedAfter() {
-        return startedAfter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_STARTED_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getStartedAfter_JsonNullable() {
+  public OffsetDateTime getStartedAfter() {
     return startedAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_STARTED_AFTER)
-  public void setStartedAfter_JsonNullable(JsonNullable<OffsetDateTime> startedAfter) {
-    this.startedAfter = startedAfter;
-  }
+
 
   public void setStartedAfter(OffsetDateTime startedAfter) {
-    this.startedAfter = JsonNullable.<OffsetDateTime>of(startedAfter);
+    this.startedAfter = startedAfter;
   }
 
 
   public HistoricActivityInstanceQueryDto finishedBefore(OffsetDateTime finishedBefore) {
-    this.finishedBefore = JsonNullable.<OffsetDateTime>of(finishedBefore);
     
+    this.finishedBefore = finishedBefore;
     return this;
   }
 
@@ -619,32 +476,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getFinishedBefore() {
-        return finishedBefore.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFinishedBefore_JsonNullable() {
+  public OffsetDateTime getFinishedBefore() {
     return finishedBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_BEFORE)
-  public void setFinishedBefore_JsonNullable(JsonNullable<OffsetDateTime> finishedBefore) {
-    this.finishedBefore = finishedBefore;
-  }
+
 
   public void setFinishedBefore(OffsetDateTime finishedBefore) {
-    this.finishedBefore = JsonNullable.<OffsetDateTime>of(finishedBefore);
+    this.finishedBefore = finishedBefore;
   }
 
 
   public HistoricActivityInstanceQueryDto finishedAfter(OffsetDateTime finishedAfter) {
-    this.finishedAfter = JsonNullable.<OffsetDateTime>of(finishedAfter);
     
+    this.finishedAfter = finishedAfter;
     return this;
   }
 
@@ -654,44 +501,30 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getFinishedAfter() {
-        return finishedAfter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFinishedAfter_JsonNullable() {
+  public OffsetDateTime getFinishedAfter() {
     return finishedAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_AFTER)
-  public void setFinishedAfter_JsonNullable(JsonNullable<OffsetDateTime> finishedAfter) {
-    this.finishedAfter = finishedAfter;
-  }
+
 
   public void setFinishedAfter(OffsetDateTime finishedAfter) {
-    this.finishedAfter = JsonNullable.<OffsetDateTime>of(finishedAfter);
+    this.finishedAfter = finishedAfter;
   }
 
 
   public HistoricActivityInstanceQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public HistoricActivityInstanceQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -701,32 +534,22 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Must be a JSON array of Strings. An activity instance must have one of the given tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public HistoricActivityInstanceQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -736,44 +559,30 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include historic activity instances that belong to no tenant. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public HistoricActivityInstanceQueryDto sorting(List<HistoricActivityInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<HistoricActivityInstanceQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public HistoricActivityInstanceQueryDto addSortingItem(HistoricActivityInstanceQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<HistoricActivityInstanceQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -783,26 +592,16 @@ public class HistoricActivityInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonIgnore
-
-  public List<HistoricActivityInstanceQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<HistoricActivityInstanceQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<HistoricActivityInstanceQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<HistoricActivityInstanceQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<HistoricActivityInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<HistoricActivityInstanceQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

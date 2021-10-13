@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -42,39 +39,39 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CaseDefinitionDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE
 })
 @JsonTypeName("CaseDefinitionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CaseDefinitionDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_KEY = "key";
-  private JsonNullable<String> key = JsonNullable.<String>undefined();
+  private String key;
 
   public static final String JSON_PROPERTY_CATEGORY = "category";
-  private JsonNullable<String> category = JsonNullable.<String>undefined();
+  private String category;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  private JsonNullable<Integer> version = JsonNullable.<Integer>undefined();
+  private Integer version;
 
   public static final String JSON_PROPERTY_RESOURCE = "resource";
-  private JsonNullable<String> resource = JsonNullable.<String>undefined();
+  private String resource;
 
   public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
-  private JsonNullable<String> deploymentId = JsonNullable.<String>undefined();
+  private String deploymentId;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  private Integer historyTimeToLive;
 
 
   public CaseDefinitionDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -84,32 +81,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case definition")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public CaseDefinitionDto key(String key) {
-    this.key = JsonNullable.<String>of(key);
     
+    this.key = key;
     return this;
   }
 
@@ -119,32 +106,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the case definition, i.e., the id of the CMMN 2.0 XML case definition.")
-  @JsonIgnore
-
-  public String getKey() {
-        return key.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getKey_JsonNullable() {
+  public String getKey() {
     return key;
   }
-  
-  @JsonProperty(JSON_PROPERTY_KEY)
-  public void setKey_JsonNullable(JsonNullable<String> key) {
-    this.key = key;
-  }
+
 
   public void setKey(String key) {
-    this.key = JsonNullable.<String>of(key);
+    this.key = key;
   }
 
 
   public CaseDefinitionDto category(String category) {
-    this.category = JsonNullable.<String>of(category);
     
+    this.category = category;
     return this;
   }
 
@@ -154,32 +131,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The category of the case definition.")
-  @JsonIgnore
-
-  public String getCategory() {
-        return category.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CATEGORY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCategory_JsonNullable() {
+  public String getCategory() {
     return category;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CATEGORY)
-  public void setCategory_JsonNullable(JsonNullable<String> category) {
-    this.category = category;
-  }
+
 
   public void setCategory(String category) {
-    this.category = JsonNullable.<String>of(category);
+    this.category = category;
   }
 
 
   public CaseDefinitionDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -189,32 +156,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the case definition.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public CaseDefinitionDto version(Integer version) {
-    this.version = JsonNullable.<Integer>of(version);
     
+    this.version = version;
     return this;
   }
 
@@ -224,32 +181,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the case definition that the engine assigned to it.")
-  @JsonIgnore
-
-  public Integer getVersion() {
-        return version.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getVersion_JsonNullable() {
+  public Integer getVersion() {
     return version;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  public void setVersion_JsonNullable(JsonNullable<Integer> version) {
-    this.version = version;
-  }
+
 
   public void setVersion(Integer version) {
-    this.version = JsonNullable.<Integer>of(version);
+    this.version = version;
   }
 
 
   public CaseDefinitionDto resource(String resource) {
-    this.resource = JsonNullable.<String>of(resource);
     
+    this.resource = resource;
     return this;
   }
 
@@ -259,32 +206,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The file name of the case definition.")
-  @JsonIgnore
-
-  public String getResource() {
-        return resource.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResource_JsonNullable() {
+  public String getResource() {
     return resource;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE)
-  public void setResource_JsonNullable(JsonNullable<String> resource) {
-    this.resource = resource;
-  }
+
 
   public void setResource(String resource) {
-    this.resource = JsonNullable.<String>of(resource);
+    this.resource = resource;
   }
 
 
   public CaseDefinitionDto deploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
     
+    this.deploymentId = deploymentId;
     return this;
   }
 
@@ -294,32 +231,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The deployment id of the case definition.")
-  @JsonIgnore
-
-  public String getDeploymentId() {
-        return deploymentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeploymentId_JsonNullable() {
+  public String getDeploymentId() {
     return deploymentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  public void setDeploymentId_JsonNullable(JsonNullable<String> deploymentId) {
-    this.deploymentId = deploymentId;
-  }
+
 
   public void setDeploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
+    this.deploymentId = deploymentId;
   }
 
 
   public CaseDefinitionDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -329,32 +256,22 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the case definition.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public CaseDefinitionDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
     
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -365,26 +282,16 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "History time to live value of the case definition. Is used within [History cleanup](https://docs.camunda.org/manual/7.16/user-guide/process-engine/history/#history-cleanup).")
-  @JsonIgnore
-
-  public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
+  public Integer getHistoryTimeToLive() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoryTimeToLiveDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE
 })
 @JsonTypeName("HistoryTimeToLiveDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoryTimeToLiveDto {
   public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  private Integer historyTimeToLive;
 
 
   public HistoryTimeToLiveDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
     
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -53,26 +50,16 @@ public class HistoryTimeToLiveDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "New value for historyTimeToLive field of the definition. Can be `null`. Can not be negative.")
-  @JsonIgnore
-
-  public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
+  public Integer getHistoryTimeToLive() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,10 +35,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DurationReportResultDto.JSON_PROPERTY_AVERAGE
 })
 @JsonTypeName("DurationReportResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DurationReportResultDto {
   public static final String JSON_PROPERTY_PERIOD = "period";
-  private JsonNullable<Integer> period = JsonNullable.<Integer>undefined();
+  private Integer period;
 
   /**
    * The unit of the given period. Possible values are &#x60;MONTH&#x60; and &#x60;QUARTER&#x60;.
@@ -79,21 +76,21 @@ public class DurationReportResultDto {
   }
 
   public static final String JSON_PROPERTY_PERIOD_UNIT = "periodUnit";
-  private JsonNullable<PeriodUnitEnum> periodUnit = JsonNullable.<PeriodUnitEnum>undefined();
+  private PeriodUnitEnum periodUnit;
 
   public static final String JSON_PROPERTY_MINIMUM = "minimum";
-  private JsonNullable<Long> minimum = JsonNullable.<Long>undefined();
+  private Long minimum;
 
   public static final String JSON_PROPERTY_MAXIMUM = "maximum";
-  private JsonNullable<Long> maximum = JsonNullable.<Long>undefined();
+  private Long maximum;
 
   public static final String JSON_PROPERTY_AVERAGE = "average";
-  private JsonNullable<Long> average = JsonNullable.<Long>undefined();
+  private Long average;
 
 
   public DurationReportResultDto period(Integer period) {
-    this.period = JsonNullable.<Integer>of(period);
     
+    this.period = period;
     return this;
   }
 
@@ -103,32 +100,22 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Specifies a timespan within a year. **Note:** The period must be interpreted in conjunction with the returned `periodUnit`.")
-  @JsonIgnore
-
-  public Integer getPeriod() {
-        return period.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PERIOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getPeriod_JsonNullable() {
+  public Integer getPeriod() {
     return period;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PERIOD)
-  public void setPeriod_JsonNullable(JsonNullable<Integer> period) {
-    this.period = period;
-  }
+
 
   public void setPeriod(Integer period) {
-    this.period = JsonNullable.<Integer>of(period);
+    this.period = period;
   }
 
 
   public DurationReportResultDto periodUnit(PeriodUnitEnum periodUnit) {
-    this.periodUnit = JsonNullable.<PeriodUnitEnum>of(periodUnit);
     
+    this.periodUnit = periodUnit;
     return this;
   }
 
@@ -138,32 +125,22 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The unit of the given period. Possible values are `MONTH` and `QUARTER`.")
-  @JsonIgnore
-
-  public PeriodUnitEnum getPeriodUnit() {
-        return periodUnit.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PERIOD_UNIT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<PeriodUnitEnum> getPeriodUnit_JsonNullable() {
+  public PeriodUnitEnum getPeriodUnit() {
     return periodUnit;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PERIOD_UNIT)
-  public void setPeriodUnit_JsonNullable(JsonNullable<PeriodUnitEnum> periodUnit) {
-    this.periodUnit = periodUnit;
-  }
+
 
   public void setPeriodUnit(PeriodUnitEnum periodUnit) {
-    this.periodUnit = JsonNullable.<PeriodUnitEnum>of(periodUnit);
+    this.periodUnit = periodUnit;
   }
 
 
   public DurationReportResultDto minimum(Long minimum) {
-    this.minimum = JsonNullable.<Long>of(minimum);
     
+    this.minimum = minimum;
     return this;
   }
 
@@ -173,32 +150,22 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The smallest duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonIgnore
-
-  public Long getMinimum() {
-        return minimum.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MINIMUM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getMinimum_JsonNullable() {
+  public Long getMinimum() {
     return minimum;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MINIMUM)
-  public void setMinimum_JsonNullable(JsonNullable<Long> minimum) {
-    this.minimum = minimum;
-  }
+
 
   public void setMinimum(Long minimum) {
-    this.minimum = JsonNullable.<Long>of(minimum);
+    this.minimum = minimum;
   }
 
 
   public DurationReportResultDto maximum(Long maximum) {
-    this.maximum = JsonNullable.<Long>of(maximum);
     
+    this.maximum = maximum;
     return this;
   }
 
@@ -208,32 +175,22 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The greatest duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonIgnore
-
-  public Long getMaximum() {
-        return maximum.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MAXIMUM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getMaximum_JsonNullable() {
+  public Long getMaximum() {
     return maximum;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MAXIMUM)
-  public void setMaximum_JsonNullable(JsonNullable<Long> maximum) {
-    this.maximum = maximum;
-  }
+
 
   public void setMaximum(Long maximum) {
-    this.maximum = JsonNullable.<Long>of(maximum);
+    this.maximum = maximum;
   }
 
 
   public DurationReportResultDto average(Long average) {
-    this.average = JsonNullable.<Long>of(average);
     
+    this.average = average;
     return this;
   }
 
@@ -243,26 +200,16 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The average duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonIgnore
-
-  public Long getAverage() {
-        return average.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_AVERAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getAverage_JsonNullable() {
+  public Long getAverage() {
     return average;
   }
-  
-  @JsonProperty(JSON_PROPERTY_AVERAGE)
-  public void setAverage_JsonNullable(JsonNullable<Long> average) {
-    this.average = average;
-  }
+
 
   public void setAverage(Long average) {
-    this.average = JsonNullable.<Long>of(average);
+    this.average = average;
   }
 
 

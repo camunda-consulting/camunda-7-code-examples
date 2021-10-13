@@ -27,9 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,30 +37,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PatchVariablesDto.JSON_PROPERTY_DELETIONS
 })
 @JsonTypeName("PatchVariablesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class PatchVariablesDto {
   public static final String JSON_PROPERTY_MODIFICATIONS = "modifications";
-  private JsonNullable<Map<String, VariableValueDto>> modifications = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> modifications = null;
 
   public static final String JSON_PROPERTY_DELETIONS = "deletions";
-  private JsonNullable<List<String>> deletions = JsonNullable.<List<String>>undefined();
+  private List<String> deletions = null;
 
 
   public PatchVariablesDto modifications(Map<String, VariableValueDto> modifications) {
-    this.modifications = JsonNullable.<Map<String, VariableValueDto>>of(modifications);
     
+    this.modifications = modifications;
     return this;
   }
 
   public PatchVariablesDto putModificationsItem(String key, VariableValueDto modificationsItem) {
-    if (this.modifications == null || !this.modifications.isPresent()) {
-      this.modifications = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.modifications == null) {
+      this.modifications = new HashMap<>();
     }
-    try {
-      this.modifications.get().put(key, modificationsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.modifications.put(key, modificationsItem);
     return this;
   }
 
@@ -73,44 +66,30 @@ public class PatchVariablesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getModifications() {
-        return modifications.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MODIFICATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getModifications_JsonNullable() {
+  public Map<String, VariableValueDto> getModifications() {
     return modifications;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MODIFICATIONS)
-  public void setModifications_JsonNullable(JsonNullable<Map<String, VariableValueDto>> modifications) {
-    this.modifications = modifications;
-  }
+
 
   public void setModifications(Map<String, VariableValueDto> modifications) {
-    this.modifications = JsonNullable.<Map<String, VariableValueDto>>of(modifications);
+    this.modifications = modifications;
   }
 
 
   public PatchVariablesDto deletions(List<String> deletions) {
-    this.deletions = JsonNullable.<List<String>>of(deletions);
     
+    this.deletions = deletions;
     return this;
   }
 
   public PatchVariablesDto addDeletionsItem(String deletionsItem) {
-    if (this.deletions == null || !this.deletions.isPresent()) {
-      this.deletions = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.deletions == null) {
+      this.deletions = new ArrayList<>();
     }
-    try {
-      this.deletions.get().add(deletionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.deletions.add(deletionsItem);
     return this;
   }
 
@@ -120,26 +99,16 @@ public class PatchVariablesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of String keys of variables to be deleted.")
-  @JsonIgnore
-
-  public List<String> getDeletions() {
-        return deletions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getDeletions_JsonNullable() {
+  public List<String> getDeletions() {
     return deletions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETIONS)
-  public void setDeletions_JsonNullable(JsonNullable<List<String>> deletions) {
-    this.deletions = deletions;
-  }
+
 
   public void setDeletions(List<String> deletions) {
-    this.deletions = JsonNullable.<List<String>>of(deletions);
+    this.deletions = deletions;
   }
 
 

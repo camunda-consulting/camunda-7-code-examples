@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -55,75 +52,75 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricExternalTaskLogDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
 })
 @JsonTypeName("HistoricExternalTaskLogDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricExternalTaskLogDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_EXTERNAL_TASK_ID = "externalTaskId";
-  private JsonNullable<String> externalTaskId = JsonNullable.<String>undefined();
+  private String externalTaskId;
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  private JsonNullable<OffsetDateTime> timestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime timestamp;
 
   public static final String JSON_PROPERTY_TOPIC_NAME = "topicName";
-  private JsonNullable<String> topicName = JsonNullable.<String>undefined();
+  private String topicName;
 
   public static final String JSON_PROPERTY_WORKER_ID = "workerId";
-  private JsonNullable<String> workerId = JsonNullable.<String>undefined();
+  private String workerId;
 
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  private JsonNullable<Long> priority = JsonNullable.<Long>undefined();
+  private Long priority;
 
   public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
-  private JsonNullable<String> errorMessage = JsonNullable.<String>undefined();
+  private String errorMessage;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID = "activityInstanceId";
-  private JsonNullable<String> activityInstanceId = JsonNullable.<String>undefined();
+  private String activityInstanceId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_CREATION_LOG = "creationLog";
-  private JsonNullable<Boolean> creationLog = JsonNullable.<Boolean>undefined();
+  private Boolean creationLog;
 
   public static final String JSON_PROPERTY_FAILURE_LOG = "failureLog";
-  private JsonNullable<Boolean> failureLog = JsonNullable.<Boolean>undefined();
+  private Boolean failureLog;
 
   public static final String JSON_PROPERTY_SUCCESS_LOG = "successLog";
-  private JsonNullable<Boolean> successLog = JsonNullable.<Boolean>undefined();
+  private Boolean successLog;
 
   public static final String JSON_PROPERTY_DELETION_LOG = "deletionLog";
-  private JsonNullable<Boolean> deletionLog = JsonNullable.<Boolean>undefined();
+  private Boolean deletionLog;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
 
   public HistoricExternalTaskLogDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -133,32 +130,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the log entry.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricExternalTaskLogDto externalTaskId(String externalTaskId) {
-    this.externalTaskId = JsonNullable.<String>of(externalTaskId);
     
+    this.externalTaskId = externalTaskId;
     return this;
   }
 
@@ -168,32 +155,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the external task.")
-  @JsonIgnore
-
-  public String getExternalTaskId() {
-        return externalTaskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExternalTaskId_JsonNullable() {
+  public String getExternalTaskId() {
     return externalTaskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID)
-  public void setExternalTaskId_JsonNullable(JsonNullable<String> externalTaskId) {
-    this.externalTaskId = externalTaskId;
-  }
+
 
   public void setExternalTaskId(String externalTaskId) {
-    this.externalTaskId = JsonNullable.<String>of(externalTaskId);
+    this.externalTaskId = externalTaskId;
   }
 
 
   public HistoricExternalTaskLogDto timestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
     
+    this.timestamp = timestamp;
     return this;
   }
 
@@ -203,32 +180,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the log entry has been written.")
-  @JsonIgnore
-
-  public OffsetDateTime getTimestamp() {
-        return timestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTimestamp_JsonNullable() {
+  public OffsetDateTime getTimestamp() {
     return timestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  public void setTimestamp_JsonNullable(JsonNullable<OffsetDateTime> timestamp) {
-    this.timestamp = timestamp;
-  }
+
 
   public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
+    this.timestamp = timestamp;
   }
 
 
   public HistoricExternalTaskLogDto topicName(String topicName) {
-    this.topicName = JsonNullable.<String>of(topicName);
     
+    this.topicName = topicName;
     return this;
   }
 
@@ -238,32 +205,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The topic name of the associated external task.")
-  @JsonIgnore
-
-  public String getTopicName() {
-        return topicName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TOPIC_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTopicName_JsonNullable() {
+  public String getTopicName() {
     return topicName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TOPIC_NAME)
-  public void setTopicName_JsonNullable(JsonNullable<String> topicName) {
-    this.topicName = topicName;
-  }
+
 
   public void setTopicName(String topicName) {
-    this.topicName = JsonNullable.<String>of(topicName);
+    this.topicName = topicName;
   }
 
 
   public HistoricExternalTaskLogDto workerId(String workerId) {
-    this.workerId = JsonNullable.<String>of(workerId);
     
+    this.workerId = workerId;
     return this;
   }
 
@@ -273,32 +230,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the worker that posessed the most recent lock.")
-  @JsonIgnore
-
-  public String getWorkerId() {
-        return workerId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WORKER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getWorkerId_JsonNullable() {
+  public String getWorkerId() {
     return workerId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  public void setWorkerId_JsonNullable(JsonNullable<String> workerId) {
-    this.workerId = workerId;
-  }
+
 
   public void setWorkerId(String workerId) {
-    this.workerId = JsonNullable.<String>of(workerId);
+    this.workerId = workerId;
   }
 
 
   public HistoricExternalTaskLogDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -308,32 +255,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of retries the associated external task has left.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 
   public HistoricExternalTaskLogDto priority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
     
+    this.priority = priority;
     return this;
   }
 
@@ -343,32 +280,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution priority the external task had when the log entry was created.")
-  @JsonIgnore
-
-  public Long getPriority() {
-        return priority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getPriority_JsonNullable() {
+  public Long getPriority() {
     return priority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY)
-  public void setPriority_JsonNullable(JsonNullable<Long> priority) {
-    this.priority = priority;
-  }
+
 
   public void setPriority(Long priority) {
-    this.priority = JsonNullable.<Long>of(priority);
+    this.priority = priority;
   }
 
 
   public HistoricExternalTaskLogDto errorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
     
+    this.errorMessage = errorMessage;
     return this;
   }
 
@@ -378,32 +305,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of the error that occurred by executing the associated external task.")
-  @JsonIgnore
-
-  public String getErrorMessage() {
-        return errorMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorMessage_JsonNullable() {
+  public String getErrorMessage() {
     return errorMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  public void setErrorMessage_JsonNullable(JsonNullable<String> errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+
 
   public void setErrorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
+    this.errorMessage = errorMessage;
   }
 
 
   public HistoricExternalTaskLogDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -413,32 +330,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity on which the associated external task was created.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public HistoricExternalTaskLogDto activityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
     
+    this.activityInstanceId = activityInstanceId;
     return this;
   }
 
@@ -448,32 +355,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity instance on which the associated external task was created.")
-  @JsonIgnore
-
-  public String getActivityInstanceId() {
-        return activityInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityInstanceId_JsonNullable() {
+  public String getActivityInstanceId() {
     return activityInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
-  public void setActivityInstanceId_JsonNullable(JsonNullable<String> activityInstanceId) {
-    this.activityInstanceId = activityInstanceId;
-  }
+
 
   public void setActivityInstanceId(String activityInstanceId) {
-    this.activityInstanceId = JsonNullable.<String>of(activityInstanceId);
+    this.activityInstanceId = activityInstanceId;
   }
 
 
   public HistoricExternalTaskLogDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -483,32 +380,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution id on which the associated external task was created.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public HistoricExternalTaskLogDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -518,32 +405,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance on which the associated external task was created.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public HistoricExternalTaskLogDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -553,32 +430,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition which the associated external task belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public HistoricExternalTaskLogDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -588,32 +455,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition which the associated external task belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public HistoricExternalTaskLogDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -623,32 +480,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant that this historic external task log entry belongs to.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public HistoricExternalTaskLogDto creationLog(Boolean creationLog) {
-    this.creationLog = JsonNullable.<Boolean>of(creationLog);
     
+    this.creationLog = creationLog;
     return this;
   }
 
@@ -658,32 +505,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the creation of the associated external task.")
-  @JsonIgnore
-
-  public Boolean getCreationLog() {
-        return creationLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATION_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCreationLog_JsonNullable() {
+  public Boolean getCreationLog() {
     return creationLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATION_LOG)
-  public void setCreationLog_JsonNullable(JsonNullable<Boolean> creationLog) {
-    this.creationLog = creationLog;
-  }
+
 
   public void setCreationLog(Boolean creationLog) {
-    this.creationLog = JsonNullable.<Boolean>of(creationLog);
+    this.creationLog = creationLog;
   }
 
 
   public HistoricExternalTaskLogDto failureLog(Boolean failureLog) {
-    this.failureLog = JsonNullable.<Boolean>of(failureLog);
     
+    this.failureLog = failureLog;
     return this;
   }
 
@@ -693,32 +530,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the failed execution of the associated external task.")
-  @JsonIgnore
-
-  public Boolean getFailureLog() {
-        return failureLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILURE_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getFailureLog_JsonNullable() {
+  public Boolean getFailureLog() {
     return failureLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILURE_LOG)
-  public void setFailureLog_JsonNullable(JsonNullable<Boolean> failureLog) {
-    this.failureLog = failureLog;
-  }
+
 
   public void setFailureLog(Boolean failureLog) {
-    this.failureLog = JsonNullable.<Boolean>of(failureLog);
+    this.failureLog = failureLog;
   }
 
 
   public HistoricExternalTaskLogDto successLog(Boolean successLog) {
-    this.successLog = JsonNullable.<Boolean>of(successLog);
     
+    this.successLog = successLog;
     return this;
   }
 
@@ -728,32 +555,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the successful execution of the associated external task.")
-  @JsonIgnore
-
-  public Boolean getSuccessLog() {
-        return successLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUCCESS_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuccessLog_JsonNullable() {
+  public Boolean getSuccessLog() {
     return successLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUCCESS_LOG)
-  public void setSuccessLog_JsonNullable(JsonNullable<Boolean> successLog) {
-    this.successLog = successLog;
-  }
+
 
   public void setSuccessLog(Boolean successLog) {
-    this.successLog = JsonNullable.<Boolean>of(successLog);
+    this.successLog = successLog;
   }
 
 
   public HistoricExternalTaskLogDto deletionLog(Boolean deletionLog) {
-    this.deletionLog = JsonNullable.<Boolean>of(deletionLog);
     
+    this.deletionLog = deletionLog;
     return this;
   }
 
@@ -763,32 +580,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the deletion of the associated external task.")
-  @JsonIgnore
-
-  public Boolean getDeletionLog() {
-        return deletionLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETION_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getDeletionLog_JsonNullable() {
+  public Boolean getDeletionLog() {
     return deletionLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETION_LOG)
-  public void setDeletionLog_JsonNullable(JsonNullable<Boolean> deletionLog) {
-    this.deletionLog = deletionLog;
-  }
+
 
   public void setDeletionLog(Boolean deletionLog) {
-    this.deletionLog = JsonNullable.<Boolean>of(deletionLog);
+    this.deletionLog = deletionLog;
   }
 
 
   public HistoricExternalTaskLogDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -798,32 +605,22 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which this log should be removed by the History Cleanup job. Default format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.  For further information, please see the [documentation](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/)")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public HistoricExternalTaskLogDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -833,26 +630,16 @@ public class HistoricExternalTaskLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing this log.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

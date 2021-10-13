@@ -29,9 +29,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -44,36 +41,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DeploymentWithDefinitionsDtoAllOf.JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS
 })
 @JsonTypeName("DeploymentWithDefinitionsDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DeploymentWithDefinitionsDtoAllOf {
   public static final String JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS = "deployedProcessDefinitions";
-  private JsonNullable<Map<String, ProcessDefinitionDto>> deployedProcessDefinitions = JsonNullable.<Map<String, ProcessDefinitionDto>>undefined();
+  private Map<String, ProcessDefinitionDto> deployedProcessDefinitions = null;
 
   public static final String JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS = "deployedDecisionDefinitions";
-  private JsonNullable<Map<String, DecisionDefinitionDto>> deployedDecisionDefinitions = JsonNullable.<Map<String, DecisionDefinitionDto>>undefined();
+  private Map<String, DecisionDefinitionDto> deployedDecisionDefinitions = null;
 
   public static final String JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS = "deployedDecisionRequirementsDefinitions";
-  private JsonNullable<Map<String, DecisionRequirementsDefinitionDto>> deployedDecisionRequirementsDefinitions = JsonNullable.<Map<String, DecisionRequirementsDefinitionDto>>undefined();
+  private Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions = null;
 
   public static final String JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS = "deployedCaseDefinitions";
-  private JsonNullable<Map<String, CaseDefinitionDto>> deployedCaseDefinitions = JsonNullable.<Map<String, CaseDefinitionDto>>undefined();
+  private Map<String, CaseDefinitionDto> deployedCaseDefinitions = null;
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedProcessDefinitions(Map<String, ProcessDefinitionDto> deployedProcessDefinitions) {
-    this.deployedProcessDefinitions = JsonNullable.<Map<String, ProcessDefinitionDto>>of(deployedProcessDefinitions);
     
+    this.deployedProcessDefinitions = deployedProcessDefinitions;
     return this;
   }
 
   public DeploymentWithDefinitionsDtoAllOf putDeployedProcessDefinitionsItem(String key, ProcessDefinitionDto deployedProcessDefinitionsItem) {
-    if (this.deployedProcessDefinitions == null || !this.deployedProcessDefinitions.isPresent()) {
-      this.deployedProcessDefinitions = JsonNullable.<Map<String, ProcessDefinitionDto>>of(new HashMap<>());
+    if (this.deployedProcessDefinitions == null) {
+      this.deployedProcessDefinitions = new HashMap<>();
     }
-    try {
-      this.deployedProcessDefinitions.get().put(key, deployedProcessDefinitionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.deployedProcessDefinitions.put(key, deployedProcessDefinitionsItem);
     return this;
   }
 
@@ -83,44 +76,30 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the process definitions, which are successfully deployed with that deployment. The key is the process definition id, the value is a JSON Object corresponding to the process definition.")
-  @JsonIgnore
-
-  public Map<String, ProcessDefinitionDto> getDeployedProcessDefinitions() {
-        return deployedProcessDefinitions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, ProcessDefinitionDto>> getDeployedProcessDefinitions_JsonNullable() {
+  public Map<String, ProcessDefinitionDto> getDeployedProcessDefinitions() {
     return deployedProcessDefinitions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS)
-  public void setDeployedProcessDefinitions_JsonNullable(JsonNullable<Map<String, ProcessDefinitionDto>> deployedProcessDefinitions) {
-    this.deployedProcessDefinitions = deployedProcessDefinitions;
-  }
+
 
   public void setDeployedProcessDefinitions(Map<String, ProcessDefinitionDto> deployedProcessDefinitions) {
-    this.deployedProcessDefinitions = JsonNullable.<Map<String, ProcessDefinitionDto>>of(deployedProcessDefinitions);
+    this.deployedProcessDefinitions = deployedProcessDefinitions;
   }
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedDecisionDefinitions(Map<String, DecisionDefinitionDto> deployedDecisionDefinitions) {
-    this.deployedDecisionDefinitions = JsonNullable.<Map<String, DecisionDefinitionDto>>of(deployedDecisionDefinitions);
     
+    this.deployedDecisionDefinitions = deployedDecisionDefinitions;
     return this;
   }
 
   public DeploymentWithDefinitionsDtoAllOf putDeployedDecisionDefinitionsItem(String key, DecisionDefinitionDto deployedDecisionDefinitionsItem) {
-    if (this.deployedDecisionDefinitions == null || !this.deployedDecisionDefinitions.isPresent()) {
-      this.deployedDecisionDefinitions = JsonNullable.<Map<String, DecisionDefinitionDto>>of(new HashMap<>());
+    if (this.deployedDecisionDefinitions == null) {
+      this.deployedDecisionDefinitions = new HashMap<>();
     }
-    try {
-      this.deployedDecisionDefinitions.get().put(key, deployedDecisionDefinitionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.deployedDecisionDefinitions.put(key, deployedDecisionDefinitionsItem);
     return this;
   }
 
@@ -130,44 +109,30 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision definitions, which are successfully deployed with that deployment. The key is the decision definition id, the value is a JSON Object corresponding to the decision definition.")
-  @JsonIgnore
-
-  public Map<String, DecisionDefinitionDto> getDeployedDecisionDefinitions() {
-        return deployedDecisionDefinitions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, DecisionDefinitionDto>> getDeployedDecisionDefinitions_JsonNullable() {
+  public Map<String, DecisionDefinitionDto> getDeployedDecisionDefinitions() {
     return deployedDecisionDefinitions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS)
-  public void setDeployedDecisionDefinitions_JsonNullable(JsonNullable<Map<String, DecisionDefinitionDto>> deployedDecisionDefinitions) {
-    this.deployedDecisionDefinitions = deployedDecisionDefinitions;
-  }
+
 
   public void setDeployedDecisionDefinitions(Map<String, DecisionDefinitionDto> deployedDecisionDefinitions) {
-    this.deployedDecisionDefinitions = JsonNullable.<Map<String, DecisionDefinitionDto>>of(deployedDecisionDefinitions);
+    this.deployedDecisionDefinitions = deployedDecisionDefinitions;
   }
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedDecisionRequirementsDefinitions(Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions) {
-    this.deployedDecisionRequirementsDefinitions = JsonNullable.<Map<String, DecisionRequirementsDefinitionDto>>of(deployedDecisionRequirementsDefinitions);
     
+    this.deployedDecisionRequirementsDefinitions = deployedDecisionRequirementsDefinitions;
     return this;
   }
 
   public DeploymentWithDefinitionsDtoAllOf putDeployedDecisionRequirementsDefinitionsItem(String key, DecisionRequirementsDefinitionDto deployedDecisionRequirementsDefinitionsItem) {
-    if (this.deployedDecisionRequirementsDefinitions == null || !this.deployedDecisionRequirementsDefinitions.isPresent()) {
-      this.deployedDecisionRequirementsDefinitions = JsonNullable.<Map<String, DecisionRequirementsDefinitionDto>>of(new HashMap<>());
+    if (this.deployedDecisionRequirementsDefinitions == null) {
+      this.deployedDecisionRequirementsDefinitions = new HashMap<>();
     }
-    try {
-      this.deployedDecisionRequirementsDefinitions.get().put(key, deployedDecisionRequirementsDefinitionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.deployedDecisionRequirementsDefinitions.put(key, deployedDecisionRequirementsDefinitionsItem);
     return this;
   }
 
@@ -177,44 +142,30 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision requirements definitions, which are successfully deployed with that deployment. The key is the decision requirements definition id, the value is a JSON Object corresponding to the decision requirements definition.")
-  @JsonIgnore
-
-  public Map<String, DecisionRequirementsDefinitionDto> getDeployedDecisionRequirementsDefinitions() {
-        return deployedDecisionRequirementsDefinitions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, DecisionRequirementsDefinitionDto>> getDeployedDecisionRequirementsDefinitions_JsonNullable() {
+  public Map<String, DecisionRequirementsDefinitionDto> getDeployedDecisionRequirementsDefinitions() {
     return deployedDecisionRequirementsDefinitions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
-  public void setDeployedDecisionRequirementsDefinitions_JsonNullable(JsonNullable<Map<String, DecisionRequirementsDefinitionDto>> deployedDecisionRequirementsDefinitions) {
-    this.deployedDecisionRequirementsDefinitions = deployedDecisionRequirementsDefinitions;
-  }
+
 
   public void setDeployedDecisionRequirementsDefinitions(Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions) {
-    this.deployedDecisionRequirementsDefinitions = JsonNullable.<Map<String, DecisionRequirementsDefinitionDto>>of(deployedDecisionRequirementsDefinitions);
+    this.deployedDecisionRequirementsDefinitions = deployedDecisionRequirementsDefinitions;
   }
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedCaseDefinitions(Map<String, CaseDefinitionDto> deployedCaseDefinitions) {
-    this.deployedCaseDefinitions = JsonNullable.<Map<String, CaseDefinitionDto>>of(deployedCaseDefinitions);
     
+    this.deployedCaseDefinitions = deployedCaseDefinitions;
     return this;
   }
 
   public DeploymentWithDefinitionsDtoAllOf putDeployedCaseDefinitionsItem(String key, CaseDefinitionDto deployedCaseDefinitionsItem) {
-    if (this.deployedCaseDefinitions == null || !this.deployedCaseDefinitions.isPresent()) {
-      this.deployedCaseDefinitions = JsonNullable.<Map<String, CaseDefinitionDto>>of(new HashMap<>());
+    if (this.deployedCaseDefinitions == null) {
+      this.deployedCaseDefinitions = new HashMap<>();
     }
-    try {
-      this.deployedCaseDefinitions.get().put(key, deployedCaseDefinitionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.deployedCaseDefinitions.put(key, deployedCaseDefinitionsItem);
     return this;
   }
 
@@ -224,26 +175,16 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the case definitions, which are successfully deployed with that deployment. The key is the case definition id, the value is a JSON Object corresponding to the case definition.")
-  @JsonIgnore
-
-  public Map<String, CaseDefinitionDto> getDeployedCaseDefinitions() {
-        return deployedCaseDefinitions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, CaseDefinitionDto>> getDeployedCaseDefinitions_JsonNullable() {
+  public Map<String, CaseDefinitionDto> getDeployedCaseDefinitions() {
     return deployedCaseDefinitions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS)
-  public void setDeployedCaseDefinitions_JsonNullable(JsonNullable<Map<String, CaseDefinitionDto>> deployedCaseDefinitions) {
-    this.deployedCaseDefinitions = deployedCaseDefinitions;
-  }
+
 
   public void setDeployedCaseDefinitions(Map<String, CaseDefinitionDto> deployedCaseDefinitions) {
-    this.deployedCaseDefinitions = JsonNullable.<Map<String, CaseDefinitionDto>>of(deployedCaseDefinitions);
+    this.deployedCaseDefinitions = deployedCaseDefinitions;
   }
 
 

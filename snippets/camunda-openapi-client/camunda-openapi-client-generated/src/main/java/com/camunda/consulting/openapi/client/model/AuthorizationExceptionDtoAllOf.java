@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,18 +35,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AuthorizationExceptionDtoAllOf.JSON_PROPERTY_MISSING_AUTHORIZATIONS
 })
 @JsonTypeName("AuthorizationExceptionDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AuthorizationExceptionDtoAllOf {
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_MISSING_AUTHORIZATIONS = "missingAuthorizations";
-  private JsonNullable<List<MissingAuthorizationDto>> missingAuthorizations = JsonNullable.<List<MissingAuthorizationDto>>undefined();
+  private List<MissingAuthorizationDto> missingAuthorizations = null;
 
 
   public AuthorizationExceptionDtoAllOf userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -59,44 +56,30 @@ public class AuthorizationExceptionDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user that does not have expected permissions")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public AuthorizationExceptionDtoAllOf missingAuthorizations(List<MissingAuthorizationDto> missingAuthorizations) {
-    this.missingAuthorizations = JsonNullable.<List<MissingAuthorizationDto>>of(missingAuthorizations);
     
+    this.missingAuthorizations = missingAuthorizations;
     return this;
   }
 
   public AuthorizationExceptionDtoAllOf addMissingAuthorizationsItem(MissingAuthorizationDto missingAuthorizationsItem) {
-    if (this.missingAuthorizations == null || !this.missingAuthorizations.isPresent()) {
-      this.missingAuthorizations = JsonNullable.<List<MissingAuthorizationDto>>of(new ArrayList<>());
+    if (this.missingAuthorizations == null) {
+      this.missingAuthorizations = new ArrayList<>();
     }
-    try {
-      this.missingAuthorizations.get().add(missingAuthorizationsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.missingAuthorizations.add(missingAuthorizationsItem);
     return this;
   }
 
@@ -106,26 +89,16 @@ public class AuthorizationExceptionDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonIgnore
-
-  public List<MissingAuthorizationDto> getMissingAuthorizations() {
-        return missingAuthorizations.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MISSING_AUTHORIZATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<MissingAuthorizationDto>> getMissingAuthorizations_JsonNullable() {
+  public List<MissingAuthorizationDto> getMissingAuthorizations() {
     return missingAuthorizations;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MISSING_AUTHORIZATIONS)
-  public void setMissingAuthorizations_JsonNullable(JsonNullable<List<MissingAuthorizationDto>> missingAuthorizations) {
-    this.missingAuthorizations = missingAuthorizations;
-  }
+
 
   public void setMissingAuthorizations(List<MissingAuthorizationDto> missingAuthorizations) {
-    this.missingAuthorizations = JsonNullable.<List<MissingAuthorizationDto>>of(missingAuthorizations);
+    this.missingAuthorizations = missingAuthorizations;
   }
 
 

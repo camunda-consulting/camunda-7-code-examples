@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,33 +35,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationInstructionDto.JSON_PROPERTY_UPDATE_EVENT_TRIGGER
 })
 @JsonTypeName("MigrationInstructionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationInstructionDto {
   public static final String JSON_PROPERTY_SOURCE_ACTIVITY_IDS = "sourceActivityIds";
-  private JsonNullable<List<String>> sourceActivityIds = JsonNullable.<List<String>>undefined();
+  private List<String> sourceActivityIds = null;
 
   public static final String JSON_PROPERTY_TARGET_ACTIVITY_IDS = "targetActivityIds";
-  private JsonNullable<List<String>> targetActivityIds = JsonNullable.<List<String>>undefined();
+  private List<String> targetActivityIds = null;
 
   public static final String JSON_PROPERTY_UPDATE_EVENT_TRIGGER = "updateEventTrigger";
-  private JsonNullable<Boolean> updateEventTrigger = JsonNullable.<Boolean>undefined();
+  private Boolean updateEventTrigger;
 
 
   public MigrationInstructionDto sourceActivityIds(List<String> sourceActivityIds) {
-    this.sourceActivityIds = JsonNullable.<List<String>>of(sourceActivityIds);
     
+    this.sourceActivityIds = sourceActivityIds;
     return this;
   }
 
   public MigrationInstructionDto addSourceActivityIdsItem(String sourceActivityIdsItem) {
-    if (this.sourceActivityIds == null || !this.sourceActivityIds.isPresent()) {
-      this.sourceActivityIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.sourceActivityIds == null) {
+      this.sourceActivityIds = new ArrayList<>();
     }
-    try {
-      this.sourceActivityIds.get().add(sourceActivityIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sourceActivityIds.add(sourceActivityIdsItem);
     return this;
   }
 
@@ -74,44 +67,30 @@ public class MigrationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The activity ids from the source process definition being mapped.")
-  @JsonIgnore
-
-  public List<String> getSourceActivityIds() {
-        return sourceActivityIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SOURCE_ACTIVITY_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getSourceActivityIds_JsonNullable() {
+  public List<String> getSourceActivityIds() {
     return sourceActivityIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SOURCE_ACTIVITY_IDS)
-  public void setSourceActivityIds_JsonNullable(JsonNullable<List<String>> sourceActivityIds) {
-    this.sourceActivityIds = sourceActivityIds;
-  }
+
 
   public void setSourceActivityIds(List<String> sourceActivityIds) {
-    this.sourceActivityIds = JsonNullable.<List<String>>of(sourceActivityIds);
+    this.sourceActivityIds = sourceActivityIds;
   }
 
 
   public MigrationInstructionDto targetActivityIds(List<String> targetActivityIds) {
-    this.targetActivityIds = JsonNullable.<List<String>>of(targetActivityIds);
     
+    this.targetActivityIds = targetActivityIds;
     return this;
   }
 
   public MigrationInstructionDto addTargetActivityIdsItem(String targetActivityIdsItem) {
-    if (this.targetActivityIds == null || !this.targetActivityIds.isPresent()) {
-      this.targetActivityIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.targetActivityIds == null) {
+      this.targetActivityIds = new ArrayList<>();
     }
-    try {
-      this.targetActivityIds.get().add(targetActivityIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.targetActivityIds.add(targetActivityIdsItem);
     return this;
   }
 
@@ -121,32 +100,22 @@ public class MigrationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The activity ids from the target process definition being mapped.")
-  @JsonIgnore
-
-  public List<String> getTargetActivityIds() {
-        return targetActivityIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TARGET_ACTIVITY_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTargetActivityIds_JsonNullable() {
+  public List<String> getTargetActivityIds() {
     return targetActivityIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TARGET_ACTIVITY_IDS)
-  public void setTargetActivityIds_JsonNullable(JsonNullable<List<String>> targetActivityIds) {
-    this.targetActivityIds = targetActivityIds;
-  }
+
 
   public void setTargetActivityIds(List<String> targetActivityIds) {
-    this.targetActivityIds = JsonNullable.<List<String>>of(targetActivityIds);
+    this.targetActivityIds = targetActivityIds;
   }
 
 
   public MigrationInstructionDto updateEventTrigger(Boolean updateEventTrigger) {
-    this.updateEventTrigger = JsonNullable.<Boolean>of(updateEventTrigger);
     
+    this.updateEventTrigger = updateEventTrigger;
     return this;
   }
 
@@ -156,26 +125,16 @@ public class MigrationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Configuration flag whether event triggers defined are going to be updated during migration.")
-  @JsonIgnore
-
-  public Boolean getUpdateEventTrigger() {
-        return updateEventTrigger.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_UPDATE_EVENT_TRIGGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getUpdateEventTrigger_JsonNullable() {
+  public Boolean getUpdateEventTrigger() {
     return updateEventTrigger;
   }
-  
-  @JsonProperty(JSON_PROPERTY_UPDATE_EVENT_TRIGGER)
-  public void setUpdateEventTrigger_JsonNullable(JsonNullable<Boolean> updateEventTrigger) {
-    this.updateEventTrigger = updateEventTrigger;
-  }
+
 
   public void setUpdateEventTrigger(Boolean updateEventTrigger) {
-    this.updateEventTrigger = JsonNullable.<Boolean>of(updateEventTrigger);
+    this.updateEventTrigger = updateEventTrigger;
   }
 
 

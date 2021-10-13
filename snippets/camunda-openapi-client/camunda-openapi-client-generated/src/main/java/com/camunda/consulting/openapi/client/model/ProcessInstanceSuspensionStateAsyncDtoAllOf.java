@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,10 +37,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProcessInstanceSuspensionStateAsyncDtoAllOf.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY
 })
 @JsonTypeName("ProcessInstanceSuspensionStateAsyncDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProcessInstanceSuspensionStateAsyncDtoAllOf {
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
-  private JsonNullable<List<String>> processInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIds = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
   private ProcessInstanceQueryDto processInstanceQuery;
@@ -53,20 +50,16 @@ public class ProcessInstanceSuspensionStateAsyncDtoAllOf {
 
 
   public ProcessInstanceSuspensionStateAsyncDtoAllOf processInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
     
+    this.processInstanceIds = processInstanceIds;
     return this;
   }
 
   public ProcessInstanceSuspensionStateAsyncDtoAllOf addProcessInstanceIdsItem(String processInstanceIdsItem) {
-    if (this.processInstanceIds == null || !this.processInstanceIds.isPresent()) {
-      this.processInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIds == null) {
+      this.processInstanceIds = new ArrayList<>();
     }
-    try {
-      this.processInstanceIds.get().add(processInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIds.add(processInstanceIdsItem);
     return this;
   }
 
@@ -76,26 +69,16 @@ public class ProcessInstanceSuspensionStateAsyncDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of process instance ids which defines a group of process instances which will be activated or suspended by the operation.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIds() {
-        return processInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIds_JsonNullable() {
+  public List<String> getProcessInstanceIds() {
     return processInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  public void setProcessInstanceIds_JsonNullable(JsonNullable<List<String>> processInstanceIds) {
-    this.processInstanceIds = processInstanceIds;
-  }
+
 
   public void setProcessInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
+    this.processInstanceIds = processInstanceIds;
   }
 
 

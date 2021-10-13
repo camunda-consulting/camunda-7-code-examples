@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AtomLink.JSON_PROPERTY_METHOD
 })
 @JsonTypeName("AtomLink")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AtomLink {
   public static final String JSON_PROPERTY_REL = "rel";
-  private JsonNullable<String> rel = JsonNullable.<String>undefined();
+  private String rel;
 
   public static final String JSON_PROPERTY_HREF = "href";
-  private JsonNullable<String> href = JsonNullable.<String>undefined();
+  private String href;
 
   public static final String JSON_PROPERTY_METHOD = "method";
-  private JsonNullable<String> method = JsonNullable.<String>undefined();
+  private String method;
 
 
   public AtomLink rel(String rel) {
-    this.rel = JsonNullable.<String>of(rel);
     
+    this.rel = rel;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The relation of the link to the object that belongs to.")
-  @JsonIgnore
-
-  public String getRel() {
-        return rel.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRel_JsonNullable() {
+  public String getRel() {
     return rel;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REL)
-  public void setRel_JsonNullable(JsonNullable<String> rel) {
-    this.rel = rel;
-  }
+
 
   public void setRel(String rel) {
-    this.rel = JsonNullable.<String>of(rel);
+    this.rel = rel;
   }
 
 
   public AtomLink href(String href) {
-    this.href = JsonNullable.<String>of(href);
     
+    this.href = href;
     return this;
   }
 
@@ -95,32 +82,22 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The url of the link.")
-  @JsonIgnore
-
-  public String getHref() {
-        return href.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HREF)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getHref_JsonNullable() {
+  public String getHref() {
     return href;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HREF)
-  public void setHref_JsonNullable(JsonNullable<String> href) {
-    this.href = href;
-  }
+
 
   public void setHref(String href) {
-    this.href = JsonNullable.<String>of(href);
+    this.href = href;
   }
 
 
   public AtomLink method(String method) {
-    this.method = JsonNullable.<String>of(method);
     
+    this.method = method;
     return this;
   }
 
@@ -130,26 +107,16 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The http method.")
-  @JsonIgnore
-
-  public String getMethod() {
-        return method.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_METHOD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMethod_JsonNullable() {
+  public String getMethod() {
     return method;
   }
-  
-  @JsonProperty(JSON_PROPERTY_METHOD)
-  public void setMethod_JsonNullable(JsonNullable<String> method) {
-    this.method = method;
-  }
+
 
   public void setMethod(String method) {
-    this.method = JsonNullable.<String>of(method);
+    this.method = method;
   }
 
 

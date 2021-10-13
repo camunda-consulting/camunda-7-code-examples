@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobConditionQueryParameterDto.JSON_PROPERTY_VALUE
 })
 @JsonTypeName("JobConditionQueryParameterDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobConditionQueryParameterDto {
   /**
    * Comparison operator to be used.
@@ -74,15 +71,15 @@ public class JobConditionQueryParameterDto {
   }
 
   public static final String JSON_PROPERTY_OPERATOR = "operator";
-  private JsonNullable<OperatorEnum> operator = JsonNullable.<OperatorEnum>undefined();
+  private OperatorEnum operator;
 
   public static final String JSON_PROPERTY_VALUE = "value";
-  private JsonNullable<OffsetDateTime> value = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime value;
 
 
   public JobConditionQueryParameterDto operator(OperatorEnum operator) {
-    this.operator = JsonNullable.<OperatorEnum>of(operator);
     
+    this.operator = operator;
     return this;
   }
 
@@ -92,32 +89,22 @@ public class JobConditionQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Comparison operator to be used.")
-  @JsonIgnore
-
-  public OperatorEnum getOperator() {
-        return operator.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPERATOR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OperatorEnum> getOperator_JsonNullable() {
+  public OperatorEnum getOperator() {
     return operator;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPERATOR)
-  public void setOperator_JsonNullable(JsonNullable<OperatorEnum> operator) {
-    this.operator = operator;
-  }
+
 
   public void setOperator(OperatorEnum operator) {
-    this.operator = JsonNullable.<OperatorEnum>of(operator);
+    this.operator = operator;
   }
 
 
   public JobConditionQueryParameterDto value(OffsetDateTime value) {
-    this.value = JsonNullable.<OffsetDateTime>of(value);
     
+    this.value = value;
     return this;
   }
 
@@ -127,26 +114,16 @@ public class JobConditionQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Date value to compare with.")
-  @JsonIgnore
-
-  public OffsetDateTime getValue() {
-        return value.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getValue_JsonNullable() {
+  public OffsetDateTime getValue() {
     return value;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  public void setValue_JsonNullable(JsonNullable<OffsetDateTime> value) {
-    this.value = value;
-  }
+
 
   public void setValue(OffsetDateTime value) {
-    this.value = JsonNullable.<OffsetDateTime>of(value);
+    this.value = value;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,36 +38,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CleanableHistoricProcessInstanceReportResultDto.JSON_PROPERTY_TENANT_ID
 })
 @JsonTypeName("CleanableHistoricProcessInstanceReportResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CleanableHistoricProcessInstanceReportResultDto {
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_NAME = "processDefinitionName";
-  private JsonNullable<String> processDefinitionName = JsonNullable.<String>undefined();
+  private String processDefinitionName;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_VERSION = "processDefinitionVersion";
-  private JsonNullable<Integer> processDefinitionVersion = JsonNullable.<Integer>undefined();
+  private Integer processDefinitionVersion;
 
   public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  private Integer historyTimeToLive;
 
   public static final String JSON_PROPERTY_FINISHED_PROCESS_INSTANCE_COUNT = "finishedProcessInstanceCount";
-  private JsonNullable<Long> finishedProcessInstanceCount = JsonNullable.<Long>undefined();
+  private Long finishedProcessInstanceCount;
 
   public static final String JSON_PROPERTY_CLEANABLE_PROCESS_INSTANCE_COUNT = "cleanableProcessInstanceCount";
-  private JsonNullable<Long> cleanableProcessInstanceCount = JsonNullable.<Long>undefined();
+  private Long cleanableProcessInstanceCount;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
 
   public CleanableHistoricProcessInstanceReportResultDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -80,32 +77,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -115,32 +102,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto processDefinitionName(String processDefinitionName) {
-    this.processDefinitionName = JsonNullable.<String>of(processDefinitionName);
     
+    this.processDefinitionName = processDefinitionName;
     return this;
   }
 
@@ -150,32 +127,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionName() {
-        return processDefinitionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionName_JsonNullable() {
+  public String getProcessDefinitionName() {
     return processDefinitionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME)
-  public void setProcessDefinitionName_JsonNullable(JsonNullable<String> processDefinitionName) {
-    this.processDefinitionName = processDefinitionName;
-  }
+
 
   public void setProcessDefinitionName(String processDefinitionName) {
-    this.processDefinitionName = JsonNullable.<String>of(processDefinitionName);
+    this.processDefinitionName = processDefinitionName;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto processDefinitionVersion(Integer processDefinitionVersion) {
-    this.processDefinitionVersion = JsonNullable.<Integer>of(processDefinitionVersion);
     
+    this.processDefinitionVersion = processDefinitionVersion;
     return this;
   }
 
@@ -185,32 +152,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the process definition.")
-  @JsonIgnore
-
-  public Integer getProcessDefinitionVersion() {
-        return processDefinitionVersion.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getProcessDefinitionVersion_JsonNullable() {
+  public Integer getProcessDefinitionVersion() {
     return processDefinitionVersion;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_VERSION)
-  public void setProcessDefinitionVersion_JsonNullable(JsonNullable<Integer> processDefinitionVersion) {
-    this.processDefinitionVersion = processDefinitionVersion;
-  }
+
 
   public void setProcessDefinitionVersion(Integer processDefinitionVersion) {
-    this.processDefinitionVersion = JsonNullable.<Integer>of(processDefinitionVersion);
+    this.processDefinitionVersion = processDefinitionVersion;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
     
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -220,32 +177,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The history time to live of the process definition.")
-  @JsonIgnore
-
-  public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
+  public Integer getHistoryTimeToLive() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto finishedProcessInstanceCount(Long finishedProcessInstanceCount) {
-    this.finishedProcessInstanceCount = JsonNullable.<Long>of(finishedProcessInstanceCount);
     
+    this.finishedProcessInstanceCount = finishedProcessInstanceCount;
     return this;
   }
 
@@ -255,32 +202,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the finished historic process instances.")
-  @JsonIgnore
-
-  public Long getFinishedProcessInstanceCount() {
-        return finishedProcessInstanceCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED_PROCESS_INSTANCE_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getFinishedProcessInstanceCount_JsonNullable() {
+  public Long getFinishedProcessInstanceCount() {
     return finishedProcessInstanceCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_PROCESS_INSTANCE_COUNT)
-  public void setFinishedProcessInstanceCount_JsonNullable(JsonNullable<Long> finishedProcessInstanceCount) {
-    this.finishedProcessInstanceCount = finishedProcessInstanceCount;
-  }
+
 
   public void setFinishedProcessInstanceCount(Long finishedProcessInstanceCount) {
-    this.finishedProcessInstanceCount = JsonNullable.<Long>of(finishedProcessInstanceCount);
+    this.finishedProcessInstanceCount = finishedProcessInstanceCount;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto cleanableProcessInstanceCount(Long cleanableProcessInstanceCount) {
-    this.cleanableProcessInstanceCount = JsonNullable.<Long>of(cleanableProcessInstanceCount);
     
+    this.cleanableProcessInstanceCount = cleanableProcessInstanceCount;
     return this;
   }
 
@@ -290,32 +227,22 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the cleanable historic process instances, referring to history time to live.")
-  @JsonIgnore
-
-  public Long getCleanableProcessInstanceCount() {
-        return cleanableProcessInstanceCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEANABLE_PROCESS_INSTANCE_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getCleanableProcessInstanceCount_JsonNullable() {
+  public Long getCleanableProcessInstanceCount() {
     return cleanableProcessInstanceCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEANABLE_PROCESS_INSTANCE_COUNT)
-  public void setCleanableProcessInstanceCount_JsonNullable(JsonNullable<Long> cleanableProcessInstanceCount) {
-    this.cleanableProcessInstanceCount = cleanableProcessInstanceCount;
-  }
+
 
   public void setCleanableProcessInstanceCount(Long cleanableProcessInstanceCount) {
-    this.cleanableProcessInstanceCount = JsonNullable.<Long>of(cleanableProcessInstanceCount);
+    this.cleanableProcessInstanceCount = cleanableProcessInstanceCount;
   }
 
 
   public CleanableHistoricProcessInstanceReportResultDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -325,26 +252,16 @@ public class CleanableHistoricProcessInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the process definition.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 

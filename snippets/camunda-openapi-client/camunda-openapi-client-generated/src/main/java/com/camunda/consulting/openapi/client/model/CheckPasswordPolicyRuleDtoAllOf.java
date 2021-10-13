@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CheckPasswordPolicyRuleDtoAllOf.JSON_PROPERTY_VALID
 })
 @JsonTypeName("CheckPasswordPolicyRuleDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CheckPasswordPolicyRuleDtoAllOf {
   public static final String JSON_PROPERTY_VALID = "valid";
-  private JsonNullable<Boolean> valid = JsonNullable.<Boolean>undefined();
+  private Boolean valid;
 
 
   public CheckPasswordPolicyRuleDtoAllOf valid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
     
+    this.valid = valid;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class CheckPasswordPolicyRuleDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "`true` if the password is compliant with this rule, otherwise `false`.")
-  @JsonIgnore
-
-  public Boolean getValid() {
-        return valid.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getValid_JsonNullable() {
+  public Boolean getValid() {
     return valid;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALID)
-  public void setValid_JsonNullable(JsonNullable<Boolean> valid) {
-    this.valid = valid;
-  }
+
 
   public void setValid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
+    this.valid = valid;
   }
 
 

@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,27 +35,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ParseExceptionDtoAllOf.JSON_PROPERTY_DETAILS
 })
 @JsonTypeName("ParseExceptionDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ParseExceptionDtoAllOf {
   public static final String JSON_PROPERTY_DETAILS = "details";
-  private JsonNullable<Map<String, ResourceReportDto>> details = JsonNullable.<Map<String, ResourceReportDto>>undefined();
+  private Map<String, ResourceReportDto> details = null;
 
 
   public ParseExceptionDtoAllOf details(Map<String, ResourceReportDto> details) {
-    this.details = JsonNullable.<Map<String, ResourceReportDto>>of(details);
     
+    this.details = details;
     return this;
   }
 
   public ParseExceptionDtoAllOf putDetailsItem(String key, ResourceReportDto detailsItem) {
-    if (this.details == null || !this.details.isPresent()) {
-      this.details = JsonNullable.<Map<String, ResourceReportDto>>of(new HashMap<>());
+    if (this.details == null) {
+      this.details = new HashMap<>();
     }
-    try {
-      this.details.get().put(key, detailsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.details.put(key, detailsItem);
     return this;
   }
 
@@ -68,26 +61,16 @@ public class ParseExceptionDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing list of errors and warnings occurred during deployment.")
-  @JsonIgnore
-
-  public Map<String, ResourceReportDto> getDetails() {
-        return details.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, ResourceReportDto>> getDetails_JsonNullable() {
+  public Map<String, ResourceReportDto> getDetails() {
     return details;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DETAILS)
-  public void setDetails_JsonNullable(JsonNullable<Map<String, ResourceReportDto>> details) {
-    this.details = details;
-  }
+
 
   public void setDetails(Map<String, ResourceReportDto> details) {
-    this.details = JsonNullable.<Map<String, ResourceReportDto>>of(details);
+    this.details = details;
   }
 
 

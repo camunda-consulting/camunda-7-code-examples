@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TriggerVariableValueDtoAllOf.JSON_PROPERTY_LOCAL
 })
 @JsonTypeName("TriggerVariableValueDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TriggerVariableValueDtoAllOf {
   public static final String JSON_PROPERTY_LOCAL = "local";
-  private JsonNullable<Boolean> local = JsonNullable.<Boolean>undefined();
+  private Boolean local;
 
 
   public TriggerVariableValueDtoAllOf local(Boolean local) {
-    this.local = JsonNullable.<Boolean>of(local);
     
+    this.local = local;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class TriggerVariableValueDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates whether the variable should be a local variable or not. If set to true, the variable becomes a local variable of the execution entering the target activity.")
-  @JsonIgnore
-
-  public Boolean getLocal() {
-        return local.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LOCAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getLocal_JsonNullable() {
+  public Boolean getLocal() {
     return local;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCAL)
-  public void setLocal_JsonNullable(JsonNullable<Boolean> local) {
-    this.local = local;
-  }
+
 
   public void setLocal(Boolean local) {
-    this.local = JsonNullable.<Boolean>of(local);
+    this.local = local;
   }
 
 

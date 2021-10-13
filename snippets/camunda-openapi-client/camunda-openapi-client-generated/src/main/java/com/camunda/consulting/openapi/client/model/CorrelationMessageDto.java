@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -49,48 +46,48 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CorrelationMessageDto.JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED
 })
 @JsonTypeName("CorrelationMessageDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CorrelationMessageDto {
   public static final String JSON_PROPERTY_MESSAGE_NAME = "messageName";
-  private JsonNullable<String> messageName = JsonNullable.<String>undefined();
+  private String messageName;
 
   public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
-  private JsonNullable<String> businessKey = JsonNullable.<String>undefined();
+  private String businessKey;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>of(false);
+  private Boolean withoutTenantId = false;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_CORRELATION_KEYS = "correlationKeys";
-  private JsonNullable<Map<String, VariableValueDto>> correlationKeys = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> correlationKeys = null;
 
   public static final String JSON_PROPERTY_LOCAL_CORRELATION_KEYS = "localCorrelationKeys";
-  private JsonNullable<Map<String, VariableValueDto>> localCorrelationKeys = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> localCorrelationKeys = null;
 
   public static final String JSON_PROPERTY_PROCESS_VARIABLES = "processVariables";
-  private JsonNullable<Map<String, VariableValueDto>> processVariables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> processVariables = null;
 
   public static final String JSON_PROPERTY_PROCESS_VARIABLES_LOCAL = "processVariablesLocal";
-  private JsonNullable<Map<String, VariableValueDto>> processVariablesLocal = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> processVariablesLocal = null;
 
   public static final String JSON_PROPERTY_ALL = "all";
-  private JsonNullable<Boolean> all = JsonNullable.<Boolean>of(false);
+  private Boolean all = false;
 
   public static final String JSON_PROPERTY_RESULT_ENABLED = "resultEnabled";
-  private JsonNullable<Boolean> resultEnabled = JsonNullable.<Boolean>of(false);
+  private Boolean resultEnabled = false;
 
   public static final String JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED = "variablesInResultEnabled";
-  private JsonNullable<Boolean> variablesInResultEnabled = JsonNullable.<Boolean>of(false);
+  private Boolean variablesInResultEnabled = false;
 
 
   public CorrelationMessageDto messageName(String messageName) {
-    this.messageName = JsonNullable.<String>of(messageName);
     
+    this.messageName = messageName;
     return this;
   }
 
@@ -100,32 +97,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the message to deliver.")
-  @JsonIgnore
-
-  public String getMessageName() {
-        return messageName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessageName_JsonNullable() {
+  public String getMessageName() {
     return messageName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE_NAME)
-  public void setMessageName_JsonNullable(JsonNullable<String> messageName) {
-    this.messageName = messageName;
-  }
+
 
   public void setMessageName(String messageName) {
-    this.messageName = JsonNullable.<String>of(messageName);
+    this.messageName = messageName;
   }
 
 
   public CorrelationMessageDto businessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
     
+    this.businessKey = businessKey;
     return this;
   }
 
@@ -135,32 +122,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used for correlation of process instances that wait for incoming messages. Will only correlate to executions that belong to a process instance with the provided business key.")
-  @JsonIgnore
-
-  public String getBusinessKey() {
-        return businessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKey_JsonNullable() {
+  public String getBusinessKey() {
     return businessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  public void setBusinessKey_JsonNullable(JsonNullable<String> businessKey) {
-    this.businessKey = businessKey;
-  }
+
 
   public void setBusinessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
+    this.businessKey = businessKey;
   }
 
 
   public CorrelationMessageDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -170,32 +147,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to correlate the message for a tenant with the given id. Will only correlate to executions and process definitions which belong to the tenant. Must not be supplied in conjunction with a `withoutTenantId`.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public CorrelationMessageDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -205,32 +172,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the message should only be correlated to executions and process definitions which belong to no tenant or not. Value may only be `true`, as `false` is the default behavior. Must not be supplied in conjunction with a `tenantId`.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public CorrelationMessageDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -240,44 +197,30 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to correlate the message to the process instance with the given id.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public CorrelationMessageDto correlationKeys(Map<String, VariableValueDto> correlationKeys) {
-    this.correlationKeys = JsonNullable.<Map<String, VariableValueDto>>of(correlationKeys);
     
+    this.correlationKeys = correlationKeys;
     return this;
   }
 
   public CorrelationMessageDto putCorrelationKeysItem(String key, VariableValueDto correlationKeysItem) {
-    if (this.correlationKeys == null || !this.correlationKeys.isPresent()) {
-      this.correlationKeys = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.correlationKeys == null) {
+      this.correlationKeys = new HashMap<>();
     }
-    try {
-      this.correlationKeys.get().put(key, correlationKeysItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.correlationKeys.put(key, correlationKeysItem);
     return this;
   }
 
@@ -287,44 +230,30 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used for correlation of process instances that wait for incoming messages. Has to be a JSON object containing key-value pairs that are matched against process instance variables during correlation. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getCorrelationKeys() {
-        return correlationKeys.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CORRELATION_KEYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getCorrelationKeys_JsonNullable() {
+  public Map<String, VariableValueDto> getCorrelationKeys() {
     return correlationKeys;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CORRELATION_KEYS)
-  public void setCorrelationKeys_JsonNullable(JsonNullable<Map<String, VariableValueDto>> correlationKeys) {
-    this.correlationKeys = correlationKeys;
-  }
+
 
   public void setCorrelationKeys(Map<String, VariableValueDto> correlationKeys) {
-    this.correlationKeys = JsonNullable.<Map<String, VariableValueDto>>of(correlationKeys);
+    this.correlationKeys = correlationKeys;
   }
 
 
   public CorrelationMessageDto localCorrelationKeys(Map<String, VariableValueDto> localCorrelationKeys) {
-    this.localCorrelationKeys = JsonNullable.<Map<String, VariableValueDto>>of(localCorrelationKeys);
     
+    this.localCorrelationKeys = localCorrelationKeys;
     return this;
   }
 
   public CorrelationMessageDto putLocalCorrelationKeysItem(String key, VariableValueDto localCorrelationKeysItem) {
-    if (this.localCorrelationKeys == null || !this.localCorrelationKeys.isPresent()) {
-      this.localCorrelationKeys = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.localCorrelationKeys == null) {
+      this.localCorrelationKeys = new HashMap<>();
     }
-    try {
-      this.localCorrelationKeys.get().put(key, localCorrelationKeysItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.localCorrelationKeys.put(key, localCorrelationKeysItem);
     return this;
   }
 
@@ -334,44 +263,30 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Local variables used for correlation of executions (process instances) that wait for incoming messages. Has to be a JSON object containing key-value pairs that are matched against local variables during correlation. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getLocalCorrelationKeys() {
-        return localCorrelationKeys.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LOCAL_CORRELATION_KEYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getLocalCorrelationKeys_JsonNullable() {
+  public Map<String, VariableValueDto> getLocalCorrelationKeys() {
     return localCorrelationKeys;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCAL_CORRELATION_KEYS)
-  public void setLocalCorrelationKeys_JsonNullable(JsonNullable<Map<String, VariableValueDto>> localCorrelationKeys) {
-    this.localCorrelationKeys = localCorrelationKeys;
-  }
+
 
   public void setLocalCorrelationKeys(Map<String, VariableValueDto> localCorrelationKeys) {
-    this.localCorrelationKeys = JsonNullable.<Map<String, VariableValueDto>>of(localCorrelationKeys);
+    this.localCorrelationKeys = localCorrelationKeys;
   }
 
 
   public CorrelationMessageDto processVariables(Map<String, VariableValueDto> processVariables) {
-    this.processVariables = JsonNullable.<Map<String, VariableValueDto>>of(processVariables);
     
+    this.processVariables = processVariables;
     return this;
   }
 
   public CorrelationMessageDto putProcessVariablesItem(String key, VariableValueDto processVariablesItem) {
-    if (this.processVariables == null || !this.processVariables.isPresent()) {
-      this.processVariables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.processVariables == null) {
+      this.processVariables = new HashMap<>();
     }
-    try {
-      this.processVariables.get().put(key, processVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processVariables.put(key, processVariablesItem);
     return this;
   }
 
@@ -381,44 +296,30 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of variables that is injected into the triggered execution or process instance after the message has been delivered. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getProcessVariables() {
-        return processVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getProcessVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getProcessVariables() {
     return processVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
-  public void setProcessVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> processVariables) {
-    this.processVariables = processVariables;
-  }
+
 
   public void setProcessVariables(Map<String, VariableValueDto> processVariables) {
-    this.processVariables = JsonNullable.<Map<String, VariableValueDto>>of(processVariables);
+    this.processVariables = processVariables;
   }
 
 
   public CorrelationMessageDto processVariablesLocal(Map<String, VariableValueDto> processVariablesLocal) {
-    this.processVariablesLocal = JsonNullable.<Map<String, VariableValueDto>>of(processVariablesLocal);
     
+    this.processVariablesLocal = processVariablesLocal;
     return this;
   }
 
   public CorrelationMessageDto putProcessVariablesLocalItem(String key, VariableValueDto processVariablesLocalItem) {
-    if (this.processVariablesLocal == null || !this.processVariablesLocal.isPresent()) {
-      this.processVariablesLocal = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.processVariablesLocal == null) {
+      this.processVariablesLocal = new HashMap<>();
     }
-    try {
-      this.processVariablesLocal.get().put(key, processVariablesLocalItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processVariablesLocal.put(key, processVariablesLocalItem);
     return this;
   }
 
@@ -428,32 +329,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of local variables that is injected into the triggered execution or process instance after the message has been delivered. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getProcessVariablesLocal() {
-        return processVariablesLocal.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES_LOCAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getProcessVariablesLocal_JsonNullable() {
+  public Map<String, VariableValueDto> getProcessVariablesLocal() {
     return processVariablesLocal;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES_LOCAL)
-  public void setProcessVariablesLocal_JsonNullable(JsonNullable<Map<String, VariableValueDto>> processVariablesLocal) {
-    this.processVariablesLocal = processVariablesLocal;
-  }
+
 
   public void setProcessVariablesLocal(Map<String, VariableValueDto> processVariablesLocal) {
-    this.processVariablesLocal = JsonNullable.<Map<String, VariableValueDto>>of(processVariablesLocal);
+    this.processVariablesLocal = processVariablesLocal;
   }
 
 
   public CorrelationMessageDto all(Boolean all) {
-    this.all = JsonNullable.<Boolean>of(all);
     
+    this.all = all;
     return this;
   }
 
@@ -463,32 +354,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the message should be correlated to exactly one entity or multiple entities. If the value is set to `false`, the message will be correlated to exactly one entity (execution or process definition). If the value is set to `true`, the message will be correlated to multiple executions and a process definition that can be instantiated by this message in one go.")
-  @JsonIgnore
-
-  public Boolean getAll() {
-        return all.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ALL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getAll_JsonNullable() {
+  public Boolean getAll() {
     return all;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ALL)
-  public void setAll_JsonNullable(JsonNullable<Boolean> all) {
-    this.all = all;
-  }
+
 
   public void setAll(Boolean all) {
-    this.all = JsonNullable.<Boolean>of(all);
+    this.all = all;
   }
 
 
   public CorrelationMessageDto resultEnabled(Boolean resultEnabled) {
-    this.resultEnabled = JsonNullable.<Boolean>of(resultEnabled);
     
+    this.resultEnabled = resultEnabled;
     return this;
   }
 
@@ -498,32 +379,22 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the result of the correlation should be returned or not. If this property is set to `true`, there will be returned a list of message correlation result objects. Depending on the all property, there will be either one ore more returned results in the list.  The default value is `false`, which means no result will be returned.")
-  @JsonIgnore
-
-  public Boolean getResultEnabled() {
-        return resultEnabled.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESULT_ENABLED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getResultEnabled_JsonNullable() {
+  public Boolean getResultEnabled() {
     return resultEnabled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESULT_ENABLED)
-  public void setResultEnabled_JsonNullable(JsonNullable<Boolean> resultEnabled) {
-    this.resultEnabled = resultEnabled;
-  }
+
 
   public void setResultEnabled(Boolean resultEnabled) {
-    this.resultEnabled = JsonNullable.<Boolean>of(resultEnabled);
+    this.resultEnabled = resultEnabled;
   }
 
 
   public CorrelationMessageDto variablesInResultEnabled(Boolean variablesInResultEnabled) {
-    this.variablesInResultEnabled = JsonNullable.<Boolean>of(variablesInResultEnabled);
     
+    this.variablesInResultEnabled = variablesInResultEnabled;
     return this;
   }
 
@@ -533,26 +404,16 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the result of the correlation should contain process variables or not. The parameter resultEnabled should be set to `true` in order to use this it.  The default value is `false`, which means the variables will not be returned.")
-  @JsonIgnore
-
-  public Boolean getVariablesInResultEnabled() {
-        return variablesInResultEnabled.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariablesInResultEnabled_JsonNullable() {
+  public Boolean getVariablesInResultEnabled() {
     return variablesInResultEnabled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED)
-  public void setVariablesInResultEnabled_JsonNullable(JsonNullable<Boolean> variablesInResultEnabled) {
-    this.variablesInResultEnabled = variablesInResultEnabled;
-  }
+
 
   public void setVariablesInResultEnabled(Boolean variablesInResultEnabled) {
-    this.variablesInResultEnabled = JsonNullable.<Boolean>of(variablesInResultEnabled);
+    this.variablesInResultEnabled = variablesInResultEnabled;
   }
 
 

@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -42,36 +39,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CommentDtoAllOf.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
 })
 @JsonTypeName("CommentDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CommentDtoAllOf {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_TASK_ID = "taskId";
-  private JsonNullable<String> taskId = JsonNullable.<String>undefined();
+  private String taskId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_TIME = "time";
-  private JsonNullable<OffsetDateTime> time = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime time;
 
   public static final String JSON_PROPERTY_MESSAGE = "message";
-  private JsonNullable<String> message = JsonNullable.<String>undefined();
+  private String message;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
 
   public CommentDtoAllOf id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -81,32 +78,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task comment.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public CommentDtoAllOf userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -116,32 +103,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user who created the comment.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public CommentDtoAllOf taskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
     
+    this.taskId = taskId;
     return this;
   }
 
@@ -151,32 +128,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task to which the comment belongs.")
-  @JsonIgnore
-
-  public String getTaskId() {
-        return taskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskId_JsonNullable() {
+  public String getTaskId() {
     return taskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_ID)
-  public void setTaskId_JsonNullable(JsonNullable<String> taskId) {
-    this.taskId = taskId;
-  }
+
 
   public void setTaskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
+    this.taskId = taskId;
   }
 
 
   public CommentDtoAllOf processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -186,32 +153,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance the comment is related to.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public CommentDtoAllOf time(OffsetDateTime time) {
-    this.time = JsonNullable.<OffsetDateTime>of(time);
     
+    this.time = time;
     return this;
   }
 
@@ -221,32 +178,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the comment was created. [Default format]($(docsUrl)/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getTime() {
-        return time.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTime_JsonNullable() {
+  public OffsetDateTime getTime() {
     return time;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIME)
-  public void setTime_JsonNullable(JsonNullable<OffsetDateTime> time) {
-    this.time = time;
-  }
+
 
   public void setTime(OffsetDateTime time) {
-    this.time = JsonNullable.<OffsetDateTime>of(time);
+    this.time = time;
   }
 
 
   public CommentDtoAllOf message(String message) {
-    this.message = JsonNullable.<String>of(message);
     
+    this.message = message;
     return this;
   }
 
@@ -256,32 +203,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The content of the comment.")
-  @JsonIgnore
-
-  public String getMessage() {
-        return message.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessage_JsonNullable() {
+  public String getMessage() {
     return message;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  public void setMessage_JsonNullable(JsonNullable<String> message) {
-    this.message = message;
-  }
+
 
   public void setMessage(String message) {
-    this.message = JsonNullable.<String>of(message);
+    this.message = message;
   }
 
 
   public CommentDtoAllOf removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -291,32 +228,22 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the comment should be removed by the History Cleanup job. [Default format]($(docsUrl)/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public CommentDtoAllOf rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -326,26 +253,16 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing the task.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobDefinitionSuspensionStateDtoAllOf.JSON_PROPERTY_EXECUTION_DATE
 })
 @JsonTypeName("JobDefinitionSuspensionStateDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobDefinitionSuspensionStateDtoAllOf {
   public static final String JSON_PROPERTY_INCLUDE_JOBS = "includeJobs";
-  private JsonNullable<Boolean> includeJobs = JsonNullable.<Boolean>undefined();
+  private Boolean includeJobs;
 
   public static final String JSON_PROPERTY_EXECUTION_DATE = "executionDate";
-  private JsonNullable<String> executionDate = JsonNullable.<String>undefined();
+  private String executionDate;
 
 
   public JobDefinitionSuspensionStateDtoAllOf includeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
     
+    this.includeJobs = includeJobs;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class JobDefinitionSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `Boolean` value which indicates whether to activate or suspend also all jobs of the referenced job definitions. When the value is set to `true`, all jobs of the provided job definitions will be activated or suspended and when the value is set to `false`, the suspension state of all jobs of the provided job definitions will not be updated.")
-  @JsonIgnore
-
-  public Boolean getIncludeJobs() {
-        return includeJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeJobs_JsonNullable() {
+  public Boolean getIncludeJobs() {
     return includeJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
-  public void setIncludeJobs_JsonNullable(JsonNullable<Boolean> includeJobs) {
-    this.includeJobs = includeJobs;
-  }
+
 
   public void setIncludeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
+    this.includeJobs = includeJobs;
   }
 
 
   public JobDefinitionSuspensionStateDtoAllOf executionDate(String executionDate) {
-    this.executionDate = JsonNullable.<String>of(executionDate);
     
+    this.executionDate = executionDate;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class JobDefinitionSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date on which the referenced job definitions will be activated or suspended. If null, the suspension state of the given job definitions is updated immediately. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM- dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public String getExecutionDate() {
-        return executionDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionDate_JsonNullable() {
+  public String getExecutionDate() {
     return executionDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
-  public void setExecutionDate_JsonNullable(JsonNullable<String> executionDate) {
-    this.executionDate = executionDate;
-  }
+
 
   public void setExecutionDate(String executionDate) {
-    this.executionDate = JsonNullable.<String>of(executionDate);
+    this.executionDate = executionDate;
   }
 
 

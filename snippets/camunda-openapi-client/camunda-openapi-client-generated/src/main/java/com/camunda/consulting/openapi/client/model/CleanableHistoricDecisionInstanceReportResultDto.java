@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,36 +38,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CleanableHistoricDecisionInstanceReportResultDto.JSON_PROPERTY_TENANT_ID
 })
 @JsonTypeName("CleanableHistoricDecisionInstanceReportResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CleanableHistoricDecisionInstanceReportResultDto {
   public static final String JSON_PROPERTY_DECISION_DEFINITION_ID = "decisionDefinitionId";
-  private JsonNullable<String> decisionDefinitionId = JsonNullable.<String>undefined();
+  private String decisionDefinitionId;
 
   public static final String JSON_PROPERTY_DECISION_DEFINITION_KEY = "decisionDefinitionKey";
-  private JsonNullable<String> decisionDefinitionKey = JsonNullable.<String>undefined();
+  private String decisionDefinitionKey;
 
   public static final String JSON_PROPERTY_DECISION_DEFINITION_NAME = "decisionDefinitionName";
-  private JsonNullable<String> decisionDefinitionName = JsonNullable.<String>undefined();
+  private String decisionDefinitionName;
 
   public static final String JSON_PROPERTY_DECISION_DEFINITION_VERSION = "decisionDefinitionVersion";
-  private JsonNullable<Integer> decisionDefinitionVersion = JsonNullable.<Integer>undefined();
+  private Integer decisionDefinitionVersion;
 
   public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  private Integer historyTimeToLive;
 
   public static final String JSON_PROPERTY_FINISHED_DECISION_INSTANCE_COUNT = "finishedDecisionInstanceCount";
-  private JsonNullable<Long> finishedDecisionInstanceCount = JsonNullable.<Long>undefined();
+  private Long finishedDecisionInstanceCount;
 
   public static final String JSON_PROPERTY_CLEANABLE_DECISION_INSTANCE_COUNT = "cleanableDecisionInstanceCount";
-  private JsonNullable<Long> cleanableDecisionInstanceCount = JsonNullable.<Long>undefined();
+  private Long cleanableDecisionInstanceCount;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
 
   public CleanableHistoricDecisionInstanceReportResultDto decisionDefinitionId(String decisionDefinitionId) {
-    this.decisionDefinitionId = JsonNullable.<String>of(decisionDefinitionId);
     
+    this.decisionDefinitionId = decisionDefinitionId;
     return this;
   }
 
@@ -80,32 +77,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision definition.")
-  @JsonIgnore
-
-  public String getDecisionDefinitionId() {
-        return decisionDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDecisionDefinitionId_JsonNullable() {
+  public String getDecisionDefinitionId() {
     return decisionDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_ID)
-  public void setDecisionDefinitionId_JsonNullable(JsonNullable<String> decisionDefinitionId) {
-    this.decisionDefinitionId = decisionDefinitionId;
-  }
+
 
   public void setDecisionDefinitionId(String decisionDefinitionId) {
-    this.decisionDefinitionId = JsonNullable.<String>of(decisionDefinitionId);
+    this.decisionDefinitionId = decisionDefinitionId;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto decisionDefinitionKey(String decisionDefinitionKey) {
-    this.decisionDefinitionKey = JsonNullable.<String>of(decisionDefinitionKey);
     
+    this.decisionDefinitionKey = decisionDefinitionKey;
     return this;
   }
 
@@ -115,32 +102,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the decision definition.")
-  @JsonIgnore
-
-  public String getDecisionDefinitionKey() {
-        return decisionDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDecisionDefinitionKey_JsonNullable() {
+  public String getDecisionDefinitionKey() {
     return decisionDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_KEY)
-  public void setDecisionDefinitionKey_JsonNullable(JsonNullable<String> decisionDefinitionKey) {
-    this.decisionDefinitionKey = decisionDefinitionKey;
-  }
+
 
   public void setDecisionDefinitionKey(String decisionDefinitionKey) {
-    this.decisionDefinitionKey = JsonNullable.<String>of(decisionDefinitionKey);
+    this.decisionDefinitionKey = decisionDefinitionKey;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto decisionDefinitionName(String decisionDefinitionName) {
-    this.decisionDefinitionName = JsonNullable.<String>of(decisionDefinitionName);
     
+    this.decisionDefinitionName = decisionDefinitionName;
     return this;
   }
 
@@ -150,32 +127,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the decision definition.")
-  @JsonIgnore
-
-  public String getDecisionDefinitionName() {
-        return decisionDefinitionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDecisionDefinitionName_JsonNullable() {
+  public String getDecisionDefinitionName() {
     return decisionDefinitionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_NAME)
-  public void setDecisionDefinitionName_JsonNullable(JsonNullable<String> decisionDefinitionName) {
-    this.decisionDefinitionName = decisionDefinitionName;
-  }
+
 
   public void setDecisionDefinitionName(String decisionDefinitionName) {
-    this.decisionDefinitionName = JsonNullable.<String>of(decisionDefinitionName);
+    this.decisionDefinitionName = decisionDefinitionName;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto decisionDefinitionVersion(Integer decisionDefinitionVersion) {
-    this.decisionDefinitionVersion = JsonNullable.<Integer>of(decisionDefinitionVersion);
     
+    this.decisionDefinitionVersion = decisionDefinitionVersion;
     return this;
   }
 
@@ -185,32 +152,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the decision definition.")
-  @JsonIgnore
-
-  public Integer getDecisionDefinitionVersion() {
-        return decisionDefinitionVersion.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getDecisionDefinitionVersion_JsonNullable() {
+  public Integer getDecisionDefinitionVersion() {
     return decisionDefinitionVersion;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_VERSION)
-  public void setDecisionDefinitionVersion_JsonNullable(JsonNullable<Integer> decisionDefinitionVersion) {
-    this.decisionDefinitionVersion = decisionDefinitionVersion;
-  }
+
 
   public void setDecisionDefinitionVersion(Integer decisionDefinitionVersion) {
-    this.decisionDefinitionVersion = JsonNullable.<Integer>of(decisionDefinitionVersion);
+    this.decisionDefinitionVersion = decisionDefinitionVersion;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
     
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -220,32 +177,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The history time to live of the decision definition.")
-  @JsonIgnore
-
-  public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
+  public Integer getHistoryTimeToLive() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto finishedDecisionInstanceCount(Long finishedDecisionInstanceCount) {
-    this.finishedDecisionInstanceCount = JsonNullable.<Long>of(finishedDecisionInstanceCount);
     
+    this.finishedDecisionInstanceCount = finishedDecisionInstanceCount;
     return this;
   }
 
@@ -255,32 +202,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the finished historic decision instances.")
-  @JsonIgnore
-
-  public Long getFinishedDecisionInstanceCount() {
-        return finishedDecisionInstanceCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED_DECISION_INSTANCE_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getFinishedDecisionInstanceCount_JsonNullable() {
+  public Long getFinishedDecisionInstanceCount() {
     return finishedDecisionInstanceCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_DECISION_INSTANCE_COUNT)
-  public void setFinishedDecisionInstanceCount_JsonNullable(JsonNullable<Long> finishedDecisionInstanceCount) {
-    this.finishedDecisionInstanceCount = finishedDecisionInstanceCount;
-  }
+
 
   public void setFinishedDecisionInstanceCount(Long finishedDecisionInstanceCount) {
-    this.finishedDecisionInstanceCount = JsonNullable.<Long>of(finishedDecisionInstanceCount);
+    this.finishedDecisionInstanceCount = finishedDecisionInstanceCount;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto cleanableDecisionInstanceCount(Long cleanableDecisionInstanceCount) {
-    this.cleanableDecisionInstanceCount = JsonNullable.<Long>of(cleanableDecisionInstanceCount);
     
+    this.cleanableDecisionInstanceCount = cleanableDecisionInstanceCount;
     return this;
   }
 
@@ -290,32 +227,22 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the cleanable historic decision instances, referring to history time to live.")
-  @JsonIgnore
-
-  public Long getCleanableDecisionInstanceCount() {
-        return cleanableDecisionInstanceCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEANABLE_DECISION_INSTANCE_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getCleanableDecisionInstanceCount_JsonNullable() {
+  public Long getCleanableDecisionInstanceCount() {
     return cleanableDecisionInstanceCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEANABLE_DECISION_INSTANCE_COUNT)
-  public void setCleanableDecisionInstanceCount_JsonNullable(JsonNullable<Long> cleanableDecisionInstanceCount) {
-    this.cleanableDecisionInstanceCount = cleanableDecisionInstanceCount;
-  }
+
 
   public void setCleanableDecisionInstanceCount(Long cleanableDecisionInstanceCount) {
-    this.cleanableDecisionInstanceCount = JsonNullable.<Long>of(cleanableDecisionInstanceCount);
+    this.cleanableDecisionInstanceCount = cleanableDecisionInstanceCount;
   }
 
 
   public CleanableHistoricDecisionInstanceReportResultDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -325,26 +252,16 @@ public class CleanableHistoricDecisionInstanceReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the decision definition.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 

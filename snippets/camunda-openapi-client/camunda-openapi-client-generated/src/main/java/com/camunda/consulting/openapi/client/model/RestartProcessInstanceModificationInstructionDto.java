@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   RestartProcessInstanceModificationInstructionDto.JSON_PROPERTY_TRANSITION_ID
 })
 @JsonTypeName("RestartProcessInstanceModificationInstructionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class RestartProcessInstanceModificationInstructionDto {
   /**
    * **Mandatory**. One of the following values: &#x60;startBeforeActivity&#x60;, &#x60;startAfterActivity&#x60;, &#x60;startTransition&#x60;.  * A &#x60;startBeforeActivity&#x60; instruction requests to enter a given activity. * A &#x60;startAfterActivity&#x60; instruction requests to execute the single outgoing sequence flow of a given activity. * A &#x60;startTransition&#x60; instruction requests to execute a specific sequence flow.
@@ -79,10 +76,10 @@ public class RestartProcessInstanceModificationInstructionDto {
   private TypeEnum type;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_TRANSITION_ID = "transitionId";
-  private JsonNullable<String> transitionId = JsonNullable.<String>undefined();
+  private String transitionId;
 
 
   public RestartProcessInstanceModificationInstructionDto type(TypeEnum type) {
@@ -110,8 +107,8 @@ public class RestartProcessInstanceModificationInstructionDto {
 
 
   public RestartProcessInstanceModificationInstructionDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -121,32 +118,22 @@ public class RestartProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "**Can be used with instructions of types** `startBeforeActivity` and `startAfterActivity`. Specifies the sequence flow to start.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public RestartProcessInstanceModificationInstructionDto transitionId(String transitionId) {
-    this.transitionId = JsonNullable.<String>of(transitionId);
     
+    this.transitionId = transitionId;
     return this;
   }
 
@@ -156,26 +143,16 @@ public class RestartProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "**Can be used with instructions of types** `startTransition`. Specifies the sequence flow to start.")
-  @JsonIgnore
-
-  public String getTransitionId() {
-        return transitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TRANSITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTransitionId_JsonNullable() {
+  public String getTransitionId() {
     return transitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TRANSITION_ID)
-  public void setTransitionId_JsonNullable(JsonNullable<String> transitionId) {
-    this.transitionId = transitionId;
-  }
+
 
   public void setTransitionId(String transitionId) {
-    this.transitionId = JsonNullable.<String>of(transitionId);
+    this.transitionId = transitionId;
   }
 
 

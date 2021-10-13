@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -47,51 +44,51 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricIdentityLinkLogDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
 })
 @JsonTypeName("HistoricIdentityLinkLogDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricIdentityLinkLogDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_TIME = "time";
-  private JsonNullable<OffsetDateTime> time = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime time;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_GROUP_ID = "groupId";
-  private JsonNullable<String> groupId = JsonNullable.<String>undefined();
+  private String groupId;
 
   public static final String JSON_PROPERTY_TASK_ID = "taskId";
-  private JsonNullable<String> taskId = JsonNullable.<String>undefined();
+  private String taskId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_OPERATION_TYPE = "operationType";
-  private JsonNullable<String> operationType = JsonNullable.<String>undefined();
+  private String operationType;
 
   public static final String JSON_PROPERTY_ASSIGNER_ID = "assignerId";
-  private JsonNullable<String> assignerId = JsonNullable.<String>undefined();
+  private String assignerId;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
 
   public HistoricIdentityLinkLogDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -101,32 +98,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Id of the Historic identity link entry.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricIdentityLinkLogDto time(OffsetDateTime time) {
-    this.time = JsonNullable.<OffsetDateTime>of(time);
     
+    this.time = time;
     return this;
   }
 
@@ -136,32 +123,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the identity link is logged.  [Default format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getTime() {
-        return time.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTime_JsonNullable() {
+  public OffsetDateTime getTime() {
     return time;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIME)
-  public void setTime_JsonNullable(JsonNullable<OffsetDateTime> time) {
-    this.time = time;
-  }
+
 
   public void setTime(OffsetDateTime time) {
-    this.time = JsonNullable.<OffsetDateTime>of(time);
+    this.time = time;
   }
 
 
   public HistoricIdentityLinkLogDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -171,32 +148,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of identity link (candidate/assignee/owner).")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 
   public HistoricIdentityLinkLogDto userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -206,32 +173,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user/assignee.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public HistoricIdentityLinkLogDto groupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
     
+    this.groupId = groupId;
     return this;
   }
 
@@ -241,32 +198,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the group.")
-  @JsonIgnore
-
-  public String getGroupId() {
-        return groupId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUP_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getGroupId_JsonNullable() {
+  public String getGroupId() {
     return groupId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  public void setGroupId_JsonNullable(JsonNullable<String> groupId) {
-    this.groupId = groupId;
-  }
+
 
   public void setGroupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
+    this.groupId = groupId;
   }
 
 
   public HistoricIdentityLinkLogDto taskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
     
+    this.taskId = taskId;
     return this;
   }
 
@@ -276,32 +223,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task.")
-  @JsonIgnore
-
-  public String getTaskId() {
-        return taskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskId_JsonNullable() {
+  public String getTaskId() {
     return taskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_ID)
-  public void setTaskId_JsonNullable(JsonNullable<String> taskId) {
-    this.taskId = taskId;
-  }
+
 
   public void setTaskId(String taskId) {
-    this.taskId = JsonNullable.<String>of(taskId);
+    this.taskId = taskId;
   }
 
 
   public HistoricIdentityLinkLogDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -311,32 +248,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public HistoricIdentityLinkLogDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -346,32 +273,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public HistoricIdentityLinkLogDto operationType(String operationType) {
-    this.operationType = JsonNullable.<String>of(operationType);
     
+    this.operationType = operationType;
     return this;
   }
 
@@ -381,32 +298,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Type of operation (add/delete).")
-  @JsonIgnore
-
-  public String getOperationType() {
-        return operationType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPERATION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOperationType_JsonNullable() {
+  public String getOperationType() {
     return operationType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPERATION_TYPE)
-  public void setOperationType_JsonNullable(JsonNullable<String> operationType) {
-    this.operationType = operationType;
-  }
+
 
   public void setOperationType(String operationType) {
-    this.operationType = JsonNullable.<String>of(operationType);
+    this.operationType = operationType;
   }
 
 
   public HistoricIdentityLinkLogDto assignerId(String assignerId) {
-    this.assignerId = JsonNullable.<String>of(assignerId);
     
+    this.assignerId = assignerId;
     return this;
   }
 
@@ -416,32 +323,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the assigner.")
-  @JsonIgnore
-
-  public String getAssignerId() {
-        return assignerId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssignerId_JsonNullable() {
+  public String getAssignerId() {
     return assignerId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNER_ID)
-  public void setAssignerId_JsonNullable(JsonNullable<String> assignerId) {
-    this.assignerId = assignerId;
-  }
+
 
   public void setAssignerId(String assignerId) {
-    this.assignerId = JsonNullable.<String>of(assignerId);
+    this.assignerId = assignerId;
   }
 
 
   public HistoricIdentityLinkLogDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -451,32 +348,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public HistoricIdentityLinkLogDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -486,32 +373,22 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the identity link should be removed by the History Cleanup job.  [Default format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public HistoricIdentityLinkLogDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -521,26 +398,16 @@ public class HistoricIdentityLinkLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing this identity link.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

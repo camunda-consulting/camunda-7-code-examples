@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,19 +37,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FilterDto.JSON_PROPERTY_ITEM_COUNT
 })
 @JsonTypeName("FilterDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class FilterDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_RESOURCE_TYPE = "resourceType";
-  private JsonNullable<String> resourceType = JsonNullable.<String>undefined();
+  private String resourceType;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_OWNER = "owner";
-  private JsonNullable<String> owner = JsonNullable.<String>undefined();
+  private String owner;
 
   public static final String JSON_PROPERTY_QUERY = "query";
   private Object query;
@@ -61,12 +58,12 @@ public class FilterDto {
   private Object properties;
 
   public static final String JSON_PROPERTY_ITEM_COUNT = "itemCount";
-  private JsonNullable<Long> itemCount = JsonNullable.<Long>undefined();
+  private Long itemCount;
 
 
   public FilterDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -76,32 +73,22 @@ public class FilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the filter.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public FilterDto resourceType(String resourceType) {
-    this.resourceType = JsonNullable.<String>of(resourceType);
     
+    this.resourceType = resourceType;
     return this;
   }
 
@@ -111,32 +98,22 @@ public class FilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The resource type of the filter.")
-  @JsonIgnore
-
-  public String getResourceType() {
-        return resourceType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResourceType_JsonNullable() {
+  public String getResourceType() {
     return resourceType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
-  public void setResourceType_JsonNullable(JsonNullable<String> resourceType) {
-    this.resourceType = resourceType;
-  }
+
 
   public void setResourceType(String resourceType) {
-    this.resourceType = JsonNullable.<String>of(resourceType);
+    this.resourceType = resourceType;
   }
 
 
   public FilterDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -146,32 +123,22 @@ public class FilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the filter.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public FilterDto owner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
     
+    this.owner = owner;
     return this;
   }
 
@@ -181,26 +148,16 @@ public class FilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The user id of the owner of the filter.")
-  @JsonIgnore
-
-  public String getOwner() {
-        return owner.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OWNER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOwner_JsonNullable() {
+  public String getOwner() {
     return owner;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OWNER)
-  public void setOwner_JsonNullable(JsonNullable<String> owner) {
-    this.owner = owner;
-  }
+
 
   public void setOwner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
+    this.owner = owner;
   }
 
 
@@ -255,8 +212,8 @@ public class FilterDto {
 
 
   public FilterDto itemCount(Long itemCount) {
-    this.itemCount = JsonNullable.<Long>of(itemCount);
     
+    this.itemCount = itemCount;
     return this;
   }
 
@@ -266,26 +223,16 @@ public class FilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = " The number of items matched by the filter itself. Note: Only exists if the query parameter `itemCount` was set to `true`")
-  @JsonIgnore
-
-  public Long getItemCount() {
-        return itemCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ITEM_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getItemCount_JsonNullable() {
+  public Long getItemCount() {
     return itemCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ITEM_COUNT)
-  public void setItemCount_JsonNullable(JsonNullable<Long> itemCount) {
-    this.itemCount = itemCount;
-  }
+
 
   public void setItemCount(Long itemCount) {
-    this.itemCount = JsonNullable.<Long>of(itemCount);
+    this.itemCount = itemCount;
   }
 
 

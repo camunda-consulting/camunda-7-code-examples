@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   RetriesDto.JSON_PROPERTY_RETRIES
 })
 @JsonTypeName("RetriesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class RetriesDto {
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
 
   public RetriesDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class RetriesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of retries to set for the resource.  Must be >= 0. If this is 0, an incident is created and the task, or job, cannot be fetched, or acquired anymore unless the retries are increased again. Can not be null.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 

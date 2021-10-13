@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,18 +34,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ExtendLockOnExternalTaskDto.JSON_PROPERTY_WORKER_ID
 })
 @JsonTypeName("ExtendLockOnExternalTaskDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ExtendLockOnExternalTaskDto {
   public static final String JSON_PROPERTY_NEW_DURATION = "newDuration";
-  private JsonNullable<Long> newDuration = JsonNullable.<Long>undefined();
+  private Long newDuration;
 
   public static final String JSON_PROPERTY_WORKER_ID = "workerId";
   private String workerId;
 
 
   public ExtendLockOnExternalTaskDto newDuration(Long newDuration) {
-    this.newDuration = JsonNullable.<Long>of(newDuration);
     
+    this.newDuration = newDuration;
     return this;
   }
 
@@ -58,26 +55,16 @@ public class ExtendLockOnExternalTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An amount of time (in milliseconds). This is the new lock duration starting from the current moment.")
-  @JsonIgnore
-
-  public Long getNewDuration() {
-        return newDuration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NEW_DURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getNewDuration_JsonNullable() {
+  public Long getNewDuration() {
     return newDuration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NEW_DURATION)
-  public void setNewDuration_JsonNullable(JsonNullable<Long> newDuration) {
-    this.newDuration = newDuration;
-  }
+
 
   public void setNewDuration(Long newDuration) {
-    this.newDuration = JsonNullable.<Long>of(newDuration);
+    this.newDuration = newDuration;
   }
 
 

@@ -28,9 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -43,36 +40,32 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationVariableValidationReportDto.JSON_PROPERTY_VALUE_INFO
 })
 @JsonTypeName("MigrationVariableValidationReportDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationVariableValidationReportDto {
   public static final String JSON_PROPERTY_FAILURES = "failures";
-  private JsonNullable<List<String>> failures = JsonNullable.<List<String>>undefined();
+  private List<String> failures = null;
 
   public static final String JSON_PROPERTY_VALUE = "value";
-  private JsonNullable<Object> value = JsonNullable.<Object>of(null);
+  private Object value = null;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_VALUE_INFO = "valueInfo";
   private Map<String, Object> valueInfo = null;
 
 
   public MigrationVariableValidationReportDto failures(List<String> failures) {
-    this.failures = JsonNullable.<List<String>>of(failures);
     
+    this.failures = failures;
     return this;
   }
 
   public MigrationVariableValidationReportDto addFailuresItem(String failuresItem) {
-    if (this.failures == null || !this.failures.isPresent()) {
-      this.failures = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.failures == null) {
+      this.failures = new ArrayList<>();
     }
-    try {
-      this.failures.get().add(failuresItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.failures.add(failuresItem);
     return this;
   }
 
@@ -82,32 +75,22 @@ public class MigrationVariableValidationReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of variable validation report messages.")
-  @JsonIgnore
-
-  public List<String> getFailures() {
-        return failures.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILURES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getFailures_JsonNullable() {
+  public List<String> getFailures() {
     return failures;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILURES)
-  public void setFailures_JsonNullable(JsonNullable<List<String>> failures) {
-    this.failures = failures;
-  }
+
 
   public void setFailures(List<String> failures) {
-    this.failures = JsonNullable.<List<String>>of(failures);
+    this.failures = failures;
   }
 
 
   public MigrationVariableValidationReportDto value(Object value) {
-    this.value = JsonNullable.<Object>of(value);
     
+    this.value = value;
     return this;
   }
 
@@ -117,32 +100,22 @@ public class MigrationVariableValidationReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be any value - string, number, boolean, array or object.  **Note**: Not every endpoint supports every type.")
-  @JsonIgnore
-
-  public Object getValue() {
-        return value.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Object> getValue_JsonNullable() {
+  public Object getValue() {
     return value;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  public void setValue_JsonNullable(JsonNullable<Object> value) {
-    this.value = value;
-  }
+
 
   public void setValue(Object value) {
-    this.value = JsonNullable.<Object>of(value);
+    this.value = value;
   }
 
 
   public MigrationVariableValidationReportDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -152,26 +125,16 @@ public class MigrationVariableValidationReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The value type of the variable.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 

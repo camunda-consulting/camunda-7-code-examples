@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,27 +35,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   EvaluateDecisionDto.JSON_PROPERTY_VARIABLES
 })
 @JsonTypeName("EvaluateDecisionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class EvaluateDecisionDto {
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
 
   public EvaluateDecisionDto variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public EvaluateDecisionDto putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -68,26 +61,16 @@ public class EvaluateDecisionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 

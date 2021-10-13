@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AnnotationDto.JSON_PROPERTY_ANNOTATION
 })
 @JsonTypeName("AnnotationDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AnnotationDto {
   public static final String JSON_PROPERTY_ANNOTATION = "annotation";
-  private JsonNullable<String> annotation = JsonNullable.<String>undefined();
+  private String annotation;
 
 
   public AnnotationDto annotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
     
+    this.annotation = annotation;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class AnnotationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The annotation value to put.")
-  @JsonIgnore
-
-  public String getAnnotation() {
-        return annotation.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ANNOTATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAnnotation_JsonNullable() {
+  public String getAnnotation() {
     return annotation;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ANNOTATION)
-  public void setAnnotation_JsonNullable(JsonNullable<String> annotation) {
-    this.annotation = annotation;
-  }
+
 
   public void setAnnotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
+    this.annotation = annotation;
   }
 
 

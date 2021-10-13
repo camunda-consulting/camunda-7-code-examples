@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,33 +36,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetRemovalTimeToHistoricProcessInstancesDtoAllOf.JSON_PROPERTY_HIERARCHICAL
 })
 @JsonTypeName("SetRemovalTimeToHistoricProcessInstancesDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
-  private JsonNullable<List<String>> historicProcessInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicProcessInstanceIds = null;
 
   public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
   private HistoricProcessInstanceQueryDto historicProcessInstanceQuery;
 
   public static final String JSON_PROPERTY_HIERARCHICAL = "hierarchical";
-  private JsonNullable<Boolean> hierarchical = JsonNullable.<Boolean>undefined();
+  private Boolean hierarchical;
 
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf historicProcessInstanceIds(List<String> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = JsonNullable.<List<String>>of(historicProcessInstanceIds);
     
+    this.historicProcessInstanceIds = historicProcessInstanceIds;
     return this;
   }
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf addHistoricProcessInstanceIdsItem(String historicProcessInstanceIdsItem) {
-    if (this.historicProcessInstanceIds == null || !this.historicProcessInstanceIds.isPresent()) {
-      this.historicProcessInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicProcessInstanceIds == null) {
+      this.historicProcessInstanceIds = new ArrayList<>();
     }
-    try {
-      this.historicProcessInstanceIds.get().add(historicProcessInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicProcessInstanceIds.add(historicProcessInstanceIdsItem);
     return this;
   }
 
@@ -75,26 +68,16 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance.")
-  @JsonIgnore
-
-  public List<String> getHistoricProcessInstanceIds() {
-        return historicProcessInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricProcessInstanceIds_JsonNullable() {
+  public List<String> getHistoricProcessInstanceIds() {
     return historicProcessInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
-  public void setHistoricProcessInstanceIds_JsonNullable(JsonNullable<List<String>> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = historicProcessInstanceIds;
-  }
+
 
   public void setHistoricProcessInstanceIds(List<String> historicProcessInstanceIds) {
-    this.historicProcessInstanceIds = JsonNullable.<List<String>>of(historicProcessInstanceIds);
+    this.historicProcessInstanceIds = historicProcessInstanceIds;
   }
 
 
@@ -124,8 +107,8 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
 
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf hierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
     
+    this.hierarchical = hierarchical;
     return this;
   }
 
@@ -135,26 +118,16 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to all historic process instances in the hierarchy. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getHierarchical() {
-        return hierarchical.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getHierarchical_JsonNullable() {
+  public Boolean getHierarchical() {
     return hierarchical;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  public void setHierarchical_JsonNullable(JsonNullable<Boolean> hierarchical) {
-    this.hierarchical = hierarchical;
-  }
+
 
   public void setHierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
+    this.hierarchical = hierarchical;
   }
 
 

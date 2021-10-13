@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,16 +35,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CreateFilterDto.JSON_PROPERTY_PROPERTIES
 })
 @JsonTypeName("CreateFilterDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CreateFilterDto {
   public static final String JSON_PROPERTY_RESOURCE_TYPE = "resourceType";
-  private JsonNullable<String> resourceType = JsonNullable.<String>undefined();
+  private String resourceType;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_OWNER = "owner";
-  private JsonNullable<String> owner = JsonNullable.<String>undefined();
+  private String owner;
 
   public static final String JSON_PROPERTY_QUERY = "query";
   private Object query;
@@ -57,8 +54,8 @@ public class CreateFilterDto {
 
 
   public CreateFilterDto resourceType(String resourceType) {
-    this.resourceType = JsonNullable.<String>of(resourceType);
     
+    this.resourceType = resourceType;
     return this;
   }
 
@@ -68,32 +65,22 @@ public class CreateFilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The resource type of the filter.")
-  @JsonIgnore
-
-  public String getResourceType() {
-        return resourceType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResourceType_JsonNullable() {
+  public String getResourceType() {
     return resourceType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
-  public void setResourceType_JsonNullable(JsonNullable<String> resourceType) {
-    this.resourceType = resourceType;
-  }
+
 
   public void setResourceType(String resourceType) {
-    this.resourceType = JsonNullable.<String>of(resourceType);
+    this.resourceType = resourceType;
   }
 
 
   public CreateFilterDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -103,32 +90,22 @@ public class CreateFilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the filter.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public CreateFilterDto owner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
     
+    this.owner = owner;
     return this;
   }
 
@@ -138,26 +115,16 @@ public class CreateFilterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The user id of the owner of the filter.")
-  @JsonIgnore
-
-  public String getOwner() {
-        return owner.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OWNER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOwner_JsonNullable() {
+  public String getOwner() {
     return owner;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OWNER)
-  public void setOwner_JsonNullable(JsonNullable<String> owner) {
-    this.owner = owner;
-  }
+
 
   public void setOwner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
+    this.owner = owner;
   }
 
 

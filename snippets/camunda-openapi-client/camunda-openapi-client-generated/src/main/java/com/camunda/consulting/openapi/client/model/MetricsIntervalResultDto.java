@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,24 +35,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MetricsIntervalResultDto.JSON_PROPERTY_VALUE
 })
 @JsonTypeName("MetricsIntervalResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MetricsIntervalResultDto {
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  private JsonNullable<OffsetDateTime> timestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime timestamp;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_REPORTER = "reporter";
-  private JsonNullable<String> reporter = JsonNullable.<String>undefined();
+  private String reporter;
 
   public static final String JSON_PROPERTY_VALUE = "value";
-  private JsonNullable<Long> value = JsonNullable.<Long>undefined();
+  private Long value;
 
 
   public MetricsIntervalResultDto timestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
     
+    this.timestamp = timestamp;
     return this;
   }
 
@@ -65,32 +62,22 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The interval timestamp.")
-  @JsonIgnore
-
-  public OffsetDateTime getTimestamp() {
-        return timestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTimestamp_JsonNullable() {
+  public OffsetDateTime getTimestamp() {
     return timestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  public void setTimestamp_JsonNullable(JsonNullable<OffsetDateTime> timestamp) {
-    this.timestamp = timestamp;
-  }
+
 
   public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
+    this.timestamp = timestamp;
   }
 
 
   public MetricsIntervalResultDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -100,32 +87,22 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the metric.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public MetricsIntervalResultDto reporter(String reporter) {
-    this.reporter = JsonNullable.<String>of(reporter);
     
+    this.reporter = reporter;
     return this;
   }
 
@@ -135,32 +112,22 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The reporter of the metric. `null` if the metrics are aggregated by reporter.")
-  @JsonIgnore
-
-  public String getReporter() {
-        return reporter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REPORTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getReporter_JsonNullable() {
+  public String getReporter() {
     return reporter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REPORTER)
-  public void setReporter_JsonNullable(JsonNullable<String> reporter) {
-    this.reporter = reporter;
-  }
+
 
   public void setReporter(String reporter) {
-    this.reporter = JsonNullable.<String>of(reporter);
+    this.reporter = reporter;
   }
 
 
   public MetricsIntervalResultDto value(Long value) {
-    this.value = JsonNullable.<Long>of(value);
     
+    this.value = value;
     return this;
   }
 
@@ -170,26 +137,16 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The value of the metric aggregated by the interval.")
-  @JsonIgnore
-
-  public Long getValue() {
-        return value.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getValue_JsonNullable() {
+  public Long getValue() {
     return value;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  public void setValue_JsonNullable(JsonNullable<Long> value) {
-    this.value = value;
-  }
+
 
   public void setValue(Long value) {
-    this.value = JsonNullable.<Long>of(value);
+    this.value = value;
   }
 
 

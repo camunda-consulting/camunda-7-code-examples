@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MetricsResultDto.JSON_PROPERTY_RESULT
 })
 @JsonTypeName("MetricsResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MetricsResultDto {
   public static final String JSON_PROPERTY_RESULT = "result";
-  private JsonNullable<Long> result = JsonNullable.<Long>undefined();
+  private Long result;
 
 
   public MetricsResultDto result(Long result) {
-    this.result = JsonNullable.<Long>of(result);
     
+    this.result = result;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class MetricsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The current sum (count) for the selected metric.")
-  @JsonIgnore
-
-  public Long getResult() {
-        return result.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESULT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getResult_JsonNullable() {
+  public Long getResult() {
     return result;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESULT)
-  public void setResult_JsonNullable(JsonNullable<Long> result) {
-    this.result = result;
-  }
+
 
   public void setResult(Long result) {
-    this.result = JsonNullable.<Long>of(result);
+    this.result = result;
   }
 
 

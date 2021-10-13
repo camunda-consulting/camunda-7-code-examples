@@ -28,9 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -42,33 +39,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ParseExceptionDto.JSON_PROPERTY_MESSAGE
 })
 @JsonTypeName("ParseExceptionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ParseExceptionDto {
   public static final String JSON_PROPERTY_DETAILS = "details";
-  private JsonNullable<Map<String, ResourceReportDto>> details = JsonNullable.<Map<String, ResourceReportDto>>undefined();
+  private Map<String, ResourceReportDto> details = null;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_MESSAGE = "message";
-  private JsonNullable<String> message = JsonNullable.<String>undefined();
+  private String message;
 
 
   public ParseExceptionDto details(Map<String, ResourceReportDto> details) {
-    this.details = JsonNullable.<Map<String, ResourceReportDto>>of(details);
     
+    this.details = details;
     return this;
   }
 
   public ParseExceptionDto putDetailsItem(String key, ResourceReportDto detailsItem) {
-    if (this.details == null || !this.details.isPresent()) {
-      this.details = JsonNullable.<Map<String, ResourceReportDto>>of(new HashMap<>());
+    if (this.details == null) {
+      this.details = new HashMap<>();
     }
-    try {
-      this.details.get().put(key, detailsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.details.put(key, detailsItem);
     return this;
   }
 
@@ -78,32 +71,22 @@ public class ParseExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing list of errors and warnings occurred during deployment.")
-  @JsonIgnore
-
-  public Map<String, ResourceReportDto> getDetails() {
-        return details.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, ResourceReportDto>> getDetails_JsonNullable() {
+  public Map<String, ResourceReportDto> getDetails() {
     return details;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DETAILS)
-  public void setDetails_JsonNullable(JsonNullable<Map<String, ResourceReportDto>> details) {
-    this.details = details;
-  }
+
 
   public void setDetails(Map<String, ResourceReportDto> details) {
-    this.details = JsonNullable.<Map<String, ResourceReportDto>>of(details);
+    this.details = details;
   }
 
 
   public ParseExceptionDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -113,32 +96,22 @@ public class ParseExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An exception class indicating the occurred error.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 
   public ParseExceptionDto message(String message) {
-    this.message = JsonNullable.<String>of(message);
     
+    this.message = message;
     return this;
   }
 
@@ -148,26 +121,16 @@ public class ParseExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A detailed message of the error.")
-  @JsonIgnore
-
-  public String getMessage() {
-        return message.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessage_JsonNullable() {
+  public String getMessage() {
     return message;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  public void setMessage_JsonNullable(JsonNullable<String> message) {
-    this.message = message;
-  }
+
 
   public void setMessage(String message) {
-    this.message = JsonNullable.<String>of(message);
+    this.message = message;
   }
 
 

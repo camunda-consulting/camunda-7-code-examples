@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -43,27 +40,27 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetRemovalTimeToHistoricBatchesDto.JSON_PROPERTY_CALCULATED_REMOVAL_TIME
 })
 @JsonTypeName("SetRemovalTimeToHistoricBatchesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetRemovalTimeToHistoricBatchesDto {
   public static final String JSON_PROPERTY_HISTORIC_BATCH_QUERY = "historicBatchQuery";
-  private JsonNullable<Object> historicBatchQuery = JsonNullable.<Object>undefined();
+  private Object historicBatchQuery;
 
   public static final String JSON_PROPERTY_HISTORIC_BATCH_IDS = "historicBatchIds";
-  private JsonNullable<List<String>> historicBatchIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicBatchIds = null;
 
   public static final String JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME = "absoluteRemovalTime";
-  private JsonNullable<OffsetDateTime> absoluteRemovalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime absoluteRemovalTime;
 
   public static final String JSON_PROPERTY_CLEARED_REMOVAL_TIME = "clearedRemovalTime";
-  private JsonNullable<Boolean> clearedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean clearedRemovalTime;
 
   public static final String JSON_PROPERTY_CALCULATED_REMOVAL_TIME = "calculatedRemovalTime";
-  private JsonNullable<Boolean> calculatedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean calculatedRemovalTime;
 
 
   public SetRemovalTimeToHistoricBatchesDto historicBatchQuery(Object historicBatchQuery) {
-    this.historicBatchQuery = JsonNullable.<Object>of(historicBatchQuery);
     
+    this.historicBatchQuery = historicBatchQuery;
     return this;
   }
 
@@ -73,44 +70,30 @@ public class SetRemovalTimeToHistoricBatchesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Query for the historic batches to set the removal time for.")
-  @JsonIgnore
-
-  public Object getHistoricBatchQuery() {
-        return historicBatchQuery.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_QUERY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Object> getHistoricBatchQuery_JsonNullable() {
+  public Object getHistoricBatchQuery() {
     return historicBatchQuery;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_QUERY)
-  public void setHistoricBatchQuery_JsonNullable(JsonNullable<Object> historicBatchQuery) {
-    this.historicBatchQuery = historicBatchQuery;
-  }
+
 
   public void setHistoricBatchQuery(Object historicBatchQuery) {
-    this.historicBatchQuery = JsonNullable.<Object>of(historicBatchQuery);
+    this.historicBatchQuery = historicBatchQuery;
   }
 
 
   public SetRemovalTimeToHistoricBatchesDto historicBatchIds(List<String> historicBatchIds) {
-    this.historicBatchIds = JsonNullable.<List<String>>of(historicBatchIds);
     
+    this.historicBatchIds = historicBatchIds;
     return this;
   }
 
   public SetRemovalTimeToHistoricBatchesDto addHistoricBatchIdsItem(String historicBatchIdsItem) {
-    if (this.historicBatchIds == null || !this.historicBatchIds.isPresent()) {
-      this.historicBatchIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicBatchIds == null) {
+      this.historicBatchIds = new ArrayList<>();
     }
-    try {
-      this.historicBatchIds.get().add(historicBatchIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicBatchIds.add(historicBatchIdsItem);
     return this;
   }
 
@@ -120,32 +103,22 @@ public class SetRemovalTimeToHistoricBatchesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The ids of the historic batches to set the removal time for.")
-  @JsonIgnore
-
-  public List<String> getHistoricBatchIds() {
-        return historicBatchIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricBatchIds_JsonNullable() {
+  public List<String> getHistoricBatchIds() {
     return historicBatchIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_IDS)
-  public void setHistoricBatchIds_JsonNullable(JsonNullable<List<String>> historicBatchIds) {
-    this.historicBatchIds = historicBatchIds;
-  }
+
 
   public void setHistoricBatchIds(List<String> historicBatchIds) {
-    this.historicBatchIds = JsonNullable.<List<String>>of(historicBatchIds);
+    this.historicBatchIds = historicBatchIds;
   }
 
 
   public SetRemovalTimeToHistoricBatchesDto absoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
     
+    this.absoluteRemovalTime = absoluteRemovalTime;
     return this;
   }
 
@@ -155,32 +128,22 @@ public class SetRemovalTimeToHistoricBatchesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date for which the instances shall be removed. Value may not be `null`.  **Note:** Cannot be set in conjunction with `clearedRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public OffsetDateTime getAbsoluteRemovalTime() {
-        return absoluteRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getAbsoluteRemovalTime_JsonNullable() {
+  public OffsetDateTime getAbsoluteRemovalTime() {
     return absoluteRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
-  public void setAbsoluteRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> absoluteRemovalTime) {
-    this.absoluteRemovalTime = absoluteRemovalTime;
-  }
+
 
   public void setAbsoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
+    this.absoluteRemovalTime = absoluteRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricBatchesDto clearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
     
+    this.clearedRemovalTime = clearedRemovalTime;
     return this;
   }
 
@@ -190,32 +153,22 @@ public class SetRemovalTimeToHistoricBatchesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to `null`. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getClearedRemovalTime() {
-        return clearedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getClearedRemovalTime_JsonNullable() {
+  public Boolean getClearedRemovalTime() {
     return clearedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
-  public void setClearedRemovalTime_JsonNullable(JsonNullable<Boolean> clearedRemovalTime) {
-    this.clearedRemovalTime = clearedRemovalTime;
-  }
+
 
   public void setClearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
+    this.clearedRemovalTime = clearedRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricBatchesDto calculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
     
+    this.calculatedRemovalTime = calculatedRemovalTime;
     return this;
   }
 
@@ -225,26 +178,16 @@ public class SetRemovalTimeToHistoricBatchesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The removal time is calculated based on the engine's configuration settings. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `clearedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getCalculatedRemovalTime() {
-        return calculatedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCalculatedRemovalTime_JsonNullable() {
+  public Boolean getCalculatedRemovalTime() {
     return calculatedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
-  public void setCalculatedRemovalTime_JsonNullable(JsonNullable<Boolean> calculatedRemovalTime) {
-    this.calculatedRemovalTime = calculatedRemovalTime;
-  }
+
 
   public void setCalculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
+    this.calculatedRemovalTime = calculatedRemovalTime;
   }
 
 

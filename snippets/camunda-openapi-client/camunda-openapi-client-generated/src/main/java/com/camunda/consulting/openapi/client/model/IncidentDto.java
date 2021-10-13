@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -49,57 +46,57 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   IncidentDto.JSON_PROPERTY_ANNOTATION
 })
 @JsonTypeName("IncidentDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class IncidentDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_INCIDENT_TIMESTAMP = "incidentTimestamp";
-  private JsonNullable<OffsetDateTime> incidentTimestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime incidentTimestamp;
 
   public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
-  private JsonNullable<String> incidentType = JsonNullable.<String>undefined();
+  private String incidentType;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_FAILED_ACTIVITY_ID = "failedActivityId";
-  private JsonNullable<String> failedActivityId = JsonNullable.<String>undefined();
+  private String failedActivityId;
 
   public static final String JSON_PROPERTY_CAUSE_INCIDENT_ID = "causeIncidentId";
-  private JsonNullable<String> causeIncidentId = JsonNullable.<String>undefined();
+  private String causeIncidentId;
 
   public static final String JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID = "rootCauseIncidentId";
-  private JsonNullable<String> rootCauseIncidentId = JsonNullable.<String>undefined();
+  private String rootCauseIncidentId;
 
   public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
-  private JsonNullable<String> _configuration = JsonNullable.<String>undefined();
+  private String _configuration;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_INCIDENT_MESSAGE = "incidentMessage";
-  private JsonNullable<String> incidentMessage = JsonNullable.<String>undefined();
+  private String incidentMessage;
 
   public static final String JSON_PROPERTY_JOB_DEFINITION_ID = "jobDefinitionId";
-  private JsonNullable<String> jobDefinitionId = JsonNullable.<String>undefined();
+  private String jobDefinitionId;
 
   public static final String JSON_PROPERTY_ANNOTATION = "annotation";
-  private JsonNullable<String> annotation = JsonNullable.<String>undefined();
+  private String annotation;
 
 
   public IncidentDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -109,32 +106,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the incident.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public IncidentDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -144,32 +131,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition this incident is associated with.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public IncidentDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -179,32 +156,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance this incident is associated with.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public IncidentDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -214,32 +181,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the execution this incident is associated with.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public IncidentDto incidentTimestamp(OffsetDateTime incidentTimestamp) {
-    this.incidentTimestamp = JsonNullable.<OffsetDateTime>of(incidentTimestamp);
     
+    this.incidentTimestamp = incidentTimestamp;
     return this;
   }
 
@@ -249,32 +206,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time this incident happened. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getIncidentTimestamp() {
-        return incidentTimestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getIncidentTimestamp_JsonNullable() {
+  public OffsetDateTime getIncidentTimestamp() {
     return incidentTimestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TIMESTAMP)
-  public void setIncidentTimestamp_JsonNullable(JsonNullable<OffsetDateTime> incidentTimestamp) {
-    this.incidentTimestamp = incidentTimestamp;
-  }
+
 
   public void setIncidentTimestamp(OffsetDateTime incidentTimestamp) {
-    this.incidentTimestamp = JsonNullable.<OffsetDateTime>of(incidentTimestamp);
+    this.incidentTimestamp = incidentTimestamp;
   }
 
 
   public IncidentDto incidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
     
+    this.incidentType = incidentType;
     return this;
   }
 
@@ -284,32 +231,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of incident, for example: `failedJobs` will be returned in case of an incident which identified a failed job during the execution of a process instance. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonIgnore
-
-  public String getIncidentType() {
-        return incidentType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentType_JsonNullable() {
+  public String getIncidentType() {
     return incidentType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  public void setIncidentType_JsonNullable(JsonNullable<String> incidentType) {
-    this.incidentType = incidentType;
-  }
+
 
   public void setIncidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
+    this.incidentType = incidentType;
   }
 
 
   public IncidentDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -319,32 +256,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity this incident is associated with.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public IncidentDto failedActivityId(String failedActivityId) {
-    this.failedActivityId = JsonNullable.<String>of(failedActivityId);
     
+    this.failedActivityId = failedActivityId;
     return this;
   }
 
@@ -354,32 +281,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity on which the last exception occurred.")
-  @JsonIgnore
-
-  public String getFailedActivityId() {
-        return failedActivityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILED_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFailedActivityId_JsonNullable() {
+  public String getFailedActivityId() {
     return failedActivityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILED_ACTIVITY_ID)
-  public void setFailedActivityId_JsonNullable(JsonNullable<String> failedActivityId) {
-    this.failedActivityId = failedActivityId;
-  }
+
 
   public void setFailedActivityId(String failedActivityId) {
-    this.failedActivityId = JsonNullable.<String>of(failedActivityId);
+    this.failedActivityId = failedActivityId;
   }
 
 
   public IncidentDto causeIncidentId(String causeIncidentId) {
-    this.causeIncidentId = JsonNullable.<String>of(causeIncidentId);
     
+    this.causeIncidentId = causeIncidentId;
     return this;
   }
 
@@ -389,32 +306,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the associated cause incident which has been triggered.")
-  @JsonIgnore
-
-  public String getCauseIncidentId() {
-        return causeIncidentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CAUSE_INCIDENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCauseIncidentId_JsonNullable() {
+  public String getCauseIncidentId() {
     return causeIncidentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CAUSE_INCIDENT_ID)
-  public void setCauseIncidentId_JsonNullable(JsonNullable<String> causeIncidentId) {
-    this.causeIncidentId = causeIncidentId;
-  }
+
 
   public void setCauseIncidentId(String causeIncidentId) {
-    this.causeIncidentId = JsonNullable.<String>of(causeIncidentId);
+    this.causeIncidentId = causeIncidentId;
   }
 
 
   public IncidentDto rootCauseIncidentId(String rootCauseIncidentId) {
-    this.rootCauseIncidentId = JsonNullable.<String>of(rootCauseIncidentId);
     
+    this.rootCauseIncidentId = rootCauseIncidentId;
     return this;
   }
 
@@ -424,32 +331,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the associated root cause incident which has been triggered.")
-  @JsonIgnore
-
-  public String getRootCauseIncidentId() {
-        return rootCauseIncidentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootCauseIncidentId_JsonNullable() {
+  public String getRootCauseIncidentId() {
     return rootCauseIncidentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID)
-  public void setRootCauseIncidentId_JsonNullable(JsonNullable<String> rootCauseIncidentId) {
-    this.rootCauseIncidentId = rootCauseIncidentId;
-  }
+
 
   public void setRootCauseIncidentId(String rootCauseIncidentId) {
-    this.rootCauseIncidentId = JsonNullable.<String>of(rootCauseIncidentId);
+    this.rootCauseIncidentId = rootCauseIncidentId;
   }
 
 
   public IncidentDto _configuration(String _configuration) {
-    this._configuration = JsonNullable.<String>of(_configuration);
     
+    this._configuration = _configuration;
     return this;
   }
 
@@ -459,32 +356,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The payload of this incident.")
-  @JsonIgnore
-
-  public String getConfiguration() {
-        return _configuration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getConfiguration_JsonNullable() {
+  public String getConfiguration() {
     return _configuration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CONFIGURATION)
-  public void setConfiguration_JsonNullable(JsonNullable<String> _configuration) {
-    this._configuration = _configuration;
-  }
+
 
   public void setConfiguration(String _configuration) {
-    this._configuration = JsonNullable.<String>of(_configuration);
+    this._configuration = _configuration;
   }
 
 
   public IncidentDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -494,32 +381,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant this incident is associated with.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public IncidentDto incidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
     
+    this.incidentMessage = incidentMessage;
     return this;
   }
 
@@ -529,32 +406,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of this incident.")
-  @JsonIgnore
-
-  public String getIncidentMessage() {
-        return incidentMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentMessage_JsonNullable() {
+  public String getIncidentMessage() {
     return incidentMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
-  public void setIncidentMessage_JsonNullable(JsonNullable<String> incidentMessage) {
-    this.incidentMessage = incidentMessage;
-  }
+
 
   public void setIncidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
+    this.incidentMessage = incidentMessage;
   }
 
 
   public IncidentDto jobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
     
+    this.jobDefinitionId = jobDefinitionId;
     return this;
   }
 
@@ -564,32 +431,22 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id the incident is associated with.")
-  @JsonIgnore
-
-  public String getJobDefinitionId() {
-        return jobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionId_JsonNullable() {
+  public String getJobDefinitionId() {
     return jobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
-  public void setJobDefinitionId_JsonNullable(JsonNullable<String> jobDefinitionId) {
-    this.jobDefinitionId = jobDefinitionId;
-  }
+
 
   public void setJobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
+    this.jobDefinitionId = jobDefinitionId;
   }
 
 
   public IncidentDto annotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
     
+    this.annotation = annotation;
     return this;
   }
 
@@ -599,26 +456,16 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The annotation set to the incident.")
-  @JsonIgnore
-
-  public String getAnnotation() {
-        return annotation.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ANNOTATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAnnotation_JsonNullable() {
+  public String getAnnotation() {
     return annotation;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ANNOTATION)
-  public void setAnnotation_JsonNullable(JsonNullable<String> annotation) {
-    this.annotation = annotation;
-  }
+
 
   public void setAnnotation(String annotation) {
-    this.annotation = JsonNullable.<String>of(annotation);
+    this.annotation = annotation;
   }
 
 

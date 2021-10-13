@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,21 +38,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CheckPasswordPolicyRuleDto.JSON_PROPERTY_PARAMETER
 })
 @JsonTypeName("CheckPasswordPolicyRuleDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CheckPasswordPolicyRuleDto {
   public static final String JSON_PROPERTY_VALID = "valid";
-  private JsonNullable<Boolean> valid = JsonNullable.<Boolean>undefined();
+  private Boolean valid;
 
   public static final String JSON_PROPERTY_PLACEHOLDER = "placeholder";
-  private JsonNullable<String> placeholder = JsonNullable.<String>undefined();
+  private String placeholder;
 
   public static final String JSON_PROPERTY_PARAMETER = "parameter";
   private Map<String, String> parameter = null;
 
 
   public CheckPasswordPolicyRuleDto valid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
     
+    this.valid = valid;
     return this;
   }
 
@@ -65,32 +62,22 @@ public class CheckPasswordPolicyRuleDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "`true` if the password is compliant with this rule, otherwise `false`.")
-  @JsonIgnore
-
-  public Boolean getValid() {
-        return valid.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VALID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getValid_JsonNullable() {
+  public Boolean getValid() {
     return valid;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VALID)
-  public void setValid_JsonNullable(JsonNullable<Boolean> valid) {
-    this.valid = valid;
-  }
+
 
   public void setValid(Boolean valid) {
-    this.valid = JsonNullable.<Boolean>of(valid);
+    this.valid = valid;
   }
 
 
   public CheckPasswordPolicyRuleDto placeholder(String placeholder) {
-    this.placeholder = JsonNullable.<String>of(placeholder);
     
+    this.placeholder = placeholder;
     return this;
   }
 
@@ -100,26 +87,16 @@ public class CheckPasswordPolicyRuleDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A placeholder string that contains the name of a password policy rule.")
-  @JsonIgnore
-
-  public String getPlaceholder() {
-        return placeholder.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PLACEHOLDER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getPlaceholder_JsonNullable() {
+  public String getPlaceholder() {
     return placeholder;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PLACEHOLDER)
-  public void setPlaceholder_JsonNullable(JsonNullable<String> placeholder) {
-    this.placeholder = placeholder;
-  }
+
 
   public void setPlaceholder(String placeholder) {
-    this.placeholder = JsonNullable.<String>of(placeholder);
+    this.placeholder = placeholder;
   }
 
 

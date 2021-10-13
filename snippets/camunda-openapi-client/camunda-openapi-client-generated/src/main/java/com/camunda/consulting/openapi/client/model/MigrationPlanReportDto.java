@@ -28,9 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,30 +38,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationPlanReportDto.JSON_PROPERTY_VARIABLE_REPORTS
 })
 @JsonTypeName("MigrationPlanReportDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationPlanReportDto {
   public static final String JSON_PROPERTY_INSTRUCTION_REPORTS = "instructionReports";
-  private JsonNullable<List<MigrationInstructionValidationReportDto>> instructionReports = JsonNullable.<List<MigrationInstructionValidationReportDto>>undefined();
+  private List<MigrationInstructionValidationReportDto> instructionReports = null;
 
   public static final String JSON_PROPERTY_VARIABLE_REPORTS = "variableReports";
-  private JsonNullable<Map<String, MigrationVariableValidationReportDto>> variableReports = JsonNullable.<Map<String, MigrationVariableValidationReportDto>>undefined();
+  private Map<String, MigrationVariableValidationReportDto> variableReports = null;
 
 
   public MigrationPlanReportDto instructionReports(List<MigrationInstructionValidationReportDto> instructionReports) {
-    this.instructionReports = JsonNullable.<List<MigrationInstructionValidationReportDto>>of(instructionReports);
     
+    this.instructionReports = instructionReports;
     return this;
   }
 
   public MigrationPlanReportDto addInstructionReportsItem(MigrationInstructionValidationReportDto instructionReportsItem) {
-    if (this.instructionReports == null || !this.instructionReports.isPresent()) {
-      this.instructionReports = JsonNullable.<List<MigrationInstructionValidationReportDto>>of(new ArrayList<>());
+    if (this.instructionReports == null) {
+      this.instructionReports = new ArrayList<>();
     }
-    try {
-      this.instructionReports.get().add(instructionReportsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.instructionReports.add(instructionReportsItem);
     return this;
   }
 
@@ -74,44 +67,30 @@ public class MigrationPlanReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The list of instruction validation reports. If no validation errors are detected it is an empty list.")
-  @JsonIgnore
-
-  public List<MigrationInstructionValidationReportDto> getInstructionReports() {
-        return instructionReports.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INSTRUCTION_REPORTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<MigrationInstructionValidationReportDto>> getInstructionReports_JsonNullable() {
+  public List<MigrationInstructionValidationReportDto> getInstructionReports() {
     return instructionReports;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INSTRUCTION_REPORTS)
-  public void setInstructionReports_JsonNullable(JsonNullable<List<MigrationInstructionValidationReportDto>> instructionReports) {
-    this.instructionReports = instructionReports;
-  }
+
 
   public void setInstructionReports(List<MigrationInstructionValidationReportDto> instructionReports) {
-    this.instructionReports = JsonNullable.<List<MigrationInstructionValidationReportDto>>of(instructionReports);
+    this.instructionReports = instructionReports;
   }
 
 
   public MigrationPlanReportDto variableReports(Map<String, MigrationVariableValidationReportDto> variableReports) {
-    this.variableReports = JsonNullable.<Map<String, MigrationVariableValidationReportDto>>of(variableReports);
     
+    this.variableReports = variableReports;
     return this;
   }
 
   public MigrationPlanReportDto putVariableReportsItem(String key, MigrationVariableValidationReportDto variableReportsItem) {
-    if (this.variableReports == null || !this.variableReports.isPresent()) {
-      this.variableReports = JsonNullable.<Map<String, MigrationVariableValidationReportDto>>of(new HashMap<>());
+    if (this.variableReports == null) {
+      this.variableReports = new HashMap<>();
     }
-    try {
-      this.variableReports.get().put(key, variableReportsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variableReports.put(key, variableReportsItem);
     return this;
   }
 
@@ -121,26 +100,16 @@ public class MigrationPlanReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of variable reports. Each key is a variable name and each value a JSON object consisting of the variable's type, value, value info object and a list of failures.")
-  @JsonIgnore
-
-  public Map<String, MigrationVariableValidationReportDto> getVariableReports() {
-        return variableReports.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_REPORTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, MigrationVariableValidationReportDto>> getVariableReports_JsonNullable() {
+  public Map<String, MigrationVariableValidationReportDto> getVariableReports() {
     return variableReports;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_REPORTS)
-  public void setVariableReports_JsonNullable(JsonNullable<Map<String, MigrationVariableValidationReportDto>> variableReports) {
-    this.variableReports = variableReports;
-  }
+
 
   public void setVariableReports(Map<String, MigrationVariableValidationReportDto> variableReports) {
-    this.variableReports = JsonNullable.<Map<String, MigrationVariableValidationReportDto>>of(variableReports);
+    this.variableReports = variableReports;
   }
 
 

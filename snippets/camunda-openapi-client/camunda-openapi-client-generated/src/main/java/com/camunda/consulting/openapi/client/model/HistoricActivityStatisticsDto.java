@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,36 +38,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricActivityStatisticsDto.JSON_PROPERTY_DELETED_INCIDENTS
 })
 @JsonTypeName("HistoricActivityStatisticsDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricActivityStatisticsDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_INSTANCES = "instances";
-  private JsonNullable<Long> instances = JsonNullable.<Long>undefined();
+  private Long instances;
 
   public static final String JSON_PROPERTY_CANCELED = "canceled";
-  private JsonNullable<Long> canceled = JsonNullable.<Long>undefined();
+  private Long canceled;
 
   public static final String JSON_PROPERTY_FINISHED = "finished";
-  private JsonNullable<Long> finished = JsonNullable.<Long>undefined();
+  private Long finished;
 
   public static final String JSON_PROPERTY_COMPLETE_SCOPE = "completeScope";
-  private JsonNullable<Long> completeScope = JsonNullable.<Long>undefined();
+  private Long completeScope;
 
   public static final String JSON_PROPERTY_OPEN_INCIDENTS = "openIncidents";
-  private JsonNullable<Long> openIncidents = JsonNullable.<Long>undefined();
+  private Long openIncidents;
 
   public static final String JSON_PROPERTY_RESOLVED_INCIDENTS = "resolvedIncidents";
-  private JsonNullable<Long> resolvedIncidents = JsonNullable.<Long>undefined();
+  private Long resolvedIncidents;
 
   public static final String JSON_PROPERTY_DELETED_INCIDENTS = "deletedIncidents";
-  private JsonNullable<Long> deletedIncidents = JsonNullable.<Long>undefined();
+  private Long deletedIncidents;
 
 
   public HistoricActivityStatisticsDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -80,32 +77,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity the results are aggregated for.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricActivityStatisticsDto instances(Long instances) {
-    this.instances = JsonNullable.<Long>of(instances);
     
+    this.instances = instances;
     return this;
   }
 
@@ -115,32 +102,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of all running instances of the activity.")
-  @JsonIgnore
-
-  public Long getInstances() {
-        return instances.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INSTANCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getInstances_JsonNullable() {
+  public Long getInstances() {
     return instances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INSTANCES)
-  public void setInstances_JsonNullable(JsonNullable<Long> instances) {
-    this.instances = instances;
-  }
+
 
   public void setInstances(Long instances) {
-    this.instances = JsonNullable.<Long>of(instances);
+    this.instances = instances;
   }
 
 
   public HistoricActivityStatisticsDto canceled(Long canceled) {
-    this.canceled = JsonNullable.<Long>of(canceled);
     
+    this.canceled = canceled;
     return this;
   }
 
@@ -150,32 +127,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of all canceled instances of the activity. **Note:** Will be `0` (not `null`), if canceled activity instances were excluded.")
-  @JsonIgnore
-
-  public Long getCanceled() {
-        return canceled.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANCELED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getCanceled_JsonNullable() {
+  public Long getCanceled() {
     return canceled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANCELED)
-  public void setCanceled_JsonNullable(JsonNullable<Long> canceled) {
-    this.canceled = canceled;
-  }
+
 
   public void setCanceled(Long canceled) {
-    this.canceled = JsonNullable.<Long>of(canceled);
+    this.canceled = canceled;
   }
 
 
   public HistoricActivityStatisticsDto finished(Long finished) {
-    this.finished = JsonNullable.<Long>of(finished);
     
+    this.finished = finished;
     return this;
   }
 
@@ -185,32 +152,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of all finished instances of the activity. **Note:** Will be `0` (not `null`), if finished activity instances were excluded.")
-  @JsonIgnore
-
-  public Long getFinished() {
-        return finished.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getFinished_JsonNullable() {
+  public Long getFinished() {
     return finished;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED)
-  public void setFinished_JsonNullable(JsonNullable<Long> finished) {
-    this.finished = finished;
-  }
+
 
   public void setFinished(Long finished) {
-    this.finished = JsonNullable.<Long>of(finished);
+    this.finished = finished;
   }
 
 
   public HistoricActivityStatisticsDto completeScope(Long completeScope) {
-    this.completeScope = JsonNullable.<Long>of(completeScope);
     
+    this.completeScope = completeScope;
     return this;
   }
 
@@ -220,32 +177,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of all instances which completed a scope of the activity. **Note:** Will be `0` (not `null`), if activity instances which completed a scope were excluded.")
-  @JsonIgnore
-
-  public Long getCompleteScope() {
-        return completeScope.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_COMPLETE_SCOPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getCompleteScope_JsonNullable() {
+  public Long getCompleteScope() {
     return completeScope;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COMPLETE_SCOPE)
-  public void setCompleteScope_JsonNullable(JsonNullable<Long> completeScope) {
-    this.completeScope = completeScope;
-  }
+
 
   public void setCompleteScope(Long completeScope) {
-    this.completeScope = JsonNullable.<Long>of(completeScope);
+    this.completeScope = completeScope;
   }
 
 
   public HistoricActivityStatisticsDto openIncidents(Long openIncidents) {
-    this.openIncidents = JsonNullable.<Long>of(openIncidents);
     
+    this.openIncidents = openIncidents;
     return this;
   }
 
@@ -255,32 +202,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of open incidents for the activity. **Note:** Will be `0` (not `null`), if `incidents` is set to `false`.")
-  @JsonIgnore
-
-  public Long getOpenIncidents() {
-        return openIncidents.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OPEN_INCIDENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getOpenIncidents_JsonNullable() {
+  public Long getOpenIncidents() {
     return openIncidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OPEN_INCIDENTS)
-  public void setOpenIncidents_JsonNullable(JsonNullable<Long> openIncidents) {
-    this.openIncidents = openIncidents;
-  }
+
 
   public void setOpenIncidents(Long openIncidents) {
-    this.openIncidents = JsonNullable.<Long>of(openIncidents);
+    this.openIncidents = openIncidents;
   }
 
 
   public HistoricActivityStatisticsDto resolvedIncidents(Long resolvedIncidents) {
-    this.resolvedIncidents = JsonNullable.<Long>of(resolvedIncidents);
     
+    this.resolvedIncidents = resolvedIncidents;
     return this;
   }
 
@@ -290,32 +227,22 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of resolved incidents for the activity. **Note:** Will be `0` (not `null`), if `incidents` is set to `false`.")
-  @JsonIgnore
-
-  public Long getResolvedIncidents() {
-        return resolvedIncidents.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOLVED_INCIDENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getResolvedIncidents_JsonNullable() {
+  public Long getResolvedIncidents() {
     return resolvedIncidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOLVED_INCIDENTS)
-  public void setResolvedIncidents_JsonNullable(JsonNullable<Long> resolvedIncidents) {
-    this.resolvedIncidents = resolvedIncidents;
-  }
+
 
   public void setResolvedIncidents(Long resolvedIncidents) {
-    this.resolvedIncidents = JsonNullable.<Long>of(resolvedIncidents);
+    this.resolvedIncidents = resolvedIncidents;
   }
 
 
   public HistoricActivityStatisticsDto deletedIncidents(Long deletedIncidents) {
-    this.deletedIncidents = JsonNullable.<Long>of(deletedIncidents);
     
+    this.deletedIncidents = deletedIncidents;
     return this;
   }
 
@@ -325,26 +252,16 @@ public class HistoricActivityStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of deleted incidents for the activity. **Note:** Will be `0` (not `null`), if `incidents` is set to `false`.")
-  @JsonIgnore
-
-  public Long getDeletedIncidents() {
-        return deletedIncidents.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETED_INCIDENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getDeletedIncidents_JsonNullable() {
+  public Long getDeletedIncidents() {
     return deletedIncidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETED_INCIDENTS)
-  public void setDeletedIncidents_JsonNullable(JsonNullable<Long> deletedIncidents) {
-    this.deletedIncidents = deletedIncidents;
-  }
+
 
   public void setDeletedIncidents(Long deletedIncidents) {
-    this.deletedIncidents = JsonNullable.<Long>of(deletedIncidents);
+    this.deletedIncidents = deletedIncidents;
   }
 
 

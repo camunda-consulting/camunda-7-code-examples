@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -50,57 +47,57 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   BatchStatisticsDto.JSON_PROPERTY_CREATE_USER_ID
 })
 @JsonTypeName("BatchStatisticsDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class BatchStatisticsDto {
   public static final String JSON_PROPERTY_REMAINING_JOBS = "remainingJobs";
-  private JsonNullable<Integer> remainingJobs = JsonNullable.<Integer>undefined();
+  private Integer remainingJobs;
 
   public static final String JSON_PROPERTY_COMPLETED_JOBS = "completedJobs";
-  private JsonNullable<Integer> completedJobs = JsonNullable.<Integer>undefined();
+  private Integer completedJobs;
 
   public static final String JSON_PROPERTY_FAILED_JOBS = "failedJobs";
-  private JsonNullable<Integer> failedJobs = JsonNullable.<Integer>undefined();
+  private Integer failedJobs;
 
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_TOTAL_JOBS = "totalJobs";
-  private JsonNullable<Integer> totalJobs = JsonNullable.<Integer>undefined();
+  private Integer totalJobs;
 
   public static final String JSON_PROPERTY_JOBS_CREATED = "jobsCreated";
-  private JsonNullable<Integer> jobsCreated = JsonNullable.<Integer>undefined();
+  private Integer jobsCreated;
 
   public static final String JSON_PROPERTY_BATCH_JOBS_PER_SEED = "batchJobsPerSeed";
-  private JsonNullable<Integer> batchJobsPerSeed = JsonNullable.<Integer>undefined();
+  private Integer batchJobsPerSeed;
 
   public static final String JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB = "invocationsPerBatchJob";
-  private JsonNullable<Integer> invocationsPerBatchJob = JsonNullable.<Integer>undefined();
+  private Integer invocationsPerBatchJob;
 
   public static final String JSON_PROPERTY_SEED_JOB_DEFINITION_ID = "seedJobDefinitionId";
-  private JsonNullable<String> seedJobDefinitionId = JsonNullable.<String>undefined();
+  private String seedJobDefinitionId;
 
   public static final String JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID = "monitorJobDefinitionId";
-  private JsonNullable<String> monitorJobDefinitionId = JsonNullable.<String>undefined();
+  private String monitorJobDefinitionId;
 
   public static final String JSON_PROPERTY_BATCH_JOB_DEFINITION_ID = "batchJobDefinitionId";
-  private JsonNullable<String> batchJobDefinitionId = JsonNullable.<String>undefined();
+  private String batchJobDefinitionId;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_CREATE_USER_ID = "createUserId";
-  private JsonNullable<String> createUserId = JsonNullable.<String>undefined();
+  private String createUserId;
 
 
   public BatchStatisticsDto remainingJobs(Integer remainingJobs) {
-    this.remainingJobs = JsonNullable.<Integer>of(remainingJobs);
     
+    this.remainingJobs = remainingJobs;
     return this;
   }
 
@@ -110,32 +107,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of remaining batch execution jobs. This does include failed batch execution jobs and batch execution jobs which still have to be created by the seed job.")
-  @JsonIgnore
-
-  public Integer getRemainingJobs() {
-        return remainingJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMAINING_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRemainingJobs_JsonNullable() {
+  public Integer getRemainingJobs() {
     return remainingJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMAINING_JOBS)
-  public void setRemainingJobs_JsonNullable(JsonNullable<Integer> remainingJobs) {
-    this.remainingJobs = remainingJobs;
-  }
+
 
   public void setRemainingJobs(Integer remainingJobs) {
-    this.remainingJobs = JsonNullable.<Integer>of(remainingJobs);
+    this.remainingJobs = remainingJobs;
   }
 
 
   public BatchStatisticsDto completedJobs(Integer completedJobs) {
-    this.completedJobs = JsonNullable.<Integer>of(completedJobs);
     
+    this.completedJobs = completedJobs;
     return this;
   }
 
@@ -145,32 +132,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of completed batch execution jobs. This does include aborted/deleted batch execution jobs.")
-  @JsonIgnore
-
-  public Integer getCompletedJobs() {
-        return completedJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_COMPLETED_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getCompletedJobs_JsonNullable() {
+  public Integer getCompletedJobs() {
     return completedJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COMPLETED_JOBS)
-  public void setCompletedJobs_JsonNullable(JsonNullable<Integer> completedJobs) {
-    this.completedJobs = completedJobs;
-  }
+
 
   public void setCompletedJobs(Integer completedJobs) {
-    this.completedJobs = JsonNullable.<Integer>of(completedJobs);
+    this.completedJobs = completedJobs;
   }
 
 
   public BatchStatisticsDto failedJobs(Integer failedJobs) {
-    this.failedJobs = JsonNullable.<Integer>of(failedJobs);
     
+    this.failedJobs = failedJobs;
     return this;
   }
 
@@ -180,32 +157,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of failed batch execution jobs. This does not include aborted or deleted batch execution jobs.")
-  @JsonIgnore
-
-  public Integer getFailedJobs() {
-        return failedJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILED_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getFailedJobs_JsonNullable() {
+  public Integer getFailedJobs() {
     return failedJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILED_JOBS)
-  public void setFailedJobs_JsonNullable(JsonNullable<Integer> failedJobs) {
-    this.failedJobs = failedJobs;
-  }
+
 
   public void setFailedJobs(Integer failedJobs) {
-    this.failedJobs = JsonNullable.<Integer>of(failedJobs);
+    this.failedJobs = failedJobs;
   }
 
 
   public BatchStatisticsDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -215,32 +182,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the batch.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public BatchStatisticsDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -250,32 +207,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the batch. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/batch/#creating-a-batch) for more information about batch types.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 
   public BatchStatisticsDto totalJobs(Integer totalJobs) {
-    this.totalJobs = JsonNullable.<Integer>of(totalJobs);
     
+    this.totalJobs = totalJobs;
     return this;
   }
 
@@ -285,32 +232,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total jobs of a batch is the number of batch execution jobs required to complete the batch.")
-  @JsonIgnore
-
-  public Integer getTotalJobs() {
-        return totalJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TOTAL_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getTotalJobs_JsonNullable() {
+  public Integer getTotalJobs() {
     return totalJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TOTAL_JOBS)
-  public void setTotalJobs_JsonNullable(JsonNullable<Integer> totalJobs) {
-    this.totalJobs = totalJobs;
-  }
+
 
   public void setTotalJobs(Integer totalJobs) {
-    this.totalJobs = JsonNullable.<Integer>of(totalJobs);
+    this.totalJobs = totalJobs;
   }
 
 
   public BatchStatisticsDto jobsCreated(Integer jobsCreated) {
-    this.jobsCreated = JsonNullable.<Integer>of(jobsCreated);
     
+    this.jobsCreated = jobsCreated;
     return this;
   }
 
@@ -320,32 +257,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of batch execution jobs already created by the seed job.")
-  @JsonIgnore
-
-  public Integer getJobsCreated() {
-        return jobsCreated.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOBS_CREATED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getJobsCreated_JsonNullable() {
+  public Integer getJobsCreated() {
     return jobsCreated;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOBS_CREATED)
-  public void setJobsCreated_JsonNullable(JsonNullable<Integer> jobsCreated) {
-    this.jobsCreated = jobsCreated;
-  }
+
 
   public void setJobsCreated(Integer jobsCreated) {
-    this.jobsCreated = JsonNullable.<Integer>of(jobsCreated);
+    this.jobsCreated = jobsCreated;
   }
 
 
   public BatchStatisticsDto batchJobsPerSeed(Integer batchJobsPerSeed) {
-    this.batchJobsPerSeed = JsonNullable.<Integer>of(batchJobsPerSeed);
     
+    this.batchJobsPerSeed = batchJobsPerSeed;
     return this;
   }
 
@@ -355,32 +282,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of batch execution jobs created per seed job invocation. The batch seed job is invoked until it has created all batch execution jobs required by the batch (see `totalJobs` property).")
-  @JsonIgnore
-
-  public Integer getBatchJobsPerSeed() {
-        return batchJobsPerSeed.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_JOBS_PER_SEED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getBatchJobsPerSeed_JsonNullable() {
+  public Integer getBatchJobsPerSeed() {
     return batchJobsPerSeed;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_JOBS_PER_SEED)
-  public void setBatchJobsPerSeed_JsonNullable(JsonNullable<Integer> batchJobsPerSeed) {
-    this.batchJobsPerSeed = batchJobsPerSeed;
-  }
+
 
   public void setBatchJobsPerSeed(Integer batchJobsPerSeed) {
-    this.batchJobsPerSeed = JsonNullable.<Integer>of(batchJobsPerSeed);
+    this.batchJobsPerSeed = batchJobsPerSeed;
   }
 
 
   public BatchStatisticsDto invocationsPerBatchJob(Integer invocationsPerBatchJob) {
-    this.invocationsPerBatchJob = JsonNullable.<Integer>of(invocationsPerBatchJob);
     
+    this.invocationsPerBatchJob = invocationsPerBatchJob;
     return this;
   }
 
@@ -390,32 +307,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Every batch execution job invokes the command executed by the batch `invocationsPerBatchJob` times. E.g., for a process instance migration batch this specifies the number of process instances which are migrated per batch execution job.")
-  @JsonIgnore
-
-  public Integer getInvocationsPerBatchJob() {
-        return invocationsPerBatchJob.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getInvocationsPerBatchJob_JsonNullable() {
+  public Integer getInvocationsPerBatchJob() {
     return invocationsPerBatchJob;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB)
-  public void setInvocationsPerBatchJob_JsonNullable(JsonNullable<Integer> invocationsPerBatchJob) {
-    this.invocationsPerBatchJob = invocationsPerBatchJob;
-  }
+
 
   public void setInvocationsPerBatchJob(Integer invocationsPerBatchJob) {
-    this.invocationsPerBatchJob = JsonNullable.<Integer>of(invocationsPerBatchJob);
+    this.invocationsPerBatchJob = invocationsPerBatchJob;
   }
 
 
   public BatchStatisticsDto seedJobDefinitionId(String seedJobDefinitionId) {
-    this.seedJobDefinitionId = JsonNullable.<String>of(seedJobDefinitionId);
     
+    this.seedJobDefinitionId = seedJobDefinitionId;
     return this;
   }
 
@@ -425,32 +332,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the seed jobs of this batch.")
-  @JsonIgnore
-
-  public String getSeedJobDefinitionId() {
-        return seedJobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SEED_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSeedJobDefinitionId_JsonNullable() {
+  public String getSeedJobDefinitionId() {
     return seedJobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SEED_JOB_DEFINITION_ID)
-  public void setSeedJobDefinitionId_JsonNullable(JsonNullable<String> seedJobDefinitionId) {
-    this.seedJobDefinitionId = seedJobDefinitionId;
-  }
+
 
   public void setSeedJobDefinitionId(String seedJobDefinitionId) {
-    this.seedJobDefinitionId = JsonNullable.<String>of(seedJobDefinitionId);
+    this.seedJobDefinitionId = seedJobDefinitionId;
   }
 
 
   public BatchStatisticsDto monitorJobDefinitionId(String monitorJobDefinitionId) {
-    this.monitorJobDefinitionId = JsonNullable.<String>of(monitorJobDefinitionId);
     
+    this.monitorJobDefinitionId = monitorJobDefinitionId;
     return this;
   }
 
@@ -460,32 +357,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the monitor jobs of this batch.")
-  @JsonIgnore
-
-  public String getMonitorJobDefinitionId() {
-        return monitorJobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMonitorJobDefinitionId_JsonNullable() {
+  public String getMonitorJobDefinitionId() {
     return monitorJobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID)
-  public void setMonitorJobDefinitionId_JsonNullable(JsonNullable<String> monitorJobDefinitionId) {
-    this.monitorJobDefinitionId = monitorJobDefinitionId;
-  }
+
 
   public void setMonitorJobDefinitionId(String monitorJobDefinitionId) {
-    this.monitorJobDefinitionId = JsonNullable.<String>of(monitorJobDefinitionId);
+    this.monitorJobDefinitionId = monitorJobDefinitionId;
   }
 
 
   public BatchStatisticsDto batchJobDefinitionId(String batchJobDefinitionId) {
-    this.batchJobDefinitionId = JsonNullable.<String>of(batchJobDefinitionId);
     
+    this.batchJobDefinitionId = batchJobDefinitionId;
     return this;
   }
 
@@ -495,32 +382,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the batch execution jobs of this batch.")
-  @JsonIgnore
-
-  public String getBatchJobDefinitionId() {
-        return batchJobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBatchJobDefinitionId_JsonNullable() {
+  public String getBatchJobDefinitionId() {
     return batchJobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_JOB_DEFINITION_ID)
-  public void setBatchJobDefinitionId_JsonNullable(JsonNullable<String> batchJobDefinitionId) {
-    this.batchJobDefinitionId = batchJobDefinitionId;
-  }
+
 
   public void setBatchJobDefinitionId(String batchJobDefinitionId) {
-    this.batchJobDefinitionId = JsonNullable.<String>of(batchJobDefinitionId);
+    this.batchJobDefinitionId = batchJobDefinitionId;
   }
 
 
   public BatchStatisticsDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -530,32 +407,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates whether this batch is suspended or not.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public BatchStatisticsDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -565,32 +432,22 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the batch.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public BatchStatisticsDto createUserId(String createUserId) {
-    this.createUserId = JsonNullable.<String>of(createUserId);
     
+    this.createUserId = createUserId;
     return this;
   }
 
@@ -600,26 +457,16 @@ public class BatchStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user that created the batch.")
-  @JsonIgnore
-
-  public String getCreateUserId() {
-        return createUserId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATE_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCreateUserId_JsonNullable() {
+  public String getCreateUserId() {
     return createUserId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATE_USER_ID)
-  public void setCreateUserId_JsonNullable(JsonNullable<String> createUserId) {
-    this.createUserId = createUserId;
-  }
+
 
   public void setCreateUserId(String createUserId) {
-    this.createUserId = JsonNullable.<String>of(createUserId);
+    this.createUserId = createUserId;
   }
 
 

@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -59,87 +56,87 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricJobLogDto.JSON_PROPERTY_DELETION_LOG
 })
 @JsonTypeName("HistoricJobLogDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricJobLogDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  private JsonNullable<OffsetDateTime> timestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime timestamp;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_JOB_ID = "jobId";
-  private JsonNullable<String> jobId = JsonNullable.<String>undefined();
+  private String jobId;
 
   public static final String JSON_PROPERTY_JOB_DUE_DATE = "jobDueDate";
-  private JsonNullable<OffsetDateTime> jobDueDate = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime jobDueDate;
 
   public static final String JSON_PROPERTY_JOB_RETRIES = "jobRetries";
-  private JsonNullable<Integer> jobRetries = JsonNullable.<Integer>undefined();
+  private Integer jobRetries;
 
   public static final String JSON_PROPERTY_JOB_PRIORITY = "jobPriority";
-  private JsonNullable<Long> jobPriority = JsonNullable.<Long>undefined();
+  private Long jobPriority;
 
   public static final String JSON_PROPERTY_JOB_EXCEPTION_MESSAGE = "jobExceptionMessage";
-  private JsonNullable<String> jobExceptionMessage = JsonNullable.<String>undefined();
+  private String jobExceptionMessage;
 
   public static final String JSON_PROPERTY_FAILED_ACTIVITY_ID = "failedActivityId";
-  private JsonNullable<String> failedActivityId = JsonNullable.<String>undefined();
+  private String failedActivityId;
 
   public static final String JSON_PROPERTY_JOB_DEFINITION_ID = "jobDefinitionId";
-  private JsonNullable<String> jobDefinitionId = JsonNullable.<String>undefined();
+  private String jobDefinitionId;
 
   public static final String JSON_PROPERTY_JOB_DEFINITION_TYPE = "jobDefinitionType";
-  private JsonNullable<String> jobDefinitionType = JsonNullable.<String>undefined();
+  private String jobDefinitionType;
 
   public static final String JSON_PROPERTY_JOB_DEFINITION_CONFIGURATION = "jobDefinitionConfiguration";
-  private JsonNullable<String> jobDefinitionConfiguration = JsonNullable.<String>undefined();
+  private String jobDefinitionConfiguration;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
-  private JsonNullable<String> deploymentId = JsonNullable.<String>undefined();
+  private String deploymentId;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_HOSTNAME = "hostname";
-  private JsonNullable<String> hostname = JsonNullable.<String>undefined();
+  private String hostname;
 
   public static final String JSON_PROPERTY_CREATION_LOG = "creationLog";
-  private JsonNullable<Boolean> creationLog = JsonNullable.<Boolean>undefined();
+  private Boolean creationLog;
 
   public static final String JSON_PROPERTY_FAILURE_LOG = "failureLog";
-  private JsonNullable<Boolean> failureLog = JsonNullable.<Boolean>undefined();
+  private Boolean failureLog;
 
   public static final String JSON_PROPERTY_SUCCESS_LOG = "successLog";
-  private JsonNullable<Boolean> successLog = JsonNullable.<Boolean>undefined();
+  private Boolean successLog;
 
   public static final String JSON_PROPERTY_DELETION_LOG = "deletionLog";
-  private JsonNullable<Boolean> deletionLog = JsonNullable.<Boolean>undefined();
+  private Boolean deletionLog;
 
 
   public HistoricJobLogDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -149,32 +146,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the log entry.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricJobLogDto timestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
     
+    this.timestamp = timestamp;
     return this;
   }
 
@@ -184,32 +171,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the log entry has been written.")
-  @JsonIgnore
-
-  public OffsetDateTime getTimestamp() {
-        return timestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTimestamp_JsonNullable() {
+  public OffsetDateTime getTimestamp() {
     return timestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  public void setTimestamp_JsonNullable(JsonNullable<OffsetDateTime> timestamp) {
-    this.timestamp = timestamp;
-  }
+
 
   public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
+    this.timestamp = timestamp;
   }
 
 
   public HistoricJobLogDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -219,32 +196,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the log entry should be removed by the History Cleanup job. Default format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`. For further info see the [docs](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/)")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public HistoricJobLogDto jobId(String jobId) {
-    this.jobId = JsonNullable.<String>of(jobId);
     
+    this.jobId = jobId;
     return this;
   }
 
@@ -254,32 +221,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the associated job.")
-  @JsonIgnore
-
-  public String getJobId() {
-        return jobId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobId_JsonNullable() {
+  public String getJobId() {
     return jobId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_ID)
-  public void setJobId_JsonNullable(JsonNullable<String> jobId) {
-    this.jobId = jobId;
-  }
+
 
   public void setJobId(String jobId) {
-    this.jobId = JsonNullable.<String>of(jobId);
+    this.jobId = jobId;
   }
 
 
   public HistoricJobLogDto jobDueDate(OffsetDateTime jobDueDate) {
-    this.jobDueDate = JsonNullable.<OffsetDateTime>of(jobDueDate);
     
+    this.jobDueDate = jobDueDate;
     return this;
   }
 
@@ -289,32 +246,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date on which the associated job is supposed to be processed.")
-  @JsonIgnore
-
-  public OffsetDateTime getJobDueDate() {
-        return jobDueDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DUE_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getJobDueDate_JsonNullable() {
+  public OffsetDateTime getJobDueDate() {
     return jobDueDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DUE_DATE)
-  public void setJobDueDate_JsonNullable(JsonNullable<OffsetDateTime> jobDueDate) {
-    this.jobDueDate = jobDueDate;
-  }
+
 
   public void setJobDueDate(OffsetDateTime jobDueDate) {
-    this.jobDueDate = JsonNullable.<OffsetDateTime>of(jobDueDate);
+    this.jobDueDate = jobDueDate;
   }
 
 
   public HistoricJobLogDto jobRetries(Integer jobRetries) {
-    this.jobRetries = JsonNullable.<Integer>of(jobRetries);
     
+    this.jobRetries = jobRetries;
     return this;
   }
 
@@ -324,32 +271,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of retries the associated job has left.")
-  @JsonIgnore
-
-  public Integer getJobRetries() {
-        return jobRetries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getJobRetries_JsonNullable() {
+  public Integer getJobRetries() {
     return jobRetries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_RETRIES)
-  public void setJobRetries_JsonNullable(JsonNullable<Integer> jobRetries) {
-    this.jobRetries = jobRetries;
-  }
+
 
   public void setJobRetries(Integer jobRetries) {
-    this.jobRetries = JsonNullable.<Integer>of(jobRetries);
+    this.jobRetries = jobRetries;
   }
 
 
   public HistoricJobLogDto jobPriority(Long jobPriority) {
-    this.jobPriority = JsonNullable.<Long>of(jobPriority);
     
+    this.jobPriority = jobPriority;
     return this;
   }
 
@@ -359,32 +296,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution priority the job had when the log entry was created.")
-  @JsonIgnore
-
-  public Long getJobPriority() {
-        return jobPriority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getJobPriority_JsonNullable() {
+  public Long getJobPriority() {
     return jobPriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_PRIORITY)
-  public void setJobPriority_JsonNullable(JsonNullable<Long> jobPriority) {
-    this.jobPriority = jobPriority;
-  }
+
 
   public void setJobPriority(Long jobPriority) {
-    this.jobPriority = JsonNullable.<Long>of(jobPriority);
+    this.jobPriority = jobPriority;
   }
 
 
   public HistoricJobLogDto jobExceptionMessage(String jobExceptionMessage) {
-    this.jobExceptionMessage = JsonNullable.<String>of(jobExceptionMessage);
     
+    this.jobExceptionMessage = jobExceptionMessage;
     return this;
   }
 
@@ -394,32 +321,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of the exception that occurred by executing the associated job.")
-  @JsonIgnore
-
-  public String getJobExceptionMessage() {
-        return jobExceptionMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_EXCEPTION_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobExceptionMessage_JsonNullable() {
+  public String getJobExceptionMessage() {
     return jobExceptionMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_EXCEPTION_MESSAGE)
-  public void setJobExceptionMessage_JsonNullable(JsonNullable<String> jobExceptionMessage) {
-    this.jobExceptionMessage = jobExceptionMessage;
-  }
+
 
   public void setJobExceptionMessage(String jobExceptionMessage) {
-    this.jobExceptionMessage = JsonNullable.<String>of(jobExceptionMessage);
+    this.jobExceptionMessage = jobExceptionMessage;
   }
 
 
   public HistoricJobLogDto failedActivityId(String failedActivityId) {
-    this.failedActivityId = JsonNullable.<String>of(failedActivityId);
     
+    this.failedActivityId = failedActivityId;
     return this;
   }
 
@@ -429,32 +346,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity on which the last exception occurred by executing the associated job.")
-  @JsonIgnore
-
-  public String getFailedActivityId() {
-        return failedActivityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILED_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFailedActivityId_JsonNullable() {
+  public String getFailedActivityId() {
     return failedActivityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILED_ACTIVITY_ID)
-  public void setFailedActivityId_JsonNullable(JsonNullable<String> failedActivityId) {
-    this.failedActivityId = failedActivityId;
-  }
+
 
   public void setFailedActivityId(String failedActivityId) {
-    this.failedActivityId = JsonNullable.<String>of(failedActivityId);
+    this.failedActivityId = failedActivityId;
   }
 
 
   public HistoricJobLogDto jobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
     
+    this.jobDefinitionId = jobDefinitionId;
     return this;
   }
 
@@ -464,32 +371,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the job definition on which the associated job was created.")
-  @JsonIgnore
-
-  public String getJobDefinitionId() {
-        return jobDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionId_JsonNullable() {
+  public String getJobDefinitionId() {
     return jobDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
-  public void setJobDefinitionId_JsonNullable(JsonNullable<String> jobDefinitionId) {
-    this.jobDefinitionId = jobDefinitionId;
-  }
+
 
   public void setJobDefinitionId(String jobDefinitionId) {
-    this.jobDefinitionId = JsonNullable.<String>of(jobDefinitionId);
+    this.jobDefinitionId = jobDefinitionId;
   }
 
 
   public HistoricJobLogDto jobDefinitionType(String jobDefinitionType) {
-    this.jobDefinitionType = JsonNullable.<String>of(jobDefinitionType);
     
+    this.jobDefinitionType = jobDefinitionType;
     return this;
   }
 
@@ -499,32 +396,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition type of the associated job. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/the-job-executor/#job-creation) for more information about job definition types.")
-  @JsonIgnore
-
-  public String getJobDefinitionType() {
-        return jobDefinitionType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionType_JsonNullable() {
+  public String getJobDefinitionType() {
     return jobDefinitionType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_TYPE)
-  public void setJobDefinitionType_JsonNullable(JsonNullable<String> jobDefinitionType) {
-    this.jobDefinitionType = jobDefinitionType;
-  }
+
 
   public void setJobDefinitionType(String jobDefinitionType) {
-    this.jobDefinitionType = JsonNullable.<String>of(jobDefinitionType);
+    this.jobDefinitionType = jobDefinitionType;
   }
 
 
   public HistoricJobLogDto jobDefinitionConfiguration(String jobDefinitionConfiguration) {
-    this.jobDefinitionConfiguration = JsonNullable.<String>of(jobDefinitionConfiguration);
     
+    this.jobDefinitionConfiguration = jobDefinitionConfiguration;
     return this;
   }
 
@@ -534,32 +421,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition configuration type of the associated job.")
-  @JsonIgnore
-
-  public String getJobDefinitionConfiguration() {
-        return jobDefinitionConfiguration.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_CONFIGURATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getJobDefinitionConfiguration_JsonNullable() {
+  public String getJobDefinitionConfiguration() {
     return jobDefinitionConfiguration;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_CONFIGURATION)
-  public void setJobDefinitionConfiguration_JsonNullable(JsonNullable<String> jobDefinitionConfiguration) {
-    this.jobDefinitionConfiguration = jobDefinitionConfiguration;
-  }
+
 
   public void setJobDefinitionConfiguration(String jobDefinitionConfiguration) {
-    this.jobDefinitionConfiguration = JsonNullable.<String>of(jobDefinitionConfiguration);
+    this.jobDefinitionConfiguration = jobDefinitionConfiguration;
   }
 
 
   public HistoricJobLogDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -569,32 +446,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity on which the associated job was created.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public HistoricJobLogDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -604,32 +471,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution id on which the associated job was created.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public HistoricJobLogDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -639,32 +496,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance on which the associated job was created.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public HistoricJobLogDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -674,32 +521,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition which the associated job belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public HistoricJobLogDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -709,32 +546,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition which the associated job belongs to.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public HistoricJobLogDto deploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
     
+    this.deploymentId = deploymentId;
     return this;
   }
 
@@ -744,32 +571,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment which the associated job belongs to.")
-  @JsonIgnore
-
-  public String getDeploymentId() {
-        return deploymentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDeploymentId_JsonNullable() {
+  public String getDeploymentId() {
     return deploymentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  public void setDeploymentId_JsonNullable(JsonNullable<String> deploymentId) {
-    this.deploymentId = deploymentId;
-  }
+
 
   public void setDeploymentId(String deploymentId) {
-    this.deploymentId = JsonNullable.<String>of(deploymentId);
+    this.deploymentId = deploymentId;
   }
 
 
   public HistoricJobLogDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -779,32 +596,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process which the associated job belongs to.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 
   public HistoricJobLogDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -814,32 +621,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant that this historic job log entry belongs to.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public HistoricJobLogDto hostname(String hostname) {
-    this.hostname = JsonNullable.<String>of(hostname);
     
+    this.hostname = hostname;
     return this;
   }
 
@@ -849,32 +646,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = " The name of the host of the Process Engine where the job of this historic job log entry was executed.")
-  @JsonIgnore
-
-  public String getHostname() {
-        return hostname.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HOSTNAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getHostname_JsonNullable() {
+  public String getHostname() {
     return hostname;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HOSTNAME)
-  public void setHostname_JsonNullable(JsonNullable<String> hostname) {
-    this.hostname = hostname;
-  }
+
 
   public void setHostname(String hostname) {
-    this.hostname = JsonNullable.<String>of(hostname);
+    this.hostname = hostname;
   }
 
 
   public HistoricJobLogDto creationLog(Boolean creationLog) {
-    this.creationLog = JsonNullable.<Boolean>of(creationLog);
     
+    this.creationLog = creationLog;
     return this;
   }
 
@@ -884,32 +671,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the creation of the associated job.")
-  @JsonIgnore
-
-  public Boolean getCreationLog() {
-        return creationLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATION_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCreationLog_JsonNullable() {
+  public Boolean getCreationLog() {
     return creationLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATION_LOG)
-  public void setCreationLog_JsonNullable(JsonNullable<Boolean> creationLog) {
-    this.creationLog = creationLog;
-  }
+
 
   public void setCreationLog(Boolean creationLog) {
-    this.creationLog = JsonNullable.<Boolean>of(creationLog);
+    this.creationLog = creationLog;
   }
 
 
   public HistoricJobLogDto failureLog(Boolean failureLog) {
-    this.failureLog = JsonNullable.<Boolean>of(failureLog);
     
+    this.failureLog = failureLog;
     return this;
   }
 
@@ -919,32 +696,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the failed execution of the associated job.")
-  @JsonIgnore
-
-  public Boolean getFailureLog() {
-        return failureLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILURE_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getFailureLog_JsonNullable() {
+  public Boolean getFailureLog() {
     return failureLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILURE_LOG)
-  public void setFailureLog_JsonNullable(JsonNullable<Boolean> failureLog) {
-    this.failureLog = failureLog;
-  }
+
 
   public void setFailureLog(Boolean failureLog) {
-    this.failureLog = JsonNullable.<Boolean>of(failureLog);
+    this.failureLog = failureLog;
   }
 
 
   public HistoricJobLogDto successLog(Boolean successLog) {
-    this.successLog = JsonNullable.<Boolean>of(successLog);
     
+    this.successLog = successLog;
     return this;
   }
 
@@ -954,32 +721,22 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the successful execution of the associated job.")
-  @JsonIgnore
-
-  public Boolean getSuccessLog() {
-        return successLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUCCESS_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuccessLog_JsonNullable() {
+  public Boolean getSuccessLog() {
     return successLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUCCESS_LOG)
-  public void setSuccessLog_JsonNullable(JsonNullable<Boolean> successLog) {
-    this.successLog = successLog;
-  }
+
 
   public void setSuccessLog(Boolean successLog) {
-    this.successLog = JsonNullable.<Boolean>of(successLog);
+    this.successLog = successLog;
   }
 
 
   public HistoricJobLogDto deletionLog(Boolean deletionLog) {
-    this.deletionLog = JsonNullable.<Boolean>of(deletionLog);
     
+    this.deletionLog = deletionLog;
     return this;
   }
 
@@ -989,26 +746,16 @@ public class HistoricJobLogDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether this log represents the deletion of the associated job.")
-  @JsonIgnore
-
-  public Boolean getDeletionLog() {
-        return deletionLog.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELETION_LOG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getDeletionLog_JsonNullable() {
+  public Boolean getDeletionLog() {
     return deletionLog;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELETION_LOG)
-  public void setDeletionLog_JsonNullable(JsonNullable<Boolean> deletionLog) {
-    this.deletionLog = deletionLog;
-  }
+
 
   public void setDeletionLog(Boolean deletionLog) {
-    this.deletionLog = JsonNullable.<Boolean>of(deletionLog);
+    this.deletionLog = deletionLog;
   }
 
 

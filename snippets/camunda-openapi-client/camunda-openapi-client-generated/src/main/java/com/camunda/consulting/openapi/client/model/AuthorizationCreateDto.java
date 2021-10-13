@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,30 +38,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AuthorizationCreateDto.JSON_PROPERTY_RESOURCE_ID
 })
 @JsonTypeName("AuthorizationCreateDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AuthorizationCreateDto {
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<Integer> type = JsonNullable.<Integer>undefined();
+  private Integer type;
 
   public static final String JSON_PROPERTY_PERMISSIONS = "permissions";
-  private JsonNullable<List<String>> permissions = JsonNullable.<List<String>>undefined();
+  private List<String> permissions = null;
 
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_GROUP_ID = "groupId";
-  private JsonNullable<String> groupId = JsonNullable.<String>undefined();
+  private String groupId;
 
   public static final String JSON_PROPERTY_RESOURCE_TYPE = "resourceType";
-  private JsonNullable<Integer> resourceType = JsonNullable.<Integer>undefined();
+  private Integer resourceType;
 
   public static final String JSON_PROPERTY_RESOURCE_ID = "resourceId";
-  private JsonNullable<String> resourceId = JsonNullable.<String>undefined();
+  private String resourceId;
 
 
   public AuthorizationCreateDto type(Integer type) {
-    this.type = JsonNullable.<Integer>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -74,44 +71,30 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the authorization (0=global, 1=grant, 2=revoke). See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/authorization-service.md#authorization-type) for more information about authorization types.")
-  @JsonIgnore
-
-  public Integer getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getType_JsonNullable() {
+  public Integer getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<Integer> type) {
-    this.type = type;
-  }
+
 
   public void setType(Integer type) {
-    this.type = JsonNullable.<Integer>of(type);
+    this.type = type;
   }
 
 
   public AuthorizationCreateDto permissions(List<String> permissions) {
-    this.permissions = JsonNullable.<List<String>>of(permissions);
     
+    this.permissions = permissions;
     return this;
   }
 
   public AuthorizationCreateDto addPermissionsItem(String permissionsItem) {
-    if (this.permissions == null || !this.permissions.isPresent()) {
-      this.permissions = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.permissions == null) {
+      this.permissions = new ArrayList<>();
     }
-    try {
-      this.permissions.get().add(permissionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.permissions.add(permissionsItem);
     return this;
   }
 
@@ -121,32 +104,22 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of Strings holding the permissions provided by this authorization.")
-  @JsonIgnore
-
-  public List<String> getPermissions() {
-        return permissions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PERMISSIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getPermissions_JsonNullable() {
+  public List<String> getPermissions() {
     return permissions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PERMISSIONS)
-  public void setPermissions_JsonNullable(JsonNullable<List<String>> permissions) {
-    this.permissions = permissions;
-  }
+
 
   public void setPermissions(List<String> permissions) {
-    this.permissions = JsonNullable.<List<String>>of(permissions);
+    this.permissions = permissions;
   }
 
 
   public AuthorizationCreateDto userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -156,32 +129,22 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user this authorization has been created for. The value `*` represents a global authorization ranging over all users.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public AuthorizationCreateDto groupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
     
+    this.groupId = groupId;
     return this;
   }
 
@@ -191,32 +154,22 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the group this authorization has been created for.")
-  @JsonIgnore
-
-  public String getGroupId() {
-        return groupId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUP_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getGroupId_JsonNullable() {
+  public String getGroupId() {
     return groupId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  public void setGroupId_JsonNullable(JsonNullable<String> groupId) {
-    this.groupId = groupId;
-  }
+
 
   public void setGroupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
+    this.groupId = groupId;
   }
 
 
   public AuthorizationCreateDto resourceType(Integer resourceType) {
-    this.resourceType = JsonNullable.<Integer>of(resourceType);
     
+    this.resourceType = resourceType;
     return this;
   }
 
@@ -226,32 +179,22 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An integer representing the resource type. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/authorization-service/#resources) for a list of integer representations of resource types.")
-  @JsonIgnore
-
-  public Integer getResourceType() {
-        return resourceType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getResourceType_JsonNullable() {
+  public Integer getResourceType() {
     return resourceType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_TYPE)
-  public void setResourceType_JsonNullable(JsonNullable<Integer> resourceType) {
-    this.resourceType = resourceType;
-  }
+
 
   public void setResourceType(Integer resourceType) {
-    this.resourceType = JsonNullable.<Integer>of(resourceType);
+    this.resourceType = resourceType;
   }
 
 
   public AuthorizationCreateDto resourceId(String resourceId) {
-    this.resourceId = JsonNullable.<String>of(resourceId);
     
+    this.resourceId = resourceId;
     return this;
   }
 
@@ -261,26 +204,16 @@ public class AuthorizationCreateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The resource Id. The value `*` represents an authorization ranging over all instances of a resource.")
-  @JsonIgnore
-
-  public String getResourceId() {
-        return resourceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResourceId_JsonNullable() {
+  public String getResourceId() {
     return resourceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_ID)
-  public void setResourceId_JsonNullable(JsonNullable<String> resourceId) {
-    this.resourceId = resourceId;
-  }
+
 
   public void setResourceId(String resourceId) {
-    this.resourceId = JsonNullable.<String>of(resourceId);
+    this.resourceId = resourceId;
   }
 
 

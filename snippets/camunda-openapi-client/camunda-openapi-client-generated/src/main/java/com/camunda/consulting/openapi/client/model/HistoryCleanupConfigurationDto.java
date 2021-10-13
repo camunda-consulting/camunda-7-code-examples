@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,21 +34,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoryCleanupConfigurationDto.JSON_PROPERTY_ENABLED
 })
 @JsonTypeName("HistoryCleanupConfigurationDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoryCleanupConfigurationDto {
   public static final String JSON_PROPERTY_BATCH_WINDOW_START_TIME = "batchWindowStartTime";
-  private JsonNullable<OffsetDateTime> batchWindowStartTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime batchWindowStartTime;
 
   public static final String JSON_PROPERTY_BATCH_WINDOW_END_TIME = "batchWindowEndTime";
-  private JsonNullable<OffsetDateTime> batchWindowEndTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime batchWindowEndTime;
 
   public static final String JSON_PROPERTY_ENABLED = "enabled";
-  private JsonNullable<Boolean> enabled = JsonNullable.<Boolean>undefined();
+  private Boolean enabled;
 
 
   public HistoryCleanupConfigurationDto batchWindowStartTime(OffsetDateTime batchWindowStartTime) {
-    this.batchWindowStartTime = JsonNullable.<OffsetDateTime>of(batchWindowStartTime);
     
+    this.batchWindowStartTime = batchWindowStartTime;
     return this;
   }
 
@@ -61,32 +58,22 @@ public class HistoryCleanupConfigurationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Start time of the current or next batch window. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getBatchWindowStartTime() {
-        return batchWindowStartTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_WINDOW_START_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getBatchWindowStartTime_JsonNullable() {
+  public OffsetDateTime getBatchWindowStartTime() {
     return batchWindowStartTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_WINDOW_START_TIME)
-  public void setBatchWindowStartTime_JsonNullable(JsonNullable<OffsetDateTime> batchWindowStartTime) {
-    this.batchWindowStartTime = batchWindowStartTime;
-  }
+
 
   public void setBatchWindowStartTime(OffsetDateTime batchWindowStartTime) {
-    this.batchWindowStartTime = JsonNullable.<OffsetDateTime>of(batchWindowStartTime);
+    this.batchWindowStartTime = batchWindowStartTime;
   }
 
 
   public HistoryCleanupConfigurationDto batchWindowEndTime(OffsetDateTime batchWindowEndTime) {
-    this.batchWindowEndTime = JsonNullable.<OffsetDateTime>of(batchWindowEndTime);
     
+    this.batchWindowEndTime = batchWindowEndTime;
     return this;
   }
 
@@ -96,32 +83,22 @@ public class HistoryCleanupConfigurationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "End time of the current or next batch window. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getBatchWindowEndTime() {
-        return batchWindowEndTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_WINDOW_END_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getBatchWindowEndTime_JsonNullable() {
+  public OffsetDateTime getBatchWindowEndTime() {
     return batchWindowEndTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_WINDOW_END_TIME)
-  public void setBatchWindowEndTime_JsonNullable(JsonNullable<OffsetDateTime> batchWindowEndTime) {
-    this.batchWindowEndTime = batchWindowEndTime;
-  }
+
 
   public void setBatchWindowEndTime(OffsetDateTime batchWindowEndTime) {
-    this.batchWindowEndTime = JsonNullable.<OffsetDateTime>of(batchWindowEndTime);
+    this.batchWindowEndTime = batchWindowEndTime;
   }
 
 
   public HistoryCleanupConfigurationDto enabled(Boolean enabled) {
-    this.enabled = JsonNullable.<Boolean>of(enabled);
     
+    this.enabled = enabled;
     return this;
   }
 
@@ -131,26 +108,16 @@ public class HistoryCleanupConfigurationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates whether the engine node participates in history cleanup or not. The default is `true`. Participation can be disabled via [Process Engine Configuration](https://docs.camunda.org/manual/7.16/reference/deployment-descriptors/tags/process-engine/#history-cleanup-enabled).  For more details, see [Cleanup Execution Participation per Node](https://docs.camunda.org/manual/7.16/user-guide/process-engine/history/#cleanup-execution-participation-per-node).")
-  @JsonIgnore
-
-  public Boolean getEnabled() {
-        return enabled.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ENABLED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getEnabled_JsonNullable() {
+  public Boolean getEnabled() {
     return enabled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENABLED)
-  public void setEnabled_JsonNullable(JsonNullable<Boolean> enabled) {
-    this.enabled = enabled;
-  }
+
 
   public void setEnabled(Boolean enabled) {
-    this.enabled = JsonNullable.<Boolean>of(enabled);
+    this.enabled = enabled;
   }
 
 

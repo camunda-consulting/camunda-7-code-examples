@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   VersionDto.JSON_PROPERTY_VERSION
 })
 @JsonTypeName("VersionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class VersionDto {
   public static final String JSON_PROPERTY_VERSION = "version";
-  private JsonNullable<String> version = JsonNullable.<String>undefined();
+  private String version;
 
 
   public VersionDto version(String version) {
-    this.version = JsonNullable.<String>of(version);
     
+    this.version = version;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class VersionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the Rest API.")
-  @JsonIgnore
-
-  public String getVersion() {
-        return version.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getVersion_JsonNullable() {
+  public String getVersion() {
     return version;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  public void setVersion_JsonNullable(JsonNullable<String> version) {
-    this.version = version;
-  }
+
 
   public void setVersion(String version) {
-    this.version = JsonNullable.<String>of(version);
+    this.version = version;
   }
 
 

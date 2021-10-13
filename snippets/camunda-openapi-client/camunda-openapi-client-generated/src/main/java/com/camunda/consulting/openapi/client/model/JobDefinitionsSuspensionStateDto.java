@@ -24,9 +24,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -42,33 +39,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobDefinitionsSuspensionStateDto.JSON_PROPERTY_SUSPENDED
 })
 @JsonTypeName("JobDefinitionsSuspensionStateDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobDefinitionsSuspensionStateDto {
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID = "processDefinitionTenantId";
-  private JsonNullable<String> processDefinitionTenantId = JsonNullable.<String>undefined();
+  private String processDefinitionTenantId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID = "processDefinitionWithoutTenantId";
-  private JsonNullable<Boolean> processDefinitionWithoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean processDefinitionWithoutTenantId;
 
   public static final String JSON_PROPERTY_INCLUDE_JOBS = "includeJobs";
-  private JsonNullable<Boolean> includeJobs = JsonNullable.<Boolean>undefined();
+  private Boolean includeJobs;
 
   public static final String JSON_PROPERTY_EXECUTION_DATE = "executionDate";
-  private JsonNullable<String> executionDate = JsonNullable.<String>undefined();
+  private String executionDate;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
 
   public JobDefinitionsSuspensionStateDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -78,32 +75,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process definition id of the job definitions to activate or suspend.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public JobDefinitionsSuspensionStateDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -113,32 +100,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process definition key of the job definitions to activate or suspend.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public JobDefinitionsSuspensionStateDto processDefinitionTenantId(String processDefinitionTenantId) {
-    this.processDefinitionTenantId = JsonNullable.<String>of(processDefinitionTenantId);
     
+    this.processDefinitionTenantId = processDefinitionTenantId;
     return this;
   }
 
@@ -148,32 +125,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only activate or suspend job definitions of a process definition which belongs to a tenant with the given id.  Note that this parameter will only be considered  in combination with `processDefinitionKey`.")
-  @JsonIgnore
-
-  public String getProcessDefinitionTenantId() {
-        return processDefinitionTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionTenantId_JsonNullable() {
+  public String getProcessDefinitionTenantId() {
     return processDefinitionTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID)
-  public void setProcessDefinitionTenantId_JsonNullable(JsonNullable<String> processDefinitionTenantId) {
-    this.processDefinitionTenantId = processDefinitionTenantId;
-  }
+
 
   public void setProcessDefinitionTenantId(String processDefinitionTenantId) {
-    this.processDefinitionTenantId = JsonNullable.<String>of(processDefinitionTenantId);
+    this.processDefinitionTenantId = processDefinitionTenantId;
   }
 
 
   public JobDefinitionsSuspensionStateDto processDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
     
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
     return this;
   }
 
@@ -183,32 +150,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only activate or suspend job definitions of a process definition which belongs to no tenant. Value may only be `true`, as `false` is the default behavior.  Note that this parameter will only be considered  in combination with `processDefinitionKey`.")
-  @JsonIgnore
-
-  public Boolean getProcessDefinitionWithoutTenantId() {
-        return processDefinitionWithoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getProcessDefinitionWithoutTenantId_JsonNullable() {
+  public Boolean getProcessDefinitionWithoutTenantId() {
     return processDefinitionWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
-  public void setProcessDefinitionWithoutTenantId_JsonNullable(JsonNullable<Boolean> processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
-  }
+
 
   public void setProcessDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
   }
 
 
   public JobDefinitionsSuspensionStateDto includeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
     
+    this.includeJobs = includeJobs;
     return this;
   }
 
@@ -218,32 +175,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `Boolean` value which indicates whether to activate or suspend also all jobs of the referenced job definitions. When the value is set to `true`, all jobs of the provided job definitions will be activated or suspended and when the value is set to `false`, the suspension state of all jobs of the provided job definitions will not be updated.")
-  @JsonIgnore
-
-  public Boolean getIncludeJobs() {
-        return includeJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeJobs_JsonNullable() {
+  public Boolean getIncludeJobs() {
     return includeJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_JOBS)
-  public void setIncludeJobs_JsonNullable(JsonNullable<Boolean> includeJobs) {
-    this.includeJobs = includeJobs;
-  }
+
 
   public void setIncludeJobs(Boolean includeJobs) {
-    this.includeJobs = JsonNullable.<Boolean>of(includeJobs);
+    this.includeJobs = includeJobs;
   }
 
 
   public JobDefinitionsSuspensionStateDto executionDate(String executionDate) {
-    this.executionDate = JsonNullable.<String>of(executionDate);
     
+    this.executionDate = executionDate;
     return this;
   }
 
@@ -253,32 +200,22 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date on which the referenced job definitions will be activated or suspended. If null, the suspension state of the given job definitions is updated immediately. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM- dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
-
-  public String getExecutionDate() {
-        return executionDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionDate_JsonNullable() {
+  public String getExecutionDate() {
     return executionDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
-  public void setExecutionDate_JsonNullable(JsonNullable<String> executionDate) {
-    this.executionDate = executionDate;
-  }
+
 
   public void setExecutionDate(String executionDate) {
-    this.executionDate = JsonNullable.<String>of(executionDate);
+    this.executionDate = executionDate;
   }
 
 
   public JobDefinitionsSuspensionStateDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -288,26 +225,16 @@ public class JobDefinitionsSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value which indicates whether to activate or suspend a given instance  (e.g. process instance, job, job definition, or batch). When the value is set to true,  the given instance will be suspended and when the value is set to false,  the given instance will be activated.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 

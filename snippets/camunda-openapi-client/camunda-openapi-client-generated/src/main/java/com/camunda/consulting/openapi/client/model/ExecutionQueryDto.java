@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -57,69 +54,69 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ExecutionQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("ExecutionQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ExecutionQueryDto {
   public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
-  private JsonNullable<String> businessKey = JsonNullable.<String>undefined();
+  private String businessKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_SIGNAL_EVENT_SUBSCRIPTION_NAME = "signalEventSubscriptionName";
-  private JsonNullable<String> signalEventSubscriptionName = JsonNullable.<String>undefined();
+  private String signalEventSubscriptionName;
 
   public static final String JSON_PROPERTY_MESSAGE_EVENT_SUBSCRIPTION_NAME = "messageEventSubscriptionName";
-  private JsonNullable<String> messageEventSubscriptionName = JsonNullable.<String>undefined();
+  private String messageEventSubscriptionName;
 
   public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>undefined();
+  private Boolean active;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
   public static final String JSON_PROPERTY_INCIDENT_ID = "incidentId";
-  private JsonNullable<String> incidentId = JsonNullable.<String>undefined();
+  private String incidentId;
 
   public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
-  private JsonNullable<String> incidentType = JsonNullable.<String>undefined();
+  private String incidentType;
 
   public static final String JSON_PROPERTY_INCIDENT_MESSAGE = "incidentMessage";
-  private JsonNullable<String> incidentMessage = JsonNullable.<String>undefined();
+  private String incidentMessage;
 
   public static final String JSON_PROPERTY_INCIDENT_MESSAGE_LIKE = "incidentMessageLike";
-  private JsonNullable<String> incidentMessageLike = JsonNullable.<String>undefined();
+  private String incidentMessageLike;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<List<VariableQueryParameterDto>> variables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> variables = null;
 
   public static final String JSON_PROPERTY_PROCESS_VARIABLES = "processVariables";
-  private JsonNullable<List<VariableQueryParameterDto>> processVariables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> processVariables = null;
 
   public static final String JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
-  private JsonNullable<Boolean> variableNamesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableNamesIgnoreCase;
 
   public static final String JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
-  private JsonNullable<Boolean> variableValuesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableValuesIgnoreCase;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<ExecutionQueryDtoSorting>> sorting = JsonNullable.<List<ExecutionQueryDtoSorting>>undefined();
+  private List<ExecutionQueryDtoSorting> sorting = null;
 
 
   public ExecutionQueryDto businessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
     
+    this.businessKey = businessKey;
     return this;
   }
 
@@ -129,32 +126,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the business key of the process instances the executions belong to.")
-  @JsonIgnore
-
-  public String getBusinessKey() {
-        return businessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKey_JsonNullable() {
+  public String getBusinessKey() {
     return businessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  public void setBusinessKey_JsonNullable(JsonNullable<String> businessKey) {
-    this.businessKey = businessKey;
-  }
+
 
   public void setBusinessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
+    this.businessKey = businessKey;
   }
 
 
   public ExecutionQueryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -164,32 +151,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the process definition the executions run on.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public ExecutionQueryDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -199,32 +176,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the key of the process definition the executions run on.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public ExecutionQueryDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -234,32 +201,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the process instance the execution belongs to.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public ExecutionQueryDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -269,32 +226,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the activity the execution currently executes.")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public ExecutionQueryDto signalEventSubscriptionName(String signalEventSubscriptionName) {
-    this.signalEventSubscriptionName = JsonNullable.<String>of(signalEventSubscriptionName);
     
+    this.signalEventSubscriptionName = signalEventSubscriptionName;
     return this;
   }
 
@@ -304,32 +251,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Select only those executions that expect a signal of the given name.")
-  @JsonIgnore
-
-  public String getSignalEventSubscriptionName() {
-        return signalEventSubscriptionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SIGNAL_EVENT_SUBSCRIPTION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSignalEventSubscriptionName_JsonNullable() {
+  public String getSignalEventSubscriptionName() {
     return signalEventSubscriptionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SIGNAL_EVENT_SUBSCRIPTION_NAME)
-  public void setSignalEventSubscriptionName_JsonNullable(JsonNullable<String> signalEventSubscriptionName) {
-    this.signalEventSubscriptionName = signalEventSubscriptionName;
-  }
+
 
   public void setSignalEventSubscriptionName(String signalEventSubscriptionName) {
-    this.signalEventSubscriptionName = JsonNullable.<String>of(signalEventSubscriptionName);
+    this.signalEventSubscriptionName = signalEventSubscriptionName;
   }
 
 
   public ExecutionQueryDto messageEventSubscriptionName(String messageEventSubscriptionName) {
-    this.messageEventSubscriptionName = JsonNullable.<String>of(messageEventSubscriptionName);
     
+    this.messageEventSubscriptionName = messageEventSubscriptionName;
     return this;
   }
 
@@ -339,32 +276,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Select only those executions that expect a message of the given name.")
-  @JsonIgnore
-
-  public String getMessageEventSubscriptionName() {
-        return messageEventSubscriptionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE_EVENT_SUBSCRIPTION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessageEventSubscriptionName_JsonNullable() {
+  public String getMessageEventSubscriptionName() {
     return messageEventSubscriptionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE_EVENT_SUBSCRIPTION_NAME)
-  public void setMessageEventSubscriptionName_JsonNullable(JsonNullable<String> messageEventSubscriptionName) {
-    this.messageEventSubscriptionName = messageEventSubscriptionName;
-  }
+
 
   public void setMessageEventSubscriptionName(String messageEventSubscriptionName) {
-    this.messageEventSubscriptionName = JsonNullable.<String>of(messageEventSubscriptionName);
+    this.messageEventSubscriptionName = messageEventSubscriptionName;
   }
 
 
   public ExecutionQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
     
+    this.active = active;
     return this;
   }
 
@@ -374,32 +301,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include active executions. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getActive() {
-        return active.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getActive_JsonNullable() {
+  public Boolean getActive() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public ExecutionQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -409,32 +326,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include suspended executions. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public ExecutionQueryDto incidentId(String incidentId) {
-    this.incidentId = JsonNullable.<String>of(incidentId);
     
+    this.incidentId = incidentId;
     return this;
   }
 
@@ -444,32 +351,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident id.")
-  @JsonIgnore
-
-  public String getIncidentId() {
-        return incidentId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentId_JsonNullable() {
+  public String getIncidentId() {
     return incidentId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_ID)
-  public void setIncidentId_JsonNullable(JsonNullable<String> incidentId) {
-    this.incidentId = incidentId;
-  }
+
 
   public void setIncidentId(String incidentId) {
-    this.incidentId = JsonNullable.<String>of(incidentId);
+    this.incidentId = incidentId;
   }
 
 
   public ExecutionQueryDto incidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
     
+    this.incidentType = incidentType;
     return this;
   }
 
@@ -479,32 +376,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident type. See the [User Guide](/manual/develop/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonIgnore
-
-  public String getIncidentType() {
-        return incidentType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentType_JsonNullable() {
+  public String getIncidentType() {
     return incidentType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  public void setIncidentType_JsonNullable(JsonNullable<String> incidentType) {
-    this.incidentType = incidentType;
-  }
+
 
   public void setIncidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
+    this.incidentType = incidentType;
   }
 
 
   public ExecutionQueryDto incidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
     
+    this.incidentMessage = incidentMessage;
     return this;
   }
 
@@ -514,32 +401,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message. Exact match.")
-  @JsonIgnore
-
-  public String getIncidentMessage() {
-        return incidentMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentMessage_JsonNullable() {
+  public String getIncidentMessage() {
     return incidentMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
-  public void setIncidentMessage_JsonNullable(JsonNullable<String> incidentMessage) {
-    this.incidentMessage = incidentMessage;
-  }
+
 
   public void setIncidentMessage(String incidentMessage) {
-    this.incidentMessage = JsonNullable.<String>of(incidentMessage);
+    this.incidentMessage = incidentMessage;
   }
 
 
   public ExecutionQueryDto incidentMessageLike(String incidentMessageLike) {
-    this.incidentMessageLike = JsonNullable.<String>of(incidentMessageLike);
     
+    this.incidentMessageLike = incidentMessageLike;
     return this;
   }
 
@@ -549,44 +426,30 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message that the parameter is a substring of.")
-  @JsonIgnore
-
-  public String getIncidentMessageLike() {
-        return incidentMessageLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentMessageLike_JsonNullable() {
+  public String getIncidentMessageLike() {
     return incidentMessageLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE_LIKE)
-  public void setIncidentMessageLike_JsonNullable(JsonNullable<String> incidentMessageLike) {
-    this.incidentMessageLike = incidentMessageLike;
-  }
+
 
   public void setIncidentMessageLike(String incidentMessageLike) {
-    this.incidentMessageLike = JsonNullable.<String>of(incidentMessageLike);
+    this.incidentMessageLike = incidentMessageLike;
   }
 
 
   public ExecutionQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public ExecutionQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -596,44 +459,30 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a  list of tenant ids. An execution must have one of the given tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public ExecutionQueryDto variables(List<VariableQueryParameterDto> variables) {
-    this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public ExecutionQueryDto addVariablesItem(VariableQueryParameterDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.variables == null) {
+      this.variables = new ArrayList<>();
     }
-    try {
-      this.variables.get().add(variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.add(variablesItem);
     return this;
   }
 
@@ -643,44 +492,30 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array to only include executions that have variables with certain values.  The array consists of objects with the three properties `name`, `operator` and `value`. `name (String)` is the variable name, `operator (String)` is the comparison operator to be used and `value` the variable value. `value` may be `String`, `Number` or `Boolean`.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(List<VariableQueryParameterDto> variables) {
-    this.variables = JsonNullable.<List<VariableQueryParameterDto>>of(variables);
+    this.variables = variables;
   }
 
 
   public ExecutionQueryDto processVariables(List<VariableQueryParameterDto> processVariables) {
-    this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(processVariables);
     
+    this.processVariables = processVariables;
     return this;
   }
 
   public ExecutionQueryDto addProcessVariablesItem(VariableQueryParameterDto processVariablesItem) {
-    if (this.processVariables == null || !this.processVariables.isPresent()) {
-      this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.processVariables == null) {
+      this.processVariables = new ArrayList<>();
     }
-    try {
-      this.processVariables.get().add(processVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processVariables.add(processVariablesItem);
     return this;
   }
 
@@ -690,32 +525,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array to only include executions that belong to a process instance with variables with certain values.  The array consists of objects with the three properties `name`, `operator` and `value`. `name (String)` is the variable name, `operator (String)` is the comparison operator to be used and `value` the variable value. `value` may be `String`, `Number` or `Boolean`.  Valid operator values are: `eq` - equal to; `neq` - not equal to.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getProcessVariables() {
-        return processVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getProcessVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getProcessVariables() {
     return processVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
-  public void setProcessVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> processVariables) {
-    this.processVariables = processVariables;
-  }
+
 
   public void setProcessVariables(List<VariableQueryParameterDto> processVariables) {
-    this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(processVariables);
+    this.processVariables = processVariables;
   }
 
 
   public ExecutionQueryDto variableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
     
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
     return this;
   }
 
@@ -725,32 +550,22 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable names provided in `variables` and `processVariables` case- insensitively. If set to `true` **variableName** and **variablename** are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableNamesIgnoreCase() {
-        return variableNamesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableNamesIgnoreCase_JsonNullable() {
+  public Boolean getVariableNamesIgnoreCase() {
     return variableNamesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  public void setVariableNamesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
-  }
+
 
   public void setVariableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
   }
 
 
   public ExecutionQueryDto variableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
     
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
     return this;
   }
 
@@ -760,44 +575,30 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable values provided in `variables` and `processVariables` case- insensitively. If set to `true` **variableValue** and **variablevalue** are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableValuesIgnoreCase() {
-        return variableValuesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableValuesIgnoreCase_JsonNullable() {
+  public Boolean getVariableValuesIgnoreCase() {
     return variableValuesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  public void setVariableValuesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
-  }
+
 
   public void setVariableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
   }
 
 
   public ExecutionQueryDto sorting(List<ExecutionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<ExecutionQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public ExecutionQueryDto addSortingItem(ExecutionQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<ExecutionQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -807,26 +608,16 @@ public class ExecutionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of criteria to sort the result by. Each element of the array is                        an object that specifies one ordering. The position in the array                        identifies the rank of an ordering, i.e., whether it is primary, secondary,                        etc. Has no effect for the `/count` endpoint")
-  @JsonIgnore
-
-  public List<ExecutionQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ExecutionQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<ExecutionQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<ExecutionQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<ExecutionQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<ExecutionQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

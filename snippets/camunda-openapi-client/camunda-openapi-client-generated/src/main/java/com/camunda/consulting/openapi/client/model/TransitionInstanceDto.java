@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -47,42 +44,42 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TransitionInstanceDto.JSON_PROPERTY_INCIDENTS
 })
 @JsonTypeName("TransitionInstanceDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TransitionInstanceDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID = "parentActivityInstanceId";
-  private JsonNullable<String> parentActivityInstanceId = JsonNullable.<String>undefined();
+  private String parentActivityInstanceId;
 
   public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
-  private JsonNullable<String> activityId = JsonNullable.<String>undefined();
+  private String activityId;
 
   public static final String JSON_PROPERTY_ACTIVITY_NAME = "activityName";
-  private JsonNullable<String> activityName = JsonNullable.<String>undefined();
+  private String activityName;
 
   public static final String JSON_PROPERTY_ACTIVITY_TYPE = "activityType";
-  private JsonNullable<String> activityType = JsonNullable.<String>undefined();
+  private String activityType;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_INCIDENT_IDS = "incidentIds";
-  private JsonNullable<List<String>> incidentIds = JsonNullable.<List<String>>undefined();
+  private List<String> incidentIds = null;
 
   public static final String JSON_PROPERTY_INCIDENTS = "incidents";
-  private JsonNullable<List<ActivityInstanceIncidentDto>> incidents = JsonNullable.<List<ActivityInstanceIncidentDto>>undefined();
+  private List<ActivityInstanceIncidentDto> incidents = null;
 
 
   public TransitionInstanceDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -92,32 +89,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the transition instance.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public TransitionInstanceDto parentActivityInstanceId(String parentActivityInstanceId) {
-    this.parentActivityInstanceId = JsonNullable.<String>of(parentActivityInstanceId);
     
+    this.parentActivityInstanceId = parentActivityInstanceId;
     return this;
   }
 
@@ -127,32 +114,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the parent activity instance, for example a sub process instance.")
-  @JsonIgnore
-
-  public String getParentActivityInstanceId() {
-        return parentActivityInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getParentActivityInstanceId_JsonNullable() {
+  public String getParentActivityInstanceId() {
     return parentActivityInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID)
-  public void setParentActivityInstanceId_JsonNullable(JsonNullable<String> parentActivityInstanceId) {
-    this.parentActivityInstanceId = parentActivityInstanceId;
-  }
+
 
   public void setParentActivityInstanceId(String parentActivityInstanceId) {
-    this.parentActivityInstanceId = JsonNullable.<String>of(parentActivityInstanceId);
+    this.parentActivityInstanceId = parentActivityInstanceId;
   }
 
 
   public TransitionInstanceDto activityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
     
+    this.activityId = activityId;
     return this;
   }
 
@@ -162,32 +139,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonIgnore
-
-  public String getActivityId() {
-        return activityId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityId_JsonNullable() {
+  public String getActivityId() {
     return activityId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  public void setActivityId_JsonNullable(JsonNullable<String> activityId) {
-    this.activityId = activityId;
-  }
+
 
   public void setActivityId(String activityId) {
-    this.activityId = JsonNullable.<String>of(activityId);
+    this.activityId = activityId;
   }
 
 
   public TransitionInstanceDto activityName(String activityName) {
-    this.activityName = JsonNullable.<String>of(activityName);
     
+    this.activityName = activityName;
     return this;
   }
 
@@ -197,32 +164,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonIgnore
-
-  public String getActivityName() {
-        return activityName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityName_JsonNullable() {
+  public String getActivityName() {
     return activityName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
-  public void setActivityName_JsonNullable(JsonNullable<String> activityName) {
-    this.activityName = activityName;
-  }
+
 
   public void setActivityName(String activityName) {
-    this.activityName = JsonNullable.<String>of(activityName);
+    this.activityName = activityName;
   }
 
 
   public TransitionInstanceDto activityType(String activityType) {
-    this.activityType = JsonNullable.<String>of(activityType);
     
+    this.activityType = activityType;
     return this;
   }
 
@@ -232,32 +189,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonIgnore
-
-  public String getActivityType() {
-        return activityType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getActivityType_JsonNullable() {
+  public String getActivityType() {
     return activityType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
-  public void setActivityType_JsonNullable(JsonNullable<String> activityType) {
-    this.activityType = activityType;
-  }
+
 
   public void setActivityType(String activityType) {
-    this.activityType = JsonNullable.<String>of(activityType);
+    this.activityType = activityType;
   }
 
 
   public TransitionInstanceDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -267,32 +214,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance this instance is part of.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public TransitionInstanceDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -302,32 +239,22 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public TransitionInstanceDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -337,44 +264,30 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution id.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public TransitionInstanceDto incidentIds(List<String> incidentIds) {
-    this.incidentIds = JsonNullable.<List<String>>of(incidentIds);
     
+    this.incidentIds = incidentIds;
     return this;
   }
 
   public TransitionInstanceDto addIncidentIdsItem(String incidentIdsItem) {
-    if (this.incidentIds == null || !this.incidentIds.isPresent()) {
-      this.incidentIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.incidentIds == null) {
+      this.incidentIds = new ArrayList<>();
     }
-    try {
-      this.incidentIds.get().add(incidentIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.incidentIds.add(incidentIdsItem);
     return this;
   }
 
@@ -384,44 +297,30 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of incident ids.")
-  @JsonIgnore
-
-  public List<String> getIncidentIds() {
-        return incidentIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getIncidentIds_JsonNullable() {
+  public List<String> getIncidentIds() {
     return incidentIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_IDS)
-  public void setIncidentIds_JsonNullable(JsonNullable<List<String>> incidentIds) {
-    this.incidentIds = incidentIds;
-  }
+
 
   public void setIncidentIds(List<String> incidentIds) {
-    this.incidentIds = JsonNullable.<List<String>>of(incidentIds);
+    this.incidentIds = incidentIds;
   }
 
 
   public TransitionInstanceDto incidents(List<ActivityInstanceIncidentDto> incidents) {
-    this.incidents = JsonNullable.<List<ActivityInstanceIncidentDto>>of(incidents);
     
+    this.incidents = incidents;
     return this;
   }
 
   public TransitionInstanceDto addIncidentsItem(ActivityInstanceIncidentDto incidentsItem) {
-    if (this.incidents == null || !this.incidents.isPresent()) {
-      this.incidents = JsonNullable.<List<ActivityInstanceIncidentDto>>of(new ArrayList<>());
+    if (this.incidents == null) {
+      this.incidents = new ArrayList<>();
     }
-    try {
-      this.incidents.get().add(incidentsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.incidents.add(incidentsItem);
     return this;
   }
 
@@ -431,26 +330,16 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of JSON objects containing incident specific properties: * `id`: the id of the incident * `activityId`: the activity id in which the incident occurred")
-  @JsonIgnore
-
-  public List<ActivityInstanceIncidentDto> getIncidents() {
-        return incidents.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ActivityInstanceIncidentDto>> getIncidents_JsonNullable() {
+  public List<ActivityInstanceIncidentDto> getIncidents() {
     return incidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENTS)
-  public void setIncidents_JsonNullable(JsonNullable<List<ActivityInstanceIncidentDto>> incidents) {
-    this.incidents = incidents;
-  }
+
 
   public void setIncidents(List<ActivityInstanceIncidentDto> incidents) {
-    this.incidents = JsonNullable.<List<ActivityInstanceIncidentDto>>of(incidents);
+    this.incidents = incidents;
   }
 
 

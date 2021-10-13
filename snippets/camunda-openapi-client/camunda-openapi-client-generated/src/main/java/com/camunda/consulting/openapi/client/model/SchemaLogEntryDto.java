@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,21 +34,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SchemaLogEntryDto.JSON_PROPERTY_VERSION
 })
 @JsonTypeName("SchemaLogEntryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SchemaLogEntryDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  private JsonNullable<OffsetDateTime> timestamp = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime timestamp;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  private JsonNullable<String> version = JsonNullable.<String>undefined();
+  private String version;
 
 
   public SchemaLogEntryDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -61,32 +58,22 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the schema log entry.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public SchemaLogEntryDto timestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
     
+    this.timestamp = timestamp;
     return this;
   }
 
@@ -96,32 +83,22 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date and time of the schema update.")
-  @JsonIgnore
-
-  public OffsetDateTime getTimestamp() {
-        return timestamp.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TIMESTAMP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getTimestamp_JsonNullable() {
+  public OffsetDateTime getTimestamp() {
     return timestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  public void setTimestamp_JsonNullable(JsonNullable<OffsetDateTime> timestamp) {
-    this.timestamp = timestamp;
-  }
+
 
   public void setTimestamp(OffsetDateTime timestamp) {
-    this.timestamp = JsonNullable.<OffsetDateTime>of(timestamp);
+    this.timestamp = timestamp;
   }
 
 
   public SchemaLogEntryDto version(String version) {
-    this.version = JsonNullable.<String>of(version);
     
+    this.version = version;
     return this;
   }
 
@@ -131,26 +108,16 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the schema.")
-  @JsonIgnore
-
-  public String getVersion() {
-        return version.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getVersion_JsonNullable() {
+  public String getVersion() {
     return version;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  public void setVersion_JsonNullable(JsonNullable<String> version) {
-    this.version = version;
-  }
+
 
   public void setVersion(String version) {
-    this.version = JsonNullable.<String>of(version);
+    this.version = version;
   }
 
 

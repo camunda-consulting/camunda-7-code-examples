@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   IdentityLinkDto.JSON_PROPERTY_TYPE
 })
 @JsonTypeName("IdentityLinkDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class IdentityLinkDto {
   public static final String JSON_PROPERTY_USER_ID = "userId";
-  private JsonNullable<String> userId = JsonNullable.<String>undefined();
+  private String userId;
 
   public static final String JSON_PROPERTY_GROUP_ID = "groupId";
-  private JsonNullable<String> groupId = JsonNullable.<String>undefined();
+  private String groupId;
 
   public static final String JSON_PROPERTY_TYPE = "type";
   private String type;
 
 
   public IdentityLinkDto userId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
     
+    this.userId = userId;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class IdentityLinkDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user participating in this link. Either `userId` or `groupId` is set.")
-  @JsonIgnore
-
-  public String getUserId() {
-        return userId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getUserId_JsonNullable() {
+  public String getUserId() {
     return userId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  public void setUserId_JsonNullable(JsonNullable<String> userId) {
-    this.userId = userId;
-  }
+
 
   public void setUserId(String userId) {
-    this.userId = JsonNullable.<String>of(userId);
+    this.userId = userId;
   }
 
 
   public IdentityLinkDto groupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
     
+    this.groupId = groupId;
     return this;
   }
 
@@ -95,26 +82,16 @@ public class IdentityLinkDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the group participating in this link. Either `groupId` or `userId` is set.")
-  @JsonIgnore
-
-  public String getGroupId() {
-        return groupId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUP_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getGroupId_JsonNullable() {
+  public String getGroupId() {
     return groupId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  public void setGroupId_JsonNullable(JsonNullable<String> groupId) {
-    this.groupId = groupId;
-  }
+
 
   public void setGroupId(String groupId) {
-    this.groupId = JsonNullable.<String>of(groupId);
+    this.groupId = groupId;
   }
 
 

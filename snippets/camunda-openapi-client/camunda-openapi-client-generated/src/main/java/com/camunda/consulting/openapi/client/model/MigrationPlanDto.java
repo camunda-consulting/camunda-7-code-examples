@@ -28,9 +28,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -43,24 +40,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationPlanDto.JSON_PROPERTY_VARIABLES
 })
 @JsonTypeName("MigrationPlanDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationPlanDto {
   public static final String JSON_PROPERTY_SOURCE_PROCESS_DEFINITION_ID = "sourceProcessDefinitionId";
-  private JsonNullable<String> sourceProcessDefinitionId = JsonNullable.<String>undefined();
+  private String sourceProcessDefinitionId;
 
   public static final String JSON_PROPERTY_TARGET_PROCESS_DEFINITION_ID = "targetProcessDefinitionId";
-  private JsonNullable<String> targetProcessDefinitionId = JsonNullable.<String>undefined();
+  private String targetProcessDefinitionId;
 
   public static final String JSON_PROPERTY_INSTRUCTIONS = "instructions";
-  private JsonNullable<List<MigrationInstructionDto>> instructions = JsonNullable.<List<MigrationInstructionDto>>undefined();
+  private List<MigrationInstructionDto> instructions = null;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
 
   public MigrationPlanDto sourceProcessDefinitionId(String sourceProcessDefinitionId) {
-    this.sourceProcessDefinitionId = JsonNullable.<String>of(sourceProcessDefinitionId);
     
+    this.sourceProcessDefinitionId = sourceProcessDefinitionId;
     return this;
   }
 
@@ -70,32 +67,22 @@ public class MigrationPlanDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the source process definition for the migration.")
-  @JsonIgnore
-
-  public String getSourceProcessDefinitionId() {
-        return sourceProcessDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SOURCE_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSourceProcessDefinitionId_JsonNullable() {
+  public String getSourceProcessDefinitionId() {
     return sourceProcessDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SOURCE_PROCESS_DEFINITION_ID)
-  public void setSourceProcessDefinitionId_JsonNullable(JsonNullable<String> sourceProcessDefinitionId) {
-    this.sourceProcessDefinitionId = sourceProcessDefinitionId;
-  }
+
 
   public void setSourceProcessDefinitionId(String sourceProcessDefinitionId) {
-    this.sourceProcessDefinitionId = JsonNullable.<String>of(sourceProcessDefinitionId);
+    this.sourceProcessDefinitionId = sourceProcessDefinitionId;
   }
 
 
   public MigrationPlanDto targetProcessDefinitionId(String targetProcessDefinitionId) {
-    this.targetProcessDefinitionId = JsonNullable.<String>of(targetProcessDefinitionId);
     
+    this.targetProcessDefinitionId = targetProcessDefinitionId;
     return this;
   }
 
@@ -105,44 +92,30 @@ public class MigrationPlanDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the target process definition for the migration.")
-  @JsonIgnore
-
-  public String getTargetProcessDefinitionId() {
-        return targetProcessDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TARGET_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTargetProcessDefinitionId_JsonNullable() {
+  public String getTargetProcessDefinitionId() {
     return targetProcessDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TARGET_PROCESS_DEFINITION_ID)
-  public void setTargetProcessDefinitionId_JsonNullable(JsonNullable<String> targetProcessDefinitionId) {
-    this.targetProcessDefinitionId = targetProcessDefinitionId;
-  }
+
 
   public void setTargetProcessDefinitionId(String targetProcessDefinitionId) {
-    this.targetProcessDefinitionId = JsonNullable.<String>of(targetProcessDefinitionId);
+    this.targetProcessDefinitionId = targetProcessDefinitionId;
   }
 
 
   public MigrationPlanDto instructions(List<MigrationInstructionDto> instructions) {
-    this.instructions = JsonNullable.<List<MigrationInstructionDto>>of(instructions);
     
+    this.instructions = instructions;
     return this;
   }
 
   public MigrationPlanDto addInstructionsItem(MigrationInstructionDto instructionsItem) {
-    if (this.instructions == null || !this.instructions.isPresent()) {
-      this.instructions = JsonNullable.<List<MigrationInstructionDto>>of(new ArrayList<>());
+    if (this.instructions == null) {
+      this.instructions = new ArrayList<>();
     }
-    try {
-      this.instructions.get().add(instructionsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.instructions.add(instructionsItem);
     return this;
   }
 
@@ -152,44 +125,30 @@ public class MigrationPlanDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of migration instructions which map equal activities. Each migration instruction is a JSON object with the following properties:")
-  @JsonIgnore
-
-  public List<MigrationInstructionDto> getInstructions() {
-        return instructions.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INSTRUCTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<MigrationInstructionDto>> getInstructions_JsonNullable() {
+  public List<MigrationInstructionDto> getInstructions() {
     return instructions;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INSTRUCTIONS)
-  public void setInstructions_JsonNullable(JsonNullable<List<MigrationInstructionDto>> instructions) {
-    this.instructions = instructions;
-  }
+
 
   public void setInstructions(List<MigrationInstructionDto> instructions) {
-    this.instructions = JsonNullable.<List<MigrationInstructionDto>>of(instructions);
+    this.instructions = instructions;
   }
 
 
   public MigrationPlanDto variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public MigrationPlanDto putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -199,26 +158,16 @@ public class MigrationPlanDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of variables which will be set into the process instances' scope. Each key is a variable name and each value a JSON variable value object.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 

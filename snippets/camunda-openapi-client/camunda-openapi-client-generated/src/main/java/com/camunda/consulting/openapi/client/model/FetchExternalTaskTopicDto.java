@@ -26,9 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -52,7 +49,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FetchExternalTaskTopicDto.JSON_PROPERTY_INCLUDE_EXTENSION_PROPERTIES
 })
 @JsonTypeName("FetchExternalTaskTopicDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class FetchExternalTaskTopicDto {
   public static final String JSON_PROPERTY_TOPIC_NAME = "topicName";
   private String topicName;
@@ -61,43 +58,43 @@ public class FetchExternalTaskTopicDto {
   private Long lockDuration;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<List<String>> variables = JsonNullable.<List<String>>undefined();
+  private List<String> variables = null;
 
   public static final String JSON_PROPERTY_LOCAL_VARIABLES = "localVariables";
-  private JsonNullable<Boolean> localVariables = JsonNullable.<Boolean>of(false);
+  private Boolean localVariables = false;
 
   public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
-  private JsonNullable<String> businessKey = JsonNullable.<String>undefined();
+  private String businessKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID_IN = "processDefinitionIdIn";
-  private JsonNullable<List<String>> processDefinitionIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> processDefinitionIdIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN = "processDefinitionKeyIn";
-  private JsonNullable<List<String>> processDefinitionKeyIn = JsonNullable.<List<String>>undefined();
+  private List<String> processDefinitionKeyIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_VERSION_TAG = "processDefinitionVersionTag";
-  private JsonNullable<String> processDefinitionVersionTag = JsonNullable.<String>undefined();
+  private String processDefinitionVersionTag;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>of(false);
+  private Boolean withoutTenantId = false;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_VARIABLES = "processVariables";
   private Map<String, Object> processVariables = null;
 
   public static final String JSON_PROPERTY_DESERIALIZE_VALUES = "deserializeValues";
-  private JsonNullable<Boolean> deserializeValues = JsonNullable.<Boolean>of(false);
+  private Boolean deserializeValues = false;
 
   public static final String JSON_PROPERTY_INCLUDE_EXTENSION_PROPERTIES = "includeExtensionProperties";
-  private JsonNullable<Boolean> includeExtensionProperties = JsonNullable.<Boolean>of(false);
+  private Boolean includeExtensionProperties = false;
 
 
   public FetchExternalTaskTopicDto topicName(String topicName) {
@@ -150,20 +147,16 @@ public class FetchExternalTaskTopicDto {
 
 
   public FetchExternalTaskTopicDto variables(List<String> variables) {
-    this.variables = JsonNullable.<List<String>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public FetchExternalTaskTopicDto addVariablesItem(String variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.variables == null) {
+      this.variables = new ArrayList<>();
     }
-    try {
-      this.variables.get().add(variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.add(variablesItem);
     return this;
   }
 
@@ -173,32 +166,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of `String` values that represent variable names. For each result task belonging to this topic, the given variables are returned as well if they are accessible from the external task's execution. If not provided - all variables will be fetched.")
-  @JsonIgnore
-
-  public List<String> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getVariables_JsonNullable() {
+  public List<String> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<List<String>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(List<String> variables) {
-    this.variables = JsonNullable.<List<String>>of(variables);
+    this.variables = variables;
   }
 
 
   public FetchExternalTaskTopicDto localVariables(Boolean localVariables) {
-    this.localVariables = JsonNullable.<Boolean>of(localVariables);
     
+    this.localVariables = localVariables;
     return this;
   }
 
@@ -208,32 +191,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If `true` only local variables will be fetched.")
-  @JsonIgnore
-
-  public Boolean getLocalVariables() {
-        return localVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getLocalVariables_JsonNullable() {
+  public Boolean getLocalVariables() {
     return localVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
-  public void setLocalVariables_JsonNullable(JsonNullable<Boolean> localVariables) {
-    this.localVariables = localVariables;
-  }
+
 
   public void setLocalVariables(Boolean localVariables) {
-    this.localVariables = JsonNullable.<Boolean>of(localVariables);
+    this.localVariables = localVariables;
   }
 
 
   public FetchExternalTaskTopicDto businessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
     
+    this.businessKey = businessKey;
     return this;
   }
 
@@ -243,32 +216,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `String` value which enables the filtering of tasks based on process instance business key.")
-  @JsonIgnore
-
-  public String getBusinessKey() {
-        return businessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKey_JsonNullable() {
+  public String getBusinessKey() {
     return businessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  public void setBusinessKey_JsonNullable(JsonNullable<String> businessKey) {
-    this.businessKey = businessKey;
-  }
+
 
   public void setBusinessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
+    this.businessKey = businessKey;
   }
 
 
   public FetchExternalTaskTopicDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -278,44 +241,30 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on process definition id.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public FetchExternalTaskTopicDto processDefinitionIdIn(List<String> processDefinitionIdIn) {
-    this.processDefinitionIdIn = JsonNullable.<List<String>>of(processDefinitionIdIn);
     
+    this.processDefinitionIdIn = processDefinitionIdIn;
     return this;
   }
 
   public FetchExternalTaskTopicDto addProcessDefinitionIdInItem(String processDefinitionIdInItem) {
-    if (this.processDefinitionIdIn == null || !this.processDefinitionIdIn.isPresent()) {
-      this.processDefinitionIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processDefinitionIdIn == null) {
+      this.processDefinitionIdIn = new ArrayList<>();
     }
-    try {
-      this.processDefinitionIdIn.get().add(processDefinitionIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processDefinitionIdIn.add(processDefinitionIdInItem);
     return this;
   }
 
@@ -325,32 +274,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on process definition ids.")
-  @JsonIgnore
-
-  public List<String> getProcessDefinitionIdIn() {
-        return processDefinitionIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessDefinitionIdIn_JsonNullable() {
+  public List<String> getProcessDefinitionIdIn() {
     return processDefinitionIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID_IN)
-  public void setProcessDefinitionIdIn_JsonNullable(JsonNullable<List<String>> processDefinitionIdIn) {
-    this.processDefinitionIdIn = processDefinitionIdIn;
-  }
+
 
   public void setProcessDefinitionIdIn(List<String> processDefinitionIdIn) {
-    this.processDefinitionIdIn = JsonNullable.<List<String>>of(processDefinitionIdIn);
+    this.processDefinitionIdIn = processDefinitionIdIn;
   }
 
 
   public FetchExternalTaskTopicDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -360,44 +299,30 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on process definition key.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public FetchExternalTaskTopicDto processDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
     
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
     return this;
   }
 
   public FetchExternalTaskTopicDto addProcessDefinitionKeyInItem(String processDefinitionKeyInItem) {
-    if (this.processDefinitionKeyIn == null || !this.processDefinitionKeyIn.isPresent()) {
-      this.processDefinitionKeyIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processDefinitionKeyIn == null) {
+      this.processDefinitionKeyIn = new ArrayList<>();
     }
-    try {
-      this.processDefinitionKeyIn.get().add(processDefinitionKeyInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processDefinitionKeyIn.add(processDefinitionKeyInItem);
     return this;
   }
 
@@ -407,32 +332,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on process definition keys.")
-  @JsonIgnore
-
-  public List<String> getProcessDefinitionKeyIn() {
-        return processDefinitionKeyIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessDefinitionKeyIn_JsonNullable() {
+  public List<String> getProcessDefinitionKeyIn() {
     return processDefinitionKeyIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
-  public void setProcessDefinitionKeyIn_JsonNullable(JsonNullable<List<String>> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = processDefinitionKeyIn;
-  }
+
 
   public void setProcessDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
   }
 
 
   public FetchExternalTaskTopicDto processDefinitionVersionTag(String processDefinitionVersionTag) {
-    this.processDefinitionVersionTag = JsonNullable.<String>of(processDefinitionVersionTag);
     
+    this.processDefinitionVersionTag = processDefinitionVersionTag;
     return this;
   }
 
@@ -442,32 +357,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on process definition version tag.")
-  @JsonIgnore
-
-  public String getProcessDefinitionVersionTag() {
-        return processDefinitionVersionTag.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_VERSION_TAG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionVersionTag_JsonNullable() {
+  public String getProcessDefinitionVersionTag() {
     return processDefinitionVersionTag;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_VERSION_TAG)
-  public void setProcessDefinitionVersionTag_JsonNullable(JsonNullable<String> processDefinitionVersionTag) {
-    this.processDefinitionVersionTag = processDefinitionVersionTag;
-  }
+
 
   public void setProcessDefinitionVersionTag(String processDefinitionVersionTag) {
-    this.processDefinitionVersionTag = JsonNullable.<String>of(processDefinitionVersionTag);
+    this.processDefinitionVersionTag = processDefinitionVersionTag;
   }
 
 
   public FetchExternalTaskTopicDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -477,44 +382,30 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks without tenant id.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public FetchExternalTaskTopicDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public FetchExternalTaskTopicDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -524,26 +415,16 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter tasks based on tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
@@ -581,8 +462,8 @@ public class FetchExternalTaskTopicDto {
 
 
   public FetchExternalTaskTopicDto deserializeValues(Boolean deserializeValues) {
-    this.deserializeValues = JsonNullable.<Boolean>of(deserializeValues);
     
+    this.deserializeValues = deserializeValues;
     return this;
   }
 
@@ -592,32 +473,22 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Determines whether serializable variable values (typically variables that store custom Java objects) should be deserialized on server side (default `false`).  If set to `true`, a serializable variable will be deserialized on server side and transformed to JSON using [Jackson's](https://github.com/FasterXML/jackson) POJO/bean property introspection feature. Note that this requires the Java classes of the variable value to be on the REST API's classpath.  If set to `false`, a serializable variable will be returned in its serialized format. For example, a variable that is serialized as XML will be returned as a JSON string containing XML.")
-  @JsonIgnore
-
-  public Boolean getDeserializeValues() {
-        return deserializeValues.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DESERIALIZE_VALUES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getDeserializeValues_JsonNullable() {
+  public Boolean getDeserializeValues() {
     return deserializeValues;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DESERIALIZE_VALUES)
-  public void setDeserializeValues_JsonNullable(JsonNullable<Boolean> deserializeValues) {
-    this.deserializeValues = deserializeValues;
-  }
+
 
   public void setDeserializeValues(Boolean deserializeValues) {
-    this.deserializeValues = JsonNullable.<Boolean>of(deserializeValues);
+    this.deserializeValues = deserializeValues;
   }
 
 
   public FetchExternalTaskTopicDto includeExtensionProperties(Boolean includeExtensionProperties) {
-    this.includeExtensionProperties = JsonNullable.<Boolean>of(includeExtensionProperties);
     
+    this.includeExtensionProperties = includeExtensionProperties;
     return this;
   }
 
@@ -627,26 +498,16 @@ public class FetchExternalTaskTopicDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Determines whether custom extension properties defined in the BPMN activity of the external task (e.g. via the Extensions tab in the Camunda modeler) should be included in the response. Default: false")
-  @JsonIgnore
-
-  public Boolean getIncludeExtensionProperties() {
-        return includeExtensionProperties.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_EXTENSION_PROPERTIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeExtensionProperties_JsonNullable() {
+  public Boolean getIncludeExtensionProperties() {
     return includeExtensionProperties;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_EXTENSION_PROPERTIES)
-  public void setIncludeExtensionProperties_JsonNullable(JsonNullable<Boolean> includeExtensionProperties) {
-    this.includeExtensionProperties = includeExtensionProperties;
-  }
+
 
   public void setIncludeExtensionProperties(Boolean includeExtensionProperties) {
-    this.includeExtensionProperties = JsonNullable.<Boolean>of(includeExtensionProperties);
+    this.includeExtensionProperties = includeExtensionProperties;
   }
 
 

@@ -26,9 +26,6 @@ import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -48,34 +45,34 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricDecisionInputInstanceDto.JSON_PROPERTY_VALUE_INFO
 })
 @JsonTypeName("HistoricDecisionInputInstanceDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricDecisionInputInstanceDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_DECISION_INSTANCE_ID = "decisionInstanceId";
-  private JsonNullable<String> decisionInstanceId = JsonNullable.<String>undefined();
+  private String decisionInstanceId;
 
   public static final String JSON_PROPERTY_CLAUSE_ID = "clauseId";
-  private JsonNullable<String> clauseId = JsonNullable.<String>undefined();
+  private String clauseId;
 
   public static final String JSON_PROPERTY_CLAUSE_NAME = "clauseName";
-  private JsonNullable<String> clauseName = JsonNullable.<String>undefined();
+  private String clauseName;
 
   public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
-  private JsonNullable<String> errorMessage = JsonNullable.<String>undefined();
+  private String errorMessage;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_CREATE_TIME = "createTime";
-  private JsonNullable<OffsetDateTime> createTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime createTime;
 
   public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime removalTime;
 
   public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
-  private JsonNullable<String> rootProcessInstanceId = JsonNullable.<String>undefined();
+  private String rootProcessInstanceId;
 
   public static final String JSON_PROPERTY_VALUE = "value";
   private Object value;
@@ -85,8 +82,8 @@ public class HistoricDecisionInputInstanceDto {
 
 
   public HistoricDecisionInputInstanceDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -96,32 +93,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision input value.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public HistoricDecisionInputInstanceDto decisionInstanceId(String decisionInstanceId) {
-    this.decisionInstanceId = JsonNullable.<String>of(decisionInstanceId);
     
+    this.decisionInstanceId = decisionInstanceId;
     return this;
   }
 
@@ -131,32 +118,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision instance the input value belongs to.")
-  @JsonIgnore
-
-  public String getDecisionInstanceId() {
-        return decisionInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDecisionInstanceId_JsonNullable() {
+  public String getDecisionInstanceId() {
     return decisionInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_INSTANCE_ID)
-  public void setDecisionInstanceId_JsonNullable(JsonNullable<String> decisionInstanceId) {
-    this.decisionInstanceId = decisionInstanceId;
-  }
+
 
   public void setDecisionInstanceId(String decisionInstanceId) {
-    this.decisionInstanceId = JsonNullable.<String>of(decisionInstanceId);
+    this.decisionInstanceId = decisionInstanceId;
   }
 
 
   public HistoricDecisionInputInstanceDto clauseId(String clauseId) {
-    this.clauseId = JsonNullable.<String>of(clauseId);
     
+    this.clauseId = clauseId;
     return this;
   }
 
@@ -166,32 +143,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the clause the input value belongs to.")
-  @JsonIgnore
-
-  public String getClauseId() {
-        return clauseId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLAUSE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getClauseId_JsonNullable() {
+  public String getClauseId() {
     return clauseId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLAUSE_ID)
-  public void setClauseId_JsonNullable(JsonNullable<String> clauseId) {
-    this.clauseId = clauseId;
-  }
+
 
   public void setClauseId(String clauseId) {
-    this.clauseId = JsonNullable.<String>of(clauseId);
+    this.clauseId = clauseId;
   }
 
 
   public HistoricDecisionInputInstanceDto clauseName(String clauseName) {
-    this.clauseName = JsonNullable.<String>of(clauseName);
     
+    this.clauseName = clauseName;
     return this;
   }
 
@@ -201,32 +168,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the clause the input value belongs to.")
-  @JsonIgnore
-
-  public String getClauseName() {
-        return clauseName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLAUSE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getClauseName_JsonNullable() {
+  public String getClauseName() {
     return clauseName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLAUSE_NAME)
-  public void setClauseName_JsonNullable(JsonNullable<String> clauseName) {
-    this.clauseName = clauseName;
-  }
+
 
   public void setClauseName(String clauseName) {
-    this.clauseName = JsonNullable.<String>of(clauseName);
+    this.clauseName = clauseName;
   }
 
 
   public HistoricDecisionInputInstanceDto errorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
     
+    this.errorMessage = errorMessage;
     return this;
   }
 
@@ -236,32 +193,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error message in case a Java Serialized Object could not be de-serialized.")
-  @JsonIgnore
-
-  public String getErrorMessage() {
-        return errorMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorMessage_JsonNullable() {
+  public String getErrorMessage() {
     return errorMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  public void setErrorMessage_JsonNullable(JsonNullable<String> errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+
 
   public void setErrorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
+    this.errorMessage = errorMessage;
   }
 
 
   public HistoricDecisionInputInstanceDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -271,32 +218,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The value type of the variable.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 
   public HistoricDecisionInputInstanceDto createTime(OffsetDateTime createTime) {
-    this.createTime = JsonNullable.<OffsetDateTime>of(createTime);
     
+    this.createTime = createTime;
     return this;
   }
 
@@ -306,32 +243,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time the variable was inserted.  [Default format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getCreateTime() {
-        return createTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATE_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getCreateTime_JsonNullable() {
+  public OffsetDateTime getCreateTime() {
     return createTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATE_TIME)
-  public void setCreateTime_JsonNullable(JsonNullable<OffsetDateTime> createTime) {
-    this.createTime = createTime;
-  }
+
 
   public void setCreateTime(OffsetDateTime createTime) {
-    this.createTime = JsonNullable.<OffsetDateTime>of(createTime);
+    this.createTime = createTime;
   }
 
 
   public HistoricDecisionInputInstanceDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
     
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -341,32 +268,22 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the entry should be removed by the History Cleanup job. [Default format](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
-
-  public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
+  public OffsetDateTime getRemovalTime() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public HistoricDecisionInputInstanceDto rootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
     
+    this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
 
@@ -376,26 +293,16 @@ public class HistoricDecisionInputInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing this entry.")
-  @JsonIgnore
-
-  public String getRootProcessInstanceId() {
-        return rootProcessInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getRootProcessInstanceId_JsonNullable() {
+  public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  public void setRootProcessInstanceId_JsonNullable(JsonNullable<String> rootProcessInstanceId) {
-    this.rootProcessInstanceId = rootProcessInstanceId;
-  }
+
 
   public void setRootProcessInstanceId(String rootProcessInstanceId) {
-    this.rootProcessInstanceId = JsonNullable.<String>of(rootProcessInstanceId);
+    this.rootProcessInstanceId = rootProcessInstanceId;
   }
 
 

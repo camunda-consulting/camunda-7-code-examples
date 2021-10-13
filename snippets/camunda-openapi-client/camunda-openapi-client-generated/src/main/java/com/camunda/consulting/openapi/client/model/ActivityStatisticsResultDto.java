@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,10 +37,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ActivityStatisticsResultDto.JSON_PROPERTY_INCIDENTS
 })
 @JsonTypeName("ActivityStatisticsResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ActivityStatisticsResultDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_INSTANCES = "instances";
   private Integer instances;
@@ -52,12 +49,12 @@ public class ActivityStatisticsResultDto {
   private Integer failedJobs;
 
   public static final String JSON_PROPERTY_INCIDENTS = "incidents";
-  private JsonNullable<List<IncidentStatisticsResultDto>> incidents = JsonNullable.<List<IncidentStatisticsResultDto>>undefined();
+  private List<IncidentStatisticsResultDto> incidents = null;
 
 
   public ActivityStatisticsResultDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -67,26 +64,16 @@ public class ActivityStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity the results are aggregated for.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
@@ -141,20 +128,16 @@ public class ActivityStatisticsResultDto {
 
 
   public ActivityStatisticsResultDto incidents(List<IncidentStatisticsResultDto> incidents) {
-    this.incidents = JsonNullable.<List<IncidentStatisticsResultDto>>of(incidents);
     
+    this.incidents = incidents;
     return this;
   }
 
   public ActivityStatisticsResultDto addIncidentsItem(IncidentStatisticsResultDto incidentsItem) {
-    if (this.incidents == null || !this.incidents.isPresent()) {
-      this.incidents = JsonNullable.<List<IncidentStatisticsResultDto>>of(new ArrayList<>());
+    if (this.incidents == null) {
+      this.incidents = new ArrayList<>();
     }
-    try {
-      this.incidents.get().add(incidentsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.incidents.add(incidentsItem);
     return this;
   }
 
@@ -164,26 +147,16 @@ public class ActivityStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Each item in the resulting array is an object which contains `incidentType` and `incidentCount`. **Note**: Will be an empty array, if `incidents` or `incidentsForType` were excluded. Furthermore, the array will be also empty if no incidents were found.")
-  @JsonIgnore
-
-  public List<IncidentStatisticsResultDto> getIncidents() {
-        return incidents.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<IncidentStatisticsResultDto>> getIncidents_JsonNullable() {
+  public List<IncidentStatisticsResultDto> getIncidents() {
     return incidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENTS)
-  public void setIncidents_JsonNullable(JsonNullable<List<IncidentStatisticsResultDto>> incidents) {
-    this.incidents = incidents;
-  }
+
 
   public void setIncidents(List<IncidentStatisticsResultDto> incidents) {
-    this.incidents = JsonNullable.<List<IncidentStatisticsResultDto>>of(incidents);
+    this.incidents = incidents;
   }
 
 

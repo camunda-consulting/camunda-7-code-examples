@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -45,36 +42,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   GroupQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("GroupQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class GroupQueryDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_ID_IN = "idIn";
-  private JsonNullable<List<String>> idIn = JsonNullable.<List<String>>undefined();
+  private List<String> idIn = null;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_NAME_LIKE = "nameLike";
-  private JsonNullable<String> nameLike = JsonNullable.<String>undefined();
+  private String nameLike;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  private JsonNullable<String> type = JsonNullable.<String>undefined();
+  private String type;
 
   public static final String JSON_PROPERTY_MEMBER = "member";
-  private JsonNullable<String> member = JsonNullable.<String>undefined();
+  private String member;
 
   public static final String JSON_PROPERTY_MEMBER_OF_TENANT = "memberOfTenant";
-  private JsonNullable<String> memberOfTenant = JsonNullable.<String>undefined();
+  private String memberOfTenant;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<GroupQueryDtoSorting>> sorting = JsonNullable.<List<GroupQueryDtoSorting>>undefined();
+  private List<GroupQueryDtoSorting> sorting = null;
 
 
   public GroupQueryDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -84,44 +81,30 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the group.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public GroupQueryDto idIn(List<String> idIn) {
-    this.idIn = JsonNullable.<List<String>>of(idIn);
     
+    this.idIn = idIn;
     return this;
   }
 
   public GroupQueryDto addIdInItem(String idInItem) {
-    if (this.idIn == null || !this.idIn.isPresent()) {
-      this.idIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.idIn == null) {
+      this.idIn = new ArrayList<>();
     }
-    try {
-      this.idIn.get().add(idInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.idIn.add(idInItem);
     return this;
   }
 
@@ -131,32 +114,22 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a JSON string array of group ids.")
-  @JsonIgnore
-
-  public List<String> getIdIn() {
-        return idIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getIdIn_JsonNullable() {
+  public List<String> getIdIn() {
     return idIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID_IN)
-  public void setIdIn_JsonNullable(JsonNullable<List<String>> idIn) {
-    this.idIn = idIn;
-  }
+
 
   public void setIdIn(List<String> idIn) {
-    this.idIn = JsonNullable.<List<String>>of(idIn);
+    this.idIn = idIn;
   }
 
 
   public GroupQueryDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -166,32 +139,22 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the name of the group.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public GroupQueryDto nameLike(String nameLike) {
-    this.nameLike = JsonNullable.<String>of(nameLike);
     
+    this.nameLike = nameLike;
     return this;
   }
 
@@ -201,32 +164,22 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the name that the parameter is a substring of.")
-  @JsonIgnore
-
-  public String getNameLike() {
-        return nameLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getNameLike_JsonNullable() {
+  public String getNameLike() {
     return nameLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME_LIKE)
-  public void setNameLike_JsonNullable(JsonNullable<String> nameLike) {
-    this.nameLike = nameLike;
-  }
+
 
   public void setNameLike(String nameLike) {
-    this.nameLike = JsonNullable.<String>of(nameLike);
+    this.nameLike = nameLike;
   }
 
 
   public GroupQueryDto type(String type) {
-    this.type = JsonNullable.<String>of(type);
     
+    this.type = type;
     return this;
   }
 
@@ -236,32 +189,22 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the type of the group.")
-  @JsonIgnore
-
-  public String getType() {
-        return type.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getType_JsonNullable() {
+  public String getType() {
     return type;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  public void setType_JsonNullable(JsonNullable<String> type) {
-    this.type = type;
-  }
+
 
   public void setType(String type) {
-    this.type = JsonNullable.<String>of(type);
+    this.type = type;
   }
 
 
   public GroupQueryDto member(String member) {
-    this.member = JsonNullable.<String>of(member);
     
+    this.member = member;
     return this;
   }
 
@@ -271,32 +214,22 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only retrieve groups where the given user id is a member of.")
-  @JsonIgnore
-
-  public String getMember() {
-        return member.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MEMBER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMember_JsonNullable() {
+  public String getMember() {
     return member;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MEMBER)
-  public void setMember_JsonNullable(JsonNullable<String> member) {
-    this.member = member;
-  }
+
 
   public void setMember(String member) {
-    this.member = JsonNullable.<String>of(member);
+    this.member = member;
   }
 
 
   public GroupQueryDto memberOfTenant(String memberOfTenant) {
-    this.memberOfTenant = JsonNullable.<String>of(memberOfTenant);
     
+    this.memberOfTenant = memberOfTenant;
     return this;
   }
 
@@ -306,44 +239,30 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only retrieve groups which are members of the given tenant.")
-  @JsonIgnore
-
-  public String getMemberOfTenant() {
-        return memberOfTenant.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MEMBER_OF_TENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMemberOfTenant_JsonNullable() {
+  public String getMemberOfTenant() {
     return memberOfTenant;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MEMBER_OF_TENANT)
-  public void setMemberOfTenant_JsonNullable(JsonNullable<String> memberOfTenant) {
-    this.memberOfTenant = memberOfTenant;
-  }
+
 
   public void setMemberOfTenant(String memberOfTenant) {
-    this.memberOfTenant = JsonNullable.<String>of(memberOfTenant);
+    this.memberOfTenant = memberOfTenant;
   }
 
 
   public GroupQueryDto sorting(List<GroupQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<GroupQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public GroupQueryDto addSortingItem(GroupQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<GroupQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -353,26 +272,16 @@ public class GroupQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonIgnore
-
-  public List<GroupQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<GroupQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<GroupQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<GroupQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<GroupQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<GroupQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

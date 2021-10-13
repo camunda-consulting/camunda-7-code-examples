@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   HistoricDecisionInstanceStatisticsDto.JSON_PROPERTY_EVALUATIONS
 })
 @JsonTypeName("HistoricDecisionInstanceStatisticsDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class HistoricDecisionInstanceStatisticsDto {
   public static final String JSON_PROPERTY_DECISION_DEFINITION_KEY = "decisionDefinitionKey";
-  private JsonNullable<String> decisionDefinitionKey = JsonNullable.<String>undefined();
+  private String decisionDefinitionKey;
 
   public static final String JSON_PROPERTY_EVALUATIONS = "evaluations";
-  private JsonNullable<Integer> evaluations = JsonNullable.<Integer>undefined();
+  private Integer evaluations;
 
 
   public HistoricDecisionInstanceStatisticsDto decisionDefinitionKey(String decisionDefinitionKey) {
-    this.decisionDefinitionKey = JsonNullable.<String>of(decisionDefinitionKey);
     
+    this.decisionDefinitionKey = decisionDefinitionKey;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class HistoricDecisionInstanceStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A key of decision definition.")
-  @JsonIgnore
-
-  public String getDecisionDefinitionKey() {
-        return decisionDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDecisionDefinitionKey_JsonNullable() {
+  public String getDecisionDefinitionKey() {
     return decisionDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DECISION_DEFINITION_KEY)
-  public void setDecisionDefinitionKey_JsonNullable(JsonNullable<String> decisionDefinitionKey) {
-    this.decisionDefinitionKey = decisionDefinitionKey;
-  }
+
 
   public void setDecisionDefinitionKey(String decisionDefinitionKey) {
-    this.decisionDefinitionKey = JsonNullable.<String>of(decisionDefinitionKey);
+    this.decisionDefinitionKey = decisionDefinitionKey;
   }
 
 
   public HistoricDecisionInstanceStatisticsDto evaluations(Integer evaluations) {
-    this.evaluations = JsonNullable.<Integer>of(evaluations);
     
+    this.evaluations = evaluations;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class HistoricDecisionInstanceStatisticsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A number of evaluation for decision definition.")
-  @JsonIgnore
-
-  public Integer getEvaluations() {
-        return evaluations.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EVALUATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getEvaluations_JsonNullable() {
+  public Integer getEvaluations() {
     return evaluations;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EVALUATIONS)
-  public void setEvaluations_JsonNullable(JsonNullable<Integer> evaluations) {
-    this.evaluations = evaluations;
-  }
+
 
   public void setEvaluations(Integer evaluations) {
-    this.evaluations = JsonNullable.<Integer>of(evaluations);
+    this.evaluations = evaluations;
   }
 
 

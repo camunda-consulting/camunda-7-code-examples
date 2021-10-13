@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   UserCredentialsDto.JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD
 })
 @JsonTypeName("UserCredentialsDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class UserCredentialsDto {
   public static final String JSON_PROPERTY_PASSWORD = "password";
-  private JsonNullable<String> password = JsonNullable.<String>undefined();
+  private String password;
 
   public static final String JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD = "authenticatedUserPassword";
-  private JsonNullable<String> authenticatedUserPassword = JsonNullable.<String>undefined();
+  private String authenticatedUserPassword;
 
 
   public UserCredentialsDto password(String password) {
-    this.password = JsonNullable.<String>of(password);
     
+    this.password = password;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class UserCredentialsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The users new password.")
-  @JsonIgnore
-
-  public String getPassword() {
-        return password.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PASSWORD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getPassword_JsonNullable() {
+  public String getPassword() {
     return password;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PASSWORD)
-  public void setPassword_JsonNullable(JsonNullable<String> password) {
-    this.password = password;
-  }
+
 
   public void setPassword(String password) {
-    this.password = JsonNullable.<String>of(password);
+    this.password = password;
   }
 
 
   public UserCredentialsDto authenticatedUserPassword(String authenticatedUserPassword) {
-    this.authenticatedUserPassword = JsonNullable.<String>of(authenticatedUserPassword);
     
+    this.authenticatedUserPassword = authenticatedUserPassword;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class UserCredentialsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The password of the authenticated user who changes the password of the user (i.e., the user with passed id as path parameter).")
-  @JsonIgnore
-
-  public String getAuthenticatedUserPassword() {
-        return authenticatedUserPassword.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAuthenticatedUserPassword_JsonNullable() {
+  public String getAuthenticatedUserPassword() {
     return authenticatedUserPassword;
   }
-  
-  @JsonProperty(JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD)
-  public void setAuthenticatedUserPassword_JsonNullable(JsonNullable<String> authenticatedUserPassword) {
-    this.authenticatedUserPassword = authenticatedUserPassword;
-  }
+
 
   public void setAuthenticatedUserPassword(String authenticatedUserPassword) {
-    this.authenticatedUserPassword = JsonNullable.<String>of(authenticatedUserPassword);
+    this.authenticatedUserPassword = authenticatedUserPassword;
   }
 
 

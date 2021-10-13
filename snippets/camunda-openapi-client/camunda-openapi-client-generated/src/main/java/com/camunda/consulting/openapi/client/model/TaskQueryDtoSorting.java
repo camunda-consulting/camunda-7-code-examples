@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TaskQueryDtoSorting.JSON_PROPERTY_PARAMETERS
 })
 @JsonTypeName("TaskQueryDto_sorting")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TaskQueryDtoSorting {
   /**
    * Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.
@@ -105,7 +102,7 @@ public class TaskQueryDtoSorting {
   }
 
   public static final String JSON_PROPERTY_SORT_BY = "sortBy";
-  private JsonNullable<SortByEnum> sortBy = JsonNullable.<SortByEnum>undefined();
+  private SortByEnum sortBy;
 
   /**
    * Sort the results in a given order. Values may be &#x60;asc&#x60; for ascending order or &#x60;desc&#x60; for descending order. Must be used in conjunction with the sortBy parameter.
@@ -143,15 +140,15 @@ public class TaskQueryDtoSorting {
   }
 
   public static final String JSON_PROPERTY_SORT_ORDER = "sortOrder";
-  private JsonNullable<SortOrderEnum> sortOrder = JsonNullable.<SortOrderEnum>undefined();
+  private SortOrderEnum sortOrder;
 
   public static final String JSON_PROPERTY_PARAMETERS = "parameters";
   private SortTaskQueryParametersDto parameters;
 
 
   public TaskQueryDtoSorting sortBy(SortByEnum sortBy) {
-    this.sortBy = JsonNullable.<SortByEnum>of(sortBy);
     
+    this.sortBy = sortBy;
     return this;
   }
 
@@ -161,32 +158,22 @@ public class TaskQueryDtoSorting {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.")
-  @JsonIgnore
-
-  public SortByEnum getSortBy() {
-        return sortBy.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORT_BY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<SortByEnum> getSortBy_JsonNullable() {
+  public SortByEnum getSortBy() {
     return sortBy;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORT_BY)
-  public void setSortBy_JsonNullable(JsonNullable<SortByEnum> sortBy) {
-    this.sortBy = sortBy;
-  }
+
 
   public void setSortBy(SortByEnum sortBy) {
-    this.sortBy = JsonNullable.<SortByEnum>of(sortBy);
+    this.sortBy = sortBy;
   }
 
 
   public TaskQueryDtoSorting sortOrder(SortOrderEnum sortOrder) {
-    this.sortOrder = JsonNullable.<SortOrderEnum>of(sortOrder);
     
+    this.sortOrder = sortOrder;
     return this;
   }
 
@@ -196,26 +183,16 @@ public class TaskQueryDtoSorting {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sort the results in a given order. Values may be `asc` for ascending order or `desc` for descending order. Must be used in conjunction with the sortBy parameter.")
-  @JsonIgnore
-
-  public SortOrderEnum getSortOrder() {
-        return sortOrder.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORT_ORDER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<SortOrderEnum> getSortOrder_JsonNullable() {
+  public SortOrderEnum getSortOrder() {
     return sortOrder;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORT_ORDER)
-  public void setSortOrder_JsonNullable(JsonNullable<SortOrderEnum> sortOrder) {
-    this.sortOrder = sortOrder;
-  }
+
 
   public void setSortOrder(SortOrderEnum sortOrder) {
-    this.sortOrder = JsonNullable.<SortOrderEnum>of(sortOrder);
+    this.sortOrder = sortOrder;
   }
 
 

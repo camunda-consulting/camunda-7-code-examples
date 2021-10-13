@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,30 +35,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ResourceReportDto.JSON_PROPERTY_WARNINGS
 })
 @JsonTypeName("ResourceReportDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ResourceReportDto {
   public static final String JSON_PROPERTY_ERRORS = "errors";
-  private JsonNullable<List<ProblemDto>> errors = JsonNullable.<List<ProblemDto>>undefined();
+  private List<ProblemDto> errors = null;
 
   public static final String JSON_PROPERTY_WARNINGS = "warnings";
-  private JsonNullable<List<ProblemDto>> warnings = JsonNullable.<List<ProblemDto>>undefined();
+  private List<ProblemDto> warnings = null;
 
 
   public ResourceReportDto errors(List<ProblemDto> errors) {
-    this.errors = JsonNullable.<List<ProblemDto>>of(errors);
     
+    this.errors = errors;
     return this;
   }
 
   public ResourceReportDto addErrorsItem(ProblemDto errorsItem) {
-    if (this.errors == null || !this.errors.isPresent()) {
-      this.errors = JsonNullable.<List<ProblemDto>>of(new ArrayList<>());
+    if (this.errors == null) {
+      this.errors = new ArrayList<>();
     }
-    try {
-      this.errors.get().add(errorsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.errors.add(errorsItem);
     return this;
   }
 
@@ -71,44 +64,30 @@ public class ResourceReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of errors occurred during parsing.")
-  @JsonIgnore
-
-  public List<ProblemDto> getErrors() {
-        return errors.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERRORS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ProblemDto>> getErrors_JsonNullable() {
+  public List<ProblemDto> getErrors() {
     return errors;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERRORS)
-  public void setErrors_JsonNullable(JsonNullable<List<ProblemDto>> errors) {
-    this.errors = errors;
-  }
+
 
   public void setErrors(List<ProblemDto> errors) {
-    this.errors = JsonNullable.<List<ProblemDto>>of(errors);
+    this.errors = errors;
   }
 
 
   public ResourceReportDto warnings(List<ProblemDto> warnings) {
-    this.warnings = JsonNullable.<List<ProblemDto>>of(warnings);
     
+    this.warnings = warnings;
     return this;
   }
 
   public ResourceReportDto addWarningsItem(ProblemDto warningsItem) {
-    if (this.warnings == null || !this.warnings.isPresent()) {
-      this.warnings = JsonNullable.<List<ProblemDto>>of(new ArrayList<>());
+    if (this.warnings == null) {
+      this.warnings = new ArrayList<>();
     }
-    try {
-      this.warnings.get().add(warningsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.warnings.add(warningsItem);
     return this;
   }
 
@@ -118,26 +97,16 @@ public class ResourceReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of warnings occurred during parsing.")
-  @JsonIgnore
-
-  public List<ProblemDto> getWarnings() {
-        return warnings.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WARNINGS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<ProblemDto>> getWarnings_JsonNullable() {
+  public List<ProblemDto> getWarnings() {
     return warnings;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WARNINGS)
-  public void setWarnings_JsonNullable(JsonNullable<List<ProblemDto>> warnings) {
-    this.warnings = warnings;
-  }
+
 
   public void setWarnings(List<ProblemDto> warnings) {
-    this.warnings = JsonNullable.<List<ProblemDto>>of(warnings);
+    this.warnings = warnings;
   }
 
 

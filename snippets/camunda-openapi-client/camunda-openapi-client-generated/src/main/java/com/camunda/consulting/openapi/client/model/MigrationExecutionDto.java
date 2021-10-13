@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -42,22 +39,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationExecutionDto.JSON_PROPERTY_SKIP_IO_MAPPINGS
 })
 @JsonTypeName("MigrationExecutionDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationExecutionDto {
   public static final String JSON_PROPERTY_MIGRATION_PLAN = "migrationPlan";
   private MigrationPlanDto migrationPlan;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
-  private JsonNullable<List<String>> processInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIds = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
   private ProcessInstanceQueryDto processInstanceQuery;
 
   public static final String JSON_PROPERTY_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
-  private JsonNullable<Boolean> skipCustomListeners = JsonNullable.<Boolean>undefined();
+  private Boolean skipCustomListeners;
 
   public static final String JSON_PROPERTY_SKIP_IO_MAPPINGS = "skipIoMappings";
-  private JsonNullable<Boolean> skipIoMappings = JsonNullable.<Boolean>undefined();
+  private Boolean skipIoMappings;
 
 
   public MigrationExecutionDto migrationPlan(MigrationPlanDto migrationPlan) {
@@ -86,20 +83,16 @@ public class MigrationExecutionDto {
 
 
   public MigrationExecutionDto processInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
     
+    this.processInstanceIds = processInstanceIds;
     return this;
   }
 
   public MigrationExecutionDto addProcessInstanceIdsItem(String processInstanceIdsItem) {
-    if (this.processInstanceIds == null || !this.processInstanceIds.isPresent()) {
-      this.processInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIds == null) {
+      this.processInstanceIds = new ArrayList<>();
     }
-    try {
-      this.processInstanceIds.get().add(processInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIds.add(processInstanceIdsItem);
     return this;
   }
 
@@ -109,26 +102,16 @@ public class MigrationExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of process instance ids to migrate.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIds() {
-        return processInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIds_JsonNullable() {
+  public List<String> getProcessInstanceIds() {
     return processInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  public void setProcessInstanceIds_JsonNullable(JsonNullable<List<String>> processInstanceIds) {
-    this.processInstanceIds = processInstanceIds;
-  }
+
 
   public void setProcessInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
+    this.processInstanceIds = processInstanceIds;
   }
 
 
@@ -158,8 +141,8 @@ public class MigrationExecutionDto {
 
 
   public MigrationExecutionDto skipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
     
+    this.skipCustomListeners = skipCustomListeners;
     return this;
   }
 
@@ -169,32 +152,22 @@ public class MigrationExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A boolean value to control whether execution listeners should be invoked during migration.")
-  @JsonIgnore
-
-  public Boolean getSkipCustomListeners() {
-        return skipCustomListeners.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSkipCustomListeners_JsonNullable() {
+  public Boolean getSkipCustomListeners() {
     return skipCustomListeners;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  public void setSkipCustomListeners_JsonNullable(JsonNullable<Boolean> skipCustomListeners) {
-    this.skipCustomListeners = skipCustomListeners;
-  }
+
 
   public void setSkipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    this.skipCustomListeners = skipCustomListeners;
   }
 
 
   public MigrationExecutionDto skipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
     
+    this.skipIoMappings = skipIoMappings;
     return this;
   }
 
@@ -204,26 +177,16 @@ public class MigrationExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A boolean value to control whether input/output mappings should be executed during migration.")
-  @JsonIgnore
-
-  public Boolean getSkipIoMappings() {
-        return skipIoMappings.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSkipIoMappings_JsonNullable() {
+  public Boolean getSkipIoMappings() {
     return skipIoMappings;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
-  public void setSkipIoMappings_JsonNullable(JsonNullable<Boolean> skipIoMappings) {
-    this.skipIoMappings = skipIoMappings;
-  }
+
 
   public void setSkipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
+    this.skipIoMappings = skipIoMappings;
   }
 
 

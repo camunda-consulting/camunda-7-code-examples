@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -44,16 +41,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetRetriesForExternalTasksDto.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY
 })
 @JsonTypeName("SetRetriesForExternalTasksDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetRetriesForExternalTasksDto {
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
   public static final String JSON_PROPERTY_EXTERNAL_TASK_IDS = "externalTaskIds";
-  private JsonNullable<List<String>> externalTaskIds = JsonNullable.<List<String>>undefined();
+  private List<String> externalTaskIds = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
-  private JsonNullable<List<String>> processInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIds = null;
 
   public static final String JSON_PROPERTY_EXTERNAL_TASK_QUERY = "externalTaskQuery";
   private ExternalTaskQueryDto externalTaskQuery;
@@ -66,8 +63,8 @@ public class SetRetriesForExternalTasksDto {
 
 
   public SetRetriesForExternalTasksDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -77,44 +74,30 @@ public class SetRetriesForExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of retries to set for the external task.  Must be >= 0. If this is 0, an incident is created and the task cannot be fetched anymore unless the retries are increased again. Can not be null.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 
   public SetRetriesForExternalTasksDto externalTaskIds(List<String> externalTaskIds) {
-    this.externalTaskIds = JsonNullable.<List<String>>of(externalTaskIds);
     
+    this.externalTaskIds = externalTaskIds;
     return this;
   }
 
   public SetRetriesForExternalTasksDto addExternalTaskIdsItem(String externalTaskIdsItem) {
-    if (this.externalTaskIds == null || !this.externalTaskIds.isPresent()) {
-      this.externalTaskIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.externalTaskIds == null) {
+      this.externalTaskIds = new ArrayList<>();
     }
-    try {
-      this.externalTaskIds.get().add(externalTaskIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.externalTaskIds.add(externalTaskIdsItem);
     return this;
   }
 
@@ -124,44 +107,30 @@ public class SetRetriesForExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The ids of the external tasks to set the number of retries for.")
-  @JsonIgnore
-
-  public List<String> getExternalTaskIds() {
-        return externalTaskIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getExternalTaskIds_JsonNullable() {
+  public List<String> getExternalTaskIds() {
     return externalTaskIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_IDS)
-  public void setExternalTaskIds_JsonNullable(JsonNullable<List<String>> externalTaskIds) {
-    this.externalTaskIds = externalTaskIds;
-  }
+
 
   public void setExternalTaskIds(List<String> externalTaskIds) {
-    this.externalTaskIds = JsonNullable.<List<String>>of(externalTaskIds);
+    this.externalTaskIds = externalTaskIds;
   }
 
 
   public SetRetriesForExternalTasksDto processInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
     
+    this.processInstanceIds = processInstanceIds;
     return this;
   }
 
   public SetRetriesForExternalTasksDto addProcessInstanceIdsItem(String processInstanceIdsItem) {
-    if (this.processInstanceIds == null || !this.processInstanceIds.isPresent()) {
-      this.processInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIds == null) {
+      this.processInstanceIds = new ArrayList<>();
     }
-    try {
-      this.processInstanceIds.get().add(processInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIds.add(processInstanceIdsItem);
     return this;
   }
 
@@ -171,26 +140,16 @@ public class SetRetriesForExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The ids of process instances containing the tasks to set the number of retries for.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIds() {
-        return processInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIds_JsonNullable() {
+  public List<String> getProcessInstanceIds() {
     return processInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  public void setProcessInstanceIds_JsonNullable(JsonNullable<List<String>> processInstanceIds) {
-    this.processInstanceIds = processInstanceIds;
-  }
+
 
   public void setProcessInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
+    this.processInstanceIds = processInstanceIds;
   }
 
 

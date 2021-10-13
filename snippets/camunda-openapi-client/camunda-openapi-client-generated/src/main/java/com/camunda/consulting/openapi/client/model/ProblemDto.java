@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,27 +37,27 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProblemDto.JSON_PROPERTY_ELEMENT_IDS
 })
 @JsonTypeName("ProblemDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProblemDto {
   public static final String JSON_PROPERTY_MESSAGE = "message";
-  private JsonNullable<String> message = JsonNullable.<String>undefined();
+  private String message;
 
   public static final String JSON_PROPERTY_LINE = "line";
-  private JsonNullable<Integer> line = JsonNullable.<Integer>undefined();
+  private Integer line;
 
   public static final String JSON_PROPERTY_COLUMN = "column";
-  private JsonNullable<Integer> column = JsonNullable.<Integer>undefined();
+  private Integer column;
 
   public static final String JSON_PROPERTY_MAIN_ELEMENT_ID = "mainElementId";
-  private JsonNullable<String> mainElementId = JsonNullable.<String>undefined();
+  private String mainElementId;
 
   public static final String JSON_PROPERTY_ELEMENT_IDS = "elementIds";
-  private JsonNullable<List<String>> elementIds = JsonNullable.<List<String>>undefined();
+  private List<String> elementIds = null;
 
 
   public ProblemDto message(String message) {
-    this.message = JsonNullable.<String>of(message);
     
+    this.message = message;
     return this;
   }
 
@@ -70,32 +67,22 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of the problem.")
-  @JsonIgnore
-
-  public String getMessage() {
-        return message.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMessage_JsonNullable() {
+  public String getMessage() {
     return message;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  public void setMessage_JsonNullable(JsonNullable<String> message) {
-    this.message = message;
-  }
+
 
   public void setMessage(String message) {
-    this.message = JsonNullable.<String>of(message);
+    this.message = message;
   }
 
 
   public ProblemDto line(Integer line) {
-    this.line = JsonNullable.<Integer>of(line);
     
+    this.line = line;
     return this;
   }
 
@@ -105,32 +92,22 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The line where the problem occurred.")
-  @JsonIgnore
-
-  public Integer getLine() {
-        return line.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LINE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getLine_JsonNullable() {
+  public Integer getLine() {
     return line;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LINE)
-  public void setLine_JsonNullable(JsonNullable<Integer> line) {
-    this.line = line;
-  }
+
 
   public void setLine(Integer line) {
-    this.line = JsonNullable.<Integer>of(line);
+    this.line = line;
   }
 
 
   public ProblemDto column(Integer column) {
-    this.column = JsonNullable.<Integer>of(column);
     
+    this.column = column;
     return this;
   }
 
@@ -140,32 +117,22 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The column where the problem occurred.")
-  @JsonIgnore
-
-  public Integer getColumn() {
-        return column.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_COLUMN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getColumn_JsonNullable() {
+  public Integer getColumn() {
     return column;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COLUMN)
-  public void setColumn_JsonNullable(JsonNullable<Integer> column) {
-    this.column = column;
-  }
+
 
   public void setColumn(Integer column) {
-    this.column = JsonNullable.<Integer>of(column);
+    this.column = column;
   }
 
 
   public ProblemDto mainElementId(String mainElementId) {
-    this.mainElementId = JsonNullable.<String>of(mainElementId);
     
+    this.mainElementId = mainElementId;
     return this;
   }
 
@@ -175,44 +142,30 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The main element id where the problem occurred.")
-  @JsonIgnore
-
-  public String getMainElementId() {
-        return mainElementId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MAIN_ELEMENT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getMainElementId_JsonNullable() {
+  public String getMainElementId() {
     return mainElementId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MAIN_ELEMENT_ID)
-  public void setMainElementId_JsonNullable(JsonNullable<String> mainElementId) {
-    this.mainElementId = mainElementId;
-  }
+
 
   public void setMainElementId(String mainElementId) {
-    this.mainElementId = JsonNullable.<String>of(mainElementId);
+    this.mainElementId = mainElementId;
   }
 
 
   public ProblemDto elementIds(List<String> elementIds) {
-    this.elementIds = JsonNullable.<List<String>>of(elementIds);
     
+    this.elementIds = elementIds;
     return this;
   }
 
   public ProblemDto addElementIdsItem(String elementIdsItem) {
-    if (this.elementIds == null || !this.elementIds.isPresent()) {
-      this.elementIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.elementIds == null) {
+      this.elementIds = new ArrayList<>();
     }
-    try {
-      this.elementIds.get().add(elementIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.elementIds.add(elementIdsItem);
     return this;
   }
 
@@ -222,26 +175,16 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of element id affected by the problem.")
-  @JsonIgnore
-
-  public List<String> getElementIds() {
-        return elementIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ELEMENT_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getElementIds_JsonNullable() {
+  public List<String> getElementIds() {
     return elementIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ELEMENT_IDS)
-  public void setElementIds_JsonNullable(JsonNullable<List<String>> elementIds) {
-    this.elementIds = elementIds;
-  }
+
 
   public void setElementIds(List<String> elementIds) {
-    this.elementIds = JsonNullable.<List<String>>of(elementIds);
+    this.elementIds = elementIds;
   }
 
 

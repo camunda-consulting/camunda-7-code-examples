@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,21 +37,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TaskBpmnErrorDto.JSON_PROPERTY_VARIABLES
 })
 @JsonTypeName("TaskBpmnErrorDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TaskBpmnErrorDto {
   public static final String JSON_PROPERTY_ERROR_CODE = "errorCode";
-  private JsonNullable<String> errorCode = JsonNullable.<String>undefined();
+  private String errorCode;
 
   public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
-  private JsonNullable<String> errorMessage = JsonNullable.<String>undefined();
+  private String errorMessage;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
 
   public TaskBpmnErrorDto errorCode(String errorCode) {
-    this.errorCode = JsonNullable.<String>of(errorCode);
     
+    this.errorCode = errorCode;
     return this;
   }
 
@@ -64,32 +61,22 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error code that indicates the predefined error. It is used to identify the BPMN error handler.")
-  @JsonIgnore
-
-  public String getErrorCode() {
-        return errorCode.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorCode_JsonNullable() {
+  public String getErrorCode() {
     return errorCode;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_CODE)
-  public void setErrorCode_JsonNullable(JsonNullable<String> errorCode) {
-    this.errorCode = errorCode;
-  }
+
 
   public void setErrorCode(String errorCode) {
-    this.errorCode = JsonNullable.<String>of(errorCode);
+    this.errorCode = errorCode;
   }
 
 
   public TaskBpmnErrorDto errorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
     
+    this.errorMessage = errorMessage;
     return this;
   }
 
@@ -99,44 +86,30 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error message that describes the error.")
-  @JsonIgnore
-
-  public String getErrorMessage() {
-        return errorMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorMessage_JsonNullable() {
+  public String getErrorMessage() {
     return errorMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  public void setErrorMessage_JsonNullable(JsonNullable<String> errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+
 
   public void setErrorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
+    this.errorMessage = errorMessage;
   }
 
 
   public TaskBpmnErrorDto variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public TaskBpmnErrorDto putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -146,26 +119,16 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 

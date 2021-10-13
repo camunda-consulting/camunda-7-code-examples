@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MissingAuthorizationDto.JSON_PROPERTY_RESOURCE_ID
 })
 @JsonTypeName("MissingAuthorizationDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MissingAuthorizationDto {
   public static final String JSON_PROPERTY_PERMISSION_NAME = "permissionName";
-  private JsonNullable<String> permissionName = JsonNullable.<String>undefined();
+  private String permissionName;
 
   public static final String JSON_PROPERTY_RESOURCE_NAME = "resourceName";
-  private JsonNullable<String> resourceName = JsonNullable.<String>undefined();
+  private String resourceName;
 
   public static final String JSON_PROPERTY_RESOURCE_ID = "resourceId";
-  private JsonNullable<String> resourceId = JsonNullable.<String>undefined();
+  private String resourceId;
 
 
   public MissingAuthorizationDto permissionName(String permissionName) {
-    this.permissionName = JsonNullable.<String>of(permissionName);
     
+    this.permissionName = permissionName;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The permission name that the user is missing.")
-  @JsonIgnore
-
-  public String getPermissionName() {
-        return permissionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PERMISSION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getPermissionName_JsonNullable() {
+  public String getPermissionName() {
     return permissionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PERMISSION_NAME)
-  public void setPermissionName_JsonNullable(JsonNullable<String> permissionName) {
-    this.permissionName = permissionName;
-  }
+
 
   public void setPermissionName(String permissionName) {
-    this.permissionName = JsonNullable.<String>of(permissionName);
+    this.permissionName = permissionName;
   }
 
 
   public MissingAuthorizationDto resourceName(String resourceName) {
-    this.resourceName = JsonNullable.<String>of(resourceName);
     
+    this.resourceName = resourceName;
     return this;
   }
 
@@ -95,32 +82,22 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the resource that the user is missing permission for.")
-  @JsonIgnore
-
-  public String getResourceName() {
-        return resourceName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResourceName_JsonNullable() {
+  public String getResourceName() {
     return resourceName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_NAME)
-  public void setResourceName_JsonNullable(JsonNullable<String> resourceName) {
-    this.resourceName = resourceName;
-  }
+
 
   public void setResourceName(String resourceName) {
-    this.resourceName = JsonNullable.<String>of(resourceName);
+    this.resourceName = resourceName;
   }
 
 
   public MissingAuthorizationDto resourceId(String resourceId) {
-    this.resourceId = JsonNullable.<String>of(resourceId);
     
+    this.resourceId = resourceId;
     return this;
   }
 
@@ -130,26 +107,16 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the resource that the user is missing permission for.")
-  @JsonIgnore
-
-  public String getResourceId() {
-        return resourceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getResourceId_JsonNullable() {
+  public String getResourceId() {
     return resourceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_ID)
-  public void setResourceId_JsonNullable(JsonNullable<String> resourceId) {
-    this.resourceId = resourceId;
-  }
+
 
   public void setResourceId(String resourceId) {
-    this.resourceId = JsonNullable.<String>of(resourceId);
+    this.resourceId = resourceId;
   }
 
 

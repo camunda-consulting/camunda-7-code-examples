@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,18 +33,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   JobDuedateDto.JSON_PROPERTY_CASCADE
 })
 @JsonTypeName("JobDuedateDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class JobDuedateDto {
   public static final String JSON_PROPERTY_DUEDATE = "duedate";
-  private JsonNullable<OffsetDateTime> duedate = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime duedate;
 
   public static final String JSON_PROPERTY_CASCADE = "cascade";
-  private JsonNullable<Boolean> cascade = JsonNullable.<Boolean>undefined();
+  private Boolean cascade;
 
 
   public JobDuedateDto duedate(OffsetDateTime duedate) {
-    this.duedate = JsonNullable.<OffsetDateTime>of(duedate);
     
+    this.duedate = duedate;
     return this;
   }
 
@@ -57,32 +54,22 @@ public class JobDuedateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date to set when the job has the next execution.")
-  @JsonIgnore
-
-  public OffsetDateTime getDuedate() {
-        return duedate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUEDATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDuedate_JsonNullable() {
+  public OffsetDateTime getDuedate() {
     return duedate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUEDATE)
-  public void setDuedate_JsonNullable(JsonNullable<OffsetDateTime> duedate) {
-    this.duedate = duedate;
-  }
+
 
   public void setDuedate(OffsetDateTime duedate) {
-    this.duedate = JsonNullable.<OffsetDateTime>of(duedate);
+    this.duedate = duedate;
   }
 
 
   public JobDuedateDto cascade(Boolean cascade) {
-    this.cascade = JsonNullable.<Boolean>of(cascade);
     
+    this.cascade = cascade;
     return this;
   }
 
@@ -92,26 +79,16 @@ public class JobDuedateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A boolean value to indicate if modifications to the due date should cascade to subsequent jobs. (e.g. Modify the due date of a timer by +15 minutes. This flag indicates if a +15 minutes should be applied to all subsequent timers.) This flag only affects timer jobs and only works if due date is not null. Default: `false`")
-  @JsonIgnore
-
-  public Boolean getCascade() {
-        return cascade.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASCADE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCascade_JsonNullable() {
+  public Boolean getCascade() {
     return cascade;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASCADE)
-  public void setCascade_JsonNullable(JsonNullable<Boolean> cascade) {
-    this.cascade = cascade;
-  }
+
 
   public void setCascade(Boolean cascade) {
-    this.cascade = JsonNullable.<Boolean>of(cascade);
+    this.cascade = cascade;
   }
 
 

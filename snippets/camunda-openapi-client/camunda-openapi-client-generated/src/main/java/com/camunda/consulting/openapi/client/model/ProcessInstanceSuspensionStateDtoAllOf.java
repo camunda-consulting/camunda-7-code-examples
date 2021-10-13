@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -44,22 +41,22 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProcessInstanceSuspensionStateDtoAllOf.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY
 })
 @JsonTypeName("ProcessInstanceSuspensionStateDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProcessInstanceSuspensionStateDtoAllOf {
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID = "processDefinitionTenantId";
-  private JsonNullable<String> processDefinitionTenantId = JsonNullable.<String>undefined();
+  private String processDefinitionTenantId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID = "processDefinitionWithoutTenantId";
-  private JsonNullable<Boolean> processDefinitionWithoutTenantId = JsonNullable.<Boolean>undefined();
+  private Boolean processDefinitionWithoutTenantId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
-  private JsonNullable<List<String>> processInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIds = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
   private ProcessInstanceQueryDto processInstanceQuery;
@@ -69,8 +66,8 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
 
 
   public ProcessInstanceSuspensionStateDtoAllOf processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -80,32 +77,22 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process definition id of the process instances to activate or suspend.  **Note**: This parameter can be used only with combination of `suspended`.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public ProcessInstanceSuspensionStateDtoAllOf processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -115,32 +102,22 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process definition key of the process instances to activate or suspend.  **Note**: This parameter can be used only with combination of `suspended`, `processDefinitionTenantId`, and `processDefinitionWithoutTenantId`.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public ProcessInstanceSuspensionStateDtoAllOf processDefinitionTenantId(String processDefinitionTenantId) {
-    this.processDefinitionTenantId = JsonNullable.<String>of(processDefinitionTenantId);
     
+    this.processDefinitionTenantId = processDefinitionTenantId;
     return this;
   }
 
@@ -150,32 +127,22 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only activate or suspend process instances of a process definition which belongs to a tenant with the given id.  **Note**: This parameter can be used only with combination of `suspended`, `processDefinitionKey`, and `processDefinitionWithoutTenantId`.")
-  @JsonIgnore
-
-  public String getProcessDefinitionTenantId() {
-        return processDefinitionTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionTenantId_JsonNullable() {
+  public String getProcessDefinitionTenantId() {
     return processDefinitionTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_TENANT_ID)
-  public void setProcessDefinitionTenantId_JsonNullable(JsonNullable<String> processDefinitionTenantId) {
-    this.processDefinitionTenantId = processDefinitionTenantId;
-  }
+
 
   public void setProcessDefinitionTenantId(String processDefinitionTenantId) {
-    this.processDefinitionTenantId = JsonNullable.<String>of(processDefinitionTenantId);
+    this.processDefinitionTenantId = processDefinitionTenantId;
   }
 
 
   public ProcessInstanceSuspensionStateDtoAllOf processDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
     
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
     return this;
   }
 
@@ -185,44 +152,30 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only activate or suspend process instances of a process definition which belongs to no tenant. Value may only be true, as false is the default behavior.  **Note**: This parameter can be used only with combination of `suspended`, `processDefinitionKey`, and `processDefinitionTenantId`.")
-  @JsonIgnore
-
-  public Boolean getProcessDefinitionWithoutTenantId() {
-        return processDefinitionWithoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getProcessDefinitionWithoutTenantId_JsonNullable() {
+  public Boolean getProcessDefinitionWithoutTenantId() {
     return processDefinitionWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_WITHOUT_TENANT_ID)
-  public void setProcessDefinitionWithoutTenantId_JsonNullable(JsonNullable<Boolean> processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
-  }
+
 
   public void setProcessDefinitionWithoutTenantId(Boolean processDefinitionWithoutTenantId) {
-    this.processDefinitionWithoutTenantId = JsonNullable.<Boolean>of(processDefinitionWithoutTenantId);
+    this.processDefinitionWithoutTenantId = processDefinitionWithoutTenantId;
   }
 
 
   public ProcessInstanceSuspensionStateDtoAllOf processInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
     
+    this.processInstanceIds = processInstanceIds;
     return this;
   }
 
   public ProcessInstanceSuspensionStateDtoAllOf addProcessInstanceIdsItem(String processInstanceIdsItem) {
-    if (this.processInstanceIds == null || !this.processInstanceIds.isPresent()) {
-      this.processInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIds == null) {
+      this.processInstanceIds = new ArrayList<>();
     }
-    try {
-      this.processInstanceIds.get().add(processInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIds.add(processInstanceIdsItem);
     return this;
   }
 
@@ -232,26 +185,16 @@ public class ProcessInstanceSuspensionStateDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of process instance ids which defines a group of process instances which will be activated or suspended by the operation.  **Note**: This parameter can be used only with combination of `suspended`, `processInstanceQuery`, and `historicProcessInstanceQuery`.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIds() {
-        return processInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIds_JsonNullable() {
+  public List<String> getProcessInstanceIds() {
     return processInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  public void setProcessInstanceIds_JsonNullable(JsonNullable<List<String>> processInstanceIds) {
-    this.processInstanceIds = processInstanceIds;
-  }
+
 
   public void setProcessInstanceIds(List<String> processInstanceIds) {
-    this.processInstanceIds = JsonNullable.<List<String>>of(processInstanceIds);
+    this.processInstanceIds = processInstanceIds;
   }
 
 

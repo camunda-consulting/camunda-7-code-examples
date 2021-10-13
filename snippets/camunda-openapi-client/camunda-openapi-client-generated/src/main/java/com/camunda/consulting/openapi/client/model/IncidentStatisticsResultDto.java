@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   IncidentStatisticsResultDto.JSON_PROPERTY_INCIDENT_COUNT
 })
 @JsonTypeName("IncidentStatisticsResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class IncidentStatisticsResultDto {
   public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
-  private JsonNullable<String> incidentType = JsonNullable.<String>undefined();
+  private String incidentType;
 
   public static final String JSON_PROPERTY_INCIDENT_COUNT = "incidentCount";
-  private JsonNullable<Integer> incidentCount = JsonNullable.<Integer>undefined();
+  private Integer incidentCount;
 
 
   public IncidentStatisticsResultDto incidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
     
+    this.incidentType = incidentType;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class IncidentStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the incident the number of incidents is aggregated for. See the [User Guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonIgnore
-
-  public String getIncidentType() {
-        return incidentType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getIncidentType_JsonNullable() {
+  public String getIncidentType() {
     return incidentType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  public void setIncidentType_JsonNullable(JsonNullable<String> incidentType) {
-    this.incidentType = incidentType;
-  }
+
 
   public void setIncidentType(String incidentType) {
-    this.incidentType = JsonNullable.<String>of(incidentType);
+    this.incidentType = incidentType;
   }
 
 
   public IncidentStatisticsResultDto incidentCount(Integer incidentCount) {
-    this.incidentCount = JsonNullable.<Integer>of(incidentCount);
     
+    this.incidentCount = incidentCount;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class IncidentStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of incidents for the corresponding incident type.")
-  @JsonIgnore
-
-  public Integer getIncidentCount() {
-        return incidentCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCIDENT_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getIncidentCount_JsonNullable() {
+  public Integer getIncidentCount() {
     return incidentCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_COUNT)
-  public void setIncidentCount_JsonNullable(JsonNullable<Integer> incidentCount) {
-    this.incidentCount = incidentCount;
-  }
+
 
   public void setIncidentCount(Integer incidentCount) {
-    this.incidentCount = JsonNullable.<Integer>of(incidentCount);
+    this.incidentCount = incidentCount;
   }
 
 

@@ -28,9 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -45,30 +42,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetRemovalTimeToHistoricDecisionInstancesDto.JSON_PROPERTY_CALCULATED_REMOVAL_TIME
 })
 @JsonTypeName("SetRemovalTimeToHistoricDecisionInstancesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetRemovalTimeToHistoricDecisionInstancesDto {
   public static final String JSON_PROPERTY_HIERARCHICAL = "hierarchical";
-  private JsonNullable<Boolean> hierarchical = JsonNullable.<Boolean>undefined();
+  private Boolean hierarchical;
 
   public static final String JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_QUERY = "historicDecisionInstanceQuery";
   private HistoricDecisionInstanceQueryDto historicDecisionInstanceQuery;
 
   public static final String JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS = "historicDecisionInstanceIds";
-  private JsonNullable<List<String>> historicDecisionInstanceIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicDecisionInstanceIds = null;
 
   public static final String JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME = "absoluteRemovalTime";
-  private JsonNullable<OffsetDateTime> absoluteRemovalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime absoluteRemovalTime;
 
   public static final String JSON_PROPERTY_CLEARED_REMOVAL_TIME = "clearedRemovalTime";
-  private JsonNullable<Boolean> clearedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean clearedRemovalTime;
 
   public static final String JSON_PROPERTY_CALCULATED_REMOVAL_TIME = "calculatedRemovalTime";
-  private JsonNullable<Boolean> calculatedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean calculatedRemovalTime;
 
 
   public SetRemovalTimeToHistoricDecisionInstancesDto hierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
     
+    this.hierarchical = hierarchical;
     return this;
   }
 
@@ -78,26 +75,16 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to all historic decision instances in the hierarchy. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getHierarchical() {
-        return hierarchical.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getHierarchical_JsonNullable() {
+  public Boolean getHierarchical() {
     return hierarchical;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  public void setHierarchical_JsonNullable(JsonNullable<Boolean> hierarchical) {
-    this.hierarchical = hierarchical;
-  }
+
 
   public void setHierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
+    this.hierarchical = hierarchical;
   }
 
 
@@ -127,20 +114,16 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
 
 
   public SetRemovalTimeToHistoricDecisionInstancesDto historicDecisionInstanceIds(List<String> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(historicDecisionInstanceIds);
     
+    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
     return this;
   }
 
   public SetRemovalTimeToHistoricDecisionInstancesDto addHistoricDecisionInstanceIdsItem(String historicDecisionInstanceIdsItem) {
-    if (this.historicDecisionInstanceIds == null || !this.historicDecisionInstanceIds.isPresent()) {
-      this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicDecisionInstanceIds == null) {
+      this.historicDecisionInstanceIds = new ArrayList<>();
     }
-    try {
-      this.historicDecisionInstanceIds.get().add(historicDecisionInstanceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicDecisionInstanceIds.add(historicDecisionInstanceIdsItem);
     return this;
   }
 
@@ -150,32 +133,22 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The ids of the historic decision instances to set the removal time for.")
-  @JsonIgnore
-
-  public List<String> getHistoricDecisionInstanceIds() {
-        return historicDecisionInstanceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricDecisionInstanceIds_JsonNullable() {
+  public List<String> getHistoricDecisionInstanceIds() {
     return historicDecisionInstanceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_DECISION_INSTANCE_IDS)
-  public void setHistoricDecisionInstanceIds_JsonNullable(JsonNullable<List<String>> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
-  }
+
 
   public void setHistoricDecisionInstanceIds(List<String> historicDecisionInstanceIds) {
-    this.historicDecisionInstanceIds = JsonNullable.<List<String>>of(historicDecisionInstanceIds);
+    this.historicDecisionInstanceIds = historicDecisionInstanceIds;
   }
 
 
   public SetRemovalTimeToHistoricDecisionInstancesDto absoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
     
+    this.absoluteRemovalTime = absoluteRemovalTime;
     return this;
   }
 
@@ -185,32 +158,22 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date for which the instances shall be removed. Value may not be `null`.  **Note:** Cannot be set in conjunction with `clearedRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public OffsetDateTime getAbsoluteRemovalTime() {
-        return absoluteRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getAbsoluteRemovalTime_JsonNullable() {
+  public OffsetDateTime getAbsoluteRemovalTime() {
     return absoluteRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
-  public void setAbsoluteRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> absoluteRemovalTime) {
-    this.absoluteRemovalTime = absoluteRemovalTime;
-  }
+
 
   public void setAbsoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
+    this.absoluteRemovalTime = absoluteRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricDecisionInstancesDto clearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
     
+    this.clearedRemovalTime = clearedRemovalTime;
     return this;
   }
 
@@ -220,32 +183,22 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to `null`. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getClearedRemovalTime() {
-        return clearedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getClearedRemovalTime_JsonNullable() {
+  public Boolean getClearedRemovalTime() {
     return clearedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
-  public void setClearedRemovalTime_JsonNullable(JsonNullable<Boolean> clearedRemovalTime) {
-    this.clearedRemovalTime = clearedRemovalTime;
-  }
+
 
   public void setClearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
+    this.clearedRemovalTime = clearedRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricDecisionInstancesDto calculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
     
+    this.calculatedRemovalTime = calculatedRemovalTime;
     return this;
   }
 
@@ -255,26 +208,16 @@ public class SetRemovalTimeToHistoricDecisionInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The removal time is calculated based on the engine's configuration settings. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `clearedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getCalculatedRemovalTime() {
-        return calculatedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCalculatedRemovalTime_JsonNullable() {
+  public Boolean getCalculatedRemovalTime() {
     return calculatedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
-  public void setCalculatedRemovalTime_JsonNullable(JsonNullable<Boolean> calculatedRemovalTime) {
-    this.calculatedRemovalTime = calculatedRemovalTime;
-  }
+
 
   public void setCalculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
+    this.calculatedRemovalTime = calculatedRemovalTime;
   }
 
 

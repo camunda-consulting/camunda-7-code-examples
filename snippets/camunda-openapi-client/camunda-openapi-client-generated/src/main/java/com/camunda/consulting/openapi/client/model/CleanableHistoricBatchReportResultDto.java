@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,24 +34,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CleanableHistoricBatchReportResultDto.JSON_PROPERTY_CLEANABLE_BATCHES_COUNT
 })
 @JsonTypeName("CleanableHistoricBatchReportResultDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CleanableHistoricBatchReportResultDto {
   public static final String JSON_PROPERTY_BATCH_TYPE = "batchType";
-  private JsonNullable<String> batchType = JsonNullable.<String>undefined();
+  private String batchType;
 
   public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  private Integer historyTimeToLive;
 
   public static final String JSON_PROPERTY_FINISHED_BATCHES_COUNT = "finishedBatchesCount";
-  private JsonNullable<Long> finishedBatchesCount = JsonNullable.<Long>undefined();
+  private Long finishedBatchesCount;
 
   public static final String JSON_PROPERTY_CLEANABLE_BATCHES_COUNT = "cleanableBatchesCount";
-  private JsonNullable<Long> cleanableBatchesCount = JsonNullable.<Long>undefined();
+  private Long cleanableBatchesCount;
 
 
   public CleanableHistoricBatchReportResultDto batchType(String batchType) {
-    this.batchType = JsonNullable.<String>of(batchType);
     
+    this.batchType = batchType;
     return this;
   }
 
@@ -64,32 +61,22 @@ public class CleanableHistoricBatchReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the batch operation.")
-  @JsonIgnore
-
-  public String getBatchType() {
-        return batchType.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBatchType_JsonNullable() {
+  public String getBatchType() {
     return batchType;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_TYPE)
-  public void setBatchType_JsonNullable(JsonNullable<String> batchType) {
-    this.batchType = batchType;
-  }
+
 
   public void setBatchType(String batchType) {
-    this.batchType = JsonNullable.<String>of(batchType);
+    this.batchType = batchType;
   }
 
 
   public CleanableHistoricBatchReportResultDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
     
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -99,32 +86,22 @@ public class CleanableHistoricBatchReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The history time to live of the batch operation.")
-  @JsonIgnore
-
-  public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
+  public Integer getHistoryTimeToLive() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 
   public CleanableHistoricBatchReportResultDto finishedBatchesCount(Long finishedBatchesCount) {
-    this.finishedBatchesCount = JsonNullable.<Long>of(finishedBatchesCount);
     
+    this.finishedBatchesCount = finishedBatchesCount;
     return this;
   }
 
@@ -134,32 +111,22 @@ public class CleanableHistoricBatchReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the finished batch operations.")
-  @JsonIgnore
-
-  public Long getFinishedBatchesCount() {
-        return finishedBatchesCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FINISHED_BATCHES_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getFinishedBatchesCount_JsonNullable() {
+  public Long getFinishedBatchesCount() {
     return finishedBatchesCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_BATCHES_COUNT)
-  public void setFinishedBatchesCount_JsonNullable(JsonNullable<Long> finishedBatchesCount) {
-    this.finishedBatchesCount = finishedBatchesCount;
-  }
+
 
   public void setFinishedBatchesCount(Long finishedBatchesCount) {
-    this.finishedBatchesCount = JsonNullable.<Long>of(finishedBatchesCount);
+    this.finishedBatchesCount = finishedBatchesCount;
   }
 
 
   public CleanableHistoricBatchReportResultDto cleanableBatchesCount(Long cleanableBatchesCount) {
-    this.cleanableBatchesCount = JsonNullable.<Long>of(cleanableBatchesCount);
     
+    this.cleanableBatchesCount = cleanableBatchesCount;
     return this;
   }
 
@@ -169,26 +136,16 @@ public class CleanableHistoricBatchReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The count of the cleanable historic batch operations, referring to history time to live.")
-  @JsonIgnore
-
-  public Long getCleanableBatchesCount() {
-        return cleanableBatchesCount.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEANABLE_BATCHES_COUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getCleanableBatchesCount_JsonNullable() {
+  public Long getCleanableBatchesCount() {
     return cleanableBatchesCount;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEANABLE_BATCHES_COUNT)
-  public void setCleanableBatchesCount_JsonNullable(JsonNullable<Long> cleanableBatchesCount) {
-    this.cleanableBatchesCount = cleanableBatchesCount;
-  }
+
 
   public void setCleanableBatchesCount(Long cleanableBatchesCount) {
-    this.cleanableBatchesCount = JsonNullable.<Long>of(cleanableBatchesCount);
+    this.cleanableBatchesCount = cleanableBatchesCount;
   }
 
 

@@ -4,7 +4,7 @@ Camunda Platform REST API
 
 - API version: 7.16.0
 
-- Build date: 2021-10-13T16:56:52.297572+02:00[Europe/Berlin]
+- Build date: 2021-10-13T17:49:51.183809+02:00[Europe/Berlin]
 
 OpenApi Spec for Camunda Platform REST API.
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProcessDefinitionDiagramDto.JSON_PROPERTY_BPMN20_XML
 })
 @JsonTypeName("ProcessDefinitionDiagramDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProcessDefinitionDiagramDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_BPMN20_XML = "bpmn20Xml";
-  private JsonNullable<String> bpmn20Xml = JsonNullable.<String>undefined();
+  private String bpmn20Xml;
 
 
   public ProcessDefinitionDiagramDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class ProcessDefinitionDiagramDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public ProcessDefinitionDiagramDto bpmn20Xml(String bpmn20Xml) {
-    this.bpmn20Xml = JsonNullable.<String>of(bpmn20Xml);
     
+    this.bpmn20Xml = bpmn20Xml;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class ProcessDefinitionDiagramDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An escaped XML string containing the XML that this definition was deployed with. Carriage returns, line feeds and quotation marks are escaped.")
-  @JsonIgnore
-
-  public String getBpmn20Xml() {
-        return bpmn20Xml.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BPMN20_XML)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBpmn20Xml_JsonNullable() {
+  public String getBpmn20Xml() {
     return bpmn20Xml;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BPMN20_XML)
-  public void setBpmn20Xml_JsonNullable(JsonNullable<String> bpmn20Xml) {
-    this.bpmn20Xml = bpmn20Xml;
-  }
+
 
   public void setBpmn20Xml(String bpmn20Xml) {
-    this.bpmn20Xml = JsonNullable.<String>of(bpmn20Xml);
+    this.bpmn20Xml = bpmn20Xml;
   }
 
 

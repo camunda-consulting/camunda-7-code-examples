@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   BatchStatisticsDtoAllOf.JSON_PROPERTY_FAILED_JOBS
 })
 @JsonTypeName("BatchStatisticsDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class BatchStatisticsDtoAllOf {
   public static final String JSON_PROPERTY_REMAINING_JOBS = "remainingJobs";
-  private JsonNullable<Integer> remainingJobs = JsonNullable.<Integer>undefined();
+  private Integer remainingJobs;
 
   public static final String JSON_PROPERTY_COMPLETED_JOBS = "completedJobs";
-  private JsonNullable<Integer> completedJobs = JsonNullable.<Integer>undefined();
+  private Integer completedJobs;
 
   public static final String JSON_PROPERTY_FAILED_JOBS = "failedJobs";
-  private JsonNullable<Integer> failedJobs = JsonNullable.<Integer>undefined();
+  private Integer failedJobs;
 
 
   public BatchStatisticsDtoAllOf remainingJobs(Integer remainingJobs) {
-    this.remainingJobs = JsonNullable.<Integer>of(remainingJobs);
     
+    this.remainingJobs = remainingJobs;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class BatchStatisticsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of remaining batch execution jobs. This does include failed batch execution jobs and batch execution jobs which still have to be created by the seed job.")
-  @JsonIgnore
-
-  public Integer getRemainingJobs() {
-        return remainingJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_REMAINING_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRemainingJobs_JsonNullable() {
+  public Integer getRemainingJobs() {
     return remainingJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMAINING_JOBS)
-  public void setRemainingJobs_JsonNullable(JsonNullable<Integer> remainingJobs) {
-    this.remainingJobs = remainingJobs;
-  }
+
 
   public void setRemainingJobs(Integer remainingJobs) {
-    this.remainingJobs = JsonNullable.<Integer>of(remainingJobs);
+    this.remainingJobs = remainingJobs;
   }
 
 
   public BatchStatisticsDtoAllOf completedJobs(Integer completedJobs) {
-    this.completedJobs = JsonNullable.<Integer>of(completedJobs);
     
+    this.completedJobs = completedJobs;
     return this;
   }
 
@@ -95,32 +82,22 @@ public class BatchStatisticsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of completed batch execution jobs. This does include aborted/deleted batch execution jobs.")
-  @JsonIgnore
-
-  public Integer getCompletedJobs() {
-        return completedJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_COMPLETED_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getCompletedJobs_JsonNullable() {
+  public Integer getCompletedJobs() {
     return completedJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COMPLETED_JOBS)
-  public void setCompletedJobs_JsonNullable(JsonNullable<Integer> completedJobs) {
-    this.completedJobs = completedJobs;
-  }
+
 
   public void setCompletedJobs(Integer completedJobs) {
-    this.completedJobs = JsonNullable.<Integer>of(completedJobs);
+    this.completedJobs = completedJobs;
   }
 
 
   public BatchStatisticsDtoAllOf failedJobs(Integer failedJobs) {
-    this.failedJobs = JsonNullable.<Integer>of(failedJobs);
     
+    this.failedJobs = failedJobs;
     return this;
   }
 
@@ -130,26 +107,16 @@ public class BatchStatisticsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of failed batch execution jobs. This does not include aborted or deleted batch execution jobs.")
-  @JsonIgnore
-
-  public Integer getFailedJobs() {
-        return failedJobs.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILED_JOBS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getFailedJobs_JsonNullable() {
+  public Integer getFailedJobs() {
     return failedJobs;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILED_JOBS)
-  public void setFailedJobs_JsonNullable(JsonNullable<Integer> failedJobs) {
-    this.failedJobs = failedJobs;
-  }
+
 
   public void setFailedJobs(Integer failedJobs) {
-    this.failedJobs = JsonNullable.<Integer>of(failedJobs);
+    this.failedJobs = failedJobs;
   }
 
 

@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -130,229 +127,229 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TaskQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("TaskQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TaskQueryDto {
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
-  private JsonNullable<String> processInstanceId = JsonNullable.<String>undefined();
+  private String processInstanceId;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID_IN = "processInstanceIdIn";
-  private JsonNullable<List<String>> processInstanceIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIdIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY = "processInstanceBusinessKey";
-  private JsonNullable<String> processInstanceBusinessKey = JsonNullable.<String>undefined();
+  private String processInstanceBusinessKey;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_EXPRESSION = "processInstanceBusinessKeyExpression";
-  private JsonNullable<String> processInstanceBusinessKeyExpression = JsonNullable.<String>undefined();
+  private String processInstanceBusinessKeyExpression;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_IN = "processInstanceBusinessKeyIn";
-  private JsonNullable<List<String>> processInstanceBusinessKeyIn = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceBusinessKeyIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE = "processInstanceBusinessKeyLike";
-  private JsonNullable<String> processInstanceBusinessKeyLike = JsonNullable.<String>undefined();
+  private String processInstanceBusinessKeyLike;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE_EXPRESSION = "processInstanceBusinessKeyLikeExpression";
-  private JsonNullable<String> processInstanceBusinessKeyLikeExpression = JsonNullable.<String>undefined();
+  private String processInstanceBusinessKeyLikeExpression;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
-  private JsonNullable<String> processDefinitionId = JsonNullable.<String>undefined();
+  private String processDefinitionId;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
-  private JsonNullable<String> processDefinitionKey = JsonNullable.<String>undefined();
+  private String processDefinitionKey;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN = "processDefinitionKeyIn";
-  private JsonNullable<List<String>> processDefinitionKeyIn = JsonNullable.<List<String>>undefined();
+  private List<String> processDefinitionKeyIn = null;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_NAME = "processDefinitionName";
-  private JsonNullable<String> processDefinitionName = JsonNullable.<String>undefined();
+  private String processDefinitionName;
 
   public static final String JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE = "processDefinitionNameLike";
-  private JsonNullable<String> processDefinitionNameLike = JsonNullable.<String>undefined();
+  private String processDefinitionNameLike;
 
   public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
-  private JsonNullable<String> executionId = JsonNullable.<String>undefined();
+  private String executionId;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
-  private JsonNullable<String> caseInstanceId = JsonNullable.<String>undefined();
+  private String caseInstanceId;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY = "caseInstanceBusinessKey";
-  private JsonNullable<String> caseInstanceBusinessKey = JsonNullable.<String>undefined();
+  private String caseInstanceBusinessKey;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY_LIKE = "caseInstanceBusinessKeyLike";
-  private JsonNullable<String> caseInstanceBusinessKeyLike = JsonNullable.<String>undefined();
+  private String caseInstanceBusinessKeyLike;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_ID = "caseDefinitionId";
-  private JsonNullable<String> caseDefinitionId = JsonNullable.<String>undefined();
+  private String caseDefinitionId;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_KEY = "caseDefinitionKey";
-  private JsonNullable<String> caseDefinitionKey = JsonNullable.<String>undefined();
+  private String caseDefinitionKey;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_NAME = "caseDefinitionName";
-  private JsonNullable<String> caseDefinitionName = JsonNullable.<String>undefined();
+  private String caseDefinitionName;
 
   public static final String JSON_PROPERTY_CASE_DEFINITION_NAME_LIKE = "caseDefinitionNameLike";
-  private JsonNullable<String> caseDefinitionNameLike = JsonNullable.<String>undefined();
+  private String caseDefinitionNameLike;
 
   public static final String JSON_PROPERTY_CASE_EXECUTION_ID = "caseExecutionId";
-  private JsonNullable<String> caseExecutionId = JsonNullable.<String>undefined();
+  private String caseExecutionId;
 
   public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN = "activityInstanceIdIn";
-  private JsonNullable<List<String>> activityInstanceIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> activityInstanceIdIn = null;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>of(false);
+  private Boolean withoutTenantId = false;
 
   public static final String JSON_PROPERTY_ASSIGNEE = "assignee";
-  private JsonNullable<String> assignee = JsonNullable.<String>undefined();
+  private String assignee;
 
   public static final String JSON_PROPERTY_ASSIGNEE_EXPRESSION = "assigneeExpression";
-  private JsonNullable<String> assigneeExpression = JsonNullable.<String>undefined();
+  private String assigneeExpression;
 
   public static final String JSON_PROPERTY_ASSIGNEE_LIKE = "assigneeLike";
-  private JsonNullable<String> assigneeLike = JsonNullable.<String>undefined();
+  private String assigneeLike;
 
   public static final String JSON_PROPERTY_ASSIGNEE_LIKE_EXPRESSION = "assigneeLikeExpression";
-  private JsonNullable<String> assigneeLikeExpression = JsonNullable.<String>undefined();
+  private String assigneeLikeExpression;
 
   public static final String JSON_PROPERTY_ASSIGNEE_IN = "assigneeIn";
-  private JsonNullable<List<String>> assigneeIn = JsonNullable.<List<String>>undefined();
+  private List<String> assigneeIn = null;
 
   public static final String JSON_PROPERTY_ASSIGNEE_NOT_IN = "assigneeNotIn";
-  private JsonNullable<List<String>> assigneeNotIn = JsonNullable.<List<String>>undefined();
+  private List<String> assigneeNotIn = null;
 
   public static final String JSON_PROPERTY_OWNER = "owner";
-  private JsonNullable<String> owner = JsonNullable.<String>undefined();
+  private String owner;
 
   public static final String JSON_PROPERTY_OWNER_EXPRESSION = "ownerExpression";
-  private JsonNullable<String> ownerExpression = JsonNullable.<String>undefined();
+  private String ownerExpression;
 
   public static final String JSON_PROPERTY_CANDIDATE_GROUP = "candidateGroup";
-  private JsonNullable<String> candidateGroup = JsonNullable.<String>undefined();
+  private String candidateGroup;
 
   public static final String JSON_PROPERTY_CANDIDATE_GROUP_EXPRESSION = "candidateGroupExpression";
-  private JsonNullable<String> candidateGroupExpression = JsonNullable.<String>undefined();
+  private String candidateGroupExpression;
 
   public static final String JSON_PROPERTY_CANDIDATE_USER = "candidateUser";
-  private JsonNullable<String> candidateUser = JsonNullable.<String>undefined();
+  private String candidateUser;
 
   public static final String JSON_PROPERTY_CANDIDATE_USER_EXPRESSION = "candidateUserExpression";
-  private JsonNullable<String> candidateUserExpression = JsonNullable.<String>undefined();
+  private String candidateUserExpression;
 
   public static final String JSON_PROPERTY_INCLUDE_ASSIGNED_TASKS = "includeAssignedTasks";
-  private JsonNullable<Boolean> includeAssignedTasks = JsonNullable.<Boolean>of(false);
+  private Boolean includeAssignedTasks = false;
 
   public static final String JSON_PROPERTY_INVOLVED_USER = "involvedUser";
-  private JsonNullable<String> involvedUser = JsonNullable.<String>undefined();
+  private String involvedUser;
 
   public static final String JSON_PROPERTY_INVOLVED_USER_EXPRESSION = "involvedUserExpression";
-  private JsonNullable<String> involvedUserExpression = JsonNullable.<String>undefined();
+  private String involvedUserExpression;
 
   public static final String JSON_PROPERTY_ASSIGNED = "assigned";
-  private JsonNullable<Boolean> assigned = JsonNullable.<Boolean>of(false);
+  private Boolean assigned = false;
 
   public static final String JSON_PROPERTY_UNASSIGNED = "unassigned";
-  private JsonNullable<Boolean> unassigned = JsonNullable.<Boolean>of(false);
+  private Boolean unassigned = false;
 
   public static final String JSON_PROPERTY_TASK_DEFINITION_KEY = "taskDefinitionKey";
-  private JsonNullable<String> taskDefinitionKey = JsonNullable.<String>undefined();
+  private String taskDefinitionKey;
 
   public static final String JSON_PROPERTY_TASK_DEFINITION_KEY_IN = "taskDefinitionKeyIn";
-  private JsonNullable<List<String>> taskDefinitionKeyIn = JsonNullable.<List<String>>undefined();
+  private List<String> taskDefinitionKeyIn = null;
 
   public static final String JSON_PROPERTY_TASK_DEFINITION_KEY_LIKE = "taskDefinitionKeyLike";
-  private JsonNullable<String> taskDefinitionKeyLike = JsonNullable.<String>undefined();
+  private String taskDefinitionKeyLike;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  private JsonNullable<String> name = JsonNullable.<String>undefined();
+  private String name;
 
   public static final String JSON_PROPERTY_NAME_NOT_EQUAL = "nameNotEqual";
-  private JsonNullable<String> nameNotEqual = JsonNullable.<String>undefined();
+  private String nameNotEqual;
 
   public static final String JSON_PROPERTY_NAME_LIKE = "nameLike";
-  private JsonNullable<String> nameLike = JsonNullable.<String>undefined();
+  private String nameLike;
 
   public static final String JSON_PROPERTY_NAME_NOT_LIKE = "nameNotLike";
-  private JsonNullable<String> nameNotLike = JsonNullable.<String>undefined();
+  private String nameNotLike;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
-  private JsonNullable<String> description = JsonNullable.<String>undefined();
+  private String description;
 
   public static final String JSON_PROPERTY_DESCRIPTION_LIKE = "descriptionLike";
-  private JsonNullable<String> descriptionLike = JsonNullable.<String>undefined();
+  private String descriptionLike;
 
   public static final String JSON_PROPERTY_PRIORITY = "priority";
-  private JsonNullable<Integer> priority = JsonNullable.<Integer>undefined();
+  private Integer priority;
 
   public static final String JSON_PROPERTY_MAX_PRIORITY = "maxPriority";
-  private JsonNullable<Integer> maxPriority = JsonNullable.<Integer>undefined();
+  private Integer maxPriority;
 
   public static final String JSON_PROPERTY_MIN_PRIORITY = "minPriority";
-  private JsonNullable<Integer> minPriority = JsonNullable.<Integer>undefined();
+  private Integer minPriority;
 
   public static final String JSON_PROPERTY_DUE_DATE = "dueDate";
-  private JsonNullable<OffsetDateTime> dueDate = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime dueDate;
 
   public static final String JSON_PROPERTY_DUE_DATE_EXPRESSION = "dueDateExpression";
-  private JsonNullable<String> dueDateExpression = JsonNullable.<String>undefined();
+  private String dueDateExpression;
 
   public static final String JSON_PROPERTY_DUE_AFTER = "dueAfter";
-  private JsonNullable<OffsetDateTime> dueAfter = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime dueAfter;
 
   public static final String JSON_PROPERTY_DUE_AFTER_EXPRESSION = "dueAfterExpression";
-  private JsonNullable<String> dueAfterExpression = JsonNullable.<String>undefined();
+  private String dueAfterExpression;
 
   public static final String JSON_PROPERTY_DUE_BEFORE = "dueBefore";
-  private JsonNullable<OffsetDateTime> dueBefore = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime dueBefore;
 
   public static final String JSON_PROPERTY_DUE_BEFORE_EXPRESSION = "dueBeforeExpression";
-  private JsonNullable<String> dueBeforeExpression = JsonNullable.<String>undefined();
+  private String dueBeforeExpression;
 
   public static final String JSON_PROPERTY_WITHOUT_DUE_DATE = "withoutDueDate";
-  private JsonNullable<Boolean> withoutDueDate = JsonNullable.<Boolean>of(false);
+  private Boolean withoutDueDate = false;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_DATE = "followUpDate";
-  private JsonNullable<OffsetDateTime> followUpDate = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime followUpDate;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_DATE_EXPRESSION = "followUpDateExpression";
-  private JsonNullable<String> followUpDateExpression = JsonNullable.<String>undefined();
+  private String followUpDateExpression;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_AFTER = "followUpAfter";
-  private JsonNullable<OffsetDateTime> followUpAfter = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime followUpAfter;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_AFTER_EXPRESSION = "followUpAfterExpression";
-  private JsonNullable<String> followUpAfterExpression = JsonNullable.<String>undefined();
+  private String followUpAfterExpression;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_BEFORE = "followUpBefore";
-  private JsonNullable<String> followUpBefore = JsonNullable.<String>undefined();
+  private String followUpBefore;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_BEFORE_EXPRESSION = "followUpBeforeExpression";
-  private JsonNullable<String> followUpBeforeExpression = JsonNullable.<String>undefined();
+  private String followUpBeforeExpression;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT = "followUpBeforeOrNotExistent";
-  private JsonNullable<OffsetDateTime> followUpBeforeOrNotExistent = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime followUpBeforeOrNotExistent;
 
   public static final String JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT_EXPRESSION = "followUpBeforeOrNotExistentExpression";
-  private JsonNullable<String> followUpBeforeOrNotExistentExpression = JsonNullable.<String>undefined();
+  private String followUpBeforeOrNotExistentExpression;
 
   public static final String JSON_PROPERTY_CREATED_ON = "createdOn";
-  private JsonNullable<OffsetDateTime> createdOn = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime createdOn;
 
   public static final String JSON_PROPERTY_CREATED_ON_EXPRESSION = "createdOnExpression";
-  private JsonNullable<String> createdOnExpression = JsonNullable.<String>undefined();
+  private String createdOnExpression;
 
   public static final String JSON_PROPERTY_CREATED_AFTER = "createdAfter";
-  private JsonNullable<OffsetDateTime> createdAfter = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime createdAfter;
 
   public static final String JSON_PROPERTY_CREATED_AFTER_EXPRESSION = "createdAfterExpression";
-  private JsonNullable<String> createdAfterExpression = JsonNullable.<String>undefined();
+  private String createdAfterExpression;
 
   public static final String JSON_PROPERTY_CREATED_BEFORE = "createdBefore";
-  private JsonNullable<OffsetDateTime> createdBefore = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime createdBefore;
 
   public static final String JSON_PROPERTY_CREATED_BEFORE_EXPRESSION = "createdBeforeExpression";
-  private JsonNullable<String> createdBeforeExpression = JsonNullable.<String>undefined();
+  private String createdBeforeExpression;
 
   /**
    * Restrict to tasks that are in the given delegation state. Valid values are &#x60;PENDING&#x60; and &#x60;RESOLVED&#x60;.
@@ -390,60 +387,60 @@ public class TaskQueryDto {
   }
 
   public static final String JSON_PROPERTY_DELEGATION_STATE = "delegationState";
-  private JsonNullable<DelegationStateEnum> delegationState = JsonNullable.<DelegationStateEnum>undefined();
+  private DelegationStateEnum delegationState;
 
   public static final String JSON_PROPERTY_CANDIDATE_GROUPS = "candidateGroups";
-  private JsonNullable<List<String>> candidateGroups = JsonNullable.<List<String>>undefined();
+  private List<String> candidateGroups = null;
 
   public static final String JSON_PROPERTY_CANDIDATE_GROUPS_EXPRESSION = "candidateGroupsExpression";
-  private JsonNullable<String> candidateGroupsExpression = JsonNullable.<String>undefined();
+  private String candidateGroupsExpression;
 
   public static final String JSON_PROPERTY_WITH_CANDIDATE_GROUPS = "withCandidateGroups";
-  private JsonNullable<Boolean> withCandidateGroups = JsonNullable.<Boolean>of(false);
+  private Boolean withCandidateGroups = false;
 
   public static final String JSON_PROPERTY_WITHOUT_CANDIDATE_GROUPS = "withoutCandidateGroups";
-  private JsonNullable<Boolean> withoutCandidateGroups = JsonNullable.<Boolean>of(false);
+  private Boolean withoutCandidateGroups = false;
 
   public static final String JSON_PROPERTY_WITH_CANDIDATE_USERS = "withCandidateUsers";
-  private JsonNullable<Boolean> withCandidateUsers = JsonNullable.<Boolean>of(false);
+  private Boolean withCandidateUsers = false;
 
   public static final String JSON_PROPERTY_WITHOUT_CANDIDATE_USERS = "withoutCandidateUsers";
-  private JsonNullable<Boolean> withoutCandidateUsers = JsonNullable.<Boolean>of(false);
+  private Boolean withoutCandidateUsers = false;
 
   public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>of(false);
+  private Boolean active = false;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>of(false);
+  private Boolean suspended = false;
 
   public static final String JSON_PROPERTY_TASK_VARIABLES = "taskVariables";
-  private JsonNullable<List<VariableQueryParameterDto>> taskVariables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> taskVariables = null;
 
   public static final String JSON_PROPERTY_PROCESS_VARIABLES = "processVariables";
-  private JsonNullable<List<VariableQueryParameterDto>> processVariables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> processVariables = null;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_VARIABLES = "caseInstanceVariables";
-  private JsonNullable<List<VariableQueryParameterDto>> caseInstanceVariables = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> caseInstanceVariables = null;
 
   public static final String JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
-  private JsonNullable<Boolean> variableNamesIgnoreCase = JsonNullable.<Boolean>of(false);
+  private Boolean variableNamesIgnoreCase = false;
 
   public static final String JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
-  private JsonNullable<Boolean> variableValuesIgnoreCase = JsonNullable.<Boolean>of(false);
+  private Boolean variableValuesIgnoreCase = false;
 
   public static final String JSON_PROPERTY_PARENT_TASK_ID = "parentTaskId";
-  private JsonNullable<String> parentTaskId = JsonNullable.<String>undefined();
+  private String parentTaskId;
 
   public static final String JSON_PROPERTY_OR_QUERIES = "orQueries";
-  private JsonNullable<List<TaskQueryDto>> orQueries = JsonNullable.<List<TaskQueryDto>>undefined();
+  private List<TaskQueryDto> orQueries = null;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<TaskQueryDtoSorting>> sorting = JsonNullable.<List<TaskQueryDtoSorting>>undefined();
+  private List<TaskQueryDtoSorting> sorting = null;
 
 
   public TaskQueryDto processInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
     
+    this.processInstanceId = processInstanceId;
     return this;
   }
 
@@ -453,44 +450,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to process instances with the given id.")
-  @JsonIgnore
-
-  public String getProcessInstanceId() {
-        return processInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceId_JsonNullable() {
+  public String getProcessInstanceId() {
     return processInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  public void setProcessInstanceId_JsonNullable(JsonNullable<String> processInstanceId) {
-    this.processInstanceId = processInstanceId;
-  }
+
 
   public void setProcessInstanceId(String processInstanceId) {
-    this.processInstanceId = JsonNullable.<String>of(processInstanceId);
+    this.processInstanceId = processInstanceId;
   }
 
 
   public TaskQueryDto processInstanceIdIn(List<String> processInstanceIdIn) {
-    this.processInstanceIdIn = JsonNullable.<List<String>>of(processInstanceIdIn);
     
+    this.processInstanceIdIn = processInstanceIdIn;
     return this;
   }
 
   public TaskQueryDto addProcessInstanceIdInItem(String processInstanceIdInItem) {
-    if (this.processInstanceIdIn == null || !this.processInstanceIdIn.isPresent()) {
-      this.processInstanceIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIdIn == null) {
+      this.processInstanceIdIn = new ArrayList<>();
     }
-    try {
-      this.processInstanceIdIn.get().add(processInstanceIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIdIn.add(processInstanceIdInItem);
     return this;
   }
 
@@ -500,32 +483,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to process instances with the given ids.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIdIn() {
-        return processInstanceIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIdIn_JsonNullable() {
+  public List<String> getProcessInstanceIdIn() {
     return processInstanceIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID_IN)
-  public void setProcessInstanceIdIn_JsonNullable(JsonNullable<List<String>> processInstanceIdIn) {
-    this.processInstanceIdIn = processInstanceIdIn;
-  }
+
 
   public void setProcessInstanceIdIn(List<String> processInstanceIdIn) {
-    this.processInstanceIdIn = JsonNullable.<List<String>>of(processInstanceIdIn);
+    this.processInstanceIdIn = processInstanceIdIn;
   }
 
 
   public TaskQueryDto processInstanceBusinessKey(String processInstanceBusinessKey) {
-    this.processInstanceBusinessKey = JsonNullable.<String>of(processInstanceBusinessKey);
     
+    this.processInstanceBusinessKey = processInstanceBusinessKey;
     return this;
   }
 
@@ -535,32 +508,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to process instances with the given business key.")
-  @JsonIgnore
-
-  public String getProcessInstanceBusinessKey() {
-        return processInstanceBusinessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceBusinessKey_JsonNullable() {
+  public String getProcessInstanceBusinessKey() {
     return processInstanceBusinessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY)
-  public void setProcessInstanceBusinessKey_JsonNullable(JsonNullable<String> processInstanceBusinessKey) {
-    this.processInstanceBusinessKey = processInstanceBusinessKey;
-  }
+
 
   public void setProcessInstanceBusinessKey(String processInstanceBusinessKey) {
-    this.processInstanceBusinessKey = JsonNullable.<String>of(processInstanceBusinessKey);
+    this.processInstanceBusinessKey = processInstanceBusinessKey;
   }
 
 
   public TaskQueryDto processInstanceBusinessKeyExpression(String processInstanceBusinessKeyExpression) {
-    this.processInstanceBusinessKeyExpression = JsonNullable.<String>of(processInstanceBusinessKeyExpression);
     
+    this.processInstanceBusinessKeyExpression = processInstanceBusinessKeyExpression;
     return this;
   }
 
@@ -570,44 +533,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to process instances with the given business key which  is described by an expression. See the  [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions.")
-  @JsonIgnore
-
-  public String getProcessInstanceBusinessKeyExpression() {
-        return processInstanceBusinessKeyExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceBusinessKeyExpression_JsonNullable() {
+  public String getProcessInstanceBusinessKeyExpression() {
     return processInstanceBusinessKeyExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_EXPRESSION)
-  public void setProcessInstanceBusinessKeyExpression_JsonNullable(JsonNullable<String> processInstanceBusinessKeyExpression) {
-    this.processInstanceBusinessKeyExpression = processInstanceBusinessKeyExpression;
-  }
+
 
   public void setProcessInstanceBusinessKeyExpression(String processInstanceBusinessKeyExpression) {
-    this.processInstanceBusinessKeyExpression = JsonNullable.<String>of(processInstanceBusinessKeyExpression);
+    this.processInstanceBusinessKeyExpression = processInstanceBusinessKeyExpression;
   }
 
 
   public TaskQueryDto processInstanceBusinessKeyIn(List<String> processInstanceBusinessKeyIn) {
-    this.processInstanceBusinessKeyIn = JsonNullable.<List<String>>of(processInstanceBusinessKeyIn);
     
+    this.processInstanceBusinessKeyIn = processInstanceBusinessKeyIn;
     return this;
   }
 
   public TaskQueryDto addProcessInstanceBusinessKeyInItem(String processInstanceBusinessKeyInItem) {
-    if (this.processInstanceBusinessKeyIn == null || !this.processInstanceBusinessKeyIn.isPresent()) {
-      this.processInstanceBusinessKeyIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceBusinessKeyIn == null) {
+      this.processInstanceBusinessKeyIn = new ArrayList<>();
     }
-    try {
-      this.processInstanceBusinessKeyIn.get().add(processInstanceBusinessKeyInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceBusinessKeyIn.add(processInstanceBusinessKeyInItem);
     return this;
   }
 
@@ -617,32 +566,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to process instances with one of the give business keys.  The keys need to be in a comma-separated list.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceBusinessKeyIn() {
-        return processInstanceBusinessKeyIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceBusinessKeyIn_JsonNullable() {
+  public List<String> getProcessInstanceBusinessKeyIn() {
     return processInstanceBusinessKeyIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_IN)
-  public void setProcessInstanceBusinessKeyIn_JsonNullable(JsonNullable<List<String>> processInstanceBusinessKeyIn) {
-    this.processInstanceBusinessKeyIn = processInstanceBusinessKeyIn;
-  }
+
 
   public void setProcessInstanceBusinessKeyIn(List<String> processInstanceBusinessKeyIn) {
-    this.processInstanceBusinessKeyIn = JsonNullable.<List<String>>of(processInstanceBusinessKeyIn);
+    this.processInstanceBusinessKeyIn = processInstanceBusinessKeyIn;
   }
 
 
   public TaskQueryDto processInstanceBusinessKeyLike(String processInstanceBusinessKeyLike) {
-    this.processInstanceBusinessKeyLike = JsonNullable.<String>of(processInstanceBusinessKeyLike);
     
+    this.processInstanceBusinessKeyLike = processInstanceBusinessKeyLike;
     return this;
   }
 
@@ -652,32 +591,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a process instance business key that has the parameter  value as a substring.")
-  @JsonIgnore
-
-  public String getProcessInstanceBusinessKeyLike() {
-        return processInstanceBusinessKeyLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceBusinessKeyLike_JsonNullable() {
+  public String getProcessInstanceBusinessKeyLike() {
     return processInstanceBusinessKeyLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE)
-  public void setProcessInstanceBusinessKeyLike_JsonNullable(JsonNullable<String> processInstanceBusinessKeyLike) {
-    this.processInstanceBusinessKeyLike = processInstanceBusinessKeyLike;
-  }
+
 
   public void setProcessInstanceBusinessKeyLike(String processInstanceBusinessKeyLike) {
-    this.processInstanceBusinessKeyLike = JsonNullable.<String>of(processInstanceBusinessKeyLike);
+    this.processInstanceBusinessKeyLike = processInstanceBusinessKeyLike;
   }
 
 
   public TaskQueryDto processInstanceBusinessKeyLikeExpression(String processInstanceBusinessKeyLikeExpression) {
-    this.processInstanceBusinessKeyLikeExpression = JsonNullable.<String>of(processInstanceBusinessKeyLikeExpression);
     
+    this.processInstanceBusinessKeyLikeExpression = processInstanceBusinessKeyLikeExpression;
     return this;
   }
 
@@ -687,32 +616,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a process instance business key that has the parameter  value as a substring and is described by an expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getProcessInstanceBusinessKeyLikeExpression() {
-        return processInstanceBusinessKeyLikeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessInstanceBusinessKeyLikeExpression_JsonNullable() {
+  public String getProcessInstanceBusinessKeyLikeExpression() {
     return processInstanceBusinessKeyLikeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE_EXPRESSION)
-  public void setProcessInstanceBusinessKeyLikeExpression_JsonNullable(JsonNullable<String> processInstanceBusinessKeyLikeExpression) {
-    this.processInstanceBusinessKeyLikeExpression = processInstanceBusinessKeyLikeExpression;
-  }
+
 
   public void setProcessInstanceBusinessKeyLikeExpression(String processInstanceBusinessKeyLikeExpression) {
-    this.processInstanceBusinessKeyLikeExpression = JsonNullable.<String>of(processInstanceBusinessKeyLikeExpression);
+    this.processInstanceBusinessKeyLikeExpression = processInstanceBusinessKeyLikeExpression;
   }
 
 
   public TaskQueryDto processDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
     
+    this.processDefinitionId = processDefinitionId;
     return this;
   }
 
@@ -722,32 +641,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a process definition with the given id.")
-  @JsonIgnore
-
-  public String getProcessDefinitionId() {
-        return processDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionId_JsonNullable() {
+  public String getProcessDefinitionId() {
     return processDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  public void setProcessDefinitionId_JsonNullable(JsonNullable<String> processDefinitionId) {
-    this.processDefinitionId = processDefinitionId;
-  }
+
 
   public void setProcessDefinitionId(String processDefinitionId) {
-    this.processDefinitionId = JsonNullable.<String>of(processDefinitionId);
+    this.processDefinitionId = processDefinitionId;
   }
 
 
   public TaskQueryDto processDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
     
+    this.processDefinitionKey = processDefinitionKey;
     return this;
   }
 
@@ -757,44 +666,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a process definition with the given key.")
-  @JsonIgnore
-
-  public String getProcessDefinitionKey() {
-        return processDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionKey_JsonNullable() {
+  public String getProcessDefinitionKey() {
     return processDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  public void setProcessDefinitionKey_JsonNullable(JsonNullable<String> processDefinitionKey) {
-    this.processDefinitionKey = processDefinitionKey;
-  }
+
 
   public void setProcessDefinitionKey(String processDefinitionKey) {
-    this.processDefinitionKey = JsonNullable.<String>of(processDefinitionKey);
+    this.processDefinitionKey = processDefinitionKey;
   }
 
 
   public TaskQueryDto processDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
     
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
     return this;
   }
 
   public TaskQueryDto addProcessDefinitionKeyInItem(String processDefinitionKeyInItem) {
-    if (this.processDefinitionKeyIn == null || !this.processDefinitionKeyIn.isPresent()) {
-      this.processDefinitionKeyIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processDefinitionKeyIn == null) {
+      this.processDefinitionKeyIn = new ArrayList<>();
     }
-    try {
-      this.processDefinitionKeyIn.get().add(processDefinitionKeyInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processDefinitionKeyIn.add(processDefinitionKeyInItem);
     return this;
   }
 
@@ -804,32 +699,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a process definition with one of the given keys. The  keys need to be in a comma-separated list.")
-  @JsonIgnore
-
-  public List<String> getProcessDefinitionKeyIn() {
-        return processDefinitionKeyIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessDefinitionKeyIn_JsonNullable() {
+  public List<String> getProcessDefinitionKeyIn() {
     return processDefinitionKeyIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
-  public void setProcessDefinitionKeyIn_JsonNullable(JsonNullable<List<String>> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = processDefinitionKeyIn;
-  }
+
 
   public void setProcessDefinitionKeyIn(List<String> processDefinitionKeyIn) {
-    this.processDefinitionKeyIn = JsonNullable.<List<String>>of(processDefinitionKeyIn);
+    this.processDefinitionKeyIn = processDefinitionKeyIn;
   }
 
 
   public TaskQueryDto processDefinitionName(String processDefinitionName) {
-    this.processDefinitionName = JsonNullable.<String>of(processDefinitionName);
     
+    this.processDefinitionName = processDefinitionName;
     return this;
   }
 
@@ -839,32 +724,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a process definition with the given name.")
-  @JsonIgnore
-
-  public String getProcessDefinitionName() {
-        return processDefinitionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionName_JsonNullable() {
+  public String getProcessDefinitionName() {
     return processDefinitionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME)
-  public void setProcessDefinitionName_JsonNullable(JsonNullable<String> processDefinitionName) {
-    this.processDefinitionName = processDefinitionName;
-  }
+
 
   public void setProcessDefinitionName(String processDefinitionName) {
-    this.processDefinitionName = JsonNullable.<String>of(processDefinitionName);
+    this.processDefinitionName = processDefinitionName;
   }
 
 
   public TaskQueryDto processDefinitionNameLike(String processDefinitionNameLike) {
-    this.processDefinitionNameLike = JsonNullable.<String>of(processDefinitionNameLike);
     
+    this.processDefinitionNameLike = processDefinitionNameLike;
     return this;
   }
 
@@ -874,32 +749,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a process definition name that has the parameter value as  a substring.")
-  @JsonIgnore
-
-  public String getProcessDefinitionNameLike() {
-        return processDefinitionNameLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getProcessDefinitionNameLike_JsonNullable() {
+  public String getProcessDefinitionNameLike() {
     return processDefinitionNameLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE)
-  public void setProcessDefinitionNameLike_JsonNullable(JsonNullable<String> processDefinitionNameLike) {
-    this.processDefinitionNameLike = processDefinitionNameLike;
-  }
+
 
   public void setProcessDefinitionNameLike(String processDefinitionNameLike) {
-    this.processDefinitionNameLike = JsonNullable.<String>of(processDefinitionNameLike);
+    this.processDefinitionNameLike = processDefinitionNameLike;
   }
 
 
   public TaskQueryDto executionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
     
+    this.executionId = executionId;
     return this;
   }
 
@@ -909,32 +774,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to an execution with the given id.")
-  @JsonIgnore
-
-  public String getExecutionId() {
-        return executionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getExecutionId_JsonNullable() {
+  public String getExecutionId() {
     return executionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  public void setExecutionId_JsonNullable(JsonNullable<String> executionId) {
-    this.executionId = executionId;
-  }
+
 
   public void setExecutionId(String executionId) {
-    this.executionId = JsonNullable.<String>of(executionId);
+    this.executionId = executionId;
   }
 
 
   public TaskQueryDto caseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
     
+    this.caseInstanceId = caseInstanceId;
     return this;
   }
 
@@ -944,32 +799,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to case instances with the given id.")
-  @JsonIgnore
-
-  public String getCaseInstanceId() {
-        return caseInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceId_JsonNullable() {
+  public String getCaseInstanceId() {
     return caseInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  public void setCaseInstanceId_JsonNullable(JsonNullable<String> caseInstanceId) {
-    this.caseInstanceId = caseInstanceId;
-  }
+
 
   public void setCaseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
+    this.caseInstanceId = caseInstanceId;
   }
 
 
   public TaskQueryDto caseInstanceBusinessKey(String caseInstanceBusinessKey) {
-    this.caseInstanceBusinessKey = JsonNullable.<String>of(caseInstanceBusinessKey);
     
+    this.caseInstanceBusinessKey = caseInstanceBusinessKey;
     return this;
   }
 
@@ -979,32 +824,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to case instances with the given business key.")
-  @JsonIgnore
-
-  public String getCaseInstanceBusinessKey() {
-        return caseInstanceBusinessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceBusinessKey_JsonNullable() {
+  public String getCaseInstanceBusinessKey() {
     return caseInstanceBusinessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY)
-  public void setCaseInstanceBusinessKey_JsonNullable(JsonNullable<String> caseInstanceBusinessKey) {
-    this.caseInstanceBusinessKey = caseInstanceBusinessKey;
-  }
+
 
   public void setCaseInstanceBusinessKey(String caseInstanceBusinessKey) {
-    this.caseInstanceBusinessKey = JsonNullable.<String>of(caseInstanceBusinessKey);
+    this.caseInstanceBusinessKey = caseInstanceBusinessKey;
   }
 
 
   public TaskQueryDto caseInstanceBusinessKeyLike(String caseInstanceBusinessKeyLike) {
-    this.caseInstanceBusinessKeyLike = JsonNullable.<String>of(caseInstanceBusinessKeyLike);
     
+    this.caseInstanceBusinessKeyLike = caseInstanceBusinessKeyLike;
     return this;
   }
 
@@ -1014,32 +849,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a case instance business key that has the parameter value  as a substring.")
-  @JsonIgnore
-
-  public String getCaseInstanceBusinessKeyLike() {
-        return caseInstanceBusinessKeyLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceBusinessKeyLike_JsonNullable() {
+  public String getCaseInstanceBusinessKeyLike() {
     return caseInstanceBusinessKeyLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_BUSINESS_KEY_LIKE)
-  public void setCaseInstanceBusinessKeyLike_JsonNullable(JsonNullable<String> caseInstanceBusinessKeyLike) {
-    this.caseInstanceBusinessKeyLike = caseInstanceBusinessKeyLike;
-  }
+
 
   public void setCaseInstanceBusinessKeyLike(String caseInstanceBusinessKeyLike) {
-    this.caseInstanceBusinessKeyLike = JsonNullable.<String>of(caseInstanceBusinessKeyLike);
+    this.caseInstanceBusinessKeyLike = caseInstanceBusinessKeyLike;
   }
 
 
   public TaskQueryDto caseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
     
+    this.caseDefinitionId = caseDefinitionId;
     return this;
   }
 
@@ -1049,32 +874,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a case definition with the given id.")
-  @JsonIgnore
-
-  public String getCaseDefinitionId() {
-        return caseDefinitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionId_JsonNullable() {
+  public String getCaseDefinitionId() {
     return caseDefinitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_ID)
-  public void setCaseDefinitionId_JsonNullable(JsonNullable<String> caseDefinitionId) {
-    this.caseDefinitionId = caseDefinitionId;
-  }
+
 
   public void setCaseDefinitionId(String caseDefinitionId) {
-    this.caseDefinitionId = JsonNullable.<String>of(caseDefinitionId);
+    this.caseDefinitionId = caseDefinitionId;
   }
 
 
   public TaskQueryDto caseDefinitionKey(String caseDefinitionKey) {
-    this.caseDefinitionKey = JsonNullable.<String>of(caseDefinitionKey);
     
+    this.caseDefinitionKey = caseDefinitionKey;
     return this;
   }
 
@@ -1084,32 +899,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a case definition with the given key.")
-  @JsonIgnore
-
-  public String getCaseDefinitionKey() {
-        return caseDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionKey_JsonNullable() {
+  public String getCaseDefinitionKey() {
     return caseDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_KEY)
-  public void setCaseDefinitionKey_JsonNullable(JsonNullable<String> caseDefinitionKey) {
-    this.caseDefinitionKey = caseDefinitionKey;
-  }
+
 
   public void setCaseDefinitionKey(String caseDefinitionKey) {
-    this.caseDefinitionKey = JsonNullable.<String>of(caseDefinitionKey);
+    this.caseDefinitionKey = caseDefinitionKey;
   }
 
 
   public TaskQueryDto caseDefinitionName(String caseDefinitionName) {
-    this.caseDefinitionName = JsonNullable.<String>of(caseDefinitionName);
     
+    this.caseDefinitionName = caseDefinitionName;
     return this;
   }
 
@@ -1119,32 +924,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a case definition with the given name.")
-  @JsonIgnore
-
-  public String getCaseDefinitionName() {
-        return caseDefinitionName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionName_JsonNullable() {
+  public String getCaseDefinitionName() {
     return caseDefinitionName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_NAME)
-  public void setCaseDefinitionName_JsonNullable(JsonNullable<String> caseDefinitionName) {
-    this.caseDefinitionName = caseDefinitionName;
-  }
+
 
   public void setCaseDefinitionName(String caseDefinitionName) {
-    this.caseDefinitionName = JsonNullable.<String>of(caseDefinitionName);
+    this.caseDefinitionName = caseDefinitionName;
   }
 
 
   public TaskQueryDto caseDefinitionNameLike(String caseDefinitionNameLike) {
-    this.caseDefinitionNameLike = JsonNullable.<String>of(caseDefinitionNameLike);
     
+    this.caseDefinitionNameLike = caseDefinitionNameLike;
     return this;
   }
 
@@ -1154,32 +949,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a case definition name that has the parameter value as a  substring.")
-  @JsonIgnore
-
-  public String getCaseDefinitionNameLike() {
-        return caseDefinitionNameLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_NAME_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseDefinitionNameLike_JsonNullable() {
+  public String getCaseDefinitionNameLike() {
     return caseDefinitionNameLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_DEFINITION_NAME_LIKE)
-  public void setCaseDefinitionNameLike_JsonNullable(JsonNullable<String> caseDefinitionNameLike) {
-    this.caseDefinitionNameLike = caseDefinitionNameLike;
-  }
+
 
   public void setCaseDefinitionNameLike(String caseDefinitionNameLike) {
-    this.caseDefinitionNameLike = JsonNullable.<String>of(caseDefinitionNameLike);
+    this.caseDefinitionNameLike = caseDefinitionNameLike;
   }
 
 
   public TaskQueryDto caseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
     
+    this.caseExecutionId = caseExecutionId;
     return this;
   }
 
@@ -1189,44 +974,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that belong to a case execution with the given id.")
-  @JsonIgnore
-
-  public String getCaseExecutionId() {
-        return caseExecutionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseExecutionId_JsonNullable() {
+  public String getCaseExecutionId() {
     return caseExecutionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID)
-  public void setCaseExecutionId_JsonNullable(JsonNullable<String> caseExecutionId) {
-    this.caseExecutionId = caseExecutionId;
-  }
+
 
   public void setCaseExecutionId(String caseExecutionId) {
-    this.caseExecutionId = JsonNullable.<String>of(caseExecutionId);
+    this.caseExecutionId = caseExecutionId;
   }
 
 
   public TaskQueryDto activityInstanceIdIn(List<String> activityInstanceIdIn) {
-    this.activityInstanceIdIn = JsonNullable.<List<String>>of(activityInstanceIdIn);
     
+    this.activityInstanceIdIn = activityInstanceIdIn;
     return this;
   }
 
   public TaskQueryDto addActivityInstanceIdInItem(String activityInstanceIdInItem) {
-    if (this.activityInstanceIdIn == null || !this.activityInstanceIdIn.isPresent()) {
-      this.activityInstanceIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.activityInstanceIdIn == null) {
+      this.activityInstanceIdIn = new ArrayList<>();
     }
-    try {
-      this.activityInstanceIdIn.get().add(activityInstanceIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.activityInstanceIdIn.add(activityInstanceIdInItem);
     return this;
   }
 
@@ -1236,44 +1007,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which belong to one of the passed and comma-separated activity  instance ids.")
-  @JsonIgnore
-
-  public List<String> getActivityInstanceIdIn() {
-        return activityInstanceIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getActivityInstanceIdIn_JsonNullable() {
+  public List<String> getActivityInstanceIdIn() {
     return activityInstanceIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN)
-  public void setActivityInstanceIdIn_JsonNullable(JsonNullable<List<String>> activityInstanceIdIn) {
-    this.activityInstanceIdIn = activityInstanceIdIn;
-  }
+
 
   public void setActivityInstanceIdIn(List<String> activityInstanceIdIn) {
-    this.activityInstanceIdIn = JsonNullable.<List<String>>of(activityInstanceIdIn);
+    this.activityInstanceIdIn = activityInstanceIdIn;
   }
 
 
   public TaskQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public TaskQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -1283,32 +1040,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which belong to one of the passed and comma-separated  tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public TaskQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
     
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -1318,32 +1065,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which belong to no tenant. Value may only be `true`,  as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
+  public Boolean getWithoutTenantId() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public TaskQueryDto assignee(String assignee) {
-    this.assignee = JsonNullable.<String>of(assignee);
     
+    this.assignee = assignee;
     return this;
   }
 
@@ -1353,32 +1090,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that the given user is assigned to.")
-  @JsonIgnore
-
-  public String getAssignee() {
-        return assignee.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssignee_JsonNullable() {
+  public String getAssignee() {
     return assignee;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE)
-  public void setAssignee_JsonNullable(JsonNullable<String> assignee) {
-    this.assignee = assignee;
-  }
+
 
   public void setAssignee(String assignee) {
-    this.assignee = JsonNullable.<String>of(assignee);
+    this.assignee = assignee;
   }
 
 
   public TaskQueryDto assigneeExpression(String assigneeExpression) {
-    this.assigneeExpression = JsonNullable.<String>of(assigneeExpression);
     
+    this.assigneeExpression = assigneeExpression;
     return this;
   }
 
@@ -1388,32 +1115,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that the user described by the given expression is assigned to. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getAssigneeExpression() {
-        return assigneeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssigneeExpression_JsonNullable() {
+  public String getAssigneeExpression() {
     return assigneeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE_EXPRESSION)
-  public void setAssigneeExpression_JsonNullable(JsonNullable<String> assigneeExpression) {
-    this.assigneeExpression = assigneeExpression;
-  }
+
 
   public void setAssigneeExpression(String assigneeExpression) {
-    this.assigneeExpression = JsonNullable.<String>of(assigneeExpression);
+    this.assigneeExpression = assigneeExpression;
   }
 
 
   public TaskQueryDto assigneeLike(String assigneeLike) {
-    this.assigneeLike = JsonNullable.<String>of(assigneeLike);
     
+    this.assigneeLike = assigneeLike;
     return this;
   }
 
@@ -1423,32 +1140,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have an assignee that has the parameter  value as a substring.")
-  @JsonIgnore
-
-  public String getAssigneeLike() {
-        return assigneeLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssigneeLike_JsonNullable() {
+  public String getAssigneeLike() {
     return assigneeLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE_LIKE)
-  public void setAssigneeLike_JsonNullable(JsonNullable<String> assigneeLike) {
-    this.assigneeLike = assigneeLike;
-  }
+
 
   public void setAssigneeLike(String assigneeLike) {
-    this.assigneeLike = JsonNullable.<String>of(assigneeLike);
+    this.assigneeLike = assigneeLike;
   }
 
 
   public TaskQueryDto assigneeLikeExpression(String assigneeLikeExpression) {
-    this.assigneeLikeExpression = JsonNullable.<String>of(assigneeLikeExpression);
     
+    this.assigneeLikeExpression = assigneeLikeExpression;
     return this;
   }
 
@@ -1458,44 +1165,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have an assignee that has the parameter value described by the  given expression as a substring. See the  [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getAssigneeLikeExpression() {
-        return assigneeLikeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE_LIKE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getAssigneeLikeExpression_JsonNullable() {
+  public String getAssigneeLikeExpression() {
     return assigneeLikeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE_LIKE_EXPRESSION)
-  public void setAssigneeLikeExpression_JsonNullable(JsonNullable<String> assigneeLikeExpression) {
-    this.assigneeLikeExpression = assigneeLikeExpression;
-  }
+
 
   public void setAssigneeLikeExpression(String assigneeLikeExpression) {
-    this.assigneeLikeExpression = JsonNullable.<String>of(assigneeLikeExpression);
+    this.assigneeLikeExpression = assigneeLikeExpression;
   }
 
 
   public TaskQueryDto assigneeIn(List<String> assigneeIn) {
-    this.assigneeIn = JsonNullable.<List<String>>of(assigneeIn);
     
+    this.assigneeIn = assigneeIn;
     return this;
   }
 
   public TaskQueryDto addAssigneeInItem(String assigneeInItem) {
-    if (this.assigneeIn == null || !this.assigneeIn.isPresent()) {
-      this.assigneeIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.assigneeIn == null) {
+      this.assigneeIn = new ArrayList<>();
     }
-    try {
-      this.assigneeIn.get().add(assigneeInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.assigneeIn.add(assigneeInItem);
     return this;
   }
 
@@ -1505,44 +1198,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which are assigned to one of the passed and comma-separated user ids.")
-  @JsonIgnore
-
-  public List<String> getAssigneeIn() {
-        return assigneeIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getAssigneeIn_JsonNullable() {
+  public List<String> getAssigneeIn() {
     return assigneeIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE_IN)
-  public void setAssigneeIn_JsonNullable(JsonNullable<List<String>> assigneeIn) {
-    this.assigneeIn = assigneeIn;
-  }
+
 
   public void setAssigneeIn(List<String> assigneeIn) {
-    this.assigneeIn = JsonNullable.<List<String>>of(assigneeIn);
+    this.assigneeIn = assigneeIn;
   }
 
 
   public TaskQueryDto assigneeNotIn(List<String> assigneeNotIn) {
-    this.assigneeNotIn = JsonNullable.<List<String>>of(assigneeNotIn);
     
+    this.assigneeNotIn = assigneeNotIn;
     return this;
   }
 
   public TaskQueryDto addAssigneeNotInItem(String assigneeNotInItem) {
-    if (this.assigneeNotIn == null || !this.assigneeNotIn.isPresent()) {
-      this.assigneeNotIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.assigneeNotIn == null) {
+      this.assigneeNotIn = new ArrayList<>();
     }
-    try {
-      this.assigneeNotIn.get().add(assigneeNotInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.assigneeNotIn.add(assigneeNotInItem);
     return this;
   }
 
@@ -1552,32 +1231,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which are not assigned to one of the passed and comma-separated user ids.")
-  @JsonIgnore
-
-  public List<String> getAssigneeNotIn() {
-        return assigneeNotIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNEE_NOT_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getAssigneeNotIn_JsonNullable() {
+  public List<String> getAssigneeNotIn() {
     return assigneeNotIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNEE_NOT_IN)
-  public void setAssigneeNotIn_JsonNullable(JsonNullable<List<String>> assigneeNotIn) {
-    this.assigneeNotIn = assigneeNotIn;
-  }
+
 
   public void setAssigneeNotIn(List<String> assigneeNotIn) {
-    this.assigneeNotIn = JsonNullable.<List<String>>of(assigneeNotIn);
+    this.assigneeNotIn = assigneeNotIn;
   }
 
 
   public TaskQueryDto owner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
     
+    this.owner = owner;
     return this;
   }
 
@@ -1587,32 +1256,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that the given user owns.")
-  @JsonIgnore
-
-  public String getOwner() {
-        return owner.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OWNER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOwner_JsonNullable() {
+  public String getOwner() {
     return owner;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OWNER)
-  public void setOwner_JsonNullable(JsonNullable<String> owner) {
-    this.owner = owner;
-  }
+
 
   public void setOwner(String owner) {
-    this.owner = JsonNullable.<String>of(owner);
+    this.owner = owner;
   }
 
 
   public TaskQueryDto ownerExpression(String ownerExpression) {
-    this.ownerExpression = JsonNullable.<String>of(ownerExpression);
     
+    this.ownerExpression = ownerExpression;
     return this;
   }
 
@@ -1622,32 +1281,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that the user described by the given expression owns. See the  [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getOwnerExpression() {
-        return ownerExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OWNER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getOwnerExpression_JsonNullable() {
+  public String getOwnerExpression() {
     return ownerExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OWNER_EXPRESSION)
-  public void setOwnerExpression_JsonNullable(JsonNullable<String> ownerExpression) {
-    this.ownerExpression = ownerExpression;
-  }
+
 
   public void setOwnerExpression(String ownerExpression) {
-    this.ownerExpression = JsonNullable.<String>of(ownerExpression);
+    this.ownerExpression = ownerExpression;
   }
 
 
   public TaskQueryDto candidateGroup(String candidateGroup) {
-    this.candidateGroup = JsonNullable.<String>of(candidateGroup);
     
+    this.candidateGroup = candidateGroup;
     return this;
   }
 
@@ -1657,32 +1306,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that are offered to the given group.")
-  @JsonIgnore
-
-  public String getCandidateGroup() {
-        return candidateGroup.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCandidateGroup_JsonNullable() {
+  public String getCandidateGroup() {
     return candidateGroup;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUP)
-  public void setCandidateGroup_JsonNullable(JsonNullable<String> candidateGroup) {
-    this.candidateGroup = candidateGroup;
-  }
+
 
   public void setCandidateGroup(String candidateGroup) {
-    this.candidateGroup = JsonNullable.<String>of(candidateGroup);
+    this.candidateGroup = candidateGroup;
   }
 
 
   public TaskQueryDto candidateGroupExpression(String candidateGroupExpression) {
-    this.candidateGroupExpression = JsonNullable.<String>of(candidateGroupExpression);
     
+    this.candidateGroupExpression = candidateGroupExpression;
     return this;
   }
 
@@ -1692,32 +1331,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that are offered to the group described by the given expression.  See the  [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getCandidateGroupExpression() {
-        return candidateGroupExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUP_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCandidateGroupExpression_JsonNullable() {
+  public String getCandidateGroupExpression() {
     return candidateGroupExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUP_EXPRESSION)
-  public void setCandidateGroupExpression_JsonNullable(JsonNullable<String> candidateGroupExpression) {
-    this.candidateGroupExpression = candidateGroupExpression;
-  }
+
 
   public void setCandidateGroupExpression(String candidateGroupExpression) {
-    this.candidateGroupExpression = JsonNullable.<String>of(candidateGroupExpression);
+    this.candidateGroupExpression = candidateGroupExpression;
   }
 
 
   public TaskQueryDto candidateUser(String candidateUser) {
-    this.candidateUser = JsonNullable.<String>of(candidateUser);
     
+    this.candidateUser = candidateUser;
     return this;
   }
 
@@ -1727,32 +1356,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that are offered to the given user or to one of his groups.")
-  @JsonIgnore
-
-  public String getCandidateUser() {
-        return candidateUser.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_USER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCandidateUser_JsonNullable() {
+  public String getCandidateUser() {
     return candidateUser;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_USER)
-  public void setCandidateUser_JsonNullable(JsonNullable<String> candidateUser) {
-    this.candidateUser = candidateUser;
-  }
+
 
   public void setCandidateUser(String candidateUser) {
-    this.candidateUser = JsonNullable.<String>of(candidateUser);
+    this.candidateUser = candidateUser;
   }
 
 
   public TaskQueryDto candidateUserExpression(String candidateUserExpression) {
-    this.candidateUserExpression = JsonNullable.<String>of(candidateUserExpression);
     
+    this.candidateUserExpression = candidateUserExpression;
     return this;
   }
 
@@ -1762,32 +1381,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that are offered to the user described by the given expression.  See the  [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions)  for more information on available functions.")
-  @JsonIgnore
-
-  public String getCandidateUserExpression() {
-        return candidateUserExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_USER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCandidateUserExpression_JsonNullable() {
+  public String getCandidateUserExpression() {
     return candidateUserExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_USER_EXPRESSION)
-  public void setCandidateUserExpression_JsonNullable(JsonNullable<String> candidateUserExpression) {
-    this.candidateUserExpression = candidateUserExpression;
-  }
+
 
   public void setCandidateUserExpression(String candidateUserExpression) {
-    this.candidateUserExpression = JsonNullable.<String>of(candidateUserExpression);
+    this.candidateUserExpression = candidateUserExpression;
   }
 
 
   public TaskQueryDto includeAssignedTasks(Boolean includeAssignedTasks) {
-    this.includeAssignedTasks = JsonNullable.<Boolean>of(includeAssignedTasks);
     
+    this.includeAssignedTasks = includeAssignedTasks;
     return this;
   }
 
@@ -1797,32 +1406,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Also include tasks that are assigned to users in candidate queries. Default is to only  include tasks that are not assigned to any user if you query by candidate user or group(s).")
-  @JsonIgnore
-
-  public Boolean getIncludeAssignedTasks() {
-        return includeAssignedTasks.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INCLUDE_ASSIGNED_TASKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getIncludeAssignedTasks_JsonNullable() {
+  public Boolean getIncludeAssignedTasks() {
     return includeAssignedTasks;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_ASSIGNED_TASKS)
-  public void setIncludeAssignedTasks_JsonNullable(JsonNullable<Boolean> includeAssignedTasks) {
-    this.includeAssignedTasks = includeAssignedTasks;
-  }
+
 
   public void setIncludeAssignedTasks(Boolean includeAssignedTasks) {
-    this.includeAssignedTasks = JsonNullable.<Boolean>of(includeAssignedTasks);
+    this.includeAssignedTasks = includeAssignedTasks;
   }
 
 
   public TaskQueryDto involvedUser(String involvedUser) {
-    this.involvedUser = JsonNullable.<String>of(involvedUser);
     
+    this.involvedUser = involvedUser;
     return this;
   }
 
@@ -1832,32 +1431,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that the given user is involved in. A user is involved in a task if  an identity link exists between task and user (e.g., the user is the assignee).")
-  @JsonIgnore
-
-  public String getInvolvedUser() {
-        return involvedUser.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INVOLVED_USER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getInvolvedUser_JsonNullable() {
+  public String getInvolvedUser() {
     return involvedUser;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INVOLVED_USER)
-  public void setInvolvedUser_JsonNullable(JsonNullable<String> involvedUser) {
-    this.involvedUser = involvedUser;
-  }
+
 
   public void setInvolvedUser(String involvedUser) {
-    this.involvedUser = JsonNullable.<String>of(involvedUser);
+    this.involvedUser = involvedUser;
   }
 
 
   public TaskQueryDto involvedUserExpression(String involvedUserExpression) {
-    this.involvedUserExpression = JsonNullable.<String>of(involvedUserExpression);
     
+    this.involvedUserExpression = involvedUserExpression;
     return this;
   }
 
@@ -1867,32 +1456,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks that the user described by the given expression is involved in. A user is involved in a task if an identity link exists between task and user (e.g., the user is the assignee). See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions.")
-  @JsonIgnore
-
-  public String getInvolvedUserExpression() {
-        return involvedUserExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_INVOLVED_USER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getInvolvedUserExpression_JsonNullable() {
+  public String getInvolvedUserExpression() {
     return involvedUserExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INVOLVED_USER_EXPRESSION)
-  public void setInvolvedUserExpression_JsonNullable(JsonNullable<String> involvedUserExpression) {
-    this.involvedUserExpression = involvedUserExpression;
-  }
+
 
   public void setInvolvedUserExpression(String involvedUserExpression) {
-    this.involvedUserExpression = JsonNullable.<String>of(involvedUserExpression);
+    this.involvedUserExpression = involvedUserExpression;
   }
 
 
   public TaskQueryDto assigned(Boolean assigned) {
-    this.assigned = JsonNullable.<Boolean>of(assigned);
     
+    this.assigned = assigned;
     return this;
   }
 
@@ -1902,32 +1481,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If set to `true`, restricts the query to all tasks that are assigned.")
-  @JsonIgnore
-
-  public Boolean getAssigned() {
-        return assigned.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASSIGNED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getAssigned_JsonNullable() {
+  public Boolean getAssigned() {
     return assigned;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASSIGNED)
-  public void setAssigned_JsonNullable(JsonNullable<Boolean> assigned) {
-    this.assigned = assigned;
-  }
+
 
   public void setAssigned(Boolean assigned) {
-    this.assigned = JsonNullable.<Boolean>of(assigned);
+    this.assigned = assigned;
   }
 
 
   public TaskQueryDto unassigned(Boolean unassigned) {
-    this.unassigned = JsonNullable.<Boolean>of(unassigned);
     
+    this.unassigned = unassigned;
     return this;
   }
 
@@ -1937,32 +1506,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "If set to `true`, restricts the query to all tasks that are unassigned.")
-  @JsonIgnore
-
-  public Boolean getUnassigned() {
-        return unassigned.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_UNASSIGNED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getUnassigned_JsonNullable() {
+  public Boolean getUnassigned() {
     return unassigned;
   }
-  
-  @JsonProperty(JSON_PROPERTY_UNASSIGNED)
-  public void setUnassigned_JsonNullable(JsonNullable<Boolean> unassigned) {
-    this.unassigned = unassigned;
-  }
+
 
   public void setUnassigned(Boolean unassigned) {
-    this.unassigned = JsonNullable.<Boolean>of(unassigned);
+    this.unassigned = unassigned;
   }
 
 
   public TaskQueryDto taskDefinitionKey(String taskDefinitionKey) {
-    this.taskDefinitionKey = JsonNullable.<String>of(taskDefinitionKey);
     
+    this.taskDefinitionKey = taskDefinitionKey;
     return this;
   }
 
@@ -1972,44 +1531,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have the given key.")
-  @JsonIgnore
-
-  public String getTaskDefinitionKey() {
-        return taskDefinitionKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskDefinitionKey_JsonNullable() {
+  public String getTaskDefinitionKey() {
     return taskDefinitionKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY)
-  public void setTaskDefinitionKey_JsonNullable(JsonNullable<String> taskDefinitionKey) {
-    this.taskDefinitionKey = taskDefinitionKey;
-  }
+
 
   public void setTaskDefinitionKey(String taskDefinitionKey) {
-    this.taskDefinitionKey = JsonNullable.<String>of(taskDefinitionKey);
+    this.taskDefinitionKey = taskDefinitionKey;
   }
 
 
   public TaskQueryDto taskDefinitionKeyIn(List<String> taskDefinitionKeyIn) {
-    this.taskDefinitionKeyIn = JsonNullable.<List<String>>of(taskDefinitionKeyIn);
     
+    this.taskDefinitionKeyIn = taskDefinitionKeyIn;
     return this;
   }
 
   public TaskQueryDto addTaskDefinitionKeyInItem(String taskDefinitionKeyInItem) {
-    if (this.taskDefinitionKeyIn == null || !this.taskDefinitionKeyIn.isPresent()) {
-      this.taskDefinitionKeyIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.taskDefinitionKeyIn == null) {
+      this.taskDefinitionKeyIn = new ArrayList<>();
     }
-    try {
-      this.taskDefinitionKeyIn.get().add(taskDefinitionKeyInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.taskDefinitionKeyIn.add(taskDefinitionKeyInItem);
     return this;
   }
 
@@ -2019,32 +1564,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have one of the given keys. The keys need to be in a comma-separated list.")
-  @JsonIgnore
-
-  public List<String> getTaskDefinitionKeyIn() {
-        return taskDefinitionKeyIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTaskDefinitionKeyIn_JsonNullable() {
+  public List<String> getTaskDefinitionKeyIn() {
     return taskDefinitionKeyIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY_IN)
-  public void setTaskDefinitionKeyIn_JsonNullable(JsonNullable<List<String>> taskDefinitionKeyIn) {
-    this.taskDefinitionKeyIn = taskDefinitionKeyIn;
-  }
+
 
   public void setTaskDefinitionKeyIn(List<String> taskDefinitionKeyIn) {
-    this.taskDefinitionKeyIn = JsonNullable.<List<String>>of(taskDefinitionKeyIn);
+    this.taskDefinitionKeyIn = taskDefinitionKeyIn;
   }
 
 
   public TaskQueryDto taskDefinitionKeyLike(String taskDefinitionKeyLike) {
-    this.taskDefinitionKeyLike = JsonNullable.<String>of(taskDefinitionKeyLike);
     
+    this.taskDefinitionKeyLike = taskDefinitionKeyLike;
     return this;
   }
 
@@ -2054,32 +1589,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a key that has the parameter value as a substring.")
-  @JsonIgnore
-
-  public String getTaskDefinitionKeyLike() {
-        return taskDefinitionKeyLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTaskDefinitionKeyLike_JsonNullable() {
+  public String getTaskDefinitionKeyLike() {
     return taskDefinitionKeyLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_DEFINITION_KEY_LIKE)
-  public void setTaskDefinitionKeyLike_JsonNullable(JsonNullable<String> taskDefinitionKeyLike) {
-    this.taskDefinitionKeyLike = taskDefinitionKeyLike;
-  }
+
 
   public void setTaskDefinitionKeyLike(String taskDefinitionKeyLike) {
-    this.taskDefinitionKeyLike = JsonNullable.<String>of(taskDefinitionKeyLike);
+    this.taskDefinitionKeyLike = taskDefinitionKeyLike;
   }
 
 
   public TaskQueryDto name(String name) {
-    this.name = JsonNullable.<String>of(name);
     
+    this.name = name;
     return this;
   }
 
@@ -2089,32 +1614,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have the given name.")
-  @JsonIgnore
-
-  public String getName() {
-        return name.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getName_JsonNullable() {
+  public String getName() {
     return name;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME)
-  public void setName_JsonNullable(JsonNullable<String> name) {
-    this.name = name;
-  }
+
 
   public void setName(String name) {
-    this.name = JsonNullable.<String>of(name);
+    this.name = name;
   }
 
 
   public TaskQueryDto nameNotEqual(String nameNotEqual) {
-    this.nameNotEqual = JsonNullable.<String>of(nameNotEqual);
     
+    this.nameNotEqual = nameNotEqual;
     return this;
   }
 
@@ -2124,32 +1639,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that do not have the given name.")
-  @JsonIgnore
-
-  public String getNameNotEqual() {
-        return nameNotEqual.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME_NOT_EQUAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getNameNotEqual_JsonNullable() {
+  public String getNameNotEqual() {
     return nameNotEqual;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME_NOT_EQUAL)
-  public void setNameNotEqual_JsonNullable(JsonNullable<String> nameNotEqual) {
-    this.nameNotEqual = nameNotEqual;
-  }
+
 
   public void setNameNotEqual(String nameNotEqual) {
-    this.nameNotEqual = JsonNullable.<String>of(nameNotEqual);
+    this.nameNotEqual = nameNotEqual;
   }
 
 
   public TaskQueryDto nameLike(String nameLike) {
-    this.nameLike = JsonNullable.<String>of(nameLike);
     
+    this.nameLike = nameLike;
     return this;
   }
 
@@ -2159,32 +1664,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a name with the given parameter value as substring.")
-  @JsonIgnore
-
-  public String getNameLike() {
-        return nameLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getNameLike_JsonNullable() {
+  public String getNameLike() {
     return nameLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME_LIKE)
-  public void setNameLike_JsonNullable(JsonNullable<String> nameLike) {
-    this.nameLike = nameLike;
-  }
+
 
   public void setNameLike(String nameLike) {
-    this.nameLike = JsonNullable.<String>of(nameLike);
+    this.nameLike = nameLike;
   }
 
 
   public TaskQueryDto nameNotLike(String nameNotLike) {
-    this.nameNotLike = JsonNullable.<String>of(nameNotLike);
     
+    this.nameNotLike = nameNotLike;
     return this;
   }
 
@@ -2194,32 +1689,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that do not have a name with the given parameter value as substring.")
-  @JsonIgnore
-
-  public String getNameNotLike() {
-        return nameNotLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_NAME_NOT_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getNameNotLike_JsonNullable() {
+  public String getNameNotLike() {
     return nameNotLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NAME_NOT_LIKE)
-  public void setNameNotLike_JsonNullable(JsonNullable<String> nameNotLike) {
-    this.nameNotLike = nameNotLike;
-  }
+
 
   public void setNameNotLike(String nameNotLike) {
-    this.nameNotLike = JsonNullable.<String>of(nameNotLike);
+    this.nameNotLike = nameNotLike;
   }
 
 
   public TaskQueryDto description(String description) {
-    this.description = JsonNullable.<String>of(description);
     
+    this.description = description;
     return this;
   }
 
@@ -2229,32 +1714,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have the given description.")
-  @JsonIgnore
-
-  public String getDescription() {
-        return description.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDescription_JsonNullable() {
+  public String getDescription() {
     return description;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  public void setDescription_JsonNullable(JsonNullable<String> description) {
-    this.description = description;
-  }
+
 
   public void setDescription(String description) {
-    this.description = JsonNullable.<String>of(description);
+    this.description = description;
   }
 
 
   public TaskQueryDto descriptionLike(String descriptionLike) {
-    this.descriptionLike = JsonNullable.<String>of(descriptionLike);
     
+    this.descriptionLike = descriptionLike;
     return this;
   }
 
@@ -2264,32 +1739,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a description that has the parameter value as a substring.")
-  @JsonIgnore
-
-  public String getDescriptionLike() {
-        return descriptionLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DESCRIPTION_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDescriptionLike_JsonNullable() {
+  public String getDescriptionLike() {
     return descriptionLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DESCRIPTION_LIKE)
-  public void setDescriptionLike_JsonNullable(JsonNullable<String> descriptionLike) {
-    this.descriptionLike = descriptionLike;
-  }
+
 
   public void setDescriptionLike(String descriptionLike) {
-    this.descriptionLike = JsonNullable.<String>of(descriptionLike);
+    this.descriptionLike = descriptionLike;
   }
 
 
   public TaskQueryDto priority(Integer priority) {
-    this.priority = JsonNullable.<Integer>of(priority);
     
+    this.priority = priority;
     return this;
   }
 
@@ -2299,32 +1764,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have the given priority.")
-  @JsonIgnore
-
-  public Integer getPriority() {
-        return priority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getPriority_JsonNullable() {
+  public Integer getPriority() {
     return priority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY)
-  public void setPriority_JsonNullable(JsonNullable<Integer> priority) {
-    this.priority = priority;
-  }
+
 
   public void setPriority(Integer priority) {
-    this.priority = JsonNullable.<Integer>of(priority);
+    this.priority = priority;
   }
 
 
   public TaskQueryDto maxPriority(Integer maxPriority) {
-    this.maxPriority = JsonNullable.<Integer>of(maxPriority);
     
+    this.maxPriority = maxPriority;
     return this;
   }
 
@@ -2334,32 +1789,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a lower or equal priority.")
-  @JsonIgnore
-
-  public Integer getMaxPriority() {
-        return maxPriority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MAX_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getMaxPriority_JsonNullable() {
+  public Integer getMaxPriority() {
     return maxPriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MAX_PRIORITY)
-  public void setMaxPriority_JsonNullable(JsonNullable<Integer> maxPriority) {
-    this.maxPriority = maxPriority;
-  }
+
 
   public void setMaxPriority(Integer maxPriority) {
-    this.maxPriority = JsonNullable.<Integer>of(maxPriority);
+    this.maxPriority = maxPriority;
   }
 
 
   public TaskQueryDto minPriority(Integer minPriority) {
-    this.minPriority = JsonNullable.<Integer>of(minPriority);
     
+    this.minPriority = minPriority;
     return this;
   }
 
@@ -2369,32 +1814,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a higher or equal priority.")
-  @JsonIgnore
-
-  public Integer getMinPriority() {
-        return minPriority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_MIN_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getMinPriority_JsonNullable() {
+  public Integer getMinPriority() {
     return minPriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_MIN_PRIORITY)
-  public void setMinPriority_JsonNullable(JsonNullable<Integer> minPriority) {
-    this.minPriority = minPriority;
-  }
+
 
   public void setMinPriority(Integer minPriority) {
-    this.minPriority = JsonNullable.<Integer>of(minPriority);
+    this.minPriority = minPriority;
   }
 
 
   public TaskQueryDto dueDate(OffsetDateTime dueDate) {
-    this.dueDate = JsonNullable.<OffsetDateTime>of(dueDate);
     
+    this.dueDate = dueDate;
     return this;
   }
 
@@ -2404,32 +1839,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due on the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.546+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getDueDate() {
-        return dueDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDueDate_JsonNullable() {
+  public OffsetDateTime getDueDate() {
     return dueDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_DATE)
-  public void setDueDate_JsonNullable(JsonNullable<OffsetDateTime> dueDate) {
-    this.dueDate = dueDate;
-  }
+
 
   public void setDueDate(OffsetDateTime dueDate) {
-    this.dueDate = JsonNullable.<OffsetDateTime>of(dueDate);
+    this.dueDate = dueDate;
   }
 
 
   public TaskQueryDto dueDateExpression(String dueDateExpression) {
-    this.dueDateExpression = JsonNullable.<String>of(dueDateExpression);
     
+    this.dueDateExpression = dueDateExpression;
     return this;
   }
 
@@ -2439,32 +1864,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due on the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getDueDateExpression() {
-        return dueDateExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_DATE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDueDateExpression_JsonNullable() {
+  public String getDueDateExpression() {
     return dueDateExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_DATE_EXPRESSION)
-  public void setDueDateExpression_JsonNullable(JsonNullable<String> dueDateExpression) {
-    this.dueDateExpression = dueDateExpression;
-  }
+
 
   public void setDueDateExpression(String dueDateExpression) {
-    this.dueDateExpression = JsonNullable.<String>of(dueDateExpression);
+    this.dueDateExpression = dueDateExpression;
   }
 
 
   public TaskQueryDto dueAfter(OffsetDateTime dueAfter) {
-    this.dueAfter = JsonNullable.<OffsetDateTime>of(dueAfter);
     
+    this.dueAfter = dueAfter;
     return this;
   }
 
@@ -2474,32 +1889,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due after the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.435+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getDueAfter() {
-        return dueAfter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDueAfter_JsonNullable() {
+  public OffsetDateTime getDueAfter() {
     return dueAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_AFTER)
-  public void setDueAfter_JsonNullable(JsonNullable<OffsetDateTime> dueAfter) {
-    this.dueAfter = dueAfter;
-  }
+
 
   public void setDueAfter(OffsetDateTime dueAfter) {
-    this.dueAfter = JsonNullable.<OffsetDateTime>of(dueAfter);
+    this.dueAfter = dueAfter;
   }
 
 
   public TaskQueryDto dueAfterExpression(String dueAfterExpression) {
-    this.dueAfterExpression = JsonNullable.<String>of(dueAfterExpression);
     
+    this.dueAfterExpression = dueAfterExpression;
     return this;
   }
 
@@ -2509,32 +1914,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due after the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getDueAfterExpression() {
-        return dueAfterExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_AFTER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDueAfterExpression_JsonNullable() {
+  public String getDueAfterExpression() {
     return dueAfterExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_AFTER_EXPRESSION)
-  public void setDueAfterExpression_JsonNullable(JsonNullable<String> dueAfterExpression) {
-    this.dueAfterExpression = dueAfterExpression;
-  }
+
 
   public void setDueAfterExpression(String dueAfterExpression) {
-    this.dueAfterExpression = JsonNullable.<String>of(dueAfterExpression);
+    this.dueAfterExpression = dueAfterExpression;
   }
 
 
   public TaskQueryDto dueBefore(OffsetDateTime dueBefore) {
-    this.dueBefore = JsonNullable.<OffsetDateTime>of(dueBefore);
     
+    this.dueBefore = dueBefore;
     return this;
   }
 
@@ -2544,32 +1939,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.243+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getDueBefore() {
-        return dueBefore.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getDueBefore_JsonNullable() {
+  public OffsetDateTime getDueBefore() {
     return dueBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_BEFORE)
-  public void setDueBefore_JsonNullable(JsonNullable<OffsetDateTime> dueBefore) {
-    this.dueBefore = dueBefore;
-  }
+
 
   public void setDueBefore(OffsetDateTime dueBefore) {
-    this.dueBefore = JsonNullable.<OffsetDateTime>of(dueBefore);
+    this.dueBefore = dueBefore;
   }
 
 
   public TaskQueryDto dueBeforeExpression(String dueBeforeExpression) {
-    this.dueBeforeExpression = JsonNullable.<String>of(dueBeforeExpression);
     
+    this.dueBeforeExpression = dueBeforeExpression;
     return this;
   }
 
@@ -2579,32 +1964,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are due before the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getDueBeforeExpression() {
-        return dueBeforeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DUE_BEFORE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDueBeforeExpression_JsonNullable() {
+  public String getDueBeforeExpression() {
     return dueBeforeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DUE_BEFORE_EXPRESSION)
-  public void setDueBeforeExpression_JsonNullable(JsonNullable<String> dueBeforeExpression) {
-    this.dueBeforeExpression = dueBeforeExpression;
-  }
+
 
   public void setDueBeforeExpression(String dueBeforeExpression) {
-    this.dueBeforeExpression = JsonNullable.<String>of(dueBeforeExpression);
+    this.dueBeforeExpression = dueBeforeExpression;
   }
 
 
   public TaskQueryDto withoutDueDate(Boolean withoutDueDate) {
-    this.withoutDueDate = JsonNullable.<Boolean>of(withoutDueDate);
     
+    this.withoutDueDate = withoutDueDate;
     return this;
   }
 
@@ -2614,32 +1989,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which have no due date. Value may only be `true`,  as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutDueDate() {
-        return withoutDueDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_DUE_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutDueDate_JsonNullable() {
+  public Boolean getWithoutDueDate() {
     return withoutDueDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_DUE_DATE)
-  public void setWithoutDueDate_JsonNullable(JsonNullable<Boolean> withoutDueDate) {
-    this.withoutDueDate = withoutDueDate;
-  }
+
 
   public void setWithoutDueDate(Boolean withoutDueDate) {
-    this.withoutDueDate = JsonNullable.<Boolean>of(withoutDueDate);
+    this.withoutDueDate = withoutDueDate;
   }
 
 
   public TaskQueryDto followUpDate(OffsetDateTime followUpDate) {
-    this.followUpDate = JsonNullable.<OffsetDateTime>of(followUpDate);
     
+    this.followUpDate = followUpDate;
     return this;
   }
 
@@ -2649,32 +2014,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date on the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.342+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getFollowUpDate() {
-        return followUpDate.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFollowUpDate_JsonNullable() {
+  public OffsetDateTime getFollowUpDate() {
     return followUpDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_DATE)
-  public void setFollowUpDate_JsonNullable(JsonNullable<OffsetDateTime> followUpDate) {
-    this.followUpDate = followUpDate;
-  }
+
 
   public void setFollowUpDate(OffsetDateTime followUpDate) {
-    this.followUpDate = JsonNullable.<OffsetDateTime>of(followUpDate);
+    this.followUpDate = followUpDate;
   }
 
 
   public TaskQueryDto followUpDateExpression(String followUpDateExpression) {
-    this.followUpDateExpression = JsonNullable.<String>of(followUpDateExpression);
     
+    this.followUpDateExpression = followUpDateExpression;
     return this;
   }
 
@@ -2684,32 +2039,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date on the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getFollowUpDateExpression() {
-        return followUpDateExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_DATE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFollowUpDateExpression_JsonNullable() {
+  public String getFollowUpDateExpression() {
     return followUpDateExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_DATE_EXPRESSION)
-  public void setFollowUpDateExpression_JsonNullable(JsonNullable<String> followUpDateExpression) {
-    this.followUpDateExpression = followUpDateExpression;
-  }
+
 
   public void setFollowUpDateExpression(String followUpDateExpression) {
-    this.followUpDateExpression = JsonNullable.<String>of(followUpDateExpression);
+    this.followUpDateExpression = followUpDateExpression;
   }
 
 
   public TaskQueryDto followUpAfter(OffsetDateTime followUpAfter) {
-    this.followUpAfter = JsonNullable.<OffsetDateTime>of(followUpAfter);
     
+    this.followUpAfter = followUpAfter;
     return this;
   }
 
@@ -2719,32 +2064,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date after the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.542+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getFollowUpAfter() {
-        return followUpAfter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFollowUpAfter_JsonNullable() {
+  public OffsetDateTime getFollowUpAfter() {
     return followUpAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_AFTER)
-  public void setFollowUpAfter_JsonNullable(JsonNullable<OffsetDateTime> followUpAfter) {
-    this.followUpAfter = followUpAfter;
-  }
+
 
   public void setFollowUpAfter(OffsetDateTime followUpAfter) {
-    this.followUpAfter = JsonNullable.<OffsetDateTime>of(followUpAfter);
+    this.followUpAfter = followUpAfter;
   }
 
 
   public TaskQueryDto followUpAfterExpression(String followUpAfterExpression) {
-    this.followUpAfterExpression = JsonNullable.<String>of(followUpAfterExpression);
     
+    this.followUpAfterExpression = followUpAfterExpression;
     return this;
   }
 
@@ -2754,32 +2089,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date after the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getFollowUpAfterExpression() {
-        return followUpAfterExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_AFTER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFollowUpAfterExpression_JsonNullable() {
+  public String getFollowUpAfterExpression() {
     return followUpAfterExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_AFTER_EXPRESSION)
-  public void setFollowUpAfterExpression_JsonNullable(JsonNullable<String> followUpAfterExpression) {
-    this.followUpAfterExpression = followUpAfterExpression;
-  }
+
 
   public void setFollowUpAfterExpression(String followUpAfterExpression) {
-    this.followUpAfterExpression = JsonNullable.<String>of(followUpAfterExpression);
+    this.followUpAfterExpression = followUpAfterExpression;
   }
 
 
   public TaskQueryDto followUpBefore(String followUpBefore) {
-    this.followUpBefore = JsonNullable.<String>of(followUpBefore);
     
+    this.followUpBefore = followUpBefore;
     return this;
   }
 
@@ -2789,32 +2114,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.234+0200`.")
-  @JsonIgnore
-
-  public String getFollowUpBefore() {
-        return followUpBefore.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFollowUpBefore_JsonNullable() {
+  public String getFollowUpBefore() {
     return followUpBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE)
-  public void setFollowUpBefore_JsonNullable(JsonNullable<String> followUpBefore) {
-    this.followUpBefore = followUpBefore;
-  }
+
 
   public void setFollowUpBefore(String followUpBefore) {
-    this.followUpBefore = JsonNullable.<String>of(followUpBefore);
+    this.followUpBefore = followUpBefore;
   }
 
 
   public TaskQueryDto followUpBeforeExpression(String followUpBeforeExpression) {
-    this.followUpBeforeExpression = JsonNullable.<String>of(followUpBeforeExpression);
     
+    this.followUpBeforeExpression = followUpBeforeExpression;
     return this;
   }
 
@@ -2824,32 +2139,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have a followUp date before the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getFollowUpBeforeExpression() {
-        return followUpBeforeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFollowUpBeforeExpression_JsonNullable() {
+  public String getFollowUpBeforeExpression() {
     return followUpBeforeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_EXPRESSION)
-  public void setFollowUpBeforeExpression_JsonNullable(JsonNullable<String> followUpBeforeExpression) {
-    this.followUpBeforeExpression = followUpBeforeExpression;
-  }
+
 
   public void setFollowUpBeforeExpression(String followUpBeforeExpression) {
-    this.followUpBeforeExpression = JsonNullable.<String>of(followUpBeforeExpression);
+    this.followUpBeforeExpression = followUpBeforeExpression;
   }
 
 
   public TaskQueryDto followUpBeforeOrNotExistent(OffsetDateTime followUpBeforeOrNotExistent) {
-    this.followUpBeforeOrNotExistent = JsonNullable.<OffsetDateTime>of(followUpBeforeOrNotExistent);
     
+    this.followUpBeforeOrNotExistent = followUpBeforeOrNotExistent;
     return this;
   }
 
@@ -2859,32 +2164,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have no followUp date or a followUp date before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.432+0200`. The typical use case is to query all `active` tasks for a user for a given date.")
-  @JsonIgnore
-
-  public OffsetDateTime getFollowUpBeforeOrNotExistent() {
-        return followUpBeforeOrNotExistent.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getFollowUpBeforeOrNotExistent_JsonNullable() {
+  public OffsetDateTime getFollowUpBeforeOrNotExistent() {
     return followUpBeforeOrNotExistent;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT)
-  public void setFollowUpBeforeOrNotExistent_JsonNullable(JsonNullable<OffsetDateTime> followUpBeforeOrNotExistent) {
-    this.followUpBeforeOrNotExistent = followUpBeforeOrNotExistent;
-  }
+
 
   public void setFollowUpBeforeOrNotExistent(OffsetDateTime followUpBeforeOrNotExistent) {
-    this.followUpBeforeOrNotExistent = JsonNullable.<OffsetDateTime>of(followUpBeforeOrNotExistent);
+    this.followUpBeforeOrNotExistent = followUpBeforeOrNotExistent;
   }
 
 
   public TaskQueryDto followUpBeforeOrNotExistentExpression(String followUpBeforeOrNotExistentExpression) {
-    this.followUpBeforeOrNotExistentExpression = JsonNullable.<String>of(followUpBeforeOrNotExistentExpression);
     
+    this.followUpBeforeOrNotExistentExpression = followUpBeforeOrNotExistentExpression;
     return this;
   }
 
@@ -2894,32 +2189,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that have no followUp date or a followUp date before the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getFollowUpBeforeOrNotExistentExpression() {
-        return followUpBeforeOrNotExistentExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFollowUpBeforeOrNotExistentExpression_JsonNullable() {
+  public String getFollowUpBeforeOrNotExistentExpression() {
     return followUpBeforeOrNotExistentExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FOLLOW_UP_BEFORE_OR_NOT_EXISTENT_EXPRESSION)
-  public void setFollowUpBeforeOrNotExistentExpression_JsonNullable(JsonNullable<String> followUpBeforeOrNotExistentExpression) {
-    this.followUpBeforeOrNotExistentExpression = followUpBeforeOrNotExistentExpression;
-  }
+
 
   public void setFollowUpBeforeOrNotExistentExpression(String followUpBeforeOrNotExistentExpression) {
-    this.followUpBeforeOrNotExistentExpression = JsonNullable.<String>of(followUpBeforeOrNotExistentExpression);
+    this.followUpBeforeOrNotExistentExpression = followUpBeforeOrNotExistentExpression;
   }
 
 
   public TaskQueryDto createdOn(OffsetDateTime createdOn) {
-    this.createdOn = JsonNullable.<OffsetDateTime>of(createdOn);
     
+    this.createdOn = createdOn;
     return this;
   }
 
@@ -2929,32 +2214,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created on the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.324+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getCreatedOn() {
-        return createdOn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_ON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getCreatedOn_JsonNullable() {
+  public OffsetDateTime getCreatedOn() {
     return createdOn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_ON)
-  public void setCreatedOn_JsonNullable(JsonNullable<OffsetDateTime> createdOn) {
-    this.createdOn = createdOn;
-  }
+
 
   public void setCreatedOn(OffsetDateTime createdOn) {
-    this.createdOn = JsonNullable.<OffsetDateTime>of(createdOn);
+    this.createdOn = createdOn;
   }
 
 
   public TaskQueryDto createdOnExpression(String createdOnExpression) {
-    this.createdOnExpression = JsonNullable.<String>of(createdOnExpression);
     
+    this.createdOnExpression = createdOnExpression;
     return this;
   }
 
@@ -2964,32 +2239,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created on the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getCreatedOnExpression() {
-        return createdOnExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_ON_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCreatedOnExpression_JsonNullable() {
+  public String getCreatedOnExpression() {
     return createdOnExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_ON_EXPRESSION)
-  public void setCreatedOnExpression_JsonNullable(JsonNullable<String> createdOnExpression) {
-    this.createdOnExpression = createdOnExpression;
-  }
+
 
   public void setCreatedOnExpression(String createdOnExpression) {
-    this.createdOnExpression = JsonNullable.<String>of(createdOnExpression);
+    this.createdOnExpression = createdOnExpression;
   }
 
 
   public TaskQueryDto createdAfter(OffsetDateTime createdAfter) {
-    this.createdAfter = JsonNullable.<OffsetDateTime>of(createdAfter);
     
+    this.createdAfter = createdAfter;
     return this;
   }
 
@@ -2999,32 +2264,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created after the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.342+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getCreatedAfter() {
-        return createdAfter.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_AFTER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getCreatedAfter_JsonNullable() {
+  public OffsetDateTime getCreatedAfter() {
     return createdAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_AFTER)
-  public void setCreatedAfter_JsonNullable(JsonNullable<OffsetDateTime> createdAfter) {
-    this.createdAfter = createdAfter;
-  }
+
 
   public void setCreatedAfter(OffsetDateTime createdAfter) {
-    this.createdAfter = JsonNullable.<OffsetDateTime>of(createdAfter);
+    this.createdAfter = createdAfter;
   }
 
 
   public TaskQueryDto createdAfterExpression(String createdAfterExpression) {
-    this.createdAfterExpression = JsonNullable.<String>of(createdAfterExpression);
     
+    this.createdAfterExpression = createdAfterExpression;
     return this;
   }
 
@@ -3034,32 +2289,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created after the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getCreatedAfterExpression() {
-        return createdAfterExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_AFTER_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCreatedAfterExpression_JsonNullable() {
+  public String getCreatedAfterExpression() {
     return createdAfterExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_AFTER_EXPRESSION)
-  public void setCreatedAfterExpression_JsonNullable(JsonNullable<String> createdAfterExpression) {
-    this.createdAfterExpression = createdAfterExpression;
-  }
+
 
   public void setCreatedAfterExpression(String createdAfterExpression) {
-    this.createdAfterExpression = JsonNullable.<String>of(createdAfterExpression);
+    this.createdAfterExpression = createdAfterExpression;
   }
 
 
   public TaskQueryDto createdBefore(OffsetDateTime createdBefore) {
-    this.createdBefore = JsonNullable.<OffsetDateTime>of(createdBefore);
     
+    this.createdBefore = createdBefore;
     return this;
   }
 
@@ -3069,32 +2314,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created before the given date. By [default](https://docs.camunda.org/manual/7.16/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.332+0200`.")
-  @JsonIgnore
-
-  public OffsetDateTime getCreatedBefore() {
-        return createdBefore.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_BEFORE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getCreatedBefore_JsonNullable() {
+  public OffsetDateTime getCreatedBefore() {
     return createdBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_BEFORE)
-  public void setCreatedBefore_JsonNullable(JsonNullable<OffsetDateTime> createdBefore) {
-    this.createdBefore = createdBefore;
-  }
+
 
   public void setCreatedBefore(OffsetDateTime createdBefore) {
-    this.createdBefore = JsonNullable.<OffsetDateTime>of(createdBefore);
+    this.createdBefore = createdBefore;
   }
 
 
   public TaskQueryDto createdBeforeExpression(String createdBeforeExpression) {
-    this.createdBeforeExpression = JsonNullable.<String>of(createdBeforeExpression);
     
+    this.createdBeforeExpression = createdBeforeExpression;
     return this;
   }
 
@@ -3104,32 +2339,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that were created before the date described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to a `java.util.Date` or `org.joda.time.DateTime` object.")
-  @JsonIgnore
-
-  public String getCreatedBeforeExpression() {
-        return createdBeforeExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CREATED_BEFORE_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCreatedBeforeExpression_JsonNullable() {
+  public String getCreatedBeforeExpression() {
     return createdBeforeExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_BEFORE_EXPRESSION)
-  public void setCreatedBeforeExpression_JsonNullable(JsonNullable<String> createdBeforeExpression) {
-    this.createdBeforeExpression = createdBeforeExpression;
-  }
+
 
   public void setCreatedBeforeExpression(String createdBeforeExpression) {
-    this.createdBeforeExpression = JsonNullable.<String>of(createdBeforeExpression);
+    this.createdBeforeExpression = createdBeforeExpression;
   }
 
 
   public TaskQueryDto delegationState(DelegationStateEnum delegationState) {
-    this.delegationState = JsonNullable.<DelegationStateEnum>of(delegationState);
     
+    this.delegationState = delegationState;
     return this;
   }
 
@@ -3139,44 +2364,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are in the given delegation state. Valid values are `PENDING` and `RESOLVED`.")
-  @JsonIgnore
-
-  public DelegationStateEnum getDelegationState() {
-        return delegationState.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DELEGATION_STATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<DelegationStateEnum> getDelegationState_JsonNullable() {
+  public DelegationStateEnum getDelegationState() {
     return delegationState;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DELEGATION_STATE)
-  public void setDelegationState_JsonNullable(JsonNullable<DelegationStateEnum> delegationState) {
-    this.delegationState = delegationState;
-  }
+
 
   public void setDelegationState(DelegationStateEnum delegationState) {
-    this.delegationState = JsonNullable.<DelegationStateEnum>of(delegationState);
+    this.delegationState = delegationState;
   }
 
 
   public TaskQueryDto candidateGroups(List<String> candidateGroups) {
-    this.candidateGroups = JsonNullable.<List<String>>of(candidateGroups);
     
+    this.candidateGroups = candidateGroups;
     return this;
   }
 
   public TaskQueryDto addCandidateGroupsItem(String candidateGroupsItem) {
-    if (this.candidateGroups == null || !this.candidateGroups.isPresent()) {
-      this.candidateGroups = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.candidateGroups == null) {
+      this.candidateGroups = new ArrayList<>();
     }
-    try {
-      this.candidateGroups.get().add(candidateGroupsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.candidateGroups.add(candidateGroupsItem);
     return this;
   }
 
@@ -3186,32 +2397,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are offered to any of the given candidate groups. Takes a comma-separated list of group names, so for example `developers,support,sales`.")
-  @JsonIgnore
-
-  public List<String> getCandidateGroups() {
-        return candidateGroups.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getCandidateGroups_JsonNullable() {
+  public List<String> getCandidateGroups() {
     return candidateGroups;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUPS)
-  public void setCandidateGroups_JsonNullable(JsonNullable<List<String>> candidateGroups) {
-    this.candidateGroups = candidateGroups;
-  }
+
 
   public void setCandidateGroups(List<String> candidateGroups) {
-    this.candidateGroups = JsonNullable.<List<String>>of(candidateGroups);
+    this.candidateGroups = candidateGroups;
   }
 
 
   public TaskQueryDto candidateGroupsExpression(String candidateGroupsExpression) {
-    this.candidateGroupsExpression = JsonNullable.<String>of(candidateGroupsExpression);
     
+    this.candidateGroupsExpression = candidateGroupsExpression;
     return this;
   }
 
@@ -3221,32 +2422,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to tasks that are offered to any of the candidate groups described by the given expression. See the [user guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/expression-language/#internal-context-functions) for more information on available functions. The expression must evaluate to `java.util.List` of Strings.")
-  @JsonIgnore
-
-  public String getCandidateGroupsExpression() {
-        return candidateGroupsExpression.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUPS_EXPRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCandidateGroupsExpression_JsonNullable() {
+  public String getCandidateGroupsExpression() {
     return candidateGroupsExpression;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANDIDATE_GROUPS_EXPRESSION)
-  public void setCandidateGroupsExpression_JsonNullable(JsonNullable<String> candidateGroupsExpression) {
-    this.candidateGroupsExpression = candidateGroupsExpression;
-  }
+
 
   public void setCandidateGroupsExpression(String candidateGroupsExpression) {
-    this.candidateGroupsExpression = JsonNullable.<String>of(candidateGroupsExpression);
+    this.candidateGroupsExpression = candidateGroupsExpression;
   }
 
 
   public TaskQueryDto withCandidateGroups(Boolean withCandidateGroups) {
-    this.withCandidateGroups = JsonNullable.<Boolean>of(withCandidateGroups);
     
+    this.withCandidateGroups = withCandidateGroups;
     return this;
   }
 
@@ -3256,32 +2447,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which have a candidate group. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithCandidateGroups() {
-        return withCandidateGroups.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITH_CANDIDATE_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithCandidateGroups_JsonNullable() {
+  public Boolean getWithCandidateGroups() {
     return withCandidateGroups;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_CANDIDATE_GROUPS)
-  public void setWithCandidateGroups_JsonNullable(JsonNullable<Boolean> withCandidateGroups) {
-    this.withCandidateGroups = withCandidateGroups;
-  }
+
 
   public void setWithCandidateGroups(Boolean withCandidateGroups) {
-    this.withCandidateGroups = JsonNullable.<Boolean>of(withCandidateGroups);
+    this.withCandidateGroups = withCandidateGroups;
   }
 
 
   public TaskQueryDto withoutCandidateGroups(Boolean withoutCandidateGroups) {
-    this.withoutCandidateGroups = JsonNullable.<Boolean>of(withoutCandidateGroups);
     
+    this.withoutCandidateGroups = withoutCandidateGroups;
     return this;
   }
 
@@ -3291,32 +2472,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which have no candidate group. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutCandidateGroups() {
-        return withoutCandidateGroups.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_CANDIDATE_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutCandidateGroups_JsonNullable() {
+  public Boolean getWithoutCandidateGroups() {
     return withoutCandidateGroups;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_CANDIDATE_GROUPS)
-  public void setWithoutCandidateGroups_JsonNullable(JsonNullable<Boolean> withoutCandidateGroups) {
-    this.withoutCandidateGroups = withoutCandidateGroups;
-  }
+
 
   public void setWithoutCandidateGroups(Boolean withoutCandidateGroups) {
-    this.withoutCandidateGroups = JsonNullable.<Boolean>of(withoutCandidateGroups);
+    this.withoutCandidateGroups = withoutCandidateGroups;
   }
 
 
   public TaskQueryDto withCandidateUsers(Boolean withCandidateUsers) {
-    this.withCandidateUsers = JsonNullable.<Boolean>of(withCandidateUsers);
     
+    this.withCandidateUsers = withCandidateUsers;
     return this;
   }
 
@@ -3326,32 +2497,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which have a candidate user. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithCandidateUsers() {
-        return withCandidateUsers.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITH_CANDIDATE_USERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithCandidateUsers_JsonNullable() {
+  public Boolean getWithCandidateUsers() {
     return withCandidateUsers;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_CANDIDATE_USERS)
-  public void setWithCandidateUsers_JsonNullable(JsonNullable<Boolean> withCandidateUsers) {
-    this.withCandidateUsers = withCandidateUsers;
-  }
+
 
   public void setWithCandidateUsers(Boolean withCandidateUsers) {
-    this.withCandidateUsers = JsonNullable.<Boolean>of(withCandidateUsers);
+    this.withCandidateUsers = withCandidateUsers;
   }
 
 
   public TaskQueryDto withoutCandidateUsers(Boolean withoutCandidateUsers) {
-    this.withoutCandidateUsers = JsonNullable.<Boolean>of(withoutCandidateUsers);
     
+    this.withoutCandidateUsers = withoutCandidateUsers;
     return this;
   }
 
@@ -3361,32 +2522,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include tasks which have no candidate users. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getWithoutCandidateUsers() {
-        return withoutCandidateUsers.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WITHOUT_CANDIDATE_USERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getWithoutCandidateUsers_JsonNullable() {
+  public Boolean getWithoutCandidateUsers() {
     return withoutCandidateUsers;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_CANDIDATE_USERS)
-  public void setWithoutCandidateUsers_JsonNullable(JsonNullable<Boolean> withoutCandidateUsers) {
-    this.withoutCandidateUsers = withoutCandidateUsers;
-  }
+
 
   public void setWithoutCandidateUsers(Boolean withoutCandidateUsers) {
-    this.withoutCandidateUsers = JsonNullable.<Boolean>of(withoutCandidateUsers);
+    this.withoutCandidateUsers = withoutCandidateUsers;
   }
 
 
   public TaskQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
     
+    this.active = active;
     return this;
   }
 
@@ -3396,32 +2547,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include active tasks. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getActive() {
-        return active.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getActive_JsonNullable() {
+  public Boolean getActive() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public TaskQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -3431,44 +2572,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include suspended tasks. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public TaskQueryDto taskVariables(List<VariableQueryParameterDto> taskVariables) {
-    this.taskVariables = JsonNullable.<List<VariableQueryParameterDto>>of(taskVariables);
     
+    this.taskVariables = taskVariables;
     return this;
   }
 
   public TaskQueryDto addTaskVariablesItem(VariableQueryParameterDto taskVariablesItem) {
-    if (this.taskVariables == null || !this.taskVariables.isPresent()) {
-      this.taskVariables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.taskVariables == null) {
+      this.taskVariables = new ArrayList<>();
     }
-    try {
-      this.taskVariables.get().add(taskVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.taskVariables.add(taskVariablesItem);
     return this;
   }
 
@@ -3478,44 +2605,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array to only include tasks that have variables with certain values. The array consists of JSON objects with three properties `name`, `operator` and `value`. `name` is the variable name, `operator` is the comparison operator to be used and `value` the variable value. `value` may be of type `String`, `Number` or `Boolean`.  Valid `operator` values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`. `key` and `value` may not contain underscore or comma characters.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getTaskVariables() {
-        return taskVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getTaskVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getTaskVariables() {
     return taskVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_VARIABLES)
-  public void setTaskVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> taskVariables) {
-    this.taskVariables = taskVariables;
-  }
+
 
   public void setTaskVariables(List<VariableQueryParameterDto> taskVariables) {
-    this.taskVariables = JsonNullable.<List<VariableQueryParameterDto>>of(taskVariables);
+    this.taskVariables = taskVariables;
   }
 
 
   public TaskQueryDto processVariables(List<VariableQueryParameterDto> processVariables) {
-    this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(processVariables);
     
+    this.processVariables = processVariables;
     return this;
   }
 
   public TaskQueryDto addProcessVariablesItem(VariableQueryParameterDto processVariablesItem) {
-    if (this.processVariables == null || !this.processVariables.isPresent()) {
-      this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.processVariables == null) {
+      this.processVariables = new ArrayList<>();
     }
-    try {
-      this.processVariables.get().add(processVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processVariables.add(processVariablesItem);
     return this;
   }
 
@@ -3525,44 +2638,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array to only include tasks that belong to a process instance with variables with certain values. The array consists of JSON objects with three properties `name`, `operator` and `value`. `name` is the variable name, `operator` is the comparison operator to be used and `value` the variable value. `value` may be of type `String`, `Number` or `Boolean`.  Valid `operator` values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`; `notLike`. `key` and `value` may not contain underscore or comma characters.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getProcessVariables() {
-        return processVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getProcessVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getProcessVariables() {
     return processVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
-  public void setProcessVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> processVariables) {
-    this.processVariables = processVariables;
-  }
+
 
   public void setProcessVariables(List<VariableQueryParameterDto> processVariables) {
-    this.processVariables = JsonNullable.<List<VariableQueryParameterDto>>of(processVariables);
+    this.processVariables = processVariables;
   }
 
 
   public TaskQueryDto caseInstanceVariables(List<VariableQueryParameterDto> caseInstanceVariables) {
-    this.caseInstanceVariables = JsonNullable.<List<VariableQueryParameterDto>>of(caseInstanceVariables);
     
+    this.caseInstanceVariables = caseInstanceVariables;
     return this;
   }
 
   public TaskQueryDto addCaseInstanceVariablesItem(VariableQueryParameterDto caseInstanceVariablesItem) {
-    if (this.caseInstanceVariables == null || !this.caseInstanceVariables.isPresent()) {
-      this.caseInstanceVariables = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.caseInstanceVariables == null) {
+      this.caseInstanceVariables = new ArrayList<>();
     }
-    try {
-      this.caseInstanceVariables.get().add(caseInstanceVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.caseInstanceVariables.add(caseInstanceVariablesItem);
     return this;
   }
 
@@ -3572,32 +2671,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array to only include tasks that belong to a case instance with variables with certain values. The array consists of JSON objects with three properties `name`, `operator` and `value`. `name` is the variable name, `operator` is the comparison operator to be used and `value` the variable value. `value` may be of type `String`, `Number` or `Boolean`.  Valid `operator` values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`. `key` and `value` may not contain underscore or comma characters.")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getCaseInstanceVariables() {
-        return caseInstanceVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getCaseInstanceVariables_JsonNullable() {
+  public List<VariableQueryParameterDto> getCaseInstanceVariables() {
     return caseInstanceVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_VARIABLES)
-  public void setCaseInstanceVariables_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> caseInstanceVariables) {
-    this.caseInstanceVariables = caseInstanceVariables;
-  }
+
 
   public void setCaseInstanceVariables(List<VariableQueryParameterDto> caseInstanceVariables) {
-    this.caseInstanceVariables = JsonNullable.<List<VariableQueryParameterDto>>of(caseInstanceVariables);
+    this.caseInstanceVariables = caseInstanceVariables;
   }
 
 
   public TaskQueryDto variableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
     
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
     return this;
   }
 
@@ -3607,32 +2696,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable names in this query case-insensitively. If set `variableName` and `variablename` are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableNamesIgnoreCase() {
-        return variableNamesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableNamesIgnoreCase_JsonNullable() {
+  public Boolean getVariableNamesIgnoreCase() {
     return variableNamesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  public void setVariableNamesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
-  }
+
 
   public void setVariableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
   }
 
 
   public TaskQueryDto variableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
     
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
     return this;
   }
 
@@ -3642,32 +2721,22 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable values in this query case-insensitively. If set `variableValue` and `variablevalue` are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableValuesIgnoreCase() {
-        return variableValuesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableValuesIgnoreCase_JsonNullable() {
+  public Boolean getVariableValuesIgnoreCase() {
     return variableValuesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  public void setVariableValuesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
-  }
+
 
   public void setVariableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
   }
 
 
   public TaskQueryDto parentTaskId(String parentTaskId) {
-    this.parentTaskId = JsonNullable.<String>of(parentTaskId);
     
+    this.parentTaskId = parentTaskId;
     return this;
   }
 
@@ -3677,44 +2746,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all tasks that are sub tasks of the given task. Takes a task id.")
-  @JsonIgnore
-
-  public String getParentTaskId() {
-        return parentTaskId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PARENT_TASK_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getParentTaskId_JsonNullable() {
+  public String getParentTaskId() {
     return parentTaskId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PARENT_TASK_ID)
-  public void setParentTaskId_JsonNullable(JsonNullable<String> parentTaskId) {
-    this.parentTaskId = parentTaskId;
-  }
+
 
   public void setParentTaskId(String parentTaskId) {
-    this.parentTaskId = JsonNullable.<String>of(parentTaskId);
+    this.parentTaskId = parentTaskId;
   }
 
 
   public TaskQueryDto orQueries(List<TaskQueryDto> orQueries) {
-    this.orQueries = JsonNullable.<List<TaskQueryDto>>of(orQueries);
     
+    this.orQueries = orQueries;
     return this;
   }
 
   public TaskQueryDto addOrQueriesItem(TaskQueryDto orQueriesItem) {
-    if (this.orQueries == null || !this.orQueries.isPresent()) {
-      this.orQueries = JsonNullable.<List<TaskQueryDto>>of(new ArrayList<>());
+    if (this.orQueries == null) {
+      this.orQueries = new ArrayList<>();
     }
-    try {
-      this.orQueries.get().add(orQueriesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.orQueries.add(orQueriesItem);
     return this;
   }
 
@@ -3724,44 +2779,30 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of nested task queries with OR semantics. A task matches a nested query if it fulfills *at least one* of the query's predicates. With multiple nested queries, a task must fulfill at least one predicate of *each* query ([Conjunctive Normal Form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)).  All task query properties can be used except for: `sorting`, `withCandidateGroups`, `withoutCandidateGroups`, `withCandidateUsers`, `withoutCandidateUsers`  See the [User guide](https://docs.camunda.org/manual/7.16/user-guide/process-engine/process-engine-api/#or-queries) for more information about OR queries.")
-  @JsonIgnore
-
-  public List<TaskQueryDto> getOrQueries() {
-        return orQueries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_OR_QUERIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<TaskQueryDto>> getOrQueries_JsonNullable() {
+  public List<TaskQueryDto> getOrQueries() {
     return orQueries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_OR_QUERIES)
-  public void setOrQueries_JsonNullable(JsonNullable<List<TaskQueryDto>> orQueries) {
-    this.orQueries = orQueries;
-  }
+
 
   public void setOrQueries(List<TaskQueryDto> orQueries) {
-    this.orQueries = JsonNullable.<List<TaskQueryDto>>of(orQueries);
+    this.orQueries = orQueries;
   }
 
 
   public TaskQueryDto sorting(List<TaskQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<TaskQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public TaskQueryDto addSortingItem(TaskQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<TaskQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -3771,26 +2812,16 @@ public class TaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonIgnore
-
-  public List<TaskQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<TaskQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<TaskQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<TaskQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<TaskQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<TaskQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

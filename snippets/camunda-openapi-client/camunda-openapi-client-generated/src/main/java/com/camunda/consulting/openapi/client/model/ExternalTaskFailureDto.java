@@ -28,9 +28,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -46,33 +43,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ExternalTaskFailureDto.JSON_PROPERTY_WORKER_ID
 })
 @JsonTypeName("ExternalTaskFailureDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ExternalTaskFailureDto {
   public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
-  private JsonNullable<String> errorMessage = JsonNullable.<String>undefined();
+  private String errorMessage;
 
   public static final String JSON_PROPERTY_ERROR_DETAILS = "errorDetails";
-  private JsonNullable<String> errorDetails = JsonNullable.<String>undefined();
+  private String errorDetails;
 
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
   public static final String JSON_PROPERTY_RETRY_TIMEOUT = "retryTimeout";
-  private JsonNullable<Long> retryTimeout = JsonNullable.<Long>undefined();
+  private Long retryTimeout;
 
   public static final String JSON_PROPERTY_VARIABLES = "variables";
-  private JsonNullable<Map<String, VariableValueDto>> variables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> variables = null;
 
   public static final String JSON_PROPERTY_LOCAL_VARIABLES = "localVariables";
-  private JsonNullable<Map<String, VariableValueDto>> localVariables = JsonNullable.<Map<String, VariableValueDto>>undefined();
+  private Map<String, VariableValueDto> localVariables = null;
 
   public static final String JSON_PROPERTY_WORKER_ID = "workerId";
   private String workerId;
 
 
   public ExternalTaskFailureDto errorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
     
+    this.errorMessage = errorMessage;
     return this;
   }
 
@@ -82,32 +79,22 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An message indicating the reason of the failure.")
-  @JsonIgnore
-
-  public String getErrorMessage() {
-        return errorMessage.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorMessage_JsonNullable() {
+  public String getErrorMessage() {
     return errorMessage;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  public void setErrorMessage_JsonNullable(JsonNullable<String> errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+
 
   public void setErrorMessage(String errorMessage) {
-    this.errorMessage = JsonNullable.<String>of(errorMessage);
+    this.errorMessage = errorMessage;
   }
 
 
   public ExternalTaskFailureDto errorDetails(String errorDetails) {
-    this.errorDetails = JsonNullable.<String>of(errorDetails);
     
+    this.errorDetails = errorDetails;
     return this;
   }
 
@@ -117,32 +104,22 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A detailed error description.")
-  @JsonIgnore
-
-  public String getErrorDetails() {
-        return errorDetails.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ERROR_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getErrorDetails_JsonNullable() {
+  public String getErrorDetails() {
     return errorDetails;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ERROR_DETAILS)
-  public void setErrorDetails_JsonNullable(JsonNullable<String> errorDetails) {
-    this.errorDetails = errorDetails;
-  }
+
 
   public void setErrorDetails(String errorDetails) {
-    this.errorDetails = JsonNullable.<String>of(errorDetails);
+    this.errorDetails = errorDetails;
   }
 
 
   public ExternalTaskFailureDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -152,32 +129,22 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A number of how often the task should be retried. Must be >= 0. If this is 0, an incident is created and the task cannot be fetched anymore unless the retries are increased again. The incident's message is set to the `errorMessage` parameter.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 
   public ExternalTaskFailureDto retryTimeout(Long retryTimeout) {
-    this.retryTimeout = JsonNullable.<Long>of(retryTimeout);
     
+    this.retryTimeout = retryTimeout;
     return this;
   }
 
@@ -187,44 +154,30 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A timeout in milliseconds before the external task becomes available again for fetching. Must be >= 0.")
-  @JsonIgnore
-
-  public Long getRetryTimeout() {
-        return retryTimeout.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRY_TIMEOUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getRetryTimeout_JsonNullable() {
+  public Long getRetryTimeout() {
     return retryTimeout;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRY_TIMEOUT)
-  public void setRetryTimeout_JsonNullable(JsonNullable<Long> retryTimeout) {
-    this.retryTimeout = retryTimeout;
-  }
+
 
   public void setRetryTimeout(Long retryTimeout) {
-    this.retryTimeout = JsonNullable.<Long>of(retryTimeout);
+    this.retryTimeout = retryTimeout;
   }
 
 
   public ExternalTaskFailureDto variables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
     
+    this.variables = variables;
     return this;
   }
 
   public ExternalTaskFailureDto putVariablesItem(String key, VariableValueDto variablesItem) {
-    if (this.variables == null || !this.variables.isPresent()) {
-      this.variables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.variables == null) {
+      this.variables = new HashMap<>();
     }
-    try {
-      this.variables.get().put(key, variablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variables.put(key, variablesItem);
     return this;
   }
 
@@ -234,44 +187,30 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getVariables() {
-        return variables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getVariables() {
     return variables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  public void setVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> variables) {
-    this.variables = variables;
-  }
+
 
   public void setVariables(Map<String, VariableValueDto> variables) {
-    this.variables = JsonNullable.<Map<String, VariableValueDto>>of(variables);
+    this.variables = variables;
   }
 
 
   public ExternalTaskFailureDto localVariables(Map<String, VariableValueDto> localVariables) {
-    this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(localVariables);
     
+    this.localVariables = localVariables;
     return this;
   }
 
   public ExternalTaskFailureDto putLocalVariablesItem(String key, VariableValueDto localVariablesItem) {
-    if (this.localVariables == null || !this.localVariables.isPresent()) {
-      this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(new HashMap<>());
+    if (this.localVariables == null) {
+      this.localVariables = new HashMap<>();
     }
-    try {
-      this.localVariables.get().put(key, localVariablesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.localVariables.put(key, localVariablesItem);
     return this;
   }
 
@@ -281,26 +220,16 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing local variable key-value pairs. Local variables are set only in the scope of external task. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonIgnore
-
-  public Map<String, VariableValueDto> getLocalVariables() {
-        return localVariables.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Map<String, VariableValueDto>> getLocalVariables_JsonNullable() {
+  public Map<String, VariableValueDto> getLocalVariables() {
     return localVariables;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
-  public void setLocalVariables_JsonNullable(JsonNullable<Map<String, VariableValueDto>> localVariables) {
-    this.localVariables = localVariables;
-  }
+
 
   public void setLocalVariables(Map<String, VariableValueDto> localVariables) {
-    this.localVariables = JsonNullable.<Map<String, VariableValueDto>>of(localVariables);
+    this.localVariables = localVariables;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,21 +33,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CamundaFormRef.JSON_PROPERTY_VERSION
 })
 @JsonTypeName("CamundaFormRef")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class CamundaFormRef {
   public static final String JSON_PROPERTY_KEY = "key";
-  private JsonNullable<String> key = JsonNullable.<String>undefined();
+  private String key;
 
   public static final String JSON_PROPERTY_BINDING = "binding";
-  private JsonNullable<String> binding = JsonNullable.<String>undefined();
+  private String binding;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  private JsonNullable<Integer> version = JsonNullable.<Integer>undefined();
+  private Integer version;
 
 
   public CamundaFormRef key(String key) {
-    this.key = JsonNullable.<String>of(key);
     
+    this.key = key;
     return this;
   }
 
@@ -60,32 +57,22 @@ public class CamundaFormRef {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the Camunda Form.")
-  @JsonIgnore
-
-  public String getKey() {
-        return key.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getKey_JsonNullable() {
+  public String getKey() {
     return key;
   }
-  
-  @JsonProperty(JSON_PROPERTY_KEY)
-  public void setKey_JsonNullable(JsonNullable<String> key) {
-    this.key = key;
-  }
+
 
   public void setKey(String key) {
-    this.key = JsonNullable.<String>of(key);
+    this.key = key;
   }
 
 
   public CamundaFormRef binding(String binding) {
-    this.binding = JsonNullable.<String>of(binding);
     
+    this.binding = binding;
     return this;
   }
 
@@ -95,32 +82,22 @@ public class CamundaFormRef {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The binding of the Camunda Form. Can be `latest`, `deployment` or `version`.")
-  @JsonIgnore
-
-  public String getBinding() {
-        return binding.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BINDING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBinding_JsonNullable() {
+  public String getBinding() {
     return binding;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BINDING)
-  public void setBinding_JsonNullable(JsonNullable<String> binding) {
-    this.binding = binding;
-  }
+
 
   public void setBinding(String binding) {
-    this.binding = JsonNullable.<String>of(binding);
+    this.binding = binding;
   }
 
 
   public CamundaFormRef version(Integer version) {
-    this.version = JsonNullable.<Integer>of(version);
     
+    this.version = version;
     return this;
   }
 
@@ -130,26 +107,16 @@ public class CamundaFormRef {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The specific version of a Camunda Form. This property is only set if `binding` is `version`.")
-  @JsonIgnore
-
-  public Integer getVersion() {
-        return version.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VERSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getVersion_JsonNullable() {
+  public Integer getVersion() {
     return version;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  public void setVersion_JsonNullable(JsonNullable<Integer> version) {
-    this.version = version;
-  }
+
 
   public void setVersion(Integer version) {
-    this.version = JsonNullable.<Integer>of(version);
+    this.version = version;
   }
 
 

@@ -27,9 +27,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -46,36 +43,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProcessInstanceDto.JSON_PROPERTY_LINKS
 })
 @JsonTypeName("ProcessInstanceDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ProcessInstanceDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_DEFINITION_ID = "definitionId";
-  private JsonNullable<String> definitionId = JsonNullable.<String>undefined();
+  private String definitionId;
 
   public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
-  private JsonNullable<String> businessKey = JsonNullable.<String>undefined();
+  private String businessKey;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
-  private JsonNullable<String> caseInstanceId = JsonNullable.<String>undefined();
+  private String caseInstanceId;
 
   public static final String JSON_PROPERTY_ENDED = "ended";
-  private JsonNullable<Boolean> ended = JsonNullable.<Boolean>undefined();
+  private Boolean ended;
 
   public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  private Boolean suspended;
 
   public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
-  private JsonNullable<String> tenantId = JsonNullable.<String>undefined();
+  private String tenantId;
 
   public static final String JSON_PROPERTY_LINKS = "links";
-  private JsonNullable<List<AtomLink>> links = JsonNullable.<List<AtomLink>>undefined();
+  private List<AtomLink> links = null;
 
 
   public ProcessInstanceDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -85,32 +82,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public ProcessInstanceDto definitionId(String definitionId) {
-    this.definitionId = JsonNullable.<String>of(definitionId);
     
+    this.definitionId = definitionId;
     return this;
   }
 
@@ -120,32 +107,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition that this process instance belongs to.")
-  @JsonIgnore
-
-  public String getDefinitionId() {
-        return definitionId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DEFINITION_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDefinitionId_JsonNullable() {
+  public String getDefinitionId() {
     return definitionId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DEFINITION_ID)
-  public void setDefinitionId_JsonNullable(JsonNullable<String> definitionId) {
-    this.definitionId = definitionId;
-  }
+
 
   public void setDefinitionId(String definitionId) {
-    this.definitionId = JsonNullable.<String>of(definitionId);
+    this.definitionId = definitionId;
   }
 
 
   public ProcessInstanceDto businessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
     
+    this.businessKey = businessKey;
     return this;
   }
 
@@ -155,32 +132,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The business key of the process instance.")
-  @JsonIgnore
-
-  public String getBusinessKey() {
-        return businessKey.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBusinessKey_JsonNullable() {
+  public String getBusinessKey() {
     return businessKey;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  public void setBusinessKey_JsonNullable(JsonNullable<String> businessKey) {
-    this.businessKey = businessKey;
-  }
+
 
   public void setBusinessKey(String businessKey) {
-    this.businessKey = JsonNullable.<String>of(businessKey);
+    this.businessKey = businessKey;
   }
 
 
   public ProcessInstanceDto caseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
     
+    this.caseInstanceId = caseInstanceId;
     return this;
   }
 
@@ -190,32 +157,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case instance associated with the process instance.")
-  @JsonIgnore
-
-  public String getCaseInstanceId() {
-        return caseInstanceId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCaseInstanceId_JsonNullable() {
+  public String getCaseInstanceId() {
     return caseInstanceId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  public void setCaseInstanceId_JsonNullable(JsonNullable<String> caseInstanceId) {
-    this.caseInstanceId = caseInstanceId;
-  }
+
 
   public void setCaseInstanceId(String caseInstanceId) {
-    this.caseInstanceId = JsonNullable.<String>of(caseInstanceId);
+    this.caseInstanceId = caseInstanceId;
   }
 
 
   public ProcessInstanceDto ended(Boolean ended) {
-    this.ended = JsonNullable.<Boolean>of(ended);
     
+    this.ended = ended;
     return this;
   }
 
@@ -225,32 +182,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the process instance has ended or not. Deprecated: will always be false!")
-  @JsonIgnore
-
-  public Boolean getEnded() {
-        return ended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getEnded_JsonNullable() {
+  public Boolean getEnded() {
     return ended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENDED)
-  public void setEnded_JsonNullable(JsonNullable<Boolean> ended) {
-    this.ended = ended;
-  }
+
 
   public void setEnded(Boolean ended) {
-    this.ended = JsonNullable.<Boolean>of(ended);
+    this.ended = ended;
   }
 
 
   public ProcessInstanceDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
     
+    this.suspended = suspended;
     return this;
   }
 
@@ -260,32 +207,22 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the process instance is suspended or not.")
-  @JsonIgnore
-
-  public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SUSPENDED)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
+  public Boolean getSuspended() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public ProcessInstanceDto tenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
     
+    this.tenantId = tenantId;
     return this;
   }
 
@@ -295,44 +232,30 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the process instance.")
-  @JsonIgnore
-
-  public String getTenantId() {
-        return tenantId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getTenantId_JsonNullable() {
+  public String getTenantId() {
     return tenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  public void setTenantId_JsonNullable(JsonNullable<String> tenantId) {
-    this.tenantId = tenantId;
-  }
+
 
   public void setTenantId(String tenantId) {
-    this.tenantId = JsonNullable.<String>of(tenantId);
+    this.tenantId = tenantId;
   }
 
 
   public ProcessInstanceDto links(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
     
+    this.links = links;
     return this;
   }
 
   public ProcessInstanceDto addLinksItem(AtomLink linksItem) {
-    if (this.links == null || !this.links.isPresent()) {
-      this.links = JsonNullable.<List<AtomLink>>of(new ArrayList<>());
+    if (this.links == null) {
+      this.links = new ArrayList<>();
     }
-    try {
-      this.links.get().add(linksItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.links.add(linksItem);
     return this;
   }
 
@@ -342,26 +265,16 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonIgnore
-
-  public List<AtomLink> getLinks() {
-        return links.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LINKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<AtomLink>> getLinks_JsonNullable() {
+  public List<AtomLink> getLinks() {
     return links;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  public void setLinks_JsonNullable(JsonNullable<List<AtomLink>> links) {
-    this.links = links;
-  }
+
 
   public void setLinks(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
+    this.links = links;
   }
 
 

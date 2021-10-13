@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,21 +34,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AbstractSetRemovalTimeDto.JSON_PROPERTY_CALCULATED_REMOVAL_TIME
 })
 @JsonTypeName("AbstractSetRemovalTimeDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class AbstractSetRemovalTimeDto {
   public static final String JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME = "absoluteRemovalTime";
-  private JsonNullable<OffsetDateTime> absoluteRemovalTime = JsonNullable.<OffsetDateTime>undefined();
+  private OffsetDateTime absoluteRemovalTime;
 
   public static final String JSON_PROPERTY_CLEARED_REMOVAL_TIME = "clearedRemovalTime";
-  private JsonNullable<Boolean> clearedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean clearedRemovalTime;
 
   public static final String JSON_PROPERTY_CALCULATED_REMOVAL_TIME = "calculatedRemovalTime";
-  private JsonNullable<Boolean> calculatedRemovalTime = JsonNullable.<Boolean>undefined();
+  private Boolean calculatedRemovalTime;
 
 
   public AbstractSetRemovalTimeDto absoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
     
+    this.absoluteRemovalTime = absoluteRemovalTime;
     return this;
   }
 
@@ -61,32 +58,22 @@ public class AbstractSetRemovalTimeDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date for which the instances shall be removed. Value may not be `null`.  **Note:** Cannot be set in conjunction with `clearedRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public OffsetDateTime getAbsoluteRemovalTime() {
-        return absoluteRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<OffsetDateTime> getAbsoluteRemovalTime_JsonNullable() {
+  public OffsetDateTime getAbsoluteRemovalTime() {
     return absoluteRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
-  public void setAbsoluteRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> absoluteRemovalTime) {
-    this.absoluteRemovalTime = absoluteRemovalTime;
-  }
+
 
   public void setAbsoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
+    this.absoluteRemovalTime = absoluteRemovalTime;
   }
 
 
   public AbstractSetRemovalTimeDto clearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
     
+    this.clearedRemovalTime = clearedRemovalTime;
     return this;
   }
 
@@ -96,32 +83,22 @@ public class AbstractSetRemovalTimeDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to `null`. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getClearedRemovalTime() {
-        return clearedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getClearedRemovalTime_JsonNullable() {
+  public Boolean getClearedRemovalTime() {
     return clearedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
-  public void setClearedRemovalTime_JsonNullable(JsonNullable<Boolean> clearedRemovalTime) {
-    this.clearedRemovalTime = clearedRemovalTime;
-  }
+
 
   public void setClearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
+    this.clearedRemovalTime = clearedRemovalTime;
   }
 
 
   public AbstractSetRemovalTimeDto calculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
     
+    this.calculatedRemovalTime = calculatedRemovalTime;
     return this;
   }
 
@@ -131,26 +108,16 @@ public class AbstractSetRemovalTimeDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The removal time is calculated based on the engine's configuration settings. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `clearedRemovalTime`.")
-  @JsonIgnore
-
-  public Boolean getCalculatedRemovalTime() {
-        return calculatedRemovalTime.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getCalculatedRemovalTime_JsonNullable() {
+  public Boolean getCalculatedRemovalTime() {
     return calculatedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
-  public void setCalculatedRemovalTime_JsonNullable(JsonNullable<Boolean> calculatedRemovalTime) {
-    this.calculatedRemovalTime = calculatedRemovalTime;
-  }
+
 
   public void setCalculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
+    this.calculatedRemovalTime = calculatedRemovalTime;
   }
 
 

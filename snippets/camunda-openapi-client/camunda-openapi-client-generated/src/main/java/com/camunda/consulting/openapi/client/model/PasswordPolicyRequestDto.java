@@ -23,9 +23,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -36,18 +33,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PasswordPolicyRequestDto.JSON_PROPERTY_PROFILE
 })
 @JsonTypeName("PasswordPolicyRequestDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class PasswordPolicyRequestDto {
   public static final String JSON_PROPERTY_PASSWORD = "password";
-  private JsonNullable<String> password = JsonNullable.<String>undefined();
+  private String password;
 
   public static final String JSON_PROPERTY_PROFILE = "profile";
   private UserProfileDto profile;
 
 
   public PasswordPolicyRequestDto password(String password) {
-    this.password = JsonNullable.<String>of(password);
     
+    this.password = password;
     return this;
   }
 
@@ -57,26 +54,16 @@ public class PasswordPolicyRequestDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The candidate password to be check against the password policy.")
-  @JsonIgnore
-
-  public String getPassword() {
-        return password.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PASSWORD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getPassword_JsonNullable() {
+  public String getPassword() {
     return password;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PASSWORD)
-  public void setPassword_JsonNullable(JsonNullable<String> password) {
-    this.password = password;
-  }
+
 
   public void setPassword(String password) {
-    this.password = JsonNullable.<String>of(password);
+    this.password = password;
   }
 
 

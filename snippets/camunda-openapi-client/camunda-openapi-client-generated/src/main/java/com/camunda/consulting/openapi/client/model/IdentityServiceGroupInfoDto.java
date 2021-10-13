@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,30 +36,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   IdentityServiceGroupInfoDto.JSON_PROPERTY_GROUP_USERS
 })
 @JsonTypeName("IdentityServiceGroupInfoDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class IdentityServiceGroupInfoDto {
   public static final String JSON_PROPERTY_GROUPS = "groups";
-  private JsonNullable<List<IdentityServiceGroupDto>> groups = JsonNullable.<List<IdentityServiceGroupDto>>undefined();
+  private List<IdentityServiceGroupDto> groups = null;
 
   public static final String JSON_PROPERTY_GROUP_USERS = "groupUsers";
-  private JsonNullable<List<IdentityServiceUserDto>> groupUsers = JsonNullable.<List<IdentityServiceUserDto>>undefined();
+  private List<IdentityServiceUserDto> groupUsers = null;
 
 
   public IdentityServiceGroupInfoDto groups(List<IdentityServiceGroupDto> groups) {
-    this.groups = JsonNullable.<List<IdentityServiceGroupDto>>of(groups);
     
+    this.groups = groups;
     return this;
   }
 
   public IdentityServiceGroupInfoDto addGroupsItem(IdentityServiceGroupDto groupsItem) {
-    if (this.groups == null || !this.groups.isPresent()) {
-      this.groups = JsonNullable.<List<IdentityServiceGroupDto>>of(new ArrayList<>());
+    if (this.groups == null) {
+      this.groups = new ArrayList<>();
     }
-    try {
-      this.groups.get().add(groupsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.groups.add(groupsItem);
     return this;
   }
 
@@ -72,44 +65,30 @@ public class IdentityServiceGroupInfoDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of group objects.")
-  @JsonIgnore
-
-  public List<IdentityServiceGroupDto> getGroups() {
-        return groups.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUPS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<IdentityServiceGroupDto>> getGroups_JsonNullable() {
+  public List<IdentityServiceGroupDto> getGroups() {
     return groups;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUPS)
-  public void setGroups_JsonNullable(JsonNullable<List<IdentityServiceGroupDto>> groups) {
-    this.groups = groups;
-  }
+
 
   public void setGroups(List<IdentityServiceGroupDto> groups) {
-    this.groups = JsonNullable.<List<IdentityServiceGroupDto>>of(groups);
+    this.groups = groups;
   }
 
 
   public IdentityServiceGroupInfoDto groupUsers(List<IdentityServiceUserDto> groupUsers) {
-    this.groupUsers = JsonNullable.<List<IdentityServiceUserDto>>of(groupUsers);
     
+    this.groupUsers = groupUsers;
     return this;
   }
 
   public IdentityServiceGroupInfoDto addGroupUsersItem(IdentityServiceUserDto groupUsersItem) {
-    if (this.groupUsers == null || !this.groupUsers.isPresent()) {
-      this.groupUsers = JsonNullable.<List<IdentityServiceUserDto>>of(new ArrayList<>());
+    if (this.groupUsers == null) {
+      this.groupUsers = new ArrayList<>();
     }
-    try {
-      this.groupUsers.get().add(groupUsersItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.groupUsers.add(groupUsersItem);
     return this;
   }
 
@@ -119,26 +98,16 @@ public class IdentityServiceGroupInfoDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array that contains all users that are member in one of the groups.")
-  @JsonIgnore
-
-  public List<IdentityServiceUserDto> getGroupUsers() {
-        return groupUsers.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_GROUP_USERS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<IdentityServiceUserDto>> getGroupUsers_JsonNullable() {
+  public List<IdentityServiceUserDto> getGroupUsers() {
     return groupUsers;
   }
-  
-  @JsonProperty(JSON_PROPERTY_GROUP_USERS)
-  public void setGroupUsers_JsonNullable(JsonNullable<List<IdentityServiceUserDto>> groupUsers) {
-    this.groupUsers = groupUsers;
-  }
+
 
   public void setGroupUsers(List<IdentityServiceUserDto> groupUsers) {
-    this.groupUsers = JsonNullable.<List<IdentityServiceUserDto>>of(groupUsers);
+    this.groupUsers = groupUsers;
   }
 
 

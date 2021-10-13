@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TelemetryConfigurationDto.JSON_PROPERTY_ENABLE_TELEMETRY
 })
 @JsonTypeName("TelemetryConfigurationDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class TelemetryConfigurationDto {
   public static final String JSON_PROPERTY_ENABLE_TELEMETRY = "enableTelemetry";
-  private JsonNullable<Boolean> enableTelemetry = JsonNullable.<Boolean>undefined();
+  private Boolean enableTelemetry;
 
 
   public TelemetryConfigurationDto enableTelemetry(Boolean enableTelemetry) {
-    this.enableTelemetry = JsonNullable.<Boolean>of(enableTelemetry);
     
+    this.enableTelemetry = enableTelemetry;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class TelemetryConfigurationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Specifies if the telemetry data should be sent or not.")
-  @JsonIgnore
-
-  public Boolean getEnableTelemetry() {
-        return enableTelemetry.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ENABLE_TELEMETRY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getEnableTelemetry_JsonNullable() {
+  public Boolean getEnableTelemetry() {
     return enableTelemetry;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENABLE_TELEMETRY)
-  public void setEnableTelemetry_JsonNullable(JsonNullable<Boolean> enableTelemetry) {
-    this.enableTelemetry = enableTelemetry;
-  }
+
 
   public void setEnableTelemetry(Boolean enableTelemetry) {
-    this.enableTelemetry = JsonNullable.<Boolean>of(enableTelemetry);
+    this.enableTelemetry = enableTelemetry;
   }
 
 

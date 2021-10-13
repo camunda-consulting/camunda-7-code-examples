@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -39,33 +36,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   RedeploymentDto.JSON_PROPERTY_SOURCE
 })
 @JsonTypeName("RedeploymentDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class RedeploymentDto {
   public static final String JSON_PROPERTY_RESOURCE_IDS = "resourceIds";
-  private JsonNullable<List<String>> resourceIds = JsonNullable.<List<String>>undefined();
+  private List<String> resourceIds = null;
 
   public static final String JSON_PROPERTY_RESOURCE_NAMES = "resourceNames";
-  private JsonNullable<List<String>> resourceNames = JsonNullable.<List<String>>undefined();
+  private List<String> resourceNames = null;
 
   public static final String JSON_PROPERTY_SOURCE = "source";
-  private JsonNullable<String> source = JsonNullable.<String>undefined();
+  private String source;
 
 
   public RedeploymentDto resourceIds(List<String> resourceIds) {
-    this.resourceIds = JsonNullable.<List<String>>of(resourceIds);
     
+    this.resourceIds = resourceIds;
     return this;
   }
 
   public RedeploymentDto addResourceIdsItem(String resourceIdsItem) {
-    if (this.resourceIds == null || !this.resourceIds.isPresent()) {
-      this.resourceIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.resourceIds == null) {
+      this.resourceIds = new ArrayList<>();
     }
-    try {
-      this.resourceIds.get().add(resourceIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.resourceIds.add(resourceIdsItem);
     return this;
   }
 
@@ -75,44 +68,30 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of deployment resource ids to re-deploy.")
-  @JsonIgnore
-
-  public List<String> getResourceIds() {
-        return resourceIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getResourceIds_JsonNullable() {
+  public List<String> getResourceIds() {
     return resourceIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_IDS)
-  public void setResourceIds_JsonNullable(JsonNullable<List<String>> resourceIds) {
-    this.resourceIds = resourceIds;
-  }
+
 
   public void setResourceIds(List<String> resourceIds) {
-    this.resourceIds = JsonNullable.<List<String>>of(resourceIds);
+    this.resourceIds = resourceIds;
   }
 
 
   public RedeploymentDto resourceNames(List<String> resourceNames) {
-    this.resourceNames = JsonNullable.<List<String>>of(resourceNames);
     
+    this.resourceNames = resourceNames;
     return this;
   }
 
   public RedeploymentDto addResourceNamesItem(String resourceNamesItem) {
-    if (this.resourceNames == null || !this.resourceNames.isPresent()) {
-      this.resourceNames = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.resourceNames == null) {
+      this.resourceNames = new ArrayList<>();
     }
-    try {
-      this.resourceNames.get().add(resourceNamesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.resourceNames.add(resourceNamesItem);
     return this;
   }
 
@@ -122,32 +101,22 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of deployment resource names to re-deploy.")
-  @JsonIgnore
-
-  public List<String> getResourceNames() {
-        return resourceNames.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RESOURCE_NAMES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getResourceNames_JsonNullable() {
+  public List<String> getResourceNames() {
     return resourceNames;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESOURCE_NAMES)
-  public void setResourceNames_JsonNullable(JsonNullable<List<String>> resourceNames) {
-    this.resourceNames = resourceNames;
-  }
+
 
   public void setResourceNames(List<String> resourceNames) {
-    this.resourceNames = JsonNullable.<List<String>>of(resourceNames);
+    this.resourceNames = resourceNames;
   }
 
 
   public RedeploymentDto source(String source) {
-    this.source = JsonNullable.<String>of(source);
     
+    this.source = source;
     return this;
   }
 
@@ -157,26 +126,16 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the source of the deployment.")
-  @JsonIgnore
-
-  public String getSource() {
-        return source.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SOURCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getSource_JsonNullable() {
+  public String getSource() {
     return source;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  public void setSource_JsonNullable(JsonNullable<String> source) {
-    this.source = source;
-  }
+
 
   public void setSource(String source) {
-    this.source = JsonNullable.<String>of(source);
+    this.source = source;
   }
 
 

@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,24 +34,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   IdentityServiceUserDto.JSON_PROPERTY_DISPLAY_NAME
 })
 @JsonTypeName("IdentityServiceUserDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class IdentityServiceUserDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_FIRST_NAME = "firstName";
-  private JsonNullable<String> firstName = JsonNullable.<String>undefined();
+  private String firstName;
 
   public static final String JSON_PROPERTY_LAST_NAME = "lastName";
-  private JsonNullable<String> lastName = JsonNullable.<String>undefined();
+  private String lastName;
 
   public static final String JSON_PROPERTY_DISPLAY_NAME = "displayName";
-  private JsonNullable<String> displayName = JsonNullable.<String>undefined();
+  private String displayName;
 
 
   public IdentityServiceUserDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -64,32 +61,22 @@ public class IdentityServiceUserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public IdentityServiceUserDto firstName(String firstName) {
-    this.firstName = JsonNullable.<String>of(firstName);
     
+    this.firstName = firstName;
     return this;
   }
 
@@ -99,32 +86,22 @@ public class IdentityServiceUserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The firstname of the user.")
-  @JsonIgnore
-
-  public String getFirstName() {
-        return firstName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FIRST_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getFirstName_JsonNullable() {
+  public String getFirstName() {
     return firstName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FIRST_NAME)
-  public void setFirstName_JsonNullable(JsonNullable<String> firstName) {
-    this.firstName = firstName;
-  }
+
 
   public void setFirstName(String firstName) {
-    this.firstName = JsonNullable.<String>of(firstName);
+    this.firstName = firstName;
   }
 
 
   public IdentityServiceUserDto lastName(String lastName) {
-    this.lastName = JsonNullable.<String>of(lastName);
     
+    this.lastName = lastName;
     return this;
   }
 
@@ -134,32 +111,22 @@ public class IdentityServiceUserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The lastname of the user.")
-  @JsonIgnore
-
-  public String getLastName() {
-        return lastName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LAST_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getLastName_JsonNullable() {
+  public String getLastName() {
     return lastName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LAST_NAME)
-  public void setLastName_JsonNullable(JsonNullable<String> lastName) {
-    this.lastName = lastName;
-  }
+
 
   public void setLastName(String lastName) {
-    this.lastName = JsonNullable.<String>of(lastName);
+    this.lastName = lastName;
   }
 
 
   public IdentityServiceUserDto displayName(String displayName) {
-    this.displayName = JsonNullable.<String>of(displayName);
     
+    this.displayName = displayName;
     return this;
   }
 
@@ -169,26 +136,16 @@ public class IdentityServiceUserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The displayName is generated from the id or firstName and lastName if available.")
-  @JsonIgnore
-
-  public String getDisplayName() {
-        return displayName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDisplayName_JsonNullable() {
+  public String getDisplayName() {
     return displayName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DISPLAY_NAME)
-  public void setDisplayName_JsonNullable(JsonNullable<String> displayName) {
-    this.displayName = displayName;
-  }
+
 
   public void setDisplayName(String displayName) {
-    this.displayName = JsonNullable.<String>of(displayName);
+    this.displayName = displayName;
   }
 
 

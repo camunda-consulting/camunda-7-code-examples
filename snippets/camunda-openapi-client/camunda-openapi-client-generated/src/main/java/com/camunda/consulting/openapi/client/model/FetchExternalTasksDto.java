@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -41,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FetchExternalTasksDto.JSON_PROPERTY_TOPICS
 })
 @JsonTypeName("FetchExternalTasksDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class FetchExternalTasksDto {
   public static final String JSON_PROPERTY_WORKER_ID = "workerId";
   private String workerId;
@@ -50,13 +47,13 @@ public class FetchExternalTasksDto {
   private Integer maxTasks;
 
   public static final String JSON_PROPERTY_USE_PRIORITY = "usePriority";
-  private JsonNullable<Boolean> usePriority = JsonNullable.<Boolean>undefined();
+  private Boolean usePriority;
 
   public static final String JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT = "asyncResponseTimeout";
-  private JsonNullable<Long> asyncResponseTimeout = JsonNullable.<Long>undefined();
+  private Long asyncResponseTimeout;
 
   public static final String JSON_PROPERTY_TOPICS = "topics";
-  private JsonNullable<List<FetchExternalTaskTopicDto>> topics = JsonNullable.<List<FetchExternalTaskTopicDto>>undefined();
+  private List<FetchExternalTaskTopicDto> topics = null;
 
 
   public FetchExternalTasksDto workerId(String workerId) {
@@ -109,8 +106,8 @@ public class FetchExternalTasksDto {
 
 
   public FetchExternalTasksDto usePriority(Boolean usePriority) {
-    this.usePriority = JsonNullable.<Boolean>of(usePriority);
     
+    this.usePriority = usePriority;
     return this;
   }
 
@@ -120,32 +117,22 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `boolean` value, which indicates whether the task should be fetched based on its priority or arbitrarily.")
-  @JsonIgnore
-
-  public Boolean getUsePriority() {
-        return usePriority.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_USE_PRIORITY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getUsePriority_JsonNullable() {
+  public Boolean getUsePriority() {
     return usePriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USE_PRIORITY)
-  public void setUsePriority_JsonNullable(JsonNullable<Boolean> usePriority) {
-    this.usePriority = usePriority;
-  }
+
 
   public void setUsePriority(Boolean usePriority) {
-    this.usePriority = JsonNullable.<Boolean>of(usePriority);
+    this.usePriority = usePriority;
   }
 
 
   public FetchExternalTasksDto asyncResponseTimeout(Long asyncResponseTimeout) {
-    this.asyncResponseTimeout = JsonNullable.<Long>of(asyncResponseTimeout);
     
+    this.asyncResponseTimeout = asyncResponseTimeout;
     return this;
   }
 
@@ -155,44 +142,30 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The [Long Polling](https://docs.camunda.org/manual/7.16/user-guide/process-engine/external-tasks/#long-polling-to-fetch-and-lock-external-tasks) timeout in milliseconds.  **Note:** The value cannot be set larger than 1.800.000 milliseconds (corresponds to 30 minutes).")
-  @JsonIgnore
-
-  public Long getAsyncResponseTimeout() {
-        return asyncResponseTimeout.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Long> getAsyncResponseTimeout_JsonNullable() {
+  public Long getAsyncResponseTimeout() {
     return asyncResponseTimeout;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT)
-  public void setAsyncResponseTimeout_JsonNullable(JsonNullable<Long> asyncResponseTimeout) {
-    this.asyncResponseTimeout = asyncResponseTimeout;
-  }
+
 
   public void setAsyncResponseTimeout(Long asyncResponseTimeout) {
-    this.asyncResponseTimeout = JsonNullable.<Long>of(asyncResponseTimeout);
+    this.asyncResponseTimeout = asyncResponseTimeout;
   }
 
 
   public FetchExternalTasksDto topics(List<FetchExternalTaskTopicDto> topics) {
-    this.topics = JsonNullable.<List<FetchExternalTaskTopicDto>>of(topics);
     
+    this.topics = topics;
     return this;
   }
 
   public FetchExternalTasksDto addTopicsItem(FetchExternalTaskTopicDto topicsItem) {
-    if (this.topics == null || !this.topics.isPresent()) {
-      this.topics = JsonNullable.<List<FetchExternalTaskTopicDto>>of(new ArrayList<>());
+    if (this.topics == null) {
+      this.topics = new ArrayList<>();
     }
-    try {
-      this.topics.get().add(topicsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.topics.add(topicsItem);
     return this;
   }
 
@@ -202,26 +175,16 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of topic objects for which external tasks should be fetched. The returned tasks may be arbitrarily distributed among these topics. Each topic object has the following properties:")
-  @JsonIgnore
-
-  public List<FetchExternalTaskTopicDto> getTopics() {
-        return topics.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TOPICS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<FetchExternalTaskTopicDto>> getTopics_JsonNullable() {
+  public List<FetchExternalTaskTopicDto> getTopics() {
     return topics;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TOPICS)
-  public void setTopics_JsonNullable(JsonNullable<List<FetchExternalTaskTopicDto>> topics) {
-    this.topics = topics;
-  }
+
 
   public void setTopics(List<FetchExternalTaskTopicDto> topics) {
-    this.topics = JsonNullable.<List<FetchExternalTaskTopicDto>>of(topics);
+    this.topics = topics;
   }
 
 

@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -53,57 +50,57 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   VariableInstanceQueryDto.JSON_PROPERTY_SORTING
 })
 @JsonTypeName("VariableInstanceQueryDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class VariableInstanceQueryDto {
   public static final String JSON_PROPERTY_VARIABLE_NAME = "variableName";
-  private JsonNullable<String> variableName = JsonNullable.<String>undefined();
+  private String variableName;
 
   public static final String JSON_PROPERTY_VARIABLE_NAME_LIKE = "variableNameLike";
-  private JsonNullable<String> variableNameLike = JsonNullable.<String>undefined();
+  private String variableNameLike;
 
   public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID_IN = "processInstanceIdIn";
-  private JsonNullable<List<String>> processInstanceIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> processInstanceIdIn = null;
 
   public static final String JSON_PROPERTY_EXECUTION_ID_IN = "executionIdIn";
-  private JsonNullable<List<String>> executionIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> executionIdIn = null;
 
   public static final String JSON_PROPERTY_CASE_INSTANCE_ID_IN = "caseInstanceIdIn";
-  private JsonNullable<List<String>> caseInstanceIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> caseInstanceIdIn = null;
 
   public static final String JSON_PROPERTY_CASE_EXECUTION_ID_IN = "caseExecutionIdIn";
-  private JsonNullable<List<String>> caseExecutionIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> caseExecutionIdIn = null;
 
   public static final String JSON_PROPERTY_TASK_ID_IN = "taskIdIn";
-  private JsonNullable<List<String>> taskIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> taskIdIn = null;
 
   public static final String JSON_PROPERTY_BATCH_ID_IN = "batchIdIn";
-  private JsonNullable<List<String>> batchIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> batchIdIn = null;
 
   public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN = "activityInstanceIdIn";
-  private JsonNullable<List<String>> activityInstanceIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> activityInstanceIdIn = null;
 
   public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
-  private JsonNullable<List<String>> tenantIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> tenantIdIn = null;
 
   public static final String JSON_PROPERTY_VARIABLE_VALUES = "variableValues";
-  private JsonNullable<List<VariableQueryParameterDto>> variableValues = JsonNullable.<List<VariableQueryParameterDto>>undefined();
+  private List<VariableQueryParameterDto> variableValues = null;
 
   public static final String JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
-  private JsonNullable<Boolean> variableNamesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableNamesIgnoreCase;
 
   public static final String JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
-  private JsonNullable<Boolean> variableValuesIgnoreCase = JsonNullable.<Boolean>undefined();
+  private Boolean variableValuesIgnoreCase;
 
   public static final String JSON_PROPERTY_VARIABLE_SCOPE_ID_IN = "variableScopeIdIn";
-  private JsonNullable<List<String>> variableScopeIdIn = JsonNullable.<List<String>>undefined();
+  private List<String> variableScopeIdIn = null;
 
   public static final String JSON_PROPERTY_SORTING = "sorting";
-  private JsonNullable<List<VariableInstanceQueryDtoSorting>> sorting = JsonNullable.<List<VariableInstanceQueryDtoSorting>>undefined();
+  private List<VariableInstanceQueryDtoSorting> sorting = null;
 
 
   public VariableInstanceQueryDto variableName(String variableName) {
-    this.variableName = JsonNullable.<String>of(variableName);
     
+    this.variableName = variableName;
     return this;
   }
 
@@ -113,32 +110,22 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by variable instance name.")
-  @JsonIgnore
-
-  public String getVariableName() {
-        return variableName.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getVariableName_JsonNullable() {
+  public String getVariableName() {
     return variableName;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAME)
-  public void setVariableName_JsonNullable(JsonNullable<String> variableName) {
-    this.variableName = variableName;
-  }
+
 
   public void setVariableName(String variableName) {
-    this.variableName = JsonNullable.<String>of(variableName);
+    this.variableName = variableName;
   }
 
 
   public VariableInstanceQueryDto variableNameLike(String variableNameLike) {
-    this.variableNameLike = JsonNullable.<String>of(variableNameLike);
     
+    this.variableNameLike = variableNameLike;
     return this;
   }
 
@@ -148,44 +135,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the variable instance name. The parameter can include the wildcard `%` to express like-strategy such as: starts with (`%`name), ends with (name`%`) or contains (`%`name`%`).")
-  @JsonIgnore
-
-  public String getVariableNameLike() {
-        return variableNameLike.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAME_LIKE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getVariableNameLike_JsonNullable() {
+  public String getVariableNameLike() {
     return variableNameLike;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAME_LIKE)
-  public void setVariableNameLike_JsonNullable(JsonNullable<String> variableNameLike) {
-    this.variableNameLike = variableNameLike;
-  }
+
 
   public void setVariableNameLike(String variableNameLike) {
-    this.variableNameLike = JsonNullable.<String>of(variableNameLike);
+    this.variableNameLike = variableNameLike;
   }
 
 
   public VariableInstanceQueryDto processInstanceIdIn(List<String> processInstanceIdIn) {
-    this.processInstanceIdIn = JsonNullable.<List<String>>of(processInstanceIdIn);
     
+    this.processInstanceIdIn = processInstanceIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addProcessInstanceIdInItem(String processInstanceIdInItem) {
-    if (this.processInstanceIdIn == null || !this.processInstanceIdIn.isPresent()) {
-      this.processInstanceIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.processInstanceIdIn == null) {
+      this.processInstanceIdIn = new ArrayList<>();
     }
-    try {
-      this.processInstanceIdIn.get().add(processInstanceIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.processInstanceIdIn.add(processInstanceIdInItem);
     return this;
   }
 
@@ -195,44 +168,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  process instance ids.")
-  @JsonIgnore
-
-  public List<String> getProcessInstanceIdIn() {
-        return processInstanceIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getProcessInstanceIdIn_JsonNullable() {
+  public List<String> getProcessInstanceIdIn() {
     return processInstanceIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID_IN)
-  public void setProcessInstanceIdIn_JsonNullable(JsonNullable<List<String>> processInstanceIdIn) {
-    this.processInstanceIdIn = processInstanceIdIn;
-  }
+
 
   public void setProcessInstanceIdIn(List<String> processInstanceIdIn) {
-    this.processInstanceIdIn = JsonNullable.<List<String>>of(processInstanceIdIn);
+    this.processInstanceIdIn = processInstanceIdIn;
   }
 
 
   public VariableInstanceQueryDto executionIdIn(List<String> executionIdIn) {
-    this.executionIdIn = JsonNullable.<List<String>>of(executionIdIn);
     
+    this.executionIdIn = executionIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addExecutionIdInItem(String executionIdInItem) {
-    if (this.executionIdIn == null || !this.executionIdIn.isPresent()) {
-      this.executionIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.executionIdIn == null) {
+      this.executionIdIn = new ArrayList<>();
     }
-    try {
-      this.executionIdIn.get().add(executionIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.executionIdIn.add(executionIdInItem);
     return this;
   }
 
@@ -242,44 +201,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  execution ids.")
-  @JsonIgnore
-
-  public List<String> getExecutionIdIn() {
-        return executionIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_EXECUTION_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getExecutionIdIn_JsonNullable() {
+  public List<String> getExecutionIdIn() {
     return executionIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID_IN)
-  public void setExecutionIdIn_JsonNullable(JsonNullable<List<String>> executionIdIn) {
-    this.executionIdIn = executionIdIn;
-  }
+
 
   public void setExecutionIdIn(List<String> executionIdIn) {
-    this.executionIdIn = JsonNullable.<List<String>>of(executionIdIn);
+    this.executionIdIn = executionIdIn;
   }
 
 
   public VariableInstanceQueryDto caseInstanceIdIn(List<String> caseInstanceIdIn) {
-    this.caseInstanceIdIn = JsonNullable.<List<String>>of(caseInstanceIdIn);
     
+    this.caseInstanceIdIn = caseInstanceIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addCaseInstanceIdInItem(String caseInstanceIdInItem) {
-    if (this.caseInstanceIdIn == null || !this.caseInstanceIdIn.isPresent()) {
-      this.caseInstanceIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.caseInstanceIdIn == null) {
+      this.caseInstanceIdIn = new ArrayList<>();
     }
-    try {
-      this.caseInstanceIdIn.get().add(caseInstanceIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.caseInstanceIdIn.add(caseInstanceIdInItem);
     return this;
   }
 
@@ -289,44 +234,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  case instance ids.")
-  @JsonIgnore
-
-  public List<String> getCaseInstanceIdIn() {
-        return caseInstanceIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getCaseInstanceIdIn_JsonNullable() {
+  public List<String> getCaseInstanceIdIn() {
     return caseInstanceIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID_IN)
-  public void setCaseInstanceIdIn_JsonNullable(JsonNullable<List<String>> caseInstanceIdIn) {
-    this.caseInstanceIdIn = caseInstanceIdIn;
-  }
+
 
   public void setCaseInstanceIdIn(List<String> caseInstanceIdIn) {
-    this.caseInstanceIdIn = JsonNullable.<List<String>>of(caseInstanceIdIn);
+    this.caseInstanceIdIn = caseInstanceIdIn;
   }
 
 
   public VariableInstanceQueryDto caseExecutionIdIn(List<String> caseExecutionIdIn) {
-    this.caseExecutionIdIn = JsonNullable.<List<String>>of(caseExecutionIdIn);
     
+    this.caseExecutionIdIn = caseExecutionIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addCaseExecutionIdInItem(String caseExecutionIdInItem) {
-    if (this.caseExecutionIdIn == null || !this.caseExecutionIdIn.isPresent()) {
-      this.caseExecutionIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.caseExecutionIdIn == null) {
+      this.caseExecutionIdIn = new ArrayList<>();
     }
-    try {
-      this.caseExecutionIdIn.get().add(caseExecutionIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.caseExecutionIdIn.add(caseExecutionIdInItem);
     return this;
   }
 
@@ -336,44 +267,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  case execution ids.")
-  @JsonIgnore
-
-  public List<String> getCaseExecutionIdIn() {
-        return caseExecutionIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getCaseExecutionIdIn_JsonNullable() {
+  public List<String> getCaseExecutionIdIn() {
     return caseExecutionIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CASE_EXECUTION_ID_IN)
-  public void setCaseExecutionIdIn_JsonNullable(JsonNullable<List<String>> caseExecutionIdIn) {
-    this.caseExecutionIdIn = caseExecutionIdIn;
-  }
+
 
   public void setCaseExecutionIdIn(List<String> caseExecutionIdIn) {
-    this.caseExecutionIdIn = JsonNullable.<List<String>>of(caseExecutionIdIn);
+    this.caseExecutionIdIn = caseExecutionIdIn;
   }
 
 
   public VariableInstanceQueryDto taskIdIn(List<String> taskIdIn) {
-    this.taskIdIn = JsonNullable.<List<String>>of(taskIdIn);
     
+    this.taskIdIn = taskIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addTaskIdInItem(String taskIdInItem) {
-    if (this.taskIdIn == null || !this.taskIdIn.isPresent()) {
-      this.taskIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.taskIdIn == null) {
+      this.taskIdIn = new ArrayList<>();
     }
-    try {
-      this.taskIdIn.get().add(taskIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.taskIdIn.add(taskIdInItem);
     return this;
   }
 
@@ -383,44 +300,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  task ids.")
-  @JsonIgnore
-
-  public List<String> getTaskIdIn() {
-        return taskIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TASK_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTaskIdIn_JsonNullable() {
+  public List<String> getTaskIdIn() {
     return taskIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TASK_ID_IN)
-  public void setTaskIdIn_JsonNullable(JsonNullable<List<String>> taskIdIn) {
-    this.taskIdIn = taskIdIn;
-  }
+
 
   public void setTaskIdIn(List<String> taskIdIn) {
-    this.taskIdIn = JsonNullable.<List<String>>of(taskIdIn);
+    this.taskIdIn = taskIdIn;
   }
 
 
   public VariableInstanceQueryDto batchIdIn(List<String> batchIdIn) {
-    this.batchIdIn = JsonNullable.<List<String>>of(batchIdIn);
     
+    this.batchIdIn = batchIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addBatchIdInItem(String batchIdInItem) {
-    if (this.batchIdIn == null || !this.batchIdIn.isPresent()) {
-      this.batchIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.batchIdIn == null) {
+      this.batchIdIn = new ArrayList<>();
     }
-    try {
-      this.batchIdIn.get().add(batchIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.batchIdIn.add(batchIdInItem);
     return this;
   }
 
@@ -430,44 +333,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  batch ids.")
-  @JsonIgnore
-
-  public List<String> getBatchIdIn() {
-        return batchIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_BATCH_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getBatchIdIn_JsonNullable() {
+  public List<String> getBatchIdIn() {
     return batchIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_BATCH_ID_IN)
-  public void setBatchIdIn_JsonNullable(JsonNullable<List<String>> batchIdIn) {
-    this.batchIdIn = batchIdIn;
-  }
+
 
   public void setBatchIdIn(List<String> batchIdIn) {
-    this.batchIdIn = JsonNullable.<List<String>>of(batchIdIn);
+    this.batchIdIn = batchIdIn;
   }
 
 
   public VariableInstanceQueryDto activityInstanceIdIn(List<String> activityInstanceIdIn) {
-    this.activityInstanceIdIn = JsonNullable.<List<String>>of(activityInstanceIdIn);
     
+    this.activityInstanceIdIn = activityInstanceIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addActivityInstanceIdInItem(String activityInstanceIdInItem) {
-    if (this.activityInstanceIdIn == null || !this.activityInstanceIdIn.isPresent()) {
-      this.activityInstanceIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.activityInstanceIdIn == null) {
+      this.activityInstanceIdIn = new ArrayList<>();
     }
-    try {
-      this.activityInstanceIdIn.get().add(activityInstanceIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.activityInstanceIdIn.add(activityInstanceIdInItem);
     return this;
   }
 
@@ -477,44 +366,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  activity instance ids.")
-  @JsonIgnore
-
-  public List<String> getActivityInstanceIdIn() {
-        return activityInstanceIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getActivityInstanceIdIn_JsonNullable() {
+  public List<String> getActivityInstanceIdIn() {
     return activityInstanceIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID_IN)
-  public void setActivityInstanceIdIn_JsonNullable(JsonNullable<List<String>> activityInstanceIdIn) {
-    this.activityInstanceIdIn = activityInstanceIdIn;
-  }
+
 
   public void setActivityInstanceIdIn(List<String> activityInstanceIdIn) {
-    this.activityInstanceIdIn = JsonNullable.<List<String>>of(activityInstanceIdIn);
+    this.activityInstanceIdIn = activityInstanceIdIn;
   }
 
 
   public VariableInstanceQueryDto tenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
     
+    this.tenantIdIn = tenantIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addTenantIdInItem(String tenantIdInItem) {
-    if (this.tenantIdIn == null || !this.tenantIdIn.isPresent()) {
-      this.tenantIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.tenantIdIn == null) {
+      this.tenantIdIn = new ArrayList<>();
     }
-    try {
-      this.tenantIdIn.get().add(tenantIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.tenantIdIn.add(tenantIdInItem);
     return this;
   }
 
@@ -524,44 +399,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of the passed  tenant ids.")
-  @JsonIgnore
-
-  public List<String> getTenantIdIn() {
-        return tenantIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getTenantIdIn_JsonNullable() {
+  public List<String> getTenantIdIn() {
     return tenantIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  public void setTenantIdIn_JsonNullable(JsonNullable<List<String>> tenantIdIn) {
-    this.tenantIdIn = tenantIdIn;
-  }
+
 
   public void setTenantIdIn(List<String> tenantIdIn) {
-    this.tenantIdIn = JsonNullable.<List<String>>of(tenantIdIn);
+    this.tenantIdIn = tenantIdIn;
   }
 
 
   public VariableInstanceQueryDto variableValues(List<VariableQueryParameterDto> variableValues) {
-    this.variableValues = JsonNullable.<List<VariableQueryParameterDto>>of(variableValues);
     
+    this.variableValues = variableValues;
     return this;
   }
 
   public VariableInstanceQueryDto addVariableValuesItem(VariableQueryParameterDto variableValuesItem) {
-    if (this.variableValues == null || !this.variableValues.isPresent()) {
-      this.variableValues = JsonNullable.<List<VariableQueryParameterDto>>of(new ArrayList<>());
+    if (this.variableValues == null) {
+      this.variableValues = new ArrayList<>();
     }
-    try {
-      this.variableValues.get().add(variableValuesItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variableValues.add(variableValuesItem);
     return this;
   }
 
@@ -571,32 +432,22 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array to only include variable instances that have the certain values. The array consists of objects with the three properties `name`, `operator` and `value`. `name (String)` is the variable name, `operator (String)` is the comparison operator to be used and `value` the variable value. `value` may be `String`, `Number` or `Boolean`.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`")
-  @JsonIgnore
-
-  public List<VariableQueryParameterDto> getVariableValues() {
-        return variableValues.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableQueryParameterDto>> getVariableValues_JsonNullable() {
+  public List<VariableQueryParameterDto> getVariableValues() {
     return variableValues;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES)
-  public void setVariableValues_JsonNullable(JsonNullable<List<VariableQueryParameterDto>> variableValues) {
-    this.variableValues = variableValues;
-  }
+
 
   public void setVariableValues(List<VariableQueryParameterDto> variableValues) {
-    this.variableValues = JsonNullable.<List<VariableQueryParameterDto>>of(variableValues);
+    this.variableValues = variableValues;
   }
 
 
   public VariableInstanceQueryDto variableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
     
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
     return this;
   }
 
@@ -606,32 +457,22 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable names provided in `variableValues` case-insensitively. If set to `true` **variableName** and **variablename** are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableNamesIgnoreCase() {
-        return variableNamesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableNamesIgnoreCase_JsonNullable() {
+  public Boolean getVariableNamesIgnoreCase() {
     return variableNamesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  public void setVariableNamesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
-  }
+
 
   public void setVariableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
   }
 
 
   public VariableInstanceQueryDto variableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
     
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
     return this;
   }
 
@@ -641,44 +482,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable values provided in `variableValues` case-insensitively. If set to `true` **variableValue** and **variablevalue** are treated as equal.")
-  @JsonIgnore
-
-  public Boolean getVariableValuesIgnoreCase() {
-        return variableValuesIgnoreCase.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Boolean> getVariableValuesIgnoreCase_JsonNullable() {
+  public Boolean getVariableValuesIgnoreCase() {
     return variableValuesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  public void setVariableValuesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
-  }
+
 
   public void setVariableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
   }
 
 
   public VariableInstanceQueryDto variableScopeIdIn(List<String> variableScopeIdIn) {
-    this.variableScopeIdIn = JsonNullable.<List<String>>of(variableScopeIdIn);
     
+    this.variableScopeIdIn = variableScopeIdIn;
     return this;
   }
 
   public VariableInstanceQueryDto addVariableScopeIdInItem(String variableScopeIdInItem) {
-    if (this.variableScopeIdIn == null || !this.variableScopeIdIn.isPresent()) {
-      this.variableScopeIdIn = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.variableScopeIdIn == null) {
+      this.variableScopeIdIn = new ArrayList<>();
     }
-    try {
-      this.variableScopeIdIn.get().add(variableScopeIdInItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.variableScopeIdIn.add(variableScopeIdInItem);
     return this;
   }
 
@@ -688,44 +515,30 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include variable instances which belong to one of passed scope ids.")
-  @JsonIgnore
-
-  public List<String> getVariableScopeIdIn() {
-        return variableScopeIdIn.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_VARIABLE_SCOPE_ID_IN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getVariableScopeIdIn_JsonNullable() {
+  public List<String> getVariableScopeIdIn() {
     return variableScopeIdIn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_SCOPE_ID_IN)
-  public void setVariableScopeIdIn_JsonNullable(JsonNullable<List<String>> variableScopeIdIn) {
-    this.variableScopeIdIn = variableScopeIdIn;
-  }
+
 
   public void setVariableScopeIdIn(List<String> variableScopeIdIn) {
-    this.variableScopeIdIn = JsonNullable.<List<String>>of(variableScopeIdIn);
+    this.variableScopeIdIn = variableScopeIdIn;
   }
 
 
   public VariableInstanceQueryDto sorting(List<VariableInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<VariableInstanceQueryDtoSorting>>of(sorting);
     
+    this.sorting = sorting;
     return this;
   }
 
   public VariableInstanceQueryDto addSortingItem(VariableInstanceQueryDtoSorting sortingItem) {
-    if (this.sorting == null || !this.sorting.isPresent()) {
-      this.sorting = JsonNullable.<List<VariableInstanceQueryDtoSorting>>of(new ArrayList<>());
+    if (this.sorting == null) {
+      this.sorting = new ArrayList<>();
     }
-    try {
-      this.sorting.get().add(sortingItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.sorting.add(sortingItem);
     return this;
   }
 
@@ -735,26 +548,16 @@ public class VariableInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of criteria to sort the result by. Each element of the array is an object that specifies one ordering.                       The position in the array identifies the rank of an ordering, i.e., whether it is primary, secondary, etc.                       Sorting has no effect for `count` endpoints")
-  @JsonIgnore
-
-  public List<VariableInstanceQueryDtoSorting> getSorting() {
-        return sorting.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_SORTING)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<VariableInstanceQueryDtoSorting>> getSorting_JsonNullable() {
+  public List<VariableInstanceQueryDtoSorting> getSorting() {
     return sorting;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  public void setSorting_JsonNullable(JsonNullable<List<VariableInstanceQueryDtoSorting>> sorting) {
-    this.sorting = sorting;
-  }
+
 
   public void setSorting(List<VariableInstanceQueryDtoSorting> sorting) {
-    this.sorting = JsonNullable.<List<VariableInstanceQueryDtoSorting>>of(sorting);
+    this.sorting = sorting;
   }
 
 

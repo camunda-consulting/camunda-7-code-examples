@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -40,33 +37,29 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetJobRetriesDto.JSON_PROPERTY_RETRIES
 })
 @JsonTypeName("SetJobRetriesDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetJobRetriesDto {
   public static final String JSON_PROPERTY_JOB_IDS = "jobIds";
-  private JsonNullable<List<String>> jobIds = JsonNullable.<List<String>>undefined();
+  private List<String> jobIds = null;
 
   public static final String JSON_PROPERTY_JOB_QUERY = "jobQuery";
   private JobQueryDto jobQuery;
 
   public static final String JSON_PROPERTY_RETRIES = "retries";
-  private JsonNullable<Integer> retries = JsonNullable.<Integer>undefined();
+  private Integer retries;
 
 
   public SetJobRetriesDto jobIds(List<String> jobIds) {
-    this.jobIds = JsonNullable.<List<String>>of(jobIds);
     
+    this.jobIds = jobIds;
     return this;
   }
 
   public SetJobRetriesDto addJobIdsItem(String jobIdsItem) {
-    if (this.jobIds == null || !this.jobIds.isPresent()) {
-      this.jobIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.jobIds == null) {
+      this.jobIds = new ArrayList<>();
     }
-    try {
-      this.jobIds.get().add(jobIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.jobIds.add(jobIdsItem);
     return this;
   }
 
@@ -76,26 +69,16 @@ public class SetJobRetriesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of job ids to set retries for.")
-  @JsonIgnore
-
-  public List<String> getJobIds() {
-        return jobIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_JOB_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getJobIds_JsonNullable() {
+  public List<String> getJobIds() {
     return jobIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_JOB_IDS)
-  public void setJobIds_JsonNullable(JsonNullable<List<String>> jobIds) {
-    this.jobIds = jobIds;
-  }
+
 
   public void setJobIds(List<String> jobIds) {
-    this.jobIds = JsonNullable.<List<String>>of(jobIds);
+    this.jobIds = jobIds;
   }
 
 
@@ -125,8 +108,8 @@ public class SetJobRetriesDto {
 
 
   public SetJobRetriesDto retries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
     
+    this.retries = retries;
     return this;
   }
 
@@ -137,26 +120,16 @@ public class SetJobRetriesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An integer representing the number of retries. Please note that the value cannot be negative or null.")
-  @JsonIgnore
-
-  public Integer getRetries() {
-        return retries.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_RETRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Integer> getRetries_JsonNullable() {
+  public Integer getRetries() {
     return retries;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  public void setRetries_JsonNullable(JsonNullable<Integer> retries) {
-    this.retries = retries;
-  }
+
 
   public void setRetries(Integer retries) {
-    this.retries = JsonNullable.<Integer>of(retries);
+    this.retries = retries;
   }
 
 

@@ -24,9 +24,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -37,18 +34,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SetRemovalTimeToHistoricBatchesDtoAllOf.JSON_PROPERTY_HISTORIC_BATCH_IDS
 })
 @JsonTypeName("SetRemovalTimeToHistoricBatchesDto_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class SetRemovalTimeToHistoricBatchesDtoAllOf {
   public static final String JSON_PROPERTY_HISTORIC_BATCH_QUERY = "historicBatchQuery";
-  private JsonNullable<Object> historicBatchQuery = JsonNullable.<Object>undefined();
+  private Object historicBatchQuery;
 
   public static final String JSON_PROPERTY_HISTORIC_BATCH_IDS = "historicBatchIds";
-  private JsonNullable<List<String>> historicBatchIds = JsonNullable.<List<String>>undefined();
+  private List<String> historicBatchIds = null;
 
 
   public SetRemovalTimeToHistoricBatchesDtoAllOf historicBatchQuery(Object historicBatchQuery) {
-    this.historicBatchQuery = JsonNullable.<Object>of(historicBatchQuery);
     
+    this.historicBatchQuery = historicBatchQuery;
     return this;
   }
 
@@ -58,44 +55,30 @@ public class SetRemovalTimeToHistoricBatchesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Query for the historic batches to set the removal time for.")
-  @JsonIgnore
-
-  public Object getHistoricBatchQuery() {
-        return historicBatchQuery.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_QUERY)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<Object> getHistoricBatchQuery_JsonNullable() {
+  public Object getHistoricBatchQuery() {
     return historicBatchQuery;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_QUERY)
-  public void setHistoricBatchQuery_JsonNullable(JsonNullable<Object> historicBatchQuery) {
-    this.historicBatchQuery = historicBatchQuery;
-  }
+
 
   public void setHistoricBatchQuery(Object historicBatchQuery) {
-    this.historicBatchQuery = JsonNullable.<Object>of(historicBatchQuery);
+    this.historicBatchQuery = historicBatchQuery;
   }
 
 
   public SetRemovalTimeToHistoricBatchesDtoAllOf historicBatchIds(List<String> historicBatchIds) {
-    this.historicBatchIds = JsonNullable.<List<String>>of(historicBatchIds);
     
+    this.historicBatchIds = historicBatchIds;
     return this;
   }
 
   public SetRemovalTimeToHistoricBatchesDtoAllOf addHistoricBatchIdsItem(String historicBatchIdsItem) {
-    if (this.historicBatchIds == null || !this.historicBatchIds.isPresent()) {
-      this.historicBatchIds = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.historicBatchIds == null) {
+      this.historicBatchIds = new ArrayList<>();
     }
-    try {
-      this.historicBatchIds.get().add(historicBatchIdsItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.historicBatchIds.add(historicBatchIdsItem);
     return this;
   }
 
@@ -105,26 +88,16 @@ public class SetRemovalTimeToHistoricBatchesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The ids of the historic batches to set the removal time for.")
-  @JsonIgnore
-
-  public List<String> getHistoricBatchIds() {
-        return historicBatchIds.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_IDS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getHistoricBatchIds_JsonNullable() {
+  public List<String> getHistoricBatchIds() {
     return historicBatchIds;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORIC_BATCH_IDS)
-  public void setHistoricBatchIds_JsonNullable(JsonNullable<List<String>> historicBatchIds) {
-    this.historicBatchIds = historicBatchIds;
-  }
+
 
   public void setHistoricBatchIds(List<String> historicBatchIds) {
-    this.historicBatchIds = JsonNullable.<List<String>>of(historicBatchIds);
+    this.historicBatchIds = historicBatchIds;
   }
 
 

@@ -25,9 +25,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,13 +35,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MigrationInstructionValidationReportDto.JSON_PROPERTY_FAILURES
 })
 @JsonTypeName("MigrationInstructionValidationReportDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class MigrationInstructionValidationReportDto {
   public static final String JSON_PROPERTY_INSTRUCTION = "instruction";
   private MigrationInstructionDto instruction;
 
   public static final String JSON_PROPERTY_FAILURES = "failures";
-  private JsonNullable<List<String>> failures = JsonNullable.<List<String>>undefined();
+  private List<String> failures = null;
 
 
   public MigrationInstructionValidationReportDto instruction(MigrationInstructionDto instruction) {
@@ -73,20 +70,16 @@ public class MigrationInstructionValidationReportDto {
 
 
   public MigrationInstructionValidationReportDto failures(List<String> failures) {
-    this.failures = JsonNullable.<List<String>>of(failures);
     
+    this.failures = failures;
     return this;
   }
 
   public MigrationInstructionValidationReportDto addFailuresItem(String failuresItem) {
-    if (this.failures == null || !this.failures.isPresent()) {
-      this.failures = JsonNullable.<List<String>>of(new ArrayList<>());
+    if (this.failures == null) {
+      this.failures = new ArrayList<>();
     }
-    try {
-      this.failures.get().add(failuresItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.failures.add(failuresItem);
     return this;
   }
 
@@ -96,26 +89,16 @@ public class MigrationInstructionValidationReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of instruction validation report messages.")
-  @JsonIgnore
-
-  public List<String> getFailures() {
-        return failures.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_FAILURES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<String>> getFailures_JsonNullable() {
+  public List<String> getFailures() {
     return failures;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FAILURES)
-  public void setFailures_JsonNullable(JsonNullable<List<String>> failures) {
-    this.failures = failures;
-  }
+
 
   public void setFailures(List<String> failures) {
-    this.failures = JsonNullable.<List<String>>of(failures);
+    this.failures = failures;
   }
 
 

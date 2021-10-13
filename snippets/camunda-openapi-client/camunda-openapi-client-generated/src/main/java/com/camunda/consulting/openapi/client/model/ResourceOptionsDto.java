@@ -26,9 +26,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -38,27 +35,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ResourceOptionsDto.JSON_PROPERTY_LINKS
 })
 @JsonTypeName("ResourceOptionsDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ResourceOptionsDto {
   public static final String JSON_PROPERTY_LINKS = "links";
-  private JsonNullable<List<AtomLink>> links = JsonNullable.<List<AtomLink>>undefined();
+  private List<AtomLink> links = null;
 
 
   public ResourceOptionsDto links(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
     
+    this.links = links;
     return this;
   }
 
   public ResourceOptionsDto addLinksItem(AtomLink linksItem) {
-    if (this.links == null || !this.links.isPresent()) {
-      this.links = JsonNullable.<List<AtomLink>>of(new ArrayList<>());
+    if (this.links == null) {
+      this.links = new ArrayList<>();
     }
-    try {
-      this.links.get().add(linksItem);
-    } catch (java.util.NoSuchElementException e) {
-      // this can never happen, as we make sure above that the value is present
-    }
+    this.links.add(linksItem);
     return this;
   }
 
@@ -68,26 +61,16 @@ public class ResourceOptionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonIgnore
-
-  public List<AtomLink> getLinks() {
-        return links.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_LINKS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<List<AtomLink>> getLinks_JsonNullable() {
+  public List<AtomLink> getLinks() {
     return links;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  public void setLinks_JsonNullable(JsonNullable<List<AtomLink>> links) {
-    this.links = links;
-  }
+
 
   public void setLinks(List<AtomLink> links) {
-    this.links = JsonNullable.<List<AtomLink>>of(links);
+    this.links = links;
   }
 
 

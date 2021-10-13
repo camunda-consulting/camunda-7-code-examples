@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -34,15 +31,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ExternalTaskBpmnErrorAllOf.JSON_PROPERTY_WORKER_ID
 })
 @JsonTypeName("ExternalTaskBpmnError_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class ExternalTaskBpmnErrorAllOf {
   public static final String JSON_PROPERTY_WORKER_ID = "workerId";
-  private JsonNullable<String> workerId = JsonNullable.<String>undefined();
+  private String workerId;
 
 
   public ExternalTaskBpmnErrorAllOf workerId(String workerId) {
-    this.workerId = JsonNullable.<String>of(workerId);
     
+    this.workerId = workerId;
     return this;
   }
 
@@ -52,26 +49,16 @@ public class ExternalTaskBpmnErrorAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the worker that reports the failure. Must match the id of the worker who has most recently locked the task.")
-  @JsonIgnore
-
-  public String getWorkerId() {
-        return workerId.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_WORKER_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getWorkerId_JsonNullable() {
+  public String getWorkerId() {
     return workerId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  public void setWorkerId_JsonNullable(JsonNullable<String> workerId) {
-    this.workerId = workerId;
-  }
+
 
   public void setWorkerId(String workerId) {
-    this.workerId = JsonNullable.<String>of(workerId);
+    this.workerId = workerId;
   }
 
 

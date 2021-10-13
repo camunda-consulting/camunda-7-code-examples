@@ -22,9 +22,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
@@ -35,18 +32,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DecisionRequirementsDefinitionXmlDto.JSON_PROPERTY_DMN_XML
 })
 @JsonTypeName("DecisionRequirementsDefinitionXmlDto")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T16:56:52.297572+02:00[Europe/Berlin]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-10-13T17:49:51.183809+02:00[Europe/Berlin]")
 public class DecisionRequirementsDefinitionXmlDto {
   public static final String JSON_PROPERTY_ID = "id";
-  private JsonNullable<String> id = JsonNullable.<String>undefined();
+  private String id;
 
   public static final String JSON_PROPERTY_DMN_XML = "dmnXml";
-  private JsonNullable<String> dmnXml = JsonNullable.<String>undefined();
+  private String dmnXml;
 
 
   public DecisionRequirementsDefinitionXmlDto id(String id) {
-    this.id = JsonNullable.<String>of(id);
     
+    this.id = id;
     return this;
   }
 
@@ -56,32 +53,22 @@ public class DecisionRequirementsDefinitionXmlDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision requirements definition.")
-  @JsonIgnore
-
-  public String getId() {
-        return id.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getId_JsonNullable() {
+  public String getId() {
     return id;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ID)
-  public void setId_JsonNullable(JsonNullable<String> id) {
-    this.id = id;
-  }
+
 
   public void setId(String id) {
-    this.id = JsonNullable.<String>of(id);
+    this.id = id;
   }
 
 
   public DecisionRequirementsDefinitionXmlDto dmnXml(String dmnXml) {
-    this.dmnXml = JsonNullable.<String>of(dmnXml);
     
+    this.dmnXml = dmnXml;
     return this;
   }
 
@@ -91,26 +78,16 @@ public class DecisionRequirementsDefinitionXmlDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An escaped XML string containing the XML that this decision requirements definition was deployed with. Carriage returns, line feeds and quotation marks are escaped.")
-  @JsonIgnore
-
-  public String getDmnXml() {
-        return dmnXml.orElse(null);
-  }
-
   @JsonProperty(JSON_PROPERTY_DMN_XML)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getDmnXml_JsonNullable() {
+  public String getDmnXml() {
     return dmnXml;
   }
-  
-  @JsonProperty(JSON_PROPERTY_DMN_XML)
-  public void setDmnXml_JsonNullable(JsonNullable<String> dmnXml) {
-    this.dmnXml = dmnXml;
-  }
+
 
   public void setDmnXml(String dmnXml) {
-    this.dmnXml = JsonNullable.<String>of(dmnXml);
+    this.dmnXml = dmnXml;
   }
 
 
