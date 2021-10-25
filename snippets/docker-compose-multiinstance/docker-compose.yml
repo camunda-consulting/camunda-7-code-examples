@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:13.1
+    restart: always
+    environment:
+      - POSTGRES_USER=camunda
+      - POSTGRES_PASSWORD=camunda
+      - POSTGRES_DB=camunda
+  camunda1:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./default.yml:/camunda/configuration/default.yml:ro
+  camunda2:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    restart: always
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./default.yml:/camunda/configuration/default.yml:ro
+  camunda3:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    restart: always
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./default.yml:/camunda/configuration/default.yml:ro
