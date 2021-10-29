@@ -19,14 +19,16 @@ camunda.bpm:
 
 job:
   breaks: # these are schedule entries
-    - 03:00,05:00
+    - 15:00,18:00
     - SATURDAY,00:00,23:59
     - SUNDAY,00:00,23:59
   schedule: # these are cron expressions for controlling the job executor itself
     shutdown: 0 0 3 * * *
     start: 0 0 5 * * *
+  scheduler.paused: false
 
 logging:
   level:
     ROOT: INFO
     com.camunda.consulting: DEBUG
+    org.camunda.bpm.engine.impl.cmd: DEBUG

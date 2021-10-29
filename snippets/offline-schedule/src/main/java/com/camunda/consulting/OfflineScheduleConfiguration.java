@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JobExecutorScheduleConfiguration extends OfflineSchedulePluginProperties {
+public class OfflineScheduleConfiguration extends OfflineSchedulePluginProperties {
 
   @Bean
-  public JobExecutorSchedule schedule() {
-    return new JobExecutorSchedule(
+  public OfflineSchedule schedule() {
+    return new OfflineSchedule(
         this.getBreaks().stream().map(JobExecutorBreakParser::parse).collect(Collectors.toSet()));
   }
 }

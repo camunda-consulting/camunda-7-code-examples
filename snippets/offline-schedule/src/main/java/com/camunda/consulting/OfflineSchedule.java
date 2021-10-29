@@ -6,10 +6,10 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Set;
 
-public class JobExecutorSchedule {
+public class OfflineSchedule {
   private final Set<JobExecutorBreak> schedule;
 
-  public JobExecutorSchedule(Set<JobExecutorBreak> schedule) {
+  public OfflineSchedule(Set<JobExecutorBreak> schedule) {
     this.schedule = schedule;
   }
 

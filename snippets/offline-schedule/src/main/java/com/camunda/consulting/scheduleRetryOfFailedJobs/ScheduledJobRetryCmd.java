@@ -7,14 +7,14 @@ import org.camunda.bpm.engine.impl.interceptor.CommandContext;
 import org.camunda.bpm.engine.impl.jobexecutor.JobExecutorLogger;
 import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
 
-import com.camunda.consulting.JobExecutorSchedule;
+import com.camunda.consulting.OfflineSchedule;
 
 public class ScheduledJobRetryCmd extends DefaultJobRetryCmd {
   private final static JobExecutorLogger LOG = ProcessEngineLogger.JOB_EXECUTOR_LOGGER;
 
-  private final JobExecutorSchedule schedule;
+  private final OfflineSchedule schedule;
 
-  public ScheduledJobRetryCmd(String jobId, Throwable exception, JobExecutorSchedule schedule) {
+  public ScheduledJobRetryCmd(String jobId, Throwable exception, OfflineSchedule schedule) {
     super(jobId, exception);
     this.schedule = schedule;
   }

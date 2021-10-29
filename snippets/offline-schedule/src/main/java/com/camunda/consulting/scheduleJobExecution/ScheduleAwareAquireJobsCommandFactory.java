@@ -5,12 +5,12 @@ import org.camunda.bpm.engine.impl.jobexecutor.AcquiredJobs;
 import org.camunda.bpm.engine.impl.jobexecutor.DefaultAcquireJobsCommandFactory;
 import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
 
-import com.camunda.consulting.JobExecutorSchedule;
+import com.camunda.consulting.OfflineSchedule;
 
 public class ScheduleAwareAquireJobsCommandFactory extends DefaultAcquireJobsCommandFactory {
-  private final JobExecutorSchedule schedule;
+  private final OfflineSchedule schedule;
 
-  public ScheduleAwareAquireJobsCommandFactory(JobExecutor jobExecutor, JobExecutorSchedule schedule) {
+  public ScheduleAwareAquireJobsCommandFactory(JobExecutor jobExecutor, OfflineSchedule schedule) {
     super(jobExecutor);
     this.schedule = schedule;
   }

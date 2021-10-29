@@ -3,9 +3,15 @@ package com.camunda.consulting;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class JobExecutorBreakParser {
+  private static final Logger LOG = LoggerFactory.getLogger(JobExecutorBreakParser.class);
+
   public static JobExecutorBreak parse(String property) {
     try {
+      LOG.debug("Creating job executor break for: {}", property);
       String[] split = property.split(",");
       JobExecutorBreak b = new JobExecutorBreak();
       String weekday = split.length == 2 ? null : split[0];

@@ -8,7 +8,7 @@
   <name>Offline Schedule</name>
   <description>A project where the jobs have an offline schedule to follow</description>
   <properties>
-    <camunda.version>7.15.6-ee</camunda.version>
+    <camunda.version>7.16.1-ee</camunda.version>
     <springBoot.version>2.5.5</springBoot.version>
 
     <maven.compiler.source>11</maven.compiler.source>

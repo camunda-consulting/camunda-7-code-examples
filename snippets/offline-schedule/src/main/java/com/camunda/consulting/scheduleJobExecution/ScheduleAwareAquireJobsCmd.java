@@ -9,13 +9,13 @@ import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.camunda.consulting.JobExecutorSchedule;
+import com.camunda.consulting.OfflineSchedule;
 
 public class ScheduleAwareAquireJobsCmd extends AcquireJobsCmd {
   private static final Logger LOG = LoggerFactory.getLogger(ScheduleAwareAquireJobsCmd.class);
-  private final JobExecutorSchedule schedule;
+  private final OfflineSchedule schedule;
 
-  public ScheduleAwareAquireJobsCmd(JobExecutor jobExecutor, JobExecutorSchedule schedule) {
+  public ScheduleAwareAquireJobsCmd(JobExecutor jobExecutor, OfflineSchedule schedule) {
     super(jobExecutor);
     this.schedule = schedule;
   }

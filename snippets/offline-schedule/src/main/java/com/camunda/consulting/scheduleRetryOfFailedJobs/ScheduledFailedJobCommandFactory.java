@@ -3,13 +3,13 @@ package com.camunda.consulting.scheduleRetryOfFailedJobs;
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.jobexecutor.DefaultFailedJobCommandFactory;
 
-import com.camunda.consulting.JobExecutorSchedule;
+import com.camunda.consulting.OfflineSchedule;
 
 public class ScheduledFailedJobCommandFactory extends DefaultFailedJobCommandFactory {
 
-  private final JobExecutorSchedule schedule;
+  private final OfflineSchedule schedule;
 
-  public ScheduledFailedJobCommandFactory(JobExecutorSchedule schedule) {
+  public ScheduledFailedJobCommandFactory(OfflineSchedule schedule) {
     this.schedule = schedule;
   }
 
