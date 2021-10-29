@@ -1,4 +1,4 @@
-package com.camunda.consulting;
+package com.camunda.consulting.scheduleRetryOfFailedJobs;
 
 import org.camunda.bpm.engine.impl.ProcessEngineLogger;
 import org.camunda.bpm.engine.impl.calendar.DurationHelper;
@@ -6,6 +6,8 @@ import org.camunda.bpm.engine.impl.cmd.DefaultJobRetryCmd;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
 import org.camunda.bpm.engine.impl.jobexecutor.JobExecutorLogger;
 import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
+
+import com.camunda.consulting.JobExecutorSchedule;
 
 public class ScheduledJobRetryCmd extends DefaultJobRetryCmd {
   private final static JobExecutorLogger LOG = ProcessEngineLogger.JOB_EXECUTOR_LOGGER;

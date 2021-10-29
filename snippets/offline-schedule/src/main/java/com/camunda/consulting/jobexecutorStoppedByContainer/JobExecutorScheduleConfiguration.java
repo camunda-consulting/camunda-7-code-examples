@@ -1,4 +1,4 @@
-package com.camunda.consulting;
+package com.camunda.consulting.jobexecutorStoppedByContainer;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;

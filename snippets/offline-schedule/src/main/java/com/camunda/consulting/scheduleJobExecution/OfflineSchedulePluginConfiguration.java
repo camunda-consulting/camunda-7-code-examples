@@ -1,4 +1,4 @@
-package com.camunda.consulting.scheduleRetryOfFailedJobs;
+package com.camunda.consulting.scheduleJobExecution;
 
 import java.util.stream.Collectors;
 
@@ -15,7 +15,7 @@ public class OfflineSchedulePluginConfiguration extends OfflineSchedulePluginPro
 
   @Bean
   public ProcessEnginePlugin offlineSchedulePlugin(JobExecutorSchedule schedule) {
-    return new OfflineSchedulePlugin(schedule);
+    return new ScheduleAwareJobAcquisitionPlugin(schedule);
   }
 
   @Bean

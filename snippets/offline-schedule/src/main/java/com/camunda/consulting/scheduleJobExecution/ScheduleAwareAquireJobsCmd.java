@@ -1,4 +1,4 @@
-package com.camunda.consulting;
+package com.camunda.consulting.scheduleJobExecution;
 
 import java.util.Date;
 
@@ -8,6 +8,8 @@ import org.camunda.bpm.engine.impl.jobexecutor.AcquiredJobs;
 import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.camunda.consulting.JobExecutorSchedule;
 
 public class ScheduleAwareAquireJobsCmd extends AcquireJobsCmd {
   private static final Logger LOG = LoggerFactory.getLogger(ScheduleAwareAquireJobsCmd.class);

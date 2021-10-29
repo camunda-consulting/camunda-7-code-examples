@@ -18,11 +18,11 @@ camunda.bpm:
   default-serialization-format: application/json
 
 job:
-  breaks:
+  breaks: # these are schedule entries
     - 03:00,05:00
     - SATURDAY,00:00,23:59
     - SUNDAY,00:00,23:59
-  schedule:
+  schedule: # these are cron expressions for controlling the job executor itself
     shutdown: 0 0 3 * * *
     start: 0 0 5 * * *
 

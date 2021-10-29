@@ -1,9 +1,11 @@
-package com.camunda.consulting;
+package com.camunda.consulting.scheduleJobExecution;
 
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.jobexecutor.AcquiredJobs;
 import org.camunda.bpm.engine.impl.jobexecutor.DefaultAcquireJobsCommandFactory;
 import org.camunda.bpm.engine.impl.jobexecutor.JobExecutor;
+
+import com.camunda.consulting.JobExecutorSchedule;
 
 public class ScheduleAwareAquireJobsCommandFactory extends DefaultAcquireJobsCommandFactory {
   private final JobExecutorSchedule schedule;

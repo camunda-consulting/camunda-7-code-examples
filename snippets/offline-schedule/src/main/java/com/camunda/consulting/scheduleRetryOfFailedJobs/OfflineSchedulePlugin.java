@@ -1,7 +1,9 @@
-package com.camunda.consulting;
+package com.camunda.consulting.scheduleRetryOfFailedJobs;
 
 import org.camunda.bpm.engine.impl.cfg.AbstractProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+
+import com.camunda.consulting.JobExecutorSchedule;
 
 public class OfflineSchedulePlugin extends AbstractProcessEnginePlugin {
   private final JobExecutorSchedule schedule;
