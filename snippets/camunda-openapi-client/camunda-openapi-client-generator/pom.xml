@@ -45,9 +45,10 @@
       <plugin>
         <groupId>org.openapitools</groupId>
         <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>5.1.0</version>
+        <version>5.3.0</version>
         <executions>
           <execution>
+            <id>java-client-spring</id>
             <goals>
               <goal>generate</goal>
             </goals>
@@ -55,7 +56,7 @@
               <inputSpec>${project.basedir}/target/dependency/openapi.json</inputSpec>
               <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
               <skipOverwrite>true</skipOverwrite>
-              <output>../camunda-openapi-client-generated</output>
+              <output>../camunda-openapi-client-spring</output>
               <generatorName>java</generatorName>
               <configOptions>
                 <sourceFolder>src/main/java</sourceFolder>
@@ -64,8 +65,8 @@
                 <library>resttemplate</library>
                 <openApiNullable>false</openApiNullable>
               </configOptions>
-              <groupId>com.camunda.consulting.openapi.client</groupId>
-              <artifactId>camunda-openapi-client</artifactId>
+              <groupId>com.camunda.consulting</groupId>
+              <artifactId>camunda-openapi-client-spring</artifactId>
               <artifactVersion>${version.camunda}</artifactVersion>
               <packageName>com.camunda.consulting.openapi.client</packageName>
               <apiPackage>com.camunda.consulting.openapi.client.handler</apiPackage>

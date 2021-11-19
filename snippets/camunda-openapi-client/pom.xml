@@ -9,9 +9,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-   <modules>
-     <module>camunda-openapi-client-generator</module>
-     <module>camunda-openapi-client-generated</module>
-   </modules>
+  <modules>
+    <module>camunda-openapi-client-generator</module>
+    <module>camunda-openapi-client-spring</module>
+    <module>camunda-openapi-jaxrs-spec-quarkus</module>
+  </modules>
 
 </project>
