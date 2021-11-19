@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:13.5
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: camunda
+      POSTGRES_USER: camunda
+      POSTGRES_DB: camunda
+    ports:
+      - 5432:5432
+
+  cockpit:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.1
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/camunda
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_USERNAME: camunda
+      SPRING_DATASOURCE_PASSWORD: camunda
+    ports:
+      - 8081:8080

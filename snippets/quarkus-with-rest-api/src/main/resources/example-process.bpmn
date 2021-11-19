@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1aucgb4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ExampleProcess" name="Example" isExecutable="true">
+    <bpmn:startEvent id="ProcessStartedStartEvent" name="Process started" camunda:asyncBefore="true">
+      <bpmn:outgoing>Flow_0wl9fei</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0wl9fei" sourceRef="ProcessStartedStartEvent" targetRef="TaskOneTask" />
+    <bpmn:sequenceFlow id="Flow_0k1xghm" sourceRef="TaskOneTask" targetRef="TaskTwoTask" />
+    <bpmn:endEvent id="ProcessEndedEndEvent" name="Process ended">
+      <bpmn:incoming>Flow_1unf6tb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_194b2gs" sourceRef="TaskTwoTask" targetRef="TaskThreeTask" />
+    <bpmn:serviceTask id="TaskOneTask" name="Task One" camunda:delegateExpression="${TaskOneDelegate}">
+      <bpmn:incoming>Flow_0wl9fei</bpmn:incoming>
+      <bpmn:outgoing>Flow_0k1xghm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="TaskTwoTask" name="Task Two" camunda:delegateExpression="${TaskTwoDelegate}">
+      <bpmn:incoming>Flow_0k1xghm</bpmn:incoming>
+      <bpmn:outgoing>Flow_194b2gs</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1unf6tb" sourceRef="TaskThreeTask" targetRef="ProcessEndedEndEvent" />
+    <bpmn:userTask id="TaskThreeTask" name="Task Three">
+      <bpmn:incoming>Flow_194b2gs</bpmn:incoming>
+      <bpmn:outgoing>Flow_1unf6tb</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ExampleProcess">
+      <bpmndi:BPMNEdge id="Flow_1unf6tb_di" bpmnElement="Flow_1unf6tb">
+        <di:waypoint x="700" y="117" />
+        <di:waypoint x="752" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_194b2gs_di" bpmnElement="Flow_194b2gs">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="600" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k1xghm_di" bpmnElement="Flow_0k1xghm">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wl9fei_di" bpmnElement="Flow_0wl9fei">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ProcessStartedStartEvent">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="142" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d6ik4r_di" bpmnElement="ProcessEndedEndEvent">
+        <dc:Bounds x="752" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="733" y="142" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14yp8bh_di" bpmnElement="TaskOneTask">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mwi8u1_di" bpmnElement="TaskTwoTask">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0uhcz6v_di" bpmnElement="TaskThreeTask">
+        <dc:Bounds x="600" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
