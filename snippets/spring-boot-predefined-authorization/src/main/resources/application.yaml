@@ -15,6 +15,12 @@ camunda.bpm:
         user: peter
         permissions: ALL
   default-serialization-format: application/json
-  filter.create: All Tasks
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
 
 
