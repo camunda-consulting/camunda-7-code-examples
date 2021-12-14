@@ -1,15 +1,11 @@
 package com.camunda.consulting;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
+import javax.ejb.Singleton;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Service
+@Singleton
 public class TaskDataService {
   private final Map<String, TaskData> taskDataList = new HashMap<>();
 
@@ -36,12 +32,11 @@ public class TaskDataService {
     return taskDataList.values().stream();
   }
 
-  public Page<TaskData> page(Pageable pageable) {
-    List<TaskData> list = taskDataList.values()
+  public List<TaskData> list() {
+    return taskDataList.values()
         .stream()
         .sorted(Comparator.comparing(TaskData::getTaskId))
         .collect(Collectors.toList());
-    return new PageImpl<>(list, pageable, list.size());
   }
 
   public void drop() {
