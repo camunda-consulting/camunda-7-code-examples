@@ -31,10 +31,12 @@ public class EventListeningEjbProcessApplication extends EjbProcessApplication {
     undeploy();
   }
 
+  @Override
   public ExecutionListener getExecutionListener() {
     return cdiEventListener;
   }
 
+  @Override
   public TaskListener getTaskListener() {
     return cdiEventListener;
   }
