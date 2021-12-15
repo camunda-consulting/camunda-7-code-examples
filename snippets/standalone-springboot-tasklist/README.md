@@ -18,3 +18,11 @@ Two things are important:
 Since the Tasklist runs in its own Spring Boot Application, it will not have direct access to embedded forms of the process application. This can be achieved using a reverse proxy to resolve the form key. In my example, I use Zuul as an embedded reverse proxy.
 
 In more traditional architectures, where the Standalone Webapp is deployed as a war file, one can also choose to use an external reverse proxy to do the lookup.
+
+#### Tested on:
+
+* Camunda platform 7.16.0
+* Spring-Boot 2.5.4
+* Spring Cloud 2020.0.4
+* spring-cloud-starter-netflix-zuul: 2.2.10.RELEASE
+* As the Zuul component and Spring Cloud are out of sync, you have to add the ZuulConfiguration class as well: https://stackoverflow.com/questions/68100671/nosuchmethoderror-org-springframework-boot-web-servlet-error-errorcontroller-ge
