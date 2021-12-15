@@ -1,4 +1,4 @@
-window.camTasklistConf = {
+export default {
   // change the app name and vendor
    app: {
      name: '${CUSTOM_TASKLIST_TITLE}',
@@ -16,9 +16,12 @@ window.camTasklistConf = {
       "fallbackLocale": "en"
     },
   
-  // // custom libraries and scripts loading and initialization,
-  // // see: http://docs.camunda.org/guides/user-guide/#tasklist-customizing-custom-scripts
-  // customScripts: {
+  // customScripts: [
+  //   // If you have a folder called 'my-custom-script' (in the 'tasklist' folder)
+  //   // with a file called 'customScript.js' in it
+  //   // 'my-custom-script/customScript'
+  // ],
+  // requireJsConfig: {
   //   // AngularJS module names
   //   ngDeps: ['ui.bootstrap'],
   //   // RequireJS configuration for a complete configuration documentation see:
@@ -30,7 +33,9 @@ window.camTasklistConf = {
   //     'custom-ui': 'custom-ui/scripts'
   //   }
   // },
-
+  // csrfCookieName: 'XSRF-TOKEN',
+  // disableWelcomeMessage: false,
+  // assignProcessInstanceIdToTaskComment: true, 
   'shortcuts': {
     'claimTask': {
       'key': 'ctrl+alt+c',

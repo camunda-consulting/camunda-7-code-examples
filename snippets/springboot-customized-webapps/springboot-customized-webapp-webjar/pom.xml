@@ -6,7 +6,7 @@
 	<parent>
                 <groupId>org.camunda.bpm</groupId>
                 <artifactId>camunda-parent</artifactId>
-                <version>7.12.0</version>
+                <version>7.16.0</version>
 	</parent>
 
 	<!--
@@ -219,7 +219,7 @@
 		<repository>
 			<id>camunda-bpm-nexus-ee</id>
 			<name>camunda-bpm-nexus</name>
-			<url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+			<url>https://camunda.jfrog.io/artifactory/private/</url>
 		</repository>
 	</repositories>
 	-->
