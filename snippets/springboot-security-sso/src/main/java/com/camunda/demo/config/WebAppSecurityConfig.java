@@ -18,7 +18,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .antMatcher("/app/**")
+                .antMatcher("/camunda/app/**")
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .httpBasic();// this is just an example, use any auth mechanism you like
@@ -32,7 +32,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
         filterRegistration.setFilter(new ContainerBasedAuthenticationFilter());
         filterRegistration.setInitParameters(Collections.singletonMap("authentication-provider", "com.camunda.demo.filter.webapp.SpringSecurityAuthenticationProvider"));
         filterRegistration.setOrder(101); // make sure the filter is registered after the Spring Security Filter Chain
-        filterRegistration.addUrlPatterns("/app/*");
+        filterRegistration.addUrlPatterns("/camunda/app/*");
         return filterRegistration;
     }
 }

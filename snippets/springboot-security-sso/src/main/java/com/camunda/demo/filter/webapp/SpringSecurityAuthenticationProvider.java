@@ -3,6 +3,8 @@ package com.camunda.demo.filter.webapp;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.rest.security.auth.AuthenticationResult;
 import org.camunda.bpm.engine.rest.security.auth.impl.ContainerBasedAuthenticationProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SpringSecurityAuthenticationProvider extends ContainerBasedAuthenticationProvider {
+  
+    private static final Logger LOG = LoggerFactory.getLogger(SpringSecurityAuthenticationProvider.class);
 
     @Override
     public AuthenticationResult extractAuthenticatedUser(HttpServletRequest request, ProcessEngine engine) {
@@ -22,6 +26,7 @@ public class SpringSecurityAuthenticationProvider extends ContainerBasedAuthenti
         }
 
         String name = authentication.getName();
+        LOG.debug("extracted user: {}", name);
         if (name == null || name.isEmpty()) {
             return AuthenticationResult.unsuccessful();
         }

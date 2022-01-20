@@ -11,15 +11,14 @@
     <description>Spring Boot Application using [Camunda](http://docs.camunda.org)</description>
 
     <properties>
-        <camunda.version>7.12.0</camunda.version>
+        <camunda.version>7.14.0</camunda.version>
         <!--
         Adjust if you want to use EE:
         <camunda.version>7.8.0-ee</camunda.version>
         Make sure you also switch to the ee webapp dependency
         and EE repository below
         -->
-        <camundaSpringBoot.version>3.4.0</camundaSpringBoot.version>
-        <springBoot.version>2.2.0.RELEASE</springBoot.version>
+        <springBoot.version>2.3.1.RELEASE</springBoot.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -61,18 +60,21 @@
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-            <version>${camundaSpringBoot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-            <version>${camundaSpringBoot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
         <!-- Required to use Spin dataformat support -->
@@ -137,13 +139,13 @@
         <repository>
             <id>camunda-bpm-nexus</id>
             <name>Camunda BPM Maven Repository</name>
-            <url>https://app.camunda.com/nexus/content/groups/public</url>
+            <url>https://camunda.jfrog.io/artifactory/public/</url>
         </repository>
         <!-- enable this for EE dependencies
         <repository>
           <id>camunda-bpm-nexus-ee</id>
           <name>camunda-bpm-nexus</name>
-          <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+          <url>https://camunda.jfrog.io/artifactory/private/</url>
         </repository>
         -->
     </repositories>
