@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "8ac518c4-c4c0-4994-aab4-7e0e00065a5f",
+		"name": "RandomFailureProcess",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "start random failure process",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"function wait(ms){\r",
+							"   var start = new Date().getTime();\r",
+							"   var end = start;\r",
+							"   while(end < start + ms) {\r",
+							"     end = new Date().getTime();\r",
+							"  }\r",
+							"}\r",
+							"\r",
+							"var random = Math.random() * 1000;\r",
+							"console.log(\"process started, waiting for \" + random + \" ms\");\r",
+							"wait(random);\r",
+							"\r",
+							"var i = pm.collectionVariables.get(\"loopCounter\");\r",
+							"if (i > 0) {\r",
+							"    console.log(i+ \". process\");\r",
+							"    i--;\r",
+							"    pm.collectionVariables.set(\"loopCounter\", i);\r",
+							"    postman.setNextRequest(\"start random failure process\");\r",
+							"} else {\r",
+							"    console.log(\"finish\");\r",
+							"    postman.setNextRequest(null);\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/engine-rest/process-definition/key/RandomErrorProcess/start",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"RandomErrorProcess",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "loopCounter",
+			"value": "10",
+			"type": "default"
+		}
+	]
+}

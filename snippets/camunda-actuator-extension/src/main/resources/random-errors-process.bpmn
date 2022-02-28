@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0qucub5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0-alpha.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="RandomErrorProcess" name="Random Error Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Failures wanted">
+      <bpmn:outgoing>Flow_1pdhh47</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1pdhh47" sourceRef="StartEvent_1" targetRef="Activity_0hm7odr" />
+    <bpmn:serviceTask id="Activity_158njz8" name="Invoke Service" camunda:asyncBefore="true" camunda:delegateExpression="${randomlyFailingDelegate}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1h5cf1i</bpmn:incoming>
+      <bpmn:outgoing>Flow_09i2bnt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1h5cf1i" sourceRef="Activity_0hm7odr" targetRef="Activity_158njz8" />
+    <bpmn:serviceTask id="Activity_0hm7odr" name="Set random number" camunda:asyncBefore="true" camunda:delegateExpression="${createRandomNumberDelegate}">
+      <bpmn:incoming>Flow_1pdhh47</bpmn:incoming>
+      <bpmn:outgoing>Flow_1h5cf1i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_09i2bnt" sourceRef="Activity_158njz8" targetRef="Activity_1comfwb" />
+    <bpmn:serviceTask id="Activity_1comfwb" name="Invoke Service again" camunda:asyncBefore="true" camunda:delegateExpression="${randomly2FailingDelegate}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_09i2bnt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cfkor1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0zphxi5" name="Failures shown">
+      <bpmn:incoming>Flow_1cfkor1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1cfkor1" sourceRef="Activity_1comfwb" targetRef="Event_0zphxi5" />
+    <bpmn:textAnnotation id="TextAnnotation_0m8xb89">
+      <bpmn:text>70% Failure</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1pg0sga" sourceRef="Activity_158njz8" targetRef="TextAnnotation_0m8xb89" />
+    <bpmn:textAnnotation id="TextAnnotation_0968bju">
+      <bpmn:text>60% Failure</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1qlpjr7" sourceRef="Activity_1comfwb" targetRef="TextAnnotation_0968bju" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="RandomErrorProcess">
+      <bpmndi:BPMNShape id="TextAnnotation_0m8xb89_di" bpmnElement="TextAnnotation_0m8xb89">
+        <dc:Bounds x="450" y="80" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0968bju_di" bpmnElement="TextAnnotation_0968bju">
+        <dc:Bounds x="620" y="80" width="100" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1pdhh47_di" bpmnElement="Flow_1pdhh47">
+        <di:waypoint x="215" y="197" />
+        <di:waypoint x="250" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h5cf1i_di" bpmnElement="Flow_1h5cf1i">
+        <di:waypoint x="350" y="197" />
+        <di:waypoint x="390" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09i2bnt_di" bpmnElement="Flow_09i2bnt">
+        <di:waypoint x="490" y="197" />
+        <di:waypoint x="530" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cfkor1_di" bpmnElement="Flow_1cfkor1">
+        <di:waypoint x="630" y="197" />
+        <di:waypoint x="672" y="197" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="179" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="222" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gyrz5q_di" bpmnElement="Activity_158njz8">
+        <dc:Bounds x="390" y="157" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1u1uq8h_di" bpmnElement="Activity_0hm7odr">
+        <dc:Bounds x="250" y="157" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16n3nvp_di" bpmnElement="Activity_1comfwb">
+        <dc:Bounds x="530" y="157" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zphxi5_di" bpmnElement="Event_0zphxi5">
+        <dc:Bounds x="672" y="179" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="653" y="222" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1pg0sga_di" bpmnElement="Association_1pg0sga">
+        <di:waypoint x="464" y="157" />
+        <di:waypoint x="491" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1qlpjr7_di" bpmnElement="Association_1qlpjr7">
+        <di:waypoint x="615" y="157" />
+        <di:waypoint x="657" y="110" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

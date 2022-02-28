@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "68377446-0509-481a-b423-2a9ed5e1ba2c",
+		"name": "Start processes for timer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "start process including timer",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var now = new Date();\r",
+							"var nowPlus2MinutesTime = Math.trunc((now.getTime() + 120000)/100000) * 100000;\r",
+							"var startTime = new Date(nowPlus2MinutesTime);\r",
+							"var timerValueISO = startTime.toISOString();\r",
+							"pm.collectionVariables.set(\"timerValueISO\", timerValueISO);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\": {\r\n        \"timerValue\": {\"value\": \"{{timerValueISO}}\"}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/TimerWaitProcess/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"TimerWaitProcess",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "timerValueISO",
+			"value": ""
+		}
+	]
+}

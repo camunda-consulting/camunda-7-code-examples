@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    build: ./postgres-camunda
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=camunda
+      - POSTGRES_USER=camunda
+      - POSTGRES_PASSWORD=camunda
+

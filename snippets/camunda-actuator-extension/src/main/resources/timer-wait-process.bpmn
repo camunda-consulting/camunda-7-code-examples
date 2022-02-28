@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0vx5qmt" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0-alpha.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="TimerWaitProcess" name="Timer Wait Process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Timer Job wanted">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="timerValue" label="Time to continue (yyyy-mm-ddTHH:MM:SS)" type="string" defaultValue="${dateTime().plusMinutes(2).withSecondOfMinute(0).withMillisOfSecond(0).toString()}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_114esef</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_114esef" sourceRef="StartEvent_1" targetRef="Event_151bo4h" />
+    <bpmn:intermediateCatchEvent id="Event_151bo4h" name="Given timer expired">
+      <bpmn:incoming>Flow_114esef</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ml4bgg</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0x9k0cq">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${timerValue}</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1ml4bgg" sourceRef="Event_151bo4h" targetRef="Activity_0dnyf11" />
+    <bpmn:serviceTask id="Activity_0dnyf11" name="Log output" camunda:delegateExpression="${logger}">
+      <bpmn:incoming>Flow_1ml4bgg</bpmn:incoming>
+      <bpmn:outgoing>Flow_1u4lt7u</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0940lnu" name="Example shown">
+      <bpmn:incoming>Flow_1u4lt7u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1u4lt7u" sourceRef="Activity_0dnyf11" targetRef="Event_0940lnu" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="TimerWaitProcess">
+      <bpmndi:BPMNEdge id="Flow_114esef_di" bpmnElement="Flow_114esef">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="272" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ml4bgg_di" bpmnElement="Flow_1ml4bgg">
+        <di:waypoint x="308" y="117" />
+        <di:waypoint x="370" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u4lt7u_di" bpmnElement="Flow_1u4lt7u">
+        <di:waypoint x="470" y="117" />
+        <di:waypoint x="532" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="142" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0jzeqbh_di" bpmnElement="Event_151bo4h">
+        <dc:Bounds x="272" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="261" y="142" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_113ijsa_di" bpmnElement="Activity_0dnyf11">
+        <dc:Bounds x="370" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0940lnu_di" bpmnElement="Event_0940lnu">
+        <dc:Bounds x="532" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="511" y="142" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

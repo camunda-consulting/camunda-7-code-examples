@@ -1,0 +1,35 @@
+spring.datasource:
+  url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  username: sa
+  password: sa
+#  url: jdbc:postgresql:camunda
+#  username: camunda
+#  password: camunda
+spring.h2.console.enabled: true
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  job-execution:
+    max-wait: 10000
+    
+  defaultNumberOfRetries: 1
+    
+server.port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        exclude: "env,beans"
+  endpoint:
+    health:
+      show-details: always
+      
+#logging:
+#  level:
+#    org.camunda.bpm.engine.impl.persistence.entity.MeterLogEntity: TRACE    
