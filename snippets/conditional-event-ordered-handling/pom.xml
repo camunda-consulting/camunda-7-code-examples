@@ -122,13 +122,13 @@
     <repository>
       <id>camunda-bpm-nexus</id>
       <name>Camunda Maven Repository</name>
-      <url>https://camunda.jfrog.io/artifactory/public/</url>
+      <url>https://artifacts.camunda.com/artifactory/public/</url>
     </repository>
     <!-- enable this for EE dependencies (requires credentials in ~/.m2/settings.xml)
     <repository>
       <id>camunda-bpm-nexus-ee</id>
       <name>Camunda Enterprise Maven Repository</name>
-      <url>https://camunda.jfrog.io/artifactory/private/</url>
+      <url>https://artifacts.camunda.com/artifactory/private/</url>
     </repository>
     -->
   </repositories>

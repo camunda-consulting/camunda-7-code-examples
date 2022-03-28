@@ -101,12 +101,12 @@
 		<repository>
 			<id>camunda-bpm-nexus-ee</id>
 			<name>Camunda BPM Enterprise Maven Repository</name>
-			<url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+			<url>https://artifacts.camunda.com/artifactory/camunda-bpm-ee</url>
 		</repository>
 		<repository>
 			<id>camunda-bpm-nexus-snapshots</id>
 			<name>Camunda BPM Maven Repository</name>
-			<url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-snapshots/</url>
+			<url>https://artifacts.camunda.com/artifactory/camunda-bpm-snapshots/</url>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 		<repository>
