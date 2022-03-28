@@ -118,7 +118,7 @@
     <repository>
       <id>camunda-bpm-nexus-ee</id>
       <name>Camunda Enterprise Maven Repository</name>
-      <url>https://artifacts.camunda.com/artifactory/camunda-bpm-ee</url>
+      <url>https://artifacts.camunda.com/artifactory/camunda-bpm-ee/</url>
     </repository>
   </repositories>
   <build>
