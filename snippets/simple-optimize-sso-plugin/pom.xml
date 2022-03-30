@@ -34,7 +34,7 @@
         <repository>
             <id>camunda-nexus</id>
             <name>camunda-nexus</name>
-            <url>https://app.camunda.com/nexus/content/repositories/camunda-optimize</url>
+            <url>https://artifacts.camunda.com/artifactory/camunda-optimize/</url>
         </repository>
     </repositories>
 
