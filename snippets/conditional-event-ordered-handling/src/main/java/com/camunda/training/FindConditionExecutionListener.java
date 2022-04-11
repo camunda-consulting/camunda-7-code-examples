@@ -1,15 +1,11 @@
 package com.camunda.training;
 
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.delegate.ExecutionListener;
-import org.camunda.bpm.engine.variable.Variables;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.camunda.bpm.engine.delegate.*;
+import org.camunda.bpm.engine.variable.*;
+import org.slf4j.*;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
 public class FindConditionExecutionListener implements ExecutionListener {
   private static final Logger LOG = LoggerFactory.getLogger(FindConditionExecutionListener.class);
@@ -22,10 +18,11 @@ public class FindConditionExecutionListener implements ExecutionListener {
   @Override
   public void notify(DelegateExecution execution) throws Exception {
     if (eventNames.size() <= 1) {
+      LOG.info("No more than 1 event contained in {}, skipping filtering", eventNames);
       return;
     }
-    EventVariableUtil.EventVariableHandler eventVariableHandler =
-        EventVariableUtil.forVariables(execution.getVariables());
+    LOG.info("Start filtering for {}", eventNames);
+    EventVariableUtil.EventVariableHandler eventVariableHandler = EventVariableUtil.forVariables(execution.getVariables());
 
     Map<String, Boolean> trueFlags = eventVariableHandler
         .getFlags(eventNames)
@@ -33,15 +30,28 @@ public class FindConditionExecutionListener implements ExecutionListener {
         .stream()
         .filter(Map.Entry::getValue)
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    LOG.info("Found activated conditions: {}", trueFlags);
     if (trueFlags.size() > 1) {
       String oldestEventName = eventVariableHandler.findOldestEventName(trueFlags.keySet());
+      LOG.info("Oldest event is {}", oldestEventName);
       Set<String> flagsToInvert = trueFlags
           .keySet()
           .stream()
           .filter(variableName -> !variableName.equals(oldestEventName))
           .peek(variableName -> execution.setVariable(variableName, false))
           .collect(Collectors.toSet());
-      execution.setVariable("flagsToInvert", Variables.objectValue(flagsToInvert, true).create());
+      LOG.info("Setting {} to false", flagsToInvert);
+      execution.setVariable(
+          "flagsToInvert",
+          Variables
+              .objectValue(flagsToInvert, true)
+              .create()
+      );
     }
+  }
+
+  @Override
+  public String toString() {
+    return "FindConditionExecutionListener{" + "eventNames=" + eventNames + '}';
   }
 }
