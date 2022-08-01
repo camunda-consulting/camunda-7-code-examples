@@ -1,0 +1,18 @@
+bpmn:
+  byUser:
+    demo:
+    - test
+    - test2
+    - Process_test
+  byGroup:
+    admin:
+    - test
+    - test2
+dmn:
+  byUser:
+    demo:
+    - test_dmn1
+drd:
+  byUser:
+    demo:
+    - Test_DRD
