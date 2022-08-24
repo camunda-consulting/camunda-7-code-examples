@@ -48,6 +48,14 @@ public class FilterCreatingProcessEnginePlugin extends AbstractProcessEnginePlug
             .createTaskQuery()
             .taskCandidateUserExpression("${currentUser()}")
     );
+    getOrCreateFilter(
+        processEngine.getFilterService(),
+        "Overdue Tasks",
+        processEngine
+            .getTaskService()
+            .createTaskQuery()
+            .dueBeforeExpression("${now()}")
+    );
   }
 
   private void getOrCreateFilter(FilterService filterService, String filterName, TaskQuery query) {
