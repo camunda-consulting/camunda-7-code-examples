@@ -1,12 +1,17 @@
 package com.camunda.consulting;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import java.util.Objects;
 
+@Document(indexName = "task-data")
 public class TaskData {
   private String orderNumber;
   private String workStep;
   private String singleProcess;
   private String bankCode;
+  @Id
   private String taskId;
 
   public String getOrderNumber() {
