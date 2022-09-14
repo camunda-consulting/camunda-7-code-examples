@@ -9,6 +9,15 @@ The process consists of a simple sequence of activities:
 1. A user enters the number of desired list entries, an index for a business error, and an index for a technical error.
 2. Afterwards, a service task is called to create a generic list
 3. A sequential subprocess iterates over the list: If the index matches the technical failure index, an exception is thrown; if it matches the business failure index, a BPMN error is raised.
+![image](https://user-images.githubusercontent.com/5269168/190198864-c8cf74e9-7eee-42e4-801c-7433a576eb5d.png)
+
+## Executing the Example
+1. Run the Spring boot application.
+2. Deploy the form placed in `main/resources`
+3. Start a process instance
+4. Complete the user task with the desired properties
+![image](https://user-images.githubusercontent.com/5269168/190201221-1711ab8c-ab6e-4652-a895-ff6a6fd2866e.png)
+
 
 ## Error Handling
 ### Desired Behavior
@@ -19,14 +28,14 @@ In case of a business error, the error is caught and the entry is flagged as fau
 #### Transaction Boundaries
 The technical error occurs for a specific instance of the multi-instance subprocess.
 Only the respective instance shall be retried if the execution fails.
-For this purpose, we need to introduce suitable transaction boundaries, by setting the following properties for `call a service`:
+For this purpose, we need to introduce suitable transaction boundaries, by setting the following properties for `call some service`:
 
 | Property | Value |
 |----------|-------|
 | Asynchronus Before | true |
 | Exclusive | true |
 
-### Java Delegate
+#### Java Delegate
 Let's have a look at the execute method of the java delegate `CallSomServiceDelegate`:
 ```JAVA
 public void execute(DelegateExecution execution) throws Exception {
