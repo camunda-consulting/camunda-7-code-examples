@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1c7q5wk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="ConditionalCircusProcess" name="Conditional Circus" isExecutable="true">
+    <bpmn:startEvent id="ProcessStartedStartEvent" name="Process started">
+      <bpmn:outgoing>Flow_0sisjai</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0sisjai" sourceRef="ProcessStartedStartEvent" targetRef="WaitHereUntilAIsTrueEvent" />
+    <bpmn:intermediateCatchEvent id="WaitHereUntilAIsTrueEvent" name="Wait here until A is true">
+      <bpmn:incoming>Flow_0sisjai</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nc4gx7</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0q0ym2e">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${a}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1nc4gx7" sourceRef="WaitHereUntilAIsTrueEvent" targetRef="Gateway_119pxgp" />
+    <bpmn:eventBasedGateway id="Gateway_119pxgp">
+      <bpmn:incoming>Flow_1nc4gx7</bpmn:incoming>
+      <bpmn:incoming>YesSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_17yezri</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ef8xgu</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1fze0he</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="BIsTrueEvent" name="B is true">
+      <bpmn:incoming>Flow_17yezri</bpmn:incoming>
+      <bpmn:outgoing>Flow_0h20px7</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0hnp1k7">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${b}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_17yezri" sourceRef="Gateway_119pxgp" targetRef="BIsTrueEvent" />
+    <bpmn:intermediateCatchEvent id="CIsTrueEvent" name="C is true">
+      <bpmn:incoming>Flow_0ef8xgu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qq0pqy</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0iqfpad">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${c}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0ef8xgu" sourceRef="Gateway_119pxgp" targetRef="CIsTrueEvent" />
+    <bpmn:intermediateCatchEvent id="DIsTrueEvent" name="D is true">
+      <bpmn:incoming>Flow_1fze0he</bpmn:incoming>
+      <bpmn:outgoing>Flow_05lgme9</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1euplqb">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${d}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1fze0he" sourceRef="Gateway_119pxgp" targetRef="DIsTrueEvent" />
+    <bpmn:sequenceFlow id="Flow_0h20px7" sourceRef="BIsTrueEvent" targetRef="ActionForBTask" />
+    <bpmn:sequenceFlow id="Flow_0qq0pqy" sourceRef="CIsTrueEvent" targetRef="ActionForCTask" />
+    <bpmn:sequenceFlow id="Flow_05lgme9" sourceRef="DIsTrueEvent" targetRef="ActionForDTask" />
+    <bpmn:exclusiveGateway id="Gateway_0zaggnp">
+      <bpmn:incoming>Flow_01tau5i</bpmn:incoming>
+      <bpmn:incoming>Flow_0a8xpdu</bpmn:incoming>
+      <bpmn:incoming>Flow_10urnay</bpmn:incoming>
+      <bpmn:incoming>Flow_1iwr956</bpmn:incoming>
+      <bpmn:outgoing>Flow_1p9vx1p</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_01tau5i" sourceRef="ActionForBTask" targetRef="Gateway_0zaggnp" />
+    <bpmn:sequenceFlow id="Flow_0a8xpdu" sourceRef="ActionForCTask" targetRef="Gateway_0zaggnp" />
+    <bpmn:sequenceFlow id="Flow_10urnay" sourceRef="ActionForDTask" targetRef="Gateway_0zaggnp" />
+    <bpmn:sequenceFlow id="Flow_1p9vx1p" sourceRef="Gateway_0zaggnp" targetRef="DetermineIfMoreToHandleTask" />
+    <bpmn:exclusiveGateway id="IsThereMoreGateway" name="is there more?">
+      <bpmn:incoming>Flow_00yudje</bpmn:incoming>
+      <bpmn:outgoing>YesSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>NoSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_00yudje" sourceRef="DetermineIfMoreToHandleTask" targetRef="IsThereMoreGateway" />
+    <bpmn:sequenceFlow id="YesSequenceFlow" name="yes" sourceRef="IsThereMoreGateway" targetRef="Gateway_119pxgp">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${more}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="ProcessEndedEndEvent" name="Process ended">
+      <bpmn:incoming>NoSequenceFlow</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="NoSequenceFlow" name="no" sourceRef="IsThereMoreGateway" targetRef="ProcessEndedEndEvent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${not more}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="ActionForBTask" name="Action for B">
+      <bpmn:incoming>Flow_0h20px7</bpmn:incoming>
+      <bpmn:outgoing>Flow_01tau5i</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ActionForCTask" name="Action for C">
+      <bpmn:incoming>Flow_0qq0pqy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a8xpdu</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="ActionForDTask" name="Action for D">
+      <bpmn:incoming>Flow_05lgme9</bpmn:incoming>
+      <bpmn:outgoing>Flow_10urnay</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="DetermineIfMoreToHandleTask" name="Determine if more to handle" camunda:class="com.camunda.training.MoreToHandleDelegate">
+      <bpmn:incoming>Flow_1p9vx1p</bpmn:incoming>
+      <bpmn:outgoing>Flow_00yudje</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="EIsTrueBoundaryEvent" name="E is true" attachedToRef="ActionForBTask">
+      <bpmn:outgoing>Flow_1iwr956</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0cyqq5f">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${e}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1iwr956" sourceRef="EIsTrueBoundaryEvent" targetRef="Gateway_0zaggnp" />
+    <bpmn:subProcess id="Activity_14i9pic" triggeredByEvent="true">
+      <bpmn:startEvent id="FIsTrueStartEvent" name="F is true">
+        <bpmn:outgoing>Flow_1mz36n9</bpmn:outgoing>
+        <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1rcsgyy">
+          <bpmn:condition xsi:type="bpmn:tFormalExpression">${f}</bpmn:condition>
+        </bpmn:conditionalEventDefinition>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="Event_1bu6sq2">
+        <bpmn:incoming>Flow_1mz36n9</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1mz36n9" sourceRef="FIsTrueStartEvent" targetRef="Event_1bu6sq2" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ConditionalCircusProcess">
+      <bpmndi:BPMNEdge id="Flow_0f1urqi_di" bpmnElement="NoSequenceFlow">
+        <di:waypoint x="1065" y="177" />
+        <di:waypoint x="1132" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1092" y="159" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_015r3sd_di" bpmnElement="YesSequenceFlow">
+        <di:waypoint x="1040" y="202" />
+        <di:waypoint x="1040" y="510" />
+        <di:waypoint x="370" y="510" />
+        <di:waypoint x="370" y="182" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="696" y="492" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00yudje_di" bpmnElement="Flow_00yudje">
+        <di:waypoint x="950" y="177" />
+        <di:waypoint x="1015" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p9vx1p_di" bpmnElement="Flow_1p9vx1p">
+        <di:waypoint x="785" y="177" />
+        <di:waypoint x="850" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10urnay_di" bpmnElement="Flow_10urnay">
+        <di:waypoint x="670" y="400" />
+        <di:waypoint x="760" y="400" />
+        <di:waypoint x="760" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a8xpdu_di" bpmnElement="Flow_0a8xpdu">
+        <di:waypoint x="670" y="290" />
+        <di:waypoint x="760" y="290" />
+        <di:waypoint x="760" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01tau5i_di" bpmnElement="Flow_01tau5i">
+        <di:waypoint x="670" y="177" />
+        <di:waypoint x="735" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05lgme9_di" bpmnElement="Flow_05lgme9">
+        <di:waypoint x="508" y="400" />
+        <di:waypoint x="570" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qq0pqy_di" bpmnElement="Flow_0qq0pqy">
+        <di:waypoint x="508" y="290" />
+        <di:waypoint x="570" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0h20px7_di" bpmnElement="Flow_0h20px7">
+        <di:waypoint x="508" y="177" />
+        <di:waypoint x="570" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fze0he_di" bpmnElement="Flow_1fze0he">
+        <di:waypoint x="390" y="202" />
+        <di:waypoint x="390" y="400" />
+        <di:waypoint x="472" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ef8xgu_di" bpmnElement="Flow_0ef8xgu">
+        <di:waypoint x="390" y="202" />
+        <di:waypoint x="390" y="290" />
+        <di:waypoint x="472" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17yezri_di" bpmnElement="Flow_17yezri">
+        <di:waypoint x="415" y="177" />
+        <di:waypoint x="472" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nc4gx7_di" bpmnElement="Flow_1nc4gx7">
+        <di:waypoint x="308" y="177" />
+        <di:waypoint x="365" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sisjai_di" bpmnElement="Flow_0sisjai">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="272" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iwr956_di" bpmnElement="Flow_1iwr956">
+        <di:waypoint x="640" y="119" />
+        <di:waypoint x="640" y="99" />
+        <di:waypoint x="760" y="99" />
+        <di:waypoint x="760" y="152" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ProcessStartedStartEvent">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="202" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ci16is_di" bpmnElement="WaitHereUntilAIsTrueEvent">
+        <dc:Bounds x="272" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="250" y="202" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0f3qxzm_di" bpmnElement="Gateway_119pxgp">
+        <dc:Bounds x="365" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0fbgurd_di" bpmnElement="BIsTrueEvent">
+        <dc:Bounds x="472" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="202" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f3bl2v_di" bpmnElement="CIsTrueEvent">
+        <dc:Bounds x="472" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="315" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jpd10u_di" bpmnElement="DIsTrueEvent">
+        <dc:Bounds x="472" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="425" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0zaggnp_di" bpmnElement="Gateway_0zaggnp" isMarkerVisible="true">
+        <dc:Bounds x="735" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0qmky9y_di" bpmnElement="IsThereMoreGateway" isMarkerVisible="true">
+        <dc:Bounds x="1015" y="152" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1005" y="122" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1x6nhzh_di" bpmnElement="ProcessEndedEndEvent">
+        <dc:Bounds x="1132" y="159" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1113" y="202" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nluegk_di" bpmnElement="ActionForBTask">
+        <dc:Bounds x="570" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_021g75w_di" bpmnElement="ActionForCTask">
+        <dc:Bounds x="570" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_115rlww_di" bpmnElement="ActionForDTask">
+        <dc:Bounds x="570" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u3z0qv_di" bpmnElement="DetermineIfMoreToHandleTask">
+        <dc:Bounds x="850" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nodkhh_di" bpmnElement="Activity_14i9pic" isExpanded="true">
+        <dc:Bounds x="250" y="570" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1mz36n9_di" bpmnElement="Flow_1mz36n9">
+        <di:waypoint x="326" y="670" />
+        <di:waypoint x="382" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_02jhvhn_di" bpmnElement="FIsTrueStartEvent">
+        <dc:Bounds x="290" y="652" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="288" y="695" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bu6sq2_di" bpmnElement="Event_1bu6sq2">
+        <dc:Bounds x="382" y="652" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08185y7_di" bpmnElement="EIsTrueBoundaryEvent">
+        <dc:Bounds x="622" y="119" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="620" y="89" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

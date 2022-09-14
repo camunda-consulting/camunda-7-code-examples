@@ -14,6 +14,8 @@ You will get the metrics from the job executor in these endpoints:
 
 Once the data are published via spring boot actuator you can import them into prometheus and other monitoring tools.
 
+To get the data from your engine, you have to copy the `JobExecutorMetricsConfiguration` class into your Camunda Spring Boot project.
+
 ## Details
 
 The numbers are directly promoted from the internal metrics into the actuator. They are saved each 15 minutes into the database and set to 0.

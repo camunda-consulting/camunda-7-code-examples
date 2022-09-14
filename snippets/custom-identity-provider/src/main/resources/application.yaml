@@ -1,0 +1,3 @@
+camunda:
+  bpm:
+    default-serialization-format: application/json

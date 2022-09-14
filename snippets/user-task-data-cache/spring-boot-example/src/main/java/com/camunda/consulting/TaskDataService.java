@@ -1,22 +1,28 @@
 package com.camunda.consulting;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Service
 public class TaskDataService {
-  private final Map<String, TaskData> taskDataList = new HashMap<>();
+  private final TaskDataRepository repository;
+
+
+  public TaskDataService(TaskDataRepository repository) {
+    this.repository = repository;
+  }
 
   public TaskData save(TaskData taskData) {
-    assert taskData.getTaskId() != null;
-    taskDataList.put(taskData.getTaskId(), taskData);
-    return taskData;
+    return repository.save(taskData);
+  }
+
+  public <I extends Iterable<TaskData>> I saveAll(I taskData) {
+    return (I) repository.saveAll(taskData);
   }
 
   public Optional<TaskData> delete(TaskData taskData) {
@@ -25,26 +31,22 @@ public class TaskDataService {
   }
 
   public Optional<TaskData> delete(String id) {
-    return Optional.ofNullable(taskDataList.remove(id));
+    return get(id).stream().peek(repository::delete).findFirst();
   }
 
   public Optional<TaskData> get(String id) {
-    return Optional.ofNullable(taskDataList.get(id));
+    return repository.findById(id);
   }
 
   public Stream<TaskData> stream() {
-    return taskDataList.values().stream();
+    return StreamSupport.stream(repository.findAll().spliterator(), false);
   }
 
   public Page<TaskData> page(Pageable pageable) {
-    List<TaskData> list = taskDataList.values()
-        .stream()
-        .sorted(Comparator.comparing(TaskData::getTaskId))
-        .collect(Collectors.toList());
-    return new PageImpl<>(list, pageable, list.size());
+    return repository.findAll(pageable);
   }
 
   public void drop() {
-    taskDataList.clear();
+    repository.deleteAll();
   }
 }

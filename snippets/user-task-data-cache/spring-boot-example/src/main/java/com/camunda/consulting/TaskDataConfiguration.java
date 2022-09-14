@@ -1,8 +1,8 @@
 package com.camunda.consulting;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.delegate.TaskListener;
@@ -18,8 +18,12 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Configuration
 @EnableScheduling
@@ -27,16 +31,17 @@ public class TaskDataConfiguration {
   private final Logger log = LoggerFactory.getLogger(this.getClass());
 
   private final TaskDataService taskDataService;
-  private final ObjectMapper objectMapper;
   private final RuntimeService runtimeService;
   private final TaskService taskService;
+  private final ThreadPoolExecutor executor =
+      new ThreadPoolExecutor(1, 10, 30, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10000));
 
   @Autowired
   public TaskDataConfiguration(
-      TaskDataService taskDataService, ObjectMapper objectMapper, RuntimeService runtimeService, TaskService taskService
-  ) {
+      TaskDataService taskDataService,
+      RuntimeService runtimeService,
+      TaskService taskService) {
     this.taskDataService = taskDataService;
-    this.objectMapper = objectMapper;
     this.runtimeService = runtimeService;
     this.taskService = taskService;
   }
@@ -44,63 +49,84 @@ public class TaskDataConfiguration {
   @EventListener(ProcessApplicationStartedEvent.class)
   public void onStartup() {
     int i = 0;
-    while (i++ < 100) {
-      runtimeService.startProcessInstanceByKey("TestProcess", Map.of(
-          "bankCode",
-          RandomStringUtils.randomAlphabetic(8),
-          "orderNumber",
-          RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4),
-          "singleProcess",
-          RandomStringUtils.randomNumeric(14)
-      ));
+    while (i++ < 10) {
+      runtimeService.startProcessInstanceByKey(
+          "TestProcess",
+          Map.of(
+              "bankCode",
+              RandomStringUtils.randomAlphabetic(8),
+              "orderNumber",
+              RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4),
+              "singleProcess",
+              RandomStringUtils.randomNumeric(14)));
     }
-    this.rebuildTaskData();
   }
 
   @EventListener
-  public void onTaskEvent(PayloadApplicationEvent<TaskEvent> event) throws JsonProcessingException {
-    log.info(
-        "Task {}: \n\n{}\n",
-        event.getPayload().getEventName(),
-        objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(event.getPayload())
-    );
-    switch (event.getPayload().getEventName()) {
-    case TaskListener.EVENTNAME_CREATE:
-      handleCreate(event.getPayload());
-      break;
-    case TaskListener.EVENTNAME_ASSIGNMENT:
-    case TaskListener.EVENTNAME_UPDATE:
-      handleUpdate(event.getPayload());
-      break;
-    case TaskListener.EVENTNAME_COMPLETE:
-    case TaskListener.EVENTNAME_DELETE:
-      handleDelete(event.getPayload());
-      break;
-    default:
-      break;
-    }
+  public void onTaskEvent(PayloadApplicationEvent<TaskEvent> event) {
+    executor.execute(
+        () -> {
+          switch (event.getPayload().getEventName()) {
+            case TaskListener.EVENTNAME_CREATE:
+              handleCreate(event.getPayload());
+              break;
+            case TaskListener.EVENTNAME_ASSIGNMENT:
+            case TaskListener.EVENTNAME_UPDATE:
+              handleUpdate(event.getPayload());
+              break;
+            case TaskListener.EVENTNAME_COMPLETE:
+            case TaskListener.EVENTNAME_DELETE:
+              handleDelete(event.getPayload());
+              break;
+            default:
+              break;
+          }
+          verifyIntegrity();
+        });
   }
 
   @Scheduled(cron = "0 0 0 * * *")
   public void rebuildTaskDataNightly() {
-    rebuildTaskData();
+    executor.execute(this::rebuildTaskData);
   }
 
   private void handleCreate(TaskEvent event) {
     log.info("Handling create event...");
-    updateTask(event.getId(), new TaskData(), event.getProcessInstanceId(), event.getName());
+    TaskData taskData = createTaskData(event.getId(), event.getName());
+    taskDataService.save(taskData);
     log.info("Create event handled");
   }
 
   private void handleUpdate(TaskEvent event) {
     log.info("Handling update event...");
-    taskDataService.get(event.getId())
-        .ifPresentOrElse(
-            taskData -> updateTask(event.getId(), taskData, event.getProcessInstanceId(), event.getName()),
-            this::rebuildTaskData
-        );
+    taskDataService
+        .get(event.getId())
+        .map(taskData -> updateTaskData(taskData, event.getName(), 10, 1000L))
+        .ifPresentOrElse(taskDataService::save, this::rebuildTaskData);
     log.info("Update event handled");
+  }
 
+  private void verifyIntegrity() {
+    for (Task task : taskService.createTaskQuery().active().list()) {
+      Optional<TaskData> taskData = taskDataService.get(task.getId());
+      if (taskData.isPresent()) {
+        taskDataService.save(updateTaskData(taskData.get(), task.getName(), 10, 1000L));
+      } else {
+        rebuildTaskData();
+        return;
+      }
+    }
+    for (TaskData taskData : taskDataService.stream().toList()) {
+      Optional<Task> task =
+          Optional.ofNullable(
+              taskService.createTaskQuery().taskId(taskData.getTaskId()).active().singleResult());
+      if (task.isPresent()) {
+        taskDataService.save(updateTaskData(taskData, task.get().getName(), 10, 1000L));
+      } else {
+        rebuildTaskData();
+        return;
+      }
+    }
   }
 
   private void handleDelete(TaskEvent event) {
@@ -109,21 +135,42 @@ public class TaskDataConfiguration {
     log.info("Delete event handled");
   }
 
-  private void updateTask(String taskId, TaskData taskData, String processInstanceId, String taskName) {
-    taskData.setBankCode((String) runtimeService.getVariable(processInstanceId, "bankCode"));
-    taskData.setOrderNumber((String) runtimeService.getVariable(processInstanceId, "orderNumber"));
-    taskData.setWorkStep(taskName);
-    taskData.setSingleProcess((String) runtimeService.getVariable(processInstanceId, "singleProcess"));
+  private TaskData createTaskData(String taskId, String taskName) {
+    TaskData taskData = new TaskData();
     taskData.setTaskId(taskId);
-    taskDataService.save(taskData);
+    return updateTaskData(taskData, taskName, 10, 1000L);
+  }
+
+  private TaskData updateTaskData(TaskData taskData, String taskName, int retries, long timeout) {
+    try {
+      taskData.setBankCode((String) taskService.getVariable(taskData.getTaskId(), "bankCode"));
+      taskData.setOrderNumber(
+          (String) taskService.getVariable(taskData.getTaskId(), "orderNumber"));
+      taskData.setWorkStep(taskName);
+      taskData.setSingleProcess(
+          (String) taskService.getVariable(taskData.getTaskId(), "singleProcess"));
+      return taskData;
+    } catch (ProcessEngineException e) {
+      if (retries == 1) {
+        throw e;
+      }
+      try {
+        Thread.sleep(timeout);
+      } catch (InterruptedException ex) {
+        throw new RuntimeException(ex);
+      }
+      return updateTaskData(taskData, taskName, retries - 1, timeout);
+    }
   }
 
   private void rebuildTaskData() {
     log.info("Rebuilding task data...");
     taskDataService.drop();
-    List<Task> tasks = taskService.createTaskQuery().active().list();
-    tasks.forEach(task -> updateTask(task.getId(), new TaskData(), task.getProcessInstanceId(), task.getName()));
-    log.info("Task data rebuilt with {} tasks", tasks.size());
+    log.info(
+        "Task data rebuilt with {} tasks",
+        taskService.createTaskQuery().active().list().stream()
+            .map(task -> createTaskData(task.getId(), task.getName()))
+            .collect(Collectors.collectingAndThen(Collectors.toList(), taskDataService::saveAll))
+            .size());
   }
-
 }
