@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1gmtfcp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.2.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="ErrorHandlingInMISubprocesses" name="Error Handling in MI Subprocesses" isExecutable="true">
+    <bpmn:startEvent id="StartEvent" name="process&#10;started">
+      <bpmn:outgoing>Flow_04bq8mr</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_04bq8mr" sourceRef="StartEvent" targetRef="EnterFailureIndex" />
+    <bpmn:serviceTask id="GenerateList" name="generate&#10;list" camunda:delegateExpression="${GenerateList}">
+      <bpmn:incoming>Flow_1nbzy4z</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j5s0fz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="ExecuteIDListSubprocess" name="execute list">
+      <bpmn:incoming>Flow_0j5s0fz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x0ivxz</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true" camunda:collection="list" camunda:elementVariable="item" />
+      <bpmn:startEvent id="StartEventSubprocess" name="subprocess started">
+        <bpmn:outgoing>Flow_1a6a1dj</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1a6a1dj" sourceRef="StartEventSubprocess" targetRef="CallSomeService" />
+      <bpmn:serviceTask id="CallSomeService" name="call some service" camunda:asyncBefore="true" camunda:delegateExpression="${CallSomeService}">
+        <bpmn:extensionElements />
+        <bpmn:incoming>Flow_1a6a1dj</bpmn:incoming>
+        <bpmn:outgoing>Flow_079y9tz</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="SuccessEndEventSubprocess" name="subprocess completed&#10;successfully">
+        <bpmn:incoming>Flow_079y9tz</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_079y9tz" sourceRef="CallSomeService" targetRef="SuccessEndEventSubprocess" />
+      <bpmn:boundaryEvent id="ErrorBoundaryEvent" name="business&#10;error occurred" attachedToRef="CallSomeService">
+        <bpmn:outgoing>Flow_132i97y</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0hsjwcn" errorRef="Error_187185q" />
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_132i97y" sourceRef="ErrorBoundaryEvent" targetRef="FlagDatabaseEntry" />
+      <bpmn:serviceTask id="FlagDatabaseEntry" name="flag&#10;database&#10;entry" camunda:delegateExpression="${FlagEntry}">
+        <bpmn:incoming>Flow_132i97y</bpmn:incoming>
+        <bpmn:outgoing>Flow_0t4f2q7</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="FailureEndEventSubprocess" name="subprocess completed&#10;without success">
+        <bpmn:incoming>Flow_0t4f2q7</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0t4f2q7" sourceRef="FlagDatabaseEntry" targetRef="FailureEndEventSubprocess" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0j5s0fz" sourceRef="GenerateList" targetRef="ExecuteIDListSubprocess" />
+    <bpmn:endEvent id="EndEvent" name="process&#10;completed">
+      <bpmn:incoming>Flow_1x0ivxz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1x0ivxz" sourceRef="ExecuteIDListSubprocess" targetRef="EndEvent" />
+    <bpmn:userTask id="EnterFailureIndex" name="enter&#10;failure&#10;index" camunda:formRef="failureIndexForm" camunda:formRefBinding="latest">
+      <bpmn:incoming>Flow_04bq8mr</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nbzy4z</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1nbzy4z" sourceRef="EnterFailureIndex" targetRef="GenerateList" />
+  </bpmn:process>
+  <bpmn:error id="Error_187185q" name="BusinessError" errorCode="BusinessError" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ErrorHandlingInMISubprocesses">
+      <bpmndi:BPMNEdge id="Flow_04bq8mr_di" bpmnElement="Flow_04bq8mr">
+        <di:waypoint x="198" y="180" />
+        <di:waypoint x="250" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nbzy4z_di" bpmnElement="Flow_1nbzy4z">
+        <di:waypoint x="350" y="180" />
+        <di:waypoint x="410" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j5s0fz_di" bpmnElement="Flow_0j5s0fz">
+        <di:waypoint x="510" y="180" />
+        <di:waypoint x="570" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x0ivxz_di" bpmnElement="Flow_1x0ivxz">
+        <di:waypoint x="1000" y="180" />
+        <di:waypoint x="1052" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="162" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="205" width="40" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mg5qjm_di" bpmnElement="EnterFailureIndex">
+        <dc:Bounds x="250" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wlokkl_di" bpmnElement="GenerateList">
+        <dc:Bounds x="410" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0c443q6_di" bpmnElement="EndEvent">
+        <dc:Bounds x="1052" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1045" y="205" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0c0rc40_di" bpmnElement="ExecuteIDListSubprocess" isExpanded="true">
+        <dc:Bounds x="570" y="80" width="430" height="300" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1a6a1dj_di" bpmnElement="Flow_1a6a1dj">
+        <di:waypoint x="646" y="180" />
+        <di:waypoint x="700" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_079y9tz_di" bpmnElement="Flow_079y9tz">
+        <di:waypoint x="800" y="180" />
+        <di:waypoint x="862" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_132i97y_di" bpmnElement="Flow_132i97y">
+        <di:waypoint x="750" y="238" />
+        <di:waypoint x="750" y="310" />
+        <di:waypoint x="770" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t4f2q7_di" bpmnElement="Flow_0t4f2q7">
+        <di:waypoint x="870" y="310" />
+        <di:waypoint x="922" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_00v5vyn_di" bpmnElement="StartEventSubprocess">
+        <dc:Bounds x="610" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="600" y="205" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gb06p5_di" bpmnElement="CallSomeService">
+        <dc:Bounds x="700" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gmcly8_di" bpmnElement="SuccessEndEventSubprocess">
+        <dc:Bounds x="862" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="851" y="205" width="60" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15ww1pa_di" bpmnElement="FlagDatabaseEntry">
+        <dc:Bounds x="770" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lq6wv8_di" bpmnElement="FailureEndEventSubprocess">
+        <dc:Bounds x="922" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="901" y="335" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jggdo1_di" bpmnElement="ErrorBoundaryEvent">
+        <dc:Bounds x="732" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="665" y="226" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

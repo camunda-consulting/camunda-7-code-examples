@@ -1,0 +1,51 @@
+{
+  "components": [
+    {
+      "text": "# MI Error Handling\nPlease enter the required information.",
+      "type": "text",
+      "id": "Field_1dqh0pr"
+    },
+    {
+      "label": "How many elements should be added to the list?",
+      "type": "number",
+      "id": "Field_0rnoykt",
+      "key": "numberOfItems",
+      "defaultValue": 5,
+      "validate": {
+        "min": 1,
+        "required": true
+      }
+    },
+    {
+      "label": "Which element should cause a technical failure?",
+      "type": "number",
+      "id": "Field_11i9ssd",
+      "key": "failureIndex",
+      "validate": {
+        "required": true,
+        "min": 0
+      },
+      "description": "Take a number greater than the number of elements in the list to skip the technical error"
+    },
+    {
+      "label": "Which element should cause a business error?",
+      "type": "number",
+      "id": "Field_1vpn475",
+      "key": "businessErrorIndex",
+      "description": "Take a number greater than the number of elements in the list to skip the business error",
+      "validate": {
+        "min": 0,
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "failureIndexForm",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.2.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
