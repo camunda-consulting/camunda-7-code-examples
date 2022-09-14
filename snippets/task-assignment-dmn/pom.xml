@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.7.3</version>
         <relativePath/>
     </parent>
 
@@ -16,7 +16,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.java>1.8</version.java>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <camunda.version>7.13.0-alpha4</camunda.version>
+        <camunda.version>7.18.0-alpha4</camunda.version>
     </properties>
 
     <groupId>org.camunda.demo</groupId>
@@ -68,9 +68,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.camunda.bpm.assert</groupId>
+            <groupId>org.camunda.bpm</groupId>
             <artifactId>camunda-bpm-assert</artifactId>
-            <version>5.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-bpm-junit5</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

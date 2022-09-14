@@ -2,17 +2,14 @@ package org.camunda.demo;
 
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
-import org.camunda.bpm.engine.test.ProcessEngineRule;
-import org.junit.Rule;
-import org.junit.Test;
+import org.camunda.bpm.engine.test.junit5.ProcessEngineExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 
-
+@ExtendWith(ProcessEngineExtension.class)
 public class AssignmentTest {
-
-    @Rule
-    public ProcessEngineRule engine = new ProcessEngineRule();
 
     @Test
     @Deployment(resources = {"Approval.bpmn", "taskAssignment.dmn"})
