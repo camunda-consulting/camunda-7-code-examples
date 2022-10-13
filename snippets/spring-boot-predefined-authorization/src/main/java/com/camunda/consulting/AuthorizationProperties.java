@@ -1,8 +1,8 @@
 package com.camunda.consulting;
 
-import java.util.Set;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.Set;
 
 @ConfigurationProperties("camunda.bpm.authorization")
 public class AuthorizationProperties {
@@ -74,22 +74,8 @@ public class AuthorizationProperties {
 
     @Override
     public String toString() {
-      StringBuilder builder = new StringBuilder();
-      builder
-        .append("AuthorizationRule [resource=")
-        .append(this.resource)
-        .append(", type=")
-        .append(this.type)
-        .append(", user=")
-        .append(this.user)
-        .append(", group=")
-        .append(this.group)
-        .append(", permissions=")
-        .append(this.permissions)
-        .append(", resourceId=")
-        .append(this.resourceId)
-        .append("]");
-      return builder.toString();
+      String builder = "AuthorizationRule [resource=" + this.resource + ", type=" + this.type + ", user=" + this.user + ", group=" + this.group + ", permissions=" + this.permissions + ", resourceId=" + this.resourceId + "]";
+      return builder;
     }
 
   }

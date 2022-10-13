@@ -1,10 +1,10 @@
 package com.camunda.consulting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.camunda.bpm.engine.authorization.Permission;
 import org.camunda.bpm.engine.authorization.Resource;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class AuthorizationRule {
   private int type;
@@ -64,22 +64,8 @@ public class AuthorizationRule {
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder
-      .append("AuthorizationRule [type=")
-      .append(this.type)
-      .append(", resource=")
-      .append(this.resource)
-      .append(", user=")
-      .append(this.user)
-      .append(", group=")
-      .append(this.group)
-      .append(", permissions=")
-      .append(this.permissions)
-      .append(", resourceId=")
-      .append(this.resourceId)
-      .append("]");
-    return builder.toString();
+    String builder = "AuthorizationRule [type=" + this.type + ", resource=" + this.resource + ", user=" + this.user + ", group=" + this.group + ", permissions=" + this.permissions + ", resourceId=" + this.resourceId + "]";
+    return builder;
   }
 
 }

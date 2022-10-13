@@ -6,12 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableProcessApplication
-public class ExampleApplication
-{
+public class ExampleApplication {
 
-	public static void main(String... args)
-	{
-		SpringApplication.run(ExampleApplication.class, args);
-	}
+  public static void main(String... args) {
+    SpringApplication.run(ExampleApplication.class, args);
+  }
 
 }
