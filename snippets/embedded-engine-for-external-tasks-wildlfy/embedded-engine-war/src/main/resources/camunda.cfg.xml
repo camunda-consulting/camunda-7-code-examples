@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="jobExecutor" class="org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor">
+    <property name="maxWait" value="10000"/>
+  </bean>
+  
+  <bean id="strongUuidGenerator" class="org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator" />
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="history" value="full" />
+    <property name="dataSourceJndiName" value="java:jboss/datasources/ProcessEngine" />
+
+    <property name="databaseSchemaUpdate" value="true" />
+
+    <property name="jobExecutorActivate" value="true" />
+    
+    <property name="jobExecutor" ref="jobExecutor" />
+    <property name="idGenerator" ref="strongUuidGenerator" />
+      
+    <property name="processEnginePlugins">
+      <list>
+      </list>
+    </property>
+  </bean>
+
+</beans>
