@@ -1,0 +1,52 @@
+ Schema |          Name           | Type  |  Owner  | Handled by script |             Required if            | Related by / to
+--------+-------------------------+-------+---------+-------------------+------------------------------------+-----------------
+ public | act_ge_bytearray        | table | camunda | x                 | always                             | deployment_id_ in act_re_procdef.deployment_id_ / id_ in act_ru_variable.bytearray_id_ / id_ in act_ru_job.exception_stack_id_ / name in act_re_procdef.key_
+ public | act_ge_property         | table | camunda | skip              | engine properties should be cloned | global
+ public | act_ge_schema_log       | table | camunda | skip              | engine properties should be cloned | global
+ public | act_hi_actinst          | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_attachment       | table | camunda | skip              | ?                                  | proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_batch            | table | camunda | skip              | Batch history is relevant          | no direct relation to process/decision definitions
+ public | act_hi_caseactinst      | table | camunda | skip              | CMMN is used                       | case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ public | act_hi_caseinst         | table | camunda | skip              | CMMN is used                       | case_def_id_ in act_re_case_def.id_
+ public | act_hi_comment          | table | camunda | skip              | Comment is used                    | proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_dec_in           | table | camunda | x                 | DMN is used                        | dec_inst_id_ in act_hi_decinst
+ public | act_hi_dec_out          | table | camunda | x                 | DMN is used                        | dec_inst_id_ in act_hi_decinst
+ public | act_hi_decinst          | table | camunda | x                 | DMN is used                        | proc_def_id_ in act_re_procdef.id_ / dec_def_id_ in act_re_decision_def.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_detail           | table | camunda | x                 | BPMN OR CMMN is used               | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ public | act_hi_ext_task_log     | table | camunda | skip              | External task pattern is used      | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / proc_def_key_ in act_re_procdef.key_
+ public | act_hi_identitylink     | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_
+ public | act_hi_incident         | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_job_log          | table | camunda | x                 | BPMN is used                       | process_def_id_ in act_re_procdef.id_ / process_instance_id_ in act_hi_procinst.proc_inst_id_ / deployment_id_ in act_re_procdef.deployment_id_
+ public | act_hi_op_log           | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_
+ public | act_hi_procinst         | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_
+ public | act_hi_taskinst         | table | camunda | x                 | BPMN or CMMN is used               | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ public | act_hi_varinst          | table | camunda | x                 | BPMN or CMMN is used               | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ public | act_id_group            | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_id_info             | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_id_membership       | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_id_tenant           | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_id_tenant_member    | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_id_user             | table | camunda | skip              | Identity is used                   | no direct relation to process/decision definitions
+ public | act_re_camformdef       | table | camunda | skip              | Camunda Forms are used             | key_ / deployment_id_ in act_re_deployment.id_
+ public | act_re_case_def         | table | camunda | skip              | CMMN is used                       | key_ / deployment_id_ in act_re_deployment.id_
+ public | act_re_decision_def     | table | camunda | x                 | DMN is used                        | key_ / deployment_id_ in act_re_deployment.id_
+ public | act_re_decision_req_def | table | camunda | x                 | DMN is used                        | key_ / deployment_id_ in act_re_deployment.id_
+ public | act_re_deployment       | table | camunda | x                 | always                             | id_ in act_re_procdef.deployment_id_ / id_ in act_re_camformdef.deployment_id_ / id_ in act_re_decision_def.deployment_id_ / id_ in act_re_decision_req_def.deployment_id_ / id_ in act_re_case_def.deployment_id_
+ public | act_re_procdef          | table | camunda | x                 | BPMN is used                       | key_ / deployment_id_ in act_re_deployment.id_
+ public | act_ru_authorization    | table | camunda | skip              | authorizations should be copied    | depends on resource type and id
+ public | act_ru_batch            | table | camunda | skip              | batches should be copied           | no direct relation to process/decision definitions
+ public | act_ru_case_execution   | table | camunda | skip              | CMMN is used                       | case_def_id_ in act_re_case_def.id_
+ public | act_ru_case_sentry_part | table | camunda | skip              | CMMN is used                       | case_inst_id_ in act_ru_case_execution.case_inst_id_
+ public | act_ru_event_subscr     | table | camunda | x                 | BPMN is used                       | execution_id_ in act_ru_execution.id_ / proc_inst_id_ in act_ru_execution.id_ / configuration_ in act_re_procdef.id_
+ public | act_ru_execution        | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_ / proc_inst_id in act_hi_procinst.id_
+ public | act_ru_ext_task         | table | camunda | skip              | External task pattern is used      | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / proc_def_key_ in act_re_procdef.key_
+ public | act_ru_filter           | table | camunda | skip              | Filters should be copied           | no direct relation to process/decision definitions
+ public | act_ru_identitylink     | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_
+ public | act_ru_incident         | table | camunda | x                 | BPMN is used                       | execution_id_ in act_ru_execution.id_ / proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_ru_execution.id_ / job_def_id_ in act_ru_jobdef.id_
+ public | act_ru_job              | table | camunda | x                 | BPMN is used                       | execution_id_ in act_ru_execution.id_ / process_def_id_ in act_re_procdef.id_ / process_instance_id_ in act_ru_execution.id_ / deployment_id_ in act_re_deployment.id_
+ public | act_ru_jobdef           | table | camunda | x                 | BPMN is used                       | proc_def_id_ in act_re_procdef.id_
+ public | act_ru_meter_log        | table | camunda | skip              | do not copy this                   | -
+ public | act_ru_task             | table | camunda | x                 | BPMN or CMMN is used               | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ public | act_ru_task_meter_log   | table | camunda | skip              | do not copy this                   | - 
+ public | act_ru_variable         | table | camunda | x                 | BPMN or CMMN is used               | proc_def_id_ in act_re_procdef.id_ / proc_inst_id_ in act_hi_procinst.proc_inst_id_ / case_def_id_ in act_re_case_def.id_ / case_inst_id_ in act_hi_caseinst.case_inst_id_
+ 

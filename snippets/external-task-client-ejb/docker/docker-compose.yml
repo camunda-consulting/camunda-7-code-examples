@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  camunda:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.18.2
+    restart: always
+    ports:
+    - "8083:8080"
+    volumes:
+    - ./default.yml:/camunda/configuration/default.yml:ro
+    - ./example.bpmn:/camunda/configuration/resources/example.bpmn:ro
+  wildfly:
+    build: .
+    ports:
+    - "8080:8080"
+    - "9990:9990"
