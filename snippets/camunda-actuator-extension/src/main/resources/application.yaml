@@ -6,6 +6,7 @@ spring.datasource:
 #  username: camunda
 #  password: camunda
 spring.h2.console.enabled: true
+
 camunda.bpm:
   admin-user:
     id: demo
@@ -19,7 +20,7 @@ camunda.bpm:
     
   defaultNumberOfRetries: 1
     
-server.port: 8080
+server.port: 8081
 management:
   endpoints:
     web:
@@ -33,3 +34,19 @@ management:
 #logging:
 #  level:
 #    org.camunda.bpm.engine.impl.persistence.entity.MeterLogEntity: TRACE    
+
+sslconfig:
+  enabled: true
+  key-store: classpath:keystore/baeldung.p12
+  key-store-password: password
+  trust-store: classpath:keystore/baeldung.p12
+  trust-store-password: password
+  
+logging:
+  level:
+    root: DEBUG
+    '[org.camunda.bpm]': INFO
+    '[org.springframework.jdbc]': INFO
+    '[org.apache.ibatis]': INFO 
+    '[com.zaxxer.hikari]': INFO
+    '[org.springframework.boot.autoconfigure]': INFO
