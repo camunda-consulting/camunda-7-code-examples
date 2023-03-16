@@ -32,7 +32,7 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/app/admin/**", "/app/cockpit/**", "/app/tasklist/**").authenticated()
+        http.authorizeRequests().antMatchers("/camunda/app/**").authenticated()
                 .and()
                 .authorizeRequests().antMatchers("/**").permitAll()
                 .and()
@@ -57,5 +57,11 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
         return filterRegistration;
 
     }
+
+    // Enable this if you have trouble with "No thread-bound request found"
+    //@Bean
+    //public RequestContextListener requestContextListener() {
+    //    return new RequestContextListener();
+    //}
 
 }
