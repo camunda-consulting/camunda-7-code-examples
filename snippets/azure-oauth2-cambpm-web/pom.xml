@@ -13,24 +13,22 @@
         <!-- ================ CAMUNDA VERSIONS ================ -->
 
         <!-- Community Edition -->
-        <camunda.version>7.13.0</camunda.version>
+        <camunda.version>7.18.0</camunda.version>
         <!-- Enterprise Edition -->
-<!--        <camunda.version>7.13.0-ee</camunda.version>-->
+        <!--        <camunda.version>7.18.0-ee</camunda.version>-->
 
-        <camunda.spring-boot.version>7.13.0</camunda.spring-boot.version>
+        <camunda.spring-boot.version>7.18.0</camunda.spring-boot.version>
 
         <!-- ============== SPRING BOOT VERSIONS ============== -->
 
-        <!-- 7.12 and above -->
-        <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <version.java>1.8</version.java>
+        <spring-boot.version>2.7.3</spring-boot.version>
+        <version.java>11</version.java>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <azure.version>2.2.4</azure.version>
+        <spring-cloud-azure.version>4.5.0</spring-cloud-azure.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
     </properties>
 
@@ -51,9 +49,9 @@
                 <type>pom</type>
             </dependency>
             <dependency>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-spring-boot-bom</artifactId>
-                <version>${azure.version}</version>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${spring-cloud-azure.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -87,7 +85,7 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.2.3</version>
+            <version>4.0.2</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.postgresql</groupId>-->
@@ -121,13 +119,8 @@
         <!-- ================ microsoft azure ================ -->
 
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-active-directory-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-spring-boot</artifactId>
-            <version>${azure.version}</version>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-active-directory</artifactId>
         </dependency>
 
     </dependencies>
