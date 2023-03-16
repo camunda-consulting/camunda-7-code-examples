@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.camunda.example.oauth2</groupId>
-    <artifactId>azure-oauth2-cambpm-web-4.5.0</artifactId>
+    <artifactId>azure-oauth2-cambpm-web</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
