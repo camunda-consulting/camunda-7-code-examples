@@ -1,67 +1,53 @@
 package com.camunda.example.oauth2.config;
 
-import com.camunda.example.oauth2.filter.CamundaAuthenticationFilter;
-import com.camunda.example.oauth2.filter.WebAppAuthenticationProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.azure.spring.cloud.autoconfigure.aad.AadWebSecurityConfigurerAdapter;
+import java.util.Collections;
+import org.camunda.bpm.webapp.impl.security.auth.ContainerBasedAuthenticationFilter;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.web.context.request.RequestContextListener;
 
-import java.util.Collections;
-
+/** Used for Azure AD security. */
+@Order(SecurityProperties.BASIC_AUTH_ORDER - 10)
 @Configuration
-@EnableWebSecurity(debug = true)
-@Order(SecurityProperties.BASIC_AUTH_ORDER - 15)
-public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebAppSecurityConfig extends AadWebSecurityConfigurerAdapter {
 
-    private final Logger logger = LoggerFactory.getLogger(WebAppSecurityConfig.class.getName());
+  @Override
+  public void configure(HttpSecurity http) throws Exception {
+    // use required configuration form AADWebSecurityAdapter.configure:
+    super.configure(http);
+    // add custom configuration:
+    http.authorizeRequests()
+        .antMatchers("/camunda/**")
+        .authenticated() // limit these pages to authenticated users (default: /token_details)
+        .antMatchers("/**")
+        .permitAll(); // allow all other routes.
+  }
 
-    @Autowired
-    private OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService;
+  @Bean
+  public FilterRegistrationBean<ContainerBasedAuthenticationFilter>
+      containerBasedAuthenticationFilter() {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    FilterRegistrationBean<ContainerBasedAuthenticationFilter> filterRegistration =
+        new FilterRegistrationBean<>();
+    filterRegistration.setFilter(new ContainerBasedAuthenticationFilter());
+    filterRegistration.setInitParameters(
+        Collections.singletonMap(
+            "authentication-provider",
+            SpringSecurityOAuth2AuthenticationProvider.class.getCanonicalName()));
+    filterRegistration.setOrder(
+        101); // make sure the filter is registered after the Spring Security Filter Chain
+    filterRegistration.addUrlPatterns("/camunda/*");
+    return filterRegistration;
+  }
 
-        http.authorizeRequests().antMatchers("/camunda/app/**").authenticated()
-                .and()
-                .authorizeRequests().antMatchers("/**").permitAll()
-                .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                .oidcUserService(oidcUserService);
-
-        http.csrf().disable();
-    }
-
-    @Bean
-    @Order(SecurityProperties.BASIC_AUTH_ORDER - 15)
-    public FilterRegistrationBean<CamundaAuthenticationFilter> containerBasedAuthenticationFilter() {
-
-        logger.info("++++++++ WebAppSecurityConfig.containerBasedAuthenticationFilter()....");
-        FilterRegistrationBean<CamundaAuthenticationFilter> filterRegistration
-                = new FilterRegistrationBean<>();
-        filterRegistration.setFilter(new CamundaAuthenticationFilter());
-        filterRegistration.setInitParameters(Collections.singletonMap("authentication-provider", WebAppAuthenticationProvider.class.getName()));
-        filterRegistration.setOrder(101); // make sure the filter is registered after the Spring Security Filter Chain
-        filterRegistration.addUrlPatterns("/*");
-        return filterRegistration;
-
-    }
-
-    // Enable this if you have trouble with "No thread-bound request found"
-    //@Bean
-    //public RequestContextListener requestContextListener() {
-    //    return new RequestContextListener();
-    //}
-
+  @Bean
+  @Order(0)
+  public RequestContextListener requestContextListener() {
+    return new RequestContextListener();
+  }
 }
