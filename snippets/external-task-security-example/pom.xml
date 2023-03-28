@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.camunda.consulting</groupId>
+  <artifactId>external-task-security-example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>External Task Security Example</name>
+  <description>An example to show potential restrictions using external task workers</description>
+  
+  <modules>
+    <module>secure-spring-boot-process-engine</module>
+    <module>system-1-external-task-worker</module>
+    <module>system-2-external-task-worker</module>
+  </modules>
+  
+  <properties>
+    <camunda.version>7.18.5-ee</camunda.version>
+    <springBoot.version>2.7.9</springBoot.version>
+
+    <version.java>11</version.java>
+    <maven.compiler.source>${version.java}</maven.compiler.source>
+    <maven.compiler.target>${version.java}</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springBoot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>Camunda Maven Repository</name>
+      <url>https://artifacts.camunda.com/artifactory/public/</url>
+    </repository>
+    <repository>
+      <id>camunda-bpm-nexus-ee</id>
+      <name>Camunda Enterprise Maven Repository</name>
+      <url>https://artifacts.camunda.com/artifactory/camunda-bpm-ee/</url>
+    </repository>
+    <!-- enable this for EE dependencies (requires credentials in ~/.m2/settings.xml)
+    -->
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${springBoot.version}</version>
+        <configuration>
+          <layout>ZIP</layout>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
