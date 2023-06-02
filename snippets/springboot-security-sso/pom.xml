@@ -11,7 +11,7 @@
     <description>Spring Boot Application using [Camunda](http://docs.camunda.org)</description>
 
     <properties>
-        <camunda.version>7.14.0</camunda.version>
+        <camunda.version>7.19.0</camunda.version>
         <!--
         Adjust if you want to use EE:
         <camunda.version>7.8.0-ee</camunda.version>
