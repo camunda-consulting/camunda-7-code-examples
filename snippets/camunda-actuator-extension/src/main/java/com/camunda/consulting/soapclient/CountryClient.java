@@ -46,16 +46,21 @@ public class CountryClient extends WebServiceGatewaySupport {
   }
   
   WebServiceTemplate webServiceTemplate() throws Exception {
+    LOG.info("Using parameters {}, {}", trustStore, trustStorePassword);
     SSLContext sslContext = new SSLContextBuilder()
         .loadTrustMaterial(trustStore.getURL(), trustStorePassword.toCharArray()).build();
+    LOG.info("SSL context created");
     SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext);
     HttpClient httpClient = HttpClients.custom().setSSLSocketFactory(socketFactory)
         .addInterceptorFirst(new HttpComponentsMessageSender.RemoveSoapHeadersInterceptor())
         .build();
         
+    LOG.info("http client created");
     WebServiceMessageSender sender = new HttpComponentsMessageSender(httpClient);
+    LOG.info("HttpComponentsMessageSender created");
     
     WebServiceTemplate webServiceTemplate = getWebServiceTemplate();
+    LOG.info("webServiceTemplate got");
     webServiceTemplate.setMessageSender(sender);
     
     LOG.info("webservice template: {}", webServiceTemplate);

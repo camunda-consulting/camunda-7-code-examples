@@ -16,7 +16,10 @@ public class RestTemplateConfig {
   public RestTemplate restTemplate(RestTemplateBuilder builder) {
     LOG.info("Configure RestTemplate");
     // Do any additional configuration here
-    return builder.build();
+    RestTemplate localBuilderVar = builder.build();
+    
+    LOG.info("RestTemplate configured");
+    return localBuilderVar;
   }
 
 }

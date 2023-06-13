@@ -18,6 +18,7 @@ public class SslConfig {
 
   @PostConstruct
   private void configureSSL() {
+    LOG.info("Try to set SSL config");
     if ("true".equals(env.getProperty("sslconfig.enabled"))) {
       
       LOG.info("Get SSL config details");

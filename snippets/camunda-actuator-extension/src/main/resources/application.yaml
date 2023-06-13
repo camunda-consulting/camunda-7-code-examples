@@ -44,9 +44,10 @@ sslconfig:
   
 logging:
   level:
-    root: DEBUG
+    root: INFO
     '[org.camunda.bpm]': INFO
     '[org.springframework.jdbc]': INFO
     '[org.apache.ibatis]': INFO 
     '[com.zaxxer.hikari]': INFO
     '[org.springframework.boot.autoconfigure]': INFO
+    '[javax.net.ssl]': DEBUG
