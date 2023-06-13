@@ -50,4 +50,4 @@ logging:
     '[org.apache.ibatis]': INFO 
     '[com.zaxxer.hikari]': INFO
     '[org.springframework.boot.autoconfigure]': INFO
-    '[javax.net.ssl]': DEBUG
+#    '[javax.net.ssl]': INFO ## has no effect, use -Djavax.net.debug=sslctx as VM parameter
