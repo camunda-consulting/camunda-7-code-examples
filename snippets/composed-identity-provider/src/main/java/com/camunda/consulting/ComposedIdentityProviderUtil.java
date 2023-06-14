@@ -5,6 +5,13 @@ import java.util.function.BinaryOperator;
 
 public class ComposedIdentityProviderUtil {
 
+  /**
+   * This BinaryOperator will ensure that only one element is contained in the stream that should be
+   * reduced
+   *
+   * @return the one result
+   * @param <T> type of elements
+   */
   public static <T> BinaryOperator<T> atMostOne() {
     return (t, t2) -> {
       if (t == null) {
@@ -17,6 +24,14 @@ public class ComposedIdentityProviderUtil {
     };
   }
 
+  /**
+   * This BinaryOperator will ensure that only equal elements are contained in the stream that
+   * should be reduced
+   *
+   * @param comparator the comparator that is applied in case there are multiple elements present
+   * @return the one result
+   * @param <T> type of elements
+   */
   public static <T> BinaryOperator<T> merge(Comparator<T> comparator) {
     return (t, t2) -> {
       if (t == null) {
