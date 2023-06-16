@@ -4,12 +4,12 @@ This example shows how a composed identity provider can be implemented.
 
 It uses:
 
-* a list of LDAP configurations
-* a flag for database identity provider
+* one LDAP configurations
+* a static in-memory bypass
 
 ## Goal
 
-Using this composed identity provider, you will be able to define multiple LDAP connections at the same time or bypass a ldap connection with a database identity provider.
+Using this composed identity provider, you will be able to an LDAP connection plus a bypass.
 
 ## Configuration
 
@@ -17,68 +17,49 @@ Using this composed identity provider, you will be able to define multiple LDAP 
 
 To use the plugin with Spring Boot, the easiest way would be to add it to the context as `@Bean` programmatically. From there, it will be registered to the process engine.
 
+> Please set `additionalUserProperties` to prevent loading the properties file from catalina conf.
+> 
+> Instead, you can inject here a subsection of the application.yaml
+
 ### Camunda Run
 
 Here, the same mechanism as with Spring Boot would apply as the plugin needs to be configured.
 
 ### Tomcat
 
-To use the plugin with a Tomcat, you will need to register it to the `bpm-platform.xml` using:
+To use the plugin with a Tomcat, you will need to register it to the `bpm-platform.xml`. Just replace the `plugin.class` of the LDAP identity provider plugin with `com.camunda.consulting.ComposedLdapIdentityProviderPlugin`:
+
+As this plugin extends the Ldap Identity Provider plugin, you should be able to use it with the same properties.
+
+The plugin will then the ldap configuration plus the in-memory identity provider.
+
+If you need to populate the in-memory identity provider as well, please add to the plugin properties:
 
 ```xml
-<plugin>
-  <class>com.camunda.consulting.ComposedIdentityProviderPlugin</class>
-  <properties>
-    <property name="useDatabase">true</property>
-    <property name="ldapConfigurationFiles">my-first-ldap-config.properties, my-second-ldap-config.properties</property>
-  </properties>
-</plugin>
+<property name="additionalUsers">{{additionalUsersPropertiesFileName}}</property>
 ```
 
-Then, you will have to add `my-first-ldap-config.properties` and `my-second-ldap-config.properties` to the `conf` folder of the Tomcat.
+This will default to `additionalUsers.properties`. The file has to be placed under `conf/` in the `catalina.home`.
 
-They both should include all relevant attributes:
+Additional users, groups and assignments can then be registered in the properties file like this:
+
 ```properties
-initialContextFactory =com.sun.jndi.ldap.LdapCtxFactory
-securityAuthentication =simple
+# Creates a user with a given userId
+user.{{userId}}.firstName=Demo
+user.{{userId}}.lastName=Demo
+user.{{userId}}.password=demo
+user.{{userId}}.email=demo@demo.org
 
-serverUrl=
-managerDn=
-managerPassword=
+# Creates groups with given ids
+group.{{groupId}}.name=Demo Group
+group.{{groupId}}.type=SYSTEM
 
-baseDn=
+group.{{groupId2}}.name=Demo Group 2
+group.{{groupId2}}.type=SYSTEM
 
-userDnPattern=
-
-userSearchBase=
-userSearchFilter=(objectclass=person)
-
-groupSearchBase=
-groupSearchFilter=(objectclass=groupOfNames)
-
-userIdAttribute=uid
-userFirstnameAttribute=cn
-userLastnameAttribute=sn
-userEmailAttribute=email
-userPasswordAttribute=userpassword
-
-groupIdAttribute=ou
-groupNameAttribute=cn
-groupTypeAttribute=
-groupMemberAttribute=memberOf
-
-sortControlSupported=false
-useSsl=false
-usePosixGroups=false
-allowAnonymousLogin=false
-
-authorizationCheckEnabled=true
-# if not set, it is disabled
-pageSize=
+# Assigns a user to the given groups, separated by comma
+assignment.{{userId}}=demoGroup, demoGroup2
 ```
->Note: The above mentioned values are default values and can be omitted.
-
-The plugin will then use all configurations (ldap, database) to search users and groups. Also, it will use the database to modify users there.
 
 ## Components
 
@@ -90,11 +71,8 @@ Here, all configuration from outside is taken and processed before the factory r
 
 ### Session Factory
 
-The session factory that provides the composed identity provider itself. It holds a list of session factories that are then filtered and the opened sessions are injected to the session.
+The session factory that provides the identity provider itself. It extends the LDAP identity provider session factory.
 
 ### Identity Provider
 
-The session for one request. It can handle any amount of `ReadOnlyIdentityProvider` sessions and one session of `WritableIdentityProvider`.
-
-This makes sure that no more than one writable resource is written to at the same time.
-
+The session for one request. It overrides the query methods to execute the LDAP query first and the in-memory query afterwards.
