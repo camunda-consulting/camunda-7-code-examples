@@ -13,6 +13,8 @@ import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
 import org.camunda.bpm.engine.impl.GroupQueryImpl;
 import org.camunda.bpm.engine.impl.UserQueryImpl;
+import org.camunda.bpm.identity.impl.ldap.LdapGroupEntity;
+import org.camunda.bpm.identity.impl.ldap.LdapUserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -190,7 +192,7 @@ public class StaticIdentityProvider {
     return Objects.equals(user.getPassword(), password);
   }
 
-  public static class UserImpl implements User {
+  public static class UserImpl extends LdapUserEntity implements User {
     private String id;
     private String firstName;
     private String lastName;
@@ -269,7 +271,7 @@ public class StaticIdentityProvider {
     }
   }
 
-  public static class GroupImpl implements Group {
+  public static class GroupImpl extends LdapGroupEntity implements Group {
     private String id;
     private String name;
     private String type;
