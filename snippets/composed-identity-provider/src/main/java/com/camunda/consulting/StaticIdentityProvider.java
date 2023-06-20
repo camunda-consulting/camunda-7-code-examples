@@ -192,7 +192,7 @@ public class StaticIdentityProvider {
     return Objects.equals(user.getPassword(), password);
   }
 
-  public static class UserImpl extends LdapUserEntity implements User {
+  public static class UserImpl implements User {
     private String id;
     private String firstName;
     private String lastName;
@@ -271,7 +271,7 @@ public class StaticIdentityProvider {
     }
   }
 
-  public static class GroupImpl extends LdapGroupEntity implements Group {
+  public static class GroupImpl implements Group {
     private String id;
     private String name;
     private String type;

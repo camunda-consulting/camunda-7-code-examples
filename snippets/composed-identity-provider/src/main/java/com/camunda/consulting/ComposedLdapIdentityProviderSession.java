@@ -26,7 +26,10 @@ public class ComposedLdapIdentityProviderSession extends LdapIdentityProviderSes
 
   @Override
   public boolean checkPassword(String userId, String password) {
-    return super.checkPassword(userId, password) || getInstance().checkPassword(userId, password);
+    if (findUserById(userId) instanceof UserImpl) {
+      return getInstance().checkPassword(userId, password);
+    }
+    return super.checkPassword(userId, password);
   }
 
   @Override
