@@ -24,11 +24,11 @@ public class ProcessEngineTest {
   @Test
   void shouldHaveChangedVersionTag() {
     Deployment deployment =
-        repositoryService()
-            .createDeployment()
-            .name("test")
-            .addClasspathResource("test.bpmn")
-            .deploy();
+      repositoryService()
+        .createDeployment()
+        .name("test")
+        .addClasspathResource("test.bpmn")
+        .deploy();
     assertThat(deployment).isNotNull();
 
     List<Resource> resourceEntities = repositoryService().getDeploymentResources(deployment.getId());
