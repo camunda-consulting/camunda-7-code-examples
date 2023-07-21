@@ -7,22 +7,24 @@ services:
       - POSTGRES_USER=camunda
       - POSTGRES_PASSWORD=camunda
       - POSTGRES_DB=camunda
+    ports:
+      - "5432:5432"
   camunda1:
-    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.19.0
     restart: always
     ports:
       - "8080:8080"
     volumes:
       - ./default.yml:/camunda/configuration/default.yml:ro
   camunda2:
-    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.19.0
     restart: always
     ports:
       - "8081:8080"
     volumes:
       - ./default.yml:/camunda/configuration/default.yml:ro
   camunda3:
-    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.16.0
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.19.0
     restart: always
     ports:
       - "8082:8080"
