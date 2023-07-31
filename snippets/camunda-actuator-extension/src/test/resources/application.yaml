@@ -1,0 +1,59 @@
+spring.datasource:
+  url: jdbc:h2:mem:camunda-db;DB_CLOSE_ON_EXIT=FALSE
+  username: sa
+  password: sa
+#  url: jdbc:postgresql:camunda
+#  username: camunda
+#  password: camunda
+spring.h2.console.enabled: true
+
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  job-execution:
+    max-wait: 10000
+    
+  defaultNumberOfRetries: 1
+    
+server.port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        exclude: "env,beans"
+  endpoint:
+    health:
+      show-details: always
+      
+#logging:
+#  level:
+#    org.camunda.bpm.engine.impl.persistence.entity.MeterLogEntity: TRACE    
+
+sslconfig:
+  enabled: true
+  key-store: classpath:keystore/baeldung.p12
+  key-store-password: password
+  trust-store: classpath:keystore/baeldung.p12
+  trust-store-password: password
+  
+logging:
+  level:
+    root: INFO
+    '[org.camunda.bpm]': INFO
+    '[org.camunda.bpm.engine.jobexecutor]': DEBUG
+    '[org.springframework.jdbc]': INFO
+    '[org.apache.ibatis]': INFO 
+    '[com.zaxxer.hikari]': INFO
+    '[org.springframework]': DEBUG
+    '[org.springframework.boot.autoconfigure]': DEBUG
+    '[org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]': INFO
+    '[jdk.event.security]': DEBUG
+    '[org.hibernate]': INFO
+    '[org.apache.catalina.core]': INFO
+#    '[javax.net.ssl]': INFO ## has no effect, use -Djavax.net.debug=sslctx as VM parameter

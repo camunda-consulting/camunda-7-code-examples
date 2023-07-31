@@ -56,3 +56,6 @@ In the `util` folder you find postman collections to start a higher amount of pr
 * [https://www.callicoder.com/spring-boot-actuator-metrics-monitoring-dashboard-prometheus-grafana/](https://www.callicoder.com/spring-boot-actuator-metrics-monitoring-dashboard-prometheus-grafana/)
 * [https://mokkapps.de/blog/monitoring-spring-boot-application-with-micrometer-prometheus-and-grafana-using-custom-metrics/](https://mokkapps.de/blog/monitoring-spring-boot-application-with-micrometer-prometheus-and-grafana-using-custom-metrics/)
 * [https://micrometer.io/docs/concepts](https://micrometer.io/docs/concepts)
+
+## SSL debugging
+As jvm parameter, add `-Djavax.net.debug=sslctx`
