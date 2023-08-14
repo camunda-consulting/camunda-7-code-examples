@@ -39,3 +39,8 @@ Build the frontend plugin with `mvn package` and move the jar
 `configuration/userlib` folder of your Camunda Run installation.
 
 The JavaScript part gets build with `npm` from maven automatically.
+
+## General documentation
+
+More details about Webapp plugin development and installation can be found here:
+https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/
