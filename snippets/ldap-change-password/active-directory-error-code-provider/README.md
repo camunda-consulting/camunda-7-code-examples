@@ -45,6 +45,7 @@ camunda.bpm:
 
 ## Build and install
 
-User maven to build the process engine plugin: `mvn package`. Then copy the
-`active-directory-error-code-provider-0.0.1-SNAPSHOT.jar` into the
-`configuration/userlib folder of your Camunda Run installation.
+Maven is used to build the process engine plugin: `mvn package`. After a
+successful build, the `active-directory-error-code-provider-0.0.1-SNAPSHOT.jar`
+has to be copied into the `configuration/userlib` folder of the Camunda Run
+installation.

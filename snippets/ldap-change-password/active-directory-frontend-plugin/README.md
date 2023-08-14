@@ -36,6 +36,6 @@ tasklist and cockpit.
 
 Build the frontend plugin with `mvn package` and move the jar
 `active-directory-frontend-plugin-1.0-SNAPSHOT.jar` into the
-configuration/userlib folder of your Camunda Run installation.
+`configuration/userlib` folder of your Camunda Run installation.
 
 The JavaScript part gets build with `npm` from maven automatically.
