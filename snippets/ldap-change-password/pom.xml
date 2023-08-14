@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.camunda.bpm</groupId>
+  <artifactId>ldap-change-password</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>LDAP Change Password Extension</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>active-directory-error-code-provider</module>
+    <module>active-directory-frontend-plugin</module>
+  </modules>
+  
+  <repositories>
+    <repository>
+      <id>camunda-bpm-nexus</id>
+      <name>camunda-bpm-nexus</name>
+      <url>https://artifacts.camunda.com/artifactory/public/</url>
+    </repository>
+  </repositories>
+
+</project>
