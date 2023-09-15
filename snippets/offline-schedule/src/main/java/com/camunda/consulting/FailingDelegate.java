@@ -13,8 +13,5 @@ public class FailingDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     LOG.debug("I am running!");
-    throw new Exception();
-
   }
-
 }

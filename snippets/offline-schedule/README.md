@@ -1,6 +1,6 @@
-# Offline Schedule for Job Retry
+# Offline Schedule for Jobs
 
-This project shows 3 example implementations of how Job Scheduling can be done according to breaks where no job should be executed.
+This project shows 4 example implementations of how Job Scheduling can be done according to breaks where no job should be executed.
 
 ## Configuration
 
