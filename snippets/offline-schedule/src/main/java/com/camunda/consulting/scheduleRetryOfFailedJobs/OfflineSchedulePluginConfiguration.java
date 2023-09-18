@@ -9,9 +9,9 @@ import com.camunda.consulting.OfflineSchedule;
 @Configuration
 public class OfflineSchedulePluginConfiguration {
 
-  @Bean
-  public ProcessEnginePlugin offlineSchedulePlugin(OfflineSchedule schedule) {
-    return new OfflineSchedulePlugin(schedule);
-  }
+//  @Bean
+//  public ProcessEnginePlugin offlineSchedulePlugin(OfflineSchedule schedule) {
+//    return new OfflineSchedulePlugin(schedule);
+//  }
 
 }

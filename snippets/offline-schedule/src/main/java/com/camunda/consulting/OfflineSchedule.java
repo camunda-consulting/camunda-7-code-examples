@@ -14,13 +14,20 @@ public class OfflineSchedule {
   }
 
   public Date calculateStartDateFromSchedule() {
-    LocalDateTime startDate = LocalDateTime.now();
+    return Date.from(
+        doCalculateStartDateFromSchedule(LocalDateTime.now())
+            .atZone(ZoneId.systemDefault())
+            .toInstant());
+  }
+
+  private LocalDateTime doCalculateStartDateFromSchedule(LocalDateTime startDate) {
     boolean startDateChanged = true;
     while (startDateChanged) {
       startDateChanged = false;
       for (JobExecutorBreak jobExecutorBreak : this.schedule) {
         DayOfWeek dayOfWeek = startDate.getDayOfWeek();
-        if ((jobExecutorBreak.getDayOfWeek() == null) || jobExecutorBreak.getDayOfWeek().equals(dayOfWeek)) {
+        if ((jobExecutorBreak.getDayOfWeek() == null)
+            || jobExecutorBreak.getDayOfWeek().equals(dayOfWeek)) {
           // will be applied on every day or if the day fits
           if (JobExecutorBreakUtils.timestampFrom(jobExecutorBreak).isBefore(startDate)
               && JobExecutorBreakUtils.timestampTo(jobExecutorBreak).isAfter(startDate)) {
@@ -31,6 +38,12 @@ public class OfflineSchedule {
         }
       }
     }
-    return Date.from(startDate.atZone(ZoneId.systemDefault()).toInstant());
+    return startDate;
+  }
+
+  public boolean isSuspended() {
+    LocalDateTime now = LocalDateTime.now();
+    LocalDateTime next = doCalculateStartDateFromSchedule(now);
+    return !now.isEqual(next);
   }
 }
