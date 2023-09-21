@@ -25,8 +25,8 @@
 	<properties>
 		<skipTests>true</skipTests>
 
-		<!-- make sure that exists in https://github.com/camunda/camunda-webapp-translations -->
-		<CUSTOM_LANG>de</CUSTOM_LANG>
+		<!-- make sure that exists in https://github.com/camunda-community-hub/camunda-7-webapp-translations -->
+		<CUSTOM_LANG>fr</CUSTOM_LANG>
 		
 		<CUSTOM_TASKLIST_TITLE>Purple Camunda ToDo\'s</CUSTOM_TASKLIST_TITLE>
 
@@ -129,7 +129,7 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/tasklist/${CUSTOM_LANG}.json</url>
+							<url>https://github.com/camunda-community-hub/camunda-7-webapp-translations/raw/main/tasklist/${CUSTOM_LANG}.json</url>
 							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/tasklist/locales/</outputDirectory>
 						</configuration>
 					</execution>
@@ -140,7 +140,7 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/cockpit/${CUSTOM_LANG}.json</url>
+							<url>https://github.com/camunda-community-hub/camunda-7-webapp-translations/raw/main/cockpit/${CUSTOM_LANG}.json</url>
 							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/cockpit/locales/</outputDirectory>
 						</configuration>
 					</execution>
@@ -151,7 +151,7 @@
 							<goal>wget</goal>
 						</goals>
 						<configuration>
-							<url>https://github.com/camunda/camunda-webapp-translations/raw/master/admin/${CUSTOM_LANG}.json</url>
+							<url>https://github.com/camunda-community-hub/camunda-7-webapp-translations/raw/main/admin/${CUSTOM_LANG}.json</url>
 							<outputDirectory>${project.build.outputDirectory}/META-INF/resources/webjars/camunda/app/admin/locales/</outputDirectory>
 						</configuration>
 					</execution>
