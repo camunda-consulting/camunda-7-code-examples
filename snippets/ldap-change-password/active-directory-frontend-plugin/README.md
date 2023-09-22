@@ -28,6 +28,9 @@ and hides it initially.
 [reset-password.html](frontend/src/reset-password.html) contains the HTML
 snippet that is shown when a user tries to login and his password is expired.
 
+These files will be merged into the `plugin.js` file during `npm build` via
+`mvn`.
+
 The plugin uses [rollup.config.js](frontend/rollup.config.js) to distribute the
 plugin and the policy with the html-snippet to all applications: welcome, admin,
 tasklist and cockpit.
