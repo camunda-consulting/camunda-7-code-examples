@@ -24,6 +24,9 @@ engine. It provides default values for the configuration, which can be simply
 overridden in the configuration file of the Camunda Run installation. An example
 configuration is shown below.
 
+To activate this mechanism, it is required to disable the catch of
+`AuthenticationExcpetion`.
+
 ## Example config
 
 ```yml
@@ -34,6 +37,7 @@ camunda.bpm:
       serverUrl: ldap://<ip>
       managerDn: <user>
       managerPassword: <password>
+      passwordCheckCatchAuthenticationException: false
     process-engine-plugins:
       - plugin-class: org.camunda.bpm.plugin.activedirectory.ActiveDirectoryErrorCodeProviderPlugin
         plugin-parameters:
