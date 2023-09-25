@@ -24,8 +24,10 @@ configuration `passwordCheckCatchAuthenticationException: false`. The complete
 Spring Boot configuration property for Camunda Run is
 
 ```
-camunda.bpm.run.ldap.passwordCheckCatchAuthenticationException=true
+camunda.bpm.run.ldap.passwordCheckCatchAuthenticationException=false
 ```
+
+The default value of this property is `true`.
 
 [ActiveDirectoryErrorCodeProviderPlugin](src/main/java/org/camunda/bpm/plugin/activedirectory/ActiveDirectoryErrorCodeProviderPlugin.java)
 registers the `ActiveDirectoryExceptionCodeProvider` as a plugin in the process
