@@ -18,6 +18,15 @@ be picked up in the frontend plugin. See
 [password-policy.js](../active-directory-frontend-plugin/frontend/src/password-policy.js)
 how the values are handled.
 
+This mechanism relays on throwing an exception on a failed login attempt to
+check for the error details. The exception has to be forced with LDAP plugin
+configuration `passwordCheckCatchAuthenticationException: false`. The complete
+Spring Boot configuration property for Camunda Run is
+
+```
+camunda.bpm.run.ldap.passwordCheckCatchAuthenticationException=true
+```
+
 [ActiveDirectoryErrorCodeProviderPlugin](src/main/java/org/camunda/bpm/plugin/activedirectory/ActiveDirectoryErrorCodeProviderPlugin.java)
 registers the `ActiveDirectoryExceptionCodeProvider` as a plugin in the process
 engine. It provides default values for the configuration, which can be simply
