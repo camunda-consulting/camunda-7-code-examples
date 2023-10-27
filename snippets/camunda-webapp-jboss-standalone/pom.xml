@@ -22,6 +22,11 @@
     <version.graal.js>21.1.0</version.graal.js>
     <version.hikaricp>4.0.3</version.hikaricp>
     
+    <version.maven.dependency.plugin>2.8</version.maven.dependency.plugin>
+    <version.maven.antrun.plugin>1.8</version.maven.antrun.plugin>
+    <version.maven.war.plugin>3.3.2</version.maven.war.plugin>
+    <version.wildfly.maven.plugin>2.0.0.Final</version.wildfly.maven.plugin>
+    
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -185,6 +190,30 @@
   </repositories>
   
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${version.maven.dependency.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${version.maven.antrun.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${version.maven.war.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-maven-plugin</artifactId>
+          <version>${version.wildfly.maven.plugin}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -215,7 +244,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.8</version>
         <executions>
           <execution>
             <id>filter-web-xml</id>
@@ -248,7 +276,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.2</version>
         <configuration>
           <webResources>
             <resource>
@@ -275,7 +302,6 @@
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
-        <version>2.0.0.Final</version>
       </plugin>
     </plugins>
   </build>
