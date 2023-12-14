@@ -1,0 +1,29 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "GET",
+                "url": "/random/delayed"
+            },
+            "response": {
+                "status": 200,
+                "body": "More content\n",
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 4000,
+                    "upper": 6000
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "url": "/failed"
+            },
+            "response": {
+                "status": 500,
+                "body": "I'm sorry\n"
+            }
+        }
+    ]
+}
