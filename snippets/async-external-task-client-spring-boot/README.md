@@ -8,7 +8,7 @@ You will get a `CompletableFuture` of the response and  you can react with all t
 
 ## Example implementation
 
-In the [example implementation](/src/main/java/com/camunda/consulting/AsyncRestCallHandler.java), it sets a timeout of 5 seconds.
+In the [example implementation](src/main/java/com/camunda/consulting/AsyncRestCallHandler.java), it sets a timeout of 5 seconds.
 
 If the response arrives in time, the code will check for the HTTP status header to decide if the task is completed or failed.
 
