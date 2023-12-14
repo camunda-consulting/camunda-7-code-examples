@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  camunda:
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:run-7.20.0
+    ports:
+    - "8080:8080"
+    environment:
+    - "CAMUNDA_BPM_RUN_EXAMPLE_ENABLED=false"
+    volumes:
+    - "./demo-process.bpmn:/camunda/configuration/resources/demo-process.bpmn"
