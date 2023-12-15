@@ -16,7 +16,7 @@ In case of a timeout, the request will be canceled (To interrupt the completion,
 
 ## Testing with WireMock
 
-[The WireMock mapping](wireMock_mapping/random_delay.json) contains two endpoints. `random/delayed` delays the result between 4 and 6 seconds. `failed` returns a HTTP status code 500.
+[The WireMock mapping](wireMock_mapping/random_delay.json) contains 3 endpoints. `random/delayed` delays the result between 4 and 6 seconds. `failed` returns a HTTP status code 500. And `breakdown` sends garbage then closes the connection.
 
 You can find more details howto setup a WireMock server in the WireMock documentation in the sections [Running as a standalone Process](https://https://wiremock.org/docs/standalone/java-jar/) and [JSON configuration files](https://wiremock.org/docs/standalone/java-jar/#json-file-configuration)
 
@@ -41,15 +41,34 @@ curl --location 'http://localhost:8080/engine-rest/process-definition/key/exampl
 }'
 ```
 
+You can inspect the incident in Cockpit. Change the process variable `path` to the value `random/delayed` and retry the external service task.
+
 Create an instance to call the delayed API:
 
 ```
 curl --location 'http://localhost:8080/engine-rest/process-definition/key/exampleWithExternalTasksProcess/start' \
 --header 'Content-Type: application/json' \
 --data '{
-  "businessKey": "Worker test 8",
+  "businessKey": "Worker test 9",
   "variables": {
       "path": {"value": "random/delayed"}
   }
 }'
 ```
+
+If case of a timeout, you can inspect the incident in Cockpit. Retry the external task until the API responses in time.
+
+Create an instance to call the breakdown API:
+
+```
+curl --location 'http://localhost:8080/engine-rest/process-definition/key/exampleWithExternalTasksProcess/start' \
+--header 'Content-Type: application/json' \
+--data '{
+  "businessKey": "Worker test 10",
+  "variables": {
+      "path": {"value": "breakdown"}
+  }
+}'
+```
+
+You can inspect the incident in Cockpit. Change the process variable `path` to the value `random/delayed` and retry the external service task.

@@ -24,6 +24,15 @@
                 "status": 500,
                 "body": "I'm sorry\n"
             }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "url": "/breakdown"
+            },
+            "response": {
+                "fault": "RANDOM_DATA_THEN_CLOSE"
+            }
         }
     ]
 }

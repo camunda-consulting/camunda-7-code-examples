@@ -61,7 +61,8 @@ public class AsyncRestCallHandler implements ExternalTaskHandler {
           externalTaskService.handleFailure(externalTask, "Error 500", responseAsync.body(), 0, 0);
           return responseAsync.body();
         }
-      }).exceptionally(string -> {
+      }).exceptionally(exception -> {
+        externalTaskService.handleFailure(externalTask, exception.getMessage(), stacktraceToString(exception), 0, 0);
         return "failed";
       }).get(5, TimeUnit.SECONDS);
       LOG.info("response: {}", result);
@@ -73,10 +74,10 @@ public class AsyncRestCallHandler implements ExternalTaskHandler {
     }
   }
 
-  String stacktraceToString(Exception e) {
+  String stacktraceToString(Throwable exception) {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
-    e.printStackTrace(pw);
+    exception.printStackTrace(pw);
     return sw.toString();
   }
 
