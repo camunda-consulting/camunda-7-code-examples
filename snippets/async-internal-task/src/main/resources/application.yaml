@@ -1,0 +1,21 @@
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+      email: demo@demo.org
+      first-name: Demo
+      last-name: Demo
+    extension:
+      internal-task-client:
+        max-tasks: 1000
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/camunda
+    username: camunda
+    password: camunda
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
