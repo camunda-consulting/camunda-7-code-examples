@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0mf1v3j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.19.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="ExampleProcess" name="Example" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="ProcessStartedStartEvent" name="Process started">
+      <bpmn:outgoing>Flow_1kk31mp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1kk31mp" sourceRef="ProcessStartedStartEvent" targetRef="Gateway_0zed8kl" />
+    <bpmn:eventBasedGateway id="Gateway_0zed8kl">
+      <bpmn:incoming>Flow_1kk31mp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n0u7pa</bpmn:outgoing>
+      <bpmn:outgoing>Flow_13suijz</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0log1ez</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="ValueIsAEvent" name="value is A">
+      <bpmn:incoming>Flow_1n0u7pa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bymxi6</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0zyytxe">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${exampleBean.getExampleValue()=="A"}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1n0u7pa" sourceRef="Gateway_0zed8kl" targetRef="ValueIsAEvent" />
+    <bpmn:intermediateCatchEvent id="ValueIsBEvent" name="value is B">
+      <bpmn:incoming>Flow_13suijz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0o2hg67</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1mthxc9">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${exampleBean.getExampleValue()=="B"}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_13suijz" sourceRef="Gateway_0zed8kl" targetRef="ValueIsBEvent" />
+    <bpmn:intermediateCatchEvent id="ValueIsCEvent" name="value is C">
+      <bpmn:incoming>Flow_0log1ez</bpmn:incoming>
+      <bpmn:outgoing>Flow_17va3b2</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0vtai1x">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${exampleBean.getExampleValue()=="C"}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0log1ez" sourceRef="Gateway_0zed8kl" targetRef="ValueIsCEvent" />
+    <bpmn:sequenceFlow id="Flow_1bymxi6" sourceRef="ValueIsAEvent" targetRef="ProcessCompleteEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0o2hg67" sourceRef="ValueIsBEvent" targetRef="ProcessCompleteEndEvent" />
+    <bpmn:endEvent id="ProcessCompleteEndEvent" name="Process complete">
+      <bpmn:incoming>Flow_17va3b2</bpmn:incoming>
+      <bpmn:incoming>Flow_1bymxi6</bpmn:incoming>
+      <bpmn:incoming>Flow_0o2hg67</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_17va3b2" sourceRef="ValueIsCEvent" targetRef="ProcessCompleteEndEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ExampleProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="ProcessStartedStartEvent">
+        <dc:Bounds x="179" y="89" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="132" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1hssewy_di" bpmnElement="Gateway_0zed8kl">
+        <dc:Bounds x="265" y="82" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_15vk1fv_di" bpmnElement="ValueIsAEvent">
+        <dc:Bounds x="372" y="89" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="132" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vidaz4_di" bpmnElement="ValueIsBEvent">
+        <dc:Bounds x="372" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="245" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03fonjw_di" bpmnElement="ValueIsCEvent">
+        <dc:Bounds x="372" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="355" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qwdrdw_di" bpmnElement="ProcessCompleteEndEvent">
+        <dc:Bounds x="542" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="516" y="355" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1kk31mp_di" bpmnElement="Flow_1kk31mp">
+        <di:waypoint x="215" y="107" />
+        <di:waypoint x="265" y="107" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n0u7pa_di" bpmnElement="Flow_1n0u7pa">
+        <di:waypoint x="315" y="107" />
+        <di:waypoint x="372" y="107" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13suijz_di" bpmnElement="Flow_13suijz">
+        <di:waypoint x="290" y="132" />
+        <di:waypoint x="290" y="220" />
+        <di:waypoint x="372" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0log1ez_di" bpmnElement="Flow_0log1ez">
+        <di:waypoint x="290" y="132" />
+        <di:waypoint x="290" y="330" />
+        <di:waypoint x="372" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bymxi6_di" bpmnElement="Flow_1bymxi6">
+        <di:waypoint x="408" y="107" />
+        <di:waypoint x="500" y="107" />
+        <di:waypoint x="500" y="330" />
+        <di:waypoint x="542" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0o2hg67_di" bpmnElement="Flow_0o2hg67">
+        <di:waypoint x="408" y="220" />
+        <di:waypoint x="500" y="220" />
+        <di:waypoint x="500" y="330" />
+        <di:waypoint x="542" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17va3b2_di" bpmnElement="Flow_17va3b2">
+        <di:waypoint x="408" y="330" />
+        <di:waypoint x="542" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
