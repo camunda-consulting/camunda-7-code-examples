@@ -43,7 +43,15 @@
     <dependency>
       <groupId>org.camunda.community.extension</groupId>
       <artifactId>internal-task-handler-spring-boot-starter</artifactId>
-      <version>1.1.1</version>
+      <version>1.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-spin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.spin</groupId>
+      <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -25,7 +25,8 @@ public class OutboundMessageHandler implements InternalTaskHandler {
   @Override
   public void execute(InternalTask internalTask, InternalTaskService internalTaskService) {
     LOG.info("Sending message from task with id '{}'", internalTask.getId());
-    rabbitTemplate.convertAndSend("q.example", new Message(internalTask.getId(), "abcabc"));
+    ExampleComplexDto dto = internalTask.getVariable("exampleDto");
+    rabbitTemplate.convertAndSend("q.example", new Message(internalTask.getId(), dto));
     internalTaskService.setVariable(internalTask.getProcessInstanceId(), "akc", true);
   }
 }
