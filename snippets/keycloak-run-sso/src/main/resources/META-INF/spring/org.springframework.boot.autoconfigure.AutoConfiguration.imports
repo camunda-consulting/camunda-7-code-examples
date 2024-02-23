@@ -1,0 +1,2 @@
+org.camunda.bpm.extension.KeycloakSsoConfig
+org.camunda.bpm.extension.WebAppSecurityConfig
