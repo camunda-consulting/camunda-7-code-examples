@@ -1,0 +1,29 @@
+spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+
+camunda:
+  bpm:
+    admin-user:
+      id: Manuel
+      password: demo
+    authorization:
+      enabled: true
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          custom:
+            client-id: 0oafjtuveudxD3U8I5d7
+            client-secret: _--GlhMo0Z_KTl8Z8K4KnvOH4lWq_YkyKcMc7GWO-Tcn4KmYmoSeknN2jXT1_LM5
+            scope: openid, profile, email
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/custom
+        provider:
+          custom:
+            issuer-uri: https://dev-78793838.okta.com/oauth2/default
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
