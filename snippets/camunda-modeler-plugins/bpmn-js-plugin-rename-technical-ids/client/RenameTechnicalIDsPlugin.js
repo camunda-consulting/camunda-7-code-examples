@@ -140,23 +140,44 @@ RenameTechnicalIDsPlugin.prototype.renameIDs = function() {
   }
 };
 
+RenameTechnicalIDsPlugin.prototype.replaceGermanUmlautsAndEszett = function(str) {
+  const umlautMap = {
+    '\u00dc': 'UE',
+    '\u00c4': 'AE',
+    '\u00d6': 'OE',
+    '\u00fc': 'ue',
+    '\u00e4': 'ae',
+    '\u00f6': 'oe',
+    '\u00df': 'ss',
+  }
+  return str
+  .replace(/[\u00dc|\u00c4|\u00d6][a-z]/g, (a) => {
+    const big = umlautMap[a.slice(0, 1)];
+    return big.charAt(0) + big.charAt(1).toLowerCase() + a.slice(1);
+  })
+  .replace(new RegExp('['+Object.keys(umlautMap).join('|')+']',"g"),
+      (a) => umlautMap[a]
+  );
+}
+
 RenameTechnicalIDsPlugin.prototype._getTechnicalID = function(name, type) {
-  var name = removeDiacritics(name); // remove diacritics
+  var name = this.replaceGermanUmlautsAndEszett(name);
+  name = removeDiacritics(name); // remove diacritics
   name = name.replace(/[^\w\s]/gi, ''); // now replace special characters
   name = this._getCamelCase(name);; // get camelcase
-  
+
   if ( !isNaN(name.charAt(0)) ) { // mask leading numbers
      name = 'N' + name;
   }
-  
+
   if ( type === 'bpmn:Process' ) {
     return name + 'Process';
   } else if ( type === 'bpmn:IntermediateCatchEvent' || type === 'bpmn:IntermediateThrowEvent' ) {
     return name + 'Event';
-  } else if ( type === 'bpmn:UserTask' || type === 'bpmn:ServiceTask' || type === 'bpmn:ReceiveTask' || type === 'bpmn:SendTask' 
+  } else if ( type === 'bpmn:UserTask' || type === 'bpmn:ServiceTask' || type === 'bpmn:ReceiveTask' || type === 'bpmn:SendTask'
                 || type === 'bpmn:ManualTask' || type === 'bpmn:BusinessRuleTask' || type === 'bpmn:ScriptTask' ) {
     return name + 'Task';
-  } else if ( type === 'bpmn:ExclusiveGateway' || type === 'bpmn:ParallelGateway' || type === 'bpmn:ComplexGateway' 
+  } else if ( type === 'bpmn:ExclusiveGateway' || type === 'bpmn:ParallelGateway' || type === 'bpmn:ComplexGateway'
                 || type === 'bpmn:EventBasedGateway' ) {
     return name + 'Gateway';
   } else {
@@ -171,7 +192,6 @@ RenameTechnicalIDsPlugin.prototype._getCamelCase = function(str) {
   });
   return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
 };
-
 
 RenameTechnicalIDsPlugin.$inject = [ 'elementRegistry', 'editorActions', 'canvas', 'modeling' ];
 
