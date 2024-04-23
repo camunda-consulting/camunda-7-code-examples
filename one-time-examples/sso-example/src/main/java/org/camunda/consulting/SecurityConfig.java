@@ -34,11 +34,6 @@ public class SecurityConfig {
   }
 
   @Bean
-  public DefaultOAuth2UserService oAuth2UserService() {
-    return new DefaultOAuth2UserService();
-  }
-
-  @Bean
   public ProcessEnginePlugin administratorAuthorizationPlugin() {
     AdministratorAuthorizationPlugin administratorAuthorizationPlugin = new AdministratorAuthorizationPlugin();
     administratorAuthorizationPlugin.setAdministratorGroupName("your-admin-group");

@@ -3,7 +3,7 @@ package org.camunda.consulting;
 import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.camunda.bpm.engine.impl.identity.WritableIdentityProvider;
+import org.camunda.bpm.engine.impl.identity.ReadOnlyIdentityProvider;
 import org.camunda.bpm.engine.impl.identity.db.DbGroupQueryImpl;
 import org.camunda.bpm.engine.impl.identity.db.DbIdentityServiceProvider;
 import org.camunda.bpm.engine.impl.identity.db.DbUserQueryImpl;
@@ -28,7 +28,7 @@ public class IdentityProviderPlugin extends SpringProcessEnginePlugin {
     processEngineConfiguration.setIdentityProviderSessionFactory(new SessionFactory() {
       @Override
       public Class<?> getSessionType() {
-        return WritableIdentityProvider.class;
+        return ReadOnlyIdentityProvider.class;
       }
 
       @Override
