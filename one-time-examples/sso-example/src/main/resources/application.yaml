@@ -3,10 +3,12 @@ spring.datasource.url: jdbc:h2:file:./camunda-h2-database
 camunda:
   bpm:
     admin-user:
-      id: Manuel
-      password: demo
+      id: your-admin-user
     authorization:
       enabled: true
+    generic-properties:
+      properties:
+        generalResourceWhitelistPattern: ".+"
 
 spring:
   security:
@@ -14,14 +16,14 @@ spring:
       client:
         registration:
           custom:
-            client-id: 0oafjtuveudxD3U8I5d7
-            client-secret: _--GlhMo0Z_KTl8Z8K4KnvOH4lWq_YkyKcMc7GWO-Tcn4KmYmoSeknN2jXT1_LM5
+            client-id: yourClientId
+            client-secret: yourClientSecret
             scope: openid, profile, email
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/custom
         provider:
           custom:
-            issuer-uri: https://dev-78793838.okta.com/oauth2/default
+            issuer-uri: https://example.com/oauth2/default
 
 logging:
   level:

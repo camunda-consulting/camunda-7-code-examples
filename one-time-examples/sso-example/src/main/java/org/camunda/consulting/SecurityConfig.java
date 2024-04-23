@@ -2,6 +2,8 @@ package org.camunda.consulting;
 
 
 import java.util.Collections;
+import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
+import org.camunda.bpm.engine.impl.plugin.AdministratorAuthorizationPlugin;
 import org.camunda.bpm.webapp.impl.security.auth.ContainerBasedAuthenticationFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -28,6 +31,19 @@ public class SecurityConfig {
         )
         .csrf(AbstractHttpConfigurer::disable);
     return http.build();
+  }
+
+  @Bean
+  public DefaultOAuth2UserService oAuth2UserService() {
+    return new DefaultOAuth2UserService();
+  }
+
+  @Bean
+  public ProcessEnginePlugin administratorAuthorizationPlugin() {
+    AdministratorAuthorizationPlugin administratorAuthorizationPlugin = new AdministratorAuthorizationPlugin();
+    administratorAuthorizationPlugin.setAdministratorGroupName("your-admin-group");
+    administratorAuthorizationPlugin.setAdministratorUserName("your-admin-user");
+    return administratorAuthorizationPlugin;
   }
 
   @Bean
