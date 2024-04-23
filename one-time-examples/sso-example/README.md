@@ -108,39 +108,34 @@ Now we add a ContainerBasedAuthenticationFilter
   }
 ```
 
-In our CustomAuthenticationProvider we can now extract the Information from the JWT.
+In our UserExtractionUtility we can now extract the Information from the JWT.
 
 ```
-public class CustomAuthenticationProvider extends ContainerBasedAuthenticationProvider {
+public class UserExtractionUtility {
+  private static final Logger LOG = LoggerFactory.getLogger(UserExtractionUtility.class);
 
-private static final Logger LOG = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
-
-@Override
-public AuthenticationResult extractAuthenticatedUser(HttpServletRequest request, ProcessEngine engine) {
-
+  public static OidcUser getOidcUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-
-    if (authentication == null) {
-      return AuthenticationResult.unsuccessful();
+    if (authentication != null && authentication.getPrincipal() instanceof OidcUser) {
+      return (OidcUser) authentication.getPrincipal();
     }
+    LOG.debug("No OidcUser found in current authentication context.");
+    return null;
+  }
 
-    OidcUser user = (OidcUser) authentication.getPrincipal();
-    String name = user.getGivenName();
-    //name = "demo";
-    List<String> groups = user.getClaimAsStringList("groups");
-
-    LOG.debug("extracted user: {}", name);
-    if (name == null || name.isEmpty()) {
-      return AuthenticationResult.unsuccessful();
+  public static List<String> extractGroups(OidcUser oidcUser) {
+    if (oidcUser != null) {
+      return oidcUser.getClaimAsStringList("groups");
     }
+    return Collections.emptyList();
+  }
 
-    AuthenticationResult authenticationResult = new AuthenticationResult(name, true);
-    authenticationResult.setGroups(groups);
-
-    return authenticationResult;
-}
-
+  public static String extractGivenName(OidcUser oidcUser) {
+    if (oidcUser != null) {
+      return oidcUser.getGivenName();
+    }
+    return null;
+  }
 }
 ```
 
