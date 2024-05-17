@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q53crg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0q53crg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.22.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_1vzi0x5">
-    <bpmn:participant id="EmpfangsProzessParticipant" name="Empfangs-Prozess" processRef="receiver_process" />
+    <bpmn:participant id="EmpfangsProzessParticipant" name="Receiver Process" processRef="receiver_process" />
     <bpmn:participant id="MessageQueueParticipant" name="Message Queue" />
-    <bpmn:participant id="AsynchronKommunizierenderProzessParticipant" name="Asynchron kommunizierender Prozess" />
+    <bpmn:participant id="AsynchronKommunizierenderProzessParticipant" name="Async communicating process" />
     <bpmn:messageFlow id="Flow_0pzi3ro" sourceRef="MessageQueueParticipant" targetRef="NachrichtEmpfangenStartEvent" />
     <bpmn:messageFlow id="Flow_18iumok" sourceRef="AsynchronKommunizierenderProzessParticipant" targetRef="MessageQueueParticipant" />
     <bpmn:messageFlow id="Flow_1562c3j" sourceRef="NachrichtAnEigentlichenEmpfangerWeitergeleitetEndEvent" targetRef="AsynchronKommunizierenderProzessParticipant" />
   </bpmn:collaboration>
   <bpmn:process id="receiver_process" name="Empfangs-Prozess" isExecutable="true">
-    <bpmn:endEvent id="NachrichtAnEigentlichenEmpfangerWeitergeleitetEndEvent" name="Nachricht an eigentlichen Empfänger weitergeleitet" camunda:asyncBefore="true">
+    <bpmn:endEvent id="NachrichtAnEigentlichenEmpfangerWeitergeleitetEndEvent" name="Message forwarded to actual receiver" camunda:asyncBefore="true">
       <bpmn:extensionElements>
         <camunda:failedJobRetryTimeCycle>R3/PT3S</camunda:failedJobRetryTimeCycle>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ptqa9a</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1g21tx4" camunda:delegateExpression="${redirect_to_actual_receiver}" />
     </bpmn:endEvent>
-    <bpmn:startEvent id="NachrichtEmpfangenStartEvent" name="Nachricht empfangen" camunda:asyncBefore="true">
+    <bpmn:startEvent id="NachrichtEmpfangenStartEvent" name="Message received" camunda:asyncBefore="true">
       <bpmn:outgoing>Flow_1ptqa9a</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0az7a7h" messageRef="Message_1pedxrr" />
     </bpmn:startEvent>
@@ -27,33 +27,31 @@
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1vzi0x5">
       <bpmndi:BPMNShape id="Participant_1t4fi09_di" bpmnElement="EmpfangsProzessParticipant" isHorizontal="true">
         <dc:Bounds x="339" y="190" width="361" height="250" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1ptqa9a_di" bpmnElement="Flow_1ptqa9a">
-        <di:waypoint x="518" y="310" />
-        <di:waypoint x="612" y="310" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1fdmcxk_di" bpmnElement="NachrichtAnEigentlichenEmpfangerWeitergeleitetEndEvent">
         <dc:Bounds x="612" y="292" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="598" y="335" width="65" height="53" />
+          <dc:Bounds x="595" y="335" width="72" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_15jkao3_di" bpmnElement="NachrichtEmpfangenStartEvent">
         <dc:Bounds x="482" y="292" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="472" y="262" width="56" height="27" />
+          <dc:Bounds x="456" y="262" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ptqa9a_di" bpmnElement="Flow_1ptqa9a">
+        <di:waypoint x="518" y="310" />
+        <di:waypoint x="612" y="310" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_0te9b9l_di" bpmnElement="MessageQueueParticipant" isHorizontal="true">
         <dc:Bounds x="160" y="490" width="540" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_1p6qmoj_di" bpmnElement="AsynchronKommunizierenderProzessParticipant" isHorizontal="true">
         <dc:Bounds x="160" y="80" width="540" height="60" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1562c3j_di" bpmnElement="Flow_1562c3j">
-        <di:waypoint x="630" y="292" />
-        <di:waypoint x="630" y="140" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pzi3ro_di" bpmnElement="Flow_0pzi3ro">
         <di:waypoint x="500" y="490" />
         <di:waypoint x="500" y="328" />
@@ -61,6 +59,10 @@
       <bpmndi:BPMNEdge id="Flow_18iumok_di" bpmnElement="Flow_18iumok">
         <di:waypoint x="260" y="140" />
         <di:waypoint x="260" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1562c3j_di" bpmnElement="Flow_1562c3j">
+        <di:waypoint x="630" y="292" />
+        <di:waypoint x="630" y="140" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
