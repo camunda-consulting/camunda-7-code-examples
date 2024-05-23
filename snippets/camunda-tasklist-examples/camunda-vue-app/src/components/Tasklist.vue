@@ -5,7 +5,7 @@
         <sui-grid-column :width="3">
           <sui-segment raised>
             <sui-list divided relaxed v-if="tasks && tasks.length">
-              <sui-list-item v-for="task of tasks">
+              <sui-list-item v-for="task of tasks" :key="task.id">
                 <sui-list-icon name="browser" size="large" vertical-align="middle" />
                 <sui-list-content>
                   <p><strong>
