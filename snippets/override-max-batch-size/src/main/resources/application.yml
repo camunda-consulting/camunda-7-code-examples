@@ -1,0 +1,8 @@
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+    generic-properties:
+      properties:
+        historyCleanupBatchSize: 10000
