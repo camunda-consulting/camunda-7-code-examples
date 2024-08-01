@@ -30,7 +30,7 @@
 	  var vars = varManager.variables;
 
 	  var variableData = {};
-	  for(var v in vars) {
+	  for(var v in vars) {	if(varManager.variables[v].type !== 'File') {
 	    // only submit dirty variables
 	    // LIMITATION: dirty checking is not performed for complex object variables
 	    if(varManager.isDirty(v)) {
@@ -47,7 +47,7 @@
 	        valueInfo: vars[v].valueInfo
 	      };
 	    }
-	  }
+	  }}
 
 	  var data = { modifications: variableData };
 	  var config = {
