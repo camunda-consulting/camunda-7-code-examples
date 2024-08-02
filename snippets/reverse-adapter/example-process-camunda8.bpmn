@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" conversion:converterVersion="0.9.1-SNAPSHOT" exporter="Camunda Modeler" exporterVersion="5.25.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_0iibi6w" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <bpmn:process id="ExampleProcessProcess" isClosed="false" isExecutable="true" name="Example process" processType="None">
+    <bpmn:startEvent id="ProcessStartedStartEvent" isInterrupting="true" name="Process started" parallelMultiple="false">
+      <bpmn:outgoing>Flow_10m8b12</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_10m8b12" sourceRef="ProcessStartedStartEvent" targetRef="DoSomethingTask"/>
+    <bpmn:serviceTask completionQuantity="1" id="DoSomethingTask" implementation="##WebService" isForCompensation="false" name="Do something" startQuantity="1">
+      <bpmn:extensionElements>
+        <conversion:message severity="REVIEW">Attribute 'topic' on 'serviceTask' was mapped. Is set as job type.</conversion:message>
+        <conversion:message severity="INFO">Unused attribute 'type' on 'serviceTask' is removed.</conversion:message>
+        <zeebe:taskDefinition type="doSomething"/>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_10m8b12</bpmn:incoming>
+      <bpmn:outgoing>Flow_05m6hdo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="ProcessCompleteEndEvent" name="Process complete">
+      <bpmn:incoming>Flow_05m6hdo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_05m6hdo" sourceRef="DoSomethingTask" targetRef="ProcessCompleteEndEvent"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane bpmnElement="ExampleProcessProcess" id="BPMNPlane_1">
+      <bpmndi:BPMNShape bpmnElement="ProcessStartedStartEvent" id="_BPMNShape_StartEvent_2">
+        <dc:Bounds height="36" width="36" x="179" y="99"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="14" width="77" x="159" y="142"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="DoSomethingTask" id="Activity_1bo7c8y_di">
+        <dc:Bounds height="80" width="100" x="270" y="77"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ProcessCompleteEndEvent" id="Event_1g3kvnl_di">
+        <dc:Bounds height="36" width="36" x="432" y="99"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="14" width="88" x="406" y="142"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow_10m8b12" id="Flow_10m8b12_di">
+        <di:waypoint x="215" y="117"/>
+        <di:waypoint x="270" y="117"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_05m6hdo" id="Flow_05m6hdo_di">
+        <di:waypoint x="370" y="117"/>
+        <di:waypoint x="432" y="117"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
