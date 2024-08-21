@@ -32,9 +32,14 @@ public class ConditionTriggerHandler {
         .forEach(
             processInstance -> {
               LOG.debug("Triggering condition evaluation for process instance {}", processInstance);
+              try{
               processEngine
                   .getRuntimeService()
                   .setVariable(processInstance, "trigger", Variables.booleanValue(true, true));
+              } catch (Exception e) {
+                // make sure all events are triggered once
+                LOG.warn("An error occurred while triggering condition evaluation", e);
+              }
             });
   }
 
