@@ -6,3 +6,6 @@ camunda:
       email: demo@demo.org
       first-name: Demo
       last-name: Demo
+logging:
+  level:
+    com.camunda.consulting: debug
