@@ -38,3 +38,19 @@ custom-camunda-external-task-client by excluding the original external task
 client, you have to add them explicitly.
 
 This worker can be started in the IDE to test the environment.
+
+## Testing
+
+The external task client comes with an integration test, that tests the client
+against a Camunda 7 engine running in Tomcat and deploys and start given process
+definitions with different kind of variable handling.
+
+This integration test is adopted in this branch of a fork from the
+camunda-bpm-platform repository:
+https://github.com/ingorichtsmeier/camunda-bpm-platform/tree/test-external-task-client-without-xml/clients/java
+
+The branch contains the same changes as in this example and ignores the tests of
+the XML variable handling.
+
+Everything else runs successfully and proves, that the change did not harm other
+features and functionalities.
