@@ -33,9 +33,7 @@ To build the jar file, run `mvn clean install` in this directory.
 ## Example external task worker
 
 In the [example](basic-external-task-worker/), you can see the usage of the
-library. As the transitive dependencies are removed from the
-custom-camunda-external-task-client by excluding the original external task
-client, you have to add them explicitly.
+library. 
 
 This worker can be started in the IDE to test the environment.
 
