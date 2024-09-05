@@ -53,7 +53,6 @@ public class SampleUserServiceTest {
 
     @Test
     public void extensionUsageExample() {
-        Mocks.register("sampleUserService", new SampleUserService());
         // Given we create a new process instance
         VariableMap map = Variables.putValue("user", "john");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_Sample", map);
@@ -63,7 +62,6 @@ public class SampleUserServiceTest {
     @Test
     @Deployment(resources = "bpmn/sample_task.bpmn")
     public void extensionUsageSampleTask() {
-        Mocks.register("sampleUserService", new SampleUserService());
         // Given we create a new process instance
         VariableMap map = Variables.putValue("user", "john");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_Sample_Task", map);
