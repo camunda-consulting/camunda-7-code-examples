@@ -217,25 +217,12 @@
             <version>${camunda.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.0</version>
-            <scope>test</scope>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>11.0.0-M4</version>
+            <version>10.0.0</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.camunda.community.process_test_coverage</groupId>
-            <artifactId>camunda-process-test-coverage-spring-test-platform-7</artifactId>
-            <version>2.1.0</version>
-            <scope>test</scope>
         </dependency>
 
 <!--        Junit4-->
@@ -271,7 +258,7 @@
         <dependency>
             <groupId>jakarta.el</groupId>
             <artifactId>jakarta.el-api</artifactId>
-            <version>6.0.1</version>
+            <version>5.0.1</version>
             <scope>test</scope>
         </dependency>
         <!-- Jakarta Expression Language Implementation (Weld usually depends on this) -->
