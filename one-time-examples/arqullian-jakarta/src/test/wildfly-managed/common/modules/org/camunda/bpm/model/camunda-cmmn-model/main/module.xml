@@ -1,0 +1,13 @@
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.bpm.model.camunda-cmmn-model">
+  <resources>
+    <resource-root path="camunda-cmmn-model-7.22.0-alpha5.jar" />
+  </resources>
+
+  <dependencies>
+
+    <module name="java.base" />
+    <module name="java.xml" />
+    <module name="org.camunda.bpm.model.camunda-xml-model" />
+
+  </dependencies>
+</module>

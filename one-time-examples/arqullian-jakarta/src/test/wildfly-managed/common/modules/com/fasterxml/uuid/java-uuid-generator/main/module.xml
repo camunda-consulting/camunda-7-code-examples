@@ -1,0 +1,12 @@
+<module xmlns="urn:jboss:module:1.0" name="com.fasterxml.uuid.java-uuid-generator">
+  <resources>
+    <resource-root path="java-uuid-generator-4.3.0.jar" />
+  </resources>
+
+  <dependencies>
+    
+    <module name="java.base" />
+    <module name="org.slf4j"/>
+    
+  </dependencies>
+</module>

@@ -1,0 +1,17 @@
+<module xmlns="urn:jboss:module:1.0" name="org.mybatis.mybatis">
+  <resources>
+    <resource-root path="mybatis-3.5.15.jar" />
+  </resources>
+
+  <dependencies>
+    <module name="java.base" />
+    <module name="java.desktop" />
+    <module name="java.instrument" />
+    <module name="java.management" />
+    <module name="java.naming" />
+    <module name="java.sql" />
+    <module name="jdk.attach" />
+    <module name="jdk.jdi" />
+    <module name="jakarta.transaction.api" />
+  </dependencies>
+</module>
