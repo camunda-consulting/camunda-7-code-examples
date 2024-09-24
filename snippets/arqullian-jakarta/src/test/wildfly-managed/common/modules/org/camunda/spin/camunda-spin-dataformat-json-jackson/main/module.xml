@@ -1,0 +1,18 @@
+<module xmlns="urn:jboss:module:1.0" name="org.camunda.spin.camunda-spin-dataformat-json-jackson">
+  <resources>
+    <resource-root path="camunda-spin-dataformat-json-jackson-7.22.0-alpha5.jar" />
+  </resources>
+
+  <dependencies>
+    <module name="java.base" />
+
+    <module name="org.camunda.spin.camunda-spin-core" />
+    <module name="org.camunda.commons.camunda-commons-logging" />
+    <module name="org.camunda.commons.camunda-commons-utils" />
+    <module name="org.camunda.commons.camunda-commons-typed-values" />
+
+    <module name="com.fasterxml.jackson.core.jackson-databind" slot="2.15.2" />
+    <module name="com.jayway.jsonpath.json-path" />
+  </dependencies>
+
+</module>
