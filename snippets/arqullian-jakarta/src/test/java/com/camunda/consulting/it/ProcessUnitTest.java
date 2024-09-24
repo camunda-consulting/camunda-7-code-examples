@@ -95,7 +95,9 @@ public class ProcessUnitTest {
                 .startProcessInstanceByKey("Process_Sample_Task", map);
         assertNotNull(processInstance.getProcessInstanceId());
         TaskService taskService = processEngine.getTaskService();
-        Task task = taskService.createTaskQuery().singleResult();
+        Task task = taskService.createTaskQuery()
+                .processInstanceId(processInstance.getProcessInstanceId())
+                .singleResult();
         assertEquals(task.getName(), "Do Something with UserId");
         taskService.complete(task.getId());
         BpmnAwareTests.assertThat(processInstance).isEnded();

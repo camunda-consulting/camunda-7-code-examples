@@ -316,12 +316,6 @@
                     <version>5.0.29.Final</version>
                     <scope>test</scope>
                 </dependency>
-                <!--                <dependency>-->
-                <!--                    <groupId>org.jboss.remotingjmx</groupId>-->
-                <!--                    <artifactId>remoting-jmx</artifactId>-->
-                <!--                    <version>3.0.4.Final</version>-->
-                <!--                    <scope>test</scope>-->
-                <!--                </dependency>-->
             </dependencies>
             <build>
                 <testResources>
@@ -355,6 +349,9 @@
                 shutting it down when done -->
             <!-- Run with: mvn clean verify -Pwildfly-managed -->
             <id>wildfly-managed</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <serverProfile>standalone.xml</serverProfile>
                 <serverRoot>${project.build.directory}/wildfly-${wildfly.version}</serverRoot>
@@ -396,10 +393,6 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-<!--                                            <groupId>org.wildfly</groupId>-->
-<!--                                            <artifactId>wildfly-dist</artifactId>-->
-<!--                                            <version>${wildfly.version}</version>-->
-<!--                                            <type>zip</type>-->
                                             <groupId>org.camunda.bpm.wildfly</groupId>
                                             <artifactId>camunda-bpm-wildfly</artifactId>
                                             <version>7.21.0</version>
@@ -412,52 +405,6 @@
                             </execution>
                         </executions>
                     </plugin>
-<!--                    <plugin>-->
-<!--                        <groupId>org.apache.maven.plugins</groupId>-->
-<!--                        <artifactId>maven-resources-plugin</artifactId>-->
-<!--                        <version>3.3.1</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <id>copy-resources-wildfly-modules</id>-->
-<!--                                &lt;!&ndash; here the phase you need &ndash;&gt;-->
-<!--                                <phase>process-test-resources</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>copy-resources</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <outputDirectory>-->
-<!--                                        ${project.build.directory}/wildfly-${wildfly.version}/modules-->
-<!--                                    </outputDirectory>-->
-<!--                                    <resources>-->
-<!--                                        <resource>-->
-<!--                                            <directory>src/test/wildfly-managed/common/modules</directory>-->
-<!--                                            <filtering>false</filtering>-->
-<!--                                        </resource>-->
-<!--                                    </resources>-->
-<!--                                </configuration>-->
-<!--                            </execution>-->
-<!--                            <execution>-->
-<!--                                <id>copy-resources-wildfly-standalone-file</id>-->
-<!--                                &lt;!&ndash; here the phase you need &ndash;&gt;-->
-<!--                                <phase>process-test-resources</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>copy-resources</goal>-->
-<!--                                </goals>-->
-<!--                                <configuration>-->
-<!--                                    <outputDirectory>-->
-<!--                                        ${project.build.directory}/wildfly-${wildfly.version}/standalone/configuration-->
-<!--                                    </outputDirectory>-->
-<!--                                    <resources>-->
-<!--                                        <resource>-->
-<!--                                            <directory>src/test/wildfly-managed/wildfly/standalone/configuration/-->
-<!--                                            </directory>-->
-<!--                                            <filtering>false</filtering>-->
-<!--                                        </resource>-->
-<!--                                    </resources>-->
-<!--                                </configuration>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${maven-failsafe-plugin.version}</version>
