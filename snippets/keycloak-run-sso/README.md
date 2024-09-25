@@ -2,8 +2,8 @@
 
 Tested with versions:
 
-* `7.20.3-ee` of Camunda Run
-* `7.20.1` of Camunda Keycloak Plugin
+* `7.21.2-ee` of Camunda Run
+* `7.21.6` of Camunda Keycloak Plugin
 
 ## What is the purpose?
 
@@ -96,6 +96,16 @@ spring.security.oauth2:
         # - email              -> useEmailAsCamundaUserId=true
         # - preferred_username -> useUsernameAsCamundaUserId=true
         user-name-attribute: email
+```
+
+In 7.21, we have to disable the Camunda Run own cors configuration, by default this setting is `true`:
+
+```yaml
+camunda:
+  bpm:
+    run:
+      cors:
+        enabled: false
 ```
 
 Adjust the details like `keycloak.host`, `keycloak.realm`, `keycloak.client-id`, `keycloak.client-secret` and `plugin.identity.keycloak.administratorGroupName` accordingly.
