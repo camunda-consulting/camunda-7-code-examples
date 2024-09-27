@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans version="4.0"
+   xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+      https://jakarta.ee/xml/ns/jakartaee
+      https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd"
+   bean-discovery-mode="annotated">
+
+   <!-- This descriptor configures Context and Dependeny Injection.
+        Actually, CDI 1.1 does not require this file. But the archetype contains it anyway to avoid deloyment errors for blank projects (WFLY-13306)   -->
+
+</beans>
