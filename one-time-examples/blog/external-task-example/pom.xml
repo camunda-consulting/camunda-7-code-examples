@@ -110,7 +110,7 @@
     <dependency>
     	<groupId>org.jboss.resteasy</groupId>
     	<artifactId>resteasy-jaxrs</artifactId>
-    	<version>2.3.5.Final</version>
+    	<version>3.0.11.Final</version>
     	<scope>provided</scope> <!-- provided in JBoss / WildFly, change for other containers -->
     </dependency>
 
