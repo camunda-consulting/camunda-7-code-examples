@@ -12,7 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<camunda.version>7.1.0-Final</camunda.version>
-		<drools.version>5.5.0.Final</drools.version>
+		<drools.version>7.69.0.Final</drools.version>
 	</properties>
 
 	<dependencies>
