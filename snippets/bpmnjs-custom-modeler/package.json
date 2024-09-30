@@ -62,6 +62,6 @@
     "lodash": "^3.10.1",
     "bpmn-js-properties-panel": "^0.10.0",
     "camunda-bpmn-moddle": "^0.8.1",
-    "jquery": "3.1.1"
+    "jquery": "3.5.0"
   }
 }
