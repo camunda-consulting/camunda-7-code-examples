@@ -1,0 +1,17 @@
+# This port is fixed, so it should not interfere with other ports
+server:
+  port: 18081
+spring:
+  datasource:
+    url: jdbc:h2:mem:camunda
+camunda:
+  bpm:
+    client:
+      base-url: http://localhost:${server.port}/engine-rest
+      disable-backoff-strategy: true
+logging:
+  level:
+    org:
+      camunda:
+        bpm:
+          client: debug
