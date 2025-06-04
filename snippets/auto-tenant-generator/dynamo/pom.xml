@@ -31,7 +31,7 @@
     
     <spring-cloud.version>Fishtown.RC1</spring-cloud.version>
     
-    <postgresql.version>9.4.1211</postgresql.version>
+    <postgresql.version>42.3.7</postgresql.version>
 
   </properties>
 
