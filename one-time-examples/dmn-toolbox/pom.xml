@@ -173,7 +173,7 @@
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
-			<version>2.7.1</version>
+			<version>2.7.3</version>
 			<!-- because of https://developer.jboss.org/thread/242194?start=0&tstart=0 -->
 		</dependency>
 	</dependencies>
